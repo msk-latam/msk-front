@@ -27,6 +27,8 @@ const ProductAccountButton: FC<ProductAccountButtonProps> = ({
     statusOV.isDisabled ? statusOV.hasText : status
   );
 
+  console.log(product.title,{status,statusOV,iconStatus,isDisabled})
+
   return (
     <div className="course-2-footer text-grey-course">
       <div className="coursee-clock">
