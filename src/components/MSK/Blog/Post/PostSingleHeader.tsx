@@ -9,6 +9,7 @@ export interface SingleHeaderProps {
   metaActionStyle?: "style1" | "style2";
   titleMainClass?: string;
   className?: string;
+  excerptClassName?: string;
 }
 
 const SingleHeader: FC<SingleHeaderProps> = ({
@@ -17,6 +18,7 @@ const SingleHeader: FC<SingleHeaderProps> = ({
   hiddenDesc = false,
   className = "",
   metaActionStyle = "style1",
+  excerptClassName = "",
 }) => {
   const { excerpt, title, categories } = pageData;
 
@@ -31,7 +33,7 @@ const SingleHeader: FC<SingleHeaderProps> = ({
           />
           <SingleTitle mainClass={titleMainClass} title={title} />
           {!!excerpt && !hiddenDesc && (
-            <span className="inline-block text-[16px] sm:text-base text-neutral-500 md:text-lg dark:text-neutral-400 pb-1 h-auto leading-5">
+            <span className={excerptClassName + " inline-block text-[16px] sm:text-base md:text-lg text-neutral-400 pb-1 h-auto leading-5"} >
               {excerpt}
             </span>
           )}

@@ -26,10 +26,9 @@ const PostHtmlArticles: FC<PostHtmlArticlesProps> = ({
             </h3>
             {
               <div
+                key={index}
                 className="font-lora text-xl lg:pr-20"
-                dangerouslySetInnerHTML={{
-                  __html: parseHtml(art.content),
-                }}
+                dangerouslySetInnerHTML={{ __html: parseHtml(art.content) }}
               />
             }
             {index == 0 && (

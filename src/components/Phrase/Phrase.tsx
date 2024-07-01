@@ -5,7 +5,7 @@ import { stripHtmlTags } from "@/lib/pageHeadUtils";
 
 const Phrase: FC<{ content: string }> = ({ content }) => {
   return (
-    <div className="font-lora-italic p-4 text-[14px] border border-[#EBEFF4] rounded-lg text-center mb-[50px] sm:mb-[96px] text-[#8D929E]">
+    <div className="font-lora-italic p-4 text-[18px] border border-[#EBEFF4] rounded-lg text-center mb-[50px] sm:mb-[96px] text-[#8D929E]">
       {stripHtmlTags(content)}
     </div>
   );

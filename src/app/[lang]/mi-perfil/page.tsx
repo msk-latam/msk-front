@@ -166,7 +166,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
       {/* ====================== END HEADER ====================== */}
 
       <div className="container py-16 lg:pb-28 lg:pt-20 space-y-16 lg:space-y-28">
-        <main>
+        <main className="container">
           {loadingUser ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mt-8 lg:mt-10 mb-8">
               <ItemSkeleton />
@@ -240,16 +240,18 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
           </div>
         </main>
         <div className="relative py-16 my-32">
-          <div className={"nc-BackgroundSection absolute inset-y-0 w-screen xl:max-w-[1340px] 2xl:max-w-screen-2xl left-1/2 transform -translate-x-1/2 xl:rounded-[40px] z-0 bg-neutral-100 dark:bg-black dark:bg-opacity-20"}></div>
-          {<SectionSliderPosts
-            postCardName="card9"
-            heading="Nuestros cursos más elegidos"
-            subHeading="Profesionales como tú ya se capacitaron con ellos. ¡Ahora te toca a ti!"
-            sliderStype="style2"
-            posts={allBestSellers}
-            loading={loadingBestSellers}
-            uniqueSliderClass="pageHome-section6"
-          />}
+          <div className="md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-16 mb-[96px] w-full px-14">
+            <SectionSliderPosts
+              posts={allBestSellers}
+              loading={loadingBestSellers}
+              className="w-full section-slider-posts-container"
+              postCardName="card9"
+              heading="Nuestros cursos más elegidos"
+              subHeading="Profesionales como tú ya se capacitaron con ellos. ¡Ahora te toca a ti!"
+              sliderStype="style2"
+              uniqueSliderClass="perfil-section6"
+            />
+          </div>
         </div>
       </div>
     </div>

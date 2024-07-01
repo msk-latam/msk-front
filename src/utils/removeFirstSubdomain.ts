@@ -12,6 +12,7 @@ export function removeFirstSubdomain(url: string): string {
         // Reemplazar el primer subdominio en la URL original y devolver la URL modificada
         return `https://wp.${dominio}${restoUrl}`;
     } else {
-        return "La URL no es válida o no tiene subdominios.";
+      //"La URL no es válida o no tiene subdominios.";
+        return "";
     }
 }

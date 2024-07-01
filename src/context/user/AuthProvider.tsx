@@ -26,7 +26,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     const initializeAuth = async () => {
-      console.log('INITIALIZE AUTH');
+      /*console.log('INITIALIZE AUTH');*/
       const token = localStorage.getItem("token");
       const email = localStorage.getItem("email");
       const bypassRedirect = localStorage.getItem("bypassRedirect");

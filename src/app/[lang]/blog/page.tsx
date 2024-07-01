@@ -31,14 +31,14 @@ const PageBlog: React.FC<PageProps> = async ({ params }) => {
 
   return (
     <div className="nc-PageBlog relative animate-fade-down">
-      <div className="relative overflow-hidden">
+      <div className="md:container relative overflow-hidden">
         <div className="container relative">
           <WelcomeBlog tabs={[]} heading="" posts={welcomePosts} />
           <BlogSummary
             posts={allPosts}
             tabs={TABS_BLOG}
             className="py-16"
-            desc="Recursos para informarte y aprender de distintas maneras"
+            desc=""
             heading=""
             showTitle
             forSingleNote={false}
@@ -51,8 +51,8 @@ const PageBlog: React.FC<PageProps> = async ({ params }) => {
             <SectionSliderPosts
               posts={allBestSellers}
               postCardName="card9"
-              heading="Nuestros cursos más elegidos"
-              subHeading="Profesionales como tú ya se capacitaron con ellos. ¡Ahora te toca a ti!"
+              heading="¿Buscas capacitarte a distancia?"
+              subHeading="Estos son los cursos más elegidos entre profesionales de la salud"
               sliderStype="style2"
               uniqueSliderClass="PageBlog-section6"
               className="mx-auto max-w-[85%]"

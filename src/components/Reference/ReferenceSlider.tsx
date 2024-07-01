@@ -1,8 +1,6 @@
 "use client";
 import { FC } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-//import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from "swiper";
-//modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
 // Import Swiper styles
 import "swiper/css/bundle";
 import ReferenceCard from "@/components/Reference/RefereceCard";
@@ -12,6 +10,10 @@ interface ReferenceSliderProps {
 }
 
 const ReferenceSlider: FC<ReferenceSliderProps> = ({ references }) => {
+  //if screen is mobile, set height to 200px, else set height to 325px
+  let screenWidth = typeof window !== undefined ? window.innerWidth : 1024;
+  let heightClass = "max-h-[350px] " + (screenWidth < 1024 ? " h-[200px] " : " h-[325px] ");
+
   return (
     <div className="swiper-container h-full lg:hidden">
       <Swiper
@@ -22,7 +24,7 @@ const ReferenceSlider: FC<ReferenceSliderProps> = ({ references }) => {
           delay: 2000,
           disableOnInteraction: true,
         }}
-        className="h-[325px] sm:h-[200px] max-h-[350px]"
+        className={heightClass}
       >
         {references.map((reference, i) => (
           <SwiperSlide key={i} className="w-100 bg-primary mt-2 sm:mt-8">

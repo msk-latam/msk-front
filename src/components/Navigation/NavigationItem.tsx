@@ -270,12 +270,13 @@ const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
   };
 
   const renderDropdownMenuNavlink = (item: NavItemType) => {
+    const searchParams = new URLSearchParams(item.search);
     return (
       <Link
         className="flex items-center font-normal text-neutral-6000 dark:text-neutral-400 py-2 px-4 rounded-md hover:text-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
         href={{
-          pathname: item.href || undefined,
-          query: item.search,
+          pathname: item.href,
+          query: Object.fromEntries(searchParams), // Convert searchParams to object
         }}
       >
         {item.name}

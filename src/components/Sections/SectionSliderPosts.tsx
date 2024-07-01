@@ -1,12 +1,11 @@
 "use client";
-import { FC, useEffect } from "react";
+import {FC, useEffect, useState} from "react";
 import Heading from "@/components/Heading/Heading";
 import Card4 from "@/components/Card4/Card4";
 import Card7 from "@/components/Card7/Card7";
 
 import Glide from "@glidejs/glide";
 
-import ncNanoId from "@/utils/ncNanoId";
 import Card9 from "@/components/Card9/Card9";
 import NextPrev from "@/components/NextPrev/NextPrev";
 import Card10 from "@/components/Card10/Card10";
@@ -23,10 +22,6 @@ import Card18 from "@/components/Card18/Card18";
 import Card19 from "@/components/Card19/Card19";
 import Card20 from "@/components/Card20/Card20";
 import ImageSkeleton from "@/components/Skeleton/ImageSkeleton";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { A11y, Autoplay, Navigation } from "swiper";
-
-//import { A11y, Autoplay, Navigation, Pagination, Scrollbar } from "swiper/react";
 
 export interface SectionSliderPostsProps {
   className?: string;
@@ -52,7 +47,7 @@ export interface SectionSliderPostsProps {
     | "card19"
     | "card20";
   sliderStype?: "style1" | "style2";
-  perView?: 2 | 3 | 4;
+  perView?:1 | 2 | 3 | 4;
   uniqueSliderClass: string;
   loading?: boolean;
 }
@@ -68,6 +63,8 @@ const SectionSliderPosts: FC<SectionSliderPostsProps> = ({
                                                            uniqueSliderClass,
                                                            loading,
                                                          }) => {
+  const [slidesCount, setSlidesCount] = useState(0);
+  const [showArrows, setShowArrows] = useState(false);
   const UNIQUE_CLASS = "SectionSliderPosts_" + uniqueSliderClass;
   // const top_picks = posts.sort((a: any, b: any) => b.viewdCount - a.viewdCount);
 
@@ -89,7 +86,7 @@ const SectionSliderPosts: FC<SectionSliderPostsProps> = ({
         gap: 20,
       },
       639: {
-        perView: 1.2,
+        perView: 1,
         gap: 20,
       },
     },
@@ -97,11 +94,30 @@ const SectionSliderPosts: FC<SectionSliderPostsProps> = ({
 
   useEffect(() => {
     if (!MY_GLIDE) return;
-    console.log(UNIQUE_CLASS);
     if (document.getElementsByClassName(UNIQUE_CLASS).length){
       MY_GLIDE.mount();
     }
+    setSlidesCount(posts.length);
   }, [MY_GLIDE]);
+
+
+  useEffect(() => {
+    // Function to handle resize events
+    const handleResize = () => {
+      setShowArrows(
+        (sliderStype === "style2" && window.innerWidth < 768) ||  (sliderStype === "style2" && slidesCount > perView)
+      );
+    };
+
+    // Execute handleResize initially and on every window resize
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup function to remove event listener
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [sliderStype, slidesCount, perView]);
 
   const getPostComponent = () => {
     switch (postCardName) {
@@ -196,7 +212,7 @@ const SectionSliderPosts: FC<SectionSliderPostsProps> = ({
             </ul>
           )}
         </div>
-        {sliderStype === "style2" && (
+        {showArrows && (
           <NextPrev
             btnClassName="w-12 h-12"
             containerClassName="justify-center"

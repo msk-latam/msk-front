@@ -513,43 +513,24 @@ export const NAVIGATION_MSK: NavItemType[] = [
 ];
 
 const categoriesMenuBlog: NavItemType[] = [
-  /* {
-    id: ncNanoId(),
-    href: "/archivo",
-    name: "Actualidad",
-    search: "?categoria=Actualidad",
-  }, */
   {
     id: ncNanoId(),
     href: "/archivo",
     name: "Medicina",
-    search: "?categoria=medicina",
+    search: "/archivo?categoria=medicina",
   },
   {
     id: ncNanoId(),
     href: "/archivo",
     name: "Enfermería",
-    search: "?categoria=enfermeria",
+    search: "/archivo?categoria=enfermeria",
   },
   {
     id: ncNanoId(),
     href: "/archivo",
     name: "E-Learning",
-    search: "?categoria=e-learning",
+    search: "/archivo?categoria=e-learning",
   },
-
-  /*  {
-    id: ncNanoId(),
-    href: "/archivo",
-    name: "Entrevistas",
-    search: "?categoria=Entrevistas",
-  },
-  {
-    id: ncNanoId(),
-    href: "/archivo",
-    name: "Opinión",
-    search: "?categoria=Opinión",
-  }, */
 ];
 
 const resourcesMenuBlog: NavItemType[] = [

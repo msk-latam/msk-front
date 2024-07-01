@@ -133,8 +133,7 @@ const PageHome: React.FC<PageProps> = async ({params}) => {
             />
           </div>
 
-          <div
-            className="rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-16 mb-[96px] w-full px-14">
+          <div className="md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-16 mb-[96px] w-full px-14">
             <SectionSliderPosts
               posts={getAllBestSellers()}
               loading={loadingBestSellers}

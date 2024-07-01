@@ -103,7 +103,7 @@ class ApiSSRService {
         countryParam = `${country}`;
       }
 
-      console.log('getBestSellers URL', `${API_URL}/home/best-sellers?country=${countryParam}`);
+      //console.log('getBestSellers URL', `${API_URL}/home/best-sellers?country=${countryParam}`);
       const response = await fetch(
         `${API_URL}/home/best-sellers?country=${countryParam}`
       );

@@ -42,7 +42,7 @@ const Badge: FC<BadgeProps> = ({
           hasHover ? "hover:bg-gray-800" : ""
         }`;
       case "green":
-        return `text-green-800 bg-teal-300 ${
+        return `color-dark-green green ${
           hasHover ? "hover:bg-green-800" : ""
         }`;
       case "purple":
@@ -94,7 +94,7 @@ const Badge: FC<BadgeProps> = ({
           hasHover ? "hover:bg-blue-800" : ""
         }`;
       case "teal-active":
-        return `text-slate-500 bg-teal-active ${
+        return `text-slate-500 bg-teal-active color-description-text  ${
           hasHover ? "hover:bg-blue-800" : ""
         }`;
       case "brown-post":
@@ -115,7 +115,7 @@ const Badge: FC<BadgeProps> = ({
   };
   /* transition-colors  */
   const CLASSES =
-    "nc-Badge inline-flex px-2 py-0.5" +
+    "course-pill nc-Badge inline-flex px-2 py-1" +
     ` ${className}` +
     ` ${rounded}` +
     ` ${fontWeight}`;

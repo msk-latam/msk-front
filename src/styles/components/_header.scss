@@ -262,6 +262,10 @@
   margin-right: 30px;
   margin-left: 20px;
 }
+
+.nc-Header.sticky.scrolled .sub-menu{
+  visibility: hidden;
+}
 // main-menu style
 .main-menu {
   ul {

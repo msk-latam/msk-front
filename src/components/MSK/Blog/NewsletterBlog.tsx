@@ -58,16 +58,13 @@ const NewsletterBlog: FC<NewsletterProps> = ({ className = "" }) => {
             required
             aria-required
             placeholder="Ingresar e-mail"
-            className="rounded-lg w-full"
+            className="rounded-lg w-full color-description-text-placeholder"
             type="email"
             onChange={(e) => setEmail(e.target.value)}
           />
-          <ButtonPrimary
-            type="submit"
-            className="absolute transform -translate-y-10 -translate-x-[72px] h-[36px] left-full"
-          >
-            <ArrowLongRightIcon style={{ width: 20, color: "white" }} />
-          </ButtonPrimary>
+          <button className="newsletter-arrow-button nc-Button absolute h-[36px] w-[38px] inline-flex items-center justify-center transition-colors rounded text-sm sm:text-base font-medium ttnc-ButtonPrimary disabled:bg-grey-disabled bg-primary-6000 text-neutral-50 hover:bg-red-500 hover:text-neutral-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-6000 dark:focus:ring-offset-0" type="submit">
+            <ArrowLongRightIcon style={{ width: 25, color: "white" }} />
+          </button>
         </form>
       </div>
       <div className="flex-grow ">

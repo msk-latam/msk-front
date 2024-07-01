@@ -42,6 +42,7 @@ const BlogSummary: FC<BlogSummaryProps> = ({
         post.categories?.some((category: any) => category.name === itemParsed)
       );
     }
+    filteredPosts = filteredPosts.length ? filteredPosts : posts;
 
     const finalPosts = itemParsed.includes("Actualidad")
       ? filteredPosts.slice(4, 9)

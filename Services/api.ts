@@ -115,12 +115,17 @@ class ApiService {
         body: JSON.stringify(jsonData),
       });
 
-      if (!response.ok) {
+      let data;
+      let status = response.status;
+
+      if (response.ok || response.status === 401) {
+        data = await response.json();
+      } else {
         throw new Error(`Failed to login. HTTP status ${response.status}`);
       }
-      const data = await response.json();
-      return { data: data, status: response.status };
+      return { data: data, status: status };
     } catch (error) {
+      //console.log(error);
       // @ts-ignore
       return error.response;
     }

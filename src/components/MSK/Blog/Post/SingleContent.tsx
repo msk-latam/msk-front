@@ -26,7 +26,7 @@ const SingleContent: FC<SingleContentProps> = ({
   const [noteIntroduction, ...noteArticles] = articles;
 
   return (
-    <div className="nc-SingleContent  relative space-y-10 mb-16">
+    <div className="container nc-SingleContent  relative space-y-10 mb-16">
       <div className="container grid grid-cols-12 gap-4">
         <div className="content-container col-span-12 lg:col-span-8 animate-fade-down">
           <CardAuthor2
@@ -110,7 +110,7 @@ const SingleContent: FC<SingleContentProps> = ({
           heading="Nuestros cursos más elegidos"
           subHeading="Profesionales como tú ya se capacitaron con ellos. ¡Ahora te toca a ti!"
           sliderStype="style2"
-          uniqueSliderClass="pageHome-section6"
+          uniqueSliderClass="article-most-picked-courses"
         />
       </div>
     </div>

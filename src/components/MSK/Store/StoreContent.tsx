@@ -116,6 +116,7 @@ const StoreContent: FC<{}> = () => {
     if (input) {
       input.value = "";
     }
+    resetPage();
     if (action == "delete") {
       clearSpecialties();
     } else {
@@ -123,7 +124,6 @@ const StoreContent: FC<{}> = () => {
       addFilter("specialties", specialty);
       addFilter("resources", { id: 1, slug: 'curso', name: "Curso" })
     }
-
   };
   const onChangeProfession = (profession: Profession) => {
     resetPage();
@@ -154,9 +154,11 @@ const StoreContent: FC<{}> = () => {
   function resetPage() {
     setCurrentPage(1);
     //Remove parameter "page" from the url
-    const url = new URL(window.location.href);
-    url.searchParams.delete("page");
-    window.history.pushState({}, "", url);
+    if (typeof window !== "undefined"){
+      const url = new URL(window.location.href);
+      url.searchParams.delete("page");
+      window.history.pushState({}, "", url);
+    }
   }
 
   const applyFilters = () => {
@@ -390,12 +392,19 @@ const StoreContent: FC<{}> = () => {
     }, [allStoreProfessions, specialties]);
   }
 
+  //Event listener for when someone clicks on an anchor that has a search param with a value for "profession"
+  /*  console.log("Search param updated");
+    if (searchParams.get("profesion") != null){
+      //@ts-ignore
+      onChangeProfession({ name: searchParams.get("profesion"), slug: searchParams.get("profesion") });
+    }*/
+
   return (
     <section className="container course-content-area pb-90 animate-fade-down px-0">
       <Breadcrum />
 
       {storeFilters.specialties.length > 0 && (
-        <h1 className="text-xl sm:text-3xl mb-10">
+        <h1 className="text-xl sm:text-3xl mb-6">
           Cursos de {storeFilters.specialties[0].name}
         </h1>
       )}

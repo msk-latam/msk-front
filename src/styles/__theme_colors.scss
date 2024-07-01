@@ -587,6 +587,7 @@ $theme-bg: #f6f8fb;
 $body-text: #575757;
 $modules-text: #374161;
 $description-text: #6474a6;
+$light-white-text: #d9d9d9;
 
 // Border Colors ---------------
 $border: #edeef2;
@@ -598,3 +599,21 @@ $heading-color2: #392c35;
 
 // section-bg Colors ---------------
 $section-bg: #f6f8fb;
+
+$dark-green: #00853E;
+
+.color-dark-green{
+    color: $dark-green;
+}
+
+.color-description-text{
+  color: $description-text;
+}
+
+.color-description-text-placeholder::placeholder{
+  color: $description-text;
+}
+
+.color-light-white-text{
+  color: $light-white-text;
+}

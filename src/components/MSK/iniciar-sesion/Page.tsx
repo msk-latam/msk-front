@@ -10,6 +10,7 @@ import api from "../../../../Services/api";
 import LayoutPage from "@/components/MSK/LayoutPage";
 import { useRouter } from "next/navigation";
 import NcImage from "@/components/NcImage/NcImage";
+import ShowErrorMessage from "@/components/ShowErrorMessage";
 
 
 export interface PageLoginProps {
@@ -54,7 +55,6 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
             recaptcha_token: await executeRecaptcha("login"),
           };
           const { data, status } = await api.postLogin(formData);
-          // @ts-ignore
           if (status == 200) {
             const { name, speciality, ...restData } = data;
             const loginData = {
@@ -65,6 +65,7 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
             dispatch({ type: "LOGIN", payload: loginData });
             changeRoute("/mi-perfil");
           } else {
+            console.log(data);
             setLoginError(data?.message as string);
           }
         }
@@ -140,7 +141,7 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
               </ButtonPrimary>
             </Form>
           </FormikProvider>
-          {/* {Boolean(loginError) && <ShowErrorMessage text={loginError} />} */}
+          <ShowErrorMessage text={loginError} visible={loginError != ""} />
           <span className="block text-center text-neutral-700 dark:text-neutral-300">
             ¿No tienes una cuenta? {` `}
             <NcLink href="/crear-cuenta">Créala aquí</NcLink>

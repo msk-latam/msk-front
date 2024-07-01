@@ -28,6 +28,13 @@
   }
 }
 
+.contact-radio-input{
+  &:checked{
+    background-image: url('/images/misc/radio-checked.png');
+    padding: 1px;
+  }
+}
+
 .contact-checkbox {
   display: flex;
   align-items: center;
@@ -56,6 +63,12 @@
       }
     }
   }
+}
+
+.newsletter-arrow-button{
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 #submit-newsletter:not(:disabled) {

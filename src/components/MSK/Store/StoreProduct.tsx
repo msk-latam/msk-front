@@ -2,7 +2,6 @@ import { FC, useContext } from "react";
 import { FetchCourseType, ResourceFilter } from "@/data/types";
 import CategoryBadgeList from "@/components/CategoryBadgeList/CategoryBadgeList";
 import Badge from "@/components/Badge/Badge";
-import { CountryContext } from "@/context/country/CountryContext";
 import NcLink from "@/components/NcLink/NcLink";
 import Image from "next/image";
 import clockIcon from "/public/images/icons/clock.svg";
@@ -88,30 +87,32 @@ const StoreProduct: FC<Props> = ({
       ) : null}
       <div className="portfolio-course-2-content">
         <div className="portfolio-course-wrapper">
-          <div className="flex flex-wrap gap-1">
-            {product.duration ? null : (
-              <Badge
-                onClick={handleBadgeClick}
-                icon="elearning"
-                color="emerald-post"
-                name="Guía profesional"
-                href={`/tienda?recurso=guias-profesionales`}
+          <div className="course-title-categories">
+            <div className="flex flex-wrap gap-1">
+              {product.duration ? null : (
+                <Badge
+                  onClick={handleBadgeClick}
+                  icon="elearning"
+                  color="emerald-post"
+                  name="Guía profesional"
+                  href={`/tienda?recurso=guias-profesionales`}
+                  textSize="text-xs sm:text-xs"
+                />
+              )}
+              <CategoryBadgeList
+                categories={product.categories}
+                color="yellow"
+                isCourse={true}
                 textSize="text-xs sm:text-xs"
+                onStore
               />
-            )}
-            <CategoryBadgeList
-              categories={product.categories}
-              color="yellow"
-              isCourse={true}
-              textSize="text-xs sm:text-xs"
-              onStore
-            />
-          </div>
+            </div>
 
-          <div className="portfolio-course-2 line-clamp-3">
-            <NcLink href={`/curso/${product.slug}`}>
-              <h3 className="font-bold text-sm">{product.title}</h3>
-            </NcLink>
+            <div className="portfolio-course-2 line-clamp-3">
+              <NcLink href={`/curso/${product.slug}`}>
+                <h3 className="font-bold text-sm">{product.title}</h3>
+              </NcLink>
+            </div>
           </div>
 
           {product.lista_de_cedentes ? (
@@ -138,7 +139,7 @@ const StoreProduct: FC<Props> = ({
 
         <NcLink
           href={`/curso/${product.slug}`}
-          className="course-network text-primary font-bold"
+          className="course-network text-primary font-bold text-sm"
         >
           Descubrir
         </NcLink>
