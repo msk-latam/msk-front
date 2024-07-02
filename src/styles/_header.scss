@@ -15,3 +15,11 @@
     @apply visible;
   }
 }
+
+
+.container {
+  @apply px-4;
+  @screen md{
+    @apply px-16;
+  }
+}
