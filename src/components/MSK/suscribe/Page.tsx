@@ -13,7 +13,7 @@ import TrialModalContent from "@/components/NcModal/TrialModalContent";
 import MissingModalContent from "@/components/NcModal/MissingModalContent";
 import useSingleProduct from "@/hooks/useSingleProduct";
 import { AuthContext } from "@/context/user/AuthContext";
-import ssr from "@Services/ssr";
+import ssr from "@/services/ssr";
 import RebillCheckout from "@/components/Checkout/RebillCheckout";
 import MercadoPagoCheckout from "@/components/Checkout/MercadoPagoCheckout";
 

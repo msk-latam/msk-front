@@ -6,7 +6,7 @@ import {AuthContext} from "@/context/user/AuthContext";
 import Image from 'next/image'
 import {FetchSingleProduct} from "@/data/types";
 import InputSkeleton from "@/components/Skeleton/InputSkeleton";
-import api from "@Services/api";
+import api from "@/services/api";
 
 interface MercadoPagoCheckoutProps{
     product: FetchSingleProduct | undefined;
@@ -63,7 +63,7 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
                 description: `Solicitud de trial (${product?.ficha.title})`,
                 installments: quotes,
                 payment_method_id: 'visa',
-                user: AuthState.profile?.contact,
+                user: AuthState.profile,
                 product
             }, country)
 

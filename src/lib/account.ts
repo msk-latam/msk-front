@@ -1,4 +1,8 @@
-import api from "../../Services/api";
+import api from "@/services/api";
+import activeIcon from "@/public/images/icons/activo.svg";
+import inactiveIcon from "@/public/images/icons/inactivo.svg";
+import expiredIcon from "@/public/images/icons/expirado.svg";
+import trialIcon from "@/public/images/icons/trialIcon.svg";
 
 export const goToLMS = async (
   product_code: number,
@@ -28,7 +32,7 @@ export const goToEnroll = async (product_code: number, email: string) => {
 export function hasText(status: string) {
   switch (status) {
     case "Sin enrolar":
-      return "Inscríbete";
+      return "Activar";
     case "Listo para enrolar":
       return "Ir a enrolar";
     case "Activo":
@@ -45,16 +49,21 @@ export const productFinishOrActive = (status: string) =>
 export const productStatusIsExpired = (status: string) =>
   status.includes("Expirado");
 
-export const getStatusIcon = (status: string | null) => {
-  switch (status) {
-    case "Activo":
-    case "Finalizado":
-      return "/images/icons/activo.svg";
-    case "Expirado":
-      return "/images/icons/expirado.svg";
-    default:
-      return "/images/icons/inactivo.svg";
+export const getStatusIcon = (status: string | null, statusOV: string | null = null) => {
+  console.log(status, statusOV, activeIcon)
+  // Verificar si es un caso especial de "Trial"
+  if (statusOV === "Trial") {
+    return status === "Prueba" ? trialIcon : inactiveIcon;
   }
+  // Objeto de mapeo para asociar estados con iconos
+  const iconMapping: Record<string, any> = {
+    Activo: activeIcon,
+    Finalizado: activeIcon,
+    Expirado: expiredIcon,
+  };
+
+  // Devolver el icono correspondiente o el icono inactivo por defecto
+  return status ? iconMapping[status] || inactiveIcon : inactiveIcon;
 };
 
 export const statusCourse = (status: string) => {
@@ -83,9 +92,7 @@ export const statusCourse = (status: string) => {
   return statusObj;
 };
 
-export const statusOrdenVenta = (status: string) => {
-
-
+export const statusOrdenVenta = (status: string, statusCourse: string | null = null) => {
   const statusObj: {
     isDisabled: boolean;
     hasText: string | null;
@@ -98,7 +105,6 @@ export const statusOrdenVenta = (status: string) => {
     color: "",
   };
 
-
   switch (status) {
     case "Baja":
       statusObj.isDisabled = true;
@@ -109,7 +115,7 @@ export const statusOrdenVenta = (status: string) => {
     case "Trial suspendido":
       statusObj.isDisabled = true;
       statusObj.disabledText = "Prueba cancelada";
-      statusObj.hasText = "Prueba cancelada";
+      statusObj.hasText = null;
       statusObj.color = "trial";
       break;
     case "Trial":

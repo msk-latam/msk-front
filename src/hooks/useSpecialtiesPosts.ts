@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import api from "../../Services/api";
+import api from "@/services/api";
 
 export interface SpecialitiePost {
   speciality_name: string;

@@ -1,4 +1,4 @@
-import ssr from "/Services/ssr";
+import ssr from "/src/services/ssr";
 import { countries } from "@/data/countries";
 
 let locales = countries.map((item) => item.id);

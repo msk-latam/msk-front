@@ -27,9 +27,7 @@
       "@/*": [
         "./src/*"
       ],
-      "@Services/*": [
-        "./Services/*"
-      ]
+      "@/public/*": ["public/*"]
     }
   },
   "include": [

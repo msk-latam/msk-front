@@ -3,7 +3,7 @@ import React, { useEffect, useReducer } from "react";
 import { AuthContext } from "./AuthContext";
 import { authReducer } from "./AuthReducer";
 import { AuthState, Contact } from "@/data/types";
-import api from "../../../Services/api";
+import api from "@/services/api";
 import { fetchUserData } from "@/middleware";
 
 interface Props {

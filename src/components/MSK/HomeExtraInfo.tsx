@@ -2,7 +2,7 @@
 import { FC, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { BannerImg } from "@/data/types";
-import api from "../../../Services/api";
+import api from "@/services/api";
 
 export interface SectionAdsProps {
   className?: string;

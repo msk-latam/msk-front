@@ -4,7 +4,7 @@ import BlogSummary from "@/components/MSK/BlogSummary";
 import BackgroundSection from "@/components/BackgroundSection/BackgroundSection";
 import HomeExtraInfo from "@/components/MSK/HomeExtraInfo";
 import { cookies } from "next/headers";
-import ssr from "../../../../Services/ssr";
+import ssr from "@/services/ssr";
 import { FetchPostType } from "@/data/types";
 import WelcomeBlog from "@/components/MSK/Blog/WelcomeBlog";
 import NewsletterBlog from "@/components/MSK/Blog/NewsletterBlog";

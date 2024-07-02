@@ -1,8 +1,8 @@
 "use client";
 import React, { FC, useContext, useEffect, useState } from "react";
 import { User, UserCourseProgress } from "@/data/types";
-import { getUserCourses } from "@Services/user";
-import api from "../../../../Services/api";
+import { getUserCourses } from "@/services/user";
+import api from "@/services/api";
 import { DataContext } from "@/context/data/DataContext";
 import Avatar from "@/components/Avatar/Avatar";
 import BackgroundSection from "@/components/BackgroundSection/BackgroundSection";

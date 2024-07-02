@@ -1,7 +1,7 @@
 
-import ssr from '@Services/ssr';
+import ssr from '@/services/ssr';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import api from "@Services/api";
+import api from "@/services/api";
 
 interface TrialCoursesStatus {
   hasCoursedRequested: boolean;

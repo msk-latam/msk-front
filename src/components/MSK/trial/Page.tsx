@@ -22,7 +22,7 @@ import InputField from "@/components/InputField/InputField";
 import Link from "next/link";
 import ButtonPrimary from "@/components/Button/ButtonPrimary";
 import ShowErrorMessage from "@/components/ShowErrorMessage";
-import ssr from "@Services/ssr";
+import ssr from "@/services/ssr";
 
 export interface PageTrialProps {
   className?: string;

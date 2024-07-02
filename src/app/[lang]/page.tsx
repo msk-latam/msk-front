@@ -10,7 +10,7 @@ import SectionHero from "@/components/SectionHero/SectionHero";
 import SectionGridCategoryBox from "@/components/SectionGridCategoryBox/SectionGridCategoryBox";
 import BrandSlider from "@/components/MSK/BrandSlider";
 import {cookies} from "next/headers";
-import ssr from "../../../Services/ssr";
+import ssr from "@/services/ssr";
 import {
   getAllBestSellers,
   getAllCourses,

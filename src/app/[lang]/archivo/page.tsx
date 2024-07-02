@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import PageArchiveComponent from "@/components/MSK/Archive/Page";
 import { getAllPosts, setAllPosts } from "@/lib/allData";
-import ssr from "@Services/ssr";
+import ssr from "@/services/ssr";
 import { cookies } from "next/headers";
 export const runtime = "edge";
 

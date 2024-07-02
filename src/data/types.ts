@@ -64,6 +64,20 @@ export interface Contact {
   year?: string;
   courses_progress: CourseProgress[];
   type_doc?: string;
+  trial_course_sites?: TrialCourseSite[]
+}
+
+export interface TrialCourseSite {
+  id: number
+  trial_status: any
+  contact_entity_id: string
+  contractJson: string
+  trial_finish_at: string
+  trial_cancelled_at: any
+  retry_trial_quantity: number
+  rebill_response: any
+  created_at: string
+  updated_at: string
 }
 
 export interface Contract {
@@ -170,6 +184,7 @@ export interface UserProfile {
   courses_progress: CourseProgress[];
   contact?: Contact;
   identification?:string;
+
 }
 
 export interface CustomUser {

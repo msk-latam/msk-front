@@ -1,4 +1,4 @@
-import api from "../Services/api";
+import api from "@/services/api";
 import { NextRequest, NextResponse } from "next/server";
 import { i18nRouter } from "next-i18n-router";
 // @ts-ignore

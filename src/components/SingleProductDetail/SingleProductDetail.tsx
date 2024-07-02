@@ -20,7 +20,7 @@ interface Props {
   product: FetchSingleProduct;
   country?: string;
 }
-import api from "@Services/api";
+import api from "@/services/api";
 import {DataContext} from "@/context/data/DataContext";
 import {getAllBestSellers} from "@/lib/allData";
 const SingleProductDetail: FC<Props> = ({ product, country }) => {

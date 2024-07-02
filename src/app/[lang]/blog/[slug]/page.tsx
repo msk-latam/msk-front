@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import ssr from "../../../../../Services/ssr";
+import ssr from "@/services/ssr";
 import SingleHeader from "@/components/MSK/Blog/Post/PostSingleHeader";
 import NcImage from "@/components/NcImage/NcImage";
 import SingleContent from "@/components/MSK/Blog/Post/SingleContent";

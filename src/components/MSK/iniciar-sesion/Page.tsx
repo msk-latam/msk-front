@@ -6,7 +6,7 @@ import { AuthContext } from "@/context/user/AuthContext";
 import { ErrorMessage, Field, Form, FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import api from "../../../../Services/api";
+import api from "@/services/api";
 import LayoutPage from "@/components/MSK/LayoutPage";
 import { useRouter } from "next/navigation";
 import NcImage from "@/components/NcImage/NcImage";

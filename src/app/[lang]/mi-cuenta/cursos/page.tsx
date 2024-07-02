@@ -3,8 +3,8 @@ import AccountCourses from "@/components/MSK/account/AccountCourses";
 import { ComponentType, FC, useContext, useEffect, useState } from "react";
 import { User, UserCourseProgress } from "@/data/types";
 import { AuthContext } from "@/context/user/AuthContext";
-import api from "../../../../../Services/api";
-import { getUserCourses } from "../../../../../Services/user";
+import api from "@/services/api";
+import { getUserCourses } from "@/services/user";
 import TableSkeleton from "@/components/Skeleton/TableSkeleton";
 import {CountryContext} from "@/context/country/CountryContext";
 

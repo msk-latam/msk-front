@@ -5,7 +5,7 @@ import ContactFormSection from "@/components/MSK/ContactForm";
 import NcModal from "@/components/NcModal/NcModal";
 import { Topic } from "@/data/types";
 import React, { FC, useEffect, useRef, useState } from "react";
-import api from "../../../Services/api";
+import api from "@/services/api";
 
 interface Props {
   topics: Topic;

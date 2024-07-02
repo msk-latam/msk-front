@@ -5,7 +5,7 @@ import { FetchCourseType } from "@/data/types";
 import NcLink from "../NcLink/NcLink";
 import NcImage from "../NcImage/NcImage";
 import { usePathname } from "next/navigation";
-import ssr from "../../../Services/ssr";
+import ssr from "@/services/ssr";
 import { removeFirstSubdomain } from "@/utils/removeFirstSubdomain";
 
 const SearchProducts = () => {

@@ -2,7 +2,7 @@ import { useState, FC, useContext, useEffect } from "react";
 import NcModalSmall from "@/components/NcModal/NcModalSmall";
 import TrialModalContent from "@/components/NcModal/TrialModalContent";
 import { AuthContext } from "@/context/user/AuthContext";
-import api from "../../../Services/api";
+import api from "@/services/api";
 
 interface CancelTrialModalProps {
   item: any;

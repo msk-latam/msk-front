@@ -5,7 +5,7 @@ import { A11y, Autoplay, Navigation, Pagination, Scrollbar } from "swiper";
 
 import 'swiper/swiper-bundle.css';
 import { BannerImg } from "@/data/types";
-import api from "../../../Services/api";
+import api from "@/services/api";
 export interface LayoutPageProps {
   className?: string;
   heading: string;

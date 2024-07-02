@@ -1,6 +1,6 @@
 import SingleProductDetail from "@/components/SingleProductDetail/SingleProductDetail";
 import React, { FC } from "react";
-import ssr from "@Services/ssr";
+import ssr from "@/services/ssr";
 import PageHeadServer from "@/components/Head/PageHeadServer";
 
 interface PageCourseProps {

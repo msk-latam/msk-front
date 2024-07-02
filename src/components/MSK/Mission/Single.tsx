@@ -1,7 +1,7 @@
 "use client";
 import React, { FC, useEffect, useState } from "react";
 import BackgroundSection from "@/components/BackgroundSection/BackgroundSection";
-import api from "../../../../Services/api";
+import api from "@/services/api";
 import { SinglePageType } from "./PageMission";
 import SectionSliderPosts from "@/components/Sections/SectionSliderPosts";
 

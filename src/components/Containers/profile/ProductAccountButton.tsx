@@ -1,11 +1,14 @@
 import { UserCourseProgress } from "@/data/types";
 import {
   getStatusIcon,
-  hasText,
   statusCourse,
   statusOrdenVenta,
 } from "@/lib/account";
-import React, { FC } from "react";
+import React, {FC, useState} from "react";
+import Link from "next/link";
+import CancelTrialModal from "@/components/Modal/CancelTrial";
+import ButtonActivateOrRegister from "@/components/Account/ButtonActivateOrRegister";
+import Image from "next/image";
 
 interface ProductAccountButtonProps {
   product: UserCourseProgress;
@@ -15,49 +18,52 @@ interface ProductAccountButtonProps {
 }
 
 const ProductAccountButton: FC<ProductAccountButtonProps> = ({
-  product,
-  onRequest,
-  isRunning,
-  onClick,
-}) => {
+                                                               product,
+                                                               onRequest,
+                                                               isRunning,
+                                                               onClick,
+                                                             }) => {
+  const [showCancelTrial, setShowCancelTrial] = useState(false)
   const { status } = product;
   const { isDisabled } = statusCourse(status);
-  const statusOV = statusOrdenVenta(product?.ov);
-  const iconStatus = getStatusIcon(
-    statusOV.isDisabled ? statusOV.hasText : status
-  );
-
-  console.log(product.title,{status,statusOV,iconStatus,isDisabled})
+  const statusOV = statusOrdenVenta(product?.ov, status);
+  const textStatus = statusOV.isDisabled ? statusOV.disabledText : statusOV.hasText
+  const iconStatus = getStatusIcon(textStatus, product?.ov);
 
   return (
-    <div className="course-2-footer text-grey-course">
-      <div className="coursee-clock">
-        <img
-          src={iconStatus}
-          alt={statusOV.isDisabled ? statusOV.hasText : status}
-        />
-        <span className="ml-2">
-          {statusOV.isDisabled ? statusOV.hasText : status}
+      <div className="course-2-footer text-grey-course">
+        <div className="coursee-clock">
+          <Image
+              {...iconStatus}
+              alt={textStatus as string}
+          />
+          <span className="ml-2">
+          {textStatus === "" ? status : textStatus}
+            {statusOV.hasText === 'Prueba' &&
+                <div className="ml-1 inline-block">
+                  - <Link href="#"
+                    onClick={()=> setShowCancelTrial(true)}
+                    className="underline text-violet-custom hover:text-violet-custom">
+                  Dar de baja
+                </Link>
+                </div>
+            }
         </span>
-      </div>
+        </div>
 
-      <button
-        className="course-network text-primary font-bold disabled:cursor-not-allowed disabled:opacity-70"
-        onClick={onClick}
-        disabled={isDisabled || onRequest || isRunning || statusOV.isDisabled}
-      >
-        {onRequest ||
-        isRunning ||
-        (status && status.includes("Listo para enrolar")) ? (
-          <div className="flex justify-center items-center">
-            Activando...
-            {/*  <div className="w-4 h-4 my-1 border-t-2 border-primary border-solid rounded-full animate-spin"></div> */}
-          </div>
-        ) : (
-          hasText(status)
-        )}
-      </button>
-    </div>
+        <ButtonActivateOrRegister
+            isDisabledActivate={isDisabled || statusOV.isDisabled}
+            handleActivateClick={onClick}
+            whenActivate={onRequest || isRunning || (typeof status === 'string' && status.includes("Listo para enrolar"))}
+            status={status}
+            productSlug={product.slug}
+        />
+
+        <CancelTrialModal
+            isOpenProp={showCancelTrial} item={product}
+            onCloseModal={() => setShowCancelTrial(false)}
+        />
+      </div>
   );
 };
 

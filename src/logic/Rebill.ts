@@ -3,8 +3,8 @@ import { ContactCRM, JsonMapping } from "@/data/types";
 import { Dispatch, SetStateAction } from "react";
 import rebillCountryPriceMapping from "@/data/jsons/__rebillCurrencyPrices.json"
 import { getEnv } from "@/utils/getEnv";
-import api from "@Services/api";
-import ssr from "@Services/ssr";
+import api from "@/services/api";
+import ssr from "@/services/ssr";
 import translateDocumentType from "@/utils/translateDocumentType";
 
 declare global {

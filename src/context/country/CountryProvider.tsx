@@ -4,7 +4,7 @@ import { CountryContext } from "./CountryContext";
 import { countryReducer } from "./CountryReducer";
 import { CountryState } from "@/data/types";
 import { countries } from "@/data/countries";
-import api from "../../../Services/api";
+import api from "@/services/api";
 import Cookies from "js-cookie";
 
 interface Props {

@@ -2,7 +2,7 @@
 import React, {useContext, useEffect, useReducer, useState} from "react";
 import { DataContext } from "./DataContext";
 import { dataReducer } from "./DataReducer";
-import api from "../../../Services/api";
+import api from "@/services/api";
 import { CountryContext } from "@/context/country/CountryContext";
 
 

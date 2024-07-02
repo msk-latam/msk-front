@@ -10,7 +10,7 @@ import { CountryCode } from "libphonenumber-js/types";
 import Link from "next/link";
 import ButtonPrimary from "@/components/Button/ButtonPrimary";
 import ShowErrorMessage from "@/components/ShowErrorMessage";
-import ssr from "@Services/ssr";
+import ssr from "@/services/ssr";
 import * as Yup from "yup";
 import { countries } from "@/data/countries";
 import { DataContext } from "@/context/data/DataContext";

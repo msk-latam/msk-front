@@ -3,7 +3,7 @@ import AccountPersonalData from "@/components/MSK/account/AccountPersonalData";
 import { FC, useContext, useEffect, useState } from "react";
 import { User } from "@/data/types";
 import { AuthContext } from "@/context/user/AuthContext";
-import api from "../../../../../Services/api";
+import api from "@/services/api";
 import InputSkeleton from "@/components/Skeleton/InputSkeleton";
 import { useRouter } from "next/navigation";
 

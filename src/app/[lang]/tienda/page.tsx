@@ -3,7 +3,7 @@ import StoreLayout from "@/components/MSK/StoreLayout";
 import StoreContent from "@/components/MSK/Store/StoreContent";
 import { cookies } from "next/headers";
 import { Metadata } from "next";
-import ssr from "@Services/ssr";
+import ssr from "@/services/ssr";
 import { slugifySpecialty } from "@/lib/Slugify";
 
 type Props = {

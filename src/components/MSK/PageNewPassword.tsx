@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import LayoutPage from "@/components/MSK/LayoutPage";
 import Input from "@/components/Input/Input";
 import ButtonPrimary from "@/components/Button/ButtonPrimary";
-import api from "../../../Services/api";
+import api from "@/services/api";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import PageHeadServer from "../Head/PageHeadServer";

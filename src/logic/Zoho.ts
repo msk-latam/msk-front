@@ -3,7 +3,7 @@ import installmentsMapping from '@/data/jsons/__countryInstallments.json'
 import currencyMapping from "@/data/jsons/__countryCurrencies.json";
 import { JsonInstallmentsMapping, RebillTransaction } from "@/data/types";
 import { countries } from "@/data/countries";
-import api from "@Services/api";
+import api from "@/services/api";
 
 interface RebillCheckoutPayment{
   invoice: RebillTransaction | null,
