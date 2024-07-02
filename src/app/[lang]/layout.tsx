@@ -15,6 +15,9 @@ import { cookies } from "next/headers";
 import React from "react";
 import { Analytics } from "@vercel/analytics/react"
 import {SpeedInsights} from "@vercel/speed-insights/next";
+import { Suspense } from 'react'
+import { NavigationEvents } from '@/components/NavigationEvents'
+
 
 export const runtime = "edge";
 
@@ -75,6 +78,9 @@ export default async function RootLayout({ params, children }: LayoutProps) {
                       />
                       <script src="https://go.botmaker.com/rest/webchat/p/XG5DC3KZSF/init.js"></script>
                       <Footer/>
+                      <Suspense fallback={null}>
+                        <NavigationEvents />
+                      </Suspense>
                     </StoreProvider>
                   </AuthProvider>
                 </UTMProvider>

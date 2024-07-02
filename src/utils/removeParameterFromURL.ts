@@ -1,7 +1,7 @@
 export const removeParameterFromURL = (param: string, value: string) => {
   const url = new URL(window.location.href);
-  console.log("REMOVE PARAM FROM URL");
-  console.log(url, param, value);
+  //console.log("REMOVE PARAM FROM URL");
+  //console.log(url, param, value);
   if (param === 'resources') {
     url.searchParams.delete("recurso");
     window.history.replaceState({}, document.title, url.toString());

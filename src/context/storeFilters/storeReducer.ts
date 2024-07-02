@@ -110,8 +110,8 @@ const reducer = (state: State, action: Action): State => {
       };
     case "ADD_FILTER":
       console.log("ADD_FILTER", action.payload.filterType, action.payload.filterValue);
-      addParameterToURL(action.payload.filterType, action.payload.filterValue)
-      removeParameterFromURL("page", '')
+      addParameterToURL(action.payload.filterType, action.payload.filterValue);
+      removeParameterFromURL("page", '');
 
       let stateAux = {
         ...state,
@@ -122,7 +122,10 @@ const reducer = (state: State, action: Action): State => {
           duration: [...state.storeFilters.duration],
           resources: [...state.storeFilters.resources],
           page: [...state.storeFilters.page],
-          [action.payload.filterType]: [action.payload.filterValue],
+          [action.payload.filterType]: [
+            ...state.storeFilters[action.payload.filterType],
+            action.payload.filterValue
+          ],
         },
       };
       console.log("State aux: ", stateAux);

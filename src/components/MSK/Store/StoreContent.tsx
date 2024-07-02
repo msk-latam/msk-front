@@ -99,7 +99,6 @@ const StoreContent: FC<{}> = () => {
       removeFilter("page", { id: pageNumber, name: String(pageNumber) });
     }
   };
-
   // STOREBAR FILTERS
 
   const triggerFilter = (event: any) => {
@@ -118,7 +117,7 @@ const StoreContent: FC<{}> = () => {
     }
     resetPage();
     if (action == "delete") {
-      clearSpecialties();
+      removeFilter('specialties', specialty);
     } else {
       console.log("Adding filter");
       addFilter("specialties", specialty);
@@ -252,16 +251,19 @@ const StoreContent: FC<{}> = () => {
               )
             );
 
-          const resourcesMatch = selectedResources
-            .filter((e: string) => e != undefined)
-            .every((resource) => {
-              if (resource === "Curso") {
-                //console.log({resource, type: product.father_post_type},product.father_post_type === "course")
-                return product.father_post_type === "course";
-              } else if (resource === "Guías profesionales") {
-                return product.father_post_type === "downloadable";
-              }
-            });
+          let resourcesMatch = true;
+          if (selectedResources.length !== 0) {
+            resourcesMatch = selectedResources
+              .filter((e: string) => e != undefined)
+              .some((resource) => {
+                if (resource === "Curso") {
+                  //console.log({resource, type: product.father_post_type},product.father_post_type === "course")
+                  return product.father_post_type === "course";
+                } else if (resource === "Guías profesionales") {
+                  return product.father_post_type === "downloadable";
+                }
+              });
+          }
 
           let durationsMatch = true;
           if (selectedDurations && selectedDurations.length) {
