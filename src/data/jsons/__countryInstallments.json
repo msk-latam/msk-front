@@ -4,7 +4,7 @@
         "quotes": 8
     },
     "ar": {
-        "gateway": "MP",
+        "gateway": "REBILL",
         "quotes": 12
     },
     "ec": {
@@ -12,11 +12,11 @@
         "quotes": 12
     },
     "es": {
-        "gateway": "ST",
+        "gateway": "REBILL",
         "quotes": null
     },
     "int": {
-        "gateway": "ST",
+        "gateway": "REBILL",
         "quotes": null
     },
     "ve": {
