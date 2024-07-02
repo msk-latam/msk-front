@@ -63,6 +63,8 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
                 description: `Solicitud de trial (${product?.ficha.title})`,
                 installments: quotes,
                 payment_method_id: 'visa',
+                user: AuthState.profile?.contact,
+                product
             }, country)
 
 
