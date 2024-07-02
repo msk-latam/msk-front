@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-let PROD = process.env.PROD;
+let PROD = !process.env.PROD;
 let NEXT_PUBLIC_REBILL_URL = process.env.NEXT_PUBLIC_REBILL_URL;
 let NEXT_PUBLIC_REBILL_API_KEY_TEST = process.env.NEXT_PUBLIC_REBILL_API_KEY_TEST;
 let NEXT_PUBLIC_REBILL_API_KEY_PRD = process.env.NEXT_PUBLIC_REBILL_API_KEY_PRD;
@@ -38,6 +38,15 @@ let NEXT_PUBLIC_REBILL_COP_API_KEY_PRD = process.env.NEXT_PUBLIC_REBILL_COP_API_
 let NEXT_PUBLIC_REBILL_REBILL_CO_FREEMIUM_PRD = process.env.NEXT_PUBLIC_REBILL_REBILL_COP_FREEMIUM_PRD;
 let NEXT_PUBLIC_REBILL_REBILL_CO_FREEMIUM_TEST = process.env.NEXT_PUBLIC_REBILL_REBILL_COP_FREEMIUM_TEST;
 
+//AR
+let NEXT_PUBLIC_REBILL_MP_AR_FREEMIUM_PRD = process.env.NEXT_PUBLIC_REBILL_MP_AR_FREEMIUM_PRD;
+let NEXT_PUBLIC_REBILL_STRIPE_BO_FREEMIUM_PRD = process.env.NEXT_PUBLIC_REBILL_STRIPE_BO_FREEMIUM_PRD
+let NEXT_PUBLIC_REBILL_STRIPE_PY_FREEMIUM_PRD = process.env.NEXT_PUBLIC_REBILL_STRIPE_PY_FREEMIUM_PRD
+let NEXT_PUBLIC_REBILL_STRIPE_PE_FREEMIUM_PRD = process.env.NEXT_PUBLIC_REBILL_STRIPE_PE_FREEMIUM_PRD
+let NEXT_PUBLIC_REBILL_STRIPE_CR_FREEMIUM_PRD = process.env.NEXT_PUBLIC_REBILL_STRIPE_CR_FREEMIUM_PRD
+let NEXT_PUBLIC_REBILL_STRIPE_HN_FREEMIUM_PRD = process.env.NEXT_PUBLIC_REBILL_STRIPE_HN_FREEMIUM_PRD
+let NEXT_PUBLIC_REBILL_STRIPE_USD_FREEMIUM_PRD = process.env.NEXT_PUBLIC_REBILL_STRIPE_USD_FREEMIUM_PRD
+
 
 const rebillCountriesPrices: JsonMapping = rebillCountryPriceMapping
 
@@ -46,9 +55,11 @@ export const REBILL_CONF = {
   API_KEY: PROD ? NEXT_PUBLIC_REBILL_API_KEY_PRD : NEXT_PUBLIC_REBILL_API_KEY_TEST, //getEnv("REBILL_API_KEY")
   URL: NEXT_PUBLIC_REBILL_URL,
   GATEWAYS: {
-    ST: ["cr","hn","ve","pe","ni","sv","bo","py","gt","pa","ec"],
-    MP: ["ar"],
-    REBILL: ['cl','co','uy','mx']
+    ST: ["cr","hn","ve","ni","sv","bo","py","gt","pa","ec"],
+    MP: [], //ar is need it!, rebill is provisional!
+    REBILL: ['cl','co','uy','mx'],
+    // for old rebill is provisional!
+    DEPRECATE_REBILL:['ar',"pe","cr","hn","ve","ni","sv","bo","py","gt","pa","ec"]
   },
   PRICES: {
     NEXT_PUBLIC_REBILL_REBILL_CL_FREEMIUM_PRD,
@@ -56,7 +67,15 @@ export const REBILL_CONF = {
     NEXT_PUBLIC_REBILL_REBILL_CO_FREEMIUM_PRD,
     NEXT_PUBLIC_REBILL_REBILL_CL_FREEMIUM_TEST,
     NEXT_PUBLIC_REBILL_REBILL_UY_FREEMIUM_TEST,
-    NEXT_PUBLIC_REBILL_REBILL_CO_FREEMIUM_TEST
+    NEXT_PUBLIC_REBILL_REBILL_CO_FREEMIUM_TEST,
+    //DEPRECATE REBILL PRICES
+    NEXT_PUBLIC_REBILL_MP_AR_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_STRIPE_BO_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_STRIPE_PY_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_STRIPE_PE_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_STRIPE_CR_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_STRIPE_HN_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_STRIPE_USD_FREEMIUM_PRD,
 }
 };
 
@@ -85,6 +104,7 @@ export const getRebillInitialization = (country: string) => {
 
       };
     default:
+      //return te old rebill DEPRECATE_REBILL
       return {
         organization_id: REBILL_CONF.ORG_ID,
         api_key: REBILL_CONF.API_KEY,
@@ -131,8 +151,10 @@ const mappingCheckoutFields = (contactZoho: ContactCRM) => {
 
 const getPlan = (country: string) => {
   const gateway = REBILL_CONF.GATEWAYS.REBILL.includes(country) ? "REBILL" : null;
+  const isDeprecateRebill = REBILL_CONF.GATEWAYS.DEPRECATE_REBILL.includes(country) ? "REBILL" : null;
+  const isDeprecateRebillMP = isDeprecateRebill ? (country === "ar"? "MP" : "STRIPE"): null;
   const countryPrice = rebillCountriesPrices[country];
-  const price = getEnv(`REBILL_${gateway}_${countryPrice}_FREEMIUM`);
+  const price = getEnv(`REBILL_${gateway ?? isDeprecateRebillMP}_${countryPrice}_FREEMIUM`);
 
   console.log({price, countryPrice})
 

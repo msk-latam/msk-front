@@ -48,6 +48,10 @@ export const countries = [
     name: "Panama",
   },
   {
+    id: "pe",
+    name: "Peru",
+  },
+  {
     id: "ni",
     name: "Nicaragua",
   },

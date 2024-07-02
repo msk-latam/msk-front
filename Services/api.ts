@@ -848,11 +848,10 @@ class ApiService {
       }
 
       const data = await response.json();
-      // console.log({ data });
       return data;
     } catch (error) {
-      console.error("Network error:", error);
-      return error;
+      console.error("Error:", {error});
+      return {error: true, details: error};
     }
   }
 

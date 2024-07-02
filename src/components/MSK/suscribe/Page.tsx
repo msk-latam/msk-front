@@ -2,7 +2,7 @@
 import { FC, useContext, useEffect, useRef, useState } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import installmentsMapping from "@/data/jsons/__countryInstallments.json";
-import {JsonInstallmentsMapping, JsonMapping} from "@/data/types";
+import {JsonInstallmentsMapping} from "@/data/types";
 import { useParams } from "next/navigation";
 import { CountryContext } from "@/context/country/CountryContext";
 import useRequestedTrialCourse from "@/hooks/useRequestedTrialCourse";
@@ -122,7 +122,16 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
       case 'ST':
        // return <StripePaymentForm payment={invoiceDetail} currency={currencyOptions.currency} />;
       default:
-        return null;
+        return <RebillCheckout
+            product={product}
+            hasCoursedRequested={hasCoursedRequested}
+            country={country}
+            showMissingData={showMissingData}
+            setShow={setShow}
+            setFaliedMessage={setFaliedMessage}
+            setPaymentCorrect={setPaymentCorrect}
+            mountedInputObjectState={mountedInputObjectState}
+        />;;
     }
   }
 

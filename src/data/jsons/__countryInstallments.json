@@ -8,7 +8,7 @@
         "quotes": 12
     },
     "ec": {
-        "gateway": "ST",
+        "gateway": "REBILL",
         "quotes": 12
     },
     "es": {
@@ -20,7 +20,7 @@
         "quotes": null
     },
     "ve": {
-        "gateway": "ST",
+        "gateway": "REBILL",
         "quotes": 12
     },
     "mx": {
@@ -28,7 +28,7 @@
         "quotes": 12
     },
     "bo": {
-        "gateway": "ST",
+        "gateway": "REBILL",
         "quotes": 12
     },
     "co": {
@@ -36,35 +36,35 @@
         "quotes": 12
     },
     "cr": {
-        "gateway": "ST",
+        "gateway": "REBILL",
         "quotes": 12
     },
     "sv": {
-        "gateway": "ST",
+        "gateway": "REBILL",
         "quotes": 12
     },
     "gt": {
-        "gateway": "ST",
+        "gateway": "REBILL",
         "quotes": 12
     },
     "hn": {
-        "gateway": "ST",
+        "gateway": "REBILL",
         "quotes": 12
     },
     "ni": {
-        "gateway": "ST",
+        "gateway": "REBILL",
         "quotes": 12
     },
     "pa": {
-        "gateway": "ST",
+        "gateway": "REBILL",
         "quotes": 12
     },
     "py": {
-        "gateway": "ST",
+        "gateway": "REBILL",
         "quotes": 12
     },
     "pe": {
-        "gateway": "ST",
+        "gateway": "REBILL",
         "quotes": 12
     },
     "uy": {

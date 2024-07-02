@@ -117,9 +117,6 @@ const DesktopCourseItem: FC<DesktopCourseItemProps> = ({
             goToLMS={goToLMS}
             item={item}
           />
-          {item.ov === "Trial" && (
-            <ButtonOffTrial item={item} email={email} />
-          )}
         </div>
       </td>
     </tr>
