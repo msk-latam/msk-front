@@ -38,7 +38,6 @@ const MainNav2: FC = () => {
     setIsOnBlog(pathName.includes("blog"));
     setIsOnArchive(pathName.includes("archivo"));
     setInitialLoad(true);
-    console.log('USE EFFECT RUN');
   }, []);
   
   return (

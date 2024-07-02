@@ -342,10 +342,6 @@ const StoreContent: FC<{}> = () => {
       const profesion = url.searchParams.get("profesion");
       const duracion = url.searchParams.get("duracion");
       const page = url.searchParams.get("page");
-      // check if there is anything in page, if not set to 1
-      /*if (!page) {
-        setCurrentPage(1);
-      }*/
       if (recurso) {
         let urlResource = resources.find(
           (resource) => resource.slug === recurso
@@ -378,7 +374,7 @@ const StoreContent: FC<{}> = () => {
         );
         console.log("URL PROFESSION: ", urlProfession);
         if (urlProfession) {
-          onChangeProfession(urlProfession);
+          addFilter("professions", urlProfession);
         }
       }
       if (duracion) {
@@ -391,13 +387,6 @@ const StoreContent: FC<{}> = () => {
       }
     }, [allStoreProfessions, specialties]);
   }
-
-  //Event listener for when someone clicks on an anchor that has a search param with a value for "profession"
-  /*  console.log("Search param updated");
-    if (searchParams.get("profesion") != null){
-      //@ts-ignore
-      onChangeProfession({ name: searchParams.get("profesion"), slug: searchParams.get("profesion") });
-    }*/
 
   return (
     <section className="container course-content-area pb-90 animate-fade-down px-0">

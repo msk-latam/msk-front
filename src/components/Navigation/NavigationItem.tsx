@@ -57,11 +57,9 @@ const recentPosts = [
 
 const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
   const [menuCurrentHovers, setMenuCurrentHovers] = useState<string[]>([]);
-
   const onMouseEnterMenu = (id: string) => {
     setMenuCurrentHovers((state) => [...state, id]);
   };
-
   const onMouseLeaveMenu = (id: string) => {
     setMenuCurrentHovers((state) => {
       return state.filter((item, index) => {
@@ -271,6 +269,27 @@ const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
 
   const renderDropdownMenuNavlink = (item: NavItemType) => {
     const searchParams = new URLSearchParams(item.search);
+    //if the current url includes /tienda and the item.href includes /tienda, use an anchor instead of a link element
+    if (
+      typeof window !== "undefined" &&
+      window.location.pathname.includes("/tienda") &&
+      item.href?.includes("/tienda")
+    ) {
+      return (
+        <a
+          className="flex items-center font-normal text-neutral-6000 dark:text-neutral-400 py-2 px-4 rounded-md hover:text-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
+          href={item.href + "/?" + searchParams.toString()}
+        >
+          {item.name}
+          {item.type && (
+            <ChevronDownIcon
+              className="ms-2 h-4 w-4 text-neutral-500"
+              aria-hidden="true"
+            />
+          )}
+        </a>
+      );
+    }
     return (
       <Link
         className="flex items-center font-normal text-neutral-6000 dark:text-neutral-400 py-2 px-4 rounded-md hover:text-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
