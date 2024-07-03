@@ -45,7 +45,7 @@ const DateProductExpiration: FC<DateProductExpirationProps> = ({
   return (
       <>
         {dating && (
-            <div className="flex items-center mt-2 ml-3">
+            <div className="flex items-center mt-2">
               <Image src={calendarIcon} alt="Calendar Icon" className="mr-2" width={15} height={15} />
               <span className="text-violet-wash text-[14px] sm:text-sm">
             {text}: {dating}

@@ -73,7 +73,7 @@ const ProductAccount: FC<Props> = ({
   };
 
   return (
-      <div className={`protfolio-course-2-wrapper ${className}`}>
+      <div className={`protfolio-course-2-wrapper justify-between ${className}`}>
         <div className="student-course-img">
           <a onClick={handleClick}>
             <img src={imageURL} alt="course-img" />
@@ -107,71 +107,74 @@ const ProductAccount: FC<Props> = ({
             </div>
         ) : null}
 
-        <div className="portfolio-course-2-content">
-          <div className="portfolio-course-wrapper">
-            <div>
-              <div className="flex gap-2 flex-wrap">
-                {product.duration ? null : (
+        <div className="course-content-wrp">
+          <div className="portfolio-course-2-content">
+            <div className="portfolio-course-wrapper">
+              <div>
+                <div className="flex gap-2 flex-wrap">
+                  {product.duration ? null : (
                     <>
                       <Badge
-                          icon="elearning"
-                          color="emerald-post"
-                          name="Guía profesional"
-                          textSize="text-[11px]"
+                        icon="elearning"
+                        color="emerald-post"
+                        name="Guía profesional"
+                        textSize="text-[11px]"
                       />
                     </>
-                )}
-                <CategoryBadgeList
+                  )}
+                  <CategoryBadgeList
                     categories={product.categories}
                     color="yellow"
                     isCourse={true}
                     textSize="text-[11px]"
-                />
+                  />
+                </div>
+                <div className="portfolio-course-2 line-clamp-3">
+                  <a onClick={handleClick} className="">
+                    <h3 className="font-bold text-sm">{product.title}</h3>
+                  </a>
+                </div>
               </div>
-              <div className="portfolio-course-2 line-clamp-3">
-                <a onClick={handleClick} className="">
-                  <h3 className="font-bold text-sm">{product.title}</h3>
-                </a>
-              </div>
-            </div>
-            <div>
-              {(product.ov !== "Baja" && product.ov !== 'Trial suspendido') && (
+              <div>
+                {(product.ov !== "Baja" && product.ov !== 'Trial suspendido') && (
                   <>
                     {product.expiration ? (
-                        <DateProductExpiration
-                            date={productExpiration.current}
-                            text="Fecha de expiración"
-                            user={authState.profile}
-                            product={product}
-                        />
+                      <DateProductExpiration
+                        date={productExpiration.current}
+                        text="Fecha de expiración"
+                        user={authState.profile}
+                        product={product}
+                      />
                     ) : (
-                        <DateProductExpiration
-                            date={productExpirationEnroll.current}
-                            text="Fecha límite de activación"
-                            user={authState.profile}
-                            product={product}
-                        />
+                      <DateProductExpiration
+                        date={productExpirationEnroll.current}
+                        text="Fecha límite de activación"
+                        user={authState.profile}
+                        product={product}
+                      />
                     )}
                   </>
-              )}
-              {showHelp && <CentroAyudaLink addClassNames="my-2" />}
-              {showTip && (
+                )}
+                {showHelp && <CentroAyudaLink addClassNames="my-2" />}
+                {showTip && (
                   <InfoText
-                      addClassNames="mt-2"
-                      text="¿No ves resultados? Intenta refrescar la pantalla."
+                    addClassNames="mt-2"
+                    text="¿No ves resultados? Intenta refrescar la pantalla."
                   />
-              )}
+                )}
+              </div>
             </div>
           </div>
-        </div>
-        {product ? (
+          {product ? (
             <ProductAccountButton
-                product={product}
-                onRequest={onRequest}
-                isRunning={isRunning}
-                onClick={handleClick}
+              product={product}
+              onRequest={onRequest}
+              isRunning={isRunning}
+              onClick={handleClick}
             />
-        ) : null}
+          ) : null}
+        </div>
+
       </div>
   );
 };

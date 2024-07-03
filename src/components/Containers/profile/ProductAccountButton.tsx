@@ -1,4 +1,4 @@
-import { UserCourseProgress } from "@/data/types";
+import {UserCourseProgress} from "@/data/types";
 import {
   getStatusIcon,
   statusCourse,
@@ -24,46 +24,48 @@ const ProductAccountButton: FC<ProductAccountButtonProps> = ({
                                                                onClick,
                                                              }) => {
   const [showCancelTrial, setShowCancelTrial] = useState(false)
-  const { status } = product;
-  const { isDisabled } = statusCourse(status);
+  const {status} = product;
+  const {isDisabled} = statusCourse(status);
   const statusOV = statusOrdenVenta(product?.ov, status);
   const textStatus = statusOV.isDisabled ? statusOV.disabledText : statusOV.hasText
   const iconStatus = getStatusIcon(textStatus, product?.ov);
 
   return (
-      <div className="course-2-footer text-grey-course">
+    <div className="product-button-wrp">
+      <div className="product-button-footer text-grey-course">
         <div className="coursee-clock">
           <Image
-              {...iconStatus}
-              alt={textStatus as string}
+            {...iconStatus}
+            alt={textStatus as string}
           />
           <span className="ml-2">
           {textStatus === "" ? status : textStatus}
             {statusOV.hasText === 'Prueba' &&
-                <div className="ml-1 inline-block">
-                  - <Link href="#"
-                    onClick={()=> setShowCancelTrial(true)}
-                    className="underline text-violet-custom hover:text-violet-custom">
-                  Dar de baja
-                </Link>
-                </div>
+              <div className="ml-1 inline-block">
+                - <Link href="#"
+                        onClick={() => setShowCancelTrial(true)}
+                        className="underline text-violet-custom hover:text-violet-custom">
+                Dar de baja
+              </Link>
+              </div>
             }
         </span>
         </div>
-
         <ButtonActivateOrRegister
-            isDisabledActivate={isDisabled || statusOV.isDisabled}
-            handleActivateClick={onClick}
-            whenActivate={onRequest || isRunning || (typeof status === 'string' && status.includes("Listo para enrolar"))}
-            status={status}
-            productSlug={product.slug}
-        />
-
-        <CancelTrialModal
-            isOpenProp={showCancelTrial} item={product}
-            onCloseModal={() => setShowCancelTrial(false)}
+          isDisabledActivate={isDisabled || statusOV.isDisabled}
+          handleActivateClick={onClick}
+          whenActivate={onRequest || isRunning || (typeof status === 'string' && status.includes("Listo para enrolar"))}
+          status={status}
+          productSlug={product.slug}
         />
       </div>
+
+      <CancelTrialModal
+        isOpenProp={showCancelTrial} item={product}
+        onCloseModal={() => setShowCancelTrial(false)}
+      />
+    </div>
+
   );
 };
 

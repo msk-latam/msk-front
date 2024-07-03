@@ -665,6 +665,8 @@
     height: auto;
     position: absolute;
     left: 0;
+    transition: transform 0.2s ease-in-out;
+
     // top: 50%;
     // transform: translateY(-50%);
   }
@@ -1252,6 +1254,26 @@
 
 .portfolio-course-2-content {
   padding: 0 20px;
+}
+
+.product-button-wrp{
+  margin-top: auto;
+}
+
+.product-button-footer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-top: 1px solid $border;
+  line-height: 1;
+
+  i {
+    @media #{$xl} {
+      font-size: 14px;
+      margin-right: 4px;
+    }
+  }
 }
 
 .course-2-footer {
