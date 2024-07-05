@@ -22,8 +22,9 @@ const DateProductExpiration: FC<DateProductExpirationProps> = ({
     if(product.ov.includes("Trial")){
       user?.trial_course_sites?.filter((tcs: any) => {
         let contract = JSON.parse(tcs.contractJson);
+        console.log({contract})
         let accessContent = contract?.data[0] ?? contract?.data
-        let productDetails = accessContent.Product_Details
+        let productDetails = accessContent?.Product_Details 
         let dateEndTrial = accessContent.Fecha_de_fin_TRIAL
        
         console.log({contract, productDetails, dateEndTrial})
