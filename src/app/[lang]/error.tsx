@@ -1,6 +1,7 @@
 'use client' // Error components must be Client Components
 
 import { useEffect } from 'react'
+import {BASE_URL} from "@/contains/constants";
 
 export default function Error({
                                   error,
@@ -9,7 +10,7 @@ export default function Error({
     error: Error & { digest?: string }
     reset: () => void
 }) {
-    let apiURL = process.env.NEXT_PUBLIC_PUBLIC_URL;
+    let apiURL = BASE_URL;
     console.log("APIIIII",apiURL);
     useEffect(() => {
         // Log the error to an error reporting service
