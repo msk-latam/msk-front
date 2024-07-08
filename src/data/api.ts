@@ -1,18 +1,18 @@
 import { countries } from "./countries";
-
+const IS_PROD = process.env.PROD || process.env.NODE_ENV === "production";
 const API_URL = process.env.NEXT_PUBLIC_MSK_WP_API;
 const PROD_BASE_URL = process.env.NEXT_PUBLIC_PUBLIC_URL;
 const DEV_BASE_URL = process.env.NEXT_PUBLIC_PUBLIC_URL_DEV;
 
-const API_BACKEND_LARAVEL = process.env.PROD
+const API_BACKEND_LARAVEL = IS_PROD
   ? `${process.env.NEXT_PUBLIC_PUBLIC_URL}/api`
   : `${process.env.NEXT_PUBLIC_PUBLIC_URL_DEV}/api`;
 
-const baseUrl = process.env.PROD
+const baseUrl = IS_PROD
   ? PROD_BASE_URL
   : DEV_BASE_URL;
 
-console.log({PROD_BASE_URL, DEV_BASE_URL, baseUrl})
+console.log({IS_PROD,PROD_BASE_URL, DEV_BASE_URL, baseUrl})
 
 const API_BACKEND_URL = API_BACKEND_LARAVEL;
 
