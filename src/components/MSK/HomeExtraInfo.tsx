@@ -3,6 +3,7 @@ import { FC, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { BannerImg } from "@/data/types";
 import api from "@/services/api";
+import {A11y, Autoplay, Navigation, Pagination, Scrollbar} from "swiper";
 
 export interface SectionAdsProps {
   className?: string;
@@ -38,6 +39,7 @@ const SectionAds: FC<SectionAdsProps> = ({ country, btnOnClick }) => {
     >
       <Swiper
         slidesPerView={1}
+        modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         loop={true}
         autoplay={{
           delay: 5000,

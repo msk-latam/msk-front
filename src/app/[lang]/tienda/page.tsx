@@ -59,12 +59,14 @@ export interface PageStoreProps {
 }
 
 const PageStore: FC<PageStoreProps> = ({ className = "", params }) => {
+  const currentCountry = params.lang || cookies().get("country")?.value;
+
   return (
     <div
       className={`nc-PageStore ${className} animate-fade-down`}
       data-nc-id="PageStore"
     >
-      <StoreLayout subHeading="" headingEmoji="" heading="Tienda">
+      <StoreLayout subHeading="" headingEmoji="" heading="Tienda" country={currentCountry}>
         <section className="container text-neutral-600 text-sm md:text-base overflow-hidden">
           <StoreContent />
         </section>

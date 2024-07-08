@@ -32,6 +32,7 @@ const StoreLayout: FC<LayoutPageProps> = ({
     const fetchData = async () => {
       try {
         const response = await api.getWpImages("banners_shop", country);
+        console.log({ response });
         if (response.length > 0) {
           setBannerImgs(response);
         }
@@ -42,6 +43,8 @@ const StoreLayout: FC<LayoutPageProps> = ({
 
     fetchData();
   }, []);
+
+  console.log({bannerImgs})
 
   return (
     <div
