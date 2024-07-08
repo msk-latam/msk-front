@@ -11,13 +11,13 @@ import {
   setLoadingCourses,
 } from "@/lib/allData";
 import {SignUp} from "@/data/types";
-import {IS_PROD} from "@/contains/constants";
+import {BASE_URL, IS_PROD, SITE_URL} from "@/contains/constants";
 
 let validCountries = countries.map((item) => item.id);
 
 const PROD = IS_PROD;
 
-const apiProfileUrl = `${baseUrl}/api/profile`;
+const apiProfileUrl = `${BASE_URL}/api/profile`;
 
 class ApiSSRService {
   token = typeof window !== "undefined" ? localStorage.getItem("tokenLogin") : null;
@@ -61,20 +61,18 @@ class ApiSSRService {
     }
   }
 
-  async getAllCourses(country?: string, tag?: string) {
+  async getAllCourses(country?: string, tag?: string, withAll: boolean=false) {
     setLoadingCourses(true);
 
     let validCountries = countries.map((item) => item.id);
-    let countryParam = "&country=int";
+    let onValidCountry = country && validCountries.includes(country)
 
-    if (country && validCountries.includes(country)) {
-      countryParam = `&country=${country}`;
-    }
-
+    const countryParam = onValidCountry ? `&country=${country}` : "&country=int";
     const tagParam = tag ? `&tag=${tag}` : "";
+    const withAllParam = withAll ? "&filter=all" : "";
 
     try {
-      const queryParams = [countryParam, tagParam].filter(Boolean).join("");
+      const queryParams = [countryParam, tagParam, withAllParam].filter(Boolean).join("");
 
      const response = await fetch(
         `${API_URL}/products?limit=-1${queryParams}`

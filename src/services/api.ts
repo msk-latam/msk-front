@@ -249,14 +249,14 @@ class ApiService {
     
   }
 
-  async getAllCourses(country:string) {
+  async getAllCourses(country:string, withAll = false) {
     let validCountries = countries.map((item) => item.id);
     let siteEnv = window.location.hostname !== "msklatam.com";
 
     const countryParam = validCountries.includes(COUNTRY)
       ? `&country=${COUNTRY}`
       : `&country=int`;
-    const filterParam = siteEnv ? `&asd=1&filter=all` : "";
+    const filterParam = withAll ? `&asd=1&filter=all` : "";
 
     try {
       const queryParams = [countryParam, filterParam]
