@@ -2,6 +2,8 @@ import { countries } from "./countries";
 
 const API_URL = process.env.NEXT_PUBLIC_MSK_WP_API;
 
+console.log(process.env)
+
 const API_BACKEND_LARAVEL = process.env.PROD
   ? `${process.env.NEXT_PUBLIC_PUBLIC_URL}/api`
   : `${process.env.NEXT_PUBLIC_PUBLIC_URL_DEV}/api`;
