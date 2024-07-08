@@ -4,6 +4,7 @@ import SingleHeader from "@/components/MSK/Blog/Post/PostSingleHeader";
 import NcImage from "@/components/NcImage/NcImage";
 import SingleContent from "@/components/MSK/Blog/Post/SingleContent";
 import { cookies } from "next/headers";
+import {SITE_URL} from "@/contains/constants";
 
 interface PageCourseProps {
   params: any;
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: Props) {
     title: postMetadata.title,
     description: postMetadata.excerpt,
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_URL}/blog`,
+      canonical: `${SITE_URL}/blog`,
     },
   };
 }

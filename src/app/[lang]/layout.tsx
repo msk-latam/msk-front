@@ -17,6 +17,7 @@ import { Analytics } from "@vercel/analytics/react"
 import {SpeedInsights} from "@vercel/speed-insights/next";
 import { Suspense } from 'react'
 import { NavigationEvents } from '@/components/NavigationEvents'
+import {SITE_URL} from "@/contains/constants";
 
 
 export const runtime = "edge";
@@ -47,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       template: "%s",
     },
     description: "Cursos de medicina para expandir tus metas profesionales",
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL}/${currentCountry}`),
+    metadataBase: new URL(`${SITE_URL}/${currentCountry}`),
     alternates: {
       canonical: "/",
     },

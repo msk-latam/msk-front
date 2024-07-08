@@ -8,6 +8,7 @@ import ssr from "@/services/ssr";
 import { FetchPostType } from "@/data/types";
 import WelcomeBlog from "@/components/MSK/Blog/WelcomeBlog";
 import NewsletterBlog from "@/components/MSK/Blog/NewsletterBlog";
+import {SITE_URL} from "@/contains/constants";
 
 interface PageProps {
   params: any;
@@ -18,7 +19,7 @@ export async function generateMetadata() {
   return {
     title: "Blog",
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_URL}/blog`,
+      canonical: `${SITE_URL}/blog`,
     },
   };
 }

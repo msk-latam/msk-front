@@ -11,9 +11,10 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import logger from "redux-logger";
+import {IS_PROD} from "@/contains/constants";
 // import rootReducers from "./rootReducers";
 
-const isDev = process.env.NODE_ENV === "development";
+const isDev = !IS_PROD;
 
 const persistConfig = {
   key: "root",
