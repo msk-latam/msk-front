@@ -20,6 +20,7 @@ export interface Card2Props {
   hideAuthor?: boolean;
   badgeColor?: string;
   kind?: string;
+  forSingleNote?:boolean
 }
 
 const Card2: FC<Card2Props> = ({
@@ -30,6 +31,7 @@ const Card2: FC<Card2Props> = ({
   kind = "curso",
   hideDesc,
   hideAuthor,
+                                 forSingleNote
 }) => {
   const {
     title,
@@ -40,6 +42,7 @@ const Card2: FC<Card2Props> = ({
     excerpt,
     date,
     author,
+    reading_time
   } = post;
 
   const imageURL = image?.replace("mx.", "");
@@ -88,7 +91,7 @@ const Card2: FC<Card2Props> = ({
           </span>
         </div>
         {hideAuthor ? null : (
-          <CardAuthor2 className="relative my-4" date={date} author={author} />
+          <CardAuthor2 className="relative my-4" date={date} author={author} readingTime={Number(reading_time)} forSingleNote={forSingleNote} />
         )}
       </div>
     </div>

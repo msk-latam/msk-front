@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Hasta 100 horas",
+    "slug": "dur_1"
+  },
+  {
+    "id": 2,
+    "name": "De 100 a 300 horas",
+    "slug": "dur_2"
+  },
+  {
+    "id": 3,
+    "name": "Más de 300 horas",
+    "slug": "dur_3"
+  }
+]

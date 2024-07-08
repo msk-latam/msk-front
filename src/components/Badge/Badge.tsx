@@ -1,6 +1,6 @@
 import { TwMainColor } from "@/data/types";
-import Link from "next/link";
 import React, { FC, ReactNode } from "react";
+import Link from "next/link";
 
 export interface BadgeProps {
   className?: string;
@@ -10,16 +10,20 @@ export interface BadgeProps {
   textSize?: string;
   icon?: string;
   rounded?: string;
+  fontWeight?: string;
+  onClick?: () => void;
 }
 
 const Badge: FC<BadgeProps> = ({
-  textSize = "text-xs",
+  textSize = "text-[14px] sm:text-sm",
   className = `relative ${textSize}`,
   color = "blue",
   rounded = "rounded",
   name,
   href,
   icon,
+  fontWeight = "font-medium",
+  onClick,
 }) => {
   const getColorClass = (hasHover = true) => {
     switch (color) {
@@ -38,7 +42,7 @@ const Badge: FC<BadgeProps> = ({
           hasHover ? "hover:bg-gray-800" : ""
         }`;
       case "green":
-        return `text-green-800 bg-teal-300 ${
+        return `color-dark-green green ${
           hasHover ? "hover:bg-green-800" : ""
         }`;
       case "purple":
@@ -65,6 +69,10 @@ const Badge: FC<BadgeProps> = ({
         return `text-neutral-900 bg-blue-post ${
           hasHover ? "hover:bg-blue-800" : ""
         }`;
+      case "blue-home":
+        return `text-[#445BA3] bg-[#BAC6EB] py-1.5 font-normal text-sm ${
+          hasHover ? "hover:bg-blue-800" : ""
+        }`;
       case "yellow-strong-post":
         return `text-neutral-900 bg-yellow-strong-post ${
           hasHover ? "hover:bg-blue-800" : ""
@@ -86,13 +94,19 @@ const Badge: FC<BadgeProps> = ({
           hasHover ? "hover:bg-blue-800" : ""
         }`;
       case "teal-active":
-        return `text-slate-500 bg-teal-active ${
+        return `text-slate-500 bg-teal-active color-description-text  ${
           hasHover ? "hover:bg-blue-800" : ""
         }`;
       case "brown-post":
         return `text-neutral-900 bg-brown-post ${
           hasHover ? "hover:bg-blue-800" : ""
         }`;
+      case "trial":
+        return `text-trial-strong bg-trial ${
+          hasHover ? "hover:bg-blue-800" : ""
+        }`;
+      case "sale":
+        return `text-white font-bold bg-[#E9A800] text-[14px]`;
       default:
         return `text-pink-800 bg-pink-100 ${
           hasHover ? "hover:bg-pink-800" : ""
@@ -101,14 +115,19 @@ const Badge: FC<BadgeProps> = ({
   };
   /* transition-colors  */
   const CLASSES =
-    "nc-Badge  inline-flex px-2.5 py-1 font-medium" +
+    "course-pill nc-Badge inline-flex px-2 py-1" +
     ` ${className}` +
-    ` ${rounded}`;
+    ` ${rounded}` +
+    ` ${fontWeight}`;
 
   return !!href ? (
     <Link
-      href={(href as any) || ""}
-      className={`duration-300 ${CLASSES} ${getColorClass(false)}`}
+      href={href || ""}
+      onClick={(e) => {
+        e.preventDefault(); // Evitar que el enlace se siga si se hace clic
+        onClick && onClick(); // Invocar onClick si está definido
+      }}
+      className={`items-center duration-300 ${CLASSES} ${getColorClass(false)}`}
     >
       {icon && (
         <img src={`/images/icons/${icon}.svg`} width="15" className="mr-1" />
@@ -117,14 +136,18 @@ const Badge: FC<BadgeProps> = ({
       {name}
     </Link>
   ) : icon ? (
-    <div className={`${CLASSES} ${getColorClass(false)}`}>
+    <div
+      onClick={(e) => {
+        e.preventDefault(); // Evitar que el enlace se siga si se hace clic
+        onClick && onClick(); // Invocar onClick si está definido
+      }}
+      className={`items-center ${CLASSES} ${getColorClass(false)}`}
+    >
       <img src={`/images/icons/${icon}.svg`} width="15" className="mr-1" />
-      <span className="font-normal">{name} </span>
+      <span className="font-normal">{name}</span>
     </div>
   ) : (
-    <span className={`${CLASSES} ${getColorClass(false)} font-normal`}>
-      {name}
-    </span>
+    <span className={`${CLASSES} ${getColorClass(false)}`}>{name}</span>
   );
 };
 

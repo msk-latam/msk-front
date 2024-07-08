@@ -18,10 +18,13 @@ export const dataReducer = (
 ): DataState => {
   switch (action.type) {
     case "GET_DATA":
-      return {
+      //console.log('GET_DATA: ', action.payload);
+      let stateAux = {
         ...state,
         ...action.payload,
-      };
+      }
+      //console.log('stateAux: ', stateAux);
+      return stateAux;
     default:
       return state;
   }

@@ -23,7 +23,7 @@ const HeaderFilter: FC<HeaderFilterProps> = ({
   heading = "🎈 Latest Articles",
   onClickTab,
   desc = "",
-  viewMore = "/tienda",
+  viewMore = "/tienda?recurso=curso",
   mobileHidden = "hidden",
 }) => {
   return (
@@ -46,10 +46,7 @@ const HeaderFilter: FC<HeaderFilterProps> = ({
             </NavItem>
           ))}
         </Nav>
-        <NcLink
-          href={viewMore}
-          className={`${mobileHidden} sm:block flex-shrink-0`}
-        >
+        <NcLink href={viewMore} className={` sm:block flex-shrink-0`}>
           <ButtonSecondary
             className="!leading-none border-solid border-1 border-neutral-200 text-neutral-400"
             sizeClass="px-3 py-1 sm:py-3 sm:px-6 text-[9.3px]"

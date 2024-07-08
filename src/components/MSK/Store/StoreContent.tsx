@@ -6,122 +6,126 @@ import StoreProduct from "./StoreProduct";
 import {
   DurationFilter,
   FetchCourseType,
-  JsonMapping,
   PageFilter,
   Profession,
   ResourceFilter,
   Specialty,
 } from "@/data/types";
-import { useStoreFilters } from "@/context/storeFilters/StoreFiltersProvider";
-import specialtiesMapping from "@/data/jsons/__specialties.json";
-import resourcesMapping from "@/data/jsons/__resources.json";
+import { useStoreFilters } from "@/context/storeFilters/StoreProvider";
 import StoreBar from "./StoreBar";
-import {
-  getParamsFromURL,
-  keepOnlySpecifiedParams,
-} from "@/lib/removeUrlParams";
-import { useParams, usePathname, useRouter } from "next/navigation";
-import { DataContext } from "@/context/data/DataContext";
+import { useRouter, useSearchParams } from "next/navigation";
 import { removeAccents } from "@/lib/removeAccents";
-import api from "../../../../Services/api";
+import { filterStoreProducts } from "@/lib/storeFilters";
+import Breadcrum from "@/components/Breadcrum/Breadcrum";
+import StoreSkeleton from "@/components/Skeleton/StoreSkeleton";
+import NoResultFound from "@/components/NoResultFound";
+import resourcesMapping from "@/data/jsons/__resources.json";
+import durationsMapping from "../../../data/jsons/__durations.json";
 
-interface Props {
-  products: FetchCourseType[];
-  productsLength: number;
-  // handleTriggerSearch: (e: any) => void;
-  // handleTriggerFilter: (e: any) => void;
-}
+import { slugifySpecialty } from "@/lib/Slugify";
+import { CountryContext } from "@/context/country/CountryContext";
+import { DataContext } from "@/context/data/DataContext";
 
-const StoreContent: FC<Props> = ({
-  products,
-  productsLength,
-  // handleTriggerSearch,
-  // handleTriggerFilter,
-}) => {
-  const [storeURLParams, setStoreURLParams] = useState({});
-  const [localProducts, setLocalProducts] = useState<FetchCourseType[]>([]);
-  const [allProducts, setAllProducts] = useState<FetchCourseType[]>([]);
-  const [professions, setProfessions] = useState([]);
-  const fetchProfessions = async () => {
-    const professionList = await api.getStoreProfessions();
-    setProfessions(professionList);
-  };
-  useEffect(() => {
-    if (!professions.length) fetchProfessions();
-    if (typeof window != "undefined") {
-      if (professions.length) {
-        const auxURLParams = getParamsFromURL(window.location.href, [
-          "profesion",
-        ]);
-        const auxProfessions = professions.filter((profession: Profession) => {
-          return profession.slug === auxURLParams.profesion;
-        });
-        setStoreURLParams(auxProfessions);
-        applyFilters();
-      }
-    }
-  }, [window.location.search, professions]);
-  const [currentPage, setCurrentPage] = useState(1);
+let resources = resourcesMapping;
+let durations = durationsMapping;
 
-  const { storeFilters, addFilter, removeFilter, updateFilter, clearFilters } =
-    useStoreFilters();
+const StoreContent: FC<{}> = () => {
+  const router = useRouter();
+  let {
+    storeFilters,
+    addFilter,
+    removeFilter,
+    updateFilter,
+    clearSpecialties,
+  } = useStoreFilters();
+
+  const { state: dataState } = useContext(DataContext);
+  const { allCourses, allStoreProfessions } = dataState;
+  const { specialties } = useStoreFilters();
+
+  const { countryState } = useContext(CountryContext);
+
+  const searchParams = useSearchParams();
+  const [currentItems, setCurrentItems] = useState<FetchCourseType[]>([]);
+  const [filteredItems, setFilteredItems] = useState<FetchCourseType[]>([]);
+
+  const [mutationProducts, setMutationProducts] = useState(false);
+  const [currentPage, setCurrentPage] = useState(
+    Number(searchParams.get("page")) || 1
+  );
   const itemsPerPage = 18;
 
-  // Calcular el índice del primer y último elemento en la página actual
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const [totalPages, setTotalPages] = useState(
+    Math.ceil(allCourses.length / itemsPerPage)
+  );
 
-  // Obtener los elementos de la página actual
-  const [currentItems, setCurrentItems] = useState<FetchCourseType[]>([]);
+  let products: FetchCourseType[] = [];
 
-  // Calcular el número total de páginas
-  const totalPages = Math.ceil(products.length / itemsPerPage);
+  useEffect(() => {
+    console.log("USE EFFECT STORE CONTENT");
+    async function fetchData() {
+      console.log("All Courses", allCourses);
+      if (allCourses.length) {
+        setCurrentItems(allCourses.slice(indexOfFirstItem, indexOfLastItem));
+      }
+    }
+    fetchData();
+  }, [countryState.country, allCourses]);
 
-  // Función para cambiar la página
-  const pathname = usePathname();
   const handlePageChange = (pageNumber: number) => {
+    console.log("HANDLING PAGE CHANGE");
     const pageExists = storeFilters.page.some(
       (item: PageFilter) => item.id === pageNumber
     );
-
+    //console.log({pageExists, storePage: storeFilters.page, pageNumber})
     if (!pageExists) {
-      // Si la página seleccionada no existe en los filtros de página, la agregamos
       updateFilter("page", {
         id: pageNumber,
         name: String(pageNumber),
         total: totalPages,
       });
-
-      // Calculamos el índice del primer elemento en la página actual
       const indexOfFirstItem = (pageNumber - 1) * itemsPerPage;
-      // Calculamos los elementos de la página actual
-      const currentItems = products.slice(
-        indexOfFirstItem,
-        indexOfFirstItem + itemsPerPage
-      );
-      // Actualizamos el estado con los elementos de la página actual y el número de página actual
-      setCurrentItems(currentItems);
-      setCurrentPage(pageNumber);
+      if (products) {
+        const currentItems = products.slice(
+          indexOfFirstItem,
+          indexOfFirstItem + itemsPerPage
+        );
+        setCurrentItems(currentItems);
+        setCurrentPage(pageNumber);
+      }
     } else {
-      // Si la página ya existe en los filtros de página, la eliminamos
       removeFilter("page", { id: pageNumber, name: String(pageNumber) });
     }
   };
+  // STOREBAR FILTERS
 
-  const onChangeSpecialty = (specialty: Specialty) => {
-    const specialtyExists = storeFilters.specialties.filter(
-      (item: Specialty) => {
-        return item.name == specialty.name;
-      }
-    );
+  const triggerFilter = (event: any) => {
+    console.log("TRIGGER FILTER", products);
+    if (products) {
+      setCurrentItems(filterStoreProducts(products, event));
+    }
+  };
 
-    if (specialtyExists.length) {
-      removeFilter("specialties", specialty);
+  // END STOREBAR FILTERS
+  const onChangeSpecialty = (specialty: Specialty, action: string) => {
+    //Clear store search bar
+    const input = document.getElementById("store-search") as HTMLInputElement;
+    if (input) {
+      input.value = "";
+    }
+    resetPage();
+    if (action == "delete") {
+      removeFilter('specialties', specialty);
     } else {
+      console.log("Adding filter");
       addFilter("specialties", specialty);
+      addFilter("resources", { id: 1, slug: 'curso', name: "Curso" })
     }
   };
   const onChangeProfession = (profession: Profession) => {
+    resetPage();
     const professionExists = storeFilters.professions.filter(
       (item: Profession) => {
         return item.slug == profession.slug;
@@ -130,28 +134,37 @@ const StoreContent: FC<Props> = ({
     if (professionExists.length) removeFilter("professions", profession);
     else addFilter("professions", profession);
   };
-  const onChangeResource = (resource: ResourceFilter) => {
-    const resourceExists = storeFilters.resources.filter(
-      (item: ResourceFilter) => {
-        return item.id == resource.id;
-      }
-    );
-    if (resourceExists.length) {
+  const onChangeResource = (resource: ResourceFilter, action: string) => {
+    resetPage();
+    console.log("onChangeResource running");
+    console.log("Resource", resource);
+    if (action !== "add") {
       removeFilter("resources", resource);
     } else addFilter("resources", resource);
   };
-  const onChangeDuration = (duration: DurationFilter) => {
-    const durationExists = storeFilters.duration.filter(
-      (item: DurationFilter) => {
-        return item.value == duration.value;
-      }
-    );
-    if (durationExists.length) {
+  const onChangeDuration = (duration: DurationFilter, action: string) => {
+    resetPage();
+    console.log("Duration", duration);
+    if (action !== "add") {
       removeFilter("duration", duration);
     } else addFilter("duration", duration);
   };
 
+  function resetPage() {
+    setCurrentPage(1);
+    //Remove parameter "page" from the url
+    if (typeof window !== "undefined"){
+      const url = new URL(window.location.href);
+      url.searchParams.delete("page");
+      window.history.pushState({}, "", url);
+    }
+  }
+
   const applyFilters = () => {
+
+    setMutationProducts(true);
+    console.group("applyFilters()");
+    console.log("Store Filters", { storeFilters });
     const selectedSpecialties = storeFilters.specialties.map(
       (filter: Specialty) => filter.name
     );
@@ -162,173 +175,231 @@ const StoreContent: FC<Props> = ({
       (filter: ResourceFilter) => filter.name
     );
     const selectedDurations = storeFilters.duration.map(
-      (filter: DurationFilter) => filter.value
+      (filter: DurationFilter) => filter.slug
     );
-    console.log("ENTRO", selectedProfessions.length);
+    const selectedPage = storeFilters.page.map(
+      (filter: PageFilter) => filter.id
+    );
+
+    const searchText = storeFilters.search[0] ?? '';
+
+    console.log("condition filter apply", {
+      selectedSpecialties,
+      selectedProfessions,
+      selectedResources,
+      selectedDurations,
+      selectedPage,
+      searchText,
+    });
 
     if (
       !(
         selectedSpecialties.length ||
         selectedProfessions.length ||
         selectedResources.length ||
-        selectedDurations.length
+        selectedDurations.length ||
+        selectedPage.length ||
+          searchText.length
       )
     ) {
-      setLocalProducts(products);
+      console.log("No filters");
+      // No filters, set the products to the original list
+
+      setCurrentItems([...allCourses.slice(indexOfFirstItem, indexOfLastItem)]);
+      setTotalPages(Math.ceil(allCourses.length / itemsPerPage));
+      setFilteredItems(allCourses);
+      setMutationProducts(false);
     } else {
-      const filteredProducts = products.filter((product) => {
-        const prodSpecialties = product.categories.map(
-          (category) => category.name
-        );
-        const prodProfessions = product.professions.map(
-          (profession) => profession.name
-        );
-        const prodDuration = product.duration;
-        let specialtiesMatch = true;
-        if (selectedSpecialties.length) {
-          specialtiesMatch = selectedSpecialties.some((specialty) =>
-            prodSpecialties.includes(specialty)
-          );
-        }
-
-        if (
-          storeURLParams &&
-          !selectedProfessions.includes(storeURLParams.slug)
-        ) {
-          selectedProfessions.push(storeURLParams.slug);
-        }
-        const professionsMatch =
-          selectedProfessions.length === 0 ||
-          selectedProfessions.some((profession) =>
-            prodProfessions.some((prodProfession) =>
-              prodProfession.toLowerCase().includes(profession?.toLowerCase())
-            )
-          );
-
-        const resourcesMatch = selectedResources
-          .filter((e: string) => e != undefined)
-          .every((resource) => {
-            if (resource === "Curso") {
-              return product.father_post_type === "course";
-            } else if (resource === "Guías profesionales") {
-              return product.father_post_type === "downloadable";
-            }
-          });
-
-        const durationsMatch = selectedDurations.every((duration) => {
-          const currentDuration = parseInt(prodDuration);
-          switch (duration) {
-            case "less_100":
-              return currentDuration <= 100;
-            case "100_300":
-              return currentDuration > 100 && currentDuration <= 300;
-            case "more_300":
-              return currentDuration > 300;
-          }
-        });
-
-        return (
-          // specialtiesMatch &&
-          professionsMatch && resourcesMatch && durationsMatch
-        );
+      console.log("There are filters we need to apply", {
+        selectedSpecialties,
+        selectedProfessions,
+        selectedResources,
+        selectedDurations,
+        selectedPage,
+        searchText,
       });
 
-      console.log("Filtered Products", filteredProducts);
-      setCurrentItems(
-        filteredProducts.slice(indexOfFirstItem, indexOfLastItem)
+      const filteredProducts = allCourses.filter(
+        (product: {
+          categories: any[];
+          professions: any[];
+          duration: any;
+          father_post_type: string;
+          title: string;
+        }) => {
+          const prodSpecialties = product.categories.map(
+            (category) => category.name
+          );
+          const prodProfessions = product.professions.map(
+            (profession) => profession.name
+          );
+          const prodDuration = product.duration;
+
+          let specialtiesMatch = true;
+
+          if (selectedSpecialties.length) {
+            specialtiesMatch = selectedSpecialties.some((specialty) =>
+              prodSpecialties.includes(specialty)
+            );
+          }
+
+          const professionsMatch =
+            selectedProfessions.length === 0 ||
+            selectedProfessions.some((profession) =>
+              prodProfessions.some((prodProfession) =>
+                prodProfession.toLowerCase().includes(profession?.toLowerCase())
+              )
+            );
+
+          let resourcesMatch = true;
+          if (selectedResources.length !== 0) {
+            resourcesMatch = selectedResources
+              .filter((e: string) => e != undefined)
+              .some((resource) => {
+                if (resource === "Curso") {
+                  //console.log({resource, type: product.father_post_type},product.father_post_type === "course")
+                  return product.father_post_type === "course";
+                } else if (resource === "Guías profesionales") {
+                  return product.father_post_type === "downloadable";
+                }
+              });
+          }
+
+          let durationsMatch = true;
+          if (selectedDurations && selectedDurations.length) {
+            durationsMatch = selectedDurations.some((duration) => {
+              const currentDuration = parseInt(prodDuration);
+              switch (duration) {
+                case "dur_1":
+                  return currentDuration <= 100;
+                case "dur_2":
+                  return currentDuration > 100 && currentDuration <= 300;
+                case "dur_3":
+                  return currentDuration > 300;
+              }
+            });
+          }
+
+          let searchMatch = true;
+          if (searchText) {
+            searchMatch = removeAccents(product.title.toLowerCase()).includes(
+              removeAccents(searchText.toLowerCase())
+            );
+          }
+
+          return (
+            specialtiesMatch &&
+            professionsMatch &&
+            resourcesMatch &&
+            durationsMatch &&
+              searchMatch
+          );
+        }
       );
 
-      // setLocalProducts(filteredProducts);
-    }
-  };
-  // const triggerFilter = (event: any) => {
-  //   let sortedProducts: FetchCourseType[] = [];
-  //   // setLoading(true);
+      console.log("FILTERED PRODUCTS", { filteredProducts });
+      console.log("setCurrentPage: ", selectedPage[0] || 1);
+      console.log("indexOfFirstItem: ", indexOfFirstItem);
+      console.log("indexOfLastItem: ", indexOfLastItem);
 
-  //   switch (event) {
-  //     case "":
-  //       sortedProducts = [...auxProducts];
-  //       break;
-  //     case "novedades":
-  //       sortedProducts = [...products]; // Create a copy of products
-  //       sortedProducts.sort((a, b) => {
-  //         const isNewA = Boolean(a.is_new);
-  //         const isNewB = Boolean(b.is_new);
-  //         if (isNewA === isNewB) {
-  //           return 0;
-  //         } else if (isNewA) {
-  //           return -1;
-  //         } else {
-  //           return 1;
-  //         }
-  //       });
-  //       break;
-  //     case "mas_horas":
-  //       sortedProducts = [...products];
-  //       sortedProducts.sort((a, b) => {
-  //         let durationA = parseInt(a.duration);
-  //         let durationB = parseInt(b.duration);
+      setFilteredItems(filteredProducts);
 
-  //         if (isNaN(durationA)) {
-  //           durationA = 0;
-  //         }
-  //         if (isNaN(durationB)) {
-  //           durationB = 0;
-  //         }
-  //         if (durationA < durationB) {
-  //           return 1;
-  //         }
-  //         if (durationA > durationB) {
-  //           return -1;
-  //         }
-  //         return 0;
-  //       });
-  //       break;
-  //     case "menos_horas":
-  //       sortedProducts = [...products];
-  //       sortedProducts.sort((a, b) => {
-  //         let durationA = parseInt(a.duration);
-  //         let durationB = parseInt(b.duration);
-  //         if (isNaN(durationA)) {
-  //           durationA = 0;
-  //         }
-  //         if (isNaN(durationB)) {
-  //           durationB = 0;
-  //         }
-  //         if (durationA > durationB) {
-  //           return 1;
-  //         }
-  //         if (durationA < durationB) {
-  //           return -1;
-  //         }
-  //         return 0;
-  //       });
-  //       break;
-  //     default:
-  //       break;
-  //   }
-
-  // setLoading(false);
-  // setProducts(sortedProducts);
-  // };
-
-  useEffect(() => {
-      if (products){
-          console.log('Products: ', products);
-          setCurrentItems(products.slice(indexOfFirstItem, indexOfLastItem));
-          setLocalProducts(products);
-          setAllProducts(products);
+      let auxCurrentPage = selectedPage[0] || 1;
+      //setCurrentPage(auxCurrentPage);
+      if (auxCurrentPage == 1) {
+        setCurrentItems([...filteredProducts.slice(0, itemsPerPage)]);
+      } else {
+        setCurrentItems([
+          ...filteredProducts.slice(indexOfFirstItem, indexOfLastItem),
+        ]);
       }
-  }, [products]);
+      setTotalPages(Math.ceil(filteredProducts.length / itemsPerPage));
+      setMutationProducts(false);
+    }
+    console.groupEnd();
+  };
+
+  if (typeof window !== "undefined") {
+    useEffect(() => {
+      console.log("FILTERS WERE UPDATED");
+      applyFilters();
+    }, [
+      allCourses,
+      storeFilters.page,
+      storeFilters.specialties,
+      storeFilters.professions,
+      storeFilters.resources,
+      storeFilters.duration,
+      storeFilters.search,
+    ]);
+  }
+
+  if (typeof window !== "undefined") {
+    useEffect(() => {
+      console.log("Store Component rendered, check URL to apply filters");
+      //if the url has the search param recurso call onChange() for that resource
+      const url = new URL(window.location.href);
+      const recurso = url.searchParams.get("recurso");
+      const especialidad = url.searchParams.get("especialidad");
+      const profesion = url.searchParams.get("profesion");
+      const duracion = url.searchParams.get("duracion");
+      const page = url.searchParams.get("page");
+      if (recurso) {
+        let urlResource = resources.find(
+          (resource) => resource.slug === recurso
+        );
+        console.log("URL RESOURCE: ", urlResource);
+        if (urlResource) {
+          onChangeResource(urlResource, "add");
+        }
+      }
+
+      console.log("SPECIALTIES: ", specialties);
+      console.log("ESPECIALIDAD: ", especialidad);
+      if (especialidad && specialties) {
+        console.log("SPECIALTIES: ", specialties);
+        let urlSpecialty = specialties.find(
+          (specialty: any) => slugifySpecialty(specialty.name) === especialidad
+        );
+        console.log("URL SPECIALTY: ", urlSpecialty);
+        if (urlSpecialty) {
+          onChangeSpecialty(urlSpecialty, "add");
+        }
+      }
+
+      console.log("PROFESSIONS: ", allStoreProfessions);
+      console.log("PROFESSION: ", profesion);
+      if (profesion && allStoreProfessions) {
+        console.log("changing profession");
+        let urlProfession = allStoreProfessions?.find(
+          (profession: any) => profession.slug === profesion
+        );
+        console.log("URL PROFESSION: ", urlProfession);
+        if (urlProfession) {
+          addFilter("professions", urlProfession);
+        }
+      }
+      if (duracion) {
+        let urlDuration = durations.find(
+          (duration) => duration.slug === duracion
+        );
+        if (urlDuration) {
+          onChangeDuration(urlDuration, "add");
+        }
+      }
+    }, [allStoreProfessions, specialties]);
+  }
 
   return (
     <section className="container course-content-area pb-90 animate-fade-down px-0">
-      {/* {localProducts.length} */}
+      <Breadcrum />
+
       {storeFilters.specialties.length > 0 && (
-        <h1 className="text-xl sm:text-3xl mb-10">
+        <h1 className="text-xl sm:text-3xl mb-6">
           Cursos de {storeFilters.specialties[0].name}
         </h1>
       )}
+
       <div className="grid grid-cols-1 lg:grid-cols-[28%_72%] gap-4 mb-10">
         <div className="hidden lg:flex flex-col">
           <StoreSideBar
@@ -336,50 +407,52 @@ const StoreContent: FC<Props> = ({
             onChangeProfession={onChangeProfession}
             onChangeResource={onChangeResource}
             onChangeDuration={onChangeDuration}
-            professions={professions}
           />
         </div>
         <div>
-          {/* <StoreBar
-            onSearch={(e) => triggerSearch(e)}
-            onFilter={(e) => triggerFilter(e)}
-            length={products.length}
+          <StoreBar
+            onFilter={triggerFilter}
+            itemsPerPage={itemsPerPage}
+            showingCount={itemsPerPage * currentPage}
+            length={filteredItems.length}
             filtersCount={
               storeFilters.specialties.length +
               storeFilters.professions.length +
               storeFilters.resources.length +
               storeFilters.duration.length
             }
-          /> */}
-          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
-            {currentItems.length ? (
-              currentItems.map((product, index) => {
-                return (
-                  <StoreProduct
-                    product={product}
-                    key={`${product.slug}_${index}`}
-                    kind={product.father_post_type}
-                  />
-                );
-              })
+          />
+
+          {
+            !allCourses.length ? (
+              <StoreSkeleton />
             ) : (
-              <div className="text-center col-span-1 md:col-span-2 lg:col-span-3 flex flex-col justify-center items-center h-[350px]">
-                <img src="/images/icons/no_items.svg" className="mb-5" />
-                <p>
-                  No hay resultados para tu búsqueda.
-                  <br />
-                  Modifica los filtros y encuentra tu curso ideal.
-                </p>
+              <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full mb-12">
+                {currentItems.length ? (
+                  currentItems.map((product, index) => (
+                    <StoreProduct
+                      product={product}
+                      key={`${product.slug}_${index}`}
+                      kind={product.father_post_type}
+                    />
+                  ))
+                ) : (
+                  <NoResultFound />
+                )}
               </div>
-            )}
-          </div>
+            )
+          }
 
           <div className="flex justify-center md:justify-start">
-            <StorePagination
-              totalPages={totalPages}
-              onPageChange={handlePageChange}
-              currentPage={currentPage}
-            />
+            {/*<p>Total pages: {totalPages}</p>*/}
+            {!mutationProducts && (
+              <StorePagination
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+                currentPage={currentPage}
+                urlTrack={true}
+              />
+            )}
           </div>
         </div>
       </div>

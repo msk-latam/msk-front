@@ -1,17 +1,35 @@
 import SingleProductDetail from "@/components/SingleProductDetail/SingleProductDetail";
-import React, { FC, useContext } from "react";
-// import LoadingText from "@/components/Loader/Text";
-import { CountryContext } from "@/context/country/CountryContext";
-import useSingleProduct from "@/hooks/useSingleProduct";
-import ssr from "../../../../../Services/ssr";
+import React, { FC } from "react";
+import ssr from "@/services/ssr";
+import PageHeadServer from "@/components/Head/PageHeadServer";
+import {SITE_URL} from "@/contains/constants";
 
 interface PageCourseProps {
   params: any;
 }
-export const runtime = 'edge';
+export const runtime = "edge";
+
+type Props = {
+  params: { slug: string; lang: string };
+};
+export async function generateMetadata({ params }: Props) {
+  const { product: courseMetaData } = await ssr.getSingleProduct(
+    params.slug,
+    params.lang
+  );
+  return {
+    title: courseMetaData?.ficha.title,
+    description: courseMetaData?.excerpt,
+    alternates: {
+      canonical: `${SITE_URL}/blog`,
+    },
+    schemaJson: "Course",
+    schemaJsonData: courseMetaData,
+  };
+}
 
 const PageSingleProduct: FC<PageCourseProps> = async ({ params }) => {
-  const { product } = await ssr.getSingleProduct(params.slug, params.country);
+  const { product } = await ssr.getSingleProduct(params.slug, params.lang);
   return (
     <div className={`nc-PageSubcription `} data-nc-id="PageSubcription">
       <section className="text-neutral-600 text-sm md:text-base overflow-hidden">

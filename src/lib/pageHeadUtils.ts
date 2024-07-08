@@ -8,7 +8,9 @@ export const getDescriptionContent = (
   return isProd ? stripHtmlTags(text) || "" : "";
 };
 
+import cheerio from 'cheerio';
+
 export const stripHtmlTags = (html: string) => {
-  const doc = new DOMParser().parseFromString(html, "text/html");
-  return doc.body.textContent;
+  const $ = cheerio.load(html);
+  return $('body').text();
 };

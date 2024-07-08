@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import ButtonPrimary from "@/components/Button/ButtonPrimary";
 import { Requirement } from "@/data/types";
-import { StaticImageData } from "next/image";
+import Image, { StaticImageData } from "next/image";
 export interface CourseRequirementsProps {
   className?: string;
   imgAds?: StaticImageData | string;
@@ -26,7 +26,7 @@ const CourseRequirements: FC<CourseRequirementsProps> = ({
   };
 
   return (
-    <div className="requirements">
+    <div className="requirements !mt-16">
       <div className="sm:pr-60 md:pr-5">
         <div className="text-xl font-raleway font-bold">{title}</div>
         {requirements.map((requirement, index) => {
@@ -37,11 +37,12 @@ const CourseRequirements: FC<CourseRequirementsProps> = ({
                   className="flex gap-1 items-start"
                   key={`req_item_${i_index}`}
                 >
-                  <img
+                  <Image
                     src="/images/vectors/isotipo.svg"
-                    width="14"
+                    width={14}
+                    height={14}
                     className="mt-2"
-                    alt=""
+                    alt="msk isotipo"
                   />{" "}
                   <span
                     dangerouslySetInnerHTML={{
@@ -54,7 +55,7 @@ const CourseRequirements: FC<CourseRequirementsProps> = ({
           );
         })}
       </div>
-      {imgAds && <img src={imgAds as string} alt="" className="absolute-img" />}
+      {imgAds && <Image src={imgAds as string} alt="Doctor Image" width={230} height={200} className="absolute-img" />}
     </div>
   );
 };

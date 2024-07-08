@@ -1,16 +1,12 @@
 "use client";
-import { FC, useContext, useEffect, useState } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import { User, UserCourseProgress } from "@/data/types";
-import { getUserCourses } from "../../../../Services/user";
-import api from "../../../../Services/api";
+import { getUserCourses } from "@/services/user";
+import api from "@/services/api";
 import { DataContext } from "@/context/data/DataContext";
 import Avatar from "@/components/Avatar/Avatar";
 import BackgroundSection from "@/components/BackgroundSection/BackgroundSection";
-// import StorePagination from "@/components/Store/StorePagination";
-// import SectionSliderPosts from "./home/SectionSliderPosts";
-// import CardCategory6 from "@/components/CardCategory6/CardCategory6";
 import ButtonPrimary from "@/components/Button/ButtonPrimary";
-import Heading from "@/components/Heading/Heading";
 import CardCategory6 from "@/components/CardCategory6/CardCategory6";
 import HeaderFilter from "@/components/MSK/HeaderFilter";
 import SectionSliderPosts from "@/components/Sections/SectionSliderPosts";
@@ -30,7 +26,7 @@ const TABS = [
   "Mis cursos",
   // "Favoritos"
 ];
-export const runtime = 'edge';
+export const runtime = "edge";
 
 const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
   const {
@@ -39,8 +35,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
     loadingProductsMX,
   } = useContext(DataContext);
   const router = useRouter();
-  const { allBestSellers } = dataState;
-  const [allCourses, setAllCourses] = useState([]);
+  const { allBestSellers, allCourses } = dataState;
   const [tabActive, setTabActive] = useState<string>(TABS[0]);
   const [coursesTabActive, setCoursesTabActive] = useState<string>("Todo");
   const [user, setUser] = useState<User>({} as User);
@@ -51,36 +46,35 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
   const [userCourses, setUserCourses] = useState<UserCourseProgress[]>([]);
   const fetchUser = async () => {
     try {
-      const productList = await api.getAllProductsMX();
-      const fetchedCourses = await api.getAllCourses();
-      setAllCourses(fetchedCourses);
-      setTotalPages(Math.ceil(fetchedCourses.length / itemsPerPage));
+      setTotalPages(Math.ceil(allCourses.length / itemsPerPage));
       const res = await api.getUserData();
+      console.log('FETCH USER RES: ', res);
       if (!res.message) {
         setUser(res);
-        let coursesList = getUserCourses(res, productList);
+        let coursesList = getUserCourses(res, allCourses);
         setUserCourses(coursesList);
-        setTotalPages(Math.ceil(allCourses.length / itemsPerPage));
+        setTotalPages(Math.ceil(coursesList.length / itemsPerPage));
         setLoadingUser(false);
       } else {
         router.push("/iniciar-sesion");
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       router.push("/iniciar-sesion");
     }
   };
 
   useEffect(() => {
+    console.log('bb');
     fetchUser();
-  }, []);
+  }, [allCourses]);
   const itemsPerPage = 8;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
   useEffect(() => {
-    setCurrentItems(allCourses.slice(indexOfFirstItem, indexOfLastItem));
-  }, [indexOfFirstItem, indexOfLastItem, allCourses]);
+    setCurrentItems(userCourses.slice(indexOfFirstItem, indexOfLastItem));
+  }, [indexOfFirstItem, indexOfLastItem, userCourses]);
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -109,28 +103,35 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
     },
   ];
 
-  const goToStore = () => {
-    // tabActive == "Favoritos" ? history.push("/") : history.push("/tienda");
-  };
-
   const handleUserTabChange = (item: string) => {
+    console.log(item);
+    console.log(userCourses);
     switch (item) {
       case "Todo":
-        setCurrentItems(allCourses.slice(indexOfFirstItem, indexOfLastItem));
-        setTotalPages(Math.ceil(allCourses.length / itemsPerPage));
+        setCurrentItems(userCourses.slice(indexOfFirstItem, indexOfLastItem));
+        setTotalPages(Math.ceil(userCourses.length / itemsPerPage));
         break;
       case "Mis cursos":
         setCurrentItems(userCourses.slice(indexOfFirstItem, indexOfLastItem));
         setTotalPages(Math.ceil(userCourses.length / itemsPerPage));
-
         break;
       default:
-        setCurrentItems(allCourses.slice(indexOfFirstItem, indexOfLastItem));
+        setCurrentItems(userCourses.slice(indexOfFirstItem, indexOfLastItem));
         break;
     }
     setCurrentPage(1);
     setCoursesTabActive(item);
   };
+
+  if(typeof window !== 'undefined'){
+    useEffect(() =>{
+      const redirectToTrialURL = localStorage.getItem('continueTrialAccess');
+      if(redirectToTrialURL){
+        router.push(redirectToTrialURL)
+      }
+    }, []);
+  }
+
 
   return (
     <div className={`nc-PageAuthor  ${className}`} data-nc-id="PageAuthor">
@@ -165,8 +166,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
       {/* ====================== END HEADER ====================== */}
 
       <div className="container py-16 lg:pb-28 lg:pt-20 space-y-16 lg:space-y-28">
-        <main>
-          <Heading desc="">Mis Cursos </Heading>
+        <main className="container">
           {loadingUser ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mt-8 lg:mt-10 mb-8">
               <ItemSkeleton />
@@ -212,21 +212,20 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
                     Aún puedes descubrir mucho más en Medical & Scientific
                     Knowledge
                   </p>
+
                   <ButtonPrimary
-                    onClick={goToStore}
+                    href={"/tienda"}
                     sizeClass="py-3 "
                     className="font-semibold px-6"
                   >
-                    {tabActive == "Favoritos"
-                      ? "Comienza tu experiencia"
-                      : "Comienza un curso"}
+                    Comienza un curso
                   </ButtonPrimary>
                 </div>
               )}
             </>
           )}
 
-          {/* <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 sm:gap-6 md:gap-8 ">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 sm:gap-6 md:gap-8 ">
             {categories
               ? categories.map((item, i) => (
                   <CardComponentName
@@ -238,19 +237,21 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
                   />
                 ))
               : null}
-          </div> */}
+          </div>
         </main>
         <div className="relative py-16 my-32">
-          <BackgroundSection />
-          <SectionSliderPosts
-            postCardName="card9"
-            heading="Nuestros cursos más elegidos"
-            subHeading="Profesionales como tú ya se capacitaron con ellos. ¡Ahora te toca a ti!"
-            sliderStype="style2"
-            posts={allBestSellers}
-            loading={loadingBestSellers}
-            uniqueSliderClass="pageHome-section6"
-          />
+          <div className="md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-16 mb-[96px] w-full px-14">
+            <SectionSliderPosts
+              posts={allBestSellers}
+              loading={loadingBestSellers}
+              className="w-full section-slider-posts-container"
+              postCardName="card9"
+              heading="Nuestros cursos más elegidos"
+              subHeading="Profesionales como tú ya se capacitaron con ellos. ¡Ahora te toca a ti!"
+              sliderStype="style2"
+              uniqueSliderClass="perfil-section6"
+            />
+          </div>
         </div>
       </div>
     </div>

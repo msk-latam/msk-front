@@ -53,7 +53,8 @@ const CardCategory2: FC<CardCategory2Props> = ({
         <Badge
           color={color as TwMainColor}
           name="NUEVO"
-          className="absolute top-2 sm:top-3 left-3"
+          className="absolute top-2 sm:top-3 left-3 text-[8px] sm:text-[12px] leading-4"
+          fontWeight="font-medium"
         />
       )}
       <NcImage

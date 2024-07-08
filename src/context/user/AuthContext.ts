@@ -6,6 +6,7 @@ export const AuthContext = createContext<{
   dispatch: Dispatch<AuthAction>;
 }>({
   state: {
+    stateLoaded: false,
     isAuthenticated: false,
     user: null,
     profile: null,

@@ -6,6 +6,7 @@ import Card9 from "@/components/Card9/Card9";
 import { FetchCourseType } from "@/data/types";
 import { PostDataType } from "@/data/types";
 import ImageSkeleton from "./ImageSkeleton";
+import CoursesSlider from "@/components/Sliders/CoursesSlider";
 
 interface SectionMagazine1Props {
   tabs: string[];
@@ -38,11 +39,15 @@ const CoursesForYou: FC<Props> = ({
   const [localCourses, setLocalCourses] = useState<FetchCourseType[]>([]);
   const handleClickTab = (item: string) => {
     switch (item) {
-      case "Todo":
-        setLocalCourses(courses);
-        break;
       case "Novedades":
-        const newCourses = courses.filter((course, i: number) => course.is_new);
+
+        //Check the created_at date of the courses and order by most recent
+
+        const newCourses = courses.sort((a, b) => {
+          const dateA = new Date(a.created_at);
+          const dateB = new Date(b.created_at);
+          return dateB.getTime() - dateA.getTime();
+        });
         setLocalCourses(newCourses);
         break;
       case "Recomendados":
@@ -63,6 +68,7 @@ const CoursesForYou: FC<Props> = ({
 
   useEffect(() => {
     setLocalCourses(courses);
+    handleClickTab("Novedades");
   }, [courses]);
 
   return (
@@ -91,7 +97,10 @@ const CoursesForYou: FC<Props> = ({
             (!localCourses.length && (
               <span>No encontramos publicaciones.!</span>
             ))}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+
+          <CoursesSlider products={localCourses} />
+
+          <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-6">
             {localCourses && localCourses[0] && (
               <Card8
                 className="sm:col-span-2 rounded-3xl"

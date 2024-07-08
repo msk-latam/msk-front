@@ -1,0 +1,85 @@
+/* styles.scss */
+.mpc-box {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+
+  .mpc-field {
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid #E4E4E4;
+    border-radius: 10px;
+    padding: 10px;
+    color: #374161;
+
+    &-requesting{
+      background-color: #f0f0f0;  // Un color gris claro para indicar que está en modo read-only
+      color: #a9a9a9;  // Un color gris para el texto
+      cursor: not-allowed;  // Cambia el cursor para indicar que no se puede interactuar
+      opacity: 0.6;  // Reduce la opacidad para dar una apariencia de read-only
+    }
+
+    .mpc-input {
+      border: none;
+      padding: 10px;
+      font-size: 16px;
+      margin-right: -1px;
+      margin: 0 10px;
+
+      &:first-child {
+        border-radius: 4px 0 0 4px;
+        flex-grow: 1;
+      }
+
+      &:nth-child(2) {
+        border-radius: 0;
+        width: 80px;
+      }
+
+      &:last-child {
+        border-radius: 0 4px 4px 0;
+        width: 60px;
+      }
+
+
+    }
+  }
+
+  .mpc-button {
+    background-color: #8a2be2;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 16px;
+
+    &:hover {
+      background-color: darken(#8a2be2, 10%);
+    }
+
+    &:disabled {
+      background-color: #d3d3d3;
+      color: #a9a9a9;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+}
+#cardNumberSecureField_container{
+  height: 25px !important;
+  margin-right: 10px;
+}
+#expirationDateSecureField_container{
+  height: 25px !important;
+  width: 80px;
+
+}
+#securityCodeSecureField_container{
+  height: 25px !important;
+  width: 60px;
+
+}

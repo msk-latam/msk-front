@@ -3,13 +3,9 @@ const withNextIntl = require("next-intl/plugin")("./i18n.ts");
 
 const nextConfig = {
   //output: 'export', //For static site (loses SSR cappabilites)
- /* distDir: "dist",*/
-  /*runtime: 'experimental-edge',*/
-  logging: {
-    fetches: {
-      fullUrl: true,
-    },
-  },
+  //distDir: "dist",
+  reactStrictMode: false,
+  trailingSlash: true,
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
@@ -40,6 +36,12 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "secure.gravatar.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "wp.msklatam.com",
         port: "",
         pathname: "/**",
       },

@@ -1,7 +1,7 @@
 import { FetchPostType } from "@/data/types";
 
 export const badgeColorOld = (item: FetchPostType) => {
-  console.log(item.categories);
+  // console.log(item.categories);
   switch (item.categories[0].name) {
     case "Medicina":
       return "blue-post";

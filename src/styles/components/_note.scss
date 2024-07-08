@@ -560,28 +560,33 @@ div.tagcloud a:hover {
   }
 }
 
-.background-note-blog {
+.note-header-background {
   background: rgb(0, 14, 77);
   height: 700px;
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+
+.background-note-blog {
   .header-image-container {
     overflow: hidden;
     position: relative !important;
     height: 440px;
-    max-width: 1370px;
+    max-width: 1298px;
     width: 96%;
-    @media (max-width: 639px) {
-      height: 370px;
+    @media (max-width: 767px) {
+      height: 500px;
     }
   }
 }
 
 .note-container {
-  margin-top: 150px !important;
-  @media (max-width: 639px) {
-    margin-top: 75px !important;
+  @media (max-width: 768px) {
+    margin-top: 50px;
   }
-  @media (max-width: 375px) {
-    margin-top: 100px !important;
+  iframe {
+    max-width: 100%;
   }
 }
 
@@ -637,15 +642,15 @@ div.tagcloud a:hover {
 
 .source-title {
   color: #878686;
-  font-family: Poppins !important;
   font-size: 15px;
+  font-family: "Poppins", sans-serif !important;
   font-style: normal;
   font-weight: 800;
 }
 .source-content {
   color: #878686;
-  font-family: Poppins !important;
   font-size: 15px;
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 400;
 }

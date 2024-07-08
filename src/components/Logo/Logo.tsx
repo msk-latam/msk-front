@@ -18,7 +18,7 @@ const Logo: React.FC<LogoProps> = ({
       href={isOnBlog ? "/blog" : "/"}
       className="ttnc-logo inline-block text-primary-6000 w-[100px] "
     >
-      <NcImage src={img} alt="" width="100" height="60" />
+      <NcImage src={img} alt="Logo" width="100" height="60" />
     </NcLink>
   );
 };

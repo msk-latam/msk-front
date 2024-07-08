@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { UserCourseProgress } from "data/types";
+import { UserCourseProgress } from "@/data/types";
 import DesktopCourseItem from "./DesktopCourseItem";
 
 interface DesktopCourseListProps {

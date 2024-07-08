@@ -16,6 +16,7 @@ import CategoryBadgeList from "@/components/CategoryBadgeList/CategoryBadgeList"
 import ButtonOffTrial from "./ButtonOffTrial";
 import { AuthContext } from "@/context/user/AuthContext";
 import ButtonAccessOrSignCourse from "./ButtonAccessOrSignCourse";
+import ButtonPrimary from "@/components/Button/ButtonPrimary";
 
 interface MobileCourseItemProps {
   item: UserCourseProgress;
@@ -44,20 +45,22 @@ const MobileCourseItem: FC<MobileCourseItemProps> = ({
     : "Prueba";
   const { state: authState } = useContext(AuthContext);
 
-  return (
-    <li className="my-account-courses-mobile">
-      <div className="direct-info">
-        <NcImage
-          containerClassName="flex-shrink-0 h-[32px] w-[32px] rounded-lg overflow-hidden lg:h-14 lg:w-14"
-          src={item.featured_image}
-          width="32"
-          height="32"
-          alt=""
-        />
 
-        <span className="font-normal dark:text-neutral-300 text-[14px] leading-4 sm:leading-1">
+  return (
+    <li className="my-account-courses-mobile m-4">
+      <div className="direct-info flex mb-4">
+
+          <NcImage
+              containerClassName="flex-shrink-0 h-[32px] w-[32px] rounded-lg overflow-hidden lg:h-14 lg:w-14 mr-2"
+              src={item.featured_image}
+              width="32"
+              height="32"
+              alt={`${item.title} image`}
+          />
+
+          <span className="font-normal dark:text-neutral-300 text-[14px] leading-4 sm:leading-1">
           {item.title || "-"}
-        </span>
+          </span>
         <div className="status-badge ml-auto">
           {item.ov.includes("Trial") ? (
             <CategoryBadgeList
@@ -95,25 +98,25 @@ const MobileCourseItem: FC<MobileCourseItemProps> = ({
         </>
       )}
 
-      {(isDisabled && !isReadyToEnroll) ||
-        (statusOV.isDisabled && <CentroAyudaLink />)}
+      {(isDisabled && !isReadyToEnroll) || (statusOV.isDisabled && <CentroAyudaLink />)}
 
       {isReadyToEnroll && (
         <InfoText text="¿No ves resultados? Intenta refrescar la pantalla." />
       )}
-      <div className="w-full mt-1">
-        <ButtonAccessOrSignCourse
-          email={email}
-          goToEnroll={goToEnroll}
-          goToLMS={goToLMS}
-          item={item}
-        />
-        {item.ov.includes("Trial") && (
-          <>
-            <br />
-            <ButtonOffTrial item={item} email={email} />
-          </>
-        )}
+      <div className="w-full mt-4">
+              <ButtonAccessOrSignCourse
+              email={email}
+              goToEnroll={goToEnroll}
+              goToLMS={goToLMS}
+              item={item}
+              />
+              {item.ov === "Trial" && (
+                  <>
+                  <br />
+                  <ButtonOffTrial item={item} email={email} />
+            </>
+          )}
+
       </div>
     </li>
   );

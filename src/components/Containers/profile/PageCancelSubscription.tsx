@@ -1,14 +1,13 @@
 import React, { FC, useEffect, useRef, useState } from "react";
-import LayoutPage from "components/LayoutPage/LayoutPage";
-import { Link, useHistory } from "react-router-dom";
 
 import {
   setDependent,
   zsRegenerateCaptcha,
   isFormDisabled,
 } from "./arrepentimientoCompra";
-import { removeUrlParams } from "lib/removeUrlParams";
-import PageHead from "../PageHead";
+import PageHeadServer from "@/components/Head/PageHeadServer";
+import LayoutPage from "@/components/MSK/LayoutPage";
+import Link from "next/link";
 
 export const argDocumentTypes = [
   {
@@ -27,6 +26,12 @@ export const argDocumentTypes = [
 
 export interface PageCancelSubscriptionProps {
   className?: string;
+}
+
+export async function generateMetadata() {
+  return {
+    title: "Cancelar inscripción",
+  };
 }
 
 const PageCancelSubscription: FC<PageCancelSubscriptionProps> = ({
@@ -52,7 +57,6 @@ const PageCancelSubscription: FC<PageCancelSubscriptionProps> = ({
       className={`nc-PageCancelSubscription ${className} animate-fade-down`}
       data-nc-id="PageCancelSubscription"
     >
-      <PageHead title="Cancelar inscripción" />
       <LayoutPage
         heading="Cancelar inscripción"
         subHeading="Puedes solicitar la cancelación de tu inscripción a un curso hasta 10 días hábiles luego de adquirido el mismo "
@@ -224,7 +228,7 @@ const PageCancelSubscription: FC<PageCancelSubscriptionProps> = ({
                   <label>
                     Acepto las{" "}
                     <Link
-                      to="/politica-de-privacidad"
+                      href="/politica-de-privacidad"
                       target="_blank"
                       className="text-primary underline"
                     >

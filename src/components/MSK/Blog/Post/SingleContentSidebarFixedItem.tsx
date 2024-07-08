@@ -5,6 +5,7 @@ import { slugifySpecialty } from "@/lib/Slugify";
 import Link from "next/link";
 import NcModal from "@/components/NcModal/NcModal";
 import SpecialtiesModal from "./SpecialtiesModal";
+import NcLink from "@/components/NcLink/NcLink";
 
 export interface SingleContentSidebarFixedItemProps {
   articles: any[];
@@ -93,16 +94,15 @@ const SingleContentSidebarFixedItem: FC<SingleContentSidebarFixedItemProps> = ({
           </Link>
         ))}
       </div>
-      <div className="side-content rounded-2xl ">
+      {/*<div className="side-content rounded-2xl ">
         <div className="flex w-full">
           <h5 className="side-content-header p-2.5">💼 Especialidades </h5>
-          <a
-            href="#"
+          <button
             onClick={() => setShowSpecialties(true)}
             className="course-network text-primary font-semibold text-sm my-auto ml-auto mr-4 pointer"
           >
             Ver todas
-          </a>
+          </button>
         </div>
         {fiveSpecialtiesGroup?.map(
           ({ speciality_name, image, articles }, index) => (
@@ -127,7 +127,7 @@ const SingleContentSidebarFixedItem: FC<SingleContentSidebarFixedItemProps> = ({
             </Link>
           )
         )}
-      </div>
+      </div>*/}
       <NcModal
         isOpenProp={showSpecialties}
         onCloseModal={() => {

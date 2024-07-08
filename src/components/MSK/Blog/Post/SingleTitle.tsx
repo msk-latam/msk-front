@@ -7,7 +7,7 @@ export interface SingleTitleProps {
 }
 
 const SingleTitle: FC<SingleTitleProps> = ({
-  mainClass = "text-neutral-900 font-semibold text-2xl md:text-4xl md:!leading-[120%] lg:text-5xl dark:text-neutral-100 w-full h-[100px] flex items-center",
+  mainClass = "text-neutral-900 font-semibold text-2xl md:text-4xl md:!leading-[120%] lg:text-5xl dark:text-neutral-100 w-full flex items-center",
   className = "",
   title,
 }) => {

@@ -3,12 +3,29 @@
 @import "./_theme_colors";
 @import "./_theme_font";
 @import "./_theme_custom";
+
 //
 @import "./header";
 @import "./components/contact";
 @import "./components/footer";
 @import "./components/header";
+@import "./components/hero";
 @import "./components/course";
 @import "./components/shop";
 @import "./components/note";
-@import "/fonts/line-awesome-1.3.0/css/line-awesome.css";
+@import "./components/tooltip";
+@import "./components/mercadopago";
+@import "./components/profile";
+@import "../../public/fonts/line-awesome-1.3.0/css/line-awesome.css";
+@import "bts.module.css";
+.grecaptcha-badge {
+  width: 70px !important;
+  overflow: hidden !important;
+  transition: all 0.3s ease !important;
+  left: -2px !important;
+  bottom: 20px !important;
+}
+.grecaptcha-badge:hover {
+  width: 256px !important;
+}
+

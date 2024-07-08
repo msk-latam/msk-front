@@ -9,9 +9,10 @@ import Link from "next/link";
 export interface Card4Props {
   className?: string;
   post: PostDataType;
+  forSingleNote?: boolean;
 }
 
-const Card4: FC<Card4Props> = ({ className = "h-full", post }) => {
+const Card4: FC<Card4Props> = ({ className = "h-full", post,forSingleNote }) => {
   const { title, href, featuredImage, categories, author, date, readingTime } =
     post;
 
@@ -25,7 +26,7 @@ const Card4: FC<Card4Props> = ({ className = "h-full", post }) => {
           className="object-cover"
           alt=""
           sizes="(max-width: 600px) 480px, 800px"
-          src={featuredImage}
+          src={featuredImage as string}
         />
       </span>
 
@@ -41,7 +42,7 @@ const Card4: FC<Card4Props> = ({ className = "h-full", post }) => {
           </h2>
         </div>
         <div className="flex items-end justify-between mt-auto">
-          <CardAuthor2 readingTime={readingTime} date={date} author={author} />
+          <CardAuthor2 readingTime={readingTime} date={date} author={author} forSingleNote={forSingleNote} />
           <PostCardSaveAction hidenReadingTime />
         </div>
       </div>

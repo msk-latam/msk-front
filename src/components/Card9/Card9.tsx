@@ -5,7 +5,9 @@ import CategoryBadgeList from "@/components/CategoryBadgeList/CategoryBadgeList"
 import Link from "next/link";
 import NcImage from "@/components/NcImage/NcImage";
 import { CountryContext } from "@/context/country/CountryContext";
-import Image from "next/image";
+import Showing from "@/components/Showing/Showing";
+import moduleIcon from "/public/images/icons/moduleIcon.svg";
+import timeIcon from "/public/images/icons/timeIcon.svg";
 
 export interface Card9Props {
   className?: string;
@@ -27,22 +29,38 @@ const Card9: FC<Card9Props> = ({
   kind,
 }) => {
   const { title, categories, id, slug, image } = post;
-  const { state } = useContext(CountryContext);
-  const imageURL = image ? image.replace(`${state.country || "mx"}.`, "") : "";
+  const { countryState } = useContext(CountryContext);
+  const imageURL = image
+    ? image.replace(`${countryState.country || "mx"}.`, "")
+    : "";
 
   const renderMeta = () => {
     return (
       <div className="inline-flex items-center text-xs text-neutral-300">
         <div className="block ">
-          <h2 className="block text-lg font-semibold text-white">
-            <span className="text-xl font-raleway" title={title}>
+          <h4 className="block text-lg font-semibold text-white mb-2">
+            <span className="text-xl font-raleway font-bold" title={title}>
               {title}
             </span>
-          </h2>
-
+          </h4>
+          {post.cantidad_modulos && (
+            <Showing
+              title={`${post.cantidad_modulos} temas`}
+              icon={moduleIcon.src}
+              className="mb-2"
+            />
+          )}
+          {post.duration && (
+            <Showing
+              title={`${post.duration} horas estimadas`}
+              icon={timeIcon.src}
+            />
+          )}
           <>
             {showDescription && post.lista_de_cedentes ? (
               <div className="sm:block mt-2">
+                <span className="text-neutral-300 text-[10px] line-clamp-1">Certificación</span>
+
                 <span className="text-neutral-300 text-sm line-clamp-1 ">
                   {post.lista_de_cedentes[0].post_title}
                 </span>
@@ -67,7 +85,7 @@ const Card9: FC<Card9Props> = ({
       <div className={`flex items-start relative w-full ${ratio}`}></div>
       <Link href={`/curso/${slug}`}>
         <NcImage
-          containerClassName="absolute inset-0 rounded-3xl"
+          containerClassName="absolute inset-0 rounded-2xl sm:rounded-3xl"
           src={imageURL}
           fill
           sizes="200px"
@@ -75,7 +93,7 @@ const Card9: FC<Card9Props> = ({
           className="object-cover"
         />
 
-        <span className="absolute inset-0 bg-black bg-opacity-10 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+        <span className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-100 md:opacity-80 group-hover:opacity-100 transition-opacity"></span>
       </Link>
       <Link
         href={`/curso/${slug}`}

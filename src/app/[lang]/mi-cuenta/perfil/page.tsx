@@ -1,57 +1,30 @@
 "use client";
-import LayoutPage from "@/components/MSK/LayoutPage";
-import AccountHome from "@/components/MSK/account/AccountHome";
-import AccountCourses from "@/components/MSK/account/AccountCourses";
 import AccountPersonalData from "@/components/MSK/account/AccountPersonalData";
-import { ComponentType, FC, useContext, useEffect, useState } from "react";
-// import AccountCourses from "@/components/MSK/account/AccountCourses";
-// import AccountHome from "@/components/MSK/account/AccountHome";
-// import { Helmet } from "react-helmet";
-import { User, UserCourseProgress } from "@/data/types";
-// import LoadingText from "@/components/Loader/Text";
-import ModalSignOut from "@/components/Modal/SignOut";
-// import { getUserCourses } from "Services/user";
+import { FC, useContext, useEffect, useState } from "react";
+import { User } from "@/data/types";
 import { AuthContext } from "@/context/user/AuthContext";
-import { DataContext } from "@/context/data/DataContext";
-import api from "../../../../../Services/api";
-import { getUserCourses } from "../../../../../Services/user";
-import NcLink from "@/components/NcLink/NcLink";
-import { Switch } from "@headlessui/react";
+import api from "@/services/api";
+import InputSkeleton from "@/components/Skeleton/InputSkeleton";
+import { useRouter } from "next/navigation";
 
 export interface PageDashboardProps {
   className?: string;
 }
 
-interface DashboardLocationState {
-  "/inicio"?: {};
-  "/cursos"?: {};
-  "/perfil"?: {};
-  "/metodo-pego"?: {};
-  "/cerrar-sesion"?: {};
-}
-
-interface DashboardPage {
-  sPath: keyof DashboardLocationState;
-  exact?: boolean;
-  component: ComponentType<Object>;
-  icon: string;
-  pageName: string;
-}
-
 const PageDashboard: FC<PageDashboardProps> = ({ className = "" }) => {
-  // let { path, url } = useRouteMatch();
-  // const history = useHistory();
+  const router = useRouter();
   const { state, dispatch } = useContext(AuthContext);
   const [user, setUser] = useState<User>({} as User);
-  // const [isLoading, setLoading] = useState(true);
-
+  const [isLoading, setLoading] = useState(true);
+  
   useEffect(() => {
-    //setCourses(allProductsMX);
-    fetchUser();
-  }, [state?.profile?.contact?.courses_progress]);
+    if (!user.id) fetchUser();
+  }, [state?.profile]);
 
   const fetchUser = async () => {
+    setLoading(true);
     const res = await api.getUserData();
+    console.log({res})
     if (!res.message) {
       if (!res.contact.state) res.contact.state = "";
       setUser(res);
@@ -62,8 +35,9 @@ const PageDashboard: FC<PageDashboardProps> = ({ className = "" }) => {
         },
       });
     } else {
-      // history.push("/iniciar-sesion");
+      router.push("/iniciar-sesion");
     }
+    setLoading(false);
   };
 
   return (
@@ -71,7 +45,15 @@ const PageDashboard: FC<PageDashboardProps> = ({ className = "" }) => {
       className={`nc-PageDashboard animate-fade-down ${className}`}
       data-nc-id="PageDashboard"
     >
-      <AccountPersonalData user={user} setUser={setUser} />
+      {isLoading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          {[...Array(7)].map((_, index) => (
+            <InputSkeleton key={index} />
+          ))}
+        </div>
+      ) : (
+        <AccountPersonalData user={user} setUser={setUser} />
+      )}
     </div>
   );
 };

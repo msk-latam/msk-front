@@ -6,19 +6,20 @@ import { usePathname } from "next/navigation";
 
 export interface MenuBarProps {}
 const MenuBar: React.FC<MenuBarProps> = () => {
-  const [isVisable, setIsVisable] = useState(false);
+  const [isVisible, setisVisible] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
-    setIsVisable(false);
+    setisVisible(false);
   }, [pathname]);
 
-  const handleOpenMenu = () => setIsVisable(true);
-  const handleCloseMenu = () => setIsVisable(false);
+  const handleOpenMenu = () => setisVisible(true);
+  const handleCloseMenu = () => setisVisible(false);
 
   const renderContent = () => {
     return (
-      <Transition show={isVisable} as={Fragment}>
+      /*<Transition show={true} as={Fragment}>*/
+      <Transition show={isVisible} as={Fragment}>
         <div className="relative z-50">
           <Transition.Child
             as={Fragment}
@@ -61,7 +62,7 @@ const MenuBar: React.FC<MenuBarProps> = () => {
     <div>
       <button
         onClick={() => {
-          setIsVisable(!isVisable);
+          setisVisible(!isVisible);
         }}
         className="p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300 focus:outline-none flex items-center justify-center"
       >

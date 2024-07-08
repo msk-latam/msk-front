@@ -26,8 +26,8 @@ const SingleContent: FC<SingleContentProps> = ({
   const [noteIntroduction, ...noteArticles] = articles;
 
   return (
-    <div className="nc-SingleContent space-y-10 ">
-      <div className="grid grid-cols-12 gap-4">
+    <div className="container nc-SingleContent  relative space-y-10 mb-16">
+      <div className="container grid grid-cols-12 gap-4">
         <div className="content-container col-span-12 lg:col-span-8 animate-fade-down">
           <CardAuthor2
             className="relative my-4"
@@ -68,13 +68,13 @@ const SingleContent: FC<SingleContentProps> = ({
             />
             <NoteExtraData suggest_content={data.suggest_content} />
             <div>
-              <h4 className="source-title">Fuente/s:</h4>
+              <h4 className="source-title font-poppins">Fuente/s:</h4>
               {sources && sources.length > 0
                 ? sources.map((source, index) => {
                     return (
                       <p
                         key={`source_${index}`}
-                        className="source-content lg:pr-20 break-words"
+                        className="source-content lg:pr-20 break-words font-poppins"
                       >
                         {source.fuente}
                       </p>
@@ -102,7 +102,7 @@ const SingleContent: FC<SingleContentProps> = ({
           />
         </div>
       </div>
-      <div className="relative py-16">
+      <div className="container relative py-16">
         <BackgroundSection />
         <SectionSliderPosts
           posts={bestSellers}
@@ -110,7 +110,7 @@ const SingleContent: FC<SingleContentProps> = ({
           heading="Nuestros cursos más elegidos"
           subHeading="Profesionales como tú ya se capacitaron con ellos. ¡Ahora te toca a ti!"
           sliderStype="style2"
-          uniqueSliderClass="pageHome-section6"
+          uniqueSliderClass="article-most-picked-courses"
         />
       </div>
     </div>

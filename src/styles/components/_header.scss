@@ -262,6 +262,10 @@
   margin-right: 30px;
   margin-left: 20px;
 }
+
+.nc-Header.sticky.scrolled .sub-menu{
+  visibility: hidden;
+}
 // main-menu style
 .main-menu {
   ul {
@@ -1162,6 +1166,7 @@ div.mean-container {
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
     position: absolute;
     background: white;
+    z-index: 10;
     .product-item {
       display: flex;
       gap: 16px;

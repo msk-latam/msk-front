@@ -22,7 +22,7 @@ const ModalHideAuthor: FC<ModalHideAuthorProps> = ({
   const textareaRef = useRef(null);
 
   const handleClickSubmitForm = () => {
-    console.log({ auhthor: auhthor.id });
+    // console.log({ auhthor: auhthor.id });
   };
 
   useEffect(() => {

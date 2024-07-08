@@ -4,15 +4,16 @@ import { CountryContext } from "@/context/country/CountryContext";
 import { FetchCourseType } from "@/data/types";
 import NcLink from "../NcLink/NcLink";
 import NcImage from "../NcImage/NcImage";
-import { getAllCourses } from "@/lib/allData";
 import { usePathname } from "next/navigation";
+import ssr from "@/services/ssr";
+import { removeFirstSubdomain } from "@/utils/removeFirstSubdomain";
 
 const SearchProducts = () => {
   const [auxProducts, setAuxProducts] = useState<FetchCourseType[]>([]);
   const [products, setProducts] = useState<FetchCourseType[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [isInputFocused, setIsInputFocused] = useState(false);
-  const { state } = useContext(CountryContext);
+  const { countryState } = useContext(CountryContext);
   const [isOnBlog, setIsOnBlog] = useState(false);
 
   const removeAccents = (str: string) => {
@@ -43,23 +44,41 @@ const SearchProducts = () => {
     }, 200);
   };
 
+  const onFocus = () => {
+    setIsInputFocused(true);
+  };
+
   const clearInputValue = () => {
     setInputValue("");
   };
+
   const pathname = usePathname();
   useEffect(() => {
-    if (pathname?.includes("/blog")) {
-      // setAuxProducts([...allPosts]);
-      // setProducts(allPosts);
-      // setIsOnBlog(true);
-    } else {
-      if (getAllCourses().length) {
-        setAuxProducts([...getAllCourses()]);
-        setProducts(getAllCourses());
-        setIsOnBlog(false);
+    const fetchData = async () => {
+      try {
+        //console.log('STATE: ', countryState);
+        let courses;
+        if (pathname?.includes("/blog")) {
+          // Fetch blog posts
+        } else {
+          if (products.length == 0) {
+            //const currentCountry = cookies().get("country")?.value;
+            let productsCountry =
+              countryState.country == "int" ? "" : countryState.country;
+            courses = await ssr.getAllCourses(productsCountry);
+
+            setAuxProducts(courses);
+            setProducts(courses);
+            setIsOnBlog(false);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
-    }
-  }, [pathname, getAllCourses()]);
+    };
+
+    fetchData();
+  }, [pathname]);
 
   return (
     <div className="search-products">
@@ -71,13 +90,13 @@ const SearchProducts = () => {
           sizeClass="h-[42px] pl-4 py-3"
           value={inputValue}
           onChange={triggerSearch}
-          onFocus={() => setIsInputFocused(true)}
-          onBlur={() => onBlur()}
+          onFocus={onFocus}
+          onBlur={onBlur}
         />
         <NcImage
           src={"/images/icons/search.svg"}
           className="absolute top-2.5 right-2"
-          alt=""
+          alt="Search Icon"
           width="21"
           height="21"
         />
@@ -90,11 +109,11 @@ const SearchProducts = () => {
                 href={`/${isOnBlog ? "blog" : "curso"}/${product.slug}`}
                 key={product.id}
                 className="product-item font-medium"
-                onClick={() => clearInputValue()} // Clear input value and update URL
+                onClick={() => clearInputValue()}
               >
                 <div className="img-container">
                   <NcImage
-                    src={product.image.replace(`${state.country}.`, "")}
+                    src={removeFirstSubdomain(product.image)}
                     alt={product.title}
                     width="50"
                     height="50"

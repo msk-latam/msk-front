@@ -1,12 +1,26 @@
-import api from "../../Services/api";
+import api from "@/services/api";
+import activeIcon from "@/public/images/icons/activo.svg";
+import inactiveIcon from "@/public/images/icons/inactivo.svg";
+import expiredIcon from "@/public/images/icons/expirado.svg";
+import trialIcon from "@/public/images/icons/trialIcon.svg";
 
 export const goToLMS = async (
   product_code: number,
   cod_curso: string,
   email: string
 ) => {
+  console.log('go to lms executed');
   const res = await api.getLinkLMS(product_code, cod_curso, email);
-  window.open(res.sso, "_blank");
+  console.log(res);
+  if (res.sso){
+    const a = document.createElement("a");
+    a.setAttribute('href', res.sso);
+    a.setAttribute('target', '_blank');
+    a.click();
+    //window.open(res.sso, "_blank");
+  }else{
+    alert('Hubo un problema al obtener el curso');
+  }
   return res;
 };
 
@@ -16,6 +30,7 @@ export const goToEnroll = async (product_code: number, email: string) => {
 };
 
 export function hasText(status: string) {
+  console.log({status})
   switch (status) {
     case "Sin enrolar":
       return "Activar";
@@ -35,16 +50,21 @@ export const productFinishOrActive = (status: string) =>
 export const productStatusIsExpired = (status: string) =>
   status.includes("Expirado");
 
-export const getStatusIcon = (status: string) => {
-  switch (status) {
-    case "Activo":
-    case "Finalizado":
-      return "/images/icons/activo.svg";
-    case "Expirado":
-      return "/images/icons/expirado.svg";
-    default:
-      return "/images/icons/inactivo.svg";
+export const getStatusIcon = (status: string | null, statusOV: string | null = null) => {
+  console.log(status, statusOV, activeIcon)
+  // Verificar si es un caso especial de "Trial"
+  if (statusOV === "Trial") {
+    return status === "Prueba" ? trialIcon : inactiveIcon;
   }
+  // Objeto de mapeo para asociar estados con iconos
+  const iconMapping: Record<string, any> = {
+    Activo: activeIcon,
+    Finalizado: activeIcon,
+    Expirado: expiredIcon,
+  };
+
+  // Devolver el icono correspondiente o el icono inactivo por defecto
+  return status ? iconMapping[status] || inactiveIcon : inactiveIcon;
 };
 
 export const statusCourse = (status: string) => {
@@ -73,22 +93,42 @@ export const statusCourse = (status: string) => {
   return statusObj;
 };
 
-export const statusOrdenVenta = (status: string) => {
-  const statusObj: { isDisabled: boolean; hasText: string; color: string } = {
+export const statusOrdenVenta = (status: string, statusCourse: string | null = null) => {
+  const statusObj: {
+    isDisabled: boolean;
+    hasText: string | null;
+    disabledText: string | null;
+    color: string
+  } = {
     isDisabled: true,
-    hasText: "",
+    disabledText: null,
+    hasText: null,
     color: "",
   };
 
   switch (status) {
     case "Baja":
       statusObj.isDisabled = true;
-      statusObj.hasText = "Baja";
+      statusObj.disabledText = "Baja"
+      statusObj.hasText = null;
       statusObj.color = "red";
+      break;
+    case "Trial suspendido":
+      statusObj.isDisabled = true;
+      statusObj.disabledText = "Prueba cancelada";
+      statusObj.hasText = null;
+      statusObj.color = "trial";
+      break;
+    case "Trial":
+      statusObj.isDisabled = false;
+      statusObj.hasText = "Prueba";
+      statusObj.disabledText = "Prueba";
+      statusObj.color = "trial";
       break;
     default:
       statusObj.isDisabled = false;
       statusObj.hasText = "";
+      statusObj.disabledText = "";
       statusObj.color = "";
       break;
   }

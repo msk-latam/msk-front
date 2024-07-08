@@ -5,6 +5,8 @@ import { AuthContext } from "@/context/user/AuthContext";
 import { UTMAction } from "@/context/utm/UTMContext";
 import { utmInitialState, utmReducer } from "@/context/utm/UTMReducer";
 import { FC, useContext, useEffect, useReducer, useState } from "react";
+import {useRouter} from "next/navigation";
+
 interface Props {
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   onClose: () => any;
@@ -12,7 +14,7 @@ interface Props {
 
 const signOutContent: FC<Props> = ({ setShow, onClose }) => {
   const { dispatch } = useContext(AuthContext);
-  // const history = useHistory();
+  const router = useRouter();
   const clearUTMAction: UTMAction = {
     type: "CLEAR_UTM",
     payload: {} as any,
@@ -23,7 +25,7 @@ const signOutContent: FC<Props> = ({ setShow, onClose }) => {
     onClose();
     dispatchUTM(clearUTMAction);
     dispatch({ type: "LOGOUT" });
-    // history.push("/");
+    router.push("/");
   };
 
   return (
@@ -32,7 +34,7 @@ const signOutContent: FC<Props> = ({ setShow, onClose }) => {
       <ButtonSecondary
         onClick={() => handleLogout()}
         sizeClass="py-3 "
-        className="border-solid border-1 border-primary-6000 text-primary-6000 logout-button"
+        className="border-solid border-1 border-primary-6000 text-primary-6000 logout-button w-[160px]"
         bordered
       >
         Confirmar
@@ -40,7 +42,7 @@ const signOutContent: FC<Props> = ({ setShow, onClose }) => {
       <ButtonPrimary
         onClick={() => setShow(false)} // Triggeamos setShow(false) al hacer clic
         sizeClass="py-3 "
-        className="font-semibold logout-button"
+        className="font-semibold logout-button w-[160px]"
       >
         Cancelar
       </ButtonPrimary>

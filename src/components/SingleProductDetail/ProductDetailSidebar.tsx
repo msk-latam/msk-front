@@ -3,11 +3,16 @@ import { FC, useContext, useEffect, useState } from "react";
 import { Details, Ficha } from "@/data/types";
 import { CountryContext } from "@/context/country/CountryContext";
 import { AuthContext } from "@/context/user/AuthContext";
-import { useParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import useRequestedTrialCourse from "@/hooks/useRequestedTrialCourse";
+import Badge from "@/components/Badge/Badge";
+import Image from "next/image";
+import PricingDetail from "@/components/SingleProductDetail/PricingDetail";
+import { REBILL_CONF } from "@/logic/Rebill";
 
 interface Props {
   ficha: Ficha;
+  product: any;
   details: Details;
   isEbook?: boolean;
   sideData: {
@@ -17,23 +22,22 @@ interface Props {
     certificacion: string;
     idioma: string[];
   };
+  fixedPosition?: boolean;
 }
 
 const ProductDetailSidebar: FC<Props> = ({
   ficha,
+  product,
   details,
   isEbook,
   sideData,
+  fixedPosition = false,
 }) => {
   const { slug }: { slug: string } = useParams();
   const { state: authState } = useContext(AuthContext);
-  const isLocal =
-    window.location.origin.includes("dev.msklatam.tech") ||
-    window.location.origin.includes("localhost");
-
+  const { countryState: countryState } = useContext(CountryContext);
   const [isFixed, setIsFixed] = useState(false);
   const [bottomDistance, setBottomDistance] = useState(0);
-  const { state } = useContext(CountryContext);
   let scrollPosition = 0;
 
   const image = ficha.image;
@@ -96,27 +100,54 @@ const ProductDetailSidebar: FC<Props> = ({
       authState.isAuthenticated ? `/suscribe/${slug}` : `/trial/${slug}`
     );
   };
+  const { hasCoursedRequested } = useRequestedTrialCourse(product);
 
+  const hasGateway = Object.values(REBILL_CONF.GATEWAYS).some(array =>
+    array.includes(countryState.country)
+  );
+  //console.log(hasCoursedRequested)
   return (
     <div className={`course-video-widget`}>
       <div
         className={`${
-          isFixed && bottomDistance == 0 && !isEbook
+          isFixed && bottomDistance == 0 && !isEbook && fixedPosition
             ? "course-widget-wrapper fixed"
             : "course-widget-wrapper"
         } ${bottomDistance != 0 && !isEbook ? "absolute bottom-0" : ""}`}
       >
-        {isFixed && !isEbook ? null : (
-          <div className="course-video-thumb w-img hidden lg:flex">
-            <img src={image} alt="img not found" />
+        {isFixed && !isEbook ? (
+          <>
+            {product.sale_price !== "0" && (
+              <Badge
+                color="sale"
+                name="EN PROMOCIÓN"
+                className="hidden lg:inline-block mb-2"
+              />
+            )}
+          </>
+        ) : (
+          <div className="course-video-thumb mb-2 w-img hidden lg:flex relative">
+            {product.sale_price !== "0" && (
+              <Badge
+                color="sale"
+                name="EN PROMOCIÓN"
+                className="absolute top-2 left-2"
+              />
+            )}
+            <Image
+              src={image}
+              alt={`${slug} image`}
+              width={1000}
+              height={1000}
+            />
           </div>
         )}
 
-        {isEbook ? null : (
-          <div className="course-video-price">
-            <span>💳 Pagos sin intereses</span>
-          </div>
+        {product.sale_price !== "0" && (
+          <Badge color="sale" name="EN PROMOCIÓN" className="mb-2 lg:hidden" />
         )}
+
+        <PricingDetail isEbook={isEbook} product={product} />
 
         <div className="course-video-body">
           <ul>
@@ -175,14 +206,17 @@ const ProductDetailSidebar: FC<Props> = ({
           >
             {isEbook ? "Descargar gratis" : "Contáctanos"}
           </button>
-          {!isEbook && isLocal && (
-            <button
-              onClick={() => requestTrial(slug)}
-              className="video-cart-btn border-2 w-full"
-            >
-              Prueba 7 días gratis
-            </button>
-          )}
+          {!isEbook && hasGateway && (
+              <button
+                onClick={() => requestTrial(slug)}
+                className="video-cart-btn border-2 w-full disabled:border-grey-disabled disabled:text-grey-disabled disabled:cursor-not-allowed hover:disabled:bg-transparent hover:disabled:border-grey-disabled hover:disabled:text-grey-disabled"
+                disabled={hasCoursedRequested}
+              >
+                {hasCoursedRequested
+                  ? "Prueba ya solicitada"
+                  : "Prueba 7 días gratis"}
+              </button>
+            )}
         </div>
       </div>
     </div>

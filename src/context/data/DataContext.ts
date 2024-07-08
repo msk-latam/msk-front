@@ -12,6 +12,7 @@ export interface DataState {
   allPosts: any;
   allBestSellers: any;
   allProfessions: any;
+  allStoreProfessions: any;
   allSpecialties: any;
   allSpecialtiesGroups: any;
   allProductsMX: any;
@@ -32,6 +33,7 @@ export const DataContext = createContext<{
     allPosts: [],
     allBestSellers: [],
     allProfessions: [],
+    allStoreProfessions: [],
     allSpecialties: [],
     allSpecialtiesGroups: [],
     allProductsMX: [],

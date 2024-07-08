@@ -11,7 +11,7 @@ const MobileCourseTable: FC<CoursesTableComponentProps> = ({
 
   return (
     <div className="flex flex-col space-y-8">
-      <ul>
+      <ul className="border rounded-xl">
         <MobileCourseList
           items={currentItems}
           email={email}

@@ -22,9 +22,15 @@ module.exports = {
     container: {
       center: true,
       padding: {
-        DEFAULT: "1rem",
-        "2xl": "128px",
+        DEFAULT: '4rem',
       },
+      screens: {
+        md: '1792px', // Change from 1536px to 1792px
+      },
+    },
+    fontFamily: {
+      display: ["var(--font-display)", ...defaultTheme.fontFamily.sans],
+      body: ["var(--font-body)", ...defaultTheme.fontFamily.sans],
     },
 
     extend: {
@@ -69,18 +75,23 @@ module.exports = {
         "yellow-post": "#FFEF00",
         "blue-post": "#759CFF",
         "orange-post": "#FF7728",
-        "red-post": "#FF7171",
+        "red-post": "#FF5D5E",
+        "red-2": "#FF384F",
         "emerald-post": "#9AFFD6",
         "brown-post": "#E8874E",
         "teal-active": "#F3FEFC",
         "grey-course": "#575757",
         "violet-wash": "#6474A6",
+        "violet-strong": "#374161",
         "violet-custom": "#9200ad",
+        "violet-dark": "#392C35",
         "grey-disabled": "#CCD1DC",
+        "trial": "#FFD39C",
+        "trial-strong": "#B47528",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
-        "lora-italic": ["Lora-Italic", "sans-serif"],
+        "lora-italic": ["var(--font-lora-italic)", "sans-serif"],
         lora: ["Lora", "sans-serif"],
         inter: ["Inter", "sans-serif"],
         raleway: ["Raleway", "sans-serif"],
@@ -98,5 +109,6 @@ module.exports = {
     require("@tailwindcss/typography"),
     require("@tailwindcss/forms"),
     require("@tailwindcss/aspect-ratio"),
+    require("tailwindcss-animated"),
   ],
 };

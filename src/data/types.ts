@@ -38,6 +38,7 @@ export interface Contact {
   entity_id_crm?: string;
   name: string;
   last_name: string;
+  identification?: string;
   profession: string;
   speciality: string | null;
   user_id: number;
@@ -62,6 +63,21 @@ export interface Contact {
   career?: string;
   year?: string;
   courses_progress: CourseProgress[];
+  type_doc?: string;
+  trial_course_sites?: TrialCourseSite[]
+}
+
+export interface TrialCourseSite {
+  id: number
+  trial_status: any
+  contact_entity_id: string
+  contractJson: string
+  trial_finish_at: string
+  trial_cancelled_at: any
+  retry_trial_quantity: number
+  rebill_response: any
+  created_at: string
+  updated_at: string
 }
 
 export interface Contract {
@@ -166,6 +182,9 @@ export interface User {
 
 export interface UserProfile {
   courses_progress: CourseProgress[];
+  contact?: Contact;
+  identification?:string;
+
 }
 
 export interface CustomUser {
@@ -212,6 +231,7 @@ export interface FetchPostType {
   author: any;
   content: string;
   father_post_type?: string;
+  reading_time: string;
 }
 
 export interface PostDataType {
@@ -381,6 +401,9 @@ export interface Cedente {
   imagen: string;
 }
 export interface FetchSingleProduct {
+  installmentAmount?: number;
+  totalAmount?: number;
+  total_price: string;
   ficha: Ficha;
   description: string;
   details: Details;
@@ -431,9 +454,12 @@ export interface FetchCourseType {
   total_price: string;
   price_installments: string;
   lista_de_cedentes: any[];
+  cantidad_modulos: string;
   excerpt?: string;
   date?: string;
   author?: any;
+  reading_time:string;
+  created_at: string;
 }
 
 export interface Category {
@@ -457,7 +483,7 @@ export interface Profession {
 }
 
 export interface Specialty {
-  id: number;
+  id?: number;
   name: string;
   href?: string;
 }
@@ -466,11 +492,17 @@ export interface DurationFilter {
   id: number;
   name: string;
   value?: string;
+  slug?: string;
+}
+
+export interface PageFilter {
+  id: number;
 }
 
 export interface ResourceFilter {
   id: number;
   name: string;
+  slug?: string;
 }
 
 export interface CourseDataType {
@@ -565,19 +597,23 @@ export type Newsletter = {
 };
 
 export interface BannerImg {
-  imagen_desktop: { link: string };
-  imagen_mobile: { link: string };
+  id?: number;
+  imagen_desktop: {
+    url?: string;
+    link: string };
+  imagen_mobile: { link: string, url?: string };
   url_banner?: string | { title?: string; url: string; target?: string };
   url?: { href: string };
 }
 
 export interface AuthState {
+  stateLoaded : boolean;
   isAuthenticated: boolean;
   user: User | null;
   profile: UserProfile | null;
   email: string | null;
   token: string | null;
-  expires_at: number | null;
+  expires_at: string | null;
   bypassRedirect: boolean | number | null;
 }
 
@@ -597,6 +633,83 @@ export interface CustomStaticContext {
 
 export interface JsonMapping {
   [key: string]: string;
+}
+
+export interface JsonInstallmentsMapping {
+  [key: string]: {
+    quotes: number | null;
+    gateway: string;
+  };
+}
+export interface RebillTransaction{
+  id: string,
+  cartId: string;
+  organizationId: string;
+  paidBags: [
+      {
+          payment: {
+              amount: string;
+              id: string;
+              currency: string;
+              status: string;
+              gateway: {
+                  id: string;
+                  type: string;
+                  country: string;
+                  description:string;
+                  status: string;
+              },
+              errorMessage: string;
+              createdAt: string;
+              source: string;
+          },
+          prices: [
+              {
+                  id: string;
+                  quantity: number
+              }
+          ],
+          schedules: string[]
+      }
+  ],
+  buyer: {
+      customer: {
+          id: string;
+          firstName: string;
+          lastName:string;
+          cellPhone: string;
+          birthday: string;
+          taxIdType:string;
+          taxIdNumber: string;
+          personalIdType:string;
+          personalIdNumber: string;
+          userEmail: string;
+          address: {
+              street: string;
+              city: string;
+              state: string;
+              country: string;
+              zipCode: string;
+              number: string;
+              floor: string;
+              apt: string;
+              description: string;
+          }
+      },
+      card: {
+          id: string;
+          bin: number;
+          last4: string;
+          cardHolder: string;
+          cardNumber: string;
+          expiration: {
+              month: number;
+              year: string;
+          }
+      }
+  },
+  type: string;
+  createdAt: string;
 }
 
 export interface PageFilter {
@@ -637,3 +750,68 @@ export interface JsonIdentificationsMapping {
     type: string;
   }>;
 }
+
+export type WpContentData = {
+  params: {
+    country?: string;
+  };
+  header: {
+    cabecera: string;
+    cta: {
+      title: string;
+      url: string;
+      target: string;
+    };
+    imagen: string;
+  };
+  sobre_mks: {
+    etiqueta: string;
+    texto_1: string;
+    texto_2: string;
+  };
+  cedentes: {
+    texto: string;
+  };
+  recomendaciones: {
+    texto_1: string;
+    texto_2: string;
+    items_1: {
+      titulo: string;
+      parrafo: string;
+    }[];
+    items_2: {
+      imagen: string;
+      titulo: string;
+      numero: string;
+      parrafo: string;
+      redes: {
+        value: string;
+        label: string;
+      };
+    }[];
+  };
+  preguntas_frecuentes: {
+    texto: string;
+    items: {
+      titulo: string;
+      parrafo: string;
+    }[];
+  };
+};
+
+export type ContactCRM = {
+  First_Name: string;
+  Last_Name: string;
+  Email: string;
+  Phone: string;
+  Date_of_Birth: string;
+  Identificacion: string;
+  Tipo_de_Documento: string;
+  Mailing_Street: string;
+  Mailing_City: string;
+  Mailing_State: string;
+  Mailing_Zip: string;
+  Pais: string;
+  Full_Name: string;
+  id: string;
+};

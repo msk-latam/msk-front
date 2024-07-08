@@ -1,221 +1,102 @@
-import { FC, useContext, useEffect, useReducer, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import {
   DurationFilter,
   Profession,
   ResourceFilter,
   Specialty,
 } from "@/data/types";
-import { useStoreFilters } from "@/context/storeFilters/StoreFiltersProvider";
-// import { useHistory } from "react-router-dom";
 import { slugifySpecialty } from "@/lib/Slugify";
-import { useRouter } from "next/navigation";
-import { DataContext } from "@/context/data/DataContext";
-import api from "../../../../Services/api";
-
-interface StoreFilterQuery {
-  professions: [{ name: string; id: number; slug: string }];
-  specialties: [{ name: string; id: number; image?: string }];
-  resources: [{ name: string; id: number }];
-}
-
-const initialState = {
-  isActive: false,
-  isActiveA: false,
-  isActiveB: false,
-  isActiveC: false,
-  isActiveD: false,
-  isActiveE: false,
-};
-const reducer = (state: any, action: any) => {
-  switch (action) {
-    case "categories":
-      return {
-        ...state,
-        isActive: !state.isActive,
-      };
-    case "ratings":
-      return {
-        ...state,
-        isActiveA: !state.isActiveA,
-      };
-    case "price":
-      return {
-        ...state,
-        isActiveB: !state.isActiveB,
-      };
-    case "durations":
-      return {
-        ...state,
-        isActiveE: !state.isActiveE,
-      };
-    default:
-      throw new Error("Unexpected action");
-  }
-};
+import resourcesMapping from "../../../data/jsons/__resources.json";
+import durationsMapping from "../../../data/jsons/__durations.json";
+import { useStoreFilters } from "@/context/storeFilters/StoreProvider";
 
 interface Props {
-  onChangeSpecialty: (specialty: Specialty) => void;
+  onChangeSpecialty: (specialty: any, action: string) => void;
   onChangeProfession: (profession: Profession) => void;
-  onChangeResource: (resource: ResourceFilter) => void;
-  onChangeDuration: (duration: DurationFilter) => void;
-  professions: Profession[];
+  onChangeResource: (resource: ResourceFilter, action: string) => void;
+  onChangeDuration: (duration: DurationFilter, action: string) => void;
 }
+
+let resources = resourcesMapping;
+let durations = durationsMapping;
 
 const StoreSideBar: FC<Props> = ({
   onChangeSpecialty,
   onChangeProfession,
   onChangeResource,
   onChangeDuration,
-  professions,
 }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const [initialLoad, setInitialLoad] = useState(true);
+  const [specialtyVisible, setSpecialtyVisible] = useState<boolean>(true);
+  const [resourceVisible, setResourceVisible] = useState<boolean>(false);
+  const [professionVisible, setProfessionVisible] = useState<boolean>(false);
+  const [durationVisible, setDurationVisible] = useState<boolean>(false);
+
+  let specialties: Specialty[] = useStoreFilters().specialties;
+  let professions: Profession[] = useStoreFilters().professions;
+
   const { storeFilters } = useStoreFilters();
-  const { state: dataState } = useContext(DataContext);
-  // const { allProfessions: professions, allSpecialties: specialties } =
-  // dataState;
 
-  // const [professions, setProfessions] = useState<Profession[]>(allProfessions);
-  // const [specialties, setSpecialties] = useState<Specialty[]>(allSpecialties);
-
-  const resources: ResourceFilter[] = [
-    { name: "Curso", id: 1 },
-    { name: "Guías profesionales", id: 2 },
-  ];
-
-  const duration = [
-    { name: "Hasta 100 horas", id: 1, value: "less_100" },
-    { name: "De 100 a 300 horas", id: 2, value: "100_300" },
-    { name: "Más de 300 horas", id: 3, value: "more_300" },
-  ];
-  useEffect(() => {
-    const currentUrl = window.location.href;
-    const searchQuery = currentUrl.split("?")[1];
-
-    if (searchQuery) {
-      const queryParams = searchQuery.split("&");
-      const matchingProfessions = [{}] as StoreFilterQuery["professions"];
-      const matchingSpecialties = [{}] as StoreFilterQuery["specialties"];
-      const matchingResources = [{}] as StoreFilterQuery["resources"];
-
-      queryParams.forEach((param) => {
-        const [key, value] = param.split("=");
-        const decodedValue = decodeURIComponent(value);
-        if (key === "profesion" && professions.length) {
-          const professionExists = professions.find(
-            (item) => item.slug === decodedValue
-          );
-          if (professionExists) {
-            matchingProfessions.push(professionExists);
-          }
-        } else if (key === "especialidad" && specialties.length) {
-          const specialtiesExists = specialties.find(
-            (item) => item.name === decodedValue
-          );
-          if (specialtiesExists) {
-            matchingSpecialties.push(specialtiesExists);
-          }
-        } else if (key === "recurso" && resources.length) {
-          const resourceExists = resources.find(
-            (item) => item.id.toString() === decodedValue
-          );
-          if (resourceExists) {
-            matchingResources.push(resourceExists);
-          }
-        }
-      });
-
-      if (
-        (matchingProfessions.length ||
-          matchingSpecialties.length ||
-          matchingResources.length) &&
-        initialLoad
-      ) {
-        matchingProfessions.forEach((profession) => {
-          onChangeProfession({
-            id: profession.id,
-            name: profession.name,
-            slug: profession.slug,
-          });
-        });
-        matchingSpecialties.forEach((specialty) => {
-          onChangeSpecialty({
-            id: specialty.id,
-            name: specialty.name,
-          });
-        });
-        matchingResources.forEach((resource) => {
-          onChangeResource({
-            id: resource.id,
-            name: resource.name,
-          });
-        });
-        setInitialLoad(false);
-      }
-    }
-  }, [onChangeProfession, onChangeSpecialty, onChangeResource]);
-
-  const isChecked = (type: string, value: any) => {
-    switch (type) {
-      case "professions":
-        !!storeFilters[type as keyof typeof storeFilters].filter(
-          (profession: any) => {
-            return profession.slug == value.slug;
-          }
-        );
-        return !!storeFilters[type as keyof typeof storeFilters].filter(
-          (profession: any) => {
-            return profession.slug == value.slug;
-          }
-        ).length;
-      case "specialties":
-        return !!storeFilters[type as keyof typeof storeFilters].filter(
-          (specialty: any) => {
-            return specialty.name == value.name;
-          }
-        ).length;
-      case "resources":
-        return !!storeFilters[type as keyof typeof storeFilters].filter(
-          (resource: any) => {
-            return resource.id == value.id;
-          }
-        ).length;
-    }
+  const toggleSpecialtyVisibility = () => {
+    setSpecialtyVisible((prevVisible) => !prevVisible);
+  };
+  const toggleResourceVisibility = () => {
+    setResourceVisible((prevVisible) => !prevVisible);
+  };
+  const toggleProfessionVisibility = () => {
+    setProfessionVisible((prevVisible) => !prevVisible);
+  };
+  const toggleDurationVisibility = () => {
+    setDurationVisible((prevVisible) => !prevVisible);
   };
 
-  const history = useRouter();
+  const setSpecialtyFilter = (specialty: Specialty, action: string) => {
+    onChangeSpecialty(specialty, action);
+  };
+
+  const setResourceFilter = (resource: ResourceFilter, action: string) => {
+    onChangeResource(resource, action);
+  };
+
+  const setProfessionFilter = (profession: Profession, action: string) => {
+    onChangeProfession(profession);
+  };
+
+  const setDurationFilter = (duration: DurationFilter, action: string) => {
+    onChangeDuration(duration, action);
+  };
+
   return (
     <>
       <div className="course-sidebar-widget mb-2">
         <div
           className={`course-sidebar-info ${
-            state.isActive ? "content-visiable" : "content-hidden"
+            specialtyVisible ? "content-visible" : "content-hidden"
           }`}
         >
-          <h3 className="drop-btn" onClick={() => dispatch("categories")}>
+          <h3 className="drop-btn" onClick={toggleSpecialtyVisibility}>
             Especialidades
           </h3>
-          {false ? (
-            // specialties.length
+          {specialties && specialties.length ? (
             <ul>
               {specialties.map((specialty, index) => {
                 return (
                   <li key={`spe_${index}`}>
                     <div className="course-sidebar-list">
                       <input
-                        className="edu-check-box"
+                        className="edu-check-box bg-transparent border-none text-transparent focus:ring-0 focus:ring-offset-0"
                         type="checkbox"
                         id={`specialty_${specialty.name}`}
-                        onChange={(event) => {
-                          /* onChangeSpecialty(specialty) */
-                          //console.error(specialty);
-                          history.push(
-                            `?especialidad=${slugifySpecialty(
-                              specialty.name
-                            )}&recurso=curso`
-                          );
-                        }}
-                        checked={isChecked("specialties", specialty)}
+                        onChange={(e) =>
+                          setSpecialtyFilter(
+                            specialty,
+                            e.target.checked ? "add" : "delete"
+                          )
+                        }
+                        checked={
+                          !!storeFilters.specialties.find(
+                            (item: Specialty) => item.name == specialty.name
+                          )
+                        }
                       />
                       <label
                         className="edu-check-label"
@@ -234,47 +115,59 @@ const StoreSideBar: FC<Props> = ({
       <div className="course-sidebar-widget mb-2">
         <div
           className={`course-sidebar-info ${
-            state.isActiveA ? "content-visiable" : "content-hidden"
+            resourceVisible ? "content-visible" : "content-hidden"
           }`}
         >
-          <h3 className="drop-btn" onClick={() => dispatch("ratings")}>
+          <h3 className="drop-btn" onClick={toggleResourceVisibility}>
             Recurso
           </h3>
-          <ul>
-            {resources.map((resource, index: number) => {
-              return (
-                <li key={index}>
-                  <div className="course-sidebar-list">
-                    <input
-                      className="edu-check-box"
-                      type="checkbox"
-                      id={`res_${resource.id}`}
-                      onChange={(event) => onChangeResource(resource)}
-                      checked={isChecked("resources", resource)}
-                    />
-                    <label
-                      className="edu-check-label"
-                      htmlFor={`res_${resource.id}`}
-                    >
-                      {resource.name}
-                    </label>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+          {resourceVisible && (
+            <ul>
+              {resources.map((resource, index) => {
+                return (
+                  <li key={`res_${index}`}>
+                    <div className="course-sidebar-list">
+                      <input
+                        className="edu-check-box bg-transparent border-none text-transparent focus:ring-0 focus:ring-offset-0"
+                        type="checkbox"
+                        id={`res_${resource.id}`}
+                        checked={
+                          !!storeFilters.resources.find(
+                            (item: ResourceFilter) => item.slug == resource.slug
+                          )
+                        }
+                        onChange={(e) =>
+                          setResourceFilter(
+                            resource,
+                            e.target.checked ? "add" : "delete"
+                          )
+                        }
+                      />
+                      <label
+                        className="edu-check-label"
+                        htmlFor={`res_${resource.id}`}
+                      >
+                        {resource.name}{" "}
+                      </label>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
       </div>
+
       <div className="course-sidebar-widget mb-2">
         <div
           className={`course-sidebar-info ${
-            state.isActiveB ? "content-visiable" : "content-hidden"
+            professionVisible ? "content-visible" : "content-hidden"
           }`}
         >
-          <h3 className="drop-btn" onClick={() => dispatch("price")}>
+          <h3 className="drop-btn" onClick={toggleProfessionVisibility}>
             Profesión
           </h3>
-          {professions.length ? (
+          {professions && professions.length ? (
             <ul>
               {professions.map((profession, index: number) => {
                 return (
@@ -284,8 +177,17 @@ const StoreSideBar: FC<Props> = ({
                         className="edu-check-box"
                         type="checkbox"
                         id={`profession_${profession.id}`}
-                        onChange={(event) => onChangeProfession(profession)}
-                        checked={isChecked("professions", profession)}
+                        checked={
+                          !!storeFilters.professions.find(
+                            (item: Profession) => item.slug == profession.slug
+                          )
+                        }
+                        onChange={(e) =>
+                          setProfessionFilter(
+                            profession,
+                            e.target.checked ? "add" : "delete"
+                          )
+                        }
                       />
                       <label
                         className="edu-check-label"
@@ -305,28 +207,38 @@ const StoreSideBar: FC<Props> = ({
       <div className="course-sidebar-widget mb-2">
         <div
           className={`course-sidebar-info ${
-            state.isActiveE ? "content-visiable" : "content-hidden"
+            durationVisible ? "content-visible" : "content-hidden"
           }`}
         >
-          <h3 className="drop-btn" onClick={() => dispatch("durations")}>
+          <h3 className="drop-btn" onClick={toggleDurationVisibility}>
             Duración
           </h3>
           <ul>
-            {duration.map((item, index) => {
+            {durations.map((duration, index) => {
               return (
                 <li key={`dur_${index}`}>
                   <div className="course-sidebar-list">
                     <input
                       className="edu-check-box"
                       type="checkbox"
-                      id={`dur_${item.id}`}
-                      onChange={(event) => onChangeDuration(item)}
+                      id={`dur_${duration.id}`}
+                      checked={
+                        !!storeFilters.duration.find(
+                          (item: DurationFilter) => item.slug == duration.slug
+                        )
+                      }
+                      onChange={(e) =>
+                        setDurationFilter(
+                          duration,
+                          e.target.checked ? "add" : "delete"
+                        )
+                      }
                     />
                     <label
                       className="edu-check-label"
-                      htmlFor={`dur_${item.id}`}
+                      htmlFor={`dur_${duration.id}`}
                     >
-                      {item.name}
+                      {duration.name}
                     </label>
                   </div>
                 </li>

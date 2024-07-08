@@ -27,10 +27,10 @@ import { CountryCode } from "libphonenumber-js/types";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { countries } from "@/data/countries";
 import { DataContext } from "@/context/data/DataContext";
-//import countryIdentificationsMapping from "../../../data/jsons/__countryIdentifications.json";
-import api from "../../../../Services/api";
-
-// import InputField from "@/components/Form/InputField";
+import countryIdentificationsMapping from "../../../data/jsons/__countryIdentifications.json";
+import InputField from "@/components/InputField/InputField";
+import api from "@/services/api";
+import { useRouter } from "next/navigation";
 
 interface Props {
   user: User;
@@ -38,19 +38,42 @@ interface Props {
 }
 
 const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
+  const router = useRouter();
+  const [userData, setUserData] = useState(user);
+  const [localUser, setLocalUser] = useState<Contact>(userData.contact as Contact);
+  const [defaultCountry, setDefaultCountry] = useState("" as CountryCode);
+  const initialValues = {
+    name: localUser?.name || "",
+    last_name: localUser?.last_name || "",
+    email: localUser?.email || "",
+    phone: localUser?.phone || "",
+    profession: localUser?.profession || "",
+    speciality: localUser?.speciality || "",
+    other_profession: localUser?.other_profession || "",
+    other_speciality: localUser?.other_speciality || "",
+    career: localUser?.career || "",
+    year: localUser?.year || "",
+    address: localUser?.address || "",
+    country: localUser?.country || "",
+    postal_code: localUser?.postal_code || "",
+    state: localUser?.state || "",
+    fiscal_regime: localUser?.fiscal_regime || "",
+    type_doc: localUser?.type_doc || "",
+    identification: localUser?.identification || "",
+  };
   const { executeRecaptcha } = useGoogleReCaptcha();
   const { state: dataState } = useContext(DataContext);
+
   const { allProfessions, allSpecialties, allSpecialtiesGroups } = dataState;
   const [specialties, setSpecialties] = useState<Specialty[]>([]);
   const [professions, setProfessions] = useState<Profession[]>([]);
-  const { state } = useContext(CountryContext);
-  const [userData, setUserData] = useState(user);
+  const { countryState } = useContext(CountryContext);
+  useEffect(() => {
+    setDefaultCountry(countryState.country?.toUpperCase() as CountryCode);
+  }, [countryState]);
   const [formSubmitted, setFormSubmitted] = useState(true);
   const [showInputProfession, setShowInputProfession] = useState(false);
   const [showInputSpecialties, setShowInputSpecialties] = useState(false);
-  const [localUser, setLocalUser] = useState<Contact>(
-    userData.contact as Contact
-  );
   const [specialtiesGroup, setSpecialtiesGroup] = useState<Specialty[]>([]);
   const [selectedProfessionId, setSelectedProfessionId] = useState<string>("");
   const [currentGroup, setCurrentGroup] = useState<any>([]);
@@ -62,19 +85,12 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
     type: "",
   });
   const [currentStates, setCurrentStates] = useState<string[]>([]);
-  //const [currentDocumentsType, setCurrentDocumentsType] = useState<JsonIdentificationsMapping>(countryIdentificationsMapping);
-  const [selectedOptionProfession, setSelectedOptionProfession] =
-    useState<string>(userData.contact?.profession || "");
-  const [selectedOptionSpecialty, setSelectedOptionSpecialty] =
-    useState<string>(userData.contact?.speciality || "");
-  const [phoneNumber, setPhoneNumber] = useState<string>(
-    userData?.contact?.phone || ""
-  );
-  const [selectedDocument, setSelectedDocument] = useState<string>(
-    userData.contact?.type_doc || ""
-  );
-  const [selectedDocumentId, setSelectedDocumentId] = useState<string>(
-    userData.contact?.type_doc ? state.country : ""
+  const [currentDocumentsType, setCurrentDocumentsType] = useState<JsonIdentificationsMapping>(countryIdentificationsMapping);
+  const [selectedOptionProfession, setSelectedOptionProfession] = useState<string>(userData.contact?.profession || "");
+  const [selectedOptionSpecialty, setSelectedOptionSpecialty] = useState<string>(userData.contact?.speciality || "");
+  const [phoneNumber, setPhoneNumber] = useState<string>(userData?.contact?.phone || "");
+  const [selectedDocument, setSelectedDocument] = useState<string>(userData.contact?.type_doc || "");
+  const [selectedDocumentId, setSelectedDocumentId] = useState<string>(userData.contact?.type_doc ? `${countryState.country}-${userData.contact?.type_doc.toLowerCase()}` : ""
   );
 
   const handleOptionTypeChange = (
@@ -151,10 +167,10 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
   };
 
   const handleInputChange = (fieldName: string, value: string) => {
-    setLocalUser((prevUser: Contact) => ({
-      ...prevUser,
-      [fieldName]: value,
-    }));
+    // setLocalUser((prevUser: Contact) => ({
+    //   ...prevUser,
+    //   [fieldName]: value,
+    // }));
 
     if (fieldName == "country") {
       getStates(value);
@@ -164,36 +180,7 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
     if (fieldName == "state") {
       formik.setFieldValue("state", value);
     }
-
-    /* let identification = null;
-
-    switch (localUser.country) {
-      case "Argentina":
-        identification = localUser.dni;
-        break;
-      case "Chile":
-        identification = localUser.rut;
-        break;
-      default:
-        identification = localUser.rfc;
-        break;
-    } */
   };
-
-  useEffect(() => {
-    const hasOtherProfession = selectedOptionProfession.includes("Otra ");
-    const hasOtherSpeciality = selectedOptionSpecialty.includes("Otra ");
-    setShowInputProfession(hasOtherProfession);
-    setShowInputSpecialties(hasOtherSpeciality);
-
-    return () => {
-      setLocalUser((prevState) => ({
-        ...prevState,
-        other_profession: hasOtherProfession ? localUser.other_profession : "",
-        other_speciality: hasOtherSpeciality ? localUser.other_speciality : "",
-      }));
-    };
-  }, [selectedOptionProfession, selectedOptionSpecialty]);
 
   const getStates = async (country: string) => {
     const res = await api.getStatesFromCountry(country);
@@ -216,70 +203,10 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
     }
   }, [selectedOptionProfession, professions]);
 
-  const renderInputIdentification = () => {
-    if (!localUser) return <></>;
-    switch (localUser.country) {
-      case "México":
-        return (
-          <div className="form-input-std">
-            <label className="text-neutral-800 dark:text-neutral-200 mb-1">
-              RFC
-            </label>
-            <ErrorMessage name="rfc" component="span" className="error" />
-            <Field type="text" name="rfc" placeholder="Ingresar RFC" />
-          </div>
-        );
-      case "Chile":
-        return (
-          <div className="form-input-std">
-            <label className="text-neutral-800 dark:text-neutral-200 mb-1">
-              RUT
-            </label>
-            <ErrorMessage name="rut" component="span" className="error" />
-            <Field type="text" name="rut" placeholder="Ingresar RUT" />
-          </div>
-        );
-      default:
-        return (
-          <>
-            <div className="form-select-std">
-              {/* <InputField
-                label="Identificacion"
-                type="text"
-                name="identification"
-                placeholder="Ingresar identificacion"
-              /> */}
-            </div>
-          </>
-        );
-    }
-  };
-
   const optionsArray = [1, 2, 3, 4, 5];
 
   const formRef = useRef<HTMLFormElement>(null);
-  const initialValues = {
-    name: localUser?.name || "",
-    last_name: localUser?.last_name || "",
-    email: localUser?.email || "",
-    phone: localUser?.phone || "",
-    profession: localUser?.profession || "",
-    speciality: localUser?.speciality || "",
-    other_profession: localUser?.other_profession || "",
-    other_speciality: localUser?.other_speciality || "",
-    career: localUser?.career || "",
-    year: localUser?.year || "",
-    address: localUser?.address || "",
-    country: localUser?.country || "",
-    postal_code: localUser?.postal_code || "",
-    state: localUser?.state || "",
-    /*  rfc: localUser?.rfc || "",
-    dni: localUser?.dni || "",
-    rut: localUser?.rut || "", */
-    fiscal_regime: localUser?.fiscal_regime || "",
-    type_doc: localUser?.type_doc || "",
-    identification: localUser?.identification || "",
-  };
+  // const [initialValues, setInitialValues] = useState({});
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("El nombre es requerido"),
@@ -307,39 +234,10 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
             cl: /^\d{7,8}-[0-9Kk]$/, // RUT para Chile (ejemplo, ajusta según necesites)
           };
 
-          return countryRegexMap[state.country]?.test(value) || false;
+          return countryRegexMap[countryState.country]?.test(value) || false;
         }
       )
       .required("Este campo es obligatorio"),
-    //fiscal_regime: Yup.string().required("El régimen fiscal es requerido"),
-    // dni: Yup.string().when("country", {
-    //   is: (val: string) => val === "Argentina",
-    //   then: Yup.string().required("El DNI es requerido"),
-    // }),
-    // rfc: Yup.string().when("country", {
-    //   is: (val: string) => val === "México",
-    //   then: Yup.string().required("El RFC es requerido"),
-    // }),
-    // rut: Yup.string().when("country", {
-    //   is: (val: string) => val === "Chile",
-    //   then: Yup.string().required("El RUT es requerido"),
-    // }),
-    // other_profession: Yup.string().when("profession", {
-    //   is: (val: string) => val === "Otra profesión",
-    //   then: Yup.string().required("La profesión es requerida"),
-    // })
-    // other_speciality: Yup.string().when("speciality", {
-    //   is: (val: string) => val === "Otra especialidad",
-    //   then: Yup.string().required("La especialidad es requerida"),
-    // }),
-    // Career: Yup.string().when("profession", {
-    //   is: (val: string) => val === "Estudiante",
-    //   then: Yup.string().required("La carrera es requerida"),
-    // }),
-    // Year: Yup.string().when("profession", {
-    //   is: (val: string) => val === "Estudiante",
-    //   then: Yup.string().required("El año es requerido"),
-    // }),
   });
 
   const formik = useFormik({
@@ -373,7 +271,7 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
             );
             if (typeof continueTrialAccess === "string") {
               localStorage.removeItem("continueTrialAccess");
-              // history.push(continueTrialAccess)
+              router.push(continueTrialAccess);
             }
           } else {
             console.error("Hubo un error al actualizar el usuario", res);
@@ -404,6 +302,12 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
       setFormSubmitted(false);
     }
   }, [formik.dirty]);
+
+  useEffect(() => {
+    if (!localUser && user.contact) {
+      setLocalUser(user.contact);
+    }
+  }, [user]);
 
   return (
     <div className="rounded-xl md:border md:border-neutral-100 dark:border-neutral-800 md:p-6">
@@ -442,7 +346,7 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
               type="text"
               name="email"
               placeholder="Ingresar e-mail"
-              className="bg-gray-300"
+              className="bg-gray-300 cursor-not-allowed"
               readOnly
             />
           </div>
@@ -457,8 +361,8 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
                   name="phone"
                   id="phone"
                   placeholder="Ingresar número telefónico"
-                  defaultCountry={state.country.toUpperCase() as CountryCode}
-                  value={formik.values.phone}
+                  defaultCountry={countryState.country.toUpperCase() as CountryCode}
+                  value={formik.values.phone || user.contact?.phone}
                   onChange={(value: any) => {
                     form.setFieldValue("phone", value);
                     handlePhoneChange(value);
@@ -468,7 +372,6 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
               </div>
             )}
           </Field>
-
           <div className="grid grid-cols-2 col-span-2 gap-6">
             <div className="col-xl-6 col-span-2 md:col-span-1">
               <div className="form-select-std">
@@ -614,6 +517,7 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
               </div>
             )}
           </div>
+
           <div className="col-span-2 mb-4 sm:mb-0">
             <span className="dark:text-primary-500 forgot-password">
               ¿Necesitas cambiar tu contraseña?{" "}
@@ -647,6 +551,7 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
               as="select"
               name="country"
               value={localUser?.country}
+              className="cursor-not-allowed"
               onChange={(event: any) =>
                 handleInputChange("country", event.target.value)
               }
@@ -707,7 +612,7 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
             />
           </div>
 
-          <div className="form-input-std">
+          <div className="form-select-std">
             <label className="text-neutral-800 dark:text-neutral-200 mb-1">
               Tipo de identificacion
             </label>
@@ -722,25 +627,22 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
               <option defaultValue="" value="">
                 Seleccionar tipo
               </option>
-              {/*{currentDocumentsType[state.country]
-                ? currentDocumentsType[state.country].map((p) => (
+              {currentDocumentsType[countryState.country]
+                ? currentDocumentsType[countryState.country].map((p) => (
                     <option key={p.id} value={`${p.type}/${p.id}`}>
                       {p.type}
                     </option>
                   ))
-                : ""}*/}
+                : ""}
             </Field>
           </div>
 
-          {/* <label className="block">
-            {renderInputIdentification()}
-          </label> */}
-          {/* <InputField
-                label="Identificacion"
-                type="text"
-                name="identification"
-                placeholder="Ingresar identificacion"
-              /> */}
+          <InputField
+            label="Identificacion"
+            type="text"
+            name="identification"
+            placeholder="Ingresar identificacion"
+          />
 
           {localUser?.country?.includes("México") && (
             <div className="form-input-std">

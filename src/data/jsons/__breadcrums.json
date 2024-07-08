@@ -1,0 +1,7 @@
+{
+    "/": ["Home"],
+    "/tienda": [ "Tienda"],
+    "/curso": [ "Tienda", "mainCategory" ,"Curso|Guía profesional"],
+    "/blog": ["Blog", "mainCategory" , "Nota"],
+    "/archivo": ["Blog", "Archivo"]
+  }

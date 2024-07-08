@@ -1,6 +1,4 @@
-import { API_BACKEND_URL } from "@/data/api";
-import { ContactUs, Newsletter, Profession, Specialty } from "@/data/types";
-
+import { Newsletter, Profession, Specialty } from "@/data/types";
 import React, {
   FC,
   useContext,
@@ -10,7 +8,6 @@ import React, {
   useState,
 } from "react";
 import { utmInitialState, utmReducer } from "@/context/utm/UTMReducer";
-import { UTMAction } from "@/context/utm/UTMContext";
 import * as Yup from "yup";
 import {
   ErrorMessage,
@@ -24,30 +21,55 @@ import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { CountryContext } from "@/context/country/CountryContext";
 import { DataContext } from "@/context/data/DataContext";
 import NcLink from "../NcLink/NcLink";
-import api from "../../../Services/api";
+import api from "@/services/api";
+import {useRouter} from "next/navigation";
+import Image from "next/image";
+import ShowErrorMessage from "@/components/ShowErrorMessage";
+import {useYupValidation} from "@/hooks/useYupValidation";
 
 interface Props {
   email: string;
   setShow: (state: boolean) => void;
 }
+export function isFormValid(requiredFields: string[], formValues: any, formErrors: any, formTouched: any) {
+  for (let i = 0; i < requiredFields.length; i++) {
+    const fieldName = requiredFields[i];
 
-const validationSchema = Yup.object().shape({
-  First_Name: Yup.string().required("El nombre es requerido"),
-  Last_Name: Yup.string().required("El apellido es requerido"),
-  Email: Yup.string()
-    .email("Correo electrónico inválido")
-    .required("El correo electrónico es requerido"),
-  Profesion: Yup.string().required("La profesión es requerida"),
-  Especialidad: Yup.string().required("La especialidad es requerida"),
-  Temas_de_interes: Yup.array()
-    .of(Yup.string())
-    .min(1, "Se requiere al menos 1 tema de interés")
-    .required(),
-  Terms_And_Conditions2: Yup.boolean().oneOf(
-    [true],
-    "Debe aceptar los términos y condiciones"
-  ),
-});
+    // Verificar si el campo está en formValues y tiene un valor válido
+    if (!(fieldName in formValues) || formValues[fieldName] === "" || formValues[fieldName] === null || formValues[fieldName] === false) {
+      if (fieldName.includes("Preferencia_de_contactaci_n")) { //los Ebooks no tienen este campo
+        continue;
+      }
+      return false;
+    }
+
+    // Verificar si el campo está en formErrors y ha sido tocado
+    if (fieldName in formErrors && formTouched[fieldName]) {
+      return false;
+    }
+
+    // Verificar condiciones específicas para el campo "profesion"
+    if (fieldName === "Profesion") {
+      // Verificar si "profesion" contiene "estudiante"
+      if (formValues[fieldName].includes("Estudiante")) {
+        // Si contiene "estudiante", no es necesario validar "Especialidad"
+        continue;
+      }
+    }
+
+    // Verificar condiciones específicas para los campos "year" y "carrer"
+    if (fieldName === "year" || fieldName === "career") {
+      // Verificar si los campos no están vacíos
+      if (formValues[fieldName] === "") {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+
+const { newsletterValidation } = useYupValidation();
 const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
   const { executeRecaptcha } = useGoogleReCaptcha();
   const { state: dataState } = useContext(DataContext);
@@ -60,6 +82,7 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
     setSpecialties(allSpecialties);
     setSpecialtiesGroup(allSpecialtiesGroups);
   }, [allProfessions, allSpecialties]);
+
   const [specialties, setSpecialties] = useState([]);
   const [newsletterSpecialties, setNewsletterSpecialties] = useState([]);
   const [selectedOptionSpecialty, setSelectedOptionSpecialty] = useState("");
@@ -71,7 +94,7 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
   const [studentInputs, setStudentInputs] = useState(false);
   const [formError, setFormError] = useState("");
   const [utmState, dispatchUTM] = useReducer(utmReducer, utmInitialState);
-  const { state } = useContext(CountryContext);
+  const { countryState } = useContext(CountryContext);
 
   const fetchNewsletterSpecialties = async () => {
     const newsletterSpecialtyList = await api.getNewsletterSpecialties();
@@ -107,6 +130,7 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
     } else {
       setSelectedOptionProfession("");
       setSelectedProfessionId("");
+      formik.setFieldValue("Profesion", "");
     }
   };
 
@@ -114,10 +138,10 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
     fetchNewsletterSpecialties();
   }, []);
 
-  // const history = useHistory();
+   const router = useRouter();
 
   const changeRoute = (newRoute: string): void => {
-    // history.push(newRoute);
+     router.push(newRoute);
   };
 
   const formRef = useRef<HTMLFormElement>(null!);
@@ -138,7 +162,7 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
     Terms_And_Conditions2: false,
     Otra_profesion: "",
     Otra_especialidad: "",
-    country: state?.country,
+    country: countryState?.country,
     utm_source: utmState.utm_source,
     utm_medium: utmState.utm_medium,
     utm_campaign: utmState.utm_campaign,
@@ -147,18 +171,18 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
   };
   const formik = useFormik({
     initialValues,
-    validationSchema,
+    validationSchema: newsletterValidation,
     onSubmit: async (values) => {
       if (executeRecaptcha) {
         const body = {
           ...values,
           recaptcha_token: await executeRecaptcha("newsletter"),
-          country: state?.country,
+          country: countryState?.country,
         };
         try {
           let response = await api.postNewsletter(body as Newsletter);
           // @ts-ignore
-          if (response.status === 200) {
+          if (response.data[0].code === "SUCCESS") {
             setShow(false);
             resetForm();
             setTimeout(() => {
@@ -175,6 +199,15 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
       }
     },
   });
+
+  const requiredFormFields = ["First_Name",
+      "Last_Name",
+      "Email",
+      "Profesion",
+      "Temas_de_interes",
+      "Terms_And_Conditions2"];
+
+  const isSubmitDisabled = !formik.dirty || !isFormValid(requiredFormFields, formik.values, formik.errors, formik.touched);
   return (
     <FormikProvider value={formik}>
       <Form
@@ -190,7 +223,7 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
           id="URL_ORIGEN"
           value={window.location.href}
         />
-        <input type="hidden" name="country" value={state?.country} />
+        <input type="hidden" name="country" value={countryState?.country} />
         <div className="grid grid-cols-1 md:grid-cols-3 grid-row-6 gap-4">
           <div className="">
             <div className="contact-from-input">
@@ -316,7 +349,7 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
                     onChange={handleOptionSpecialtyChange}
                     value={selectedOptionSpecialty}
                   >
-                    <option defaultValue="">Seleccionar especialidad</option>
+                    <option defaultValue="" value="">Seleccionar especialidad</option>
                     {selectedOptionProfession && currentGroup.length
                       ? currentGroup.map((s: any) => (
                           <option
@@ -436,21 +469,16 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
               type="submit"
               id="submit-newsletter"
               className="cont-btn rounded flex center"
-              disabled={!formik.values.Terms_And_Conditions2}
+              disabled={isSubmitDisabled}
             >
               <div className="flex center gap-2 px-2 text-sm my-auto">
                 Suscribirme
-                <img src="/images/icons/plane.svg" className="subscribe-icon" />
+                <Image width={15} height={15} alt="suscribe icon" src="/images/icons/plane.svg" className="subscribe-icon" />
               </div>
             </button>
           </div>
         </div>
-        <p
-          className="text-red-500 font-bold text-center"
-          style={{ visibility: formError ? "visible" : "hidden" }}
-        >
-          {formError}
-        </p>
+        <ShowErrorMessage text={formError} visible={Boolean(formError)} />
       </Form>
     </FormikProvider>
   );

@@ -1,14 +1,15 @@
 "use client";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import React from "react";
+import {RECAPTCHA_SITE_KEY} from "@/contains/constants";
 
 export default function GoogleCaptchaWrapper({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const recaptchaKey: string | undefined = process.env.NEXT_PUBLIC_RECAPTCHA_PK
-    ? process.env.NEXT_PUBLIC_RECAPTCHA_PK
+  const recaptchaKey: string | undefined = RECAPTCHA_SITE_KEY
+    ? RECAPTCHA_SITE_KEY
     : "not defined";
   return (
     <GoogleReCaptchaProvider

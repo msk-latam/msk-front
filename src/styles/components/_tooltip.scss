@@ -1,0 +1,28 @@
+.tooltip-container {
+  position: relative;
+  .tooltip {
+    z-index: 2;
+    bottom: 30px;
+    font-size: 12px;
+    line-height: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 150px;
+    border-radius: 6px;
+    font-weight: 500;
+    padding: 4px;
+    text-align: center;
+    background: #374161;
+    position: absolute;
+    color: white;
+  }
+  .tooltip-arrow {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    background: #374161;
+    right: 16px;
+    bottom: 25px;
+    transform: rotate(45deg);
+  }
+}

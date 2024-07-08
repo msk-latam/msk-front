@@ -27,11 +27,15 @@ const Header: FC<HeaderProps> = () => {
       return;
     }
 
+    let showClass = "scrolled";
     // SHOW _ HIDE MAIN MENU
     if (WIN_PREV_POSITION > currentScrollPos) {
       containerRef.current.style.top = "0";
+      containerRef.current.classList.remove(showClass);
     } else {
       containerRef.current.style.top = `-${MAIN_MENU_HEIGHT + 2}px`;
+      //Add class "scrolled" to .nc-header
+      containerRef.current.classList.add(showClass);
     }
 
     WIN_PREV_POSITION = currentScrollPos;

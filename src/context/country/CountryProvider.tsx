@@ -4,22 +4,20 @@ import { CountryContext } from "./CountryContext";
 import { countryReducer } from "./CountryReducer";
 import { CountryState } from "@/data/types";
 import { countries } from "@/data/countries";
-import api from "../../../Services/api";
-import { parse } from "cookie";
+import api from "@/services/api";
+import Cookies from "js-cookie";
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const CountryProvider: React.FC<Props> = ({ children }) => {
+
   const initialState: CountryState = {
-    country:
-      typeof window !== "undefined"
-        ? localStorage.getItem("country") || ""
-        : "",
+    country: Cookies.get('NEXT_LOCALE') || 'int'
   };
 
-  const [state, dispatch] = useReducer(countryReducer, initialState);
+  const [countryState, dispatch] = useReducer(countryReducer, initialState);
   const [bypassRedirect, setBypassRedirect] = useState(
     typeof window !== "undefined"
       ? localStorage.getItem("bypassRedirect") || ""
@@ -27,49 +25,30 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
   );
 
   const validCountries = countries.map((item) => item.id);
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      let currentCountry = "";
-      const currentUrl = window.location.pathname;
-      const validCountryUrl = validCountries.filter(
-        (country) =>
-          currentUrl.includes("/" + country + "/") ||
-          currentUrl.includes("/" + country)
-      );
-      if (validCountryUrl.length) {
-        currentCountry = validCountryUrl[0];
-      }
-
-      const cookies = parse(document.cookie);
-      const countryCookie = cookies.country;
-      if (!countryCookie) {
-        const fetchData = async () => {
-
-        };
-        fetchData();
-      }
-    }
-  });
 
   useEffect(() => {
+    //console.log("Country Provider UseEffect");
     const fetchData = async () => {
       let redirectUrl = "";
       try {
-        //console.log("Country Provider");
         let currentCountry = "";
-
         if (bypassRedirect == "1") {
-          console.log("bypassRedirect");
+          //console.log("bypassRedirect");
           const currentUrl = window.location.pathname;
           const validCountryUrl = validCountries.filter(
             (country) =>
               currentUrl.includes("/" + country + "/") ||
-              currentUrl.includes("/" + country)
+              currentUrl.endsWith("/" + country)
           );
+
           if (validCountryUrl.length) {
-            currentCountry = validCountryUrl[0];
+            //console.log('its on a valid country');
+            dispatch({
+              type: "SET_COUNTRY",
+              payload: { country: validCountryUrl[0] },
+            });
           }
-          console.log("Country Provider", currentCountry);
+          // console.log("Country Provider", currentCountry);
         } else {
           currentCountry = await api.getCountryCode();
           console.log("CurrentCountry obtained from IP: " + currentCountry);
@@ -79,28 +58,21 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
           console.log(currentPathName);
           if (currentCountry && currentCountry == currentPathName) return; //Special use case for homepage.
           if (!validCountries.includes(currentCountry)) {
+            console.log('currentCountry not included in the list of valid countries')
             currentCountry = "";
           }
-          if (typeof window !== "undefined") {
-            localStorage.setItem("country", currentCountry);
-          }
 
-          console.log("stateCountry: " + state.country);
-          console.log("currentCountry: " + currentCountry);
 
-          if (
-            state.country != currentCountry ||
-            getCountryFromURL() != currentCountry
-          ) {
-            if (
-              validCountries.includes(currentPathName) &&
-              currentPathName != currentCountry
-            ) {
+          if ( countryState.country != currentCountry || getCountryFromURL() != currentCountry ) {
+            if ( validCountries.includes(currentPathName) && currentPathName != currentCountry ) { //The path is just the country, go to the homepage of the country our IP is on
+              console.log('redirect 1');
               redirectUrl = "/" + currentCountry;
+              console.log(redirectUrl);
             } else {
+              console.log('redirect 2');
               redirectUrl = "/" + currentCountry + window.location.pathname;
             }
-            console.log("redirectUrl1: " + redirectUrl);
+            // console.log("redirectUrl1: " + redirectUrl);
             if (getCountryFromURL() != "") {
               redirectUrl = window.location.href
                 .replace(
@@ -125,38 +97,34 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
             payload: { country: currentCountry },
           });
           if (redirectUrl) {
+            console.log(redirectUrl);
             window.location.href = redirectUrl;
           }
         }
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
 
     const getCountryFromURL = () => {
       const url = window.location.href;
-      switch (true) {
-        // case url.includes("/es/"):
-        //   return "es";
-        case url.includes("/cl/"):
-          return "cl";
-        case url.includes("/ar/"):
-          return "ar";
-        case url.includes("/ec/"):
-          return "ec";
-        case url.includes("/mx/"):
-          return "mx";
-        // Add more cases for other substrings
-        default:
-          return "";
+      let validCountryUrl = validCountries.filter(
+        (country) =>
+          url.includes("/" + country + "/") ||
+          url.endsWith("/" + country)
+      );
+      console.log(validCountryUrl);
+      if (validCountryUrl.length) {
+        return validCountryUrl[0];
       }
+      return "";
     };
 
     fetchData();
   }, []);
 
   return (
-    <CountryContext.Provider value={{ state, dispatch }}>
+    <CountryContext.Provider value={{ countryState, dispatch }}>
       {children}
     </CountryContext.Provider>
   );

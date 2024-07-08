@@ -32,19 +32,22 @@ const ButtonAccessCourse: FC<ButtonAccessCourseProps> = ({
   const { isRunning, data, startWatch } = useInterval(email);
 
   const handleClick = async () => {
+    console.log('handle click as');
     setOnRequest(true);
     try {
+      console.log(status);
       if (status === "Sin enrolar") {
         const response = await goToEnroll(item.product_code, email);
 
         if (response.data[0].code.includes("SUCCESS")) {
           const watching = await startWatch(item.product_code);
-          console.log(!!watching, { watching });
+          // console.log(!!watching, { watching });
           setOnRequest(!!watching);
         } else {
           setOnRequest(false);
         }
       } else {
+        console.log('go to LMS: ', item.product_code, item.product_code_cedente);
         goToLMS(item.product_code, item.product_code_cedente as string, email);
         setOnRequest(false);
       }
@@ -71,7 +74,7 @@ const ButtonAccessCourse: FC<ButtonAccessCourseProps> = ({
           <div className="w-4 h-4 my-1 border-t-2 border-white border-solid rounded-full animate-spin"></div>
         </div>
       ) : (
-        <span className="text-[14px] sm:text-sm">{hasText(status)}</span>
+        <span className="text-[14px] sm:text-sm font-bold">{hasText(status)}</span>
       )}
     </ButtonPrimary>
   );

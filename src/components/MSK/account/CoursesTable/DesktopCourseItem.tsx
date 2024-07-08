@@ -101,27 +101,22 @@ const DesktopCourseItem: FC<DesktopCourseItemProps> = ({
         ) : (
           <Badge
             name={statusOV.isDisabled ? statusOV.hasText : item.status}
-            color={colorStatus(
-              statusOV.isDisabled ? statusOV.hasText : item.status
-            )}
+            color={colorStatus(statusOV.isDisabled ? statusOV.hasText : item.status)}
             textSize="text-sm"
           />
         )}
       </td>
       <td className="px-6 py-4  text-xs text-neutral-500 dark:text-neutral-400">
-        <span className="text-sm"> {item.avance ? item.avance : 0} %</span>
+        <span className="text-sm"> {item.avance ? item.avance : 0}%</span>
       </td>
       <td className="px-4">
-        <div>
+        <div className="w-[110px] my-2">
           <ButtonAccessOrSignCourse
             email={email}
             goToEnroll={goToEnroll}
             goToLMS={goToLMS}
             item={item}
           />
-          {item.ov.includes("Trial") && (
-            <ButtonOffTrial item={item} email={email} />
-          )}
         </div>
       </td>
     </tr>

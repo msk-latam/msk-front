@@ -3,7 +3,7 @@ import React, { useEffect, useReducer } from "react";
 import { AuthContext } from "./AuthContext";
 import { authReducer } from "./AuthReducer";
 import { AuthState, Contact } from "@/data/types";
-import api from "../../../Services/api";
+import api from "@/services/api";
 import { fetchUserData } from "@/middleware";
 
 interface Props {
@@ -12,6 +12,7 @@ interface Props {
 
 const AuthProvider: React.FC<Props> = ({ children }) => {
   const initialState: AuthState = {
+    stateLoaded: false,
     isAuthenticated: false,
     user: null,
     profile: null,
@@ -25,6 +26,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     const initializeAuth = async () => {
+      /*console.log('INITIALIZE AUTH');*/
       const token = localStorage.getItem("token");
       const email = localStorage.getItem("email");
       const bypassRedirect = localStorage.getItem("bypassRedirect");
@@ -51,9 +53,10 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
             }
           }
         } else {
-          console.log("No user data");
+          //I still trigger the logout event to mark that the authState has been loaded
+          dispatch({ type: "LOGOUT" });
         }
-      } else if (expires_at && new Date(expires_at) < new Date()) {
+      } else {
         dispatch({ type: "LOGOUT" });
       }
     };

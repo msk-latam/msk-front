@@ -1,6 +1,6 @@
 import { serialize, parse } from "cookie";
 import { NextResponse } from "next/server";
-export const runtime = 'edge'; //Test
+export const runtime = "edge"; //Test
 
 export const GET = async (request: Request) => {
   try {
@@ -61,7 +61,7 @@ export const POST = async (request: Request) => {
       });
     }
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     return new Response("Error interno del servidor", { status: 500 });
   }
 };

@@ -60,8 +60,13 @@ const SpecialtiesModal: FC<Props> = ({ email, setShow }) => {
                 height="100"
               />
               <p className="flex flex-col col-span-3">
-                <span className="text-sm"> {speciality_name ?? "Otras"}</span>
-                <span className="text-xs">{articles} artículos</span>
+                <span className="text-sm text-neutral-700 font-normal">
+                  {" "}
+                  {speciality_name ?? "Otras"}
+                </span>
+                <span className="text-xs text-neutral-500">
+                  {articles} artículos
+                </span>
               </p>
             </NcLink>
           )

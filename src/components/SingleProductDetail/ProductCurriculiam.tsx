@@ -5,7 +5,7 @@ import ContactFormSection from "@/components/MSK/ContactForm";
 import NcModal from "@/components/NcModal/NcModal";
 import { Topic } from "@/data/types";
 import React, { FC, useEffect, useRef, useState } from "react";
-import api from "../../../Services/api";
+import api from "@/services/api";
 
 interface Props {
   topics: Topic;
@@ -33,7 +33,7 @@ const ProductCurriculiam: FC<Props> = ({ topics, hours, link, slug }) => {
   }, [auxTopics]);
 
   const parseToHTML = (htmlString: string): JSX.Element => {
-    console.log({ arrHtml: htmlString.split("\n") });
+    // console.log({ arrHtml: htmlString.split("\n") });
     if (htmlString) {
       const textNodes = htmlString.split("\n").map((line, i) => {
         if (line.includes("<ul>")) {
@@ -57,7 +57,7 @@ const ProductCurriculiam: FC<Props> = ({ topics, hours, link, slug }) => {
       if (link && slug) await api.temarioDownload(body, link, slug);
       setIsFormSent(value);
     } catch (e) {
-      console.log("error", e);
+      // console.log("error", e);
     }
   };
 
@@ -74,7 +74,7 @@ const ProductCurriculiam: FC<Props> = ({ topics, hours, link, slug }) => {
         </div>
         <div className="flex items-center justify-between">
           <p className="modules-description">
-            {accordionContent.length} módulos • {hours?.value} horas estimadas
+            {accordionContent.length} módulos <br className="md:hidden" /> <span className="hidden md:inline-block">•</span> {hours?.value} horas estimadas
           </p>
           {link ? (
             <ButtonPrimary

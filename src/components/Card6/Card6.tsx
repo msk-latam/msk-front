@@ -1,19 +1,10 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import NcImage from "@/components/NcImage/NcImage";
-import PostCardMeta from "@/components/PostCardMeta/PostCardMeta";
-import PostCardSaveAction from "@/components/PostCardSaveAction/PostCardSaveAction";
-import {
-  BlogDataType,
-  FetchCourseType,
-  FetchPostType,
-  PostDataType,
-} from "@/data/types";
-import PostCardLikeAndComment from "@/components/PostCardLikeAndComment/PostCardLikeAndComment";
+import { FetchPostType } from "@/data/types";
 import CategoryBadgeList from "@/components/CategoryBadgeList/CategoryBadgeList";
-import PostTypeFeaturedIcon from "@/components/PostTypeFeaturedIcon/PostTypeFeaturedIcon";
 import CardAuthor2 from "@/components/CardAuthor2/CardAuthor2";
-import { compareByNameDescending } from "@/lib/compareByNameDescending";
 import NcLink from "../NcLink/NcLink";
+import { compareByNameOrderSet } from "@/lib/compareByNameOrderSet";
 
 export interface Card6Props {
   className?: string;
@@ -21,6 +12,7 @@ export interface Card6Props {
   authorRow?: boolean;
   badgeColor?: string;
   kind?: string;
+  forSingleNote?: boolean;
 }
 
 const Card6: FC<Card6Props> = ({
@@ -29,10 +21,10 @@ const Card6: FC<Card6Props> = ({
   authorRow,
   kind = "blog",
   badgeColor,
+  forSingleNote,
 }) => {
-  const { title, slug, image, categories, link, author, date } = post;
-  const categoriesOrder =
-    kind === "blog" ? categories.sort(compareByNameDescending) : categories;
+  const { title, slug, image, categories, link, author, date, reading_time } =
+    post;
 
   return (
     <div
@@ -46,7 +38,7 @@ const Card6: FC<Card6Props> = ({
       <div className="flex flex-col flex-grow">
         <div className="space-y-3 mb-4">
           <CategoryBadgeList
-            categories={categoriesOrder}
+            categories={categories}
             color={badgeColor}
             isCourse={kind === "curso"}
             isPost={kind === "blog"}
@@ -62,16 +54,19 @@ const Card6: FC<Card6Props> = ({
             </NcLink>
           </h2>
           <CardAuthor2
+            key={`author__${author?.id}`}
             date={date}
             className="relative my-4"
             author={author}
             flex={authorRow}
+            readingTime={Number(reading_time)}
+            forSingleNote={forSingleNote}
           />
         </div>
       </div>
 
       <NcLink
-        href={link}
+        href={`/${kind}/${slug}`}
         className={`block relative flex-shrink-0 w-full sm:w-40 h-40 sm:h-full sm:ml-5 rounded-2xl overflow-hidden mb-5 sm:mb-0 `}
       >
         <NcImage

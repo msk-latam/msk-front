@@ -1,14 +1,18 @@
 "use client";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, Suspense, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { A11y, Autoplay, Navigation, Pagination, Scrollbar } from "swiper";
+
+import 'swiper/swiper-bundle.css';
 import { BannerImg } from "@/data/types";
-import api from "../../../Services/api";
+import api from "@/services/api";
 export interface LayoutPageProps {
   className?: string;
   heading: string;
   headingEmoji?: string;
   subHeading?: string;
   children: React.ReactNode;
+  country?: string;
 }
 
 const defaultImgs = [
@@ -17,23 +21,30 @@ const defaultImgs = [
     imagen_mobile: { link: "/images/banners/tienda_mobile.jpg" },
   },
 ];
-const StoreLayout: FC<LayoutPageProps> = ({ className = "", children }) => {
+const StoreLayout: FC<LayoutPageProps> = ({
+  className = "",
+  children,
+  country,
+}) => {
   const [bannerImgs, setBannerImgs] = useState<BannerImg[]>(defaultImgs);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.getWpImages("banners_shop");
+        const response = await api.getWpImages("banners_shop", country);
+        console.log({ response });
         if (response.length > 0) {
           setBannerImgs(response);
         }
       } catch (err) {
-        console.log({ err });
+        // console.log({ err });
       }
     };
 
     fetchData();
   }, []);
+
+  console.log({bannerImgs})
 
   return (
     <div
@@ -42,10 +53,9 @@ const StoreLayout: FC<LayoutPageProps> = ({ className = "", children }) => {
     >
       <div className="container-fluid relative">
         {/* HEADER */}
-        <header className="w-full">
+        <header>
           <Swiper
-            navigation
-            scrollbar
+            modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
             slidesPerView={1}
             loop={true}
             autoplay={{
@@ -74,7 +84,7 @@ const StoreLayout: FC<LayoutPageProps> = ({ className = "", children }) => {
         </header>
 
         {/* CONTENT */}
-        <div className="py-5 mx-auto bg-white rounded-[40px] sm:p-10 lg:py-16 dark:bg-neutral-900">
+        <div className="py-5 mx-auto bg-white rounded-[40px] sm:p-5 lg:py-7 dark:bg-neutral-900">
           <div className="container">{children}</div>
         </div>
       </div>

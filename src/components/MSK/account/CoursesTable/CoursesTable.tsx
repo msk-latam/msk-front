@@ -3,6 +3,7 @@ import DesktopCoursesTable from "./DesktopCoursesTable";
 import { UserCourseProgress } from "@/data/types";
 import ButtonPrimary from "@/components/Button/ButtonPrimary";
 import MobileCourseTable from "./MobileCourseTable";
+import NcLink from "@/components/NcLink/NcLink";
 
 interface CoursesTableProps {
   courses: UserCourseProgress[];
@@ -62,13 +63,13 @@ const CoursesTable: FC<CoursesTableProps> = ({
       <p className="raleway text-3xl text-center">
         Aún puedes descubrir mucho más en Medical & Scientific Knowledge
       </p>
-      <ButtonPrimary
-        onClick={goToStore}
-        sizeClass="py-3 "
-        className="font-semibold px-6"
+      <NcLink
+      href={"/tienda"}
+      className="font-semibold px-6"
       >
         Comienza un curso
-      </ButtonPrimary>
+      </NcLink>
+      
     </div>
   );
 };

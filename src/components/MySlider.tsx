@@ -14,6 +14,7 @@ export interface MySliderProps<T> {
   renderItem?: (item: T, indx: number) => ReactNode;
   arrowBtnClass?: string;
   loading?: boolean;
+  maxWidth?: string;
 }
 
 export default function MySlider<T>({
@@ -23,6 +24,7 @@ export default function MySlider<T>({
   renderItem = () => <div></div>,
   arrowBtnClass = "top-1/2 -translate-y-1/2",
   loading,
+  maxWidth,
 }: MySliderProps<T>) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -47,10 +49,10 @@ export default function MySlider<T>({
   }, [itemPerRow, windowWidth]);
 
   function changeItemId(newVal: number) {
-    newVal = Math.max(0, Math.min(newVal, data.length - 1));
+    newVal = Math.max(0, Math.min(newVal, data.length - numberOfItems + 1));
     if (newVal == 0) {
-      newVal = data.length - 2;
-    } else if (newVal == data.length - 1) {
+      newVal = data.length - numberOfItems;
+    } else if (newVal == data.length - numberOfItems + 1) {
       newVal = 0;
     }
     if (newVal > currentIndex) {
@@ -75,68 +77,57 @@ export default function MySlider<T>({
     trackMouse: true,
   });
 
-  if (!numberOfItems) {
+  if (!data.length) {
     return <div></div>;
   }
 
-  const isRTL = document.querySelector("html")?.getAttribute("dir") === "rtl";
-
   return (
     <>
-      {loading ? (
-        <>
-          <div className="grid grid-cols-1 xl:grid-cols-4 gap-5 mb-16">
-            <ImageSkeleton height="200px" />
-            <ImageSkeleton height="200px" />
-            <ImageSkeleton height="200px" />
-            <ImageSkeleton height="200px" />
-          </div>
-        </>
-      ) : (
-        <div className={`nc-MySlider ${className}`}>
-          <MotionConfig
-            transition={{
-              x: { type: "spring", stiffness: 300, damping: 30 },
-              opacity: { duration: 0.2 },
-            }}
+      <div className={`nc-MySlider ${className}`}>
+        <MotionConfig
+          transition={{
+            x: { type: "spring", stiffness: 300, damping: 30 },
+            opacity: { duration: 0.2 },
+          }}
+        >
+          <div
+            className={`relative flow-root sm:max-w-[${maxWidth}] mx-auto`}
+            {...handlers}
           >
-            <div className={`relative flow-root`} {...handlers}>
-              <div className={`flow-root overflow-hidden rounded-xl`}>
-                  <motion.ul
-                      initial={false}
-                      className="relative whitespace-nowrap -mx-2 xl:-mx-4 "
-                  >
-                      {data && data.length > 0 && ( // Check if data has items
-                          <AnimatePresence initial={false} custom={direction}>
-                              {data.map((item, indx) => (
-                                  <motion.li
-                                      className={`relative inline-block px-2 xl:px-4 whitespace-normal`}
-                                      custom={direction}
-                                      initial={{
-                                          x: !isRTL
-                                              ? `${(currentIndex - 1) * -100}%`
-                                              : `${(currentIndex - 1) * 100}%`,
-                                      }}
-                                      animate={{
-                                          x: !isRTL
-                                              ? `${currentIndex * -100}%`
-                                              : `${currentIndex * 100}%`,
-                                      }}
-                                      variants={variants(200, 1)}
-                                      key={indx}
-                                      style={{
-                                          width: `calc(1/${numberOfItems} * 100%)`,
-                                      }}
-                                  >
-                                      {renderItem(item, indx)}
-                                  </motion.li>
-                              ))}
-                          </AnimatePresence>
-                      )}
-                  </motion.ul>
+            <div className={`flow-root overflow-hidden rounded-xl`}>
+              <motion.ul
+                initial={false}
+                className="relative whitespace-nowrap -mx-2 xl:-mx-4 "
+              >
+                {data && data.length > 0 && (
+                  <AnimatePresence initial={false} custom={direction}>
+                    {data.map((item, indx) => (
+                      <motion.li
+                        className={`relative inline-block px-2 xl:px-4 whitespace-normal`}
+                        custom={direction}
+                        initial={{
+                          x: `${(currentIndex - 1) * -100}%`,
+                        }}
+                        animate={{
+                          x: `${currentIndex * -100}%`,
+                        }}
+                        variants={variants(200, 1)}
+                        key={indx}
+                        style={{
+                          width: `calc(${
+                            numberOfItems > 1 ? 1 / numberOfItems : "1"
+                          } * 100%)`,
+                        }}
+                      >
+                        {renderItem(item, indx)}
+                      </motion.li>
+                    ))}
+                  </AnimatePresence>
+                )}
+              </motion.ul>
+            </div>
 
-              </div>
-
+            {numberOfItems > 3 && (
               <div className="flex gap-2 justify-center mt-16">
                 <PrevBtn
                   onClick={() => changeItemId(currentIndex - 1)}
@@ -147,10 +138,10 @@ export default function MySlider<T>({
                   className={`w-12 h-12 xl:w-12 xl:h-12 text-lg z-[1] ${arrowBtnClass}`}
                 />
               </div>
-            </div>
-          </MotionConfig>
-        </div>
-      )}
+            )}
+          </div>
+        </MotionConfig>
+      </div>
     </>
   );
 }

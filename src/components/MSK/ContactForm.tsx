@@ -21,11 +21,12 @@ import { ErrorMessage, Field, Form, FormikProvider, useFormik } from "formik";
 import { ContactFormSchema, useYupValidation } from "@/hooks/useYupValidation";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { DataContext } from "@/context/data/DataContext";
-import api from "../../../Services/api";
-import Link from "next/link";
+import api from "@/services/api";
 import NcLink from "../NcLink/NcLink";
-import { useRouter } from "next/router";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { isFormValid } from "@/components/Footer/Newsletter";
+import ShowErrorMessage from "@/components/ShowErrorMessage";
+import Checkbox from "../Checkbox/Checkbox";
 
 interface ContactFormProps {
   hideHeader?: boolean;
@@ -41,7 +42,7 @@ interface ContactFormProps {
   submitEndpoint?: string;
 }
 
-const ContactFormSection: FC<ContactFormProps> = ({
+const ContactForm: FC<ContactFormProps> = ({
   hideHeader = false,
   productName = "",
   isEbook = false,
@@ -56,7 +57,16 @@ const ContactFormSection: FC<ContactFormProps> = ({
 }) => {
   const { state: dataState } = useContext(DataContext);
   const { allProfessions, allSpecialties, allSpecialtiesGroups } = dataState;
-  const { state } = useContext(CountryContext);
+  const { countryState } = useContext(CountryContext);
+  const [defaultCountry, setDefaultCountry] = useState<CountryCode>(
+    "" as CountryCode
+  );
+  const pathname = usePathname();
+  const resourcePDFName = pathname.split("/").pop();
+  useEffect(() => {
+    setDefaultCountry(countryState.country?.toUpperCase() as CountryCode);
+  }, [countryState]);
+
   const [professions, setProfessions] = useState<Profession[]>([]);
   const [specialtiesGroup, setSpecialtiesGroup] = useState<Specialty[]>([]);
   const [specialties, setSpecialties] = useState<Specialty[]>([]);
@@ -78,15 +88,10 @@ const ContactFormSection: FC<ContactFormProps> = ({
   const [utmState, dispatchUTM] = useReducer(utmReducer, utmInitialState);
   const formRef = useRef<HTMLFormElement>(null);
   const { executeRecaptcha } = useGoogleReCaptcha();
-  let pathname = usePathname();
   const [urlOrigen, setUrlOrigen] = useState<string>(
     typeof window !== "undefined" ? window.location.href : ""
   );
-
-  useEffect(() => {
-    // setUrlOrigen(window.location.href);
-  }, [pathname]);
-
+  const router = useRouter();
   useEffect(() => {
     setProfessions(allProfessions);
     setSpecialties(allSpecialties);
@@ -95,7 +100,7 @@ const ContactFormSection: FC<ContactFormProps> = ({
 
   const handleReCaptchaVerify = useCallback(async () => {
     if (!executeRecaptcha) {
-      console.log("Execute recaptcha not yet available");
+      // console.log("Execute recaptcha not yet available");
       return;
     }
     const token = await executeRecaptcha("yourAction");
@@ -122,12 +127,13 @@ const ContactFormSection: FC<ContactFormProps> = ({
     career: "",
     URL_ORIGEN: urlOrigen,
     leadSource: "",
+    Ebook_consultado: isEbook ? productName : null,
+    Cursos_consultados: isEbook ? null : productName,
   };
 
   const { contactFormValidation } = useYupValidation();
-
   const changeRoute = (newRoute: any): void => {
-    // router.push(newRoute);
+    router.push(newRoute);
   };
 
   const handlePhoneChange = (value: string) => {
@@ -184,6 +190,7 @@ const ContactFormSection: FC<ContactFormProps> = ({
     } else {
       setSelectedOptionProfession("");
       setSelectedProfessionId("");
+      formik.setFieldValue("Profesion", "");
     }
   };
 
@@ -215,7 +222,7 @@ const ContactFormSection: FC<ContactFormProps> = ({
               break;
           }
           // @ts-ignore
-          if (response.status === 200) {
+          if (response.data[0].code === "SUCCESS") {
             let routeChange = isEbook
               ? "/gracias?origen=descarga-ebook"
               : "/gracias?origen=contact";
@@ -257,7 +264,7 @@ const ContactFormSection: FC<ContactFormProps> = ({
                   a.download = fileNameMatch[1];
                 } else {
                   // Si no se encontró el nombre del archivo en el encabezado, utiliza un nombre predeterminado
-                  a.download = "ebook.pdf";
+                  a.download = `${resourcePDFName}.pdf`;
                 }
 
                 // Simula un clic en el enlace para iniciar la descarga
@@ -295,7 +302,7 @@ const ContactFormSection: FC<ContactFormProps> = ({
           console.error("Error al ejecutar reCAPTCHA:", error);
         }
       } else {
-        console.log("Execute recaptcha not yet available1");
+        // console.log("Execute recaptcha not yet available1");
       }
       setOnRequest(false);
     },
@@ -304,9 +311,27 @@ const ContactFormSection: FC<ContactFormProps> = ({
   const optionsArray = [1, 2, 3, 4, 5];
 
   const handleContactPreferenceChange = (value: string) => {
-    formik.setFieldValue("Preferencia_de_contactaci_n", value);
+      formik.setFieldValue("Preferencia_de_contactaci_n", value);
   };
+  const requiredFormFields = [
+    "First_Name",
+    "Last_Name",
+    "Email",
+    "Phone",
+    "Preferencia_de_contactaci_n",
+    "Profesion",
+    "Terms_And_Conditions",
+  ];
 
+  const isSubmitDisabled =
+    !formik.dirty ||
+    !isFormValid(
+      requiredFormFields,
+      formik.values,
+      formik.errors,
+      formik.touched
+    );
+  console.log();
   return (
     <>
       <div className="col-span-3" id="contactanos">
@@ -352,7 +377,7 @@ const ContactFormSection: FC<ContactFormProps> = ({
                   <div className={`section-title mb-30`}>
                     {hideHeader ? null : (
                       <h4
-                        className="font-medium text-3xl mb-1"
+                        className="font-medium text-violet-dark text-[36px] mb-1"
                         style={{ maxWidth: "800px" }}
                       >
                         {isEbook
@@ -367,34 +392,28 @@ const ContactFormSection: FC<ContactFormProps> = ({
                           Quiero hablar por
                         </p>
                         <div className="mt-1 grid grid-cols-1 md:grid-cols-3 gap-4">
-                          <Radio
-                            name="Preferencia_de_contactaci_n"
+                          <Checkbox
+                            inputClass="contact-radio-input"
+                            name="Preferencia_de_contactaci_n_phone"
                             label="Teléfono"
-                            id="Contact_Method_Teléfono"
                             onChange={() =>
-                              handleContactPreferenceChange(
-                                "Contact_Method_Teléfono"
-                              )
+                              handleContactPreferenceChange("phone")
                             }
                           />
-                          <Radio
-                            name="Preferencia_de_contactaci_n"
-                            label="E-mail"
-                            id="Contact_Method_E-mail"
-                            onChange={() =>
-                              handleContactPreferenceChange(
-                                "Contact_Method_E-mail"
-                              )
-                            }
-                          />
-                          <Radio
-                            name="Preferencia_de_contactaci_n"
+                          <Checkbox
+                            inputClass="contact-radio-input"
+                            name="Preferencia_de_contactaci_n_whatsapp"
                             label="WhatsApp"
-                            id="Contact_Method_Whatsapp"
                             onChange={() =>
-                              handleContactPreferenceChange(
-                                "Contact_Method_Whatsapp"
-                              )
+                              handleContactPreferenceChange("whatsapp")
+                            }
+                          />
+                          <Checkbox
+                            inputClass="contact-radio-input"
+                            name="Preferencia_de_contactaci_n_email"
+                            label="E-mail"
+                            onChange={() =>
+                              handleContactPreferenceChange("email")
                             }
                           />
                         </div>
@@ -466,9 +485,7 @@ const ContactFormSection: FC<ContactFormProps> = ({
                                 name="Phone"
                                 id="Phone"
                                 placeholder="Ingresar número telefónico"
-                                defaultCountry={
-                                  state.country.toUpperCase() as CountryCode
-                                }
+                                defaultCountry={defaultCountry}
                                 onChange={(value: any) => {
                                   form.setFieldValue("Phone", value);
                                   handlePhoneChange(value);
@@ -578,7 +595,7 @@ const ContactFormSection: FC<ContactFormProps> = ({
                               onChange={handleOptionSpecialtyChange}
                               value={selectedOptionSpecialty}
                             >
-                              <option defaultValue="">
+                              <option defaultValue="" value="">
                                 Seleccionar especialidad
                               </option>
                               {selectedOptionProfession && currentGroup.length
@@ -669,20 +686,16 @@ const ContactFormSection: FC<ContactFormProps> = ({
                           <button
                             type="submit"
                             className="cont-btn disabled:bg-grey-disabled"
-                            disabled={!formik.values.Terms_And_Conditions}
+                            disabled={isSubmitDisabled || onRequest}
                           >
                             {onRequest ? "Enviando ..." : submitText}
                           </button>
                         </div>
                       </div>
-                      <p
-                        className="text-red-500 font-bold"
-                        style={{
-                          visibility: formError ? "visible" : "hidden",
-                        }}
-                      >
-                        {formError}
-                      </p>
+                      <ShowErrorMessage
+                        text={formError}
+                        visible={Boolean(formError)}
+                      />
                       <p
                         className="success-message"
                         style={{
@@ -707,4 +720,4 @@ const ContactFormSection: FC<ContactFormProps> = ({
     </>
   );
 };
-export default ContactFormSection;
+export default ContactForm;

@@ -1,14 +1,20 @@
 "use client";
-import React, { useEffect, useReducer, useState } from "react";
+import React, {useContext, useEffect, useReducer, useState} from "react";
 import { DataContext } from "./DataContext";
 import { dataReducer } from "./DataReducer";
-import api from "../../../Services/api";
+import api from "@/services/api";
+import { CountryContext } from "@/context/country/CountryContext";
+import ssr from "@/services/ssr";
+
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const DataProvider: React.FC<Props> = ({ children }) => {
+
+  const { countryState } = useContext(CountryContext);
+
   const [loadingCourses, setLoadingCourses] = useState(true);
   const [loadingPosts, setLoadingPosts] = useState(true);
   const [loadingBestSellers, setLoadingBestSellers] = useState(true);
@@ -22,6 +28,7 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
     allTestCourses: [],
     allBestSellers: [],
     allProfessions: [],
+    allStoreProfessions: [],
     allSpecialties: [],
     allSpecialtiesGroups: [],
     allProductsMX: [],
@@ -29,10 +36,8 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
 
   const [state, dispatch] = useReducer(dataReducer, dataInitialState);
 
-  //Habilita los cursos por el buscador
-  const fetchCourses = async () => {
-    const allCourses = await api.getAllCourses();
-
+  const fetchAllCourses = async () => {
+    const allCourses = await ssr.getAllCourses(countryState.country,'',true);
     dispatch({
       type: "GET_DATA",
       payload: { allCourses },
@@ -79,6 +84,19 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
     }
   };
 
+  const fetchStoreProfessions = async () => {
+    try {
+      const allStoreProfessions = await api.getStoreProfessions();
+      dispatch({
+        type: "GET_DATA",
+        payload: { allStoreProfessions },
+      });
+      setLoadingProfessions(false);
+    } catch (e) {
+      console.error({ e });
+    }
+  };
+
   const fetchSpecialties = async () => {
     try {
       const allSpecialties = await api.getSpecialtiesAndGroups();
@@ -96,30 +114,15 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
     }
   };
 
-  const fetchProductsMX = async () => {
-    try {
-      const allProductsMX = await api.getAllProductsMX();
-      const allTestCourses = await api.getAllTestCourses();
-
-      allProductsMX.push(...allTestCourses);
-
-      dispatch({
-        type: "GET_DATA",
-        payload: { allProductsMX },
-      });
-      setLoadingProductsMX(false);
-    } catch (e) {
-      console.error({ e });
-    }
-  };
-
   useEffect(() => {
     // fetchProductsMX();
     // fetchCourses();
     // fetchPosts();
     fetchBestSeller();
     fetchProfessions();
+    fetchStoreProfessions();
     fetchSpecialties();
+    fetchAllCourses();
   }, []);
 
   return (

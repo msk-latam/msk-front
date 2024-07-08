@@ -4,15 +4,25 @@ import BlogSummary from "@/components/MSK/BlogSummary";
 import BackgroundSection from "@/components/BackgroundSection/BackgroundSection";
 import HomeExtraInfo from "@/components/MSK/HomeExtraInfo";
 import { cookies } from "next/headers";
-import ssr from "../../../../Services/ssr";
+import ssr from "@/services/ssr";
 import { FetchPostType } from "@/data/types";
 import WelcomeBlog from "@/components/MSK/Blog/WelcomeBlog";
 import NewsletterBlog from "@/components/MSK/Blog/NewsletterBlog";
+import {SITE_URL} from "@/contains/constants";
 
 interface PageProps {
   params: any;
 }
-export const runtime = 'edge';
+export const runtime = "edge";
+
+export async function generateMetadata() {
+  return {
+    title: "Blog",
+    alternates: {
+      canonical: `${SITE_URL}/blog`,
+    },
+  };
+}
 
 const PageBlog: React.FC<PageProps> = async ({ params }) => {
   const currentCountry = params.lang || cookies().get("country")?.value;
@@ -22,29 +32,35 @@ const PageBlog: React.FC<PageProps> = async ({ params }) => {
 
   return (
     <div className="nc-PageBlog relative animate-fade-down">
-      <div className="relative overflow-hidden">
+      <div className="md:container relative overflow-hidden">
         <div className="container relative">
           <WelcomeBlog tabs={[]} heading="" posts={welcomePosts} />
           <BlogSummary
             posts={allPosts}
             tabs={TABS_BLOG}
-            className="py-16 "
-            heading=""
+            className="py-16"
             desc=""
+            heading=""
             showTitle
+            forSingleNote={false}
           />
-          <HomeExtraInfo country={currentCountry} className="mb-16" />
+          <HomeExtraInfo country={currentCountry} />
+        </div>
+        <div className="max-w-[1700px] mx-auto my-16">
           <div className="relative py-16">
             <BackgroundSection />
             <SectionSliderPosts
               posts={allBestSellers}
               postCardName="card9"
-              heading="Nuestros cursos más elegidos"
-              subHeading="Profesionales como tú ya se capacitaron con ellos. ¡Ahora te toca a ti!"
+              heading="¿Buscas capacitarte a distancia?"
+              subHeading="Estos son los cursos más elegidos entre profesionales de la salud"
               sliderStype="style2"
               uniqueSliderClass="PageBlog-section6"
+              className="mx-auto max-w-[85%]"
             />
           </div>
+        </div>
+        <div className="container relative">
           <NewsletterBlog />
         </div>
       </div>

@@ -7,7 +7,6 @@ import CardCategory5 from "@/components/CardCategory5/CardCategory5";
 import Heading from "@/components/Heading/Heading";
 import { DEMO_CATEGORIES } from "@/data/taxonomies";
 import { Specialty, TaxonomyType } from "@/data/types";
-import Link from "next/link";
 import React from "react";
 import NcLink from "../NcLink/NcLink";
 
@@ -66,8 +65,8 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
         ))}
         <div className="w-full col-span-2 sm:col-span-1 flex justify-items-center">
           <NcLink
-            href="/tienda"
-            className="h-full text-primary font-medium sm:font-semibold flex items-center text-center mx-auto"
+            href="/tienda?recurso=curso"
+            className="w-full !border-white nc-CardCategory2 h-full text-primary font-medium sm:font-semibold flex items-center justify-center text-center mx-auto  [ nc-dark-box-bg-has-hover ]"
           >
             Ver todas
           </NcLink>

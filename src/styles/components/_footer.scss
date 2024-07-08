@@ -44,6 +44,7 @@
       span {
         color: $theme-color-2-2;
         text-decoration: none;
+        transition: all .3s ease-out 0s;
         &:hover {
           color: $white;
         }
@@ -236,15 +237,16 @@
 }
 .widget__subscribe .field {
   position: relative;
-  &::before {
+  img {
     position: absolute;
-    content: "\f0e0";
-    font-family: "Font Awesome 5 Pro";
-    color: $theme-color-2-2;
-    color: $theme-color-2-2;
     top: 50%;
+    left: 15px;
     transform: translateY(-50%);
-    left: 20px;
+    width: 20px;
+    height: 15px;
+  }
+  input {
+    font-size: 14px;
   }
 }
 

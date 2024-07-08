@@ -2,9 +2,10 @@ import React, { FC, useState } from "react";
 import LayoutPage from "@/components/MSK/LayoutPage";
 import Input from "@/components/Input/Input";
 import ButtonPrimary from "@/components/Button/ButtonPrimary";
-import api from "../../../Services/api";
+import api from "@/services/api";
 import { useRouter } from "next/router";
-import PageHead from "./PageHead";
+import Head from "next/head";
+import PageHeadServer from "../Head/PageHeadServer";
 
 export interface PageNewPasswordProps {
   className?: string;
@@ -14,11 +15,16 @@ export interface BodyNewPassword {
   password: string;
   validator: string;
 }
+export async function generateMetadata() {
+  return {
+    title: "Cambia tu contraseña",
+  };
+}
 
 const PageNewPassword: FC<PageNewPasswordProps> = ({ className = "" }) => {
   const router = useRouter();
   const { token } = router.query; // Access token from the router query
-  console.log(decodeURIComponent(token as string));
+  // console.log(decodeURIComponent(token as string));
 
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState("");
@@ -41,12 +47,12 @@ const PageNewPassword: FC<PageNewPasswordProps> = ({ className = "" }) => {
 
     const { data, status } = await api.postNewPassword(jsonData);
     if (status === 200) {
-      console.log(data);
+      // console.log(data);
       setTimeout(() => {
         router.push("/gracias?origen=new-password");
       }, 1500);
     } else {
-      console.log("Error:", data.error);
+      // console.log("Error:", data.error);
       setError(data.error);
     }
   };
@@ -56,7 +62,6 @@ const PageNewPassword: FC<PageNewPasswordProps> = ({ className = "" }) => {
       className={`nc-PageForgotPass animate-fade-down ${className}`}
       data-nc-id="PageForgotPass"
     >
-      <PageHead title="Cambia tu contraseña" />
       <LayoutPage
         heading="Cambiar contraseña"
         subHeading="Te enviaremos un correo para que puedas crear una nueva"

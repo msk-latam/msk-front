@@ -6,18 +6,20 @@ const useSingleProduct = (slug: string, state: { country: string }) => {
   const [product, setProduct] = useState<FetchSingleProduct>();
   const [loading, setLoading] = useState<boolean>(false);
 
-
   const fetchProduct = async () => {
     try {
-        const response = await fetch(`${API_URL}/product/${slug}?country=${state.country}`);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch product data. HTTP status ${response.status}`);
-        }
-        const productData = await response.json();
-        setProduct(productData);
-
+      const response = await fetch(
+        `${API_URL}/product/${slug}?country=${state.country}`
+      );
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch product data. HTTP status ${response.status}`
+        );
+      }
+      const productData = await response.json();
+      setProduct(productData);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     } finally {
       setLoading(false);
     }

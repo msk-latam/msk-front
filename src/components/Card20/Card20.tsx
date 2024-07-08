@@ -3,6 +3,8 @@ import NcImage from "@/components/NcImage/NcImage";
 import { Aval, PostDataType } from "@/data/types";
 import { CountryContext } from "@/context/country/CountryContext";
 import Tooltip from "@/components/Tooltip/Tooltip";
+import Image from "next/image";
+import { removeFirstSubdomain } from "@/utils/removeFirstSubdomain";
 
 export interface Card20Props {
   className?: string;
@@ -14,7 +16,7 @@ const Card20: FC<Card20Props> = ({ className = "h-full", post, index }) => {
   let { title, description, image } = post;
   const { state } = useContext(CountryContext);
   if (image) {
-    image = image.replace(`${state.country || "mx"}.`, "");
+    image = removeFirstSubdomain(image);
   }
 
   return (
@@ -27,15 +29,18 @@ const Card20: FC<Card20Props> = ({ className = "h-full", post, index }) => {
           containerClassName="absolute inset-0"
           src={image}
           alt={title}
-          width="30"
-          height="30"
+          width="300"
+          height="300"
         />
       </div>
-      <Tooltip
-        text={description}
-        className={`absolute bottom-1 ${index == 3 ? "left-1" : "right-1"}`}
-      >
-        <img src={"/images/icons/info_tooltip.svg"} />
+      <Tooltip text={description} className={`absolute bottom-5`}>
+        <Image
+          src={"/images/icons/info_tooltip.svg"}
+          width={15}
+          height={15}
+          alt="info cedente"
+          className="ml-auto mr-4"
+        />
       </Tooltip>
     </div>
   );
