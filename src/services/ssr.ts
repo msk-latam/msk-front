@@ -30,7 +30,12 @@ class ApiSSRService {
 
       let response;
       if (PROD) {
-        response = await fetch(`${IP_API}?ip=${ip}`);
+        response = await fetch(`${IP_API}?ip=${ip}`,{method: "POST",
+            headers: {
+          "Content-Type": "application/json",
+              "Accept": "application/json",
+        }
+        });
       } else {
         response = await fetch(
           `https://pro.ip-api.com/json/?fields=61439&key=OE5hxPrfwddjYYP`
