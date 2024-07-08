@@ -1,16 +1,19 @@
 import { countries } from "./countries";
 
 const API_URL = process.env.NEXT_PUBLIC_MSK_WP_API;
-
-console.log(process.env)
+const PROD_BASE_URL = process.env.NEXT_PUBLIC_PUBLIC_URL;
+const DEV_BASE_URL = process.env.NEXT_PUBLIC_PUBLIC_URL_DEV;
 
 const API_BACKEND_LARAVEL = process.env.PROD
   ? `${process.env.NEXT_PUBLIC_PUBLIC_URL}/api`
   : `${process.env.NEXT_PUBLIC_PUBLIC_URL_DEV}/api`;
 
 const baseUrl = process.env.PROD
-  ? process.env.NEXT_PUBLIC_PUBLIC_URL
-  : process.env.NEXT_PUBLIC_PUBLIC_URL_DEV;
+  ? PROD_BASE_URL
+  : DEV_BASE_URL;
+
+console.log({PROD_BASE_URL, DEV_BASE_URL, baseUrl})
+
 const API_BACKEND_URL = API_BACKEND_LARAVEL;
 
 const IP_API = `${API_BACKEND_LARAVEL}/getCountryByIP`;
