@@ -12,18 +12,16 @@ import { BodyNewPassword } from "@/components/MSK/PageNewPassword";
 import { ContactFormSchema } from "@/hooks/useYupValidation";
 import { countries } from "@/data/countries";
 import {base} from "next/dist/build/webpack/config/blocks/base";
+import {IS_PROD} from "@/contains/constants";
 
 let validCountries = countries.map((item) => item.id);
-const PROD = process.env.PROD;
+const PROD = IS_PROD;
 const LSCountry = typeof window !== "undefined" ? localStorage.getItem("country") : null;
 let COUNTRY = "int";
 if (LSCountry) {
   COUNTRY = LSCountry;
 }
 
-const tempURL = "https://dev.msklatam.tech/msk-laravel/public";
-
-const WP_URL = API_URL;
 const apiSignUpURL = `${baseUrl}/api/signup`;
 const apiSignInURL = `${baseUrl}/api/login`;
 const apiRecoverURL = `${baseUrl}/api/RequestPasswordChange`;

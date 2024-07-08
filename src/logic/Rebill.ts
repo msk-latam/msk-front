@@ -3,9 +3,9 @@ import { ContactCRM, JsonMapping } from "@/data/types";
 import { Dispatch, SetStateAction } from "react";
 import rebillCountryPriceMapping from "@/data/jsons/__rebillCurrencyPrices.json"
 import { getEnv } from "@/utils/getEnv";
-import api from "@/services/api";
 import ssr from "@/services/ssr";
 import translateDocumentType from "@/utils/translateDocumentType";
+import {IS_PROD} from "@/contains/constants";
 
 declare global {
   interface Window {
@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-let PROD = !process.env.PROD;
+let PROD = IS_PROD;
 let NEXT_PUBLIC_REBILL_URL = process.env.NEXT_PUBLIC_REBILL_URL;
 let NEXT_PUBLIC_REBILL_API_KEY_TEST = process.env.NEXT_PUBLIC_REBILL_API_KEY_TEST;
 let NEXT_PUBLIC_REBILL_API_KEY_PRD = process.env.NEXT_PUBLIC_REBILL_API_KEY_PRD;
@@ -132,7 +132,7 @@ const mappingCheckoutFields = (contactZoho: ContactCRM) => {
       value: "20" + contactZoho.Identificacion + "9",
     },
     personalId: {
-      type: contactZoho.Tipo_de_Documento,
+      type: translateDocumentType(contactZoho.Tipo_de_Documento),
       value: contactZoho.Identificacion,
     },
     address: {

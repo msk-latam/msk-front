@@ -11,10 +11,11 @@ import {
   setLoadingCourses,
 } from "@/lib/allData";
 import {SignUp} from "@/data/types";
+import {IS_PROD} from "@/contains/constants";
 
 let validCountries = countries.map((item) => item.id);
 
-const PROD = process.env.PROD;
+const PROD = IS_PROD;
 
 const apiProfileUrl = `${baseUrl}/api/profile`;
 
