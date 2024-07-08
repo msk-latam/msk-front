@@ -18,6 +18,7 @@ import {SpeedInsights} from "@vercel/speed-insights/next";
 import { Suspense } from 'react'
 import { NavigationEvents } from '@/components/NavigationEvents'
 import {SITE_URL} from "@/contains/constants";
+import BotMaker from "@/scripts/BotMaker";
 
 
 export const runtime = "edge";
@@ -77,7 +78,7 @@ export default async function RootLayout({ params, children }: LayoutProps) {
                           strategy="beforeInteractive"
                           src="https://sdk.rebill.to/v2/rebill.min.js"
                       />
-                      <script src="https://go.botmaker.com/rest/webchat/p/XG5DC3KZSF/init.js"></script>
+                      <BotMaker />
                       <Footer/>
                       <Suspense fallback={null}>
                         <NavigationEvents />
