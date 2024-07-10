@@ -226,7 +226,7 @@ const PageContact: FC<PageContactProps> = ({ className = "" }) => {
             }, 1500);
           }
         } catch (error) {
-          //console.error("Error al ejecutar reCAPTCHA:", error);
+          console.error(error);
         } finally {
           setOnRequest(false);
         }
