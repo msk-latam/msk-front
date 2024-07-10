@@ -1,8 +1,8 @@
 "use client";
 import React, { FC, useContext, useEffect, useState } from "react";
 import { User, UserCourseProgress } from "@/data/types";
-import { getUserCourses } from "@Services/user";
-import api from "../../../../Services/api";
+import { getUserCourses } from "@/services/user";
+import api from "@/services/api";
 import { DataContext } from "@/context/data/DataContext";
 import Avatar from "@/components/Avatar/Avatar";
 import BackgroundSection from "@/components/BackgroundSection/BackgroundSection";
@@ -53,6 +53,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
         setUser(res);
         let coursesList = getUserCourses(res, allCourses);
         setUserCourses(coursesList);
+        setTotalPages(Math.ceil(coursesList.length / itemsPerPage));
         setLoadingUser(false);
       } else {
         router.push("/iniciar-sesion");
@@ -64,8 +65,9 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
   };
 
   useEffect(() => {
+    console.log('bb');
     fetchUser();
-  }, []);
+  }, [allCourses]);
   const itemsPerPage = 8;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -102,6 +104,8 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
   ];
 
   const handleUserTabChange = (item: string) => {
+    console.log(item);
+    console.log(userCourses);
     switch (item) {
       case "Todo":
         setCurrentItems(userCourses.slice(indexOfFirstItem, indexOfLastItem));
@@ -162,7 +166,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
       {/* ====================== END HEADER ====================== */}
 
       <div className="container py-16 lg:pb-28 lg:pt-20 space-y-16 lg:space-y-28">
-        <main>
+        <main className="container">
           {loadingUser ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mt-8 lg:mt-10 mb-8">
               <ItemSkeleton />
@@ -236,16 +240,18 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
           </div>
         </main>
         <div className="relative py-16 my-32">
-          <BackgroundSection />
-          <SectionSliderPosts
-            postCardName="card9"
-            heading="Nuestros cursos más elegidos"
-            subHeading="Profesionales como tú ya se capacitaron con ellos. ¡Ahora te toca a ti!"
-            sliderStype="style2"
-            posts={allBestSellers}
-            loading={loadingBestSellers}
-            uniqueSliderClass="pageHome-section6"
-          />
+          <div className="md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-16 mb-[96px] w-full px-14">
+            <SectionSliderPosts
+              posts={allBestSellers}
+              loading={loadingBestSellers}
+              className="w-full section-slider-posts-container"
+              postCardName="card9"
+              heading="Nuestros cursos más elegidos"
+              subHeading="Profesionales como tú ya se capacitaron con ellos. ¡Ahora te toca a ti!"
+              sliderStype="style2"
+              uniqueSliderClass="perfil-section6"
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -29,7 +29,7 @@ import { countries } from "@/data/countries";
 import { DataContext } from "@/context/data/DataContext";
 import countryIdentificationsMapping from "../../../data/jsons/__countryIdentifications.json";
 import InputField from "@/components/InputField/InputField";
-import api from "../../../../Services/api";
+import api from "@/services/api";
 import { useRouter } from "next/navigation";
 
 interface Props {

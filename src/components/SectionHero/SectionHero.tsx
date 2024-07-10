@@ -43,7 +43,7 @@ const SectionHero: FC<SectionHeroProps> = ({
       <div className="flex flex-col lg:flex-row space-y-14 lg:space-y-0 lg:space-x-10 items-center relative text-center lg:text-left">
         <div className="w-screen max-w-full space-y-5 lg:space-y-7 flex-1">
           <h1
-            className="!leading-tight text-neutral-900 section-hero-title dark:text-neutral-100 font-bold text-[24px] md:text-[35px] sm:text-[42px]"
+            className="!leading-tight text-neutral-900 section-hero-title dark:text-neutral-100 font-bold text-[24px] sm:text-[42px]"
             dangerouslySetInnerHTML={{ __html: removeFirstTag(heading) }}
           />
 
@@ -58,7 +58,7 @@ const SectionHero: FC<SectionHeroProps> = ({
             </ButtonPrimary>
           )}
         </div>
-        <div className="hero-img">
+        <div className="hero-img flex justify-end">
           {" "}
           <NcImage
             className="max-w-[725px] lg:max-w-[500px] xl:max-w-[725px] w-full"

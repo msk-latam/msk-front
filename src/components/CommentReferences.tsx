@@ -15,7 +15,7 @@ const CommentReferences: FC<{ content: WpContentData }> = ({ content }) => {
               <h4 className="!font-lora-italic font-normal text-[30px] md:text-[36px] text-[#392C35]">
                 {cri.titulo}
               </h4>
-              <p className="text-[14px] md:text-[20px] text-[#8D929E] max-w-[228px]">
+              <p className="text-[18px] text-[#8D929E] max-w-[228px]">
                 {cri.parrafo}
               </p>
             </div>

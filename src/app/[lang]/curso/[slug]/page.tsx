@@ -1,7 +1,8 @@
 import SingleProductDetail from "@/components/SingleProductDetail/SingleProductDetail";
 import React, { FC } from "react";
-import ssr from "@Services/ssr";
+import ssr from "@/services/ssr";
 import PageHeadServer from "@/components/Head/PageHeadServer";
+import {SITE_URL} from "@/contains/constants";
 
 interface PageCourseProps {
   params: any;
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: Props) {
     title: courseMetaData?.ficha.title,
     description: courseMetaData?.excerpt,
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_URL}/blog`,
+      canonical: `${SITE_URL}/blog`,
     },
     schemaJson: "Course",
     schemaJsonData: courseMetaData,

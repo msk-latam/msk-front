@@ -3,7 +3,7 @@ import React, { useEffect, useReducer } from "react";
 import { AuthContext } from "./AuthContext";
 import { authReducer } from "./AuthReducer";
 import { AuthState, Contact } from "@/data/types";
-import api from "../../../Services/api";
+import api from "@/services/api";
 import { fetchUserData } from "@/middleware";
 
 interface Props {
@@ -26,7 +26,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     const initializeAuth = async () => {
-      console.log('INITIALIZE AUTH');
+      /*console.log('INITIALIZE AUTH');*/
       const token = localStorage.getItem("token");
       const email = localStorage.getItem("email");
       const bypassRedirect = localStorage.getItem("bypassRedirect");

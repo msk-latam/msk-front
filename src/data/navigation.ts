@@ -436,7 +436,7 @@ const aboutMenu: NavItemType[] = [
     id: ncNanoId(),
     href: "/tienda",
     name: "Cursos para enfermería y otras profesiones",
-    search: "profesion=otra-profesion,enfermeros-auxiliares",
+    search: "profesion=otra-profesion",
   },
   // {
   //   id: ncNanoId(),
@@ -490,14 +490,12 @@ const accountMenu: NavItemType[] = [
 export const NAVIGATION_MSK: NavItemType[] = [
   {
     id: ncNanoId(),
-    href: "/tienda",
     name: "Qué ofrecemos",
     type: "dropdown",
     children: aboutMenu,
   },
   {
     id: ncNanoId(),
-    href: "/recursos",
     name: "Recursos",
     type: "dropdown",
     children: resourcesMenu,
@@ -515,43 +513,24 @@ export const NAVIGATION_MSK: NavItemType[] = [
 ];
 
 const categoriesMenuBlog: NavItemType[] = [
-  /* {
-    id: ncNanoId(),
-    href: "/archivo",
-    name: "Actualidad",
-    search: "?categoria=Actualidad",
-  }, */
   {
     id: ncNanoId(),
     href: "/archivo",
     name: "Medicina",
-    search: "?categoria=medicina",
+    search: "/archivo?categoria=medicina",
   },
   {
     id: ncNanoId(),
     href: "/archivo",
     name: "Enfermería",
-    search: "?categoria=enfermeria",
+    search: "/archivo?categoria=enfermeria",
   },
   {
     id: ncNanoId(),
     href: "/archivo",
     name: "E-Learning",
-    search: "?categoria=e-learning",
+    search: "/archivo?categoria=e-learning",
   },
-
-  /*  {
-    id: ncNanoId(),
-    href: "/archivo",
-    name: "Entrevistas",
-    search: "?categoria=Entrevistas",
-  },
-  {
-    id: ncNanoId(),
-    href: "/archivo",
-    name: "Opinión",
-    search: "?categoria=Opinión",
-  }, */
 ];
 
 const resourcesMenuBlog: NavItemType[] = [
@@ -588,7 +567,6 @@ export const NAVIGATION_BLOG_MSK: NavItemType[] = [
   },
   {
     id: ncNanoId(),
-    href: "/recursos",
     name: "Recursos",
     type: "dropdown",
     children: resourcesMenuBlog,
@@ -645,7 +623,6 @@ export const NAVIGATION_ARCHIVE_MSK: NavItemType[] = [
   },
   {
     id: ncNanoId(),
-    href: "/recursos",
     name: "Recursos",
     type: "dropdown",
     children: resourcesMenuBlog,

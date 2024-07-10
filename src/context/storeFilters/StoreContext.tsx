@@ -1,5 +1,4 @@
 "use client";
-
 import { createContext } from "react";
 import { Filter } from "./storeReducer";
 import {
@@ -20,6 +19,7 @@ export type ContextType = {
       | DurationFilter
       | ResourceFilter
       | PageFilter
+      | string
   ) => void;
   updateFilter: (filterType: keyof Filter, filterValue: PageFilter) => void;
   removeFilter: (
@@ -30,7 +30,7 @@ export type ContextType = {
       | DurationFilter
       | ResourceFilter
       | PageFilter
-  ) => void;
+    | string) => void;
   clearFilters: () => void;
   clearSpecialties: () => void;
   professions: Profession[];

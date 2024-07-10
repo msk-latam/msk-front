@@ -74,6 +74,10 @@ $fontawesome: "Font Awesome 5 Pro";
   font-family: $lora;
 }
 
+.font-lora-italic {
+  font-weight: 500;
+}
+
 
 .raleway {
   font-family: "Raleway", sans-serif !important;
@@ -96,7 +100,6 @@ textarea,
 ul,
 div {
   font-family: "Inter", sans-serif;
-  font-weight: 300;
 }
 
 // colors

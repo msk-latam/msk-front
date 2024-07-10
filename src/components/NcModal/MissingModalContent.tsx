@@ -19,7 +19,6 @@ const MissingModalContent: FC<MissingModalContentProps> = ({
 }) => {
   const [interact, setInteract] = useState(false)
   const router = useRouter()
-  const {state} = useContext(CountryContext)
  
   const handleCloseModal = (forElement: string | null = null) => {
     setInteract(true)
@@ -49,7 +48,7 @@ const MissingModalContent: FC<MissingModalContentProps> = ({
   }, []);
 
   return (
-    <div id='trial_modal' className='text-center max-w-[500px]'>
+    <div id='trial_modal' className='text-center max-w-[350px] mx-auto'>
         <h4 className='text-xl mb-4'>{title}</h4>
         <p className='mb-8 font-medium text-violet-wash'>{desc}</p>
         <button onClick={() => handleCloseModal() } disabled={interact} className="video-cart-btn w-full disabled:bg-grey-disabled">{interact ? "Solicitando ..." : textButton }</button>

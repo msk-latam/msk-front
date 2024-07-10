@@ -64,6 +64,20 @@ export interface Contact {
   year?: string;
   courses_progress: CourseProgress[];
   type_doc?: string;
+  trial_course_sites?: TrialCourseSite[]
+}
+
+export interface TrialCourseSite {
+  id: number
+  trial_status: any
+  contact_entity_id: string
+  contractJson: string
+  trial_finish_at: string
+  trial_cancelled_at: any
+  retry_trial_quantity: number
+  rebill_response: any
+  created_at: string
+  updated_at: string
 }
 
 export interface Contract {
@@ -169,6 +183,8 @@ export interface User {
 export interface UserProfile {
   courses_progress: CourseProgress[];
   contact?: Contact;
+  identification?:string;
+
 }
 
 export interface CustomUser {
@@ -385,6 +401,9 @@ export interface Cedente {
   imagen: string;
 }
 export interface FetchSingleProduct {
+  installmentAmount?: number;
+  totalAmount?: number;
+  total_price: string;
   ficha: Ficha;
   description: string;
   details: Details;
@@ -440,6 +459,7 @@ export interface FetchCourseType {
   date?: string;
   author?: any;
   reading_time:string;
+  created_at: string;
 }
 
 export interface Category {

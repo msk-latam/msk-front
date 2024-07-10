@@ -77,6 +77,7 @@ export const parseHtml = (contentHtml: string, removesContainer: boolean = false
 
     // Obtener el contenido modificado como cadena de texto
     return tempElement.innerHTML;
-
+  }else{
+    return contentHtml;
   }
 };

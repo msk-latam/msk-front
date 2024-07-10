@@ -15,7 +15,7 @@ export interface MegamenuItem {
 export interface NavItemType {
   id: string;
   name: string;
-  href: string;
+  href?: string;
   targetBlank?: boolean;
   children?: NavItemType[];
   megaMenu?: MegamenuItem[];
@@ -57,11 +57,9 @@ const recentPosts = [
 
 const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
   const [menuCurrentHovers, setMenuCurrentHovers] = useState<string[]>([]);
-
   const onMouseEnterMenu = (id: string) => {
     setMenuCurrentHovers((state) => [...state, id]);
   };
-
   const onMouseLeaveMenu = (id: string) => {
     setMenuCurrentHovers((state) => {
       return state.filter((item, index) => {
@@ -270,12 +268,34 @@ const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
   };
 
   const renderDropdownMenuNavlink = (item: NavItemType) => {
+    const searchParams = new URLSearchParams(item.search);
+    //if the current url includes /tienda and the item.href includes /tienda, use an anchor instead of a link element
+    if (
+      typeof window !== "undefined" &&
+      window.location.pathname.includes("/tienda") &&
+      item.href?.includes("/tienda")
+    ) {
+      return (
+        <a
+          className="flex items-center font-normal text-neutral-6000 dark:text-neutral-400 py-2 px-4 rounded-md hover:text-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
+          href={item.href + "/?" + searchParams.toString()}
+        >
+          {item.name}
+          {item.type && (
+            <ChevronDownIcon
+              className="ms-2 h-4 w-4 text-neutral-500"
+              aria-hidden="true"
+            />
+          )}
+        </a>
+      );
+    }
     return (
       <Link
         className="flex items-center font-normal text-neutral-6000 dark:text-neutral-400 py-2 px-4 rounded-md hover:text-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
         href={{
-          pathname: item.href || undefined,
-          query: item.search,
+          pathname: item.href,
+          query: Object.fromEntries(searchParams), // Convert searchParams to object
         }}
       >
         {item.name}
@@ -292,21 +312,31 @@ const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
   // ===================== MENU MAIN MENU =====================
   const renderMainItem = (item: NavItemType) => {
     return (
-      <div className="h-20 flex-shrink-0 flex items-center">
-        <Link
-          className="inline-flex items-center text-sm xl:text-base font-normal text-neutral-700 dark:text-neutral-300 py-2 px-4 xl:px-5 rounded	hover:text-neutral-100 hover:bg-red-500 dark:hover:bg-amber-600 dark:hover:text-neutral-200"
-          href={{
-            pathname: item.href || undefined,
-          }}
-        >
-          {item.name}
-          {item.type && (
-            <ChevronDownIcon
-              className="ms-1 -me-1 h-4 w-4 text-slate-400"
-              aria-hidden="true"
-            />
-          )}
-        </Link>
+      <div className="flex-shrink-0 flex items-center">
+        {item.href ? (
+          <Link
+            className="inline-flex items-center text-sm xl:text-base font-normal text-neutral-700 dark:text-neutral-300 py-2 px-4 xl:px-5 rounded hover:text-neutral-100 hover:bg-red-500 dark:hover:bg-amber-600 dark:hover:text-neutral-200"
+            href={{ pathname: item.href }}
+          >
+            {item.name}
+            {item.type && (
+              <ChevronDownIcon
+                className="ms-1 -me-1 h-4 w-4 text-slate-400"
+                aria-hidden="true"
+              />
+            )}
+          </Link>
+        ) : (
+          <div className="hover:cursor-default inline-flex items-center text-sm xl:text-base font-normal text-neutral-700 dark:text-neutral-300 py-2 px-4 xl:px-5 rounded hover:text-neutral-100 hover:bg-red-500 dark:hover:bg-amber-600 dark:hover:text-neutral-200">
+            {item.name}
+            {item.type && (
+              <ChevronDownIcon
+                className="ms-1 -me-1 h-4 w-4 text-slate-400"
+                aria-hidden="true"
+              />
+            )}
+          </div>
+        )}
       </div>
     );
   };

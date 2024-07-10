@@ -23,7 +23,7 @@ const HeaderFilter: FC<HeaderFilterProps> = ({
   heading = "🎈 Latest Articles",
   onClickTab,
   desc = "",
-  viewMore = "/tienda",
+  viewMore = "/tienda?recurso=curso",
   mobileHidden = "hidden",
 }) => {
   return (

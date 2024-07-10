@@ -37,23 +37,22 @@ const Avatar: FC<AvatarProps> = ({
   userName,
 }) => {
   const name = userName || "John Doe";
-
-  const [url, setUrl] = useState(imgUrl);
-
   return (
     <div
       className={`wil-avatar relative flex-shrink-0 inline-flex items-center justify-center overflow-hidden text-neutral-100 uppercase font-semibold shadow-inner ${radius} ${sizeClass} ${containerClassName}`}
-      style={{ backgroundColor: url ? undefined : _setBgColor(name) }}
+      style={{ backgroundColor: imgUrl ? undefined : _setBgColor(name) }}
     >
-      {url && (
-        <Image
-          fill
-          sizes="100px"
-          className="absolute inset-0 w-full h-full object-cover"
-          src={url}
-          alt={name}
-        />
+      {imgUrl && (
+          <Image
+            fill
+            sizes="100px"
+            className="absolute inset-0 w-full h-full object-cover"
+            src={imgUrl}
+            alt={name}
+          />
       )}
+
+
       <span className="wil-avatar__name font-semibold">
         {_setInitials(name)}
       </span>

@@ -19,6 +19,7 @@ const initialState: State = {
     duration: [],
     resources: [],
     page: [],
+    search : ''
   },
   professions: [],
   specialties: [],
@@ -48,7 +49,7 @@ export const StoreProvider: FC<Props> = ({children}) => {
       try {
         const specialties = await getAllStoreSpecialties(countryState.country);
         const professions = await getAllProfessions();
-        console.log('DISPATCHING INITIALIZE');
+        //console.log('DISPATCHING INITIALIZE');
         dispatch({
           type: "INITIALIZE",
           payload: { specialties, professions },
@@ -63,6 +64,7 @@ export const StoreProvider: FC<Props> = ({children}) => {
   const addFilter = (
     filterType: keyof Filter,
     filterValue:
+      string
       | Specialty
       | Profession
       | DurationFilter
@@ -80,6 +82,7 @@ export const StoreProvider: FC<Props> = ({children}) => {
   const removeFilter = (
     filterType: keyof Filter,
     filterValue:
+      string
       | Specialty
       | Profession
       | DurationFilter

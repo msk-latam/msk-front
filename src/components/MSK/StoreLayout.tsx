@@ -1,9 +1,11 @@
 "use client";
 import React, { FC, Suspense, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { A11y, Autoplay, Navigation, Pagination, Scrollbar } from "swiper";
+
 import 'swiper/swiper-bundle.css';
 import { BannerImg } from "@/data/types";
-import api from "../../../Services/api";
+import api from "@/services/api";
 export interface LayoutPageProps {
   className?: string;
   heading: string;
@@ -30,6 +32,7 @@ const StoreLayout: FC<LayoutPageProps> = ({
     const fetchData = async () => {
       try {
         const response = await api.getWpImages("banners_shop", country);
+        console.log({ response });
         if (response.length > 0) {
           setBannerImgs(response);
         }
@@ -41,6 +44,8 @@ const StoreLayout: FC<LayoutPageProps> = ({
     fetchData();
   }, []);
 
+  console.log({bannerImgs})
+
   return (
     <div
       className={`nc-LayoutPage relative ${className}`}
@@ -50,7 +55,7 @@ const StoreLayout: FC<LayoutPageProps> = ({
         {/* HEADER */}
         <header>
           <Swiper
-            scrollbar
+            modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
             slidesPerView={1}
             loop={true}
             autoplay={{
@@ -79,7 +84,7 @@ const StoreLayout: FC<LayoutPageProps> = ({
         </header>
 
         {/* CONTENT */}
-        <div className="py-5 mx-auto bg-white rounded-[40px] sm:p-10 lg:py-16 dark:bg-neutral-900">
+        <div className="py-5 mx-auto bg-white rounded-[40px] sm:p-5 lg:py-7 dark:bg-neutral-900">
           <div className="container">{children}</div>
         </div>
       </div>

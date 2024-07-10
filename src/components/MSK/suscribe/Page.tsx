@@ -1,28 +1,21 @@
 "use client";
 import { FC, useContext, useEffect, useRef, useState } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import rbImg from "/public/images/icons/rebill.svg";
 import installmentsMapping from "@/data/jsons/__countryInstallments.json";
-import { JsonInstallmentsMapping, User } from "@/data/types";
+import {JsonInstallmentsMapping} from "@/data/types";
 import { useParams } from "next/navigation";
 import { CountryContext } from "@/context/country/CountryContext";
 import useRequestedTrialCourse from "@/hooks/useRequestedTrialCourse";
-import {
-  REBILL_CONF,
-  initRebill,
-  getRebillInitialization,
-} from "@/logic/Rebill";
 import TrialInfo from "@/components/Trial/TrialInfo";
-import InputSkeleton from "@/components/Skeleton/InputSkeleton";
-import TextSkeleton from "@/components/Skeleton/TextSkeleton";
 import NcLink from "@/components/NcLink/NcLink";
 import NcModalSmall from "@/components/NcModal/NcModalSmall";
 import TrialModalContent from "@/components/NcModal/TrialModalContent";
 import MissingModalContent from "@/components/NcModal/MissingModalContent";
 import useSingleProduct from "@/hooks/useSingleProduct";
 import { AuthContext } from "@/context/user/AuthContext";
-import ssr from "@Services/ssr";
-import Image from "next/image";
+import ssr from "@/services/ssr";
+import RebillCheckout from "@/components/Checkout/RebillCheckout";
+import MercadoPagoCheckout from "@/components/Checkout/MercadoPagoCheckout";
 
 export interface PageTrialSuscribeProps {
   className?: string;
@@ -31,9 +24,7 @@ export interface PageTrialSuscribeProps {
 const installmentsJSON: JsonInstallmentsMapping = installmentsMapping;
 
 const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
-  const {
-    countryState: { country },
-  } = useContext(CountryContext);
+  const {countryState: { country }} = useContext(CountryContext);
   const { state: AuthState, dispatch } = useContext(AuthContext);
   const { slug }: { slug: string } = useParams();
   const { product } = useSingleProduct(slug, { country });
@@ -43,10 +34,15 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
   const [mountedInput, setMountedInput] = useState<boolean>(false);
   const [faliedMessage, setFaliedMessage] = useState<string>("");
   const [paymentCorrect, setPaymentCorrect] = useState<boolean | null>(null);
-  const [initedRebill, setInitedRebill] = useState<boolean | null>(null);
+
+  let installments = 0 as number | null;
+
+  const [totalAmount, setTotalAmount] = useState(0)
+  const [installmentAmount, setInstallmentAmount] = useState(0)
+
   const { executeRecaptcha } = useGoogleReCaptcha();
 
-  let gateway = null;
+  let gateway: null | string = null;
   if (installmentsJSON && country && installmentsJSON[country]) {
     gateway = installmentsJSON[country].gateway;
   }
@@ -62,6 +58,23 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
     setShowAlreadyRequest,
     setShowMissingData,
   } = useRequestedTrialCourse(product);
+
+  useEffect(() => {
+    if (installmentsJSON && country && installmentsJSON[country]) {
+      installments = installmentsJSON[country].quotes;
+    }
+
+    if(typeof product !== 'undefined' && installments != null){
+      let totalAmount = parseFloat(product.total_price.replace(/\./g, "").replace(",", ".").replaceAll(".",""));
+      setTotalAmount(totalAmount)
+      setInstallmentAmount(totalAmount / installments)
+
+      product.totalAmount = totalAmount
+      product.installmentAmount = (totalAmount / installments)
+    }
+
+  }, [product])
+
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -80,47 +93,47 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
     }
   }, [AuthState.profile]);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (typeof window.Rebill !== "undefined") {
-        const initialization = getRebillInitialization(country);
-
-        console.log({ initialization });
-
-        let RebillSDKCheckout = new window.Rebill.PhantomSDK(initialization);
-
-        const verifiedCoursedRequested =
-          hasCoursedRequested != null && !hasCoursedRequested;
-        const verifiedProductAndProfile =
-          typeof product !== "undefined" &&
-          AuthState.profile != null &&
-          Object.keys(AuthState.profile).length > 1;
-
-        if (
-          initedRebill == null &&
-          verifiedCoursedRequested &&
-          verifiedProductAndProfile &&
-          !showMissingData
-        ) {
-          setInitedRebill(true);
-          console.group("Rebill");
-          localStorage.removeItem("trialURL");
-          //console.log({user: AuthState, country, product, RebillSDKCheckout, setShow, setFaliedMessage, setPaymentCorrect, setMountedInput})
-          initRebill(
-            AuthState,
-            country,
-            product,
-            RebillSDKCheckout,
-            setShow,
-            setFaliedMessage,
-            setPaymentCorrect,
-            setMountedInput
-          );
-          console.groupEnd();
-        }
-      }
+  const renderCheckoutComponent = () =>{
+    console.log({gateway})
+    switch (gateway) {
+      case 'REBILL':
+        return <RebillCheckout
+                    product={product}
+                    hasCoursedRequested={hasCoursedRequested}
+                    country={country}
+                    showMissingData={showMissingData}
+                    setShow={setShow}
+                    setFaliedMessage={setFaliedMessage}
+                    setPaymentCorrect={setPaymentCorrect}
+                    mountedInputObjectState={mountedInputObjectState}
+              />;
+      case 'MP':
+        return <MercadoPagoCheckout
+                    product={product}
+                    quotes={installments}
+                    hasCoursedRequested={hasCoursedRequested}
+                    country={country}
+                    showMissingData={showMissingData}
+                    setShow={setShow}
+                    setFaliedMessage={setFaliedMessage}
+                    setPaymentCorrect={setPaymentCorrect}
+                    mountedInputObjectState={mountedInputObjectState}
+                />;
+      case 'ST':
+       // return <StripePaymentForm payment={invoiceDetail} currency={currencyOptions.currency} />;
+      default:
+        return <RebillCheckout
+            product={product}
+            hasCoursedRequested={hasCoursedRequested}
+            country={country}
+            showMissingData={showMissingData}
+            setShow={setShow}
+            setFaliedMessage={setFaliedMessage}
+            setPaymentCorrect={setPaymentCorrect}
+            mountedInputObjectState={mountedInputObjectState}
+        />;;
     }
-  }, [product, hasCoursedRequested, AuthState.profile]);
+  }
 
   return (
     <div ref={viewRef} className="nc-PageSuscribe relative animate-fade-down">
@@ -129,6 +142,7 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
           <TrialInfo
             country={country}
             product={product}
+            installmentAmount={installmentAmount}
             mountedInputState={mountedInputObjectState}
           />
 
@@ -137,26 +151,8 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
               Ingresa los datos de tu tarjeta de débito o crédito. <br />
               No se realizará ningún cargo hasta el octavo día.
             </p>
-            <div
-              id="rebill_elements"
-              className="flex items-center justify-center h-auto"
-            >
-              {mountedInput && <InputSkeleton className="w-[390px]" />}
-            </div>
-            {mountedInput ? (
-              <div className="text-violet-wash flex items-center justify-center gap-x-3 mb-4">
-                <span>Pagos procesados con</span>
 
-                <Image
-                  src={rbImg.src}
-                  width={70}
-                  height={80}
-                  alt={"Rebill Image"}
-                />
-              </div>
-            ) : (
-              <TextSkeleton className="w-full flex items-center justify-center" />
-            )}
+            {renderCheckoutComponent()}
 
             <NcLink
               href="/condiciones-de-contratacion#trial"
@@ -209,7 +205,7 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
         renderTrigger={() => {
           return null;
         }}
-        contentExtraClass="max-w-[500px] md:max-w-screen-lg"
+        contentExtraClass="max-w-[350px]"
         blurView={viewRef}
         renderContent={() => (
           <MissingModalContent

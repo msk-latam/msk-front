@@ -4,7 +4,7 @@ import { CountryContext } from "./CountryContext";
 import { countryReducer } from "./CountryReducer";
 import { CountryState } from "@/data/types";
 import { countries } from "@/data/countries";
-import api from "../../../Services/api";
+import api from "@/services/api";
 import Cookies from "js-cookie";
 
 interface Props {
@@ -51,26 +51,25 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
           // console.log("Country Provider", currentCountry);
         } else {
           currentCountry = await api.getCountryCode();
-          // console.log("CurrentCountry obtained from IP: " + currentCountry);
-          // console.log(window.location.pathname);
+          console.log("CurrentCountry obtained from IP: " + currentCountry);
+          console.log(window.location.pathname);
           const currentPathName = window.location.pathname.replace("/", "");
 
-          // console.log(currentPathName);
+          console.log(currentPathName);
           if (currentCountry && currentCountry == currentPathName) return; //Special use case for homepage.
           if (!validCountries.includes(currentCountry)) {
+            console.log('currentCountry not included in the list of valid countries')
             currentCountry = "";
           }
 
-          if (
-            countryState.country != currentCountry ||
-            getCountryFromURL() != currentCountry
-          ) {
-            if (
-              validCountries.includes(currentPathName) &&
-              currentPathName != currentCountry
-            ) {
+
+          if ( countryState.country != currentCountry || getCountryFromURL() != currentCountry ) {
+            if ( validCountries.includes(currentPathName) && currentPathName != currentCountry ) { //The path is just the country, go to the homepage of the country our IP is on
+              console.log('redirect 1');
               redirectUrl = "/" + currentCountry;
+              console.log(redirectUrl);
             } else {
+              console.log('redirect 2');
               redirectUrl = "/" + currentCountry + window.location.pathname;
             }
             // console.log("redirectUrl1: " + redirectUrl);
@@ -82,7 +81,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
                 )
                 .replace(/(https?:\/\/.*?)\/+/g, "$1/");
             }
-            // console.log("redirectUrl2: " + redirectUrl);
+            console.log("redirectUrl2: " + redirectUrl);
           }
           if (
             window.location.protocol === "http:" &&
@@ -98,6 +97,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
             payload: { country: currentCountry },
           });
           if (redirectUrl) {
+            console.log(redirectUrl);
             window.location.href = redirectUrl;
           }
         }

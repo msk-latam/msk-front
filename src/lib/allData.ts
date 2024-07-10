@@ -1,5 +1,5 @@
 import { WpContentData } from "@/data/types";
-import ssr from "@Services/ssr";
+import ssr from "@/services/ssr";
 
 // Courses
 let allCourses: any = [];

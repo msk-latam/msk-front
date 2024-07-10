@@ -12,18 +12,16 @@ import { BodyNewPassword } from "@/components/MSK/PageNewPassword";
 import { ContactFormSchema } from "@/hooks/useYupValidation";
 import { countries } from "@/data/countries";
 import {base} from "next/dist/build/webpack/config/blocks/base";
+import {IS_PROD} from "@/contains/constants";
 
 let validCountries = countries.map((item) => item.id);
-const PROD = process.env.PROD;
+const PROD = IS_PROD;
 const LSCountry = typeof window !== "undefined" ? localStorage.getItem("country") : null;
 let COUNTRY = "int";
 if (LSCountry) {
   COUNTRY = LSCountry;
 }
 
-const tempURL = "https://dev.msklatam.tech/msk-laravel/public";
-
-const WP_URL = API_URL;
 const apiSignUpURL = `${baseUrl}/api/signup`;
 const apiSignInURL = `${baseUrl}/api/login`;
 const apiRecoverURL = `${baseUrl}/api/RequestPasswordChange`;
@@ -33,6 +31,7 @@ const apiEnrollCourse = `${baseUrl}/api/course/enroll`;
 const apiEnrollCourseStatus = `${baseUrl}/api/coursesProgress`;
 const apiCreateTrialContract = `${baseUrl}/api/crm/contracts/trial`;
 const apiCancelTrialContract = `${baseUrl}/api/crm/contracts/trial/cancel`;
+const apiCreateTrialMPContract = `${baseUrl}/api/gateway/api/mercadopago/payment/trial`;
 
 class ApiService {
   baseUrl = apiSignUpURL;
@@ -114,12 +113,17 @@ class ApiService {
         body: JSON.stringify(jsonData),
       });
 
-      if (!response.ok) {
+      let data;
+      let status = response.status;
+
+      if (response.ok || response.status === 401) {
+        data = await response.json();
+      } else {
         throw new Error(`Failed to login. HTTP status ${response.status}`);
       }
-      const data = await response.json();
-      return { data: data, status: response.status };
+      return { data: data, status: status };
     } catch (error) {
+      //console.log(error);
       // @ts-ignore
       return error.response;
     }
@@ -245,14 +249,14 @@ class ApiService {
     
   }
 
-  async getAllCourses(country:string) {
+  async getAllCourses(country:string, withAll = false) {
     let validCountries = countries.map((item) => item.id);
     let siteEnv = window.location.hostname !== "msklatam.com";
 
     const countryParam = validCountries.includes(COUNTRY)
       ? `&country=${COUNTRY}`
       : `&country=int`;
-    const filterParam = siteEnv ? `&asd=1&filter=all` : "";
+    const filterParam = withAll ? `&asd=1&filter=all` : "";
 
     try {
       const queryParams = [countryParam, filterParam]
@@ -477,7 +481,10 @@ class ApiService {
 
   async getLinkLMS(product_code: number, cod_curso: string, email: string) {
     try {
-      const response = await fetch(`${baseUrl}/api/sso/link`, {
+      console.log(product_code, cod_curso, email);
+      let url = `${baseUrl}/api/sso/link`;
+      console.log(url);
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -839,13 +846,45 @@ class ApiService {
       }
 
       const data = await response.json();
-      // console.log({ data });
       return data;
     } catch (error) {
-      console.error("Network error:", error);
-      return error;
+      console.error("Error:", {error});
+      return {error: true, details: error};
     }
   }
+
+  async createContactTrialMP(data: any, country:string) {
+    try {
+      const res = await fetch(apiCreateTrialMPContract, {method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          'Authorization': `Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6`
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+      console.log({ result });
+
+      if(result.error){
+
+        let templateMessage = `
+                                      ${result.full_error.message} <br/>
+                                      ${result?.full_error?.code ? `code: ${result?.full_error?.code}` : ''} 
+                                     `;
+
+        return templateMessage;
+      }else{
+       return "Pago realizado con éxito"
+      }
+
+    } catch (e: any) {
+      console.log({ e });
+      return e;
+    }
+  }
+
 }
 
 export default new ApiService();

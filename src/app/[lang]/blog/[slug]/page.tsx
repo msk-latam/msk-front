@@ -1,9 +1,10 @@
 import React, { FC } from "react";
-import ssr from "../../../../../Services/ssr";
+import ssr from "@/services/ssr";
 import SingleHeader from "@/components/MSK/Blog/Post/PostSingleHeader";
 import NcImage from "@/components/NcImage/NcImage";
 import SingleContent from "@/components/MSK/Blog/Post/SingleContent";
 import { cookies } from "next/headers";
+import {SITE_URL} from "@/contains/constants";
 
 interface PageCourseProps {
   params: any;
@@ -20,9 +21,8 @@ export async function generateMetadata({ params }: Props) {
     title: postMetadata.title,
     description: postMetadata.excerpt,
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_URL}/blog`,
+      canonical: `${SITE_URL}/blog`,
     },
-    schemaJson: "WebSite",
   };
 }
 
@@ -42,11 +42,16 @@ const PageNota: FC<PageCourseProps> = async ({ params }) => {
           {/* SINGLE HEADER */}
           <div className="note-header-background" />
           <div className="dark container relative z-10">
-            <SingleHeader
-              hiddenDesc={false}
-              metaActionStyle="style2"
-              pageData={post}
-            />
+            <div className={"container"}>
+              <SingleHeader
+                hiddenDesc={false}
+                metaActionStyle="style2"
+                pageData={post}
+                className={""}
+                excerptClassName={"color-light-white-text"}
+              />
+            </div>
+
           </div>
           {/* FEATURED IMAGE */}
           <div className="px-[16px] ">

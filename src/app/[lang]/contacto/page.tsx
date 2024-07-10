@@ -10,7 +10,7 @@ export interface PageContactProps {
 
 export async function generateMetadata() {
   return {
-    title: "Contacto",
+    title: "Contactanos | MSK",
   };
 }
 

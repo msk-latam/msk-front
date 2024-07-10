@@ -5,6 +5,7 @@ const nextConfig = {
   //output: 'export', //For static site (loses SSR cappabilites)
   //distDir: "dist",
   reactStrictMode: false,
+  trailingSlash: true,
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if

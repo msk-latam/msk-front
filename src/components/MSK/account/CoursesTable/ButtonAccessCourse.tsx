@@ -32,8 +32,10 @@ const ButtonAccessCourse: FC<ButtonAccessCourseProps> = ({
   const { isRunning, data, startWatch } = useInterval(email);
 
   const handleClick = async () => {
+    console.log('handle click as');
     setOnRequest(true);
     try {
+      console.log(status);
       if (status === "Sin enrolar") {
         const response = await goToEnroll(item.product_code, email);
 
@@ -45,6 +47,7 @@ const ButtonAccessCourse: FC<ButtonAccessCourseProps> = ({
           setOnRequest(false);
         }
       } else {
+        console.log('go to LMS: ', item.product_code, item.product_code_cedente);
         goToLMS(item.product_code, item.product_code_cedente as string, email);
         setOnRequest(false);
       }

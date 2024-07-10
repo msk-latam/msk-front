@@ -12,7 +12,7 @@ interface WelcomeBoxProps {
 const WelcomeBox: FC<WelcomeBoxProps> = ({ content }) => {
   // @ts-ignore
   return (
-    <div className="bg-[#F3F4F6] p-8 py-8 sm:py-16 md:mx-16 md:rounded-[40px] mb-8">
+    <div className="bg-[#F3F4F6] p-4 py-16 md:px-32  md:mx-auto md:rounded-[40px] mb-8">
       <Badge name={content?.sobre_mks.etiqueta} color="blue-home" />
       <h2 className="text-[20px] md:text-[32px] my-3 font-medium">
         {stripHtmlTags(content?.sobre_mks.texto_1 as string)}

@@ -22,9 +22,15 @@ module.exports = {
     container: {
       center: true,
       padding: {
-        DEFAULT: "1rem",
-        "2xl": "128px",
+        DEFAULT: '4rem',
       },
+      screens: {
+        md: '1792px', // Change from 1536px to 1792px
+      },
+    },
+    fontFamily: {
+      display: ["var(--font-display)", ...defaultTheme.fontFamily.sans],
+      body: ["var(--font-body)", ...defaultTheme.fontFamily.sans],
     },
 
     extend: {
@@ -103,5 +109,6 @@ module.exports = {
     require("@tailwindcss/typography"),
     require("@tailwindcss/forms"),
     require("@tailwindcss/aspect-ratio"),
+    require("tailwindcss-animated"),
   ],
 };

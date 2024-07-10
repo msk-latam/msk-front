@@ -2,8 +2,9 @@
 import React, {useContext, useEffect, useReducer, useState} from "react";
 import { DataContext } from "./DataContext";
 import { dataReducer } from "./DataReducer";
-import api from "../../../Services/api";
+import api from "@/services/api";
 import { CountryContext } from "@/context/country/CountryContext";
+import ssr from "@/services/ssr";
 
 
 interface Props {
@@ -36,7 +37,7 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(dataReducer, dataInitialState);
 
   const fetchAllCourses = async () => {
-    const allCourses = await api.getAllCourses(countryState.country);
+    const allCourses = await ssr.getAllCourses(countryState.country,'',true);
     dispatch({
       type: "GET_DATA",
       payload: { allCourses },

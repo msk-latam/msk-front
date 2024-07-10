@@ -3,10 +3,11 @@ import AccountCourses from "@/components/MSK/account/AccountCourses";
 import { ComponentType, FC, useContext, useEffect, useState } from "react";
 import { User, UserCourseProgress } from "@/data/types";
 import { AuthContext } from "@/context/user/AuthContext";
-import api from "../../../../../Services/api";
-import { getUserCourses } from "../../../../../Services/user";
+import api from "@/services/api";
+import { getUserCourses } from "@/services/user";
 import TableSkeleton from "@/components/Skeleton/TableSkeleton";
 import {CountryContext} from "@/context/country/CountryContext";
+import ssr from "@/services/ssr";
 
 export interface PageDashboardProps {
   className?: string;
@@ -43,8 +44,8 @@ const PageDashboard: FC<PageDashboardProps> = ({ className = "" }) => {
 
   const fetchUser = async () => {
     setLoading(true);
-    const res = await api.getUserData();
-    const coursesList = await api.getAllCourses(countryState.country);
+    const res = await ssr.getUserData();
+    const coursesList = await ssr.getAllCourses(countryState.country);
     if (!res.message) {
       if (!res.contact.state) res.contact.state = "";
       setUser(res);

@@ -1,8 +1,16 @@
 import React, { FC } from "react";
-
-const SearchBar: FC<{
-  handleSearchInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}> = ({ handleSearchInput }) => {
+import { useStoreFilters } from "@/context/storeFilters/StoreProvider";
+const SearchBar: FC = () => {
+  let {storeFilters, addFilter, removeFilter} = useStoreFilters();
+  function handleSearch( event: React.ChangeEvent<HTMLInputElement>){
+    console.log('updating store filters SEARCH');
+    if (event.target.value){
+      addFilter('search', event.target.value);
+    }else{
+      removeFilter('search', '');
+    }
+    console.log('store filters', storeFilters);
+  }
   return (
     <div className="corse-bar-wrapper grid-area-search">
       <div className="bar-search ">
@@ -13,7 +21,7 @@ const SearchBar: FC<{
               id="store-search"
               type="text"
               placeholder="Buscar"
-              onChange={handleSearchInput}
+              onChange={handleSearch}
             />
             <button type="submit">
               <i className="far fa-search"></i>

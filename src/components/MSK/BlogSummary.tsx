@@ -42,6 +42,7 @@ const BlogSummary: FC<BlogSummaryProps> = ({
         post.categories?.some((category: any) => category.name === itemParsed)
       );
     }
+    filteredPosts = filteredPosts.length ? filteredPosts : posts;
 
     const finalPosts = itemParsed.includes("Actualidad")
       ? filteredPosts.slice(4, 9)
@@ -70,7 +71,7 @@ const BlogSummary: FC<BlogSummaryProps> = ({
       <HeaderFilter
         tabActive={tabActive}
         tabs={tabs}
-        heading={heading || "Blog"}
+        heading={heading}
         onClickTab={handleClickTab}
         desc={desc}
         viewMore="/archivo"
@@ -92,10 +93,10 @@ const BlogSummary: FC<BlogSummaryProps> = ({
 
       <BlogSlider posts={auxPosts} forSingleNote={forSingleNote} />
 
-      <div className="hidden md:grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+      <div className="hidden md:grid md:grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
         {auxPosts[0] && <Card2 size="large" post={auxPosts[0]} kind="blog" />}
-        <div>
-          <div className="grid gap-6 md:gap-8">
+        <div className="hidden sm:block">
+          <div className="grid gap-6 md:gap-8 ">
             {auxPosts
               .filter((_, i) => i < 4 && i > 0)
               .map((item, index) => (
@@ -105,7 +106,20 @@ const BlogSummary: FC<BlogSummaryProps> = ({
                   className="rounded-3xl"
                   kind="blog"
                   authorRow
-                  forSingleNote
+                />
+              ))}
+          </div>
+        </div>
+        <div className="block sm:hidden">
+          <div className="grid gap-6 md:gap-8 ">
+            {auxPosts
+              .filter((_, i) => i < 4 && i > 0)
+              .map((item, index) => (
+                <Card2
+                  key={index}
+                  post={item}
+                  className="rounded-3xl"
+                  kind="blog"
                 />
               ))}
           </div>

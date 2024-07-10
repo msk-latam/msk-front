@@ -40,7 +40,7 @@ const ReferenceCard: FC<{ reference: any; className?: string }> = ({
           className="ml-auto mr-3"
         />
       </div>
-      <p className="text-violet-wash text-left text-[16px]">
+      <p className="text-violet-wash text-left text-sm">
         {reference.parrafo}
       </p>
     </div>

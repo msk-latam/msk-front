@@ -14,7 +14,7 @@ const ContainerSecondary: FC<ContainerSecondaryProps> = ({
 }) => {
   // @ts-ignore
   return (
-    <div className="bg-[#F3F4F6] mt-20 px-8 py-8 sm:py-16 pb-0 md:pb-16 md:mx-16 text-center md:rounded-[40px] mb-0 sm:mb-[76px]">
+    <div className="bg-[#F3F4F6] mt-8 p-4 py-16 md:container text-center md:rounded-[40px] mb-[96px]">
       <h2 className="text-[20px] md:text-[36px] mx-2 my-3 raleway font-normal text-[#392C35]">
         {stripHtmlTags(contentAttribute.texto_1)}
       </h2>

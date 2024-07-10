@@ -39,56 +39,38 @@ const TrialModalContent: FC<TrialModalContentProps> = ({
   const history = useRouter();
 
   const handleCloseModal = (forElement: string | null = null) => {
-    setInteract(true);
-    if (title.includes("Prueba ya solicitada") && goToCourse) {
-      if(typeof window !== 'undefined'){
-        localStorage.removeItem("continueTrialAccess");
-      }
-
-      history.push(`/curso/${goToCourse}`);
-      return;
+    setInteract(true)
+    if(title.includes("Prueba ya solicitada") && goToCourse){
+      history.push(`/curso/${goToCourse}`)
+      return
     }
 
-    if (
-      (textButton.includes("Volver") ||
-        (forElement != null && forElement.includes("Cancelar"))) &&
-      typeof setShow !== "undefined" &&
-      typeof onCancelTrial !== "undefined"
-    ) {
-      setShow(false);
-      setInteract(true);
-      onCancelTrial();
-      return;
+    if((textButton.includes("Volver") || (forElement != null && forElement.includes("Cancelar"))) && typeof setShow !== 'undefined' && typeof onCancelTrial !== 'undefined'){
+      setShow(false)
+      setInteract(true)
+      onCancelTrial()
+      return
     }
 
-    if (
-      (textButton.includes("Volver") ||
-        (forElement != null && forElement.includes("Cancelar"))) &&
-      typeof setShow !== "undefined"
-    ) {
-      setShow(false);
-      setInteract(true);
-      return;
+
+    if((textButton.includes("Volver") || (forElement != null && forElement.includes("Cancelar"))) && typeof setShow !== 'undefined'){
+      setShow(false)
+      setInteract(true)
+      return
     }
 
-    if (title.includes("Listo") && goToAccount) {
-      history.push("/gracias?origen=trial");
+    if(title.includes("Listo") && goToAccount){
+      history.push("/gracias?trial=success")
     }
 
-    if (
-      textButton.includes("Confirmar") &&
-      typeof cancelTrial !== "undefined"
-    ) {
+    if(textButton.includes("Confirmar") && typeof cancelTrial !== 'undefined'){
       //console.log("Confirmar action")
-      cancelTrial();
-      return;
+      cancelTrial()
+      return
     }
 
-    if (
-      textButton.includes("Ir al curso") &&
-      typeof productSlug !== "undefined"
-    ) {
-      history.push(`/curso/${productSlug}`);
+    if(textButton.includes("Ir al curso") && typeof productSlug !== 'undefined'){
+      history.push(`/curso/${productSlug}`)
     }
   };
 
@@ -109,29 +91,19 @@ const TrialModalContent: FC<TrialModalContentProps> = ({
   }, []);
 
   return (
-    <div id="trial_modal" className="text-center">
-      <h4 className="text-xl mb-4">{title}</h4>
-      <p className="mb-4 font-medium text-violet-wash">{desc}</p>
-      {faliedMessage && (
-        <p className="mb-8 font-medium text-red-600">{faliedMessage}</p>
-      )}
-      <button
-        onClick={() => handleCloseModal()}
-        disabled={interact}
-        className="video-cart-btn w-full disabled:bg-grey-disabled"
-      >
-        {interact ? "Solicitando ..." : textButton}
-      </button>
-      {cancelButton && (
-        <button
-          onClick={() => handleCloseModal("Cancelar")}
-          disabled={interact}
-          className="video-cart-btn border-2 w-full mt-2 disabled:bg-grey-disabled"
-        >
-          Cancelar
-        </button>
-      )}
-    </div>
+      <div id='trial_modal' className='text-center'>
+        <h4 className='text-xl mb-4'>{title}</h4>
+        <p className='mb-4 font-medium text-violet-wash'>{desc}</p>
+        {faliedMessage && <p className='mb-8 font-medium text-red-600'>{faliedMessage}</p>}
+        <button onClick={() => handleCloseModal()} disabled={interact}
+                className="video-cart-btn w-full disabled:cursor-not-allowed disabled:bg-grey-disabled">{interact ? "Solicitando ..." : textButton}</button>
+        {cancelButton &&
+            <button
+                onClick={() => handleCloseModal("Cancelar")}
+                disabled={interact}
+                className="video-cart-btn border-2 w-full mt-2 disabled:cursor-not-allowed disabled:hover:bg-grey-disabled disabled:bg-grey-disabled disabled:text-white disabled:border-white disabled:hover:border-white">Cancelar</button>
+        }
+      </div>
   );
 };
 

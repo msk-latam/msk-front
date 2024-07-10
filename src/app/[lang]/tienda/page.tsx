@@ -3,11 +3,9 @@ import StoreLayout from "@/components/MSK/StoreLayout";
 import StoreContent from "@/components/MSK/Store/StoreContent";
 import { cookies } from "next/headers";
 import { Metadata } from "next";
-import Head from "next/head";
-import PageHeadServer from "@/components/Head/PageHeadServer";
-import { useRouter } from "next/router";
-import ssr from "@Services/ssr";
+import ssr from "@/services/ssr";
 import { slugifySpecialty } from "@/lib/Slugify";
+import {SITE_URL} from "@/contains/constants";
 
 type Props = {
   params: { lang: string; page: string; title?: string; filters?: string };
@@ -24,17 +22,17 @@ export async function generateMetadata({
       ? [
           {
             rel: "next",
-            url: `${process.env.NEXT_PUBLIC_URL}/${currentCountry}/tienda/?page=3`,
+            url: `${SITE_URL}/${currentCountry}/tienda/?page=3`,
           },
           {
             rel: "prev",
-            url: `${process.env.NEXT_PUBLIC_URL}/${currentCountry}/tienda/?page=1`,
+            url: `${SITE_URL}/${currentCountry}/tienda/?page=1`,
           },
         ]
       : [
           {
             rel: "next",
-            url: `${process.env.NEXT_PUBLIC_URL}/${currentCountry}/tienda/?page=2`,
+            url: `${SITE_URL}/${currentCountry}/tienda/?page=2`,
           },
         ];
   const storeSpecialties = await ssr.getSpecialtiesStore(
@@ -61,13 +59,15 @@ export interface PageStoreProps {
 }
 
 const PageStore: FC<PageStoreProps> = ({ className = "", params }) => {
+  const currentCountry = params.lang || cookies().get("country")?.value;
+
   return (
     <div
       className={`nc-PageStore ${className} animate-fade-down`}
       data-nc-id="PageStore"
     >
-      <StoreLayout subHeading="" headingEmoji="" heading="Tienda">
-        <section className="text-neutral-600 text-sm md:text-base overflow-hidden">
+      <StoreLayout subHeading="" headingEmoji="" heading="Tienda" country={currentCountry}>
+        <section className="container text-neutral-600 text-sm md:text-base overflow-hidden">
           <StoreContent />
         </section>
       </StoreLayout>

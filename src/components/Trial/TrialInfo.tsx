@@ -9,6 +9,7 @@ import { formatAmount } from "@/utils/formatAmount";
 interface TrialInfoProps {
   country: string;
   product: any;
+  installmentAmount: number;
   mountedInputState: { 
     state: boolean;
     setState: Dispatch<SetStateAction<boolean>>;
@@ -18,27 +19,15 @@ interface TrialInfoProps {
 const currencyJSON: JsonMapping = currencyMapping;
 const installmentsJSON: JsonInstallmentsMapping = installmentsMapping;
 
-const TrialInfo: FC<TrialInfoProps> = ({ country, product, mountedInputState }) => {
+const TrialInfo: FC<TrialInfoProps> = ({ country, product,installmentAmount, mountedInputState }) => {
   const currency = currencyJSON[country];
   let installments = 0 as number | null;
   if (installmentsJSON && country && installmentsJSON[country]) {
       installments = installmentsJSON[country].quotes;
   }
-  const [totalAmount, setTotalAmount] = useState(0)
-  const [installmentAmount, setInstallmentAmount] = useState(0)
+
   const {state: mountedInput } = mountedInputState
 
-  useEffect(() => {
-    if(typeof product !== 'undefined' && installments != null){
-      let totalAmount = parseFloat(product.total_price.replace(/\./g, "").replace(",", ".").replaceAll(".",""));
-      setTotalAmount(totalAmount)
-      setInstallmentAmount(totalAmount / installments)
-  
-      product.totalAmount = totalAmount 
-      product.installmentAmount = installmentAmount
-    }
-    
-  }, [product])
 
   const [forcedRoundedPrice, cents] = installmentAmount.toFixed(2).split(".")
 

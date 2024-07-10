@@ -6,9 +6,11 @@ import { AuthContext } from "@/context/user/AuthContext";
 import { ErrorMessage, Field, Form, FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import api from "../../../../Services/api";
+import api from "@/services/api";
 import LayoutPage from "@/components/MSK/LayoutPage";
 import { useRouter } from "next/navigation";
+import NcImage from "@/components/NcImage/NcImage";
+import ShowErrorMessage from "@/components/ShowErrorMessage";
 
 
 export interface PageLoginProps {
@@ -22,6 +24,7 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
   const router = useRouter();
   const { executeRecaptcha } = useGoogleReCaptcha();
   const [loginError, setLoginError] = useState<string>("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [onRequest, setOnRequest] = useState<boolean>(false);
   const { state, dispatch } = useContext(AuthContext);
   const formRef = useRef<HTMLFormElement>(null);
@@ -52,7 +55,6 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
             recaptcha_token: await executeRecaptcha("login"),
           };
           const { data, status } = await api.postLogin(formData);
-          // @ts-ignore
           if (status == 200) {
             const { name, speciality, ...restData } = data;
             const loginData = {
@@ -63,6 +65,7 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
             dispatch({ type: "LOGIN", payload: loginData });
             changeRoute("/mi-perfil");
           } else {
+            console.log(data);
             setLoginError(data?.message as string);
           }
         }
@@ -111,11 +114,23 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
                   component="span"
                   className="error"
                 />
+
+                <div className="relative">
+                  <NcImage
+                    src={showPassword ? "/images/icons/eye-solid.svg" : "/images/icons/eye-slash-solid.svg"}
+                    className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer"
+                    alt="Toggle show password"
+                    width="21"
+                    height="21"
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
                 <Field
+                  type={showPassword ? 'text' : 'password'}
                   name="password"
-                  type="password"
                   placeholder="Ingresar contraseña"
+                  className="w-full"
                 />
+                </div>
               </div>
               <ButtonPrimary
                 type="submit"
@@ -126,7 +141,7 @@ const PageLogin: FC<PageLoginProps> = ({ className = "" }) => {
               </ButtonPrimary>
             </Form>
           </FormikProvider>
-          {/* {Boolean(loginError) && <ShowErrorMessage text={loginError} />} */}
+          <ShowErrorMessage text={loginError} visible={loginError != ""} />
           <span className="block text-center text-neutral-700 dark:text-neutral-300">
             ¿No tienes una cuenta? {` `}
             <NcLink href="/crear-cuenta">Créala aquí</NcLink>

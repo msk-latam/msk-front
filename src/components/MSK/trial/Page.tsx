@@ -22,7 +22,8 @@ import InputField from "@/components/InputField/InputField";
 import Link from "next/link";
 import ButtonPrimary from "@/components/Button/ButtonPrimary";
 import ShowErrorMessage from "@/components/ShowErrorMessage";
-import ssr from "@Services/ssr";
+import ssr from "@/services/ssr";
+import {SITE_URL} from "@/contains/constants";
 
 export interface PageTrialProps {
   className?: string;
@@ -104,7 +105,7 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
     type: "",
     identification: "",
     Terms_And_Conditions: false,
-    URL_ORIGEN: `${process.env.NEXT_PUBLIC_URL}/curso/${slug}`,
+    URL_ORIGEN: `${SITE_URL}/curso/${slug}`,
     Cursos_consultados: product?.ficha.title,
     URL_DESCARGA: product?.temario_link_pdf,
   };

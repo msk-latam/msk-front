@@ -13,6 +13,13 @@ import Script from "next/script";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 import React from "react";
+import { Analytics } from "@vercel/analytics/react"
+import {SpeedInsights} from "@vercel/speed-insights/next";
+import { Suspense } from 'react'
+import { NavigationEvents } from '@/components/NavigationEvents'
+import {SITE_URL} from "@/contains/constants";
+import BotMaker from "@/scripts/BotMaker";
+
 
 export const runtime = "edge";
 
@@ -39,10 +46,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: {
       default: "MSK | Cursos de medicina para expandir tus metas profesionales",
-      template: "MSK | %s",
+      template: "%s",
     },
     description: "Cursos de medicina para expandir tus metas profesionales",
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL}/${currentCountry}`),
+    metadataBase: new URL(`${SITE_URL}/${currentCountry}`),
     alternates: {
       canonical: "/",
     },
@@ -71,8 +78,11 @@ export default async function RootLayout({ params, children }: LayoutProps) {
                           strategy="beforeInteractive"
                           src="https://sdk.rebill.to/v2/rebill.min.js"
                       />
-                      <script src="https://go.botmaker.com/rest/webchat/p/XG5DC3KZSF/init.js"></script>
+                      <BotMaker />
                       <Footer/>
+                      <Suspense fallback={null}>
+                        <NavigationEvents />
+                      </Suspense>
                     </StoreProvider>
                   </AuthProvider>
                 </UTMProvider>
@@ -80,6 +90,8 @@ export default async function RootLayout({ params, children }: LayoutProps) {
             </CountryProvider>
           </GoogleCaptchaWrapper>
         </div>
+        <Analytics />
+      <SpeedInsights />
       </body>
     </html>
   );

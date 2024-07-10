@@ -19,7 +19,7 @@ import { ErrorMessage, Field, Form, FormikProvider, useFormik } from "formik";
 import { useYupValidation } from "@/hooks/useYupValidation";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { DataContext } from "@/context/data/DataContext";
-import api from "../../../Services/api";
+import api from "@/services/api";
 import NcLink from "../NcLink/NcLink";
 import { usePathname, useRouter } from "next/navigation";
 import ButtonPrimary from "../Button/ButtonPrimary";

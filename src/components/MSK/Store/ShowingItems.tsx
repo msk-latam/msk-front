@@ -1,10 +1,11 @@
 import React, { FC } from "react";
 
-const ShowingItems: FC<{ length: number }> = ({ length }) => {
+const ShowingItems: FC<{ length: number, showingCount: number }> = ({ length, showingCount }) => {
+  let showingCountAux = showingCount > length ? length : showingCount;
   return (
     <div className="curse-tab-left-wrap">
       <div className="course-results">
-        Mostrando {length > 18 ? 18 : length} de {length} resultados
+        Mostrando {showingCountAux} de {length} resultados
       </div>
     </div>
   );

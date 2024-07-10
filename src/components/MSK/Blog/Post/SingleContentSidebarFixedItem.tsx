@@ -94,7 +94,7 @@ const SingleContentSidebarFixedItem: FC<SingleContentSidebarFixedItemProps> = ({
           </Link>
         ))}
       </div>
-      <div className="side-content rounded-2xl ">
+      {/*<div className="side-content rounded-2xl ">
         <div className="flex w-full">
           <h5 className="side-content-header p-2.5">💼 Especialidades </h5>
           <button
@@ -127,7 +127,7 @@ const SingleContentSidebarFixedItem: FC<SingleContentSidebarFixedItemProps> = ({
             </Link>
           )
         )}
-      </div>
+      </div>*/}
       <NcModal
         isOpenProp={showSpecialties}
         onCloseModal={() => {

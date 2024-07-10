@@ -2,7 +2,7 @@ import React, { FC, useContext, useEffect, useRef, useState } from "react";
 import BackgroundSection from "@/components/BackgroundSection/BackgroundSection";
 import { SinglePageType } from "@/data/types";
 import SectionSliderPosts from "@/components/Sections/SectionSliderPosts";
-import api from "../../../../Services/api";
+import api from "@/services/api";
 import { DataContext } from "@/context/data/DataContext";
 import LoadingText from "../Loader/Text";
 

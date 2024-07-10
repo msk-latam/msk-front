@@ -11,12 +11,13 @@ import {
   setLoadingCourses,
 } from "@/lib/allData";
 import {SignUp} from "@/data/types";
+import {BASE_URL, IS_PROD, SITE_URL} from "@/contains/constants";
 
 let validCountries = countries.map((item) => item.id);
 
-const PROD = process.env.PROD;
+const PROD = IS_PROD;
 
-const apiProfileUrl = `${baseUrl}/api/profile`;
+const apiProfileUrl = `${BASE_URL}/api/profile`;
 
 class ApiSSRService {
   token = typeof window !== "undefined" ? localStorage.getItem("tokenLogin") : null;
@@ -29,7 +30,12 @@ class ApiSSRService {
 
       let response;
       if (PROD) {
-        response = await fetch(`${IP_API}?ip=${ip}`);
+        response = await fetch(`${IP_API}?ip=${ip}`,{method: "POST",
+            headers: {
+          "Content-Type": "application/json",
+              "Accept": "application/json",
+        }
+        });
       } else {
         response = await fetch(
           `https://pro.ip-api.com/json/?fields=61439&key=OE5hxPrfwddjYYP`
@@ -55,20 +61,18 @@ class ApiSSRService {
     }
   }
 
-  async getAllCourses(country?: string, tag?: string) {
+  async getAllCourses(country?: string, tag?: string, withAll: boolean=false) {
     setLoadingCourses(true);
 
     let validCountries = countries.map((item) => item.id);
-    let countryParam = "&country=int";
+    let onValidCountry = country && validCountries.includes(country)
 
-    if (country && validCountries.includes(country)) {
-      countryParam = `&country=${country}`;
-    }
-
+    const countryParam = onValidCountry ? `&country=${country}` : "&country=int";
     const tagParam = tag ? `&tag=${tag}` : "";
+    const withAllParam = withAll ? "&filter=all" : "";
 
     try {
-      const queryParams = [countryParam, tagParam].filter(Boolean).join("");
+      const queryParams = [countryParam, tagParam, withAllParam].filter(Boolean).join("");
 
      const response = await fetch(
         `${API_URL}/products?limit=-1${queryParams}`
@@ -103,7 +107,7 @@ class ApiSSRService {
         countryParam = `${country}`;
       }
 
-      console.log('getBestSellers URL', `${API_URL}/home/best-sellers?country=${countryParam}`);
+      //console.log('getBestSellers URL', `${API_URL}/home/best-sellers?country=${countryParam}`);
       const response = await fetch(
         `${API_URL}/home/best-sellers?country=${countryParam}`
       );

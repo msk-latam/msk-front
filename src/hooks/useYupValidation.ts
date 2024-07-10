@@ -14,7 +14,7 @@ export interface ContactFormSchema {
   year?: string;
   career?: string;
   Otra_especialidad?: string;
-  Preferencia_de_contactaci_n?: string[];
+  Preferencia_de_contactaci_n?: string;
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;

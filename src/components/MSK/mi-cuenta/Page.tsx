@@ -3,7 +3,7 @@ import AccountHome from "@/components/MSK/account/AccountHome";
 import { FC, useContext, useEffect, useState } from "react";
 import { User } from "@/data/types";
 import { AuthContext } from "@/context/user/AuthContext";
-import api from "../../../../Services/api";
+import api from "@/services/api";
 
 export interface PageDashboardProps {
   className?: string;

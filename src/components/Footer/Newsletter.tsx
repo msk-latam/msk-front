@@ -21,7 +21,7 @@ import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { CountryContext } from "@/context/country/CountryContext";
 import { DataContext } from "@/context/data/DataContext";
 import NcLink from "../NcLink/NcLink";
-import api from "../../../Services/api";
+import api from "@/services/api";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
 import ShowErrorMessage from "@/components/ShowErrorMessage";

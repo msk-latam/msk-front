@@ -21,7 +21,7 @@ import { ErrorMessage, Field, Form, FormikProvider, useFormik } from "formik";
 import { ContactFormSchema, useYupValidation } from "@/hooks/useYupValidation";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { DataContext } from "@/context/data/DataContext";
-import api from "../../../Services/api";
+import api from "@/services/api";
 import NcLink from "../NcLink/NcLink";
 import { usePathname, useRouter } from "next/navigation";
 import { isFormValid } from "@/components/Footer/Newsletter";
@@ -114,7 +114,7 @@ const ContactForm: FC<ContactFormProps> = ({
     Description: "",
     Especialidad: "",
     Phone: "",
-    Preferencia_de_contactaci_n: [],
+    Preferencia_de_contactaci_n: "",
     Pais: "",
     Otra_profesion: "",
     Otra_especialidad: "",
@@ -311,18 +311,7 @@ const ContactForm: FC<ContactFormProps> = ({
   const optionsArray = [1, 2, 3, 4, 5];
 
   const handleContactPreferenceChange = (value: string) => {
-    const currentPreferences = formik.values.Preferencia_de_contactaci_n;
-    if (currentPreferences && currentPreferences.includes(value)) {
-      formik.setFieldValue(
-        "Preferencia_de_contactaci_n",
-        currentPreferences.filter((item) => item !== value)
-      );
-    } else if (currentPreferences) {
-      formik.setFieldValue("Preferencia_de_contactaci_n", [
-        ...currentPreferences,
-        value,
-      ]);
-    }
+      formik.setFieldValue("Preferencia_de_contactaci_n", value);
   };
   const requiredFormFields = [
     "First_Name",
@@ -388,7 +377,7 @@ const ContactForm: FC<ContactFormProps> = ({
                   <div className={`section-title mb-30`}>
                     {hideHeader ? null : (
                       <h4
-                        className="font-medium text-3xl mb-1"
+                        className="font-medium text-violet-dark text-[36px] mb-1"
                         style={{ maxWidth: "800px" }}
                       >
                         {isEbook
@@ -404,6 +393,7 @@ const ContactForm: FC<ContactFormProps> = ({
                         </p>
                         <div className="mt-1 grid grid-cols-1 md:grid-cols-3 gap-4">
                           <Checkbox
+                            inputClass="contact-radio-input"
                             name="Preferencia_de_contactaci_n_phone"
                             label="Teléfono"
                             onChange={() =>
@@ -411,17 +401,19 @@ const ContactForm: FC<ContactFormProps> = ({
                             }
                           />
                           <Checkbox
-                            name="Preferencia_de_contactaci_n_email"
-                            label="E-mail"
-                            onChange={() =>
-                              handleContactPreferenceChange("email")
-                            }
-                          />
-                          <Checkbox
+                            inputClass="contact-radio-input"
                             name="Preferencia_de_contactaci_n_whatsapp"
                             label="WhatsApp"
                             onChange={() =>
                               handleContactPreferenceChange("whatsapp")
+                            }
+                          />
+                          <Checkbox
+                            inputClass="contact-radio-input"
+                            name="Preferencia_de_contactaci_n_email"
+                            label="E-mail"
+                            onChange={() =>
+                              handleContactPreferenceChange("email")
                             }
                           />
                         </div>

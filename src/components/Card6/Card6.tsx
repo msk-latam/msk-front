@@ -66,7 +66,7 @@ const Card6: FC<Card6Props> = ({
       </div>
 
       <NcLink
-        href={link}
+        href={`/${kind}/${slug}`}
         className={`block relative flex-shrink-0 w-full sm:w-40 h-40 sm:h-full sm:ml-5 rounded-2xl overflow-hidden mb-5 sm:mb-0 `}
       >
         <NcImage

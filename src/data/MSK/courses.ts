@@ -1,5 +1,5 @@
 // TABS LIST
-const TABS_HOME = ["Novedades", "Recomendados", "Especialidades"];
+const TABS_HOME = ["Novedades", "Recomendados"];
 
 // COURSES LIST
 const HOME_COURSES = [

@@ -32,25 +32,24 @@ const Breadcrum: React.FC<BreadcrumProps> = ({
   onProduct = false,
   onNote = false,
 }) => {
-    const pathname = usePathname();
+  const pathname = usePathname();
   const parts = pathname.split("/").filter((part) => part !== "");
 
   // Construir la ruta acumulativa
   const breadcrumMap: BreadcrumbMapping = breadcrumMapping;
 
-  const partsBreadcrumb = parts
-    .map((part) => {
+  const partsBreadcrumb = parts.map((part) => {
       if (part.length === 2 && /^[a-z]+$/i.test(part)) {
         // Si es un código ISO de país, no lo agregamos a la ruta acumulativa
         return false;
       }
 
+
       let rutaAcumulativa = "";
       rutaAcumulativa += "/" + part;
       return breadcrumMap[rutaAcumulativa];
-    })
-    .filter(Boolean) as string[][];
-  // console.log({partsBreadcrumb, breadcrumMap, parts})
+    }).filter(Boolean) as string[][];
+
 
   // Aplanar el array de segmentos
   const partsFlattened = ([] as string[])
@@ -63,12 +62,12 @@ const Breadcrum: React.FC<BreadcrumProps> = ({
       if (part.includes("mainCategory") && onNote) {
         return onNote.categories[0].name;
       }
-      //console.log(onNote);
       if (part.includes("Curso|Guía profesional")) {
         return isEbook ? onProduct.ficha.title : onProduct?.ficha?.title;
       }
 
       if (part.includes("searchCategory")) {
+        if (typeof window === "undefined") return part;
         const parametroCategoria = location.search
           .split("?")[1]
           ?.split("&")
@@ -80,6 +79,28 @@ const Breadcrum: React.FC<BreadcrumProps> = ({
 
       return part;
     });
+
+  let searchQuery = "";
+  if (typeof window !== "undefined"){
+    //Check if the url has a search query parameter "especialidad" and add it to the parts array
+    searchQuery = location.search.split("?")[1];
+  }
+
+  if (searchQuery) {
+    const searchQueryParts = searchQuery.split("&");
+    let especialidad = searchQueryParts.find((part) =>
+      part.startsWith("especialidad=")
+    );
+    if (especialidad) {
+      especialidad = especialidad.split("=")[1];
+      // @ts-ignore
+      if (specialtiesMapping[especialidad] !== undefined){
+        // @ts-ignore
+        partsFlattened.push(specialtiesMapping[especialidad]);
+      }
+    }
+  }
+
 
   const handleUrl = (part: string) => {
     let managedURL = null;
@@ -106,10 +127,8 @@ const Breadcrum: React.FC<BreadcrumProps> = ({
     return managedURL ?? `/${part.toLowerCase()}`;
   };
 
-  //console.log(pathname)
-
   return (
-    <div className="flex flex-wrap md:flex-nowrap items-center mb-10 md:max-w-[600px] w-full">
+    <div className="flex flex-wrap md:flex-nowrap items-center mb-5 w-full">
       {/* Incluir el ícono de Home solo si no estamos en la página principal */}
       {pathname !== "/" && (
         <NcLink href="/" className="">
@@ -120,7 +139,7 @@ const Breadcrum: React.FC<BreadcrumProps> = ({
             width={20}
             height={20}
             alt="Home"
-            className="h-4 lg:mr-5"
+            className="h-4 breadcrumb-home"
           />
         </NcLink>
       )}
@@ -143,9 +162,11 @@ const Breadcrum: React.FC<BreadcrumProps> = ({
 
           {index === partsFlattened.length - 1 ? (
             <span
-              className={`font-bold truncate max-w-[230px] sm:max-w-[500px] md:max-w-[300px] lg:max-w-[420px] xl:max-w-[400px] ${
-                onBlog ? "text-white" : "text-[#ABABAB]"
-              }`}
+              className={`truncate max-w-[230px] sm:max-w-[500px] md:max-w-[300px] lg:max-w-[420px] xl:max-w-[400px]
+              ${onBlog ? "font-bold text-white" : "text-[#ABABAB]"}
+              ${onProduct ? "font-bold" : ""}
+              ${onNote ? "font-bold" : ""}
+              `}
             >
               {part}
             </span>
