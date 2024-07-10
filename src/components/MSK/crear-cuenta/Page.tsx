@@ -324,7 +324,7 @@ const PageContact: FC<PageContactProps> = ({ className = "" }) => {
                     {documents[countryState.country]
                       ? documents[countryState.country].map((p: any) => (
                         <option key={p.id} value={`${p.type}/${p.id}`}>
-                          {p.type}
+                          {p.text ?? p.type}
                         </option>
                       ))
                       : ""}

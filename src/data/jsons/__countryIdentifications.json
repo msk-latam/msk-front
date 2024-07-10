@@ -1,14 +1,42 @@
 {
     "ar": [
         {
-            "id": "ar",
+            "id": "ar-dni",
             "type": "DNI"
+        },
+        {
+            "id": "ar-cuit",
+            "type": "CUIT"
+        },
+        {
+            "id": "ar-cuil",
+            "type": "CUIL"
+        },
+        {
+            "id": "ar-passport",
+            "type": "PASSPORT",
+            "text": "Pasaporte"
         }
     ],
     "co": [
         {
-            "id": "co",
-            "type": "CC"
+            "id": "co-cc",
+            "type": "CC",
+            "text": "Cédula de ciudadanía"
+        },
+        {
+            "id": "co-ce",
+            "type": "CE",
+            "text": "Cédula de extranjero"
+        },
+        {
+            "id": "co-nit",
+            "type": "NIT"
+        },
+        {
+            "id": "co-passport",
+            "type": "PASSPORT",
+            "text": "Pasaporte"
         }
     ],
     "mx": [
@@ -19,24 +47,36 @@
     ],
     "cl": [
         {
-            "id": "cl",
+            "id": "cl-rut",
             "type": "RUT"
+        },
+        {
+            "id": "cl-ci",
+            "type": "CI",
+            "text": "Cédula de identidad"
         }
     ],
     "uy": [
         {
             "id": "uy-ci",
-            "type": "CI"
+            "type": "CI",
+            "text": "Cédula de identidad"
         },
         {
             "id": "uy-rut",
             "type": "RUT"
+        },
+        {
+            "id": "uy-passport",
+            "type": "PASSPORT",
+            "text": "Pasaporte"
         }
     ],
     "ec": [
         {
             "id": "ec-ci",
-            "type": "CI"
+            "type": "CI",
+            "text": "Cédula de identidad"
         },
         {
             "id": "ec-ruc",
@@ -49,32 +89,49 @@
     ],
     "pe": [
         {
-            "id": "pe",
-            "type": "DNI"
+            "id": "pe-curp",
+            "type": "CURP"
+        },
+        {
+            "id": "pe-rfc",
+            "type": "RFC"
+        },
+        {
+            "id": "pe-ife",
+            "type": "IFE"
+        },
+        {
+            "id": "pe-passport",
+            "type": "PASSPORT",
+            "text": "Pasaporte"
         }
     ],
     "py": [
         {
             "id": "py",
-            "type": "CI"
+            "type": "CI",
+            "text": "Cédula de identidad"
         }
     ],
     "ve": [
         {
             "id": "ve",
-            "type": "CI"
+            "type": "CI",
+            "text": "Cédula de identidad"
         }
     ],
     "pn": [
         {
             "id": "pn",
-            "type": "CI"
+            "type": "CI",
+            "text": "Cédula de identidad"
         }
     ],
     "ni": [
         {
             "id": "ni",
-            "type": "CI"
+            "type": "CI",
+            "text": "Cédula de identidad"
         }
     ],
     "hn": [
@@ -98,13 +155,15 @@
     "cr": [
         {
             "id": "cr",
-            "type": "CI"
+            "type": "CI",
+            "text": "Cédula de identidad"
         }
     ],
     "bo": [
         {
             "id": "bo",
-            "type": "CI"
+            "type": "CI",
+            "text": "Cédula de identidad"
         }
     ]
 }
