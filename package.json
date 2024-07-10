@@ -32,6 +32,7 @@
     "eslint-config-next": "14.0.3",
     "formik": "^2.4.5",
     "framer-motion": "^10.16.5",
+    "http-proxy-middleware": "^3.0.0",
     "jquery": "^3.7.1",
     "lodash": "^4.17.21",
     "next": "^14.0.3",
@@ -67,5 +68,5 @@
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.4.3"
-  },"proxy": "https://dev.msklatam.tech/msk-laravel/public"
+  }
 }
