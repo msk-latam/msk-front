@@ -41,7 +41,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "wp.msklatam.com",
+        hostname: "dev.msklatam.tech",
         port: "",
         pathname: "/**",
       },
