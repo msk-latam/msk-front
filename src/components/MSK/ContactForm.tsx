@@ -311,7 +311,7 @@ const ContactForm: FC<ContactFormProps> = ({
   const optionsArray = [1, 2, 3, 4, 5];
 
   const handleContactPreferenceChange = (value: string) => {
-      formik.setFieldValue("Preferencia_de_contactaci_n", value);
+    formik.setFieldValue("Preferencia_de_contactaci_n", value);
   };
   const requiredFormFields = [
     "First_Name",
@@ -331,7 +331,8 @@ const ContactForm: FC<ContactFormProps> = ({
       formik.errors,
       formik.touched
     );
-  console.log();
+  console.log({ formError }, formik.errors);
+
   return (
     <>
       <div className="col-span-3" id="contactanos">
@@ -694,7 +695,7 @@ const ContactForm: FC<ContactFormProps> = ({
                       </div>
                       <ShowErrorMessage
                         text={formError}
-                        visible={Boolean(formError)}
+                        visible={formError !== ""}
                       />
                       <p
                         className="success-message"

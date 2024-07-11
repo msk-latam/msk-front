@@ -42,7 +42,7 @@ const PageContact: FC<PageContactProps> = ({ className = "" }) => {
   const [selectedOptionProfession, setSelectedOptionProfession] = useState("");
   const [showInputProfession, setShowInputProfession] = useState(false);
   const [showInputSpecialties, setShowInputSpecialties] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<boolean>(false);
   const [selectedProfessionId, setSelectedProfessionId] = useState<string>("");
   const [currentGroup, setCurrentGroup] = useState<any>([]);
@@ -60,8 +60,6 @@ const PageContact: FC<PageContactProps> = ({ className = "" }) => {
   );
 
   const { countryState } = useContext(CountryContext);
-
-  //console.log({product},window.location,`${window.location.origin}${window.location.pathname.replace("trial","curso")}`)
 
   const handleOptionTypeChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -323,10 +321,10 @@ const PageContact: FC<PageContactProps> = ({ className = "" }) => {
                     </option>
                     {documents[countryState.country]
                       ? documents[countryState.country].map((p: any) => (
-                        <option key={p.id} value={`${p.type}/${p.id}`}>
-                          {p.type}
-                        </option>
-                      ))
+                          <option key={p.id} value={`${p.type}/${p.id}`}>
+                            {p.type}
+                          </option>
+                        ))
                       : ""}
                   </Field>
                 </div>
@@ -364,10 +362,10 @@ const PageContact: FC<PageContactProps> = ({ className = "" }) => {
                       </option>
                       {professions
                         ? professions.map((p: any) => (
-                          <option key={p.id} value={`${p.name}/${p.id}`}>
-                            {p.name}
-                          </option>
-                        ))
+                            <option key={p.id} value={`${p.name}/${p.id}`}>
+                              {p.name}
+                            </option>
+                          ))
                         : ""}
                     </Field>
                   )}
@@ -453,21 +451,21 @@ const PageContact: FC<PageContactProps> = ({ className = "" }) => {
                           </option>
                           {selectedOptionProfession && currentGroup.length
                             ? currentGroup.map((s: any) => (
-                              <option
-                                key={`sp_group_${s.id}`}
-                                defaultValue={s.name}
-                              >
-                                {s.name}
-                              </option>
-                            ))
+                                <option
+                                  key={`sp_group_${s.id}`}
+                                  defaultValue={s.name}
+                                >
+                                  {s.name}
+                                </option>
+                              ))
                             : specialties.map((s: any) => (
-                              <option
-                                key={`sp_${s.id}`}
-                                defaultValue={s.name}
-                              >
-                                {s.name}
-                              </option>
-                            ))}
+                                <option
+                                  key={`sp_${s.id}`}
+                                  defaultValue={s.name}
+                                >
+                                  {s.name}
+                                </option>
+                              ))}
                         </Field>
                       )}
                     </div>
@@ -531,7 +529,9 @@ const PageContact: FC<PageContactProps> = ({ className = "" }) => {
                 >
                   {onRequest ? "Creando..." : "Crear"}
                 </ButtonPrimary>
-                {error && <ShowErrorMessage text={error} />}
+                {error && (
+                  <ShowErrorMessage text={error} visible={error !== ""} />
+                )}
 
                 {success && (
                   <p className="text-green-500 text-center w-full">
