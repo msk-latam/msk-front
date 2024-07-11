@@ -371,6 +371,7 @@ class ApiSSRService {
     try {
       const response = await fetch(`${baseUrl}/api/signup`, {
         method: "POST",
+        mode: 'cors',
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
