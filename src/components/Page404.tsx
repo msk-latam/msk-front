@@ -31,7 +31,7 @@ const Page404 = () => {
           </ButtonPrimary>
 
           <ButtonPrimary
-            onClick={() => router.push("/")}
+            onClick={() => router.back()}
             className="mt-4 px-5 text-violet-custom bg-transparent border border-solid border-violet-custom hover:border-red-500"
           >
             Atrás
