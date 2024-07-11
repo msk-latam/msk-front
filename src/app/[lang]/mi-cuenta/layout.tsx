@@ -6,6 +6,7 @@ import NcLink from "@/components/NcLink/NcLink";
 import { usePathname, useRouter } from "next/navigation";
 import { AuthContext } from "@/context/user/AuthContext";
 import Image from "next/image";
+import RedirectToTrial from "@/components/RedirectToTrial/RedirectToTrial";
 export const runtime = "edge";
 export interface PageDashboardProps {
   className?: string;
@@ -79,6 +80,8 @@ const PageDashboard: FC<PageDashboardProps> = ({
             heading="Mi cuenta"
             subHeading="Aquí podrás controlar todo lo referido a tus capacitaciones y tu perfil personal"
           >
+            <RedirectToTrial />
+
             <div className="flex flex-col space-y-8 xl:space-y-0 xl:flex-row">
               <div className="flex-shrink-0 w-100 xl:w-80 xl:pr-8">
                 <ul className="text-base space-y-1 text-neutral-6000 dark:text-neutral-400">
