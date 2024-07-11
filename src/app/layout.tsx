@@ -1,4 +1,4 @@
-import ".././globals.css";
+import "./globals.css";
 import "@/styles/index.scss";
 import { Poppins, Lora } from "next/font/google";
 import Footer from "@/components/Footer/Footer";
@@ -9,7 +9,6 @@ import CountryProvider from "@/context/country/CountryProvider";
 import AuthProvider from "@/context/user/AuthProvider";
 import { StoreProvider } from "@/context/storeFilters/StoreProvider";
 import Header from "@/components/Header/Header";
-import Script from "next/script";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 import React from "react";
@@ -17,7 +16,6 @@ import { Suspense } from "react";
 import { NavigationEvents } from "@/components/NavigationEvents";
 import { SITE_URL } from "@/contains/constants";
 import BotMaker from "@/scripts/BotMaker";
-import RedirectToTrial from "@/components/RedirectToTrial/RedirectToTrial";
 
 export const runtime = "edge";
 
@@ -71,12 +69,7 @@ export default async function RootLayout({ params, children }: LayoutProps) {
                   <AuthProvider>
                     <StoreProvider>
                       <Header />
-                      <RedirectToTrial />
                       {children}
-                      <Script
-                        strategy="beforeInteractive"
-                        src="https://sdk.rebill.to/v2/rebill.min.js"
-                      />
                       <BotMaker />
                       <Footer />
                       <Suspense fallback={null}>

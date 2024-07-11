@@ -12,7 +12,7 @@ export function middleware(request: NextRequest) {
 
 // only applies this middleware to files in the app directory
 export const config = {
-  matcher: "/((?!api|static|.*\\..*|_next).*)",
+  matcher: ["/((?!api|static|.*\\..*|_next).*)"],
 };
 
 export const fetchUserData = async () => {
