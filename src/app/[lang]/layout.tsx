@@ -13,13 +13,11 @@ import Script from "next/script";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 import React from "react";
-import { Analytics } from "@vercel/analytics/react"
-import {SpeedInsights} from "@vercel/speed-insights/next";
-import { Suspense } from 'react'
-import { NavigationEvents } from '@/components/NavigationEvents'
-import {SITE_URL} from "@/contains/constants";
+import { Suspense } from "react";
+import { NavigationEvents } from "@/components/NavigationEvents";
+import { SITE_URL } from "@/contains/constants";
 import BotMaker from "@/scripts/BotMaker";
-
+import RedirectToTrial from "@/components/RedirectToTrial/RedirectToTrial";
 
 export const runtime = "edge";
 
@@ -72,14 +70,15 @@ export default async function RootLayout({ params, children }: LayoutProps) {
                 <UTMProvider>
                   <AuthProvider>
                     <StoreProvider>
-                      <Header/>
+                      <Header />
+                      <RedirectToTrial />
                       {children}
                       <Script
-                          strategy="beforeInteractive"
-                          src="https://sdk.rebill.to/v2/rebill.min.js"
+                        strategy="beforeInteractive"
+                        src="https://sdk.rebill.to/v2/rebill.min.js"
                       />
                       <BotMaker />
-                      <Footer/>
+                      <Footer />
                       <Suspense fallback={null}>
                         <NavigationEvents />
                       </Suspense>
@@ -90,8 +89,6 @@ export default async function RootLayout({ params, children }: LayoutProps) {
             </CountryProvider>
           </GoogleCaptchaWrapper>
         </div>
-        <Analytics />
-      <SpeedInsights />
       </body>
     </html>
   );
