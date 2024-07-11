@@ -369,7 +369,7 @@ class ApiSSRService {
 
   async postSignUp(jsonData: SignUp) {
     try {
-      const response = await fetch(`${baseUrl}/api/signup`, {
+      const response = await fetch(`/api/signup`, {
         method: "POST",
         mode: 'cors',
         headers: {
