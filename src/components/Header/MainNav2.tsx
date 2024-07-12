@@ -36,9 +36,11 @@ const MainNav2: FC = () => {
 
   useEffect(() => {
     setIsOnBlog(pathName.includes("/blog"));
-    setIsOnArchive(pathName.includes("archivo"));
+    setIsOnArchive(pathName.includes("/archivo"));
     setInitialLoad(true);
-  }, []);
+  }, [pathName]);
+
+  
   
   return (
     <div className={`nc-MainNav nc-MainNav2 relative z-10 container`}>

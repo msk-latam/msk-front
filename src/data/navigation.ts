@@ -515,21 +515,21 @@ export const NAVIGATION_MSK: NavItemType[] = [
 const categoriesMenuBlog: NavItemType[] = [
   {
     id: ncNanoId(),
-    href: "/archivo",
+    href: "/archivo/",
     name: "Medicina",
-    search: "/archivo?categoria=medicina",
+    search: "?categoria=medicina",
   },
   {
     id: ncNanoId(),
-    href: "/archivo",
+    href: "/archivo/",
     name: "Enfermería",
-    search: "/archivo?categoria=enfermeria",
+    search: "?categoria=enfermeria",
   },
   {
     id: ncNanoId(),
-    href: "/archivo",
+    href: "/archivo/",
     name: "E-Learning",
-    search: "/archivo?categoria=e-learning",
+    search: "?categoria=e-learning",
   },
 ];
 
@@ -574,21 +574,16 @@ export const NAVIGATION_BLOG_MSK: NavItemType[] = [
 ];
 
 const categoriesMenuArchive: NavItemType[] = [
-  /*  {
-    id: ncNanoId(),
-    href: "/archivo",
-    name: "Actualidad",
-    search: "?categoria=Actualidad",
-  }, */
+  
   {
     id: ncNanoId(),
-    href: "/archivo",
+    href: "/archivo/",
     name: "Medicina",
     search: "?categoria=medicina",
   },
   {
     id: ncNanoId(),
-    href: "/archivo",
+    href: "/archivo/",
     name: "Enfermería",
     search: "?categoria=enfermeria",
   },
