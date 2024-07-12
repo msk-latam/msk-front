@@ -22,7 +22,6 @@ const SearchBar: FC<SearchBarProps> = ({ onSearch }) => {
 
     console.log("store filters", storeFilters);
   }
-
   return (
     <div className="corse-bar-wrapper grid-area-search">
       <div className="bar-search ">

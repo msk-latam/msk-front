@@ -302,7 +302,7 @@ const StoreContent: FC<{}> = () => {
 
           let searchMatch = true;
           if (searchText) {
-            searchMatch = removeAccents(product.title.toLowerCase()).includes(
+            searchMatch = removeAccents(product.title.toLowerCase()).startsWith(
               removeAccents(searchText.toLowerCase())
             );
           }
