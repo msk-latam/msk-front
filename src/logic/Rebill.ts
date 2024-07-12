@@ -1,19 +1,23 @@
 import { sendToZoho } from "./Zoho";
 import { ContactCRM, JsonMapping } from "@/data/types";
 import { Dispatch, SetStateAction } from "react";
-import rebillCountryPriceMapping from "@/data/jsons/__rebillCurrencyPrices.json"
+import rebillCountryPriceMapping from "@/data/jsons/__rebillCurrencyPrices.json";
 import { getEnv } from "@/utils/getEnv";
 import ssr from "@/services/ssr";
 import translateDocumentType from "@/utils/translateDocumentType";
-import {IS_PROD} from "@/contains/constants";
+import { IS_PROD } from "@/contains/constants";
 import {
   NEXT_PUBLIC_REBILL_API_KEY_PRD,
   NEXT_PUBLIC_REBILL_API_KEY_TEST,
   NEXT_PUBLIC_REBILL_CL_API_KEY_PRD,
-  NEXT_PUBLIC_REBILL_CL_ORG_ID_PRD, NEXT_PUBLIC_REBILL_COP_API_KEY_PRD, NEXT_PUBLIC_REBILL_COP_ORG_ID_PRD,
+  NEXT_PUBLIC_REBILL_CL_ORG_ID_PRD,
+  NEXT_PUBLIC_REBILL_COP_API_KEY_PRD,
+  NEXT_PUBLIC_REBILL_COP_ORG_ID_PRD,
   NEXT_PUBLIC_REBILL_ORG_ID_PRD,
   NEXT_PUBLIC_REBILL_ORG_ID_TEST,
-  NEXT_PUBLIC_REBILL_URL, NEXT_PUBLIC_REBILL_UY_API_KEY_PRD, NEXT_PUBLIC_REBILL_UY_ORG_ID_PRD,
+  NEXT_PUBLIC_REBILL_URL,
+  NEXT_PUBLIC_REBILL_UY_API_KEY_PRD,
+  NEXT_PUBLIC_REBILL_UY_ORG_ID_PRD,
   NEXT_PUBLIC_REBILL_REBILL_CL_FREEMIUM_PRD,
   NEXT_PUBLIC_REBILL_REBILL_UY_FREEMIUM_PRD,
   NEXT_PUBLIC_REBILL_REBILL_CO_FREEMIUM_PRD,
@@ -38,20 +42,33 @@ declare global {
 
 let PROD = IS_PROD;
 
-
-
-const rebillCountriesPrices: JsonMapping = rebillCountryPriceMapping
+const rebillCountriesPrices: JsonMapping = rebillCountryPriceMapping;
 
 export const REBILL_CONF = {
   ORG_ID: PROD ? NEXT_PUBLIC_REBILL_ORG_ID_PRD : NEXT_PUBLIC_REBILL_ORG_ID_TEST, //getEnv("REBILL_ORG_ID")
-  API_KEY: PROD ? NEXT_PUBLIC_REBILL_API_KEY_PRD : NEXT_PUBLIC_REBILL_API_KEY_TEST, //getEnv("REBILL_API_KEY")
+  API_KEY: PROD
+    ? NEXT_PUBLIC_REBILL_API_KEY_PRD
+    : NEXT_PUBLIC_REBILL_API_KEY_TEST, //getEnv("REBILL_API_KEY")
   URL: NEXT_PUBLIC_REBILL_URL,
   GATEWAYS: {
-    ST: ["cr","hn","ve","ni","sv","bo","py","gt","pa","ec"],
+    ST: ["cr", "hn", "ve", "ni", "sv", "bo", "py", "gt", "pa", "ec"],
     MP: [], //ar is need it!, rebill is provisional!
-    REBILL: ['cl','co','uy','mx'],
+    REBILL: ["cl", "co", "uy", "mx"],
     // for old rebill is provisional!
-    DEPRECATE_REBILL:['ar',"pe","cr","hn","ve","ni","sv","bo","py","gt","pa","ec"]
+    DEPRECATE_REBILL: [
+      "ar",
+      "pe",
+      "cr",
+      "hn",
+      "ve",
+      "ni",
+      "sv",
+      "bo",
+      "py",
+      "gt",
+      "pa",
+      "ec",
+    ],
   },
   PRICES: {
     NEXT_PUBLIC_REBILL_REBILL_CL_FREEMIUM_PRD,
@@ -68,32 +85,28 @@ export const REBILL_CONF = {
     NEXT_PUBLIC_REBILL_STRIPE_CR_FREEMIUM_PRD,
     NEXT_PUBLIC_REBILL_STRIPE_HN_FREEMIUM_PRD,
     NEXT_PUBLIC_REBILL_STRIPE_USD_FREEMIUM_PRD,
-}
+  },
 };
 
 export const getRebillInitialization = (country: string) => {
-
-  switch (country){
-    case 'cl':
+  switch (country) {
+    case "cl":
       return {
         organization_id: NEXT_PUBLIC_REBILL_CL_ORG_ID_PRD,
         api_key: NEXT_PUBLIC_REBILL_CL_API_KEY_PRD,
         api_url: REBILL_CONF.URL,
-
       };
-    case 'co':
+    case "co":
       return {
         organization_id: NEXT_PUBLIC_REBILL_COP_ORG_ID_PRD,
         api_key: NEXT_PUBLIC_REBILL_COP_API_KEY_PRD,
         api_url: REBILL_CONF.URL,
-
       };
-    case 'uy':
+    case "uy":
       return {
         organization_id: NEXT_PUBLIC_REBILL_UY_ORG_ID_PRD,
         api_key: NEXT_PUBLIC_REBILL_UY_API_KEY_PRD,
         api_url: REBILL_CONF.URL,
-
       };
     default:
       //return te old rebill DEPRECATE_REBILL
@@ -103,8 +116,7 @@ export const getRebillInitialization = (country: string) => {
         api_url: REBILL_CONF.URL,
       };
   }
-
-}
+};
 
 const mappingCheckoutFields = (contactZoho: ContactCRM) => {
   //console.log({contactZoho})
@@ -142,13 +154,25 @@ const mappingCheckoutFields = (contactZoho: ContactCRM) => {
 };
 
 const getPlan = (country: string) => {
-  const gateway = REBILL_CONF.GATEWAYS.REBILL.includes(country) ? "REBILL" : null;
-  const isDeprecateRebill = REBILL_CONF.GATEWAYS.DEPRECATE_REBILL.includes(country) ? "REBILL" : null;
-  const isDeprecateRebillMP = isDeprecateRebill ? (country === "ar"? "MP" : "STRIPE"): null;
+  const gateway = REBILL_CONF.GATEWAYS.REBILL.includes(country)
+    ? "REBILL"
+    : null;
+  const isDeprecateRebill = REBILL_CONF.GATEWAYS.DEPRECATE_REBILL.includes(
+    country
+  )
+    ? "REBILL"
+    : null;
+  const isDeprecateRebillMP = isDeprecateRebill
+    ? country === "ar"
+      ? "MP"
+      : "STRIPE"
+    : null;
   const countryPrice = rebillCountriesPrices[country];
-  const price = getEnv(`REBILL_${gateway ?? isDeprecateRebillMP}_${countryPrice}_FREEMIUM`);
+  const price = getEnv(
+    `REBILL_${gateway ?? isDeprecateRebillMP}_${countryPrice}_FREEMIUM`
+  );
 
-  console.log({price, countryPrice})
+  console.log({ price, countryPrice });
 
   return {
     id: price,
@@ -167,7 +191,10 @@ export const initRebill = async (
   setMountedInput: Dispatch<SetStateAction<boolean>>
 ) => {
   try {
-    const contactZoho: ContactCRM = await ssr.getEmailByIdZohoCRM("Contacts", user.email);
+    const contactZoho: ContactCRM = await ssr.getEmailByIdZohoCRM(
+      "Contacts",
+      user.email
+    );
     const customerRebill = mappingCheckoutFields(contactZoho);
     //Seteo de customer
     RebillSDKCheckout.setCustomer(customerRebill);
@@ -178,7 +205,7 @@ export const initRebill = async (
         type: translateDocumentType(contactZoho.Tipo_de_Documento),
         value: contactZoho.Identificacion,
       },
-    }
+    };
     console.log(cardHolder);
     //Seteo de identidicacion del customer
     RebillSDKCheckout.setCardHolder(cardHolder);
@@ -197,12 +224,20 @@ export const initRebill = async (
     //Seteo de callbacks en saco de que el pago este correcto o tengo algun fallo
     RebillSDKCheckout.setCallbacks({
       onSuccess: (response: any) => {
-        console.log("Rebill success callback")
-        sendToZoho(response, contactZoho, country, product, setShow, setPaymentCorrect, setFaliedMessage)
+        console.log("Rebill success callback");
+        sendToZoho(
+          response,
+          contactZoho,
+          country,
+          product,
+          setShow,
+          setPaymentCorrect,
+          setFaliedMessage
+        );
       },
       onError: (error: any) => {
-         console.error({ callbackRebillError: error })
-        },
+        console.error({ callbackRebillError: error });
+      },
     });
 
     //Seteo metadata de la suscripcio
@@ -256,8 +291,8 @@ export const initRebill = async (
 
     //Aplicar configuracion al DOM
     RebillSDKCheckout.setElements("rebill_elements");
-    setMountedInput(true)
+    setMountedInput(true);
   } catch (e: any) {
-    console.error({ e })
+    console.error({ e });
   }
 };
