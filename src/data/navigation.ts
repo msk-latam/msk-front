@@ -561,7 +561,7 @@ export const NAVIGATION_BLOG_MSK: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/blog",
-    name: "Categorías",
+    name: "Secciones",
     type: "dropdown",
     children: categoriesMenuBlog,
   },

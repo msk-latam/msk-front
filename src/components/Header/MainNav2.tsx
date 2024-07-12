@@ -35,7 +35,7 @@ const MainNav2: FC = () => {
   const pathName = usePathname();
 
   useEffect(() => {
-    setIsOnBlog(pathName.includes("blog"));
+    setIsOnBlog(pathName.includes("/blog"));
     setIsOnArchive(pathName.includes("archivo"));
     setInitialLoad(true);
   }, []);
