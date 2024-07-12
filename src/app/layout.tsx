@@ -16,6 +16,9 @@ import { Suspense } from "react";
 import { NavigationEvents } from "@/components/NavigationEvents";
 import { SITE_URL } from "@/contains/constants";
 import BotMaker from "@/scripts/BotMaker";
+import { GoogleTagManager } from "@next/third-parties/google";
+import Script from "next/script";
+import EmblueScript from "@/components/EmblueScript/EmblueScript";
 
 export const runtime = "edge";
 
@@ -60,6 +63,8 @@ interface LayoutProps {
 export default async function RootLayout({ params, children }: LayoutProps) {
   return (
     <html lang="es" className={poppins.className + " " + loraItalic.variable}>
+      <GoogleTagManager gtmId="GTM-NZ95R2P" />
+      <EmblueScript />
       <body>
         <div className="bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
           <GoogleCaptchaWrapper>
@@ -72,6 +77,11 @@ export default async function RootLayout({ params, children }: LayoutProps) {
                       {children}
                       <BotMaker />
                       <Footer />
+                      <Script
+                        strategy="beforeInteractive"
+                        src="https://sdk.rebill.to/v2/rebill.min.js"
+                      />
+
                       <Suspense fallback={null}>
                         <NavigationEvents />
                       </Suspense>
