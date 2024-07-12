@@ -1,6 +1,5 @@
 "use client";
 import { FC, ReactNode } from "react";
-import { parseHtml } from "@/utils/parseHTML";
 import { stripHtmlTags } from "@/lib/pageHeadUtils";
 
 interface ContainerSecondaryProps {

@@ -1,6 +1,6 @@
-import {TABS_HOME} from "@/data/MSK/courses";
-import {TABS_BLOG} from "@/data/MSK/blog";
-import {HOME_SPECIALTIES} from "@/data/MSK/specialties";
+import { TABS_HOME } from "@/data/MSK/courses";
+import { TABS_BLOG } from "@/data/MSK/blog";
+import { HOME_SPECIALTIES } from "@/data/MSK/specialties";
 import SectionSliderPosts from "@/components/Sections/SectionSliderPosts";
 import BlogSummary from "@/components/MSK/BlogSummary";
 import BackgroundSection from "@/components/BackgroundSection/BackgroundSection";
@@ -9,7 +9,7 @@ import HomeExtraInfo from "@/components/MSK/HomeExtraInfo";
 import SectionHero from "@/components/SectionHero/SectionHero";
 import SectionGridCategoryBox from "@/components/SectionGridCategoryBox/SectionGridCategoryBox";
 import BrandSlider from "@/components/MSK/BrandSlider";
-import {cookies} from "next/headers";
+import { cookies } from "next/headers";
 import ssr from "@/services/ssr";
 import {
   getAllBestSellers,
@@ -24,22 +24,26 @@ import {
   pageHomeWpContent,
 } from "@/lib/allData";
 import ContactForm from "@/components/MSK/ContactForm";
-import {generateSchemaJson} from "@/lib/pageSchemaJson";
-import {removeFirstSubdomain} from "@/utils/removeFirstSubdomain";
+import { generateSchemaJson } from "@/lib/pageSchemaJson";
+import { removeFirstSubdomain } from "@/utils/removeFirstSubdomain";
 import WelcomeBox from "@/components/WelcomeBox/WelcomeBox";
-import {FetchCourseType, WpContentData} from "@/data/types";
+import { FetchCourseType, WpContentData } from "@/data/types";
 import Phrase from "@/components/Phrase/Phrase";
 import CommentReferences from "@/components/CommentReferences";
 import Questions from "@/components/Questions/Questions";
+import { SITE_URL } from "@/contains/constants";
 
-export async function generateMetadata() {
-
+export async function generateMetadata({
+  params,
+}: {
+  params: { lang: string };
+}) {
   return {
     title: "MSK",
     description: "Una propuesta moderna para expandir tus metas profesionales",
     alternates: {
-      canonical: "/",
-    }
+      canonical: `${SITE_URL}/${params.lang}`,
+    },
   };
 }
 
@@ -52,7 +56,7 @@ export interface FAQS {
   items: { titulo: string; parrafo: string }[];
 }
 
-const PageHome: React.FC<PageProps> = async ({params}) => {
+const PageHome: React.FC<PageProps> = async ({ params }) => {
   const jsonLd = generateSchemaJson("WebSite");
   const currentCountry = params.lang || cookies().get("country")?.value;
   const loadingBestSellers = false;
@@ -89,10 +93,10 @@ const PageHome: React.FC<PageProps> = async ({params}) => {
               heading={heroTitle}
             />
           </div>
-          <WelcomeBox content={pageHomeWpContent as WpContentData}/>
+          <WelcomeBox content={pageHomeWpContent as WpContentData} />
           <div className="container relative">
-            <BrandSlider/>
-            <Phrase content={pageHomeWpContent?.cedentes.texto as string}/>
+            <BrandSlider />
+            <Phrase content={pageHomeWpContent?.cedentes.texto as string} />
             <SectionGridCategoryBox
               headingCenter={false}
               categories={HOME_SPECIALTIES.filter((_, i) => i < 4)}
@@ -100,16 +104,16 @@ const PageHome: React.FC<PageProps> = async ({params}) => {
               className="pb-16 lg:pb-28"
             />
 
-            <HomeExtraInfo country={currentCountry}/>
+            <HomeExtraInfo country={currentCountry} />
           </div>
 
-          <CommentReferences content={pageHomeWpContent as WpContentData}/>
-
+          <CommentReferences content={pageHomeWpContent as WpContentData} />
 
           <div className="container relative">
             <CoursesForYou
               courses={getAllCourses().filter(
-                (course: FetchCourseType) => course.father_post_type === "course"
+                (course: FetchCourseType) =>
+                  course.father_post_type === "course"
               )}
               bestSeller={getAllBestSellers()}
               tabs={TABS_HOME}
@@ -145,9 +149,9 @@ const PageHome: React.FC<PageProps> = async ({params}) => {
               uniqueSliderClass="pageNewHome-section6"
             />
           </div>
-        <div className="container grid grid-cols-1 md:grid-cols-3 gap-4 my-16">
-          <ContactForm/>
-        </div>
+          <div className="container grid grid-cols-1 md:grid-cols-3 gap-4 my-16">
+            <ContactForm />
+          </div>
         </section>
       </div>
     </div>

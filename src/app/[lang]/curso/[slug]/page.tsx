@@ -1,8 +1,7 @@
 import SingleProductDetail from "@/components/SingleProductDetail/SingleProductDetail";
 import React, { FC } from "react";
 import ssr from "@/services/ssr";
-import PageHeadServer from "@/components/Head/PageHeadServer";
-import {SITE_URL} from "@/contains/constants";
+import { SITE_URL } from "@/contains/constants";
 
 interface PageCourseProps {
   params: any;

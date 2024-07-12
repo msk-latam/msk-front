@@ -5,7 +5,6 @@ import {
   zsRegenerateCaptcha,
   isFormDisabled,
 } from "./arrepentimientoCompra";
-import PageHeadServer from "@/components/Head/PageHeadServer";
 import LayoutPage from "@/components/MSK/LayoutPage";
 import Link from "next/link";
 

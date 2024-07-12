@@ -331,7 +331,6 @@ const ContactForm: FC<ContactFormProps> = ({
       formik.errors,
       formik.touched
     );
-  console.log({ formError }, formik.errors);
 
   return (
     <>
