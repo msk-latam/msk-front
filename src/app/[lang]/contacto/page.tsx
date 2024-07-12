@@ -1,8 +1,6 @@
 import LayoutPage from "@/components/MSK/LayoutPage";
 import { FC } from "react";
 import ContactForm from "@/components/MSK/ContactForm";
-import Head from "next/head";
-import PageHeadServer from "@/components/Head/PageHeadServer";
 
 export interface PageContactProps {
   className?: string;

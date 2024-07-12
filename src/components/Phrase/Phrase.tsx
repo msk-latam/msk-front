@@ -1,6 +1,5 @@
 "use client";
 import React, { FC } from "react";
-import { parseHtml } from "@/utils/parseHTML";
 import { stripHtmlTags } from "@/lib/pageHeadUtils";
 
 const Phrase: FC<{ content: string }> = ({ content }) => {
