@@ -307,9 +307,12 @@ const StoreContent: FC<{}> = () => {
             );
           }
 
-          let priceMatch =
-            product.father_post_type === "course" &&
-            Number(product.total_price) != 0;
+          let priceMatch = true;
+          if (selectedResources[0].includes("Cursos")) {
+            priceMatch =
+              product.father_post_type === "course" &&
+              Number(product.total_price) != 0;
+          }
 
           return (
             specialtiesMatch &&
