@@ -1,7 +1,6 @@
 "use client";
 import { FC } from "react";
 import Badge from "@/components/Badge/Badge";
-import { parseHtml } from "@/utils/parseHTML";
 import { WpContentData } from "@/data/types";
 import { stripHtmlTags } from "@/lib/pageHeadUtils";
 

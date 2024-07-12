@@ -11,7 +11,7 @@ const useTyC = (country: string) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/tyc?country=${country}`);
+        const response = await axios.get(`${API_URL}/contratacion?country=${country}`);
         setData(response.data);
       } catch (err) {
         console.log({ err });

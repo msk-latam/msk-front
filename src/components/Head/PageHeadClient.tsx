@@ -5,7 +5,6 @@ import { getDescriptionContent } from "@/lib/pageHeadUtils";
 import { PageFilter } from "@/data/types";
 import { generateSchemaJson } from "@/lib/pageSchemaJson";
 import { removeUrlParams } from "@/lib/removeUrlParams";
-import Script from "next/script";
 
 interface PageHeadClientProps {
   title: string;
