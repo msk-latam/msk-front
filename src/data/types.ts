@@ -64,20 +64,20 @@ export interface Contact {
   year?: string;
   courses_progress: CourseProgress[];
   type_doc?: string;
-  trial_course_sites?: TrialCourseSite[]
+  trial_course_sites?: TrialCourseSite[];
 }
 
 export interface TrialCourseSite {
-  id: number
-  trial_status: any
-  contact_entity_id: string
-  contractJson: string
-  trial_finish_at: string
-  trial_cancelled_at: any
-  retry_trial_quantity: number
-  rebill_response: any
-  created_at: string
-  updated_at: string
+  id: number;
+  trial_status: any;
+  contact_entity_id: string;
+  contractJson: string;
+  trial_finish_at: string;
+  trial_cancelled_at: any;
+  retry_trial_quantity: number;
+  rebill_response: any;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface Contract {
@@ -183,8 +183,7 @@ export interface User {
 export interface UserProfile {
   courses_progress: CourseProgress[];
   contact?: Contact;
-  identification?:string;
-
+  identification?: string;
 }
 
 export interface CustomUser {
@@ -458,7 +457,7 @@ export interface FetchCourseType {
   excerpt?: string;
   date?: string;
   author?: any;
-  reading_time:string;
+  reading_time: string;
   created_at: string;
 }
 
@@ -600,14 +599,15 @@ export interface BannerImg {
   id?: number;
   imagen_desktop: {
     url?: string;
-    link: string };
-  imagen_mobile: { link: string, url?: string };
+    link: string;
+  };
+  imagen_mobile: { link: string; url?: string };
   url_banner?: string | { title?: string; url: string; target?: string };
   url?: { href: string };
 }
 
 export interface AuthState {
-  stateLoaded : boolean;
+  stateLoaded: boolean;
   isAuthenticated: boolean;
   user: User | null;
   profile: UserProfile | null;
@@ -641,73 +641,73 @@ export interface JsonInstallmentsMapping {
     gateway: string;
   };
 }
-export interface RebillTransaction{
-  id: string,
+export interface RebillTransaction {
+  id: string;
   cartId: string;
   organizationId: string;
   paidBags: [
-      {
-          payment: {
-              amount: string;
-              id: string;
-              currency: string;
-              status: string;
-              gateway: {
-                  id: string;
-                  type: string;
-                  country: string;
-                  description:string;
-                  status: string;
-              },
-              errorMessage: string;
-              createdAt: string;
-              source: string;
-          },
-          prices: [
-              {
-                  id: string;
-                  quantity: number
-              }
-          ],
-          schedules: string[]
-      }
-  ],
+    {
+      payment: {
+        amount: string;
+        id: string;
+        currency: string;
+        status: string;
+        gateway: {
+          id: string;
+          type: string;
+          country: string;
+          description: string;
+          status: string;
+        };
+        errorMessage: string;
+        createdAt: string;
+        source: string;
+      };
+      prices: [
+        {
+          id: string;
+          quantity: number;
+        }
+      ];
+      schedules: string[];
+    }
+  ];
   buyer: {
-      customer: {
-          id: string;
-          firstName: string;
-          lastName:string;
-          cellPhone: string;
-          birthday: string;
-          taxIdType:string;
-          taxIdNumber: string;
-          personalIdType:string;
-          personalIdNumber: string;
-          userEmail: string;
-          address: {
-              street: string;
-              city: string;
-              state: string;
-              country: string;
-              zipCode: string;
-              number: string;
-              floor: string;
-              apt: string;
-              description: string;
-          }
-      },
-      card: {
-          id: string;
-          bin: number;
-          last4: string;
-          cardHolder: string;
-          cardNumber: string;
-          expiration: {
-              month: number;
-              year: string;
-          }
-      }
-  },
+    customer: {
+      id: string;
+      firstName: string;
+      lastName: string;
+      cellPhone: string;
+      birthday: string;
+      taxIdType: string;
+      taxIdNumber: string;
+      personalIdType: string;
+      personalIdNumber: string;
+      userEmail: string;
+      address: {
+        street: string;
+        city: string;
+        state: string;
+        country: string;
+        zipCode: string;
+        number: string;
+        floor: string;
+        apt: string;
+        description: string;
+      };
+    };
+    card: {
+      id: string;
+      bin: number;
+      last4: string;
+      cardHolder: string;
+      cardNumber: string;
+      expiration: {
+        month: number;
+        year: string;
+      };
+    };
+  };
   type: string;
   createdAt: string;
 }
@@ -747,6 +747,7 @@ export interface SinglePageType extends PostDataType {
 export interface JsonIdentificationsMapping {
   [key: string]: Array<{
     id: string;
+    text?: string;
     type: string;
   }>;
 }

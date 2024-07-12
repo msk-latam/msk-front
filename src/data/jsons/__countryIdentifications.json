@@ -1,111 +1,169 @@
 {
-    "ar": [
-        {
-            "id": "ar",
-            "type": "DNI"
-        }
-    ],
-    "co": [
-        {
-            "id": "co",
-            "type": "CI"
-        }
-    ],
-    "mx": [
-        {
-            "id": "mx",
-            "type": "RFC"
-        }
-    ],
-    "cl": [
-        {
-            "id": "cl",
-            "type": "RUT"
-        }
-    ],
-    "uy": [
-        {
-            "id": "uy-ci",
-            "type": "CI"
-
-        },
-        {
-            "id": "uy-rut",
-            "type": "RUT"
-        }
-    ],
-    "ec": [
-        {
-            "id": "ec-ci",
-            "type": "CI"
-        },
-        {
-            "id": "ec-ruc",
-            "type": "RUC"
-        },
-        {
-            "id": "ec-pasaporte",
-            "type": "Pasaporte"
-        }
-    ],
-    "pe": [
-        {
-            "id": "pe",
-            "type": "DNI"
-        }
-    ],
-    "py": [
-        {
-            "id": "py",
-            "type": "CI"
-        }
-    ],
-    "ve": [
-        {
-            "id": "ve",
-            "type": "CI"
-        }
-    ],
-    "pn": [
-        {
-            "id": "pn",
-            "type": "CI"
-        }
-    ],
-    "ni": [
-        {
-            "id": "ni",
-            "type": "CI"
-        }
-    ],
-    "hn": [
-        {
-            "id": "hn",
-            "type": "DNI"
-        }
-    ],
-    "gt": [
-        {
-            "id": "gt",
-            "type": "DNI"
-        }
-    ],
-    "sl": [
-        {
-            "id": "sl",
-            "type": "DUI"
-        }
-    ],
-    "cr": [
-        {
-            "id": "cr",
-            "type": "CI"
-        }
-    ],
-    "bo": [
-        {
-            "id": "bo",
-            "type": "CI"
-        }
-    ]
+  "ar": [
+    {
+      "id": "ar-dni",
+      "type": "DNI"
+    },
+    {
+      "id": "ar-cuit",
+      "type": "CUIT"
+    },
+    {
+      "id": "ar-cuil",
+      "type": "CUIL"
+    },
+    {
+      "id": "ar-passport",
+      "type": "PASSPORT",
+      "text": "Pasaporte"
+    }
+  ],
+  "co": [
+    {
+      "id": "co-cc",
+      "type": "CC",
+      "text": "Cédula de ciudadanía"
+    },
+    {
+      "id": "co-ce",
+      "type": "CE",
+      "text": "Cédula de extranjero"
+    },
+    {
+      "id": "co-nit",
+      "type": "NIT"
+    },
+    {
+      "id": "co-passport",
+      "type": "PASSPORT",
+      "text": "Pasaporte"
+    }
+  ],
+  "mx": [
+    {
+      "id": "mx",
+      "type": "RFC"
+    }
+  ],
+  "cl": [
+    {
+      "id": "cl-rut",
+      "type": "RUT"
+    },
+    {
+      "id": "cl-ci",
+      "type": "CI",
+      "text": "Cédula de identidad"
+    }
+  ],
+  "uy": [
+    {
+      "id": "uy-ci",
+      "type": "CI",
+      "text": "Cédula de identidad"
+    },
+    {
+      "id": "uy-rut",
+      "type": "RUT"
+    },
+    {
+      "id": "uy-passport",
+      "type": "PASSPORT",
+      "text": "Pasaporte"
+    }
+  ],
+  "ec": [
+    {
+      "id": "ec-ci",
+      "type": "CI",
+      "text": "Cédula de identidad"
+    },
+    {
+      "id": "ec-ruc",
+      "type": "RUC"
+    },
+    {
+      "id": "ec-pasaporte",
+      "type": "Pasaporte"
+    }
+  ],
+  "pe": [
+    {
+      "id": "pe-curp",
+      "type": "CURP"
+    },
+    {
+      "id": "pe-rfc",
+      "type": "RFC"
+    },
+    {
+      "id": "pe-ife",
+      "type": "IFE"
+    },
+    {
+      "id": "pe-passport",
+      "type": "PASSPORT",
+      "text": "Pasaporte"
+    }
+  ],
+  "py": [
+    {
+      "id": "py",
+      "type": "CI",
+      "text": "Cédula de identidad"
+    }
+  ],
+  "ve": [
+    {
+      "id": "ve",
+      "type": "CI",
+      "text": "Cédula de identidad"
+    }
+  ],
+  "pn": [
+    {
+      "id": "pn",
+      "type": "CI",
+      "text": "Cédula de identidad"
+    }
+  ],
+  "ni": [
+    {
+      "id": "ni",
+      "type": "CI",
+      "text": "Cédula de identidad"
+    }
+  ],
+  "hn": [
+    {
+      "id": "hn",
+      "type": "DNI"
+    }
+  ],
+  "gt": [
+    {
+      "id": "gt",
+      "type": "DNI"
+    }
+  ],
+  "sl": [
+    {
+      "id": "sl",
+      "type": "DUI"
+    }
+  ],
+  "cr": [
+    {
+      "id": "cr",
+      "type": "CI",
+      "text": "Cédula de identidad"
+    }
+  ],
+  "bo": [
+    {
+      "id": "bo",
+      "type": "CI",
+      "text": "Cédula de identidad"
+    }
+  ]
 }
