@@ -1,16 +1,28 @@
 import React, { FC } from "react";
 import { useStoreFilters } from "@/context/storeFilters/StoreProvider";
-const SearchBar: FC = () => {
-  let {storeFilters, addFilter, removeFilter} = useStoreFilters();
-  function handleSearch( event: React.ChangeEvent<HTMLInputElement>){
-    console.log('updating store filters SEARCH');
-    if (event.target.value){
-      addFilter('search', event.target.value);
-    }else{
-      removeFilter('search', '');
+
+interface SearchBarProps {
+  onSearch?: (selectedOption: string) => void;
+}
+
+const SearchBar: FC<SearchBarProps> = ({ onSearch }) => {
+  let { storeFilters, addFilter, removeFilter } = useStoreFilters();
+
+  function handleSearch(event: React.ChangeEvent<HTMLInputElement>) {
+    console.log("updating store filters SEARCH");
+    if (event.target.value) {
+      addFilter("search", event.target.value);
+    } else {
+      removeFilter("search", "");
     }
-    console.log('store filters', storeFilters);
+
+    if (typeof onSearch === "function") {
+      onSearch(event.target.value);
+    }
+
+    console.log("store filters", storeFilters);
   }
+
   return (
     <div className="corse-bar-wrapper grid-area-search">
       <div className="bar-search ">

@@ -8,6 +8,7 @@ import ShowingItems from "./ShowingItems";
 
 interface Props {
   onFilter: (selectedOption: string) => void;
+  onSearch: (selectedOption: string) => void;
   showingCount: number;
   itemsPerPage: number;
   length: number;
@@ -20,19 +21,27 @@ const filterItems = [
   { name: "Más horas", value: "mas_horas" },
   { name: "Menos horas", value: "menos_horas" },
 ];
-const StoreBar: FC<Props> = ({  onFilter, length, showingCount, itemsPerPage, filtersCount }) => {
+const StoreBar: FC<Props> = ({
+  onFilter,
+  onSearch,
+  length,
+  showingCount,
+  itemsPerPage,
+  filtersCount,
+}) => {
   const [selectedOption, setSelectedOption] = useState("Novedades");
 
   const handleSelectOption = (event: { name: string; value: string }) => {
     setSelectedOption(event.name);
     onFilter(event.value);
   };
+
   return (
     <div className="course-bar-up-area">
       <div className="grid grid-cols-1 gap-2">
         <div className="course-main-wrapper mb-30 gap-2 xl:flex-nowrap px-0 mx-0">
           <FiltersApply filtersCount={filtersCount} />
-          <SearchBar/>
+          <SearchBar onSearch={onSearch} />
           <div className="course-sidebar-tab">
             <div className="course-sidebar-wrapper">
               <ShowingItems showingCount={showingCount} length={length} />
