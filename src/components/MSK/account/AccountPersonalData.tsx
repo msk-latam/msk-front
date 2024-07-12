@@ -31,6 +31,7 @@ import countryIdentificationsMapping from "../../../data/jsons/__countryIdentifi
 import InputField from "@/components/InputField/InputField";
 import api from "@/services/api";
 import { useRouter } from "next/navigation";
+import translateDocumentType from "@/utils/translateDocumentType";
 
 interface Props {
   user: User;
@@ -97,7 +98,7 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
     userData?.contact?.phone || ""
   );
   const [selectedDocument, setSelectedDocument] = useState<string>(
-    userData.contact?.type_doc || ""
+    (userData.contact?.type_doc as string) || ""
   );
   const [selectedDocumentId, setSelectedDocumentId] = useState<string>(
     userData.contact?.type_doc
@@ -234,8 +235,8 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
     postal_code: Yup.string().required("El código postal es requerido"),
     address: Yup.string().required("La dirección es requerida"),
     type_doc: Yup.string().required("El tipo de identificacion es requerido"),
-    identification: Yup.string()
-      .test(
+    identification: Yup.string().required("Este campo es obligatorio"),
+    /* .test(
         "identification-validation",
         "Identificación no válida",
         function (value) {
@@ -248,8 +249,7 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 
           return countryRegexMap[countryState.country]?.test(value) || false;
         }
-      )
-      .required("Este campo es obligatorio"),
+      ) */
   });
 
   const formik = useFormik({
