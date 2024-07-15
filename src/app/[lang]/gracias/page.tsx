@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import PageGraciasComponent from "@/components/MSK/gracias/Page";
 export async function generateMetadata() {
   return {
-    title: "MSK | Gracias",
+    title: "Gracias | MSK",
   };
 }
 const PageGracias: FC = () => {

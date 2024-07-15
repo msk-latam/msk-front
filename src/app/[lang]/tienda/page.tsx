@@ -6,6 +6,7 @@ import { Metadata } from "next";
 import ssr from "@/services/ssr";
 import { slugifySpecialty } from "@/lib/Slugify";
 import {SITE_URL} from "@/contains/constants";
+import { isProduction } from "@/utils/isProduction";
 
 type Props = {
   params: { lang: string; page: string; title?: string; filters?: string };
@@ -44,13 +45,15 @@ export async function generateMetadata({
   );
   return {
     title: urlSpecialty ? `Cursos de ${urlSpecialty.name}` : "Tienda | MSK",
-    alternates: {
+    alternates: isProduction 
+    ? {
       canonical: `${SITE_URL}/${currentCountry}/tienda`,
-    },
-    robots: {
+    }
+    : undefined,
+    robots: isProduction ? {
       index: true,
       follow: true,
-    },
+    }: undefined,
     icons: {
       other: nextPrevUrls,
     },

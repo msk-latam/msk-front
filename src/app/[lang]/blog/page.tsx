@@ -11,6 +11,7 @@ import NewsletterBlog from "@/components/MSK/Blog/NewsletterBlog";
 import {SITE_URL} from "@/contains/constants";
 import { Props } from "@/app/layout";
 import { Metadata } from "next";
+import { isProduction } from "@/utils/isProduction";
 
 interface PageProps {
   params: any;
@@ -20,14 +21,14 @@ export const runtime = "edge";
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const currentCountry = params.lang || cookies().get("country")?.value;
   return {
-    title: "MSK | Blog",
-    alternates: {
+    title: "Blog | MSK",
+    alternates: isProduction ? {
       canonical: `${SITE_URL}/${currentCountry}/blog`,
-    },
-    robots: {
+    }: undefined,
+    robots: isProduction ? {
       index: true,
       follow: true,
-    },
+    }: undefined,
   };
 }
 
