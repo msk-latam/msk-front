@@ -34,6 +34,8 @@ const FooterEduman = () => {
     setIsOnBlog(pathname == "/blog");
   }, [pathname]);
 
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer>
       <div className="footer-area">
@@ -109,7 +111,7 @@ const FooterEduman = () => {
                         Una propuesta moderna que desafía a expandir las metas
                         profesionales
                       </p>
-                      <p>© 2023 • Medical&Scientific Knowledge S.L.</p>
+                      <p>© {currentYear} • Medical&Scientific Knowledge S.L.</p>
                     </div>
                     <div className="footer-icon ml-auto">
                       <a

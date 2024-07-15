@@ -44,6 +44,10 @@ export async function generateMetadata({
     alternates: {
       canonical: `${SITE_URL}/${params.lang}`,
     },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

@@ -2,7 +2,11 @@ import React, { FC } from "react";
 import PagePoliticaDeCookiesComponent from "@/components/MSK/politica-de-cookies/Page";
 export async function generateMetadata() {
   return {
-    title: "Política de cookies",
+    title: "MSK | Política de cookies",
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 const PagePoliticaDeCookies: FC = () => {

@@ -7,6 +7,10 @@ export async function generateMetadata() {
     alternates: {
       canonical: "/",
     },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

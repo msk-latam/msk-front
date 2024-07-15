@@ -105,6 +105,8 @@ export interface SinglePageType extends PostDataType {
   };
 }
 
+
+
 const PageSingleTemp3Sidebar: FC<PageSingleTemp3SidebarProps> = ({
   className = "",
 }) => {
@@ -115,7 +117,7 @@ const PageSingleTemp3Sidebar: FC<PageSingleTemp3SidebarProps> = ({
         data-nc-id="PageSingleTemp3Sidebar"
       >
         <header className="relative pt-16 z-10 md:py-20 lg:py-14 bg-neutral-900 dark:bg-black">
-          <div className="dark container relative z-10">
+          <div className="dark container relative z-10 ml-0 sm:ml-6 md:ml-12 lg:ml-24 max-w-screen-lg">
             <div className="max-w-screen-md">
               <SingleHeader
                 hiddenDesc
@@ -136,7 +138,7 @@ const PageSingleTemp3Sidebar: FC<PageSingleTemp3SidebarProps> = ({
         </header>
 
         <div className=" flex flex-col my-10 lg:flex-row">
-          <div className="w-full">
+          <div className="w-full px-4 sm:px-6 lg:px-8">
             <SingleContent data={SINGLE} />
           </div>
         </div>

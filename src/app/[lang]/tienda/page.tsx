@@ -43,9 +43,13 @@ export async function generateMetadata({
       slugifySpecialty(specialty.name) === searchParams.especialidad
   );
   return {
-    title: urlSpecialty ? `Cursos de ${urlSpecialty.name}` : "Tienda",
+    title: urlSpecialty ? `Cursos de ${urlSpecialty.name}` : "Tienda | MSK",
     alternates: {
-      canonical: "/tienda",
+      canonical: `${SITE_URL}/${currentCountry}/tienda`,
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
     icons: {
       other: nextPrevUrls,
