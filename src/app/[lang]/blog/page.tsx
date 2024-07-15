@@ -40,7 +40,7 @@ const PageBlog: React.FC<PageProps> = async ({ params }) => {
   return (
     <div className="nc-PageBlog relative animate-fade-down">
       <div className="md:container relative overflow-hidden">
-        <div className="container relative">
+        <div className=" relative">
           <WelcomeBlog tabs={[]} heading="" posts={welcomePosts} />
           <BlogSummary
             posts={allPosts}

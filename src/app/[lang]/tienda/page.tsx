@@ -71,7 +71,7 @@ const PageStore: FC<PageStoreProps> = ({ className = "", params }) => {
       data-nc-id="PageStore"
     >
       <StoreLayout subHeading="" headingEmoji="" heading="Tienda" country={currentCountry}>
-        <section className="container text-neutral-600 text-sm md:text-base overflow-hidden">
+        <section className=" text-neutral-600 text-sm md:text-base overflow-hidden">
           <StoreContent />
         </section>
       </StoreLayout>
