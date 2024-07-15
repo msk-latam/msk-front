@@ -4,7 +4,7 @@ import SingleHeader from "@/components/MSK/Blog/Post/PostSingleHeader";
 import NcImage from "@/components/NcImage/NcImage";
 import SingleContent from "@/components/MSK/Blog/Post/SingleContent";
 import { cookies } from "next/headers";
-import {SITE_URL} from "@/contains/constants";
+import { SITE_URL } from "@/contains/constants";
 
 interface PageCourseProps {
   params: any;
@@ -33,8 +33,9 @@ export async function generateMetadata({ params }: Props) {
 }
 
 const PageNota: FC<PageCourseProps> = async ({ params }) => {
-  const post = await ssr.getSinglePost(params.slug);
   const currentCountry = params.lang || cookies().get("country")?.value;
+
+  const post = await ssr.getSinglePost(params.slug, currentCountry);
   const allBestSellers = await ssr.getBestSellers(currentCountry);
   const { fiveSpecialtiesGroup } = await ssr.fetchPostsSpecialities();
   const fuentes = post?.fuentes || [];
@@ -57,7 +58,6 @@ const PageNota: FC<PageCourseProps> = async ({ params }) => {
                 excerptClassName={"color-light-white-text"}
               />
             </div>
-
           </div>
           {/* FEATURED IMAGE */}
           <div className="px-[16px] ">
