@@ -32,6 +32,7 @@ import Phrase from "@/components/Phrase/Phrase";
 import CommentReferences from "@/components/CommentReferences";
 import Questions from "@/components/Questions/Questions";
 import { SITE_URL } from "@/contains/constants";
+import { isProduction } from "@/utils/isProduction";
 
 export async function generateMetadata({
   params,
@@ -39,15 +40,15 @@ export async function generateMetadata({
   params: { lang: string };
 }) {
   return {
-    title: "MSK",
+    title: "Cursos de medicina para expandir tus metas profesionales | MSK",
     description: "Una propuesta moderna para expandir tus metas profesionales",
-    alternates: {
+    alternates: isProduction ? {
       canonical: `${SITE_URL}/${params.lang}`,
-    },
-    robots: {
+    } :undefined,
+    robots: isProduction ? {
       index: true,
       follow: true,
-    },
+    }: undefined,
   };
 }
 

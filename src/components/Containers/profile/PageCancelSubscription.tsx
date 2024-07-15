@@ -29,7 +29,7 @@ export interface PageCancelSubscriptionProps {
 
 export async function generateMetadata() {
   return {
-    title: "Cancelar inscripción",
+    title: "Cancelar inscripción | MSK",
   };
 }
 

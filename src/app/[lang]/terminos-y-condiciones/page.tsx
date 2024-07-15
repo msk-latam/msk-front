@@ -4,17 +4,24 @@ import { SITE_URL } from "@/contains/constants";
 import { Props } from "@/app/layout";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
+import { isProduction } from "@/utils/isProduction";
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const currentCountry = params.lang || cookies().get("country")?.value;
+  
+
   return {
-    title: "MSK | Términos y Condiciones",
-    alternates: {
-      canonical: `${SITE_URL}/${currentCountry}/terminos-y-condiciones`,
-    },
-    robots: {
-      index: true,
-      follow: true,
-    },
+    title: "Términos y Condiciones | MSK",
+    alternates: isProduction
+      ? {
+          canonical: `${SITE_URL}/${currentCountry}/terminos-y-condiciones`,
+        }
+      : undefined,
+    robots: isProduction
+      ? {
+          index: true,
+          follow: true,
+        }
+      : undefined,
   };
 }
 const PageTerminosCondiciones: FC = () => {

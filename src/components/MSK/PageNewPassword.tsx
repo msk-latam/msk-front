@@ -15,7 +15,7 @@ export interface BodyNewPassword {
 }
 export async function generateMetadata() {
   return {
-    title: "Cambia tu contraseña",
+    title: "Cambia tu contraseña | MSK",
   };
 }
 

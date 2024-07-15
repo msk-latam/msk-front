@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import ssr from "@/services/ssr";
 import { SITE_URL } from "@/contains/constants";
 import { cookies } from "next/headers";
+import { isProduction } from "@/utils/isProduction";
 
 interface PageCourseProps {
   params: any;
@@ -20,15 +21,15 @@ export async function generateMetadata({ params }: Props) {
   const currentCountry = params.lang || cookies().get("country")?.value;
   console.log(courseMetaData)
   return {
-    title: `MSK | ${courseMetaData?.ficha.title}`,
+    title: `${courseMetaData?.ficha.title} | MSK`,
     description: courseMetaData?.excerpt,
-    alternates: {
+    alternates: isProduction ? {
       canonical: `${SITE_URL}/${currentCountry}/curso/${params.slug}`,
-    },
-    robots: {
+    }: undefined,
+    robots: isProduction ? {
       index: true,
       follow: true,
-    },
+    }: undefined,
     schemaJson: "Course",
     schemaJsonData: courseMetaData,
   };

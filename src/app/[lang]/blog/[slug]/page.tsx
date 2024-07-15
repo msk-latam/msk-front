@@ -5,6 +5,7 @@ import NcImage from "@/components/NcImage/NcImage";
 import SingleContent from "@/components/MSK/Blog/Post/SingleContent";
 import { cookies } from "next/headers";
 import { SITE_URL } from "@/contains/constants";
+import { isProduction } from "@/utils/isProduction";
 
 interface PageCourseProps {
   params: any;
@@ -20,15 +21,15 @@ export async function generateMetadata({ params }: Props) {
   const postMetadata = await ssr.getSinglePost(params.slug);
   console.log(postMetadata)
   return {
-    title: `MSK | ${postMetadata.title}`,
+    title: `${postMetadata.title} | MSK`,
     description: postMetadata.excerpt,
-    alternates: {
+    alternates: isProduction ? {
       canonical: `${SITE_URL}/${currentCountry}/blog/${postMetadata.slug}`,
-    },
-    robots: {
+    }: undefined,
+    robots: isProduction ? {
       index: true,
       follow: true,
-    },
+    }: undefined,
   };
 }
 

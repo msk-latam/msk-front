@@ -6,19 +6,20 @@ import { cookies } from "next/headers";
 import { Props } from "@/app/layout";
 import { Metadata } from "next";
 import { SITE_URL } from "@/contains/constants";
+import { isProduction } from "@/utils/isProduction";
 export const runtime = "edge";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const currentCountry = params.lang || cookies().get("country")?.value;
   return {
-    title: "MSK | Archivo",
-    alternates: {
+    title: "Archivo | MSK",
+    alternates: isProduction ? {
       canonical: `${SITE_URL}/${currentCountry}/archivo`,
-    },
-    robots: {
+    }:undefined,
+    robots:isProduction ? {
       index: true,
       follow: true,
-    },
+    }:undefined,
   };
 }
 
