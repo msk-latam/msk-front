@@ -3,11 +3,22 @@ import PageArchiveComponent from "@/components/MSK/Archive/Page";
 import { getAllPosts, setAllPosts } from "@/lib/allData";
 import ssr from "@/services/ssr";
 import { cookies } from "next/headers";
+import { Props } from "@/app/layout";
+import { Metadata } from "next";
+import { SITE_URL } from "@/contains/constants";
 export const runtime = "edge";
 
-export async function generateMetadata() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const currentCountry = params.lang || cookies().get("country")?.value;
   return {
-    title: "Archivo",
+    title: "MSK | Archivo",
+    alternates: {
+      canonical: `${SITE_URL}/${currentCountry}/archivo`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

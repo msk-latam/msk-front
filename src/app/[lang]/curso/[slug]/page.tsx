@@ -2,6 +2,7 @@ import SingleProductDetail from "@/components/SingleProductDetail/SingleProductD
 import React, { FC } from "react";
 import ssr from "@/services/ssr";
 import { SITE_URL } from "@/contains/constants";
+import { cookies } from "next/headers";
 
 interface PageCourseProps {
   params: any;
@@ -16,11 +17,17 @@ export async function generateMetadata({ params }: Props) {
     params.slug,
     params.lang
   );
+  const currentCountry = params.lang || cookies().get("country")?.value;
+  console.log(courseMetaData)
   return {
-    title: courseMetaData?.ficha.title,
+    title: `MSK | ${courseMetaData?.ficha.title}`,
     description: courseMetaData?.excerpt,
     alternates: {
-      canonical: `${SITE_URL}/blog`,
+      canonical: `${SITE_URL}/${currentCountry}/curso/${params.slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
     schemaJson: "Course",
     schemaJsonData: courseMetaData,

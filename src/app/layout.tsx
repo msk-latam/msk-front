@@ -35,7 +35,7 @@ const loraItalic = Lora({
   weight: ["400", "500", "600", "700"],
 });
 
-type Props = {
+export type Props = {
   params: { lang: string };
 };
 
@@ -51,6 +51,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     metadataBase: new URL(`${SITE_URL}/${currentCountry}`),
     alternates: {
       canonical: "/",
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }

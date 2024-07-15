@@ -12,20 +12,22 @@ interface PageCourseProps {
 export const runtime = "edge";
 
 type Props = {
-  params: { slug: string; lang: string };
+  params: { slug: string, lang: string };
 };
 
 export async function generateMetadata({ params }: Props) {
-  const postMetadata = await ssr.getSinglePost(
-    params.slug,
-    params.lang ?? cookies().get("lang")?.value
-  );
-
+  const currentCountry = params.lang || cookies().get("country")?.value;
+  const postMetadata = await ssr.getSinglePost(params.slug);
+  console.log(postMetadata)
   return {
-    title: postMetadata.title,
+    title: `MSK | ${postMetadata.title}`,
     description: postMetadata.excerpt,
     alternates: {
-      canonical: `${SITE_URL}/${params.lang}/blog`,
+      canonical: `${SITE_URL}/${currentCountry}/blog/${postMetadata.slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }

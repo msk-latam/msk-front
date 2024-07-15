@@ -9,17 +9,24 @@ import { FetchPostType } from "@/data/types";
 import WelcomeBlog from "@/components/MSK/Blog/WelcomeBlog";
 import NewsletterBlog from "@/components/MSK/Blog/NewsletterBlog";
 import {SITE_URL} from "@/contains/constants";
+import { Props } from "@/app/layout";
+import { Metadata } from "next";
 
 interface PageProps {
   params: any;
 }
 export const runtime = "edge";
 
-export async function generateMetadata() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const currentCountry = params.lang || cookies().get("country")?.value;
   return {
-    title: "Blog",
+    title: "MSK | Blog",
     alternates: {
-      canonical: `${SITE_URL}/blog`,
+      canonical: `${SITE_URL}/${currentCountry}/blog`,
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }
@@ -33,7 +40,7 @@ const PageBlog: React.FC<PageProps> = async ({ params }) => {
   return (
     <div className="nc-PageBlog relative animate-fade-down">
       <div className="md:container relative overflow-hidden">
-        <div className="container relative">
+        <div className=" relative">
           <WelcomeBlog tabs={[]} heading="" posts={welcomePosts} />
           <BlogSummary
             posts={allPosts}
