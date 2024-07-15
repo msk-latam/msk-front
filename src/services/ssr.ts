@@ -194,10 +194,12 @@ class ApiSSRService {
     }
   }
 
-  async getSinglePost(slug: string) {
+  async getSinglePost(slug: string, country: string = "int") {
     try {
-      const response = await fetch(`${API_URL}/posts/${slug}`);
-
+      const response = await fetch(
+        `${API_URL}/posts/${slug}?country=${country}`
+      );
+      console.log(`${API_URL}/posts/${slug}?country=${country}`);
       if (!response.ok) {
         throw new Error(
           `Failed to fetch single post. HTTP status ${response.status}`
@@ -205,6 +207,7 @@ class ApiSSRService {
       }
 
       const data = await response.json();
+      //console.log({ data });
       return data.posts[0];
     } catch (error) {
       console.error("Network error:", error);
@@ -381,7 +384,7 @@ class ApiSSRService {
     try {
       const response = await fetch(`${baseUrl}/api/signup`, {
         method: "POST",
-        mode: 'cors',
+        mode: "cors",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
