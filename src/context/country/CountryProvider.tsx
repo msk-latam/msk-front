@@ -134,7 +134,8 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 
   return (
     <CountryContext.Provider value={{ countryState, dispatch }}>
-    {loading ? <Loading /> : children}
+    {/* {loading ? <Loading /> : children} */}
+    {children}
     </CountryContext.Provider>
   );
 };
