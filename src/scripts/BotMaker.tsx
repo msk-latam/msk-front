@@ -7,7 +7,7 @@ const BotMaker = () => {
   const [mountedBot, setMountedBot] = useState(false);
 
   useEffect(() => {
-    const countries = ["ar", "ec"];
+    const countries = ["ar"];
 
     const onValidCountry = pathname
       .split("/")
