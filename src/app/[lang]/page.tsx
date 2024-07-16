@@ -31,7 +31,7 @@ import { FetchCourseType, WpContentData } from "@/data/types";
 import Phrase from "@/components/Phrase/Phrase";
 import CommentReferences from "@/components/CommentReferences";
 import Questions from "@/components/Questions/Questions";
-import { SITE_URL } from "@/contains/constants";
+import { IS_PROD, SITE_URL } from "@/contains/constants";
 
 export async function generateMetadata({
   params,
@@ -39,11 +39,19 @@ export async function generateMetadata({
   params: { lang: string };
 }) {
   return {
-    title: "MSK",
+    title: "Cursos de medicina para expandir tus metas profesionales | MSK",
     description: "Una propuesta moderna para expandir tus metas profesionales",
-    alternates: {
-      canonical: `${SITE_URL}/${params.lang}`,
-    },
+    alternates: IS_PROD
+      ? {
+          canonical: `${SITE_URL}/${params.lang}`,
+        }
+      : undefined,
+    robots: IS_PROD
+      ? {
+          index: true,
+          follow: true,
+        }
+      : undefined,
   };
 }
 
@@ -84,7 +92,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
     <div className="nc-PageHome relative animate-fade-down">
       <div className="relative overflow-hidden">
         <section className="md:container">
-          <div className="container relative">
+          <div className="px-4 sm:px-8 md:px-6 lg:px-20 relative">
             <SectionHero
               rightImg={removeFirstSubdomain(heroImage)}
               className="pt-10 pb-16 md:py-16 lg:pb-28 lg:pt-20"
@@ -94,7 +102,8 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
             />
           </div>
           <WelcomeBox content={pageHomeWpContent as WpContentData} />
-          <div className="container relative">
+          {/* cursos por especialidades */}
+          <div className="px-4 sm:px-8 md:px-6 lg:px-20 relative">
             <BrandSlider />
             <Phrase content={pageHomeWpContent?.cedentes.texto as string} />
             <SectionGridCategoryBox
@@ -109,7 +118,8 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
           <CommentReferences content={pageHomeWpContent as WpContentData} />
 
-          <div className="container relative">
+          {/* oportunidades para ti */}
+          <div className="px-4 sm:px-8 md:px-6 lg:px-20 relative">
             <CoursesForYou
               courses={getAllCourses().filter(
                 (course: FetchCourseType) =>
@@ -149,7 +159,8 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
               uniqueSliderClass="pageNewHome-section6"
             />
           </div>
-          <div className="container grid grid-cols-1 md:grid-cols-3 gap-4 my-16">
+          {/* contactanos */}
+          <div className="px-4 sm:px-8 md:px-6 lg:px-20 grid grid-cols-1 md:grid-cols-3 gap-4 my-16">
             <ContactForm />
           </div>
         </section>

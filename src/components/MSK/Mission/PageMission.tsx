@@ -108,7 +108,7 @@ export interface SinglePageType extends PostDataType {
 
 export async function generateMetadata() {
   return {
-    title: "Misión",
+    title: "Misión | MSK",
   };
 }
 

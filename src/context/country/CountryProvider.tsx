@@ -6,15 +6,15 @@ import { CountryState } from "@/data/types";
 import { countries } from "@/data/countries";
 import api from "@/services/api";
 import Cookies from "js-cookie";
+import { Loading } from "@/utils/Loading";
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const CountryProvider: React.FC<Props> = ({ children }) => {
-
   const initialState: CountryState = {
-    country: Cookies.get('NEXT_LOCALE') || 'int'
+    country: Cookies.get("NEXT_LOCALE") || "int",
   };
 
   const [countryState, dispatch] = useReducer(countryReducer, initialState);
@@ -23,6 +23,8 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
       ? localStorage.getItem("bypassRedirect") || ""
       : ""
   );
+
+  const [loading, setLoading] = useState(true);
 
   const validCountries = countries.map((item) => item.id);
 
@@ -58,18 +60,26 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
           console.log(currentPathName);
           if (currentCountry && currentCountry == currentPathName) return; //Special use case for homepage.
           if (!validCountries.includes(currentCountry)) {
-            console.log('currentCountry not included in the list of valid countries')
+            console.log(
+              "currentCountry not included in the list of valid countries"
+            );
             currentCountry = "";
           }
 
-
-          if ( countryState.country != currentCountry || getCountryFromURL() != currentCountry ) {
-            if ( validCountries.includes(currentPathName) && currentPathName != currentCountry ) { //The path is just the country, go to the homepage of the country our IP is on
-              console.log('redirect 1');
+          if (
+            countryState.country != currentCountry ||
+            getCountryFromURL() != currentCountry
+          ) {
+            if (
+              validCountries.includes(currentPathName) &&
+              currentPathName != currentCountry
+            ) {
+              //The path is just the country, go to the homepage of the country our IP is on
+              console.log("redirect 1");
               redirectUrl = "/" + currentCountry;
               console.log(redirectUrl);
             } else {
-              console.log('redirect 2');
+              console.log("redirect 2");
               redirectUrl = "/" + currentCountry + window.location.pathname;
             }
             // console.log("redirectUrl1: " + redirectUrl);
@@ -101,8 +111,10 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
             window.location.href = redirectUrl;
           }
         }
+        setLoading(false);
       } catch (error) {
         // console.log(error);
+        setLoading(false);
       }
     };
 
@@ -110,8 +122,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
       const url = window.location.href;
       let validCountryUrl = validCountries.filter(
         (country) =>
-          url.includes("/" + country + "/") ||
-          url.endsWith("/" + country)
+          url.includes("/" + country + "/") || url.endsWith("/" + country)
       );
       console.log(validCountryUrl);
       if (validCountryUrl.length) {
@@ -125,6 +136,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 
   return (
     <CountryContext.Provider value={{ countryState, dispatch }}>
+      {/*loading ? <Loading /> : children */}
       {children}
     </CountryContext.Provider>
   );
