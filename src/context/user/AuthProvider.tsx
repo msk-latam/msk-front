@@ -2,8 +2,7 @@
 import React, { useEffect, useReducer } from "react";
 import { AuthContext } from "./AuthContext";
 import { authReducer } from "./AuthReducer";
-import { AuthState, Contact } from "@/data/types";
-import api from "@/services/api";
+import { AuthState } from "@/data/types";
 import { fetchUserData } from "@/middleware";
 
 interface Props {
