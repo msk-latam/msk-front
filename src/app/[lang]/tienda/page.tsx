@@ -17,16 +17,18 @@ export async function generateMetadata({
   searchParams,
 }: Props): Promise<Metadata> {
   const currentCountry = params.lang || cookies().get("country")?.value;
+  const page = Number(searchParams.page);
+
   const nextPrevUrls =
-    Number(searchParams.page) > 1
+    page > 1
       ? [
           {
             rel: "next",
-            url: `${SITE_URL}/${currentCountry}/tienda/?page=3`,
+            url: `${SITE_URL}/${currentCountry}/tienda/?page=${page + 1}`,
           },
           {
             rel: "prev",
-            url: `${SITE_URL}/${currentCountry}/tienda/?page=1`,
+            url: `${SITE_URL}/${currentCountry}/tienda/?page=${page - 1}`,
           },
         ]
       : [
@@ -42,11 +44,26 @@ export async function generateMetadata({
     (specialty: any) =>
       slugifySpecialty(specialty.name) === searchParams.especialidad
   );
+
+  const filteredParams = Object.entries(searchParams).reduce(
+    (acc, [key, value]) => {
+      if (key !== "page" && key !== "lang" && value !== undefined) {
+        acc[key] = value.toString();
+      }
+      return acc;
+    },
+    {} as Record<string, string>
+  );
+
+  const queryString = new URLSearchParams(filteredParams).toString();
+
   return {
     title: urlSpecialty ? `Cursos de ${urlSpecialty.name}` : "Tienda | MSK",
     alternates: IS_PROD
       ? {
-          canonical: `${SITE_URL}/${currentCountry}/tienda`,
+          canonical: `${SITE_URL}/${currentCountry}/tienda/${
+            queryString ? `?${queryString}` : ""
+          }`,
         }
       : undefined,
     robots: IS_PROD
