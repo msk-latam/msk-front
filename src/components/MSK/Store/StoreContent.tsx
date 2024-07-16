@@ -419,7 +419,7 @@ const StoreContent: FC<{}> = () => {
   }
 
   return (
-    <section className=" course-content-area pb-90 animate-fade-down px-0">
+    <section className="lg:!px-28 container course-content-area pb-90 animate-fade-down px-0">
       <Breadcrum />
 
       {storeFilters.specialties.length > 0 && (

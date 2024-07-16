@@ -49,7 +49,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
     try {
       setTotalPages(Math.ceil(allCourses.length / itemsPerPage));
       const res = await api.getUserData();
-      console.log('FETCH USER RES: ', res);
+      console.log("FETCH USER RES: ", res);
       if (!res.message) {
         setUser(res);
         let coursesList = getUserCourses(res, allCourses);
@@ -66,9 +66,10 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
   };
 
   useEffect(() => {
-    
+
     fetchUser();
   }, [allCourses]);
+
   const itemsPerPage = 8;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -124,6 +125,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
     setCoursesTabActive(item);
   };
 
+
   // if(typeof window !== 'undefined'){
   //   useEffect(() =>{
   //     // const redirectToTrialURL = localStorage.getItem('continueTrialAccess');
@@ -139,6 +141,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
   // localStorage.removeItem('trialURL')
 
   
+
 
   return (
     <div className={`nc-PageAuthor  ${className}`} data-nc-id="PageAuthor">

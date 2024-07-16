@@ -57,6 +57,8 @@ const BlogSummary: FC<BlogSummaryProps> = ({
     setTabActive(item);
   };
 
+  console.log({ posts });
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       let categoryValue = decodeURIComponent(

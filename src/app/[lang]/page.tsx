@@ -31,8 +31,7 @@ import { FetchCourseType, WpContentData } from "@/data/types";
 import Phrase from "@/components/Phrase/Phrase";
 import CommentReferences from "@/components/CommentReferences";
 import Questions from "@/components/Questions/Questions";
-import { SITE_URL } from "@/contains/constants";
-import { isProduction } from "@/utils/isProduction";
+import { IS_PROD, SITE_URL } from "@/contains/constants";
 
 export async function generateMetadata({
   params,
@@ -42,13 +41,17 @@ export async function generateMetadata({
   return {
     title: "Cursos de medicina para expandir tus metas profesionales | MSK",
     description: "Una propuesta moderna para expandir tus metas profesionales",
-    alternates: isProduction ? {
-      canonical: `${SITE_URL}/${params.lang}`,
-    } :undefined,
-    robots: isProduction ? {
-      index: true,
-      follow: true,
-    }: undefined,
+    alternates: IS_PROD
+      ? {
+          canonical: `${SITE_URL}/${params.lang}`,
+        }
+      : undefined,
+    robots: IS_PROD
+      ? {
+          index: true,
+          follow: true,
+        }
+      : undefined,
   };
 }
 
@@ -115,8 +118,8 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
           <CommentReferences content={pageHomeWpContent as WpContentData} />
 
-            {/* oportunidades para ti */}
-          <div className="px-4 sm:px-8 md:px-6 lg:px-20 relative"> 
+          {/* oportunidades para ti */}
+          <div className="px-4 sm:px-8 md:px-6 lg:px-20 relative">
             <CoursesForYou
               courses={getAllCourses().filter(
                 (course: FetchCourseType) =>

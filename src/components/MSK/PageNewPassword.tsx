@@ -1,9 +1,11 @@
-import React, { FC, useState } from "react";
+"use client";
+import React, { FC, useContext, useEffect, useState } from "react";
 import LayoutPage from "@/components/MSK/LayoutPage";
 import Input from "@/components/Input/Input";
 import ButtonPrimary from "@/components/Button/ButtonPrimary";
-import api from "@/services/api";
-import { useRouter } from "next/router";
+import { useRouter, useSearchParams } from "next/navigation";
+import ssr from "@/services/ssr";
+import { AuthContext } from "@/context/user/AuthContext";
 
 export interface PageNewPasswordProps {
   className?: string;
@@ -13,28 +15,23 @@ export interface BodyNewPassword {
   password: string;
   validator: string;
 }
-export async function generateMetadata() {
-  return {
-    title: "Cambia tu contraseña | MSK",
-  };
-}
 
 const PageNewPassword: FC<PageNewPasswordProps> = ({ className = "" }) => {
   const router = useRouter();
-  const { token } = router.query; // Access token from the router query
-  // console.log(decodeURIComponent(token as string));
+  const searchParams = useSearchParams();
 
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState("");
+  const [onRequest, setOnRequest] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    setOnRequest(true);
     const formData = new FormData(event.target as HTMLFormElement);
 
     const jsonData: BodyNewPassword = {
       password: "",
-      validator: decodeURIComponent(token as string),
+      validator: searchParams.get("token") as string,
     };
 
     formData.forEach((value, key, parent) => {
@@ -43,15 +40,16 @@ const PageNewPassword: FC<PageNewPasswordProps> = ({ className = "" }) => {
       }
     });
 
-    const { data, status } = await api.postNewPassword(jsonData);
-    if (status === 200) {
+    const res = await ssr.postNewPassword(jsonData);
+    if (res.original.data[0].code === "SUCCESS") {
       // console.log(data);
       setTimeout(() => {
         router.push("/gracias?origen=new-password");
       }, 1500);
     } else {
-      // console.log("Error:", data.error);
-      setError(data.error);
+      console.log("Error:", res);
+      setOnRequest(false);
+      setError(res.error.message);
     }
   };
 
@@ -85,7 +83,9 @@ const PageNewPassword: FC<PageNewPasswordProps> = ({ className = "" }) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </label>
-            <ButtonPrimary type="submit">Confirmar</ButtonPrimary>
+            <ButtonPrimary type="submit" disabled={onRequest}>
+              {onRequest ? "Confirmando ..." : "Confirmar"}
+            </ButtonPrimary>
           </form>
 
           {/* ==== */}

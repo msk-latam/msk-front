@@ -7,6 +7,7 @@ import {
 } from "@/lib/allData";
 import { SignUp } from "@/data/types";
 import { BASE_URL, IS_PROD, SITE_URL } from "@/contains/constants";
+import { BodyNewPassword } from "@/components/MSK/PageNewPassword";
 
 let validCountries = countries.map((item) => item.id);
 
@@ -145,10 +146,6 @@ class ApiSSRService {
         countryParam = `${country}`;
       }
 
-      console.log(
-        "getPosts URL",
-        `${API_URL}/posts?year=${currentYear}&country=${countryParam}`
-      );
       const response = await fetch(
         `${API_URL}/posts?year=${currentYear}&country=${countryParam}`
       );
@@ -402,6 +399,52 @@ class ApiSSRService {
     } catch (e) {
       console.error("Error in postSignUp:", e);
       return null; // Or handle the error as needed
+    }
+  }
+
+  async postRecover(jsonData: { email: string }): Promise<Response> {
+    try {
+      const response = await fetch(`${baseUrl}/api/RequestPasswordChange`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jsonData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to recover. HTTP status ${response.status}`);
+      }
+
+      return response;
+    } catch (error) {
+      // @ts-ignore
+      return error;
+    }
+  }
+
+  async postNewPassword(jsonData: BodyNewPassword) {
+    try {
+      const response = await fetch(`${baseUrl}/api/newPassword`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(jsonData),
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to post new password. HTTP status ${response.status}`
+        );
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("Network error:", error);
+      return error;
     }
   }
 }
