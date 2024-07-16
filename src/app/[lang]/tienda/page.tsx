@@ -5,8 +5,7 @@ import { cookies } from "next/headers";
 import { Metadata } from "next";
 import ssr from "@/services/ssr";
 import { slugifySpecialty } from "@/lib/Slugify";
-import {SITE_URL} from "@/contains/constants";
-import { isProduction } from "@/utils/isProduction";
+import { IS_PROD, SITE_URL } from "@/contains/constants";
 
 type Props = {
   params: { lang: string; page: string; title?: string; filters?: string };
@@ -45,15 +44,17 @@ export async function generateMetadata({
   );
   return {
     title: urlSpecialty ? `Cursos de ${urlSpecialty.name}` : "Tienda | MSK",
-    alternates: isProduction 
-    ? {
-      canonical: `${SITE_URL}/${currentCountry}/tienda`,
-    }
-    : undefined,
-    robots: isProduction ? {
-      index: true,
-      follow: true,
-    }: undefined,
+    alternates: IS_PROD
+      ? {
+          canonical: `${SITE_URL}/${currentCountry}/tienda`,
+        }
+      : undefined,
+    robots: IS_PROD
+      ? {
+          index: true,
+          follow: true,
+        }
+      : undefined,
     icons: {
       other: nextPrevUrls,
     },
@@ -73,7 +74,12 @@ const PageStore: FC<PageStoreProps> = ({ className = "", params }) => {
       className={`nc-PageStore ${className} animate-fade-down`}
       data-nc-id="PageStore"
     >
-      <StoreLayout subHeading="" headingEmoji="" heading="Tienda" country={currentCountry}>
+      <StoreLayout
+        subHeading=""
+        headingEmoji=""
+        heading="Tienda"
+        country={currentCountry}
+      >
         <section className=" text-neutral-600 text-sm md:text-base overflow-hidden">
           <StoreContent />
         </section>

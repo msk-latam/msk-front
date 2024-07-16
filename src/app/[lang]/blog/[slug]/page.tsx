@@ -4,8 +4,7 @@ import SingleHeader from "@/components/MSK/Blog/Post/PostSingleHeader";
 import NcImage from "@/components/NcImage/NcImage";
 import SingleContent from "@/components/MSK/Blog/Post/SingleContent";
 import { cookies } from "next/headers";
-import { SITE_URL } from "@/contains/constants";
-import { isProduction } from "@/utils/isProduction";
+import { IS_PROD, SITE_URL } from "@/contains/constants";
 
 interface PageCourseProps {
   params: any;
@@ -13,23 +12,27 @@ interface PageCourseProps {
 export const runtime = "edge";
 
 type Props = {
-  params: { slug: string, lang: string };
+  params: { slug: string; lang: string };
 };
 
 export async function generateMetadata({ params }: Props) {
   const currentCountry = params.lang || cookies().get("country")?.value;
   const postMetadata = await ssr.getSinglePost(params.slug);
-  console.log(postMetadata)
+  console.log(postMetadata);
   return {
     title: `${postMetadata.title} | MSK`,
     description: postMetadata.excerpt,
-    alternates: isProduction ? {
-      canonical: `${SITE_URL}/${currentCountry}/blog/${postMetadata.slug}`,
-    }: undefined,
-    robots: isProduction ? {
-      index: true,
-      follow: true,
-    }: undefined,
+    alternates: IS_PROD
+      ? {
+          canonical: `${SITE_URL}/${currentCountry}/blog/${postMetadata.slug}`,
+        }
+      : undefined,
+    robots: IS_PROD
+      ? {
+          index: true,
+          follow: true,
+        }
+      : undefined,
   };
 }
 

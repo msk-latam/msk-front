@@ -3,23 +3,27 @@ import PagePoliticsPrivacyComponent from "@/components/MSK/politica-de-privacida
 import { Props } from "@/app/layout";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
-import { SITE_URL } from "@/contains/constants";
-import { isProduction } from "@/utils/isProduction";
+import { IS_PROD, SITE_URL } from "@/contains/constants";
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const currentCountry = params.lang || cookies().get("country")?.value;
   return {
     title: "Política de Protección de Datos | MSK",
-    alternates: isProduction ? {
-      canonical: `${SITE_URL}/${currentCountry}/politica-de-privacidad`,
-    }: undefined,
-    robots: isProduction ? {
-      index: true,
-      follow: true,
-    }: undefined,
+    alternates: IS_PROD
+      ? {
+          canonical: `${SITE_URL}/${currentCountry}/politica-de-privacidad`,
+        }
+      : undefined,
+    robots: IS_PROD
+      ? {
+          index: true,
+          follow: true,
+        }
+      : undefined,
   };
 }
 const PagePoliticsPrivacy: FC = () => {
-  return <PagePoliticsPrivacyComponent/>;
+  return <PagePoliticsPrivacyComponent />;
 };
 
 export default PagePoliticsPrivacy;

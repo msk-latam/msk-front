@@ -5,21 +5,24 @@ import ssr from "@/services/ssr";
 import { cookies } from "next/headers";
 import { Props } from "@/app/layout";
 import { Metadata } from "next";
-import { SITE_URL } from "@/contains/constants";
-import { isProduction } from "@/utils/isProduction";
+import { IS_PROD, SITE_URL } from "@/contains/constants";
 export const runtime = "edge";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const currentCountry = params.lang || cookies().get("country")?.value;
   return {
     title: "Archivo | MSK",
-    alternates: isProduction ? {
-      canonical: `${SITE_URL}/${currentCountry}/archivo`,
-    }:undefined,
-    robots:isProduction ? {
-      index: true,
-      follow: true,
-    }:undefined,
+    alternates: IS_PROD
+      ? {
+          canonical: `${SITE_URL}/${currentCountry}/archivo`,
+        }
+      : undefined,
+    robots: IS_PROD
+      ? {
+          index: true,
+          follow: true,
+        }
+      : undefined,
   };
 }
 

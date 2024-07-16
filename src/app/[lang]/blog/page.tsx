@@ -8,10 +8,9 @@ import ssr from "@/services/ssr";
 import { FetchPostType } from "@/data/types";
 import WelcomeBlog from "@/components/MSK/Blog/WelcomeBlog";
 import NewsletterBlog from "@/components/MSK/Blog/NewsletterBlog";
-import {SITE_URL} from "@/contains/constants";
+import { IS_PROD, SITE_URL } from "@/contains/constants";
 import { Props } from "@/app/layout";
 import { Metadata } from "next";
-import { isProduction } from "@/utils/isProduction";
 
 interface PageProps {
   params: any;
@@ -22,13 +21,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const currentCountry = params.lang || cookies().get("country")?.value;
   return {
     title: "Blog | MSK",
-    alternates: isProduction ? {
-      canonical: `${SITE_URL}/${currentCountry}/blog`,
-    }: undefined,
-    robots: isProduction ? {
-      index: true,
-      follow: true,
-    }: undefined,
+    alternates: IS_PROD
+      ? {
+          canonical: `${SITE_URL}/${currentCountry}/blog`,
+        }
+      : undefined,
+    robots: IS_PROD
+      ? {
+          index: true,
+          follow: true,
+        }
+      : undefined,
   };
 }
 
