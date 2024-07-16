@@ -89,7 +89,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
     <div className="nc-PageHome relative animate-fade-down">
       <div className="relative overflow-hidden">
         <section className="md:container">
-          <div className="px-4 relative">
+          <div className="px-4 sm:px-8 md:px-6 lg:px-20 relative">
             <SectionHero
               rightImg={removeFirstSubdomain(heroImage)}
               className="pt-10 pb-16 md:py-16 lg:pb-28 lg:pt-20"
@@ -99,7 +99,8 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
             />
           </div>
           <WelcomeBox content={pageHomeWpContent as WpContentData} />
-          <div className="px-4 relative">
+          {/* cursos por especialidades */}
+          <div className="px-4 sm:px-8 md:px-6 lg:px-20 relative">
             <BrandSlider />
             <Phrase content={pageHomeWpContent?.cedentes.texto as string} />
             <SectionGridCategoryBox
@@ -114,7 +115,8 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
           <CommentReferences content={pageHomeWpContent as WpContentData} />
 
-          <div className="px-4 relative">
+            {/* oportunidades para ti */}
+          <div className="px-4 sm:px-8 md:px-6 lg:px-20 relative"> 
             <CoursesForYou
               courses={getAllCourses().filter(
                 (course: FetchCourseType) =>
@@ -154,7 +156,8 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
               uniqueSliderClass="pageNewHome-section6"
             />
           </div>
-          <div className="px-4 grid grid-cols-1 md:grid-cols-3 gap-4 my-16">
+          {/* contactanos */}
+          <div className="px-4 sm:px-8 md:px-6 lg:px-20 grid grid-cols-1 md:grid-cols-3 gap-4 my-16">
             <ContactForm />
           </div>
         </section>
