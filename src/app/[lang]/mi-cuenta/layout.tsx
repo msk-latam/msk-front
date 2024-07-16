@@ -74,13 +74,13 @@ const PageDashboard: FC<PageDashboardProps> = ({
       className={`nc-PageDashboard animate-fade-down ${className}`}
       data-nc-id="PageDashboard"
     >
+      <RedirectToTrial />
       {state.isAuthenticated && (
         <>
           <LayoutPage
             heading="Mi cuenta"
             subHeading="Aquí podrás controlar todo lo referido a tus capacitaciones y tu perfil personal"
           >
-            <RedirectToTrial />
 
             <div className="flex flex-col space-y-8 xl:space-y-0 xl:flex-row">
               <div className="flex-shrink-0 w-100 xl:w-80 xl:pr-8">
