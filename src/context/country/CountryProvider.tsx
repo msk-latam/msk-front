@@ -6,10 +6,14 @@ import { CountryState } from "@/data/types";
 import { countries } from "@/data/countries";
 import api from "@/services/api";
 import Cookies from "js-cookie";
+import { Loading } from "@/utils/loading";
 
 interface Props {
   children: React.ReactNode;
 }
+
+
+
 
 export const CountryProvider: React.FC<Props> = ({ children }) => {
 
@@ -23,6 +27,8 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
       ? localStorage.getItem("bypassRedirect") || ""
       : ""
   );
+
+  const [loading, setLoading] = useState(true);
 
   const validCountries = countries.map((item) => item.id);
 
@@ -101,8 +107,10 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
             window.location.href = redirectUrl;
           }
         }
+        setLoading(false);
       } catch (error) {
         // console.log(error);
+        setLoading(false);
       }
     };
 
@@ -125,7 +133,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 
   return (
     <CountryContext.Provider value={{ countryState, dispatch }}>
-      {children}
+    {loading ? <Loading /> : children}
     </CountryContext.Provider>
   );
 };
