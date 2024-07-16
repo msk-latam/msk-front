@@ -187,6 +187,7 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
   };
 
   const optionsArray = [1, 2, 3, 4, 5];
+  localStorage.setItem("trialURL", `/suscribe/${slug}`);
 
   const formik = useFormik({
     initialValues,
