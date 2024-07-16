@@ -80,10 +80,12 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
               console.log(redirectUrl);
             } else {
               console.log("redirect 2");
+
               redirectUrl = "/" + currentCountry + window.location.pathname;
             }
             // console.log("redirectUrl1: " + redirectUrl);
             if (getCountryFromURL() != "") {
+              console.log(window.localtion.search);
               redirectUrl = window.location.href
                 .replace(
                   "/" + getCountryFromURL() + "/",
@@ -93,6 +95,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
             }
             console.log("redirectUrl2: " + redirectUrl);
           }
+
           if (
             window.location.protocol === "http:" &&
             window.location.hostname !== "localhost"
@@ -107,8 +110,10 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
             payload: { country: currentCountry },
           });
           if (redirectUrl) {
-            console.log(redirectUrl);
-            window.location.href = redirectUrl;
+            let searchparams =
+              window.location.search !== "" ? window.location.search : "";
+            console.log({ redirectUrl, searchparams });
+            window.location.href = redirectUrl + searchparams;
           }
         }
         setLoading(false);
@@ -124,7 +129,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
         (country) =>
           url.includes("/" + country + "/") || url.endsWith("/" + country)
       );
-      console.log(validCountryUrl);
+      console.log(validCountryUrl, window.location.search);
       if (validCountryUrl.length) {
         return validCountryUrl[0];
       }
