@@ -6,7 +6,8 @@ import { CountryState } from "@/data/types";
 import { countries } from "@/data/countries";
 import api from "@/services/api";
 import Cookies from "js-cookie";
-import { Loading } from "@/utils/loading";
+import { Loading } from "@/utils/Loading";
+
 
 interface Props {
   children: React.ReactNode;
