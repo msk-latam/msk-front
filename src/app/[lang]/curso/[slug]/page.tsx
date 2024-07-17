@@ -19,7 +19,6 @@ export async function generateMetadata({ params }: Props) {
     params.lang
   );
   const currentCountry = params.lang || cookies().get("country")?.value;
-  console.log(courseMetaData);
 
   /*  if (courseMetaData.total_price === "0" && courseMetaData.details?.['detail-1']?.value?.includes("Ebook gratuito")) {
     notFound();
@@ -49,7 +48,7 @@ const PageSingleProduct: FC<PageCourseProps> = async ({ params }) => {
 
   const headersList = headers();
   const hostname = headersList.get("host");
-  if (product.total_price === "0" && hostname === "msklatam.com" && product.father_post_type !== "downloadable") {
+  if (product.total_price === "0" && hostname === "msklatam.com" && product.father_post_type === "course") {
     notFound();
   }
 
