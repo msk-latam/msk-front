@@ -246,6 +246,7 @@ const StoreContent: FC<{}> = () => {
           duration: any;
           father_post_type: string;
           title: string;
+          total_price: string;
         }) => {
           const prodSpecialties = product.categories.map(
             (category) => category.name
@@ -307,12 +308,10 @@ const StoreContent: FC<{}> = () => {
             );
           }
 
-          let priceMatch = true;
-          if (selectedResources[0] && selectedResources[0].includes("Cursos")) {
-            priceMatch =
-              product.father_post_type === "course" &&
+          console.log(product.title, product.total_price)
+
+          let priceMatch = product.father_post_type === "course" &&
               Number(product.total_price) != 0;
-          }
 
           return (
             specialtiesMatch &&
