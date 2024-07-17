@@ -224,10 +224,16 @@ const StoreContent: FC<{}> = () => {
     ) {
       console.log("No filters");
       // No filters, set the products to the original list
+      let filterWithValueCourses = allCourses.filter(c => {
+          if(c.father_post_type === 'course' && Number(c.total_price) === 0){
+            return false;
+          }
 
-      setCurrentItems([...allCourses.slice(indexOfFirstItem, indexOfLastItem)]);
-      setTotalPages(Math.ceil(allCourses.length / itemsPerPage));
-      setFilteredItems(allCourses);
+          return true;
+        })
+      setCurrentItems([...filterWithValueCourses.slice(indexOfFirstItem, indexOfLastItem)]);
+      setTotalPages(Math.ceil(filterWithValueCourses.length / itemsPerPage));
+      setFilteredItems(filterWithValueCourses);
       setMutationProducts(false);
     } else {
       console.log("There are filters we need to apply", {
@@ -246,6 +252,7 @@ const StoreContent: FC<{}> = () => {
           duration: any;
           father_post_type: string;
           title: string;
+          total_price: string;
         }) => {
           const prodSpecialties = product.categories.map(
             (category) => category.name
@@ -307,12 +314,9 @@ const StoreContent: FC<{}> = () => {
             );
           }
 
-          let priceMatch = true;
-          if (selectedResources[0] && selectedResources[0].includes("Cursos")) {
-            priceMatch =
-              product.father_post_type === "course" &&
-              Number(product.total_price) != 0;
-          }
+          console.log(product.title, product.total_price)
+
+          const priceMatch = (product.father_post_type === "course" && Number(product.total_price) !== 0);
 
           return (
             specialtiesMatch &&

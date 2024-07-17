@@ -19,11 +19,11 @@ export async function generateMetadata({ params }: Props) {
     params.lang
   );
   const currentCountry = params.lang || cookies().get("country")?.value;
-  console.log({ courseMetaData });
+  console.log(courseMetaData);
 
-  if (courseMetaData.total_price === "0") {
+  /*  if (courseMetaData.total_price === "0" && courseMetaData.details?.['detail-1']?.value?.includes("Ebook gratuito")) {
     notFound();
-  }
+  }  */
 
   return {
     title: `${courseMetaData?.ficha.title} | MSK`,
@@ -49,8 +49,7 @@ const PageSingleProduct: FC<PageCourseProps> = async ({ params }) => {
 
   const headersList = headers();
   const hostname = headersList.get("host");
-  console.log(product.total_price, hostname);
-  if (product.total_price === "0" && hostname === "msklatam.com") {
+  if (product.total_price === "0" && hostname === "msklatam.com" && product.father_post_type !== "downloadable") {
     notFound();
   }
 
