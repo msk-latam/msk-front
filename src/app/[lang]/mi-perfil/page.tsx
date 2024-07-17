@@ -16,6 +16,7 @@ import ItemSkeleton from "@/components/Skeleton/ItemSkeleton";
 import ProductAccount from "@/components/Containers/profile/ProductAccount";
 import StorePagination from "@/components/MSK/Store/StorePagination";
 import { useRouter } from "next/navigation";
+import RedirectToTrial from "@/components/RedirectToTrial/RedirectToTrial";
 
 export interface PageAuthorProps {
   className?: string;
@@ -65,6 +66,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
   };
 
   useEffect(() => {
+
     fetchUser();
   }, [allCourses]);
 
@@ -123,17 +125,27 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
     setCoursesTabActive(item);
   };
 
-  if (typeof window !== "undefined") {
-    useEffect(() => {
-      const redirectToTrialURL = localStorage.getItem("continueTrialAccess");
-      if (redirectToTrialURL) {
-        router.push(redirectToTrialURL);
-      }
-    }, []);
-  }
+
+  // if(typeof window !== 'undefined'){
+  //   useEffect(() =>{
+  //     // const redirectToTrialURL = localStorage.getItem('continueTrialAccess');
+  //     if(redirectToTrialURL){
+  //       router.push(redirectToTrialURL)
+  //     }
+  //   }, [router]);
+  // }
+
+  //funciona, refactorizar
+  // const redirectToTrialURL = localStorage.getItem('trialURL') || '';
+  // router.push(redirectToTrialURL)
+  // localStorage.removeItem('trialURL')
+
+  
+
 
   return (
     <div className={`nc-PageAuthor  ${className}`} data-nc-id="PageAuthor">
+      <RedirectToTrial />
       {/* HEADER */}
       <div className="animate-fade-down">
         <div className="bg-neutral-200 dark:bg-neutral-900 dark:border dark:border-neutral-700 p-5 lg:p-16 flex flex-col sm:items-center">
