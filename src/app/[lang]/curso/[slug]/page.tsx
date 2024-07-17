@@ -2,7 +2,8 @@ import SingleProductDetail from "@/components/SingleProductDetail/SingleProductD
 import React, { FC } from "react";
 import ssr from "@/services/ssr";
 import { IS_PROD, SITE_URL } from "@/contains/constants";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
+import { notFound } from "next/navigation";
 
 interface PageCourseProps {
   params: any;
@@ -18,7 +19,12 @@ export async function generateMetadata({ params }: Props) {
     params.lang
   );
   const currentCountry = params.lang || cookies().get("country")?.value;
-  console.log(courseMetaData);
+  console.log({ courseMetaData });
+
+  if (courseMetaData.total_price === "0") {
+    notFound();
+  }
+
   return {
     title: `${courseMetaData?.ficha.title} | MSK`,
     description: courseMetaData?.excerpt,
@@ -40,6 +46,14 @@ export async function generateMetadata({ params }: Props) {
 
 const PageSingleProduct: FC<PageCourseProps> = async ({ params }) => {
   const { product } = await ssr.getSingleProduct(params.slug, params.lang);
+
+  const headersList = headers();
+  const hostname = headersList.get("host");
+  console.log(product.total_price, hostname);
+  if (product.total_price === "0" && hostname === "msklatam.com") {
+    notFound();
+  }
+
   return (
     <div className={`nc-PageSubcription `} data-nc-id="PageSubcription">
       <section className="text-neutral-600 text-sm md:text-base overflow-hidden">
