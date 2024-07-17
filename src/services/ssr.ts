@@ -1,17 +1,13 @@
-import {
-  API_URL,
-  IP_API,
-  NOTE_SPECIALITIES,
-  baseUrl,
-} from "@/data/api";
+import { API_URL, IP_API, NOTE_SPECIALITIES, baseUrl } from "@/data/api";
 import { countries } from "@/data/countries";
 import {
   setAllCourses,
   setLoadingBestSellers,
   setLoadingCourses,
 } from "@/lib/allData";
-import {SignUp} from "@/data/types";
-import {BASE_URL, IS_PROD, SITE_URL} from "@/contains/constants";
+import { SignUp } from "@/data/types";
+import { BASE_URL, IS_PROD, SITE_URL } from "@/contains/constants";
+import { BodyNewPassword } from "@/components/MSK/PageNewPassword";
 
 let validCountries = countries.map((item) => item.id);
 
@@ -20,7 +16,8 @@ const PROD = IS_PROD;
 const apiProfileUrl = `${BASE_URL}/api/profile`;
 
 class ApiSSRService {
-  token = typeof window !== "undefined" ? localStorage.getItem("tokenLogin") : null;
+  token =
+    typeof window !== "undefined" ? localStorage.getItem("tokenLogin") : null;
 
   async getCountryCode() {
     try {
@@ -30,11 +27,12 @@ class ApiSSRService {
 
       let response;
       if (PROD) {
-        response = await fetch(`${IP_API}?ip=${ip}`,{method: "POST",
-            headers: {
-          "Content-Type": "application/json",
-              "Accept": "application/json",
-        }
+        response = await fetch(`${IP_API}?ip=${ip}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
         });
       } else {
         response = await fetch(
@@ -61,20 +59,28 @@ class ApiSSRService {
     }
   }
 
-  async getAllCourses(country?: string, tag?: string, withAll: boolean=false) {
+  async getAllCourses(
+    country?: string,
+    tag?: string,
+    withAll: boolean = false
+  ) {
     setLoadingCourses(true);
 
     let validCountries = countries.map((item) => item.id);
-    let onValidCountry = country && validCountries.includes(country)
+    let onValidCountry = country && validCountries.includes(country);
 
-    const countryParam = onValidCountry ? `&country=${country}` : "&country=int";
+    const countryParam = onValidCountry
+      ? `&country=${country}`
+      : "&country=int";
     const tagParam = tag ? `&tag=${tag}` : "";
     const withAllParam = withAll ? "&filter=all" : "";
 
     try {
-      const queryParams = [countryParam, tagParam, withAllParam].filter(Boolean).join("");
+      const queryParams = [countryParam, tagParam, withAllParam]
+        .filter(Boolean)
+        .join("");
 
-     const response = await fetch(
+      const response = await fetch(
         `${API_URL}/products?limit=-1${queryParams}`
       );
 
@@ -140,7 +146,6 @@ class ApiSSRService {
         countryParam = `${country}`;
       }
 
-      console.log('getPosts URL', `${API_URL}/posts?year=${currentYear}&country=${countryParam}`);
       const response = await fetch(
         `${API_URL}/posts?year=${currentYear}&country=${countryParam}`
       );
@@ -186,10 +191,12 @@ class ApiSSRService {
     }
   }
 
-  async getSinglePost(slug: string) {
+  async getSinglePost(slug: string, country: string = "int") {
     try {
-      const response = await fetch(`${API_URL}/posts/${slug}`);
-
+      const response = await fetch(
+        `${API_URL}/posts/${slug}?country=${country}`
+      );
+      console.log(`${API_URL}/posts/${slug}?country=${country}`);
       if (!response.ok) {
         throw new Error(
           `Failed to fetch single post. HTTP status ${response.status}`
@@ -197,6 +204,7 @@ class ApiSSRService {
       }
 
       const data = await response.json();
+      //console.log({ data });
       return data.posts[0];
     } catch (error) {
       console.error("Network error:", error);
@@ -289,16 +297,16 @@ class ApiSSRService {
     }
   }
 
-  async getWpContent(endpoint:string,country: string) {
+  async getWpContent(endpoint: string, country: string) {
     try {
       let validCountries = countries.map((item) => item.id);
       const countryParam = validCountries.includes(country)
         ? `&country=${country}`
         : `&country=int`;
-      
-        //console.log(`${API_URL}${endpoint}${countryParam}`)
-      
-        const response = await fetch(`${API_URL}${endpoint}?${countryParam}`);
+
+      //console.log(`${API_URL}${endpoint}${countryParam}`)
+
+      const response = await fetch(`${API_URL}${endpoint}?${countryParam}`);
 
       if (!response.ok) {
         throw new Error(
@@ -307,7 +315,7 @@ class ApiSSRService {
       }
 
       const data = await response.json();
-      return data
+      return data;
     } catch (error) {
       return error;
     }
@@ -315,17 +323,19 @@ class ApiSSRService {
 
   async getEmailByIdZohoCRM(module: string, email: string) {
     try {
-      const response = await fetch(`${baseUrl}/api/crm/GetByEmail/${module}/${email}`);
+      const response = await fetch(
+        `${baseUrl}/api/crm/GetByEmail/${module}/${email}`
+      );
 
       if (!response.ok) {
         throw new Error(
-            `Failed to get email by ID from Zoho CRM. HTTP status ${response.status}`
+          `Failed to get email by ID from Zoho CRM. HTTP status ${response.status}`
         );
       }
 
       let { data } = await response.json();
-     // console.log({data: data[0]})
-      return data[0]
+      // console.log({data: data[0]})
+      return data[0];
     } catch (error) {
       return error;
     }
@@ -334,19 +344,19 @@ class ApiSSRService {
   async getUserData() {
     if (typeof window !== "undefined") {
       const email = localStorage.getItem("email");
-      
+
       try {
         const token = localStorage.getItem("token");
         if (token) {
           const headers = {
             Authorization: `Bearer ${token}`,
           };
-          
+
           const response = await fetch(`${apiProfileUrl}/${email}`, {
             headers: {
               ...headers,
               "Content-Type": "application/json",
-              "Accept": "application/json",
+              Accept: "application/json",
             },
           });
 
@@ -371,13 +381,13 @@ class ApiSSRService {
     try {
       const response = await fetch(`${baseUrl}/api/signup`, {
         method: "POST",
+        mode: "cors",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify(jsonData),
       });
-
 
       const contentType = response.headers.get("content-type");
       if (contentType && contentType.includes("application/json")) {
@@ -392,6 +402,51 @@ class ApiSSRService {
     }
   }
 
+  async postRecover(jsonData: { email: string }): Promise<Response> {
+    try {
+      const response = await fetch(`${baseUrl}/api/RequestPasswordChange`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jsonData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to recover. HTTP status ${response.status}`);
+      }
+
+      return response;
+    } catch (error) {
+      // @ts-ignore
+      return error;
+    }
+  }
+
+  async postNewPassword(jsonData: BodyNewPassword) {
+    try {
+      const response = await fetch(`${baseUrl}/api/newPassword`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(jsonData),
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to post new password. HTTP status ${response.status}`
+        );
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("Network error:", error);
+      return error;
+    }
+  }
 }
 
 export default new ApiSSRService();

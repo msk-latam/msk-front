@@ -1,16 +1,18 @@
 import { countries } from "./countries";
-import {API_URL, DEV_BASE_URL, IS_PROD, PROD_BASE_URL} from "@/contains/constants";
-
+import {
+  API_URL,
+  DEV_BASE_URL,
+  IS_PROD,
+  PROD_BASE_URL,
+} from "@/contains/constants";
 
 const API_BACKEND_LARAVEL = IS_PROD
   ? `${PROD_BASE_URL}/api`
   : `${DEV_BASE_URL}/api`;
 
-const baseUrl = IS_PROD
-  ? PROD_BASE_URL
-  : DEV_BASE_URL;
+const baseUrl = IS_PROD ? PROD_BASE_URL : DEV_BASE_URL;
 
-console.log({IS_PROD,PROD_BASE_URL, DEV_BASE_URL, baseUrl})
+//console.log({IS_PROD,PROD_BASE_URL, DEV_BASE_URL, baseUrl})
 
 const IP_API = `${API_BACKEND_LARAVEL}/getCountryByIP`;
 

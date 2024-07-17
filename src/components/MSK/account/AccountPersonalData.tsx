@@ -31,6 +31,7 @@ import countryIdentificationsMapping from "../../../data/jsons/__countryIdentifi
 import InputField from "@/components/InputField/InputField";
 import api from "@/services/api";
 import { useRouter } from "next/navigation";
+import translateDocumentType from "@/utils/translateDocumentType";
 
 interface Props {
   user: User;
@@ -40,7 +41,9 @@ interface Props {
 const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
   const router = useRouter();
   const [userData, setUserData] = useState(user);
-  const [localUser, setLocalUser] = useState<Contact>(userData.contact as Contact);
+  const [localUser, setLocalUser] = useState<Contact>(
+    userData.contact as Contact
+  );
   const [defaultCountry, setDefaultCountry] = useState("" as CountryCode);
   const initialValues = {
     name: localUser?.name || "",
@@ -85,12 +88,22 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
     type: "",
   });
   const [currentStates, setCurrentStates] = useState<string[]>([]);
-  const [currentDocumentsType, setCurrentDocumentsType] = useState<JsonIdentificationsMapping>(countryIdentificationsMapping);
-  const [selectedOptionProfession, setSelectedOptionProfession] = useState<string>(userData.contact?.profession || "");
-  const [selectedOptionSpecialty, setSelectedOptionSpecialty] = useState<string>(userData.contact?.speciality || "");
-  const [phoneNumber, setPhoneNumber] = useState<string>(userData?.contact?.phone || "");
-  const [selectedDocument, setSelectedDocument] = useState<string>(userData.contact?.type_doc || "");
-  const [selectedDocumentId, setSelectedDocumentId] = useState<string>(userData.contact?.type_doc ? `${countryState.country}-${userData.contact?.type_doc.toLowerCase()}` : ""
+  const [currentDocumentsType, setCurrentDocumentsType] =
+    useState<JsonIdentificationsMapping>(countryIdentificationsMapping);
+  const [selectedOptionProfession, setSelectedOptionProfession] =
+    useState<string>(userData.contact?.profession || "");
+  const [selectedOptionSpecialty, setSelectedOptionSpecialty] =
+    useState<string>(userData.contact?.speciality || "");
+  const [phoneNumber, setPhoneNumber] = useState<string>(
+    userData?.contact?.phone || ""
+  );
+  const [selectedDocument, setSelectedDocument] = useState<string>(
+    (userData.contact?.type_doc as string) || ""
+  );
+  const [selectedDocumentId, setSelectedDocumentId] = useState<string>(
+    userData.contact?.type_doc
+      ? `${countryState.country}-${userData.contact?.type_doc.toLowerCase()}`
+      : ""
   );
 
   const handleOptionTypeChange = (
@@ -222,8 +235,8 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
     postal_code: Yup.string().required("El código postal es requerido"),
     address: Yup.string().required("La dirección es requerida"),
     type_doc: Yup.string().required("El tipo de identificacion es requerido"),
-    identification: Yup.string()
-      .test(
+    identification: Yup.string().required("Este campo es obligatorio"),
+    /* .test(
         "identification-validation",
         "Identificación no válida",
         function (value) {
@@ -236,8 +249,7 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 
           return countryRegexMap[countryState.country]?.test(value) || false;
         }
-      )
-      .required("Este campo es obligatorio"),
+      ) */
   });
 
   const formik = useFormik({
@@ -253,7 +265,7 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 
         try {
           const res = await api.updateUserData(formData);
-          if ((res?.status as number) === 200) {
+          if (res.data[0].code === "SUCCESS") {
             setUpdateStatusMessage({
               message: "Se actualizó correctamente.",
               type: "success",
@@ -361,7 +373,9 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
                   name="phone"
                   id="phone"
                   placeholder="Ingresar número telefónico"
-                  defaultCountry={countryState.country.toUpperCase() as CountryCode}
+                  defaultCountry={
+                    countryState.country.toUpperCase() as CountryCode
+                  }
                   value={formik.values.phone || user.contact?.phone}
                   onChange={(value: any) => {
                     form.setFieldValue("phone", value);
@@ -630,7 +644,7 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
               {currentDocumentsType[countryState.country]
                 ? currentDocumentsType[countryState.country].map((p) => (
                     <option key={p.id} value={`${p.type}/${p.id}`}>
-                      {p.type}
+                      {p.text ? p.text : p.type}
                     </option>
                   ))
                 : ""}

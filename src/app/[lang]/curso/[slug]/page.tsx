@@ -1,8 +1,8 @@
 import SingleProductDetail from "@/components/SingleProductDetail/SingleProductDetail";
 import React, { FC } from "react";
 import ssr from "@/services/ssr";
-import PageHeadServer from "@/components/Head/PageHeadServer";
-import {SITE_URL} from "@/contains/constants";
+import { IS_PROD, SITE_URL } from "@/contains/constants";
+import { cookies } from "next/headers";
 
 interface PageCourseProps {
   params: any;
@@ -17,12 +17,22 @@ export async function generateMetadata({ params }: Props) {
     params.slug,
     params.lang
   );
+  const currentCountry = params.lang || cookies().get("country")?.value;
+  console.log(courseMetaData);
   return {
-    title: courseMetaData?.ficha.title,
+    title: `${courseMetaData?.ficha.title} | MSK`,
     description: courseMetaData?.excerpt,
-    alternates: {
-      canonical: `${SITE_URL}/blog`,
-    },
+    alternates: IS_PROD
+      ? {
+          canonical: `${SITE_URL}/${currentCountry}/curso/${params.slug}`,
+        }
+      : undefined,
+    robots: IS_PROD
+      ? {
+          index: true,
+          follow: true,
+        }
+      : undefined,
     schemaJson: "Course",
     schemaJsonData: courseMetaData,
   };

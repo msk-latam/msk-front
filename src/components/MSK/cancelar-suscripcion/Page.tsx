@@ -7,31 +7,21 @@ import {
   setDependent,
   zsRegenerateCaptcha,
 } from "@/components/Containers/profile/arrepentimientoCompra";
-
-const argDocumentTypes = [
-  {
-    slug: "CÉDULA",
-    title: "CÉDULA",
-  },
-  {
-    slug: "Pasaporte",
-    title: "Pasaporte",
-  },
-  {
-    slug: "RUC",
-    title: "RUC",
-  },
-];
+import countryIdentificationsMapping from "../../../data/jsons/__countryIdentifications.json";
+import { JsonIdentificationsMapping } from "@/data/types";
 
 export interface PageCancelSubscriptionProps {
   className?: string;
+  country: string;
 }
 
 const PageCancelSubscription: React.FC<PageCancelSubscriptionProps> = ({
-                                                                         className = "",
-                                                                       }) => {
+  className = "",
+  country,
+}) => {
   const formRef = useRef<HTMLFormElement>(null);
-
+  const [currentDocumentsType, setCurrentDocumentsType] =
+    useState<JsonIdentificationsMapping>(countryIdentificationsMapping);
   const [formDisabled, setFormDisabled] = useState(true);
 
   useEffect(() => {
@@ -136,9 +126,9 @@ const PageCancelSubscription: React.FC<PageCancelSubscriptionProps> = ({
 
               <select name="Tipo de Documento">
                 <option defaultValue="">Seleccionar tipo de documento</option>
-                {argDocumentTypes.map((s) => (
-                  <option key={s.slug} value={s.title}>
-                    {s.title}
+                {currentDocumentsType[country].map((s: any) => (
+                  <option key={s.id} value={s.type}>
+                    {s.text ? s.text : s.type}
                   </option>
                 ))}
               </select>
@@ -173,40 +163,40 @@ const PageCancelSubscription: React.FC<PageCancelSubscriptionProps> = ({
 
             <table>
               <tbody>
-              <tr>
-                <td>
-                  <div className="grid grid-cols-2 items-center gap-4 justify-between">
-                    <div id="zsCaptcha" className="form-input-std">
-                      <label className="text-neutral-800 dark:text-neutral-200 mb-1">
-                        Captcha
-                      </label>
-                      <input type="hidden" name="zsCaptchaSrc" value="" />
+                <tr>
+                  <td>
+                    <div className="grid grid-cols-2 items-center gap-4 justify-between">
+                      <div id="zsCaptcha" className="form-input-std">
+                        <label className="text-neutral-800 dark:text-neutral-200 mb-1">
+                          Captcha
+                        </label>
+                        <input type="hidden" name="zsCaptchaSrc" value="" />
 
-                      <input
-                        type="text"
-                        name="zsWebFormCaptchaWord"
-                        placeholder=""
-                      />
+                        <input
+                          type="text"
+                          name="zsWebFormCaptchaWord"
+                          placeholder=""
+                        />
+                      </div>
+                      <div className="grid grid-cols-1">
+                        <img src="#" id="zsCaptchaUrl" />
+                        <a
+                          style={{
+                            color: "#00a3fe",
+                            cursor: "pointer",
+                            marginLeft: "10px",
+                            verticalAlign: "middle",
+                            textDecoration: "none",
+                          }}
+                          className="zsFontClass text-right"
+                          onClick={() => zsRegenerateCaptcha()}
+                        >
+                          Actualizar
+                        </a>
+                      </div>
                     </div>
-                    <div className="grid grid-cols-1">
-                      <img src="#" id="zsCaptchaUrl" />
-                      <a
-                        style={{
-                          color: "#00a3fe",
-                          cursor: "pointer",
-                          marginLeft: "10px",
-                          verticalAlign: "middle",
-                          textDecoration: "none",
-                        }}
-                        className="zsFontClass text-right"
-                        onClick={() => zsRegenerateCaptcha()}
-                      >
-                        Actualizar
-                      </a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
+                  </td>
+                </tr>
               </tbody>
             </table>
 

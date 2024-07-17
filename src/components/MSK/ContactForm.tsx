@@ -62,7 +62,7 @@ const ContactForm: FC<ContactFormProps> = ({
     "" as CountryCode
   );
   const pathname = usePathname();
-  const resourcePDFName = pathname.split("/").pop();
+  const resourcePDFName = pathname.split("/").filter(Boolean).pop();
   useEffect(() => {
     setDefaultCountry(countryState.country?.toUpperCase() as CountryCode);
   }, [countryState]);
@@ -311,7 +311,7 @@ const ContactForm: FC<ContactFormProps> = ({
   const optionsArray = [1, 2, 3, 4, 5];
 
   const handleContactPreferenceChange = (value: string) => {
-      formik.setFieldValue("Preferencia_de_contactaci_n", value);
+    formik.setFieldValue("Preferencia_de_contactaci_n", value);
   };
   const requiredFormFields = [
     "First_Name",
@@ -331,7 +331,7 @@ const ContactForm: FC<ContactFormProps> = ({
       formik.errors,
       formik.touched
     );
-  console.log();
+
   return (
     <>
       <div className="col-span-3" id="contactanos">
@@ -694,7 +694,7 @@ const ContactForm: FC<ContactFormProps> = ({
                       </div>
                       <ShowErrorMessage
                         text={formError}
-                        visible={Boolean(formError)}
+                        visible={formError !== ""}
                       />
                       <p
                         className="success-message"

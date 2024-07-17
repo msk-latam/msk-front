@@ -12,7 +12,7 @@ const useContractConditions = (country: string) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${API_URL}/contratacion?country=${country}`
+          `${API_URL}/tyc?country=${country}`
         );
         setData(response.data);
       } catch (err) {

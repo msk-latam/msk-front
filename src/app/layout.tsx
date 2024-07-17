@@ -1,4 +1,4 @@
-import ".././globals.css";
+import "./globals.css";
 import "@/styles/index.scss";
 import { Poppins, Lora } from "next/font/google";
 import Footer from "@/components/Footer/Footer";
@@ -9,17 +9,16 @@ import CountryProvider from "@/context/country/CountryProvider";
 import AuthProvider from "@/context/user/AuthProvider";
 import { StoreProvider } from "@/context/storeFilters/StoreProvider";
 import Header from "@/components/Header/Header";
-import Script from "next/script";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 import React from "react";
-import { Analytics } from "@vercel/analytics/react"
-import {SpeedInsights} from "@vercel/speed-insights/next";
-import { Suspense } from 'react'
-import { NavigationEvents } from '@/components/NavigationEvents'
-import {SITE_URL} from "@/contains/constants";
+import { Suspense } from "react";
+import { NavigationEvents } from "@/components/NavigationEvents";
+import { SITE_URL } from "@/contains/constants";
 import BotMaker from "@/scripts/BotMaker";
-
+import { GoogleTagManager } from "@next/third-parties/google";
+import Script from "next/script";
+import EmblueScript from "@/components/EmblueScript/EmblueScript";
 
 export const runtime = "edge";
 
@@ -36,7 +35,7 @@ const loraItalic = Lora({
   weight: ["400", "500", "600", "700"],
 });
 
-type Props = {
+export type Props = {
   params: { lang: string };
 };
 
@@ -53,6 +52,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: {
       canonical: "/",
     },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 
@@ -64,6 +67,8 @@ interface LayoutProps {
 export default async function RootLayout({ params, children }: LayoutProps) {
   return (
     <html lang="es" className={poppins.className + " " + loraItalic.variable}>
+      <GoogleTagManager gtmId="GTM-NZ95R2P" />
+      <EmblueScript />
       <body>
         <div className="bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
           <GoogleCaptchaWrapper>
@@ -72,14 +77,15 @@ export default async function RootLayout({ params, children }: LayoutProps) {
                 <UTMProvider>
                   <AuthProvider>
                     <StoreProvider>
-                      <Header/>
+                      <Header />
                       {children}
-                      <Script
-                          strategy="beforeInteractive"
-                          src="https://sdk.rebill.to/v2/rebill.min.js"
-                      />
                       <BotMaker />
-                      <Footer/>
+                      <Footer />
+                      <Script
+                        strategy="beforeInteractive"
+                        src="https://sdk.rebill.to/v2/rebill.min.js"
+                      />
+
                       <Suspense fallback={null}>
                         <NavigationEvents />
                       </Suspense>
@@ -90,8 +96,6 @@ export default async function RootLayout({ params, children }: LayoutProps) {
             </CountryProvider>
           </GoogleCaptchaWrapper>
         </div>
-        <Analytics />
-      <SpeedInsights />
       </body>
     </html>
   );

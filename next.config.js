@@ -2,6 +2,8 @@ const withNextIntl = require("next-intl/plugin")("./i18n.ts");
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+  // These are all the locales you want to support in
+  // your application
   //output: 'export', //For static site (loses SSR cappabilites)
   //distDir: "dist",
   reactStrictMode: false,
@@ -41,7 +43,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "wp.msklatam.com",
+        hostname: "dev.msklatam.tech",
         port: "",
         pathname: "/**",
       },

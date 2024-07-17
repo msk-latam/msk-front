@@ -23,7 +23,7 @@ import Link from "next/link";
 import ButtonPrimary from "@/components/Button/ButtonPrimary";
 import ShowErrorMessage from "@/components/ShowErrorMessage";
 import ssr from "@/services/ssr";
-import {SITE_URL} from "@/contains/constants";
+import { SITE_URL } from "@/contains/constants";
 
 export interface PageTrialProps {
   className?: string;
@@ -47,7 +47,7 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
   const [selectedOptionProfession, setSelectedOptionProfession] = useState("");
   const [showInputProfession, setShowInputProfession] = useState(false);
   const [showInputSpecialties, setShowInputSpecialties] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string>();
   const [success, setSuccess] = useState<boolean>(false);
   const [selectedProfessionId, setSelectedProfessionId] = useState<string>("");
   const [currentGroup, setCurrentGroup] = useState<any>([]);
@@ -264,7 +264,6 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
       className={`nc-PageSignUp ${className} animate-fade-down`}
       data-nc-id="PageSignUp"
     >
-
       <LayoutPage
         subHeading="Regístrate y disfruta de los contenidos del curso sin costo durante 7 días"
         heading="Crear cuenta"
@@ -361,10 +360,10 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
                       </option>
                       {documents[countryState.country]
                         ? documents[countryState.country].map((p: any) => (
-                          <option key={p.id} value={`${p.type}/${p.id}`}>
-                            {p.type}
-                          </option>
-                        ))
+                            <option key={p.id} value={`${p.type}/${p.id}`}>
+                              {p.text ? p.text : p.type}
+                            </option>
+                          ))
                         : ""}
                     </Field>
                   </div>
@@ -402,10 +401,10 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
                         </option>
                         {professions
                           ? professions.map((p: any) => (
-                            <option key={p.id} value={`${p.name}/${p.id}`}>
-                              {p.name}
-                            </option>
-                          ))
+                              <option key={p.id} value={`${p.name}/${p.id}`}>
+                                {p.name}
+                              </option>
+                            ))
                           : ""}
                       </Field>
                     )}
@@ -494,21 +493,21 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
                             </option>
                             {selectedOptionProfession && currentGroup.length
                               ? currentGroup.map((s: any) => (
-                                <option
-                                  key={`sp_group_${s.id}`}
-                                  defaultValue={s.name}
-                                >
-                                  {s.name}
-                                </option>
-                              ))
+                                  <option
+                                    key={`sp_group_${s.id}`}
+                                    defaultValue={s.name}
+                                  >
+                                    {s.name}
+                                  </option>
+                                ))
                               : specialties.map((s: any) => (
-                                <option
-                                  key={`sp_${s.id}`}
-                                  defaultValue={s.name}
-                                >
-                                  {s.name}
-                                </option>
-                              ))}
+                                  <option
+                                    key={`sp_${s.id}`}
+                                    defaultValue={s.name}
+                                  >
+                                    {s.name}
+                                  </option>
+                                ))}
                           </Field>
                         )}
                       </div>
@@ -572,7 +571,9 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
                   >
                     {onRequest ? "Creando..." : "Crear"}
                   </ButtonPrimary>
-                  {error && <ShowErrorMessage text={error} />}
+                  {error && (
+                    <ShowErrorMessage text={error} visible={error !== ""} />
+                  )}
 
                   {success && (
                     <p className="text-green-500 text-center w-full">

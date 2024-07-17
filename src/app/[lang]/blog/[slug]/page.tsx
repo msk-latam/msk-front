@@ -4,7 +4,7 @@ import SingleHeader from "@/components/MSK/Blog/Post/PostSingleHeader";
 import NcImage from "@/components/NcImage/NcImage";
 import SingleContent from "@/components/MSK/Blog/Post/SingleContent";
 import { cookies } from "next/headers";
-import {SITE_URL} from "@/contains/constants";
+import { IS_PROD, SITE_URL } from "@/contains/constants";
 
 interface PageCourseProps {
   params: any;
@@ -12,23 +12,34 @@ interface PageCourseProps {
 export const runtime = "edge";
 
 type Props = {
-  params: { slug: string };
+  params: { slug: string; lang: string };
 };
 
 export async function generateMetadata({ params }: Props) {
+  const currentCountry = params.lang || cookies().get("country")?.value;
   const postMetadata = await ssr.getSinglePost(params.slug);
+  console.log(postMetadata);
   return {
-    title: postMetadata.title,
+    title: `${postMetadata.title} | MSK`,
     description: postMetadata.excerpt,
-    alternates: {
-      canonical: `${SITE_URL}/blog`,
-    },
+    alternates: IS_PROD
+      ? {
+          canonical: `${SITE_URL}/${currentCountry}/blog/${postMetadata.slug}`,
+        }
+      : undefined,
+    robots: IS_PROD
+      ? {
+          index: true,
+          follow: true,
+        }
+      : undefined,
   };
 }
 
 const PageNota: FC<PageCourseProps> = async ({ params }) => {
-  const post = await ssr.getSinglePost(params.slug);
   const currentCountry = params.lang || cookies().get("country")?.value;
+
+  const post = await ssr.getSinglePost(params.slug, currentCountry);
   const allBestSellers = await ssr.getBestSellers(currentCountry);
   const { fiveSpecialtiesGroup } = await ssr.fetchPostsSpecialities();
   const fuentes = post?.fuentes || [];
@@ -51,7 +62,6 @@ const PageNota: FC<PageCourseProps> = async ({ params }) => {
                 excerptClassName={"color-light-white-text"}
               />
             </div>
-
           </div>
           {/* FEATURED IMAGE */}
           <div className="px-[16px] ">

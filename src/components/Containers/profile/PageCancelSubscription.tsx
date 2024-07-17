@@ -5,7 +5,6 @@ import {
   zsRegenerateCaptcha,
   isFormDisabled,
 } from "./arrepentimientoCompra";
-import PageHeadServer from "@/components/Head/PageHeadServer";
 import LayoutPage from "@/components/MSK/LayoutPage";
 import Link from "next/link";
 
@@ -30,7 +29,7 @@ export interface PageCancelSubscriptionProps {
 
 export async function generateMetadata() {
   return {
-    title: "Cancelar inscripción",
+    title: "Cancelar inscripción | MSK",
   };
 }
 

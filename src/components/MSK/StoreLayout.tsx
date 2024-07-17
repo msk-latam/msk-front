@@ -85,7 +85,7 @@ const StoreLayout: FC<LayoutPageProps> = ({
 
         {/* CONTENT */}
         <div className="py-5 mx-auto bg-white rounded-[40px] sm:p-5 lg:py-7 dark:bg-neutral-900">
-          <div className="container">{children}</div>
+          <div className="px-10">{children}</div>
         </div>
       </div>
     </div>

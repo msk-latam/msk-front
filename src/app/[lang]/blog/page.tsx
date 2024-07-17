@@ -8,32 +8,43 @@ import ssr from "@/services/ssr";
 import { FetchPostType } from "@/data/types";
 import WelcomeBlog from "@/components/MSK/Blog/WelcomeBlog";
 import NewsletterBlog from "@/components/MSK/Blog/NewsletterBlog";
-import {SITE_URL} from "@/contains/constants";
+import { IS_PROD, SITE_URL } from "@/contains/constants";
+import { Props } from "@/app/layout";
+import { Metadata } from "next";
 
 interface PageProps {
   params: any;
 }
 export const runtime = "edge";
 
-export async function generateMetadata() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const currentCountry = params.lang || cookies().get("country")?.value;
   return {
-    title: "Blog",
-    alternates: {
-      canonical: `${SITE_URL}/blog`,
-    },
+    title: "Blog | MSK",
+    alternates: IS_PROD
+      ? {
+          canonical: `${SITE_URL}/${currentCountry}/blog`,
+        }
+      : undefined,
+    robots: IS_PROD
+      ? {
+          index: true,
+          follow: true,
+        }
+      : undefined,
   };
 }
 
 const PageBlog: React.FC<PageProps> = async ({ params }) => {
   const currentCountry = params.lang || cookies().get("country")?.value;
   const allBestSellers = await ssr.getBestSellers(currentCountry);
-  const allPosts = await ssr.getPosts(currentCountry);
+  const allPosts = await ssr.getPosts();
   const welcomePosts = allPosts.filter((p: FetchPostType, i: number) => i < 4);
 
   return (
     <div className="nc-PageBlog relative animate-fade-down">
       <div className="md:container relative overflow-hidden">
-        <div className="container relative">
+        <div className="px-4 sm:px-8 md:px-6 lg:px-20 relative">
           <WelcomeBlog tabs={[]} heading="" posts={welcomePosts} />
           <BlogSummary
             posts={allPosts}
@@ -60,7 +71,7 @@ const PageBlog: React.FC<PageProps> = async ({ params }) => {
             />
           </div>
         </div>
-        <div className="container relative">
+        <div className="px-4 sm:px-8 md:px-12 lg:px-20 relative">
           <NewsletterBlog />
         </div>
       </div>
