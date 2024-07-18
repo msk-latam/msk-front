@@ -1,35 +1,42 @@
-"use client";
-import React, { FC, useContext, useReducer, useRef, useState } from "react";
-import PhoneInput from "react-phone-number-input";
-import { parsePhoneNumber } from "react-phone-number-input";
-import "react-phone-number-input/style.css";
-import { CountryCode } from "libphonenumber-js/types";
-import { ErrorMessage, Field, Form, FormikProvider, useFormik } from "formik";
-import * as Yup from "yup";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import { DataContext } from "@/context/data/DataContext";
-import { useParams, useRouter } from "next/navigation";
-import { JsonIdentificationsMapping } from "@/data/types";
-import { AuthContext } from "@/context/user/AuthContext";
-import useSingleProduct from "@/hooks/useSingleProduct";
-import { utmInitialState, utmReducer } from "@/context/utm/UTMReducer";
-import { CountryContext } from "@/context/country/CountryContext";
-import countryIdentificationsMapping from "@/data/jsons/__countryIdentifications.json";
-import { countries } from "@/data/countries";
-import LayoutPage from "@/components/MSK/LayoutPage";
-import SimpleInputSkeleton from "@/components/Skeleton/SimpleInputSkeleron";
-import InputField from "@/components/InputField/InputField";
-import Link from "next/link";
-import ButtonPrimary from "@/components/Button/ButtonPrimary";
-import ShowErrorMessage from "@/components/ShowErrorMessage";
-import ssr from "@/services/ssr";
-import { SITE_URL } from "@/contains/constants";
+'use client';
+import React, {
+  FC,
+  useContext,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+} from 'react';
+import PhoneInput from 'react-phone-number-input';
+import { parsePhoneNumber } from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+import { CountryCode } from 'libphonenumber-js/types';
+import { ErrorMessage, Field, Form, FormikProvider, useFormik } from 'formik';
+import * as Yup from 'yup';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { DataContext } from '@/context/data/DataContext';
+import { useParams, useRouter } from 'next/navigation';
+import { JsonIdentificationsMapping } from '@/data/types';
+import { AuthContext } from '@/context/user/AuthContext';
+import useSingleProduct from '@/hooks/useSingleProduct';
+import { utmInitialState, utmReducer } from '@/context/utm/UTMReducer';
+import { CountryContext } from '@/context/country/CountryContext';
+import countryIdentificationsMapping from '@/data/jsons/__countryIdentifications.json';
+import { countries } from '@/data/countries';
+import LayoutPage from '@/components/MSK/LayoutPage';
+import SimpleInputSkeleton from '@/components/Skeleton/SimpleInputSkeleron';
+import InputField from '@/components/InputField/InputField';
+import Link from 'next/link';
+import ButtonPrimary from '@/components/Button/ButtonPrimary';
+import ShowErrorMessage from '@/components/ShowErrorMessage';
+import ssr from '@/services/ssr';
+import { SITE_URL } from '@/contains/constants';
 
 export interface PageTrialProps {
   className?: string;
 }
 
-const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
+const PageTrial: FC<PageTrialProps> = ({ className = '' }) => {
   const {
     state: {
       allSpecialties: specialties,
@@ -41,27 +48,27 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
     loadingSpecialties,
   } = useContext(DataContext);
   const { executeRecaptcha } = useGoogleReCaptcha();
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
-  const [selectedCountry, setSelectedCountry] = useState<string>("");
-  const [selectedOptionSpecialty, setSelectedOptionSpecialty] = useState("");
-  const [selectedOptionProfession, setSelectedOptionProfession] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [selectedCountry, setSelectedCountry] = useState<string>('');
+  const [selectedOptionSpecialty, setSelectedOptionSpecialty] = useState('');
+  const [selectedOptionProfession, setSelectedOptionProfession] = useState('');
   const [showInputProfession, setShowInputProfession] = useState(false);
   const [showInputSpecialties, setShowInputSpecialties] = useState(false);
   const [error, setError] = useState<string>();
   const [success, setSuccess] = useState<boolean>(false);
-  const [selectedProfessionId, setSelectedProfessionId] = useState<string>("");
+  const [selectedProfessionId, setSelectedProfessionId] = useState<string>('');
   const [currentGroup, setCurrentGroup] = useState<any>([]);
   const [studentInputs, setStudentInputs] = useState(false);
   const [onRequest, setOnRequest] = useState<boolean>(false);
-  const [selectedCareer, setSelectedCareer] = useState("");
+  const [selectedCareer, setSelectedCareer] = useState('');
   const router = useRouter();
   const { slug }: { slug: string } = useParams();
   const [utmState] = useReducer(utmReducer, utmInitialState);
   const formRef = useRef<HTMLFormElement>(null);
-  const [selectedDocument, setSelectedDocument] = useState<string>("");
-  const [selectedDocumentId, setSelectedDocumentId] = useState<string>("");
+  const [selectedDocument, setSelectedDocument] = useState<string>('');
+  const [selectedDocumentId, setSelectedDocumentId] = useState<string>('');
   const [documents, setDocuments] = useState<JsonIdentificationsMapping>(
-    countryIdentificationsMapping
+    countryIdentificationsMapping,
   );
 
   const { countryState } = useContext(CountryContext);
@@ -73,37 +80,37 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
   //console.log({product},window.location,`${window.location.origin}${window.location.pathname.replace("trial","curso")}`)
 
   const handleOptionTypeChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
+    event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     const { value } = event.target;
     if (value && value.length) {
-      const values = value.split("/");
+      const values = value.split('/');
       const type = values[0];
       const id = values[1];
       setSelectedDocument(type);
       setSelectedDocumentId(id);
 
-      formik.setFieldValue("type", type);
+      formik.setFieldValue('type', type);
     } else {
-      setSelectedDocument("");
-      setSelectedDocumentId("");
+      setSelectedDocument('');
+      setSelectedDocumentId('');
     }
   };
 
   const initialValues = {
-    first_name: "",
-    last_name: "",
-    email: "",
-    phone: "",
-    profession: "",
-    speciality: "",
-    Otra_profesion: "",
-    Otra_especialidad: "",
-    Career: "",
-    Year: "",
-    country: "",
-    type: "",
-    identification: "",
+    first_name: '',
+    last_name: '',
+    email: '',
+    phone: '',
+    profession: '',
+    speciality: '',
+    Otra_profesion: '',
+    Otra_especialidad: '',
+    Career: '',
+    Year: '',
+    country: '',
+    type: '',
+    identification: '',
     Terms_And_Conditions: false,
     URL_ORIGEN: `${SITE_URL}/curso/${slug}`,
     Cursos_consultados: product?.ficha.title,
@@ -111,26 +118,26 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
   };
 
   const validationSchema = Yup.object().shape({
-    first_name: Yup.string().required("El nombre es requerido"),
-    last_name: Yup.string().required("El apellido es requerido"),
-    identification: Yup.string().required("La identificacion es requerida"),
-    type: Yup.string().required("El tipo de identificacion es requerido"),
+    first_name: Yup.string().required('El nombre es requerido'),
+    last_name: Yup.string().required('El apellido es requerido'),
+    identification: Yup.string().required('La identificacion es requerida'),
+    type: Yup.string().required('El tipo de identificacion es requerido'),
     email: Yup.string()
       .email(`Correo electrónico inválido`)
-      .required("El correo electrónico es requerido"),
-    phone: Yup.string().required("El teléfono es requerido"),
-    profession: Yup.string().required("La profesión es requerida"),
-    speciality: Yup.string().required("La especialidad es requerida"),
+      .required('El correo electrónico es requerido'),
+    phone: Yup.string().required('El teléfono es requerido'),
+    profession: Yup.string().required('La profesión es requerida'),
+    speciality: Yup.string().required('La especialidad es requerida'),
     country: Yup.string(),
     Terms_And_Conditions: Yup.boolean().oneOf(
       [true],
-      "Debes aceptar los términos y condiciones"
+      'Debes aceptar los términos y condiciones',
     ),
   });
 
   const handlePhoneChange = (value: string) => {
     setPhoneNumber(value);
-    if (typeof value !== "undefined") {
+    if (typeof value !== 'undefined') {
       const parsedPhoneNumber = parsePhoneNumber(value);
       if (parsedPhoneNumber?.country) {
         setSelectedCountry(parsedPhoneNumber.country);
@@ -139,78 +146,73 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
   };
 
   const handleOptionSpecialtyChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
+    event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     const { value } = event.target;
     setSelectedOptionSpecialty(value);
-    setShowInputSpecialties(value === "Otra Especialidad");
-    formik.setFieldValue("speciality", value);
+    setShowInputSpecialties(value === 'Otra Especialidad');
+    formik.setFieldValue('speciality', value);
   };
 
   const handleOptionCareerChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
+    event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     const { value } = event.target;
-    formik.setFieldValue("Career", value);
-    formik.setFieldValue("speciality", value);
+    formik.setFieldValue('Career', value);
+    formik.setFieldValue('speciality', value);
     setSelectedCareer(value);
   };
 
   const handleOptionProfessionChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
+    event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     const { value } = event.target;
     if (value && value.length) {
-      const values = value.split("/");
+      const values = value.split('/');
       const profession = values[0];
       const id = values[1];
       setSelectedOptionProfession(profession);
       setSelectedProfessionId(id);
-      setShowInputProfession(profession === "Otra profesión");
-      setStudentInputs(profession === "Estudiante");
-      formik.setFieldValue("profession", profession);
+      setShowInputProfession(profession === 'Otra profesión');
+      setStudentInputs(profession === 'Estudiante');
+      formik.setFieldValue('profession', profession);
 
       const groups =
         specialtiesGroup[parseInt(id) as keyof typeof specialtiesGroup];
       setCurrentGroup([]);
       setCurrentGroup(groups);
     } else {
-      setSelectedOptionProfession("");
-      setSelectedProfessionId("");
+      setSelectedOptionProfession('');
+      setSelectedProfessionId('');
     }
   };
 
   const fullCountry = (country: string): string => {
-    return (
-      countries.find((c) => c.id === country.toLowerCase())?.name || country
-    );
+    return countries.find(c => c.id === country.toLowerCase())?.name || country;
   };
 
   const optionsArray = [1, 2, 3, 4, 5];
-  localStorage.setItem("trialURL", `/suscribe/${slug}`);
 
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values: any) => {
-      localStorage.setItem("trialURL", `/suscribe/${slug}`);
-
       if (executeRecaptcha) {
         setOnRequest(true);
         const formData = {
           ...values,
           name: `${values.first_name} ${values.last_name}`,
-          recaptcha_token: await executeRecaptcha("signup_form"),
+          recaptcha_token: await executeRecaptcha('signup_form'),
           country: fullCountry(selectedCountry),
           utm_source: utmState.utm_source,
           utm_medium: utmState.utm_medium,
           utm_campaign: utmState.utm_campaign,
           utm_content: utmState.utm_content,
-          converted_by: "Trial Sitio web",
+          converted_by: 'Trial Sitio web',
           Cursos_consultados: product?.ficha.title,
           URL_DESCARGA: product?.temario_link_pdf?.replace(
             /^(https?:\/\/)(ar\.|mx\.|cl\.|ec\.)/,
-            "$1"
+            '$1',
           ),
         };
 
@@ -219,29 +221,34 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
           console.log({ res });
           if (!res?.access_token) {
             setSuccess(false);
-            console.error(res);
+            let errorMessages;
+            if (res?.errors) {
+              if (typeof window !== 'undefined') {
+                errorMessages = Object.values(res.errors)
+                  .map((errorMessage: any, i) => {
+                    if (
+                      errorMessage[i].includes('El Email ya ha sido registrado')
+                    ) {
+                      const redirectURL = '/iniciar-sesion';
+                      const loginLink = window.document.createElement('a');
+                      loginLink.className =
+                        'cursor-pointer text-violet-custom hover:underline hover:text-violet-custom font-bold';
+                      loginLink.href = redirectURL;
+                      loginLink.innerHTML = 'Inicia sesión';
+                      res.errors.email[0] += ` ${loginLink.outerHTML}`;
+                    }
 
-            const errorMessages = Object.values(res.errors)
-              .map((errorMessage: any, i) => {
-                if (
-                  errorMessage[i].includes("El Email ya ha sido registrado")
-                ) {
-                  const redirectURL = "/iniciar-sesion";
-                  const loginLink = document.createElement("a");
-                  loginLink.className =
-                    "cursor-pointer text-violet-custom hover:underline hover:text-violet-custom font-bold";
-                  loginLink.href = redirectURL;
-                  loginLink.innerHTML = "Inicia sesión";
-                  res.errors.email[0] += ` ${loginLink.outerHTML}`;
-                }
-
-                return ` ${errorMessage}`;
-              })
-              .join("<br />");
+                    return ` ${errorMessage}`;
+                  })
+                  .join('<br />');
+              }
+            } else {
+              errorMessages = res.message;
+            }
 
             setError(`${errorMessages}`);
           } else {
-            setError("");
+            setError('');
             setSuccess(true);
             setTimeout(() => {
               router.push(`/correo-enviado?origin=trial`);
@@ -260,16 +267,22 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
     router.push(`/suscribe/${slug}`);
   }
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('trialURL', `/suscribe/${slug}`);
+    }
+  }, []);
+
   return (
     <div
       className={`nc-PageSignUp ${className} animate-fade-down`}
-      data-nc-id="PageSignUp"
+      data-nc-id='PageSignUp'
     >
       <LayoutPage
-        subHeading="Regístrate y disfruta de los contenidos del curso sin costo durante 7 días"
-        heading="Crear cuenta"
+        subHeading='Regístrate y disfruta de los contenidos del curso sin costo durante 7 días'
+        heading='Crear cuenta'
       >
-        <div className="max-w-md mx-auto space-y-6">
+        <div className='max-w-md mx-auto space-y-6'>
           {loading ? (
             <>
               <SimpleInputSkeleton />
@@ -285,78 +298,78 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
             <FormikProvider value={formik}>
               <Form
                 onSubmit={formik.handleSubmit}
-                action="#"
-                className=""
-                autoComplete="off"
+                action='#'
+                className=''
+                autoComplete='off'
                 ref={formRef}
               >
                 <InputField
-                  label="E-mail"
-                  type="text"
-                  name="email"
-                  placeholder="Ingresar e-mail"
+                  label='E-mail'
+                  type='text'
+                  name='email'
+                  placeholder='Ingresar e-mail'
                 />
                 <InputField
-                  label="Nombre"
-                  type="text"
-                  name="first_name"
-                  placeholder="Ingresar nombre"
+                  label='Nombre'
+                  type='text'
+                  name='first_name'
+                  placeholder='Ingresar nombre'
                 />
                 <InputField
-                  label="Apellido"
-                  type="text"
-                  name="last_name"
-                  placeholder="Ingresar apellido"
+                  label='Apellido'
+                  type='text'
+                  name='last_name'
+                  placeholder='Ingresar apellido'
                 />
 
-                <div className="">
-                  <label className="text-neutral-800 dark:text-neutral-200 mb-1">
+                <div className=''>
+                  <label className='text-neutral-800 dark:text-neutral-200 mb-1'>
                     Teléfono
                   </label>
-                  <Field name="phone">
+                  <Field name='phone'>
                     {({ field, form, meta }: any) => (
-                      <div className="form-phone-std">
+                      <div className='form-phone-std'>
                         <ErrorMessage
-                          name="phone"
-                          component="span"
-                          className="error"
+                          name='phone'
+                          component='span'
+                          className='error'
                         />
                         <PhoneInput
-                          name="phone"
-                          id="phone"
-                          placeholder="Ingresar número telefónico"
+                          name='phone'
+                          id='phone'
+                          placeholder='Ingresar número telefónico'
                           defaultCountry={
                             countryState.country.toUpperCase() as CountryCode
                           }
                           onChange={(value: any) => {
-                            form.setFieldValue("phone", value);
+                            form.setFieldValue('phone', value);
                             handlePhoneChange(value);
                           }}
-                          className="phone-wrapper"
+                          className='phone-wrapper'
                         />
                       </div>
                     )}
                   </Field>
                 </div>
 
-                <div className="col-xl-6 col-span-2 md:col-span-1">
-                  <div className="form-select-std">
-                    <label className="text-neutral-800 dark:text-neutral-200 mb-1">
+                <div className='col-xl-6 col-span-2 md:col-span-1'>
+                  <div className='form-select-std'>
+                    <label className='text-neutral-800 dark:text-neutral-200 mb-1'>
                       Tipo de identificacion
                     </label>
                     <ErrorMessage
-                      name="type"
-                      component="span"
-                      className="error"
+                      name='type'
+                      component='span'
+                      className='error'
                     />
 
                     <Field
-                      as="select"
-                      name="type"
+                      as='select'
+                      name='type'
                       onChange={handleOptionTypeChange}
                       value={`${selectedDocument}/${selectedDocumentId}`}
                     >
-                      <option defaultValue="" value="">
+                      <option defaultValue='' value=''>
                         Seleccionar tipo
                       </option>
                       {documents[countryState.country]
@@ -365,39 +378,39 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
                               {p.text ? p.text : p.type}
                             </option>
                           ))
-                        : ""}
+                        : ''}
                     </Field>
                   </div>
                 </div>
 
                 <InputField
-                  label="Identificacion"
-                  type="text"
-                  name="identification"
-                  placeholder="Ingresar identificacion"
+                  label='Identificacion'
+                  type='text'
+                  name='identification'
+                  placeholder='Ingresar identificacion'
                 />
 
-                <div className="col-xl-6 col-span-2 md:col-span-1">
-                  <div className="form-select-std">
-                    <label className="text-neutral-800 dark:text-neutral-200 mb-1">
+                <div className='col-xl-6 col-span-2 md:col-span-1'>
+                  <div className='form-select-std'>
+                    <label className='text-neutral-800 dark:text-neutral-200 mb-1'>
                       Profesión
                     </label>
                     <ErrorMessage
-                      name="profession"
-                      component="span"
-                      className="error"
+                      name='profession'
+                      component='span'
+                      className='error'
                     />
 
                     {loadingProfessions ? (
                       <SimpleInputSkeleton />
                     ) : (
                       <Field
-                        as="select"
-                        name="profession"
+                        as='select'
+                        name='profession'
                         onChange={handleOptionProfessionChange}
                         value={`${selectedOptionProfession}/${selectedProfessionId}`}
                       >
-                        <option defaultValue="" value="">
+                        <option defaultValue='' value=''>
                           Seleccionar profesión
                         </option>
                         {professions
@@ -406,57 +419,57 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
                                 {p.name}
                               </option>
                             ))
-                          : ""}
+                          : ''}
                       </Field>
                     )}
                   </div>
 
                   {showInputProfession && (
-                    <div className="form-input-std my-4">
+                    <div className='form-input-std my-4'>
                       <ErrorMessage
-                        name="Otra_profesion"
-                        component="span"
-                        className="error"
+                        name='Otra_profesion'
+                        component='span'
+                        className='error'
                       />
                       <Field
-                        type="text"
-                        name="Otra_profesion"
-                        placeholder="Ingresar profesion"
+                        type='text'
+                        name='Otra_profesion'
+                        placeholder='Ingresar profesion'
                       />
                     </div>
                   )}
                 </div>
 
                 {studentInputs ? (
-                  <div className="col-xl-12 flex gap-2 mt-2">
-                    <div className="form-select-std w-1/2">
+                  <div className='col-xl-12 flex gap-2 mt-2'>
+                    <div className='form-select-std w-1/2'>
                       <ErrorMessage
-                        name="Year"
-                        component="span"
-                        className="error"
+                        name='Year'
+                        component='span'
+                        className='error'
                       />
-                      <Field as="select" name="Year">
-                        <option defaultValue="">Año</option>
-                        {optionsArray.map((y) => (
+                      <Field as='select' name='Year'>
+                        <option defaultValue=''>Año</option>
+                        {optionsArray.map(y => (
                           <option key={`st_Year_${y}`} defaultValue={y}>
                             {y}
                           </option>
                         ))}
                       </Field>
                     </div>
-                    <div className="form-select-std w-full">
+                    <div className='form-select-std w-full'>
                       <ErrorMessage
-                        name="Career"
-                        component="span"
-                        className="error"
+                        name='Career'
+                        component='span'
+                        className='error'
                       />
                       <Field
-                        as="select"
-                        name="Career"
+                        as='select'
+                        name='Career'
                         onChange={handleOptionCareerChange}
                         value={selectedCareer}
                       >
-                        <option defaultValue="">Seleccionar carrera</option>
+                        <option defaultValue=''>Seleccionar carrera</option>
                         {currentGroup.map((s: any) => (
                           <option
                             key={`st_carrer_${s.id}`}
@@ -471,25 +484,25 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
                 ) : (
                   <>
                     <div className={`col-xl-6`}>
-                      <div className="form-select-std">
-                        <label className="text-neutral-800 dark:text-neutral-200 mb-1">
+                      <div className='form-select-std'>
+                        <label className='text-neutral-800 dark:text-neutral-200 mb-1'>
                           Especialidad
                         </label>
                         <ErrorMessage
-                          name="speciality"
-                          component="span"
-                          className="error"
+                          name='speciality'
+                          component='span'
+                          className='error'
                         />
                         {loadingSpecialties ? (
                           <SimpleInputSkeleton />
                         ) : (
                           <Field
-                            as="select"
-                            name="speciality"
+                            as='select'
+                            name='speciality'
                             onChange={handleOptionSpecialtyChange}
                             value={selectedOptionSpecialty}
                           >
-                            <option defaultValue="">
+                            <option defaultValue=''>
                               Seleccionar especialidad
                             </option>
                             {selectedOptionProfession && currentGroup.length
@@ -513,49 +526,49 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
                         )}
                       </div>
                       {showInputSpecialties && (
-                        <div className="form-input-std my-4">
+                        <div className='form-input-std my-4'>
                           <Field
-                            type="text"
-                            name="Otra_especialidad"
-                            placeholder="Ingresar especialidad"
+                            type='text'
+                            name='Otra_especialidad'
+                            placeholder='Ingresar especialidad'
                           />
                           <ErrorMessage
-                            name="Otra_especialidad"
-                            component="div"
-                            className="error"
+                            name='Otra_especialidad'
+                            component='div'
+                            className='error'
                           />
                         </div>
                       )}
                     </div>
                   </>
                 )}
-                <div className="flex flex-wrap gap-4 mt-4 ">
-                  <div className="contact-checkbox signup-checkbox">
+                <div className='flex flex-wrap gap-4 mt-4 '>
+                  <div className='contact-checkbox signup-checkbox'>
                     <ErrorMessage
-                      name="Terms_And_Conditions"
-                      component="span"
-                      className="error"
+                      name='Terms_And_Conditions'
+                      component='span'
+                      className='error'
                     />
                     <Link
-                      href="/condiciones-de-contratacion#trial"
-                      target="_blank"
-                      className="text-primary hover:text-primary underline"
+                      href='/condiciones-de-contratacion#trial'
+                      target='_blank'
+                      className='text-primary hover:text-primary underline'
                     >
                       Ver términos y condiciones de prueba gratuita
                     </Link>
-                    <div className="flex gap-2 center text-center">
+                    <div className='flex gap-2 center text-center'>
                       <Field
-                        type="checkbox"
-                        name="Terms_And_Conditions"
+                        type='checkbox'
+                        name='Terms_And_Conditions'
                         checked={formik.values.Terms_And_Conditions}
-                        className="hidden-checkbox mt-0.5"
+                        className='hidden-checkbox mt-0.5'
                       />
                       <label>
-                        Acepto las{" "}
+                        Acepto las{' '}
                         <Link
-                          href="/politica-de-privacidad"
-                          target="_blank"
-                          className="text-primary"
+                          href='/politica-de-privacidad'
+                          target='_blank'
+                          className='text-primary'
                         >
                           politicas de privacidad
                         </Link>
@@ -564,20 +577,20 @@ const PageTrial: FC<PageTrialProps> = ({ className = "" }) => {
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-1 mt-2 mb-4">
+                <div className='flex flex-wrap gap-1 mt-2 mb-4'>
                   <ButtonPrimary
-                    type="submit"
-                    className="w-full"
+                    type='submit'
+                    className='w-full'
                     disabled={!formik.values.Terms_And_Conditions || onRequest}
                   >
-                    {onRequest ? "Creando..." : "Crear"}
+                    {onRequest ? 'Creando...' : 'Crear'}
                   </ButtonPrimary>
                   {error && (
-                    <ShowErrorMessage text={error} visible={error !== ""} />
+                    <ShowErrorMessage text={error} visible={error !== ''} />
                   )}
 
                   {success && (
-                    <p className="text-green-500 text-center w-full">
+                    <p className='text-green-500 text-center w-full'>
                       Registrado correctamente!
                     </p>
                   )}
