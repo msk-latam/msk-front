@@ -42,7 +42,7 @@ const PageContact: FC<PageContactProps> = ({ className = "" }) => {
   const [selectedOptionProfession, setSelectedOptionProfession] = useState("");
   const [showInputProfession, setShowInputProfession] = useState(false);
   const [showInputSpecialties, setShowInputSpecialties] = useState(false);
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
   const [selectedProfessionId, setSelectedProfessionId] = useState<string>("");
   const [currentGroup, setCurrentGroup] = useState<any>([]);
@@ -60,6 +60,8 @@ const PageContact: FC<PageContactProps> = ({ className = "" }) => {
   );
 
   const { countryState } = useContext(CountryContext);
+
+  //console.log({product},window.location,`${window.location.origin}${window.location.pathname.replace("trial","curso")}`)
 
   const handleOptionTypeChange = (
     event: React.ChangeEvent<HTMLSelectElement>
