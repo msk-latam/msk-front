@@ -271,7 +271,7 @@ const PageTrial: FC<PageTrialProps> = ({ className = '' }) => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('trialURL', `/suscribe/${slug}`);
     }
-  }, [window]);
+  }, []);
 
   return (
     <div
