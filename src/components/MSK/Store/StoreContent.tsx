@@ -321,7 +321,7 @@ const StoreContent: FC<{}> = () => {
           Number(product.total_price) !== 0;
 
         const environmentMatch =
-          product.is_test_product && product.father_post_type === 'course';
+          !product.is_test_product && product.father_post_type === 'course';
 
         return (
           specialtiesMatch &&
