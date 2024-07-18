@@ -9,9 +9,9 @@ export interface PageEmailSentProps {
 const PageEmailSent: FC<PageEmailSentProps> = ({ className = '' }) => {
   let subHeading = '';
   let message = '';
+
   const seachParams = useSearchParams();
   const origin = seachParams.get('origin');
-  console.log(origin);
 
   switch (origin) {
     case 'trial':
