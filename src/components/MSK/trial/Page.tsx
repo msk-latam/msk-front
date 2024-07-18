@@ -42,11 +42,11 @@ const PageTrial: FC<PageTrialProps> = ({ className = '' }) => {
       allSpecialties: specialties,
       allSpecialtiesGroups: specialtiesGroup,
       allProfessions: professions,
-      allCourses: allProducts,
     },
     loadingProfessions,
     loadingSpecialties,
   } = useContext(DataContext);
+
   const { executeRecaptcha } = useGoogleReCaptcha();
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [selectedCountry, setSelectedCountry] = useState<string>('');
@@ -70,6 +70,8 @@ const PageTrial: FC<PageTrialProps> = ({ className = '' }) => {
   const [documents, setDocuments] = useState<JsonIdentificationsMapping>(
     countryIdentificationsMapping,
   );
+
+  console.log({ professions, specialties });
 
   const { countryState } = useContext(CountryContext);
   const { state: authState } = useContext(AuthContext);
