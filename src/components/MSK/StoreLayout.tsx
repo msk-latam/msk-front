@@ -1,11 +1,11 @@
-"use client";
-import React, { FC, Suspense, useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { A11y, Autoplay, Navigation, Pagination, Scrollbar } from "swiper";
+'use client';
+import React, { FC, Suspense, useEffect, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { A11y, Autoplay, Navigation, Pagination, Scrollbar } from 'swiper';
 
 import 'swiper/swiper-bundle.css';
-import { BannerImg } from "@/data/types";
-import api from "@/services/api";
+import { BannerImg } from '@/data/types';
+import api from '@/services/api';
 export interface LayoutPageProps {
   className?: string;
   heading: string;
@@ -17,12 +17,12 @@ export interface LayoutPageProps {
 
 const defaultImgs = [
   {
-    imagen_desktop: { link: "/images/banners/tienda_desktop.jpg" },
-    imagen_mobile: { link: "/images/banners/tienda_mobile.jpg" },
+    imagen_desktop: { link: '/webp-images/banners/tienda_desktop.webp' },
+    imagen_mobile: { link: '/webp-images/banners/tienda_mobile.webp' },
   },
 ];
 const StoreLayout: FC<LayoutPageProps> = ({
-  className = "",
+  className = '',
   children,
   country,
 }) => {
@@ -31,7 +31,7 @@ const StoreLayout: FC<LayoutPageProps> = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.getWpImages("banners_shop", country);
+        const response = await api.getWpImages('banners_shop', country);
         console.log({ response });
         if (response.length > 0) {
           setBannerImgs(response);
@@ -44,14 +44,14 @@ const StoreLayout: FC<LayoutPageProps> = ({
     fetchData();
   }, []);
 
-  console.log({bannerImgs})
+  console.log({ bannerImgs });
 
   return (
     <div
       className={`nc-LayoutPage relative ${className}`}
-      data-nc-id="LayoutPage"
+      data-nc-id='LayoutPage'
     >
-      <div className="container-fluid relative">
+      <div className='container-fluid relative'>
         {/* HEADER */}
         <header>
           <Swiper
@@ -66,16 +66,16 @@ const StoreLayout: FC<LayoutPageProps> = ({
           >
             {bannerImgs.map((img, index) => (
               <SwiperSlide key={`img_${index}`}>
-                <a href={img.url?.href ? img.url?.href : "#"}>
+                <a href={img.url?.href ? img.url?.href : '#'}>
                   <img
                     src={img.imagen_desktop.link}
-                    alt="hero"
-                    className="store-banner-desktop hidden md:block w-full"
+                    alt='hero'
+                    className='store-banner-desktop hidden md:block w-full'
                   />
                   <img
                     src={img.imagen_mobile.link}
-                    alt="hero"
-                    className="store-banner-desktop block md:hidden w-full"
+                    alt='hero'
+                    className='store-banner-desktop block md:hidden w-full'
                   />
                 </a>
               </SwiperSlide>
@@ -84,8 +84,8 @@ const StoreLayout: FC<LayoutPageProps> = ({
         </header>
 
         {/* CONTENT */}
-        <div className="py-5 mx-auto bg-white rounded-[40px] sm:p-5 lg:py-7 dark:bg-neutral-900">
-          <div className="px-10">{children}</div>
+        <div className='py-5 mx-auto bg-white rounded-[40px] sm:p-5 lg:py-7 dark:bg-neutral-900'>
+          <div className='px-10'>{children}</div>
         </div>
       </div>
     </div>

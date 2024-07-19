@@ -7,6 +7,7 @@ export const Loading = () => (
       alt='Cargando...'
       width={120}
       height={120}
+      priority
     />
   </div>
 );

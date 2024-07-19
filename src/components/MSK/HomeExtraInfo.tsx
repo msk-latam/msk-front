@@ -1,9 +1,9 @@
-"use client";
-import { FC, useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { BannerImg } from "@/data/types";
-import api from "@/services/api";
-import {A11y, Autoplay, Navigation, Pagination, Scrollbar} from "swiper";
+'use client';
+import { FC, useEffect, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { BannerImg } from '@/data/types';
+import api from '@/services/api';
+import { A11y, Autoplay, Navigation, Pagination, Scrollbar } from 'swiper';
 
 export interface SectionAdsProps {
   className?: string;
@@ -14,8 +14,8 @@ export interface SectionAdsProps {
 
 const defaultImgs = [
   {
-    imagen_desktop: { link: "/images/banners/promo-home_desktop.png" },
-    imagen_mobile: { link: "/images/banners/promo-home_mobile.png" },
+    imagen_desktop: { link: '/webp-images/banners/promo-home_desktop.webp' },
+    imagen_mobile: { link: '/webp-images/banners/promo-home_mobile.webp' },
   },
 ];
 const SectionAds: FC<SectionAdsProps> = ({ country, btnOnClick }) => {
@@ -23,7 +23,7 @@ const SectionAds: FC<SectionAdsProps> = ({ country, btnOnClick }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.getWpImages("banners_home", country);
+        const response = await api.getWpImages('banners_home', country);
         setBannerImgs(response);
       } catch (err) {
         // console.log({ err });
@@ -34,8 +34,8 @@ const SectionAds: FC<SectionAdsProps> = ({ country, btnOnClick }) => {
   }, []);
   return (
     <div
-      onClick={() => (btnOnClick ? btnOnClick() : "")}
-      className="cursor-pointer"
+      onClick={() => (btnOnClick ? btnOnClick() : '')}
+      className='cursor-pointer'
     >
       <Swiper
         slidesPerView={1}
@@ -49,16 +49,16 @@ const SectionAds: FC<SectionAdsProps> = ({ country, btnOnClick }) => {
       >
         {bannerImgs.map((img, index) => (
           <SwiperSlide key={`img_${index}`}>
-            <a href={img.url?.href ? img.url?.href : "#"}>
+            <a href={img.url?.href ? img.url?.href : '#'}>
               <img
                 src={img.imagen_desktop.link}
-                alt="hero"
-                className="store-banner-desktop hidden md:block w-full"
+                alt='hero'
+                className='store-banner-desktop hidden md:block w-full'
               />
               <img
                 src={img.imagen_mobile.link}
-                alt="hero"
-                className="store-banner-desktop block md:hidden w-full"
+                alt='hero'
+                className='store-banner-desktop block md:hidden w-full'
               />
             </a>
           </SwiperSlide>
