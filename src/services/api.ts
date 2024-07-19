@@ -5,19 +5,20 @@ import {
   IP_API,
   NOTE_SPECIALITIES,
   baseUrl,
-} from "@/data/api";
-import { Login, ContactUs, SignUp, Newsletter, AuthState } from "@/data/types";
-import countryStates from "@/data/jsons/__countryStates.json";
-import { BodyNewPassword } from "@/components/MSK/PageNewPassword";
-import { ContactFormSchema } from "@/hooks/useYupValidation";
-import { countries } from "@/data/countries";
-import {base} from "next/dist/build/webpack/config/blocks/base";
-import {IS_PROD} from "@/contains/constants";
+} from '@/data/api';
+import { Login, ContactUs, SignUp, Newsletter, AuthState } from '@/data/types';
+import countryStates from '@/data/jsons/__countryStates.json';
+import { BodyNewPassword } from '@/components/MSK/PageNewPassword';
+import { ContactFormSchema } from '@/hooks/useYupValidation';
+import { countries } from '@/data/countries';
+import { base } from 'next/dist/build/webpack/config/blocks/base';
+import { IS_PROD } from '@/contains/constants';
 
-let validCountries = countries.map((item) => item.id);
+let validCountries = countries.map(item => item.id);
 const PROD = IS_PROD;
-const LSCountry = typeof window !== "undefined" ? localStorage.getItem("country") : null;
-let COUNTRY = "int";
+const LSCountry =
+  typeof window !== 'undefined' ? localStorage.getItem('country') : null;
+let COUNTRY = 'int';
 if (LSCountry) {
   COUNTRY = LSCountry;
 }
@@ -36,7 +37,7 @@ const apiCreateTrialMPContract = `${baseUrl}/api/gateway/api/mercadopago/payment
 class ApiService {
   baseUrl = apiSignUpURL;
   token =
-    typeof window !== "undefined" ? localStorage.getItem("tokenLogin") : null;
+    typeof window !== 'undefined' ? localStorage.getItem('tokenLogin') : null;
 
   async get(endpoint: string) {
     const response = await fetch(`${this.baseUrl}/${endpoint}`, {
@@ -52,10 +53,10 @@ class ApiService {
 
   async post(endpoint: string, body: any) {
     const response = await fetch(`${this.baseUrl}${endpoint}`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
         // Add any other headers you may need, such as authorization
       },
       body: JSON.stringify(body),
@@ -71,10 +72,10 @@ class ApiService {
   async postSignUp(jsonData: SignUp) {
     try {
       const response = await fetch(apiSignUpURL, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(jsonData),
       });
@@ -105,10 +106,10 @@ class ApiService {
   }> {
     try {
       const response = await fetch(apiSignInURL, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(jsonData),
       });
@@ -132,10 +133,10 @@ class ApiService {
   async postRecover(jsonData: { email: string }): Promise<Response> {
     try {
       const response = await fetch(apiRecoverURL, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(jsonData),
       });
@@ -154,16 +155,16 @@ class ApiService {
   async getEmailByIdZohoCRM(module: string, email: string) {
     try {
       const response = await fetch(
-        `${baseUrl}/api/crm/GetByEmail/${module}/${email}`
+        `${baseUrl}/api/crm/GetByEmail/${module}/${email}`,
       );
 
       if (!response.ok) {
         throw new Error(
-          `Failed to get email by ID from Zoho CRM. HTTP status ${response.status}`
+          `Failed to get email by ID from Zoho CRM. HTTP status ${response.status}`,
         );
       }
       let data = await response.json();
-      console.log({data})
+      console.log({ data });
       return data;
     } catch (error) {
       return error;
@@ -175,18 +176,18 @@ class ApiService {
       const response = await fetch(
         `${baseUrl}/api/crm/CreateLeadHomeContactUs`,
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify(jsonData),
-        }
+        },
       );
 
       if (!response.ok) {
         throw new Error(
-          `Failed to post contact us data. HTTP status ${response.status}`
+          `Failed to post contact us data. HTTP status ${response.status}`,
         );
       }
 
@@ -201,13 +202,13 @@ class ApiService {
       const response = await fetch(
         `${baseUrl}/api/crm/CreateLeadHomeNewsletter`,
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify(jsonData),
-        }
+        },
       );
 
       return await response.json();
@@ -217,59 +218,57 @@ class ApiService {
   }
 
   async getUserData() {
-      const email = window.localStorage.getItem("email");
-     
-      try {
-        const token = window.localStorage.getItem("token");
-        if (token) {
-          const headers = {
-            Authorization: `Bearer ${token}`,
-          };
-          const response = await fetch(`${apiProfileUrl}/${email}`, {
-            headers: {
-              ...headers,
-              "Content-Type": "application/json",
-              "Accept": "application/json",
+    const email = window.localStorage.getItem('email');
 
-            },
-          });
+    try {
+      const token = window.localStorage.getItem('token');
+      if (token) {
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
+        const response = await fetch(`${apiProfileUrl}/${email}`, {
+          headers: {
+            ...headers,
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+        });
 
-          if (!response.ok) {
-            throw new Error(`Failed to get user data. HTTP status ${response.status}`);
-          }
-
-          const data = await response.json();
-          return data.user;
+        if (!response.ok) {
+          throw new Error(
+            `Failed to get user data. HTTP status ${response.status}`,
+          );
         }
-      } catch (error) {
-        window.localStorage.removeItem("token");
-        window.localStorage.removeItem("user");
-        // console.log({error});
+
+        const data = await response.json();
+        return data.user;
       }
-    
+    } catch (error) {
+      window.localStorage.removeItem('token');
+      window.localStorage.removeItem('user');
+      // console.log({error});
+    }
   }
 
-  async getAllCourses(country:string, withAll = false) {
-    let validCountries = countries.map((item) => item.id);
-    let siteEnv = window.location.hostname !== "msklatam.com";
+  async getAllCourses(country: string, withAll = false) {
+    let validCountries = countries.map(item => item.id);
+    let siteEnv = window.location.hostname !== 'msklatam.com';
 
     const countryParam = validCountries.includes(COUNTRY)
       ? `&country=${COUNTRY}`
       : `&country=int`;
-    const filterParam = withAll ? `&asd=1&filter=all` : "";
+    const filterParam = withAll ? `&asd=1&filter=all` : '';
 
     try {
-      const queryParams = [countryParam, filterParam]
-        .filter(Boolean)
-        .join("");
+      const queryParams = [countryParam, filterParam].filter(Boolean).join('');
 
       const response = await fetch(
-        `${API_URL}/products?limit=-1${queryParams}`
+        `${API_URL}/products?limit=-1${queryParams}`,
       );
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch courses. HTTP status ${response.status}`
+          `Failed to fetch courses. HTTP status ${response.status}`,
         );
       }
 
@@ -281,18 +280,18 @@ class ApiService {
   }
 
   async getAllTestCourses() {
-    const tag = new URLSearchParams(window.location.search).get("tag");
-    const tagParam = tag ? `&tag=${tag}` : "";
+    const tag = new URLSearchParams(window.location.search).get('tag');
+    const tagParam = tag ? `&tag=${tag}` : '';
 
     try {
-      const queryParams = [tagParam].filter(Boolean).join("");
+      const queryParams = [tagParam].filter(Boolean).join('');
       const response = await fetch(
-        `${API_URL}/products?limit=-1${queryParams}&country=int&type=course&filter=test`
+        `${API_URL}/products?limit=-1${queryParams}&country=int&type=course&filter=test`,
       );
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch test courses. HTTP status ${response.status}`
+          `Failed to fetch test courses. HTTP status ${response.status}`,
         );
       }
 
@@ -309,7 +308,7 @@ class ApiService {
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch best sellers. HTTP status ${response.status}`
+          `Failed to fetch best sellers. HTTP status ${response.status}`,
         );
       }
 
@@ -322,14 +321,14 @@ class ApiService {
 
   async getBestSellers() {
     try {
-      const countryParam = validCountries.includes(COUNTRY) ? COUNTRY : "int";
+      const countryParam = validCountries.includes(COUNTRY) ? COUNTRY : 'int';
       const response = await fetch(
-        `${API_URL}/home/best-sellers?country=${countryParam}`
+        `${API_URL}/home/best-sellers?country=${countryParam}`,
       );
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch best sellers. HTTP status ${response.status}`
+          `Failed to fetch best sellers. HTTP status ${response.status}`,
         );
       }
 
@@ -347,11 +346,12 @@ class ApiService {
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch professions. HTTP status ${response.status}`
+          `Failed to fetch professions. HTTP status ${response.status}`,
         );
       }
 
       const data = await response.json();
+      console.log('getProfessions', { data });
       return data;
     } catch (error) {
       return error;
@@ -365,7 +365,7 @@ class ApiService {
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch store professions. HTTP status ${response.status}`
+          `Failed to fetch store professions. HTTP status ${response.status}`,
         );
       }
 
@@ -374,14 +374,14 @@ class ApiService {
       // Modify slug based on profession name
       data.map((profession: any) => {
         switch (profession.name) {
-          case "Personal médico":
-            profession.slug = "medicos";
+          case 'Personal médico':
+            profession.slug = 'medicos';
             break;
-          case "Personal de enfermería y auxiliares":
-            profession.slug = "enfermeros-auxiliares";
+          case 'Personal de enfermería y auxiliares':
+            profession.slug = 'enfermeros-auxiliares';
             break;
-          case "Otra profesión":
-            profession.slug = "otra-profesion";
+          case 'Otra profesión':
+            profession.slug = 'otra-profesion';
             break;
         }
       });
@@ -398,7 +398,7 @@ class ApiService {
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch specialties. HTTP status ${response.status}`
+          `Failed to fetch specialties. HTTP status ${response.status}`,
         );
       }
 
@@ -415,10 +415,9 @@ class ApiService {
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch specialties and groups. HTTP status ${response.status}`
+          `Failed to fetch specialties and groups. HTTP status ${response.status}`,
         );
       }
-
       const data = await response.json();
       return data;
     } catch (error) {
@@ -428,18 +427,18 @@ class ApiService {
 
   async getSpecialtiesStore() {
     try {
-      let validCountries = countries.map((item) => item.id);
+      let validCountries = countries.map(item => item.id);
       const countryParam = validCountries.includes(COUNTRY)
         ? `&country=${COUNTRY}`
         : `&country=int`;
 
       const response = await fetch(
-        `${API_URL}/products-specialities?${countryParam}`
+        `${API_URL}/products-specialities?${countryParam}`,
       );
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch specialties store. HTTP status ${response.status}`
+          `Failed to fetch specialties store. HTTP status ${response.status}`,
         );
       }
 
@@ -454,10 +453,10 @@ class ApiService {
           name: specialty.speciality_name,
           products: specialty.products,
           image: specialty.image,
-        })
+        }),
       );
     } catch (error) {
-      console.error("Network error:", error);
+      console.error('Network error:', error);
       return error;
     }
   }
@@ -468,7 +467,7 @@ class ApiService {
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch newsletter specialties. HTTP status ${response.status}`
+          `Failed to fetch newsletter specialties. HTTP status ${response.status}`,
         );
       }
 
@@ -485,10 +484,10 @@ class ApiService {
       let url = `${baseUrl}/api/sso/link`;
       console.log(url);
       const response = await fetch(url, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify({
           product_code,
@@ -499,7 +498,7 @@ class ApiService {
 
       if (!response.ok) {
         throw new Error(
-          `Failed to get LMS link. HTTP status ${response.status}`
+          `Failed to get LMS link. HTTP status ${response.status}`,
         );
       }
 
@@ -511,25 +510,25 @@ class ApiService {
   }
 
   async updateUserData(data: any): Promise<any> {
-    if (typeof window !== "undefined") {
-      const userEmail = localStorage.getItem("email");
+    if (typeof window !== 'undefined') {
+      const userEmail = localStorage.getItem('email');
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem('token');
         if (token) {
           const headers = {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-            "Accept": "application/json",
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
           };
           const response = await fetch(`${apiProfileUrl}/${userEmail}`, {
-            method: "PUT",
+            method: 'PUT',
             headers: headers,
             body: JSON.stringify(data), // Convert data to JSON format
           });
 
           if (!response.ok) {
             throw new Error(
-              `Failed to update user data. HTTP status ${response.status}`
+              `Failed to update user data. HTTP status ${response.status}`,
             );
           }
 
@@ -545,18 +544,18 @@ class ApiService {
   async getPosts(country?: string) {
     try {
       let currentYear = new Date().getFullYear();
-      let validCountries = countries.map((item) => item.id);
-      const countryParam = validCountries.includes(COUNTRY || "")
+      let validCountries = countries.map(item => item.id);
+      const countryParam = validCountries.includes(COUNTRY || '')
         ? COUNTRY
-        : "int";
+        : 'int';
 
       const response = await fetch(
-        `${API_URL}/posts?year=${currentYear}&country=${countryParam}`
+        `${API_URL}/posts?year=${currentYear}&country=${countryParam}`,
       );
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch posts. HTTP status ${response.status}`
+          `Failed to fetch posts. HTTP status ${response.status}`,
         );
       }
 
@@ -579,7 +578,7 @@ class ApiService {
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch single post. HTTP status ${response.status}`
+          `Failed to fetch single post. HTTP status ${response.status}`,
         );
       }
 
@@ -593,12 +592,12 @@ class ApiService {
   async getSingleCourse(slug: string, country: string) {
     try {
       const response = await fetch(
-        `${API_URL}/product/${slug}?country=${country}`
+        `${API_URL}/product/${slug}?country=${country}`,
       );
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch single course. HTTP status ${response.status}`
+          `Failed to fetch single course. HTTP status ${response.status}`,
         );
       }
 
@@ -611,25 +610,28 @@ class ApiService {
 
   async getCountryCode() {
     try {
-      const ipResponse = await fetch("https://api.ipify.org/?format=json");
+      const ipResponse = await fetch('https://api.ipify.org/?format=json');
       const ipData = await ipResponse.json();
       const ip = ipData.ip;
-      console.log("getCountryCode", ipData);
+      console.log('getCountryCode', ipData);
 
       let response;
       if (PROD) {
         response = await fetch(`${IP_API}?ip=${ip}`);
-        console.log(`${IP_API}?ip=${ip}` + " PROD country by IP Response", response);
+        console.log(
+          `${IP_API}?ip=${ip}` + ' PROD country by IP Response',
+          response,
+        );
       } else {
         response = await fetch(
-          `https://pro.ip-api.com/json/?fields=61439&key=OE5hxPrfwddjYYP`
+          `https://pro.ip-api.com/json/?fields=61439&key=OE5hxPrfwddjYYP`,
         );
-        console.log(" DEV country by IP Response", response);
+        console.log(' DEV country by IP Response', response);
       }
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch country code. HTTP status ${response.status}`
+          `Failed to fetch country code. HTTP status ${response.status}`,
         );
       }
 
@@ -639,10 +641,10 @@ class ApiService {
         return data.data;
       }
 
-      return data.countryCode ? data.countryCode.toLowerCase() : "";
+      return data.countryCode ? data.countryCode.toLowerCase() : '';
     } catch (error) {
-      console.error("Network error:", error);
-      return "";
+      console.error('Network error:', error);
+      return '';
     }
   }
 
@@ -650,7 +652,7 @@ class ApiService {
     try {
       return countryStates[country as keyof typeof countryStates];
     } catch (error) {
-      console.error("Network error:", error);
+      console.error('Network error:', error);
       return [];
     }
   }
@@ -658,23 +660,23 @@ class ApiService {
   async postNewPassword(jsonData: BodyNewPassword) {
     try {
       const response = await fetch(apiNewPassword, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify(jsonData),
       });
 
       if (!response.ok) {
         throw new Error(
-          `Failed to post new password. HTTP status ${response.status}`
+          `Failed to post new password. HTTP status ${response.status}`,
         );
       }
 
       return response.json();
     } catch (error) {
-      console.error("Network error:", error);
+      console.error('Network error:', error);
       return error;
     }
   }
@@ -685,13 +687,13 @@ class ApiService {
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch notes specialities. HTTP status ${response.status}`
+          `Failed to fetch notes specialities. HTTP status ${response.status}`,
         );
       }
 
       return response.json();
     } catch (error) {
-      console.error("Network error:", error);
+      console.error('Network error:', error);
       return error;
     }
   }
@@ -705,40 +707,40 @@ class ApiService {
       if (response.ok) {
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
+        const a = document.createElement('a');
         a.href = url;
-        a.download = `${slug || "temario_msk"}.pdf`;
+        a.download = `${slug || 'temario_msk'}.pdf`;
         a.click();
         window.URL.revokeObjectURL(url);
       }
     } catch (error) {
-      console.error("Network error:", error);
+      console.error('Network error:', error);
     }
   }
 
   async cancelSubscription(formData: any) {
     try {
-      return fetch("https://ayuda.msklatam.com/support/WebToCase", {
-        method: "POST",
+      return fetch('https://ayuda.msklatam.com/support/WebToCase', {
+        method: 'POST',
         body: formData,
         headers: {
-          "Content-Type": "multipart/form-data",
-          "Accept": "application/json",
+          'Content-Type': 'multipart/form-data',
+          Accept: 'application/json',
         },
       });
     } catch (error) {
-      console.error("Network error:", error);
+      console.error('Network error:', error);
     }
   }
 
   async getWpImages(kind: string, country?: string) {
     try {
-      const countryParam = country ? `?country=${country}` : "";
+      const countryParam = country ? `?country=${country}` : '';
       const response = await fetch(`${API_URL}/banners${countryParam}`);
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch WP images. HTTP status ${response.status}`
+          `Failed to fetch WP images. HTTP status ${response.status}`,
         );
       }
 
@@ -746,7 +748,7 @@ class ApiService {
 
       const formattedResponse = data[kind].map((img: any) => {
         const url =
-          typeof img.url_banner == "string"
+          typeof img.url_banner == 'string'
             ? { href: img.url_banner }
             : { href: img.url_banner.url };
         return { ...img, url };
@@ -754,7 +756,7 @@ class ApiService {
 
       return formattedResponse;
     } catch (error) {
-      console.error("Network error:", error);
+      console.error('Network error:', error);
       return [];
     }
   }
@@ -762,10 +764,10 @@ class ApiService {
   async enrollCourse(product_code: number, email: string) {
     try {
       const response = await fetch(apiEnrollCourse, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify({
           product_code,
@@ -775,13 +777,13 @@ class ApiService {
 
       if (!response.ok) {
         throw new Error(
-          `Failed to enroll course. HTTP status ${response.status}`
+          `Failed to enroll course. HTTP status ${response.status}`,
         );
       }
 
       return response.json();
     } catch (error) {
-      console.error("Network error:", error);
+      console.error('Network error:', error);
       return error;
     }
   }
@@ -789,30 +791,31 @@ class ApiService {
   async getCoursesProgressStatus(email: string, product_code: number) {
     try {
       const response = await fetch(
-        `${apiEnrollCourseStatus}/${email}/${product_code}`
+        `${apiEnrollCourseStatus}/${email}/${product_code}`,
       );
 
       if (!response.ok) {
         throw new Error(
-          `Failed to get courses progress status. HTTP status ${response.status}`
+          `Failed to get courses progress status. HTTP status ${response.status}`,
         );
       }
 
       return response.json();
     } catch (error) {
-      console.error("Network error:", error);
+      console.error('Network error:', error);
       return error;
     }
   }
 
-  async createContactTrialZoho(data: any, country:string) {
-     try {
-      const res = await fetch(apiCreateTrialContract, {method: "POST",
+  async createContactTrialZoho(data: any, country: string) {
+    try {
+      const res = await fetch(apiCreateTrialContract, {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
 
       console.log({ res });
@@ -828,10 +831,10 @@ class ApiService {
   async cancelTrialCourse(product: any, authState: AuthState) {
     try {
       const response = await fetch(apiCancelTrialContract, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify({
           product,
@@ -841,50 +844,52 @@ class ApiService {
 
       if (!response.ok) {
         throw new Error(
-          `Failed to cancel trial course. HTTP status ${response.status}`
+          `Failed to cancel trial course. HTTP status ${response.status}`,
         );
       }
 
       const data = await response.json();
       return data;
     } catch (error) {
-      console.error("Error:", {error});
-      return {error: true, details: error};
+      console.error('Error:', { error });
+      return { error: true, details: error };
     }
   }
 
-  async createContactTrialMP(data: any, country:string) {
+  async createContactTrialMP(data: any, country: string) {
     try {
-      const res = await fetch(apiCreateTrialMPContract, {method: "POST",
+      const res = await fetch(apiCreateTrialMPContract, {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          'Authorization': `Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6`
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6`,
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
 
       const result = await res.json();
       console.log({ result });
 
-      if(result.error){
-
+      if (result.error) {
         let templateMessage = `
                                       ${result.full_error.message} <br/>
-                                      ${result?.full_error?.code ? `code: ${result?.full_error?.code}` : ''} 
+                                      ${
+                                        result?.full_error?.code
+                                          ? `code: ${result?.full_error?.code}`
+                                          : ''
+                                      } 
                                      `;
 
         return templateMessage;
-      }else{
-       return "Pago realizado con éxito"
+      } else {
+        return 'Pago realizado con éxito';
       }
-
     } catch (e: any) {
       console.log({ e });
       return e;
     }
   }
-
 }
 
 export default new ApiService();

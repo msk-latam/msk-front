@@ -1,38 +1,38 @@
-import "./globals.css";
-import "@/styles/index.scss";
-import { Poppins, Lora } from "next/font/google";
-import Footer from "@/components/Footer/Footer";
-import GoogleCaptchaWrapper from "@/context/google/Recaptcha";
-import DataProvider from "@/context/data/DataProvider";
-import UTMProvider from "@/context/utm/UTMProvider";
-import CountryProvider from "@/context/country/CountryProvider";
-import AuthProvider from "@/context/user/AuthProvider";
-import { StoreProvider } from "@/context/storeFilters/StoreProvider";
-import Header from "@/components/Header/Header";
-import { Metadata } from "next";
-import { cookies } from "next/headers";
-import React from "react";
-import { Suspense } from "react";
-import { NavigationEvents } from "@/components/NavigationEvents";
-import { SITE_URL } from "@/contains/constants";
-import BotMaker from "@/scripts/BotMaker";
-import { GoogleTagManager } from "@next/third-parties/google";
-import Script from "next/script";
-import EmblueScript from "@/components/EmblueScript/EmblueScript";
+import './globals.css';
+import '@/styles/index.scss';
+import { Poppins, Lora } from 'next/font/google';
+import Footer from '@/components/Footer/Footer';
+import GoogleCaptchaWrapper from '@/context/google/Recaptcha';
+import DataProvider from '@/context/data/DataProvider';
+import UTMProvider from '@/context/utm/UTMProvider';
+import CountryProvider from '@/context/country/CountryProvider';
+import AuthProvider from '@/context/user/AuthProvider';
+import { StoreProvider } from '@/context/storeFilters/StoreProvider';
+import Header from '@/components/Header/Header';
+import { Metadata } from 'next';
+import { cookies } from 'next/headers';
+import React from 'react';
+import { Suspense } from 'react';
+import { NavigationEvents } from '@/components/NavigationEvents';
+import { SITE_URL } from '@/contains/constants';
+import BotMaker from '@/scripts/BotMaker';
+import { GoogleTagManager } from '@next/third-parties/google';
+import Script from 'next/script';
+import EmblueScript from '@/components/EmblueScript/EmblueScript';
 
-export const runtime = "edge";
+export const runtime = 'edge';
 
 const poppins = Poppins({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700'],
 });
 
 const loraItalic = Lora({
-  subsets: ["latin"],
-  style: "italic",
-  variable: "--font-lora-italic",
-  weight: ["400", "500", "600", "700"],
+  subsets: ['latin'],
+  style: 'italic',
+  variable: '--font-lora-italic',
+  weight: ['400', '500', '600', '700'],
 });
 
 export type Props = {
@@ -40,17 +40,17 @@ export type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const currentCountry = params.lang || cookies().get("country")?.value;
+  const currentCountry = params.lang || cookies().get('country')?.value;
 
   return {
     title: {
-      default: "MSK | Cursos de medicina para expandir tus metas profesionales",
-      template: "%s",
+      default: 'MSK | Cursos de medicina para expandir tus metas profesionales',
+      template: '%s',
     },
-    description: "Cursos de medicina para expandir tus metas profesionales",
+    description: 'Cursos de medicina para expandir tus metas profesionales',
     metadataBase: new URL(`${SITE_URL}/${currentCountry}`),
     alternates: {
-      canonical: "/",
+      canonical: '/',
     },
     robots: {
       index: true,
@@ -66,11 +66,11 @@ interface LayoutProps {
 
 export default async function RootLayout({ params, children }: LayoutProps) {
   return (
-    <html lang="es" className={poppins.className + " " + loraItalic.variable}>
-      <GoogleTagManager gtmId="GTM-NZ95R2P" />
+    <html lang='es' className={poppins.className + ' ' + loraItalic.variable}>
+      <GoogleTagManager gtmId='GTM-NZ95R2P' />
       <EmblueScript />
       <body>
-        <div className="bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
+        <div className='bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200'>
           <GoogleCaptchaWrapper>
             <CountryProvider>
               <DataProvider>
@@ -81,10 +81,6 @@ export default async function RootLayout({ params, children }: LayoutProps) {
                       {children}
                       <BotMaker />
                       <Footer />
-                      <Script
-                        strategy="beforeInteractive"
-                        src="https://sdk.rebill.to/v2/rebill.min.js"
-                      />
 
                       <Suspense fallback={null}>
                         <NavigationEvents />

@@ -8,6 +8,7 @@ import {
 import { SignUp } from '@/data/types';
 import { BASE_URL, IS_PROD, SITE_URL } from '@/contains/constants';
 import { BodyNewPassword } from '@/components/MSK/PageNewPassword';
+import { notFound, redirect } from 'next/navigation';
 
 let validCountries = countries.map(item => item.id);
 
@@ -204,8 +205,8 @@ class ApiSSRService {
       }
 
       const data = await response.json();
-      //console.log({ data });
-      return data.posts[0];
+
+      return data.posts;
     } catch (error) {
       console.error('Network error:', error);
       return { error };
@@ -290,6 +291,62 @@ class ApiSSRService {
             break;
         }
       });
+
+      return data;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async getProfessions() {
+    try {
+      //console.log('Get professions 2');
+      const response = await fetch(`${baseUrl}/api/professions`);
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch professions. HTTP status ${response.status}`,
+        );
+      }
+
+      const data = await response.json();
+      console.log('getProfessions', { data });
+      return data;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async getSpecialties() {
+    try {
+      const response = await fetch(`${baseUrl}/api/specialities`);
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch specialties. HTTP status ${response.status}`,
+        );
+      }
+
+      const data = await response.json();
+      return data.specialities;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async getSpecialtiesAndGroups() {
+    try {
+      const response = await fetch(`${baseUrl}/api/specialities`);
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch specialties and groups. HTTP status ${response.status}`,
+        );
+      }
+      console.warn('SPECIALITIES', { response });
+
+      const data = await response.json();
+      console.warn('SPECIALITIES DATA', { data });
 
       return data;
     } catch (error) {
