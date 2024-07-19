@@ -8,6 +8,7 @@ import {
 import { SignUp } from '@/data/types';
 import { BASE_URL, IS_PROD, SITE_URL } from '@/contains/constants';
 import { BodyNewPassword } from '@/components/MSK/PageNewPassword';
+import { notFound, redirect } from 'next/navigation';
 
 let validCountries = countries.map(item => item.id);
 
@@ -204,8 +205,8 @@ class ApiSSRService {
       }
 
       const data = await response.json();
-      //console.log({ data });
-      return data.posts[0];
+
+      return data.posts;
     } catch (error) {
       console.error('Network error:', error);
       return { error };
