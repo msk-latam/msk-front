@@ -28,9 +28,9 @@
   }
 }
 
-.contact-radio-input{
-  &:checked{
-    background-image: url('/images/misc/radio-checked.png');
+.contact-radio-input {
+  &:checked {
+    background-image: url('/webp-images/misc/radio-checked.webp');
     padding: 1px;
   }
 }
@@ -65,7 +65,7 @@
   }
 }
 
-.newsletter-arrow-button{
+.newsletter-arrow-button {
   right: 5px;
   top: 50%;
   transform: translateY(-50%);
@@ -481,7 +481,7 @@
 
   &:after {
     position: absolute;
-    content: "";
+    content: '';
     border-bottom: 2px solid #999;
     border-right: 2px solid #999;
     transform: rotate(45deg);
