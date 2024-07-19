@@ -1,21 +1,22 @@
-"use client";
-import { FC, useContext, useEffect, useRef, useState } from "react";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import installmentsMapping from "@/data/jsons/__countryInstallments.json";
-import {JsonInstallmentsMapping} from "@/data/types";
-import { useParams } from "next/navigation";
-import { CountryContext } from "@/context/country/CountryContext";
-import useRequestedTrialCourse from "@/hooks/useRequestedTrialCourse";
-import TrialInfo from "@/components/Trial/TrialInfo";
-import NcLink from "@/components/NcLink/NcLink";
-import NcModalSmall from "@/components/NcModal/NcModalSmall";
-import TrialModalContent from "@/components/NcModal/TrialModalContent";
-import MissingModalContent from "@/components/NcModal/MissingModalContent";
-import useSingleProduct from "@/hooks/useSingleProduct";
-import { AuthContext } from "@/context/user/AuthContext";
-import ssr from "@/services/ssr";
-import RebillCheckout from "@/components/Checkout/RebillCheckout";
-import MercadoPagoCheckout from "@/components/Checkout/MercadoPagoCheckout";
+'use client';
+import { FC, useContext, useEffect, useRef, useState } from 'react';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import installmentsMapping from '@/data/jsons/__countryInstallments.json';
+import { JsonInstallmentsMapping } from '@/data/types';
+import { useParams } from 'next/navigation';
+import { CountryContext } from '@/context/country/CountryContext';
+import useRequestedTrialCourse from '@/hooks/useRequestedTrialCourse';
+import TrialInfo from '@/components/Trial/TrialInfo';
+import NcLink from '@/components/NcLink/NcLink';
+import NcModalSmall from '@/components/NcModal/NcModalSmall';
+import TrialModalContent from '@/components/NcModal/TrialModalContent';
+import MissingModalContent from '@/components/NcModal/MissingModalContent';
+import useSingleProduct from '@/hooks/useSingleProduct';
+import { AuthContext } from '@/context/user/AuthContext';
+import ssr from '@/services/ssr';
+import RebillCheckout from '@/components/Checkout/RebillCheckout';
+import MercadoPagoCheckout from '@/components/Checkout/MercadoPagoCheckout';
+import Script from 'next/script';
 
 export interface PageTrialSuscribeProps {
   className?: string;
@@ -24,7 +25,9 @@ export interface PageTrialSuscribeProps {
 const installmentsJSON: JsonInstallmentsMapping = installmentsMapping;
 
 const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
-  const {countryState: { country }} = useContext(CountryContext);
+  const {
+    countryState: { country },
+  } = useContext(CountryContext);
   const { state: AuthState, dispatch } = useContext(AuthContext);
   const { slug }: { slug: string } = useParams();
   const { product } = useSingleProduct(slug, { country });
@@ -32,13 +35,13 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
   const [show, setShow] = useState<boolean>(false);
   const viewRef = useRef<any>();
   const [mountedInput, setMountedInput] = useState<boolean>(false);
-  const [faliedMessage, setFaliedMessage] = useState<string>("");
+  const [faliedMessage, setFaliedMessage] = useState<string>('');
   const [paymentCorrect, setPaymentCorrect] = useState<boolean | null>(null);
 
   let installments = 0 as number | null;
 
-  const [totalAmount, setTotalAmount] = useState(0)
-  const [installmentAmount, setInstallmentAmount] = useState(0)
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [installmentAmount, setInstallmentAmount] = useState(0);
 
   const { executeRecaptcha } = useGoogleReCaptcha();
 
@@ -64,65 +67,44 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
       installments = installmentsJSON[country].quotes;
     }
 
-    if(typeof product !== 'undefined' && installments != null){
-      let totalAmount = parseFloat(product.total_price.replace(/\./g, "").replace(",", ".").replaceAll(".",""));
-      setTotalAmount(totalAmount)
-      setInstallmentAmount(totalAmount / installments)
+    if (typeof product !== 'undefined' && installments != null) {
+      let totalAmount = parseFloat(
+        product.total_price
+          .replace(/\./g, '')
+          .replace(',', '.')
+          .replaceAll('.', ''),
+      );
+      setTotalAmount(totalAmount);
+      setInstallmentAmount(totalAmount / installments);
 
-      product.totalAmount = totalAmount
-      product.installmentAmount = (totalAmount / installments)
+      product.totalAmount = totalAmount;
+      product.installmentAmount = totalAmount / installments;
     }
-
-  }, [product])
-
+  }, [product]);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       const profile = AuthState.profile;
-      console.log("Profile Effect", { profile });
+      console.log('Profile Effect', { profile });
 
       const fetchProfile = async () => {
         const res = await ssr.getUserData();
         // console.log(res)
-        dispatch({ type: "UPDATE_PROFILE", payload: { profile: res.contact } });
+        dispatch({ type: 'UPDATE_PROFILE', payload: { profile: res.contact } });
       };
 
-      if (profile == null || typeof AuthState === "undefined") {
+      if (profile == null || typeof AuthState === 'undefined') {
         fetchProfile();
       }
     }
   }, [AuthState.profile]);
 
-  const renderCheckoutComponent = () =>{
-    console.log({gateway})
+  const renderCheckoutComponent = () => {
+    console.log({ gateway });
     switch (gateway) {
       case 'REBILL':
-        return <RebillCheckout
-                    product={product}
-                    hasCoursedRequested={hasCoursedRequested}
-                    country={country}
-                    showMissingData={showMissingData}
-                    setShow={setShow}
-                    setFaliedMessage={setFaliedMessage}
-                    setPaymentCorrect={setPaymentCorrect}
-                    mountedInputObjectState={mountedInputObjectState}
-              />;
-      case 'MP':
-        return <MercadoPagoCheckout
-                    product={product}
-                    quotes={installments}
-                    hasCoursedRequested={hasCoursedRequested}
-                    country={country}
-                    showMissingData={showMissingData}
-                    setShow={setShow}
-                    setFaliedMessage={setFaliedMessage}
-                    setPaymentCorrect={setPaymentCorrect}
-                    mountedInputObjectState={mountedInputObjectState}
-                />;
-      case 'ST':
-       // return <StripePaymentForm payment={invoiceDetail} currency={currencyOptions.currency} />;
-      default:
-        return <RebillCheckout
+        return (
+          <RebillCheckout
             product={product}
             hasCoursedRequested={hasCoursedRequested}
             country={country}
@@ -131,14 +113,51 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
             setFaliedMessage={setFaliedMessage}
             setPaymentCorrect={setPaymentCorrect}
             mountedInputObjectState={mountedInputObjectState}
-        />;;
+          />
+        );
+      case 'MP':
+        return (
+          <MercadoPagoCheckout
+            product={product}
+            quotes={installments}
+            hasCoursedRequested={hasCoursedRequested}
+            country={country}
+            showMissingData={showMissingData}
+            setShow={setShow}
+            setFaliedMessage={setFaliedMessage}
+            setPaymentCorrect={setPaymentCorrect}
+            mountedInputObjectState={mountedInputObjectState}
+          />
+        );
+      case 'ST':
+      // return <StripePaymentForm payment={invoiceDetail} currency={currencyOptions.currency} />;
+      default:
+        return (
+          <RebillCheckout
+            product={product}
+            hasCoursedRequested={hasCoursedRequested}
+            country={country}
+            showMissingData={showMissingData}
+            setShow={setShow}
+            setFaliedMessage={setFaliedMessage}
+            setPaymentCorrect={setPaymentCorrect}
+            mountedInputObjectState={mountedInputObjectState}
+          />
+        );
     }
-  }
+  };
 
   return (
-    <div ref={viewRef} className="nc-PageSuscribe relative animate-fade-down">
-      <div className="relative overflow-hidden">
-        <div className="container grid grid-cols-1 lg:grid-cols-[60%_40%] gap-5 my-24">
+    <div ref={viewRef} className='nc-PageSuscribe relative animate-fade-down'>
+      <Script
+        strategy='afterInteractive'
+        src='https://sdk.rebill.to/v2/rebill.min.js'
+        onLoad={e => {
+          console.log('Rebill script loaded', { e });
+        }}
+      />
+      <div className='relative overflow-hidden'>
+        <div className='container grid grid-cols-1 lg:grid-cols-[60%_40%] gap-5 my-24'>
           <TrialInfo
             country={country}
             product={product}
@@ -147,7 +166,7 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
           />
 
           <section>
-            <p className="text-center mb-4 text-violet-strong font-normal">
+            <p className='text-center mb-4 text-violet-strong font-normal'>
               Ingresa los datos de tu tarjeta de débito o crédito. <br />
               No se realizará ningún cargo hasta el octavo día.
             </p>
@@ -155,9 +174,9 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
             {renderCheckoutComponent()}
 
             <NcLink
-              href="/condiciones-de-contratacion#trial"
-              target="_blank"
-              className="text-primary hover:text-primary underline flex items-center justify-center mt-3"
+              href='/condiciones-de-contratacion#trial'
+              target='_blank'
+              className='text-primary hover:text-primary underline flex items-center justify-center mt-3'
             >
               Ver términos y condiciones de prueba gratuita
             </NcLink>
@@ -169,27 +188,27 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
         isOpenProp={show}
         onCloseModal={() => {
           setShow(false);
-          viewRef.current.classList.remove("blur-md");
+          viewRef.current.classList.remove('blur-md');
         }}
         renderTrigger={() => {
           return null;
         }}
         blurView={viewRef}
-        contentExtraClass="max-w-screen-lg"
+        contentExtraClass='max-w-screen-lg'
         renderContent={() =>
           paymentCorrect ? (
             <TrialModalContent
-              title="¡Listo!"
-              desc="Ya tienes disponible tu prueba de 7 días gratis en el curso elegido"
-              textButton="Comienza ahora"
+              title='¡Listo!'
+              desc='Ya tienes disponible tu prueba de 7 días gratis en el curso elegido'
+              textButton='Comienza ahora'
               goToAccount={true}
             />
           ) : (
             <TrialModalContent
-              title="Prueba otro método de pago"
-              desc="No pudimos procesar los datos de tu tarjeta. Intenta con otra."
+              title='Prueba otro método de pago'
+              desc='No pudimos procesar los datos de tu tarjeta. Intenta con otra.'
               faliedMessage={faliedMessage}
-              textButton="Volver"
+              textButton='Volver'
               setShow={setShow}
             />
           )
@@ -200,18 +219,18 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
         isOpenProp={showMissingData}
         onCloseModal={() => {
           setShowMissingData(false);
-          viewRef.current.classList.remove("blur-md");
+          viewRef.current.classList.remove('blur-md');
         }}
         renderTrigger={() => {
           return null;
         }}
-        contentExtraClass="max-w-[350px]"
+        contentExtraClass='max-w-[350px]'
         blurView={viewRef}
         renderContent={() => (
           <MissingModalContent
-            title="Antes de acceder a tu prueba gratuita"
-            desc="Completa tu número de documento entre los datos personales de tu cuenta y continúa con tu solicitud de prueba."
-            textButton="Ir a Datos personales"
+            title='Antes de acceder a tu prueba gratuita'
+            desc='Completa tu número de documento entre los datos personales de tu cuenta y continúa con tu solicitud de prueba.'
+            textButton='Ir a Datos personales'
             productSlug={slug}
             goToPersonalData={true}
           />
@@ -222,18 +241,18 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
         isOpenProp={showAlreadyRequest}
         onCloseModal={() => {
           setShowAlreadyRequest(false);
-          viewRef.current.classList.remove("blur-md");
+          viewRef.current.classList.remove('blur-md');
         }}
         renderTrigger={() => {
           return null;
         }}
-        contentExtraClass="max-w-screen-lg"
+        contentExtraClass='max-w-screen-lg'
         blurView={viewRef}
         renderContent={() => (
           <TrialModalContent
-            title="Prueba ya solicitada"
-            desc="Para continuar con este curso, debes inscribirte."
-            textButton="Volver"
+            title='Prueba ya solicitada'
+            desc='Para continuar con este curso, debes inscribirte.'
+            textButton='Volver'
             goToCourse={slug}
           />
         )}
