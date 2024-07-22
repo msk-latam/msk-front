@@ -22,6 +22,7 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
 
   const dataInitialState = {
     allCourses: [],
+    storeCourses: [],
     allPosts: [],
     allTestCourses: [],
     allBestSellers: [],
@@ -39,6 +40,15 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
     dispatch({
       type: 'GET_DATA',
       payload: { allCourses },
+    });
+    setLoadingCourses(false);
+  };
+
+  const fetchStoreCourses = async () => {
+    const storeCourses = await ssr.getStoreCourses(countryState.country);
+    dispatch({
+      type: 'GET_STORE_DATA',
+      payload: { storeCourses },
     });
     setLoadingCourses(false);
   };
@@ -120,6 +130,7 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
     fetchStoreProfessions();
     fetchSpecialties();
     fetchAllCourses();
+    fetchStoreCourses();
   }, []);
 
   return (
