@@ -1749,8 +1749,8 @@
     border: 1px solid $border;
     background-color: $white;
     border-radius: 5px;
-    width: 535px;
-    max-width: 535px;
+    // width: 535px;
+    max-width: 449px;
     transition: position 1s ease;
 
     @media (min-width: 1024px) and (max-width: 1400px) {
