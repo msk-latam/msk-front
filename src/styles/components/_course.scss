@@ -337,7 +337,7 @@
     height: 100%;
     width: 1px;
     background: #edeef2;
-    content: "";
+    content: '';
     top: 0;
     left: 0;
     right: 0;
@@ -390,7 +390,7 @@
       position: absolute;
       width: 31px;
       height: 1px;
-      content: "";
+      content: '';
       background: $theme-color-2;
       top: 50%;
       left: 35px;
@@ -495,7 +495,7 @@
 
 .port-border::before {
   position: absolute;
-  content: "";
+  content: '';
   height: 60px;
   width: 1px;
   background: $border;
@@ -775,7 +775,7 @@
 .hero-arera.course-item-height {
   &::before {
     position: absolute;
-    content: "";
+    content: '';
     height: 100%;
     width: 100%;
     background: $heading-color;
@@ -937,8 +937,8 @@
     position: absolute;
     top: 8px;
     right: 15px;
-    content: "\f107";
-    font-family: "Font Awesome 5 Pro";
+    content: '\f107';
+    font-family: 'Font Awesome 5 Pro';
     color: #575757;
     cursor: pointer;
   }
@@ -960,8 +960,8 @@
     position: absolute;
     top: 0;
     right: 0;
-    content: "\f107";
-    font-family: "Font Awesome 5 Pro";
+    content: '\f107';
+    font-family: 'Font Awesome 5 Pro';
     color: $body-text;
     cursor: pointer;
     transform: rotate(-180deg);
@@ -1054,7 +1054,7 @@
   align-items: center;
 }
 
-.course-sidebar-list input[type="checkbox"] {
+.course-sidebar-list input[type='checkbox'] {
   border: 1px solid $border;
   border-radius: 2px;
   appearance: none;
@@ -1068,7 +1068,7 @@
   margin-right: 8px;
 }
 
-.course-sidebar-list input[type="checkbox"]:checked {
+.course-sidebar-list input[type='checkbox']:checked {
   border: none;
   background-color: $theme-color;
   color: $white;
@@ -1083,7 +1083,7 @@
 //   left: 2px;
 // }
 
-.course-sidebar-list input[type="radio"] {
+.course-sidebar-list input[type='radio'] {
   border: 1px solid $border;
   border-radius: 9px;
   appearance: none;
@@ -1098,10 +1098,10 @@
   margin-right: 8px;
 }
 
-.course-sidebar-list input[type="radio"]:checked::before {
+.course-sidebar-list input[type='radio']:checked::before {
   position: absolute;
-  content: "";
-  font-family: "Font Awesome 5 Pro";
+  content: '';
+  font-family: 'Font Awesome 5 Pro';
   top: 4px;
   left: 4px;
   height: 8px;
@@ -1204,7 +1204,7 @@
 
   //Bullets para modulos
   li::before {
-    content: "●";
+    content: '●';
     font-size: 5px;
     margin-right: 6px;
     margin-left: 3px;
@@ -1256,11 +1256,11 @@
   padding: 0 20px;
 }
 
-.product-button-wrp{
+.product-button-wrp {
   margin-top: auto;
 }
 
-.product-button-footer{
+.product-button-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1455,7 +1455,7 @@
 
   &:after {
     position: absolute;
-    content: "";
+    content: '';
     width: 1px;
     height: 40px;
     background: #edeef2;
@@ -1468,7 +1468,7 @@
 
   &:after {
     position: absolute;
-    content: "";
+    content: '';
     width: 100%;
     height: 1px;
     background: #edeef2;
@@ -1511,7 +1511,7 @@
 
       &::before {
         position: absolute;
-        font-family: "Font Awesome 5 Pro";
+        font-family: 'Font Awesome 5 Pro';
         left: 0px;
         color: $theme-color;
       }
@@ -1718,7 +1718,7 @@
     left: 0;
     right: 0;
     margin: auto;
-    content: "";
+    content: '';
     bottom: 0;
     height: 70px;
     width: 70px;
@@ -1749,7 +1749,8 @@
     border: 1px solid $border;
     background-color: $white;
     border-radius: 5px;
-    max-width: 449px;
+    width: 535px;
+    max-width: 535px;
     transition: position 1s ease;
 
     @media (min-width: 1024px) and (max-width: 1400px) {
@@ -1851,7 +1852,7 @@
 
   &:before {
     position: absolute;
-    content: "";
+    content: '';
     height: 1px;
     width: 100%;
     background: $theme-color;
@@ -1868,7 +1869,7 @@
 
   &:before {
     position: absolute;
-    content: "";
+    content: '';
     height: 1px;
     width: 100%;
     background: #161b1c;
@@ -1903,8 +1904,8 @@
 
 .course-curriculam-accodion .accordion-button {
   &:before {
-    content: "\f067";
-    font-family: "Font Awesome 5 Pro";
+    content: '\f067';
+    font-family: 'Font Awesome 5 Pro';
     color: $body-text;
     background: none;
     flex-shrink: 0;
@@ -1914,8 +1915,8 @@
 
 .course-curriculam-accodion .accordion-button:not(.collapsed) {
   &:before {
-    content: "\f068";
-    font-family: "Font Awesome 5 Pro";
+    content: '\f068';
+    font-family: 'Font Awesome 5 Pro';
     color: $body-text;
     background: none;
     flex-shrink: 0;
@@ -1962,7 +1963,7 @@
   color: #141517;
   font-size: 16px;
   font-weight: 600;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   text-align: left;
 
   @media #{$xs,$sm} {
@@ -1987,7 +1988,7 @@
   span {
     color: $heading-color;
     font-weight: 600;
-    font-family: "Raleway", sans-serif;
+    font-family: 'Raleway', sans-serif;
   }
 }
 
@@ -2143,7 +2144,7 @@
 
   &:after {
     position: absolute;
-    content: "";
+    content: '';
     border-bottom: 2px solid #999;
     border-right: 2px solid #999;
     transform: rotate(45deg);
