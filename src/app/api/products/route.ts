@@ -7,7 +7,7 @@ export const GET = async (req: Request) => {
 
   try {
     const response = await fetch(
-      `https://wp.msklatam.com/wp-json/wp/api/products?limit=-1&country=${countryParam}&type=course`,
+      `https://wp.msklatam.com/wp-json/wp/api/products?limit=-1&filter=all&country=${countryParam}&type=course`,
     );
 
     if (!response.ok) {
@@ -16,10 +16,6 @@ export const GET = async (req: Request) => {
 
     const data = await response.json();
     const { products } = data;
-
-    // const filteredProducts = products.filter(
-    //   (product: Product) => product.total_price !== '0',
-    // );
 
     const transformedProducts = products.map((product: Product) => {
       const totalPriceNumber = parseFloat(
