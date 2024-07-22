@@ -43,12 +43,13 @@ export async function generateMetadata({ params }: Props) {
 }
 
 const PageNota: FC<PageCourseProps> = async ({ params }) => {
-  const currentCountry = params.lang || cookies().get('country')?.value;
+  const currentCountry = params.lang ?? cookies().get('country')?.value;
 
-  const [post] = await ssr.getSinglePost(params.slug, currentCountry);
+  const [post] = await ssr.getSinglePost(params.slug, params.lang);
   const allBestSellers = await ssr.getBestSellers(currentCountry);
   const { fiveSpecialtiesGroup } = await ssr.fetchPostsSpecialities();
   const fuentes = post?.fuentes || [];
+
   return (
     <>
       <div

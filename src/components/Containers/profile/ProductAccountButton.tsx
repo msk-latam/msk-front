@@ -27,7 +27,6 @@ const ProductAccountButton: FC<ProductAccountButtonProps> = ({
     ? statusOV.disabledText
     : statusOV.hasText;
   const iconStatus = getStatusIcon(textStatus);
-  console.log({ iconStatus });
 
   return (
     <div className='product-button-wrp'>

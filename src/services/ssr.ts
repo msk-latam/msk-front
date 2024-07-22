@@ -234,12 +234,16 @@ class ApiSSRService {
     }
   }
 
-  async getSinglePost(slug: string, country: string = 'int') {
+  async getSinglePost(slug: string, country: string) {
+    console.log(
+      { slug, country },
+      `${API_URL}/posts/${slug}?country=${country}`,
+    );
     try {
       const response = await fetch(
         `${API_URL}/posts/${slug}?country=${country}`,
       );
-      console.log(`${API_URL}/posts/${slug}?country=${country}`);
+
       if (!response.ok) {
         throw new Error(
           `Failed to fetch single post. HTTP status ${response.status}`,
@@ -247,7 +251,6 @@ class ApiSSRService {
       }
 
       const data = await response.json();
-
       return data.posts;
     } catch (error) {
       console.error('Network error:', error);
