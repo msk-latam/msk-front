@@ -9,6 +9,7 @@ import {
 import { SignUp } from '@/data/types';
 import { BASE_URL, IS_PROD, SITE_URL } from '@/contains/constants';
 import { BodyNewPassword } from '@/components/MSK/PageNewPassword';
+import { notFound } from 'next/navigation';
 
 let validCountries = countries.map(item => item.id);
 
@@ -149,10 +150,15 @@ class ApiSSRService {
         countryParam = `${country}`;
       }
 
-      //console.log('getBestSellers URL', `${API_URL}/home/best-sellers?country=${countryParam}`);
+      console.log(
+        'getBestSellers URL',
+        `${API_URL}/home/best-sellers?country=${countryParam}`,
+      );
       const response = await fetch(
         `${API_URL}/home/best-sellers?country=${countryParam}`,
       );
+
+      console.log(country);
 
       if (!response.ok) {
         throw new Error(
@@ -211,6 +217,7 @@ class ApiSSRService {
       const response = await fetch(
         `${API_URL}/product/${slug}?country=${country}`,
       );
+      console.log(`${API_URL}/product/${slug}?country=${country}`);
 
       if (!response.ok) {
         throw new Error(
@@ -219,10 +226,10 @@ class ApiSSRService {
       }
 
       const data = await response.json();
-
       return { product: data };
     } catch (error) {
       console.error('Network error:', error);
+      notFound();
       return { error };
     }
   }
