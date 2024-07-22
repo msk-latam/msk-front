@@ -4,11 +4,11 @@ import {
   setAllCourses,
   setLoadingBestSellers,
   setLoadingCourses,
+  setStoreCourses,
 } from '@/lib/allData';
 import { SignUp } from '@/data/types';
 import { BASE_URL, IS_PROD, SITE_URL } from '@/contains/constants';
 import { BodyNewPassword } from '@/components/MSK/PageNewPassword';
-import { notFound, redirect } from 'next/navigation';
 
 let validCountries = countries.map(item => item.id);
 
@@ -94,6 +94,41 @@ class ApiSSRService {
       const data = await response.json();
 
       setAllCourses(data.products);
+      setLoadingCourses(false);
+
+      return data.products;
+    } catch (error) {
+      console.error('Network error:', error);
+      return error;
+    }
+  }
+
+  async getStoreCourses(country?: string) {
+    setLoadingCourses(true);
+
+    let validCountries = countries.map(item => item.id);
+    let onValidCountry = country && validCountries.includes(country);
+
+    const countryParam = onValidCountry
+      ? `&country=${country}`
+      : '&country=int';
+
+    try {
+      const queryParams = [countryParam].filter(Boolean).join('');
+
+      const response = await fetch(
+        `${API_URL}/products?limit=-1${queryParams}`,
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch courses. HTTP status ${response.status}`,
+        );
+      }
+
+      const data = await response.json();
+
+      setStoreCourses(data.products);
       setLoadingCourses(false);
 
       return data.products;
