@@ -3,7 +3,7 @@ import React, { FC, useEffect, useState } from 'react';
 import BackgroundSection from '@/components/BackgroundSection/BackgroundSection';
 import api from '@/services/api';
 import { SinglePageType } from './PageMission';
-import SectionSliderPosts from '@/components/Sections/SectionSliderPosts';
+import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
 
 export interface SingleContentProps {
   data: SinglePageType;
@@ -64,7 +64,7 @@ const SingleContent: FC<SingleContentProps> = ({ data }) => {
       <div className='max-w-[1700px] mx-auto'>
         <div className='relative py-16 my-32'>
           <BackgroundSection />
-          <SectionSliderPosts
+          <SectionSliderBestSellers
             postCardName='card9'
             heading='Comienza tu experiencia aquí'
             subHeading='Estos son los cursos más elegidos entre profesionales de la salud'

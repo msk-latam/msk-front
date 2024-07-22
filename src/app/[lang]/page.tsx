@@ -1,7 +1,6 @@
 import { TABS_HOME } from '@/data/MSK/courses';
 import { TABS_BLOG } from '@/data/MSK/blog';
 import { HOME_SPECIALTIES } from '@/data/MSK/specialties';
-import SectionSliderPosts from '@/components/Sections/SectionSliderPosts';
 import BlogSummary from '@/components/MSK/BlogSummary';
 import BackgroundSection from '@/components/BackgroundSection/BackgroundSection';
 import CoursesForYou from '@/components/MSK/CoursesForYou';
@@ -32,6 +31,7 @@ import Phrase from '@/components/Phrase/Phrase';
 import CommentReferences from '@/components/CommentReferences';
 import Questions from '@/components/Questions/Questions';
 import { IS_PROD, SITE_URL } from '@/contains/constants';
+import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
 
 export async function generateMetadata({
   params,
@@ -148,7 +148,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
           </div>
 
           <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-16 mb-[96px] w-full px-14'>
-            <SectionSliderPosts
+            <SectionSliderBestSellers
               posts={getAllBestSellers()}
               loading={loadingBestSellers}
               className='w-full section-slider-posts-container'

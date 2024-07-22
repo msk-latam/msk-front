@@ -3,11 +3,11 @@ import CardAuthor2 from '@/components/CardAuthor2/CardAuthor2';
 import NoteAuthors from '@/components/SingleProductDetail/NoteAuthors';
 import NoteExtraData from './NoteExtraData';
 import BackgroundSection from '@/components/BackgroundSection/BackgroundSection';
-import SectionSliderPosts from '@/components/Sections/SectionSliderPosts';
 import { slugify } from '@/lib/Slugify';
 import SingleContentSidebarFixedItem from './SingleContentSidebarFixedItem';
 import PostHtmlArticles from './PostHtmlArticles';
 import { SinglePageType } from '@/data/types';
+import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
 
 export interface SingleContentProps {
   data: SinglePageType;
@@ -106,7 +106,7 @@ const SingleContent: FC<SingleContentProps> = ({
       </div>
       <div className='container relative py-16'>
         <BackgroundSection />
-        <SectionSliderPosts
+        <SectionSliderBestSellers
           posts={bestSellers}
           postCardName='card9'
           heading='Nuestros cursos más elegidos'

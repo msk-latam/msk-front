@@ -21,6 +21,7 @@ interface Props {
   country?: string;
 }
 import { DataContext } from '@/context/data/DataContext';
+import SectionSliderBestSellers from '../Sections/SectionSliderBestSellers';
 
 const SingleProductDetail: FC<Props> = ({ product, country }) => {
   const {
@@ -257,7 +258,7 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 
       <div className='container relative py-16 mb-20'>
         <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-16 mb-[96px] w-full px-14'>
-          <SectionSliderPosts
+          <SectionSliderBestSellers
             posts={allBestSellers}
             loading={loadingBestSellers}
             className='w-full section-slider-posts-container'
