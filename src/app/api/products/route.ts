@@ -17,11 +17,11 @@ export const GET = async (req: Request) => {
     const data = await response.json();
     const { products } = data;
 
-    const filteredProducts = products.filter(
-      (product: Product) => product.total_price !== '0',
-    );
+    // const filteredProducts = products.filter(
+    //   (product: Product) => product.total_price !== '0',
+    // );
 
-    const transformedProducts = filteredProducts.map((product: Product) => {
+    const transformedProducts = products.map((product: Product) => {
       const totalPriceNumber = parseFloat(
         product.total_price.replace(/\./g, ''),
       );
