@@ -1,5 +1,5 @@
 'use client';
-import { FC, useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import Heading from '@/components/Heading/Heading';
 import Card4 from '@/components/Card4/Card4';
 import Card7 from '@/components/Card7/Card7';
@@ -22,8 +22,9 @@ import Card18 from '@/components/Card18/Card18';
 import Card19 from '@/components/Card19/Card19';
 import Card20 from '@/components/Card20/Card20';
 import ImageSkeleton from '@/components/Skeleton/ImageSkeleton';
+import { DataContext } from '@/context/data/DataContext';
 
-export interface SectionSliderPostsProps {
+export interface SectionSliderBestSellers {
   className?: string;
   heading?: string;
   subHeading?: string;
@@ -52,7 +53,7 @@ export interface SectionSliderPostsProps {
   loading?: boolean;
 }
 
-const SectionSliderPosts: FC<SectionSliderPostsProps> = ({
+const SectionSliderBestSellers: FC<SectionSliderBestSellers> = ({
   heading,
   subHeading,
   className = '',
@@ -66,7 +67,14 @@ const SectionSliderPosts: FC<SectionSliderPostsProps> = ({
   const [slidesCount, setSlidesCount] = useState(0);
   const [showArrows, setShowArrows] = useState(false);
   const UNIQUE_CLASS = 'SectionSliderPosts_' + uniqueSliderClass;
+  const {
+    state: { storeCourses },
+  } = useContext(DataContext);
   // const top_picks = posts.sort((a: any, b: any) => b.viewdCount - a.viewdCount);
+  const allowedProductCodes = posts.map((p: any) => p.product_code);
+  const bridgeElements = storeCourses.filter((sc: any) =>
+    allowedProductCodes.includes(sc.product_code),
+  );
 
   const MY_GLIDE = new Glide(`.${UNIQUE_CLASS}`, {
     direction: 'ltr',
@@ -193,7 +201,7 @@ const SectionSliderPosts: FC<SectionSliderPostsProps> = ({
             </>
           ) : (
             <ul className='glide__slides'>
-              {posts?.map((item: any, index: number) => (
+              {bridgeElements?.map((item: any, index: number) => (
                 <li
                   key={index}
                   className={`glide__slide h-auto relative ${
@@ -222,4 +230,4 @@ const SectionSliderPosts: FC<SectionSliderPostsProps> = ({
   );
 };
 
-export default SectionSliderPosts;
+export default SectionSliderBestSellers;
