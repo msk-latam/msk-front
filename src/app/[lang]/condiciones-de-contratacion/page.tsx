@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: 'Términos y Condiciones | MSK',
     alternates: IS_PROD
       ? {
-          canonical: `${SITE_URL}/${currentCountry}/terminos-y-condiciones`,
+          canonical: `${SITE_URL}/${currentCountry}/condiciones-de-contratacion`,
         }
       : undefined,
     robots: IS_PROD
