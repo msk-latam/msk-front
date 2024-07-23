@@ -44,6 +44,8 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { lang: string } },
 ) {
+  return new NextResponse(null, { status: 204 });
+
   const url = new URL(request.url);
   const host = url.host;
 

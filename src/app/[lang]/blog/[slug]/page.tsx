@@ -19,7 +19,10 @@ type Props = {
 export async function generateMetadata({ params }: Props) {
   const currentCountry = params.lang || cookies().get('country')?.value;
   try {
-    const [postMetadata] = await ssr.getSinglePost(params.slug);
+    const [postMetadata] = await ssr.getSinglePost(
+      params.slug,
+      currentCountry as string,
+    );
     //console.log(postMetadata);
 
     return {
