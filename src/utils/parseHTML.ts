@@ -30,6 +30,12 @@ export const parseHtml = (
         }
         // Agrega la clase 'font-lora'
       }
+      const brElements = span.querySelectorAll('br');
+      brElements.forEach(brElement => {
+        if (brElement.parentNode) {
+          brElement?.parentNode.removeChild(brElement);
+        }
+      });
     });
 
     ulElements.forEach(ulElement => {
@@ -50,7 +56,7 @@ export const parseHtml = (
           liElement.classList.add('mt-6');
         }
 
-        liElement.classList.add('flex', 'items-center', 'mb-6');
+        liElement.classList.add('flex', 'items-start', 'mb-6');
 
         const spanElements = liElement.querySelectorAll('span');
 
