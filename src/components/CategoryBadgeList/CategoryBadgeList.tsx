@@ -1,13 +1,13 @@
-"use client";
-import { PostDataType, Specialty } from "@/data/types";
-import React, { FC, useEffect } from "react";
-import Badge from "@/components/Badge/Badge";
-import { slugifySpecialty } from "@/lib/Slugify";
-import { badgeColor } from "@/lib/badgeColor";
-import { JsonMapping } from "@/data/types";
-import notesMapping from "@/data/jsons/__notes.json";
-import { useStoreFilters } from "@/context/storeFilters/StoreProvider";
-import { compareByNameOrderSet } from "@/lib/compareByNameOrderSet";
+'use client';
+import { PostDataType, Specialty } from '@/data/types';
+import React, { FC, useEffect } from 'react';
+import Badge from '@/components/Badge/Badge';
+import { slugifySpecialty } from '@/lib/Slugify';
+import { badgeColor } from '@/lib/badgeColor';
+import { JsonMapping } from '@/data/types';
+import notesMapping from '@/data/jsons/__notes.json';
+import { useStoreFilters } from '@/context/storeFilters/StoreProvider';
+import { compareByNameOrderSet } from '@/lib/compareByNameOrderSet';
 
 export interface CategoryBadgeListProps {
   className?: string;
@@ -28,10 +28,10 @@ export interface PillSwitchProps {
 }
 
 const CategoryBadgeList: FC<CategoryBadgeListProps> = ({
-  className = "flex flex-wrap text-[12px] sm:text-sm",
+  className = 'flex flex-wrap text-[12px] sm:text-sm',
   itemClass,
   categories,
-  color = "yellow",
+  color = 'yellow',
   isCourse,
   isPost,
   isEbook,
@@ -45,11 +45,11 @@ const CategoryBadgeList: FC<CategoryBadgeListProps> = ({
     const compararPorSlug = (a: any, b: any) => {
       const slugA = a.slug?.toLowerCase();
       const slugB = b.slug?.toLowerCase();
-      if (slugA?.includes("actualidad") && !slugB?.includes("actualidad")) {
+      if (slugA?.includes('actualidad') && !slugB?.includes('actualidad')) {
         return 1;
       } else if (
-        !slugA?.includes("actualidad") &&
-        slugB?.includes("actualidad")
+        !slugA?.includes('actualidad') &&
+        slugB?.includes('actualidad')
       ) {
         return -1;
       }
@@ -64,23 +64,23 @@ const CategoryBadgeList: FC<CategoryBadgeListProps> = ({
 
   const { addFilter } = useStoreFilters();
   const applyFilter = (specialty: Specialty) => {
-    if (onStore) addFilter("specialties", specialty);
+    if (onStore) addFilter('specialties', specialty);
   };
 
   const pillSwitch = ({ value, itemClass }: PillSwitchProps) => {
     switch (value) {
-      case "ebook":
+      case 'ebook':
         return (
           <Badge
             className={itemClass}
-            name={"Guía profesional"}
-            color={"emerald-post"}
+            name={'Guía profesional'}
+            color={'emerald-post'}
             href={`/tienda?recurso=guias-profesionales`}
-            icon="elearning"
+            icon='elearning'
           />
         );
 
-      case "course":
+      case 'course':
         return (
           <>
             {sortedCategories.map((item, index) => (
@@ -91,7 +91,7 @@ const CategoryBadgeList: FC<CategoryBadgeListProps> = ({
                 name={item.name}
                 color={badgeColor(item.name)}
                 href={`/tienda?especialidad=${slugifySpecialty(
-                  item.name
+                  item.name,
                 )}&recurso=curso`}
                 textSize={textSize}
               />
@@ -99,7 +99,7 @@ const CategoryBadgeList: FC<CategoryBadgeListProps> = ({
           </>
         );
 
-      case "post":
+      case 'post':
         return (
           <>
             {sortedCategories.map((item, index) => (
@@ -115,13 +115,13 @@ const CategoryBadgeList: FC<CategoryBadgeListProps> = ({
           </>
         );
 
-      case "trial":
+      case 'trial':
         return (
           <Badge
             className={itemClass}
             name={categories[0]}
-            color={"trial"}
-            textSize={"text-[11px]"}
+            color={'trial'}
+            textSize={'text-[11px]'}
           />
         );
 
@@ -133,22 +133,22 @@ const CategoryBadgeList: FC<CategoryBadgeListProps> = ({
   return (
     <div
       className={`nc-CategoryBadgeList ${className}`}
-      data-nc-id="CategoryBadgeList"
+      data-nc-id='CategoryBadgeList'
     >
       {pillSwitch({
-        value: isEbook ? "ebook" : "",
+        value: isEbook ? 'ebook' : '',
         itemClass: itemClass as string,
       })}
       {pillSwitch({
-        value: isCourse ? "course" : "",
+        value: isCourse ? 'course' : '',
         itemClass: itemClass as string,
       })}
       {pillSwitch({
-        value: isPost ? "post" : "",
+        value: isPost ? 'post' : '',
         itemClass: itemClass as string,
       })}
       {pillSwitch({
-        value: isTrial ? "trial" : "",
+        value: isTrial ? 'trial' : '',
         itemClass: itemClass as string,
       })}
     </div>
