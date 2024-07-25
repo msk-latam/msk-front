@@ -55,9 +55,9 @@ const CategoryBadgeList: FC<CategoryBadgeListProps> = ({
       }
       return 0;
     };
-    const sortedCategoriesList =
-      categories.sort(compareByNameOrderSet) ||
-      categories.sort(compararPorSlug);
+    const sortedCategoriesList = categories.sort(compareByNameOrderSet);
+    // ||
+    // categories.sort(compararPorSlug);
 
     setSortedCategories(sortedCategoriesList);
   }, [categories]);
