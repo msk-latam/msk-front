@@ -41,25 +41,31 @@ const CategoryBadgeList: FC<CategoryBadgeListProps> = ({
 }) => {
   const notesJSON: JsonMapping = notesMapping;
   const [sortedCategories, setSortedCategories] = React.useState<any[]>([]);
-  useEffect(() => {
-    const compararPorSlug = (a: any, b: any) => {
-      const slugA = a.slug?.toLowerCase();
-      const slugB = b.slug?.toLowerCase();
-      if (slugA?.includes('actualidad') && !slugB?.includes('actualidad')) {
-        return 1;
-      } else if (
-        !slugA?.includes('actualidad') &&
-        slugB?.includes('actualidad')
-      ) {
-        return -1;
-      }
-      return 0;
-    };
-    const sortedCategoriesList = categories.sort(compareByNameOrderSet);
-    // ||
-    // categories.sort(compararPorSlug);
+  const [sortedCategoriespost, setSortedCategoriespost] = React.useState<any[]>(
+    [],
+  );
+  const compararPorSlug = (a: any, b: any) => {
+    const slugA = a.slug?.toLowerCase();
+    const slugB = b.slug?.toLowerCase();
+    console.log('a', slugA, 'b', slugB);
+    if (slugA?.includes('actualidad') && !slugB?.includes('actualidad')) {
+      return 1;
+    } else if (
+      !slugA?.includes('actualidad') &&
+      slugB?.includes('actualidad')
+    ) {
+      return -1;
+    } else if (slugA?.includes('medicina') && slugB?.includes('e-learning')) {
+      return -1;
+    }
+    return 0;
+  };
 
+  useEffect(() => {
+    const sortedCategoriesList = categories.sort(compareByNameOrderSet);
+    const sortedPost = categories.sort(compararPorSlug);
     setSortedCategories(sortedCategoriesList);
+    setSortedCategoriespost(sortedPost);
   }, [categories]);
 
   const { addFilter } = useStoreFilters();
@@ -102,7 +108,7 @@ const CategoryBadgeList: FC<CategoryBadgeListProps> = ({
       case 'post':
         return (
           <>
-            {sortedCategories.map((item, index) => (
+            {sortedCategoriespost.map((item, index) => (
               <Badge
                 className={itemClass}
                 key={index}
