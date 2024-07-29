@@ -1,29 +1,15 @@
-import React, { FC } from 'react';
-import PageTerminosCondicionesComponent from '@/components/MSK/terminos-y-condiciones/Page';
-import { IS_PROD, SITE_URL } from '@/contains/constants';
+import { FC } from 'react';
 import { Props } from '@/app/layout';
 import { Metadata } from 'next';
-import { cookies } from 'next/headers';
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const currentCountry = params.lang || cookies().get('country')?.value;
+import { redirect } from 'next/navigation';
 
-  return {
-    title: 'Términos y Condiciones | MSK',
-    alternates: IS_PROD
-      ? {
-          canonical: `${SITE_URL}/${currentCountry}/condiciones-de-contratacion`,
-        }
-      : undefined,
-    robots: IS_PROD
-      ? {
-          index: true,
-          follow: true,
-        }
-      : undefined,
-  };
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  redirect(`/terminos-y-condiciones`);
 }
 const PageTerminosCondiciones: FC = () => {
-  return <PageTerminosCondicionesComponent />;
+  redirect(`/terminos-y-condiciones`);
+
+  //return <PageTerminosCondicionesComponent />;
 };
 
 export default PageTerminosCondiciones;
