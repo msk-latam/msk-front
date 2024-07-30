@@ -26,7 +26,7 @@ const Tooltip: FC<Props> = ({ text, children, className }) => {
           onMouseLeave={hideTooltip}
         >
           {children}
-          {isVisible && <div className='tooltip'>{text}</div>}
+          {isVisible && <div className='tooltip relative right-0'>{text}</div>}
           {isVisible && <div className='tooltip-arrow'></div>}
         </div>
       )}
