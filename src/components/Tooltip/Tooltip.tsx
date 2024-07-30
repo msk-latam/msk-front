@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState } from 'react';
 
 interface Props {
   text: string;
@@ -26,8 +26,8 @@ const Tooltip: FC<Props> = ({ text, children, className }) => {
           onMouseLeave={hideTooltip}
         >
           {children}
-          {isVisible && <div className="tooltip">{text}</div>}
-          {isVisible && <div className="tooltip-arrow"></div>}
+          {isVisible && <div className='tooltip'>{text}</div>}
+          {isVisible && <div className='tooltip-arrow'></div>}
         </div>
       )}
     </>
