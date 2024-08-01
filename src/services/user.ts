@@ -3,10 +3,10 @@ import {
   CourseProgress,
   UserCourse,
   UserCourseProgress,
-} from "data/types";
+} from 'data/types';
 
 export const getUserProducts = (res: any, courses: any): UserCourse[] => {
-  const COUNTRY = localStorage.getItem("country");
+  const COUNTRY = localStorage.getItem('country');
   let coursesList = [] as UserCourse[];
   res.contact.contracts.map((contract: Contract) => {
     contract.products.map((product: UserCourse) => {
@@ -16,7 +16,7 @@ export const getUserProducts = (res: any, courses: any): UserCourse[] => {
       let globalProduct = courses.find(
         (productAux: { product_code: string }) => {
           return productAux.product_code == product.product_code;
-        }
+        },
       );
       if (globalProduct) {
         product.title = globalProduct.title;
@@ -27,8 +27,8 @@ export const getUserProducts = (res: any, courses: any): UserCourse[] => {
 
         if (globalProduct.image) {
           const imageURL = globalProduct.image.replace(
-            `${COUNTRY || "mx"}.`,
-            ""
+            `${COUNTRY || 'mx'}.`,
+            '',
           );
           product.featured_image = imageURL;
         }
@@ -41,23 +41,25 @@ export const getUserProducts = (res: any, courses: any): UserCourse[] => {
 
 export const getUserCourses = (
   res: any,
-  courses: any
+  courses: any,
 ): UserCourseProgress[] => {
-  const COUNTRY = localStorage.getItem("country");
+  const COUNTRY = localStorage.getItem('country');
   const coursesList: UserCourseProgress[] = [];
   const seenProductIds: { [productId: number]: boolean } = {};
   res.contact.courses_progress.forEach((cp: CourseProgress) => {
     const globalProduct = courses.find(
       (productAux: { product_code: number }) =>
-        productAux.product_code === cp.Product_Code
+        productAux.product_code === cp.Product_Code,
     );
+
+    console.log(cp, { globalProduct });
 
     if (globalProduct && !seenProductIds[cp.Product_Code]) {
       seenProductIds[cp.Product_Code] = true;
 
       const featured_image =
         globalProduct.image &&
-        globalProduct.image.replace(`${COUNTRY || "mx"}.`, "");
+        globalProduct.image.replace(`${COUNTRY || 'mx'}.`, '');
 
       const product = {
         status: cp.Estado_cursada,

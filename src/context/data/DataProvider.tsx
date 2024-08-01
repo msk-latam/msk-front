@@ -83,7 +83,7 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
   const fetchProfessions = async () => {
     try {
       const allProfessions = await ssr.getProfessions();
-      console.log({ allProfessions });
+      //console.log({ allProfessions });
       dispatch({
         type: 'GET_DATA',
         payload: { allProfessions },
