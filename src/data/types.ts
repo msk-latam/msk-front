@@ -1,5 +1,5 @@
-import { CommentType } from "@/components/CommentCard/CommentCard";
-import { ReactNode } from "react";
+import { CommentType } from '@/components/CommentCard/CommentCard';
+import { ReactNode } from 'react';
 
 //  ######  CustomLink  ######## //
 export interface CustomLink {
@@ -17,7 +17,7 @@ export interface TaxonomyType {
   thumbnail?: string;
   desc?: string;
   color?: TwMainColor | string;
-  taxonomy?: "category" | "tag";
+  taxonomy?: 'category' | 'tag';
 }
 
 export interface PostAuthorType {
@@ -96,13 +96,13 @@ export interface Contract {
 export interface CourseProgress {
   Avance: string;
   C_digo_de_Curso_Cedente: string;
-  Created_Time: "2023-05-24T11:10:41-03:00";
-  Enrollamiento: "2023-05-24T11:10:00-03:00";
+  Created_Time: '2023-05-24T11:10:41-03:00';
+  Enrollamiento: '2023-05-24T11:10:00-03:00';
   Estado_cursada: string;
   Estado_de_OV: string | null;
-  Fecha_de_compra: "2023-05-24T11:10:00-03:00";
-  Fecha_de_expiraci_n: "2026-03-01T12:37:57-03:00";
-  Fecha_limite_de_Enrolamiento: "2026-03-01T12:37:57-03:00";
+  Fecha_de_compra: '2023-05-24T11:10:00-03:00';
+  Fecha_de_expiraci_n: '2026-03-01T12:37:57-03:00';
+  Fecha_limite_de_Enrolamiento: '2026-03-01T12:37:57-03:00';
   Fecha_de_ltima_sesi_n: string | null;
   Fecha_finalizaci_n: string | null;
   Nombre_de_curso: string;
@@ -111,6 +111,8 @@ export interface CourseProgress {
   Product_Code: number;
   contact_id: number;
   entity_id_crm: string;
+  Diploma: any;
+  Certificado: any;
 }
 export interface UserCourseProgress {
   avance: string;
@@ -254,7 +256,7 @@ export interface PostDataType {
   commentCount: number;
   viewdCount: number;
   readingTime: number;
-  postType: "standard" | "video" | "gallery" | "audio";
+  postType: 'standard' | 'video' | 'gallery' | 'audio';
   videoUrl?: string;
   image?: string;
   audioUrl?: string;
@@ -289,17 +291,17 @@ export interface BlogDataType {
 }
 
 export type TwMainColor =
-  | "pink"
-  | "green"
-  | "yellow"
-  | "yellow-strong"
-  | "red"
-  | "red-strong"
-  | "indigo"
-  | "blue"
-  | "blue-light"
-  | "purple"
-  | "gray";
+  | 'pink'
+  | 'green'
+  | 'yellow'
+  | 'yellow-strong'
+  | 'red'
+  | 'red-strong'
+  | 'indigo'
+  | 'blue'
+  | 'blue-light'
+  | 'purple'
+  | 'gray';
 
 export interface VideoType {
   id: string;
@@ -459,6 +461,7 @@ export interface FetchCourseType {
   author?: any;
   reading_time: string;
   created_at: string;
+  product_code: number;
 }
 
 export interface Category {
@@ -667,10 +670,10 @@ export interface RebillTransaction {
         {
           id: string;
           quantity: number;
-        }
+        },
       ];
       schedules: string[];
-    }
+    },
   ];
   buyer: {
     customer: {
