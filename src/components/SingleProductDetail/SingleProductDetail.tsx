@@ -1,8 +1,7 @@
 'use client';
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useContext } from 'react';
 import ProductCurriculiam from './ProductCurriculiam';
 import ProductDetailSidebar from './ProductDetailSidebar';
-import BackgroundSection from '@/components/BackgroundSection/BackgroundSection';
 import CourseRequirements from './Requirements/CourseRequirements';
 import { FetchSingleProduct } from '@/data/types';
 import ProductEvaluation from './ProductEvaluation';
@@ -28,8 +27,6 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
     state: { allBestSellers },
     loadingBestSellers,
   } = useContext(DataContext);
-
-  console.log(allBestSellers);
 
   const productsGoals = (htmlString: string) => {
     const paragraphs = htmlString.split('</p>\n<p>');
