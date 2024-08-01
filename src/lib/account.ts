@@ -51,7 +51,7 @@ export const productStatusIsExpired = (status: string) =>
   status.includes('Expirado');
 
 export const getStatusIcon = (status: string | null) => {
-  console.log({ status });
+  //console.log({ status });
   // Objeto de mapeo para asociar estados con iconos
   const iconMapping: Record<string, any> = {
     Activo: activeIcon,
@@ -78,6 +78,7 @@ export const statusCourse = (status: string) => {
       statusObj.hasText = 'Activar';
       break;
     case 'Sin enrolar':
+    case 'Preventa':
       statusObj.isDisabled = false;
       statusObj.hasText = 'Activar';
       break;
@@ -125,6 +126,12 @@ export const statusOrdenVenta = (
       statusObj.hasText = 'Prueba';
       statusObj.disabledText = 'Prueba';
       statusObj.color = 'trial';
+      break;
+    case 'Preventa':
+      statusObj.isDisabled = true;
+      statusObj.hasText = 'Preventa';
+      statusObj.disabledText = 'Preventa';
+      statusObj.color = '';
       break;
     default:
       statusObj.isDisabled = false;
