@@ -47,7 +47,6 @@ const CategoryBadgeList: FC<CategoryBadgeListProps> = ({
   const compararPorSlug = (a: any, b: any) => {
     const slugA = a.slug?.toLowerCase();
     const slugB = b.slug?.toLowerCase();
-    console.log('a', slugA, 'b', slugB);
     if (slugA?.includes('actualidad') && !slugB?.includes('actualidad')) {
       return 1;
     } else if (
