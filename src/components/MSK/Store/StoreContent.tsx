@@ -42,7 +42,7 @@ const StoreContent: FC<{}> = () => {
 
   const { state: dataState } = useContext(DataContext);
   const { storeCourses, allStoreProfessions } = dataState;
-  console.log({ storeCourses });
+
   const { specialties } = useStoreFilters();
 
   const { countryState } = useContext(CountryContext);
