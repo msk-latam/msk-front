@@ -116,6 +116,7 @@ class ApiSSRService {
 
     try {
       const queryParams = [countryParam].filter(Boolean).join('');
+      // console.log(`${API_URL}/products?limit=-1${queryParams}`);
 
       const response = await fetch(
         `${API_URL}/products?limit=-1${queryParams}`,

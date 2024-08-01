@@ -46,6 +46,7 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
 
   const fetchStoreCourses = async () => {
     const storeCourses = await ssr.getStoreCourses(countryState.country);
+
     dispatch({
       type: 'GET_STORE_DATA',
       payload: { storeCourses },
