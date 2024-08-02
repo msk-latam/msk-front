@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import PageBasesPromocionalesComponent from '@/components/MSK/bases-promocionales/Page';
 import { IS_PROD } from '@/contains/constants';
+
 export async function generateMetadata() {
   return {
     title: 'Bases promocionales | MSK',
