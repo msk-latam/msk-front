@@ -26,7 +26,6 @@ const Badge: FC<BadgeProps> = ({
   onClick,
 }) => {
   const getColorClass = (hasHover = true) => {
-    console.log(color);
     switch (color) {
       case 'pink':
         return `text-pink-800 bg-pink-100 ${

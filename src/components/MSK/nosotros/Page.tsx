@@ -144,7 +144,7 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({
                 distancia, gestionando sus procesos de capacitación a través de
                 una propuesta dinámica con cursos de actualización a la medida
                 de sus posibilidades. Ofrecemos una experiencia exitosa, fluida
-                y de mejora continua. Puedes conocer más sobre nuestra misión
+                y de mejora continua. Puedes conocer más sobre nuestra misión{' '}
                 <Link
                   className='text-[#9200AD] underline text-base sm:text-lg lg:text-xl'
                   href='/mision'
