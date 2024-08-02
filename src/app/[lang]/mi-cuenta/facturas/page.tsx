@@ -48,30 +48,30 @@ const pageFacturas: FC = () => {
   }, [state?.profile]);
 
   const dummyData: any = [
-    // {
-    //   date: '2023-07-01',
-    //   invoiceNumber: 'INV-001',
-    //   amount: '$100.00',
-    //   downloadLink: '#',
-    // },
-    // {
-    //   date: '2023-07-15',
-    //   invoiceNumber: 'INV-002',
-    //   amount: '$200.00',
-    //   downloadLink: '#',
-    // },
-    // {
-    //   date: '2023-08-01',
-    //   invoiceNumber: 'INV-003',
-    //   amount: '$150.00',
-    //   downloadLink: '#',
-    // },
-    // {
-    //   date: '2023-08-15',
-    //   invoiceNumber: 'INV-004',
-    //   amount: '$250.00',
-    //   downloadLink: '#',
-    // },
+    {
+      date: '2023-07-01',
+      invoiceNumber: 'INV-001',
+      amount: '$100.00',
+      downloadLink: '#',
+    },
+    {
+      date: '2023-07-15',
+      invoiceNumber: 'INV-002',
+      amount: '$200.00',
+      downloadLink: '#',
+    },
+    {
+      date: '2023-08-01',
+      invoiceNumber: 'INV-003',
+      amount: '$150.00',
+      downloadLink: '#',
+    },
+    {
+      date: '2023-08-15',
+      invoiceNumber: 'INV-004',
+      amount: '$250.00',
+      downloadLink: '#',
+    },
   ];
 
   return (

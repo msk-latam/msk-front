@@ -22,7 +22,6 @@ const ProductAccountButton: FC<ProductAccountButtonProps> = ({
   console.log('product account button', product);
   const [showCancelTrial, setShowCancelTrial] = useState(false);
   const { status } = product;
-  //console.log({ product });
   const { isDisabled } = statusCourse(status);
   const statusOV = statusOrdenVenta(product?.ov, status);
   const textStatus = statusOV.isDisabled
@@ -62,7 +61,7 @@ const ProductAccountButton: FC<ProductAccountButtonProps> = ({
             (typeof textStatus === 'string' &&
               textStatus.includes('Listo para enrolar'))
           }
-          status={textStatus}
+          status={status}
           productSlug={product.slug}
           isPreventa={statusOV.hasText === 'Preventa'}
         />
