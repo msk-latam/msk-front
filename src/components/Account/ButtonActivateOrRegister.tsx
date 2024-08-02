@@ -1,4 +1,6 @@
+
 import { FC, useEffect } from 'react';
+
 import { useRouter } from 'next/navigation';
 import { hasText } from '@/lib/account';
 
@@ -8,6 +10,9 @@ interface ButtonActivateOrRegisterProps {
   whenActivate: boolean;
   status: string;
   productSlug: string | undefined;
+
+  isPreventa: boolean;
+
 }
 
 const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({
@@ -16,16 +21,28 @@ const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({
   whenActivate,
   status,
   productSlug,
+
+  isPreventa,
 }) => {
   const router = useRouter();
 
-  useEffect(() => {
-    console.log('Component re-rendered');
-    console.log('isDisabledActivate:', isDisabledActivate);
-    console.log('whenActivate:', whenActivate);
-    console.log('status:', status);
-    console.log('productSlug:', productSlug);
-  }, [isDisabledActivate, whenActivate, status, productSlug]);
+  const disabledRender = () => {
+    return (
+      <button
+        className='course-network text-primary font-bold disabled:text-grey-disabled disabled:cursor-not-allowed disabled:opacity-70'
+        onClick={() => {}}
+        disabled={true}
+      >
+        Activar
+      </button>
+    );
+  };
+
+  if (isPreventa) {
+    return disabledRender();
+  }
+
+
   return (
     <>
       {isDisabledActivate ? (

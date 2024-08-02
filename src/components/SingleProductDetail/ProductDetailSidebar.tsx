@@ -1,14 +1,14 @@
-"use client";
-import { FC, useContext, useEffect, useState } from "react";
-import { Details, Ficha } from "@/data/types";
-import { CountryContext } from "@/context/country/CountryContext";
-import { AuthContext } from "@/context/user/AuthContext";
-import { useParams, useRouter } from "next/navigation";
-import useRequestedTrialCourse from "@/hooks/useRequestedTrialCourse";
-import Badge from "@/components/Badge/Badge";
-import Image from "next/image";
-import PricingDetail from "@/components/SingleProductDetail/PricingDetail";
-import { REBILL_CONF } from "@/logic/Rebill";
+'use client';
+import { FC, useContext, useEffect, useState } from 'react';
+import { Details, Ficha } from '@/data/types';
+import { CountryContext } from '@/context/country/CountryContext';
+import { AuthContext } from '@/context/user/AuthContext';
+import { useParams, useRouter } from 'next/navigation';
+import useRequestedTrialCourse from '@/hooks/useRequestedTrialCourse';
+import Badge from '@/components/Badge/Badge';
+import Image from 'next/image';
+import PricingDetail from '@/components/SingleProductDetail/PricingDetail';
+import { REBILL_CONF } from '@/logic/Rebill';
 
 interface Props {
   ficha: Ficha;
@@ -59,51 +59,51 @@ const ProductDetailSidebar: FC<Props> = ({
       const distanceToBottom = calculateDistanceToBottom();
       const auxDistance = scrollPosition - distanceToBottom - 100;
       setBottomDistance(
-        distanceToBottom < (isEbook ? 1500 : 1865) ? auxDistance / 2 : 0
+        distanceToBottom < (isEbook ? 1500 : 1865) ? auxDistance / 2 : 0,
       );
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   let translations: { [key: string]: string } = {
-    modalidad: "Modalidad",
-    curso_disponible: "Curso Disponible",
-    asesoramiento_academico: "Asesoramiento Académico",
-    certificacion: "Certificación",
-    idioma: "Idioma",
+    modalidad: 'Modalidad',
+    curso_disponible: 'Curso Disponible',
+    asesoramiento_academico: 'Asesoramiento Académico',
+    certificacion: 'Certificación',
+    idioma: 'Idioma',
   };
 
   const ebookData = [
-    { description: "Guía profesional gratuita", icon: "elearning", size: "20" },
+    { description: 'Guía profesional gratuita', icon: 'elearning', size: '20' },
     {
-      description: "Contenido de nivel formativo",
-      icon: "diploma",
-      size: "19",
+      description: 'Contenido de nivel formativo',
+      icon: 'diploma',
+      size: '19',
     },
     {
-      description: "Disponible para PC, tablet y smartphone",
-      icon: "devices",
-      size: "17",
+      description: 'Disponible para PC, tablet y smartphone',
+      icon: 'devices',
+      size: '17',
     },
-    { description: "Acceso a newsletters", icon: "newsletter", size: "16" },
+    { description: 'Acceso a newsletters', icon: 'newsletter', size: '16' },
   ];
 
   const router = useRouter();
 
   const requestTrial = (slug: string) => {
     router.push(
-      authState.isAuthenticated ? `/suscribe/${slug}` : `/trial/${slug}`
+      authState.isAuthenticated ? `/suscribe/${slug}` : `/trial/${slug}`,
     );
   };
   const { hasCoursedRequested } = useRequestedTrialCourse(product);
 
   const hasGateway = Object.values(REBILL_CONF.GATEWAYS).some(array =>
-    array.includes(countryState.country)
+    array.includes(countryState.country),
   );
   //console.log(hasCoursedRequested)
   return (
@@ -111,27 +111,27 @@ const ProductDetailSidebar: FC<Props> = ({
       <div
         className={`${
           isFixed && bottomDistance == 0 && !isEbook && fixedPosition
-            ? "course-widget-wrapper fixed"
-            : "course-widget-wrapper"
-        } ${bottomDistance != 0 && !isEbook ? "absolute bottom-0" : ""}`}
+            ? 'course-widget-wrapper fixed'
+            : 'course-widget-wrapper'
+        } ${bottomDistance != 0 && !isEbook ? 'absolute bottom-0' : ''}`}
       >
         {isFixed && !isEbook ? (
           <>
-            {product.sale_price !== "0" && (
+            {product.sale_price !== '0' && (
               <Badge
-                color="sale"
-                name="EN PROMOCIÓN"
-                className="hidden lg:inline-block mb-2"
+                color='sale'
+                name='EN PROMOCIÓN'
+                className='hidden lg:inline-block mb-2'
               />
             )}
           </>
         ) : (
-          <div className="course-video-thumb mb-2 w-img hidden lg:flex relative">
-            {product.sale_price !== "0" && (
+          <div className='course-video-thumb mb-2 w-img hidden lg:flex relative'>
+            {product.sale_price !== '0' && (
               <Badge
-                color="sale"
-                name="EN PROMOCIÓN"
-                className="absolute top-2 left-2"
+                color='sale'
+                name='EN PROMOCIÓN'
+                className='absolute top-2 left-2'
               />
             )}
             <Image
@@ -143,27 +143,27 @@ const ProductDetailSidebar: FC<Props> = ({
           </div>
         )}
 
-        {product.sale_price !== "0" && (
-          <Badge color="sale" name="EN PROMOCIÓN" className="mb-2 lg:hidden" />
+        {product.sale_price !== '0' && (
+          <Badge color='sale' name='EN PROMOCIÓN' className='mb-2 lg:hidden' />
         )}
 
         <PricingDetail isEbook={isEbook} product={product} />
 
-        <div className="course-video-body">
+        <div className='course-video-body'>
           <ul>
             {isEbook ? (
               <>
                 {ebookData.map((item, index) => {
                   return (
                     <li key={`data_${index}`}>
-                      <div className="course-vide-icon">
+                      <div className='course-vide-icon'>
                         <img
                           src={`/images/icons/${item.icon}.svg`}
                           width={item.size}
                         />
                         <span>{item.description}</span>
                       </div>
-                      <div className="video-corse-info"></div>
+                      <div className='video-corse-info'></div>
                     </li>
                   );
                 })}
@@ -173,20 +173,20 @@ const ProductDetailSidebar: FC<Props> = ({
                 {Object.keys(sideData).map((key, index) => {
                   return (
                     <li key={`data_${index}`}>
-                      <div className="course-vide-icon w-full">
-                        <img src={`/images/icons/${key}.svg`} width="15" />
-                        <p className="text-[12px] sm:text-base w-full flex justify-between text-dark-blue-custom">
+                      <div className='course-vide-icon w-full'>
+                        <img src={`/images/icons/${key}.svg`} width='15' />
+                        <p className='text-[12px] sm:text-base w-full flex justify-between text-dark-blue-custom'>
                           <span>
-                            {translations[key] ? translations[key] + ":" : ""}
+                            {translations[key] ? translations[key] + ':' : ''}
                           </span>
-                          {key == "idioma" ? (
+                          {key == 'idioma' ? (
                             sideData[key].length && sideData[key][0] != null ? (
-                              <>{sideData[key].join(", ")}</>
+                              <>{sideData[key].join(', ')}</>
                             ) : (
-                              "Español"
+                              'Español'
                             )
                           ) : (
-                            <span className="ml-auto">
+                            <span className='ml-auto'>
                               {sideData[key as keyof typeof sideData]}
                             </span>
                           )}
@@ -199,24 +199,24 @@ const ProductDetailSidebar: FC<Props> = ({
             )}
           </ul>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className='flex flex-col gap-2'>
           <button
             onClick={scrollToContactForm}
-            className="video-cart-btn w-full"
+            className='video-cart-btn w-full'
           >
-            {isEbook ? "Descargar gratis" : "Contáctanos"}
+            {isEbook ? 'Descargar gratis' : 'Contáctanos'}
           </button>
-          {!isEbook && hasGateway && (
-              <button
-                onClick={() => requestTrial(slug)}
-                className="video-cart-btn border-2 w-full disabled:border-grey-disabled disabled:text-grey-disabled disabled:cursor-not-allowed hover:disabled:bg-transparent hover:disabled:border-grey-disabled hover:disabled:text-grey-disabled"
-                disabled={hasCoursedRequested}
-              >
-                {hasCoursedRequested
-                  ? "Prueba ya solicitada"
-                  : "Prueba 7 días gratis"}
-              </button>
-            )}
+          {!isEbook && hasGateway && !product.is_presale_product && (
+            <button
+              onClick={() => requestTrial(slug)}
+              className='video-cart-btn border-2 w-full disabled:border-grey-disabled disabled:text-grey-disabled disabled:cursor-not-allowed hover:disabled:bg-transparent hover:disabled:border-grey-disabled hover:disabled:text-grey-disabled'
+              disabled={hasCoursedRequested}
+            >
+              {hasCoursedRequested
+                ? 'Prueba ya solicitada'
+                : 'Prueba 7 días gratis'}
+            </button>
+          )}
         </div>
       </div>
     </div>
@@ -225,11 +225,11 @@ const ProductDetailSidebar: FC<Props> = ({
 
 export default ProductDetailSidebar;
 const scrollToContactForm = () => {
-  const contactForm = document.getElementById("contactanos");
+  const contactForm = document.getElementById('contactanos');
   if (contactForm) {
     window.scrollTo({
-      top: document.getElementById("contactanos")!.offsetTop,
-      behavior: "smooth",
+      top: document.getElementById('contactanos')!.offsetTop,
+      behavior: 'smooth',
     });
   }
 };

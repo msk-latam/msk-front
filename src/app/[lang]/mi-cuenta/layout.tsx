@@ -63,7 +63,7 @@ const PageDashboard: FC<PageDashboardProps> = ({
       icon: 'personal-data',
       pageName: 'Datos personales',
     },
-    {
+    /*  {
       sPath: '/facturas',
       icon: 'factura',
       pageName: 'Mis Facturas',
@@ -72,7 +72,7 @@ const PageDashboard: FC<PageDashboardProps> = ({
       sPath: '/diplomas',
       icon: 'certydip',
       pageName: 'Diplomas y Certificaciones',
-    },
+    }, */
   ];
 
   const navClassName =

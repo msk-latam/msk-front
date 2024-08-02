@@ -30,11 +30,8 @@ const TABS = [
 export const runtime = 'edge';
 
 const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
-  const {
-    state: dataState,
-    loadingBestSellers,
-    loadingProductsMX,
-  } = useContext(DataContext);
+  const { state: dataState, loadingBestSellers } = useContext(DataContext);
+
   const router = useRouter();
   const { allBestSellers, allCourses } = dataState;
   const [tabActive, setTabActive] = useState<string>(TABS[0]);
@@ -45,6 +42,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
   const [currentItems, setCurrentItems] = useState<UserCourseProgress[]>([]);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [userCourses, setUserCourses] = useState<UserCourseProgress[]>([]);
+
   const fetchUser = async () => {
     try {
       setTotalPages(Math.ceil(allCourses.length / itemsPerPage));
@@ -53,6 +51,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
       if (!res.message) {
         setUser(res);
         let coursesList = getUserCourses(res, allCourses);
+        console.log({ allCourses, coursesList }, res.contact.courses_progress);
         setUserCourses(coursesList);
         setTotalPages(Math.ceil(coursesList.length / itemsPerPage));
         setLoadingUser(false);
