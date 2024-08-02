@@ -19,6 +19,7 @@ const ProductAccountButton: FC<ProductAccountButtonProps> = ({
   isRunning,
   onClick,
 }) => {
+  console.log('product account button', product);
   const [showCancelTrial, setShowCancelTrial] = useState(false);
   const { status } = product;
   const { isDisabled } = statusCourse(status);
@@ -27,6 +28,8 @@ const ProductAccountButton: FC<ProductAccountButtonProps> = ({
     ? statusOV.disabledText
     : statusOV.hasText;
   const iconStatus = getStatusIcon(textStatus);
+
+  console.log('status', status);
 
   return (
     <div className='product-button-wrp'>
@@ -55,10 +58,10 @@ const ProductAccountButton: FC<ProductAccountButtonProps> = ({
           whenActivate={
             onRequest ||
             isRunning ||
-            (typeof status === 'string' &&
-              status.includes('Listo para enrolar'))
+            (typeof textStatus === 'string' &&
+              textStatus.includes('Listo para enrolar'))
           }
-          status={status}
+          status={textStatus}
           productSlug={product.slug}
         />
       </div>
