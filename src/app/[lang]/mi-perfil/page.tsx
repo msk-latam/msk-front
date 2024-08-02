@@ -76,6 +76,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
   useEffect(() => {
     setCurrentItems(userCourses.slice(indexOfFirstItem, indexOfLastItem));
   }, [indexOfFirstItem, indexOfLastItem, userCourses]);
+  console.log('page currentItems', currentItems);
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
