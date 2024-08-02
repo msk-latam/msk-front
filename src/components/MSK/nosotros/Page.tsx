@@ -132,42 +132,48 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({
       {data && (
         <div className='md:container '>
           <div className='md:container px-4 sm:px-8 md:px-12 lg:px-20 nc-SingleContent  relative space-y-10 mb-16'>
-            <div className='w-[42rem] mx-auto'>
-              <p className='font-lora  text-[#392C35] pb-2 pt-4'>
+            <div className='w-full max-w-[50rem] mx-auto px-4 sm:px-6 lg:px-8'>
+              <p className='font-lora text-[#392C35] pb-2 pt-4 text-base sm:text-lg lg:text-xl'>
                 Medical & Scientific Knowledge es un grupo español con más de
                 ocho años de trayectoria en la industria pharma y en el
-                desarrollo de cursos de medicina.{' '}
+                desarrollo de cursos de medicina.
               </p>
-              <p className='font-lora  text-[#392C35] py-2'>
+              <p className='font-lora text-[#392C35] py-2 text-base sm:text-lg lg:text-xl'>
                 Nuestra misión es satisfacer las necesidades de los
                 profesionales de la salud que buscan estudiar medicina a
                 distancia, gestionando sus procesos de capacitación a través de
                 una propuesta dinámica con cursos de actualización a la medida
                 de sus posibilidades. Ofrecemos una experiencia exitosa, fluida
-                y de mejora continua. Puedes conocer más sobre nuestra misión{' '}
-                <Link className='text-[#9200AD] underline' href='/mision'>
+                y de mejora continua. Puedes conocer más sobre nuestra misión
+                <Link
+                  className='text-[#9200AD] underline text-base sm:text-lg lg:text-xl'
+                  href='/mision'
+                >
                   ingresando aquí
                 </Link>
                 .
               </p>
-              <h1 className='py-2'> {data.title} </h1>
+              <h1 className='py-2 text-base sm:text-lg lg:text-xl'>
+                {' '}
+                {data.title}{' '}
+              </h1>
               <Image
                 src={data.imagen}
                 alt=''
                 width={1000}
                 height={1000}
-                className=' object-cover'
+                className='object-cover w-full h-auto'
               />
-              <h1 className='py-2'> {data.title_convenios} </h1>
-              <p className='font-lora  text-[#392C35] pb-4'>
+              <h1 className='py-2 text-base sm:text-lg lg:text-xl'>
+                {' '}
+                {data.title_convenios}{' '}
+              </h1>
+              <p className='font-lora text-[#392C35] pb-4 text-base sm:text-lg lg:text-xl'>
                 {cleanHTML(data.description_convenios)}
               </p>
 
               {data.avales && (
-                <div
-                  className={`bg-neutral-100 slider-container px-10 py-10 rounded-2xl 
-                  }`}
-                >
+                <div className='bg-neutral-100 slider-container px-4 sm:px-10 py-10 rounded-2xl'>
                   <SectionSliderPosts
                     heading=''
                     postCardName='card20'
@@ -177,8 +183,11 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({
                   />
                 </div>
               )}
-              <h1 className='py-2 pt-6'> {data.title_nuestro_equipo} </h1>
-              <p className='font-lora  text-[#392C35] pb-6'>
+              <h1 className='py-2 pt-6 text-base sm:text-lg lg:text-xl'>
+                {' '}
+                {data.title_nuestro_equipo}{' '}
+              </h1>
+              <p className='font-lora text-[#392C35] pb-6 text-base sm:text-lg lg:text-xl'>
                 {' '}
                 {cleanHTML(data.description_nuestro_equipo)}{' '}
               </p>
@@ -195,17 +204,19 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({
                       />
                     </div>
                     <div className='flex flex-col'>
-                      <span className='text-lg font-semibold'>
+                      <span className='text-base sm:text-lg font-semibold'>
                         {person.title}
                       </span>
-                      <span className='text-[#6474A6]'>
+                      <span className='text-[#6474A6] text-sm sm:text-base'>
                         {person.description}
                       </span>
                     </div>
                   </div>
                 ))}
-                <h1 className='py-2'> {data.title_direccion_medica} </h1>
-
+                <h1 className='py-2 text-base sm:text-lg lg:text-xl'>
+                  {' '}
+                  {data.title_direccion_medica}{' '}
+                </h1>
                 {data.direccion_medica.map((person, index) => (
                   <div key={index} className='flex items-center space-x-4'>
                     <div className='flex-shrink-0'>
@@ -218,10 +229,10 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({
                       />
                     </div>
                     <div className='flex flex-col'>
-                      <span className='text-lg font-semibold'>
+                      <span className='text-base sm:text-lg font-semibold'>
                         {person.title}
                       </span>
-                      <span className='text-[#6474A6]'>
+                      <span className='text-[#6474A6] text-sm sm:text-base'>
                         {person.description}
                       </span>
                     </div>
