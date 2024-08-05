@@ -1,9 +1,10 @@
-import React, { FC, useState } from "react";
-import DesktopCoursesTable from "./DesktopCoursesTable";
-import { UserCourseProgress } from "@/data/types";
-import ButtonPrimary from "@/components/Button/ButtonPrimary";
-import MobileCourseTable from "./MobileCourseTable";
-import NcLink from "@/components/NcLink/NcLink";
+import React, { FC, useState } from 'react';
+import DesktopCoursesTable from './DesktopCoursesTable';
+import { UserCourseProgress } from '@/data/types';
+import ButtonPrimary from '@/components/Button/ButtonPrimary';
+import MobileCourseTable from './MobileCourseTable';
+import NcLink from '@/components/NcLink/NcLink';
+import NoContent from '@/app/[lang]/mi-cuenta/diplomas/NoContent';
 
 interface CoursesTableProps {
   courses: UserCourseProgress[];
@@ -12,12 +13,12 @@ interface CoursesTableProps {
     goToLMS: (
       product_code: number,
       cod_curso: string,
-      email: string
+      email: string,
     ) => Promise<void>;
     goToEnroll: (
       product_code: number,
       cod_curso: string,
-      email: string
+      email: string,
     ) => Promise<void>;
     email: string;
   };
@@ -59,18 +60,9 @@ const CoursesTable: FC<CoursesTableProps> = ({
       <DesktopCoursesTable currentItems={currentItems} config={config} />
     )
   ) : (
-    <div className="flex flex-col justify-center items-center gap-6 my-24 lg:mt-10">
-      <p className="raleway text-3xl text-center">
-        Aún puedes descubrir mucho más en Medical & Scientific Knowledge
-      </p>
-      <NcLink
-      href={"/tienda"}
-      className="font-semibold px-6"
-      >
-        Comienza un curso
-      </NcLink>
-      
-    </div>
+    <>
+      <NoContent />
+    </>
   );
 };
 
