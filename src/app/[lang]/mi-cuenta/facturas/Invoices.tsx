@@ -14,7 +14,14 @@ interface InvoicesProps {
 }
 
 const Invoices: React.FC<InvoicesProps> = ({ data }) => {
-  function formatCurrency(currency: string, amount: number): string {
+  function formatCurrency(
+    currency: string | null | undefined,
+    amount: number | null | undefined,
+  ): string {
+    if (!currency || amount == null) {
+      return 'Sin Datos';
+    }
+
     // Formatea el número
     const formatter = new Intl.NumberFormat('es-CL', {
       style: 'currency',
@@ -27,7 +34,11 @@ const Invoices: React.FC<InvoicesProps> = ({ data }) => {
     return formatter.format(amount);
   }
 
-  function formatDate(dateString: string): string {
+  function formatDate(dateString: string | null | undefined): string {
+    if (!dateString) {
+      return 'Sin Datos';
+    }
+
     const [year, month, day] = dateString.split('-');
     return `${day}/${month}/${year}`;
   }
@@ -61,16 +72,24 @@ const Invoices: React.FC<InvoicesProps> = ({ data }) => {
                     {/* {invoice.N_De_Factura} */} -
                   </td>
                   <td className='py-2 px-4 border-b text-left font-bold'>
-                    {invoice.currency}{' '}
-                    {formatCurrency(invoice.currency, invoice.Monto)}
+                    {invoice.currency && invoice.Monto != null
+                      ? `${invoice.currency} ${formatCurrency(
+                          invoice.currency,
+                          invoice.Monto,
+                        )}`
+                      : 'Sin Datos'}
                   </td>
                   <td className='py-2 px-4 border-b text-left'>
-                    <ButtonPrimary
-                      className='!h-8'
-                      href={invoice.Comprobante_Factura}
-                    >
-                      Descargar Factura
-                    </ButtonPrimary>
+                    {invoice.Comprobante_Factura ? (
+                      <ButtonPrimary
+                        className='!h-8'
+                        href={invoice.Comprobante_Factura}
+                      >
+                        Descargar Factura
+                      </ButtonPrimary>
+                    ) : (
+                      <span className='font-bold'>Sin Factura</span>
+                    )}
                   </td>
                 </tr>
               ))}
