@@ -1,14 +1,20 @@
-import { WpContentData } from "@/data/types";
-import ssr from "@/services/ssr";
+import { WpContentData } from '@/data/types';
+import ssr from '@/services/ssr';
 
 // Courses
 let allCourses: any = [];
-let loadingCourses: boolean = false;
-
 export const setAllCourses = (courses: any) => {
   allCourses = courses;
 };
 export const getAllCourses = () => allCourses;
+
+let storeCourses: any = [];
+export const getStoreCourses = () => storeCourses;
+export const setStoreCourses = (courses: any) => {
+  storeCourses = courses;
+};
+
+let loadingCourses: boolean = false;
 export const setLoadingCourses = (value: boolean) => (loadingCourses = value);
 export const isLoadingCourses = () => loadingCourses;
 
@@ -47,7 +53,7 @@ export const getAllStoreSpecialties = async (currentCountry: string) => {
       setAllStoreSpecialties(specialties);
       return specialties;
     } catch (error) {
-      console.error("Error fetching specialties:", error);
+      console.error('Error fetching specialties:', error);
       return [];
     }
   }
@@ -69,7 +75,7 @@ export const getAllProfessions = async () => {
       setAllProfessions(professions);
       return professions;
     } catch (error) {
-      console.error("Error fetching professions:", error);
+      console.error('Error fetching professions:', error);
       return [];
     }
   }
@@ -86,12 +92,12 @@ export const setPageHomeWpContent = (value: any) => {
   pageHomeWpContent = value;
 };
 export const getPageHomeWpContent = () => pageHomeWpContent;
-export const getPageHomeWpData = async (currentCountry:string) => {
-  const pageData = getPageHomeWpContent()
-  
+export const getPageHomeWpData = async (currentCountry: string) => {
+  const pageData = getPageHomeWpContent();
+
   if (typeof pageData === 'undefined') {
-    const fetchedContent = await ssr.getWpContent("/home-msk",currentCountry);
+    const fetchedContent = await ssr.getWpContent('/home-msk', currentCountry);
     setPageHomeWpContent(fetchedContent);
   }
-}
+};
 export const isLoadingPageHomeWpContent = () => loadingPageHomeWpContent;

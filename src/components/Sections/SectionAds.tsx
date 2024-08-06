@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import Image, { StaticImageData } from "next/image";
+import React, { FC } from 'react';
+import Image, { StaticImageData } from 'next/image';
 
 export interface SectionAdsProps {
   className?: string;
@@ -7,16 +7,16 @@ export interface SectionAdsProps {
 }
 
 const SectionAds: FC<SectionAdsProps> = ({
-  className = "",
-  imgAds = "/images/ads.png",
+  className = '',
+  imgAds = '/webp-images/ads.webp',
 }) => {
   return (
     <a
-      href="/#"
+      href='/#'
       className={`nc-SectionAds block text-center mx-auto ${className}`}
     >
-      <span className="text-xs text-neutral-500">- Advertisement -</span>
-      <Image className="mx-auto" src={imgAds} alt="ads" />
+      <span className='text-xs text-neutral-500'>- Advertisement -</span>
+      <Image className='mx-auto' src={imgAds} alt='ads' />
     </a>
   );
 };

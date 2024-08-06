@@ -28,6 +28,7 @@
   user-select: none;
 }
 .glide__slide {
+  padding-top: 50px;
   width: 100%;
   height: 100%;
   flex-shrink: 0;
@@ -53,7 +54,6 @@
 .glide--rtl {
   direction: rtl;
 }
-
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .hiddenScrollbar::-webkit-scrollbar {
@@ -185,26 +185,26 @@
   }
 }
 
-[type="button"] {
+[type='button'] {
   -webkit-appearance: none !important;
 }
 
 //
 .nc-section-rounded-none {
-  *[class*="rounded"],
-  *[class*="nc-box"] {
+  *[class*='rounded'],
+  *[class*='nc-box'] {
     border-radius: 0 !important;
   }
 }
 
 .nc-section-rounded-md {
-  *[class*="rounded"],
-  *[class*="nc-box"] {
+  *[class*='rounded'],
+  *[class*='nc-box'] {
     @apply rounded-md #{!important};
   }
 }
 
-.section-slider-posts-container{
+.section-slider-posts-container {
   max-width: 1280px;
   margin: 0 auto;
 }
@@ -219,7 +219,7 @@
 //
 .menuIsNew_lv1 {
   > a::before {
-    content: "New!";
+    content: 'New!';
     position: absolute;
     top: -2px;
     @apply end-0;
@@ -235,7 +235,7 @@
 }
 .menuIsNew {
   > a::after {
-    content: "New!";
+    content: 'New!';
     display: inline-block;
     padding: 0 5px;
     line-height: 15px;
@@ -461,13 +461,13 @@ li {
   padding-bottom: 30px;
 }
 
-$xxxl: "only screen and (min-width: 1600px) and (max-width: 1800px)";
-$xxl: "only screen and (min-width: 1400px) and (max-width: 1599px)";
-$xl: "only screen and (min-width: 1200px) and (max-width: 1399px)";
-$lg: "only screen and (min-width: 992px) and (max-width: 1199px)";
-$md: "only screen and (min-width: 768px) and (max-width: 991px)";
-$sm: "only screen and (min-width: 576px) and (max-width: 767px)";
-$xs: "(max-width: 575px)";
+$xxxl: 'only screen and (min-width: 1600px) and (max-width: 1800px)';
+$xxl: 'only screen and (min-width: 1400px) and (max-width: 1599px)';
+$xl: 'only screen and (min-width: 1200px) and (max-width: 1399px)';
+$lg: 'only screen and (min-width: 992px) and (max-width: 1199px)';
+$md: 'only screen and (min-width: 768px) and (max-width: 991px)';
+$sm: 'only screen and (min-width: 576px) and (max-width: 767px)';
+$xs: '(max-width: 575px)';
 
 .mission-image {
   height: 100%;
@@ -521,7 +521,7 @@ $xs: "(max-width: 575px)";
   }
 }
 
-.breadcrumb-home{
+.breadcrumb-home {
   max-width: max-content;
 }
 

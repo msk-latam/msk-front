@@ -1,9 +1,9 @@
-"use client";
-import React, { FC, useEffect, useState } from "react";
-import BackgroundSection from "@/components/BackgroundSection/BackgroundSection";
-import api from "@/services/api";
-import { SinglePageType } from "./PageMission";
-import SectionSliderPosts from "@/components/Sections/SectionSliderPosts";
+'use client';
+import React, { FC, useEffect, useState } from 'react';
+import BackgroundSection from '@/components/BackgroundSection/BackgroundSection';
+import api from '@/services/api';
+import { SinglePageType } from './PageMission';
+import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
 
 export interface SingleContentProps {
   data: SinglePageType;
@@ -21,15 +21,15 @@ const SingleContent: FC<SingleContentProps> = ({ data }) => {
   }, []);
 
   return (
-    <div className="nc-SingleContent space-y-10">
+    <div className='nc-SingleContent space-y-10'>
       {/* ENTRY CONTENT */}
       <div
-        id="single-entry-content"
-        className="prose lg:prose-lg !max-w-screen-md mx-auto dark:prose-invert"
+        id='single-entry-content'
+        className='prose lg:prose-lg !max-w-screen-md mx-auto dark:prose-invert'
       >
-        <p className="font-lora text-xl">
-          Medical & Scientific Knowledge{" "}
-          <strong className="font-lora-italic">
+        <p className='font-lora text-xl'>
+          Medical & Scientific Knowledge{' '}
+          <strong className='font-lora-italic'>
             es una propuesta moderna que desafía a expandir las metas
             profesionales
           </strong>
@@ -38,40 +38,40 @@ const SingleContent: FC<SingleContentProps> = ({ data }) => {
           aprendizaje a distancia del personal de la salud hispanoparlante, con
           orientación hacia los resultados y el éxito profesional.
         </p>
-        <p className="font-lora  text-xl">
+        <p className='font-lora  text-xl'>
           Nuestro método de capacitación es flexible: brindamos distintos
           formatos de contenidos de nivel académico, entre los que se incluyen
           guías profesionales y webinars. Además, contamos con el respaldo de
           grandes instituciones de todo el mundo que certifican nuestros cursos.
         </p>
-        <img src="/images/misc/woman_pc.png" alt="" />
-        <p className="font-lora text-xl">
-          Quienes hacemos Medical & Scientific Knowledge{" "}
-          <strong className="font-lora-italic">
+        <img src='/webp-images/misc/woman_pc.webp' alt='Doctor on PC' />
+        <p className='font-lora text-xl'>
+          Quienes hacemos Medical & Scientific Knowledge{' '}
+          <strong className='font-lora-italic'>
             queremos acompañar y ayudar a cada persona en un camino de retos y
             crecimiento laboral.
-          </strong>{" "}
+          </strong>{' '}
           Todos los cursos que ofrecemos están desarrollados por sellos,
           instituciones y autores de prestigio. La capacitación se realiza en un
           campus virtual práctico y cada profesional tendrá el apoyo y la
           asesoría permanente de nuestros agentes académicos.
         </p>
-        <p className="font-lora text-xl text-[#392C35]">
+        <p className='font-lora text-xl text-[#392C35]'>
           ¿Te gustaría alcanzar nuevos objetivos y obtener un mayor
           reconocimiento en tu profesión?
         </p>
       </div>
-      <div className="max-w-[1700px] mx-auto">
-        <div className="relative py-16 my-32">
+      <div className='max-w-[1700px] mx-auto'>
+        <div className='relative py-16 my-32'>
           <BackgroundSection />
-          <SectionSliderPosts
-            postCardName="card9"
-            heading="Comienza tu experiencia aquí"
-            subHeading="Estos son los cursos más elegidos entre profesionales de la salud"
-            sliderStype="style2"
+          <SectionSliderBestSellers
+            postCardName='card9'
+            heading='Comienza tu experiencia aquí'
+            subHeading='Estos son los cursos más elegidos entre profesionales de la salud'
+            sliderStype='style2'
             posts={courses}
-            uniqueSliderClass="pageHome-section6"
-            className="mx-auto max-w-[85%]"
+            uniqueSliderClass='pageHome-section6'
+            className='mx-auto max-w-[85%]'
           />
         </div>
       </div>

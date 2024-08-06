@@ -1,7 +1,31 @@
-const withNextIntl = require("next-intl/plugin")("./i18n.ts");
+const withNextIntl = require('next-intl/plugin')('./i18n.ts');
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+  async headers() {
+    return [
+      {
+        // matching all API routes
+        // https://vercel.com/guides/how-to-enable-cors
+        source: '/api/:path*',
+        headers: [
+          // { key: 'Access-Control-Allow-Credentials', value: 'true' },
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*',
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: '*',
+          },
+        ],
+      },
+    ];
+  },
   // These are all the locales you want to support in
   // your application
   //output: 'export', //For static site (loses SSR cappabilites)
@@ -18,34 +42,34 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "images.pexels.com",
-        port: "",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'images.pexels.com',
+        port: '',
+        pathname: '/**',
       },
       {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-        port: "",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/**',
       },
       {
-        protocol: "https",
-        hostname: "wp.msklatam.com",
-        port: "",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'wp.msklatam.com',
+        port: '',
+        pathname: '/**',
       },
       {
-        protocol: "https",
-        hostname: "secure.gravatar.com",
-        port: "",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'secure.gravatar.com',
+        port: '',
+        pathname: '/**',
       },
       {
-        protocol: "https",
-        hostname: "dev.msklatam.tech",
-        port: "",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'dev.msklatam.tech',
+        port: '',
+        pathname: '/**',
       },
     ],
   },

@@ -1,24 +1,23 @@
-"use client";
-import AccountCourses from "@/components/MSK/account/AccountCourses";
-import { ComponentType, FC, useContext, useEffect, useState } from "react";
-import { User, UserCourseProgress } from "@/data/types";
-import { AuthContext } from "@/context/user/AuthContext";
-import api from "@/services/api";
-import { getUserCourses } from "@/services/user";
-import TableSkeleton from "@/components/Skeleton/TableSkeleton";
-import {CountryContext} from "@/context/country/CountryContext";
-import ssr from "@/services/ssr";
+'use client';
+import AccountCourses from '@/components/MSK/account/AccountCourses';
+import { ComponentType, FC, useContext, useEffect, useState } from 'react';
+import { User, UserCourseProgress } from '@/data/types';
+import { AuthContext } from '@/context/user/AuthContext';
+import { getUserCourses } from '@/services/user';
+import TableSkeleton from '@/components/Skeleton/TableSkeleton';
+import { CountryContext } from '@/context/country/CountryContext';
+import ssr from '@/services/ssr';
 
 export interface PageDashboardProps {
   className?: string;
 }
 
 interface DashboardLocationState {
-  "/inicio"?: {};
-  "/cursos"?: {};
-  "/perfil"?: {};
-  "/metodo-pego"?: {};
-  "/cerrar-sesion"?: {};
+  '/inicio'?: {};
+  '/cursos'?: {};
+  '/perfil'?: {};
+  '/metodo-pego'?: {};
+  '/cerrar-sesion'?: {};
 }
 
 interface DashboardPage {
@@ -29,8 +28,7 @@ interface DashboardPage {
   pageName: string;
 }
 
-const PageDashboard: FC<PageDashboardProps> = ({ className = "" }) => {
-
+const PageDashboard: FC<PageDashboardProps> = ({ className = '' }) => {
   const { state, dispatch } = useContext(AuthContext);
   const [user, setUser] = useState<User>({} as User);
   const { countryState: countryState } = useContext(CountryContext);
@@ -45,12 +43,12 @@ const PageDashboard: FC<PageDashboardProps> = ({ className = "" }) => {
   const fetchUser = async () => {
     setLoading(true);
     const res = await ssr.getUserData();
-    const coursesList = await ssr.getAllCourses(countryState.country);
+    const coursesList = await ssr.getAllCourses(countryState.country, '', true);
     if (!res.message) {
-      if (!res.contact.state) res.contact.state = "";
+      if (!res.contact.state) res.contact.state = '';
       setUser(res);
       dispatch({
-        type: "FRESH",
+        type: 'FRESH',
         payload: {
           user: { name: res.name, speciality: res.contact.speciality },
         },
@@ -66,7 +64,7 @@ const PageDashboard: FC<PageDashboardProps> = ({ className = "" }) => {
   return (
     <div
       className={`nc-PageDashboard animate-fade-down ${className}`}
-      data-nc-id="PageDashboard"
+      data-nc-id='PageDashboard'
     >
       {isLoading ? (
         <TableSkeleton />

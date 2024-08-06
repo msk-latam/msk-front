@@ -1,18 +1,16 @@
-"use client";
-import React, {useContext, useEffect, useReducer, useState} from "react";
-import { DataContext } from "./DataContext";
-import { dataReducer } from "./DataReducer";
-import api from "@/services/api";
-import { CountryContext } from "@/context/country/CountryContext";
-import ssr from "@/services/ssr";
-
+'use client';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
+import { DataContext } from './DataContext';
+import { dataReducer } from './DataReducer';
+import api from '@/services/api';
+import { CountryContext } from '@/context/country/CountryContext';
+import ssr from '@/services/ssr';
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const DataProvider: React.FC<Props> = ({ children }) => {
-
   const { countryState } = useContext(CountryContext);
 
   const [loadingCourses, setLoadingCourses] = useState(true);
@@ -24,6 +22,7 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
 
   const dataInitialState = {
     allCourses: [],
+    storeCourses: [],
     allPosts: [],
     allTestCourses: [],
     allBestSellers: [],
@@ -37,10 +36,20 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(dataReducer, dataInitialState);
 
   const fetchAllCourses = async () => {
-    const allCourses = await ssr.getAllCourses(countryState.country,'',true);
+    const allCourses = await ssr.getAllCourses(countryState.country, '', true);
     dispatch({
-      type: "GET_DATA",
+      type: 'GET_DATA',
       payload: { allCourses },
+    });
+    setLoadingCourses(false);
+  };
+
+  const fetchStoreCourses = async () => {
+    const storeCourses = await ssr.getStoreCourses(countryState.country);
+
+    dispatch({
+      type: 'GET_STORE_DATA',
+      payload: { storeCourses },
     });
     setLoadingCourses(false);
   };
@@ -49,7 +58,7 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
     try {
       const allPosts = await api.getPosts();
       dispatch({
-        type: "GET_DATA",
+        type: 'GET_DATA',
         payload: { allPosts },
       });
       setLoadingPosts(false);
@@ -62,7 +71,7 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
     try {
       const allBestSellers = await api.getBestSellers();
       dispatch({
-        type: "GET_DATA",
+        type: 'GET_DATA',
         payload: { allBestSellers },
       });
       setLoadingBestSellers(false);
@@ -73,14 +82,15 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
 
   const fetchProfessions = async () => {
     try {
-      const allProfessions = await api.getProfessions();
+      const allProfessions = await ssr.getProfessions();
+      //console.log({ allProfessions });
       dispatch({
-        type: "GET_DATA",
+        type: 'GET_DATA',
         payload: { allProfessions },
       });
       setLoadingProfessions(false);
     } catch (e) {
-      console.error({ e });
+      console.error('fetchProfessions', { e });
     }
   };
 
@@ -88,7 +98,7 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
     try {
       const allStoreProfessions = await api.getStoreProfessions();
       dispatch({
-        type: "GET_DATA",
+        type: 'GET_DATA',
         payload: { allStoreProfessions },
       });
       setLoadingProfessions(false);
@@ -99,13 +109,13 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
 
   const fetchSpecialties = async () => {
     try {
-      const allSpecialties = await api.getSpecialtiesAndGroups();
+      const allSpecialties = await ssr.getSpecialtiesAndGroups();
       dispatch({
-        type: "GET_DATA",
+        type: 'GET_DATA',
         payload: { allSpecialtiesGroups: allSpecialties.specialities_group },
       });
       dispatch({
-        type: "GET_DATA",
+        type: 'GET_DATA',
         payload: { allSpecialties: allSpecialties.specialities },
       });
       setLoadingSpecialties(false);
@@ -115,14 +125,13 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
   };
 
   useEffect(() => {
-    // fetchProductsMX();
-    // fetchCourses();
     // fetchPosts();
     fetchBestSeller();
     fetchProfessions();
     fetchStoreProfessions();
     fetchSpecialties();
     fetchAllCourses();
+    fetchStoreCourses();
   }, []);
 
   return (
