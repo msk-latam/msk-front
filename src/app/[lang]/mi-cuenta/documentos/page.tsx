@@ -5,6 +5,11 @@ import { AuthContext } from '@/context/user/AuthContext';
 import { User } from '@/data/types';
 import ssr from '@/services/ssr';
 import { FC, useContext, useEffect, useState } from 'react';
+import { StatusCardProps } from './StatusCard';
+
+import ButtonPrimary from '@/components/Button/ButtonPrimary';
+import DocumentStatusSection from './DocumentStatusSection';
+import PageDocumentosHeader from './PageDocumentosHeader';
 
 const pageDocumentos: FC = () => {
   const { state, dispatch } = useContext(AuthContext);
@@ -37,7 +42,10 @@ const pageDocumentos: FC = () => {
 
   return (
     <>
-      <div>hola</div>
+      <div className='p-6 '>
+        <PageDocumentosHeader />
+        <DocumentStatusSection />
+      </div>
     </>
   );
 };
