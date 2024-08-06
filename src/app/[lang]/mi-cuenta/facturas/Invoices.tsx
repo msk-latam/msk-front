@@ -25,7 +25,7 @@ const Invoices: React.FC<InvoicesProps> = ({ data }) => {
 
     const formatter = new Intl.NumberFormat('es-CL', {
       style: 'currency',
-      currency: currency,
+      currency: 'CLP',
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
