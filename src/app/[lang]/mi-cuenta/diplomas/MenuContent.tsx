@@ -72,38 +72,43 @@ const MenuContent = forwardRef<HTMLDivElement, MenuContentProps>(
           document.removeEventListener('click', closePopupOnClickOutside);
         };
 
-        if (fileExtension === 'pdf') {
-          if (popupWindow) {
-            const encodedUrl = encodeURIComponent(badgeUrl);
-            const viewerUrl = `https://docs.google.com/viewer?url=${encodedUrl}&embedded=true`;
-            popupWindow.document.write(`
-              <html>
-                <head>
-                  <title>Vista de PDF</title>
-                </head>
-                <body>
-                  <iframe src="${viewerUrl}" style="width:100%; height:100%;" frameborder="0"></iframe>
-                </body>
-              </html>
-            `);
-            popupWindow.onbeforeunload = cleanUp;
-            popupWindow.document.close();
+        try {
+          if (fileExtension === 'pdf') {
+            if (popupWindow) {
+              const encodedUrl = encodeURIComponent(badgeUrl);
+              const viewerUrl = `https://docs.google.com/viewer?url=${encodedUrl}&embedded=true`;
+              popupWindow.document.write(`
+                <html>
+                  <head>
+                    <title>Vista de PDF</title>
+                  </head>
+                  <body>
+                    <iframe src="${viewerUrl}" style="width:100%; height:100%;" frameborder="0"></iframe>
+                  </body>
+                </html>
+              `);
+              popupWindow.document.close();
+            }
+          } else if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
+            if (popupWindow) {
+              popupWindow.document.write(`
+                <html>
+                  <head>
+                    <title>Vista de Imagen</title>
+                  </head>
+                  <body>
+                    <img src="${badgeUrl}" alt="Badge" style="width:100%; height:100%;" />
+                  </body>
+                </html>
+              `);
+              popupWindow.document.close();
+            }
           }
-        } else if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
+        } finally {
           if (popupWindow) {
-            popupWindow.document.write(`
-              <html>
-                <head>
-                  <title>Vista de Imagen</title>
-                </head>
-                <body>
-                  <img src="${badgeUrl}" alt="Badge" style="width:100%; height:100%;" />
-                </body>
-              </html>
-            `);
             popupWindow.onbeforeunload = cleanUp;
-            popupWindow.document.close();
           }
+          cleanUp();
         }
       }
       closeMenu();

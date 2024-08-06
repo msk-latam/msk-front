@@ -15,7 +15,8 @@ const CourseList: React.FC<CourseListProps> = ({ courses, user }) => {
       progress => progress.Product_Code === course.product_code,
     );
 
-    const cards = [];
+    const cards: any[] = [];
+
     if (courseProgress?.Diploma) {
       cards.push(
         <CourseCard
@@ -35,6 +36,7 @@ const CourseList: React.FC<CourseListProps> = ({ courses, user }) => {
           user={user}
         />,
       );
+      console.log(courseProgress);
     }
     return cards;
   });

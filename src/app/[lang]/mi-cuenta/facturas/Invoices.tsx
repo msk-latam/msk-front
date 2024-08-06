@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ButtonPrimary from '@/components/Button/ButtonPrimary';
 
 export interface Invoice {
@@ -14,6 +14,7 @@ interface InvoicesProps {
 }
 
 const Invoices: React.FC<InvoicesProps> = ({ data }) => {
+  const [loadingInvoice, setLoadingInvoice] = useState<string | null>(null);
   function formatCurrency(
     currency: string | null | undefined,
     amount: number | null | undefined,
@@ -22,7 +23,6 @@ const Invoices: React.FC<InvoicesProps> = ({ data }) => {
       return 'Sin Datos';
     }
 
-    // Formatea el número
     const formatter = new Intl.NumberFormat('es-CL', {
       style: 'currency',
       currency: currency,
@@ -30,7 +30,6 @@ const Invoices: React.FC<InvoicesProps> = ({ data }) => {
       maximumFractionDigits: 2,
     });
 
-    // Devuelve el formato deseado
     return formatter.format(amount);
   }
 
@@ -42,6 +41,14 @@ const Invoices: React.FC<InvoicesProps> = ({ data }) => {
     const [year, month, day] = dateString.split('-');
     return `${day}/${month}/${year}`;
   }
+
+  const handleDownloadClick = (href: string) => {
+    setLoadingInvoice(href);
+    setTimeout(() => {
+      window.location.href = href;
+      setLoadingInvoice(null);
+    }, 2000);
+  };
 
   return (
     <>
@@ -83,7 +90,13 @@ const Invoices: React.FC<InvoicesProps> = ({ data }) => {
                     {invoice.Comprobante_Factura ? (
                       <ButtonPrimary
                         className='!h-8'
-                        href={invoice.Comprobante_Factura}
+                        onClick={() =>
+                          handleDownloadClick(invoice.Comprobante_Factura)
+                        }
+                        loading={loadingInvoice === invoice.Comprobante_Factura}
+                        disabled={
+                          loadingInvoice === invoice.Comprobante_Factura
+                        }
                       >
                         Descargar Factura
                       </ButtonPrimary>
@@ -129,12 +142,20 @@ const Invoices: React.FC<InvoicesProps> = ({ data }) => {
               </span>
             </div>
             <div className='mt-2'>
-              <ButtonPrimary
-                className='!h-8 w-full'
-                href={invoice.Comprobante_Factura}
-              >
-                Descargar Factura
-              </ButtonPrimary>
+              {invoice.Comprobante_Factura ? (
+                <ButtonPrimary
+                  className='!h-8 w-full'
+                  onClick={() =>
+                    handleDownloadClick(invoice.Comprobante_Factura)
+                  }
+                  loading={loadingInvoice === invoice.Comprobante_Factura}
+                  disabled={loadingInvoice === invoice.Comprobante_Factura}
+                >
+                  Descargar Factura
+                </ButtonPrimary>
+              ) : (
+                <span className='font-bold'>Sin Factura</span>
+              )}
             </div>
           </div>
         ))}
