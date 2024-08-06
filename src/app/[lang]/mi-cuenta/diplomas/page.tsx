@@ -8,6 +8,8 @@ import { FC, useContext, useEffect, useState } from 'react';
 import LoadingComponent from './LoadingComponent';
 import NoContent from './NoContent';
 import CourseList from './CourseList';
+import PageDocumentosHeader from '../documentos/PageDocumentosHeader';
+import DocumentStatusSection from '../documentos/DocumentStatusSection';
 
 const pageDiplomas: FC = () => {
   const { state, dispatch } = useContext(AuthContext);
@@ -52,6 +54,10 @@ const pageDiplomas: FC = () => {
         ) : (
           <CourseList courses={courses} user={user} />
         )}
+        <div className='mt-6'>
+          <PageDocumentosHeader />
+          <DocumentStatusSection />
+        </div>
       </div>
     </>
   );
