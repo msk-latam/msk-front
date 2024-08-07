@@ -27,45 +27,126 @@ const MenuContent = forwardRef<HTMLDivElement, MenuContentProps>(
         ? courseProgress?.Certificado
         : '';
     };
+    const badgeUrl = getBadgeUrl();
 
     const handleClickLinkedin = () => {
-      const url = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
-        window.location.href,
-      )}&title=${encodeURIComponent(course.title)}&summary=${encodeURIComponent(
-        'Check out this course!',
-      )}&source=${encodeURIComponent('YourWebsite')}`;
-      window.open(url, '_blank');
+      const title = encodeURIComponent(course.title);
+      const summary = encodeURIComponent('Check out this course!');
+      const source = encodeURIComponent('YourWebsite');
+
+      const linkedinShareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
+        badgeUrl,
+      )}&title=${title}&summary=${summary}&source=${source}`;
+
+      window.open(linkedinShareUrl, '_blank');
       closeMenu();
     };
 
     const handleClickVer = () => {
-      const badgeUrl = getBadgeUrl();
       if (badgeUrl) {
-        window.open(badgeUrl, '_blank');
+        const fileExtension = badgeUrl.split('.').pop().toLowerCase();
+        const popupWindow = window.open(
+          '',
+          '_blank',
+          'width=800,height=600,scrollbars=no,resizable=no',
+        );
+        document.body.classList.add('blur-sm', 'pointer-events-none');
+
+        const removeBlur = () => {
+          document.body.classList.remove('blur-sm', 'pointer-events-none');
+        };
+        const closePopupOnClickOutside = (event: any) => {
+          if (
+            popupWindow &&
+            !popupWindow.closed &&
+            event.target !== popupWindow
+          ) {
+            popupWindow.close();
+          }
+        };
+
+        document.addEventListener('click', closePopupOnClickOutside);
+
+        const cleanUp = () => {
+          removeBlur();
+          document.removeEventListener('click', closePopupOnClickOutside);
+        };
+
+        try {
+          if (fileExtension === 'pdf') {
+            if (popupWindow) {
+              const encodedUrl = encodeURIComponent(badgeUrl);
+              const viewerUrl = `https://docs.google.com/viewer?url=${encodedUrl}&embedded=true`;
+              popupWindow.document.write(`
+                <html>
+                  <head>
+                    <title>Vista de PDF</title>
+                  </head>
+                  <body>
+                    <iframe src="${viewerUrl}" style="width:100%; height:100%;" frameborder="0"></iframe>
+                  </body>
+                </html>
+              `);
+              popupWindow.document.close();
+            }
+          } else if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
+            if (popupWindow) {
+              popupWindow.document.write(`
+                <html>
+                  <head>
+                    <title>Vista de Imagen</title>
+                  </head>
+                  <body>
+                    <img src="${badgeUrl}" alt="Badge" style="width:100%; height:100%;" />
+                  </body>
+                </html>
+              `);
+              popupWindow.document.close();
+            }
+          }
+        } finally {
+          if (popupWindow) {
+            popupWindow.onbeforeunload = cleanUp;
+          }
+          cleanUp();
+        }
       }
       closeMenu();
     };
 
     const handleClickDownload = async () => {
-      const diplomaUrl = courseProgress?.Diploma;
-      if (diplomaUrl) {
+      if (badgeUrl) {
+        console.log('Badge URL:', badgeUrl);
         try {
-          const response = await fetch(diplomaUrl, { mode: 'no-cors' });
+          const response = await fetch(badgeUrl, { mode: 'cors' });
+          console.log('Fetch response:', response);
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+
           const blob = await response.blob();
+          console.log('Blob size:', blob.size);
+
+          const fileExtension = badgeUrl.split('.').pop().toLowerCase();
+          const fileName = `${badgeType}_${course.title.replace(
+            /[^a-z0-9]/gi,
+            '_',
+          )}.${fileExtension}`;
+          console.log('File name:', fileName);
+
           const url = window.URL.createObjectURL(blob);
           const link = document.createElement('a');
           link.href = url;
-          link.download = `${badgeType}_${course.title.replace(
-            /[^a-z0-9]/gi,
-            '_',
-          )}.jpg`;
+          link.download = fileName;
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
           window.URL.revokeObjectURL(url);
         } catch (error) {
-          console.error('Error downloading the image:', error);
+          console.error('Error downloading the file:', error);
         }
+      } else {
+        console.error('No badge URL found');
       }
       closeMenu();
     };
