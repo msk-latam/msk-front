@@ -7,7 +7,7 @@ export const GET = async (req: Request) => {
 
   try {
     const response = await fetch(
-      `https://wp.msklatam.com/wp-json/wp/api/products?limit=-1&filter=all&country=${countryParam}&type=course`,
+      `https://wp.msklatam.com/wp-json/wp/api/products?limit=-1&filter=all&country=${countryParam}&vp`,
     );
 
     if (!response.ok) {

@@ -18,6 +18,7 @@ interface DashboardLocationState {
   '/perfil'?: {};
   '/facturas'?: {};
   '/diplomas'?: {};
+  '/documentos'?: {};
   '/metodo-pego'?: {};
   '/cerrar-sesion'?: {};
 }
@@ -63,16 +64,21 @@ const PageDashboard: FC<PageDashboardProps> = ({
       icon: 'personal-data',
       pageName: 'Datos personales',
     },
-    /*  {
+    {
       sPath: '/facturas',
       icon: 'factura',
       pageName: 'Mis Facturas',
     },
-    {
-      sPath: '/diplomas',
-      icon: 'certydip',
-      pageName: 'Diplomas y Certificaciones',
-    }, */
+    // {
+    //   sPath: '/documentos',
+    //   icon: 'factura',
+    //   pageName: 'Mis Documentos',
+    // },
+    // {
+    //   sPath: '/diplomas',
+    //   icon: 'certydip',
+    //   pageName: 'Diplomas y Certificaciones',
+    // },
   ];
 
   const navClassName =

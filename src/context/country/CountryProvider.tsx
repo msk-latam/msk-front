@@ -84,7 +84,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
               redirectUrl = '/' + currentCountry + window.location.pathname;
             }
             // console.log("redirectUrl1: " + redirectUrl);
-            if (getCountryFromURL() != "") {
+            if (getCountryFromURL() != '') {
               console.log(window.location.search);
               redirectUrl = window.location.href
                 .replace(
@@ -141,10 +141,8 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 
   return (
     <CountryContext.Provider value={{ countryState, dispatch }}>
-
       {loading ? <Loading /> : children}
       {/* {children} */}
-
     </CountryContext.Provider>
   );
 };

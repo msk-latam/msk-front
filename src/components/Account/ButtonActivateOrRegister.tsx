@@ -1,4 +1,6 @@
-import { FC } from 'react';
+
+import { FC, useEffect } from 'react';
+
 import { useRouter } from 'next/navigation';
 import { hasText } from '@/lib/account';
 
@@ -8,7 +10,9 @@ interface ButtonActivateOrRegisterProps {
   whenActivate: boolean;
   status: string;
   productSlug: string | undefined;
+
   isPreventa: boolean;
+
 }
 
 const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({
@@ -17,6 +21,7 @@ const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({
   whenActivate,
   status,
   productSlug,
+
   isPreventa,
 }) => {
   const router = useRouter();
@@ -36,6 +41,7 @@ const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({
   if (isPreventa) {
     return disabledRender();
   }
+
 
   return (
     <>
