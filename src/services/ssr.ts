@@ -115,8 +115,15 @@ class ApiSSRService {
       ? `&country=${country}`
       : '&country=int';
 
+    const tagParam = new URLSearchParams(window.location.search).get('tag');
+    let tag = '';
+    if (tagParam) {
+      tag = `&tag=${tagParam}`;
+    }
+    console.log('tag2', tag);
+
     try {
-      const queryParams = [countryParam].filter(Boolean).join('');
+      const queryParams = [countryParam, tag].filter(Boolean).join('');
       // console.log(`${API_URL}/products?limit=-1${queryParams}`);
 
       const response = await fetch(
