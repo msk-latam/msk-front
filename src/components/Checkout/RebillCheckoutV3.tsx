@@ -6,11 +6,9 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import InputSkeleton from '@/components/Skeleton/InputSkeleton';
 import Image from 'next/image';
 import rbImg from '/public/images/rebill.svg';
 import TextSkeleton from '@/components/Skeleton/TextSkeleton';
-import { getRebillInitialization, initRebill } from '@/logic/Rebill';
 import { AuthContext } from '@/context/user/AuthContext';
 import { FetchSingleProduct } from '@/data/types';
 import { initRebillV3 } from '@/logic/RebillV3';
