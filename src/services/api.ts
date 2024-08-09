@@ -32,6 +32,7 @@ const apiEnrollCourse = `${baseUrl}/api/course/enroll`;
 const apiEnrollCourseStatus = `${baseUrl}/api/coursesProgress`;
 const apiCreateTrialContract = `${baseUrl}/api/crm/contracts/trial`;
 const apiCancelTrialContract = `${baseUrl}/api/crm/contracts/trial/cancel`;
+
 const apiCreateTrialMPContract = `${baseUrl}/api/gateway/api/mercadopago/payment/trial`;
 
 class ApiService {
@@ -829,6 +830,7 @@ class ApiService {
   }
 
   async cancelTrialCourse(product: any, authState: AuthState) {
+    // const apiCancelTrialContractRebill = ;
     try {
       const response = await fetch(apiCancelTrialContract, {
         method: 'POST',
@@ -847,7 +849,33 @@ class ApiService {
           `Failed to cancel trial course. HTTP status ${response.status}`,
         );
       }
+      if (!authState?.profile?.trial_course_sites) {
+        throw new Error('No trial course sites available in authState');
+      }
 
+      const contractSite = authState.profile.trial_course_sites.find(
+        (site: any) => site.contractJson,
+      );
+
+      if (!contractSite) {
+        throw new Error('No contractJson found in trial_course_sites');
+      }
+
+      const parsedContract = JSON.parse(contractSite.contractJson);
+      const trial_id = parsedContract.data[0].trial_id;
+      const country = parsedContract.data[0].Pais_de_facturaci_n;
+      const cancelRebill = await fetch(
+        `https://payment.msklatam.net/api/trial/cancel/rebill/${trial_id}/${country}`,
+
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+        },
+      );
+      console.log(cancelRebill);
       const data = await response.json();
       return data;
     } catch (error) {
