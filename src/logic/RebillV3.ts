@@ -173,7 +173,6 @@ const getPlanV3 = (country: string) => {
   )
     ? 'REBILL'
     : null;
-
   const isDeprecateRebillMP = isDeprecateRebill
     ? country === 'ar'
       ? 'MP'
