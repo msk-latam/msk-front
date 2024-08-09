@@ -10,6 +10,7 @@ export interface DataAction {
 export interface DataState {
   allCourses: any;
   storeCourses: any;
+  tagCourses: any;
   allPosts: any;
   allBestSellers: any;
   allProfessions: any;
@@ -32,6 +33,7 @@ export const DataContext = createContext<{
   state: {
     allCourses: [],
     storeCourses: [],
+    tagCourses: [],
     allPosts: [],
     allBestSellers: [],
     allProfessions: [],

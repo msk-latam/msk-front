@@ -3,7 +3,7 @@ import { FC, useContext, useEffect, useRef, useState } from 'react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import installmentsMapping from '@/data/jsons/__countryInstallments.json';
 import { JsonInstallmentsMapping } from '@/data/types';
-import { useParams } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { CountryContext } from '@/context/country/CountryContext';
 import useRequestedTrialCourse from '@/hooks/useRequestedTrialCourse';
 import TrialInfo from '@/components/Trial/TrialInfo';
@@ -16,7 +16,7 @@ import { AuthContext } from '@/context/user/AuthContext';
 import ssr from '@/services/ssr';
 import RebillCheckout from '@/components/Checkout/RebillCheckout';
 import MercadoPagoCheckout from '@/components/Checkout/MercadoPagoCheckout';
-import Script from 'next/script';
+import RebillCheckoutV3 from '@/components/Checkout/RebillCheckoutV3';
 
 export interface PageTrialSuscribeProps {
   className?: string;
@@ -44,6 +44,7 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
   const [installmentAmount, setInstallmentAmount] = useState(0);
 
   const { executeRecaptcha } = useGoogleReCaptcha();
+  const router = useRouter();
 
   let gateway: null | string = null;
   if (installmentsJSON && country && installmentsJSON[country]) {
@@ -85,17 +86,38 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const profile = AuthState.profile;
-      console.log('Profile Effect', { profile });
+      console.group('ProfileEffect');
+      console.log({ profile, AuthState });
 
       const fetchProfile = async () => {
         const res = await ssr.getUserData();
-        // console.log(res)
-        dispatch({ type: 'UPDATE_PROFILE', payload: { profile: res.contact } });
+        console.log({ res });
+
+        if (res === undefined) {
+          router.push('/');
+        } else {
+          dispatch({
+            type: 'UPDATE_PROFILE',
+            payload: { profile: res.contact },
+          });
+        }
       };
 
-      if (profile == null || typeof AuthState === 'undefined') {
+      console.log(
+        typeof AuthState === 'undefined' ||
+          AuthState.isAuthenticated === null ||
+          profile === null,
+        { AuthState, profile },
+      );
+
+      if (
+        typeof AuthState === 'undefined' ||
+        AuthState.isAuthenticated === null ||
+        profile === null
+      ) {
         fetchProfile();
       }
+      console.groupEnd();
     }
   }, [AuthState.profile]);
 
@@ -104,7 +126,7 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
     switch (gateway) {
       case 'REBILL':
         return (
-          <RebillCheckout
+          <RebillCheckoutV3
             product={product}
             hasCoursedRequested={hasCoursedRequested}
             country={country}
@@ -133,7 +155,7 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
       // return <StripePaymentForm payment={invoiceDetail} currency={currencyOptions.currency} />;
       default:
         return (
-          <RebillCheckout
+          <RebillCheckoutV3
             product={product}
             hasCoursedRequested={hasCoursedRequested}
             country={country}
@@ -149,13 +171,13 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
 
   return (
     <div ref={viewRef} className='nc-PageSuscribe relative animate-fade-down'>
-      <Script
+      {/* <Script
         strategy='afterInteractive'
         src='https://sdk.rebill.to/v2/rebill.min.js'
         onLoad={e => {
           console.log('Rebill script loaded', { e });
         }}
-      />
+      /> */}
       <div className='relative overflow-hidden'>
         <div className='container grid grid-cols-1 lg:grid-cols-[60%_40%] gap-5 my-24'>
           <TrialInfo

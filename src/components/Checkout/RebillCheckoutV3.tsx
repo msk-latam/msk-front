@@ -1,4 +1,3 @@
-'use client';
 import React, {
   Dispatch,
   FC,
@@ -14,8 +13,9 @@ import TextSkeleton from '@/components/Skeleton/TextSkeleton';
 import { getRebillInitialization, initRebill } from '@/logic/Rebill';
 import { AuthContext } from '@/context/user/AuthContext';
 import { FetchSingleProduct } from '@/data/types';
+import { initRebillV3 } from '@/logic/RebillV3';
 
-interface RebillCheckoutProps {
+interface RebillCheckoutV3Props {
   product: FetchSingleProduct | undefined;
   hasCoursedRequested: boolean;
   country: string;
@@ -29,7 +29,7 @@ interface RebillCheckoutProps {
   };
 }
 
-const RebillCheckout: FC<RebillCheckoutProps> = ({
+const RebillCheckoutV3: FC<RebillCheckoutV3Props> = ({
   product,
   hasCoursedRequested,
   country,
@@ -46,12 +46,6 @@ const RebillCheckout: FC<RebillCheckoutProps> = ({
     if (typeof window !== 'undefined') {
       console.log('WINDOW', { window }, window.Rebill);
       if (typeof window.Rebill !== 'undefined') {
-        const initialization = getRebillInitialization(country);
-
-        console.log({ initialization });
-
-        let RebillSDKCheckout = new window.Rebill.PhantomSDK(initialization);
-
         const verifiedCoursedRequested =
           hasCoursedRequested != null && !hasCoursedRequested;
         const verifiedProductAndProfile =
@@ -66,19 +60,18 @@ const RebillCheckout: FC<RebillCheckoutProps> = ({
           !showMissingData
         ) {
           setInitedRebill(true);
-          console.group('Rebill');
+          console.group('RebillV3');
           localStorage.removeItem('trialURL');
-          //console.log({user: AuthState, country, product, RebillSDKCheckout, setShow, setFaliedMessage, setPaymentCorrect, setMountedInput})
-          initRebill(
-            AuthState,
-            country,
-            product,
-            RebillSDKCheckout,
-            setShow,
-            setFaliedMessage,
-            setPaymentCorrect,
-            mountedInputObjectState.setState,
-          );
+          console.log({ user: AuthState });
+
+          try {
+            initRebillV3(AuthState.email, country);
+            mountedInputObjectState.setState(true);
+          } catch (err) {
+            console.log(err);
+            mountedInputObjectState.setState(false);
+          }
+
           console.groupEnd();
         }
       }
@@ -87,13 +80,10 @@ const RebillCheckout: FC<RebillCheckoutProps> = ({
 
   return (
     <>
-      <div
-        id='rebill_elements'
-        className='flex items-center justify-center h-auto'
-      >
-        {mountedInputObjectState.state && (
+      <div id='rebill' className='flex items-center justify-center h-auto'>
+        {/*  {mountedInputObjectState.state && (
           <InputSkeleton className='w-[390px]' />
-        )}
+        )} */}
       </div>
 
       {mountedInputObjectState.state ? (
@@ -109,4 +99,4 @@ const RebillCheckout: FC<RebillCheckoutProps> = ({
   );
 };
 
-export default RebillCheckout;
+export default RebillCheckoutV3;

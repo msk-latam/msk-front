@@ -476,7 +476,7 @@ class ApiSSRService {
       } catch (error) {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        // console.log({error});
+        console.log({ error });
       }
     }
   }

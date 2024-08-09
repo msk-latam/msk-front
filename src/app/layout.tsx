@@ -69,6 +69,9 @@ export default async function RootLayout({ params, children }: LayoutProps) {
     <html lang='es' className={poppins.className + ' ' + loraItalic.variable}>
       <GoogleTagManager gtmId='GTM-NZ95R2P' />
       <EmblueScript />
+      {/* <script src='https://sdk.rebill.com/v2/rebill.min.js'></script> */}
+      <script src='https://sdk.rebill.com/v3/rebill.js'></script>
+
       <body>
         <div className='bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200'>
           <GoogleCaptchaWrapper>
