@@ -61,7 +61,7 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
     showMissingData,
     setShowAlreadyRequest,
     setShowMissingData,
-  } = useRequestedTrialCourse(product);
+  } = useRequestedTrialCourse(product, AuthState);
 
   useEffect(() => {
     if (installmentsJSON && country && installmentsJSON[country]) {
