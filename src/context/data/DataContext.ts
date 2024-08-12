@@ -1,7 +1,7 @@
-import { createContext, Dispatch } from "react";
+import { createContext, Dispatch } from 'react';
 
 export interface DataAction {
-  type: "GET_DATA";
+  type: 'GET_DATA' | 'GET_STORE_DATA';
   payload: {
     [key: string]: any;
   };
@@ -9,6 +9,7 @@ export interface DataAction {
 
 export interface DataState {
   allCourses: any;
+  storeCourses: any;
   allPosts: any;
   allBestSellers: any;
   allProfessions: any;
@@ -30,6 +31,7 @@ export const DataContext = createContext<{
 }>({
   state: {
     allCourses: [],
+    storeCourses: [],
     allPosts: [],
     allBestSellers: [],
     allProfessions: [],

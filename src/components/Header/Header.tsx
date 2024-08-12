@@ -1,6 +1,6 @@
-"use client";
-import React, { FC, useEffect, useRef, useState } from "react";
-import MainNav2 from "./MainNav2";
+'use client';
+import React, { FC, useEffect, useRef, useState } from 'react';
+import MainNav2 from './MainNav2';
 
 export interface HeaderProps {}
 
@@ -10,8 +10,6 @@ let WIN_PREV_POSITION = 0;
 const Header: FC<HeaderProps> = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const mainMenuRef = useRef<HTMLDivElement>(null);
-  const progressBarRef = useRef<HTMLDivElement>(null);
-  const [isSingleHeaderShowing, setIsSingleHeaderShowing] = useState(false);
 
   useEffect(() => {
     if (mainMenuRef.current) {
@@ -27,10 +25,10 @@ const Header: FC<HeaderProps> = () => {
       return;
     }
 
-    let showClass = "scrolled";
+    let showClass = 'scrolled';
     // SHOW _ HIDE MAIN MENU
     if (WIN_PREV_POSITION > currentScrollPos) {
-      containerRef.current.style.top = "0";
+      containerRef.current.style.top = '0';
       containerRef.current.classList.remove(showClass);
     } else {
       containerRef.current.style.top = `-${MAIN_MENU_HEIGHT + 2}px`;
@@ -46,17 +44,17 @@ const Header: FC<HeaderProps> = () => {
       window.requestAnimationFrame(showHideHeaderMenu);
     };
 
-    if (typeof window !== "undefined") {
-      window.addEventListener("scroll", handleShowHideHeaderMenuEvent);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleShowHideHeaderMenuEvent);
       return () => {
-        window.removeEventListener("scroll", handleShowHideHeaderMenuEvent);
+        window.removeEventListener('scroll', handleShowHideHeaderMenuEvent);
       };
     }
   }, []);
 
   return (
     <div
-      className="nc-Header sticky top-0 w-full left-0 right-0 z-40 transition-all "
+      className='nc-Header sticky top-0 w-full left-0 right-0 z-40 transition-all '
       ref={containerRef}
     >
       {/* RENDER MAIN NAVIGATION */}

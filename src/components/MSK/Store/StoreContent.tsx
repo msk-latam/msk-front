@@ -41,7 +41,8 @@ const StoreContent: FC<{}> = () => {
   } = useStoreFilters();
 
   const { state: dataState } = useContext(DataContext);
-  const { allCourses, allStoreProfessions } = dataState;
+  const { storeCourses, allStoreProfessions } = dataState;
+
   const { specialties } = useStoreFilters();
 
   const { countryState } = useContext(CountryContext);
@@ -59,7 +60,7 @@ const StoreContent: FC<{}> = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const [totalPages, setTotalPages] = useState(
-    Math.ceil(allCourses.length / itemsPerPage),
+    Math.ceil(storeCourses.length / itemsPerPage),
   );
 
   let products: FetchCourseType[] = [];
@@ -67,13 +68,13 @@ const StoreContent: FC<{}> = () => {
   useEffect(() => {
     console.log('USE EFFECT STORE CONTENT');
     async function fetchData() {
-      console.log('All Courses', allCourses);
-      if (allCourses.length) {
-        setCurrentItems(allCourses.slice(indexOfFirstItem, indexOfLastItem));
+      console.log('All Courses', storeCourses);
+      if (storeCourses.length) {
+        setCurrentItems(storeCourses.slice(indexOfFirstItem, indexOfLastItem));
       }
     }
     fetchData();
-  }, [countryState.country, allCourses]);
+  }, [countryState.country, storeCourses]);
 
   const handlePageChange = (pageNumber: number) => {
     console.log('HANDLING PAGE CHANGE');
@@ -103,7 +104,7 @@ const StoreContent: FC<{}> = () => {
   // STOREBAR FILTERS
   const triggerSearch = (event: any) => {
     if (event) {
-      const filteredProducts = allCourses.filter((product: any) =>
+      const filteredProducts = storeCourses.filter((product: any) =>
         removeAccents(product.title.toLowerCase()).includes(
           removeAccents(event.toLowerCase()),
         ),
@@ -114,7 +115,7 @@ const StoreContent: FC<{}> = () => {
 
       setCurrentItems(filteredProducts);
     } else {
-      setCurrentItems(allCourses);
+      setCurrentItems(storeCourses);
       applyFilters();
     }
   };
@@ -226,7 +227,7 @@ const StoreContent: FC<{}> = () => {
     ) {
       console.log('No filters');
       // No filters, set the products to the original list
-      let filterWithValueCourses = allCourses.filter((c: WpProduct) => {
+      let filterWithValueCourses = storeCourses.filter((c: WpProduct) => {
         if (
           (c.father_post_type === 'course' && Number(c.total_price) === 0) ||
           c.is_test_product
@@ -253,7 +254,7 @@ const StoreContent: FC<{}> = () => {
         searchText,
       });
 
-      const filteredProducts = allCourses.filter((product: WpProduct) => {
+      const filteredProducts = storeCourses.filter((product: WpProduct) => {
         const prodSpecialties = product.categories.map(
           category => category.name,
         );
@@ -279,12 +280,18 @@ const StoreContent: FC<{}> = () => {
           );
 
         let resourcesMatch = true;
+        // console.log('RESOURCE_MATCH', { resourcesMatch, selectedResources });
         if (selectedResources.length !== 0) {
-          resourcesMatch = selectedResources
+          let uniqueResources = Array.from(new Set(selectedResources));
+
+          resourcesMatch = uniqueResources
             .filter((e: string) => e != undefined)
             .some(resource => {
               if (resource === 'Curso') {
-                //console.log({resource, type: product.father_post_type},product.father_post_type === "course")
+                /*  console.log(
+                  { resource, type: product.father_post_type },
+                  product.father_post_type === 'course',
+                ); */
                 return product.father_post_type === 'course';
               } else if (resource === 'Guías profesionales') {
                 return product.father_post_type === 'downloadable';
@@ -314,30 +321,26 @@ const StoreContent: FC<{}> = () => {
           );
         }
 
-        console.log(product.title, product.total_price);
-
-        const priceMatch =
-          product.father_post_type === 'course' &&
+        /*   const priceMatch =
+          product.father_post_type === 'downloadable' ||
           Number(product.total_price) !== 0;
 
         const environmentMatch =
-          !product.is_test_product && product.father_post_type === 'course';
+          !product.is_test_product && product.father_post_type === 'course'; */
 
         return (
           specialtiesMatch &&
           professionsMatch &&
           resourcesMatch &&
           durationsMatch &&
-          searchMatch &&
-          priceMatch &&
-          environmentMatch
+          searchMatch
         );
       });
 
-      console.log('FILTERED PRODUCTS', { filteredProducts });
-      console.log('setCurrentPage: ', selectedPage[0] || 1);
-      console.log('indexOfFirstItem: ', indexOfFirstItem);
-      console.log('indexOfLastItem: ', indexOfLastItem);
+      // console.log('FILTERED PRODUCTS', { filteredProducts });
+      // console.log('setCurrentPage: ', selectedPage[0] || 1);
+      // console.log('indexOfFirstItem: ', indexOfFirstItem);
+      // console.log('indexOfLastItem: ', indexOfLastItem);
 
       setFilteredItems(filteredProducts);
 
@@ -361,7 +364,7 @@ const StoreContent: FC<{}> = () => {
       console.log('FILTERS WERE UPDATED');
       applyFilters();
     }, [
-      allCourses,
+      storeCourses,
       storeFilters.page,
       storeFilters.specialties,
       storeFilters.professions,
@@ -388,9 +391,6 @@ const StoreContent: FC<{}> = () => {
           onChangeResource(urlResource, 'add');
         }
       }
-
-      console.log('SPECIALTIES: ', specialties);
-      console.log('ESPECIALIDAD: ', especialidad);
       if (especialidad && specialties) {
         console.log('SPECIALTIES: ', specialties);
         let urlSpecialty = specialties.find(
@@ -402,8 +402,6 @@ const StoreContent: FC<{}> = () => {
         }
       }
 
-      console.log('PROFESSIONS: ', allStoreProfessions);
-      console.log('PROFESSION: ', profesion);
       if (profesion && allStoreProfessions) {
         console.log('changing profession');
         let urlProfession = allStoreProfessions?.find(
@@ -458,7 +456,7 @@ const StoreContent: FC<{}> = () => {
               storeFilters.duration.length
             }
           />
-          {!allCourses.length ? (
+          {!storeCourses.length ? (
             <StoreSkeleton />
           ) : (
             <div className='mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full mb-12'>

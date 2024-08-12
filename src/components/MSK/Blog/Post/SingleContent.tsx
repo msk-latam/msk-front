@@ -3,11 +3,11 @@ import CardAuthor2 from '@/components/CardAuthor2/CardAuthor2';
 import NoteAuthors from '@/components/SingleProductDetail/NoteAuthors';
 import NoteExtraData from './NoteExtraData';
 import BackgroundSection from '@/components/BackgroundSection/BackgroundSection';
-import SectionSliderPosts from '@/components/Sections/SectionSliderPosts';
 import { slugify } from '@/lib/Slugify';
 import SingleContentSidebarFixedItem from './SingleContentSidebarFixedItem';
 import PostHtmlArticles from './PostHtmlArticles';
 import { SinglePageType } from '@/data/types';
+import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
 
 export interface SingleContentProps {
   data: SinglePageType;
@@ -68,9 +68,10 @@ const SingleContent: FC<SingleContentProps> = ({
             />
             <NoteExtraData suggest_content={data.suggest_content} />
             <div>
-              <h4 className='source-title font-poppins'>Fuente/s:</h4>
-              {sources && sources.length > 0
-                ? sources.map((source, index) => {
+              {sources && sources.length > 0 ? (
+                <>
+                  <h4 className='source-title font-poppins'>Fuente/s:</h4>
+                  {sources.map((source, index) => {
                     return (
                       <p
                         key={`source_${index}`}
@@ -79,8 +80,9 @@ const SingleContent: FC<SingleContentProps> = ({
                         {source.fuente}
                       </p>
                     );
-                  })
-                : null}
+                  })}
+                </>
+              ) : null}
             </div>
             {data.authors && data.authors.length > 0
               ? data.authors?.map((currentAuthor, index) => {
@@ -104,7 +106,7 @@ const SingleContent: FC<SingleContentProps> = ({
       </div>
       <div className='container relative py-16'>
         <BackgroundSection />
-        <SectionSliderPosts
+        <SectionSliderBestSellers
           posts={bestSellers}
           postCardName='card9'
           heading='Nuestros cursos más elegidos'

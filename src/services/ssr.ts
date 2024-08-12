@@ -4,11 +4,12 @@ import {
   setAllCourses,
   setLoadingBestSellers,
   setLoadingCourses,
+  setStoreCourses,
 } from '@/lib/allData';
 import { SignUp } from '@/data/types';
 import { BASE_URL, IS_PROD, SITE_URL } from '@/contains/constants';
 import { BodyNewPassword } from '@/components/MSK/PageNewPassword';
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 
 let validCountries = countries.map(item => item.id);
 
@@ -80,6 +81,7 @@ class ApiSSRService {
       const queryParams = [countryParam, tagParam, withAllParam]
         .filter(Boolean)
         .join('');
+      console.log(`${API_URL}/products?limit=-1${queryParams}`);
 
       const response = await fetch(
         `${API_URL}/products?limit=-1${queryParams}`,
@@ -103,6 +105,42 @@ class ApiSSRService {
     }
   }
 
+  async getStoreCourses(country?: string) {
+    setLoadingCourses(true);
+
+    let validCountries = countries.map(item => item.id);
+    let onValidCountry = country && validCountries.includes(country);
+
+    const countryParam = onValidCountry
+      ? `&country=${country}`
+      : '&country=int';
+
+    try {
+      const queryParams = [countryParam].filter(Boolean).join('');
+      // console.log(`${API_URL}/products?limit=-1${queryParams}`);
+
+      const response = await fetch(
+        `${API_URL}/products?limit=-1${queryParams}`,
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch courses. HTTP status ${response.status}`,
+        );
+      }
+
+      const data = await response.json();
+
+      setStoreCourses(data.products);
+      setLoadingCourses(false);
+
+      return data.products;
+    } catch (error) {
+      console.error('Network error:', error);
+      return error;
+    }
+  }
+
   async getBestSellers(country?: string, tag?: string) {
     setLoadingBestSellers(true);
 
@@ -114,10 +152,15 @@ class ApiSSRService {
         countryParam = `${country}`;
       }
 
-      //console.log('getBestSellers URL', `${API_URL}/home/best-sellers?country=${countryParam}`);
+      console.log(
+        'getBestSellers URL',
+        `${API_URL}/home/best-sellers?country=${countryParam}`,
+      );
       const response = await fetch(
         `${API_URL}/home/best-sellers?country=${countryParam}`,
       );
+
+      console.log(country);
 
       if (!response.ok) {
         throw new Error(
@@ -176,6 +219,7 @@ class ApiSSRService {
       const response = await fetch(
         `${API_URL}/product/${slug}?country=${country}`,
       );
+      console.log(`${API_URL}/product/${slug}?country=${country}`);
 
       if (!response.ok) {
         throw new Error(
@@ -184,20 +228,24 @@ class ApiSSRService {
       }
 
       const data = await response.json();
-
       return { product: data };
     } catch (error) {
       console.error('Network error:', error);
+      notFound();
       return { error };
     }
   }
 
-  async getSinglePost(slug: string, country: string = 'int') {
+  async getSinglePost(slug: string, country: string) {
+    console.log(
+      { slug, country },
+      `${API_URL}/posts/${slug}?country=${country}`,
+    );
     try {
       const response = await fetch(
         `${API_URL}/posts/${slug}?country=${country}`,
       );
-      console.log(`${API_URL}/posts/${slug}?country=${country}`);
+
       if (!response.ok) {
         throw new Error(
           `Failed to fetch single post. HTTP status ${response.status}`,
@@ -205,7 +253,6 @@ class ApiSSRService {
       }
 
       const data = await response.json();
-
       return data.posts;
     } catch (error) {
       console.error('Network error:', error);
