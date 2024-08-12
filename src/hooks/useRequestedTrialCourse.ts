@@ -31,11 +31,9 @@ const useRequestedTrialCourse = (
       const userProfile: any = authState;
       console.log({ userProfile });
 
-      const hasTrialCourses = userProfile?.contact.trial_course_sites;
+      const hasTrialCourses = userProfile?.trial_course_sites;
 
-      if (
-        !(userProfile?.contact.type_doc || userProfile?.contact.identification)
-      ) {
+      if (!(userProfile?.type_doc || userProfile?.identification)) {
         setShowMissingData(true);
       }
 
