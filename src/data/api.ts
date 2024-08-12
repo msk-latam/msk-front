@@ -28,7 +28,7 @@ const filterProductsParam = isProductionEnv ? "" : "&filter=all";
 let validCountries = countries.map((item) => item.id);
 const countryParam = validCountries.includes(COUNTRY || "") ? COUNTRY : "int";
 
-export const ALL_PRODUCTS_MX = `${API_URL}/products?limit=-1&country=${countryParam}&type=course${filterProductsParam}`;
+export const ALL_PRODUCTS_MX = `${API_URL}/products?limit=-1&country=${countryParam}&type=course${filterProductsParam}&asd=tes3`;
 export const BEST_SELLERS_MX = `${API_URL}/home/best-sellers?country=${countryParam}`;
 export const NOTE_SPECIALITIES = `${API_URL}/posts-specialities`;
 

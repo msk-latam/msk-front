@@ -253,18 +253,23 @@ class ApiService {
 
   async getAllCourses(country: string, withAll = false) {
     let validCountries = countries.map(item => item.id);
-    let siteEnv = window.location.hostname !== 'msklatam.com';
+    //let siteEnv = window.location.hostname !== 'msklatam.com'; comentado porque no está en uso acá
 
     const countryParam = validCountries.includes(COUNTRY)
       ? `&country=${COUNTRY}`
       : `&country=int`;
     const filterParam = withAll ? `&asd=1&filter=all` : '';
 
+    let tagParam = '';
+    if (typeof window !== 'undefined') {
+      let tagFromURL = new URLSearchParams(window.location.search).get('tag');
+      tagParam = tagFromURL ? `&tag=${tagFromURL}` : '';
+    }
     try {
-      const queryParams = [countryParam, filterParam].filter(Boolean).join('');
+      const queryParams = [tagParam, countryParam, filterParam].filter(Boolean).join('');
 
       const response = await fetch(
-        `${API_URL}/products?limit=-1${queryParams}`,
+        `${API_URL}/products?limit=-1${queryParams}&asd=tes4`,
       );
 
       if (!response.ok) {
