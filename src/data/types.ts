@@ -831,6 +831,7 @@ export type ContactCRM = {
   Pais: string;
   Full_Name: string;
   id: string;
+  Usuario: string;
 };
 
 export interface WpProduct {

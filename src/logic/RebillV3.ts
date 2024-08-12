@@ -5,15 +5,9 @@ import { IS_PROD } from '@/contains/constants';
 import {
   NEXT_PUBLIC_REBILL_API_KEY_PRD,
   NEXT_PUBLIC_REBILL_API_KEY_TEST,
-  NEXT_PUBLIC_REBILL_CL_API_KEY_PRD,
-  NEXT_PUBLIC_REBILL_CL_ORG_ID_PRD,
-  NEXT_PUBLIC_REBILL_COP_API_KEY_PRD,
-  NEXT_PUBLIC_REBILL_COP_ORG_ID_PRD,
   NEXT_PUBLIC_REBILL_ORG_ID_PRD,
   NEXT_PUBLIC_REBILL_ORG_ID_TEST,
   NEXT_PUBLIC_REBILL_URL,
-  NEXT_PUBLIC_REBILL_UY_API_KEY_PRD,
-  NEXT_PUBLIC_REBILL_UY_ORG_ID_PRD,
   NEXT_PUBLIC_REBILL_REBILL_CL_FREEMIUM_PRD,
   NEXT_PUBLIC_REBILL_REBILL_UY_FREEMIUM_PRD,
   NEXT_PUBLIC_REBILL_REBILL_CO_FREEMIUM_PRD,
@@ -39,9 +33,15 @@ import {
   NEXT_PUBLIC_REBILL_MX_PK_TEST,
   NEXT_PUBLIC_REBILL_DEPRECATED_PK_PRD,
   NEXT_PUBLIC_REBILL_DEPRECATED_PK_TEST,
+  NEXT_PUBLIC_REBILL_MP_AR_V3_FREEMIUM_PRD,
+  NEXT_PUBLIC_REBILL_MP_AR_V3_FREEMIUM_TEST,
+  NEXT_PUBLIC_REBILL_REBILL_CL_V3_FREEMIUM_PRD,
+  NEXT_PUBLIC_REBILL_REBILL_CL_V3_FREEMIUM_TEST,
 } from '@/logic/constants/rebillPrices';
 import ssr from '@/services/ssr';
 import { getEnv } from '@/utils/getEnv';
+import { sendToZoho, sendToZohoByRebillV3 } from './Zoho';
+import { RebillV3Event } from '@/types/RebillV3Types';
 
 declare global {
   interface Window {
@@ -84,11 +84,15 @@ export const REBILL_CONF = {
     NEXT_PUBLIC_REBILL_REBILL_UY_FREEMIUM_PRD,
     NEXT_PUBLIC_REBILL_REBILL_CO_FREEMIUM_PRD,
     NEXT_PUBLIC_REBILL_REBILL_CL_FREEMIUM_TEST,
+    NEXT_PUBLIC_REBILL_REBILL_CL_V3_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_REBILL_CL_V3_FREEMIUM_TEST,
     NEXT_PUBLIC_REBILL_REBILL_UY_FREEMIUM_TEST,
     NEXT_PUBLIC_REBILL_REBILL_CO_FREEMIUM_TEST,
     //DEPRECATE REBILL PRICES
-    NEXT_PUBLIC_REBILL_MP_AR_FREEMIUM_TEST,
-    NEXT_PUBLIC_REBILL_MP_AR_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_MP_AR_V3_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_MP_AR_V3_FREEMIUM_TEST,
+    //NEXT_PUBLIC_REBILL_MP_AR_FREEMIUM_TEST,
+    //NEXT_PUBLIC_REBILL_MP_AR_FREEMIUM_PRD,
     NEXT_PUBLIC_REBILL_STRIPE_BO_FREEMIUM_PRD,
     NEXT_PUBLIC_REBILL_STRIPE_PY_FREEMIUM_PRD,
     NEXT_PUBLIC_REBILL_STRIPE_PE_FREEMIUM_PRD,
@@ -191,7 +195,14 @@ const getPlanV3 = (country: string) => {
   };
 };
 
-export const initRebillV3 = async (email: string | null, country: string) => {
+export const initRebillV3 = async (
+  email: string | null,
+  country: string,
+  product: any,
+  setShow: any,
+  setFaliedMessage: any,
+  setPaymentCorrect: any,
+) => {
   if (email === null || email === '') {
     throw new Error(`El email no esta disponible, email: ${email}`);
   }
@@ -210,7 +221,6 @@ export const initRebillV3 = async (email: string | null, country: string) => {
 
   const customerDataMapping = mappingCheckoutFields(contactZoho);
 
-  console.log(customerDataMapping);
   checkoutForm.set(customerDataMapping);
 
   checkoutForm.custom({
@@ -249,8 +259,22 @@ export const initRebillV3 = async (email: string | null, country: string) => {
     console.log(form);
   });
 
-  checkoutForm.on('approved', (event: any) => {
+  const user = {
+    id: contactZoho.id,
+    Usuario: contactZoho.Usuario,
+  };
+
+  checkoutForm.on('approved', (event: RebillV3Event) => {
     console.log('approved!', { event });
+    sendToZohoByRebillV3(
+      event,
+      user,
+      country,
+      product,
+      setShow,
+      setPaymentCorrect,
+      setFaliedMessage,
+    );
   });
 
   checkoutForm.on('rejected', (event: any) => {

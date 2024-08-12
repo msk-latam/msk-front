@@ -63,7 +63,14 @@ const RebillCheckoutV3: FC<RebillCheckoutV3Props> = ({
           console.log({ user: AuthState });
 
           try {
-            initRebillV3(AuthState.email, country);
+            initRebillV3(
+              AuthState.email,
+              country,
+              product,
+              setShow,
+              setFaliedMessage,
+              setPaymentCorrect,
+            );
             mountedInputObjectState.setState(true);
           } catch (err) {
             console.log(err);
