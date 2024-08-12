@@ -14,7 +14,7 @@ import MissingModalContent from '@/components/NcModal/MissingModalContent';
 import useSingleProduct from '@/hooks/useSingleProduct';
 import { AuthContext } from '@/context/user/AuthContext';
 import ssr from '@/services/ssr';
-import RebillCheckout from '@/components/Checkout/RebillCheckout';
+//import RebillCheckout from '@/components/Checkout/RebillCheckout';
 import MercadoPagoCheckout from '@/components/Checkout/MercadoPagoCheckout';
 import RebillCheckoutV3 from '@/components/Checkout/RebillCheckoutV3';
 
@@ -43,7 +43,7 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
   const [totalAmount, setTotalAmount] = useState(0);
   const [installmentAmount, setInstallmentAmount] = useState(0);
 
-  const { executeRecaptcha } = useGoogleReCaptcha();
+  // const { executeRecaptcha } = useGoogleReCaptcha();
   const router = useRouter();
 
   let gateway: null | string = null;
@@ -91,10 +91,11 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
 
       const fetchProfile = async () => {
         const res = await ssr.getUserData();
-        console.log({ res });
+        console.log({ res, isUndefined: typeof res === 'undefined' });
 
-        if (res === undefined) {
+        if (typeof res === 'undefined') {
           router.push('/');
+          return;
         } else {
           dispatch({
             type: 'UPDATE_PROFILE',

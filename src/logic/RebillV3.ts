@@ -150,7 +150,7 @@ const mappingCheckoutFields = (contactZoho: ContactCRM) => {
     billing: {
       city: contactZoho.Mailing_City ?? contactZoho.Pais,
       country: contactZoho.Pais,
-      line1: contactZoho.Mailing_Street ?? contactZoho.Pais,
+      line1: contactZoho.Mailing_Street ?? `${contactZoho.Pais} 1234`,
       zipCode: contactZoho.Mailing_Zip ?? contactZoho.Pais,
       state: contactZoho.Mailing_State ?? contactZoho.Pais,
     },
@@ -220,7 +220,9 @@ export const initRebillV3 = async (
   const checkoutForm = RebillSDKCheckout.checkout.create(rebillPlan);
 
   const customerDataMapping = mappingCheckoutFields(contactZoho);
+  console.log({ customerDataMapping });
 
+  //checkoutForm.reset();
   checkoutForm.set(customerDataMapping);
 
   checkoutForm.custom({
