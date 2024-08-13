@@ -65,6 +65,7 @@ class ApiSSRService {
     country?: string,
     tag?: string,
     withAll: boolean = false,
+    currentUrl = '',
   ) {
     setLoadingCourses(true);
 
@@ -74,17 +75,20 @@ class ApiSSRService {
     const countryParam = onValidCountry
       ? `&country=${country}`
       : '&country=int';
-    const tagParam = tag ? `&tag=${tag}` : '';
+    if (!tag) {
+      let tagFromURL = new URLSearchParams(currentUrl).get('tag');
+      tag = tagFromURL ? tagFromURL : '';
+    }
+    let tagParam = tag ? `&tag=${tag}` : '';
     const withAllParam = withAll ? '&filter=all' : '';
 
     try {
       const queryParams = [countryParam, tagParam, withAllParam]
         .filter(Boolean)
         .join('');
-      console.log(`${API_URL}/products?limit=-1${queryParams}`);
 
       const response = await fetch(
-        `${API_URL}/products?limit=-1${queryParams}`,
+        `${API_URL}/products?limit=-1${queryParams}&asd=tes2`,
       );
 
       if (!response.ok) {
@@ -105,7 +109,7 @@ class ApiSSRService {
     }
   }
 
-  async getStoreCourses(country?: string) {
+  async getStoreCourses(country?: string, currentUrl = '') {
     setLoadingCourses(true);
 
     let validCountries = countries.map(item => item.id);
@@ -115,12 +119,18 @@ class ApiSSRService {
       ? `&country=${country}`
       : '&country=int';
 
+    const tagParam = new URLSearchParams(window.location.search).get('tag');
+    let tag = '';
+    if (tagParam) {
+      tag = `&tag=${tagParam}`;
+    }
+    console.log('tag2', tag);
+
     try {
-      const queryParams = [countryParam].filter(Boolean).join('');
-      // console.log(`${API_URL}/products?limit=-1${queryParams}`);
+      const queryParams = [countryParam, tag].filter(Boolean).join('');
 
       const response = await fetch(
-        `${API_URL}/products?limit=-1${queryParams}`,
+        `${API_URL}/products?limit=-1${queryParams}&asd=tes`,
       );
 
       if (!response.ok) {
