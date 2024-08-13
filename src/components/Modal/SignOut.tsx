@@ -21,18 +21,27 @@ const signOutContent: FC<Props> = ({ setShow, onClose }) => {
   };
   const [utmState, dispatchUTM] = useReducer(utmReducer, utmInitialState);
 
+  const [hasRedirected, setHasRedirected] = useState(false);
+
   const handleLogout = () => {
     onClose();
+    setHasRedirected(true);
     router.push('/');
-    dispatchUTM(clearUTMAction);
-    dispatch({ type: 'LOGOUT' });
   };
+
+  useEffect(() => {
+    if (hasRedirected) {
+      dispatchUTM(clearUTMAction);
+      dispatch({ type: 'LOGOUT' });
+    }
+    setHasRedirected(false);
+  }, [hasRedirected]);
 
   return (
     <div className='flex flex-col items-center justify-center gap-3'>
       <p className='raleway text-lg'>Estás saliendo de tu cuenta.</p>
       <ButtonSecondary
-        onClick={() => handleLogout()}
+        onClick={handleLogout}
         sizeClass='py-3 '
         className='border-solid border-1 border-primary-6000 text-primary-6000 logout-button w-[160px]'
         bordered
