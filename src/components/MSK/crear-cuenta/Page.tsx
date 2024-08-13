@@ -494,7 +494,7 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
                     className='error'
                   />
                   <Link
-                    href='/condiciones-de-contratacion#trial'
+                    href='/terminos-y-condiciones/#trial'
                     target='_blank'
                     className='text-primary hover:text-primary underline'
                   >
