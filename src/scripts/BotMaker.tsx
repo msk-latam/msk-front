@@ -11,7 +11,6 @@ const BotMaker = () => {
       script.src = 'https://go.botmaker.com/rest/webchat/p/XG5DC3KZSF/init.js';
       document.body.appendChild(script);
       setMountedBot(true);
-      console.log('iniciando botmaker argentina');
     }
   }, []);
 
