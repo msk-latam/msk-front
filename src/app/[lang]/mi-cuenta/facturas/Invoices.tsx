@@ -44,10 +44,11 @@ const Invoices: React.FC<InvoicesProps> = ({ data }) => {
 
   const handleDownloadClick = (href: string) => {
     setLoadingInvoice(href);
-    setTimeout(() => {
-      window.location.href = href;
-      setLoadingInvoice(null);
-    }, 2000);
+    const newTab = window.open(href, '_blank', 'noopener,noreferrer');
+    if (newTab) {
+      newTab.focus();
+    }
+    setLoadingInvoice(null);
   };
 
   return (
