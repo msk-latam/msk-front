@@ -32,13 +32,16 @@ const Card20: FC<Card20Props> = ({ className = 'h-full', post, index }) => {
           height='300'
         />
       </div>
-      <Tooltip text={description} className={`absolute bottom-5 right-0`}>
+      <Tooltip
+        text={description}
+        className={`absolute bottom-8 right-0 md:bottom-5`}
+      >
         <Image
           src={'/images/icons/info_tooltip.svg'}
           width={15}
           height={15}
           alt='info cedente'
-          className='ml-auto mr-4'
+          className='ml-auto mr-4 w-[25px] h-[25px] md:w-[15px] md:h-[15px]'
         />
       </Tooltip>
     </div>

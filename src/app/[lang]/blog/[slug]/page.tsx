@@ -6,6 +6,7 @@ import SingleContent from '@/components/MSK/Blog/Post/SingleContent';
 import { cookies } from 'next/headers';
 import { IS_PROD, SITE_URL } from '@/contains/constants';
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
 
 interface PageCourseProps {
   params: any;
@@ -74,19 +75,19 @@ const PageNota: FC<PageCourseProps> = async ({ params }) => {
             </div>
           </div>
           {/* FEATURED IMAGE */}
-          <div className='px-[16px] '>
-            {post.featured_image && post.featured_image.length ? (
-              <div className='container rounded-lg md:rounded-[40px] relative overflow-hidden top-8 header-image-container '>
+          <div className='px-[16px]'>
+            {post.featured_image?.length > 0 && (
+              <div className='container rounded-lg md:rounded-[40px] relative overflow-hidden top-8 header-image-container'>
                 <NcImage
                   containerClassName='absolute inset-0'
                   src={post.featured_image[0]}
+                  alt={post.title}
                   className='object-cover w-full h-full'
-                  alt={`${post.title}`}
-                  height='500'
-                  width='1080'
+                  height={500}
+                  width={1080}
                 />
               </div>
-            ) : null}
+            )}
           </div>
         </header>
 

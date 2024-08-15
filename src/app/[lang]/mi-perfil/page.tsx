@@ -17,6 +17,7 @@ import StorePagination from '@/components/MSK/Store/StorePagination';
 import { useRouter } from 'next/navigation';
 import RedirectToTrial from '@/components/RedirectToTrial/RedirectToTrial';
 import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
+import CursoPerfil from './CursoPerfil';
 
 export interface PageAuthorProps {
   className?: string;
@@ -201,6 +202,15 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
                         ))
                       : null}
                   </div>
+                  {/* <div className='flex flex-wrap gap-6 justify-between'>
+                    {currentItems.map((post, index) => (
+                      <CursoPerfil
+                        key={`${post.id}_${index}`}
+                        product={post}
+                        user={user}
+                      />
+                    ))}
+                  </div> */}
 
                   {totalPages > 1 ? (
                     <div className='flex justify-center'>
