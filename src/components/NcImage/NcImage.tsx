@@ -8,7 +8,7 @@ export interface NcImageProps extends ImageProps {
 const NcImage: FC<NcImageProps> = ({
   containerClassName = '',
   alt = 'nc-imgs',
-  className = 'object-cover w-full h-full rounded-full',
+  className = 'object-cover w-full h-full',
   sizes = '',
   ...args
 }) => {
