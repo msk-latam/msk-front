@@ -171,7 +171,7 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 
               {product.avales && (
                 <div
-                  className={`bg-neutral-100 slider-container px-4 py-6 md:px-10 md:py-10 rounded-2xl ${
+                  className={`bg-neutral-100 slider-container px-8 py-2 md:px-10 md:py-10 rounded-2xl ${
                     product.featured_product_text
                       ? 'mb-16 md:mb-22'
                       : 'mb-20 md:mb-24'

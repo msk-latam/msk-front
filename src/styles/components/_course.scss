@@ -1522,6 +1522,7 @@
 .instructors-heading {
   display: flex;
   align-items: flex-start;
+  justify-content: space-between;
   margin-bottom: 15px;
   gap: 0px;
 
@@ -1550,7 +1551,7 @@
 
 .course-instructors {
   h3 {
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
     text-transform: capitalize;
   }
 }

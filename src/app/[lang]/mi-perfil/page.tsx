@@ -191,7 +191,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
               />
               {currentItems.length ? (
                 <>
-                  <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mt-8 lg:mt-10 mb-8'>
+                  {/* <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mt-8 lg:mt-10 mb-8'>
                     {currentItems
                       ? currentItems.map((post, index) => (
                           <ProductAccount
@@ -201,8 +201,8 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
                           />
                         ))
                       : null}
-                  </div>
-                  {/* <div className='flex flex-wrap gap-6 justify-between'>
+                  </div> */}
+                  <div className='flex flex-wrap gap-6 justify-center'>
                     {currentItems.map((post, index) => (
                       <CursoPerfil
                         key={`${post.id}_${index}`}
@@ -210,7 +210,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
                         user={user}
                       />
                     ))}
-                  </div> */}
+                  </div>
 
                   {totalPages > 1 ? (
                     <div className='flex justify-center'>
