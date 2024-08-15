@@ -1,10 +1,11 @@
 import React, { FC, useContext } from 'react';
-import NcImage from '@/components/NcImage/NcImage';
+
 import { Aval, PostDataType } from '@/data/types';
 import { CountryContext } from '@/context/country/CountryContext';
 import Tooltip from '@/components/Tooltip/Tooltip';
 import Image from 'next/image';
 import { removeFirstSubdomain } from '@/utils/removeFirstSubdomain';
+import NcImage2 from '../NcImage/NcImage2';
 
 export interface Card20Props {
   className?: string;
@@ -24,7 +25,7 @@ const Card20: FC<Card20Props> = ({ className = 'h-full', post, index }) => {
       data-nc-id='Card20'
     >
       <div className='block bg-white flex-shrink-0 flex-grow relative w-full h-0 aspect-w-4 aspect-h-3 rounded-lg '>
-        <NcImage
+        <NcImage2
           containerClassName='absolute inset-0'
           src={image}
           alt={title}
