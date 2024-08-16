@@ -160,7 +160,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
             />
           </div>
           {/* contactanos */}
-          <div className='px-4 sm:px-8 md:px-6 lg:px-20 grid grid-cols-1 md:grid-cols-3 gap-4 my-16'>
+          <div className='px-7  md:px-6 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-4 my-16'>
             <ContactForm />
           </div>
         </section>

@@ -48,7 +48,7 @@ const StoreLayout: FC<LayoutPageProps> = ({
 
   return (
     <div
-      className={`nc-LayoutPage relative ${className}`}
+      className={`nc-LayoutPage relative ${className} `}
       data-nc-id='LayoutPage'
     >
       <div className='container-fluid relative'>
@@ -84,8 +84,8 @@ const StoreLayout: FC<LayoutPageProps> = ({
         </header>
 
         {/* CONTENT */}
-        <div className='py-5 mx-auto bg-white rounded-[40px] sm:p-5 lg:py-7 dark:bg-neutral-900'>
-          <div className='px-10'>{children}</div>
+        <div className='py-5 mx-auto bg-white rounded-[40px] sm:p-5 lg:py-7 dark:bg-neutral-900 '>
+          <div className='lg:px-16 lg:pr-28 '>{children}</div>
         </div>
       </div>
     </div>

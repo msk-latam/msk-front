@@ -140,7 +140,10 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
   // localStorage.removeItem('trialURL')
 
   return (
-    <div className={`nc-PageAuthor  ${className}`} data-nc-id='PageAuthor'>
+    <div
+      className={`nc-PageAuthor  ${className} lg:px-12`}
+      data-nc-id='PageAuthor'
+    >
       <RedirectToTrial />
       {/* HEADER */}
       <div className='animate-fade-down'>
@@ -202,7 +205,13 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
                         ))
                       : null}
                   </div> */}
-                  <div className='flex flex-wrap gap-6 justify-center'>
+                  <div
+                    className={`flex flex-wrap gap-4 ${
+                      currentItems.length >= 4
+                        ? 'justify-between'
+                        : 'justify-start'
+                    }`}
+                  >
                     {currentItems.map((post, index) => (
                       <CursoPerfil
                         key={`${post.id}_${index}`}
