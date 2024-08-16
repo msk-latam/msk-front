@@ -39,7 +39,7 @@ const FooterEduman = () => {
   return (
     <footer>
       <div className='footer-area'>
-        <div className='lg:container'>
+        <div className='lg:px-16'>
           <div className='lg:container'>
             {isOnBlog ? null : (
               <div className='copyright-area grid grid-cols-1 md:grid-cols-6 items-center sm:gap-1 mb-6'>

@@ -1765,11 +1765,19 @@
     min-width: 250px;
 
     @media (min-width: 768px) {
-      width: 70vw; // Ancho para pantallas medianas
+      width: 70vw;
+    }
+
+    @media (min-width: 1200px) and (max-width: 1500px) {
+      width: 27.9vw;
+    }
+
+    @media (min-width: 1501px) and (max-width: 1800px) {
+      width: 70vw;
     }
 
     @media (max-width: 1024px) {
-      width: 22%; // Ancho completo para pantallas grandes
+      width: 22%;
     }
   }
 }

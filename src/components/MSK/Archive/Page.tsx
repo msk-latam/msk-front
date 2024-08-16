@@ -174,7 +174,7 @@ const PageArchiveComponent: FC<PageArchiveProps> = ({
   return (
     <>
       <div
-        className={`nc-PageArchive pt-8 lg:pt-8 ${className} animate-fade-down`}
+        className={`nc-PageArchive pt-8 lg:pt-8 ${className} animate-fade-down lg:px-24 lg:pr-28`}
         data-nc-id='PageArchive'
       >
         {loadingPosts ? (
