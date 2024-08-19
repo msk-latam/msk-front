@@ -43,9 +43,11 @@ export const createStripePaymentToken: createStripePaymentTokenProps = async ({
 }) => {
   let stripeUrl = generateURLPayments('/api/gateway/api/stripe/payment/trial');
   let parsedAmount = parseInt(product?.price.total_price.replace('.', ''));
+  let parsedQuoteAmount = parseInt(product?.price.price.replace('.', ''));
   let body = JSON.stringify({
     user,
     amount: parsedAmount,
+    quote_amount: parsedQuoteAmount,
     country: fullNameCountry,
     quotes,
     product,
