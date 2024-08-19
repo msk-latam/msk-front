@@ -34,8 +34,7 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
   const [mountedInput, setMountedInput] = useState<boolean>(false);
   const [faliedMessage, setFaliedMessage] = useState<string>('');
   const [paymentCorrect, setPaymentCorrect] = useState<boolean | null>(null);
-
-  let installments = 0 as number | null;
+  const [installments, setInstallments] = useState<number>(0);
 
   const [totalAmount, setTotalAmount] = useState(0);
   const [installmentAmount, setInstallmentAmount] = useState(0);
@@ -62,7 +61,7 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
 
   useEffect(() => {
     if (installmentsJSON && country && installmentsJSON[country]) {
-      installments = installmentsJSON[country].quotes;
+      setInstallments(installmentsJSON[country].quotes as number);
     }
 
     if (typeof product !== 'undefined' && installments != null) {

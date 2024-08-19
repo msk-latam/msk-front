@@ -101,7 +101,7 @@ const CheckoutForm: FC<CheckoutFormProps> = ({
 interface StripeCheckoutProps {
   product: FetchSingleProduct | undefined;
   country: string;
-  quotes: any;
+  quotes: number;
   setShow: Dispatch<SetStateAction<boolean>>;
   setFaliedMessage: Dispatch<SetStateAction<string>>;
   setPaymentCorrect: Dispatch<SetStateAction<boolean | null>>;
@@ -122,7 +122,7 @@ const StripeCheckout: FC<StripeCheckoutProps> = ({
   const fullNameCountry = countryNames[country];
   const { profile } = useAuth();
 
-  //console.log(fullNameCountry);
+  console.log({ quotes });
 
   useEffect(() => {
     const productNotUndefined = typeof product !== 'undefined';

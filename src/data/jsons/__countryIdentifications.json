@@ -127,6 +127,13 @@
       "text": "Cédula de identidad"
     }
   ],
+  "pa": [
+    {
+      "id": "pa",
+      "type": "CI",
+      "text": "Cédula de identidad"
+    }
+  ],
   "ni": [
     {
       "id": "ni",

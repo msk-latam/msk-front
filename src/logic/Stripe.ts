@@ -1,5 +1,5 @@
 import { IS_PROD } from '@/contains/constants';
-import { FetchSingleProduct, User, UserProfile } from '@/data/types';
+import { UserProfile } from '@/data/types';
 import { generateURLPayments } from '@/lib/generateURLPayments';
 import { Dispatch, SetStateAction } from 'react';
 
@@ -24,7 +24,7 @@ type createStripePaymentTokenProps = ({
   product: any | undefined;
   user: UserProfile | null;
   fullNameCountry: string;
-  quotes: any;
+  quotes: number;
   setClientSecret: Dispatch<SetStateAction<string>>;
   setError: Dispatch<SetStateAction<string>>;
   setFound: Dispatch<SetStateAction<string>>;
@@ -42,9 +42,10 @@ export const createStripePaymentToken: createStripePaymentTokenProps = async ({
   setWaiting,
 }) => {
   let stripeUrl = generateURLPayments('/api/gateway/api/stripe/payment/trial');
+  let parsedAmount = parseInt(product?.price.total_price.replace('.', ''));
   let body = JSON.stringify({
     user,
-    amount: product?.price.total_price,
+    amount: parsedAmount,
     country: fullNameCountry,
     quotes,
     product,
@@ -59,7 +60,6 @@ export const createStripePaymentToken: createStripePaymentTokenProps = async ({
   });
 
   const paymentIntent = await response.json();
-
   console.log({ paymentIntent });
 
   if (paymentIntent.status === 302) {
