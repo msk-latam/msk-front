@@ -105,6 +105,10 @@ interface StripeCheckoutProps {
   setShow: Dispatch<SetStateAction<boolean>>;
   setFaliedMessage: Dispatch<SetStateAction<string>>;
   setPaymentCorrect: Dispatch<SetStateAction<boolean | null>>;
+  mountedInputObjectState: {
+    state: boolean;
+    setState: Dispatch<SetStateAction<boolean>>;
+  };
 }
 
 const StripeCheckout: FC<StripeCheckoutProps> = ({
@@ -114,6 +118,7 @@ const StripeCheckout: FC<StripeCheckoutProps> = ({
   setShow,
   setFaliedMessage,
   setPaymentCorrect,
+  mountedInputObjectState,
 }) => {
   const [clientSecret, setClientSecret] = useState('');
   const [error, setError] = useState('');
@@ -138,6 +143,7 @@ const StripeCheckout: FC<StripeCheckoutProps> = ({
         setFound,
         setWaiting,
       });
+      mountedInputObjectState.setState(true);
     }
   }, [product]);
 

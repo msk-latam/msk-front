@@ -118,6 +118,7 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
             setShow={setShow}
             setFaliedMessage={setFaliedMessage}
             setPaymentCorrect={setPaymentCorrect}
+            mountedInputObjectState={mountedInputObjectState}
           />
         );
       default:
