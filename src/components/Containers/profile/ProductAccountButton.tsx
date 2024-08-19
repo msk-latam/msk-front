@@ -29,7 +29,7 @@ const ProductAccountButton: FC<ProductAccountButtonProps> = ({
     : statusOV.hasText;
   const iconStatus = getStatusIcon(textStatus);
 
-  console.log('status', status);
+  //console.log('status', status);
 
   return (
     <div className='product-button-wrp'>

@@ -3,7 +3,7 @@ import { FC, useContext, useEffect, useRef, useState } from 'react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import installmentsMapping from '@/data/jsons/__countryInstallments.json';
 import { JsonInstallmentsMapping } from '@/data/types';
-import { useRouter, useParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { CountryContext } from '@/context/country/CountryContext';
 import useRequestedTrialCourse from '@/hooks/useRequestedTrialCourse';
 import TrialInfo from '@/components/Trial/TrialInfo';
@@ -12,11 +12,9 @@ import NcModalSmall from '@/components/NcModal/NcModalSmall';
 import TrialModalContent from '@/components/NcModal/TrialModalContent';
 import MissingModalContent from '@/components/NcModal/MissingModalContent';
 import useSingleProduct from '@/hooks/useSingleProduct';
-import { AuthContext } from '@/context/user/AuthContext';
-import ssr from '@/services/ssr';
-//import RebillCheckout from '@/components/Checkout/RebillCheckout';
 import MercadoPagoCheckout from '@/components/Checkout/MercadoPagoCheckout';
 import RebillCheckoutV3 from '@/components/Checkout/RebillCheckoutV3';
+import StripeCheckout from '@/components/Stripe/StripeCheckout';
 
 export interface PageTrialSuscribeProps {
   className?: string;
@@ -28,7 +26,6 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
   const {
     countryState: { country },
   } = useContext(CountryContext);
-  const { state: AuthState, dispatch } = useContext(AuthContext);
   const { slug }: { slug: string } = useParams();
   const { product } = useSingleProduct(slug, { country });
 
@@ -44,7 +41,6 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
   const [installmentAmount, setInstallmentAmount] = useState(0);
 
   // const { executeRecaptcha } = useGoogleReCaptcha();
-  const router = useRouter();
 
   let gateway: null | string = null;
   if (installmentsJSON && country && installmentsJSON[country]) {
@@ -55,13 +51,14 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
     state: mountedInput,
     setState: setMountedInput,
   };
+
   const {
     hasCoursedRequested,
     showAlreadyRequest,
     showMissingData,
     setShowAlreadyRequest,
     setShowMissingData,
-  } = useRequestedTrialCourse(product, AuthState.profile);
+  } = useRequestedTrialCourse(product);
 
   useEffect(() => {
     if (installmentsJSON && country && installmentsJSON[country]) {
@@ -83,47 +80,8 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
     }
   }, [product]);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const profile = AuthState.profile;
-      console.group('ProfileEffect');
-      console.log({ profile, AuthState });
-
-      const fetchProfile = async () => {
-        const res = await ssr.getUserData();
-        console.log({ res, isUndefined: typeof res === 'undefined' });
-
-        if (typeof res === 'undefined') {
-          router.push('/');
-          return;
-        } else {
-          dispatch({
-            type: 'UPDATE_PROFILE',
-            payload: { profile: res.contact },
-          });
-        }
-      };
-
-      console.log(
-        typeof AuthState === 'undefined' ||
-          AuthState.isAuthenticated === null ||
-          profile === null,
-        { AuthState, profile },
-      );
-
-      if (
-        typeof AuthState === 'undefined' ||
-        AuthState.isAuthenticated === null ||
-        profile === null
-      ) {
-        fetchProfile();
-      }
-      console.groupEnd();
-    }
-  }, [AuthState.profile]);
-
   const renderCheckoutComponent = () => {
-    console.log({ gateway });
+    //console.log({ gateway });
     switch (gateway) {
       case 'REBILL':
         return (
@@ -153,7 +111,16 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
           />
         );
       case 'ST':
-      // return <StripePaymentForm payment={invoiceDetail} currency={currencyOptions.currency} />;
+        return (
+          <StripeCheckout
+            product={product}
+            country={country}
+            quotes={installments}
+            setShow={setShow}
+            setFaliedMessage={setFaliedMessage}
+            setPaymentCorrect={setPaymentCorrect}
+          />
+        );
       default:
         return (
           <RebillCheckoutV3
@@ -172,13 +139,6 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
 
   return (
     <div ref={viewRef} className='nc-PageSuscribe relative animate-fade-down'>
-      {/* <Script
-        strategy='afterInteractive'
-        src='https://sdk.rebill.to/v2/rebill.min.js'
-        onLoad={e => {
-          console.log('Rebill script loaded', { e });
-        }}
-      /> */}
       <div className='relative overflow-hidden'>
         <div className='container grid grid-cols-1 lg:grid-cols-[60%_40%] gap-5 my-24'>
           <TrialInfo

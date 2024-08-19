@@ -1,13 +1,5 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
-import { AuthContext } from '@/context/user/AuthContext';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import ssr from '@/services/ssr';
-import api from '@/services/api';
 
 interface TrialCoursesStatus {
   hasCoursedRequested: boolean;
@@ -17,10 +9,7 @@ interface TrialCoursesStatus {
   setShowAlreadyRequest: Dispatch<SetStateAction<boolean>>;
 }
 
-const useRequestedTrialCourse = (
-  product?: any,
-  authState?: any,
-): TrialCoursesStatus => {
+const useRequestedTrialCourse = (product?: any): TrialCoursesStatus => {
   const [hasCoursedRequested, setHasCoursedRequested] = useState(false);
   const [showAlreadyRequest, setShowAlreadyRequest] = useState(false);
   const [showMissingData, setShowMissingData] = useState(false);
@@ -28,12 +17,14 @@ const useRequestedTrialCourse = (
 
   useEffect(() => {
     const checkTrialCourses = async () => {
-      const userProfile: any = authState;
+      const userProfile: any = await ssr.getUserData();
       console.log({ userProfile });
 
       const hasTrialCourses = userProfile?.trial_course_sites;
 
-      if (!(userProfile?.type_doc || userProfile?.identification)) {
+      if (
+        !(userProfile?.contact.type_doc || userProfile?.contact.identification)
+      ) {
         setShowMissingData(true);
       }
 
@@ -63,7 +54,7 @@ const useRequestedTrialCourse = (
         });
       } else if (
         typeof userProfile !== 'undefined' &&
-        Object.keys(userProfile).length > 1
+        Object.keys(userProfile ?? {}).length > 1
       ) {
         setHasCoursedRequested(false);
       }

@@ -12,6 +12,7 @@ import TextSkeleton from '@/components/Skeleton/TextSkeleton';
 import { AuthContext } from '@/context/user/AuthContext';
 import { FetchSingleProduct } from '@/data/types';
 import { initRebillV3 } from '@/logic/RebillV3';
+import { useAuth } from '@/hooks/useAuth';
 
 interface RebillCheckoutV3Props {
   product: FetchSingleProduct | undefined;
@@ -38,7 +39,7 @@ const RebillCheckoutV3: FC<RebillCheckoutV3Props> = ({
   mountedInputObjectState,
 }) => {
   const [initedRebill, setInitedRebill] = useState<boolean | null>(null);
-  const { state: AuthState } = useContext(AuthContext);
+  const { profile, email } = useAuth();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -48,8 +49,8 @@ const RebillCheckoutV3: FC<RebillCheckoutV3Props> = ({
           hasCoursedRequested != null && !hasCoursedRequested;
         const verifiedProductAndProfile =
           typeof product !== 'undefined' &&
-          AuthState.profile != null &&
-          Object.keys(AuthState.profile).length > 1;
+          profile != null &&
+          Object.keys(profile).length > 1;
 
         if (
           initedRebill == null &&
@@ -60,11 +61,11 @@ const RebillCheckoutV3: FC<RebillCheckoutV3Props> = ({
           setInitedRebill(true);
           console.group('RebillV3');
           localStorage.removeItem('trialURL');
-          console.log({ user: AuthState });
+          console.log({ user: profile });
 
           try {
             initRebillV3(
-              AuthState.email,
+              email,
               country,
               product,
               setShow,
@@ -81,7 +82,7 @@ const RebillCheckoutV3: FC<RebillCheckoutV3Props> = ({
         }
       }
     }
-  }, [product, hasCoursedRequested, AuthState.profile]);
+  }, [product, hasCoursedRequested, profile]);
 
   return (
     <>

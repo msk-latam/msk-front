@@ -34,7 +34,7 @@ const ProductAccount: FC<Props> = ({
       product?.status !== STATUS.SUSPEND,
   );
 
-  console.log('product account', product);
+  //console.log('product account', product);
 
   const showHelp =
     product.ov === 'Baja' ||

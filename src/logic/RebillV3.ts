@@ -212,7 +212,7 @@ export const initRebillV3 = async (
     email,
   );
   const rebillPk = getRebillV3Initialization(country);
-  console.log({ country, rebillPk });
+  //console.log({ country, rebillPk });
   let RebillSDKCheckout = new window.Rebill(rebillPk);
 
   const rebillPlan = getPlanV3(country);
@@ -220,7 +220,7 @@ export const initRebillV3 = async (
   const checkoutForm = RebillSDKCheckout.checkout.create(rebillPlan);
 
   const customerDataMapping = mappingCheckoutFields(contactZoho);
-  console.log({ customerDataMapping });
+  //console.log({ customerDataMapping });
 
   //checkoutForm.reset();
   checkoutForm.set(customerDataMapping);
