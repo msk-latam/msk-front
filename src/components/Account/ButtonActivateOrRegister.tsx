@@ -1,8 +1,8 @@
-
-import { FC, useEffect } from 'react';
+import { FC, useContext, useEffect } from 'react';
 
 import { useRouter } from 'next/navigation';
 import { hasText } from '@/lib/account';
+import { GlobalStateContext } from '@/app/[lang]/mi-perfil/GlobalStateContext';
 
 interface ButtonActivateOrRegisterProps {
   isDisabledActivate: boolean;
@@ -12,7 +12,6 @@ interface ButtonActivateOrRegisterProps {
   productSlug: string | undefined;
 
   isPreventa: boolean;
-
 }
 
 const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({
@@ -24,6 +23,7 @@ const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({
 
   isPreventa,
 }) => {
+  const { state, dispatch1 } = useContext(GlobalStateContext);
   const router = useRouter();
 
   const disabledRender = () => {
@@ -42,6 +42,8 @@ const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({
     return disabledRender();
   }
 
+  console.log(status, 'de button activate');
+  console.log(state, 'estado global desde ButtonActivateOrRegister');
 
   return (
     <>

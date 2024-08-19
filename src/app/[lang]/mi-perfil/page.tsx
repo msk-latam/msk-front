@@ -140,10 +140,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
   // localStorage.removeItem('trialURL')
 
   return (
-    <div
-      className={`nc-PageAuthor  ${className} lg:px-12`}
-      data-nc-id='PageAuthor'
-    >
+    <div className={`nc-PageAuthor  ${className} `} data-nc-id='PageAuthor'>
       <RedirectToTrial />
       {/* HEADER */}
       <div className='animate-fade-down'>
@@ -175,8 +172,8 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
       </div>
       {/* ====================== END HEADER ====================== */}
 
-      <div className='container py-16 lg:pb-28 lg:pt-20 space-y-16 lg:space-y-28'>
-        <main className='container'>
+      <div className='container py-16 lg:pb-28 lg:pt-20 space-y-16 lg:space-y-28 '>
+        <main className=' lg:px-24'>
           {loadingUser ? (
             <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mt-8 lg:mt-10 mb-8'>
               <ItemSkeleton />
@@ -194,7 +191,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
               />
               {currentItems.length ? (
                 <>
-                  {/* <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mt-8 lg:mt-10 mb-8'>
+                  <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mt-8 lg:mt-10 mb-8'>
                     {currentItems
                       ? currentItems.map((post, index) => (
                           <ProductAccount
@@ -204,8 +201,8 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
                           />
                         ))
                       : null}
-                  </div> */}
-                  <div
+                  </div>
+                  {/* <div
                     className={`flex flex-wrap gap-4 ${
                       currentItems.length >= 4
                         ? 'justify-between'
@@ -219,7 +216,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
                         user={user}
                       />
                     ))}
-                  </div>
+                  </div> */}
 
                   {totalPages > 1 ? (
                     <div className='flex justify-center'>

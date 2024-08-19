@@ -19,6 +19,7 @@ import BotMaker from '@/scripts/BotMaker';
 import { GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
 import EmblueScript from '@/components/EmblueScript/EmblueScript';
+import { GlobalStateProvider } from './[lang]/mi-perfil/GlobalStateContext';
 
 export const runtime = 'edge';
 
@@ -83,7 +84,7 @@ export default async function RootLayout({ params, children }: LayoutProps) {
                   <AuthProvider>
                     <StoreProvider>
                       <Header />
-                      {children}
+                      <GlobalStateProvider>{children}</GlobalStateProvider>
                       <BotMaker />
                       <Footer />
 

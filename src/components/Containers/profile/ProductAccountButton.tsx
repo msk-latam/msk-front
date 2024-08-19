@@ -49,12 +49,12 @@ export const ProductAccountButton: FC<{
           <Image {...iconStatus} alt={textStatus as string} />
           <span className='ml-2'>
             {textStatus === '' ? status : textStatus}
-            {/* {statusOV.hasText === 'Prueba' && (
+            {statusOV.hasText === 'Prueba' && (
               <CancelTrialButton
                 onClick={() => setShowCancelTrial(true)}
                 linkText='Dar de baja'
               />
-            )} */}
+            )}
           </span>
         </div>
         <ButtonActivateOrRegister
