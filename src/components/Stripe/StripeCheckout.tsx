@@ -139,7 +139,7 @@ const StripeCheckout: FC<StripeCheckoutProps> = ({
         setWaiting,
       });
     }
-  }, []);
+  }, [profile]);
 
   const options = {
     clientSecret,
