@@ -79,18 +79,18 @@ const CheckoutForm: FC<CheckoutFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit} className='mx-4 mb-5'>
-      <PaymentElement className='box mt-3 mb-4' />
+      <PaymentElement
+        className={`box mt-3 mb-4 ${onPaymentRequest && 'hidden'}`}
+      />
 
-      <div className='field'>
-        <div className='control'>
-          <button
-            className='button msk-color-button is-fullwidth'
-            type='submit'
-            disabled={!stripe || !elements || onPaymentRequest}
-          >
-            {onPaymentRequest ? 'Procesando ...' : 'Finalizar'}
-          </button>
-        </div>
+      <div className='cont-btn !w-full'>
+        <button
+          className='cont-btn !w-full disabled:cursor-not-allowed disabled:bg-grey-disabled'
+          type='submit'
+          disabled={!stripe || !elements || onPaymentRequest}
+        >
+          {onPaymentRequest ? 'Procesando ...' : 'Finalizar'}
+        </button>
       </div>
       {error && <div className='notification is-danger'>{error}</div>}
       {/* {success && <div className='notification is-success'>¡Pago Exitoso!</div>} */}
