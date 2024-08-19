@@ -122,8 +122,6 @@ const StripeCheckout: FC<StripeCheckoutProps> = ({
   const fullNameCountry = countryNames[country];
   const { profile } = useAuth();
 
-  console.log({ quotes });
-
   useEffect(() => {
     const productNotUndefined = typeof product !== 'undefined';
     const userSessionNotUndefined =
@@ -141,7 +139,7 @@ const StripeCheckout: FC<StripeCheckoutProps> = ({
         setWaiting,
       });
     }
-  }, [product, profile]);
+  }, []);
 
   const options = {
     clientSecret,
