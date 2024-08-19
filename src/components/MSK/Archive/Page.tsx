@@ -174,7 +174,7 @@ const PageArchiveComponent: FC<PageArchiveProps> = ({
   return (
     <>
       <div
-        className={`nc-PageArchive pt-8 lg:pt-8 ${className} animate-fade-down`}
+        className={`nc-PageArchive pt-8 lg:pt-8 ${className} animate-fade-down lg:px-28 lg:pr-28`}
         data-nc-id='PageArchive'
       >
         {loadingPosts ? (
@@ -184,7 +184,7 @@ const PageArchiveComponent: FC<PageArchiveProps> = ({
         ) : (
           <>
             {currentItems.length ? (
-              <header className='w-full px-[20px] xl:max-w-screen-2xl mx-auto'>
+              <header className='w-full px-[20px] xl:max-w-screen-2xl mx-auto lg:px-10'>
                 <div className='container relative aspect-w-16 aspect-h-13 sm:aspect-h-9 lg:aspect-h-8 xl:aspect-h-5 rounded-3xl md:rounded-[40px] overflow-hidden z-0'>
                   <NcImage
                     className='rounded-3xl md:rounded-[40px] object-cover absolute inset-0 w-full h-full'

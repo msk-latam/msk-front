@@ -56,7 +56,7 @@ const PageSingleProduct: FC<PageCourseProps> = async ({ params }) => {
   }
 
   return (
-    <div className={`nc-PageSubcription `} data-nc-id='PageSubcription'>
+    <div className={`nc-PageSubcription lg:px-5`} data-nc-id='PageSubcription'>
       <section className='text-neutral-600 text-sm md:text-base overflow-hidden'>
         {product ? (
           <SingleProductDetail product={product} country={params.country} />

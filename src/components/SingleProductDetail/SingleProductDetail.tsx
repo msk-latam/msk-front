@@ -171,8 +171,10 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 
               {product.avales && (
                 <div
-                  className={`bg-neutral-100 slider-container px-10 py-10 rounded-2xl ${
-                    product.featured_product_text ? 'mb-22' : 'mb-24'
+                  className={`bg-neutral-100 slider-container px-8 py-2 md:px-10 md:py-10 rounded-2xl ${
+                    product.featured_product_text
+                      ? 'mb-16 md:mb-22'
+                      : 'mb-20 md:mb-24'
                   }`}
                 >
                   <SectionSliderPosts
@@ -270,7 +272,7 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 
       {product.related_products.length ? (
         <div className='container relative py-16 mt-16 '>
-          <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-16 mb-[96px] w-full px-14'>
+          <div className='md:rounded-[40px] bg-neutral-100  dark:bg-black dark:bg-opacity-20 relative py-16 mb-[96px] w-full px-14'>
             <SectionSliderPosts
               posts={product.related_products}
               className='w-full section-slider-posts-container'

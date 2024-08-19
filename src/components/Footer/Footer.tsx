@@ -39,8 +39,8 @@ const FooterEduman = () => {
   return (
     <footer>
       <div className='footer-area'>
-        <div className='container'>
-          <div className='container'>
+        <div className='lg:px-16'>
+          <div className='lg:container'>
             {isOnBlog ? null : (
               <div className='copyright-area grid grid-cols-1 md:grid-cols-6 items-center sm:gap-1 mb-6'>
                 <div className='footer-column col-span-6 md:mx-auto text-center md:text-left lg:col-span-1'>
@@ -170,8 +170,8 @@ const FooterEduman = () => {
                   </div>
                 </div>
                 <div className={`grid grid-cols-2 col-span-2`}>
-                  <div className={`col-span-1`}>
-                    <div className='footer-widget f-w3 mt-6'>
+                  <div className={`col-span-1 flex justify-center `}>
+                    <div className='footer-widget f-w3 mt-6 '>
                       <ul className='text-sm md:text-base'>
                         <li>
                           <NcLink href='/mision' className='font-light'>
@@ -200,7 +200,7 @@ const FooterEduman = () => {
                       </ul>
                     </div>
                   </div>
-                  <div className={`col-span-1`}>
+                  <div className={`col-span-1 flex justify-center `}>
                     <div className='footer-widget f-w4 mt-6'>
                       <ul className='text-sm md:text-base'>
                         <li>

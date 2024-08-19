@@ -236,7 +236,7 @@
         position: relative;
         &::after {
           position: absolute;
-          content: "";
+          content: '';
           left: 0;
           top: 9px;
           width: 6px;
@@ -288,9 +288,9 @@ blockquote {
   border: 1px solid #f3f4f8;
 }
 blockquote::before {
-  content: "\f10e";
+  content: '\f10e';
   position: static;
-  font-family: "Font Awesome 5 Pro";
+  font-family: 'Font Awesome 5 Pro';
   font-size: 32px;
   color: $theme-color;
   line-height: 1;
@@ -313,7 +313,7 @@ blockquote cite {
   font-weight: 600;
 }
 blockquote cite::before {
-  content: "";
+  content: '';
   font-size: 28px;
   color: #ff5421;
   padding-bottom: 0px;
@@ -509,7 +509,7 @@ div.tagcloud a:hover {
         border-color: transparent;
         &::after {
           box-sizing: border-box;
-          content: "\f00c";
+          content: '\f00c';
           position: absolute;
           font-family: $fontawesome;
           font-size: 10px;
@@ -626,13 +626,13 @@ div.tagcloud a:hover {
   }
 }
 
-.post-side-data {
-  width: 100%;
-  top: 100px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+// .post-side-data {
+//   width: 100%;
+//   top: 100px;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 10px;
+// }
 .post-side-data-bottom {
   .side-content {
     position: absolute;
@@ -643,14 +643,14 @@ div.tagcloud a:hover {
 .source-title {
   color: #878686;
   font-size: 15px;
-  font-family: "Poppins", sans-serif !important;
+  font-family: 'Poppins', sans-serif !important;
   font-style: normal;
   font-weight: 800;
 }
 .source-content {
   color: #878686;
   font-size: 15px;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-style: normal;
   font-weight: 400;
 }

@@ -5,10 +5,10 @@ export interface NcImageProps extends ImageProps {
   containerClassName?: string;
 }
 
-const NcImage: FC<NcImageProps> = ({
+const NcImage2: FC<NcImageProps> = ({
   containerClassName = '',
   alt = 'nc-imgs',
-  className = 'object-cover w-full h-full',
+  className = 'object-cover w-full h-full rounded-full',
   sizes = '',
   ...args
 }) => {
@@ -25,4 +25,4 @@ const NcImage: FC<NcImageProps> = ({
   );
 };
 
-export default NcImage;
+export default NcImage2;

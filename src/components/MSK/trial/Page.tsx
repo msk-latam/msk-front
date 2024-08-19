@@ -114,7 +114,7 @@ const PageTrial: FC<PageTrialProps> = ({ className = '' }) => {
     type: '',
     identification: '',
     Terms_And_Conditions: false,
-    URL_ORIGEN: `${SITE_URL}/curso/${slug}`,
+    URL_ORIGEN: `${SITE_URL}/${countryState.country}/curso/${slug}`,
     Cursos_consultados: product?.ficha.title,
     URL_DESCARGA: product?.temario_link_pdf,
   };

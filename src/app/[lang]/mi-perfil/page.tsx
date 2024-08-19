@@ -17,6 +17,7 @@ import StorePagination from '@/components/MSK/Store/StorePagination';
 import { useRouter } from 'next/navigation';
 import RedirectToTrial from '@/components/RedirectToTrial/RedirectToTrial';
 import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
+import CursoPerfil from './CursoPerfil';
 
 export interface PageAuthorProps {
   className?: string;
@@ -139,7 +140,10 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
   // localStorage.removeItem('trialURL')
 
   return (
-    <div className={`nc-PageAuthor  ${className}`} data-nc-id='PageAuthor'>
+    <div
+      className={`nc-PageAuthor  ${className} lg:px-12`}
+      data-nc-id='PageAuthor'
+    >
       <RedirectToTrial />
       {/* HEADER */}
       <div className='animate-fade-down'>
@@ -190,7 +194,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
               />
               {currentItems.length ? (
                 <>
-                  <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mt-8 lg:mt-10 mb-8'>
+                  {/* <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mt-8 lg:mt-10 mb-8'>
                     {currentItems
                       ? currentItems.map((post, index) => (
                           <ProductAccount
@@ -200,6 +204,21 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
                           />
                         ))
                       : null}
+                  </div> */}
+                  <div
+                    className={`flex flex-wrap gap-4 ${
+                      currentItems.length >= 4
+                        ? 'justify-between'
+                        : 'justify-start'
+                    }`}
+                  >
+                    {currentItems.map((post, index) => (
+                      <CursoPerfil
+                        key={`${post.id}_${index}`}
+                        product={post}
+                        user={user}
+                      />
+                    ))}
                   </div>
 
                   {totalPages > 1 ? (

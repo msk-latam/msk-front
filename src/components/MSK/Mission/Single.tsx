@@ -56,7 +56,7 @@ const SingleContent: FC<SingleContentProps> = ({ data }) => {
           campus virtual práctico y cada profesional tendrá el apoyo y la
           asesoría permanente de nuestros agentes académicos.
         </p>
-        <p className='font-lora text-xl text-[#392C35]'>
+        <p className='font-lora text-xl text-[#6474A6]'>
           ¿Te gustaría alcanzar nuevos objetivos y obtener un mayor
           reconocimiento en tu profesión?
         </p>
