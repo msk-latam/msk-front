@@ -211,8 +211,8 @@ const ProductDetailSidebar: FC<Props> = ({
           {!isEbook && hasGateway && !product.is_presale_product && (
             <button
               onClick={() => requestTrial(slug)}
-              className='video-cart-btn border-2 w-full disabled:border-grey-disabled disabled:text-grey-disabled disabled:cursor-not-allowed hover:disabled:bg-transparent hover:disabled:border-grey-disabled hover:disabled:text-grey-disabled'
-              disabled={hasCoursedRequested}
+              className='video-cart-btn border-2 w-full disabled:!border-grey-disabled disabled:!text-grey-disabled disabled:cursor-not-allowed hover:disabled:!bg-transparent hover:!disabled:border-grey-disabled hover:!disabled:text-grey-disabled'
+              disabled={hasCoursedRequested || countryState.country === 'ar'}
             >
               {hasCoursedRequested
                 ? 'Prueba ya solicitada'
