@@ -145,9 +145,11 @@ export const getRebillV3Initialization = (country: string) => {
 
 const mappingCheckoutFields = (contactZoho: ContactCRM) => {
   const { area_code, number } = separatePhoneNumber(contactZoho.Phone);
-  const parsedIdentification = contactZoho.Identificacion.replaceAll('-', '');
-  console.log({ contactZoho, area_code, number, parsedIdentification });
-  return {
+  const parsedIdentification = contactZoho.Identificacion.replace(
+    /[\u2010-\u2015\u2212\uFE58\uFE63\uFF0D]/g,
+    '',
+  );
+  const mapping = {
     customerInformation: {
       firstName: contactZoho.First_Name,
       lastName: contactZoho.Last_Name,
@@ -179,6 +181,14 @@ const mappingCheckoutFields = (contactZoho: ContactCRM) => {
       contact_id: `x${contactZoho.id}`,
     },
   };
+
+  console.log(
+    { mapping, parsedIdentification },
+    typeof contactZoho.Identificacion,
+    contactZoho.Identificacion,
+  );
+
+  return mapping;
 };
 
 const getPlanV3 = (country: string) => {
