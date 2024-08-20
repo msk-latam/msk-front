@@ -107,13 +107,15 @@ const ProductDetailSidebar: FC<Props> = ({
   );
   //console.log(hasCoursedRequested)
   return (
-    <div className={`course-video-widget`}>
+    <div className={`flex  justify-center lg:block`}>
       <div
         className={`${
           isFixed && bottomDistance == 0 && !isEbook && fixedPosition
             ? 'course-widget-wrapper fixed'
             : 'course-widget-wrapper'
-        } ${bottomDistance != 0 && !isEbook ? 'absolute bottom-0' : ''}`}
+        } ${
+          bottomDistance != 0 && !isEbook ? 'absolute bottom-0' : 'bottom-10'
+        }`}
       >
         {isFixed && !isEbook ? (
           <>

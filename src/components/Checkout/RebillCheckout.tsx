@@ -1,3 +1,4 @@
+'use client';
 import React, {
   Dispatch,
   FC,
@@ -39,7 +40,7 @@ const RebillCheckout: FC<RebillCheckoutProps> = ({
   mountedInputObjectState,
 }) => {
   const [initedRebill, setInitedRebill] = useState<boolean | null>(null);
-  const { state: AuthState, dispatch } = useContext(AuthContext);
+  const { state: AuthState } = useContext(AuthContext);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

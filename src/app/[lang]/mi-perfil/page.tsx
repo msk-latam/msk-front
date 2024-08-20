@@ -17,6 +17,7 @@ import StorePagination from '@/components/MSK/Store/StorePagination';
 import { useRouter } from 'next/navigation';
 import RedirectToTrial from '@/components/RedirectToTrial/RedirectToTrial';
 import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
+import CursoPerfil from './CursoPerfil';
 
 export interface PageAuthorProps {
   className?: string;
@@ -139,7 +140,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
   // localStorage.removeItem('trialURL')
 
   return (
-    <div className={`nc-PageAuthor  ${className}`} data-nc-id='PageAuthor'>
+    <div className={`nc-PageAuthor  ${className} `} data-nc-id='PageAuthor'>
       <RedirectToTrial />
       {/* HEADER */}
       <div className='animate-fade-down'>
@@ -171,8 +172,8 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
       </div>
       {/* ====================== END HEADER ====================== */}
 
-      <div className='container py-16 lg:pb-28 lg:pt-20 space-y-16 lg:space-y-28'>
-        <main className='container'>
+      <div className='container py-16 lg:pb-28 lg:pt-20 space-y-16 lg:space-y-28 '>
+        <main className=' lg:px-24'>
           {loadingUser ? (
             <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mt-8 lg:mt-10 mb-8'>
               <ItemSkeleton />
@@ -201,6 +202,21 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
                         ))
                       : null}
                   </div>
+                  {/* <div
+                    className={`flex flex-wrap gap-4 ${
+                      currentItems.length >= 4
+                        ? 'justify-between'
+                        : 'justify-start'
+                    }`}
+                  >
+                    {currentItems.map((post, index) => (
+                      <CursoPerfil
+                        key={`${post.id}_${index}`}
+                        product={post}
+                        user={user}
+                      />
+                    ))}
+                  </div> */}
 
                   {totalPages > 1 ? (
                     <div className='flex justify-center'>

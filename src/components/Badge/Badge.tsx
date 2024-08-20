@@ -126,7 +126,9 @@ const Badge: FC<BadgeProps> = ({
     <Link
       href={href || ''}
       onClick={e => {
-        e.preventDefault(); // Evitar que el enlace se siga si se hace clic
+        if (onClick && !href) {
+          e.preventDefault(); // Evitar que el enlace se siga si no hay `href`
+        }
         onClick && onClick(); // Invocar onClick si está definido
       }}
       className={`items-center duration-300 ${CLASSES} ${getColorClass(false)}`}

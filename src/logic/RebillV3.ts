@@ -1,23 +1,13 @@
-import { sendToZoho } from './Zoho';
 import { ContactCRM, JsonMapping } from '@/data/types';
-import { Dispatch, SetStateAction } from 'react';
 import rebillCountryPriceMapping from '@/data/jsons/__rebillCurrencyPrices.json';
-import { getEnv } from '@/utils/getEnv';
-import ssr from '@/services/ssr';
 import translateDocumentType from '@/utils/translateDocumentType';
 import { IS_PROD } from '@/contains/constants';
 import {
   NEXT_PUBLIC_REBILL_API_KEY_PRD,
   NEXT_PUBLIC_REBILL_API_KEY_TEST,
-  NEXT_PUBLIC_REBILL_CL_API_KEY_PRD,
-  NEXT_PUBLIC_REBILL_CL_ORG_ID_PRD,
-  NEXT_PUBLIC_REBILL_COP_API_KEY_PRD,
-  NEXT_PUBLIC_REBILL_COP_ORG_ID_PRD,
   NEXT_PUBLIC_REBILL_ORG_ID_PRD,
   NEXT_PUBLIC_REBILL_ORG_ID_TEST,
   NEXT_PUBLIC_REBILL_URL,
-  NEXT_PUBLIC_REBILL_UY_API_KEY_PRD,
-  NEXT_PUBLIC_REBILL_UY_ORG_ID_PRD,
   NEXT_PUBLIC_REBILL_REBILL_CL_FREEMIUM_PRD,
   NEXT_PUBLIC_REBILL_REBILL_UY_FREEMIUM_PRD,
   NEXT_PUBLIC_REBILL_REBILL_CO_FREEMIUM_PRD,
@@ -33,7 +23,32 @@ import {
   NEXT_PUBLIC_REBILL_STRIPE_CR_FREEMIUM_PRD,
   NEXT_PUBLIC_REBILL_STRIPE_HN_FREEMIUM_PRD,
   NEXT_PUBLIC_REBILL_STRIPE_USD_FREEMIUM_PRD,
+  NEXT_PUBLIC_REBILL_CL_PK_PRD,
+  NEXT_PUBLIC_REBILL_CL_PK_TEST,
+  NEXT_PUBLIC_REBILL_COP_PK_PRD,
+  NEXT_PUBLIC_REBILL_COP_PK_TEST,
+  NEXT_PUBLIC_REBILL_UY_PK_PRD,
+  NEXT_PUBLIC_REBILL_UY_PK_TEST,
+  NEXT_PUBLIC_REBILL_MX_PK_PRD,
+  NEXT_PUBLIC_REBILL_MX_PK_TEST,
+  NEXT_PUBLIC_REBILL_DEPRECATED_PK_PRD,
+  NEXT_PUBLIC_REBILL_DEPRECATED_PK_TEST,
+  NEXT_PUBLIC_REBILL_MP_AR_V3_FREEMIUM_PRD,
+  NEXT_PUBLIC_REBILL_MP_AR_V3_FREEMIUM_TEST,
+  NEXT_PUBLIC_REBILL_REBILL_CL_V3_FREEMIUM_PRD,
+  NEXT_PUBLIC_REBILL_REBILL_CL_V3_FREEMIUM_TEST,
+  NEXT_PUBLIC_REBILL_REBILL_MX_V3_FREEMIUM_PRD,
+  NEXT_PUBLIC_REBILL_REBILL_MX_V3_FREEMIUM_TEST,
+  NEXT_PUBLIC_REBILL_REBILL_CO_V3_FREEMIUM_PRD,
+  NEXT_PUBLIC_REBILL_REBILL_CO_V3_FREEMIUM_TEST,
+  NEXT_PUBLIC_REBILL_REBILL_UY_V3_FREEMIUM_PRD,
+  NEXT_PUBLIC_REBILL_REBILL_UY_V3_FREEMIUM_TEST,
 } from '@/logic/constants/rebillPrices';
+import ssr from '@/services/ssr';
+import { getEnv } from '@/utils/getEnv';
+import { sendToZohoByRebillV3 } from './Zoho';
+import { RebillV3Event } from '@/types/RebillV3Types';
+import { separatePhoneNumber } from '@/utils/separatePhoneNumber';
 
 declare global {
   interface Window {
@@ -75,90 +90,112 @@ export const REBILL_CONF = {
     NEXT_PUBLIC_REBILL_REBILL_CL_FREEMIUM_PRD,
     NEXT_PUBLIC_REBILL_REBILL_UY_FREEMIUM_PRD,
     NEXT_PUBLIC_REBILL_REBILL_CO_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_REBILL_CO_V3_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_REBILL_CO_V3_FREEMIUM_TEST,
     NEXT_PUBLIC_REBILL_REBILL_CL_FREEMIUM_TEST,
+    NEXT_PUBLIC_REBILL_REBILL_CL_V3_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_REBILL_CL_V3_FREEMIUM_TEST,
     NEXT_PUBLIC_REBILL_REBILL_UY_FREEMIUM_TEST,
+    NEXT_PUBLIC_REBILL_REBILL_UY_V3_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_REBILL_UY_V3_FREEMIUM_TEST,
     NEXT_PUBLIC_REBILL_REBILL_CO_FREEMIUM_TEST,
     //DEPRECATE REBILL PRICES
-    NEXT_PUBLIC_REBILL_MP_AR_FREEMIUM_TEST,
-    NEXT_PUBLIC_REBILL_MP_AR_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_MP_AR_V3_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_MP_AR_V3_FREEMIUM_TEST,
+    //NEXT_PUBLIC_REBILL_MP_AR_FREEMIUM_TEST,
+    //NEXT_PUBLIC_REBILL_MP_AR_FREEMIUM_PRD,
     NEXT_PUBLIC_REBILL_STRIPE_BO_FREEMIUM_PRD,
     NEXT_PUBLIC_REBILL_STRIPE_PY_FREEMIUM_PRD,
     NEXT_PUBLIC_REBILL_STRIPE_PE_FREEMIUM_PRD,
     NEXT_PUBLIC_REBILL_STRIPE_CR_FREEMIUM_PRD,
     NEXT_PUBLIC_REBILL_STRIPE_HN_FREEMIUM_PRD,
     NEXT_PUBLIC_REBILL_STRIPE_USD_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_REBILL_MX_V3_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_REBILL_MX_V3_FREEMIUM_TEST,
   },
 };
 
-export const getRebillInitialization = (country: string) => {
+export const getRebillV3Initialization = (country: string) => {
+  console.log(country);
+
   switch (country) {
     case 'cl':
-      return {
-        organization_id: NEXT_PUBLIC_REBILL_CL_ORG_ID_PRD,
-        api_key: NEXT_PUBLIC_REBILL_CL_API_KEY_PRD,
-        api_url: REBILL_CONF.URL,
-      };
+      return IS_PROD
+        ? NEXT_PUBLIC_REBILL_CL_PK_PRD
+        : NEXT_PUBLIC_REBILL_CL_PK_TEST;
     case 'co':
-      return {
-        organization_id: NEXT_PUBLIC_REBILL_COP_ORG_ID_PRD,
-        api_key: NEXT_PUBLIC_REBILL_COP_API_KEY_PRD,
-        api_url: REBILL_CONF.URL,
-      };
+      return IS_PROD
+        ? NEXT_PUBLIC_REBILL_COP_PK_PRD
+        : NEXT_PUBLIC_REBILL_COP_PK_TEST;
     case 'uy':
-      return {
-        organization_id: NEXT_PUBLIC_REBILL_UY_ORG_ID_PRD,
-        api_key: NEXT_PUBLIC_REBILL_UY_API_KEY_PRD,
-        api_url: REBILL_CONF.URL,
-      };
+      return IS_PROD
+        ? NEXT_PUBLIC_REBILL_UY_PK_PRD
+        : NEXT_PUBLIC_REBILL_UY_PK_TEST;
+    case 'mx':
+      return IS_PROD
+        ? NEXT_PUBLIC_REBILL_MX_PK_PRD
+        : NEXT_PUBLIC_REBILL_MX_PK_TEST;
     default:
       //return te old rebill DEPRECATE_REBILL
-      return {
-        organization_id: REBILL_CONF.ORG_ID,
-        api_key: REBILL_CONF.API_KEY,
-        api_url: REBILL_CONF.URL,
-      };
+      return IS_PROD
+        ? NEXT_PUBLIC_REBILL_DEPRECATED_PK_PRD
+        : NEXT_PUBLIC_REBILL_DEPRECATED_PK_TEST;
   }
 };
 
 const mappingCheckoutFields = (contactZoho: ContactCRM) => {
-  //console.log({contactZoho})
-
-  return {
-    firstName: contactZoho.First_Name,
-    lastName: contactZoho.Last_Name,
-    email: contactZoho.Email,
-    phone: {
-      countryCode: '54',
-      areaCode: '11',
-      phoneNumber: contactZoho.Phone,
+  const { area_code, number } = separatePhoneNumber(contactZoho.Phone);
+  const parsedIdentification = contactZoho.Identificacion.replace(
+    /[\u2010-\u2015\u2212\uFE58\uFE63\uFF0D]/g,
+    '',
+  );
+  const mapping = {
+    customerInformation: {
+      firstName: contactZoho.First_Name,
+      lastName: contactZoho.Last_Name,
+      email: contactZoho.Email,
+      phoneNumber: {
+        countryCode: area_code,
+        number,
+      },
+      identification: {
+        type: translateDocumentType(contactZoho.Tipo_de_Documento),
+        id: parsedIdentification,
+      },
     },
-    birthday: contactZoho.Date_of_Birth ?? '99-99-9999',
-    taxId: {
-      type: 'CUIT',
-      value: '20' + contactZoho.Identificacion + '9',
-    },
-    personalId: {
-      type: translateDocumentType(contactZoho.Tipo_de_Documento),
-      value: contactZoho.Identificacion,
-    },
-    address: {
-      street: contactZoho.Mailing_Street ?? contactZoho.Pais,
-      number: '0',
-      floor: '0',
-      apt: '0',
+    billing: {
       city: contactZoho.Mailing_City ?? contactZoho.Pais,
-      state: contactZoho.Mailing_State ?? contactZoho.Pais,
-      zipCode: contactZoho.Mailing_Zip ?? contactZoho.Pais,
       country: contactZoho.Pais,
-      description: 'Pago en el sitio de MSK',
+      line1: contactZoho.Mailing_Street ?? `${contactZoho.Pais} 1234`,
+      zipCode: contactZoho.Mailing_Zip ?? contactZoho.Pais,
+      state: contactZoho.Mailing_State ?? contactZoho.Pais,
+    },
+    cardHolderDetails: {
+      identification: {
+        type: translateDocumentType(contactZoho.Tipo_de_Documento),
+        id: parsedIdentification,
+      },
+      name: `${contactZoho.First_Name} ${contactZoho.Last_Name}`,
+    },
+    metadata: {
+      contact_id: `x${contactZoho.id}`,
     },
   };
+
+  console.log(
+    { mapping, parsedIdentification },
+    typeof contactZoho.Identificacion,
+    contactZoho.Identificacion,
+  );
+
+  return mapping;
 };
 
-const getPlan = (country: string) => {
+const getPlanV3 = (country: string) => {
   const gateway = REBILL_CONF.GATEWAYS.REBILL.includes(country)
     ? 'REBILL'
     : null;
+
   const isDeprecateRebill = REBILL_CONF.GATEWAYS.DEPRECATE_REBILL.includes(
     country,
   )
@@ -169,28 +206,110 @@ const getPlan = (country: string) => {
       ? 'MP'
       : 'STRIPE'
     : null;
+
   const countryPrice = rebillCountriesPrices[country];
   const price = getEnv(
-    `REBILL_${gateway ?? isDeprecateRebillMP}_${countryPrice}_FREEMIUM`,
+    `REBILL_${gateway ?? isDeprecateRebillMP}_${countryPrice}_V3_FREEMIUM`,
   );
 
   console.log({ price, countryPrice });
 
   return {
     id: price,
-    quantity: 1,
   };
 };
 
 export const initRebillV3 = async (
-  user: any,
+  email: string | null,
   country: string,
   product: any,
-  RebillSDKCheckout: any,
-  setShow: Dispatch<SetStateAction<boolean>>,
-  setFaliedMessage: Dispatch<SetStateAction<string>>,
-  setPaymentCorrect: Dispatch<SetStateAction<boolean | null>>,
-  setMountedInput: Dispatch<SetStateAction<boolean>>,
+  setShow: any,
+  setFaliedMessage: any,
+  setPaymentCorrect: any,
 ) => {
-  const rebill = new Rebill('pk_test_eee4f877-6b08-4b35-8cc1-b283f97f6578');
+  if (email === null || email === '') {
+    throw new Error(`El email no esta disponible, email: ${email}`);
+  }
+
+  const contactZoho: ContactCRM = await ssr.getEmailByIdZohoCRM(
+    'Contacts',
+    email,
+  );
+  const rebillPk = getRebillV3Initialization(country);
+  //console.log({ country, rebillPk });
+  let RebillSDKCheckout = new window.Rebill(rebillPk);
+
+  const rebillPlan = getPlanV3(country);
+
+  const checkoutForm = RebillSDKCheckout.checkout.create(rebillPlan);
+
+  const customerDataMapping = mappingCheckoutFields(contactZoho);
+  //console.log({ customerDataMapping });
+
+  //checkoutForm.reset();
+  checkoutForm.set(customerDataMapping);
+
+  checkoutForm.custom({
+    css: `
+      h2#checkout-payment-title{
+        display: none;
+      }
+
+      #rebill-footer{
+        display: none;
+      }
+      
+      #title-coupon-container{
+        display: none;
+      }
+      
+      #checkout-form-container > form{
+        margin: 0 auto;
+      }
+    `,
+  });
+
+  //Hide elements of checkout
+  checkoutForm.display({
+    userLogin: false,
+    billing: false,
+    customerInformation: false,
+    cardholderDetails: false,
+    discountCode: false,
+    resetButton: false,
+    checkoutSummary: false,
+    excludePaymentMethods: ['CASH', 'REBILL_PIX', 'TRANSFER'],
+  });
+
+  checkoutForm.on('formStatus', (form: any) => {
+    console.log(form);
+  });
+
+  const user = {
+    id: contactZoho.id,
+    Usuario: contactZoho.Usuario,
+  };
+
+  checkoutForm.on('approved', (event: RebillV3Event) => {
+    console.log('approved!', { event });
+    sendToZohoByRebillV3(
+      event,
+      user,
+      country,
+      product,
+      setShow,
+      setPaymentCorrect,
+      setFaliedMessage,
+    );
+  });
+
+  checkoutForm.on('rejected', (event: any) => {
+    console.log('rejected!', { event });
+  });
+
+  checkoutForm.on('error', (event: any) => {
+    console.log('error', { event });
+  });
+
+  checkoutForm.mount('rebill');
 };

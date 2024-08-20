@@ -65,7 +65,7 @@ const SearchProducts = () => {
             //const currentCountry = cookies().get("country")?.value;
             let productsCountry =
               countryState.country == 'int' ? '' : countryState.country;
-            courses = await ssr.getStoreCourses(productsCountry);
+            courses = await ssr.getStoreCourses(productsCountry, window.location.href);
 
             setAuxProducts(courses);
             setProducts(courses);

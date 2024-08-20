@@ -11,6 +11,7 @@ import { BASE_URL, IS_PROD, SITE_URL } from '@/contains/constants';
 import { BodyNewPassword } from '@/components/MSK/PageNewPassword';
 import { notFound } from 'next/navigation';
 
+
 let validCountries = countries.map(item => item.id);
 
 const PROD = IS_PROD;
@@ -65,7 +66,7 @@ class ApiSSRService {
     country?: string,
     tag?: string,
     withAll: boolean = false,
-    currentUrl = '',
+    currentUrl = ''
   ) {
     setLoadingCourses(true);
 
@@ -75,7 +76,9 @@ class ApiSSRService {
     const countryParam = onValidCountry
       ? `&country=${country}`
       : '&country=int';
-    if (!tag) {
+
+    if (!tag){
+
       let tagFromURL = new URLSearchParams(currentUrl).get('tag');
       tag = tagFromURL ? tagFromURL : '';
     }
@@ -119,16 +122,16 @@ class ApiSSRService {
       ? `&country=${country}`
       : '&country=int';
 
-    const tagParam = new URLSearchParams(window.location.search).get('tag');
-    let tag = '';
-    if (tagParam) {
-      tag = `&tag=${tagParam}`;
+
+    let tagParam = '';
+    const tag = new URLSearchParams(currentUrl).get('tag');
+    if (tag) {
+      tagParam = `&tag=${tag}`;
     }
-    console.log('tag2', tag);
+
 
     try {
-      const queryParams = [countryParam, tag].filter(Boolean).join('');
-
+      const queryParams = [countryParam, tagParam].filter(Boolean).join('');
       const response = await fetch(
         `${API_URL}/products?limit=-1${queryParams}&asd=tes`,
       );
@@ -486,7 +489,7 @@ class ApiSSRService {
       } catch (error) {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        // console.log({error});
+        console.log({ error });
       }
     }
   }

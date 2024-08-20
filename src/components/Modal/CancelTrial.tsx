@@ -1,8 +1,8 @@
-import { useState, FC, useContext, useEffect } from "react";
-import NcModalSmall from "@/components/NcModal/NcModalSmall";
-import TrialModalContent from "@/components/NcModal/TrialModalContent";
-import { AuthContext } from "@/context/user/AuthContext";
-import api from "@/services/api";
+import { useState, FC, useContext, useEffect } from 'react';
+import NcModalSmall from '@/components/NcModal/NcModalSmall';
+import TrialModalContent from '@/components/NcModal/TrialModalContent';
+import { AuthContext } from '@/context/user/AuthContext';
+import api from '@/services/api';
 
 interface CancelTrialModalProps {
   item: any;
@@ -23,29 +23,33 @@ const CancelTrialModal: FC<CancelTrialModalProps> = ({
 
   const suspendTrial = async () => {
     const res = await api.cancelTrialCourse(item, authState);
-    console.log({res})
-    let errorConditionCRM = res.error ?? res.data[0].data[0].code.includes("INVALID_DATA");
+    console.log('item', item);
+    console.log('authState', authState);
 
-    if(!errorConditionCRM){
+    console.log({ res });
+    let errorConditionCRM =
+      res.error ?? res.data[0]?.data[0]?.code?.includes('INVALID_DATA');
+
+    if (!errorConditionCRM) {
       setOnRequest(false);
-      onCloseModal()
-      setConfirmModal(true)
-    }else{
+      onCloseModal();
+      setConfirmModal(true);
+    } else {
       setOnRequest(false);
-      onCloseModal()
-      setErrorModal(true)
+      onCloseModal();
+      setErrorModal(true);
     }
   };
 
   function closeModal() {
-    if (typeof isOpenProp !== "boolean") {
+    if (typeof isOpenProp !== 'boolean') {
       setOnRequest(false);
     }
     onCloseModal && onCloseModal();
   }
 
   function openModal() {
-    if (typeof isOpenProp !== "boolean") {
+    if (typeof isOpenProp !== 'boolean') {
       setOnRequest(true);
     }
   }
@@ -60,14 +64,14 @@ const CancelTrialModal: FC<CancelTrialModalProps> = ({
         isOpenProp={onRequest}
         onCloseModal={() => setOnRequest(false)}
         renderTrigger={() => null}
-        contentExtraClass="max-w-[500px]"
+        contentExtraClass='max-w-[500px]'
         renderContent={() => (
           <TrialModalContent
-            title="Tu prueba de 7 días gratis finalizará"
-            desc="Si más adelante deseas continuar 
+            title='Tu prueba de 7 días gratis finalizará'
+            desc='Si más adelante deseas continuar 
             con este curso, deberás inscribirte.
-            ¿Quieres darte de baja?"
-            textButton="Confirmar"
+            ¿Quieres darte de baja?'
+            textButton='Confirmar'
             cancelButton={true}
             setShow={setOnRequest}
             cancelTrial={suspendTrial}
@@ -80,33 +84,33 @@ const CancelTrialModal: FC<CancelTrialModalProps> = ({
         isOpenProp={confirmModal}
         onCloseModal={() => setConfirmModal(false)}
         renderTrigger={() => null}
-        contentExtraClass="max-w-[500px]"
+        contentExtraClass='max-w-[500px]'
         renderContent={() => (
           <TrialModalContent
-            title="Has finalizado tu prueba de 7 días gratis"
-            desc="Para continuar con este curso, debes inscribirte."
-            textButton="Ir al curso"
+            title='Has finalizado tu prueba de 7 días gratis'
+            desc='Para continuar con este curso, debes inscribirte.'
+            textButton='Ir al curso'
             productSlug={item.slug}
             setShow={setConfirmModal}
           />
         )}
       />
 
-        <NcModalSmall
-            isOpenProp={errorModal}
-            onCloseModal={() => setErrorModal(false)}
-            renderTrigger={() => null}
-            contentExtraClass="max-w-[500px]"
-            renderContent={() => (
-                <TrialModalContent
-                    title="Hubo un error al finalizar tu prueba"
-                    desc="Intenta nuevamente mas tarde"
-                    textButton="Volver"
-                    productSlug={item.slug}
-                    setShow={setErrorModal}
-                />
-            )}
-        />
+      <NcModalSmall
+        isOpenProp={errorModal}
+        onCloseModal={() => setErrorModal(false)}
+        renderTrigger={() => null}
+        contentExtraClass='max-w-[500px]'
+        renderContent={() => (
+          <TrialModalContent
+            title='Hubo un error al finalizar tu prueba'
+            desc='Intenta nuevamente mas tarde'
+            textButton='Volver'
+            productSlug={item.slug}
+            setShow={setErrorModal}
+          />
+        )}
+      />
     </>
   );
 };

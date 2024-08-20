@@ -6,6 +6,7 @@ import { UTMAction } from '@/context/utm/UTMContext';
 import { utmInitialState, utmReducer } from '@/context/utm/UTMReducer';
 import { FC, useContext, useEffect, useReducer, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Loading } from '@/utils/Loading';
 
 interface Props {
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,23 +22,54 @@ const signOutContent: FC<Props> = ({ setShow, onClose }) => {
   };
   const [utmState, dispatchUTM] = useReducer(utmReducer, utmInitialState);
 
-  const handleLogout = () => {
-    onClose();
-    router.push('/');
-    dispatchUTM(clearUTMAction);
-    dispatch({ type: 'LOGOUT' });
+  const [hasRedirected, setHasRedirected] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleLogout = async () => {
+    setLoading(true); // Activar estado de carga
+    try {
+      // Aquí podrías realizar alguna llamada API o lógica adicional
+      dispatchUTM(clearUTMAction);
+      dispatch({ type: 'LOGOUT' });
+    } catch (error) {
+      console.error('Error during logout:', error);
+    } finally {
+      setLoading(false); // Desactivar estado de carga
+      onClose(); // Cerrar el modal después de redirigir
+      router.push('/');
+    }
   };
+
+  // const handleLogout = () => {
+  //   setLoading(true);
+  //   // onClose();
+  //   setHasRedirected(true);
+  //   router.push('/');
+  // };
+
+  // useEffect(() => {
+  //   if (hasRedirected) {
+  //     dispatchUTM(clearUTMAction);
+  //     dispatch({ type: 'LOGOUT' });
+  //   }
+  //   setHasRedirected(false);
+  //   setLoading(false);
+  // }, [hasRedirected]);
+
+  // if (loading) {
+  //   return <Loading />;
+  // }
 
   return (
     <div className='flex flex-col items-center justify-center gap-3'>
       <p className='raleway text-lg'>Estás saliendo de tu cuenta.</p>
       <ButtonSecondary
-        onClick={() => handleLogout()}
+        onClick={handleLogout}
         sizeClass='py-3 '
         className='border-solid border-1 border-primary-6000 text-primary-6000 logout-button w-[160px]'
         bordered
       >
-        Confirmar
+        {loading ? 'Cargando...' : 'Confirmar'}
       </ButtonSecondary>
       <ButtonPrimary
         onClick={() => setShow(false)} // Triggeamos setShow(false) al hacer clic

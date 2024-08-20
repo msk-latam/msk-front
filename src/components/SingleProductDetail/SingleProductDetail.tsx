@@ -45,8 +45,8 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
   // @ts-ignore
   return (
     <section className='course-details-area my-1 pb-90'>
-      <div className='container'>
-        <div className='container grid grid-cols-1 lg:grid-cols-[65%_35%] mb-16'>
+      <div className='xl:pl-[10.5vw] 2xl:pr-[2vw]  xl:pr-24 2xl:pl-[8vw]'>
+        <div className=' grid grid-cols-1 lg:grid-cols-[65%_35%] mb-16'>
           <div className=''>
             <div className='course-details-wrapper animate-fade-down'>
               <Breadcrum isEbook={isEbook} onProduct={product} />
@@ -171,8 +171,10 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 
               {product.avales && (
                 <div
-                  className={`bg-neutral-100 slider-container px-10 py-10 rounded-2xl ${
-                    product.featured_product_text ? 'mb-22' : 'mb-24'
+                  className={`bg-neutral-100 slider-container px-8 py-2 md:px-10 md:py-10 rounded-2xl ${
+                    product.featured_product_text
+                      ? 'mb-16 md:mb-22'
+                      : 'mb-20 md:mb-24'
                   }`}
                 >
                   <SectionSliderPosts
@@ -221,26 +223,28 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
               />
             </div>
           </div>
-          <div className='order-last relative hidden lg:block'>
-            <ProductDetailSidebar
-              ficha={product.ficha}
-              details={product.details}
-              sideData={{
-                modalidad: product.modalidad,
-                curso_disponible: product.curso_disponible,
-                asesoramiento_academico: product.asesoramiento_academico,
-                certificacion: product.certificacion,
-                idioma: product.idioma,
-              }}
-              product={product}
-              isEbook={isEbook}
-              fixedPosition
-            />
+          <div className='flex justify-center lg:justify-start'>
+            <div className='order-last relative hidden lg:block'>
+              <ProductDetailSidebar
+                ficha={product.ficha}
+                details={product.details}
+                sideData={{
+                  modalidad: product.modalidad,
+                  curso_disponible: product.curso_disponible,
+                  asesoramiento_academico: product.asesoramiento_academico,
+                  certificacion: product.certificacion,
+                  idioma: product.idioma,
+                }}
+                product={product}
+                isEbook={isEbook}
+                fixedPosition
+              />
+            </div>
           </div>
         </div>
       </div>
 
-      <div className='container'>
+      <div className='px-20'>
         <div className='container grid grid-cols-1 md:grid-cols-3 gap-4 mb-4'>
           <ContactFormSection
             productName={product.ficha.title}
@@ -270,7 +274,7 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 
       {product.related_products.length ? (
         <div className='container relative py-16 mt-16 '>
-          <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-16 mb-[96px] w-full px-14'>
+          <div className='md:rounded-[40px] bg-neutral-100  dark:bg-black dark:bg-opacity-20 relative py-16 mb-[96px] w-full px-14'>
             <SectionSliderPosts
               posts={product.related_products}
               className='w-full section-slider-posts-container'

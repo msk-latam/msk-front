@@ -424,7 +424,7 @@ const StoreContent: FC<{}> = () => {
   }
 
   return (
-    <section className='lg:!px-28 container course-content-area pb-90 animate-fade-down px-0'>
+    <section className='lg:!px-18 container course-content-area pb-90 animate-fade-down px-0'>
       <Breadcrum />
 
       {storeFilters.specialties.length > 0 && (
@@ -433,7 +433,7 @@ const StoreContent: FC<{}> = () => {
         </h1>
       )}
 
-      <div className='grid grid-cols-1 lg:grid-cols-[28%_72%] gap-4 mb-10'>
+      <div className='grid grid-cols-1 lg:grid-cols-[28%_72%] gap-6 mb-10'>
         <div className='hidden lg:flex flex-col'>
           <StoreSideBar
             onChangeSpecialty={onChangeSpecialty}

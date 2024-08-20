@@ -6,6 +6,7 @@ import SingleContent from '@/components/MSK/Blog/Post/SingleContent';
 import { cookies } from 'next/headers';
 import { IS_PROD, SITE_URL } from '@/contains/constants';
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
 
 interface PageCourseProps {
   params: any;
@@ -63,7 +64,7 @@ const PageNota: FC<PageCourseProps> = async ({ params }) => {
           {/* SINGLE HEADER */}
           <div className='note-header-background' />
           <div className='dark container relative z-10'>
-            <div className={'container'}>
+            <div className={'lg:px-12'}>
               <SingleHeader
                 hiddenDesc={false}
                 metaActionStyle='style2'
@@ -74,24 +75,24 @@ const PageNota: FC<PageCourseProps> = async ({ params }) => {
             </div>
           </div>
           {/* FEATURED IMAGE */}
-          <div className='px-[16px] '>
-            {post.featured_image && post.featured_image.length ? (
-              <div className='container rounded-lg md:rounded-[40px] relative overflow-hidden top-8 header-image-container '>
+          <div className='px-6'>
+            {post.featured_image?.length > 0 && (
+              <div className='container rounded-lg md:rounded-[40px] relative overflow-hidden top-8 header-image-container'>
                 <NcImage
                   containerClassName='absolute inset-0'
                   src={post.featured_image[0]}
+                  alt={post.title}
                   className='object-cover w-full h-full'
-                  alt={`${post.title}`}
-                  height='500'
-                  width='1080'
+                  height={500}
+                  width={1080}
                 />
               </div>
-            ) : null}
+            )}
           </div>
         </header>
 
         {/* SINGLE MAIN CONTENT */}
-        <div className=' flex flex-col col-span-12 w-full lg:flex-row note-container'>
+        <div className=' flex flex-col col-span-12 w-full lg:flex-row note-container '>
           <div className='w-full  md:mt-0'>
             <SingleContent
               data={post}

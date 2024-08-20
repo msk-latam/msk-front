@@ -6,13 +6,13 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import InputSkeleton from '@/components/Skeleton/InputSkeleton';
 import Image from 'next/image';
 import rbImg from '/public/images/rebill.svg';
 import TextSkeleton from '@/components/Skeleton/TextSkeleton';
-import { getRebillInitialization, initRebill } from '@/logic/Rebill';
 import { AuthContext } from '@/context/user/AuthContext';
 import { FetchSingleProduct } from '@/data/types';
+import { initRebillV3 } from '@/logic/RebillV3';
+import { useAuth } from '@/hooks/useAuth';
 
 interface RebillCheckoutV3Props {
   product: FetchSingleProduct | undefined;
@@ -39,24 +39,18 @@ const RebillCheckoutV3: FC<RebillCheckoutV3Props> = ({
   mountedInputObjectState,
 }) => {
   const [initedRebill, setInitedRebill] = useState<boolean | null>(null);
-  const { state: AuthState, dispatch } = useContext(AuthContext);
+  const { profile, email } = useAuth();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       console.log('WINDOW', { window }, window.Rebill);
       if (typeof window.Rebill !== 'undefined') {
-        const initialization = getRebillInitialization(country);
-
-        console.log({ initialization });
-
-        let RebillSDKCheckout = new window.Rebill.PhantomSDK(initialization);
-
         const verifiedCoursedRequested =
           hasCoursedRequested != null && !hasCoursedRequested;
         const verifiedProductAndProfile =
           typeof product !== 'undefined' &&
-          AuthState.profile != null &&
-          Object.keys(AuthState.profile).length > 1;
+          profile != null &&
+          Object.keys(profile).length > 1;
 
         if (
           initedRebill == null &&
@@ -65,31 +59,37 @@ const RebillCheckoutV3: FC<RebillCheckoutV3Props> = ({
           !showMissingData
         ) {
           setInitedRebill(true);
-          console.group('Rebill');
+          console.group('RebillV3');
           localStorage.removeItem('trialURL');
-          //console.log({user: AuthState, country, product, RebillSDKCheckout, setShow, setFaliedMessage, setPaymentCorrect, setMountedInput})
-          initRebill(
-            AuthState,
-            country,
-            product,
-            RebillSDKCheckout,
-            setShow,
-            setFaliedMessage,
-            setPaymentCorrect,
-            mountedInputObjectState.setState,
-          );
+          console.log({ user: profile });
+
+          try {
+            initRebillV3(
+              email,
+              country,
+              product,
+              setShow,
+              setFaliedMessage,
+              setPaymentCorrect,
+            );
+            mountedInputObjectState.setState(true);
+          } catch (err) {
+            console.log(err);
+            mountedInputObjectState.setState(false);
+          }
+
           console.groupEnd();
         }
       }
     }
-  }, [product, hasCoursedRequested, AuthState.profile]);
+  }, [product, hasCoursedRequested, profile]);
 
   return (
     <>
       <div id='rebill' className='flex items-center justify-center h-auto'>
-        {mountedInputObjectState.state && (
+        {/*  {mountedInputObjectState.state && (
           <InputSkeleton className='w-[390px]' />
-        )}
+        )} */}
       </div>
 
       {mountedInputObjectState.state ? (

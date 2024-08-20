@@ -1,11 +1,11 @@
-"use client";
-import React, { FC, useEffect, useRef, useState } from "react";
-import NcImage from "@/components/NcImage/NcImage";
-import { slugifySpecialty } from "@/lib/Slugify";
-import Link from "next/link";
-import NcModal from "@/components/NcModal/NcModal";
-import SpecialtiesModal from "./SpecialtiesModal";
-import NcLink from "@/components/NcLink/NcLink";
+'use client';
+import React, { FC, useEffect, useRef, useState } from 'react';
+import NcImage from '@/components/NcImage/NcImage';
+import { slugifySpecialty } from '@/lib/Slugify';
+import Link from 'next/link';
+import NcModal from '@/components/NcModal/NcModal';
+import SpecialtiesModal from './SpecialtiesModal';
+import NcLink from '@/components/NcLink/NcLink';
 
 export interface SingleContentSidebarFixedItemProps {
   articles: any[];
@@ -25,7 +25,7 @@ const SingleContentSidebarFixedItem: FC<SingleContentSidebarFixedItemProps> = ({
   const [recommendedCourses, setRecommendedCourses] = useState<any>([]);
   useEffect(() => {
     const courseList = the_most_read.map((course: any) => {
-      var urlParts = course.link.split("/");
+      var urlParts = course.link.split('/');
       return { ...course, slug: urlParts[urlParts.length - 2] };
     });
     setRecommendedCourses(courseList);
@@ -50,26 +50,24 @@ const SingleContentSidebarFixedItem: FC<SingleContentSidebarFixedItemProps> = ({
       const auxDistance = scrollPosition - distanceToBottom - 100;
       setBottomDistance(distanceToBottom < 1200 ? auxDistance / 3 : 0);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   return (
     <div
       className={`${
-        isFixed &&
-        bottomDistance == 0 &&
-        "col-span-12 lg:col-span-4 post-side-data lg:fixed lg:max-w-[330px] xl:max-w-[420px]"
-      } ${bottomDistance != 0 ? "absolute bottom-0" : ""}`}
+        isFixed && bottomDistance == 0 && '  lg:fixed top-[100px]'
+      } ${bottomDistance != 0 ? 'absolute bottom-0' : ''}`}
     >
-      <div className="side-content rounded-2xl mb-2">
-        <div className="flex w-full">
-          <h5 className="side-content-header p-2.5">🎯 Los más leídos</h5>
+      <div className='bg-[#f3f4f6] rounded-2xl mb-2 lg:max-w-[27vw] xl:max-w-[24.6vw] 2xl:max-w-[25.8vw]'>
+        <div className='flex '>
+          <h5 className=' p-2.5'>🎯 Los más leídos</h5>
           <Link
             href={`/archivo`}
-            className="course-network text-primary font-semibold text-sm my-auto ml-auto mr-4"
+            className='course-network text-primary font-semibold text-sm my-auto ml-auto mr-4'
           >
             Ver todos
           </Link>
@@ -78,17 +76,17 @@ const SingleContentSidebarFixedItem: FC<SingleContentSidebarFixedItemProps> = ({
           <Link
             href={`/blog/${course.slug}`}
             key={`rc_${index}`}
-            className="side-content-course"
+            className='side-content-course'
           >
             <NcImage
-              containerClassName="flex-shrink-0 h-8 w-8 rounded-lg overflow-hidden lg:h-10 lg:w-10"
+              containerClassName='flex-shrink-0 h-8 w-8 rounded-lg overflow-hidden lg:h-10 lg:w-10'
               src={course.image}
-              alt=""
-              width="100"
-              height="100"
+              alt=''
+              width='100'
+              height='100'
             />
             <p>
-              <span className="category">{course.category}</span>
+              <span className='category'>{course.category}</span>
               <span>{course.title}</span>
             </p>
           </Link>
@@ -136,10 +134,10 @@ const SingleContentSidebarFixedItem: FC<SingleContentSidebarFixedItemProps> = ({
         renderTrigger={() => {
           return null;
         }}
-        contentExtraClass="max-w-screen-lg"
+        contentExtraClass='max-w-screen-lg'
         renderContent={() => <SpecialtiesModal setShow={setShowSpecialties} />}
-        modalTitle="Especialidades"
-        modalSubtitle=""
+        modalTitle='Especialidades'
+        modalSubtitle=''
         centerTitle
       />
     </div>

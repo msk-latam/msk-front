@@ -45,6 +45,8 @@ const Excerpt: React.FC<NoteExtraDataProps> = ({
             className='mb-7 font-lora text-slate-500 text-xl'
           />
           <Link
+            target='_blank'
+            rel='noopener noreferrer'
             href={suggest_content?.link.url as string}
             className='nc-Button  transition-colors rounded text-sm sm:text-base px-4 py-2 sm:px-5  ttnc-ButtonPrimary bg-primary-6000 text-neutral-50 hover:bg-red-500 hover:text-neutral-50 font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-6000 dark:focus:ring-offset-0 no-underline'
           >

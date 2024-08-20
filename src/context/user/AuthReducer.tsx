@@ -1,28 +1,28 @@
-import { AuthState, AuthAction } from "@/data/types";
+import { AuthState, AuthAction } from '@/data/types';
 
-const LOGIN = "LOGIN";
-const LOGOUT = "LOGOUT";
-const FRESH = "FRESH";
-const UPDATE_PROFILE = "UPDATE_PROFILE";
-const UPDATE_COURSES = "UPDATE_COURSES";
+const LOGIN = 'LOGIN';
+const LOGOUT = 'LOGOUT';
+const FRESH = 'FRESH';
+const UPDATE_PROFILE = 'UPDATE_PROFILE';
+const UPDATE_COURSES = 'UPDATE_COURSES';
 
 export const authReducer = (
   state: AuthState,
-  action: AuthAction
+  action: AuthAction,
 ): AuthState => {
   switch (action.type) {
     case LOGIN:
-      localStorage.setItem("token", action.payload.access_token);
-      localStorage.setItem("email", action.payload.email);
-      localStorage.setItem("expires_at", action.payload.expires_at);
+      localStorage.setItem('token', action.payload.access_token);
+      localStorage.setItem('email', action.payload.email);
+      localStorage.setItem('expires_at', action.payload.expires_at);
       localStorage.setItem(
-        "user",
+        'user',
         JSON.stringify({
           name: action.payload.user.name,
           speciality: action.payload.user.speciality,
-        })
+        }),
       );
-      const user = localStorage.getItem("user");
+      const user = localStorage.getItem('user');
       return {
         ...state,
         isAuthenticated: true,
@@ -36,9 +36,9 @@ export const authReducer = (
       };
 
     case LOGOUT:
-      localStorage.removeItem("token");
-      localStorage.removeItem("email");
-      localStorage.removeItem("user");
+      localStorage.removeItem('token');
+      localStorage.removeItem('email');
+      localStorage.removeItem('user');
 
       return {
         ...state,
@@ -53,30 +53,34 @@ export const authReducer = (
 
     case FRESH:
       localStorage.setItem(
-        "user",
+        'user',
         JSON.stringify({
           name: action.payload.user.name,
           speciality: action.payload.user.speciality,
-        })
+        }),
       );
 
-      const userInLocal = localStorage.getItem("user");
+      const userInLocal = localStorage.getItem('user');
       return {
         ...state,
         isAuthenticated: true,
         user: userInLocal ? JSON.parse(userInLocal) : null,
       };
     case UPDATE_PROFILE:
+      console.log('UPDATE_PROFILE / AUTH REDUCER', { action });
       let profileInLocal = {
         ...state,
-        user: localStorage.getItem("user") != null ? JSON.parse(localStorage.getItem("user") as string) : null,
-        email: localStorage.getItem("email"),
-        token: localStorage.getItem("token"),
-        expires_at: localStorage.getItem("expires_at"),
+        user:
+          localStorage.getItem('user') != null
+            ? JSON.parse(localStorage.getItem('user') as string)
+            : null,
+        email: localStorage.getItem('email'),
+        token: localStorage.getItem('token'),
+        expires_at: localStorage.getItem('expires_at'),
         profile: action.payload.profile,
       };
 
-      return {...profileInLocal};
+      return { ...profileInLocal };
     case UPDATE_COURSES:
       return {
         ...state,

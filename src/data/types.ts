@@ -186,6 +186,19 @@ export interface UserProfile {
   courses_progress: CourseProgress[];
   contact?: Contact;
   identification?: string;
+  trial_course_sites: Trial_course_sites[];
+}
+export interface Trial_course_sites {
+  id: number;
+  trial_status: string;
+  contact_entity_id: string;
+  contractJson: string;
+  trial_finish_at: string;
+  trial_cancelled_at: string;
+  retry_trial_quantity: number;
+  rebill_response: any;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface CustomUser {
@@ -818,6 +831,7 @@ export type ContactCRM = {
   Pais: string;
   Full_Name: string;
   id: string;
+  Usuario: string;
 };
 
 export interface WpProduct {

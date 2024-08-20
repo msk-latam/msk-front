@@ -12,11 +12,9 @@ import NcModalSmall from '@/components/NcModal/NcModalSmall';
 import TrialModalContent from '@/components/NcModal/TrialModalContent';
 import MissingModalContent from '@/components/NcModal/MissingModalContent';
 import useSingleProduct from '@/hooks/useSingleProduct';
-import { AuthContext } from '@/context/user/AuthContext';
-import ssr from '@/services/ssr';
-import RebillCheckout from '@/components/Checkout/RebillCheckout';
 import MercadoPagoCheckout from '@/components/Checkout/MercadoPagoCheckout';
-import Script from 'next/script';
+import RebillCheckoutV3 from '@/components/Checkout/RebillCheckoutV3';
+import StripeCheckout from '@/components/Stripe/StripeCheckout';
 
 export interface PageTrialSuscribeProps {
   className?: string;
@@ -28,7 +26,6 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
   const {
     countryState: { country },
   } = useContext(CountryContext);
-  const { state: AuthState, dispatch } = useContext(AuthContext);
   const { slug }: { slug: string } = useParams();
   const { product } = useSingleProduct(slug, { country });
 
@@ -37,13 +34,12 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
   const [mountedInput, setMountedInput] = useState<boolean>(false);
   const [faliedMessage, setFaliedMessage] = useState<string>('');
   const [paymentCorrect, setPaymentCorrect] = useState<boolean | null>(null);
-
-  let installments = 0 as number | null;
+  const [installments, setInstallments] = useState<number>(0);
 
   const [totalAmount, setTotalAmount] = useState(0);
   const [installmentAmount, setInstallmentAmount] = useState(0);
 
-  const { executeRecaptcha } = useGoogleReCaptcha();
+  // const { executeRecaptcha } = useGoogleReCaptcha();
 
   let gateway: null | string = null;
   if (installmentsJSON && country && installmentsJSON[country]) {
@@ -54,6 +50,7 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
     state: mountedInput,
     setState: setMountedInput,
   };
+
   const {
     hasCoursedRequested,
     showAlreadyRequest,
@@ -64,7 +61,7 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
 
   useEffect(() => {
     if (installmentsJSON && country && installmentsJSON[country]) {
-      installments = installmentsJSON[country].quotes;
+      setInstallments(installmentsJSON[country].quotes as number);
     }
 
     if (typeof product !== 'undefined' && installments != null) {
@@ -82,29 +79,12 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
     }
   }, [product]);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const profile = AuthState.profile;
-      console.log('Profile Effect', { profile });
-
-      const fetchProfile = async () => {
-        const res = await ssr.getUserData();
-        // console.log(res)
-        dispatch({ type: 'UPDATE_PROFILE', payload: { profile: res.contact } });
-      };
-
-      if (profile == null || typeof AuthState === 'undefined') {
-        fetchProfile();
-      }
-    }
-  }, [AuthState.profile]);
-
   const renderCheckoutComponent = () => {
-    console.log({ gateway });
+    //console.log({ gateway });
     switch (gateway) {
       case 'REBILL':
         return (
-          <RebillCheckout
+          <RebillCheckoutV3
             product={product}
             hasCoursedRequested={hasCoursedRequested}
             country={country}
@@ -130,10 +110,20 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
           />
         );
       case 'ST':
-      // return <StripePaymentForm payment={invoiceDetail} currency={currencyOptions.currency} />;
+        return (
+          <StripeCheckout
+            product={product}
+            country={country}
+            quotes={installments}
+            setShow={setShow}
+            setFaliedMessage={setFaliedMessage}
+            setPaymentCorrect={setPaymentCorrect}
+            mountedInputObjectState={mountedInputObjectState}
+          />
+        );
       default:
         return (
-          <RebillCheckout
+          <RebillCheckoutV3
             product={product}
             hasCoursedRequested={hasCoursedRequested}
             country={country}
@@ -149,13 +139,6 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
 
   return (
     <div ref={viewRef} className='nc-PageSuscribe relative animate-fade-down'>
-      <Script
-        strategy='afterInteractive'
-        src='https://sdk.rebill.to/v2/rebill.min.js'
-        onLoad={e => {
-          console.log('Rebill script loaded', { e });
-        }}
-      />
       <div className='relative overflow-hidden'>
         <div className='container grid grid-cols-1 lg:grid-cols-[60%_40%] gap-5 my-24'>
           <TrialInfo

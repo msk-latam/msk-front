@@ -5,7 +5,7 @@ import Badge from '@/components/Badge/Badge';
 import { goToEnroll, goToLMS, statusCourse } from '@/lib/account';
 import CentroAyudaLink from '@/components/CentroAyudaLink/CentroAyudaLink';
 import { CountryContext } from '@/context/country/CountryContext';
-import ProductAccountButton from './ProductAccountButton';
+import { ProductAccountButton } from './ProductAccountButton';
 import InfoText from '@/components/InfoText/InfoText';
 import { STATUS } from '@/data/MSK/statusCourses';
 import useInterval from '@/hooks/useInterval';
@@ -34,7 +34,7 @@ const ProductAccount: FC<Props> = ({
       product?.status !== STATUS.SUSPEND,
   );
 
-  console.log('product account', product);
+  //console.log('product account', product);
 
   const showHelp =
     product.ov === 'Baja' ||

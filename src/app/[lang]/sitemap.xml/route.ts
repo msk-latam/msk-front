@@ -22,8 +22,9 @@ const staticRoutes: SitemapProps[] = [
   { path: '/bases-promocionales/', changefreq: 'yearly', priority: 0.6 },
 ];
 
-async function fetchProductRoutes(country: string): Promise<SitemapProps[]> {
-  const products = await ssr.getStoreCourses(country);
+async function fetchProductRoutes(req: NextRequest, country: string): Promise<SitemapProps[]> {
+  const currentUrl = req.url;
+  const products = await ssr.getStoreCourses(country, currentUrl);
   return products.map((product: { slug: string }) => ({
     path: `/curso/${product.slug}/`,
     changefreq: 'weekly',

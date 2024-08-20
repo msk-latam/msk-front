@@ -33,6 +33,14 @@ import {
   NEXT_PUBLIC_REBILL_STRIPE_CR_FREEMIUM_PRD,
   NEXT_PUBLIC_REBILL_STRIPE_HN_FREEMIUM_PRD,
   NEXT_PUBLIC_REBILL_STRIPE_USD_FREEMIUM_PRD,
+  NEXT_PUBLIC_REBILL_REBILL_CL_V3_FREEMIUM_PRD,
+  NEXT_PUBLIC_REBILL_REBILL_UY_V3_FREEMIUM_PRD,
+  NEXT_PUBLIC_REBILL_REBILL_MX_V3_FREEMIUM_PRD,
+  NEXT_PUBLIC_REBILL_REBILL_CL_V3_FREEMIUM_TEST,
+  NEXT_PUBLIC_REBILL_REBILL_UY_V3_FREEMIUM_TEST,
+  NEXT_PUBLIC_REBILL_REBILL_MX_V3_FREEMIUM_TEST,
+  NEXT_PUBLIC_REBILL_REBILL_CO_V3_FREEMIUM_PRD,
+  NEXT_PUBLIC_REBILL_REBILL_CO_V3_FREEMIUM_TEST,
 } from '@/logic/constants/rebillPrices';
 
 declare global {
@@ -78,6 +86,15 @@ export const REBILL_CONF = {
     NEXT_PUBLIC_REBILL_REBILL_CL_FREEMIUM_TEST,
     NEXT_PUBLIC_REBILL_REBILL_UY_FREEMIUM_TEST,
     NEXT_PUBLIC_REBILL_REBILL_CO_FREEMIUM_TEST,
+    //V3 PLANS
+    NEXT_PUBLIC_REBILL_REBILL_CL_V3_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_REBILL_UY_V3_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_REBILL_CO_V3_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_REBILL_MX_V3_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_REBILL_CL_V3_FREEMIUM_TEST,
+    NEXT_PUBLIC_REBILL_REBILL_UY_V3_FREEMIUM_TEST,
+    NEXT_PUBLIC_REBILL_REBILL_CO_V3_FREEMIUM_TEST,
+    NEXT_PUBLIC_REBILL_REBILL_MX_V3_FREEMIUM_TEST,
     //DEPRECATE REBILL PRICES
     NEXT_PUBLIC_REBILL_MP_AR_FREEMIUM_TEST,
     NEXT_PUBLIC_REBILL_MP_AR_FREEMIUM_PRD,
@@ -208,39 +225,9 @@ export const initRebill = async (
         value: contactZoho.Identificacion,
       },
     };
-    console.log(cardHolder);
+    console.log({ cardHolder, RebillSDKCheckout });
     //Seteo de identidicacion del customer
     RebillSDKCheckout.setCardHolder(cardHolder);
-
-    //Seteo de plan para cobrar
-    const { id, quantity } = getPlan(country);
-    RebillSDKCheckout.setTransaction({
-      prices: [
-        {
-          id,
-          quantity,
-        },
-      ],
-    }).then((price_setting: any) => console.log({ price_setting }));
-
-    //Seteo de callbacks en saco de que el pago este correcto o tengo algun fallo
-    RebillSDKCheckout.setCallbacks({
-      onSuccess: (response: any) => {
-        console.log('Rebill success callback');
-        sendToZoho(
-          response,
-          contactZoho,
-          country,
-          product,
-          setShow,
-          setPaymentCorrect,
-          setFaliedMessage,
-        );
-      },
-      onError: (error: any) => {
-        console.error({ callbackRebillError: error });
-      },
-    });
 
     //Seteo metadata de la suscripcio
     RebillSDKCheckout.setMetadata({
@@ -290,6 +277,39 @@ export const initRebill = async (
         },
       },
     });
+
+    //Seteo de callbacks en saco de que el pago este correcto o tengo algun fallo
+    RebillSDKCheckout.setCallbacks({
+      onSuccess: (response: any) => {
+        console.log('Rebill success callback');
+        sendToZoho(
+          response,
+          contactZoho,
+          country,
+          product,
+          setShow,
+          setPaymentCorrect,
+          setFaliedMessage,
+        );
+      },
+      onError: (error: any) => {
+        console.error({ callbackRebillError: error });
+      },
+    });
+
+    //Seteo de plan para cobrar
+    const { id, quantity } = getPlan(country);
+
+    RebillSDKCheckout.setTransaction({
+      prices: [
+        {
+          id,
+          quantity,
+        },
+      ],
+    })
+      .then((res: any) => console.log({ res }))
+      .catch((err: any) => console.error({ err }));
 
     //Aplicar configuracion al DOM
     RebillSDKCheckout.setElements('rebill_elements');

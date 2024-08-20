@@ -18,28 +18,32 @@ export const parseHtml = (
 
     const spanElements = tempElement.querySelectorAll('span');
     spanElements.forEach(span => {
-      //console.log({span, options})
       if (
         options != null ||
         (!span.classList.contains('font-lora') && span.id != 'font-lora-italic')
       ) {
-        // Si no tiene la clase 'font-lora', remueve todas las clases existentes
         span.className = '';
         if (options != null && options.ignoreClassName !== 'font-lora') {
           span.classList.add('font-lora');
         }
-        // Agrega la clase 'font-lora'
       }
+
       const brElements = span.querySelectorAll('br');
-      brElements.forEach(brElement => {
-        if (brElement.parentNode) {
-          brElement?.parentNode.removeChild(brElement);
+      let brCount = 0;
+
+      brElements.forEach((brElement, index) => {
+        if (brElement.previousElementSibling?.tagName === 'BR') {
+          brCount++;
+        } else {
+          brCount = 0;
+        }
+        if (brCount >= 2) {
+          brElement.remove();
         }
       });
     });
 
     ulElements.forEach(ulElement => {
-      // Buscar elementos LI dentro de cada UL
       ulElement.classList.add('m-0', 'flex', 'flex-col');
       const liElements = ulElement.querySelectorAll('li');
       const brElements = ulElement.querySelectorAll('br');
@@ -56,7 +60,12 @@ export const parseHtml = (
           liElement.classList.add('mt-6');
         }
 
-        liElement.classList.add('flex', 'items-start', 'mb-6');
+        liElement.classList.add(
+          'flex',
+          'items-start',
+          'mb-6',
+          'md:items-center',
+        );
 
         const spanElements = liElement.querySelectorAll('span');
 
@@ -71,7 +80,7 @@ export const parseHtml = (
         });
 
         const imgElement = document.createElement('img');
-        imgElement.classList.add('m-0', 'mr-3', 'mt-1', 'w-5');
+        imgElement.classList.add('m-0', 'mr-3', 'w-5', 'mt-2');
         //console.log({ imgElement });
         imgElement.src = '/images/vectors/isotipo.svg'; // Cambia la URL de la imagen según tus necesidades
         imgElement.alt = 'Imagen'; // Cambia el texto alternativo según tus necesidades

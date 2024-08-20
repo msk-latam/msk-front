@@ -1,16 +1,17 @@
-"use client";
-import React from "react";
-import breadcrumHomeIcon from "/public/images/icons/breadcrum_home.svg";
-import breadcrumArrowIcon from "/public/images/icons/breadcrum_arrow.svg";
-import breadcrumHomeIconWhite from "/public/images/icons/breadcrum_home_white.svg";
-import breadcrumArrowIconWhite from "/public/images/icons/breadcrum_arrow_white.svg";
-import breadcrumMapping from "@/data/jsons/__breadcrums.json";
-import specialtiesMapping from "@/data/jsons/__specialties.json";
-import notesMapping from "@/data/jsons/__notes.json";
-import { JsonMapping } from "@/data/types";
-import NcLink from "../NcLink/NcLink";
-import Image from "next/image";
-import {usePathname} from "next/navigation";
+'use client';
+import React, { useContext } from 'react';
+import breadcrumHomeIcon from '/public/images/icons/breadcrum_home.svg';
+import breadcrumArrowIcon from '/public/images/icons/breadcrum_arrow.svg';
+import breadcrumHomeIconWhite from '/public/images/icons/breadcrum_home_white.svg';
+import breadcrumArrowIconWhite from '/public/images/icons/breadcrum_arrow_white.svg';
+import breadcrumMapping from '@/data/jsons/__breadcrums.json';
+import specialtiesMapping from '@/data/jsons/__specialties.json';
+import notesMapping from '@/data/jsons/__notes.json';
+import { JsonMapping } from '@/data/types';
+import NcLink from '../NcLink/NcLink';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { CountryContext } from '@/context/country/CountryContext';
 
 interface BreadcrumbMapping {
   [key: string]: string[];
@@ -32,75 +33,76 @@ const Breadcrum: React.FC<BreadcrumProps> = ({
   onProduct = false,
   onNote = false,
 }) => {
+  const { countryState: countryState } = useContext(CountryContext);
+
   const pathname = usePathname();
-  const parts = pathname.split("/").filter((part) => part !== "");
+  const parts = pathname.split('/').filter(part => part !== '');
 
   // Construir la ruta acumulativa
   const breadcrumMap: BreadcrumbMapping = breadcrumMapping;
 
-  const partsBreadcrumb = parts.map((part) => {
+  const partsBreadcrumb = parts
+    .map(part => {
       if (part.length === 2 && /^[a-z]+$/i.test(part)) {
         // Si es un código ISO de país, no lo agregamos a la ruta acumulativa
         return false;
       }
 
-
-      let rutaAcumulativa = "";
-      rutaAcumulativa += "/" + part;
+      let rutaAcumulativa = '';
+      rutaAcumulativa += '/' + part;
       return breadcrumMap[rutaAcumulativa];
-    }).filter(Boolean) as string[][];
-
+    })
+    .filter(Boolean) as string[][];
 
   // Aplanar el array de segmentos
   const partsFlattened = ([] as string[])
     .concat(...partsBreadcrumb)
-    .map((part) => {
-      if (part.includes("mainCategory") && onProduct.ficha) {
+    .map(part => {
+      if (part.includes('mainCategory') && onProduct.ficha) {
         return onProduct.ficha.categorias[0].name;
       }
 
-      if (part.includes("mainCategory") && onNote) {
+      if (part.includes('mainCategory') && onNote) {
         return onNote.categories[0].name;
       }
-      if (part.includes("Curso|Guía profesional")) {
+      if (part.includes('Curso|Guía profesional')) {
         return isEbook ? onProduct.ficha.title : onProduct?.ficha?.title;
       }
 
-      if (part.includes("searchCategory")) {
-        if (typeof window === "undefined") return part;
+      if (part.includes('searchCategory')) {
+        if (typeof window === 'undefined') return part;
         const parametroCategoria = location.search
-          .split("?")[1]
-          ?.split("&")
-          .find((param) => param.startsWith("categoria="));
+          .split('?')[1]
+          ?.split('&')
+          .find(param => param.startsWith('categoria='));
         return parametroCategoria
-          ? notesJSON[parametroCategoria.split("=")[1]]
+          ? notesJSON[parametroCategoria.split('=')[1]]
           : null;
       }
 
       return part;
     });
 
-  let searchQuery = "";
-  if (typeof window !== "undefined"){
+  let searchQuery = '';
+  if (typeof window !== 'undefined') {
     //Check if the url has a search query parameter "especialidad" and add it to the parts array
-    searchQuery = location.search.split("?")[1];
+    searchQuery = location.search.split('?')[1];
   }
 
   if (searchQuery) {
-    const searchQueryParts = searchQuery.split("&");
-    let especialidad = searchQueryParts.find((part) =>
-      part.startsWith("especialidad=")
+    const searchQueryParts = searchQuery.split('&');
+    let especialidad = searchQueryParts.find(part =>
+      part.startsWith('especialidad='),
     );
-    if (especialidad) {
-      especialidad = especialidad.split("=")[1];
-      // @ts-ignore
-      if (specialtiesMapping[especialidad] !== undefined){
-        // @ts-ignore
-        partsFlattened.push(specialtiesMapping[especialidad]);
-      }
-    }
+    // if (especialidad) {
+    //   especialidad = especialidad.split('=')[1];
+    //   // @ts-ignore
+    //   if (specialtiesMapping[especialidad] !== undefined) {
+    //     // @ts-ignore
+    //     partsFlattened.push(specialtiesMapping[especialidad]);
+    //   }
+    // }
   }
-
 
   const handleUrl = (part: string) => {
     let managedURL = null;
@@ -111,7 +113,7 @@ const Breadcrum: React.FC<BreadcrumProps> = ({
           specialtiesJSON.hasOwnProperty(key) &&
           specialtiesJSON[key] === part
         ) {
-          managedURL = `/tienda?especialidad=${key}&recurso=curso`;
+          managedURL = `/${countryState.country}/tienda?especialidad=${key}&recurso=curso`;
         }
       }
     }
@@ -119,27 +121,29 @@ const Breadcrum: React.FC<BreadcrumProps> = ({
     if (onNote) {
       for (const key in notesJSON) {
         if (notesJSON.hasOwnProperty(key) && notesJSON[key] === part) {
-          managedURL = `/archivo?categoria=${key}`;
+          managedURL = `/${countryState.country}/archivo?categoria=${key}`;
         }
       }
     }
 
-    return managedURL ?? `/${part.toLowerCase()}`;
+    return managedURL ?? `/${countryState.country}/${part.toLowerCase()}`;
   };
 
+  console.log(partsFlattened, 'breadcrum');
+
   return (
-    <div className="flex flex-wrap md:flex-nowrap items-center mb-5 w-full">
+    <div className='flex flex-wrap md:flex-nowrap items-center mb-5 w-full'>
       {/* Incluir el ícono de Home solo si no estamos en la página principal */}
-      {pathname !== "/" && (
-        <NcLink href="/" className="">
+      {pathname !== '/' && (
+        <NcLink href='/' className=''>
           <Image
             src={`${
               onBlog ? breadcrumHomeIconWhite.src : breadcrumHomeIcon.src
             }`}
             width={20}
             height={20}
-            alt="Home"
-            className="h-4 breadcrumb-home"
+            alt='Home'
+            className='h-4 breadcrumb-home'
           />
         </NcLink>
       )}
@@ -148,7 +152,7 @@ const Breadcrum: React.FC<BreadcrumProps> = ({
         <div
           className={`inline-flex ${
             index === parts.length &&
-            "ml-4 md:ml-0 w-[220px] sm:w-auto md:w-[70%] lg:w-auto mt-2 sm:mt-0"
+            'ml-4 md:ml-0 w-[220px] sm:w-auto md:w-[70%] lg:w-auto mt-2 sm:mt-0'
           }`}
           key={part}
         >
@@ -156,16 +160,16 @@ const Breadcrum: React.FC<BreadcrumProps> = ({
             src={`${
               onBlog ? breadcrumArrowIconWhite.src : breadcrumArrowIcon.src
             }`}
-            className="mx-3"
-            alt="Arrow"
+            className='mx-3'
+            alt='Arrow'
           />
 
           {index === partsFlattened.length - 1 ? (
             <span
               className={`truncate max-w-[230px] sm:max-w-[500px] md:max-w-[300px] lg:max-w-[420px] xl:max-w-[400px]
-              ${onBlog ? "font-bold text-white" : "text-[#ABABAB]"}
-              ${onProduct ? "font-bold" : ""}
-              ${onNote ? "font-bold" : ""}
+              ${onBlog ? 'font-bold text-white' : 'text-[#ABABAB]'}
+              ${onProduct ? 'font-bold' : ''}
+              ${onNote ? 'font-bold' : ''}
               `}
             >
               {part}
@@ -174,9 +178,9 @@ const Breadcrum: React.FC<BreadcrumProps> = ({
             // Partes intermedias
             <NcLink
               href={handleUrl(part)}
-              colorClass=""
+              colorClass=''
               className={`${
-                onBlog ? "text-white" : "text-[#ABABAB]"
+                onBlog ? 'text-white' : 'text-[#ABABAB]'
               } hover:underline hover:text-[#FF5D5E] `}
             >
               {part}

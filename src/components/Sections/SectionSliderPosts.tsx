@@ -196,8 +196,8 @@ const SectionSliderPosts: FC<SectionSliderPostsProps> = ({
               {posts?.map((item: any, index: number) => (
                 <li
                   key={index}
-                  className={`glide__slide h-auto relative ${
-                    sliderStype === 'style2' ? 'pb-8 xl:pb-10' : ''
+                  className={`glide__slide h-auto relative pt-10 rounded-md ${
+                    sliderStype === 'style2' ? ' xl:pb-10' : ''
                   }`}
                 >
                   <CardName
