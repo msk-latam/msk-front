@@ -56,14 +56,20 @@ const ButtonAccessOrSignCourse: FC<ButtonAccessOrSignCourseProps> = ({
         </ButtonPrimary>
       ) : (
         <>
-          <ButtonAccessCourse
-            email={email}
-            goToEnroll={goToEnroll}
-            goToLMS={goToLMS}
-            item={item}
-          />
+          <div className='flex gap-2 md:block'>
+            <ButtonAccessCourse
+              email={email}
+              goToEnroll={goToEnroll}
+              goToLMS={goToLMS}
+              item={item}
+            />
 
-          {item.ov === 'Trial' && <ButtonOffTrial item={item} email={email} />}
+            {item.ov === 'Trial' && (
+              <div className=''>
+                <ButtonOffTrial item={item} email={email} />
+              </div>
+            )}
+          </div>
         </>
       )}
     </>
