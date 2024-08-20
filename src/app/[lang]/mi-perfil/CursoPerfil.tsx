@@ -25,6 +25,11 @@ const CursoPerfil: FC<Props> = ({ product, user }) => {
   const productExpiration = useRef(new Date(product.expiration));
   const productExpirationEnroll = useRef(new Date(product.limit_enroll));
   const [showCancelTrial, setShowCancelTrial] = useState(false);
+  const [showAll, setShowAll] = useState(false);
+
+  const handleToggleShowAll = () => {
+    setShowAll(!showAll);
+  };
 
   const { isDisabled } = statusCourse(product?.status);
   const { isRunning, startWatch } = useInterval(user.email);
@@ -90,6 +95,10 @@ const CursoPerfil: FC<Props> = ({ product, user }) => {
 
   console.log(product);
 
+  const visibleCategories = showAll
+    ? product.categories
+    : product.categories.slice(0, 2);
+
   return (
     <div className='flex flex-col bg-white shadow-lg rounded-sm overflow-hidden w-full max-w-[365px] md:max-w-[240px] lg:max-w-[274px] h-[400px] mb-8'>
       <div className='relative w-full h-[180px]'>
@@ -103,12 +112,21 @@ const CursoPerfil: FC<Props> = ({ product, user }) => {
       </div>
       <div className='p-4 flex flex-col justify-between flex-grow '>
         <CategoryBadgeList
-          categories={product.categories}
+          categories={visibleCategories}
           color='yellow'
           isCourse={true}
           textSize='text-[11px]'
           itemClass='!py-0.5 !px-1'
         />
+        {product.categories.length > 2 && (
+          <button
+            onClick={handleToggleShowAll}
+            className='mt-2 text-primary font-bold flex items-center'
+          >
+            {showAll ? 'Ver menos' : '...'}
+            <span className='ml-1'>{showAll ? '▲' : '▼'}</span>
+          </button>
+        )}
         <h3 className='text-lg font-bold my-2 leading-tight'>
           {product.title}
         </h3>

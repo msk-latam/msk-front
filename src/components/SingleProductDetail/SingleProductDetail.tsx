@@ -45,8 +45,8 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
   // @ts-ignore
   return (
     <section className='course-details-area my-1 pb-90'>
-      <div className='container'>
-        <div className='container grid grid-cols-1 lg:grid-cols-[65%_35%] mb-16'>
+      <div className='xl:pl-[8vw] 2xl:pr-[2vw] xl:pr-[1vw] px-4'>
+        <div className=' grid grid-cols-1 lg:grid-cols-[65%_35%] mb-16'>
           <div className=''>
             <div className='course-details-wrapper animate-fade-down'>
               <Breadcrum isEbook={isEbook} onProduct={product} />
@@ -223,21 +223,23 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
               />
             </div>
           </div>
-          <div className='order-last relative hidden lg:block'>
-            <ProductDetailSidebar
-              ficha={product.ficha}
-              details={product.details}
-              sideData={{
-                modalidad: product.modalidad,
-                curso_disponible: product.curso_disponible,
-                asesoramiento_academico: product.asesoramiento_academico,
-                certificacion: product.certificacion,
-                idioma: product.idioma,
-              }}
-              product={product}
-              isEbook={isEbook}
-              fixedPosition
-            />
+          <div className='flex justify-center lg:justify-start'>
+            <div className='order-last relative hidden lg:block'>
+              <ProductDetailSidebar
+                ficha={product.ficha}
+                details={product.details}
+                sideData={{
+                  modalidad: product.modalidad,
+                  curso_disponible: product.curso_disponible,
+                  asesoramiento_academico: product.asesoramiento_academico,
+                  certificacion: product.certificacion,
+                  idioma: product.idioma,
+                }}
+                product={product}
+                isEbook={isEbook}
+                fixedPosition
+              />
+            </div>
           </div>
         </div>
       </div>
