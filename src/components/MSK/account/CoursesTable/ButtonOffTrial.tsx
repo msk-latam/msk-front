@@ -1,8 +1,8 @@
-import { FC, useEffect, useState } from "react";
-import ButtonPrimary from "@/components/Button/ButtonPrimary";
-import { statusOrdenVenta } from "@/lib/account";
-import { UserCourseProgress } from "@/data/types";
-import CancelTrialModal from "@/components/Modal/CancelTrial";
+import { FC, useEffect, useState } from 'react';
+import ButtonPrimary from '@/components/Button/ButtonPrimary';
+import { statusOrdenVenta } from '@/lib/account';
+import { UserCourseProgress } from '@/data/types';
+import CancelTrialModal from '@/components/Modal/CancelTrial';
 
 interface ButtonOffTrialProps {
   item: UserCourseProgress;
@@ -31,12 +31,12 @@ const ButtonOffTrial: FC<ButtonOffTrialProps> = ({ item, email }) => {
     <>
       <ButtonPrimary
         onClick={handleClick}
-        className="border-2 border-solid hover:border-red-500 border-violet-custom text-violet-custom disabled:border-grey-disabled bg-transparent disabled:text-grey-disabled"
-        sizeClass="py-0.5 sm:py-1 px-2 sm:px-5 mt-2"
+        className='border-2 border-solid hover:border-red-500 border-violet-custom text-violet-custom disabled:border-grey-disabled bg-transparent disabled:text-grey-disabled'
+        sizeClass='py-0.5 sm:py-1 px-2 sm:px-5 md:mt-2 md:px-1 w-full'
         bordered={true}
         disabled={isDisabled || onRequest}
       >
-        <span className="text-[14px] sm:text-sm font-bold">Dar de baja</span>
+        <span className='text-[14px] sm:text-sm font-bold'>Dar de baja</span>
       </ButtonPrimary>
 
       <CancelTrialModal
