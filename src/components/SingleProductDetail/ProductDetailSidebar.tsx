@@ -113,7 +113,9 @@ const ProductDetailSidebar: FC<Props> = ({
           isFixed && bottomDistance == 0 && !isEbook && fixedPosition
             ? 'course-widget-wrapper fixed'
             : 'course-widget-wrapper'
-        } ${bottomDistance != 0 && !isEbook ? 'absolute bottom-0' : ''}`}
+        } ${
+          bottomDistance != 0 && !isEbook ? 'absolute bottom-0' : 'bottom-10'
+        }`}
       >
         {isFixed && !isEbook ? (
           <>
