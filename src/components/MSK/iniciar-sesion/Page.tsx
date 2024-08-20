@@ -61,7 +61,7 @@ const PageLogin: FC<PageLoginProps> = ({ className = '' }) => {
               email: formik.values.email,
               user: { name, speciality },
             };
-            console.log(loginData, '65');
+
             dispatch({ type: 'LOGIN', payload: loginData });
             changeRoute('/mi-perfil');
           } else {
