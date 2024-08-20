@@ -159,7 +159,7 @@ const mappingCheckoutFields = (contactZoho: ContactCRM) => {
       value: contactZoho.Identificacion,
     },
     address: {
-      street: contactZoho.Mailing_Street ?? contactZoho.Pais,
+      street: contactZoho.Mailing_Street ?? `${contactZoho.Pais} 1234`,
       number: '0',
       floor: '0',
       apt: '0',

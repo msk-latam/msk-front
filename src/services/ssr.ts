@@ -76,7 +76,9 @@ class ApiSSRService {
     const countryParam = onValidCountry
       ? `&country=${country}`
       : '&country=int';
+
     if (!tag){
+
       let tagFromURL = new URLSearchParams(currentUrl).get('tag');
       tag = tagFromURL ? tagFromURL : '';
     }
@@ -120,11 +122,13 @@ class ApiSSRService {
       ? `&country=${country}`
       : '&country=int';
 
+
     let tagParam = '';
     const tag = new URLSearchParams(currentUrl).get('tag');
     if (tag) {
       tagParam = `&tag=${tag}`;
     }
+
 
     try {
       const queryParams = [countryParam, tagParam].filter(Boolean).join('');
