@@ -37,11 +37,14 @@ import {
   NEXT_PUBLIC_REBILL_MP_AR_V3_FREEMIUM_TEST,
   NEXT_PUBLIC_REBILL_REBILL_CL_V3_FREEMIUM_PRD,
   NEXT_PUBLIC_REBILL_REBILL_CL_V3_FREEMIUM_TEST,
+  NEXT_PUBLIC_REBILL_REBILL_MX_V3_FREEMIUM_PRD,
+  NEXT_PUBLIC_REBILL_REBILL_MX_V3_FREEMIUM_TEST,
 } from '@/logic/constants/rebillPrices';
 import ssr from '@/services/ssr';
 import { getEnv } from '@/utils/getEnv';
-import { sendToZoho, sendToZohoByRebillV3 } from './Zoho';
+import { sendToZohoByRebillV3 } from './Zoho';
 import { RebillV3Event } from '@/types/RebillV3Types';
+import { separatePhoneNumber } from '@/utils/separatePhoneNumber';
 
 declare global {
   interface Window {
@@ -99,6 +102,8 @@ export const REBILL_CONF = {
     NEXT_PUBLIC_REBILL_STRIPE_CR_FREEMIUM_PRD,
     NEXT_PUBLIC_REBILL_STRIPE_HN_FREEMIUM_PRD,
     NEXT_PUBLIC_REBILL_STRIPE_USD_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_REBILL_MX_V3_FREEMIUM_PRD,
+    NEXT_PUBLIC_REBILL_REBILL_MX_V3_FREEMIUM_TEST,
   },
 };
 
@@ -131,20 +136,21 @@ export const getRebillV3Initialization = (country: string) => {
 };
 
 const mappingCheckoutFields = (contactZoho: ContactCRM) => {
-  //console.log({contactZoho}){
-
+  const { area_code, number } = separatePhoneNumber(contactZoho.Phone);
+  const parsedIdentification = contactZoho.Identificacion.replaceAll('-', '');
+  console.log({ contactZoho, area_code, number, parsedIdentification });
   return {
     customerInformation: {
       firstName: contactZoho.First_Name,
       lastName: contactZoho.Last_Name,
       email: contactZoho.Email,
       phoneNumber: {
-        countryCode: '54',
-        number: '1155011250',
+        countryCode: area_code,
+        number,
       },
       identification: {
         type: translateDocumentType(contactZoho.Tipo_de_Documento),
-        id: contactZoho.Identificacion,
+        id: parsedIdentification,
       },
     },
     billing: {
@@ -157,7 +163,7 @@ const mappingCheckoutFields = (contactZoho: ContactCRM) => {
     cardHolderDetails: {
       identification: {
         type: translateDocumentType(contactZoho.Tipo_de_Documento),
-        id: contactZoho.Identificacion,
+        id: parsedIdentification,
       },
       name: `${contactZoho.First_Name} ${contactZoho.Last_Name}`,
     },
