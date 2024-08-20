@@ -45,7 +45,7 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
   // @ts-ignore
   return (
     <section className='course-details-area my-1 pb-90'>
-      <div className='xl:pl-[8vw] 2xl:pr-[2vw] xl:pr-[1vw] px-4'>
+      <div className='xl:pl-[10.5vw] 2xl:pr-[2vw]  xl:pr-24 2xl:pl-[8vw]'>
         <div className=' grid grid-cols-1 lg:grid-cols-[65%_35%] mb-16'>
           <div className=''>
             <div className='course-details-wrapper animate-fade-down'>
@@ -244,7 +244,7 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
         </div>
       </div>
 
-      <div className='container'>
+      <div className='px-20'>
         <div className='container grid grid-cols-1 md:grid-cols-3 gap-4 mb-4'>
           <ContactFormSection
             productName={product.ficha.title}

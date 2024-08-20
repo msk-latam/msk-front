@@ -1746,7 +1746,8 @@
   min-width: 250px;
 
   @media (min-width: 768px) {
-    width: 70vw; // Ancho para pantallas medianas
+    max-width: 1000px;
+    width: 100%; // Ancho para pantallas medianas
   }
 
   @media (min-width: 1024px) {
@@ -1770,10 +1771,10 @@
   }
   @media (max-width: 1367px) {
     max-width: 310px; // Ajuste del ancho máximo para pantallas de 1707px
-    width: 70vw; // Ajuste del ancho relativo
+    width: 100vw; // Ajuste del ancho relativo
   }
   @media (max-width: 600px) {
-    max-width: 210px; // Ajuste del ancho máximo para pantallas de 1707px
+    max-width: 1000px; // Ajuste del ancho máximo para pantallas de 1707px
     // width: 70vw; // Ajuste del ancho relativo
     // background-color: red;
   }
@@ -1781,6 +1782,10 @@
     max-width: 510px; // Ajuste del ancho máximo para pantallas de 1707px
     // width: 70vw; // Ajuste del ancho relativo
     // background-color: red;
+  }
+  @media (min-width: 910px) and (max-width: 1020px) {
+    max-width: 480px; /* Ajuste del ancho máximo para pantallas entre 910px y 1020px */
+    width: 80vw; /* Ajuste del ancho relativo para pantallas entre 910px y 1020px */
   }
 
   &.fixed {
