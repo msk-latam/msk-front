@@ -26,7 +26,7 @@ const SingleContent: FC<SingleContentProps> = ({
   const [noteIntroduction, ...noteArticles] = articles;
 
   return (
-    <div className='px-4 sm:px-8 md:px-12 lg:px-20 nc-SingleContent  relative space-y-10 mb-16'>
+    <div className='px-4 sm:px-8 md:px-12 lg:px-28 nc-SingleContent  relative space-y-10 mb-16'>
       <div className='container grid grid-cols-12 gap-4'>
         <div className='content-container col-span-12 lg:col-span-8 animate-fade-down'>
           <CardAuthor2
@@ -96,7 +96,7 @@ const SingleContent: FC<SingleContentProps> = ({
               : null}
           </div>
         </div>
-        <div className='  col-span-12 md:col-span-6 lg:col-span-4 relative course-video-widget z-50'>
+        <div className='col-span-12 lg:col-span-4 relative course-video-widget z-50'>
           <SingleContentSidebarFixedItem
             articles={data.articles}
             the_most_read={data.the_most_read}
@@ -104,7 +104,7 @@ const SingleContent: FC<SingleContentProps> = ({
           />
         </div>
       </div>
-      <div className='container relative py-16'>
+      <div className=' relative py-16 bg-neutral-100 px-14 md:rounded-[40px] -mx-4 xl:mx-24 xl:px-40'>
         <BackgroundSection />
         <SectionSliderBestSellers
           posts={bestSellers}
