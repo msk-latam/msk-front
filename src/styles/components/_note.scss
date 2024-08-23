@@ -564,7 +564,10 @@ div.tagcloud a:hover {
   background: rgb(0, 14, 77);
   height: 700px;
   position: absolute;
-  width: 100%;
+  width: 98.7vw;
+  left: 50%;
+  transform: translateX(-50%);
+
   top: 0;
 }
 
@@ -574,7 +577,7 @@ div.tagcloud a:hover {
     position: relative !important;
     height: 440px;
     max-width: 1298px;
-    width: 96%;
+    // width: 96%;
     @media (max-width: 767px) {
       height: 500px;
     }

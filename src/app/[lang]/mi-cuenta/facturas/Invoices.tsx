@@ -51,6 +51,8 @@ const Invoices: React.FC<InvoicesProps> = ({ data }) => {
     setLoadingInvoice(null);
   };
 
+  console.log(data);
+
   return (
     <>
       <div className='overflow-x-auto rounded-xl bg-white border'>

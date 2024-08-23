@@ -16,7 +16,6 @@ export const useLoginForm = () => {
   const [onRequest, setOnRequest] = useState<boolean>(false);
   const formRef = useRef<HTMLFormElement>(null);
   const { countryState: countryState } = useContext(CountryContext);
-  console.log(countryState.country);
 
   useEffect(() => {
     router.prefetch(`/${countryState.country}/mi-perfil`);

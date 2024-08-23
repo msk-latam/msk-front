@@ -94,14 +94,14 @@ const Breadcrum: React.FC<BreadcrumProps> = ({
     let especialidad = searchQueryParts.find(part =>
       part.startsWith('especialidad='),
     );
-    // if (especialidad) {
-    //   especialidad = especialidad.split('=')[1];
-    //   // @ts-ignore
-    //   if (specialtiesMapping[especialidad] !== undefined) {
-    //     // @ts-ignore
-    //     partsFlattened.push(specialtiesMapping[especialidad]);
-    //   }
-    // }
+    if (especialidad) {
+      especialidad = especialidad.split('=')[1];
+      // @ts-ignore
+      if (specialtiesMapping[especialidad] !== undefined) {
+        // @ts-ignore
+        partsFlattened.push(specialtiesMapping[especialidad]);
+      }
+    }
   }
 
   const handleUrl = (part: string) => {

@@ -5,3 +5,8 @@
 /* * {
   outline: 1px solid red;
 } */
+@layer components {
+  .custom-grid {
+    @apply grid grid-cols-12 gap-3;
+  }
+}

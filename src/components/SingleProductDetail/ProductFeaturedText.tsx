@@ -9,7 +9,7 @@ const ProductFeaturedText: FC<ProductFeaturedTextProps> = ({ text }) => {
 
   return (
     <div className='requirements mb-10 sm:mb-16 flex nowrap items-center'>
-      <div className='w-[15%] flex justify-center'>
+      <div className='w-[15%] md:flex justify-center hidden '>
         <img
           src={'/webp-images/featuredTextImg.webp'}
           alt='featuredTextImg'
@@ -18,7 +18,7 @@ const ProductFeaturedText: FC<ProductFeaturedTextProps> = ({ text }) => {
       </div>
       <div
         dangerouslySetInnerHTML={{ __html: formattedText }}
-        className='font-normal not-italic w-[85%]'
+        className='font-normal not-italic md:w-[85%] w-full'
       />
     </div>
   );

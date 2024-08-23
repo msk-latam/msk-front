@@ -45,10 +45,10 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
   // @ts-ignore
   return (
     <section className='course-details-area my-1 pb-90'>
-      <div className='xl:pl-[10.5vw] 2xl:pr-[2vw]  xl:pr-24 2xl:pl-[8vw]'>
-        <div className=' grid grid-cols-1 lg:grid-cols-[65%_35%] mb-16'>
+      <div className=''>
+        <div className=' grid grid-cols-1 lg:grid-cols-[66.2%_35%] mb-16'>
           <div className=''>
-            <div className='course-details-wrapper animate-fade-down'>
+            <div className='course-details-wrapper pt-10 animate-fade-down'>
               <Breadcrum isEbook={isEbook} onProduct={product} />
               <div className='flex gap-2'>
                 <CategoryBadgeList
@@ -223,29 +223,27 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
               />
             </div>
           </div>
-          <div className='flex justify-center lg:justify-start'>
-            <div className='order-last relative hidden lg:block'>
-              <ProductDetailSidebar
-                ficha={product.ficha}
-                details={product.details}
-                sideData={{
-                  modalidad: product.modalidad,
-                  curso_disponible: product.curso_disponible,
-                  asesoramiento_academico: product.asesoramiento_academico,
-                  certificacion: product.certificacion,
-                  idioma: product.idioma,
-                }}
-                product={product}
-                isEbook={isEbook}
-                fixedPosition
-              />
-            </div>
+          <div className='order-last relative hidden mt-10 lg:block ml-4'>
+            <ProductDetailSidebar
+              ficha={product.ficha}
+              details={product.details}
+              sideData={{
+                modalidad: product.modalidad,
+                curso_disponible: product.curso_disponible,
+                asesoramiento_academico: product.asesoramiento_academico,
+                certificacion: product.certificacion,
+                idioma: product.idioma,
+              }}
+              product={product}
+              isEbook={isEbook}
+              fixedPosition
+            />
           </div>
         </div>
       </div>
 
-      <div className='px-20'>
-        <div className='container grid grid-cols-1 md:grid-cols-3 gap-4 mb-4'>
+      <div className=''>
+        <div className=' grid grid-cols-1 md:grid-cols-3 gap-4 mb-4'>
           <ContactFormSection
             productName={product.ficha.title}
             isEbook={isEbook}
@@ -257,7 +255,7 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
         </div>
       </div>
 
-      <div className='container relative py-16 mb-20'>
+      {/* <div className='container relative py-16 mb-20'>
         <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-16 mb-[96px] w-full px-14'>
           <SectionSliderBestSellers
             posts={allBestSellers}
@@ -270,6 +268,18 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
             uniqueSliderClass='singleProduct-section6'
           />
         </div>
+      </div> */}
+      <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] md:w-[129%] left-1/2 transform -translate-x-1/2  w-screen'>
+        <SectionSliderBestSellers
+          posts={allBestSellers}
+          loading={loadingBestSellers}
+          className='w-full section-slider-posts-container'
+          postCardName='card9'
+          heading='Descubre nuestras capacitaciones destacadas'
+          subHeading='Estos son los cursos más elegidos entre profesionales de la salud'
+          sliderStype='style2'
+          uniqueSliderClass='pageProduct-section6'
+        />
       </div>
 
       {product.related_products.length ? (

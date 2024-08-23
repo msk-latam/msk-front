@@ -338,7 +338,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 
   return (
     <>
-      <div className='col-span-3 lg:px-7' id='contactanos'>
+      <div className='col-span-3 ' id='contactanos'>
         <div className='contact-area-wrapper'>
           <div className='contact-form'>
             <FormikProvider value={formik}>

@@ -32,6 +32,8 @@ import CommentReferences from '@/components/CommentReferences';
 import Questions from '@/components/Questions/Questions';
 import { IS_PROD, SITE_URL } from '@/contains/constants';
 import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
+import { useLoader } from '@/context/loader/LoaderContext';
+import { Loading } from '@/utils/Loading';
 
 export async function generateMetadata({
   params,
@@ -90,9 +92,9 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
   return (
     <div className='nc-PageHome relative animate-fade-down'>
-      <div className='relative overflow-hidden'>
-        <section className='md:container'>
-          <div className='px-4 sm:px-8 md:px-6 lg:px-20 relative'>
+      <div className='relative  md:overflow-visible '>
+        <section className=''>
+          <div className=' relative'>
             <SectionHero
               rightImg={removeFirstSubdomain(heroImage)}
               className='pt-10 pb-16 md:py-16 lg:pb-28 lg:pt-20'
@@ -101,9 +103,12 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
               heading={heroTitle}
             />
           </div>
+          {/* ver el welcome box  */}
+
           <WelcomeBox content={pageHomeWpContent as WpContentData} />
+
           {/* cursos por especialidades */}
-          <div className='px-4 sm:px-8 md:px-6 lg:px-20 relative'>
+          <div className=' relative'>
             <BrandSlider />
             <Phrase content={pageHomeWpContent?.cedentes.texto as string} />
             <SectionGridCategoryBox
@@ -115,11 +120,13 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
             <HomeExtraInfo country={currentCountry} />
           </div>
-
-          <CommentReferences content={pageHomeWpContent as WpContentData} />
+          {/* arreglar commentReferences */}
+          <div className='md:w-[129%] left-1/2 transform -translate-x-1/2 relative w-screen'>
+            <CommentReferences content={pageHomeWpContent as WpContentData} />
+          </div>
 
           {/* oportunidades para ti */}
-          <div className='px-4 sm:px-8 md:px-6 lg:px-20 relative'>
+          <div className=' relative'>
             <CoursesForYou
               courses={getAllCourses().filter(
                 (course: FetchCourseType) =>
@@ -147,7 +154,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
             />
           </div>
 
-          <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-16 mb-[96px] w-full px-14'>
+          <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] md:w-[129%] left-1/2 transform -translate-x-1/2  w-screen'>
             <SectionSliderBestSellers
               posts={getAllBestSellers()}
               loading={loadingBestSellers}
@@ -160,7 +167,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
             />
           </div>
           {/* contactanos */}
-          <div className='px-7  md:px-6 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-4 my-16'>
+          <div className=' grid grid-cols-1 md:grid-cols-3 gap-4 my-16'>
             <ContactForm />
           </div>
         </section>

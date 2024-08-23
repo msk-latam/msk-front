@@ -174,18 +174,18 @@ const PageArchiveComponent: FC<PageArchiveProps> = ({
   return (
     <>
       <div
-        className={`nc-PageArchive pt-8 lg:pt-8 ${className} animate-fade-down lg:px-28 lg:pr-28`}
+        className={`nc-PageArchive pt-8 lg:pt-8 ${className} animate-fade-down `}
         data-nc-id='PageArchive'
       >
         {loadingPosts ? (
-          <div className='container'>
+          <div className=''>
             <ItemSkeleton hideText />
           </div>
         ) : (
           <>
             {currentItems.length ? (
-              <header className='w-full px-[20px] xl:max-w-screen-2xl mx-auto lg:px-10'>
-                <div className='container relative aspect-w-16 aspect-h-13 sm:aspect-h-9 lg:aspect-h-8 xl:aspect-h-5 rounded-3xl md:rounded-[40px] overflow-hidden z-0'>
+              <header className='md:w-[120%] relative md:left-1/2 md:transform md:-translate-x-1/2  xl:max-w-screen-2xl '>
+                <div className=' relative aspect-w-16 aspect-h-13 sm:aspect-h-9 lg:aspect-h-8 xl:aspect-h-5 rounded-3xl md:rounded-[40px] overflow-hidden z-0'>
                   <NcImage
                     className='rounded-3xl md:rounded-[40px] object-cover absolute inset-0 w-full h-full'
                     src={bannerImage}
@@ -207,7 +207,7 @@ const PageArchiveComponent: FC<PageArchiveProps> = ({
             ) : null}
           </>
         )}
-        <div className='container my-10 animate-fade-down'>
+        <div className=' my-10 animate-fade-down'>
           <div className='flex space-between flex-wrap mb-8 gap-2'>
             <ArchiveFilterListBox
               setFilter={handleCategoryChange}

@@ -130,9 +130,9 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({
       )}
 
       {data && (
-        <div className='md:container '>
-          <div className='md:container px-4 sm:px-8 md:px-12 lg:px-20 nc-SingleContent  relative space-y-10 mb-16'>
-            <div className='w-full max-w-[50rem] mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className=' '>
+          <div className=' nc-SingleContent  relative space-y-10 mb-16'>
+            <div className='w-full max-w-[50rem] mx-auto '>
               <p className='font-lora text-[#392C35] pb-2 pt-4 text-base sm:text-lg lg:text-xl'>
                 Medical & Scientific Knowledge es un grupo español con más de
                 ocho años de trayectoria en la industria pharma y en el
@@ -246,8 +246,8 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({
 
       {/* transformar a componente */}
 
-      <div className='md:container'>
-        <div className='px-4 sm:px-8 md:px-6 lg:px-20 grid grid-cols-1 md:grid-cols-3 gap-4 my-16'>
+      <div className=''>
+        <div className=' grid grid-cols-1 md:grid-cols-3 gap-4 my-16'>
           <ContactForm isNosotros={true} />
         </div>
       </div>

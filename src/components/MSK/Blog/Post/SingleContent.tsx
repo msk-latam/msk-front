@@ -26,8 +26,8 @@ const SingleContent: FC<SingleContentProps> = ({
   const [noteIntroduction, ...noteArticles] = articles;
 
   return (
-    <div className='px-4 sm:px-8 md:px-12 lg:px-28 nc-SingleContent  relative space-y-10 mb-16'>
-      <div className='container grid grid-cols-12 gap-4'>
+    <div className=' nc-SingleContent  relative space-y-10 mb-16'>
+      <div className=' grid grid-cols-12 gap-4'>
         <div className='content-container col-span-12 lg:col-span-8 animate-fade-down'>
           <CardAuthor2
             className='relative my-4'
@@ -104,10 +104,22 @@ const SingleContent: FC<SingleContentProps> = ({
           />
         </div>
       </div>
-      <div className=' relative py-16 bg-neutral-100 px-14 md:rounded-[40px] -mx-4 xl:mx-24 xl:px-40'>
+      {/* <div className=' relative py-16 bg-neutral-100 px-14 md:rounded-[40px] -mx-4 xl:mx-24 xl:px-40'>
         <BackgroundSection />
         <SectionSliderBestSellers
           posts={bestSellers}
+          postCardName='card9'
+          heading='Nuestros cursos más elegidos'
+          subHeading='Profesionales como tú ya se capacitaron con ellos. ¡Ahora te toca a ti!'
+          sliderStype='style2'
+          uniqueSliderClass='article-most-picked-courses'
+        />
+      </div> */}
+      <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] md:w-[129%] left-1/2 transform -translate-x-1/2  w-screen'>
+        <SectionSliderBestSellers
+          posts={bestSellers}
+          // loading={loadingBestSellers}
+          className='w-full section-slider-posts-container'
           postCardName='card9'
           heading='Nuestros cursos más elegidos'
           subHeading='Profesionales como tú ya se capacitaron con ellos. ¡Ahora te toca a ti!'

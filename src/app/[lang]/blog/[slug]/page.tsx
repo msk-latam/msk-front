@@ -7,6 +7,7 @@ import { cookies } from 'next/headers';
 import { IS_PROD, SITE_URL } from '@/contains/constants';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
+import Breadcrum from '@/components/Breadcrum/Breadcrum';
 
 interface PageCourseProps {
   params: any;
@@ -63,8 +64,9 @@ const PageNota: FC<PageCourseProps> = async ({ params }) => {
         <header className='relative pt-10 z-10 md:py-20 lg:py-14 dark:bg-black background-note-blog animate-fade-down'>
           {/* SINGLE HEADER */}
           <div className='note-header-background' />
-          <div className='dark container relative z-10'>
-            <div className={'lg:px-12'}>
+          <div className='dark  relative z-10'>
+            <div className={''}>
+              {/* <Breadcrum onBlog={true} /> */}
               <SingleHeader
                 hiddenDesc={false}
                 metaActionStyle='style2'
@@ -75,9 +77,9 @@ const PageNota: FC<PageCourseProps> = async ({ params }) => {
             </div>
           </div>
           {/* FEATURED IMAGE */}
-          <div className='px-6'>
+          <div className=''>
             {post.featured_image?.length > 0 && (
-              <div className='container rounded-lg md:rounded-[40px] relative overflow-hidden top-8 header-image-container'>
+              <div className='w-full rounded-lg md:rounded-[40px] relative overflow-hidden top-8 header-image-container'>
                 <NcImage
                   containerClassName='absolute inset-0'
                   src={post.featured_image[0]}
