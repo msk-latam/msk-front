@@ -6,6 +6,7 @@ import usePoliticsPrivacy from '@/hooks/usePoliticsPrivacy';
 import { CommentType } from '@/components/CommentCard/CommentCard';
 import SingleHeader from '@/components/MSK/Privacy/SingleHeader';
 import SingleContent from '@/components/MSK/Privacy/SingleContent';
+import InfoPageHeader from '@/components/InfoPageHeader/InfoPageHeader';
 
 const SINGLE: SinglePageType = {
   id: 'eae0212192f63287e0c212',
@@ -95,9 +96,9 @@ const PagePoliticsPrivacy: FC<PageSingleTemp3SidebarProps> = ({
         className={`nc-PageSingleTemp3Sidebar  animate-fade-down ${className}`}
         data-nc-id='PageSingleTemp3Sidebar'
       >
-        <header className='relative pt-16 z-10 md:py-20 lg:py-14 bg-neutral-900 dark:bg-black'>
-          <div className='dark  relative z-10 ml-0 sm:ml-6 md:ml-12 lg:ml-24 max-w-screen-lg'>
-            <div className='max-w-screen-md'>
+        {/* <header className='relative  pt-16 z-10 md:py-20 lg:py-14  md:w-[141.5%] left-1/2 transform -translate-x-1/2  w-screen '>
+          <div className='dark  relative z-10 ml-0 sm:ml-6 md:ml-12 lg:ml-24 max-w-screen-lg '>
+            <div className='max-w-screen-md container'>
               <SingleHeader
                 hiddenDesc
                 metaActionStyle='style2'
@@ -106,15 +107,18 @@ const PagePoliticsPrivacy: FC<PageSingleTemp3SidebarProps> = ({
             </div>
           </div>
 
-          <div className='mt-0 absolute top-0 right-0 bottom-0 w-1/2 lg:w-2/5 2xl:w-1/3'>
-            <div className=' block absolute top-0 left-0 bottom-0 from-neutral-900 dark:from-black bg-gradient-to-r w-full'></div>
+          <div className=''>
+            <div className=' block absolute top-0 left-0 bottom-0 from-neutral-900 dark:from-black bg-gradient-to-r w-screen'></div>
             <img
-              className='mission-image'
-              src='/webp-images/misc/mission.webp'
+              className='absolute top-0 left-1/2 transform -translate-x-1/2 w-screen md:w-[98.7vw] h-full object-cover '
+              style={{ maxWidth: '100vw' }}
+              src='/images/misc/quienes-somos.jpg'
               alt=''
             />
           </div>
-        </header>
+        </header> */}
+
+        <InfoPageHeader pageData={SINGLE} />
 
         {/* SINGLE MAIN CONTENT */}
         <div className='flex flex-col my-10 lg:flex-row '>

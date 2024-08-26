@@ -97,9 +97,9 @@ const PageContractConditions: FC<PageSingleTemp3SidebarProps> = ({
         className={`nc-PageSingleTemp3Sidebar animate-fade-down ${className}`}
         data-nc-id='PageSingleTemp3Sidebar'
       >
-        <header className='relative pt-16 z-10 md:py-20 lg:py-14 bg-neutral-900 dark:bg-black'>
-          <div className='dark container relative z-10  ml-0 sm:ml-6 md:ml-12 lg:ml-24 max-w-screen-lg'>
-            <div className='max-w-screen-md'>
+        <header className='relative  pt-16 z-10 md:py-20 lg:py-14  md:w-[141.5%] left-1/2 transform -translate-x-1/2  w-screen '>
+          <div className='dark  relative z-10 ml-0 sm:ml-6 md:ml-12 lg:ml-24 max-w-screen-lg '>
+            <div className='max-w-screen-md container'>
               <SingleHeader
                 hiddenDesc
                 metaActionStyle='style2'
@@ -108,14 +108,13 @@ const PageContractConditions: FC<PageSingleTemp3SidebarProps> = ({
             </div>
           </div>
 
-          <div className='mt-0 absolute top-0 right-0 bottom-0 w-1/2 lg:w-2/5 2xl:w-1/3'>
-            <div className=' block absolute top-0 left-0 bottom-0 from-neutral-900 dark:from-black bg-gradient-to-r w-full'></div>
-            <Image
-              className='mission-image'
-              src='/webp-images/misc/mission.webp'
-              alt='Nuestra Mision'
-              width={1000}
-              height={500}
+          <div className=''>
+            {/* <div className=' block absolute top-0 left-0 bottom-0 from-neutral-900 dark:from-black bg-gradient-to-r w-screen'></div> */}
+            <img
+              className='absolute top-0 left-1/2 transform -translate-x-1/2 w-screen md:w-[98.7vw] h-full object-cover '
+              style={{ maxWidth: '100vw' }}
+              src='/images/misc/quienes-somos.jpg'
+              alt=''
             />
           </div>
         </header>

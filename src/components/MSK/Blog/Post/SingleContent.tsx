@@ -115,7 +115,7 @@ const SingleContent: FC<SingleContentProps> = ({
           uniqueSliderClass='article-most-picked-courses'
         />
       </div> */}
-      <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] md:w-[129%] left-1/2 transform -translate-x-1/2  w-screen'>
+      <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] md:w-[129%] left-1/2 transform -translate-x-1/2  w-screen '>
         <SectionSliderBestSellers
           posts={bestSellers}
           // loading={loadingBestSellers}
