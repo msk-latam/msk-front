@@ -11,7 +11,6 @@ import { BASE_URL, IS_PROD, SITE_URL } from '@/contains/constants';
 import { BodyNewPassword } from '@/components/MSK/PageNewPassword';
 import { notFound } from 'next/navigation';
 
-
 let validCountries = countries.map(item => item.id);
 
 const PROD = IS_PROD;
@@ -66,7 +65,7 @@ class ApiSSRService {
     country?: string,
     tag?: string,
     withAll: boolean = false,
-    currentUrl = ''
+    currentUrl = '',
   ) {
     setLoadingCourses(true);
 
@@ -77,8 +76,7 @@ class ApiSSRService {
       ? `&country=${country}`
       : '&country=int';
 
-    if (!tag){
-
+    if (!tag) {
       let tagFromURL = new URLSearchParams(currentUrl).get('tag');
       tag = tagFromURL ? tagFromURL : '';
     }
@@ -122,13 +120,11 @@ class ApiSSRService {
       ? `&country=${country}`
       : '&country=int';
 
-
     let tagParam = '';
     const tag = new URLSearchParams(currentUrl).get('tag');
     if (tag) {
       tagParam = `&tag=${tag}`;
     }
-
 
     try {
       const queryParams = [countryParam, tagParam].filter(Boolean).join('');
@@ -562,6 +558,30 @@ class ApiSSRService {
     } catch (error) {
       console.error('Network error:', error);
       return error;
+    }
+  }
+
+  async postPaymentMercadoPago(paymentData: any) {
+    try {
+      const response = await fetch(
+        `${baseUrl}/api/gateway2/api/mercadopago/arg/our_test`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6`,
+          },
+          body: JSON.stringify(paymentData),
+        },
+      );
+      const data = response.json();
+
+      if (data.status == 200) {
+        console.log('Pago ok', { data });
+        return data;
+      }
+    } catch (err) {
+      console.error('Pago error', { err });
     }
   }
 }
