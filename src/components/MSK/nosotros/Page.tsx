@@ -97,31 +97,7 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({
 
   return (
     <>
-      {/* <header className='relative  pt-16 z-10 md:py-20 lg:py-14  md:w-[141.5%] left-1/2 transform -translate-x-1/2  w-screen '>
-        <div className='dark  relative z-10 ml-0 sm:ml-6 md:ml-12 lg:ml-24 max-w-screen-lg '>
-          <div className='max-w-screen-md container'>
-            <SingleHeader
-              hiddenDesc
-              metaActionStyle='style2'
-              pageData={SINGLE}
-            />
-          </div>
-        </div>
-
-        <div className=''>
-          <div className=' block absolute top-0 left-0 bottom-0 from-neutral-900 dark:from-black bg-gradient-to-r w-screen'></div>
-          <img
-            className='absolute top-0 left-1/2 transform -translate-x-1/2 w-screen md:w-[98.7vw] h-full object-cover '
-            style={{ maxWidth: '100vw' }}
-            src='/images/misc/quienes-somos.jpg'
-            alt=''
-          />
-        </div>
-      </header> */}
-
       <InfoPageHeader pageData={SINGLE} />
-
-      {/* transformar a componente */}
 
       {!data && (
         <div className='flex flex-col gap-8 container'>
@@ -133,14 +109,14 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({
 
       {data && (
         <div className=' '>
-          <div className=' nc-SingleContent  relative space-y-10 mb-16'>
-            <div className='w-full max-w-[50rem] mx-auto '>
-              <p className='font-lora text-[#392C35] pb-2 pt-4 text-base sm:text-lg lg:text-xl'>
+          <div className=' nc-SingleContent  relative space-y-10 mb-16 '>
+            <div className='w-full max-w-[50rem] mx-auto px-4 mt-5'>
+              <p className='font-lora  pb-2 pt-4 text-base sm:text-lg lg:text-xl text-[#392C35]'>
                 Medical & Scientific Knowledge es un grupo español con más de
                 ocho años de trayectoria en la industria pharma y en el
                 desarrollo de cursos de medicina.
               </p>
-              <p className='font-lora text-[#392C35] py-2 text-base sm:text-lg lg:text-xl'>
+              <p className='font-lora  py-2 text-base sm:text-lg lg:text-xl text-[#392C35]'>
                 Nuestra misión es satisfacer las necesidades de los
                 profesionales de la salud que buscan estudiar medicina a
                 distancia, gestionando sus procesos de capacitación a través de

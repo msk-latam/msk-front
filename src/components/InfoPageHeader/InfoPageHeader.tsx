@@ -15,7 +15,7 @@ const InfoPageHeader = ({ pageData }: any) => {
 
       <div className=''>
         <img
-          className='absolute top-0 left-1/2 transform -translate-x-1/2 w-screen md:w-[98.7vw] h-full object-cover'
+          className='absolute top-0 left-1/2 transform -translate-x-1/2 w-screen  h-full object-cover'
           style={{ maxWidth: '100vw' }}
           src='/images/misc/quienes-somos.jpg'
           alt=''

@@ -144,7 +144,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
       <RedirectToTrial />
       {/* HEADER */}
       <div className='animate-fade-down'>
-        <div className='bg-neutral-200 dark:bg-neutral-900 dark:border dark:border-neutral-700 p-5 lg:p-16 flex flex-col sm:items-center w-screen md:w-[98.7vw] transform -translate-x-1/2 left-1/2 relative'>
+        <div className='bg-neutral-200 dark:bg-neutral-900 dark:border dark:border-neutral-700 p-5 lg:p-16 flex flex-col sm:items-center w-screen  transform -translate-x-1/2 left-1/2 relative'>
           {loadingUser ? (
             <div className='mx-auto'>
               <AvatarSkeleton className='rounded-full w-24 h-24 mx-auto' />

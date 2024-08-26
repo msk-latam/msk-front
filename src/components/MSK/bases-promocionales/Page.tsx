@@ -7,6 +7,7 @@ import SingleHeader from '@/components/MSK/Privacy/SingleHeader';
 import SingleContent from '@/components/MSK/Privacy/SingleContent';
 import useContractConditions from '@/hooks/useContractConditions';
 import Image from 'next/image';
+import InfoPageHeader from '@/components/InfoPageHeader/InfoPageHeader';
 
 const SINGLE: SinglePageType = {
   id: 'eae0212192f63287e0c212',
@@ -97,30 +98,10 @@ const PageContractConditions: FC<PageSingleTemp3SidebarProps> = ({
         className={`nc-PageSingleTemp3Sidebar animate-fade-down ${className}`}
         data-nc-id='PageSingleTemp3Sidebar'
       >
-        <header className='relative  pt-16 z-10 md:py-20 lg:py-14  md:w-[141.5%] left-1/2 transform -translate-x-1/2  w-screen '>
-          <div className='dark  relative z-10 ml-0 sm:ml-6 md:ml-12 lg:ml-24 max-w-screen-lg '>
-            <div className='max-w-screen-md container'>
-              <SingleHeader
-                hiddenDesc
-                metaActionStyle='style2'
-                pageData={SINGLE}
-              />
-            </div>
-          </div>
-
-          <div className=''>
-            {/* <div className=' block absolute top-0 left-0 bottom-0 from-neutral-900 dark:from-black bg-gradient-to-r w-screen'></div> */}
-            <img
-              className='absolute top-0 left-1/2 transform -translate-x-1/2 w-screen md:w-[98.7vw] h-full object-cover '
-              style={{ maxWidth: '100vw' }}
-              src='/images/misc/quienes-somos.jpg'
-              alt=''
-            />
-          </div>
-        </header>
+        <InfoPageHeader pageData={SINGLE} />
 
         <div className='container flex flex-col my-10 lg:flex-row'>
-          <div className='w-full px-4 sm:px-6 lg:px-8'>
+          <div className='w-full '>
             <SingleContent data={data as SinglePageType} />
           </div>
         </div>

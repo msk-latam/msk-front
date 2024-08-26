@@ -53,7 +53,7 @@ const StoreLayout: FC<LayoutPageProps> = ({
     >
       <div className='container-fluid relative'>
         {/* HEADER */}
-        <header className='relative w-screen md:w-[98.7vw]  left-1/2 transform -translate-x-1/2'>
+        <header className='relative w-screen   left-1/2 transform -translate-x-1/2'>
           <Swiper
             modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
             slidesPerView={1}

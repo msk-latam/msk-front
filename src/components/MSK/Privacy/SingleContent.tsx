@@ -21,7 +21,7 @@ const SingleContent: FC<SingleContentProps> = ({ data }) => {
       {data?.content && (
         <div
           id='single-entry-content'
-          className='prose lg:prose-lg !max-w-screen-lg mx-auto dark:prose-invert '
+          className=' !max-w-screen-lg md:px-44 !font-lora text-xl prose'
           dangerouslySetInnerHTML={{ __html: data.content as string }}
         />
       )}
@@ -35,28 +35,18 @@ const SingleContent: FC<SingleContentProps> = ({ data }) => {
       )}
 
       {data?.terminos &&
-        data.terminos.map(t => (
-          <div className=''>
-            <h2 className='font-raleway text-2xl mb-7'>{t.titulo}</h2>
-            <div dangerouslySetInnerHTML={{ __html: t.descripcion }} />
+        data.terminos.map((t, index) => (
+          <div key={index} className='md:px-36 !font-lora'>
+            <h2 className='text-2xl mb-7'>{t.titulo}</h2>
+            <div
+              className='!font-lora text-xl prose'
+              dangerouslySetInnerHTML={{ __html: t.descripcion }}
+            />
           </div>
         ))}
 
       {/* TAGS */}
-      {/* <div className='max-w-[1700px] mx-auto'>
-        <div className='relative py-16 mb-20'>
-          <BackgroundSection />
-          <SectionSliderBestSellers
-            posts={allBestSellers}
-            postCardName='card9'
-            heading='Comienza tu experiencia aquí'
-            subHeading='Estos son los cursos más elegidos entre profesionales de la salud'
-            sliderStype='style2'
-            uniqueSliderClass='pageHome-section6'
-            className='mx-auto max-w-[85%]'
-          />
-        </div>
-      </div> */}
+
       <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] md:w-[129%] left-1/2 transform -translate-x-1/2  w-screen '>
         <SectionSliderBestSellers
           posts={allBestSellers}

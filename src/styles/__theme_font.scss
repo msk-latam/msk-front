@@ -1,74 +1,74 @@
 // Font Family
 @font-face {
-  font-family: "Lora";
+  font-family: 'Lora';
   font-style: italic;
-  src: url("/fonts/Lora/Lora-VariableFont_wght.ttf");
+  src: url('/fonts/Lora/Lora-VariableFont_wght.ttf');
 }
 
 @font-face {
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-style: normal;
-  src: url("/fonts/Poppins/Poppins-Regular.ttf");
+  src: url('/fonts/Poppins/Poppins-Regular.ttf');
 }
 
 @font-face {
-  font-family: "Lora-italic";
+  font-family: 'Lora-italic';
   font-style: italic;
-  src: url("/fonts/Lora/Lora-italic.ttf");
+  src: url('/fonts/Lora/Lora-italic.ttf');
 }
 
 @font-face {
-  font-family: "Raleway";
-  src: url("/fonts/Raleway/static/Raleway-Regular.ttf");
+  font-family: 'Raleway';
+  src: url('/fonts/Raleway/static/Raleway-Regular.ttf');
 }
 
 @font-face {
-  font-family: "Raleway";
+  font-family: 'Raleway';
   weight: 500;
-  src: url("/fonts/Raleway/static/Raleway-Medium.ttf");
+  src: url('/fonts/Raleway/static/Raleway-Medium.ttf');
 }
 
 @font-face {
-  font-family: "Raleway-SemiBold";
+  font-family: 'Raleway-SemiBold';
   weight: 700;
-  src: url("/fonts/Raleway/static/Raleway-SemiBold.ttf");
+  src: url('/fonts/Raleway/static/Raleway-SemiBold.ttf');
 }
 
 @font-face {
-  font-family: "Raleway-Bold";
+  font-family: 'Raleway-Bold';
   weight: 800;
-  src: url("/fonts/Raleway/static/Raleway-Bold.ttf");
+  src: url('/fonts/Raleway/static/Raleway-Bold.ttf');
 }
 
 @font-face {
   font-family: Inter;
   font-weight: 300;
-  src: url("/fonts/Inter/static/Inter-Light.ttf");
+  src: url('/fonts/Inter/static/Inter-Light.ttf');
 }
 @font-face {
   font-family: Inter;
   font-weight: 400;
-  src: url("/fonts/Inter/static/Inter-Regular.ttf");
+  src: url('/fonts/Inter/static/Inter-Regular.ttf');
 }
 @font-face {
   font-family: Inter;
   font-weight: 500;
-  src: url("/fonts/Inter/static/Inter-Medium.ttf");
+  src: url('/fonts/Inter/static/Inter-Medium.ttf');
 }
 @font-face {
   font-family: Inter;
   font-weight: 600;
-  src: url("/fonts/Inter/static/Inter-SemiBold.ttf");
+  src: url('/fonts/Inter/static/Inter-SemiBold.ttf');
 }
 @font-face {
   font-family: Inter;
   font-weight: 700;
-  src: url("/fonts/Inter/static/Inter-Bold.ttf");
+  src: url('/fonts/Inter/static/Inter-Bold.ttf');
 }
 
-$raleway: "Raleway", sans-serif;
-$lora: "Lora", serif;
-$fontawesome: "Font Awesome 5 Pro";
+$raleway: 'Raleway', sans-serif;
+$lora: 'Lora', serif;
+$fontawesome: 'Font Awesome 5 Pro';
 
 .font-lora {
   font-family: $lora;
@@ -78,18 +78,17 @@ $fontawesome: "Font Awesome 5 Pro";
   font-weight: 500;
 }
 
-
 .raleway {
-  font-family: "Raleway", sans-serif !important;
+  font-family: 'Raleway', sans-serif !important;
   font-weight: 500;
 }
 
 .raleway-bold {
-  font-family: "Raleway-Bold", sans-serif;
+  font-family: 'Raleway-Bold', sans-serif;
   font-weight: 800;
 }
 
-p,
+// p,
 span,
 button,
 a,
@@ -99,7 +98,7 @@ select,
 textarea,
 ul,
 div {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 // colors
