@@ -2,9 +2,9 @@ import SingleHeader from '../MSK/Privacy/SingleHeader';
 
 const InfoPageHeader = ({ pageData }: any) => {
   return (
-    <header className='relative pt-16 z-10 md:py-20 lg:py-14 md:w-[141.5%] left-1/2 transform -translate-x-1/2 w-screen'>
-      <div className='dark relative z-10 ml-0 sm:ml-6 md:ml-12 lg:ml-24 max-w-screen-lg'>
-        <div className='max-w-screen-md container'>
+    <header className='relative pt-16 z-10 md:py-20 lg:py-14  left-1/2 transform -translate-x-1/2 w-screen'>
+      <div className='dark relative z-10 md:ml-1 '>
+        <div className='  container'>
           <SingleHeader
             hiddenDesc
             metaActionStyle='style2'
