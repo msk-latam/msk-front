@@ -27,12 +27,12 @@ const SingleHeader: FC<SingleHeaderProps> = ({
           {/* <CategoryBadgeList itemClass="!px-3" categories={categories} /> */}
           <SingleTitle mainClass={titleMainClass} title={title} />
           {!!desc && !hiddenDesc && (
-            <span className='block text-base text-neutral-500 md:text-lg dark:text-neutral-400 pb-1'>
+            <span className='block text-base text-neutral-500 md:text-lg dark:text-neutral-400 pb-1 '>
               {desc}
             </span>
           )}
-          <div className='w-full border-b border-white '></div>
-          <div className='flex items-center sm:flex-row justify-between pb-4 sm:pb-0'>
+          <div className='w-1/2 border-b border-white '></div>
+          <div className='flex items-center sm:flex-row justify-between pb-4 sm:pb-0 w-1/2'>
             <div className='dark:text-neutral-100 msk-logo-text grid grid-cols-12 items-center gap-6'>
               <div className='img-container col-span-2'>
                 <img
