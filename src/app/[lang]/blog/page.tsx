@@ -45,8 +45,8 @@ const PageBlog: React.FC<PageProps> = async ({ params }) => {
 
   return (
     <div className='nc-PageBlog relative animate-fade-down'>
-      <div className='md:container relative overflow-hidden'>
-        <div className='px-4 sm:px-8 md:px-6 lg:px-20 relative'>
+      <div className=' relative'>
+        <div className=' relative'>
           <WelcomeBlog tabs={[]} heading='' posts={welcomePosts} />
           <BlogSummary
             posts={allPosts}
@@ -59,21 +59,19 @@ const PageBlog: React.FC<PageProps> = async ({ params }) => {
           />
           <HomeExtraInfo country={currentCountry} />
         </div>
-        <div className='max-w-[1700px] mx-auto my-16'>
-          <div className='relative py-16'>
-            <BackgroundSection />
-            <SectionSliderBestSellers
-              posts={allBestSellers}
-              postCardName='card9'
-              heading='¿Buscas capacitarte a distancia?'
-              subHeading='Estos son los cursos más elegidos entre profesionales de la salud'
-              sliderStype='style2'
-              uniqueSliderClass='PageBlog-section6'
-              className='mx-auto max-w-[85%]'
-            />
-          </div>
+
+        <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] md:w-[129%] left-1/2 transform -translate-x-1/2  w-screen mt-16'>
+          <SectionSliderBestSellers
+            posts={allBestSellers}
+            className='w-full section-slider-posts-container'
+            postCardName='card9'
+            heading='¿Buscas capacitarte a distancia?'
+            subHeading='Estos son los cursos más elegidos entre profesionales de la salud'
+            sliderStype='style2'
+            uniqueSliderClass='pageBlog-section6'
+          />
         </div>
-        <div className='px-4 sm:px-8 md:px-12 lg:px-20 relative'>
+        <div className=' relative'>
           <NewsletterBlog />
         </div>
       </div>

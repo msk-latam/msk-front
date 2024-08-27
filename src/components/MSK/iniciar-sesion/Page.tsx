@@ -1,5 +1,5 @@
 'use client';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import LayoutPage from '@/components/MSK/LayoutPage';
 import ButtonPrimary from '@/components/Button/ButtonPrimary';
 import NcLink from '@/components/NcLink/NcLink';
@@ -8,6 +8,8 @@ import ShowErrorMessage from '@/components/ShowErrorMessage';
 import { useLoginForm } from './useLoginForm';
 import { FormikProvider, Form } from 'formik';
 import LoginInput from './LoginInputField';
+import { useLoader } from '@/context/loader/LoaderContext';
+import { Loading } from '@/utils/Loading';
 
 export interface PageLoginProps {
   className?: string;
@@ -17,6 +19,25 @@ const PageLogin: FC<PageLoginProps> = ({ className = '' }) => {
   const { formik, loginError, onRequest, formRef, setLoginError } =
     useLoginForm();
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const { isLoading, setLoading } = useLoader();
+
+  useEffect(() => {
+    // Function to handle the timeout logic
+    const startLoader = () => {
+      setLoading(true); // Set loading to true
+
+      // Set a timeout to turn off the loader after 3 seconds
+      const timer = setTimeout(() => {
+        setLoading(false); // Set loading to false after 3 seconds
+      }, 3000);
+
+      // Clear the timeout if the component unmounts
+      return () => clearTimeout(timer);
+    };
+
+    // Start loader when component mounts
+    startLoader();
+  }, [setLoading]);
 
   return (
     <div

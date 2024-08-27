@@ -20,6 +20,7 @@ import { GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
 import EmblueScript from '@/components/EmblueScript/EmblueScript';
 import { GlobalStateProvider } from './[lang]/mi-perfil/GlobalStateContext';
+import { LoaderProvider, useLoader } from '@/context/loader/LoaderContext';
 
 export const runtime = 'edge';
 
@@ -77,7 +78,7 @@ export default async function RootLayout({ params, children }: LayoutProps) {
       </head>
 
       <body>
-        <div className='bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200'>
+        <div className='bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200 '>
           <GoogleCaptchaWrapper>
             <CountryProvider>
               <DataProvider>
@@ -85,7 +86,11 @@ export default async function RootLayout({ params, children }: LayoutProps) {
                   <AuthProvider>
                     <StoreProvider>
                       <Header />
-                      <GlobalStateProvider>{children}</GlobalStateProvider>
+                      <LoaderProvider>
+                        <GlobalStateProvider>
+                          <div className='container'>{children}</div>
+                        </GlobalStateProvider>
+                      </LoaderProvider>
                       <BotMaker />
                       <Footer />
 

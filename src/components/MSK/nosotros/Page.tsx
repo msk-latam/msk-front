@@ -13,6 +13,7 @@ import ContactForm from '../ContactForm';
 import LoadingText from '../Loader/Text';
 import SectionSliderPosts from '@/components/Sections/SectionSliderPosts';
 import Link from 'next/link';
+import InfoPageHeader from '@/components/InfoPageHeader/InfoPageHeader';
 
 const SINGLE: SinglePageType = {
   id: 'eae0212192f63287e0c212',
@@ -96,30 +97,7 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({
 
   return (
     <>
-      <header className='relative pt-16 z-10 md:py-20 lg:py-14 bg-neutral-900 dark:bg-black'>
-        <div className='dark container relative z-10 ml-0 sm:ml-6 md:ml-12 lg:ml-24 max-w-screen-lg'>
-          <div className='max-w-screen-md'>
-            <SingleHeader
-              hiddenDesc
-              metaActionStyle='style2'
-              pageData={SINGLE}
-            />
-          </div>
-        </div>
-
-        <div className='mt-8 md:mt-0 md:absolute md:top-0 md:right-0 md:bottom-0 md:w-1/2 lg:w-2/5 2xl:w-1/3 mission-image-container'>
-          <div className='hidden md:block absolute top-0 left-0 bottom-0 w-1/5 from-neutral-900 dark:from-black bg-gradient-to-r'></div>
-          <Image
-            className='mission-image'
-            src='/webp-images/misc/mission.webp'
-            alt='Nuestra Mision'
-            width={1000}
-            height={500}
-          />
-        </div>
-      </header>
-
-      {/* transformar a componente */}
+      <InfoPageHeader pageData={SINGLE} />
 
       {!data && (
         <div className='flex flex-col gap-8 container'>
@@ -130,15 +108,15 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({
       )}
 
       {data && (
-        <div className='md:container '>
-          <div className='md:container px-4 sm:px-8 md:px-12 lg:px-20 nc-SingleContent  relative space-y-10 mb-16'>
-            <div className='w-full max-w-[50rem] mx-auto px-4 sm:px-6 lg:px-8'>
-              <p className='font-lora text-[#392C35] pb-2 pt-4 text-base sm:text-lg lg:text-xl'>
+        <div className=' '>
+          <div className=' nc-SingleContent  relative space-y-10 mb-16 '>
+            <div className='w-full max-w-[50rem] mx-auto px-4 mt-5'>
+              <p className='font-lora  pb-2 pt-4 text-base sm:text-lg lg:text-xl text-[#392C35]'>
                 Medical & Scientific Knowledge es un grupo español con más de
                 ocho años de trayectoria en la industria pharma y en el
                 desarrollo de cursos de medicina.
               </p>
-              <p className='font-lora text-[#392C35] py-2 text-base sm:text-lg lg:text-xl'>
+              <p className='font-lora  py-2 text-base sm:text-lg lg:text-xl text-[#392C35]'>
                 Nuestra misión es satisfacer las necesidades de los
                 profesionales de la salud que buscan estudiar medicina a
                 distancia, gestionando sus procesos de capacitación a través de
@@ -246,8 +224,8 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({
 
       {/* transformar a componente */}
 
-      <div className='md:container'>
-        <div className='px-4 sm:px-8 md:px-6 lg:px-20 grid grid-cols-1 md:grid-cols-3 gap-4 my-16'>
+      <div className=''>
+        <div className=' grid grid-cols-1 md:grid-cols-3 gap-4 my-16'>
           <ContactForm isNosotros={true} />
         </div>
       </div>

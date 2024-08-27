@@ -144,7 +144,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
       <RedirectToTrial />
       {/* HEADER */}
       <div className='animate-fade-down'>
-        <div className='bg-neutral-200 dark:bg-neutral-900 dark:border dark:border-neutral-700 p-5 lg:p-16 flex flex-col sm:items-center'>
+        <div className='bg-neutral-200 dark:bg-neutral-900 dark:border dark:border-neutral-700 p-5 lg:p-16 flex flex-col sm:items-center w-screen  transform -translate-x-1/2 left-1/2 relative'>
           {loadingUser ? (
             <div className='mx-auto'>
               <AvatarSkeleton className='rounded-full w-24 h-24 mx-auto' />
@@ -172,8 +172,8 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
       </div>
       {/* ====================== END HEADER ====================== */}
 
-      <div className='container py-16 lg:pb-28 lg:pt-20 space-y-16 lg:space-y-28 '>
-        <main className=' lg:px-24'>
+      <div className=' py-16 lg:pb-28 lg:pt-20 space-y-16 lg:space-y-28 '>
+        <main className=' '>
           {loadingUser ? (
             <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mt-8 lg:mt-10 mb-8'>
               <ItemSkeleton />
@@ -191,7 +191,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
               />
               {currentItems.length ? (
                 <>
-                  <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mt-8 lg:mt-10 mb-8'>
+                  {/* <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mt-8 lg:mt-10 mb-8'>
                     {currentItems
                       ? currentItems.map((post, index) => (
                           <ProductAccount
@@ -201,14 +201,8 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
                           />
                         ))
                       : null}
-                  </div>
-                  {/* <div
-                    className={`flex flex-wrap gap-4 ${
-                      currentItems.length >= 4
-                        ? 'justify-between'
-                        : 'justify-start'
-                    }`}
-                  >
+                  </div> */}
+                  <div className='grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4'>
                     {currentItems.map((post, index) => (
                       <CursoPerfil
                         key={`${post.id}_${index}`}
@@ -216,7 +210,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
                         user={user}
                       />
                     ))}
-                  </div> */}
+                  </div>
 
                   {totalPages > 1 ? (
                     <div className='flex justify-center'>
@@ -261,7 +255,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
               : null}
           </div>
         </main>
-        <div className='relative py-16 my-32'>
+        {/* <div className='relative py-16 my-32'>
           <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-16 mb-[96px] w-full px-14'>
             <SectionSliderBestSellers
               posts={allBestSellers}
@@ -274,6 +268,18 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
               uniqueSliderClass='perfil-section6'
             />
           </div>
+        </div> */}
+        <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] md:w-[129%] left-1/2 transform -translate-x-1/2  w-screen'>
+          <SectionSliderBestSellers
+            posts={allBestSellers}
+            loading={loadingBestSellers}
+            className='w-full section-slider-posts-container'
+            postCardName='card9'
+            heading='Nuestros cursos más elegidos'
+            subHeading='Profesionales como tú ya se capacitaron con ellos. ¡Ahora te toca a ti!'
+            sliderStype='style2'
+            uniqueSliderClass='pageNewHome-section6'
+          />
         </div>
       </div>
     </div>

@@ -1,9 +1,10 @@
-"use client";
-import React, { useEffect, useReducer } from "react";
-import { AuthContext } from "./AuthContext";
-import { authReducer } from "./AuthReducer";
-import { AuthState } from "@/data/types";
-import { fetchUserData } from "@/middleware";
+'use client';
+import React, { useEffect, useReducer } from 'react';
+import { AuthContext } from './AuthContext';
+import { authReducer } from './AuthReducer';
+import { AuthState } from '@/data/types';
+import { fetchUserData } from '@/middleware';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   children: React.ReactNode;
@@ -22,14 +23,19 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
   };
 
   const [state, dispatch] = useReducer(authReducer, initialState);
+  const router = useRouter();
+  useEffect(() => {
+    router.prefetch('/');
+    router.prefetch('/iniciar-sesion');
+  }, []);
 
   useEffect(() => {
     const initializeAuth = async () => {
       /*console.log('INITIALIZE AUTH');*/
-      const token = localStorage.getItem("token");
-      const email = localStorage.getItem("email");
-      const bypassRedirect = localStorage.getItem("bypassRedirect");
-      let expires_at: string | Date | null = localStorage.getItem("expires_at");
+      const token = localStorage.getItem('token');
+      const email = localStorage.getItem('email');
+      const bypassRedirect = localStorage.getItem('bypassRedirect');
+      let expires_at: string | Date | null = localStorage.getItem('expires_at');
 
       if (token && email) {
         const userData = await fetchUserData();
@@ -42,21 +48,22 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
             user: userData,
             profile: userData.profile,
           };
-          dispatch({ type: "LOGIN", payload: data });
+          dispatch({ type: 'LOGIN', payload: data });
           if (expires_at) {
             expires_at = new Date(expires_at);
             expires_at.setDate(expires_at.getDate() - 1);
 
             if (new Date() > expires_at) {
-              dispatch({ type: "LOGOUT" });
+              dispatch({ type: 'LOGOUT' });
+              router.push('/iniciar-sesion');
             }
           }
         } else {
           //I still trigger the logout event to mark that the authState has been loaded
-          dispatch({ type: "LOGOUT" });
+          dispatch({ type: 'LOGOUT' });
         }
       } else {
-        dispatch({ type: "LOGOUT" });
+        dispatch({ type: 'LOGOUT' });
       }
     };
 

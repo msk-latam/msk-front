@@ -22,10 +22,10 @@ module.exports = {
     container: {
       center: true,
       padding: {
-        DEFAULT: '6rem',
+        DEFAULT: '4rem',
       },
       screens: {
-        md: '1792px', // Change from 1536px to 1792px
+        md: '1400px', // Change from 1536px to 1792px
       },
     },
     fontFamily: {
@@ -35,6 +35,9 @@ module.exports = {
 
     extend: {
       colors: {
+        translucent: {
+          blue: 'rgba(173, 216, 230, 0.5)', // Light Blue
+        },
         primary: {
           50: customColors('--c-primary-50'),
           100: customColors('--c-primary-100'),

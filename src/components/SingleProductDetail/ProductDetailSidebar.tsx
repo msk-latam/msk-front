@@ -107,119 +107,107 @@ const ProductDetailSidebar: FC<Props> = ({
   );
   //console.log(hasCoursedRequested)
   return (
-    <div className={`flex  justify-center lg:block`}>
-      <div
-        className={`${
-          isFixed && bottomDistance == 0 && !isEbook && fixedPosition
-            ? 'course-widget-wrapper fixed'
-            : 'course-widget-wrapper'
-        } ${
-          bottomDistance != 0 && !isEbook ? 'absolute bottom-0' : 'bottom-10'
-        }`}
-      >
-        {isFixed && !isEbook ? (
-          <>
-            {product.sale_price !== '0' && (
-              <Badge
-                color='sale'
-                name='EN PROMOCIÓN'
-                className='hidden lg:inline-block mb-2'
-              />
-            )}
-          </>
-        ) : (
-          <div className='course-video-thumb mb-2 w-img hidden lg:flex relative'>
-            {product.sale_price !== '0' && (
-              <Badge
-                color='sale'
-                name='EN PROMOCIÓN'
-                className='absolute top-2 left-2'
-              />
-            )}
-            <Image
-              src={image}
-              alt={`${slug} image`}
-              width={1000}
-              height={1000}
+    <div
+      className={`${
+        isFixed && bottomDistance == 0 && !isEbook && fixedPosition
+          ? 'course-widget-wrapper fixed'
+          : 'course-widget-wrapper'
+      } ${bottomDistance != 0 && !isEbook ? 'absolute bottom-0' : 'bottom-10'}`}
+    >
+      {isFixed && !isEbook ? (
+        <>
+          {product.sale_price !== '0' && (
+            <Badge
+              color='sale'
+              name='EN PROMOCIÓN'
+              className='hidden lg:inline-block mb-2'
             />
-          </div>
-        )}
-
-        {product.sale_price !== '0' && (
-          <Badge color='sale' name='EN PROMOCIÓN' className='mb-2 lg:hidden' />
-        )}
-
-        <PricingDetail isEbook={isEbook} product={product} />
-
-        <div className='course-video-body'>
-          <ul>
-            {isEbook ? (
-              <>
-                {ebookData.map((item, index) => {
-                  return (
-                    <li key={`data_${index}`}>
-                      <div className='course-vide-icon'>
-                        <img
-                          src={`/images/icons/${item.icon}.svg`}
-                          width={item.size}
-                        />
-                        <span>{item.description}</span>
-                      </div>
-                      <div className='video-corse-info'></div>
-                    </li>
-                  );
-                })}
-              </>
-            ) : (
-              <>
-                {Object.keys(sideData).map((key, index) => {
-                  return (
-                    <li key={`data_${index}`}>
-                      <div className='course-vide-icon w-full'>
-                        <img src={`/images/icons/${key}.svg`} width='15' />
-                        <p className='text-[12px] sm:text-base w-full flex justify-between text-dark-blue-custom'>
-                          <span>
-                            {translations[key] ? translations[key] + ':' : ''}
-                          </span>
-                          {key == 'idioma' ? (
-                            sideData[key].length && sideData[key][0] != null ? (
-                              <>{sideData[key].join(', ')}</>
-                            ) : (
-                              'Español'
-                            )
-                          ) : (
-                            <span className='ml-auto'>
-                              {sideData[key as keyof typeof sideData]}
-                            </span>
-                          )}
-                        </p>
-                      </div>
-                    </li>
-                  );
-                })}
-              </>
-            )}
-          </ul>
-        </div>
-        <div className='flex flex-col gap-2'>
-          <button
-            onClick={scrollToContactForm}
-            className='video-cart-btn w-full'
-          >
-            {isEbook ? 'Descargar gratis' : 'Contáctanos'}
-          </button>
-          {!isEbook && hasGateway && !product.is_presale_product && (
-            <button
-              onClick={() => requestTrial(slug)}
-              className='video-cart-btn border-2 w-full disabled:!border-grey-disabled disabled:!text-grey-disabled disabled:cursor-not-allowed hover:disabled:!bg-transparent hover:!disabled:border-grey-disabled hover:!disabled:text-grey-disabled'
-              disabled={hasCoursedRequested}
-            >
-              {hasCoursedRequested
-                ? 'Prueba ya solicitada'
-                : 'Prueba 7 días gratis'}
-            </button>
           )}
+        </>
+      ) : (
+        <div className='course-video-thumb mb-2 w-img hidden lg:flex relative'>
+          {product.sale_price !== '0' && (
+            <Badge
+              color='sale'
+              name='EN PROMOCIÓN'
+              className='absolute top-2 left-2'
+            />
+          )}
+          <Image src={image} alt={`${slug} image`} width={1000} height={1000} />
         </div>
+      )}
+
+      {product.sale_price !== '0' && (
+        <Badge color='sale' name='EN PROMOCIÓN' className='mb-2 lg:hidden' />
+      )}
+
+      <PricingDetail isEbook={isEbook} product={product} />
+
+      <div className='course-video-body'>
+        <ul>
+          {isEbook ? (
+            <>
+              {ebookData.map((item, index) => {
+                return (
+                  <li key={`data_${index}`}>
+                    <div className='course-vide-icon'>
+                      <img
+                        src={`/images/icons/${item.icon}.svg`}
+                        width={item.size}
+                      />
+                      <span>{item.description}</span>
+                    </div>
+                    <div className='video-corse-info'></div>
+                  </li>
+                );
+              })}
+            </>
+          ) : (
+            <>
+              {Object.keys(sideData).map((key, index) => {
+                return (
+                  <li key={`data_${index}`}>
+                    <div className='course-vide-icon w-full'>
+                      <img src={`/images/icons/${key}.svg`} width='15' />
+                      <p className='text-[12px] sm:text-base w-full flex justify-between text-dark-blue-custom'>
+                        <span>
+                          {translations[key] ? translations[key] + ':' : ''}
+                        </span>
+                        {key == 'idioma' ? (
+                          sideData[key].length && sideData[key][0] != null ? (
+                            <>{sideData[key].join(', ')}</>
+                          ) : (
+                            'Español'
+                          )
+                        ) : (
+                          <span className='ml-auto'>
+                            {sideData[key as keyof typeof sideData]}
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
+            </>
+          )}
+        </ul>
+      </div>
+      <div className='flex flex-col gap-2'>
+        <button onClick={scrollToContactForm} className='video-cart-btn w-full'>
+          {isEbook ? 'Descargar gratis' : 'Contáctanos'}
+        </button>
+        {!isEbook && hasGateway && !product.is_presale_product && (
+          <button
+            onClick={() => requestTrial(slug)}
+            className='video-cart-btn border-2 w-full disabled:!border-grey-disabled disabled:!text-grey-disabled disabled:cursor-not-allowed hover:disabled:!bg-transparent hover:!disabled:border-grey-disabled hover:!disabled:text-grey-disabled'
+            disabled={hasCoursedRequested || countryState.country === 'ar'}
+          >
+            {hasCoursedRequested
+              ? 'Prueba ya solicitada'
+              : 'Prueba 7 días gratis'}
+          </button>
+        )}
       </div>
     </div>
   );
