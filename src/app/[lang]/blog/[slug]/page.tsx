@@ -63,8 +63,6 @@ const PageNota: FC<PageCourseProps> = async ({ params }) => {
         data-nc-id='PageSingleTemp3Sidebar'
       >
         <BlogHeader post={post} />
-
-        {/* SINGLE MAIN CONTENT */}
         <div className=' flex flex-col col-span-12 w-full lg:flex-row note-container '>
           <div className='w-full  md:mt-0'>
             <SingleContent
@@ -75,9 +73,6 @@ const PageNota: FC<PageCourseProps> = async ({ params }) => {
             />
           </div>
         </div>
-
-        {/* RELATED POSTS */}
-        {/* <SingleRelatedPosts /> */}
       </div>
     </>
   );
