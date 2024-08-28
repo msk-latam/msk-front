@@ -76,7 +76,7 @@ const BlogSummary: FC<BlogSummaryProps> = ({
         heading={heading}
         onClickTab={handleClickTab}
         desc={desc}
-        viewMore='/archivo'
+        viewMore='/blog/archivo'
         mobileHidden='block'
       />
       {loading && (
