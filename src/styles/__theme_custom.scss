@@ -537,7 +537,6 @@ $xs: '(max-width: 575px)';
   }
   .main-container {
     max-width: 100%;
-    overflow-x: auto;
     left: 0;
     margin-left: 0;
     position: relative;
@@ -545,7 +544,19 @@ $xs: '(max-width: 575px)';
 
     .table-container {
       min-width: 1000px;
-      left: 0;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  @media (max-width: 768px) {
+    .main-container {
+      overflow-x: auto;
+      .table-container {
+        min-width: 1000px;
+        left: 0;
+        transform: none;
+      }
     }
   }
 }

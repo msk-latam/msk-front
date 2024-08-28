@@ -5,3 +5,13 @@
 /* * {
   outline: 1px solid red;
 } */
+html,
+body {
+  overflow-x: hidden;
+}
+
+@layer components {
+  .custom-grid {
+    @apply grid grid-cols-12 gap-3;
+  }
+}

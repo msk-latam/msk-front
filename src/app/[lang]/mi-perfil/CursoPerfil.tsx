@@ -97,10 +97,10 @@ const CursoPerfil: FC<Props> = ({ product, user }) => {
 
   const visibleCategories = showAll
     ? product.categories
-    : product.categories.slice(0, 2);
+    : product.categories.slice(0, 1);
 
   return (
-    <div className='flex flex-col bg-white shadow-lg rounded-sm overflow-hidden w-full max-w-[365px] md:max-w-[240px] lg:max-w-[274px] h-[400px] mb-8'>
+    <div className='flex flex-col bg-white shadow-lg rounded-sm overflow-hidden w-full  h-[400px] mb-8'>
       <div className='relative w-full h-[180px]'>
         <Image
           src={imageUrl}
@@ -118,18 +118,12 @@ const CursoPerfil: FC<Props> = ({ product, user }) => {
           textSize='text-[11px]'
           itemClass='!py-0.5 !px-1'
         />
-        {product.categories.length > 2 && (
-          <button
-            onClick={handleToggleShowAll}
-            className='mt-2 text-primary font-bold flex items-center'
-          >
-            {showAll ? 'Ver menos' : '...'}
-            <span className='ml-1'>{showAll ? '▲' : '▼'}</span>
-          </button>
-        )}
-        <h3 className='text-lg font-bold my-2 leading-tight'>
-          {product.title}
-        </h3>
+
+        <div className='group'>
+          <h3 className='text-lg font-bold my-2 leading-tight line-clamp-2 group-hover:line-clamp-none'>
+            {product.title}
+          </h3>
+        </div>
         <div className='mt-auto'>
           {product.expiration ? (
             <DateProductExpiration

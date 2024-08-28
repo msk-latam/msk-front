@@ -1,7 +1,7 @@
 {
-    "/": ["Home"],
-    "/tienda": [ "Tienda"],
-    "/curso": [ "Tienda", "mainCategory" ,"Curso|Guía profesional"],
-    "/blog": ["Blog", "mainCategory" , "Nota"],
-    "/archivo": ["Blog", "Archivo"]
-  }
+  "/": ["Home"],
+  "/tienda": ["Tienda"],
+  "/curso": ["Tienda", "mainCategory", "Curso|Guía profesional"],
+  "/blog": ["Blog", "mainCategory", "Nota"],
+  "/blog/archivo": ["Blog", "Archivo"]
+}

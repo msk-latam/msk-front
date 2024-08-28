@@ -60,6 +60,10 @@ const signOutContent: FC<Props> = ({ setShow, onClose }) => {
   //   return <Loading />;
   // }
 
+  useEffect(() => {
+    router.prefetch('/');
+  }, []);
+
   return (
     <div className='flex flex-col items-center justify-center gap-3'>
       <p className='raleway text-lg'>Estás saliendo de tu cuenta.</p>

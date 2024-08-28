@@ -18,6 +18,14 @@ const PageDashboard: FC<PageDashboardProps> = ({ className = '' }) => {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
+    router.prefetch('/');
+  }, []);
+
+  useEffect(() => {
+    router.prefetch('/iniciar-sesion');
+  }, []);
+
+  useEffect(() => {
     if (!user.id) fetchUser();
   }, [state?.profile]);
 
