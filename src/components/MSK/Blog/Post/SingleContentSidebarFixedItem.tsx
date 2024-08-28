@@ -59,12 +59,10 @@ const SingleContentSidebarFixedItem: FC<SingleContentSidebarFixedItemProps> = ({
   return (
     <div
       className={`${
-        isFixed &&
-        bottomDistance == 0 &&
-        '  lg:fixed top-[100px] max-w-[25.9rem]'
+        isFixed && bottomDistance == 0 && '  lg:fixed top-[100px] '
       } ${bottomDistance != 0 ? 'absolute bottom-0' : ''}`}
     >
-      <div className='bg-[#f3f4f6] rounded-2xl mb-2 '>
+      <div className='bg-[#f3f4f6] rounded-2xl mb-2 xl:w-[25rem] lg:w-[20rem]'>
         <div className='flex '>
           <h5 className=' p-2.5'>🎯 Los más leídos</h5>
           <Link

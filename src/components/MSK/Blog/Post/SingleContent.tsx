@@ -96,7 +96,7 @@ const SingleContent: FC<SingleContentProps> = ({
               : null}
           </div>
         </div>
-        <div className='col-span-12 lg:col-span-4 relative course-video-widget z-50'>
+        <div className='col-span-12 lg:col-span-4 relative course-video-widget z-50 '>
           <SingleContentSidebarFixedItem
             articles={data.articles}
             the_most_read={data.the_most_read}
