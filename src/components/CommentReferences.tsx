@@ -8,7 +8,7 @@ import ReferenceCard from '@/components/Reference/RefereceCard';
 const CommentReferences: FC<{ content: WpContentData }> = ({ content }) => {
   return (
     <ContainerSecondary contentAttribute={content?.recomendaciones}>
-      <div className='flex flex-col  lg:grid lg:grid-cols-[30%_65%] lg:gap-x-8 lg:items-stretch justify-center mt-6 sm:mt-12 md:px-20'>
+      <div className='flex flex-col  lg:grid lg:grid-cols-[30%_65%] lg:gap-x-8 lg:items-stretch justify-center mt-6 sm:mt-12 md:px-20 px-4'>
         <div className='flex justify-center items-center flex-col bg-[#F6F7F8] border border-[#6474A6] rounded-xl py-12  mb-8 md:mb-0'>
           {content?.recomendaciones.items_1.map((cri, index) => (
             <div key={index} className='mb-5'>

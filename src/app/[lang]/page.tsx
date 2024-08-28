@@ -121,7 +121,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
             <HomeExtraInfo country={currentCountry} />
           </div>
           {/* arreglar commentReferences */}
-          <div className='md:w-[124%] left-1/2 transform -translate-x-1/2 relative w-full '>
+          <div className='md:w-[124%] left-1/2 transform -translate-x-1/2 relative w-screen'>
             <CommentReferences content={pageHomeWpContent as WpContentData} />
           </div>
 
