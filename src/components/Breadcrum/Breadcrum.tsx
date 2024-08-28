@@ -38,8 +38,6 @@ const Breadcrum: React.FC<BreadcrumProps> = ({
   const pathname = usePathname();
   const parts = pathname.split('/').filter(part => part !== '');
 
-  console.log(parts);
-
   // Construir la ruta acumulativa
   const breadcrumMap: BreadcrumbMapping = breadcrumMapping;
 
@@ -55,10 +53,6 @@ const Breadcrum: React.FC<BreadcrumProps> = ({
         // Si es un código ISO de país, no lo agregamos a la ruta acumulativa
         return false;
       }
-
-      console.log(rutaAcumulativa);
-      console.log(part);
-      console.log(breadcrumMap[rutaAcumulativa]);
 
       return breadcrumMap[rutaAcumulativa];
     })
@@ -151,9 +145,6 @@ const Breadcrum: React.FC<BreadcrumProps> = ({
 
     return managedURL ?? `/${countryState.country}/${part.toLowerCase()}`;
   };
-
-  console.log(partsFlattened, 'breadcrum');
-  console.log(partsBreadcrumb);
 
   return (
     <div className='flex flex-wrap md:flex-nowrap items-center mb-5 w-full'>

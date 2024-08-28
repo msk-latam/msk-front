@@ -66,9 +66,9 @@ const StoreContent: FC<{}> = () => {
   let products: FetchCourseType[] = [];
 
   useEffect(() => {
-    console.log('USE EFFECT STORE CONTENT');
+    // console.log('USE EFFECT STORE CONTENT');
     async function fetchData() {
-      console.log('All Courses', storeCourses);
+      // console.log('All Courses', storeCourses);
       if (storeCourses.length) {
         setCurrentItems(storeCourses.slice(indexOfFirstItem, indexOfLastItem));
       }
@@ -77,7 +77,7 @@ const StoreContent: FC<{}> = () => {
   }, [countryState.country, storeCourses]);
 
   const handlePageChange = (pageNumber: number) => {
-    console.log('HANDLING PAGE CHANGE');
+    // console.log('HANDLING PAGE CHANGE');
     const pageExists = storeFilters.page.some(
       (item: PageFilter) => item.id === pageNumber,
     );
@@ -109,9 +109,9 @@ const StoreContent: FC<{}> = () => {
           removeAccents(event.toLowerCase()),
         ),
       );
-      console.log('SEARCH TRIGGERED', event, {
-        filteredProducts,
-      });
+      // console.log('SEARCH TRIGGERED', event, {
+      //   filteredProducts,
+      // });
 
       setCurrentItems(filteredProducts);
     } else {
@@ -121,7 +121,7 @@ const StoreContent: FC<{}> = () => {
   };
 
   const triggerFilter = (event: any) => {
-    console.log('TRIGGER FILTER', products);
+    // console.log('TRIGGER FILTER', products);
     if (products) {
       setCurrentItems(filterStoreProducts(products, event));
     }
@@ -138,7 +138,7 @@ const StoreContent: FC<{}> = () => {
     if (action == 'delete') {
       removeFilter('specialties', specialty);
     } else {
-      console.log('Adding filter');
+      // console.log('Adding filter');
       addFilter('specialties', specialty);
       addFilter('resources', { id: 1, slug: 'curso', name: 'Curso' });
     }
@@ -155,15 +155,15 @@ const StoreContent: FC<{}> = () => {
   };
   const onChangeResource = (resource: ResourceFilter, action: string) => {
     resetPage();
-    console.log('onChangeResource running');
-    console.log('Resource', resource);
+    // console.log('onChangeResource running');
+    // console.log('Resource', resource);
     if (action !== 'add') {
       removeFilter('resources', resource);
     } else addFilter('resources', resource);
   };
   const onChangeDuration = (duration: DurationFilter, action: string) => {
     resetPage();
-    console.log('Duration', duration);
+    // console.log('Duration', duration);
     if (action !== 'add') {
       removeFilter('duration', duration);
     } else addFilter('duration', duration);
@@ -182,7 +182,7 @@ const StoreContent: FC<{}> = () => {
   const applyFilters = () => {
     setMutationProducts(true);
     console.group('applyFilters()');
-    console.log('Store Filters', { storeFilters });
+    // console.log('Store Filters', { storeFilters });
     const selectedSpecialties = storeFilters.specialties.map(
       (filter: Specialty) => filter.name,
     );
@@ -206,14 +206,14 @@ const StoreContent: FC<{}> = () => {
 
     const searchText = selectedText ?? '';
 
-    console.log('condition filter apply', {
-      selectedSpecialties,
-      selectedProfessions,
-      selectedResources,
-      selectedDurations,
-      selectedPage,
-      searchText,
-    });
+    // console.log('condition filter apply', {
+    //   selectedSpecialties,
+    //   selectedProfessions,
+    //   selectedResources,
+    //   selectedDurations,
+    //   selectedPage,
+    //   searchText,
+    // });
 
     if (
       !(
@@ -225,14 +225,14 @@ const StoreContent: FC<{}> = () => {
         searchText.length
       )
     ) {
-      console.log('No filters');
+      // console.log('No filters');
       // No filters, set the products to the original list
       let filterWithValueCourses = storeCourses.filter((c: WpProduct) => {
         if (
           (c.father_post_type === 'course' && Number(c.total_price) === 0) ||
           c.is_test_product
         ) {
-          console.log({ c });
+          // console.log({ c });
           return false;
         }
 
@@ -245,14 +245,14 @@ const StoreContent: FC<{}> = () => {
       setFilteredItems(filterWithValueCourses);
       setMutationProducts(false);
     } else {
-      console.log('There are filters we need to apply', {
-        selectedSpecialties,
-        selectedProfessions,
-        selectedResources,
-        selectedDurations,
-        selectedPage,
-        searchText,
-      });
+      // console.log('There are filters we need to apply', {
+      //   selectedSpecialties,
+      //   selectedProfessions,
+      //   selectedResources,
+      //   selectedDurations,
+      //   selectedPage,
+      //   searchText,
+      // });
 
       const filteredProducts = storeCourses.filter((product: WpProduct) => {
         const prodSpecialties = product.categories.map(
@@ -361,7 +361,7 @@ const StoreContent: FC<{}> = () => {
 
   if (typeof window !== 'undefined') {
     useEffect(() => {
-      console.log('FILTERS WERE UPDATED');
+      // console.log('FILTERS WERE UPDATED');
       applyFilters();
     }, [
       storeCourses,
@@ -376,7 +376,7 @@ const StoreContent: FC<{}> = () => {
 
   if (typeof window !== 'undefined') {
     useEffect(() => {
-      console.log('Store Component rendered, check URL to apply filters');
+      // console.log('Store Component rendered, check URL to apply filters');
       //if the url has the search param recurso call onChange() for that resource
       const url = new URL(window.location.href);
       const recurso = url.searchParams.get('recurso');
@@ -386,28 +386,28 @@ const StoreContent: FC<{}> = () => {
       const page = url.searchParams.get('page');
       if (recurso) {
         let urlResource = resources.find(resource => resource.slug === recurso);
-        console.log('URL RESOURCE: ', urlResource);
+        // console.log('URL RESOURCE: ', urlResource);
         if (urlResource) {
           onChangeResource(urlResource, 'add');
         }
       }
       if (especialidad && specialties) {
-        console.log('SPECIALTIES: ', specialties);
+        // console.log('SPECIALTIES: ', specialties);
         let urlSpecialty = specialties.find(
           (specialty: any) => slugifySpecialty(specialty.name) === especialidad,
         );
-        console.log('URL SPECIALTY: ', urlSpecialty);
+        // console.log('URL SPECIALTY: ', urlSpecialty);
         if (urlSpecialty) {
           onChangeSpecialty(urlSpecialty, 'add');
         }
       }
 
       if (profesion && allStoreProfessions) {
-        console.log('changing profession');
+        // console.log('changing profession');
         let urlProfession = allStoreProfessions?.find(
           (profession: any) => profession.slug === profesion,
         );
-        console.log('URL PROFESSION: ', urlProfession);
+        // console.log('URL PROFESSION: ', urlProfession);
         if (urlProfession) {
           addFilter('professions', urlProfession);
         }
@@ -422,6 +422,8 @@ const StoreContent: FC<{}> = () => {
       }
     }, [allStoreProfessions, specialties]);
   }
+
+  // console.log(currentItems, 'CURRENTITEMS');
 
   return (
     <section className=' course-content-area pb-90 animate-fade-down '>
