@@ -81,8 +81,8 @@ class ApiService {
         body: JSON.stringify(jsonData),
       });
 
-      console.log(await response.text());
-      console.log(response.headers);
+      // console.log(await response.text());
+      // console.log(response.headers);
 
       if (!response.ok) {
         throw new Error(`Failed to sign up. HTTP status ${response.status}`);
@@ -260,14 +260,15 @@ class ApiService {
       : `&country=int`;
     const filterParam = withAll ? `&asd=1&filter=all` : '';
 
-
     let tagParam = '';
     if (typeof window !== 'undefined') {
       let tagFromURL = new URLSearchParams(window.location.search).get('tag');
       tagParam = tagFromURL ? `&tag=${tagFromURL}` : '';
     }
     try {
-      const queryParams = [tagParam, countryParam, filterParam].filter(Boolean).join('');
+      const queryParams = [tagParam, countryParam, filterParam]
+        .filter(Boolean)
+        .join('');
       const response = await fetch(
         `${API_URL}/products?limit=-1${queryParams}&asd=tes4`,
       );

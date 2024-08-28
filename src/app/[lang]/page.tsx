@@ -108,20 +108,20 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
           <WelcomeBox content={pageHomeWpContent as WpContentData} />
 
           {/* cursos por especialidades */}
-          <div className=' relative'>
+          <div className=' relative mb-10 md:mb-28'>
             <BrandSlider />
             <Phrase content={pageHomeWpContent?.cedentes.texto as string} />
             <SectionGridCategoryBox
               headingCenter={false}
               categories={HOME_SPECIALTIES.filter((_, i) => i < 4)}
               categoryCardType='card2'
-              className='pb-16 lg:pb-28'
+              className='pb-8 lg:pb-28'
             />
 
             <HomeExtraInfo country={currentCountry} />
           </div>
           {/* arreglar commentReferences */}
-          <div className='md:w-[129%] left-1/2 transform -translate-x-1/2 relative w-screen'>
+          <div className='md:w-[124%] left-1/2 transform -translate-x-1/2 relative w-full '>
             <CommentReferences content={pageHomeWpContent as WpContentData} />
           </div>
 
@@ -142,7 +142,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
             <BlogSummary
               posts={getAllPosts()}
               tabs={TABS_BLOG}
-              className='pt-4 md:pt-16 pb-8'
+              className='pt-4 md:mt-16 md:mb-8 pb-8'
               heading='Blog'
               desc='Recursos para informarte y aprender de distintas maneras'
               showTitle

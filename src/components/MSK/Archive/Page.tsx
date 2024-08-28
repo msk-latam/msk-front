@@ -140,9 +140,6 @@ const PageArchiveComponent: FC<PageArchiveProps> = ({
         ? specialtiesBannersJSON[categoryValue]
         : '/webp-images/banners/archive.webp';
 
-      console.log(categoryValue);
-      console.log(specialtyValue);
-      console.log(bannerImg);
       setBannerImage(bannerImg);
 
       if (!specialtyValue && !categoryValue) return setAuxPosts(posts);
