@@ -11,7 +11,8 @@ export interface CourseRequirementsProps {
 
 const CourseRequirements: FC<CourseRequirementsProps> = ({
   className = '',
-  imgAds = '/webp-images/vectors/doctor_2.webp',
+  // imgAds = '/webp-images/vectors/doctor_2.webp',
+  imgAds = '/images/vectors/ficha.png',
   requirements,
   title,
 }) => {
