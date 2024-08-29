@@ -1,4 +1,4 @@
-import * as Yup from "yup";
+import * as Yup from 'yup';
 
 export interface ContactFormSchema {
   First_Name: string;
@@ -54,91 +54,91 @@ export interface CancelSubscriptionSchema {
   recaptcha_token?: string | null;
 }
 
-const firstNameValidation = Yup.string().required("El nombre es requerido");
-const lastNameValidation = Yup.string().required("El apellido es requerido");
-const phoneValidation = Yup.string().required("El teléfono es requerido");
+const firstNameValidation = Yup.string().required('El nombre es requerido');
+const lastNameValidation = Yup.string().required('El apellido es requerido');
+const phoneValidation = Yup.string().required('El teléfono es requerido');
 
-const professionValidation = Yup.string().required("La profesión es requerida");
+const professionValidation = Yup.string().required('La profesión es requerida');
 
 const specialtyValidation = Yup.string().required(
-  "La especialidad es requerida"
+  'La especialidad es requerida',
 );
 
 const anotherProfessionValidation = Yup.string().test(
-  "other-profession",
-  "La profesion es requerida",
+  'other-profession',
+  'La profesion es requerida',
   function (value) {
     const profession = this.parent.Profesion;
-    if (profession === "Otra Profesion" && !value) {
+    if (profession === 'Otra Profesion' && !value) {
       return new Yup.ValidationError(
-        "La profesion es requerida",
+        'La profesion es requerida',
         value,
-        "Otra_profesion"
+        'Otra_profesion',
       );
     }
     return true;
-  }
+  },
 );
 
 const careerYearValidation = Yup.string().test(
-  "student-year",
-  "El año es requerido para estudiantes",
+  'student-year',
+  'El año es requerido para estudiantes',
   function (value) {
     const profession = this.parent.Profesion;
-    if (profession === "Estudiante" && !value) {
-      return new Yup.ValidationError("El año es requerido", value, "year");
+    if (profession === 'Estudiante' && !value) {
+      return new Yup.ValidationError('El año es requerido', value, 'year');
     }
     return true;
-  }
+  },
 );
 
 const careerValidation = Yup.string().test(
-  "student-year",
-  "La carrera es requerido para estudiantes",
+  'student-year',
+  'La carrera es requerido para estudiantes',
   function (value) {
     const profession = this.parent.Profesion;
-    if (profession === "Estudiante" && !value) {
+    if (profession === 'Estudiante' && !value) {
       return new Yup.ValidationError(
-        "La carrera es requerida",
+        'La carrera es requerida',
         value,
-        "career"
+        'career',
       );
     }
     return true;
-  }
+  },
 );
 
 const anotherSpecialtyValidation = Yup.string().test(
-  "other-speciality",
-  "El año es requerido para estudiantes",
+  'other-speciality',
+  'El año es requerido para estudiantes',
   function (value) {
     const specialty = this.parent.Especialidad;
-    if (specialty === "Otra Especialidad" && !value) {
+    if (specialty === 'Otra Especialidad' && !value) {
       return new Yup.ValidationError(
-        "La especialidad es requerida",
+        'La especialidad es requerida',
         value,
-        "Otra_especialidad"
+        'Otra_especialidad',
       );
     }
     return true;
-  }
+  },
 );
 
 const identificationValidation = Yup.string().required(
-  "La identificación es requerida"
+  'La identificación es requerida',
 );
 
-const formReason = Yup.string().required("El motivo de solicitud es requerido");
+const formReason = Yup.string().required('El motivo de solicitud es requerido');
 const emailValidation = Yup.string()
-  .email("Correo electrónico inválido")
-  .required("El correo electrónico es requerido");
+  .email('Correo electrónico inválido')
+  .required('El correo electrónico es requerido');
 
 const termsAndConditionsValidation = Yup.boolean()
-  .oneOf([true], "Debes aceptar los términos y condiciones")
-  .required("Debes aceptar los términos y condiciones");
+  .oneOf([true], 'Debes aceptar los términos y condiciones')
+  .required('Debes aceptar los términos y condiciones');
 const themesNewsletterValidation = Yup.array()
   .of(Yup.string())
-  .min(1, "Se requiere al menos 1 tema de interés")
+  .min(1, 'Se requiere al menos 1 tema de interés')
   .required();
 
 export const useYupValidation = () => {
@@ -178,9 +178,9 @@ export const useYupValidation = () => {
       identificacion: identificationValidation,
       motivo_solicitud: formReason,
       tipo_documento: Yup.string().required(
-        "El tipo de documento es requerido"
+        'El tipo de documento es requerido',
       ),
-      zsWebFormCaptchaWord: Yup.string().required("El captcha es requerido"),
+      zsWebFormCaptchaWord: Yup.string().required('El captcha es requerido'),
       Terms_And_Conditions: termsAndConditionsValidation,
     });
   const newsletterValidation = Yup.object().shape({
@@ -193,10 +193,41 @@ export const useYupValidation = () => {
     Terms_And_Conditions2: termsAndConditionsValidation,
   });
 
+  const cardMpValidation = Yup.object().shape({
+    cardNumber: Yup.string()
+      .required('El número de tarjeta es obligatorio')
+      .matches(
+        /^\d{16}$/,
+        'El número de tarjeta debe tener 16 dígitos y solo números',
+      ),
+
+    expirationMonth: Yup.string()
+      .required('El mes de expiración es obligatorio')
+      .matches(
+        /^(0[1-9]|1[0-2])$/,
+        'El mes de expiración debe ser un número entre 01 y 12',
+      ),
+
+    expirationYear: Yup.string()
+      .required('El año de expiración es obligatorio')
+      .matches(
+        /^\d{4}$/,
+        'El año de expiración debe tener 4 dígitos y solo números',
+      ),
+
+    securityCode: Yup.string()
+      .required('El código de seguridad es obligatorio')
+      .matches(
+        /^\d{3,4}$/,
+        'El código de seguridad debe tener 3 o 4 dígitos y solo números',
+      ),
+  });
+
   return {
     contactFormValidation,
     temarioFormValidation,
     cancelSubscriptionValidation,
     newsletterValidation,
+    cardMpValidation,
   };
 };

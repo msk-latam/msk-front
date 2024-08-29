@@ -67,6 +67,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
   );
   const pathname = usePathname();
   const resourcePDFName = pathname.split('/').filter(Boolean).pop();
+
   useEffect(() => {
     setDefaultCountry(countryState.country?.toUpperCase() as CountryCode);
   }, [countryState]);

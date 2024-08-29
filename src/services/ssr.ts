@@ -6,7 +6,7 @@ import {
   setLoadingCourses,
   setStoreCourses,
 } from '@/lib/allData';
-import { SignUp } from '@/data/types';
+import { FetchSingleProduct, SignUp, UserProfile } from '@/data/types';
 import { BASE_URL, IS_PROD, SITE_URL } from '@/contains/constants';
 import { BodyNewPassword } from '@/components/MSK/PageNewPassword';
 import { notFound } from 'next/navigation';
@@ -576,10 +576,52 @@ class ApiSSRService {
       );
       const data = response.json();
 
+      console.log({ data });
+
       if (data.status == 200) {
         console.log('Pago ok', { data });
         return data;
       }
+    } catch (err) {
+      console.error('Pago error', { err });
+    }
+  }
+
+  async createDrafContract(
+    product: FetchSingleProduct,
+    profile: UserProfile | null,
+  ) {
+    console.log({ product, profile });
+    const body = {
+      customer_id: profile?.entity_id_crm,
+      products: [
+        {
+          code: product.ficha.product_code,
+          quantity: 1,
+          total: product.ficha.total_price,
+        },
+      ],
+      status: 'Borrador',
+      currency: 'ARS',
+      country: 'Argentina',
+      grand_total: product.ficha.total_price,
+    };
+
+    try {
+      const response = await fetch(
+        `${baseUrl}/api/mskcrm/api/zoho/sales_order/create_contract`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6`,
+          },
+          body: JSON.stringify(body),
+        },
+      );
+      const data = response.json();
+
+      console.log({ data });
     } catch (err) {
       console.error('Pago error', { err });
     }
