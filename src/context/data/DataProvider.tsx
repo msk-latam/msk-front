@@ -36,7 +36,12 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(dataReducer, dataInitialState);
 
   const fetchAllCourses = async () => {
-    const allCourses = await ssr.getAllCourses(countryState.country, '', true, window.location.href);
+    const allCourses = await ssr.getAllCourses(
+      countryState.country,
+      '',
+      true,
+      window.location.href,
+    );
     dispatch({
       type: 'GET_DATA',
       payload: { allCourses },
@@ -45,7 +50,10 @@ export const DataProvider: React.FC<Props> = ({ children }) => {
   };
 
   const fetchStoreCourses = async () => {
-    const storeCourses = await ssr.getStoreCourses(countryState.country, window.location.href);
+    const storeCourses = await ssr.getStoreCourses(
+      countryState.country,
+      window.location.href,
+    );
     dispatch({
       type: 'GET_STORE_DATA',
       payload: { storeCourses },

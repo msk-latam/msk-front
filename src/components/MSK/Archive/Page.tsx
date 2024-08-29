@@ -18,6 +18,7 @@ import LoaderImage from '@/components/MSK/Loader/Image';
 import ItemSkeleton from '@/components/Skeleton/ItemSkeleton';
 import StorePagination from '@/components/MSK/Store/StorePagination';
 import { slugifySpecialty } from '@/lib/Slugify';
+import Breadcrum from '@/components/Breadcrum/Breadcrum';
 
 export const runtime = 'edge';
 
@@ -139,9 +140,6 @@ const PageArchiveComponent: FC<PageArchiveProps> = ({
         ? specialtiesBannersJSON[categoryValue]
         : '/webp-images/banners/archive.webp';
 
-      console.log(categoryValue);
-      console.log(specialtyValue);
-      console.log(bannerImg);
       setBannerImage(bannerImg);
 
       if (!specialtyValue && !categoryValue) return setAuxPosts(posts);
@@ -207,6 +205,7 @@ const PageArchiveComponent: FC<PageArchiveProps> = ({
             ) : null}
           </>
         )}
+        <div>{/* <Breadcrum /> */}</div>
         <div className=' my-10 animate-fade-down'>
           <div className='flex space-between flex-wrap mb-8 gap-2'>
             <ArchiveFilterListBox

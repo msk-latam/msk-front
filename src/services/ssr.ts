@@ -121,7 +121,8 @@ class ApiSSRService {
       : '&country=int';
 
     let tagParam = '';
-    const tag = new URLSearchParams(currentUrl).get('tag');
+    const tag = new URLSearchParams(window.location.search).get('tag');
+
     if (tag) {
       tagParam = `&tag=${tag}`;
     }

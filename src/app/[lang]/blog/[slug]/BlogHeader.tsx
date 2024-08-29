@@ -1,4 +1,5 @@
 'use client';
+import Breadcrum from '@/components/Breadcrum/Breadcrum';
 import SingleHeader from '@/components/MSK/Blog/Post/PostSingleHeader';
 import NcImage from '@/components/NcImage/NcImage';
 import { useEffect, useState } from 'react';
@@ -12,7 +13,6 @@ const BlogHeader = ({ post }: any) => {
       const headerElement = document.querySelector('header');
       if (headerElement) {
         setHeaderHeight(headerElement.clientHeight - 90);
-        console.log(headerElement.clientHeight);
       }
     }
   }, [post]); // Se recalcula cuando cambie `post`
@@ -26,7 +26,7 @@ const BlogHeader = ({ post }: any) => {
       />
       <div className='dark relative z-10'>
         <div className={''}>
-          {/* <Breadcrum onBlog={true} /> */}
+          <Breadcrum onBlog={post} />
           <SingleHeader
             hiddenDesc={false}
             metaActionStyle='style2'

@@ -19,7 +19,7 @@ interface BreadcrumbMapping {
 
 interface BreadcrumProps {
   isEbook?: boolean;
-  onBlog?: boolean;
+  onBlog?: boolean | any;
   onProduct?: boolean | any;
   onNote?: boolean | any;
 }
@@ -42,14 +42,18 @@ const Breadcrum: React.FC<BreadcrumProps> = ({
   const breadcrumMap: BreadcrumbMapping = breadcrumMapping;
 
   const partsBreadcrumb = parts
-    .map(part => {
+    .map((part, index, array) => {
+      // Verificamos si estamos en el caso específico de "/blog/archivo"
+      const rutaAcumulativa =
+        index > 0 && array[index - 1] === 'blog' && part === 'archivo'
+          ? '/blog/archivo'
+          : '/' + part;
+
       if (part.length === 2 && /^[a-z]+$/i.test(part)) {
         // Si es un código ISO de país, no lo agregamos a la ruta acumulativa
         return false;
       }
 
-      let rutaAcumulativa = '';
-      rutaAcumulativa += '/' + part;
       return breadcrumMap[rutaAcumulativa];
     })
     .filter(Boolean) as string[][];
@@ -65,8 +69,14 @@ const Breadcrum: React.FC<BreadcrumProps> = ({
       if (part.includes('mainCategory') && onNote) {
         return onNote.categories[0].name;
       }
+      if (part.includes('mainCategory') && onBlog) {
+        return onBlog.categories[0].name;
+      }
       if (part.includes('Curso|Guía profesional')) {
         return isEbook ? onProduct.ficha.title : onProduct?.ficha?.title;
+      }
+      if (part.includes('Nota') && onBlog) {
+        return onBlog.title;
       }
 
       if (part.includes('searchCategory')) {
@@ -121,15 +131,20 @@ const Breadcrum: React.FC<BreadcrumProps> = ({
     if (onNote) {
       for (const key in notesJSON) {
         if (notesJSON.hasOwnProperty(key) && notesJSON[key] === part) {
-          managedURL = `/${countryState.country}/archivo?categoria=${key}`;
+          managedURL = `/${countryState.country}/blog/archivo?categoria=${key}`;
+        }
+      }
+    }
+    if (onBlog) {
+      for (const key in notesJSON) {
+        if (notesJSON.hasOwnProperty(key) && notesJSON[key] === part) {
+          managedURL = `/${countryState.country}/blog/archivo?categoria=${key}`;
         }
       }
     }
 
     return managedURL ?? `/${countryState.country}/${part.toLowerCase()}`;
   };
-
-  console.log(partsFlattened, 'breadcrum');
 
   return (
     <div className='flex flex-wrap md:flex-nowrap items-center mb-5 w-full'>
