@@ -126,6 +126,8 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({
                 <Link
                   className='text-[#9200AD] underline text-base sm:text-lg lg:text-xl'
                   href='/mision'
+                  target='_blank'
+                  rel='noopener noreferrer'
                 >
                   ingresando aquí
                 </Link>
