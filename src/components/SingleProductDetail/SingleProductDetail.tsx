@@ -102,8 +102,8 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
                           <div className='hidden sm:block border-line-meta' />
                         ) : null}
                         {product.temario ? (
-                          <div className='col-span-4 sm:col-span-2 my-auto text-violet-strong mb-2'>
-                            <div className='flex flex-col'>
+                          <div className='col-span-4 sm:col-span-2 my-auto text-violet-strong pb-0 md:pb-2 mb-2 md:mb-auto md:-ml-5'>
+                            <div className='flex flex-col '>
                               <span className='font-inter'>Contenido</span>
                               <div className='font-inter font-bold'>
                                 {product.temario['data']?.row_count} módulos
@@ -113,7 +113,7 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
                         ) : null}
                         <div className='border-line-meta' />
                         {product.details && product.details['duration'] ? (
-                          <div className='col-span-6 sm:col-span-3 my-auto text-violet-strong mb-2'>
+                          <div className='col-span-6 sm:col-span-3 my-auto text-violet-strong pb-0 md:pb-2 mb-2 md:mb-auto md:-ml-5'>
                             <span className='font-inter'>Duración</span>
                             <div className='font-inter font-bold'>
                               {product.details['duration'].value} horas
@@ -275,11 +275,11 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
           />
         </div>
       </div> */}
-      <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] md:w-[129%] left-1/2 transform -translate-x-1/2  w-screen'>
+      <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] xl:w-[129%] left-1/2 transform -translate-x-1/2  w-screen'>
         <SectionSliderBestSellers
           posts={allBestSellers}
           loading={loadingBestSellers}
-          className='w-full section-slider-posts-container'
+          className='w-full section-slider-posts-container px-3 md:px-4'
           postCardName='card9'
           heading='Descubre nuestras capacitaciones destacadas'
           subHeading='Estos son los cursos más elegidos entre profesionales de la salud'
