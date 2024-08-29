@@ -102,7 +102,7 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
                           <div className='hidden sm:block border-line-meta' />
                         ) : null}
                         {product.temario ? (
-                          <div className='col-span-4 sm:col-span-2 my-auto text-violet-strong pb-0 md:pb-2 mb-2 md:mb-auto'>
+                          <div className='col-span-4 sm:col-span-2 my-auto text-violet-strong pb-0 md:pb-2 mb-2 md:mb-auto md:-ml-5'>
                             <div className='flex flex-col '>
                               <span className='font-inter'>Contenido</span>
                               <div className='font-inter font-bold'>
@@ -113,7 +113,7 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
                         ) : null}
                         <div className='border-line-meta' />
                         {product.details && product.details['duration'] ? (
-                          <div className='col-span-6 sm:col-span-3 my-auto text-violet-strong pb-0 md:pb-2 mb-2 md:mb-auto '>
+                          <div className='col-span-6 sm:col-span-3 my-auto text-violet-strong pb-0 md:pb-2 mb-2 md:mb-auto md:-ml-5'>
                             <span className='font-inter'>Duración</span>
                             <div className='font-inter font-bold'>
                               {product.details['duration'].value} horas
