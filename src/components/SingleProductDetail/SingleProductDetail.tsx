@@ -275,11 +275,11 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
           />
         </div>
       </div> */}
-      <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] md:w-[129%] left-1/2 transform -translate-x-1/2  w-screen'>
+      <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] xl:w-[129%] left-1/2 transform -translate-x-1/2  w-screen'>
         <SectionSliderBestSellers
           posts={allBestSellers}
           loading={loadingBestSellers}
-          className='w-full section-slider-posts-container'
+          className='w-full section-slider-posts-container px-3 md:px-4'
           postCardName='card9'
           heading='Descubre nuestras capacitaciones destacadas'
           subHeading='Estos son los cursos más elegidos entre profesionales de la salud'

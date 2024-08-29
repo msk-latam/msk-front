@@ -128,6 +128,7 @@ const SectionSliderBestSellers: FC<SectionSliderBestSellers> = ({
   }, [sliderStype, slidesCount, perView]);
 
   const getPostComponent = () => {
+    console.log(postCardName);
     switch (postCardName) {
       case 'card2':
         return Card2;
