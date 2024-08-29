@@ -3,6 +3,7 @@ import React, {
   FC,
   SetStateAction,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 import { FetchSingleProduct } from '@/data/types';
@@ -36,8 +37,11 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
   mountedInputObjectState,
 }) => {
   const { profile } = useAuth();
-
+  const sendRequestRef = useRef(false);
   const [onPaymentRequest, setOnPaymentRequest] = useState(false);
+  const [contractDraftCreated, setContractDraftCreated] = useState<{} | null>(
+    null,
+  );
 
   const initialValues = {
     cardNumber: '',
@@ -48,15 +52,13 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
 
   const profileCustomerInfo = profile?.contact ?? profile;
 
-  console.log({ profileCustomerInfo, profile, contact: profile?.contact });
-
   const { cardMpValidation } = useYupValidation();
 
   const handleSubmit = async (values: any) => {
     console.log({ values });
     setOnPaymentRequest(true);
 
-    const customerCard = {
+    const customerCardData = {
       ...values,
       identification: {
         type: profileCustomerInfo?.type_doc,
@@ -67,7 +69,7 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
     const paymentDetails = {
       trial: true,
       paymentData: {
-        contractId: null,
+        contractId: contractDraftCreated.details.id,
         email: profileCustomerInfo?.email,
         address: profileCustomerInfo?.address,
         phone: profileCustomerInfo?.phone,
@@ -86,7 +88,7 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
     const paymentData = {
       transactionAmount: product?.total_price,
       installments: quotes,
-      description: `Pago de contrato (SO:)`,
+      description: `Pago de contrato (ID: ${contractDraftCreated.details.id})`,
       payer: {
         email: profileCustomerInfo?.email,
         identification: {
@@ -95,13 +97,13 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
         },
       },
       paymentDetails,
-      customerCard,
+      customerCardData,
     };
 
     console.log({ paymentData });
 
     try {
-      //   await ssr.postPaymentMercadoPago(paymentData);
+      await ssr.postPaymentMercadoPago(paymentData);
     } catch (error) {
       console.error('Error:', error);
     } finally {
@@ -110,17 +112,30 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
   };
 
   useEffect(() => {
-    if (typeof profile !== 'undefined' && profile != null && product?.ficha) {
-      console.log(
-        typeof profile !== 'undefined',
-        profile != null,
-        product?.ficha,
-        (typeof profile !== 'undefined' || profile != null) && product?.ficha,
-      );
-      ssr.createDrafContract(product, profile);
-      mountedInputObjectState.setState(true);
+    const createDraftContract = async (product, profile) => {
+      setOnPaymentRequest(true);
+      const contract = await ssr.createDrafContract(product, profile);
+
+      if (!contract.error) {
+        setContractDraftCreated(contract.data[0]);
+        setOnPaymentRequest(false);
+        mountedInputObjectState.setState(true);
+      }
+
+      console.log({ contract });
+    };
+
+    if (
+      !sendRequestRef.current &&
+      typeof profile !== 'undefined' &&
+      profile != null &&
+      product?.ficha != null
+    ) {
+      sendRequestRef.current = true;
+      console.log('In fetch');
+      createDraftContract(product, profile);
     }
-  }, [profile, product]);
+  }, [profile]);
 
   return (
     <>

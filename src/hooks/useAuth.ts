@@ -6,9 +6,6 @@ import { useRouter } from 'next/navigation';
 export const useAuth = () => {
   const { state, dispatch } = useContext(AuthContext);
   const router = useRouter();
-  useEffect(() => {
-    router.prefetch('/');
-  }, []);
 
   const fetchProfile = useCallback(async () => {
     try {
@@ -24,6 +21,7 @@ export const useAuth = () => {
         router.push('/');
       }
     } catch (error) {
+      router.prefetch('/');
       console.error('Failed to fetch user profile:', error);
       dispatch({ type: 'LOGOUT' });
       router.push('/');
@@ -31,10 +29,11 @@ export const useAuth = () => {
   }, [dispatch, router]);
 
   useEffect(() => {
+    console.log({ state }, state.profile);
     if (!state.profile) {
       fetchProfile();
     }
-  }, [state.profile, fetchProfile]);
+  }, [state.profile]);
 
   return {
     ...state,

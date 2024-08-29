@@ -400,10 +400,10 @@ class ApiSSRService {
           `Failed to fetch specialties and groups. HTTP status ${response.status}`,
         );
       }
-      console.warn('SPECIALITIES', { response });
+      //  console.warn('SPECIALITIES', { response });
 
       const data = await response.json();
-      console.warn('SPECIALITIES DATA', { data });
+      //console.warn('SPECIALITIES DATA', { data });
 
       return data;
     } catch (error) {
@@ -565,7 +565,7 @@ class ApiSSRService {
   async postPaymentMercadoPago(paymentData: any) {
     try {
       const response = await fetch(
-        `${baseUrl}/api/gateway2/api/mercadopago/arg/our_test`,
+        `${baseUrl}/api/gateway2/api/mercadopago/arg/our_test/trial`,
         {
           method: 'POST',
           headers: {
@@ -605,7 +605,7 @@ class ApiSSRService {
       status: 'Borrador',
       currency: 'ARS',
       country: 'Argentina',
-      grand_total: product.ficha.total_price,
+      grand_total: product?.ficha?.total_price,
     };
 
     try {
@@ -622,9 +622,10 @@ class ApiSSRService {
       );
       const data = response.json();
 
-      console.log({ data });
+      return data;
     } catch (err) {
       console.error('Pago error', { err });
+      return { error: true, message: '' };
     }
   }
 }
