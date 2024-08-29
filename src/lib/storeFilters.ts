@@ -1,5 +1,5 @@
-import { Filter } from "@/context/storeFilters/storeReducer";
-import specialtiesMapping from "@/data/jsons/__specialties.json";
+import { Filter } from '@/context/storeFilters/storeReducer';
+import specialtiesMapping from '@/data/jsons/__specialties.json';
 import {
   DurationFilter,
   FetchCourseType,
@@ -7,9 +7,9 @@ import {
   Profession,
   ResourceFilter,
   Specialty,
-} from "@/data/types";
+} from '@/data/types';
 
-let filterSpecialties = "";
+let filterSpecialties = '';
 const filterProfessions: any[] = [];
 const filterDuration: any[] = [];
 const filterResources: ResourceFilter[] = [];
@@ -29,23 +29,23 @@ export const addFilterNew = (
     | DurationFilter
     | ResourceFilter
     | PageFilter
-    | string
+    | string,
 ) => {
   switch (filterType) {
-    case "specialties":
-      if (typeof filterValue === "string") filterSpecialties = filterValue;
+    case 'specialties':
+      if (typeof filterValue === 'string') filterSpecialties = filterValue;
       break;
-    case "professions":
+    case 'professions':
       if (!filterProfessions.includes(filterValue)) {
         filterProfessions.push(filterValue);
       }
       break;
-    case "duration":
+    case 'duration':
       if (!filterDuration.includes(filterValue)) {
         filterDuration.push(filterValue);
       }
       break;
-    case "resources":
+    case 'resources':
       if (!filterResources.includes(filterValue)) {
         filterResources.push(filterValue);
       } else {
@@ -68,13 +68,13 @@ export const getFilters = () => {
 
 export const isFilterChecked = (filterType: keyof Filter, filterValue: any) => {
   switch (filterType) {
-    case "specialties":
+    case 'specialties':
       return filterSpecialties.includes(filterValue);
-    case "professions":
+    case 'professions':
       return filterProfessions.includes(filterValue);
-    case "duration":
+    case 'duration':
       return filterDuration.includes(filterValue);
-    case "resources":
+    case 'resources':
       // console.log(
       //   "IS CHECKED",
       //   filterType,
@@ -91,14 +91,14 @@ export const getFilterResources = () => filterResources;
 
 export const filterStoreProducts = (
   products: FetchCourseType[],
-  event: string
+  event: string,
 ) => {
   let sortedProducts: FetchCourseType[] = [];
   switch (event) {
-    case "":
+    case '':
       sortedProducts = [...products];
       break;
-    case "novedades":
+    case 'novedades':
       sortedProducts = [...products]; // Create a copy of products
       sortedProducts.sort((a, b) => {
         const isNewA = Boolean(a.is_new);
@@ -112,7 +112,7 @@ export const filterStoreProducts = (
         }
       });
       break;
-    case "mas_horas":
+    case 'mas_horas':
       sortedProducts = [...products];
       sortedProducts.sort((a, b) => {
         let durationA = parseInt(a.duration);
@@ -132,7 +132,8 @@ export const filterStoreProducts = (
         return 0;
       });
       break;
-    case "menos_horas":
+    case 'menos_horas':
+      console.log('ejecutando menos horas');
       sortedProducts = [...products];
       sortedProducts.sort((a, b) => {
         let durationA = parseInt(a.duration);

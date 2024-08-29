@@ -19,6 +19,8 @@ const Card20: FC<Card20Props> = ({ className = 'h-full', post, index }) => {
     image = removeFirstSubdomain(image);
   }
 
+  console.log(image);
+
   return (
     <div
       className={`nc-Card20 group relative flex flex-col ${className}`}

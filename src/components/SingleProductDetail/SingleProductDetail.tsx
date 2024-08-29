@@ -42,6 +42,8 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
   };
 
   let { isEbook, imagen, title } = productDetails(product);
+
+  console.log(product.modalidad);
   // @ts-ignore
   return (
     <section className='course-details-area my-1 pb-90'>
@@ -100,10 +102,10 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
                           <div className='hidden sm:block border-line-meta' />
                         ) : null}
                         {product.temario ? (
-                          <div className='col-span-4 sm:col-span-2 my-auto text-violet-strong '>
+                          <div className='col-span-4 sm:col-span-2 my-auto text-violet-strong mb-2'>
                             <div className='flex flex-col'>
-                              <span className='raleway'>Contenido</span>
-                              <div className='raleway-bold'>
+                              <span className='font-inter'>Contenido</span>
+                              <div className='font-inter font-bold'>
                                 {product.temario['data']?.row_count} módulos
                               </div>
                             </div>
@@ -111,9 +113,9 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
                         ) : null}
                         <div className='border-line-meta' />
                         {product.details && product.details['duration'] ? (
-                          <div className='col-span-6 sm:col-span-3 my-auto text-violet-strong'>
-                            <span className='raleway '>Duración</span>
-                            <div className='raleway-bold'>
+                          <div className='col-span-6 sm:col-span-3 my-auto text-violet-strong mb-2'>
+                            <span className='font-inter'>Duración</span>
+                            <div className='font-inter font-bold'>
                               {product.details['duration'].value} horas
                               estimadas
                             </div>
@@ -135,7 +137,9 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
                   ficha={product.ficha}
                   details={product.details}
                   sideData={{
-                    modalidad: product.modalidad,
+                    modalidad: product.modalidad.includes('100% online')
+                      ? '100% online'
+                      : product.modalidad,
                     curso_disponible: product.curso_disponible,
                     asesoramiento_academico: product.asesoramiento_academico,
                     certificacion: product.certificacion,
@@ -228,7 +232,9 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
               ficha={product.ficha}
               details={product.details}
               sideData={{
-                modalidad: product.modalidad,
+                modalidad: product.modalidad.includes('100% online')
+                  ? '100% online'
+                  : product.modalidad,
                 curso_disponible: product.curso_disponible,
                 asesoramiento_academico: product.asesoramiento_academico,
                 certificacion: product.certificacion,

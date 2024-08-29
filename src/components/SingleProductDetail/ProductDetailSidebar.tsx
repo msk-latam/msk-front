@@ -112,7 +112,7 @@ const ProductDetailSidebar: FC<Props> = ({
         isFixed && bottomDistance == 0 && !isEbook && fixedPosition
           ? 'course-widget-wrapper fixed'
           : 'course-widget-wrapper'
-      } ${bottomDistance != 0 && !isEbook ? 'absolute bottom-0' : 'bottom-10'}`}
+      } ${bottomDistance != 0 && !isEbook ? '' : ''}`}
     >
       {isFixed && !isEbook ? (
         <>
@@ -155,7 +155,7 @@ const ProductDetailSidebar: FC<Props> = ({
                         src={`/images/icons/${item.icon}.svg`}
                         width={item.size}
                       />
-                      <span>{item.description}</span>
+                      <span className=''>{item.description}</span>
                     </div>
                     <div className='video-corse-info'></div>
                   </li>
@@ -169,7 +169,7 @@ const ProductDetailSidebar: FC<Props> = ({
                   <li key={`data_${index}`}>
                     <div className='course-vide-icon w-full'>
                       <img src={`/images/icons/${key}.svg`} width='15' />
-                      <p className='text-[12px] sm:text-base w-full flex justify-between text-dark-blue-custom'>
+                      <p className='text-[14px] sm:text-base w-full flex justify-between text-violet-strong'>
                         <span>
                           {translations[key] ? translations[key] + ':' : ''}
                         </span>

@@ -121,9 +121,9 @@ const StoreContent: FC<{}> = () => {
   };
 
   const triggerFilter = (event: any) => {
-    // console.log('TRIGGER FILTER', products);
+    // console.log('TRIGGER FILTER', event);
     if (products) {
-      setCurrentItems(filterStoreProducts(products, event));
+      setCurrentItems(filterStoreProducts(currentItems, event));
     }
   };
 
