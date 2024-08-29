@@ -1016,7 +1016,7 @@
     margin-right: 15px;
     &:hover {
       a {
-        color: $theme-color;
+        color: $secondary;
         font-weight: 600;
       }
     }
@@ -1036,8 +1036,8 @@
     transition: 0.3s;
 
     &:hover {
-      border-color: $theme-color;
-      background: $theme-color;
+      border-color: $secondary;
+      background: $secondary;
       color: $white;
     }
   }
