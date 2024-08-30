@@ -11,7 +11,7 @@ export interface NavItemProps {
 }
 
 const NavItem: FC<NavItemProps> = ({
-  className = 'px-2.5 py-2.5 text-[9.5px] sm:text-sm md:text-base sm:px-6 sm:py-3 capitalize',
+  className = 'px-2.5 py-2.5 text-[11px] sm:text-sm md:text-base sm:px-6 sm:py-3 capitalize',
   radius = 'rounded-lg',
   children,
   onClick = () => {},
