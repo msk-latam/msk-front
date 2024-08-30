@@ -43,7 +43,6 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 
   let { isEbook, imagen, title } = productDetails(product);
 
-  console.log(product.modalidad);
   // @ts-ignore
   return (
     <section className='course-details-area my-1 pb-90'>
@@ -261,20 +260,6 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
         </div>
       </div>
 
-      {/* <div className='container relative py-16 mb-20'>
-        <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-16 mb-[96px] w-full px-14'>
-          <SectionSliderBestSellers
-            posts={allBestSellers}
-            loading={loadingBestSellers}
-            className='w-full section-slider-posts-container'
-            postCardName='card9'
-            heading='Descubre nuestras capacitaciones destacadas'
-            subHeading='Estos son los cursos más elegidos entre profesionales de la salud'
-            sliderStype='style2'
-            uniqueSliderClass='singleProduct-section6'
-          />
-        </div>
-      </div> */}
       <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] xl:w-[129%] left-1/2 transform -translate-x-1/2  w-screen'>
         <SectionSliderBestSellers
           posts={allBestSellers}
@@ -288,7 +273,7 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
         />
       </div>
 
-      {product.related_products.length ? (
+      {/* {product.related_products.length ? (
         <div className='container relative py-16 mt-16 '>
           <div className='md:rounded-[40px] bg-neutral-100  dark:bg-black dark:bg-opacity-20 relative py-16 mb-[96px] w-full px-14'>
             <SectionSliderPosts
@@ -302,7 +287,7 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
             />
           </div>
         </div>
-      ) : null}
+      ) : null} */}
     </section>
   );
 };

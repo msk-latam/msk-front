@@ -19,25 +19,6 @@ const PageLogin: FC<PageLoginProps> = ({ className = '' }) => {
   const { formik, loginError, onRequest, formRef, setLoginError } =
     useLoginForm();
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { isLoading, setLoading } = useLoader();
-
-  useEffect(() => {
-    // Function to handle the timeout logic
-    const startLoader = () => {
-      setLoading(true); // Set loading to true
-
-      // Set a timeout to turn off the loader after 3 seconds
-      const timer = setTimeout(() => {
-        setLoading(false); // Set loading to false after 3 seconds
-      }, 3000);
-
-      // Clear the timeout if the component unmounts
-      return () => clearTimeout(timer);
-    };
-
-    // Start loader when component mounts
-    startLoader();
-  }, [setLoading]);
 
   return (
     <div
