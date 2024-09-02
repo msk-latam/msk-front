@@ -66,7 +66,7 @@ const SingleContentSidebarFixedItem: FC<SingleContentSidebarFixedItemProps> = ({
         <div className='flex '>
           <h5 className=' p-2.5'>🎯 Los más leídos</h5>
           <Link
-            href={`/archivo`}
+            href={`/blog/archivo`}
             className='course-network text-primary font-semibold text-sm my-auto ml-auto mr-4'
           >
             Ver todos

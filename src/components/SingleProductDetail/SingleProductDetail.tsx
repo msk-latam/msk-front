@@ -264,7 +264,7 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
         <SectionSliderBestSellers
           posts={allBestSellers}
           loading={loadingBestSellers}
-          className='w-full section-slider-posts-container px-3 md:px-4'
+          className='w-full section-slider-posts-container px-12 md:px-4'
           postCardName='card9'
           heading='Descubre nuestras capacitaciones destacadas'
           subHeading='Estos son los cursos más elegidos entre profesionales de la salud'

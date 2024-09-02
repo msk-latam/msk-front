@@ -475,7 +475,7 @@ const StoreContent: FC<{}> = () => {
               )}
             </div>
           )}
-          <div className='flex justify-center md:justify-start'>
+          <div className='flex justify-center md:justify-center'>
             {/*<p>Total pages: {totalPages}</p>*/}
             {!mutationProducts && (
               <StorePagination

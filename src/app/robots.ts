@@ -1,12 +1,17 @@
-import { MetadataRoute } from "next";
+import { IS_PROD } from '@/contains/constants';
+import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: "*",
-      allow: "",
-      disallow: "",
-    },
-    sitemap: "https://msklatam.com/sitemap.xml",
+    rules: IS_PROD
+      ? {
+          userAgent: '*',
+          allow: '/',
+        }
+      : {
+          userAgent: '*',
+          disallow: '/',
+        },
+    sitemap: IS_PROD ? 'https://msklatam.com/sitemap.xml' : '',
   };
 }

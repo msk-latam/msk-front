@@ -79,7 +79,7 @@ const SingleContent: FC<SingleContentProps> = ({ data }) => {
         <SectionSliderBestSellers
           posts={courses}
           // loading={loadingBestSellers}
-          className='w-full section-slider-posts-container px-3 md:px-4'
+          className='w-full section-slider-posts-container px-12 md:px-4'
           postCardName='card9'
           heading='Comienza tu experiencia aquí'
           subHeading='Estos son los cursos más elegidos entre profesionales de la salud'

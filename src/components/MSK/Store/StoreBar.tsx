@@ -36,8 +36,6 @@ const StoreBar: FC<Props> = ({
     onFilter(event.value);
   };
 
-  console.log(showingCount);
-
   return (
     <div className='course-bar-up-area'>
       <div className='grid grid-cols-1 gap-2'>

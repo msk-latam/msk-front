@@ -1,6 +1,15 @@
 'use client';
 import { useEffect, useState } from 'react';
 
+export const toggleBotVisibility = (visible: boolean) => {
+  const botElement = document.querySelector(
+    'iframe[title="Botmaker"]',
+  ) as HTMLIFrameElement;
+  if (botElement) {
+    botElement.style.display = visible ? 'block' : 'none';
+  }
+};
+
 const BotMaker = () => {
   const [mountedBot, setMountedBot] = useState(false);
   const [botVisible, setBotVisible] = useState(true);
@@ -35,13 +44,7 @@ const BotMaker = () => {
   }, [mountedBot]);
 
   useEffect(() => {
-    const botElement = document.querySelector(
-      'iframe[title="Botmaker"]',
-    ) as HTMLIFrameElement;
-
-    if (botElement) {
-      botElement.style.display = botVisible ? 'block' : 'none';
-    }
+    toggleBotVisibility(botVisible);
   }, [botVisible]);
 
   return null;
