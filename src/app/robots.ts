@@ -1,8 +1,7 @@
+import { IS_PROD } from '@/contains/constants';
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const IS_PROD = process.env.PROD === 'production';
-  console.log(process.env.PROD);
   console.log(IS_PROD);
   return {
     rules: IS_PROD
