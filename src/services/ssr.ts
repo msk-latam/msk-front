@@ -201,7 +201,7 @@ class ApiSSRService {
       }
 
       const response = await fetch(
-        `${API_URL}/posts?year=${currentYear}&country=${countryParam}`,
+        `${API_URL}/posts?year=${currentYear}&country=${countryParam}&limit=-1`,
       );
 
       if (!response.ok) {
