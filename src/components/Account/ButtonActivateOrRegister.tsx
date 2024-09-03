@@ -45,6 +45,11 @@ const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({
   console.log(status, 'de button activate');
   console.log(state, 'estado global desde ButtonActivateOrRegister');
 
+  // const globalStatus = state.statuses.status;
+  // console.log(globalStatus);
+
+  // console.log(hasText(globalStatus));
+
   return (
     <>
       {isDisabledActivate ? (

@@ -1,12 +1,13 @@
-"use client";
-import React, { FC, useEffect, useState } from "react";
-import Card8 from "@/components/Card8/Card8";
-import HeaderFilter from "./HeaderFilter";
-import Card9 from "@/components/Card9/Card9";
-import { FetchCourseType } from "@/data/types";
-import { PostDataType } from "@/data/types";
-import ImageSkeleton from "./ImageSkeleton";
-import CoursesSlider from "@/components/Sliders/CoursesSlider";
+'use client';
+import React, { FC, useContext, useEffect, useState } from 'react';
+import Card8 from '@/components/Card8/Card8';
+import HeaderFilter from './HeaderFilter';
+import Card9 from '@/components/Card9/Card9';
+import { FetchCourseType } from '@/data/types';
+import { PostDataType } from '@/data/types';
+import ImageSkeleton from './ImageSkeleton';
+import CoursesSlider from '@/components/Sliders/CoursesSlider';
+import { CountryContext } from '@/context/country/CountryContext';
 
 interface SectionMagazine1Props {
   tabs: string[];
@@ -30,17 +31,17 @@ const CoursesForYou: FC<Props> = ({
   courses,
   bestSeller,
   tabs,
-  className = "",
-  heading = "Latest Articles 🎈 ",
-  desc = "",
+  className = '',
+  heading = 'Latest Articles 🎈 ',
+  desc = '',
   loading = false,
 }) => {
   const [tabActive, setTabActive] = useState<string>(tabs[0]);
   const [localCourses, setLocalCourses] = useState<FetchCourseType[]>([]);
+  const { countryState: countryState } = useContext(CountryContext);
   const handleClickTab = (item: string) => {
     switch (item) {
-      case "Novedades":
-
+      case 'Novedades':
         //Check the created_at date of the courses and order by most recent
 
         const newCourses = courses.sort((a, b) => {
@@ -50,15 +51,15 @@ const CoursesForYou: FC<Props> = ({
         });
         setLocalCourses(newCourses);
         break;
-      case "Recomendados":
+      case 'Recomendados':
         if (bestSeller) setLocalCourses(bestSeller);
         break;
-      case "Especialidades":
+      case 'Especialidades':
         const specialtyCourses = courses.filter(
-          (course) =>
+          course =>
             !course.categories.some(
-              (category) => category.name === "Medicina general"
-            )
+              category => category.name === 'Medicina general',
+            ),
         );
         setLocalCourses(specialtyCourses);
         break;
@@ -66,10 +67,28 @@ const CoursesForYou: FC<Props> = ({
     setTabActive(item);
   };
 
+  // useEffect(() => {
+  //   setLocalCourses(courses);
+  //   handleClickTab('Novedades');
+  // }, [courses]);
+
   useEffect(() => {
-    setLocalCourses(courses);
-    handleClickTab("Novedades");
-  }, [courses]);
+    // Update course title based on country
+    const updatedCourses = courses.map(course => {
+      if (
+        countryState.country === 'mx' &&
+        course.title === 'Curso superior de diagnóstico por imágenes'
+      ) {
+        return {
+          ...course,
+          title: 'Diplomado en imagenología',
+        };
+      }
+      return course;
+    });
+
+    setLocalCourses(updatedCourses);
+  }, [courses, countryState.country]);
 
   return (
     <div className={`nc-CoursesForYou ${className}`}>
@@ -82,13 +101,13 @@ const CoursesForYou: FC<Props> = ({
       />
       {loading ? (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-            <ImageSkeleton className="col-span-2" height="200px" />
-            <ImageSkeleton className="col-span-1" height="200px" />
-            <ImageSkeleton className="col-span-1" height="200px" />
-            <ImageSkeleton className="col-span-1" height="200px" />
-            <ImageSkeleton className="col-span-1" height="200px" />
-            <ImageSkeleton className="col-span-2" height="200px" />
+          <div className='grid grid-cols-1 md:grid-cols-4 gap-5'>
+            <ImageSkeleton className='col-span-2' height='200px' />
+            <ImageSkeleton className='col-span-1' height='200px' />
+            <ImageSkeleton className='col-span-1' height='200px' />
+            <ImageSkeleton className='col-span-1' height='200px' />
+            <ImageSkeleton className='col-span-1' height='200px' />
+            <ImageSkeleton className='col-span-2' height='200px' />
           </div>
         </>
       ) : (
@@ -100,12 +119,12 @@ const CoursesForYou: FC<Props> = ({
 
           <CoursesSlider products={localCourses} />
 
-          <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-6">
+          <div className='hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-6'>
             {localCourses && localCourses[0] && (
               <Card8
-                className="sm:col-span-2 rounded-3xl"
+                className='sm:col-span-2 rounded-3xl'
                 post={localCourses[0]}
-                kind="curso"
+                kind='curso'
               />
             )}
             {localCourses
@@ -114,9 +133,9 @@ const CoursesForYou: FC<Props> = ({
                 <Card9
                   key={index}
                   post={item}
-                  badgeColor="yellow"
+                  badgeColor='yellow'
                   showDescription
-                  kind="curso"
+                  kind='curso'
                 />
               ))}
             {localCourses
@@ -125,17 +144,17 @@ const CoursesForYou: FC<Props> = ({
                 <Card9
                   key={index}
                   post={item}
-                  badgeColor="yellow"
+                  badgeColor='yellow'
                   showDescription
-                  kind="curso"
+                  kind='curso'
                 />
               ))}
             {localCourses && localCourses[5] && (
               <Card8
-                className="sm:col-span-2 rounded-3xl"
-                badgeColor="yellow"
+                className='sm:col-span-2 rounded-3xl'
+                badgeColor='yellow'
                 post={localCourses[5]}
-                kind="curso"
+                kind='curso'
               />
             )}
           </div>
