@@ -19,8 +19,9 @@ export async function generateMetadata({
   const currentCountry = params.lang || cookies().get('country')?.value;
   const page = Number(searchParams.page);
 
+  const maxPages = 9;
   const nextPrevUrls =
-    page > 1
+    page > 1 && page < maxPages
       ? [
           {
             rel: 'next',
@@ -31,12 +32,22 @@ export async function generateMetadata({
             url: `${SITE_URL}/${currentCountry}/tienda/?page=${page - 1}`,
           },
         ]
-      : [
+      : page === 1
+      ? [
           {
             rel: 'next',
             url: `${SITE_URL}/${currentCountry}/tienda/?page=2`,
           },
-        ];
+        ]
+      : page === maxPages
+      ? [
+          {
+            rel: 'prev',
+            url: `${SITE_URL}/${currentCountry}/tienda/?page=${page - 1}`,
+          },
+        ]
+      : [];
+
   const storeSpecialties = await ssr.getSpecialtiesStore(
     currentCountry || 'int',
   );
