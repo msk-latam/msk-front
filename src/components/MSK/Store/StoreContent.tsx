@@ -121,9 +121,9 @@ const StoreContent: FC<{}> = () => {
   };
 
   const triggerFilter = (event: any) => {
-    // console.log('TRIGGER FILTER', products);
+    // console.log('TRIGGER FILTER', event);
     if (products) {
-      setCurrentItems(filterStoreProducts(products, event));
+      setCurrentItems(filterStoreProducts(currentItems, event));
     }
   };
 
@@ -475,7 +475,7 @@ const StoreContent: FC<{}> = () => {
               )}
             </div>
           )}
-          <div className='flex justify-center md:justify-start'>
+          <div className='flex justify-center md:justify-center'>
             {/*<p>Total pages: {totalPages}</p>*/}
             {!mutationProducts && (
               <StorePagination

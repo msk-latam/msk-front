@@ -32,8 +32,6 @@ import CommentReferences from '@/components/CommentReferences';
 import Questions from '@/components/Questions/Questions';
 import { IS_PROD, SITE_URL } from '@/contains/constants';
 import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
-import { useLoader } from '@/context/loader/LoaderContext';
-import { Loading } from '@/utils/Loading';
 
 export async function generateMetadata({
   params,
@@ -103,11 +101,9 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
               heading={heroTitle}
             />
           </div>
-          {/* ver el welcome box  */}
 
           <WelcomeBox content={pageHomeWpContent as WpContentData} />
 
-          {/* cursos por especialidades */}
           <div className=' relative mb-10 md:mb-28'>
             <BrandSlider />
             <Phrase content={pageHomeWpContent?.cedentes.texto as string} />
@@ -120,12 +116,11 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
             <HomeExtraInfo country={currentCountry} />
           </div>
-          {/* arreglar commentReferences */}
+
           <div className='md:w-[124%] left-1/2 transform -translate-x-1/2 relative w-screen'>
             <CommentReferences content={pageHomeWpContent as WpContentData} />
           </div>
 
-          {/* oportunidades para ti */}
           <div className=' relative'>
             <CoursesForYou
               courses={getAllCourses().filter(
@@ -154,11 +149,11 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
             />
           </div>
 
-          <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] md:w-[129%] left-1/2 transform -translate-x-1/2  w-screen'>
+          <div className=' md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] xl:w-[129%] left-1/2 transform -translate-x-1/2  w-screen -mt-10'>
             <SectionSliderBestSellers
               posts={getAllBestSellers()}
               loading={loadingBestSellers}
-              className='w-full section-slider-posts-container'
+              className='w-full section-slider-posts-container px-12 md:px-4'
               postCardName='card9'
               heading='Nuestros cursos más elegidos'
               subHeading='Profesionales como tú ya se capacitaron con ellos. ¡Ahora te toca a ti!'
@@ -166,7 +161,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
               uniqueSliderClass='pageNewHome-section6'
             />
           </div>
-          {/* contactanos */}
+
           <div className=' grid grid-cols-1 md:grid-cols-3 gap-4 my-16'>
             <ContactForm />
           </div>

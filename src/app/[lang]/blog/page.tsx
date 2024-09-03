@@ -60,10 +60,10 @@ const PageBlog: React.FC<PageProps> = async ({ params }) => {
           <HomeExtraInfo country={currentCountry} />
         </div>
 
-        <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] md:w-[129%] left-1/2 transform -translate-x-1/2  w-screen mt-16'>
+        <div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] xl:w-[129%] left-1/2 transform -translate-x-1/2  w-screen mt-16'>
           <SectionSliderBestSellers
             posts={allBestSellers}
-            className='w-full section-slider-posts-container'
+            className='w-full section-slider-posts-container px-12 md:px-4'
             postCardName='card9'
             heading='¿Buscas capacitarte a distancia?'
             subHeading='Estos son los cursos más elegidos entre profesionales de la salud'

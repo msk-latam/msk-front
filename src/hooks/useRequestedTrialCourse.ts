@@ -18,7 +18,7 @@ const useRequestedTrialCourse = (product?: any): TrialCoursesStatus => {
   useEffect(() => {
     const checkTrialCourses = async () => {
       const userProfile: any = await ssr.getUserData();
-      console.log({ userProfile });
+      // console.log({ userProfile });
 
       const hasTrialCourses = userProfile?.trial_course_sites;
 

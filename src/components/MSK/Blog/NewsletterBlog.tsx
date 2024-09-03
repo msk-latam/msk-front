@@ -73,7 +73,7 @@ const NewsletterBlog: FC<NewsletterProps> = ({ className = '' }) => {
       <div className='flex-grow '>
         <div className='newsletter-doctors'>
           <NcImage
-            src={'/webp-images/vectors/doctors_1.webp'}
+            src={'/images/vectors/newsletter.png'}
             width='1920'
             height='1080'
             alt=''

@@ -49,9 +49,9 @@ const HeaderFilter: FC<HeaderFilterProps> = ({
         <NcLink href={viewMore} className={` sm:block flex-shrink-0`}>
           <ButtonSecondary
             className='!leading-none border-solid border-1 border-neutral-200 text-neutral-400'
-            sizeClass='px-3 py-2 sm:py-3 sm:px-6 text-[9.3px]'
+            sizeClass='px-3 py-2 sm:py-3 sm:px-6 text-[11px]'
           >
-            <span className='text-[9.3px] sm:text-sm'>Ver más</span>
+            <span className='text-[11px] sm:text-sm'>Ver más</span>
             <svg
               className='w-3 h-3 sm:w-5 sm:h-5 ml-3 rtl:rotate-180'
               viewBox='0 0 24 24'

@@ -110,10 +110,30 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
             payload: { country: currentCountry },
           });
           if (redirectUrl) {
-            let searchparams =
-              window.location.search !== '' ? window.location.search : '';
-            console.log({ redirectUrl, searchparams });
-            window.location.href = redirectUrl + searchparams;
+            let currentSearchParams = new URLSearchParams(
+              window.location.search,
+            );
+
+            // Si el `redirectUrl` ya contiene una cadena de consulta, extrae y combina con la actual
+            if (redirectUrl.includes('?')) {
+              const redirectSearchParams = new URLSearchParams(
+                redirectUrl.split('?')[1],
+              );
+
+              for (const [key, value] of currentSearchParams) {
+                if (!redirectSearchParams.has(key)) {
+                  redirectSearchParams.append(key, value);
+                }
+              }
+              redirectUrl =
+                redirectUrl.split('?')[0] +
+                '?' +
+                redirectSearchParams.toString();
+            } else {
+              redirectUrl += window.location.search;
+            }
+            console.log('redirectUrl: ' + redirectUrl);
+            window.location.href = redirectUrl;
           }
         }
         setLoading(false);

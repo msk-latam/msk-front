@@ -114,7 +114,7 @@ const CategoryBadgeList: FC<CategoryBadgeListProps> = ({
                 key={index}
                 name={notesJSON[slugifySpecialty(item.name)]}
                 color={badgeColor(notesJSON[slugifySpecialty(item.name)])}
-                href={`/archivo?categoria=${slugifySpecialty(item.name)}`}
+                href={`/blog/archivo?categoria=${slugifySpecialty(item.name)}`}
                 textSize={textSize}
               />
             ))}

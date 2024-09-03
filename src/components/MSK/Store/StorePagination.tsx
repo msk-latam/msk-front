@@ -1,8 +1,8 @@
-import React, { FC, useEffect, useState } from "react";
-import fai from "../../../styles/fai/fontAwesome5Pro.module.css";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { updateQueryString } from "@/utils/updateQueryString";
+import React, { FC, useEffect, useState } from 'react';
+import fai from '../../../styles/fai/fontAwesome5Pro.module.css';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { updateQueryString } from '@/utils/updateQueryString';
 
 interface Props {
   totalPages: number;
@@ -26,9 +26,9 @@ const StorePagination: FC<Props> = ({
   const queryString = Object.entries(searchParamsObject)
     .map(
       ([key, value]) =>
-        `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+        `${encodeURIComponent(key)}=${encodeURIComponent(value)}`,
     )
-    .join("&");
+    .join('&');
 
   useEffect(() => {
     const newPages = [];
@@ -41,46 +41,54 @@ const StorePagination: FC<Props> = ({
   return (
     <>
       {totalPages > 1 ? (
-        <div className="edu-pagination mt-30 mb-20">
-          <ul className="items-center">
-            {currentPage > 1 ? (
+        <div className='edu-pagination mt-30 mb-20'>
+          <ul className='items-center'>
+            {currentPage > 0 ? (
               <li
-                onClick={() => onPageChange(currentPage - 1)}
-                className="cursor-pointer hidden sm:block"
+                onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
+                className={` ${
+                  currentPage <= 1
+                    ? 'opacity-50 cursor-not-allowed'
+                    : 'cursor-pointer'
+                } hidden sm:block`}
               >
                 {urlTrack ? (
                   <Link
-                    href={updateQueryString("/tienda", queryString, {
-                      key: "page",
+                    href={updateQueryString('/tienda', queryString, {
+                      key: 'page',
                       value: `${
-                        currentPage - 1 > 1 ? `?page=${currentPage - 1}` : ""
+                        currentPage - 1 > 1 ? `?page=${currentPage - 1}` : ''
                       }`,
                     })}
                   >
-                    <i className={`${fai.fal} ${fai["fa-angle-left"]}`}></i>
+                    <i
+                      className={`${fai.fal} ${fai['fa-angle-left']} ${
+                        currentPage <= 1 ? 'cursor-not-allowed' : ''
+                      }`}
+                    ></i>
                   </Link>
                 ) : (
-                  <i className={`${fai.fal} ${fai["fa-angle-left"]}`}></i>
+                  <i className={`${fai.fal} ${fai['fa-angle-left']} `}></i>
                 )}
               </li>
             ) : (
-              ""
+              ''
             )}
-            {pages.map((page) => {
+            {pages.map(page => {
               return (
                 <li
                   className={
                     currentPage == page
-                      ? "text-red-500 font-bold pointer"
-                      : "text-black-600 cursor-pointer"
+                      ? 'text-red-500 font-bold pointer'
+                      : 'text-black-600 cursor-pointer hover:text-red-500'
                   }
                   key={`page_${page}`}
                   onClick={() => onPageChange(page)}
                 >
                   {urlTrack ? (
                     <Link
-                      href={updateQueryString("/tienda", queryString, {
-                        key: "page",
+                      href={updateQueryString('/tienda', queryString, {
+                        key: 'page',
                         value: `${page}`,
                       })}
                     >
@@ -95,64 +103,64 @@ const StorePagination: FC<Props> = ({
             {totalPages > 1 && currentPage < totalPages ? (
               <li
                 onClick={() => onPageChange(currentPage + 1)}
-                className="cursor-pointer hidden sm:block"
+                className='cursor-pointer hidden sm:block'
               >
                 {urlTrack ? (
                   <Link
-                    href={updateQueryString("/tienda", queryString, {
-                      key: "page",
+                    href={updateQueryString('/tienda', queryString, {
+                      key: 'page',
                       value: `${currentPage + 1}`,
                     })}
                   >
-                    <i className={`${fai.fal} ${fai["fa-angle-right"]}`}></i>
+                    <i className={`${fai.fal} ${fai['fa-angle-right']}`}></i>
                   </Link>
                 ) : (
-                  <i className={`${fai.fal} ${fai["fa-angle-right"]}`}></i>
+                  <i className={`${fai.fal} ${fai['fa-angle-right']}`}></i>
                 )}
               </li>
             ) : null}
           </ul>
 
-          <div className="flex sm:hidden mx-auto justify-center mt-2">
+          <div className='flex sm:hidden mx-auto justify-center mt-2'>
             {currentPage > 1 ? (
               <li
                 onClick={() => onPageChange(currentPage - 1)}
-                className="cursor-pointer"
+                className='cursor-pointer'
               >
                 {urlTrack ? (
                   <Link
                     href={`${
-                      currentPage - 1 > 1 ? `?page=${currentPage - 1}` : ""
+                      currentPage - 1 > 1 ? `?page=${currentPage - 1}` : ''
                     }`}
                   >
-                    <i className={`${fai.fal} ${fai["fa-angle-left"]}`}></i>
+                    <i className={`${fai.fal} ${fai['fa-angle-left']}`}></i>
                   </Link>
                 ) : (
-                  <i className={`${fai.fal} ${fai["fa-angle-left"]}`}></i>
+                  <i className={`${fai.fal} ${fai['fa-angle-left']}`}></i>
                 )}
               </li>
             ) : (
-              ""
+              ''
             )}
 
             {totalPages > 1 && currentPage < totalPages ? (
               <li
                 onClick={() => onPageChange(currentPage + 1)}
-                className="cursor-pointer"
+                className='cursor-pointer'
               >
                 {urlTrack ? (
                   <Link
-                    href={updateQueryString("/tienda", queryString, {
-                      key: "page",
+                    href={updateQueryString('/tienda', queryString, {
+                      key: 'page',
                       value: `${
-                        currentPage - 1 > 1 ? `?page=${currentPage - 1}` : ""
+                        currentPage - 1 > 1 ? `?page=${currentPage - 1}` : ''
                       }`,
                     })}
                   >
-                    <i className={`${fai.fal} ${fai["fa-angle-right"]}`}></i>
+                    <i className={`${fai.fal} ${fai['fa-angle-right']}`}></i>
                   </Link>
                 ) : (
-                  <i className={`${fai.fal} ${fai["fa-angle-right"]}`}></i>
+                  <i className={`${fai.fal} ${fai['fa-angle-right']}`}></i>
                 )}
               </li>
             ) : null}

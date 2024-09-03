@@ -73,6 +73,7 @@ export default async function RootLayout({ params, children }: LayoutProps) {
       <head>
         <GoogleTagManager gtmId='GTM-NZ95R2P' />
         <Script src='https://sdk.rebill.com/v3/rebill.js' defer />
+        <Script src='https://sdk.mercadopago.com/js/v2' defer />
         <EmblueScript />
       </head>
 
