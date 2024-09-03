@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
   const IS_PROD = process.env.NODE_ENV === 'production';
+  console.log(process.env.NODE_ENV);
   console.log(IS_PROD);
   return {
     rules: IS_PROD
