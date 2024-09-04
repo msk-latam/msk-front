@@ -5,7 +5,7 @@ import { cookies } from 'next/headers';
 import { Metadata } from 'next';
 import ssr from '@/services/ssr';
 import { slugifySpecialty } from '@/lib/Slugify';
-import { IS_PROD, SITE_URL } from '@/contains/constants';
+import { SITE_URL } from '@/contains/constants';
 
 type Props = {
   params: { lang: string; page: string; title?: string; filters?: string };
@@ -68,6 +68,8 @@ export async function generateMetadata({
   );
 
   const queryString = new URLSearchParams(filteredParams).toString();
+  const hostname = process.env.VERCEL_URL || '';
+  const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
 
   return {
     title: urlSpecialty ? `Cursos de ${urlSpecialty.name}` : 'Tienda | MSK',
@@ -79,11 +81,8 @@ export async function generateMetadata({
         }
       : undefined,
     robots: IS_PROD
-      ? {
-          index: true,
-          follow: true,
-        }
-      : undefined,
+      ? { index: true, follow: true }
+      : { index: false, follow: false },
     icons: {
       other: nextPrevUrls,
     },

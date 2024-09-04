@@ -7,7 +7,7 @@ import ssr from '@/services/ssr';
 import { FetchPostType } from '@/data/types';
 import WelcomeBlog from '@/components/MSK/Blog/WelcomeBlog';
 import NewsletterBlog from '@/components/MSK/Blog/NewsletterBlog';
-import { IS_PROD, SITE_URL } from '@/contains/constants';
+import { SITE_URL } from '@/contains/constants';
 import { Props } from '@/app/layout';
 import { Metadata } from 'next';
 import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
@@ -19,6 +19,8 @@ export const runtime = 'edge';
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const currentCountry = params.lang || cookies().get('country')?.value;
+  const hostname = process.env.VERCEL_URL || '';
+  const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
   return {
     title: 'Blog | MSK',
     alternates: IS_PROD
@@ -27,11 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         }
       : undefined,
     robots: IS_PROD
-      ? {
-          index: true,
-          follow: true,
-        }
-      : undefined,
+      ? { index: true, follow: true }
+      : { index: false, follow: false },
   };
 }
 
