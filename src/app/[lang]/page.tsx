@@ -30,7 +30,7 @@ import { FetchCourseType, WpContentData } from '@/data/types';
 import Phrase from '@/components/Phrase/Phrase';
 import CommentReferences from '@/components/CommentReferences';
 import Questions from '@/components/Questions/Questions';
-import { IS_PROD, SITE_URL } from '@/contains/constants';
+import { SITE_URL } from '@/contains/constants';
 import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
 
 export async function generateMetadata({
@@ -38,6 +38,8 @@ export async function generateMetadata({
 }: {
   params: { lang: string };
 }) {
+  const hostname = process.env.VERCEL_URL || '';
+  const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
   return {
     title: 'Cursos de medicina para expandir tus metas profesionales | MSK',
     description: 'Una propuesta moderna para expandir tus metas profesionales',
@@ -47,11 +49,8 @@ export async function generateMetadata({
         }
       : undefined,
     robots: IS_PROD
-      ? {
-          index: true,
-          follow: true,
-        }
-      : undefined,
+      ? { index: true, follow: true }
+      : { index: false, follow: false },
   };
 }
 
