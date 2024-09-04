@@ -47,6 +47,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const hostname = process.env.VERCEL_URL || '';
   const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
 
+  console.log(IS_PROD, 'IS PROD');
+  console.log(hostname, 'HOSTNAME');
+
   return {
     title: {
       default: 'MSK | Cursos de medicina para expandir tus metas profesionales',
