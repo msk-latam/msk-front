@@ -44,6 +44,9 @@ export type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const currentCountry = params.lang || cookies().get('country')?.value;
 
+  const hostname = process.env.VERCEL_URL || '';
+  const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
+
   return {
     title: {
       default: 'MSK | Cursos de medicina para expandir tus metas profesionales',
@@ -55,8 +58,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: '/',
     },
     robots: {
-      index: true,
-      follow: true,
+      index: IS_PROD,
+      follow: IS_PROD,
     },
   };
 }
