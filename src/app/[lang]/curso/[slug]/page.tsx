@@ -1,7 +1,7 @@
 import SingleProductDetail from '@/components/SingleProductDetail/SingleProductDetail';
 import React, { FC } from 'react';
 import ssr from '@/services/ssr';
-import { IS_PROD, SITE_URL } from '@/contains/constants';
+import { SITE_URL } from '@/contains/constants';
 import { cookies, headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 
@@ -23,7 +23,8 @@ export async function generateMetadata({ params }: Props) {
   /*  if (courseMetaData.total_price === "0" && courseMetaData.details?.['detail-1']?.value?.includes("Ebook gratuito")) {
     notFound();
   }  */
-
+  const hostname = process.env.VERCEL_URL || '';
+  const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
   return {
     title: `${courseMetaData?.ficha.title} | MSK`,
     description: courseMetaData?.excerpt,
@@ -33,11 +34,8 @@ export async function generateMetadata({ params }: Props) {
         }
       : undefined,
     robots: IS_PROD
-      ? {
-          index: true,
-          follow: true,
-        }
-      : undefined,
+      ? { index: true, follow: true }
+      : { index: false, follow: false },
     schemaJson: 'Course',
     schemaJsonData: courseMetaData,
   };

@@ -4,7 +4,7 @@ import SingleHeader from '@/components/MSK/Blog/Post/PostSingleHeader';
 import NcImage from '@/components/NcImage/NcImage';
 import SingleContent from '@/components/MSK/Blog/Post/SingleContent';
 import { cookies } from 'next/headers';
-import { IS_PROD, SITE_URL } from '@/contains/constants';
+import { SITE_URL } from '@/contains/constants';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Breadcrum from '@/components/Breadcrum/Breadcrum';
@@ -27,6 +27,8 @@ export async function generateMetadata({ params }: Props) {
       currentCountry as string,
     );
     //console.log(postMetadata);
+    const hostname = process.env.VERCEL_URL || '';
+    const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
 
     return {
       title: `${postMetadata.title} | MSK`,
@@ -37,11 +39,8 @@ export async function generateMetadata({ params }: Props) {
           }
         : undefined,
       robots: IS_PROD
-        ? {
-            index: true,
-            follow: true,
-          }
-        : undefined,
+        ? { index: true, follow: true }
+        : { index: false, follow: false },
     };
   } catch (error: any) {
     notFound();
