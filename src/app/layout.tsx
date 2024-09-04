@@ -60,10 +60,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: {
       canonical: '/',
     },
-    robots: {
-      index: IS_PROD,
-      follow: IS_PROD,
-    },
+    robots: IS_PROD
+      ? { index: true, follow: true }
+      : { index: false, follow: false },
   };
 }
 
