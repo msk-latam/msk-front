@@ -1,16 +1,15 @@
 export const getDescriptionContent = (
   isProd: boolean,
   customDesc?: string,
-  desc?: string
+  desc?: string,
 ) => {
-  const text = customDesc || desc || "";
+  const text = customDesc || desc || '';
 
-  return isProd ? stripHtmlTags(text) || "" : "";
+  return isProd ? stripHtmlTags(text) || '' : '';
 };
 
-import cheerio from 'cheerio';
-
 export const stripHtmlTags = (html: string) => {
-  const $ = cheerio.load(html);
-  return $('body').text();
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+  return doc.body.textContent || '';
 };

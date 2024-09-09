@@ -42,21 +42,16 @@ const StoreContent: FC<{}> = () => {
 
   const { state: dataState } = useContext(DataContext);
   const { storeCourses, allStoreProfessions } = dataState;
-
   const { specialties } = useStoreFilters();
-
   const { countryState } = useContext(CountryContext);
-
   const searchParams = useSearchParams();
   const [currentItems, setCurrentItems] = useState<FetchCourseType[]>([]);
   const [filteredItems, setFilteredItems] = useState<FetchCourseType[]>([]);
-
   const [mutationProducts, setMutationProducts] = useState(false);
   const [currentPage, setCurrentPage] = useState(
     Number(searchParams.get('page')) || 1,
   );
   const itemsPerPage = 18;
-
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const [totalPages, setTotalPages] = useState(

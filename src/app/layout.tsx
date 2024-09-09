@@ -47,9 +47,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const hostname = process.env.VERCEL_URL || '';
   const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
 
-  console.log(IS_PROD, 'IS PROD');
-  console.log(hostname, 'HOSTNAME');
-
   return {
     title: {
       default: 'MSK | Cursos de medicina para expandir tus metas profesionales',
@@ -80,6 +77,111 @@ export default async function RootLayout({ params, children }: LayoutProps) {
         <Script src='https://sdk.rebill.com/v3/rebill.js' defer />
         <Script src='https://sdk.mercadopago.com/js/v2' defer />
         <EmblueScript />
+        <Script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'MSK Latam',
+              url: 'https://msklatam.com',
+              logo: 'https://msklatam.com/images/msk-logo.svg',
+              sameAs: [
+                'https://www.facebook.com/msk.online.learning',
+                'https://www.instagram.com/msk.latam',
+                'https://www.youtube.com/@msk.online.learning',
+                'https://www.linkedin.com/company/msk-online-learning/',
+              ],
+              contactPoint: {
+                '@type': 'ContactPoint',
+                email: 'hola@msklatam.com',
+                contactType: 'Customer Service',
+              },
+            }),
+          }}
+        />
+        <Script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              url: 'https://msklatam.com',
+              potentialAction: {
+                '@type': 'SearchAction',
+                target: 'https://msklatam.com/search?q={search_term_string}',
+                'query-input': 'required name=search_term_string',
+              },
+            }),
+          }}
+        />
+        <Script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Review',
+              review: [
+                {
+                  '@type': 'Review',
+                  author: {
+                    '@type': 'Person',
+                    name: 'José Ignacio Srebot',
+                  },
+                  reviewBody:
+                    'Contenido académico excelente. La plataforma es muy amigable y la modalidad del curso es muy cómoda. Para recomendar.',
+                  reviewRating: {
+                    '@type': 'Rating',
+                    ratingValue: '5',
+                    bestRating: '5',
+                  },
+                },
+                {
+                  '@type': 'Review',
+                  author: {
+                    '@type': 'Person',
+                    name: 'Claudia Gutiérrez',
+                  },
+                  reviewBody:
+                    'Excelente atención!! Cordialidad, respeto y mucha paciencia.',
+                  reviewRating: {
+                    '@type': 'Rating',
+                    ratingValue: '5',
+                    bestRating: '5',
+                  },
+                },
+                {
+                  '@type': 'Review',
+                  author: {
+                    '@type': 'Person',
+                    name: 'María Benítez',
+                  },
+                  reviewBody:
+                    'Un contenido muy amplio me brindaron. Me ayuda mucho en mi labor. Gracias a mi asesora por acompañarme y estar cada vez que necesité algo.',
+                  reviewRating: {
+                    '@type': 'Rating',
+                    ratingValue: '5',
+                    bestRating: '5',
+                  },
+                },
+                {
+                  '@type': 'Review',
+                  author: {
+                    '@type': 'Person',
+                    name: 'Agustina Orsi',
+                  },
+                  reviewBody:
+                    'Hice el curso de Hematología y realmente fue muy bueno e interesante. Aprendí un montón. Súper recomendable!',
+                  reviewRating: {
+                    '@type': 'Rating',
+                    ratingValue: '5',
+                    bestRating: '5',
+                  },
+                },
+              ],
+            }),
+          }}
+        />
       </head>
 
       <body>
