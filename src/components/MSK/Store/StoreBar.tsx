@@ -1,3 +1,4 @@
+'use client';
 import { Listbox } from '@headlessui/react';
 import ButtonDropdown from '@/components/ButtonDropdown/ButtonDropdown';
 import { ListBoxItemType } from '@/components/NcListBox/NcListBox';
@@ -40,11 +41,14 @@ const StoreBar: FC<Props> = ({
     <div className='course-bar-up-area'>
       <div className='grid grid-cols-1 gap-2'>
         <div className='course-main-wrapper mb-30 gap-2 xl:flex-nowrap px-0 mx-0'>
-          <FiltersApply filtersCount={filtersCount} />
+          <FiltersApply filtersCount={filtersCount || 0} />
           <SearchBar onSearch={onSearch} />
           <div className='course-sidebar-tab'>
             <div className='course-sidebar-wrapper'>
-              <ShowingItems showingCount={showingCount} length={length} />
+              <ShowingItems
+                showingCount={showingCount || 0}
+                length={length || 0}
+              />
               <Listbox
                 value={'selectedOption'}
                 onChange={(e: any) => handleSelectOption(e)}

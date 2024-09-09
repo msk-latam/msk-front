@@ -28,6 +28,8 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
     loadingBestSellers,
   } = useContext(DataContext);
 
+  console.log(product);
+
   const productsGoals = (htmlString: string) => {
     const paragraphs = htmlString.split('</p>\n<p>');
     const listOfGoals = paragraphs.map(paragraph => {
