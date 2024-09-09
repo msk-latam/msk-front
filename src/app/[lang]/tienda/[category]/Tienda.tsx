@@ -132,7 +132,9 @@ const Tienda: FC<TiendaProps> = ({ category, country }) => {
     texto: 'Preguntas Frecuentes',
     items: [
       {
-        titulo: `¿Quiénes desarrollan los cursos de ${matchedSpecialty.name}?`,
+        titulo: `¿Quiénes desarrollan los cursos de ${
+          matchedSpecialty?.name || 'esta especialidad'
+        }?`,
         parrafo: '<p>Estos cursos tienen como cedentes a:</p>',
       },
       {
