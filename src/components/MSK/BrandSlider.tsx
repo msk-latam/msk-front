@@ -36,7 +36,7 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
           disableOnInteraction: true,
         }}
       >
-        {brands.map((brand, i) => (
+        {brands?.map((brand, i) => (
           <SwiperSlide key={i} className='w-100 bg-primary'>
             <div className='brand-container'>
               <Image src={brand.img} alt='img not found' width={brand.width} />

@@ -20,7 +20,7 @@ const DEFAULT_BRANDS: Brand[] = [
 
 export const BRANDS_BY_COUNTRY: BrandsByCountry = {
   cl: [
-    { img: brand2, width: 350 },
+    // { img: brand2, width: 350 },
     { img: brand2, width: 350 },
     { img: brand3, width: 200 },
   ],
