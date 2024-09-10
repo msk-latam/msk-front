@@ -1,6 +1,5 @@
 import { TABS_BLOG } from '@/data/MSK/blog';
 import BlogSummary from '@/components/MSK/BlogSummary';
-import BackgroundSection from '@/components/BackgroundSection/BackgroundSection';
 import HomeExtraInfo from '@/components/MSK/HomeExtraInfo';
 import { cookies } from 'next/headers';
 import ssr from '@/services/ssr';
