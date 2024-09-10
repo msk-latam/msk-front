@@ -1,16 +1,18 @@
-"use client";
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { BRANDS } from "@/data/MSK/brands";
+'use client';
+import React, { FC } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { BRANDS_BY_COUNTRY } from '@/data/MSK/brands';
+import 'swiper/css/bundle';
+import Image from 'next/image';
 
-// Import Swiper styles
-import "swiper/css/bundle";
-import NcImage from "../NcImage/NcImage";
-import Image from "next/image";
+interface BrandSliderProps {
+  country: string;
+}
 
-const BrandSlider: React.FC = () => {
+const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
+  const brands = BRANDS_BY_COUNTRY[country] || BRANDS_BY_COUNTRY['default'];
   return (
-    <div className="swiper-container">
+    <div className='swiper-container'>
       <Swiper
         pagination
         a11y={{ enabled: true }}
@@ -34,10 +36,10 @@ const BrandSlider: React.FC = () => {
           disableOnInteraction: true,
         }}
       >
-        {BRANDS.map((brand, i) => (
-          <SwiperSlide key={i} className="w-100 bg-primary">
-            <div className="brand-container">
-              <Image src={brand.img} alt="img not found" width={brand.width} />
+        {brands.map((brand, i) => (
+          <SwiperSlide key={i} className='w-100 bg-primary'>
+            <div className='brand-container'>
+              <Image src={brand.img} alt='img not found' width={brand.width} />
             </div>
           </SwiperSlide>
         ))}

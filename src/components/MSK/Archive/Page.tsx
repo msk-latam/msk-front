@@ -56,7 +56,7 @@ const PageArchiveComponent: FC<PageArchiveProps> = ({
   const [title, setTitle] = useState('Archivo');
   const [currentPage, setCurrentPage] = useState(1);
   const [bannerImage, setBannerImage] = useState(
-    '/webp-images/banners/archive.webp',
+    '/webp-images/banners/archivo.jpg',
   );
   const [showSpecialties, setShowSpecialties] = useState(false);
   const itemsPerPage = 12;
@@ -73,7 +73,7 @@ const PageArchiveComponent: FC<PageArchiveProps> = ({
   const handleCategoryChange = (e: { name: string }) => {
     if (e.name == 'Todas las categorías') {
       setTitle('Archivo');
-      setBannerImage('/webp-images/banners/archive.webp');
+      setBannerImage('/webp-images/banners/archivo.jpg');
       return setAuxPosts(posts);
     }
     let filteredPosts = posts.filter((post: PostDataType) => {
@@ -138,7 +138,7 @@ const PageArchiveComponent: FC<PageArchiveProps> = ({
         ? specialtiesBannersJSON[specialtyValue]
         : categoryValue && !categoryValue.includes('Otra')
         ? specialtiesBannersJSON[categoryValue]
-        : '/webp-images/banners/archive.webp';
+        : '/webp-images/banners/archivo.jpg';
 
       setBannerImage(bannerImg);
 

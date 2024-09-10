@@ -1,13 +1,10 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import ssr from '@/services/ssr';
-import SingleHeader from '@/components/MSK/Blog/Post/PostSingleHeader';
-import NcImage from '@/components/NcImage/NcImage';
 import SingleContent from '@/components/MSK/Blog/Post/SingleContent';
 import { cookies } from 'next/headers';
 import { SITE_URL } from '@/contains/constants';
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
-import Breadcrum from '@/components/Breadcrum/Breadcrum';
+
 import BlogHeader from './BlogHeader';
 
 interface PageCourseProps {

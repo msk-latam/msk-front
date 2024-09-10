@@ -45,7 +45,8 @@ export async function generateMetadata({
     description: 'Una propuesta moderna para expandir tus metas profesionales',
     alternates: IS_PROD
       ? {
-          canonical: `${SITE_URL}/${params.lang}`,
+          // canonical: `${SITE_URL}/${params.lang}`,
+          canonical: `${SITE_URL}`,
         }
       : undefined,
     robots: IS_PROD
@@ -104,7 +105,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
           <WelcomeBox content={pageHomeWpContent as WpContentData} />
 
           <div className=' relative mb-10 md:mb-28'>
-            <BrandSlider />
+            <BrandSlider country={currentCountry} />
             <Phrase content={pageHomeWpContent?.cedentes.texto as string} />
             <SectionGridCategoryBox
               headingCenter={false}

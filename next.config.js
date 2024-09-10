@@ -24,8 +24,19 @@ const nextConfig = {
           },
         ],
       },
+      {
+        // Cache control for /blog route
+        source: '/blog/:slug*', // Aplica a todas las rutas que comienzan con /blog
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-cache',
+          },
+        ],
+      },
     ];
   },
+
   // These are all the locales you want to support in
   // your application
   //output: 'export', //For static site (loses SSR cappabilites)
