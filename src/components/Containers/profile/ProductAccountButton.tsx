@@ -1,10 +1,11 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import Link from 'next/link';
 import CancelTrialModal from '@/components/Modal/CancelTrial';
 import ButtonActivateOrRegister from '@/components/Account/ButtonActivateOrRegister';
 import Image from 'next/image';
 import { UserCourseProgress } from '@/data/types';
 import { getStatusIcon, statusCourse, statusOrdenVenta } from '@/lib/account';
+import { GlobalStateContext } from '@/app/[lang]/mi-perfil/GlobalStateContext';
 
 // CancelTrialButton Component
 export const CancelTrialButton: FC<{
@@ -34,13 +35,25 @@ export const ProductAccountButton: FC<{
   onClick: () => void;
 }> = ({ product, onRequest, isRunning, onClick }) => {
   const [showCancelTrial, setShowCancelTrial] = useState(false);
+  const { state, dispatch1 } = useContext(GlobalStateContext);
+
   const { status } = product;
-  const { isDisabled } = statusCourse(status);
-  const statusOV = statusOrdenVenta(product?.ov, status);
+  const mappedStatus = state.statuses[product.product_code]
+    ? state.statuses[product.product_code]
+    : product.status;
+  // const { isDisabled } = statusCourse(status);
+  const { isDisabled } = statusCourse(mappedStatus);
+  const statusOV = statusOrdenVenta(product?.ov, mappedStatus);
   const textStatus = statusOV.isDisabled
     ? statusOV.disabledText
     : statusOV.hasText;
   const iconStatus = getStatusIcon(textStatus);
+
+  console.log(textStatus, 'TEXT STATUS');
+
+  console.log(product, 'PRODUCT');
+  console.log(status, 'STATUS');
+  console.log(state, 'STATE');
 
   return (
     <div className='product-button-wrp'>
@@ -67,6 +80,7 @@ export const ProductAccountButton: FC<{
               textStatus.includes('Listo para enrolar'))
           }
           status={status}
+          // status={state.statuses.status}
           productSlug={product.slug}
           isPreventa={statusOV.hasText === 'Preventa'}
         />

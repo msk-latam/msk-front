@@ -23,7 +23,6 @@ const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({
 
   isPreventa,
 }) => {
-  const { state, dispatch1 } = useContext(GlobalStateContext);
   const router = useRouter();
 
   const disabledRender = () => {
@@ -43,12 +42,30 @@ const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({
   }
 
   console.log(status, 'de button activate');
-  console.log(state, 'estado global desde ButtonActivateOrRegister');
 
   // const globalStatus = state.statuses.status;
   // console.log(globalStatus);
 
   // console.log(hasText(globalStatus));
+
+  console.log(isDisabledActivate);
+
+  const handleProductAction = async () => {
+    if (isProductActive() && activeProductRef.current) {
+      setOnRequest(true);
+      try {
+        if (isProductNotEnrolled()) {
+          await handleEnrollment();
+        } else {
+          navigateToLMS();
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setOnRequest(false);
+      }
+    }
+  };
 
   return (
     <>

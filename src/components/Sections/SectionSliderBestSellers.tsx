@@ -71,8 +71,8 @@ const SectionSliderBestSellers: FC<SectionSliderBestSellers> = ({
     state: { storeCourses },
   } = useContext(DataContext);
   // const top_picks = posts.sort((a: any, b: any) => b.viewdCount - a.viewdCount);
-  const allowedProductCodes = posts.map((p: any) => p.product_code);
-  const bridgeElements = storeCourses.filter((sc: any) =>
+  const allowedProductCodes = posts?.map((p: any) => p.product_code);
+  const bridgeElements = storeCourses?.filter((sc: any) =>
     allowedProductCodes.includes(sc.product_code),
   );
 
