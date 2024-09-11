@@ -38,6 +38,7 @@ const globalReducer = (
       return { ...state, isRunning: action.payload };
     case 'SET_STATUS':
       const { productSlug, status } = action.payload;
+      console.log(productSlug, 'PRODUCT SLUG');
       if (!productSlug) {
         console.error('Product slug is missing');
         return state;
@@ -46,7 +47,7 @@ const globalReducer = (
         ...state,
         statuses: {
           ...state.statuses,
-          status, // Usa productSlug como clave en el diccionario de statuses
+          [productSlug]: status,
         },
       };
     default:

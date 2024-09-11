@@ -77,7 +77,7 @@ export default async function RootLayout({ params, children }: LayoutProps) {
         <Script src='https://sdk.rebill.com/v3/rebill.js' defer />
         <Script src='https://sdk.mercadopago.com/js/v2' defer />
         <EmblueScript />
-        <Script
+        {/* <Script
           type='application/ld+json'
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -181,7 +181,7 @@ export default async function RootLayout({ params, children }: LayoutProps) {
               ],
             }),
           }}
-        />
+        /> */}
       </head>
 
       <body>

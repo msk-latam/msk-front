@@ -6,7 +6,7 @@ import { GlobalStateContext } from '@/app/[lang]/mi-perfil/GlobalStateContext';
 
 interface UseIntervalResult {
   isRunning: boolean;
-  data: any; // Reemplazar 'any' con el tipo de datos real
+  // data: any; // Reemplazar 'any' con el tipo de datos real
   startWatch: (product_code: number) => number | Promise<NodeJS.Timeout>;
 }
 
@@ -40,7 +40,7 @@ const useInterval = (url: string): UseIntervalResult => {
         const selectedCourse = response[0].find(
           (course: any) => course.Product_Code === product_code, // Asegúrate de que estás usando `Product_Code`
         );
-        console.log(selectedCourse, 'de use interval');
+
         if (selectedCourse.Estado_cursada === 'Listo para enrolar') {
           setData(selectedCourse);
           dispatch1({
@@ -50,8 +50,6 @@ const useInterval = (url: string): UseIntervalResult => {
               status: selectedCourse.Estado_cursada,
             },
           });
-          console.log('ejecutado el if');
-          console.log(state, 'el estate');
         } else {
           console.warn('Curso no encontrado en la respuesta');
         }
@@ -85,7 +83,7 @@ const useInterval = (url: string): UseIntervalResult => {
 
   return {
     isRunning,
-    data,
+    // data,
     startWatch,
   };
 };
