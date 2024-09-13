@@ -30,7 +30,7 @@ export const goToEnroll = async (product_code: number, email: string) => {
 };
 
 export function hasText(status: string) {
-  console.log({ status });
+  // console.log({ status });
   switch (status) {
     case 'Sin enrolar':
       return 'Activar';

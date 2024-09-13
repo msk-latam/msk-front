@@ -5,8 +5,7 @@ import { AuthContext } from '@/context/user/AuthContext';
 import { UTMAction } from '@/context/utm/UTMContext';
 import { utmInitialState, utmReducer } from '@/context/utm/UTMReducer';
 import { FC, useContext, useEffect, useReducer, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Loading } from '@/utils/Loading';
+import { usePathname, useRouter } from 'next/navigation';
 
 interface Props {
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
@@ -20,49 +19,31 @@ const signOutContent: FC<Props> = ({ setShow, onClose }) => {
     type: 'CLEAR_UTM',
     payload: {} as any,
   };
-  const [utmState, dispatchUTM] = useReducer(utmReducer, utmInitialState);
+  const [_, dispatchUTM] = useReducer(utmReducer, utmInitialState);
+  const pathname = usePathname();
 
-  const [hasRedirected, setHasRedirected] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleLogout = async () => {
-    setLoading(true); // Activar estado de carga
+    setLoading(true);
     try {
-      // Aquí podrías realizar alguna llamada API o lógica adicional
       dispatchUTM(clearUTMAction);
       dispatch({ type: 'LOGOUT' });
+      router.push('/');
     } catch (error) {
       console.error('Error during logout:', error);
-    } finally {
-      setLoading(false); // Desactivar estado de carga
-      onClose(); // Cerrar el modal después de redirigir
-      router.push('/');
     }
   };
 
-  // const handleLogout = () => {
-  //   setLoading(true);
-  //   // onClose();
-  //   setHasRedirected(true);
-  //   router.push('/');
-  // };
-
-  // useEffect(() => {
-  //   if (hasRedirected) {
-  //     dispatchUTM(clearUTMAction);
-  //     dispatch({ type: 'LOGOUT' });
-  //   }
-  //   setHasRedirected(false);
-  //   setLoading(false);
-  // }, [hasRedirected]);
-
-  // if (loading) {
-  //   return <Loading />;
-  // }
-
   useEffect(() => {
-    router.prefetch('/');
-  }, []);
+    const isCountryRoute = /^\/[a-z]{2}\//.test(pathname);
+    if (isCountryRoute) {
+      onClose();
+    }
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000); // Espera 300ms o el tiempo que tarde el modal en cerrarse completamente
+  }, [pathname]);
 
   return (
     <div className='flex flex-col items-center justify-center gap-3'>
@@ -73,10 +54,35 @@ const signOutContent: FC<Props> = ({ setShow, onClose }) => {
         className='border-solid border-1 border-primary-6000 text-primary-6000 logout-button w-[160px]'
         bordered
       >
-        {loading ? 'Cargando...' : 'Confirmar'}
+        {loading ? (
+          <div className='flex items-center justify-center gap-2'>
+            <svg
+              className='animate-spin h-5 w-5 text-primary-6000'
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+            >
+              <circle
+                className='opacity-25'
+                cx='12'
+                cy='12'
+                r='10'
+                stroke='currentColor'
+                strokeWidth='4'
+              ></circle>
+              <path
+                className='opacity-75'
+                fill='currentColor'
+                d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z'
+              ></path>
+            </svg>
+          </div>
+        ) : (
+          'Confirmar'
+        )}
       </ButtonSecondary>
       <ButtonPrimary
-        onClick={() => setShow(false)} // Triggeamos setShow(false) al hacer clic
+        onClick={() => setShow(false)}
         sizeClass='py-3 '
         className='font-semibold logout-button w-[160px]'
       >

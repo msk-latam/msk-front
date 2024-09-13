@@ -187,6 +187,7 @@ export interface UserProfile {
   contact?: Contact;
   identification?: string;
   trial_course_sites: Trial_course_sites[];
+  entity_id_crm?: string;
 }
 export interface Trial_course_sites {
   id: number;
@@ -348,6 +349,7 @@ export interface Ficha {
   isbn: string;
   description: string;
   temario_link_pdf?: string;
+  product_code?: string;
 }
 
 export interface DetailsItem {

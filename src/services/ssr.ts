@@ -579,7 +579,7 @@ class ApiSSRService {
 
       console.log({ data });
 
-      if (data.status == 200) {
+      if (response.status == 200) {
         console.log('Pago ok', { data });
         return data;
       }
@@ -599,28 +599,33 @@ class ApiSSRService {
         {
           code: product.ficha.product_code,
           quantity: 1,
-          total: product.ficha.total_price,
+          total: product.total_price,
         },
       ],
       status: 'Borrador',
       currency: 'ARS',
       country: 'Argentina',
-      grand_total: product?.ficha?.total_price,
+      grand_total: product?.total_price,
     };
 
     try {
       const response = await fetch(
-        `${baseUrl}/api/mskcrm/api/zoho/sales_order/create_contract`,
+        `http://localhost:8577/api/msk-crm/api/zoho/sales_order/create_contract`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6`,
+
+            Authorization: `Bearer $2y$12$tdFqIBqa413sfYENjGjVR.lUOfcRnRaXBgBDUeQIBg1BjujlLbmQW`, //este token va asi
           },
           body: JSON.stringify(body),
+          mode: 'no-cors',
         },
       );
+      console.log({ body });
+      console.log({ response });
       const data = response.json();
+      console.log({ data });
 
       return data;
     } catch (err) {

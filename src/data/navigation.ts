@@ -472,20 +472,20 @@ const resourcesMenu: NavItemType[] = [
   }, */
 ];
 
-const accountMenu: NavItemType[] = [
-  {
-    id: ncNanoId(),
-    href: '/mi-cuenta/inicio',
-    name: 'Mi Cuenta',
-    search: '',
-  },
-  {
-    id: ncNanoId(),
-    href: '/mi-perfil',
-    name: 'Mi Perfil',
-    search: '',
-  },
-];
+// const accountMenu: NavItemType[] = [
+//   {
+//     id: ncNanoId(),
+//     href: '/mi-cuenta/inicio',
+//     name: 'Mi Cuenta',
+//     search: '',
+//   },
+//   {
+//     id: ncNanoId(),
+//     href: '/mi-perfil',
+//     name: 'Mi Perfil',
+//     search: '',
+//   },
+// ];
 
 export const NAVIGATION_MSK: NavItemType[] = [
   {

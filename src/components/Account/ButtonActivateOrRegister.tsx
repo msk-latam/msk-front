@@ -1,30 +1,23 @@
-import { FC, useContext, useEffect } from 'react';
-
+import { FC, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { hasText } from '@/lib/account';
-import { GlobalStateContext } from '@/app/[lang]/mi-perfil/GlobalStateContext';
+import { User, UserCourseProgress } from '@/data/types';
+import { goToEnroll, goToLMS } from '@/lib/account';
 
 interface ButtonActivateOrRegisterProps {
-  isDisabledActivate: boolean;
-  handleActivateClick: () => void;
-  whenActivate: boolean;
-  status: string;
-  productSlug: string | undefined;
-
   isPreventa: boolean;
+  product: UserCourseProgress;
+  user: User;
 }
 
 const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({
-  isDisabledActivate,
-  handleActivateClick,
-  whenActivate,
-  status,
-  productSlug,
-
+  product,
   isPreventa,
+  user,
 }) => {
   const router = useRouter();
-
+  const [whenActivate, setWhenActivate] = useState(false);
+  const [isDisabledActivate, setIsDisabledActivate] = useState(false);
   const disabledRender = () => {
     return (
       <button
@@ -41,18 +34,9 @@ const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({
     return disabledRender();
   }
 
-  console.log(status, 'de button activate');
-
-  // const globalStatus = state.statuses.status;
-  // console.log(globalStatus);
-
-  // console.log(hasText(globalStatus));
-
-  console.log(isDisabledActivate);
-
   const handleProductAction = async () => {
-    if (isProductActive() && activeProductRef.current) {
-      setOnRequest(true);
+    if (isProductActive()) {
+      setWhenActivate(true);
       try {
         if (isProductNotEnrolled()) {
           await handleEnrollment();
@@ -62,30 +46,77 @@ const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({
       } catch (error) {
         console.error(error);
       } finally {
-        setOnRequest(false);
+        setWhenActivate(false);
       }
     }
   };
 
+  const handleEnrollment = async () => {
+    const response = await goToEnroll(product.product_code, user.email);
+
+    if (response.data[0].code.includes('SUCCESS')) {
+      product.status = 'Activo';
+    }
+  };
+
+  const navigateToLMS = () => {
+    goToLMS(
+      product.product_code,
+      product.product_code_cedente as string,
+      user.email,
+    );
+  };
+
+  const isProductActive = () => {
+    return product.ov !== 'Baja' && product.ov !== 'Trial suspendido';
+  };
+
+  const isProductNotEnrolled = () => {
+    return product.status === 'Sin enrolar';
+  };
+  console.log(product.status);
   return (
     <>
       {isDisabledActivate ? (
         <button
           className='course-network text-primary font-bold disabled:text-grey-disabled disabled:cursor-not-allowed disabled:opacity-70'
-          onClick={() => router.push(`/curso/${productSlug}`)}
+          onClick={() => router.push(`/curso/${product?.slug}`)}
         >
           Inscríbete
         </button>
       ) : (
         <button
           className='course-network text-primary font-bold disabled:text-grey-disabled disabled:cursor-not-allowed disabled:opacity-70'
-          onClick={handleActivateClick}
+          onClick={handleProductAction}
           disabled={isDisabledActivate}
         >
           {whenActivate ? (
-            <div className='flex justify-center items-center'>Activando...</div>
+            <div className='flex justify-center items-center transition-opacity duration-300'>
+              <svg
+                className='animate-spin h-5 w-5 text-primary-6000'
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+              >
+                <circle
+                  className='opacity-25'
+                  cx='12'
+                  cy='12'
+                  r='10'
+                  stroke='currentColor'
+                  strokeWidth='4'
+                ></circle>
+                <path
+                  className='opacity-75'
+                  fill='currentColor'
+                  d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z'
+                ></path>
+              </svg>
+            </div>
           ) : (
-            hasText(status)
+            <div className='transition-opacity duration-300'>
+              {hasText(product.status)}
+            </div>
           )}
         </button>
       )}

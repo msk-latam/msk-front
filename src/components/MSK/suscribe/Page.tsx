@@ -80,7 +80,7 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
   }, [product]);
 
   const renderCheckoutComponent = () => {
-    //console.log({ gateway });
+    // console.log({ gateway });
     switch (gateway) {
       case 'REBILL':
         return (
@@ -145,7 +145,7 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
             country={country}
             product={product}
             installmentAmount={installmentAmount}
-            mountedInputState={mountedInputObjectState}
+            // mountedInputState={mountedInputObjectState}
           />
 
           <section>

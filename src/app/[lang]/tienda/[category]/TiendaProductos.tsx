@@ -43,6 +43,10 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
         );
       }
 
+      filteredCourses = filteredCourses.filter(
+        (course: any) => course.father_post_type === 'course',
+      );
+
       // if (resourceFilter) {
       //   filteredCourses = filteredCourses.filter(course => {
       //     if (resourceFilter === 'guias-profesionales') {
@@ -111,6 +115,8 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
+
+  console.log(currentItems);
   return (
     <>
       <ButtonPrimary onClick={toggleModal}>Ver Especialidades</ButtonPrimary>
