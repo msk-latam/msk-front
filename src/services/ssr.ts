@@ -355,9 +355,44 @@ class ApiSSRService {
     }
   }
 
+  // async getProfessions() {
+  //   try {
+  //     //console.log('Get professions 2');
+  //     const response = await fetch(`${baseUrl}/api/professions`);
+
+  //     if (!response.ok) {
+  //       throw new Error(
+  //         `Failed to fetch professions. HTTP status ${response.status}`,
+  //       );
+  //     }
+
+  //     const data = await response.json();
+  //     console.log('getProfessions', { data });
+  //     return data;
+  //   } catch (error) {
+  //     return error;
+  //   }
+  // }
+
   async getProfessions() {
+    const PROFESSIONS_TTL = 24 * 60 * 60 * 1000;
     try {
-      //console.log('Get professions 2');
+      if (typeof window !== 'undefined') {
+        const storedProfessions = localStorage.getItem('professions');
+        // console.log(storedProfessions);
+        if (storedProfessions) {
+          const { data, timestamp } = JSON.parse(storedProfessions);
+          const now = new Date().getTime();
+          // console.log(data);
+
+          if (now - timestamp < PROFESSIONS_TTL) {
+            return data;
+          }
+        }
+      }
+
+      // Si no hay datos o el TTL ha expirado, realizar una nueva llamada a la API
+      console.log('haciendo llamada api');
       const response = await fetch(`${baseUrl}/api/professions`);
 
       if (!response.ok) {
@@ -368,8 +403,21 @@ class ApiSSRService {
 
       const data = await response.json();
       console.log('getProfessions', { data });
+
+      // Guardar los datos en localStorage solo si estamos en el cliente
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(
+          'professions',
+          JSON.stringify({
+            data,
+            timestamp: new Date().getTime(), // Guardar el tiempo actual
+          }),
+        );
+      }
+
       return data;
     } catch (error) {
+      console.error('Error de red:', error);
       return error;
     }
   }

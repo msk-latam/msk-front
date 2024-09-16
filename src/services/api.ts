@@ -617,40 +617,60 @@ class ApiService {
 
   async getCountryCode() {
     try {
+      const COUNTRY_CODE_TTL = 24 * 60 * 60 * 1000;
+      const storedCountryData = localStorage.getItem('countryCode');
+
+      if (storedCountryData) {
+        const { value, timestamp } = JSON.parse(storedCountryData);
+        const now = new Date().getTime();
+
+        // Validar si el dato almacenado sigue siendo válido dentro del TTL
+        if (now - timestamp < COUNTRY_CODE_TTL) {
+          return value; // Si es válido, devolver el valor guardado
+        }
+      }
+
+      // Si no existe el valor o el TTL ha expirado, hacer una nueva llamada a la API
       const ipResponse = await fetch('https://api.ipify.org/?format=json');
       const ipData = await ipResponse.json();
       const ip = ipData.ip;
-      console.log('getCountryCode', ipData);
+
+      console.log('Obteniendo IP:', ip);
 
       let response;
       if (PROD) {
         response = await fetch(`${IP_API}?ip=${ip}`);
-        console.log(
-          `${IP_API}?ip=${ip}` + ' PROD country by IP Response',
-          response,
-        );
       } else {
         response = await fetch(
           `https://pro.ip-api.com/json/?fields=61439&key=OE5hxPrfwddjYYP`,
         );
-        console.log(' DEV country by IP Response', response);
       }
 
       if (!response.ok) {
         throw new Error(
-          `Failed to fetch country code. HTTP status ${response.status}`,
+          `Error al obtener el código de país. HTTP status ${response.status}`,
         );
       }
 
       const data = await response.json();
+      const countryCode = PROD
+        ? data.data
+        : data.countryCode
+        ? data.countryCode.toLowerCase()
+        : '';
 
-      if (PROD) {
-        return data.data;
-      }
+      // Guardar el código del país y el timestamp en localStorage
+      localStorage.setItem(
+        'countryCode',
+        JSON.stringify({
+          value: countryCode,
+          timestamp: new Date().getTime(), // Guardar el tiempo actual
+        }),
+      );
 
-      return data.countryCode ? data.countryCode.toLowerCase() : '';
+      return countryCode;
     } catch (error) {
-      console.error('Network error:', error);
+      console.error('Error de red:', error);
       return '';
     }
   }

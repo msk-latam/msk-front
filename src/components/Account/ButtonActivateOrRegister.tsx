@@ -8,16 +8,19 @@ interface ButtonActivateOrRegisterProps {
   isPreventa: boolean;
   product: UserCourseProgress;
   user: User;
+  isDisabled?: any;
 }
 
 const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({
   product,
   isPreventa,
   user,
+  isDisabled,
 }) => {
   const router = useRouter();
   const [whenActivate, setWhenActivate] = useState(false);
   const [isDisabledActivate, setIsDisabledActivate] = useState(false);
+
   const disabledRender = () => {
     return (
       <button
@@ -35,7 +38,13 @@ const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({
   }
 
   const handleProductAction = async () => {
-    if (isProductActive()) {
+    const validStatuses = [
+      'Listo para enrolar',
+      'Sin enrolar',
+      'Activo',
+      'Finalizado',
+    ];
+    if (isProductActive() && validStatuses.includes(product.status)) {
       setWhenActivate(true);
       try {
         if (isProductNotEnrolled()) {
@@ -74,7 +83,7 @@ const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({
   const isProductNotEnrolled = () => {
     return product.status === 'Sin enrolar';
   };
-  console.log(product.status);
+
   return (
     <>
       {isDisabledActivate ? (

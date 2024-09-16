@@ -3,7 +3,7 @@ import {
   CourseProgress,
   UserCourse,
   UserCourseProgress,
-} from 'data/types';
+} from '@/data/types';
 
 export const getUserProducts = (res: any, courses: any): UserCourse[] => {
   const COUNTRY = localStorage.getItem('country');
@@ -52,7 +52,7 @@ export const getUserCourses = (
         productAux.product_code === cp.Product_Code,
     );
 
-    console.log(cp, { globalProduct });
+    // console.log(cp, { globalProduct });
 
     if (globalProduct && !seenProductIds[cp.Product_Code]) {
       seenProductIds[cp.Product_Code] = true;

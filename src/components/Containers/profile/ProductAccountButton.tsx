@@ -66,6 +66,7 @@ export const ProductAccountButton: FC<{
           product={product}
           user={user}
           isPreventa={statusOV.hasText === 'Preventa'}
+          isDisabled={isDisabled}
         />
       </div>
 
