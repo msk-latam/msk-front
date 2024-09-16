@@ -610,8 +610,9 @@ class ApiSSRService {
 
     try {
       const response = await fetch(
-        `http://localhost:8577/api/msk-crm/api/zoho/sales_order/create_contract`,
+        `http://localhost:8577/api/zoho/sales_order/create_contract`,
         {
+          mode: 'no-cors',
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -619,9 +620,12 @@ class ApiSSRService {
             Authorization: `Bearer $2y$12$tdFqIBqa413sfYENjGjVR.lUOfcRnRaXBgBDUeQIBg1BjujlLbmQW`, //este token va asi
           },
           body: JSON.stringify(body),
-          mode: 'no-cors',
         },
       );
+
+      // if (!response.ok) {
+      //   throw new Error(`HTTP error! status: ${response.status}`);
+      // }
       console.log({ body });
       console.log({ response });
       const data = response.json();
