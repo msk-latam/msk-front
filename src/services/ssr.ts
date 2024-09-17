@@ -658,9 +658,9 @@ class ApiSSRService {
 
     try {
       const response = await fetch(
-        `http://localhost:8577/api/zoho/sales_order/create_contract`,
+        `http://127.0.0.1:8000/api/gateway/api/mercadopago/arg/our_test`,
         {
-          mode: 'no-cors',
+          // mode: 'no-cors',
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
