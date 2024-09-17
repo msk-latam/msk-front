@@ -636,11 +636,59 @@ class ApiSSRService {
     }
   }
 
-  async createDrafContract(
+  // async createDrafContract(
+  //   product: FetchSingleProduct,
+  //   profile: UserProfile | null,
+  // ) {
+  //   console.log({ product, profile });
+  //   const body = {
+  //     customer_id: profile?.entity_id_crm,
+  //     products: [
+  //       {
+  //         code: product.ficha.product_code,
+  //         quantity: 1,
+  //         total: product.total_price,
+  //       },
+  //     ],
+  //     status: 'Borrador',
+  //     currency: 'ARS',
+  //     country: 'Argentina',
+  //     grand_total: product?.total_price,
+  //   };
+
+  //   try {
+  //     const response = await fetch(
+  //       `http://127.0.0.1:8000/api/gateway/api/mercadopago/arg/our_test`,
+  //       {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+
+  //           Authorization: `Bearer $2y$12$tdFqIBqa413sfYENjGjVR.lUOfcRnRaXBgBDUeQIBg1BjujlLbmQW`, //este token va asi
+  //         },
+  //         body: JSON.stringify(body),
+  //       },
+  //     );
+
+  //     // if (!response.ok) {
+  //     //   throw new Error(`HTTP error! status: ${response.status}`);
+  //     // }
+  //     console.log({ body });
+  //     console.log({ response });
+  //     const data = response.json();
+  //     console.log({ data });
+
+  //     return data;
+  //   } catch (err) {
+  //     console.error('Pago error', { err });
+  //     return { error: true, message: '' };
+  //   }
+  // }
+
+  async buildDraftContractBody(
     product: FetchSingleProduct,
     profile: UserProfile | null,
   ) {
-    console.log({ product, profile });
     const body = {
       customer_id: profile?.entity_id_crm,
       products: [
@@ -648,35 +696,41 @@ class ApiSSRService {
           code: product.ficha.product_code,
           quantity: 1,
           total: product.total_price,
+          net_total: product.totalAmount,
+          list_price: product.totalAmount,
         },
       ],
       status: 'Borrador',
       currency: 'ARS',
       country: 'Argentina',
+      sub_total: product.total_price,
       grand_total: product?.total_price,
     };
 
+    console.log({ body });
+
+    return body;
+  }
+
+  async callDraftContractApi(body: object) {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/gateway/api/mercadopago/arg/our_test`,
+        `http://msk-web-crm/api/zoho/sales_order/create_contract`,
+        // `http://crm.msklatam.net/api/zoho/sales_order/create_contract`,
+        // `http://127.0.0.1:8000/api/gateway/api/mercadopago/arg/our_test`,
         {
-          // mode: 'no-cors',
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-
-            Authorization: `Bearer $2y$12$tdFqIBqa413sfYENjGjVR.lUOfcRnRaXBgBDUeQIBg1BjujlLbmQW`, //este token va asi
+            Authorization: `Bearer $2y$12$tdFqIBqa413sfYENjGjVR.lUOfcRnRaXBgBDUeQIBg1BjujlLbmQW`, // token fijo
           },
           body: JSON.stringify(body),
         },
       );
 
-      // if (!response.ok) {
-      //   throw new Error(`HTTP error! status: ${response.status}`);
-      // }
       console.log({ body });
       console.log({ response });
-      const data = response.json();
+      const data = await response.json();
       console.log({ data });
 
       return data;
@@ -684,6 +738,20 @@ class ApiSSRService {
       console.error('Pago error', { err });
       return { error: true, message: '' };
     }
+  }
+
+  async createDraftContract(
+    product: FetchSingleProduct,
+    profile: UserProfile | null,
+  ) {
+    const body = this.buildDraftContractBody(product, profile);
+    console.log({ body });
+
+    //falta la tarjeta de credito antes de enviar
+
+    const data = await this.callDraftContractApi(body);
+
+    return data;
   }
 }
 

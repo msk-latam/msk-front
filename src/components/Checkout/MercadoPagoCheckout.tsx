@@ -57,7 +57,6 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
   const handleSubmit = async (values: any) => {
     console.log({ values });
     setOnPaymentRequest(true);
-
     const customerCardData = {
       ...values,
       identification: {
@@ -71,7 +70,7 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
     const paymentDetails = {
       trial: true,
       paymentData: {
-        contractId: contractDraftCreated.details.id,
+        contractId: contractDraftCreated?.details.id,
         email: profileCustomerInfo?.email,
         address: profileCustomerInfo?.address,
         phone: profileCustomerInfo?.phone,
@@ -117,63 +116,66 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
 
   // 5031755734530604
 
-  // useEffect(() => {
-  //   const createDraftContract = async (product, profile) => {
-  //     setOnPaymentRequest(true);
-  //     const contract = await ssr.createDrafContract(product, profile);
-  //     console.log({ contract });
+  console.log({ product });
 
-  //     if (!contract.error) {
-  //       setContractDraftCreated(contract.data[0]);
-  //       setOnPaymentRequest(false);
-  //       // mountedInputObjectState.setState(true);
-  //     }
-
-  //     console.log({ contract });
-  //   };
-
-  //   if (
-  //     !sendRequestRef.current &&
-  //     typeof profile !== 'undefined' &&
-  //     profile != null &&
-  //     product?.ficha != null
-  //   ) {
-  //     sendRequestRef.current = true;
-  //     console.log('In fetch');
-  //     createDraftContract(product, profile);
-  //   }
-  // }, [profile]);
-
-  const createDraftContract = async (product: any, profile: any) => {
-    try {
+  useEffect(() => {
+    const createDraftContract = async (product, profile) => {
       setOnPaymentRequest(true);
-      const contract = await ssr.createDrafContract(product, profile);
+      const contract = await ssr.createDraftContract(product, profile);
       console.log({ contract });
 
       if (!contract.error) {
-        // setContractDraftCreated(contract.data[0]);
-        mountedInputObjectState.setState(true);
+        setContractDraftCreated(contract.data[0]);
         setOnPaymentRequest(false);
+        // mountedInputObjectState.setState(true);
       }
-    } catch (error) {
-      console.error('Error creating contract:', error);
-    } finally {
-      setOnPaymentRequest(false);
-    }
-  };
 
-  useEffect(() => {
-    if (!sendRequestRef.current && profile && product?.ficha) {
+      console.log({ contract });
+    };
+
+    if (
+      !sendRequestRef.current &&
+      typeof profile !== 'undefined' &&
+      profile != null &&
+      product?.ficha != null
+    ) {
       sendRequestRef.current = true;
       console.log('In fetch');
       createDraftContract(product, profile);
     }
+  }, [profile]);
 
-    // Opcional: cleanup si necesitas cancelar peticiones o limpiar efectos
-    return () => {
-      // cleanup code si es necesario
-    };
-  }, [profile, product]);
+  // const createDraftContract = async (product: any, profile: any) => {
+  //   try {
+  //     setOnPaymentRequest(true);
+  //     const contract = await ssr.createDraftContract(product, profile);
+  //     setContractDraftCreated(contract);
+  //     console.log({ contract });
+
+  //     // if (!contract.error) {
+  //     //   // setContractDraftCreated(contract.data[0]);
+  //     // }
+  //     mountedInputObjectState.setState(true);
+  //     setOnPaymentRequest(false);
+  //   } catch (error) {
+  //     console.error('Error creating contract:', error);
+  //   } finally {
+  //     setOnPaymentRequest(false);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if (!sendRequestRef.current && profile && product?.ficha) {
+  //     sendRequestRef.current = true;
+  //     console.log('In fetch');
+  //     createDraftContract(product, profile);
+  //   }
+
+  //   // Opcional: cleanup si necesitas cancelar peticiones o limpiar efectos
+  //   return () => {
+  //     // cleanup code si es necesario
+  //   };
+  // }, [profile, product]);
 
   return (
     <>
