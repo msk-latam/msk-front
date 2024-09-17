@@ -3,7 +3,7 @@ import Link from 'next/link';
 import CancelTrialModal from '@/components/Modal/CancelTrial';
 import ButtonActivateOrRegister from '@/components/Account/ButtonActivateOrRegister';
 import Image from 'next/image';
-import { UserCourseProgress } from '@/data/types';
+import { User, UserCourseProgress } from '@/data/types';
 import { getStatusIcon, statusCourse, statusOrdenVenta } from '@/lib/account';
 import { GlobalStateContext } from '@/app/[lang]/mi-perfil/GlobalStateContext';
 
@@ -27,13 +27,11 @@ export const CancelTrialButton: FC<{
   );
 };
 
-// ProductAccountButton Component
 export const ProductAccountButton: FC<{
   product: UserCourseProgress;
-  onRequest: boolean;
-  isRunning: boolean;
-  onClick: () => void;
-}> = ({ product, onRequest, isRunning, onClick }) => {
+
+  user: User;
+}> = ({ product, user }) => {
   const [showCancelTrial, setShowCancelTrial] = useState(false);
   const { state, dispatch1 } = useContext(GlobalStateContext);
 
@@ -41,19 +39,13 @@ export const ProductAccountButton: FC<{
   const mappedStatus = state.statuses[product.product_code]
     ? state.statuses[product.product_code]
     : product.status;
-  // const { isDisabled } = statusCourse(status);
+
   const { isDisabled } = statusCourse(mappedStatus);
   const statusOV = statusOrdenVenta(product?.ov, mappedStatus);
   const textStatus = statusOV.isDisabled
     ? statusOV.disabledText
     : statusOV.hasText;
   const iconStatus = getStatusIcon(textStatus);
-
-  console.log(textStatus, 'TEXT STATUS');
-
-  console.log(product, 'PRODUCT');
-  console.log(status, 'STATUS');
-  console.log(state, 'STATE');
 
   return (
     <div className='product-button-wrp'>
@@ -71,18 +63,10 @@ export const ProductAccountButton: FC<{
           </span>
         </div>
         <ButtonActivateOrRegister
-          isDisabledActivate={isDisabled || statusOV.isDisabled}
-          handleActivateClick={onClick}
-          whenActivate={
-            onRequest ||
-            isRunning ||
-            (typeof textStatus === 'string' &&
-              textStatus.includes('Listo para enrolar'))
-          }
-          status={status}
-          // status={state.statuses.status}
-          productSlug={product.slug}
+          product={product}
+          user={user}
           isPreventa={statusOV.hasText === 'Preventa'}
+          isDisabled={isDisabled}
         />
       </div>
 

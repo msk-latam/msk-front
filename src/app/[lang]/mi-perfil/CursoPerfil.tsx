@@ -5,12 +5,8 @@ import {
   ProductAccountButton,
 } from '@/components/Containers/profile/ProductAccountButton';
 import CancelTrialModal from '@/components/Modal/CancelTrial';
-
 import { CountryContext } from '@/context/country/CountryContext';
-import { STATUS } from '@/data/MSK/statusCourses';
 import { User, UserCourseProgress } from '@/data/types';
-import useInterval from '@/hooks/useInterval';
-import { goToEnroll, goToLMS, statusCourse } from '@/lib/account';
 import Image from 'next/image';
 import { FC, useContext, useRef, useState } from 'react';
 import darDeBaja from '@/public/images/icons/darDeBaja.svg';
@@ -27,73 +23,14 @@ const CursoPerfil: FC<Props> = ({ product, user }) => {
   const [showCancelTrial, setShowCancelTrial] = useState(false);
   const [showAll, setShowAll] = useState(false);
 
-  const handleToggleShowAll = () => {
-    setShowAll(!showAll);
-  };
-
-  const { isDisabled } = statusCourse(product?.status);
-  const { isRunning, startWatch } = useInterval(user.email);
-
-  const [onRequest, setOnRequest] = useState<boolean>(false);
-
-  const activeProductRef = useRef(
-    product?.status !== 'Inactivo' &&
-      product?.status !== 'Expirado' &&
-      product?.status !== STATUS.SUSPEND,
-  );
+  // const handleToggleShowAll = () => {
+  //   setShowAll(!showAll);
+  // };
 
   const imageUrl = product.thumbnail.high?.replace(
     `${'mx' || countryState.country}.`,
     '',
   );
-
-  const handleProductAction = async () => {
-    if (isProductActive() && activeProductRef.current) {
-      setOnRequest(true);
-      try {
-        if (isProductNotEnrolled()) {
-          await handleEnrollment();
-        } else {
-          navigateToLMS();
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setOnRequest(false);
-      }
-    }
-  };
-
-  const isProductActive = () => {
-    return product.ov !== 'Baja' && product.ov !== 'Trial suspendido';
-  };
-
-  const isProductNotEnrolled = () => {
-    return product.status === 'Sin enrolar';
-  };
-
-  const handleEnrollment = async () => {
-    const response = await goToEnroll(product.product_code, user.email);
-
-    if (response.data[0].code.includes('SUCCESS')) {
-      const watching = await startWatch(product.product_code);
-      console.log('watching 68', watching);
-      console.log(!!watching, { watching });
-      setOnRequest(!!watching);
-    } else {
-      setOnRequest(false);
-    }
-  };
-
-  const navigateToLMS = () => {
-    goToLMS(
-      product.product_code,
-      product.product_code_cedente as string,
-      user.email,
-    );
-  };
-
-  console.log(product);
 
   const visibleCategories = showAll
     ? product.categories
@@ -151,14 +88,7 @@ const CursoPerfil: FC<Props> = ({ product, user }) => {
           )}
         </div>
       </div>
-      {product ? (
-        <ProductAccountButton
-          product={product}
-          onRequest={onRequest}
-          isRunning={isRunning}
-          onClick={handleProductAction}
-        />
-      ) : null}
+      {product ? <ProductAccountButton product={product} user={user} /> : null}
       <CancelTrialModal
         isOpenProp={showCancelTrial}
         item={product}

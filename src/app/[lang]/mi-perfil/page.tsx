@@ -48,11 +48,11 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
     try {
       setTotalPages(Math.ceil(allCourses.length / itemsPerPage));
       const res = await api.getUserData();
-      console.log('FETCH USER RES: ', res);
+      // console.log('FETCH USER RES: ', res);
       if (!res.message) {
         setUser(res);
         let coursesList = getUserCourses(res, allCourses);
-        console.log({ allCourses, coursesList }, res.contact.courses_progress);
+        // console.log({ allCourses, coursesList }, res.contact.courses_progress);
         setUserCourses(coursesList);
         setTotalPages(Math.ceil(coursesList.length / itemsPerPage));
         setLoadingUser(false);
@@ -76,7 +76,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
   useEffect(() => {
     setCurrentItems(userCourses.slice(indexOfFirstItem, indexOfLastItem));
   }, [indexOfFirstItem, indexOfLastItem, userCourses]);
-  console.log('page currentItems', currentItems);
+  // console.log('page currentItems', currentItems);
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -106,8 +106,6 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
   ];
 
   const handleUserTabChange = (item: string) => {
-    console.log(item);
-    console.log(userCourses);
     switch (item) {
       case 'Todo':
         setCurrentItems(userCourses.slice(indexOfFirstItem, indexOfLastItem));

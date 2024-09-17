@@ -66,6 +66,8 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
       },
     };
 
+    console.log({ customerCardData });
+
     const paymentDetails = {
       trial: true,
       paymentData: {
@@ -84,6 +86,8 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
       type: 'Suscripcion',
       contract_so: null,
     };
+
+    console.log({ paymentDetails });
 
     const paymentData = {
       transactionAmount: product?.total_price,
@@ -111,31 +115,65 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
     }
   };
 
-  useEffect(() => {
-    const createDraftContract = async (product, profile) => {
+  // 5031755734530604
+
+  // useEffect(() => {
+  //   const createDraftContract = async (product, profile) => {
+  //     setOnPaymentRequest(true);
+  //     const contract = await ssr.createDrafContract(product, profile);
+  //     console.log({ contract });
+
+  //     if (!contract.error) {
+  //       setContractDraftCreated(contract.data[0]);
+  //       setOnPaymentRequest(false);
+  //       // mountedInputObjectState.setState(true);
+  //     }
+
+  //     console.log({ contract });
+  //   };
+
+  //   if (
+  //     !sendRequestRef.current &&
+  //     typeof profile !== 'undefined' &&
+  //     profile != null &&
+  //     product?.ficha != null
+  //   ) {
+  //     sendRequestRef.current = true;
+  //     console.log('In fetch');
+  //     createDraftContract(product, profile);
+  //   }
+  // }, [profile]);
+
+  const createDraftContract = async (product: any, profile: any) => {
+    try {
       setOnPaymentRequest(true);
       const contract = await ssr.createDrafContract(product, profile);
+      console.log({ contract });
 
       if (!contract.error) {
-        setContractDraftCreated(contract.data[0]);
-        setOnPaymentRequest(false);
+        // setContractDraftCreated(contract.data[0]);
         mountedInputObjectState.setState(true);
+        setOnPaymentRequest(false);
       }
+    } catch (error) {
+      console.error('Error creating contract:', error);
+    } finally {
+      setOnPaymentRequest(false);
+    }
+  };
 
-      console.log({ contract });
-    };
-
-    if (
-      !sendRequestRef.current &&
-      typeof profile !== 'undefined' &&
-      profile != null &&
-      product?.ficha != null
-    ) {
+  useEffect(() => {
+    if (!sendRequestRef.current && profile && product?.ficha) {
       sendRequestRef.current = true;
       console.log('In fetch');
       createDraftContract(product, profile);
     }
-  }, [profile]);
+
+    // Opcional: cleanup si necesitas cancelar peticiones o limpiar efectos
+    return () => {
+      // cleanup code si es necesario
+    };
+  }, [profile, product]);
 
   return (
     <>
@@ -223,9 +261,9 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
                       onPaymentRequest && ''
                     }`}
                     type='submit'
-                    disabled={
-                      onPaymentRequest || !(isValid && dirty) || isSubmitting
-                    }
+                    // disabled={
+                    //   onPaymentRequest || !(isValid && dirty) || isSubmitting
+                    // }
                   >
                     Pagar
                   </button>
