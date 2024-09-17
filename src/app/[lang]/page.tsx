@@ -1,15 +1,6 @@
 import { TABS_HOME } from '@/data/MSK/courses';
 import { TABS_BLOG } from '@/data/MSK/blog';
 import { HOME_SPECIALTIES } from '@/data/MSK/specialties';
-import BlogSummary from '@/components/MSK/BlogSummary';
-import BackgroundSection from '@/components/BackgroundSection/BackgroundSection';
-import CoursesForYou from '@/components/MSK/CoursesForYou';
-import HomeExtraInfo from '@/components/MSK/HomeExtraInfo';
-import SectionHero from '@/components/SectionHero/SectionHero';
-import SectionGridCategoryBox from '@/components/SectionGridCategoryBox/SectionGridCategoryBox';
-import BrandSlider from '@/components/MSK/BrandSlider';
-import { cookies } from 'next/headers';
-import ssr from '@/services/ssr';
 import {
   getAllBestSellers,
   getAllCourses,
@@ -22,16 +13,47 @@ import {
   setPageHomeWpContent,
   pageHomeWpContent,
 } from '@/lib/allData';
-import ContactForm from '@/components/MSK/ContactForm';
+import { cookies } from 'next/headers';
 import { generateSchemaJson } from '@/lib/pageSchemaJson';
 import { removeFirstSubdomain } from '@/utils/removeFirstSubdomain';
-import WelcomeBox from '@/components/WelcomeBox/WelcomeBox';
 import { FetchCourseType, WpContentData } from '@/data/types';
-import Phrase from '@/components/Phrase/Phrase';
-import CommentReferences from '@/components/CommentReferences';
-import Questions from '@/components/Questions/Questions';
 import { SITE_URL } from '@/contains/constants';
-import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
+import ssr from '@/services/ssr';
+import dynamic from 'next/dynamic';
+// import BackgroundSection from '@/components/BackgroundSection/BackgroundSection';
+
+// import BlogSummary from '@/components/MSK/BlogSummary';
+// import BrandSlider from '@/components/MSK/BrandSlider';
+// import CommentReferences from '@/components/CommentReferences';
+// import ContactForm from '@/components/MSK/ContactForm';
+// import CoursesForYou from '@/components/MSK/CoursesForYou';
+// import HomeExtraInfo from '@/components/MSK/HomeExtraInfo';
+// import Phrase from '@/components/Phrase/Phrase';
+// import Questions from '@/components/Questions/Questions';
+// import SectionHero from '@/components/SectionHero/SectionHero';
+// import SectionGridCategoryBox from '@/components/SectionGridCategoryBox/SectionGridCategoryBox';
+// import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
+// import WelcomeBox from '@/components/WelcomeBox/WelcomeBox';
+const SectionHero = dynamic(
+  () => import('@/components/SectionHero/SectionHero'),
+);
+const WelcomeBox = dynamic(() => import('@/components/WelcomeBox/WelcomeBox'));
+const BrandSlider = dynamic(() => import('@/components/MSK/BrandSlider'));
+const Phrase = dynamic(() => import('@/components/Phrase/Phrase'));
+const SectionGridCategoryBox = dynamic(
+  () => import('@/components/SectionGridCategoryBox/SectionGridCategoryBox'),
+);
+const HomeExtraInfo = dynamic(() => import('@/components/MSK/HomeExtraInfo'));
+const CommentReferences = dynamic(
+  () => import('@/components/CommentReferences'),
+);
+const CoursesForYou = dynamic(() => import('@/components/MSK/CoursesForYou'));
+const BlogSummary = dynamic(() => import('@/components/MSK/BlogSummary'));
+const Questions = dynamic(() => import('@/components/Questions/Questions'));
+const SectionSliderBestSellers = dynamic(
+  () => import('@/components/Sections/SectionSliderBestSellers'),
+);
+const ContactForm = dynamic(() => import('@/components/MSK/ContactForm'));
 
 export async function generateMetadata({
   params,
