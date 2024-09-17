@@ -715,7 +715,7 @@ class ApiSSRService {
   async callDraftContractApi(body: object) {
     try {
       const response = await fetch(
-        `http://msk-web-crm/api/zoho/sales_order/create_contract`,
+        `https://msk-web-crm/api/zoho/sales_order/create_contract`,
         // `http://crm.msklatam.net/api/zoho/sales_order/create_contract`,
         // `http://127.0.0.1:8000/api/gateway/api/mercadopago/arg/our_test`,
         {
