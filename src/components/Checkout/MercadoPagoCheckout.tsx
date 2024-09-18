@@ -116,6 +116,94 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
 
   // 5031755734530604
 
+  // Función para crear los datos de la tarjeta del cliente
+
+  const createCustomerCardData = (values: any, profileCustomerInfo: any) => ({
+    ...values,
+    identification: {
+      type: profileCustomerInfo?.type_doc,
+      number: profileCustomerInfo?.identification,
+    },
+  });
+
+  // Función para crear los detalles del pago
+  const createPaymentDetails = (
+    profileCustomerInfo: any,
+    contractDraftCreated: any,
+  ) => ({
+    trial: true,
+    paymentData: {
+      contractId: contractDraftCreated?.details.id,
+      email: profileCustomerInfo?.email,
+      address: profileCustomerInfo?.address,
+      phone: profileCustomerInfo?.phone,
+      zip: profileCustomerInfo?.postal_code,
+      fullName: `${profileCustomerInfo?.name} ${profileCustomerInfo?.last_name}`,
+      contact: {
+        ID_Personal: profileCustomerInfo?.identification,
+      },
+      dni: profileCustomerInfo?.identification,
+      mod: 'Suscripcion',
+    },
+    type: 'Suscripcion',
+    contract_so: null,
+  });
+
+  // Función para crear los datos completos del pago
+  const createPaymentData = (
+    product: any,
+    quotes: number,
+    profileCustomerInfo: any,
+    contractDraftCreated: any,
+    customerCardData: any,
+    paymentDetails: any,
+  ) => ({
+    transactionAmount: product?.total_price,
+    installments: quotes,
+    description: `Pago de contrato (ID: ${contractDraftCreated.details.id})`,
+    payer: {
+      email: profileCustomerInfo?.email,
+      identification: {
+        type: profileCustomerInfo?.type_doc,
+        number: profileCustomerInfo?.identification,
+      },
+    },
+    paymentDetails,
+    customerCardData,
+  });
+
+  // const handleSubmit = async (values: any) => {
+  //   console.log({ values });
+  //   setOnPaymentRequest(true);
+
+  //   // Crear datos de la tarjeta del cliente
+  //   const customerCardData = createCustomerCardData(values, profileCustomerInfo);
+  //   console.log({ customerCardData });
+
+  //   // Crear detalles del pago
+  //   const paymentDetails = createPaymentDetails(profileCustomerInfo, contractDraftCreated);
+  //   console.log({ paymentDetails });
+
+  //   // Crear datos completos del pago
+  //   const paymentData = createPaymentData(
+  //     product,
+  //     quotes = 0,
+  //     profileCustomerInfo,
+  //     contractDraftCreated,
+  //     customerCardData,
+  //     paymentDetails
+  //   );
+  //   console.log({ paymentData });
+
+  //   try {
+  //     await ssr.postPaymentMercadoPago(paymentData);
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //   } finally {
+  //     setOnPaymentRequest(false);
+  //   }
+  // };
+
   console.log({ product });
 
   useEffect(() => {
@@ -127,7 +215,7 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
       if (!contract.error) {
         setContractDraftCreated(contract.data[0]);
         setOnPaymentRequest(false);
-        // mountedInputObjectState.setState(true);
+        mountedInputObjectState.setState(true);
       }
 
       console.log({ contract });

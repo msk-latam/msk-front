@@ -613,7 +613,8 @@ class ApiSSRService {
   async postPaymentMercadoPago(paymentData: any) {
     try {
       const response = await fetch(
-        `${baseUrl}/api/gateway2/api/mercadopago/arg/our_test/trial`,
+        `https://payment.msklatam.net/api/gateway/api/mercadopago/arg/our_test`,
+        // `${baseUrl}/api/gateway/api/mercadopago/arg/our_test/`,
         {
           method: 'POST',
           headers: {
@@ -623,11 +624,11 @@ class ApiSSRService {
           body: JSON.stringify(paymentData),
         },
       );
-      const data = response.json();
 
-      console.log({ data });
+      // console.log({ data });
 
       if (response.status == 200) {
+        const data = response.json();
         console.log('Pago ok', { data });
         return data;
       }
@@ -685,7 +686,7 @@ class ApiSSRService {
   //   }
   // }
 
-  async buildDraftContractBody(
+  buildDraftContractBody(
     product: FetchSingleProduct,
     profile: UserProfile | null,
   ) {
@@ -713,9 +714,10 @@ class ApiSSRService {
   }
 
   async callDraftContractApi(body: object) {
+    console.log({ body });
     try {
       const response = await fetch(
-        `https://crm.msklatam.net/api/zoho/sales_order/create_contract`,
+        `https://payment.msklatam.net/api/msk-crm/api/zoho/sales_order/create_contract`,
         // `http://crm.msklatam.net/api/zoho/sales_order/create_contract`,
         // `http://127.0.0.1:8000/api/gateway/api/mercadopago/arg/our_test`,
         {
@@ -728,7 +730,6 @@ class ApiSSRService {
         },
       );
 
-      console.log({ body });
       console.log({ response });
       const data = await response.json();
       console.log({ data });

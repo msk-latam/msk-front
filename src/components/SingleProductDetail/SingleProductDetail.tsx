@@ -45,6 +45,8 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 
   let { isEbook, imagen, title } = productDetails(product);
 
+  console.log(product, 'de aca');
+
   // @ts-ignore
   return (
     <section className='course-details-area my-1 pb-90'>

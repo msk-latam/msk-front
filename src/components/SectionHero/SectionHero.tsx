@@ -1,7 +1,7 @@
 'use client';
 import ButtonPrimary from '@/components/Button/ButtonPrimary';
 import { StaticImageData } from 'next/image';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import NcImage from '../NcImage/NcImage';
 import { removeFirstTag } from '@/lib/removeFirstTag';
 import { useRouter } from 'next/navigation';
@@ -35,11 +35,26 @@ const SectionHero: FC<SectionHeroProps> = ({
     typeof btnOnClick === 'function' && btnOnClick();
   };
 
+  // useEffect(() => {
+  //   // Verificar si el script ya está cargado
+  //   if (!document.getElementById('EmbedSocialHashtagScript')) {
+  //     const script = document.createElement('script');
+  //     script.id = 'EmbedSocialHashtagScript';
+  //     script.src = 'https://embedsocial.com/cdn/ht.js';
+  //     script.async = true;
+  //     document.head.appendChild(script);
+  //   }
+  // }, []);
+
   return (
     <div
       className={`nc-SectionHero relative ${className}`}
       data-nc-id='SectionHero'
     >
+      {/* <div
+        className='embedsocial-hashtag'
+        data-ref='d1d3da558a418ee93bb873db94bd5f1f3d1297ef'
+      ></div> */}
       <div className='flex flex-col lg:flex-row space-y-14 lg:space-y-0 lg:space-x-10 items-center relative text-center lg:text-left'>
         <div className='w-screen max-w-full space-y-5 lg:space-y-7 flex-1'>
           <h1

@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: Props) {
     schemaJson: 'Course',
     schemaJsonData: courseMetaData,
   };
-
+  console.log(courseMetaData.excerpt);
   // Verificar si hay un schema específico para este curso en schemaMap
   if (schemaMap[params.slug]) {
     metadata.schemaJson = 'Product';
