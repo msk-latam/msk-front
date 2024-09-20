@@ -611,9 +611,11 @@ class ApiSSRService {
   }
 
   async postPaymentMercadoPago(paymentData: any) {
+    console.log(paymentData);
     try {
       const response = await fetch(
-        `https://payment.msklatam.net/api/gateway/api/mercadopago/arg/our_test`,
+        `http://localhost:8000/api/gateway/api/mercadopago/arg/our_test`,
+        // `https://payment.msklatam.net/api/gateway/api/mercadopago/arg/our_test`,
         // `${baseUrl}/api/gateway/api/mercadopago/arg/our_test/`,
         {
           method: 'POST',
@@ -628,7 +630,7 @@ class ApiSSRService {
       // console.log({ data });
 
       if (response.status == 200) {
-        const data = response.json();
+        const data = await response.json();
         console.log('Pago ok', { data });
         return data;
       }
@@ -730,7 +732,6 @@ class ApiSSRService {
         },
       );
 
-      console.log({ response });
       const data = await response.json();
       console.log({ data });
 
@@ -747,8 +748,6 @@ class ApiSSRService {
   ) {
     const body = this.buildDraftContractBody(product, profile);
     console.log({ body });
-
-    //falta la tarjeta de credito antes de enviar
 
     const data = await this.callDraftContractApi(body);
 

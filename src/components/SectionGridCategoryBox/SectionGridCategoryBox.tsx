@@ -7,8 +7,9 @@ import CardCategory5 from '@/components/CardCategory5/CardCategory5';
 import Heading from '@/components/Heading/Heading';
 import { DEMO_CATEGORIES } from '@/data/taxonomies';
 import { Specialty, TaxonomyType } from '@/data/types';
-import React from 'react';
+import React, { useState } from 'react';
 import NcLink from '../NcLink/NcLink';
+import SpecialtiesModal from '@/app/[lang]/tienda/[category]/SpecialtiesModal';
 
 export interface SectionGridCategoryBoxProps {
   categories?: TaxonomyType[] | Specialty[];
@@ -25,6 +26,10 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
   headingCenter = true,
   className = '',
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
   let CardComponentName = CardCategory2;
   switch (categoryCardType) {
     case 'card1':
@@ -46,33 +51,50 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
       CardComponentName = CardCategory2;
   }
 
+  console.log(DATA);
+
   return (
-    <div className={`nc-SectionGridCategoryBox relative ${className}`}>
-      <Heading
-        desc='Elige un área de interés y descúbrelos'
-        isCenter={headingCenter}
-      >
-        Cursos por especialidades
-      </Heading>
-      <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 sm:gap-6 md:gap-8 justify-center'>
-        {categories.map((item, i) => (
-          <CardComponentName
-            index={i < 1 ? `#${i + 1}` : undefined}
-            key={item.id}
-            taxonomy={item}
-            className='rounded-lg'
-          />
-        ))}
-        <div className='w-full col-span-2 sm:col-span-1 flex justify-items-center'>
-          <NcLink
+    <>
+      <div className={`nc-SectionGridCategoryBox relative ${className}`}>
+        <Heading
+          desc='Elige un área de interés y descúbrelos'
+          isCenter={headingCenter}
+        >
+          Cursos por especialidades
+        </Heading>
+        <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 sm:gap-6 md:gap-8 justify-center'>
+          {categories.map((item, i) => (
+            <CardComponentName
+              index={i < 1 ? `#${i + 1}` : undefined}
+              key={item.id}
+              taxonomy={item}
+              className='rounded-lg'
+            />
+          ))}
+          <div className='w-full col-span-2 sm:col-span-1 flex justify-items-center'>
+            {/* <NcLink
             href='/tienda?recurso=curso'
             className='w-full !border-white nc-CardCategory2 h-full text-primary font-medium sm:font-semibold flex items-center justify-center text-center mx-auto  [ nc-dark-box-bg-has-hover ]'
           >
-            Ver todas
-          </NcLink>
+          Ver todas
+          </NcLink> */}
+            <button
+              onClick={toggleModal}
+              className='w-full !border-white nc-CardCategory2 h-full text-primary font-medium sm:font-semibold flex items-center justify-center text-center mx-auto  [ nc-dark-box-bg-has-hover ]'
+            >
+              Ver todas
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+      <div
+        className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 inset-0 w-full ${
+          isModalOpen ? 'z-10' : '-z-10'
+        }`}
+      >
+        <SpecialtiesModal isOpen={isModalOpen} onClose={toggleModal} />
+      </div>
+    </>
   );
 };
 

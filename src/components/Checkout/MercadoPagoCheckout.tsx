@@ -6,7 +6,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { FetchSingleProduct } from '@/data/types';
+import { FetchSingleProduct, UserProfile } from '@/data/types';
 import InputSkeleton from '@/components/Skeleton/InputSkeleton';
 import { useAuth } from '@/hooks/useAuth';
 import ssr from '@/services/ssr';
@@ -17,7 +17,7 @@ import Image from 'next/image';
 
 interface MercadoPagoCheckoutProps {
   product: FetchSingleProduct | undefined;
-  quotes: number | null;
+  quotes: number;
   hasCoursedRequested: boolean;
   country: string;
   showMissingData: boolean;
@@ -39,9 +39,16 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
   const { profile } = useAuth();
   const sendRequestRef = useRef(false);
   const [onPaymentRequest, setOnPaymentRequest] = useState(false);
+  const [statusMessage, setStatusMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [contractDraftCreated, setContractDraftCreated] = useState<{} | null>(
     null,
   );
+
+  const profileCustomerInfo = profile?.contact ?? profile;
+  const { cardMpValidation } = useYupValidation();
+
+  // 4509953566233704
 
   const initialValues = {
     cardNumber: '',
@@ -49,74 +56,6 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
     expirationYear: '',
     securityCode: '',
   };
-
-  const profileCustomerInfo = profile?.contact ?? profile;
-
-  const { cardMpValidation } = useYupValidation();
-
-  const handleSubmit = async (values: any) => {
-    console.log({ values });
-    setOnPaymentRequest(true);
-    const customerCardData = {
-      ...values,
-      identification: {
-        type: profileCustomerInfo?.type_doc,
-        number: profileCustomerInfo?.identification,
-      },
-    };
-
-    console.log({ customerCardData });
-
-    const paymentDetails = {
-      trial: true,
-      paymentData: {
-        contractId: contractDraftCreated?.details.id,
-        email: profileCustomerInfo?.email,
-        address: profileCustomerInfo?.address,
-        phone: profileCustomerInfo?.phone,
-        zip: profileCustomerInfo?.postal_code,
-        fullName: `${profileCustomerInfo?.name} ${profileCustomerInfo?.last_name}`,
-        contact: {
-          ID_Personal: profileCustomerInfo?.identification,
-        },
-        dni: profileCustomerInfo?.identification,
-        mod: 'Suscripcion',
-      },
-      type: 'Suscripcion',
-      contract_so: null,
-    };
-
-    console.log({ paymentDetails });
-
-    const paymentData = {
-      transactionAmount: product?.total_price,
-      installments: quotes,
-      description: `Pago de contrato (ID: ${contractDraftCreated.details.id})`,
-      payer: {
-        email: profileCustomerInfo?.email,
-        identification: {
-          type: profileCustomerInfo?.type_doc,
-          number: profileCustomerInfo?.identification,
-        },
-      },
-      paymentDetails,
-      customerCardData,
-    };
-
-    console.log({ paymentData });
-
-    try {
-      await ssr.postPaymentMercadoPago(paymentData);
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setOnPaymentRequest(false);
-    }
-  };
-
-  // 5031755734530604
-
-  // Función para crear los datos de la tarjeta del cliente
 
   const createCustomerCardData = (values: any, profileCustomerInfo: any) => ({
     ...values,
@@ -126,40 +65,40 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
     },
   });
 
-  // Función para crear los detalles del pago
   const createPaymentDetails = (
     profileCustomerInfo: any,
     contractDraftCreated: any,
   ) => ({
-    trial: true,
-    paymentData: {
-      contractId: contractDraftCreated?.details.id,
-      email: profileCustomerInfo?.email,
-      address: profileCustomerInfo?.address,
-      phone: profileCustomerInfo?.phone,
-      zip: profileCustomerInfo?.postal_code,
-      fullName: `${profileCustomerInfo?.name} ${profileCustomerInfo?.last_name}`,
-      contact: {
-        ID_Personal: profileCustomerInfo?.identification,
-      },
-      dni: profileCustomerInfo?.identification,
-      mod: 'Suscripcion',
+    trial: 0,
+    contractId: contractDraftCreated?.details.id,
+    email: profileCustomerInfo?.email,
+    address: profileCustomerInfo?.address,
+    phone: profileCustomerInfo?.phone,
+    zip: profileCustomerInfo?.postal_code,
+    fullName: `${profileCustomerInfo?.name} ${profileCustomerInfo?.last_name}`,
+    contact: {
+      ID_Personal: profileCustomerInfo?.identification,
     },
-    type: 'Suscripcion',
-    contract_so: null,
+    dni: profileCustomerInfo?.identification,
+    mod: 'Suscripción',
+    quotes,
+    type: 'Suscripción',
+    contract_so: contractDraftCreated.details.id,
+    gateway: 'Mercado Pago',
   });
 
-  // Función para crear los datos completos del pago
   const createPaymentData = (
     product: any,
     quotes: number,
     profileCustomerInfo: any,
     contractDraftCreated: any,
-    customerCardData: any,
+    paymentData: any,
     paymentDetails: any,
   ) => ({
-    transactionAmount: product?.total_price,
+    transactionAmount: parseInt(product?.total_price.replace('.', '')),
     installments: quotes,
+    paymentData,
+
     description: `Pago de contrato (ID: ${contractDraftCreated.details.id})`,
     payer: {
       email: profileCustomerInfo?.email,
@@ -168,59 +107,109 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
         number: profileCustomerInfo?.identification,
       },
     },
-    paymentDetails,
-    customerCardData,
+    paymentDetails: {
+      ...paymentDetails,
+      paymentData:
+        '{"formValues":{"status":"ok","detail":"Found","products":[{"name":"ACCSAP","quantity":1,"id":"5344455000163461048","price":923738}],"sale":{"Canal_por_el_que_se_cerro_la_venta":null,"Paga_un_tercero":null,"Customer_No":null,"data_temporal_certificaciones":null,"Numero_de_tarjeta":null,"Currency":"ARS","Estado_de_cobro":null,"mp_subscription_id":null,"Modo_de_pago":null,"Cuotas_totales":null,"Status":"Borrador","Tipo_de_vendedor":null,"Parentesco":null,"Adjustment":0,"Motivo_de_la_baja":[],"Estado_de_facturacion":null,"Alumno_riesgo_de_baja":false,"stripe_subscription_id":null,"Comprobante_Factura":null,"Categor_a_EIRL":null,"Description":"generated by crm.msklatam.net","Discount":0,"Fecha_baja_TRIAL":null,"Fecha_de_inicio_TRIAL":null,"Fecha_de_fin_TRIAL":null,"M_todo_de_pago_secundario":null,"Pais_de_facturaci_n":"Argentina","Certificaci_n_seleccionada":false,"Banco_emisor":null,"Ultimo_movimiento_fecha":null,"Ultimo_movimiento_referencia":null,"Monto_de_parcialidad":null,"Terms_and_Conditions":null,"Sub_Total":923738,"rea_que_otorgo_baja":[],"Contact_Name":{},"Activo_trial":false,"SO_Number":"5344455000163461046","N_mero_de_Cuenta":null,"Locked__s":false,"Fecha_de_contrato_efectivo":null,"Selector_de_ACCION_envio":null,"Tax":0,"Vencimiento_de_tarjeta":null,"folio_suscripcion":null,"Activador_URL":false,"Exchange_Rate":1300,"LINK_Verificador":"https://validator.msklatam.net/v1/validator/5344455000163461045","Ultimo_movimiento_estado":null,"LINK_de_COBRO":null,"otro_so":null,"Plan_de_financiaci_n":null,"Quote_Name":null,"Ultimo_movimiento_tipo_document":null,"Grand_Total":923738,"trial_id":null,"verificador":null,"Fuente_de_cierre_venta":null,"Tipo_de_cuenta":null,"Tipo_de_tarjeta":null,"Ultimo_movimiento_documento":null,"N_mero_de_Cuenta_secundario":null,"Fecha_de_baja":null,"Banco_emisor_secundario":null,"Fecha_de_contrato_confirmado":null,"Observaciones":null,"Propietario_EIRL":null,"URL_diploma":null,"LINK_de_Trial":null,"Tipo_de_cuenta_secundario":null,"Banco_receptor":null,"Seleccione_total_de_pagos_recurrentes":null,"Importe_Nota_de_credito":null,"Tel_fono_del_tercero":null,"Habilitar_segundo_metodo_de_pago":false,"Ultimo_movimiento_autorizacion":null,"Cantidad_de_pagos_recurrentes_restantes":null,"CBU":null,"URL_certificado":null,"Referencia_Nota_de_credito":null,"folio_pago":null,"Tipo_de_Documento_Tercero":null,"Monto_de_cada_pago_restantes":null,"Cuotas_cobradas":null,"Nombre_y_Apellido_tercero":null,"CVV_de_tarjeta":null,"N_mero_de_movimiento":null,"Subject":"Contrato","Licencia_enviada":false,"Tipo_de_baja":null,"Ultimo_movimiento_monto":null,"M_todo_de_pago":null,"Identificaci_n":null,"Fecha_de_primer_cobro":null},"contact":{"R_gimen_fiscal":"616 Sin obligaciones fiscales","Fecha_asignaci_n_retake":null,"Ad_Campaign":null,"Canal":null,"Mailing_State":"test","Lista_de_selecci_n_17":"EXENTO - 0%","A_o_de_estudio":null,"Motivo_del_estado":[],"URL_TRIAL":null,"Currency":"USD","Estado_de_Posible_cliente":"No contactado","Fecha_contacto_futuro":null,"Tipo_de_vendedor":"EIRL","First_Visited_URL":null,"Horario_de_la_contactaci_n":[],"Estado_de_cuenta":null,"Se_agrego_cursada":true,"Horario_de_contacto":null,"Caracter_stica_contacto":"Experiencia MSK","Last_Visited_Time":null,"Link_CSF":null,"Nombre_de_la_base":null,"Description":null,"Usuario":"ariel@ariel.com","Number_Of_Chats":null,"Facebook_Page":null,"Tipo_de_lead":null,"Mailing_Street":"123123","Average_Time_Spent_Minutes":null,"Fecha_primer_cambio_de_estado":null,"Salutation":null,"Full_Name":"test ariel test","Record_Image":null,"Programa":null,"Documento_CSF":null,"Ad_ID":null,"Account_Name":null,"leadchain0__Social_Lead_ID":null,"Generar_nueva_password":null,"Email_Opt_Out":false,"Cursos_consultados":null,"Ad_Name":null,"Origen_de_ingresos":null,"valido_hasta":null,"Temas_de_interes":["null"],"correo_facturacion":"ariel@ariel.com","ID_Personal":"17219366645","Validador":"NTM0NDQ1NTAwMDEyNzk3MjY1OQ==","Cursos_recomendados":null,"Territories":null,"Carrera_de_estudio":null,"Scoring_contactacion":10,"URL_DESCARGA":null,"Locked__s":false,"Lead_Source":"Hospitales / Clínicas","Disparador_email":null,"Canton":null,"Colegio_Sociedad_o_Federaci_n":[],"Lead_Form_ID":null,"Ad_Account_ID":null,"Email":"ariel@ariel.com","Identificacion":"123123123-5","Verificada_desde":null,"Visitor_Score":null,"Other_Phone":null,"Ad_Campaign_ID":null,"Tel_fono_de_facturaci_n":"56123123","usuario_prueba":false,"Condici_n_frente_al_IVA":null,"Tipo_de_Documento":"RUT","rea_donde_tabaja":null,"Preferencia_de_contactaci_n":[],"Unsubscribed_Mode":null,"URL_ORIGEN":null,"Momento_de_contacto":null,"Ad_Set_ID":null,"Otra_especialidad":null,"Profesi_n":"Personal médico","Profesion_predicha":null,"Lead_Form":null,"Days_Visited":null,"Campa_a_whatsapp":false,"Plataforma":"Venta Presencial","Estado_civil":null,"Momento_de_contactaci_n":[],"Parroquia":null,"Facebook_Page_ID":null,"Brand":null,"Lead_ID_social":null,"Especialidad_predicha":null,"Especialidad":"Anatomía patológica","Convertido_mediante":"Asesor comercial","Propietario_EIRL":"Admin - Eitner","Pertenece_a_un_colegio":false,"Raz_n_social":"test ariel test","Mailing_Zip":"1110","Descuento":"20","Lugar_de_trabajo":null,"Sexo":"Masculino","First_Name":"test","Otra_profesi_n":null,"Phone":"56123123","googlemapstextsearch__Google_Address":null,"Preferencia_de_contacto":"WhatsApp","Recomendador":null,"Pais":"Chile","Ad_Set":null,"Password":"YCLQtdDwqyES","Date_of_Birth":"2024-08-06","Mailing_City":"test","Fecha_de_creaci_n_lead":"2024-07-25T16:44:10-03:00","Unsubscribed_Time":null,"Requiere_factura":"Factura fiscal personal","curso_nombre_plantilla":null,"datos_completos_para_Facturar":true,"Necesita_enrolar":false,"Tiempo_en_gesti_n_comercial":null,"Correo_verificado":true,"CUPON_DESCUENTO":null,"Ad_Account":"Web","Obsequio":null,"Tipo_de_recupero":null,"First_Visited_Time":null,"Last_Name":"ariel test","Fuente_Secundaria_de_Posible_cliente":null,"Referrer":null,"Scoring_venta":3,"Fecha_modificaci_n_de_estado":null,"id":"5344455000127972659"},"fullName":"Tomas Gonzalo Prueba","phone":"+3581321233","address":"ads 123","dni":"123123123","email":"talk.tomas@hotmail.com","zip":"1234","mod":"Suscripción","trial":false,"country":"Argentina","payment_method":"Mercado Pago","contractId":"5344455000163461045","quotes":12,"amount":923738,"advanceSuscription":{"isAdvanceSuscription":false,"remainingAmountToPay":885249,"firstQuoteDiscount":38489,"payPerMonthAdvance":80477,"quotesAdvance":11},"checkContract":"Datos correctos","cardHolder":false},"userInfo":{"stepOne":{"step":1,"label":"country","value":"Argentina","isoRef":"pais_arg_input"},"stepTwo":{"step":2,"label":"payment_method","value":"Mercado Pago"},"stepThree":{"step":3,"label":"payment_mode","value":"Suscripción"},"stepFour":{"step":4,"label":"customer_data","value":"Datos correctos"},"stepFive":{"step":5,"label":"card_data","value":""}}}',
+    },
   });
 
-  // const handleSubmit = async (values: any) => {
-  //   console.log({ values });
-  //   setOnPaymentRequest(true);
+  const createDraftContract = async (product: any, profile: any) => {
+    try {
+      const response = await ssr.createDraftContract(product, profile);
+      console.log(response);
+      if (response && response.data[0].code === 'SUCCESS') {
+        return { status: 200, data: response.data[0] };
+      } else {
+        console.error('Error in contract response:', response);
+        return { status: 500, data: null };
+      }
+    } catch (error) {
+      console.error('Error creating contract:', error);
+      return { status: 500, data: null };
+    }
+  };
 
-  //   // Crear datos de la tarjeta del cliente
-  //   const customerCardData = createCustomerCardData(values, profileCustomerInfo);
-  //   console.log({ customerCardData });
+  const handleSubmit = async (values: any) => {
+    console.log({ values });
+    setOnPaymentRequest(true);
+    setStatusMessage('');
+    setErrorMessage('');
+    setStatusMessage('Creando nuevo contrato...');
+    let contract;
+    try {
+      contract = await createDraftContract(product, profile);
+      console.log({ contract });
+      if (contract.status === 200 && contract.data) {
+        setStatusMessage('Contrato creado correctamente.');
+        // setContractDraftCreated(contract.data);
+      } else {
+        setErrorMessage(
+          'Hubo un problema al crear el contrato. Inténtalo de nuevo.',
+        );
+        setStatusMessage('');
+        setOnPaymentRequest(false);
+        return;
+      }
+    } catch (error) {
+      console.error('Error al crear contrato:', error);
+      setErrorMessage(
+        'Hubo un problema al crear el contrato. Inténtalo de nuevo.',
+      );
+      setStatusMessage('');
+      setOnPaymentRequest(false);
+      return;
+    }
 
-  //   // Crear detalles del pago
-  //   const paymentDetails = createPaymentDetails(profileCustomerInfo, contractDraftCreated);
-  //   console.log({ paymentDetails });
+    const customerCardData = createCustomerCardData(
+      values,
+      profileCustomerInfo,
+    );
+    setStatusMessage('Generando información de la tarjeta del cliente...');
 
-  //   // Crear datos completos del pago
-  //   const paymentData = createPaymentData(
-  //     product,
-  //     quotes = 0,
-  //     profileCustomerInfo,
-  //     contractDraftCreated,
-  //     customerCardData,
-  //     paymentDetails
-  //   );
-  //   console.log({ paymentData });
+    const paymentDetails = createPaymentDetails(
+      profileCustomerInfo,
+      contract.data,
+    );
+    setStatusMessage('Generando detalles de pago...');
 
-  //   try {
-  //     await ssr.postPaymentMercadoPago(paymentData);
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   } finally {
-  //     setOnPaymentRequest(false);
-  //   }
-  // };
+    const paymentData = createPaymentData(
+      product,
+      quotes,
+      profileCustomerInfo,
+      contract.data,
+      customerCardData,
+      paymentDetails,
+    );
+    setStatusMessage('Preparando los datos para procesar el pago...');
 
-  console.log({ product });
+    console.log(paymentData);
+
+    try {
+      const response = await ssr.postPaymentMercadoPago(paymentData);
+      if (response) {
+        console.log(response);
+        setStatusMessage('Pago procesado exitosamente.');
+        setOnPaymentRequest(false);
+      } else {
+        console.error('Error en la respuesta del servidor:', response);
+        setErrorMessage(
+          'Hubo un problema al procesar el pago. Inténtalo de nuevo.',
+        );
+        setStatusMessage('');
+        setOnPaymentRequest(false);
+      }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
+      setErrorMessage(
+        'Hubo un problema al procesar el pago. Inténtalo de nuevo.',
+      );
+      setStatusMessage('');
+      setOnPaymentRequest(false);
+    }
+  };
 
   useEffect(() => {
-    const createDraftContract = async (product, profile) => {
-      setOnPaymentRequest(true);
-      const contract = await ssr.createDraftContract(product, profile);
-      console.log({ contract });
-
-      if (!contract.error) {
-        setContractDraftCreated(contract.data[0]);
-        setOnPaymentRequest(false);
-        mountedInputObjectState.setState(true);
-      }
-
-      console.log({ contract });
-    };
-
     if (
       !sendRequestRef.current &&
       typeof profile !== 'undefined' &&
@@ -228,47 +217,26 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
       product?.ficha != null
     ) {
       sendRequestRef.current = true;
-      console.log('In fetch');
-      createDraftContract(product, profile);
+      mountedInputObjectState.setState(true);
     }
   }, [profile]);
-
-  // const createDraftContract = async (product: any, profile: any) => {
-  //   try {
-  //     setOnPaymentRequest(true);
-  //     const contract = await ssr.createDraftContract(product, profile);
-  //     setContractDraftCreated(contract);
-  //     console.log({ contract });
-
-  //     // if (!contract.error) {
-  //     //   // setContractDraftCreated(contract.data[0]);
-  //     // }
-  //     mountedInputObjectState.setState(true);
-  //     setOnPaymentRequest(false);
-  //   } catch (error) {
-  //     console.error('Error creating contract:', error);
-  //   } finally {
-  //     setOnPaymentRequest(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (!sendRequestRef.current && profile && product?.ficha) {
-  //     sendRequestRef.current = true;
-  //     console.log('In fetch');
-  //     createDraftContract(product, profile);
-  //   }
-
-  //   // Opcional: cleanup si necesitas cancelar peticiones o limpiar efectos
-  //   return () => {
-  //     // cleanup code si es necesario
-  //   };
-  // }, [profile, product]);
 
   return (
     <>
       {mountedInputObjectState.state ? (
         <div className='mpc-box'>
+          {statusMessage && (
+            <div className=''>
+              {/* Muestra el mensaje mientras se procesa */}
+              <p>{statusMessage}</p>
+            </div>
+          )}
+          {errorMessage && (
+            <div className='text-red-500'>
+              {/* Muestra los errores si hay alguno */}
+              <p>{errorMessage}</p>
+            </div>
+          )}
           <div
             className={`mpc-field  mb-5 ${
               onPaymentRequest ? 'mpc-field-requesting hidden' : null
@@ -351,9 +319,9 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
                       onPaymentRequest && ''
                     }`}
                     type='submit'
-                    // disabled={
-                    //   onPaymentRequest || !(isValid && dirty) || isSubmitting
-                    // }
+                    disabled={
+                      onPaymentRequest || !(isValid && dirty) || isSubmitting
+                    }
                   >
                     Pagar
                   </button>
@@ -373,7 +341,10 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
           </div>
         </div>
       ) : (
-        <InputSkeleton className='w-[390px] mx-auto' />
+        <InputSkeleton
+          className='w-[390px] mx-auto'
+          text='cargando datos de pago'
+        />
       )}
     </>
   );
