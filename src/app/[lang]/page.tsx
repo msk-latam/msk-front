@@ -67,7 +67,6 @@ export async function generateMetadata({
     description: 'Una propuesta moderna para expandir tus metas profesionales',
     alternates: IS_PROD
       ? {
-          // canonical: `${SITE_URL}/${params.lang}`,
           canonical: `${SITE_URL}`,
         }
       : undefined,

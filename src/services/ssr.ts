@@ -614,8 +614,8 @@ class ApiSSRService {
     console.log(paymentData);
     try {
       const response = await fetch(
-        `http://localhost:8000/api/gateway/api/mercadopago/arg/our_test`,
-        // `https://payment.msklatam.net/api/gateway/api/mercadopago/arg/our_test`,
+        // `http://localhost:8000/api/gateway/api/mercadopago/arg/our_test`,
+        `https://payment.msklatam.net/api/gateway/api/mercadopago/arg/our_test`,
         // `${baseUrl}/api/gateway/api/mercadopago/arg/our_test/`,
         {
           method: 'POST',
