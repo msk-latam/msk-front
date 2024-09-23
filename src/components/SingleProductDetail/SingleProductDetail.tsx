@@ -1,5 +1,5 @@
 'use client';
-import { FC, useContext } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import ProductCurriculiam from './ProductCurriculiam';
 import ProductDetailSidebar from './ProductDetailSidebar';
 import CourseRequirements from './Requirements/CourseRequirements';
@@ -45,7 +45,16 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 
   let { isEbook, imagen, title } = productDetails(product);
 
-  console.log(product, 'de aca');
+  useEffect(() => {
+    // Verificar si el script ya está cargado
+    if (!document.getElementById('EmbedSocialHashtagScript')) {
+      const script = document.createElement('script');
+      script.id = 'EmbedSocialHashtagScript';
+      script.src = 'https://embedsocial.com/cdn/ht.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  }, []);
 
   // @ts-ignore
   return (
