@@ -238,6 +238,10 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
                 isEbook={isEbook}
               />
             </div>
+            <div
+              className='embedsocial-hashtag'
+              data-ref='d1d3da558a418ee93bb873db94bd5f1f3d1297ef'
+            ></div>
           </div>
           <div className='order-last relative hidden mt-10 lg:block ml-4'>
             <ProductDetailSidebar
