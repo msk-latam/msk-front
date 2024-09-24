@@ -70,12 +70,6 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
             />
           ))}
           <div className='w-full col-span-2 sm:col-span-1 flex justify-items-center'>
-            {/* <NcLink
-            href='/tienda?recurso=curso'
-            className='w-full !border-white nc-CardCategory2 h-full text-primary font-medium sm:font-semibold flex items-center justify-center text-center mx-auto  [ nc-dark-box-bg-has-hover ]'
-          >
-          Ver todas
-          </NcLink> */}
             <button
               onClick={toggleModal}
               className='w-full !border-white nc-CardCategory2 h-full text-primary font-medium sm:font-semibold flex items-center justify-center text-center mx-auto  [ nc-dark-box-bg-has-hover ]'
@@ -86,11 +80,17 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
         </div>
       </div>
       <div
-        className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 inset-0 w-full ${
+        className={`fixed inset-0 flex items-center justify-center w-full ${
           isModalOpen ? 'z-10' : '-z-10'
         }`}
       >
-        <SpecialtiesModal isOpen={isModalOpen} onClose={toggleModal} />
+        <div className='relative'>
+          <SpecialtiesModal
+            isOpen={isModalOpen}
+            onClose={toggleModal}
+            fixed='fixed'
+          />
+        </div>
       </div>
     </>
   );

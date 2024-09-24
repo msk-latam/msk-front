@@ -119,6 +119,11 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
   console.log(currentItems);
   return (
     <>
+      <SpecialtiesModal
+        isOpen={isModalOpen}
+        onClose={toggleModal}
+        fixed='fixed'
+      />
       <ButtonPrimary onClick={toggleModal}>Ver Especialidades</ButtonPrimary>
 
       <div className='flex gap-6 mb-10'>
@@ -147,11 +152,6 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
           )}
         </div>
       </div>
-      <SpecialtiesModal
-        isOpen={isModalOpen}
-        onClose={toggleModal}
-        fixed='fixed'
-      />
     </>
   );
 };
