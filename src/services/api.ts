@@ -220,10 +220,34 @@ class ApiService {
 
   async getUserData() {
     const email = window.localStorage.getItem('email');
+    const TTL = 2 * 60 * 60 * 1000; // 2 horas
+    const cacheKey = `user-data-${email}`;
 
     try {
       const token = window.localStorage.getItem('token');
-      if (token) {
+
+      // Verificar si el token y email existen
+      if (token && email) {
+        const isServer = typeof window === 'undefined';
+
+        if (!isServer) {
+          // Verificar si ya tenemos datos en `localStorage`
+          const cachedData = localStorage.getItem(cacheKey);
+          if (cachedData) {
+            const { value, timestamp } = JSON.parse(cachedData);
+            const now = new Date().getTime();
+
+            // Validar si los datos en `localStorage` son recientes
+            if (now - timestamp < TTL) {
+              console.log(
+                `Datos de usuario obtenidos de localStorage para ${email}`,
+              );
+              return value;
+            }
+          }
+        }
+
+        // Si no hay datos válidos en `localStorage`, realizar fetch
         const headers = {
           Authorization: `Bearer ${token}`,
         };
@@ -242,12 +266,26 @@ class ApiService {
         }
 
         const data = await response.json();
+
+        // Guardar datos en `localStorage` con un nuevo timestamp
+        if (!isServer) {
+          localStorage.setItem(
+            cacheKey,
+            JSON.stringify({
+              value: data.user,
+              timestamp: new Date().getTime(),
+            }),
+          );
+          console.log(`Datos de usuario obtenidos de la API para ${email}`);
+        }
+
         return data.user;
       }
     } catch (error) {
+      console.error('Error obteniendo datos de usuario:', error);
       window.localStorage.removeItem('token');
       window.localStorage.removeItem('user');
-      // console.log({error});
+      return error;
     }
   }
 
