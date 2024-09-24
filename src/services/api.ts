@@ -220,10 +220,34 @@ class ApiService {
 
   async getUserData() {
     const email = window.localStorage.getItem('email');
+    const TTL = 2 * 60 * 60 * 1000; // 2 horas
+    const cacheKey = `user-data-${email}`;
 
     try {
       const token = window.localStorage.getItem('token');
-      if (token) {
+
+      // Verificar si el token y email existen
+      if (token && email) {
+        const isServer = typeof window === 'undefined';
+
+        if (!isServer) {
+          // Verificar si ya tenemos datos en `localStorage`
+          const cachedData = localStorage.getItem(cacheKey);
+          if (cachedData) {
+            const { value, timestamp } = JSON.parse(cachedData);
+            const now = new Date().getTime();
+
+            // Validar si los datos en `localStorage` son recientes
+            if (now - timestamp < TTL) {
+              console.log(
+                `Datos de usuario obtenidos de localStorage para ${email}`,
+              );
+              return value;
+            }
+          }
+        }
+
+        // Si no hay datos válidos en `localStorage`, realizar fetch
         const headers = {
           Authorization: `Bearer ${token}`,
         };
@@ -242,12 +266,26 @@ class ApiService {
         }
 
         const data = await response.json();
+
+        // Guardar datos en `localStorage` con un nuevo timestamp
+        if (!isServer) {
+          localStorage.setItem(
+            cacheKey,
+            JSON.stringify({
+              value: data.user,
+              timestamp: new Date().getTime(),
+            }),
+          );
+          console.log(`Datos de usuario obtenidos de la API para ${email}`);
+        }
+
         return data.user;
       }
     } catch (error) {
+      console.error('Error obteniendo datos de usuario:', error);
       window.localStorage.removeItem('token');
       window.localStorage.removeItem('user');
-      // console.log({error});
+      return error;
     }
   }
 
@@ -328,6 +366,25 @@ class ApiService {
 
   async getBestSellers() {
     try {
+      const BEST_SELLERS_TTL = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
+      let storedBestSellers;
+
+      // Verificar si estamos en un entorno de navegador
+      if (typeof window !== 'undefined') {
+        storedBestSellers = localStorage.getItem(`bestSellers_${COUNTRY}`);
+      }
+
+      // Comprobar si hay datos en localStorage y si son válidos
+      if (storedBestSellers) {
+        const { value, timestamp } = JSON.parse(storedBestSellers);
+        const now = new Date().getTime();
+        if (now - timestamp < BEST_SELLERS_TTL) {
+          console.log('BestSeller tomados de localStorage');
+          return value; // Retorna los datos almacenados
+        }
+      }
+
+      console.log('Llamando a la API para obtener los bestseller');
       const countryParam = validCountries.includes(COUNTRY) ? COUNTRY : 'int';
       const response = await fetch(
         `${API_URL}/home/best-sellers?country=${countryParam}`,
@@ -340,9 +397,22 @@ class ApiService {
       }
 
       const data = await response.json();
+
+      // Guardar los mejores vendedores en localStorage
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(
+          `bestSellers_${COUNTRY}`,
+          JSON.stringify({
+            value: data.products,
+            timestamp: new Date().getTime(),
+          }),
+        );
+      }
+
       return data.products;
     } catch (error) {
-      return error;
+      console.error('Error de red:', error);
+      return [];
     }
   }
 
@@ -367,7 +437,25 @@ class ApiService {
 
   async getStoreProfessions() {
     try {
-      //console.log('Get professions 3');
+      const PROFESSIONS_TTL = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
+      let storedProfessions;
+
+      // Verificar si estamos en un entorno de navegador
+      if (typeof window !== 'undefined') {
+        storedProfessions = localStorage.getItem('storeProfessions');
+      }
+
+      // Comprobar si hay datos en localStorage y si son válidos
+      if (storedProfessions) {
+        const { value, timestamp } = JSON.parse(storedProfessions);
+        const now = new Date().getTime();
+        if (now - timestamp < PROFESSIONS_TTL) {
+          console.log('store professions tomados de localStorage');
+          return value; // Retorna los datos almacenados
+        }
+      }
+
+      console.log('Llamando a la API para obtener las profesiones');
       const response = await fetch(`${baseUrl}/api/store/professions`);
 
       if (!response.ok) {
@@ -378,7 +466,7 @@ class ApiService {
 
       const data = await response.json();
 
-      // Modify slug based on profession name
+      // Modificar slug basado en el nombre de la profesión
       data.map((profession: any) => {
         switch (profession.name) {
           case 'Personal médico':
@@ -393,8 +481,20 @@ class ApiService {
         }
       });
 
+      // Guardar las profesiones en localStorage
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(
+          'storeProfessions',
+          JSON.stringify({
+            value: data,
+            timestamp: new Date().getTime(),
+          }),
+        );
+      }
+
       return data;
     } catch (error) {
+      console.error('Error al obtener las profesiones:', error);
       return error;
     }
   }
@@ -619,24 +719,18 @@ class ApiService {
     try {
       const COUNTRY_CODE_TTL = 24 * 60 * 60 * 1000;
       const storedCountryData = localStorage.getItem('countryCode');
-
       if (storedCountryData) {
         const { value, timestamp } = JSON.parse(storedCountryData);
         const now = new Date().getTime();
-
-        // Validar si el dato almacenado sigue siendo válido dentro del TTL
         if (now - timestamp < COUNTRY_CODE_TTL) {
-          return value; // Si es válido, devolver el valor guardado
+          console.log('IP tomada del localStorage');
+          return value;
         }
       }
-
-      // Si no existe el valor o el TTL ha expirado, hacer una nueva llamada a la API
+      console.log('Llamando a la API para obtener la IP');
       const ipResponse = await fetch('https://api.ipify.org/?format=json');
       const ipData = await ipResponse.json();
       const ip = ipData.ip;
-
-      console.log('Obteniendo IP:', ip);
-
       let response;
       if (PROD) {
         response = await fetch(`${IP_API}?ip=${ip}`);
@@ -659,12 +753,11 @@ class ApiService {
         ? data.countryCode.toLowerCase()
         : '';
 
-      // Guardar el código del país y el timestamp en localStorage
       localStorage.setItem(
         'countryCode',
         JSON.stringify({
           value: countryCode,
-          timestamp: new Date().getTime(), // Guardar el tiempo actual
+          timestamp: new Date().getTime(),
         }),
       );
 
@@ -762,6 +855,27 @@ class ApiService {
 
   async getWpImages(kind: string, country?: string) {
     try {
+      const IMAGES_TTL = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
+      let storedImages;
+
+      // Verificar si estamos en un entorno de navegador
+      if (typeof window !== 'undefined') {
+        storedImages = localStorage.getItem(
+          `wpImages_${kind}_${country || 'default'}`,
+        );
+      }
+
+      // Comprobar si hay datos en localStorage y si son válidos
+      if (storedImages) {
+        const { value, timestamp } = JSON.parse(storedImages);
+        const now = new Date().getTime();
+        if (now - timestamp < IMAGES_TTL) {
+          console.log('Banners tomados de localStorage');
+          return value; // Retorna los datos almacenados
+        }
+      }
+
+      console.log('Llamando a la API para obtener banners');
       const countryParam = country ? `?country=${country}` : '';
       const response = await fetch(`${API_URL}/banners${countryParam}`);
 
@@ -775,15 +889,26 @@ class ApiService {
 
       const formattedResponse = data[kind].map((img: any) => {
         const url =
-          typeof img.url_banner == 'string'
+          typeof img.url_banner === 'string'
             ? { href: img.url_banner }
             : { href: img.url_banner.url };
         return { ...img, url };
       });
 
+      // Guardar las imágenes en localStorage
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(
+          `wpImages_${kind}_${country || 'default'}`,
+          JSON.stringify({
+            value: formattedResponse,
+            timestamp: new Date().getTime(),
+          }),
+        );
+      }
+
       return formattedResponse;
     } catch (error) {
-      console.error('Network error:', error);
+      console.error('Error de red:', error);
       return [];
     }
   }

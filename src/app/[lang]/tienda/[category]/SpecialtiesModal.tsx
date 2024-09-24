@@ -12,7 +12,6 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, fixed }) => {
-  console.log(isOpen);
   if (!isOpen) return null;
 
   let specialties: Specialty[] = useStoreFilters().specialties;

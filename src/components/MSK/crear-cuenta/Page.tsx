@@ -498,7 +498,7 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
                     target='_blank'
                     className='text-primary hover:text-primary underline'
                   >
-                    Ver términos y condiciones de prueba gratuita
+                    Ver términos y condiciones
                   </Link>
                   <div className='flex gap-2 center text-center'>
                     <Field

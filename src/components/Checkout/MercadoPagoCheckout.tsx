@@ -346,7 +346,7 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
                           <Field
                             type='text'
                             name='expirationMonth'
-                            placeholder='Mes de expiración (MM)'
+                            placeholder='Mes (MM)'
                             className='contact-from-input'
                           />
                           <ErrorMessage
@@ -359,7 +359,7 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
                           <Field
                             type='text'
                             name='expirationYear'
-                            placeholder='Año de expiración (YYYY)'
+                            placeholder='Año (AAAA)'
                             className='contact-from-input'
                           />
                           <ErrorMessage
@@ -370,7 +370,7 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
                         </div>
                         <div className='contact-from-input col-span-4'>
                           <Field
-                            type='text'
+                            type='password'
                             name='securityCode'
                             placeholder='Código de seguridad (CVV)'
                             className='contact-from-input'

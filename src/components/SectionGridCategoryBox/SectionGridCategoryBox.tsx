@@ -51,8 +51,6 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
       CardComponentName = CardCategory2;
   }
 
-  console.log(DATA);
-
   return (
     <>
       <div className={`nc-SectionGridCategoryBox relative ${className}`}>
