@@ -1,5 +1,5 @@
 'use client';
-import { FC, useContext } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import ProductCurriculiam from './ProductCurriculiam';
 import ProductDetailSidebar from './ProductDetailSidebar';
 import CourseRequirements from './Requirements/CourseRequirements';
@@ -44,6 +44,17 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
   };
 
   let { isEbook, imagen, title } = productDetails(product);
+
+  useEffect(() => {
+    // Verificar si el script ya está cargado
+    if (!document.getElementById('EmbedSocialHashtagScript')) {
+      const script = document.createElement('script');
+      script.id = 'EmbedSocialHashtagScript';
+      script.src = 'https://embedsocial.com/cdn/ht.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  }, []);
 
   // @ts-ignore
   return (
@@ -227,6 +238,10 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
                 isEbook={isEbook}
               />
             </div>
+            {/* <div
+              className='embedsocial-hashtag'
+              data-ref='d1d3da558a418ee93bb873db94bd5f1f3d1297ef'
+            ></div> */}
           </div>
           <div className='order-last relative hidden mt-10 lg:block ml-4'>
             <ProductDetailSidebar

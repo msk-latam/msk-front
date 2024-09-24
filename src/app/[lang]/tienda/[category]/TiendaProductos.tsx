@@ -147,7 +147,11 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
           )}
         </div>
       </div>
-      <SpecialtiesModal isOpen={isModalOpen} onClose={toggleModal} />
+      <SpecialtiesModal
+        isOpen={isModalOpen}
+        onClose={toggleModal}
+        fixed='fixed'
+      />
     </>
   );
 };

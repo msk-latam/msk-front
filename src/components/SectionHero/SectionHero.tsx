@@ -1,7 +1,7 @@
 'use client';
 import ButtonPrimary from '@/components/Button/ButtonPrimary';
 import { StaticImageData } from 'next/image';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import NcImage from '../NcImage/NcImage';
 import { removeFirstTag } from '@/lib/removeFirstTag';
 import { useRouter } from 'next/navigation';

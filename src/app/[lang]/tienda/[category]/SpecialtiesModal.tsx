@@ -8,17 +8,23 @@ import React from 'react';
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
+  fixed?: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, fixed }) => {
+  console.log(isOpen);
   if (!isOpen) return null;
 
   let specialties: Specialty[] = useStoreFilters().specialties;
 
   return (
-    <div className='fixed inset-0 flex items-center justify-center z-50 backdrop-blur-[2px]'>
+    <div
+      className={`${
+        fixed || ''
+      } inset-0 flex items-center justify-center z-50 backdrop-blur-[2px]`}
+    >
       <div
-        className='fixed inset-0 bg-black opacity-50'
+        className={`${fixed || ''} inset-0 bg-black opacity-50`}
         onClick={onClose}
       ></div>
       <div className='bg-white rounded-3xl shadow-lg z-10 relative max-h-[90vh] overflow-y-auto'>
