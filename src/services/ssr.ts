@@ -110,6 +110,98 @@ class ApiSSRService {
     }
   }
 
+  // async getAllCourses(
+  //   country?: string,
+  //   tag?: string,
+  //   withAll: boolean = false,
+  //   currentUrl = '',
+  // ) {
+  //   // Verifica si window está disponible (en cliente)
+  //   const isClient = typeof window !== 'undefined';
+
+  //   const STORAGE_KEY = 'courses_data';
+  //   const TTL = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
+  //   const now = new Date().getTime();
+
+  //   if (isClient) {
+  //     // Intenta obtener datos de localStorage
+  //     const storedData = localStorage.getItem(STORAGE_KEY);
+
+  //     if (storedData) {
+  //       const parsedData = JSON.parse(storedData);
+
+  //       // Verifica si los datos aún son válidos (TTL no expirado)
+  //       if (now - parsedData.timestamp < TTL) {
+  //         console.log('Cargando cursos desde localStorage');
+  //         setAllCourses(parsedData.products);
+  //         setLoadingCourses(false);
+  //         return parsedData.products;
+  //       } else {
+  //         console.log(
+  //           'Datos expirados en localStorage, se procederá a cargar desde la API',
+  //         );
+  //         localStorage.removeItem(STORAGE_KEY);
+  //       }
+  //     }
+  //   }
+
+  //   // Si no hay datos válidos en localStorage, realiza la solicitud a la API
+  //   setLoadingCourses(true);
+
+  //   let validCountries = countries.map(item => item.id);
+  //   let onValidCountry = country && validCountries.includes(country);
+
+  //   const countryParam = onValidCountry
+  //     ? `&country=${country}`
+  //     : '&country=int';
+
+  //   if (!tag) {
+  //     let tagFromURL = new URLSearchParams(currentUrl).get('tag');
+  //     tag = tagFromURL ? tagFromURL : '';
+  //   }
+  //   let tagParam = tag ? `&tag=${tag}` : '';
+  //   const withAllParam = withAll ? '&filter=all' : '';
+
+  //   try {
+  //     const queryParams = [countryParam, tagParam, withAllParam]
+  //       .filter(Boolean)
+  //       .join('');
+
+  //     const response = await fetch(
+  //       `${API_URL}/products?limit=-1${queryParams}&asd=tes2`,
+  //     );
+
+  //     if (!response.ok) {
+  //       throw new Error(
+  //         `Failed to fetch courses. HTTP status ${response.status}`,
+  //       );
+  //     }
+
+  //     const data = await response.json();
+
+  //     setAllCourses(data.products);
+  //     setLoadingCourses(false);
+
+  //     if (isClient) {
+  //       // Guarda los datos en localStorage con el timestamp actual
+  //       localStorage.setItem(
+  //         STORAGE_KEY,
+  //         JSON.stringify({
+  //           timestamp: now,
+  //           products: data.products,
+  //         }),
+  //       );
+  //       console.log('Cursos guardados en localStorage');
+  //     }
+
+  //     return data.products;
+  //   } catch (error) {
+  //     console.error('Network error:', error);
+  //     setLoadingCourses(false);
+  //     return error;
+  //   }
+  // }
+
   async getStoreCourses(country?: string, currentUrl = '') {
     setLoadingCourses(true);
 

@@ -218,16 +218,28 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
   };
 
   useEffect(() => {
-    if (
-      !sendRequestRef.current &&
-      typeof profile !== 'undefined' &&
-      profile != null &&
-      product?.ficha != null
-    ) {
-      sendRequestRef.current = true;
-      mountedInputObjectState.setState(true);
-    }
-  }, [profile]);
+    let retryCount = 0;
+    const maxRetries = 5;
+    const retryInterval = 1000;
+
+    const checkAndSetState = () => {
+      if (
+        !sendRequestRef.current &&
+        typeof profile !== 'undefined' &&
+        profile != null &&
+        product?.ficha != null
+      ) {
+        sendRequestRef.current = true;
+        mountedInputObjectState.setState(true);
+      } else if (retryCount < maxRetries) {
+        retryCount++;
+        setTimeout(checkAndSetState, retryInterval);
+      }
+    };
+
+    checkAndSetState();
+  }, [profile, product]);
+
   console.log(profile);
   console.log(product);
 
