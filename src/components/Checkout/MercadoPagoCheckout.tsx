@@ -359,7 +359,7 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
                           <Field
                             type='text'
                             name='expirationYear'
-                            placeholder='Año (YYYY)'
+                            placeholder='Año (AAAA)'
                             className='contact-from-input'
                           />
                           <ErrorMessage
