@@ -413,7 +413,7 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
                             </svg>
                           </div>
                         ) : (
-                          'Pagar'
+                          'Finalizar'
                         )}
                       </button>
                     </Form>

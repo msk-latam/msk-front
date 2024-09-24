@@ -201,8 +201,8 @@ const ProductDetailSidebar: FC<Props> = ({
           <button
             onClick={() => requestTrial(slug)}
             className='video-cart-btn border-2 w-full disabled:!border-grey-disabled disabled:!text-grey-disabled disabled:cursor-not-allowed hover:disabled:!bg-transparent hover:!disabled:border-grey-disabled hover:!disabled:text-grey-disabled'
-            disabled={hasCoursedRequested}
-            // disabled={true}
+            // disabled={hasCoursedRequested}
+            disabled={true}
           >
             {hasCoursedRequested
               ? 'Prueba ya solicitada'
