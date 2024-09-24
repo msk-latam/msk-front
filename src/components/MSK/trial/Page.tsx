@@ -551,13 +551,7 @@ const PageTrial: FC<PageTrialProps> = ({ className = '' }) => {
                       component='span'
                       className='error'
                     />
-                    <Link
-                      href='/condiciones-de-contratacion#trial'
-                      target='_blank'
-                      className='text-primary hover:text-primary underline'
-                    >
-                      Ver términos y condiciones de prueba gratuita
-                    </Link>
+
                     <div className='flex gap-2 center text-center'>
                       <Field
                         type='checkbox'
@@ -590,7 +584,15 @@ const PageTrial: FC<PageTrialProps> = ({ className = '' }) => {
                   {error && (
                     <ShowErrorMessage text={error} visible={error !== ''} />
                   )}
-
+                  <div className='mx-auto mt-2'>
+                    <Link
+                      href='/terminos-y-condiciones/#trial'
+                      target='_blank'
+                      className='text-primary hover:text-primary underline'
+                    >
+                      Ver términos y condiciones
+                    </Link>
+                  </div>
                   {success && (
                     <p className='text-green-500 text-center w-full'>
                       Registrado correctamente!

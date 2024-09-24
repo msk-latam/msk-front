@@ -161,7 +161,7 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
               target='_blank'
               className='text-primary hover:text-primary underline flex items-center justify-center mt-3'
             >
-              Ver términos y condiciones de prueba gratuita
+              Ver términos y condiciones
             </NcLink>
           </section>
         </div>

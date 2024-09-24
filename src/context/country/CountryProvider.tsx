@@ -53,11 +53,11 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
           // console.log("Country Provider", currentCountry);
         } else {
           currentCountry = await api.getCountryCode();
-          console.log('CurrentCountry obtained from IP: ' + currentCountry);
-          console.log(window.location.pathname);
+          // console.log('CurrentCountry obtained from IP: ' + currentCountry);
+          // console.log(window.location.pathname);
           const currentPathName = window.location.pathname.replace('/', '');
 
-          console.log(currentPathName);
+          // console.log(currentPathName);
           if (currentCountry && currentCountry == currentPathName) return; //Special use case for homepage.
           if (!validCountries.includes(currentCountry)) {
             console.log(
@@ -75,17 +75,17 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
               currentPathName != currentCountry
             ) {
               //The path is just the country, go to the homepage of the country our IP is on
-              console.log('redirect 1');
+              // console.log('redirect 1');
               redirectUrl = '/' + currentCountry;
               console.log(redirectUrl);
             } else {
-              console.log('redirect 2');
+              // console.log('redirect 2');
 
               redirectUrl = '/' + currentCountry + window.location.pathname;
             }
             // console.log("redirectUrl1: " + redirectUrl);
             if (getCountryFromURL() != '') {
-              console.log(window.location.search);
+              // console.log(window.location.search);
               redirectUrl = window.location.href
                 .replace(
                   '/' + getCountryFromURL() + '/',
@@ -93,7 +93,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
                 )
                 .replace(/(https?:\/\/.*?)\/+/g, '$1/');
             }
-            console.log('redirectUrl2: ' + redirectUrl);
+            // console.log('redirectUrl2: ' + redirectUrl);
           }
 
           if (
@@ -132,7 +132,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
             } else {
               redirectUrl += window.location.search;
             }
-            console.log('redirectUrl: ' + redirectUrl);
+            // console.log('redirectUrl: ' + redirectUrl);
             window.location.href = redirectUrl;
           }
         }
@@ -149,7 +149,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
         country =>
           url.includes('/' + country + '/') || url.endsWith('/' + country),
       );
-      console.log(validCountryUrl, window.location.search);
+      // console.log(validCountryUrl, window.location.search);
       if (validCountryUrl.length) {
         return validCountryUrl[0];
       }

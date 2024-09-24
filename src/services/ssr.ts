@@ -110,98 +110,6 @@ class ApiSSRService {
     }
   }
 
-  // async getAllCourses(
-  //   country?: string,
-  //   tag?: string,
-  //   withAll: boolean = false,
-  //   currentUrl = '',
-  // ) {
-  //   // Verifica si window está disponible (en cliente)
-  //   const isClient = typeof window !== 'undefined';
-
-  //   const STORAGE_KEY = 'courses_data';
-  //   const TTL = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
-  //   const now = new Date().getTime();
-
-  //   if (isClient) {
-  //     // Intenta obtener datos de localStorage
-  //     const storedData = localStorage.getItem(STORAGE_KEY);
-
-  //     if (storedData) {
-  //       const parsedData = JSON.parse(storedData);
-
-  //       // Verifica si los datos aún son válidos (TTL no expirado)
-  //       if (now - parsedData.timestamp < TTL) {
-  //         console.log('Cargando cursos desde localStorage');
-  //         setAllCourses(parsedData.products);
-  //         setLoadingCourses(false);
-  //         return parsedData.products;
-  //       } else {
-  //         console.log(
-  //           'Datos expirados en localStorage, se procederá a cargar desde la API',
-  //         );
-  //         localStorage.removeItem(STORAGE_KEY);
-  //       }
-  //     }
-  //   }
-
-  //   // Si no hay datos válidos en localStorage, realiza la solicitud a la API
-  //   setLoadingCourses(true);
-
-  //   let validCountries = countries.map(item => item.id);
-  //   let onValidCountry = country && validCountries.includes(country);
-
-  //   const countryParam = onValidCountry
-  //     ? `&country=${country}`
-  //     : '&country=int';
-
-  //   if (!tag) {
-  //     let tagFromURL = new URLSearchParams(currentUrl).get('tag');
-  //     tag = tagFromURL ? tagFromURL : '';
-  //   }
-  //   let tagParam = tag ? `&tag=${tag}` : '';
-  //   const withAllParam = withAll ? '&filter=all' : '';
-
-  //   try {
-  //     const queryParams = [countryParam, tagParam, withAllParam]
-  //       .filter(Boolean)
-  //       .join('');
-
-  //     const response = await fetch(
-  //       `${API_URL}/products?limit=-1${queryParams}&asd=tes2`,
-  //     );
-
-  //     if (!response.ok) {
-  //       throw new Error(
-  //         `Failed to fetch courses. HTTP status ${response.status}`,
-  //       );
-  //     }
-
-  //     const data = await response.json();
-
-  //     setAllCourses(data.products);
-  //     setLoadingCourses(false);
-
-  //     if (isClient) {
-  //       // Guarda los datos en localStorage con el timestamp actual
-  //       localStorage.setItem(
-  //         STORAGE_KEY,
-  //         JSON.stringify({
-  //           timestamp: now,
-  //           products: data.products,
-  //         }),
-  //       );
-  //       console.log('Cursos guardados en localStorage');
-  //     }
-
-  //     return data.products;
-  //   } catch (error) {
-  //     console.error('Network error:', error);
-  //     setLoadingCourses(false);
-  //     return error;
-  //   }
-  // }
-
   async getStoreCourses(country?: string, currentUrl = '') {
     setLoadingCourses(true);
 
@@ -384,8 +292,29 @@ class ApiSSRService {
       return { allSpecialtiesGroup: [], fiveSpecialtiesGroup: [] };
     }
   }
+
   async getSpecialtiesStore(country: string) {
     try {
+      // Comprobamos si `window` está definido
+      if (typeof window === 'undefined') {
+        console.log('Se está ejecutando en un entorno sin window.');
+        return []; // Devuelve un array vacío o maneja la lógica para entornos del lado del servidor
+      }
+
+      const COUNTRY_TTL = 24 * 60 * 60 * 1000; // TTL de 24 horas
+      const storedData = localStorage.getItem(`specialties_${country}`);
+
+      // Comprobamos si hay datos almacenados y si no han expirado
+      if (storedData) {
+        const { value, timestamp } = JSON.parse(storedData);
+        const now = new Date().getTime();
+        if (now - timestamp < COUNTRY_TTL) {
+          console.log('specialtystore obtenidos de localStorage');
+          return value; // Devuelve los datos almacenados
+        }
+      }
+
+      // Si no hay datos válidos en localStorage, hacemos la llamada a la API
       let validCountries = countries.map(item => item.id);
       const countryParam = validCountries.includes(country)
         ? `&country=${country}`
@@ -401,6 +330,29 @@ class ApiSSRService {
       }
 
       const data = await response.json();
+
+      // Almacenamos los datos en localStorage
+      localStorage.setItem(
+        `specialties_${country}`,
+        JSON.stringify({
+          value: data.specialities.map(
+            (specialty: {
+              speciality_name: string;
+              products: number;
+              image: string;
+            }) => {
+              return {
+                name: specialty.speciality_name,
+                products: specialty.products,
+                image: specialty.image,
+              };
+            },
+          ),
+          timestamp: new Date().getTime(), // Guardamos el timestamp actual
+        }),
+      );
+
+      console.log('Datos obtenidos de la API specialstore');
       return data.specialities.map(
         (specialty: {
           speciality_name: string;
@@ -415,18 +367,43 @@ class ApiSSRService {
         },
       );
     } catch (error) {
-      return error;
+      console.error('Error en la función getSpecialtiesStore:', error);
+      return []; // Devuelve un array vacío en caso de error
     }
   }
 
   async getAllProfessions() {
     try {
-      //console.log('Get professions 1');
+      const PROFESSIONS_TTL = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
+      let storedProfessions;
+
+      // Verificar si estamos en un entorno de navegador
+      if (typeof window !== 'undefined') {
+        storedProfessions = localStorage.getItem('allProfessions');
+      }
+
+      // Comprobar si hay datos en localStorage y si son válidos
+      if (storedProfessions) {
+        const { value, timestamp } = JSON.parse(storedProfessions);
+        const now = new Date().getTime();
+        if (now - timestamp < PROFESSIONS_TTL) {
+          console.log('All professions tomados de localStorage');
+          return value; // Retorna los datos almacenados
+        }
+      }
+
+      console.log('Llamando a la API para obtener todas las profesiones');
       const response = await fetch(`${baseUrl}/api/store/professions`);
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch all professions. HTTP status ${response.status}`,
+        );
+      }
 
       const data = await response.json();
 
-      // Modify slug based on profession name
+      // Modificar el slug según el nombre de la profesión
       data.map((profession: any) => {
         switch (profession.name) {
           case 'Personal médico':
@@ -441,9 +418,21 @@ class ApiSSRService {
         }
       });
 
+      // Guardar los datos en localStorage
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(
+          'allProfessions',
+          JSON.stringify({
+            value: data,
+            timestamp: new Date().getTime(),
+          }),
+        );
+      }
+
       return data;
     } catch (error) {
-      return error;
+      console.error('Error de red:', error);
+      return [];
     }
   }
 
@@ -533,6 +522,25 @@ class ApiSSRService {
 
   async getSpecialtiesAndGroups() {
     try {
+      const SPECIALTIES_TTL = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
+      let storedSpecialties;
+
+      // Verificar si estamos en un entorno de navegador
+      if (typeof window !== 'undefined') {
+        storedSpecialties = localStorage.getItem('specialtiesAndGroups');
+      }
+
+      // Comprobar si hay datos en localStorage y si son válidos
+      if (storedSpecialties) {
+        const { value, timestamp } = JSON.parse(storedSpecialties);
+        const now = new Date().getTime();
+        if (now - timestamp < SPECIALTIES_TTL) {
+          console.log('especialidades tomados de localStorage');
+          return value; // Retorna los datos almacenados
+        }
+      }
+
+      console.log('Llamando a la API para obtener especialidades y grupos');
       const response = await fetch(`${baseUrl}/api/specialities`);
 
       if (!response.ok) {
@@ -540,14 +548,24 @@ class ApiSSRService {
           `Failed to fetch specialties and groups. HTTP status ${response.status}`,
         );
       }
-      //  console.warn('SPECIALITIES', { response });
 
       const data = await response.json();
-      //console.warn('SPECIALITIES DATA', { data });
+
+      // Guardar los datos en localStorage
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(
+          'specialtiesAndGroups',
+          JSON.stringify({
+            value: data,
+            timestamp: new Date().getTime(),
+          }),
+        );
+      }
 
       return data;
     } catch (error) {
-      return error;
+      console.error('Error de red:', error);
+      return [];
     }
   }
 
