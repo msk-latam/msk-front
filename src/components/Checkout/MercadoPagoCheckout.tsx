@@ -45,6 +45,9 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
   const [statusMessage, setStatusMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus | null>(
+    // 'approved',
+    // 'in_process',
+    // 'error',
     null,
   );
 
@@ -245,41 +248,67 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
 
   const paymentStatusMessages = {
     approved: {
-      bgColor: 'bg-[#34A853]',
-      title: '¡El pago ha sido aprobado correctamente!',
+      bgColor: 'bg-[#DBECDD]',
+      strokeColor: 'border-[#0B934A]',
+      textColor: 'text-[#374161]',
+      title: 'El pago realizado ha sido aprobado correctamente',
       message:
         'Revisa tu bandeja de entrada, spam o correos no deseados y sigue los pasos detallados.',
+      icon: '/webp-images/icons/activo.svg',
     },
     in_process: {
-      bgColor: 'bg-[#F8AE52]',
+      bgColor: 'bg-[#FFF8EE]',
+      strokeColor: 'border-[#F28A52]',
+      textColor: 'text-[#374161]',
       title: 'El pago realizado está en estado pendiente',
       message:
         'Tu pago está siendo procesado. Por favor, espera unos minutos y revisa tu correo para más información.',
+      icon: '/webp-images/icons/trialIcon.svg',
     },
     error: {
-      bgColor: 'bg-[#F24822]',
+      bgColor: 'bg-[#FFE8E8]',
+      strokeColor: 'border-[#F24C4C]',
+      textColor: 'text-[#374161]',
       title: 'El pago realizado ha sido rechazado',
       message:
         'Ocurrió un problema al procesar el pago. Por favor, intenta nuevamente o contacta a soporte.',
+      icon: '/webp-images/icons/expirado.svg',
     },
   };
 
   return (
     <>
       {mountedInputObjectState.state ? (
-        <div className='mpc-box'>
+        <div className='mpc-box md:p-[20px]'>
           {/* Verifica el estado del pago */}
           {paymentStatus ? (
             <div
-              className={`${paymentStatusMessages[paymentStatus]?.bgColor} text-white p-4 rounded-md text-center`}
+              className={`${paymentStatusMessages[paymentStatus]?.bgColor} p-4 rounded-md border ${paymentStatusMessages[paymentStatus]?.strokeColor} relative text-left`}
             >
-              <h2 className='text-2xl font-bold text-white'>
+              {/* Icono - visible solo en pantallas grandes */}
+              <div className='absolute top-0 right-0 p-4 pt-6 hidden lg:block'>
+                <img
+                  src={paymentStatusMessages[paymentStatus]?.icon}
+                  alt='Status Icon'
+                  className='w-6 h-6'
+                />
+              </div>
+
+              {/* Título - centrado en móviles */}
+              <h2
+                className={`text-2xl font-bold ${paymentStatusMessages[paymentStatus]?.textColor} w-full lg:w-80`}
+              >
                 {paymentStatusMessages[paymentStatus]?.title}
               </h2>
-              <p className='text-white'>
+
+              {/* Mensaje - centrado en móviles */}
+              <p
+                className={`${paymentStatusMessages[paymentStatus]?.textColor} w-full`}
+              >
                 {paymentStatusMessages[paymentStatus]?.message}
               </p>
-              <div className='mt-2'>
+
+              <div className='mt-8'>
                 {paymentStatus === 'error' ? (
                   <ButtonPrimary
                     href='#' // Para evitar redirección
@@ -288,7 +317,9 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
                     Volver a intentar
                   </ButtonPrimary>
                 ) : (
-                  <ButtonPrimary href='/'>Seguir navegando</ButtonPrimary>
+                  <div className='mt-8'>
+                    <ButtonPrimary href='/'>Seguir navegando</ButtonPrimary>
+                  </div>
                 )}
               </div>
             </div>

@@ -80,15 +80,15 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
         </div>
       </div>
       <div
-        className={`fixed inset-0 flex items-center justify-center w-full ${
+        className={`relative inset-0 flex items-center justify-center w-full ${
           isModalOpen ? 'z-10' : '-z-10'
         }`}
       >
-        <div className='relative'>
+        <div className='absolute'>
           <SpecialtiesModal
             isOpen={isModalOpen}
             onClose={toggleModal}
-            fixed='fixed'
+            // fixed='fixed'
           />
         </div>
       </div>
