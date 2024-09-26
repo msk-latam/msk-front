@@ -1,26 +1,29 @@
 import './globals.css';
 import '@/styles/index.scss';
 import { Poppins, Lora } from 'next/font/google';
-import Footer from '@/components/Footer/Footer';
+import { StoreProvider } from '@/context/storeFilters/StoreProvider';
+import { Metadata } from 'next';
+import { cookies } from 'next/headers';
+import { Suspense } from 'react';
+import { NavigationEvents } from '@/components/NavigationEvents';
+import { SITE_URL } from '@/contains/constants';
+import { GoogleTagManager } from '@next/third-parties/google';
+import { GlobalStateProvider } from './[lang]/mi-perfil/GlobalStateContext';
+import { LoaderProvider, useLoader } from '@/context/loader/LoaderContext';
+// import Footer from '@/components/Footer/Footer';
+// import BotMaker from '@/scripts/BotMaker';
+const Footer = React.lazy(() => import('@/components/Footer/Footer'));
+const BotMaker = React.lazy(() => import('@/scripts/BotMaker'));
+
 import GoogleCaptchaWrapper from '@/context/google/Recaptcha';
 import DataProvider from '@/context/data/DataProvider';
 import UTMProvider from '@/context/utm/UTMProvider';
 import CountryProvider from '@/context/country/CountryProvider';
 import AuthProvider from '@/context/user/AuthProvider';
-import { StoreProvider } from '@/context/storeFilters/StoreProvider';
 import Header from '@/components/Header/Header';
-import { Metadata } from 'next';
-import { cookies } from 'next/headers';
 import React from 'react';
-import { Suspense } from 'react';
-import { NavigationEvents } from '@/components/NavigationEvents';
-import { SITE_URL } from '@/contains/constants';
-import BotMaker from '@/scripts/BotMaker';
-import { GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
 import EmblueScript from '@/components/EmblueScript/EmblueScript';
-import { GlobalStateProvider } from './[lang]/mi-perfil/GlobalStateContext';
-import { LoaderProvider, useLoader } from '@/context/loader/LoaderContext';
 
 export const runtime = 'edge';
 
@@ -78,6 +81,7 @@ export default async function RootLayout({ params, children }: LayoutProps) {
         <Script src='https://sdk.mercadopago.com/js/v2' defer />
         <EmblueScript />
         <Script
+          defer
           type='application/ld+json'
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -101,6 +105,7 @@ export default async function RootLayout({ params, children }: LayoutProps) {
           }}
         />
         <Script
+          defer
           type='application/ld+json'
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -116,6 +121,7 @@ export default async function RootLayout({ params, children }: LayoutProps) {
           }}
         />
         <Script
+          defer
           type='application/ld+json'
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
