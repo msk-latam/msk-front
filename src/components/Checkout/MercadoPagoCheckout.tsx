@@ -204,16 +204,14 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
         setOnPaymentRequest(false);
       } else {
         console.error('Error en la respuesta del servidor:', response);
-        setErrorMessage(
-          'Hubo un problema al procesar el pago. Inténtalo de nuevo.',
-        );
+        setPaymentStatus('error'), setStatusMessage('');
         setStatusMessage('');
         setOnPaymentRequest(false);
       }
     } catch (error) {
       console.error('Error en la solicitud:', error);
       // setErrorMessage(
-      //   'Hubo un problema al procesar el pago. Inténtalo de nuevo.',
+      //   'Hubo un problema al procesar el pago. Inténtalo de nuevo
       // );
       setPaymentStatus('error'), setStatusMessage('');
       setOnPaymentRequest(false);

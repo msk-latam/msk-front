@@ -67,11 +67,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 interface LayoutProps {
-  params: { country: string };
+  params?: { country: string };
   children: React.ReactNode;
+  showHeaderFooter?: boolean;
 }
 
-export default async function RootLayout({ params, children }: LayoutProps) {
+export default async function RootLayout({
+  params,
+  children,
+  showHeaderFooter = true,
+}: LayoutProps) {
   return (
     <html lang='es' className={poppins.className + ' ' + loraItalic.variable}>
       {/* <script src='https://sdk.rebill.com/v2/rebill.min.js'></script> */}
@@ -198,14 +203,14 @@ export default async function RootLayout({ params, children }: LayoutProps) {
                 <UTMProvider>
                   <AuthProvider>
                     <StoreProvider>
-                      <Header />
+                      {showHeaderFooter && <Header />}
                       <LoaderProvider>
                         <GlobalStateProvider>
                           <div className='container'>{children}</div>
                         </GlobalStateProvider>
                       </LoaderProvider>
                       <BotMaker />
-                      <Footer />
+                      {showHeaderFooter && <Footer />}
 
                       <Suspense fallback={null}>
                         <NavigationEvents />
