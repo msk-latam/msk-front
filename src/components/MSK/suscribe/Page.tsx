@@ -80,7 +80,7 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
   }, [product]);
 
   const renderCheckoutComponent = () => {
-    // console.log({ gateway });
+    console.log({ gateway });
     switch (gateway) {
       case 'REBILL':
         return (

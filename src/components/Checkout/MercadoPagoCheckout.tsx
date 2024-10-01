@@ -204,16 +204,14 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
         setOnPaymentRequest(false);
       } else {
         console.error('Error en la respuesta del servidor:', response);
-        setErrorMessage(
-          'Hubo un problema al procesar el pago. Inténtalo de nuevo.',
-        );
+        setPaymentStatus('error'), setStatusMessage('');
         setStatusMessage('');
         setOnPaymentRequest(false);
       }
     } catch (error) {
       console.error('Error en la solicitud:', error);
       // setErrorMessage(
-      //   'Hubo un problema al procesar el pago. Inténtalo de nuevo.',
+      //   'Hubo un problema al procesar el pago. Inténtalo de nuevo
       // );
       setPaymentStatus('error'), setStatusMessage('');
       setOnPaymentRequest(false);
@@ -279,31 +277,31 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
   return (
     <>
       {mountedInputObjectState.state ? (
-        <div className='mpc-box md:p-[20px]'>
+        <div className='mpc-box !p-0 md:!p-[20px]'>
           {/* Verifica el estado del pago */}
           {paymentStatus ? (
             <div
               className={`${paymentStatusMessages[paymentStatus]?.bgColor} p-4 rounded-md border ${paymentStatusMessages[paymentStatus]?.strokeColor} relative text-left`}
             >
               {/* Icono - visible solo en pantallas grandes */}
-              <div className='absolute top-0 right-0 p-4 pt-6 hidden lg:block'>
+              <div className='absolute top-0 right-0 p-5 pt-5 '>
                 <img
                   src={paymentStatusMessages[paymentStatus]?.icon}
                   alt='Status Icon'
-                  className='w-6 h-6'
+                  className='w-5 h-5'
                 />
               </div>
 
               {/* Título - centrado en móviles */}
               <h2
-                className={`text-2xl font-bold ${paymentStatusMessages[paymentStatus]?.textColor} w-full lg:w-80`}
+                className={`text-2xl font-bold ${paymentStatusMessages[paymentStatus]?.textColor} w-full lg:w-80 pr-8 mb-2`}
               >
                 {paymentStatusMessages[paymentStatus]?.title}
               </h2>
 
               {/* Mensaje - centrado en móviles */}
               <p
-                className={`${paymentStatusMessages[paymentStatus]?.textColor} w-full`}
+                className={`${paymentStatusMessages[paymentStatus]?.textColor} w-full font-normal`}
               >
                 {paymentStatusMessages[paymentStatus]?.message}
               </p>
@@ -311,14 +309,17 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({
               <div className='mt-8'>
                 {paymentStatus === 'error' ? (
                   <ButtonPrimary
-                    href='#' // Para evitar redirección
-                    onClick={() => window.location.reload()} // Recargar la página
+                    href='#'
+                    onClick={() => window.location.reload()}
+                    className='w-full'
                   >
                     Volver a intentar
                   </ButtonPrimary>
                 ) : (
                   <div className='mt-8'>
-                    <ButtonPrimary href='/'>Seguir navegando</ButtonPrimary>
+                    <ButtonPrimary className='w-full' href='/'>
+                      Seguir navegando
+                    </ButtonPrimary>
                   </div>
                 )}
               </div>
