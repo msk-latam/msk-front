@@ -56,6 +56,8 @@ const LandingHeader: FC<LandingProps> = ({ product, country }) => {
       ? 'Con este amplio curso de actualización en medicina interna incorporarás los conocimientos necesarios para el abordaje de distintas enfermedades, el diagnóstico de estados patológicos poco frecuentes, el manejo clínico de las comorbilidades y la toma de decisiones sobre la derivación del paciente.'
       : product.ficha.description;
 
+  console.log('test');
+
   return (
     <>
       <div className='relative'>
