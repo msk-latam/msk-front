@@ -42,7 +42,7 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
 
       <div className=' lg:absolute lg:flex  bg-[#FFFFFF] rounded-xl shadow-md shadow-black/50 translate-y-[-50px] z-10'>
         <div className='lg:flex'>
-          <Image src={footerImage} alt='banner' width={750} height={750} />
+          <Image src={footerImage} alt='banner' width={750} height={250} />
         </div>
         <div className='flex w-full flex-col p-2 lg:p-8'>
           <h2 className='text-2xl'> {footerTitle} </h2>
