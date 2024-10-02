@@ -27,11 +27,13 @@ const SearchProducts = () => {
     const value = event.target.value;
     setInputValue(value);
     if (value) {
+      console.log(value);
       const filteredProducts = auxProducts.filter(product =>
         removeAccents(product.title.toLowerCase()).includes(
           removeAccents(value.toLowerCase()),
         ),
       );
+      console.log(filteredProducts);
       setProducts(filteredProducts);
     } else {
       setProducts(auxProducts);
@@ -56,20 +58,42 @@ const SearchProducts = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        //console.log('STATE: ', countryState);
+        // Variables locales
         let courses;
-        if (pathname?.includes('/blog')) {
-          // Fetch blog posts
-        } else {
-          if (products.length == 0) {
-            //const currentCountry = cookies().get("country")?.value;
-            let productsCountry =
-              countryState.country == 'int' ? '' : countryState.country;
-            courses = await ssr.getStoreCourses(productsCountry, window.location.href);
+        let productsCountry =
+          countryState.country === 'int' ? '' : countryState.country;
 
-            setAuxProducts(courses);
-            setProducts(courses);
-            setIsOnBlog(false);
+        // Si estamos en el blog, no se buscan cursos
+        if (pathname?.includes('/blogg')) {
+          // console.log('Estamos en el blog. No se fetch de productos.');
+          setIsOnBlog(true);
+        } else {
+          // Si no hay productos aún, hacemos fetch de los productos
+          if (!products || products.length === 0) {
+            // console.log(
+            //   'No products found, fetching products for country:',
+            //   productsCountry,
+            // );
+
+            // Hacemos fetch de productos desde el SSR
+            courses = await ssr.getStoreCourses(
+              productsCountry,
+              window.location.href,
+            );
+
+            // Debug logs
+            // console.log('Courses fetched:', courses);
+
+            // Seteamos los productos si encontramos cursos
+            if (courses && courses.length > 0) {
+              setAuxProducts(courses);
+              setProducts(courses);
+              setIsOnBlog(false);
+            } else {
+              console.warn('No courses found for country:', productsCountry);
+            }
+          } else {
+            console.log('Products already exist, no need to fetch.');
           }
         }
       } catch (error) {
@@ -78,7 +102,7 @@ const SearchProducts = () => {
     };
 
     fetchData();
-  }, [pathname]);
+  }, [pathname, countryState, products]);
 
   return (
     <div className='search-products'>
