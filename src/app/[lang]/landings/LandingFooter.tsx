@@ -4,7 +4,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { FAQS } from '../page';
 import ssr from '@/services/ssr';
 import Image from 'next/image';
-import { cedenteTropos } from './LandingsVariables';
+import { cedenteTropos, paymentLinks } from './LandingsVariables';
 import ButtonPrimary from '@/components/Button/ButtonPrimary';
 
 interface LandingProps {
@@ -28,6 +28,9 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
     product.params.slug === 'medicina-interna'
       ? product.ficha.title
       : 'Programa ACCSAP';
+
+  const productSlug = product?.params?.slug || '';
+  const paymentLink = paymentLinks[country]?.[productSlug] || '#';
 
   useEffect(() => {
     fetchContent();
@@ -82,7 +85,13 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
           </div>
 
           <div className='mt-4'>
-            <ButtonPrimary>Prueba 7 días gratis</ButtonPrimary>
+            <ButtonPrimary
+              href={paymentLink}
+              targetBlank={true}
+              rel='noopener noreferrer'
+            >
+              Prueba 7 días gratis
+            </ButtonPrimary>
           </div>
         </div>
       </div>

@@ -1,7 +1,9 @@
 import CourseRequirements from '@/components/SingleProductDetail/Requirements/CourseRequirements';
 import { FetchSingleProduct } from '@/data/types';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { FC } from 'react';
+import { paymentLinks } from './LandingsVariables';
 
 interface LandingProps {
   product: FetchSingleProduct;
@@ -32,6 +34,9 @@ const LandingBody: FC<LandingProps> = ({ product, country }) => {
   const accsapTranslateMessage =
     'La edición en español de ACCSAP ha sido traducida de la edición en inglés por Dandelion Contents, SL con permiso de la American College of Cardiology Foundation (ACCF). La ACCF se exime de cualquier responsabilidad derivada de cualquier error contenido en el producto o en los materiales de marketing.';
 
+  const productSlug = product?.params?.slug || '';
+  const paymentLink = paymentLinks[country]?.[productSlug] || '#';
+
   return (
     <>
       <div className='my-6'>
@@ -39,23 +44,27 @@ const LandingBody: FC<LandingProps> = ({ product, country }) => {
         <p className='text-[#392C35] font-medium'> {aboutCourseBody} </p>
 
         <div className='block md:hidden'>
-          <Image
-            src={bannerImagesMobile}
-            alt='Banner Mobile'
-            width={500}
-            height={300}
-            className='w-full h-auto'
-          />
+          <Link href={paymentLink} target='_blank' rel='noopener noreferrer'>
+            <Image
+              src={bannerImagesMobile}
+              alt='Banner Mobile'
+              width={500}
+              height={300}
+              className='w-full h-auto'
+            />
+          </Link>
         </div>
 
         <div className='hidden md:block'>
-          <Image
-            src={bannerImagesDesktop}
-            alt='Banner Desktop'
-            width={1000}
-            height={500}
-            className='w-full h-auto'
-          />
+          <Link href={paymentLink} target='_blank' rel='noopener noreferrer'>
+            <Image
+              src={bannerImagesDesktop}
+              alt='Banner Desktop'
+              width={1000}
+              height={500}
+              className='w-full h-auto'
+            />
+          </Link>
         </div>
 
         <div className='lg:flex block my-4 lg:justify-between'>

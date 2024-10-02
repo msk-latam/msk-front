@@ -2,6 +2,7 @@ import { FetchSingleProduct } from '@/data/types';
 import Image from 'next/image';
 import React, { FC } from 'react';
 import { cedenteTropos } from './LandingsVariables';
+import Link from 'next/link';
 
 interface LandingProps {
   product: FetchSingleProduct;
@@ -95,9 +96,11 @@ const LandingHeader: FC<LandingProps> = ({ product, country }) => {
               />
             ))}
           </div>
-          <button className='rounded-md border-2 border-[#9200AD] text-[#9200AD] py-2 px-4 my-8 mb-12 font-bold'>
-            Contáctanos para más información
-          </button>
+          <Link href={`https://www.msklatam.com/${country}/contacto`}>
+            <button className='rounded-md border-2 border-[#9200AD] text-[#9200AD] py-2 px-4 my-8 mb-12 font-bold'>
+              Contáctanos para más información
+            </button>
+          </Link>
           <div className='flex flex-col md:flex-row '>
             <div className='bg-[#E0E7FF] flex gap-2 p-6  justify-center items-center'>
               <div className='rounded-full p-2 bg-white'>
