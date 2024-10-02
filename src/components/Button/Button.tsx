@@ -1,20 +1,21 @@
-"use client";
+'use client';
 
-import React, { ButtonHTMLAttributes, FC } from "react";
-import { Route } from "@/routers/types";
-import Link from "next/link";
-import Loading from "./Loading";
-import twFocusClass from "@/utils/twFocusClass";
+import React, { ButtonHTMLAttributes, FC } from 'react';
+import { Route } from '@/routers/types';
+import Link from 'next/link';
+import Loading from './Loading';
+import twFocusClass from '@/utils/twFocusClass';
 
 export interface ButtonProps {
   className?: string;
   translate?: string;
   sizeClass?: string;
   fontSize?: string;
+  rel?: any;
   //
   loading?: boolean;
   disabled?: boolean;
-  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
+  type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
   href?: Route | string;
   locale?: string;
   targetBlank?: boolean;
@@ -25,11 +26,11 @@ export interface ButtonProps {
 }
 
 const Button: FC<ButtonProps> = ({
-  className = "text-neutral-700 dark:text-neutral-200",
-  translate = "",
-  sizeClass = "px-4 py-3 sm:px-6",
-  fontSize = "text-sm sm:text-base font-medium",
-  rounded = "rounded",
+  className = 'text-neutral-700 dark:text-neutral-200',
+  translate = '',
+  sizeClass = 'px-4 py-3 sm:px-6',
+  fontSize = 'text-sm sm:text-base font-medium',
+  rounded = 'rounded',
   disabled = false,
   bordered = false,
   href,

@@ -5,6 +5,7 @@ import { stripHtmlTags } from '@/lib/pageHeadUtils';
 import { parseHtml } from '@/utils/parseHTML';
 
 interface QuestionProps {
+  isLanding?: boolean;
   content: {
     texto: string;
     items: {
@@ -14,14 +15,15 @@ interface QuestionProps {
   };
 }
 
-const Questions: FC<QuestionProps> = ({ content }) => {
+const Questions: FC<QuestionProps> = ({ content, isLanding = false }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const handleAccordionClick = (index: number) => {
     setOpenIndex(prevIndex => (prevIndex === index ? null : index));
   };
 
   return (
-    <section className='text-left mb-[96px]'>
+    // <section className='text-left mb-[96px]'>
+    <section className={`text-left ${isLanding ? 'mb-28' : 'mb-[96px]'}`}>
       <h2 className='text-[22px] md:text-[36px] font-medium mb-8'>
         {stripHtmlTags(content?.texto)}
       </h2>

@@ -2,17 +2,24 @@
 import { FetchSingleProduct } from '@/data/types';
 import React, { FC } from 'react';
 import LandingHeader from './LandingHeader';
+import LandingBody from './LandingBody';
+import LandingTemario from './LandingTemario';
+import LandingFooter from './LandingFooter';
 
-// Definir la interfaz de las props del componente
 interface LandingProps {
   product: FetchSingleProduct;
   country: string;
 }
 
 const Landing: FC<LandingProps> = ({ product, country }) => {
-  console.log(product);
-  console.log(country);
-  return <LandingHeader product={product} country={country} />;
+  return (
+    <>
+      <LandingHeader product={product} country={country} />
+      <LandingBody product={product} country={country} />
+      <LandingTemario product={product} country={country} />
+      <LandingFooter product={product} country={country} />
+    </>
+  );
 };
 
 export default Landing;
