@@ -1,6 +1,7 @@
 import { FetchSingleProduct } from '@/data/types';
 import Image from 'next/image';
 import React, { FC } from 'react';
+import { cedenteTropos } from './LandingsVariables';
 
 interface LandingProps {
   product: FetchSingleProduct;
@@ -40,23 +41,18 @@ const LandingHeader: FC<LandingProps> = ({ product, country }) => {
 
   const bannerImage =
     product.params.slug === 'medicina-interna'
-      ? '/webp-images/landing-images/banner-medicina-interna.png'
-      : '/webp-images/landing-images/banner-accsap.png';
+      ? '/webp-images/landing-images/header-medicina-interna.png'
+      : '/webp-images/landing-images/header-accsap.png';
 
   const cedenteImage =
     product.params.slug === 'medicina-interna'
       ? '/webp-images/landing-icons/cedente-tropos.svg'
       : '/webp-images/landing-icons/cedente-accsap.svg';
 
-  const cedenteTropos =
-    product.params.slug === 'medicina-interna' ? 'formación' : '';
-
   const headerDescription =
     product.params.slug === 'medicina-interna'
       ? 'Con este amplio curso de actualización en medicina interna incorporarás los conocimientos necesarios para el abordaje de distintas enfermedades, el diagnóstico de estados patológicos poco frecuentes, el manejo clínico de las comorbilidades y la toma de decisiones sobre la derivación del paciente.'
       : product.ficha.description;
-
-  console.log('test');
 
   return (
     <>
@@ -102,7 +98,7 @@ const LandingHeader: FC<LandingProps> = ({ product, country }) => {
           <button className='rounded-md border-2 border-[#9200AD] text-[#9200AD] py-2 px-4 my-8 mb-12 font-bold'>
             Contáctanos para más información
           </button>
-          <div className='flex flex-col md:flex-row lg:gap-4'>
+          <div className='flex flex-col md:flex-row '>
             <div className='bg-[#E0E7FF] flex gap-2 p-6  justify-center items-center'>
               <div className='rounded-full p-2 bg-white'>
                 <Image
@@ -122,7 +118,7 @@ const LandingHeader: FC<LandingProps> = ({ product, country }) => {
                   </p>
                   <p className='font-inter font-medium text-[#392C35]'>
                     {' '}
-                    {cedenteTropos}{' '}
+                    {cedenteTropos(product)}{' '}
                   </p>
                 </div>
               </div>

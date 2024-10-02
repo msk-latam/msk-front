@@ -36,7 +36,7 @@ const Accordion: FC<Props> = ({
   };
 
   const iconAccordion = isOpen ? minusIcon : plusIcon;
-  const titleItem = title.replace(/^Módulo\s+\d+:\s*/, '');
+  const titleItem = title?.replace(/^Módulo\s+\d+:\s*/, '');
   return (
     <div className={`overflow-hidden accordion ${bordered && 'border'}`}>
       <div

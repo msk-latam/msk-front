@@ -7,6 +7,7 @@ export interface CourseRequirementsProps {
   imgAds?: StaticImageData | string;
   requirements: Requirement[];
   title?: string;
+  requireImage?: boolean;
 }
 
 const CourseRequirements: FC<CourseRequirementsProps> = ({
@@ -15,6 +16,7 @@ const CourseRequirements: FC<CourseRequirementsProps> = ({
   imgAds = '/images/vectors/ficha.png',
   requirements,
   title,
+  requireImage = true,
 }) => {
   const parse = (htmlString: string) => {
     const cleanedString = htmlString.replace(/<\/?ul>|<\/?li>/g, '');
@@ -27,7 +29,8 @@ const CourseRequirements: FC<CourseRequirementsProps> = ({
   };
 
   return (
-    <div className='requirements !mt-16'>
+    // <div className='requirements !mt-16'>
+    <div className={`requirements ${requireImage ? '!mt-16' : '!mt-0 !p-4'}`}>
       <div className='sm:pr-60 md:pr-5'>
         <div className='text-xl font-raleway font-bold'>{title}</div>
         {requirements.map((requirement, index) => {
@@ -46,6 +49,7 @@ const CourseRequirements: FC<CourseRequirementsProps> = ({
                     alt='msk isotipo'
                   />{' '}
                   <span
+                    className='text-[#6474A6]'
                     dangerouslySetInnerHTML={{
                       __html: item,
                     }}
@@ -56,7 +60,7 @@ const CourseRequirements: FC<CourseRequirementsProps> = ({
           );
         })}
       </div>
-      {imgAds && (
+      {requireImage && imgAds && (
         <Image
           src={imgAds as string}
           alt='Doctor Image'
