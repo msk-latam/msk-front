@@ -6,15 +6,22 @@ import { redirect } from 'next/navigation';
 
 const LandingPage: FC = async ({ params }: any) => {
   const currentCountry = params.lang || cookies().get('country')?.value;
-  // const allowedCountries = ['co', 'cr', 'pe'];
-  // if (!allowedCountries.includes(currentCountry)) {
-  //   redirect('/');
-  // }
+  const allowedCountries = ['co', 'cr', 'pe'];
+
+  // Detectar el entorno basado en el hostname
+  const currentHost =
+    typeof window !== 'undefined' ? window.location.hostname : '';
+  const isProduction = currentHost === 'msklatam.com';
+
+  // Lógica de redirección solo en producción
+  if (isProduction && !allowedCountries.includes(currentCountry)) {
+    redirect('/');
+  }
+
   const { product } = await ssr.getSingleProduct(
     'medicina-interna',
     currentCountry,
   );
-
   return <Landing product={product} country={currentCountry} />;
 };
 
