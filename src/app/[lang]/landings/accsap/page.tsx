@@ -1,5 +1,5 @@
 import ssr from '@/services/ssr';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import React, { FC } from 'react';
 import Landing from '../Landing';
 import { redirect } from 'next/navigation';
@@ -8,13 +8,16 @@ const LandingPage: FC = async ({ params }: any) => {
   const currentCountry = params.lang || cookies().get('country')?.value;
   const allowedCountries = ['co', 'cr', 'pe'];
 
-  // Detectar el entorno basado en el hostname
-  const currentHost =
-    typeof window !== 'undefined' ? window.location.hostname : '';
-  const isProduction = currentHost === 'msklatam.com';
+  const reqHeaders = headers();
+  const currentHost = reqHeaders.get('host') || '';
+
+  console.log(currentHost, 'currentHost');
+  // const isProduction = currentHost.includes('localhost');
+  const isProduction = currentHost.includes('msklatam.com');
 
   // Lógica de redirección solo en producción
   if (isProduction && !allowedCountries.includes(currentCountry)) {
+    // aca estaria bueno agregar un modal de que vas a ser redireccionado o curso bloqueado en el pais
     redirect('/');
   }
 
