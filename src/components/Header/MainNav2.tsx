@@ -39,10 +39,6 @@ const MainNav2: FC = () => {
     setInitialLoad(true);
   }, [pathName]);
 
-  if (pathName.includes('/landings/')) {
-    return null; // No renderiza el navbar si es una página de "landings"
-  }
-
   return (
     <div className={`nc-MainNav nc-MainNav2 relative z-10 container`}>
       <div className='   py-5 relative flex justify-between items-center'>
