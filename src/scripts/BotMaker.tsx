@@ -15,6 +15,12 @@ const BotMaker = () => {
   const [botVisible, setBotVisible] = useState(true);
 
   useEffect(() => {
+    const isLandingPage = window.location.pathname.includes('/landings/');
+
+    if (isLandingPage) {
+      // Si es una página de landings, no ejecutar el BotMaker
+      return;
+    }
     if (!mountedBot) {
       const script = document.createElement('script');
       script.type = 'text/javascript';

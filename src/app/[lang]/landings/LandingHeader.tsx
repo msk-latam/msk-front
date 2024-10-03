@@ -101,8 +101,8 @@ const LandingHeader: FC<LandingProps> = ({ product, country }) => {
               Contáctanos para más información
             </button>
           </Link>
-          <div className='flex flex-col md:flex-row '>
-            <div className='bg-[#E0E7FF] flex gap-2 p-6  justify-center items-center'>
+          <div className='flex flex-col md:flex-row relative'>
+            <div className='bg-[#E0E7FF] flex gap-2 px-4 py-6 lg:p-6 justify-start  items-center w-screen lg:w-auto left-1/2 translate-x-[-50vw] lg:translate-x-0 absolute lg:static top-0 h-[100px]'>
               <div className='rounded-full p-2 bg-white'>
                 <Image
                   src={cedenteImage}
@@ -114,7 +114,7 @@ const LandingHeader: FC<LandingProps> = ({ product, country }) => {
               </div>
 
               <div className='flex-col md:flex'>
-                <p className=' text-[#6474A6] font-bold font-inter'>CEDENTE</p>
+                <p className='text-[#6474A6] font-bold font-inter'>CEDENTE</p>
                 <div className='flex gap-1'>
                   <p className='font-inter font-medium text-[#392C35]'>
                     {product.lista_de_cedentes?.[0]?.post_title}
@@ -127,18 +127,20 @@ const LandingHeader: FC<LandingProps> = ({ product, country }) => {
               </div>
             </div>
 
-            <div className='bg-[#E0E7FF] flex gap-6 bg-opacity-50 p-6 justify-center items-center'>
+            <div className='h-[200px] lg:h-0'></div>
+
+            <div className='bg-[#E0E7FF] flex gap-6 bg-opacity-50 px-4 py-6 lg:p-6 justify-start lg:justify-center items-center w-screen lg:w-auto left-1/2 translate-x-[-50vw] lg:translate-x-0 absolute lg:static top-[100px] h-[100px]'>
               <div className=''>
                 <p className='text-[#6474A6] font-inter font-bold'>DURACIÓN</p>
-                <div className='flex  gap-2'>
-                  <p> {product.details.duration.value} horas </p>
+                <div className='flex gap-2'>
+                  <p>{product.details.duration.value} horas</p>
                   <p>|</p>
-                  <p> {product.cantidad_modulos} módulos </p>
+                  <p>{product.cantidad_modulos} módulos</p>
                 </div>
               </div>
               <div>
                 <p className='text-[#6474A6] font-bold font-inter'>MODALIDAD</p>
-                <p> {product.modalidad} </p>
+                <p>100% online</p>
               </div>
             </div>
           </div>

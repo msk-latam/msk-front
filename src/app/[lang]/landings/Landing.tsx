@@ -18,6 +18,8 @@ const Landing: FC<LandingProps> = ({ product, country }) => {
       <LandingBody product={product} country={country} />
       <LandingTemario product={product} country={country} />
       <LandingFooter product={product} country={country} />
+
+      {/* Hecho por Ariel Eitner */}
     </>
   );
 };
