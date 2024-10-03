@@ -67,9 +67,9 @@ const LandingBody: FC<LandingProps> = ({ product, country }) => {
           </Link>
         </div>
 
-        <div className='lg:flex block my-4 lg:justify-stretch'>
+        <div className='lg:flex block my-4 lg:justify-between'>
           {product.params.slug === 'accsap' && (
-            <div className='flex  gap-4 px-6 py-4 bg-[#F5F8FF] rounded-md my-6 lg:my-0'>
+            <div className='flex  gap-4 px-6 lg:px-10 py-4 bg-[#F5F8FF] rounded-md my-6 lg:my-0'>
               <Image src={bell} alt='bell' width={80} height={80} />
               <p className='w-[27.7rem] font-medium text-sm text-[#6474A6]'>
                 {' '}

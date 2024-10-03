@@ -21,8 +21,8 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
 
   const footerImage =
     product.params.slug === 'medicina-interna'
-      ? '/webp-images/landing-images/footer-medicina-interna.svg'
-      : '/webp-images/landing-images/footer-accsap.svg';
+      ? '/webp-images/landing-images/footer-medicina-interna-desktop.png'
+      : '/webp-images/landing-images/footer-accsap-desktop.png';
 
   const footerTitle =
     product.params.slug === 'medicina-interna'
@@ -43,9 +43,15 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
         isLanding={true}
       />
 
-      <div className=' lg:absolute lg:flex  bg-[#FFFFFF] rounded-xl shadow-md shadow-black/50 translate-y-[-50px] z-10'>
+      <div className=' lg:absolute lg:flex  bg-[#FFFFFF] rounded-3xl shadow-2xl shadow-black/25 translate-y-[-50px] z-10'>
         <div className='lg:flex'>
-          <Image src={footerImage} alt='banner' width={750} height={250} />
+          <Image
+            src={footerImage}
+            alt='banner'
+            width={750}
+            height={550}
+            className='p-0 m-0'
+          />
         </div>
         <div className='flex w-full flex-col p-2 lg:p-8'>
           <h2 className='text-2xl'> {footerTitle} </h2>
