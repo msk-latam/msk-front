@@ -4,16 +4,8 @@ import ssr from '@/services/ssr';
 import { SITE_URL } from '@/contains/constants';
 import { cookies, headers } from 'next/headers';
 import { notFound } from 'next/navigation';
-import medicinaInternaSchema from './SEOScripts/medicina-interna';
-import hemoterapiaSchema from './SEOScripts/hemoterapia';
-import auditoriaMedicaSchema from './SEOScripts/auditoria-medica';
-import cirugiaGeneralSchema from './SEOScripts/cirugia-general';
-import gestionHospitalariaSchema from './SEOScripts/gestion-hospitalaria';
-import medicinaFamiliarSchema from './SEOScripts/medicina-familiar';
-import neonatologiaSchema from './SEOScripts/neonatologia';
-import neurologiaSchema from './SEOScripts/neurologia';
-import psiquiatriaSchema from './SEOScripts/psiquiatria';
-import terapiaIntensivaSchema from './SEOScripts/terapia-intensiva';
+
+import schemaMap from '@/SEO/curso/schemaMap';
 
 interface PageCourseProps {
   params: any;
@@ -30,23 +22,8 @@ export async function generateMetadata({ params }: Props) {
   );
   const currentCountry = params.lang || cookies().get('country')?.value;
 
-  /*  if (courseMetaData.total_price === "0" && courseMetaData.details?.['detail-1']?.value?.includes("Ebook gratuito")) {
-    notFound();
-  }  */
   const hostname = process.env.VERCEL_URL || '';
   const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
-  const schemaMap = {
-    'auditoria-medica': auditoriaMedicaSchema,
-    'cirugia-general-y-del-aparato-digestivo': cirugiaGeneralSchema,
-    'administracion-y-gestion-hospitalaria': gestionHospitalariaSchema,
-    'hematologia-y-hemoterapia': hemoterapiaSchema,
-    'medicina-familiar-y-comunitaria': medicinaFamiliarSchema,
-    'medicina-interna': medicinaInternaSchema,
-    neonatologia: neonatologiaSchema,
-    neurologia: neurologiaSchema,
-    psiquiatria: psiquiatriaSchema,
-    'terapia-intensiva': terapiaIntensivaSchema,
-  };
 
   const metadata: { [key: string]: any } = {
     title: `${courseMetaData?.ficha.title} | MSK - Cursos de medicina.`,

@@ -6,6 +6,7 @@ import { SITE_URL } from '@/contains/constants';
 import { notFound } from 'next/navigation';
 
 import BlogHeader from './BlogHeader';
+import { generateBlogMetadata } from '@/SEO/blog/blogSEO';
 
 interface PageCourseProps {
   params: any;
@@ -16,31 +17,39 @@ type Props = {
   params: { slug: string; lang: string };
 };
 
-export async function generateMetadata({ params }: Props) {
-  const currentCountry = params.lang || cookies().get('country')?.value;
-  try {
-    const [postMetadata] = await ssr.getSinglePost(
-      params.slug,
-      currentCountry as string,
-    );
-    //console.log(postMetadata);
-    const hostname = process.env.VERCEL_URL || '';
-    const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
+// export async function generateMetadata({ params }: Props) {
+//   const currentCountry = params.lang || cookies().get('country')?.value;
+//   try {
+//     const [postMetadata] = await ssr.getSinglePost(
+//       params.slug,
+//       currentCountry as string,
+//     );
+//     //console.log(postMetadata);
+//     const hostname = process.env.VERCEL_URL || '';
+//     const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
 
-    return {
-      title: `${postMetadata.title} | MSK`,
-      description: postMetadata.excerpt,
-      alternates: IS_PROD
-        ? {
-            canonical: `${SITE_URL}/${currentCountry}/blog/${postMetadata.slug}`,
-          }
-        : undefined,
-      robots: IS_PROD
-        ? { index: true, follow: true }
-        : { index: false, follow: false },
-    };
+//     return {
+//       title: `${postMetadata.title} | MSK`,
+//       description: postMetadata.excerpt,
+//       alternates: IS_PROD
+//         ? {
+//             canonical: `${SITE_URL}/${currentCountry}/blog/${postMetadata.slug}`,
+//           }
+//         : undefined,
+//       robots: IS_PROD
+//         ? { index: true, follow: true }
+//         : { index: false, follow: false },
+//     };
+//   } catch (error: any) {
+//     notFound();
+//   }
+// }
+
+export async function generateMetadata({ params }: Props) {
+  try {
+    return await generateBlogMetadata({ params });
   } catch (error: any) {
-    notFound();
+    notFound(); // Si no encuentra los metadatos, devuelve un 404
   }
 }
 

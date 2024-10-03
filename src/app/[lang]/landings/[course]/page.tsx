@@ -7,21 +7,24 @@ import { redirect } from 'next/navigation';
 const LandingPage: FC = async ({ params }: any) => {
   const currentCountry = params.lang || cookies().get('country')?.value;
   const allowedCountries = ['co', 'cr', 'pe'];
+  const allowedCourses = ['accsap', 'medicina-interna'];
 
   const reqHeaders = headers();
   const currentHost = reqHeaders.get('host') || '';
-
-  console.log(currentHost, 'currentHost');
-  // const isProduction = currentHost.includes('localhost');
   const isProduction = currentHost.includes('msklatam.com');
+  const courseSlug = params.course;
 
   // Lógica de redirección solo en producción
-  if (isProduction && !allowedCountries.includes(currentCountry)) {
-    // aca estaria bueno agregar un modal de que vas a ser redireccionado o curso bloqueado en el pais
+  if (
+    isProduction &&
+    (!allowedCountries.includes(currentCountry) ||
+      !allowedCourses.includes(courseSlug))
+  ) {
+    // Modal o redirección cuando el curso no está permitido o el país no es permitido
     redirect('/');
   }
 
-  const { product } = await ssr.getSingleProduct('accsap', currentCountry);
+  const { product } = await ssr.getSingleProduct(courseSlug, currentCountry);
   return <Landing product={product} country={currentCountry} />;
 };
 
