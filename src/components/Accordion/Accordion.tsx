@@ -57,7 +57,7 @@ const Accordion: FC<Props> = ({
           </div>
           {forModules ? (
             <h3 className='font-medium'>
-              Módulo {index + 1} •{' '}
+              {/* Módulo {index + 1} •{' '} */}
               <span className='font-normal'>{titleItem}</span>
             </h3>
           ) : (

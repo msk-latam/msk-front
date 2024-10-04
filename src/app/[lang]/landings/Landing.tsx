@@ -21,7 +21,7 @@ const Landing: FC<LandingProps> = ({ product, country }) => {
 
       if (footer && button) {
         const scrollY = window.scrollY;
-        if (scrollY < 250 || scrollY > 4700) {
+        if (scrollY < 300 || scrollY > 4700) {
           button.classList.add('hidden');
           button.classList.remove('block');
         } else {
@@ -44,12 +44,15 @@ const Landing: FC<LandingProps> = ({ product, country }) => {
       <LandingTemario product={product} country={country} />
       <LandingFooter product={product} country={country} />
 
-      <div id='fixedButton' className='fixed bottom-4 left-4 right-4 md:hidden'>
+      <div
+        id='fixedButton'
+        className='fixed bottom-4 left-4 right-4 md:hidden !z-[9999]'
+      >
         <ButtonPrimary
           href={paymentLink(country, product.params.slug)}
           targetBlank={true}
           rel='noopener noreferrer'
-          className='fixed bottom-16 left-0 right-0 md:hidden z-[9999] w-full shadow-xl shadow-black/25'
+          className='fixed bottom-16 left-0 right-0 md:hidden !z-[9999]  w-full shadow-xl shadow-black/25'
         >
           Prueba 7 días gratis
         </ButtonPrimary>
