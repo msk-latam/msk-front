@@ -30,7 +30,11 @@ const CourseRequirements: FC<CourseRequirementsProps> = ({
 
   return (
     // <div className='requirements !mt-16'>
-    <div className={`requirements ${requireImage ? '!mt-16' : '!mt-0 !p-4'}`}>
+    <div
+      className={`requirements ${
+        requireImage ? '!mt-16' : '!mt-0 !p-4 !pr-20'
+      }`}
+    >
       <div className='sm:pr-60 md:pr-5'>
         <div className='text-xl font-raleway font-bold'>{title}</div>
         {requirements.map((requirement, index) => {
