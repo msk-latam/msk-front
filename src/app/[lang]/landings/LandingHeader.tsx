@@ -101,7 +101,7 @@ const LandingHeader: FC<LandingProps> = ({ product, country }) => {
               Contáctanos para más información
             </button>
           </Link>
-          <div className='flex flex-col md:flex-row relative'>
+          <div className='flex flex-col md:flex-row relative z-0'>
             <div className='bg-[#E0E7FF] flex gap-2 px-4 py-6 lg:p-6 justify-start  items-center w-screen lg:w-auto left-1/2 translate-x-[-50vw] lg:translate-x-0 absolute lg:static top-0 h-[100px]'>
               <div className='rounded-full p-2 bg-white'>
                 <Image
