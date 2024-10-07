@@ -344,6 +344,7 @@ export interface Ficha {
   novedad: string;
   categorias: FichaCategory[];
   title: string;
+  title_contenido?: string;
   image: string;
   code: string;
   isbn: string;

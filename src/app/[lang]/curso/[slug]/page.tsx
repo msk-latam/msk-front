@@ -26,8 +26,11 @@ export async function generateMetadata({ params }: Props) {
   const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
 
   const metadata: { [key: string]: any } = {
-    title: `${courseMetaData?.ficha.title} | MSK - Cursos de medicina.`,
-    description: courseMetaData?.excerpt,
+    title: `${courseMetaData?.ficha.meta_titulo}`,
+    description: courseMetaData?.ficha.meta_description?.replace(
+      /<\/?[^>]+(>|$)/g,
+      '',
+    ),
     alternates: IS_PROD
       ? {
           canonical: `${SITE_URL}/${currentCountry}/curso/${params.slug}`,
