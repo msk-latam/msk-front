@@ -269,6 +269,7 @@ class ApiService {
 
         // Guardar datos en `localStorage` con un nuevo timestamp
         if (!isServer) {
+          localStorage.removeItem(cacheKey);
           // localStorage.setItem(
           //   cacheKey,
           //   JSON.stringify({
