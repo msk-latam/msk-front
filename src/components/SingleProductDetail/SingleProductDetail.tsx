@@ -185,7 +185,8 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
                   {!isEbook && (
                     <div className='course-description'>
                       <div className='font-semibold text-xl font-raleway'>
-                        Qué aprenderás
+                        {/* Qué aprenderás */}
+                        {product.ficha.title_contenido}
                       </div>
                     </div>
                   )}
