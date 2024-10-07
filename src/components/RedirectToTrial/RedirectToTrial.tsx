@@ -35,7 +35,7 @@ const RedirectToTrial = () => {
           }
           if (!authState.isAuthenticated) {
             console.log('User is not authenticated.');
-            router.push('/');
+            // router.push('/');
           }
         }
       }
