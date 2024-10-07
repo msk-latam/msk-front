@@ -48,6 +48,8 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 
   const slug = product.params.slug;
 
+  console.log(isEbook, 'isEbook');
+
   const dataRef = courseReviewRefs[slug]
     ? courseReviewRefs[slug]
     : courseReviewRefs['general'];
@@ -185,8 +187,8 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
                   {!isEbook && (
                     <div className='course-description'>
                       <div className='font-semibold text-xl font-raleway'>
-                        {/* Qué aprenderás */}
-                        {product.ficha.title_contenido}
+                        {product.ficha.title_contenido?.trim() ||
+                          'Qué aprenderás'}
                       </div>
                     </div>
                   )}
@@ -252,8 +254,10 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
                 isEbook={isEbook}
               />
             </div>
-
-            <div className='embedsocial-hashtag ' data-ref={dataRef}></div>
+            {/* widget */}
+            {!isEbook && (
+              <div className='embedsocial-hashtag' data-ref={dataRef}></div>
+            )}
           </div>
           <div className='order-last relative hidden mt-10 lg:block ml-4'>
             <ProductDetailSidebar
