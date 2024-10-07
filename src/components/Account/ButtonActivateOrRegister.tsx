@@ -60,6 +60,8 @@ const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({
     }
   };
 
+  console.log(product);
+  console.log(user);
   const handleEnrollment = async () => {
     const response = await goToEnroll(product.product_code, user.email);
 

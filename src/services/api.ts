@@ -924,7 +924,15 @@ class ApiService {
         body: JSON.stringify({
           product_code,
           email,
-          Necesita_enrolar: true,
+          data: [
+            {
+              Formulario_de_cursada: [
+                {
+                  Estado_cursada: 'Listo para enrolar', // Hardcodeado
+                },
+              ],
+            },
+          ],
         }),
       });
 
