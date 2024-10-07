@@ -27,7 +27,10 @@ export async function generateMetadata({ params }: Props) {
 
   const metadata: { [key: string]: any } = {
     title: `${courseMetaData?.ficha.meta_titulo}`,
-    description: courseMetaData?.ficha.meta_description,
+    description: courseMetaData?.ficha.meta_description?.replace(
+      /<\/?[^>]+(>|$)/g,
+      '',
+    ),
     alternates: IS_PROD
       ? {
           canonical: `${SITE_URL}/${currentCountry}/curso/${params.slug}`,
