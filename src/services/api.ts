@@ -269,13 +269,13 @@ class ApiService {
 
         // Guardar datos en `localStorage` con un nuevo timestamp
         if (!isServer) {
-          localStorage.setItem(
-            cacheKey,
-            JSON.stringify({
-              value: data.user,
-              timestamp: new Date().getTime(),
-            }),
-          );
+          // localStorage.setItem(
+          //   cacheKey,
+          //   JSON.stringify({
+          //     value: data.user,
+          //     timestamp: new Date().getTime(),
+          //   }),
+          // );
           console.log(`Datos de usuario obtenidos de la API para ${email}`);
         }
 
@@ -924,6 +924,7 @@ class ApiService {
         body: JSON.stringify({
           product_code,
           email,
+          Necesita_enrolar: true,
         }),
       });
 
