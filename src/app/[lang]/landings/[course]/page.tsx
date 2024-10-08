@@ -19,21 +19,28 @@ const LandingPage: FC = async ({ params }: any) => {
 		// Modal o redirección cuando el curso no está permitido o el país no es permitido
 		redirect('/');
 	}
-	<Script id='hotjar-init' strategy='afterInteractive'>
-		{`
-                    (function(h,o,t,j,a,r){
-                        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-                        h._hjSettings={hjid:5162115,hjsv:6};
-                        a=o.getElementsByTagName('head')[0];
-                        r=o.createElement('script');r.async=1;
-                        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-                        a.appendChild(r);
-                    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-                `}
-	</Script>;
 
 	const { product } = await ssr.getSingleProduct(courseSlug, currentCountry);
-	return <Landing product={product} country={currentCountry} />;
+	return (
+		<>
+			{/* Incluir el script de Hotjar */}
+			<Script id='hotjar-init' strategy='afterInteractive'>
+				{`
+								(function(h,o,t,j,a,r){
+										h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+										h._hjSettings={hjid:5162115,hjsv:6};
+										a=o.getElementsByTagName('head')[0];
+										r=o.createElement('script');r.async=1;
+										r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+										a.appendChild(r);
+								})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+						`}
+			</Script>
+
+			{/* Renderizar la página de landing */}
+			<Landing product={product} country={currentCountry} />
+		</>
+	);
 };
 
 export default LandingPage;
