@@ -1,25 +1,26 @@
 {
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "prettier.singleQuote": true,
-  "prettier.trailingComma": "all",
-  "prettier.tabWidth": 2,
-  "prettier.semi": true,
-  "prettier.jsxSingleQuote": true,
-  "prettier.printWidth": 80,
-  "prettier.endOfLine": "auto",
-  "prettier.arrowParens": "avoid",
-  "prettier.proseWrap": "always",
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"prettier.singleQuote": true,
+	"prettier.trailingComma": "all",
+	"prettier.tabWidth": 2,
+	"prettier.semi": true,
+	"prettier.jsxSingleQuote": true,
+	"prettier.printWidth": 125,
+	"prettier.useTabs": true,
+	"prettier.endOfLine": "auto",
+	"prettier.arrowParens": "always",
+	"prettier.proseWrap": "always",
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[javascriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	}
 }
