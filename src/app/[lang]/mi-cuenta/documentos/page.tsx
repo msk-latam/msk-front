@@ -12,42 +12,42 @@ import DocumentStatusSection from './DocumentStatusSection';
 import PageDocumentosHeader from './PageDocumentosHeader';
 
 const pageDocumentos: FC = () => {
-  const { state, dispatch } = useContext(AuthContext);
-  const [user, setUser] = useState<User>({} as User);
-  const { countryState: countryState } = useContext(CountryContext);
+	const { state, dispatch } = useContext(AuthContext);
+	const [user, setUser] = useState<User>({} as User);
+	const { countryState: countryState } = useContext(CountryContext);
 
-  const [isLoading, setLoading] = useState(true);
+	const [isLoading, setLoading] = useState(true);
 
-  const fetchUser = async () => {
-    setLoading(true);
-    const res = await ssr.getUserData();
-    if (!res.message) {
-      if (!res.contact.state) res.contact.state = '';
-      setUser(res);
-      dispatch({
-        type: 'FRESH',
-        payload: {
-          user: { name: res.name, speciality: res.contact.speciality },
-        },
-      });
-      setLoading(false);
-    } else {
-      // history.push("/iniciar-sesion");
-    }
-  };
+	const fetchUser = async () => {
+		setLoading(true);
+		const res = await ssr.getUserData();
+		if (!res.message) {
+			if (!res.contact.state) res.contact.state = '';
+			setUser(res);
+			dispatch({
+				type: 'FRESH',
+				payload: {
+					user: { name: res.name, speciality: res.contact.speciality },
+				},
+			});
+			setLoading(false);
+		} else {
+			// history.push("/iniciar-sesion");
+		}
+	};
 
-  useEffect(() => {
-    fetchUser();
-  }, [state?.profile]);
+	useEffect(() => {
+		fetchUser();
+	}, [state?.profile]);
 
-  return (
-    <>
-      <div className='p-6 '>
-        <PageDocumentosHeader />
-        <DocumentStatusSection />
-      </div>
-    </>
-  );
+	return (
+		<>
+			<div className='p-6 '>
+				<PageDocumentosHeader />
+				<DocumentStatusSection />
+			</div>
+		</>
+	);
 };
 
 export default pageDocumentos;

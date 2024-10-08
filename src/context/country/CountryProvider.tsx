@@ -9,162 +9,134 @@ import Cookies from 'js-cookie';
 import { Loading } from '@/utils/Loading';
 
 interface Props {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }
 
 export const CountryProvider: React.FC<Props> = ({ children }) => {
-  const initialState: CountryState = {
-    country: Cookies.get('NEXT_LOCALE') || 'int',
-  };
+	const initialState: CountryState = {
+		country: Cookies.get('NEXT_LOCALE') || 'int',
+	};
 
-  const [countryState, dispatch] = useReducer(countryReducer, initialState);
-  const [bypassRedirect, setBypassRedirect] = useState(
-    typeof window !== 'undefined'
-      ? localStorage.getItem('bypassRedirect') || ''
-      : '',
-  );
+	const [countryState, dispatch] = useReducer(countryReducer, initialState);
+	const [bypassRedirect, setBypassRedirect] = useState(
+		typeof window !== 'undefined' ? localStorage.getItem('bypassRedirect') || '' : '',
+	);
 
-  const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(true);
 
-  const validCountries = countries.map(item => item.id);
+	const validCountries = countries.map((item) => item.id);
 
-  useEffect(() => {
-    //console.log("Country Provider UseEffect");
-    const fetchData = async () => {
-      let redirectUrl = '';
-      try {
-        let currentCountry = '';
-        if (bypassRedirect == '1') {
-          //console.log("bypassRedirect");
-          const currentUrl = window.location.pathname;
-          const validCountryUrl = validCountries.filter(
-            country =>
-              currentUrl.includes('/' + country + '/') ||
-              currentUrl.endsWith('/' + country),
-          );
+	useEffect(() => {
+		//console.log("Country Provider UseEffect");
+		const fetchData = async () => {
+			let redirectUrl = '';
+			try {
+				let currentCountry = '';
+				if (bypassRedirect == '1') {
+					//console.log("bypassRedirect");
+					const currentUrl = window.location.pathname;
+					const validCountryUrl = validCountries.filter(
+						(country) => currentUrl.includes('/' + country + '/') || currentUrl.endsWith('/' + country),
+					);
 
-          if (validCountryUrl.length) {
-            //console.log('its on a valid country');
-            dispatch({
-              type: 'SET_COUNTRY',
-              payload: { country: validCountryUrl[0] },
-            });
-          }
-          // console.log("Country Provider", currentCountry);
-        } else {
-          currentCountry = await api.getCountryCode();
-          // console.log('CurrentCountry obtained from IP: ' + currentCountry);
-          // console.log(window.location.pathname);
-          const currentPathName = window.location.pathname.replace('/', '');
+					if (validCountryUrl.length) {
+						//console.log('its on a valid country');
+						dispatch({
+							type: 'SET_COUNTRY',
+							payload: { country: validCountryUrl[0] },
+						});
+					}
+					// console.log("Country Provider", currentCountry);
+				} else {
+					currentCountry = await api.getCountryCode();
+					// console.log('CurrentCountry obtained from IP: ' + currentCountry);
+					// console.log(window.location.pathname);
+					const currentPathName = window.location.pathname.replace('/', '');
 
-          // console.log(currentPathName);
-          if (currentCountry && currentCountry == currentPathName) return; //Special use case for homepage.
-          if (!validCountries.includes(currentCountry)) {
-            console.log(
-              'currentCountry not included in the list of valid countries',
-            );
-            currentCountry = '';
-          }
+					// console.log(currentPathName);
+					if (currentCountry && currentCountry == currentPathName) return; //Special use case for homepage.
+					if (!validCountries.includes(currentCountry)) {
+						console.log('currentCountry not included in the list of valid countries');
+						currentCountry = '';
+					}
 
-          if (
-            countryState.country != currentCountry ||
-            getCountryFromURL() != currentCountry
-          ) {
-            if (
-              validCountries.includes(currentPathName) &&
-              currentPathName != currentCountry
-            ) {
-              //The path is just the country, go to the homepage of the country our IP is on
-              // console.log('redirect 1');
-              redirectUrl = '/' + currentCountry;
-              console.log(redirectUrl);
-            } else {
-              // console.log('redirect 2');
+					if (countryState.country != currentCountry || getCountryFromURL() != currentCountry) {
+						if (validCountries.includes(currentPathName) && currentPathName != currentCountry) {
+							//The path is just the country, go to the homepage of the country our IP is on
+							// console.log('redirect 1');
+							redirectUrl = '/' + currentCountry;
+							console.log(redirectUrl);
+						} else {
+							// console.log('redirect 2');
 
-              redirectUrl = '/' + currentCountry + window.location.pathname;
-            }
-            // console.log("redirectUrl1: " + redirectUrl);
-            if (getCountryFromURL() != '') {
-              // console.log(window.location.search);
-              redirectUrl = window.location.href
-                .replace(
-                  '/' + getCountryFromURL() + '/',
-                  '/' + currentCountry + '/',
-                )
-                .replace(/(https?:\/\/.*?)\/+/g, '$1/');
-            }
-            // console.log('redirectUrl2: ' + redirectUrl);
-          }
+							redirectUrl = '/' + currentCountry + window.location.pathname;
+						}
+						// console.log("redirectUrl1: " + redirectUrl);
+						if (getCountryFromURL() != '') {
+							// console.log(window.location.search);
+							redirectUrl = window.location.href
+								.replace('/' + getCountryFromURL() + '/', '/' + currentCountry + '/')
+								.replace(/(https?:\/\/.*?)\/+/g, '$1/');
+						}
+						// console.log('redirectUrl2: ' + redirectUrl);
+					}
 
-          if (
-            window.location.protocol === 'http:' &&
-            window.location.hostname !== 'localhost'
-          ) {
-            window.location.href =
-              'https:' +
-              window.location.href.substring(window.location.protocol.length);
-          }
+					if (window.location.protocol === 'http:' && window.location.hostname !== 'localhost') {
+						window.location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+					}
 
-          dispatch({
-            type: 'SET_COUNTRY',
-            payload: { country: currentCountry },
-          });
-          if (redirectUrl) {
-            let currentSearchParams = new URLSearchParams(
-              window.location.search,
-            );
+					dispatch({
+						type: 'SET_COUNTRY',
+						payload: { country: currentCountry },
+					});
+					if (redirectUrl) {
+						let currentSearchParams = new URLSearchParams(window.location.search);
 
-            // Si el `redirectUrl` ya contiene una cadena de consulta, extrae y combina con la actual
-            if (redirectUrl.includes('?')) {
-              const redirectSearchParams = new URLSearchParams(
-                redirectUrl.split('?')[1],
-              );
+						// Si el `redirectUrl` ya contiene una cadena de consulta, extrae y combina con la actual
+						if (redirectUrl.includes('?')) {
+							const redirectSearchParams = new URLSearchParams(redirectUrl.split('?')[1]);
 
-              for (const [key, value] of currentSearchParams) {
-                if (!redirectSearchParams.has(key)) {
-                  redirectSearchParams.append(key, value);
-                }
-              }
-              redirectUrl =
-                redirectUrl.split('?')[0] +
-                '?' +
-                redirectSearchParams.toString();
-            } else {
-              redirectUrl += window.location.search;
-            }
-            // console.log('redirectUrl: ' + redirectUrl);
-            window.location.href = redirectUrl;
-          }
-        }
-        setLoading(false);
-      } catch (error) {
-        // console.log(error);
-        setLoading(false);
-      }
-    };
+							for (const [key, value] of currentSearchParams) {
+								if (!redirectSearchParams.has(key)) {
+									redirectSearchParams.append(key, value);
+								}
+							}
+							redirectUrl = redirectUrl.split('?')[0] + '?' + redirectSearchParams.toString();
+						} else {
+							redirectUrl += window.location.search;
+						}
+						// console.log('redirectUrl: ' + redirectUrl);
+						window.location.href = redirectUrl;
+					}
+				}
+				setLoading(false);
+			} catch (error) {
+				// console.log(error);
+				setLoading(false);
+			}
+		};
 
-    const getCountryFromURL = () => {
-      const url = window.location.href;
-      let validCountryUrl = validCountries.filter(
-        country =>
-          url.includes('/' + country + '/') || url.endsWith('/' + country),
-      );
-      // console.log(validCountryUrl, window.location.search);
-      if (validCountryUrl.length) {
-        return validCountryUrl[0];
-      }
-      return '';
-    };
+		const getCountryFromURL = () => {
+			const url = window.location.href;
+			let validCountryUrl = validCountries.filter(
+				(country) => url.includes('/' + country + '/') || url.endsWith('/' + country),
+			);
+			// console.log(validCountryUrl, window.location.search);
+			if (validCountryUrl.length) {
+				return validCountryUrl[0];
+			}
+			return '';
+		};
 
-    fetchData();
-  }, []);
+		fetchData();
+	}, []);
 
-  return (
-    <CountryContext.Provider value={{ countryState, dispatch }}>
-      {loading ? <Loading /> : children}
-      {/* {children} */}
-    </CountryContext.Provider>
-  );
+	return (
+		<CountryContext.Provider value={{ countryState, dispatch }}>
+			{loading ? <Loading /> : children}
+			{/* {children} */}
+		</CountryContext.Provider>
+	);
 };
 
 export default CountryProvider;
