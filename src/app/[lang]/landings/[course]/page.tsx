@@ -4,6 +4,7 @@ import React, { FC } from 'react';
 import Landing from '../Landing';
 import { redirect } from 'next/navigation';
 import Script from 'next/script';
+import HotjarLandings from '@/hotjar/hotjarLandings';
 
 const LandingPage: FC = async ({ params }: any) => {
 	const currentCountry = params.lang || cookies().get('country')?.value;
@@ -23,21 +24,7 @@ const LandingPage: FC = async ({ params }: any) => {
 	const { product } = await ssr.getSingleProduct(courseSlug, currentCountry);
 	return (
 		<>
-			{/* Incluir el script de Hotjar */}
-			<Script id='hotjar-init' strategy='afterInteractive'>
-				{`
-								(function(h,o,t,j,a,r){
-										h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-										h._hjSettings={hjid:5162115,hjsv:6};
-										a=o.getElementsByTagName('head')[0];
-										r=o.createElement('script');r.async=1;
-										r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-										a.appendChild(r);
-								})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-						`}
-			</Script>
-
-			{/* Renderizar la página de landing */}
+			<HotjarLandings />
 			<Landing product={product} country={currentCountry} />
 		</>
 	);
