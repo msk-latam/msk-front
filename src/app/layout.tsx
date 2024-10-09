@@ -24,7 +24,7 @@ import Header from '@/components/Header/Header';
 import React from 'react';
 import Script from 'next/script';
 import EmblueScript from '@/components/EmblueScript/EmblueScript';
-import { organizationDataSEO, reviewsDataSEO, websiteDataSEO } from '@/SEO/generales';
+import { organizationDataSEO, reviewsDataSEO, websiteDataSEO } from '@/SEO/generales/structuredData';
 
 // export const runtime = 'edge';
 

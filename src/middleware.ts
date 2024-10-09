@@ -27,7 +27,8 @@ export const fetchUserData = async () => {
 					speciality: res.contact.speciality,
 				}),
 			);
-			localStorage.setItem('bypassRedirect', res.test);
+			// localStorage.setItem('bypassRedirect', res.test);
+			localStorage.removeItem('bypassRedirect');
 			return {
 				name: res.name,
 				speciality: res.contact.speciality,
