@@ -6,7 +6,7 @@ import { SITE_URL } from '@/contains/constants';
 import { notFound } from 'next/navigation';
 
 import BlogHeader from './BlogHeader';
-import { generateBlogMetadata } from '@/SEO/blog/blogMetaData';
+import { generateBlogMetadata } from '@/SEO/blog/metaData/blogMetaData';
 
 interface PageCourseProps {
 	params: any;

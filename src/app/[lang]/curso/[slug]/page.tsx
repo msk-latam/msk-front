@@ -3,12 +3,11 @@ import React, { FC } from 'react';
 import ssr from '@/services/ssr';
 import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
-import { generateCourseMetadata } from '@/SEO/curso/cursoMetaData';
+import { generateCourseMetadata } from '@/SEO/curso/structuredData/cursoMetaData';
 
 interface PageCourseProps {
 	params: any;
 }
-// export const runtime = 'edge';
 
 type Props = {
 	params: { slug: string; lang: string };
