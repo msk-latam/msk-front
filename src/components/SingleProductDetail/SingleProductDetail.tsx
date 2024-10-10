@@ -46,8 +46,6 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 
 	const slug = product.params.slug;
 
-	console.log(isEbook, 'isEbook');
-
 	const dataRef = courseReviewRefs[slug] ? courseReviewRefs[slug] : courseReviewRefs['general'];
 
 	console.log(dataRef);

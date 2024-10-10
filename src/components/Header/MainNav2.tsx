@@ -41,7 +41,7 @@ const MainNav2: FC = () => {
 			<div className='   py-5 relative flex justify-between items-center'>
 				<div className='flex justify-start flex-grow items-center space-x-3 sm:space-x-8 lg:space-x-10'>
 					<Logo isOnBlog={isOnBlog} />
-					{/* <CategoriesDropdown /> */}
+					<CategoriesDropdown />
 					<div className='hidden sm:block flex-grow max-w-xs'>
 						<SearchProducts />
 					</div>
