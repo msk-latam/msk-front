@@ -30,8 +30,8 @@ const CategoriesDropdown = () => {
 		setActiveCategory(category); // Activa el dropdown secundario con la categoría seleccionada
 	};
 
-	function getCachedCourses(country?: string, tag?: string, withAll: boolean = false) {
-		const cacheKey = `courses-${country}-${tag}-${withAll}`;
+	function getCachedCourses() {
+		const cacheKey = `all-courses`;
 		const TTL = 24 * 60 * 60 * 1000; // 24 horas
 		const isServer = typeof window === 'undefined';
 
@@ -54,7 +54,7 @@ const CategoriesDropdown = () => {
 		}
 	}
 
-	const cachedCourses = getCachedCourses('ar', '', false);
+	const cachedCourses = getCachedCourses();
 	const filteredCourses = cachedCourses?.filter((course: FetchCourseType) => {
 		return (
 			course.categories &&
@@ -62,6 +62,8 @@ const CategoriesDropdown = () => {
 			course.father_post_type !== 'downloadable' // Excluir los cursos con esta propiedad
 		);
 	});
+
+	console.log(filteredCourses);
 
 	const redirectToCategory = (slug: string) => {
 		// Transformar el slug
