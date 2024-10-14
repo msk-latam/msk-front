@@ -1,7 +1,7 @@
 import { useStoreFilters } from '@/context/storeFilters/StoreProvider';
 import { FetchCourseType, Specialty } from '@/data/types';
 import React, { useEffect, useRef, useState } from 'react';
-import breadcrumArrowIcon from '/public/images/icons/breadcrum_arrow.svg';
+import breadcrumArrowIcon from '@/public/images/icons/breadcrum_arrow.svg';
 import especialidadesIcon from '@/public/webp-images/icons/especialidadesIcon.svg';
 import ofrecemosIcon from '@/public/webp-images/icons/ofrecemosIcon.svg';
 import recursosIcon from '@/public/webp-images/icons/recursosIcon.svg';
@@ -9,6 +9,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import productDetails from '@/hooks/ssr/productDetails';
 import { useRouter } from 'next/navigation';
+import arrowLeft from '@/public/images/icons/ArrowLeft.svg';
 
 const CategoriesDropdown = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -107,38 +108,51 @@ const CategoriesDropdown = () => {
 	}, [isOpen]);
 
 	return (
-		<div className='relative inline-block' ref={dropdownRef}>
+		<div className='relative block' ref={dropdownRef}>
 			<button
-				className='bg-transparent text-black py-2 px-4 rounded-md hover:bg-[#FF5D5E] hover:text-white'
+				className=' w-full bg-transparent text-black py-2 px-4 rounded-md hover:bg-[#FF5D5E] hover:text-white xl:w-auto'
 				onClick={toggleDropdown}
 			>
 				Descubre
 			</button>
 
 			{isOpen && (
-				<div className='absolute mt-2 w-[24vw] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.3)] rounded-md p-4'>
+				<div className=' relative xl:absolute mt-2 xl:w-[24vw] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.3)] rounded-md p-4'>
 					<ul className='py-2'>
 						<li className='flex gap-2 items-center px-4 py-2'>
 							<Image src={especialidadesIcon} alt='icon' width={20} height={20} />
 							<h2 className='!font-inter'>Especialidades</h2>
 						</li>
-						{sortedCategories.map((category, index) => (
-							<li
-								onClick={() => handleCategoryClick(category)}
-								key={index}
-								className='flex justify-between items-center px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
-							>
-								<span>{category.name}</span>
-								<img src={`${breadcrumArrowIcon.src}`} className='w-3 h-3' alt='Arrow' />
-							</li>
-						))}
+						<div className='max-h-36 overflow-y-auto md:max-h-none scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent'>
+							<ul>
+								{sortedCategories.map((category, index) => (
+									<li
+										onClick={() => handleCategoryClick(category)}
+										key={index}
+										className='flex justify-between items-center px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
+									>
+										<span>{category.name}</span>
+										<img src={`${breadcrumArrowIcon.src}`} className='w-3 h-3' alt='Arrow' />
+									</li>
+								))}
+							</ul>
+						</div>
+
 						{activeCategory && (
-							<div className='absolute left-full top-0 w-[24vw] bg-[#FBFAFA] shadow-[inset_2px_0px_rgba(0,0,0,0.1)] p-4 rounded-r-lg'>
-								<p> </p>
-								<h2 className='!font-inter font-bold mb-4'>{activeCategory.name}</h2>
+							<div className='fixed top-36 left-0 w-full h-full bg-[#FBFAFA] shadow-lg p-4 rounded-md md:absolute md:left-full md:top-0 md:w-[24vw]'>
+								<div className='flex items-center mb-4'>
+									<Image src={arrowLeft} alt='arrow' width={10} height={10} className='mr-2' />
+									<button
+										onClick={() => setActiveCategory(null)} // Esta función oculta el segundo dropdown
+										className='bg-transparent text-[#6474A6] py-2 px-4 rounded-md hover:bg-gray-300 !font-inter'
+									>
+										Descubre más
+									</button>
+								</div>
+
+								<h2 className='font-inter font-bold mb-4'>{activeCategory.name}</h2>
 								<ul>
 									{filteredCourses?.length > 0 ? (
-										// Limitar la vista a 4 cursos
 										filteredCourses?.slice(0, 4).map((course: any) => (
 											<li key={course.id} className='mb-2'>
 												<Link href={`/curso/${course.slug}`} onClick={handleLinkClick} className=' text-xs'>
@@ -152,8 +166,7 @@ const CategoriesDropdown = () => {
 														/>
 														<div>
 															<h4 className='!font-inter font-extralight text-sm text-[#7C838F]'>
-																{' '}
-																{course.lista_de_cedentes[0].post_title}{' '}
+																{course.lista_de_cedentes[0].post_title}
 															</h4>
 															<h3 className='font-light text-lg text-[#6474A6] !font-inter'>{course.title}</h3>
 														</div>
@@ -162,7 +175,6 @@ const CategoriesDropdown = () => {
 											</li>
 										))
 									) : (
-										// Placeholder si no hay cursos
 										<li className='mb-2 text-sm text-gray-500'>No hay cursos disponibles en esta categoría.</li>
 									)}
 								</ul>
@@ -174,6 +186,7 @@ const CategoriesDropdown = () => {
 								</button>
 							</div>
 						)}
+
 						<li className='flex-col'>
 							<div className='flex gap-2 items-center px-4 py-2'>
 								<Image src={ofrecemosIcon} alt='icon' width={20} height={20} />
