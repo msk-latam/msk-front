@@ -1,7 +1,7 @@
 import { SITE_URL } from '@/contains/constants';
 
 export async function generateBasesPromocionalesMetadata({ params }: { params: { lang: string } }) {
-	const hostname = process.env.VERCEL_URL || '';
+	const hostname = process.env.VERCEL_URL ?? '';
 	const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
 	return {
 		title: 'Bases promocionales | MSK',

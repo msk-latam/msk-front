@@ -109,19 +109,38 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 		};
 	}, [isOpen]);
 
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth < 1270) {
+				setIsOpen(true); // Mostrar dropdown automáticamente en mobile
+			} else {
+				setIsOpen(false); // Ocultar dropdown en pantallas más grandes
+			}
+		};
+
+		// Ejecutar al cargar la página
+		handleResize();
+
+		// Escuchar cambios en el tamaño de la ventana
+		window.addEventListener('resize', handleResize);
+
+		// Limpiar el listener al desmontar
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
+
 	return (
 		<div className='relative block' ref={dropdownRef}>
 			<button
-				className=' w-full bg-transparent text-black py-2 px-4 rounded-md hover:bg-[#FF5D5E] hover:text-white xl:w-auto'
+				className='hidden xl:block w-full bg-transparent text-black py-2 px-4 rounded-md hover:bg-[#FF5D5E] hover:text-white xl:w-auto'
 				onClick={toggleDropdown}
 			>
 				Descubre
 			</button>
 
 			{isOpen && (
-				<div className=' relative xl:absolute mt-2 xl:w-[24vw] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.3)] rounded-md p-4'>
+				<div className=' relative xl:absolute mt-2 xl:w-[24vw] bg-white xl:shadow-[0_4px_12px_rgba(0,0,0,0.3)] rounded-md lg:p-4'>
 					<ul className='py-2'>
-						<li className='flex gap-2 items-center px-4 py-2'>
+						<li className='flex gap-2 items-center lg:px-4 py-2'>
 							<Image src={especialidadesIcon} alt='icon' width={20} height={20} />
 							<h2 className='!font-inter'>Especialidades</h2>
 						</li>
@@ -131,7 +150,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 									<li
 										onClick={() => handleCategoryClick(category)}
 										key={index}
-										className='flex justify-between items-center px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
+										className='flex justify-between items-center lg:px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
 									>
 										<span>{category.name}</span>
 										<img src={`${breadcrumArrowIcon.src}`} className='w-3 h-3' alt='Arrow' />
@@ -142,11 +161,11 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 
 						{activeCategory && (
 							<div className='fixed top-36 left-0 w-full h-full bg-[#FBFAFA] shadow-lg p-4 rounded-md md:absolute md:left-full md:top-0 md:w-[24vw]'>
-								<div className='flex items-center mb-4'>
+								<div className='flex items-center mb-4 xl:hidden '>
 									<Image src={arrowLeft} alt='arrow' width={10} height={10} className='mr-2' />
 									<button
 										onClick={() => setActiveCategory(null)} // Esta función oculta el segundo dropdown
-										className='bg-transparent text-[#6474A6] py-2 px-4 rounded-md hover:bg-gray-300 !font-inter'
+										className='bg-transparent text-[#6474A6] py-2 px-4 rounded-md hover:bg-gray-300 !font-inter '
 									>
 										Descubre más
 									</button>
@@ -190,7 +209,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 						)}
 
 						<li className='flex-col'>
-							<div className='flex gap-2 items-center px-4 py-2'>
+							<div className='flex gap-2 items-center lg:px-4 py-2'>
 								<Image src={ofrecemosIcon} alt='icon' width={20} height={20} />
 								<h2 className='!font-inter'>Qué Ofrecemos</h2>
 							</div>
@@ -198,7 +217,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 								<li className='w-full'>
 									<Link
 										href={'/tienda/?profesion=medicos&recurso=curso'}
-										className='block px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
+										className='block lg:px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
 									>
 										Cursos para personal médico
 									</Link>
@@ -206,7 +225,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 								<li className='w-full'>
 									<Link
 										href={'/tienda/?profesion=otra-profesion'}
-										className='block px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
+										className='block lg:px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
 									>
 										Cursos para enfermería y otras profesiones
 									</Link>
@@ -218,7 +237,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 						<li className='w-full'>
 							<Link
 								href={'/tienda/?recurso=guias-profesionales'}
-								className='flex gap-2 items-center px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md '
+								className='flex gap-2 items-center lg:px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md '
 							>
 								<Image src={recursosIcon} alt='icon' width={20} height={20} />
 								<h2 className='!font-inter'>Recursos</h2>
@@ -228,7 +247,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 							<li className='w-full'>
 								<Link
 									href={'/tienda/?recurso=guias-profesionales'}
-									className='block px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
+									className='block lg:px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
 								>
 									Guías Profesionales
 								</Link>
@@ -236,7 +255,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 							<li className='w-full'>
 								<Link
 									href={'/blog'}
-									className='block px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
+									className='block lg:px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
 								>
 									Blog
 								</Link>
