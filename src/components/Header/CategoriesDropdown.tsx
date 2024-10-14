@@ -11,7 +11,7 @@ import productDetails from '@/hooks/ssr/productDetails';
 import { useRouter } from 'next/navigation';
 import arrowLeft from '@/public/images/icons/ArrowLeft.svg';
 
-const CategoriesDropdown = () => {
+const CategoriesDropdown = ({ onClickClose }: any) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [activeCategory, setActiveCategory] = useState<Specialty | null>(null);
 	const router = useRouter();
@@ -78,12 +78,14 @@ const CategoriesDropdown = () => {
 		// Redirigir a la ruta correspondiente
 		setIsOpen(!isOpen);
 		setActiveCategory(null);
+		onClickClose;
 		router.push(`/tienda/${formattedSlug}`);
 	};
 
 	const handleLinkClick = () => {
 		setIsOpen(!isOpen); // Cambiar el estado de isOpen
 		setActiveCategory(null); // Resetear activeCategory
+		onClickClose;
 	};
 
 	useEffect(() => {

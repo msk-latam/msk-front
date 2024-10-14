@@ -178,7 +178,7 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 			</div>
 			<div className='z-10 px-4 pb-4'>
 				<SearchProducts />
-				<CategoriesDropdown />
+				<CategoriesDropdown onClick={onClickClose} />
 			</div>
 			<div className='mobile-nav-container'>
 				<ul className='flex flex-col py-2 px-2 space-y-1'>{data.map((item, index) => _renderItem(item, index, false))}</ul>
