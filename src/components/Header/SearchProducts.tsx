@@ -99,7 +99,7 @@ const SearchProducts = () => {
 	}, [pathname, countryState, products]);
 
 	return (
-		<div className='search-products'>
+		<div className='search-products lg:w-[20vw]'>
 			<div className='relative'>
 				<Input
 					type='search'

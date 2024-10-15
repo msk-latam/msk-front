@@ -10,6 +10,8 @@ import Link from 'next/link';
 import productDetails from '@/hooks/ssr/productDetails';
 import { useRouter } from 'next/navigation';
 import arrowLeft from '@/public/images/icons/ArrowLeft.svg';
+import arrowDownWhite from '@/public/images/icons/ArrowDownWhite.svg';
+import arrowDownBlack from '@/public/images/icons/ArrowDownBlack.svg';
 
 const CategoriesDropdown = ({ onClickClose }: any) => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -130,12 +132,19 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 
 	return (
 		<div className='relative block' ref={dropdownRef}>
-			<button
-				className='hidden xl:block w-full bg-transparent text-black py-2 px-4 rounded-md hover:bg-[#FF5D5E] hover:text-white xl:w-auto'
-				onClick={toggleDropdown}
-			>
-				Descubre
-			</button>
+			<div className='flex'>
+				<button
+					className='hidden xl:flex items-center justify-between w-full bg-transparent text-black py-2 px-3 rounded-md hover:bg-[#FF5D5E] hover:text-white xl:w-auto group !font-inter font-medium'
+					onClick={toggleDropdown}
+				>
+					<span>Descubre</span>
+					<div className='relative ml-2'>
+						<Image src={arrowDownBlack} alt='arrow icon black' width={10} height={10} className='block group-hover:hidden' />
+
+						<Image src={arrowDownWhite} alt='arrow icon white' width={10} height={10} className='hidden group-hover:block' />
+					</div>
+				</button>
+			</div>
 
 			{isOpen && (
 				<div className=' relative xl:absolute mt-2 xl:w-[24vw] bg-white xl:shadow-[0_4px_12px_rgba(0,0,0,0.3)] rounded-md lg:p-4'>
@@ -144,7 +153,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 							<Image src={especialidadesIcon} alt='icon' width={20} height={20} />
 							<h2 className='!font-inter'>Especialidades</h2>
 						</li>
-						<div className='max-h-36 overflow-y-auto  scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent'>
+						<div className='max-h-48 overflow-y-auto  scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent'>
 							<ul>
 								{sortedCategories.map((category, index) => (
 									<li
