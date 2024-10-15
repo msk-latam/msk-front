@@ -144,13 +144,13 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 							<Image src={especialidadesIcon} alt='icon' width={20} height={20} />
 							<h2 className='!font-inter'>Especialidades</h2>
 						</li>
-						<div className='max-h-36 overflow-y-auto md:max-h-none scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent'>
+						<div className='max-h-36 overflow-y-auto  scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent'>
 							<ul>
 								{sortedCategories.map((category, index) => (
 									<li
 										onClick={() => handleCategoryClick(category)}
 										key={index}
-										className='flex justify-between items-center lg:px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
+										className='flex justify-between items-center lg:px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md w-80 lg:w-auto'
 									>
 										<span>{category.name}</span>
 										<img src={`${breadcrumArrowIcon.src}`} className='w-3 h-3' alt='Arrow' />
