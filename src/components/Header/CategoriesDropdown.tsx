@@ -151,7 +151,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 							<Image src={especialidadesIcon} alt='icon' width={20} height={20} />
 							<h2 className='!font-inter'>Especialidades</h2>
 						</li>
-						<div className='max-h-[52vh] overflow-y-auto  scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent'>
+						<div className='max-h-48 lg:max-h-[52vh] overflow-y-auto  scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent'>
 							<ul>
 								{sortedCategories.map((category, index) => (
 									<li
