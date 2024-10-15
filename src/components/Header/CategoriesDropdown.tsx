@@ -167,7 +167,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 						</div>
 
 						{activeCategory && (
-							<div className='fixed top-36 left-0 w-full h-full bg-gradient-to-r from-[#ECECEC] to-[#FFFFFF]   p-4 rounded-r-2xl md:absolute md:left-full md:top-0 md:w-[24vw]'>
+							<div className='fixed top-36 left-0 w-full h-full bg-gradient-to-r bg-[#FBFAFA]  p-5 rounded-r-2xl md:absolute md:left-full md:top-0 md:w-[24vw] z-10 '>
 								<div className='flex items-center mb-4  '>
 									<Image src={arrowLeft} alt='arrow' width={10} height={10} className='mr-2' />
 									<button
