@@ -10,8 +10,8 @@ import Link from 'next/link';
 import productDetails from '@/hooks/ssr/productDetails';
 import { useRouter } from 'next/navigation';
 import arrowLeft from '@/public/images/icons/ArrowLeft.svg';
-import arrowDownWhite from '@/public/images/icons/ArrowDownWhite.svg';
-import arrowDownBlack from '@/public/images/icons/ArrowDownBlack.svg';
+import arrowDownWhite from '@/public/images/icons/arrowDownWhite.svg';
+import arrowDownBlack from '@/public/images/icons/arrowDownBlack.svg';
 
 const CategoriesDropdown = ({ onClickClose }: any) => {
 	const [isOpen, setIsOpen] = useState(false);
