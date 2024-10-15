@@ -53,23 +53,23 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
 			CardComponentName = CardCategory2;
 	}
 
-	useEffect(() => {
-		if (isModalOpen) {
-			// Desactivar el scroll del body y del html
-			document.documentElement.style.overflow = 'hidden';
-			document.body.style.overflowY = 'hidden';
-		} else {
-			// Restaurar el scroll
-			document.documentElement.style.overflow = '';
-			document.body.style.overflowY = '';
-		}
+	// useEffect(() => {
+	// 	if (isModalOpen) {
+	// 		// Desactivar el scroll del body y del html
+	// 		document.documentElement.style.overflow = 'hidden';
+	// 		document.body.style.overflowY = 'hidden';
+	// 	} else {
+	// 		// Restaurar el scroll
+	// 		document.documentElement.style.overflow = '';
+	// 		document.body.style.overflowY = '';
+	// 	}
 
-		return () => {
-			// Asegurarse de restaurar el scroll cuando se desmonte
-			document.documentElement.style.overflow = '';
-			document.body.style.overflowY = '';
-		};
-	}, [isModalOpen]);
+	// 	return () => {
+	// 		// Asegurarse de restaurar el scroll cuando se desmonte
+	// 		document.documentElement.style.overflow = '';
+	// 		document.body.style.overflowY = '';
+	// 	};
+	// }, [isModalOpen]);
 
 	useEffect(() => {
 		if (isModalOpen) {
