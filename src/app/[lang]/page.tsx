@@ -78,7 +78,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const heroImageWEBP = '/webp-images/home/home-msk.webp';
 
 	return (
-		<div className='nc-PageHome relative animate-fade-down'>
+		<div className='nc- relative animate-fade-down'>
 			<div className='relative  md:overflow-visible '>
 				<section className=''>
 					<div className=' relative'>

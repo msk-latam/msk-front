@@ -353,7 +353,7 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 				)}
 				{/*<div className="border-t border-neutral-200 dark:border-neutral-700 w-[90%] mx-auto px-2 space-y-1" />*/}
 				{state.isAuthenticated ? (
-					<ul className='flex flex-col py-2 px-2 space-y-1'>
+					<ul className='relative flex flex-col py-2 px-2 space-y-1 mt-14 z-50 justify-end'>
 						{userNav.map((item, index) => _renderItem(item, index, false))}
 						<li>
 							<ButtonSecondary
@@ -367,7 +367,7 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 						</li>
 					</ul>
 				) : (
-					<ul className='flex flex-col py-2 px-2 space-y-1 mt-4'>
+					<ul className='relative flex flex-col py-2 px-2 space-y-1 mt-14 z-50'>
 						<ButtonSecondary
 							href={'/iniciar-sesion'}
 							sizeClass='px-4 py-2 sm:px-5'

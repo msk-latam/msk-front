@@ -145,7 +145,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 			</div>
 
 			{isOpen && (
-				<div className=' relative xl:absolute mt-2 xl:w-[24vw] bg-white xl:shadow-[0_4px_12px_rgba(0,0,0,0.3)] rounded-md lg:p-4'>
+				<div className=' relative xl:absolute mt-2 xl:w-[24vw] bg-white xl:shadow-[0_4px_12px_rgba(0,0,0,0.3)] rounded-l-2xl lg:p-4 z-50'>
 					<ul className='py-2'>
 						<li className='flex gap-2 items-center lg:px-4 py-2 text-lg'>
 							<Image src={especialidadesIcon} alt='icon' width={20} height={20} />
@@ -167,18 +167,18 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 						</div>
 
 						{activeCategory && (
-							<div className='fixed top-36 left-0 w-full h-full bg-[#FBFAFA] shadow-lg p-4 rounded-md md:absolute md:left-full md:top-0 md:w-[24vw]'>
-								<div className='flex items-center mb-4 xl:hidden '>
+							<div className='fixed top-36 left-0 w-full h-full bg-gradient-to-r from-[#ECECEC] to-[#FFFFFF]   p-4 rounded-r-2xl md:absolute md:left-full md:top-0 md:w-[24vw]'>
+								<div className='flex items-center mb-4  '>
 									<Image src={arrowLeft} alt='arrow' width={10} height={10} className='mr-2' />
 									<button
 										onClick={() => setActiveCategory(null)} // Esta función oculta el segundo dropdown
-										className='bg-transparent text-[#6474A6] py-2 px-4 rounded-md hover:bg-gray-300 !font-inter '
+										className='bg-transparent text-[#6474A6] py-2 px-4 rounded-md hover:bg-gray-300 !font-inter lg:mt-2 '
 									>
 										Descubre más
 									</button>
 								</div>
 
-								<h2 className='font-inter font-bold mb-4'>{activeCategory.name}</h2>
+								<h2 className='!font-inter font-bold mb-4 pt-1 pb-2  text-lg'>{activeCategory.name}</h2>
 								<ul>
 									{filteredCourses?.length > 0 ? (
 										filteredCourses?.slice(0, 4).map((course: any) => (
@@ -196,7 +196,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 															<h4 className='!font-inter font-extralight text-sm text-[#7C838F]'>
 																{course.lista_de_cedentes[0].post_title}
 															</h4>
-															<h3 className='font-light text-lg text-[#6474A6] !font-inter'>{course.title}</h3>
+															<h3 className='font-light text-base text-[#6474A6] !font-inter'>{course.title}</h3>
 														</div>
 													</div>
 												</Link>
@@ -208,7 +208,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 								</ul>
 								<button
 									onClick={() => redirectToCategory(activeCategory.name)}
-									className='bg-[#9200AD] text-white py-2 px-4 rounded-md hover:bg-[#FF5D5E] w-full'
+									className='bg-[#9200AD] text-white py-3 px-4 rounded-md hover:bg-[#FF5D5E] w-full'
 								>
 									Ver todos los cursos
 								</button>
@@ -216,7 +216,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 						)}
 
 						<li className='flex-col'>
-							<div className='flex gap-2 items-center lg:px-4 py-3 text-lg'>
+							<div className='flex gap-2 items-center lg:px-4 py-2 pt-3 text-lg'>
 								<Image src={ofrecemosIcon} alt='icon' width={20} height={20} />
 								<h2 className='!font-inter'>Qué ofrecemos</h2>
 							</div>
