@@ -7,7 +7,6 @@ import ofrecemosIcon from '@/public/webp-images/icons/ofrecemosIcon.svg';
 import recursosIcon from '@/public/webp-images/icons/recursosIcon.svg';
 import Image from 'next/image';
 import Link from 'next/link';
-import productDetails from '@/hooks/ssr/productDetails';
 import { useRouter } from 'next/navigation';
 import arrowLeft from '@/public/images/icons/ArrowLeft.svg';
 import arrowDownWhite from '@/public/images/icons/arrowDownWhite.svg';
@@ -69,7 +68,6 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 	console.log(filteredCourses);
 
 	const redirectToCategory = (slug: string) => {
-		// Transformar el slug
 		const formattedSlug = slug
 			.toLowerCase() // Convertir a minúsculas
 			.normalize('NFD')
@@ -225,6 +223,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 							<ul className='flex flex-col'>
 								<li className='w-full'>
 									<Link
+										onClick={handleLinkClick}
 										href={'/tienda/?profesion=medicos&recurso=curso'}
 										className='block lg:px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
 									>
@@ -233,6 +232,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 								</li>
 								<li className='w-full'>
 									<Link
+										onClick={handleLinkClick}
 										href={'/tienda/?profesion=otra-profesion'}
 										className='block lg:px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
 									>
@@ -245,6 +245,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 						{/* Recursos Section */}
 						<li className='w-full'>
 							<Link
+								onClick={handleLinkClick}
 								href={'/tienda/?recurso=guias-profesionales'}
 								className='flex gap-2 items-center lg:px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md '
 							>
@@ -255,6 +256,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 						<ul className='flex flex-col'>
 							<li className='w-full'>
 								<Link
+									onClick={handleLinkClick}
 									href={'/tienda/?recurso=guias-profesionales'}
 									className='block lg:px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
 								>
@@ -263,6 +265,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 							</li>
 							<li className='w-full'>
 								<Link
+									onClick={handleLinkClick}
 									href={'/blog'}
 									className='block lg:px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
 								>
