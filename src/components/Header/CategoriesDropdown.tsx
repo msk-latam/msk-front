@@ -90,7 +90,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
-			if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+			if (window.innerWidth >= 1270 && dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
 				setIsOpen(false);
 				setActiveCategory(null);
 			}
@@ -147,17 +147,17 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 			{isOpen && (
 				<div className=' relative xl:absolute mt-2 xl:w-[24vw] bg-white xl:shadow-[0_4px_12px_rgba(0,0,0,0.3)] rounded-md lg:p-4'>
 					<ul className='py-2'>
-						<li className='flex gap-2 items-center lg:px-4 py-2'>
+						<li className='flex gap-2 items-center lg:px-4 py-2 text-lg'>
 							<Image src={especialidadesIcon} alt='icon' width={20} height={20} />
 							<h2 className='!font-inter'>Especialidades</h2>
 						</li>
-						<div className='max-h-48 overflow-y-auto  scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent'>
+						<div className='max-h-[52vh] overflow-y-auto  scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent'>
 							<ul>
 								{sortedCategories.map((category, index) => (
 									<li
 										onClick={() => handleCategoryClick(category)}
 										key={index}
-										className='flex justify-between items-center lg:px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md w-80 lg:w-auto'
+										className='flex justify-between items-center lg:px-4 py-1 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md w-80 lg:w-auto'
 									>
 										<span>{category.name}</span>
 										<img src={`${breadcrumArrowIcon.src}`} className='w-3 h-3' alt='Arrow' />
@@ -216,16 +216,16 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 						)}
 
 						<li className='flex-col'>
-							<div className='flex gap-2 items-center lg:px-4 py-2'>
+							<div className='flex gap-2 items-center lg:px-4 py-3 text-lg'>
 								<Image src={ofrecemosIcon} alt='icon' width={20} height={20} />
-								<h2 className='!font-inter'>Qué Ofrecemos</h2>
+								<h2 className='!font-inter'>Qué ofrecemos</h2>
 							</div>
 							<ul className='flex flex-col'>
 								<li className='w-full'>
 									<Link
 										onClick={handleLinkClick}
 										href={'/tienda/?profesion=medicos&recurso=curso'}
-										className='block lg:px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
+										className='block lg:px-4 py-1 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
 									>
 										Cursos para personal médico
 									</Link>
@@ -234,7 +234,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 									<Link
 										onClick={handleLinkClick}
 										href={'/tienda/?profesion=otra-profesion'}
-										className='block lg:px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
+										className='block lg:px-4 py-1 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
 									>
 										Cursos para enfermería y otras profesiones
 									</Link>
@@ -244,21 +244,17 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 
 						{/* Recursos Section */}
 						<li className='w-full'>
-							<Link
-								onClick={handleLinkClick}
-								href={'/tienda/?recurso=guias-profesionales'}
-								className='flex gap-2 items-center lg:px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md '
-							>
+							<div className='flex gap-2 items-center lg:px-4 py-3 text-[#6474A6]  rounded-md text-lg'>
 								<Image src={recursosIcon} alt='icon' width={20} height={20} />
 								<h2 className='!font-inter'>Recursos</h2>
-							</Link>
+							</div>
 						</li>
 						<ul className='flex flex-col'>
 							<li className='w-full'>
 								<Link
 									onClick={handleLinkClick}
 									href={'/tienda/?recurso=guias-profesionales'}
-									className='block lg:px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
+									className='block lg:px-4 py-1 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
 								>
 									Guías Profesionales
 								</Link>
@@ -267,7 +263,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 								<Link
 									onClick={handleLinkClick}
 									href={'/blog'}
-									className='block lg:px-4 py-2 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
+									className='block lg:px-4 py-1 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
 								>
 									Blog
 								</Link>

@@ -191,7 +191,7 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 							<Disclosure>
 								{({ open }) => (
 									<li>
-										<Disclosure.Button
+										{/* <Disclosure.Button
 											as='button'
 											className='py-1 px-4 flex flex-1 items-center select-none focus:outline-none focus:ring-0'
 										>
@@ -201,15 +201,15 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 											) : (
 												<ChevronDownIcon className='ml-2 mr-auto h-4 w-4 text-neutral-500' aria-hidden='true' />
 											)}
-										</Disclosure.Button>
-										<Disclosure.Panel>
+										</Disclosure.Button> */}
+										{/* <Disclosure.Panel>
 											{specialties.length ? (
 												<ul className='pl-6 flex flex-col gap-2'>
 													{specialties.map((specialty, index) => {
 														return (
 															<li key={`spe_${index}`}>
 																<div className='course-sidebar-list'>
-																	{/*<p>{currentSpecialty}</p>*/}
+																	
 																	<input
 																		className='edu-check-box'
 																		type='checkbox'
@@ -228,11 +228,11 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 													})}
 												</ul>
 											) : null}
-										</Disclosure.Panel>
+										</Disclosure.Panel> */}
 									</li>
 								)}
 							</Disclosure>
-							<Disclosure>
+							{/* <Disclosure>
 								{({ open }) => (
 									<li>
 										<Disclosure.Button
@@ -270,8 +270,8 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 										</Disclosure.Panel>
 									</li>
 								)}
-							</Disclosure>
-							<Disclosure>
+							</Disclosure> */}
+							{/* <Disclosure>
 								{({ open }) => (
 									<li>
 										<Disclosure.Button
@@ -347,7 +347,7 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 										</Disclosure.Panel>
 									</li>
 								)}
-							</Disclosure>
+							</Disclosure> */}
 						</ul>
 					</>
 				)}
