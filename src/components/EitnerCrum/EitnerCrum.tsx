@@ -93,14 +93,11 @@ const EitnerCrum: React.FC<EitnerCrumProps> = ({ product, post }) => {
 					label: tiendaSegment,
 					isLastSegment: !product && pathSegments.length === 2,
 				},
-				product &&
-					product.ficha.categorias[0] && {
-						href: `/${countrySegment}/tienda/${normalizeUrlSegment(product.ficha.categorias[0].name)}`,
-						label: formatLabel(
-							product.ficha.categorias[0].name.charAt(0).toUpperCase() + product.ficha.categorias[0].name.slice(1),
-						),
-						isLastSegment: !product && pathSegments.length === 3,
-					},
+				{
+					href: `/${countrySegment}/tienda/${normalizeUrlSegment(categoriaSegment)}`,
+					label: formatLabel(categoriaSegment.charAt(0).toUpperCase() + categoriaSegment.slice(1)),
+					isLastSegment: !product && pathSegments.length === 3,
+				},
 				product && {
 					href: `/${countrySegment}/curso/${normalizeUrlSegment(productOrPostSegment)}`,
 					label: formatLabel(productOrPostSegment),
