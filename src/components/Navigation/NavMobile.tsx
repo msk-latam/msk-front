@@ -17,7 +17,7 @@ import Link from 'next/link';
 import { useLocation } from 'react-use';
 import resourcesMapping from '@/data/jsons/__resources.json';
 import durationsMapping from '@/data/jsons/__durations.json';
-import CategoriesDropdown from '../Header/CategoriesDropdown';
+import CategoriesDropdown from '../Header/categoriesDropdown/CategoriesDropdown';
 
 export interface NavMobileProps {
 	data?: NavItemType[];

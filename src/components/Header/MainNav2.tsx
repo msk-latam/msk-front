@@ -14,7 +14,7 @@ import { usePathname } from 'next/navigation';
 import { useCurrentLocale } from 'next-i18n-router/client';
 // @ts-ignore
 import i18nConfig from '@/i18nConfig';
-import CategoriesDropdown from './CategoriesDropdown';
+import CategoriesDropdown from './categoriesDropdown/CategoriesDropdown';
 
 const MainNav2: FC = () => {
 	const locale = useCurrentLocale(i18nConfig);
