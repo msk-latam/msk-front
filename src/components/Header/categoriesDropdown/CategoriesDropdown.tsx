@@ -145,7 +145,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 			</div>
 
 			{isOpen && (
-				<div className=' relative xl:absolute mt-2 xl:w-[24vw] bg-white xl:shadow-[0_4px_20px_rgba(0,0,0,0.3)] rounded-l-2xl lg:p-4 z-50'>
+				<div className=' relative xl:absolute mt-2 xl:w-[24vw] bg-white xl:shadow-[0_6px_12px_rgba(0,0,0,0.3)] rounded-l-2xl lg:p-4 z-50'>
 					<ul className='py-2'>
 						<li className='flex gap-2 items-center lg:px-4 py-2 text-lg'>
 							<Image src={especialidadesIcon} alt='icon' width={20} height={20} />
@@ -167,7 +167,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 						</div>
 
 						{activeCategory && (
-							<div className='fixed top-36 left-0 w-full h-full bg-gradient-to-r bg-[#FBFAFA]  p-5 rounded-r-2xl md:absolute md:left-full md:top-0 md:w-[24vw] z-10 xl:shadow-[0_4px_12px_rgba(0,0,0,0.3)]'>
+							<div className='fixed top-36 left-0 w-full h-full  bg-[#FBFAFA]  p-5 rounded-r-2xl md:absolute md:left-full md:top-0 md:w-[24vw]  xl:shadow-[0_4px_10px_rgba(0,0,0,0.3)] '>
 								<div className='flex items-center mb-4  '>
 									<Image src={arrowLeft} alt='arrow' width={10} height={10} className='mr-2' />
 									<button
