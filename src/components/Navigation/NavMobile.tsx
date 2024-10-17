@@ -367,7 +367,7 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 						</li>
 					</ul>
 				) : (
-					<ul className='relative flex flex-col py-2 px-2 space-y-1  z-50 container gap-2 bg-white pt-8'>
+					<ul className='relative flex flex-col py-2 px-2 space-y-1  z-50 container gap-2 bg-white pt-4'>
 						<ButtonSecondary
 							href={'/iniciar-sesion'}
 							sizeClass='px-4 py-2 sm:px-5'
