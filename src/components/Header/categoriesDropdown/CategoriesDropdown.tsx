@@ -145,7 +145,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 			</div>
 
 			{isOpen && (
-				<div className=' relative xl:absolute mt-2 xl:w-[24vw] bg-white xl:shadow-[0_6px_12px_rgba(0,0,0,0.3)] rounded-l-2xl lg:p-4 z-50'>
+				<div className='overflow-y-scroll max-h-[62vh] relative xl:absolute mt-2 xl:w-[24vw] bg-white xl:shadow-[0_6px_12px_rgba(0,0,0,0.3)] rounded-l-2xl lg:p-4 z-50'>
 					<ul className='py-2'>
 						<li className='flex gap-2 items-center lg:px-4 py-2 text-lg'>
 							<Image src={especialidadesIcon} alt='icon' width={20} height={20} />
@@ -171,7 +171,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 						</div>
 
 						{activeCategory && (
-							<div className=' fixed top-36 left-0 w-full h-full  bg-[#FBFAFA]  p-5 rounded-r-2xl md:absolute md:left-full md:top-0 md:w-[24vw]  xl:shadow-[0_4px_10px_rgba(0,0,0,0.3)] '>
+							<div className=' fixed top-32 left-0 w-full h-full  bg-[#FBFAFA]  p-5 rounded-r-2xl md:absolute md:left-full md:top-0 md:w-[24vw]  xl:shadow-[0_4px_10px_rgba(0,0,0,0.3)] '>
 								<div className='flex items-center mb-2  '>
 									<Image src={arrowLeft} alt='arrow' width={10} height={10} className='mr-2' />
 									<button
@@ -210,12 +210,15 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 										<li className='mb-2 text-sm text-gray-500'>No hay cursos disponibles en esta categoría.</li>
 									)}
 								</ul>
-								<button
-									onClick={() => redirectToCategory(activeCategory.name)}
-									className='bg-[#9200AD] text-white py-2 lg:py-3  lg:px-4 rounded-md hover:bg-[#FF5D5E] w-full mt-8 font-semibold text-sm lg:text-base'
-								>
-									Ver todos los cursos
-								</button>
+								<div className='flex items-center gap-2 mt-4'>
+									<button
+										onClick={() => redirectToCategory(activeCategory.name)}
+										className='text-[#9200AD] bg-transparent      rounded-md    text-sm lg:text-base flex items-center gap-2'
+									>
+										Ver todos los cursos
+										<Image src={breadcrumArrowIcon} alt='Arrow' width={6} height={6} />
+									</button>
+								</div>
 							</div>
 						)}
 
