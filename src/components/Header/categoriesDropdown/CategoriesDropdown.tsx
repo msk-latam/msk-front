@@ -145,7 +145,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 			</div>
 
 			{isOpen && (
-				<div className='overflow-y-scroll lg:overflow-y-visible max-h-[50vh] lg:max-h-none relative xl:absolute mt-2 xl:w-[24vw] bg-white xl:shadow-[0_6px_12px_rgba(0,0,0,0.3)] lg:rounded-l-2xl lg:p-4 z-50'>
+				<div className=' lg:overflow-y-visible max-h-[50vh] lg:max-h-none relative xl:absolute mt-2 xl:w-[24vw] bg-white xl:shadow-[0_6px_12px_rgba(0,0,0,0.3)] lg:rounded-l-2xl lg:p-4 z-50'>
 					<ul className='py-2'>
 						<li className='flex gap-2 items-center lg:px-4 py-2 text-lg'>
 							<Image src={especialidadesIcon} alt='icon' width={20} height={20} />
@@ -156,7 +156,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 								activeCategory ? 'max-h-64' : ''
 							} lg:max-h-[52vh]   scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent`}
 						>
-							<ul className='overflow-y-scroll  lg:overflow-auto lg:max-h-[50vh]'>
+							<ul className=' lg:overflow-auto lg:max-h-[50vh] scrollbar-thumb-[#6474A6]'>
 								{sortedCategories.map((category, index) => (
 									<li
 										onClick={() => handleCategoryClick(category)}
