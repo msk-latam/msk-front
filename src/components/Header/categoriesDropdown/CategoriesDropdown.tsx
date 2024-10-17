@@ -145,7 +145,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 			</div>
 
 			{isOpen && (
-				<div className='overflow-y-scroll max-h-[47vh] relative xl:absolute mt-2 xl:w-[24vw] bg-white xl:shadow-[0_6px_12px_rgba(0,0,0,0.3)] lg:rounded-l-2xl lg:p-4 z-50'>
+				<div className='overflow-y-scroll lg:overflow-y-visible max-h-[50vh] lg:max-h-none relative xl:absolute mt-2 xl:w-[24vw] bg-white xl:shadow-[0_6px_12px_rgba(0,0,0,0.3)] lg:rounded-l-2xl lg:p-4 z-50'>
 					<ul className='py-2'>
 						<li className='flex gap-2 items-center lg:px-4 py-2 text-lg'>
 							<Image src={especialidadesIcon} alt='icon' width={20} height={20} />
@@ -154,7 +154,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 						<div
 							className={`${
 								activeCategory ? 'max-h-64' : ''
-							} lg:max-h-[52vh] overflow-y-auto scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent`}
+							} lg:max-h-[52vh]   scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent`}
 						>
 							<ul className='overflow-y-scroll scrollbar-visible lg:overflow-auto'>
 								{sortedCategories.map((category, index) => (
@@ -171,7 +171,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 						</div>
 
 						{activeCategory && (
-							<div className=' fixed top-32 left-0 w-full h-full  bg-[#FBFAFA]  p-5 rounded-r-2xl md:absolute md:left-full md:top-0 md:w-[24vw]  xl:shadow-[0_4px_10px_rgba(0,0,0,0.3)] '>
+							<div className=' fixed top-32 left-0 w-full h-full  bg-[#FBFAFA]  p-5 rounded-r-2xl md:absolute md:left-full md:top-0 md:w-[24vw]  xl:shadow-[0_4px_10px_rgba(0,0,0,0.3)] z-20 '>
 								<div className='flex items-center mb-2  '>
 									<Image src={arrowLeft} alt='arrow' width={10} height={10} className='mr-2' />
 									<button
@@ -183,10 +183,10 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 								</div>
 
 								<h2 className='!font-inter font-bold mb-2 pt-1 pb-2  text-lg'>{activeCategory.name}</h2>
-								<ul className=''>
+								<ul className='overflow-y-scroll lg:overflow-y-visible max-h-[35vh]'>
 									{filteredCourses?.length > 0 ? (
 										filteredCourses?.slice(0, 4).map((course: any) => (
-											<li key={course.id} className='mb-2'>
+											<li key={course.id} className='mb-2 '>
 												<Link href={`/curso/${course.slug}`} onClick={handleLinkClick} className=' text-xs'>
 													<div className='flex items-center gap-4'>
 														<Image
