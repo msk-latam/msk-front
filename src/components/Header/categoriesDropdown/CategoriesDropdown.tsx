@@ -156,7 +156,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 								activeCategory ? 'max-h-64' : ''
 							} lg:max-h-[52vh]   scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent`}
 						>
-							<ul className='overflow-y-scroll scrollbar-visible lg:overflow-auto lg:max-h-[50vh]'>
+							<ul className='overflow-y-scroll  lg:overflow-auto lg:max-h-[50vh]'>
 								{sortedCategories.map((category, index) => (
 									<li
 										onClick={() => handleCategoryClick(category)}
@@ -183,7 +183,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 								</div>
 
 								<h2 className='!font-inter font-bold mb-2 pt-1 pb-2  text-lg'>{activeCategory.name}</h2>
-								<ul className='overflow-y-scroll lg:overflow-y-visible max-h-[35vh] lg:max-h-none'>
+								<ul className='overflow-y-scroll lg:overflow-y-visible max-h-[20vh] lg:max-h-none z-50'>
 									{filteredCourses?.length > 0 ? (
 										filteredCourses?.slice(0, 4).map((course: any) => (
 											<li key={course.id} className='mb-2 '>
