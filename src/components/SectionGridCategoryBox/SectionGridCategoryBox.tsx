@@ -109,8 +109,8 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
 				<div className='absolute'>
 					<div
 						onClick={() => setIsModalOpen(false)}
-						style={{ top: `${modalTop}px` }}
-						className={`fixed top-[20rem]  w-screen h-[100rem]  bg-opacity-50 left-1/2  transform  -translate-x-1/2  flex items-center justify-center ${
+						// style={{ top: `${modalTop}px` }}
+						className={`fixed top-[30rem]  w-screen h-[100rem]  bg-opacity-50 left-1/2  transform  -translate-x-1/2  flex items-center justify-center ${
 							isModalOpen ? 'bg-black' : 'bg-white'
 						} rounded-lg `}
 					>

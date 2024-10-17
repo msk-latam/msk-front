@@ -40,7 +40,7 @@ const EitnerCrum: React.FC<EitnerCrumProps> = ({ product, post }) => {
 		? product.ficha.categorias[0].name
 		: post
 		? post.categories[0].name
-		: pathSegments[1] === 'tienda' && pathSegments.length === 2 // Si estás en /tienda, no mostrar categoría
+		: pathSegments[1] === 'tienda' && pathSegments.length === 2
 		? ''
 		: pathSegments[2] || 'Categoría';
 	const productOrPostSegment = product ? product.ficha.title : post ? post.title : pathSegments[3] || '';

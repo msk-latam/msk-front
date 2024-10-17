@@ -151,8 +151,8 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 							<Image src={especialidadesIcon} alt='icon' width={20} height={20} />
 							<h2 className='!font-inter'>Especialidades</h2>
 						</li>
-						<div className='max-h-48 lg:max-h-[52vh] overflow-y-auto  scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent'>
-							<ul>
+						<div className='max-h-64 lg:max-h-[52vh] overflow-y-auto  scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent'>
+							<ul className='overflow-y-scroll scrollbar-visible lg:overflow-auto'>
 								{sortedCategories.map((category, index) => (
 									<li
 										onClick={() => handleCategoryClick(category)}
@@ -168,7 +168,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 
 						{activeCategory && (
 							<div className='fixed top-36 left-0 w-full h-full  bg-[#FBFAFA]  p-5 rounded-r-2xl md:absolute md:left-full md:top-0 md:w-[24vw]  xl:shadow-[0_4px_10px_rgba(0,0,0,0.3)] '>
-								<div className='flex items-center mb-4  '>
+								<div className='flex items-center mb-2  '>
 									<Image src={arrowLeft} alt='arrow' width={10} height={10} className='mr-2' />
 									<button
 										onClick={() => setActiveCategory(null)} // Esta función oculta el segundo dropdown
@@ -178,7 +178,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 									</button>
 								</div>
 
-								<h2 className='!font-inter font-bold mb-4 pt-1 pb-2  text-lg'>{activeCategory.name}</h2>
+								<h2 className='!font-inter font-bold mb-2 pt-1 pb-2  text-lg'>{activeCategory.name}</h2>
 								<ul>
 									{filteredCourses?.length > 0 ? (
 										filteredCourses?.slice(0, 4).map((course: any) => (
@@ -208,7 +208,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 								</ul>
 								<button
 									onClick={() => redirectToCategory(activeCategory.name)}
-									className='bg-[#9200AD] text-white py-3 px-4 rounded-md hover:bg-[#FF5D5E] w-full'
+									className='bg-[#9200AD] text-white py-2 lg:py-3  lg:px-4 rounded-md hover:bg-[#FF5D5E] w-full mt-8 font-semibold text-sm lg:text-base'
 								>
 									Ver todos los cursos
 								</button>

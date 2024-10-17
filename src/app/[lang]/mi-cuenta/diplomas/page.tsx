@@ -11,7 +11,7 @@ import CourseList from './CourseList';
 import PageDocumentosHeader from '../documentos/PageDocumentosHeader';
 import DocumentStatusSection from '../documentos/DocumentStatusSection';
 
-const pageDiplomas: FC = () => {
+const PageDiplomas: FC = () => {
 	const { state, dispatch } = useContext(AuthContext);
 	const [user, setUser] = useState<User>({} as User);
 	const { countryState: countryState } = useContext(CountryContext);
@@ -63,4 +63,4 @@ const pageDiplomas: FC = () => {
 	);
 };
 
-export default pageDiplomas;
+export default PageDiplomas;

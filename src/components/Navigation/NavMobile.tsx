@@ -353,13 +353,13 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 				)}
 				{/*<div className="border-t border-neutral-200 dark:border-neutral-700 w-[90%] mx-auto px-2 space-y-1" />*/}
 				{state.isAuthenticated ? (
-					<ul className='relative flex flex-col py-2 px-2 space-y-1 mt-14 z-50 justify-end'>
+					<ul className='relative flex flex-col py-2 px-2 space-y-1 mt-14 z-50 justify-end container'>
 						{userNav.map((item, index) => _renderItem(item, index, false))}
 						<li>
 							<ButtonSecondary
 								onClick={() => handleModalLogout()}
 								sizeClass='px-4 py-2 sm:px-5 w-full mt-4'
-								className='border-solid border-1 border-neutral-200'
+								className='border-solid border-1 border-neutral-200 rounded-md'
 								bordered
 							>
 								Cerrar sesión
@@ -367,16 +367,16 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 						</li>
 					</ul>
 				) : (
-					<ul className='relative flex flex-col py-2 px-2 space-y-1 mt-14 z-50'>
+					<ul className='relative flex flex-col py-2 px-2 space-y-1  z-50 container gap-2 bg-white pt-8'>
 						<ButtonSecondary
 							href={'/iniciar-sesion'}
 							sizeClass='px-4 py-2 sm:px-5'
-							className='border-solid border-1 border-neutral-200 text-neutral-500'
+							className='border-solid border-1 border-[#E5E7EB]  text-neutral-500 rounded-md '
 							bordered
 						>
 							Iniciar sesión
 						</ButtonSecondary>
-						<ButtonPrimary href={'/crear-cuenta'} sizeClass='px-4 py-2 sm:px-5' className='font-semibold'>
+						<ButtonPrimary href={'/crear-cuenta'} sizeClass='px-4 py-2 sm:px-5 rounded-md' className='font-semibold'>
 							Crear cuenta
 						</ButtonPrimary>
 					</ul>
