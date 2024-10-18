@@ -145,7 +145,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 			</div>
 
 			{isOpen && (
-				<div className='overflow-y-scroll scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent lg:overflow-y-visible max-h-[50vh] lg:max-h-none relative xl:absolute mt-2 xl:w-[24vw] bg-white xl:shadow-[0_6px_12px_rgba(0,0,0,0.3)] lg:rounded-l-2xl lg:p-4 z-50'>
+				<div className='overflow-y-scroll scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent lg:overflow-y-visible max-h-[50vh] lg:max-h-none relative xl:absolute mt-2 xl:w-[24vw] bg-white xl:shadow-[0_6px_12px_rgba(0,0,0,0.3)] lg:rounded-l-2xl lg:p-4 '>
 					<ul className='py-2'>
 						<li className='flex gap-2 items-center lg:px-4 py-2 text-lg'>
 							<Image src={especialidadesIcon} alt='icon' width={20} height={20} />
@@ -183,7 +183,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 								</div>
 
 								<h2 className='!font-inter font-bold mb-2 pt-1 pb-2  text-lg'>{activeCategory.name}</h2>
-								<ul className='overflow-y-scroll lg:overflow-y-visible max-h-[20vh] lg:max-h-none z-50 scrollbar-thumb-[#6474A6]'>
+								<ul className='overflow-y-scroll lg:overflow-y-visible h-[calc(53vh-10rem)] lg:h-auto lg:max-h-none z-50 scrollbar-thumb-[#6474A6]'>
 									{filteredCourses?.length > 0 ? (
 										filteredCourses?.slice(0, 4).map((course: any) => (
 											<li key={course.id} className='mb-2 '>
