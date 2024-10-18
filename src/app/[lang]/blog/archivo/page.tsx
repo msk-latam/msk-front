@@ -14,6 +14,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
 	return {
 		title: 'Archivo | MSK',
+		description:
+			'Revisa los artículos archivados de nuestro blog, así como las infografías, guías profesionales y otros recursos de interés que publicamos. ',
 		alternates: IS_PROD
 			? {
 					canonical: `${SITE_URL}/${currentCountry}/blog/archivo`,

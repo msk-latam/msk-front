@@ -209,6 +209,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 														</div>
 													</div>
 												</Link>
+												<div className='absolute top-[400px] left-0 w-full h-8 bg-gradient-to-t from-white to-transparent pointer-events-none'></div>
 											</li>
 										))
 									) : (
