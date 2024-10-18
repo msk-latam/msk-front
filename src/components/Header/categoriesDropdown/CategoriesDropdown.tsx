@@ -129,7 +129,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 	}, []);
 
 	return (
-		<div className='relative block' ref={dropdownRef}>
+		<div className='relative block overscroll-none ' ref={dropdownRef}>
 			<div className='flex'>
 				<button
 					className='hidden xl:flex items-center justify-between w-full bg-transparent text-black py-2 px-3 rounded-md hover:bg-[#FF5D5E] hover:text-white xl:w-auto group !font-inter font-medium'
@@ -180,7 +180,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 										<Image src={arrowLeft} alt='arrow' width={8} height={8} className='mr-2 mb-2 lg:mb-0 lg:mt-2' />
 										<button
 											onClick={() => setActiveCategory(null)}
-											className='bg-transparent text-[#6474A6] py-2 px-2 rounded-md hover:bg-gray-300 !font-inter lg:mt-2 mb-2 lg:mb-0'
+											className='bg-transparent text-[#6474A6] py-2 px-2 rounded-md hover:bg-violet-100  !font-inter lg:mt-2 mb-2 lg:mb-0'
 										>
 											Descubre más
 										</button>
@@ -188,7 +188,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 								</div>
 
 								<h2 className='!font-inter font-bold mb-2 pt-1 pb-2  text-lg'>{activeCategory.name}</h2>
-								<ul className='overflow-y-scroll lg:overflow-y-visible h-[calc(53vh-10rem)] lg:h-auto lg:max-h-none z-50 scrollbar-thumb-[#6474A6]'>
+								<ul className='overflow-y-scroll lg:overflow-y-visible h-[calc(53vh-10rem)] lg:h-auto lg:max-h-none z-50 scrollbar-thin scrollbar-thumb-[#6474A6]'>
 									{filteredCourses?.length > 0 ? (
 										filteredCourses?.slice(0, 4).map((course: any) => (
 											<li key={course.id} className='mb-2 '>
