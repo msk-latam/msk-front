@@ -176,18 +176,18 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 				<Logo isOnBlog={typeof window !== 'undefined' && window.location.href.includes('blog')} />
 				<ButtonClose onClick={onClickClose} />
 			</div>
-			<div className='z-10 px-4 pb-4'>
+			<div className='z-10 px-4 '>
 				<SearchProducts />
-				<div className='px-2'>
+				<div className='px-2 pb-0'>
 					<CategoriesDropdown onClick={onClickClose} />
 				</div>
 			</div>
 			<div className='mobile-nav-container'>
-				<ul className='flex flex-col py-2 px-2 space-y-1'>{data.map((item, index) => _renderItem(item, index, false))}</ul>
+				{/* <ul className='flex flex-col py-2 px-2 space-y-1'>{data.map((item, index) => _renderItem(item, index, false))}</ul> */}
 				{location && typeof location.pathname != 'undefined' && location.pathname.includes('/tienda') && (
 					<>
-						<div className='border-t border-neutral-200 dark:border-neutral-700 w-[90%] mx-auto px-2 space-y-1' />
-						<ul className='flex flex-col py-2 px-2 space-y-1 store-menu'></ul>
+						{/* <div className='border-t border-neutral-200 dark:border-neutral-700 w-[90%] mx-auto px-2 space-y-1' />
+						<ul className='flex flex-col py-2 px-2 space-y-1 store-menu'></ul> */}
 					</>
 				)}
 				{/*<div className="border-t border-neutral-200 dark:border-neutral-700 w-[90%] mx-auto px-2 space-y-1" />*/}

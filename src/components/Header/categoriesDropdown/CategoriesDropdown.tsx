@@ -145,7 +145,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 			</div>
 
 			{isOpen && (
-				<div className='overflow-y-scroll scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent lg:overflow-y-visible max-h-[50vh] lg:max-h-none relative xl:absolute mt-2 xl:w-[24vw] bg-white xl:shadow-[0_6px_12px_rgba(0,0,0,0.3)] lg:rounded-l-2xl lg:p-4 '>
+				<div className='overflow-y-scroll scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent lg:overflow-y-visible max-h-[55vh] lg:max-h-none relative xl:absolute mt-2 xl:w-[24vw] bg-white xl:shadow-[0_6px_12px_rgba(0,0,0,0.3)] lg:rounded-l-2xl lg:p-4 '>
 					<ul className='py-2'>
 						<li className='flex gap-2 items-center lg:px-4 py-2 text-lg'>
 							<Image src={especialidadesIcon} alt='icon' width={20} height={20} />
@@ -156,7 +156,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 								activeCategory ? 'max-h-64' : ''
 							} lg:max-h-[52vh]   scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent`}
 						>
-							<ul className=' lg:overflow-auto lg:max-h-[50vh] scrollbar-thumb-[#6474A6]'>
+							<ul className=' lg:overflow-auto lg:max-h-[50vh] scrollbar-thumb-[#6474A6] scrollbar-thin scrollbar-track-transparent'>
 								{sortedCategories.map((category, index) => (
 									<li
 										onClick={() => handleCategoryClick(category)}
@@ -172,14 +172,19 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 
 						{activeCategory && (
 							<div className=' fixed top-32 left-0 w-full h-full  bg-[#FBFAFA]  p-5 rounded-r-2xl md:absolute md:left-full md:top-0 md:w-[24vw]  xl:shadow-[0_4px_10px_rgba(0,0,0,0.3)] z-20 '>
-								<div className='flex items-center mb-2  '>
-									<Image src={arrowLeft} alt='arrow' width={10} height={10} className='mr-2' />
-									<button
-										onClick={() => setActiveCategory(null)} // Esta función oculta el segundo dropdown
-										className='bg-transparent text-[#6474A6] py-2 px-4 rounded-md hover:bg-gray-300 !font-inter lg:mt-2 '
-									>
-										Descubre más
-									</button>
+								<div className='relative'>
+									{/* Div con posición absoluta para expandir el fondo blanco */}
+									<div className='absolute inset-0 bg-white z-[-1]  w-screen transform -translate-x-1/2 -mt-5 left-1/2 lg:hidden'></div>
+
+									<div className='flex items-center mb-4 '>
+										<Image src={arrowLeft} alt='arrow' width={8} height={8} className='mr-2 mb-2 lg:mb-0 lg:mt-2' />
+										<button
+											onClick={() => setActiveCategory(null)}
+											className='bg-transparent text-[#6474A6] py-2 px-2 rounded-md hover:bg-gray-300 !font-inter lg:mt-2 mb-2 lg:mb-0'
+										>
+											Descubre más
+										</button>
+									</div>
 								</div>
 
 								<h2 className='!font-inter font-bold mb-2 pt-1 pb-2  text-lg'>{activeCategory.name}</h2>
