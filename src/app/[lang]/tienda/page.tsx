@@ -6,6 +6,7 @@ import { Metadata } from 'next';
 import ssr from '@/services/ssr';
 import { slugifySpecialty } from '@/lib/Slugify';
 import { SITE_URL } from '@/contains/constants';
+import HotjarTienda from '@/hotjar/HotjarTienda';
 
 type Props = {
 	params: { lang: string; page: string; title?: string; filters?: string };
@@ -87,6 +88,7 @@ const PageStore: FC<PageStoreProps> = ({ className = '', params }) => {
 	return (
 		<div className={`nc-PageStore ${className} animate-fade-down`} data-nc-id='PageStore'>
 			<StoreLayout subHeading='' headingEmoji='' heading='Tienda' country={currentCountry}>
+				<HotjarTienda />
 				<section className=' text-neutral-600 text-sm md:text-base overflow-hidden'>
 					<StoreContent />
 				</section>

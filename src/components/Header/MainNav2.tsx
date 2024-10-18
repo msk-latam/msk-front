@@ -14,7 +14,7 @@ import { usePathname } from 'next/navigation';
 import { useCurrentLocale } from 'next-i18n-router/client';
 // @ts-ignore
 import i18nConfig from '@/i18nConfig';
-import CategoriesDropdown from './CategoriesDropdown';
+import CategoriesDropdown from './categoriesDropdown/CategoriesDropdown';
 
 const MainNav2: FC = () => {
 	const locale = useCurrentLocale(i18nConfig);
@@ -38,32 +38,26 @@ const MainNav2: FC = () => {
 
 	return (
 		<div className={`nc-MainNav nc-MainNav2 relative z-10 container`}>
-			<div className='   py-5 relative flex justify-between items-center'>
-				<div className='flex justify-start flex-grow items-center space-x-3 sm:space-x-8 lg:space-x-10'>
+			<div className='py-5 relative flex items-center justify-between'>
+				<div className='flex items-center space-x-3 sm:space-x-8'>
 					<Logo isOnBlog={isOnBlog} />
-					{/* <CategoriesDropdown /> */}
-					<div className='hidden sm:block flex-grow max-w-xs'>
-						<SearchProducts />
+					<div className='hidden sm:block h-10 border-l border-neutral-300 dark:border-neutral-6000 m-0'></div>
+					<div className='hidden xl:block'>
+						<CategoriesDropdown />
 					</div>
 				</div>
+
+				{/* Esta parte empuja SearchProducts a la derecha */}
+				<div className='hidden sm:flex flex-grow  justify-end mr-10'>
+					<SearchProducts />
+				</div>
+
 				{initialLoad && (
 					<div className='flex-shrink-0 flex items-center justify-end text-neutral-700 dark:text-neutral-100 space-x-1'>
 						<div className={'hidden items-center xl:flex space-x-2'}>
-							{isOnBlog && (
-								<>
-									<Navigation navigations={NAVIGATION_BLOG_MSK} />
-								</>
-							)}
-							{isOnArchive && (
-								<>
-									<Navigation navigations={NAVIGATION_ARCHIVE_MSK} />
-								</>
-							)}
-							{!isOnBlog && !isOnArchive && (
-								<>
-									<Navigation navigations={NAVIGATION_MSK} />
-								</>
-							)}
+							{isOnBlog && <>{/* <Navigation navigations={NAVIGATION_BLOG_MSK} /> */}</>}
+							{isOnArchive && <>{/* <Navigation navigations={NAVIGATION_ARCHIVE_MSK} /> */}</>}
+							{!isOnBlog && !isOnArchive && <>{/* <Navigation navigations={NAVIGATION_MSK} /> */}</>}
 							{state.isAuthenticated ? (
 								<>
 									<ButtonSecondary

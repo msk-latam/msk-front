@@ -11,7 +11,6 @@ import productDetails from '@/hooks/ssr/productDetails';
 import SectionSliderPosts from '../Sections/SectionSliderPosts';
 import ProductInstructors from './ProductInstructors';
 import ContactFormSection from '../MSK/ContactForm';
-import Breadcrum from '@/components/Breadcrum/Breadcrum';
 import Image from 'next/image';
 import { removeFirstSubdomain } from '@/utils/removeFirstSubdomain';
 
@@ -22,6 +21,7 @@ interface Props {
 import { DataContext } from '@/context/data/DataContext';
 import SectionSliderBestSellers from '../Sections/SectionSliderBestSellers';
 import { courseReviewRefs } from './EmbedSocial';
+import EitnerCrum from '../EitnerCrum/EitnerCrum';
 
 const SingleProductDetail: FC<Props> = ({ product, country }) => {
 	const {
@@ -46,8 +46,6 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 
 	const slug = product.params.slug;
 
-	console.log(isEbook, 'isEbook');
-
 	const dataRef = courseReviewRefs[slug] ? courseReviewRefs[slug] : courseReviewRefs['general'];
 
 	console.log(dataRef);
@@ -67,7 +65,7 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 		// };
 	}, [dataRef]);
 
-	console.log(product.ficha.description);
+	console.log(product);
 
 	// @ts-ignore
 	return (
@@ -76,7 +74,7 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 				<div className=' grid grid-cols-1 lg:grid-cols-[66.2%_35%] mb-16'>
 					<div className=''>
 						<div className='course-details-wrapper pt-10 animate-fade-down'>
-							<Breadcrum isEbook={isEbook} onProduct={product} />
+							<EitnerCrum product={product} />
 							<div className='flex gap-2'>
 								<CategoryBadgeList categories={product.ficha.categorias} isEbook={isEbook} isCourse={!isEbook} />
 							</div>
