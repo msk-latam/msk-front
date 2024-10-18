@@ -188,7 +188,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 								</div>
 
 								<h2 className='!font-inter font-bold mb-2 pt-1 pb-2  text-lg'>{activeCategory.name}</h2>
-								<ul className='overflow-y-scroll lg:overflow-y-visible h-[calc(53vh-10rem)] lg:h-auto lg:max-h-none z-50 scrollbar-thin scrollbar-thumb-[#6474A6]'>
+								<ul className=' overflow-y-scroll lg:overflow-y-visible h-[calc(53vh-10rem)] lg:h-auto lg:max-h-none z-50 scrollbar-thin scrollbar-thumb-[#6474A6]'>
 									{filteredCourses?.length > 0 ? (
 										filteredCourses?.slice(0, 4).map((course: any) => (
 											<li key={course.id} className='mb-2 '>
@@ -209,12 +209,12 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 														</div>
 													</div>
 												</Link>
-												<div className='absolute top-[400px] left-0 w-full h-8 bg-gradient-to-t from-white to-transparent pointer-events-none'></div>
 											</li>
 										))
 									) : (
 										<li className='mb-2 text-sm text-gray-500'>No hay cursos disponibles en esta categoría.</li>
 									)}
+									{/* <div className='absolute left-0 w-full  bottom-0 top-0 bg-gradient-to-t from-white to-transparent pointer-events-none transform translate-y-[-20px]'></div> */}
 								</ul>
 								<div className='flex items-center gap-2 mt-4'>
 									<button
