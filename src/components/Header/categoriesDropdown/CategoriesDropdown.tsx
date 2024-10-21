@@ -126,6 +126,8 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 		return () => window.removeEventListener('resize', handleResize);
 	}, []);
 
+	console.log(cachedCourses);
+
 	return (
 		<div className='relative block overscroll-none ' ref={dropdownRef}>
 			<div className='flex'>

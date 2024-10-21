@@ -51,6 +51,12 @@ export const categoriesData: CategoriesData = {
 		pageDescription:
 			'Tienes distintas opciones para cursar a distancia.Con ellas desarrollarás las habilidades esenciales para poner en práctica en los servicios de urgencias y emergencias. Comprenderás en profundidad un amplio rango de enfermedades, incluso aquellas poco frecuentes, y te prepararás para una correcta toma de decisiones que derive en tratamientos más eficientes.',
 	},
+	endocrinologia: {
+		headerTitle: 'Cursos de endocrinología',
+		pageTitle: '¿Cuál es la importancia de la endocrinología?',
+		pageDescription:
+			'Esta especialidad es de suma relevancia debido a que abarca las enfermedades metabólicas y todas aquellas derivadas del proceso nutricional. Al aprender sobre endocrinología, te prepararás para atender de forma integral las variadas patologías que corresponden a la especialidad a lo largo de toda la vida del paciente.',
+	},
 	geriatria: {
 		headerTitle: 'Cursos de geriatría',
 		pageTitle: '¿Qué obtienes al estudiar sobre geriatría?',
@@ -147,15 +153,30 @@ export const categoriesData: CategoriesData = {
 		pageDescription:
 			'Hazte de las competencias y las habilidades necesarias para realizar de manera oportuna y eficaz el abordaje, la evaluación inicial, el diagnóstico y los diferentes tipos de tratamientos de la patología traumatológica en el paciente adulto, infantil y oncológico. Estudia las afecciones traumatológicas en su totalidad: miembro superior y miembro inferior, la columna, la pelvis y el pie.',
 	},
-	'': {
-		headerTitle: '',
-		pageTitle: '',
-		pageDescription: '',
+
+	gastroenterologia: {
+		headerTitle: 'Cursos de gastroenterología',
+		pageTitle: '¿Por qué capacitarte sobre gastroenterología?',
+		pageDescription:
+			'Los cursos de actualización en gastroenterología se han posicionado como una herramienta imprescindible en el ámbito de la salud. Capacitándote en esta especialidad, podrás contar con las herramientas y los conocimientos clave para identificar, realizar el diagnóstico diferencial e implementar el tratamiento adecuado de los trastornos más comunes del aparato digestivo y ser capaz de prevenir y tratar las complicaciones más frecuentes de sus distintas enfermedades.',
 	},
-	'': {
-		headerTitle: '',
-		pageTitle: '',
-		pageDescription: '',
+	nefrologia: {
+		headerTitle: 'Cursos de nefrología',
+		pageTitle: '¿Qué obtienes al aprender sobre nefrología?',
+		pageDescription:
+			'Hazte de las competencias necesarias para atender de forma integral, tanto ambulatoria como hospitalaria, las variadas patologías que corresponden a la especialidad a lo largo de toda la vida del paciente. Con una capacitación en nefrología podrás estudiar la estructura y la función de los riñones, tanto en la salud como en la enfermedad, incluyendo la prevención, el diagnóstico y el tratamiento de las enfermedades renales.',
+	},
+	oftalmologia: {
+		headerTitle: 'Cursos de oftalmología',
+		pageTitle: '¿Qué puedes aprender sobre oftalmología?',
+		pageDescription:
+			'Capacitándote a través de contenido elaborado, revisado y actualizado por profesionales de reconocido prestigio, podrás conocer las bases anatómicas y funcionales del aparato de la visión y los principios de la óptica y la refracción, así como estudiar el abordaje de patologías de la especialidad, tales como ametropía, conjuntivitis, catarata, glaucoma, retinopatías y traumatología ocular, entre otras.',
+	},
+	urologia: {
+		headerTitle: 'Cursos de urología',
+		pageTitle: '¿Quieres capacitarte en urología?',
+		pageDescription:
+			'Nuestra propuesta de aprendizaje en esta especialidad está sustentada por la experiencia de autores de prestigio en el ámbito académico. Capacítate para conocer en profundidad las afecciones del aparato urinario y órganos situados en el retroperitoneo, así como del aparato genital masculino, motivadas por alteraciones congénitas, traumáticas, sépticas, metabólicas, obstructivas u oncológicas.',
 	},
 	'': {
 		headerTitle: '',
