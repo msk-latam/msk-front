@@ -42,6 +42,25 @@ const Tienda: FC<TiendaProps> = ({ category, country }) => {
 
 	let { storeFilters, addFilter, removeFilter, updateFilter, clearSpecialties } = useStoreFilters();
 
+	useEffect(() => {
+		const filterCourses = () => {
+			let filteredCourses = storeCourses;
+
+			// Filtra por categoría
+			if (category) {
+				filteredCourses = storeCourses.filter((course: any) => course.categories.some((cat: any) => cat.slug === category));
+			}
+
+			filteredCourses = filteredCourses.filter((course: any) => course.father_post_type === 'course');
+
+			console.log(filteredCourses);
+
+			setCurrentItems(filteredCourses);
+		};
+
+		filterCourses();
+	}, [category, country, storeCourses, currentPage]);
+
 	const onChangeProfession = (profession: Profession) => {
 		resetPage();
 		const professionExists = storeFilters.professions.filter((item: Profession) => {
@@ -103,16 +122,36 @@ const Tienda: FC<TiendaProps> = ({ category, country }) => {
 
 	const matchedSpecialty = specialties.find((specialty) => generateSlug(specialty.name) === category);
 
+	const listaDeCedentes = currentItems.flatMap((item: any) => item.lista_de_cedentes || []);
+	const cedentesTitulos = Array.from(new Set(listaDeCedentes.map((cedente: any) => cedente.post_title))).join(', ');
+
+	console.log(cedentesTitulos);
+
 	let content = {
 		texto: 'Preguntas Frecuentes',
 		items: [
 			{
 				titulo: `¿Quiénes desarrollan los cursos de ${matchedSpecialty?.name || 'esta especialidad'}?`,
-				parrafo: '<p>Estos cursos tienen como cedentes a:</p>',
+				parrafo: `<p>Estos cursos tienen como cedentes a: ${cedentesTitulos}</p>`,
 			},
 			{
-				titulo: 'Quienes pueden realizarlo?',
-				parrafo: '<p>probando 2</p>',
+				titulo: '¿Quienes pueden realizarlo?',
+				parrafo:
+					'<p>Nuestros cursos están orientados al personal médico, personal de enfermería, auxiliares y otros profesionales de la salud.</p>',
+			},
+			{
+				titulo: `¿Cómo es la modalidad de aprendizaje?`,
+				parrafo: `<p>¡Es 100% a distancia! Realizar los cursos de ${
+					matchedSpecialty?.name || 'esta especialidad'
+				} en MSK tiene como característica que puedes desarrollar una autonomía en tu cursada, avanzando a tus tiempos y con una asimilación progresiva de los conocimientos.</p>`,
+			},
+			{
+				titulo: `¿Cuántas horas de duración estimada tienen los cursos de ${matchedSpecialty?.name || 'esta especialidad'}?`,
+				parrafo: `<p>Nuestros cursos tienen una duración estimada de entre 50 a 600 horas. </p>`,
+			},
+			{
+				titulo: `¿Cuánto tiempo están disponibles para cursar? `,
+				parrafo: `<p>Los cursos están disponibles de 12 a 18 meses, dependiendo de cada uno.</p>`,
 			},
 		],
 	};
@@ -123,7 +162,6 @@ const Tienda: FC<TiendaProps> = ({ category, country }) => {
 
 			<TiendaProductos category={category} country={country} />
 
-			{/* <Questions content={pageHomeWpContent?.preguntas_frecuentes as FAQS} /> */}
 			<Questions content={content as FAQS} />
 		</>
 	);

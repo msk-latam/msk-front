@@ -26,7 +26,6 @@ interface EitnerCrumProps {
 }
 
 const EitnerCrum: React.FC<EitnerCrumProps> = ({ product, post }) => {
-	console.log(post);
 	const pathname = usePathname();
 	const pathSegments = pathname.split('/').filter(Boolean);
 
@@ -45,8 +44,6 @@ const EitnerCrum: React.FC<EitnerCrumProps> = ({ product, post }) => {
 		: pathSegments[2] || 'Categoría';
 	const productOrPostSegment = product ? product.ficha.title : post ? post.title : pathSegments[3] || '';
 
-	console.log(post?.categories);
-
 	const normalizeUrlSegment = (segment: string) => {
 		if (!segment) return '';
 		return segment
@@ -60,7 +57,6 @@ const EitnerCrum: React.FC<EitnerCrumProps> = ({ product, post }) => {
 	const formatLabel = (label: string) => {
 		return label.replace(/-/g, ' ');
 	};
-	console.log(pathSegments.length === 3);
 
 	const breadcrumbLinks = isBlog
 		? [
@@ -106,8 +102,6 @@ const EitnerCrum: React.FC<EitnerCrumProps> = ({ product, post }) => {
 					isLastSegment: true,
 				},
 		  ].filter(Boolean);
-
-	console.log(breadcrumbLinks);
 
 	return (
 		<nav aria-label='breadcrumb' className='mb-4'>
