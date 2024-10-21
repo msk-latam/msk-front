@@ -26,7 +26,18 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 
 	let categories: Specialty[] = useStoreFilters().specialties;
 
-	const sortedCategories = [...categories].sort((a, b) => a.name.localeCompare(b.name));
+	let sortedCategories = [...categories].sort((a, b) => a.name.localeCompare(b.name));
+
+	// Filtramos la categoría "Oftalmología" (asumiendo que el nombre es case-sensitive)
+	sortedCategories = sortedCategories.filter((category) => category.name !== 'Oftalmología');
+
+	// Agregamos manualmente la categoría "Neurología"
+	sortedCategories.push({
+		name: 'Neurología',
+	});
+
+	// Ordenamos de nuevo para incluir "Neurología" en la posición correcta
+	sortedCategories = sortedCategories.sort((a, b) => a.name.localeCompare(b.name));
 
 	const handleCategoryClick = (category: Specialty) => {
 		setActiveCategory(category); // Activa el dropdown secundario con la categoría seleccionada
