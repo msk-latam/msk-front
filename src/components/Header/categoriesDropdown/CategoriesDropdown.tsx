@@ -219,15 +219,17 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 									)}
 									{/* <div className='absolute left-0 w-full  bottom-0 top-0 bg-gradient-to-t from-white to-transparent pointer-events-none transform translate-y-[-20px]'></div> */}
 								</ul>
-								<div className='flex items-center gap-2 mt-4'>
-									<button
-										onClick={() => redirectToCategory(activeCategory.name)}
-										className='text-[#9200AD] bg-transparent      rounded-md    text-sm lg:text-base flex items-center gap-2'
-									>
-										Ver todos los cursos
-										<Image src={breadcrumArrowIcon} alt='Arrow' width={6} height={6} />
-									</button>
-								</div>
+								{filteredCourses?.length > 0 && (
+									<div className='flex items-center gap-2 mt-4'>
+										<button
+											onClick={() => redirectToCategory(activeCategory.name)}
+											className='text-[#9200AD] bg-transparent rounded-md text-sm lg:text-base flex items-center gap-2'
+										>
+											Ver todos los cursos
+											<Image src={breadcrumArrowIcon} alt='Arrow' width={6} height={6} />
+										</button>
+									</div>
+								)}
 							</div>
 						)}
 
