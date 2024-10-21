@@ -26,7 +26,18 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 
 	let categories: Specialty[] = useStoreFilters().specialties;
 
-	const sortedCategories = [...categories].sort((a, b) => a.name.localeCompare(b.name));
+	let sortedCategories = [...categories].sort((a, b) => a.name.localeCompare(b.name));
+
+	// Filtramos la categoría "Oftalmología" (asumiendo que el nombre es case-sensitive)
+	sortedCategories = sortedCategories.filter((category) => category.name !== 'Oftalmología');
+
+	// Agregamos manualmente la categoría "Neurología"
+	sortedCategories.push({
+		name: 'Neurología',
+	});
+
+	// Ordenamos de nuevo para incluir "Neurología" en la posición correcta
+	sortedCategories = sortedCategories.sort((a, b) => a.name.localeCompare(b.name));
 
 	const handleCategoryClick = (category: Specialty) => {
 		setActiveCategory(category); // Activa el dropdown secundario con la categoría seleccionada
@@ -64,8 +75,6 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 			course.father_post_type !== 'downloadable' // Excluir los cursos con esta propiedad
 		);
 	});
-
-	console.log(filteredCourses);
 
 	const redirectToCategory = (slug: string) => {
 		const formattedSlug = slug
@@ -190,41 +199,46 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 								<h2 className='!font-inter font-bold mb-2 pt-1 pb-2  text-lg'>{activeCategory.name}</h2>
 								<ul className=' overflow-y-scroll lg:overflow-y-visible h-[calc(53vh-10rem)] lg:h-auto lg:max-h-none z-50 scrollbar-thin scrollbar-thumb-[#6474A6]'>
 									{filteredCourses?.length > 0 ? (
-										filteredCourses?.slice(0, 4).map((course: any) => (
-											<li key={course.id} className='mb-2 '>
-												<Link href={`/curso/${course.slug}`} onClick={handleLinkClick} className=' text-xs'>
-													<div className='flex items-center gap-4'>
-														<Image
-															src={course.thumbnail.low}
-															alt={course.title}
-															className='w-20 h-20 object-cover rounded-md'
-															height={100}
-															width={100}
-														/>
-														<div>
-															<h4 className='!font-inter font-extralight text-sm text-[#7C838F]'>
-																{course.lista_de_cedentes[0].post_title}
-															</h4>
-															<h3 className='font-light text-base text-[#6474A6] !font-inter'>{course.title}</h3>
+										filteredCourses
+											.filter((course: any) => course.thumbnail?.low) // Filtrar cursos sin thumbnail.low
+											.slice(0, 4)
+											.map((course: any) => (
+												<li key={course.id} className='mb-2 '>
+													<Link href={`/curso/${course.slug}`} onClick={handleLinkClick} className=' text-xs'>
+														<div className='flex items-center gap-4'>
+															<Image
+																src={course.thumbnail.low}
+																alt={course.title}
+																className='w-20 h-20 object-cover rounded-md'
+																height={100}
+																width={100}
+															/>
+															<div>
+																<h4 className='!font-inter font-extralight text-sm text-[#7C838F]'>
+																	{course.lista_de_cedentes[0].post_title}
+																</h4>
+																<h3 className='font-light text-base text-[#6474A6] !font-inter'>{course.title}</h3>
+															</div>
 														</div>
-													</div>
-												</Link>
-											</li>
-										))
+													</Link>
+												</li>
+											))
 									) : (
 										<li className='mb-2 text-sm text-gray-500'>No hay cursos disponibles en esta categoría.</li>
 									)}
 									{/* <div className='absolute left-0 w-full  bottom-0 top-0 bg-gradient-to-t from-white to-transparent pointer-events-none transform translate-y-[-20px]'></div> */}
 								</ul>
-								<div className='flex items-center gap-2 mt-4'>
-									<button
-										onClick={() => redirectToCategory(activeCategory.name)}
-										className='text-[#9200AD] bg-transparent      rounded-md    text-sm lg:text-base flex items-center gap-2'
-									>
-										Ver todos los cursos
-										<Image src={breadcrumArrowIcon} alt='Arrow' width={6} height={6} />
-									</button>
-								</div>
+								{filteredCourses?.length > 0 && (
+									<div className='flex items-center gap-2 mt-4'>
+										<button
+											onClick={() => redirectToCategory(activeCategory.name)}
+											className='text-[#9200AD] bg-transparent rounded-md text-sm lg:text-base flex items-center gap-2'
+										>
+											Ver todos los cursos
+											<Image src={breadcrumArrowIcon} alt='Arrow' width={6} height={6} />
+										</button>
+									</div>
+								)}
 							</div>
 						)}
 
@@ -269,7 +283,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 									href={'/tienda/?recurso=guias-profesionales'}
 									className='block lg:px-4 py-1 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
 								>
-									Guías Profesionales
+									Guías profesionales
 								</Link>
 							</li>
 							<li className='w-full'>

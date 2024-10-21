@@ -15,6 +15,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, fixed }) => {
 	if (!isOpen) return null;
 
 	let specialties: Specialty[] = useStoreFilters().specialties;
+	console.log(specialties);
 
 	return (
 		<div className={`${fixed || ''} inset-0 flex items-center justify-center z-50 backdrop-blur-[2px] rounded-3xl`}>
@@ -29,6 +30,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, fixed }) => {
 				<hr className=' border-t border-gray-300' />
 				<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-8 '>
 					{specialties
+						.filter((specialty) => specialty.name !== 'Oftalmología')
 						.sort((a, b) => a.name.localeCompare(b.name))
 						.map((specialty, index) => (
 							<Link key={index} href={`/tienda/${slugifySpecialty(specialty.name)}`} onClick={onClose}>
