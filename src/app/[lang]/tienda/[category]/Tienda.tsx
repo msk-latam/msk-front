@@ -53,8 +53,6 @@ const Tienda: FC<TiendaProps> = ({ category, country }) => {
 
 			filteredCourses = filteredCourses.filter((course: any) => course.father_post_type === 'course');
 
-			console.log(filteredCourses);
-
 			setCurrentItems(filteredCourses);
 		};
 
@@ -124,8 +122,6 @@ const Tienda: FC<TiendaProps> = ({ category, country }) => {
 
 	const listaDeCedentes = currentItems.flatMap((item: any) => item.lista_de_cedentes || []);
 	const cedentesTitulos = Array.from(new Set(listaDeCedentes.map((cedente: any) => cedente.post_title))).join(', ');
-
-	console.log(cedentesTitulos);
 
 	let content = {
 		texto: 'Preguntas Frecuentes',

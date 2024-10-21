@@ -87,8 +87,6 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 
 			const paginatedCourses = filteredCourses.slice(indexOfFirstItem, indexOfLastItem);
 
-			console.log(filterCourses);
-
 			setCurrentItems(paginatedCourses);
 		};
 
@@ -109,7 +107,6 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 		setIsModalOpen(!isModalOpen);
 	};
 
-	console.log(currentItems);
 	return (
 		<>
 			<SpecialtiesModal isOpen={isModalOpen} onClose={toggleModal} fixed='fixed' />

@@ -65,8 +65,6 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 		);
 	});
 
-	console.log(filteredCourses);
-
 	const redirectToCategory = (slug: string) => {
 		const formattedSlug = slug
 			.toLowerCase() // Convertir a minúsculas
