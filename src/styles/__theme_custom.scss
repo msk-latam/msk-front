@@ -492,7 +492,7 @@ $xs: '(max-width: 575px)';
 
 .mobile-nav-container {
 	overflow-y: auto;
-	// max-height: calc(100vh - 250px);
+	max-height: calc(100vh - 250px);
 }
 
 .thank-you-wrp {
