@@ -171,7 +171,7 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 	const location = useLocation();
 
 	return (
-		<div className='w-full h-full py-2 transition transform shadow-lg ring-1 dark:ring-neutral-700 bg-white dark:bg-neutral-900 border-r border-transparent dark:border-neutral-700'>
+		<div className='overscroll-none w-full h-full py-2 transition transform shadow-lg ring-1 dark:ring-neutral-700 bg-white dark:bg-neutral-900 border-r border-transparent dark:border-neutral-700'>
 			<div className='py-4 px-5 flex justify-between'>
 				<Logo isOnBlog={typeof window !== 'undefined' && window.location.href.includes('blog')} />
 				<ButtonClose onClick={onClickClose} />
@@ -182,7 +182,7 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 					<CategoriesDropdown onClick={onClickClose} />
 				</div>
 			</div>
-			<div className='mobile-nav-container'>
+			<div className='mobile-nav-container overscroll-none'>
 				{/* <ul className='flex flex-col py-2 px-2 space-y-1'>{data.map((item, index) => _renderItem(item, index, false))}</ul> */}
 				{location && typeof location.pathname != 'undefined' && location.pathname.includes('/tienda') && (
 					<>
@@ -192,7 +192,7 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 				)}
 				{/*<div className="border-t border-neutral-200 dark:border-neutral-700 w-[90%] mx-auto px-2 space-y-1" />*/}
 				{state.isAuthenticated ? (
-					<ul className='relative flex flex-col py-2 px-2 space-y-1 mt-2 z-50 justify-end container'>
+					<ul className='relative flex flex-col py-2 px-2 space-y-1 mt-2  justify-end container overscroll-none'>
 						{userNav.map((item, index) => _renderItem(item, index, false))}
 						<li>
 							<ButtonSecondary
@@ -206,7 +206,7 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 						</li>
 					</ul>
 				) : (
-					<ul className='relative flex flex-col py-2 px-2 space-y-1  z-50 container gap-2 bg-white pt-4'>
+					<ul className='relative flex flex-col py-2 px-2 space-y-1  z-50 container gap-2 bg-white pt-4 overscroll-none'>
 						<ButtonSecondary
 							href={'/iniciar-sesion'}
 							sizeClass='px-4 py-2 sm:px-5'
