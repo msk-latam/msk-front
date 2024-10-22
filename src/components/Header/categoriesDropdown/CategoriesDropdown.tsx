@@ -185,12 +185,18 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 									{/* Div con posición absoluta para expandir el fondo blanco */}
 									<div className='absolute inset-0 bg-white z-[-1]  w-screen transform -translate-x-1/2 -mt-5 left-1/2 lg:hidden'></div>
 
-									<div className='flex items-center mb-4 '>
-										<Image src={arrowLeft} alt='arrow' width={8} height={8} className='mr-2 mb-2 lg:mb-0 lg:mt-2' />
+									<div className='flex items-center mb-4 group'>
 										<button
 											onClick={() => setActiveCategory(null)}
-											className='bg-transparent text-[#6474A6] py-2 px-2 rounded-md hover:bg-violet-100  !font-inter lg:mt-2 mb-2 lg:mb-0'
+											className=' text-[#6474A6] py-2 px-2 rounded-md flex !font-inter lg:mt-2 mb-2 lg:mb-0 group-hover:bg-violet-100'
 										>
+											<Image
+												src={arrowLeft}
+												alt='arrow'
+												width={8}
+												height={8}
+												className='mr-2 mt-[0.35rem] lg:mb-0  bg-transparent'
+											/>
 											Descubre más
 										</button>
 									</div>

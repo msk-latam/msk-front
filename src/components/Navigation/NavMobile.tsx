@@ -171,7 +171,7 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 	const location = useLocation();
 
 	return (
-		<div className='w-full h-full py-2 transition transform shadow-lg ring-1 dark:ring-neutral-700 bg-white dark:bg-neutral-900 border-r border-transparent dark:border-neutral-700'>
+		<div className=' w-full h-full py-2 transition transform shadow-lg ring-1 dark:ring-neutral-700 bg-white dark:bg-neutral-900 border-r border-transparent dark:border-neutral-700'>
 			<div className='py-4 px-5 flex justify-between'>
 				<Logo isOnBlog={typeof window !== 'undefined' && window.location.href.includes('blog')} />
 				<ButtonClose onClick={onClickClose} />
@@ -182,7 +182,7 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 					<CategoriesDropdown onClick={onClickClose} />
 				</div>
 			</div>
-			<div className='mobile-nav-container'>
+			<div className='mobile-nav-container '>
 				{/* <ul className='flex flex-col py-2 px-2 space-y-1'>{data.map((item, index) => _renderItem(item, index, false))}</ul> */}
 				{location && typeof location.pathname != 'undefined' && location.pathname.includes('/tienda') && (
 					<>
@@ -192,21 +192,28 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 				)}
 				{/*<div className="border-t border-neutral-200 dark:border-neutral-700 w-[90%] mx-auto px-2 space-y-1" />*/}
 				{state.isAuthenticated ? (
-					<ul className='relative flex flex-col py-2 px-2 space-y-1 mt-14 z-50 justify-end container'>
-						{userNav.map((item, index) => _renderItem(item, index, false))}
+					<ul className='relative flex flex-col py-4 px-2    justify-end container z-[2147483648]'>
+						{/* {userNav.map((item, index) => _renderItem(item, index, true))} */}
+						<div className='flex flex-col justify-start gap-2'>
+							<Link onClick={onClickClose} href={'/mi-perfil'}>
+								Mi Perfil
+							</Link>
+							<Link onClick={onClickClose} href={'/mi-cuenta/inicio'}>
+								Configurar mi cuenta
+							</Link>
+						</div>
 						<li>
-							<ButtonSecondary
+							<button
 								onClick={() => handleModalLogout()}
-								sizeClass='px-4 py-2 sm:px-5 w-full mt-4'
-								className='border-solid border-1 border-neutral-200 rounded-md'
-								bordered
+								className='rounded-md px-6 py-3 w-full mt-4 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-opacity-50'
+								style={{ border: '1px solid rgba(156, 163, 175, 0.5)' }} // border-gray-400 a 50%
 							>
 								Cerrar sesión
-							</ButtonSecondary>
+							</button>
 						</li>
 					</ul>
 				) : (
-					<ul className='relative flex flex-col py-2 px-2 space-y-1  z-50 container gap-2 bg-white pt-4'>
+					<ul className='relative flex flex-col py-2 px-2 space-y-1  z-[2147483648] container gap-2 bg-white pt-4 '>
 						<ButtonSecondary
 							href={'/iniciar-sesion'}
 							sizeClass='px-4 py-2 sm:px-5'

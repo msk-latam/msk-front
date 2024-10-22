@@ -615,11 +615,11 @@ export const NAVIGATION_USER: NavItemType[] = [
 	{
 		id: ncNanoId(),
 		href: '/mi-perfil',
-		name: 'Perfil',
+		name: ' Mi Perfil',
 	},
 	{
 		id: ncNanoId(),
 		href: '/mi-cuenta/inicio',
-		name: 'Configurar mi Cuenta',
+		name: 'Configurar mi cuenta',
 	},
 ];
