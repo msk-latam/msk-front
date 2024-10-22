@@ -193,7 +193,15 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 				{/*<div className="border-t border-neutral-200 dark:border-neutral-700 w-[90%] mx-auto px-2 space-y-1" />*/}
 				{state.isAuthenticated ? (
 					<ul className='relative flex flex-col py-2 px-2 space-y-1 mt-2  justify-end container overscroll-none'>
-						{userNav.map((item, index) => _renderItem(item, index, true))}
+						{/* {userNav.map((item, index) => _renderItem(item, index, true))} */}
+						<div className='flex flex-col justify-start gap-2'>
+							<Link onClick={onClickClose} href={'/mi-perfil'}>
+								Mi Perfil
+							</Link>
+							<Link onClick={onClickClose} href={'/mi-cuenta/inicio'}>
+								Configurar mi cuenta
+							</Link>
+						</div>
 						<li>
 							<button
 								onClick={() => handleModalLogout()}
