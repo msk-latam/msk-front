@@ -195,14 +195,14 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 					<ul className='relative flex flex-col py-2 px-2 space-y-1 mt-2  justify-end container overscroll-none'>
 						{userNav.map((item, index) => _renderItem(item, index, false))}
 						<li>
-							<ButtonSecondary
+							<button
 								onClick={() => handleModalLogout()}
-								sizeClass='px-4  sm:px-5 w-full mt-4'
-								className='border-solid border-1 border-neutral-200 rounded-md z-50 py-4'
-								bordered
+								// sizeClass='px-4 py-2 sm:px-5 w-full mt-4'
+								className='border-solid border-1 border-neutral-200 rounded-md px-4 py-2 sm:px-5 w-full mt-4'
+								// bordered
 							>
 								Cerrar sesión
-							</ButtonSecondary>
+							</button>
 						</li>
 					</ul>
 				) : (
