@@ -193,7 +193,7 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 				{/*<div className="border-t border-neutral-200 dark:border-neutral-700 w-[90%] mx-auto px-2 space-y-1" />*/}
 				{state.isAuthenticated ? (
 					<ul className='relative flex flex-col py-2 px-2 space-y-1 mt-2  justify-end container overscroll-none'>
-						{/* {userNav.map((item, index) => _renderItem(item, index, false))} */}
+						{userNav.map((item, index) => _renderItem(item, index, true))}
 						<li>
 							<button
 								onClick={() => handleModalLogout()}
