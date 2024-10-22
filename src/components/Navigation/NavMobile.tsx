@@ -192,7 +192,7 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 				)}
 				{/*<div className="border-t border-neutral-200 dark:border-neutral-700 w-[90%] mx-auto px-2 space-y-1" />*/}
 				{state.isAuthenticated ? (
-					<ul className='relative flex flex-col py-4 px-2    justify-end container '>
+					<ul className='relative flex flex-col py-4 px-2    justify-end container z-[2147483648]'>
 						{/* {userNav.map((item, index) => _renderItem(item, index, true))} */}
 						<div className='flex flex-col justify-start gap-2'>
 							<Link onClick={onClickClose} href={'/mi-perfil'}>
