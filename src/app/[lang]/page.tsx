@@ -21,6 +21,7 @@ import { SITE_URL } from '@/contains/constants';
 import ssr from '@/services/ssr';
 import dynamic from 'next/dynamic';
 import { generateHomeMetadata } from '@/SEO/home/metaData/homeMetaData';
+import { homeFAQs } from '@/components/faqs/homeFAQs';
 
 const BlogSummary = dynamic(() => import('@/components/MSK/BlogSummary'));
 const BrandSlider = dynamic(() => import('@/components/MSK/BrandSlider'));
@@ -77,6 +78,8 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
 	const heroImageWEBP = '/webp-images/home/home-msk.webp';
 
+	const faqs = homeFAQs(currentCountry);
+
 	return (
 		<div className='nc- relative animate-fade-down'>
 			<div className='relative  md:overflow-visible '>
@@ -131,7 +134,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 							forSingleNote={false}
 						/>
 
-						<Questions content={pageHomeWpContent?.preguntas_frecuentes as FAQS} />
+						<Questions content={faqs} />
 					</div>
 
 					<div className=' md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20  relative py-8 md:py-16 mb-[96px] xl:w-[129%] left-1/2 transform -translate-x-1/2  w-screen -mt-10'>
