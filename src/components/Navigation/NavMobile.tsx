@@ -198,7 +198,7 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 							<ButtonSecondary
 								onClick={() => handleModalLogout()}
 								sizeClass='px-4 py-2 sm:px-5 w-full mt-4'
-								className='border-solid border-1 border-neutral-200 rounded-md'
+								className='border-solid border-1 border-neutral-200 rounded-md z-50'
 								bordered
 							>
 								Cerrar sesión
