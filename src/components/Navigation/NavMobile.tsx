@@ -192,7 +192,7 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 				)}
 				{/*<div className="border-t border-neutral-200 dark:border-neutral-700 w-[90%] mx-auto px-2 space-y-1" />*/}
 				{state.isAuthenticated ? (
-					<ul className='relative flex flex-col py-4 px-2    justify-end container z-[2147483648]'>
+					<ul className='relative flex flex-col py-4 px-2    justify-end container z-[3147483648]'>
 						{/* {userNav.map((item, index) => _renderItem(item, index, true))} */}
 						<div className='flex flex-col justify-start gap-2'>
 							<Link onClick={onClickClose} href={'/mi-perfil'}>
@@ -205,8 +205,8 @@ const NavMobile: React.FC<NavMobileProps> = ({ data = NAVIGATION_MSK, userNav = 
 						<li>
 							<button
 								onClick={() => handleModalLogout()}
-								className='rounded-md px-6 py-3 w-full mt-4 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-opacity-50'
-								style={{ border: '1px solid rgba(156, 163, 175, 0.5)' }} // border-gray-400 a 50%
+								className=' relative rounded-md px-6 py-3 w-full mt-4 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-opacity-50'
+								style={{ border: '1px solid rgba(156, 163, 175, 0.5)', zIndex: 3147483648 }} // border-gray-400 a 50%
 							>
 								Cerrar sesión
 							</button>
