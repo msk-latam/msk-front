@@ -81,7 +81,7 @@ const LandingHeader: FC<LandingProps> = ({ product, country }) => {
 						</button>
 					</Link>
 					<div className='flex flex-col md:flex-row relative z-0'>
-						<div className='bg-[#E0E7FF] flex gap-2 px-4 py-6 lg:py-6 lg:pr-6 lg:pl-0 justify-start  items-center w-screen lg:w-auto left-1/2 translate-x-[-50vw] lg:translate-x-0 absolute lg:static top-0 h-[100px] before:content-[""] before:absolute before:top-0 before:left-[-260px] before:h-full before:w-[260px] before:bg-[#E0E7FF] z-0'>
+						<div className='bg-[#E0E7FF] flex gap-2 px-4 py-6 lg:py-6 lg:pr-6 lg:pl-0 justify-start  items-center w-screen lg:w-auto left-1/2 translate-x-[-50vw] lg:translate-x-0 absolute lg:static top-0 h-[100px] before:content-[""] before:absolute before:top-0 before:left-[-360px] before:h-full before:w-[360px] before:bg-[#E0E7FF] z-0'>
 							<div className='rounded-full p-2 bg-white'>
 								<Image src={cedenteImage} alt='Cedente' width={50} height={50} className='rounded-full' />
 							</div>
