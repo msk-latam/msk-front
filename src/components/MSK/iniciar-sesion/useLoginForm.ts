@@ -48,6 +48,7 @@ export const useLoginForm = () => {
 					console.log(formData);
 
 					const { data, status } = await api.postLogin(formData);
+					console.log(data);
 					if (status == 200) {
 						const { name, speciality, ...restData } = data;
 						const loginData = {
