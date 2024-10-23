@@ -41,9 +41,12 @@ export const useLoginForm = () => {
 			setOnRequest(true);
 			try {
 				if (executeRecaptcha) {
+					const recaptchaToken = await executeRecaptcha('login');
+					console.log(recaptchaToken, 'token de recaptcha');
 					const formData = {
 						...values,
-						recaptcha_token: await executeRecaptcha('login'),
+						// recaptcha_token: await executeRecaptcha('login'),
+						recaptcha_token: recaptchaToken,
 					};
 					console.log(formData);
 
