@@ -27,7 +27,7 @@ export const useLoginForm = () => {
 		recaptcha_token: '',
 	};
 
-	console.log(initialValues);
+	// console.log(initialValues);
 
 	const validationSchema = Yup.object().shape({
 		email: Yup.string().email('Correo electrónico inválido').required('El correo electrónico es requerido'),
@@ -42,16 +42,16 @@ export const useLoginForm = () => {
 			try {
 				if (executeRecaptcha) {
 					const recaptchaToken = await executeRecaptcha('login');
-					console.log(recaptchaToken, 'token de recaptcha');
+					// console.log(recaptchaToken, 'token de recaptcha');
 					const formData = {
 						...values,
 						// recaptcha_token: await executeRecaptcha('login'),
 						recaptcha_token: recaptchaToken,
 					};
-					console.log(formData);
+					// console.log(formData);
 
 					const { data, status } = await api.postLogin(formData);
-					console.log(data);
+					// console.log(data);
 					if (status == 200) {
 						const { name, speciality, ...restData } = data;
 						const loginData = {

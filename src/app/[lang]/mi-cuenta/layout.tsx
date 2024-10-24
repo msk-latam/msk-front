@@ -42,7 +42,6 @@ const PageDashboard: FC<PageDashboardProps> = ({ children, className = '' }) => 
 	const { state } = useContext(AuthContext);
 	const router = useRouter();
 	useEffect(() => {
-		console.log(state);
 		if (state && state.stateLoaded && !state.isAuthenticated) {
 			router.push('/');
 		}

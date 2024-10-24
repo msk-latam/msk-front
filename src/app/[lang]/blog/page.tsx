@@ -37,7 +37,6 @@ const PageBlog: React.FC<PageProps> = async ({ params }) => {
 	const currentCountry = params.lang || cookies().get('country')?.value;
 	const allBestSellers = await ssr.getBestSellers(currentCountry);
 
-	console.log({ allBestSellers });
 	const allPosts = await ssr.getPosts();
 	const welcomePosts = allPosts.filter((p: FetchPostType, i: number) => i < 4);
 

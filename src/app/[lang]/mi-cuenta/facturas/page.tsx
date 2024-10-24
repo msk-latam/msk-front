@@ -52,12 +52,14 @@ const pageFacturas: FC = () => {
 	}, [state?.profile]);
 
 	useEffect(() => {
-		console.log(user);
+		// console.log(user);
 		if (user?.contact?.contracts) {
 			setContracts(user.contact.contracts);
-			console.log(contracts);
+			// console.log(contracts);
 		}
 	}, [user]);
+
+	console.log(user.contact, 'contacto');
 	return (
 		<>
 			<div>

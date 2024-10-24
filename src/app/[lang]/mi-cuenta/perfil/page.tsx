@@ -32,7 +32,7 @@ const PageDashboard: FC<PageDashboardProps> = ({ className = '' }) => {
 	const fetchUser = async () => {
 		setLoading(true);
 		const res = await ssr.getUserData();
-		console.log({ res });
+		// console.log({ res });
 		if (!res.message) {
 			if (!res.contact.state) res.contact.state = '';
 			setUser(res);

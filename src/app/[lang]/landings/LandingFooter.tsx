@@ -14,7 +14,7 @@ interface LandingProps {
 
 const LandingFooter: FC<LandingProps> = ({ product, country }) => {
 	const [faqs, setFaqs] = useState<any>(null);
-	console.log(faqs);
+
 	const fetchContent = async () => {
 		const fetchedContent = await ssr.getWpContent('/home-msk', country);
 		setFaqs(fetchedContent);
