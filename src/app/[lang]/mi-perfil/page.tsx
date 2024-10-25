@@ -18,6 +18,7 @@ import { useRouter } from 'next/navigation';
 import RedirectToTrial from '@/components/RedirectToTrial/RedirectToTrial';
 import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
 import CursoPerfil from './CursoPerfil';
+import CourseList from '../mi-cuenta/diplomas/CourseList';
 
 export interface PageAuthorProps {
 	className?: string;
@@ -135,6 +136,8 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	// const redirectToTrialURL = localStorage.getItem('trialURL') || '';
 	// router.push(redirectToTrialURL)
 	// localStorage.removeItem('trialURL')
+
+	console.log(CourseList);
 
 	return (
 		<div className={`nc-PageAuthor  ${className} `} data-nc-id='PageAuthor'>

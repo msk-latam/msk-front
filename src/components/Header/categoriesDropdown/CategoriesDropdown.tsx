@@ -45,7 +45,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 
 	function getCachedCourses() {
 		const cacheKey = `all-courses`;
-		const TTL = 24 * 60 * 60 * 1000; // 24 horas
+		const TTL = 2 * 60 * 60 * 1000; // 24 horas
 		const isServer = typeof window === 'undefined';
 
 		if (isServer) {
@@ -72,7 +72,8 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 		return (
 			course.categories &&
 			course.categories.some((category) => category.name === activeCategory?.name) &&
-			course.father_post_type !== 'downloadable' // Excluir los cursos con esta propiedad
+			course.father_post_type !== 'downloadable' &&
+			course.is_test_product !== true
 		);
 	});
 
@@ -136,6 +137,9 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 		// Limpiar el listener al desmontar
 		return () => window.removeEventListener('resize', handleResize);
 	}, []);
+
+	console.log(cachedCourses);
+	console.log(filteredCourses);
 
 	return (
 		<div className='relative block overscroll-none ' ref={dropdownRef}>
@@ -221,9 +225,9 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 															/>
 															<div>
 																<h4 className='!font-inter font-extralight text-sm text-[#7C838F]'>
-																	{course.lista_de_cedentes[0].post_title}
+																	{course?.lista_de_cedentes[0].post_title}
 																</h4>
-																<h3 className='font-light text-base text-[#6474A6] !font-inter'>{course.title}</h3>
+																<h3 className='font-light text-base text-[#6474A6] !font-inter'>{course?.title}</h3>
 															</div>
 														</div>
 													</Link>
