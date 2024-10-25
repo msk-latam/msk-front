@@ -70,7 +70,7 @@ class ApiSSRService {
 		const queryParams = [countryParam, tagParam, withAllParam].filter(Boolean).join('');
 
 		const cacheKey = 'all-courses';
-		const TTL = 24 * 60 * 60 * 1000; // 24 horas
+		const TTL = 2 * 60 * 60 * 1000; // 24 horas
 
 		try {
 			// Verificar si estamos en un entorno donde `window` está disponible
@@ -142,7 +142,7 @@ class ApiSSRService {
 		// Crear clave única para almacenamiento
 		const queryParams = [countryParam, tagParam].filter(Boolean).join('');
 		const cacheKey = `store-courses-${country}-${tag}`;
-		const TTL = 24 * 60 * 60 * 1000; // 24 horas
+		const TTL = 2 * 60 * 60 * 1000; // 24 horas
 
 		try {
 			// Verificar si estamos en un entorno donde `window` está disponible

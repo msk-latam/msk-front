@@ -22,6 +22,7 @@ import ssr from '@/services/ssr';
 import dynamic from 'next/dynamic';
 import { generateHomeMetadata } from '@/SEO/home/metaData/homeMetaData';
 import { homeFAQs } from '@/components/faqs/homeFAQs';
+import ClearLocalStorage from '@/components/versionStorage/ClearLocalStorage';
 
 const BlogSummary = dynamic(() => import('@/components/MSK/BlogSummary'));
 const BrandSlider = dynamic(() => import('@/components/MSK/BrandSlider'));
@@ -82,6 +83,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
 	return (
 		<div className='nc- relative animate-fade-down'>
+			<ClearLocalStorage />
 			<div className='relative  md:overflow-visible '>
 				<section className=''>
 					<div className=' relative'>

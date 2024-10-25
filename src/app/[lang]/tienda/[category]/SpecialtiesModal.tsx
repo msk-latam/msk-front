@@ -15,7 +15,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, fixed }) => {
 	if (!isOpen) return null;
 
 	let specialties: Specialty[] = useStoreFilters().specialties;
-	console.log(specialties);
+	// console.log(specialties);
 
 	return (
 		<div className={`${fixed || ''} inset-0 flex items-center justify-center z-50 backdrop-blur-[2px] rounded-3xl`}>

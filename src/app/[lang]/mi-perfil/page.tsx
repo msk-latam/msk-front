@@ -18,6 +18,8 @@ import { useRouter } from 'next/navigation';
 import RedirectToTrial from '@/components/RedirectToTrial/RedirectToTrial';
 import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
 import CursoPerfil from './CursoPerfil';
+import CourseList from '../mi-cuenta/diplomas/CourseList';
+import { useEnrollment } from '@/context/EnrollmentContext/EnrollmentContext';
 
 export interface PageAuthorProps {
 	className?: string;
@@ -43,6 +45,8 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	const [currentItems, setCurrentItems] = useState<UserCourseProgress[]>([]);
 	const [totalPages, setTotalPages] = useState<number>(1);
 	const [userCourses, setUserCourses] = useState<UserCourseProgress[]>([]);
+	const { enrollSuccess, setEnrollSuccess } = useEnrollment();
+	const [executionCount, setExecutionCount] = useState(0);
 
 	const fetchUser = async () => {
 		try {
@@ -68,6 +72,29 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	useEffect(() => {
 		fetchUser();
 	}, [allCourses]);
+
+	useEffect(() => {
+		let timeoutId: NodeJS.Timeout | null = null; // Variable para almacenar el timeout
+
+		if (enrollSuccess && executionCount < 5) {
+			// Verifica que enrollSuccess sea true y que el contador sea menor que 5
+			timeoutId = setTimeout(() => {
+				// Aquí colocas la lógica que quieres ejecutar cuando se inscribe exitosamente
+				fetchUser(); // Por ejemplo, llamar a la función fetchUser
+
+				setExecutionCount((prevCount) => prevCount + 1); // Incrementa el contador
+
+				if (executionCount + 1 === 5) {
+					// Verifica si alcanzaste las 5 ejecuciones
+					setEnrollSuccess(false); // Resetea el estado solo después de la quinta ejecución
+				}
+			}, 3000); // Tiempo de espera de 2 segundos
+		}
+
+		return () => {
+			if (timeoutId) clearTimeout(timeoutId); // Limpia el timeout al desmontar el componente o al cambiar dependencias
+		};
+	}, [enrollSuccess, executionCount]);
 
 	const itemsPerPage = 8;
 	const indexOfLastItem = currentPage * itemsPerPage;
@@ -135,6 +162,8 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	// const redirectToTrialURL = localStorage.getItem('trialURL') || '';
 	// router.push(redirectToTrialURL)
 	// localStorage.removeItem('trialURL')
+
+	// console.log(CourseList);
 
 	return (
 		<div className={`nc-PageAuthor  ${className} `} data-nc-id='PageAuthor'>

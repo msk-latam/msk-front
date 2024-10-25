@@ -107,6 +107,8 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 		setIsModalOpen(!isModalOpen);
 	};
 
+	// console.log(currentItems, 'currentItems');
+
 	return (
 		<>
 			<SpecialtiesModal isOpen={isModalOpen} onClose={toggleModal} fixed='fixed' />

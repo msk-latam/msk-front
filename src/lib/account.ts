@@ -31,7 +31,7 @@ export function hasText(status: string) {
 		case 'Sin enrolar':
 			return 'Activar';
 		case 'Listo para enrolar':
-			return 'Ir a enrolar';
+			return 'Por Favor Espere...';
 		case 'Activo':
 			return 'Ir al curso';
 		case 'Finalizado':

@@ -25,6 +25,7 @@ import React from 'react';
 import Script from 'next/script';
 import EmblueScript from '@/components/EmblueScript/EmblueScript';
 import { organizationDataSEO, reviewsDataSEO, websiteDataSEO } from '@/SEO/generales/structuredData';
+import { EnrollmentProvider } from '@/context/EnrollmentContext/EnrollmentContext';
 
 // export const runtime = 'edge';
 
@@ -89,26 +90,28 @@ export default async function RootLayout({ params, children, showHeaderFooter = 
 				<div className='bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200 '>
 					<GoogleCaptchaWrapper>
 						<CountryProvider>
-							<DataProvider>
-								<UTMProvider>
-									<AuthProvider>
-										<StoreProvider>
-											{showHeaderFooter && <Header />}
-											<LoaderProvider>
-												<GlobalStateProvider>
-													<div className='container'>{children}</div>
-												</GlobalStateProvider>
-											</LoaderProvider>
-											<BotMaker />
-											{showHeaderFooter && <Footer />}
+							<EnrollmentProvider>
+								<DataProvider>
+									<UTMProvider>
+										<AuthProvider>
+											<StoreProvider>
+												{showHeaderFooter && <Header />}
+												<LoaderProvider>
+													<GlobalStateProvider>
+														<div className='container'>{children}</div>
+													</GlobalStateProvider>
+												</LoaderProvider>
+												<BotMaker />
+												{showHeaderFooter && <Footer />}
 
-											<Suspense fallback={null}>
-												<NavigationEvents />
-											</Suspense>
-										</StoreProvider>
-									</AuthProvider>
-								</UTMProvider>
-							</DataProvider>
+												<Suspense fallback={null}>
+													<NavigationEvents />
+												</Suspense>
+											</StoreProvider>
+										</AuthProvider>
+									</UTMProvider>
+								</DataProvider>
+							</EnrollmentProvider>
 						</CountryProvider>
 					</GoogleCaptchaWrapper>
 				</div>
