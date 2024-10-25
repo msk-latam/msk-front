@@ -59,7 +59,7 @@ const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({ product, 
 
 		if (response.data[0].code.includes('SUCCESS')) {
 			product.status = 'Activo';
-			setEnrollSuccess(true);
+			// setEnrollSuccess(true);
 		}
 	};
 

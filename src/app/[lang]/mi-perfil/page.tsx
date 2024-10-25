@@ -43,7 +43,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	const [loadingUser, setLoadingUser] = useState<boolean>(true);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [currentItems, setCurrentItems] = useState<UserCourseProgress[]>([]);
-	const [totalPages, setTotalPages] = useState<number>(0);
+	const [totalPages, setTotalPages] = useState<number>(1);
 	const [userCourses, setUserCourses] = useState<UserCourseProgress[]>([]);
 	const { enrollSuccess, setEnrollSuccess } = useEnrollment();
 	const [executionCount, setExecutionCount] = useState(0);
