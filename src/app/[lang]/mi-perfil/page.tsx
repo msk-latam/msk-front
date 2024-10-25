@@ -137,7 +137,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	// router.push(redirectToTrialURL)
 	// localStorage.removeItem('trialURL')
 
-	console.log(CourseList);
+	// console.log(CourseList);
 
 	return (
 		<div className={`nc-PageAuthor  ${className} `} data-nc-id='PageAuthor'>

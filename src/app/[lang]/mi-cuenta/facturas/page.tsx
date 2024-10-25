@@ -59,7 +59,7 @@ const pageFacturas: FC = () => {
 		}
 	}, [user]);
 
-	console.log(user.contact, 'contacto');
+	// console.log(user.contact, 'contacto');
 	return (
 		<>
 			<div>

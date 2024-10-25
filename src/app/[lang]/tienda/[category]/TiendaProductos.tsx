@@ -107,7 +107,7 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 		setIsModalOpen(!isModalOpen);
 	};
 
-	console.log(currentItems, 'currentItems');
+	// console.log(currentItems, 'currentItems');
 
 	return (
 		<>
