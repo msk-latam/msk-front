@@ -2,6 +2,8 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 interface EnrollmentContextType {
+	currentProduct: any;
+	setCurrentProduct: any;
 	enrollSuccess: boolean;
 	setEnrollSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -9,9 +11,14 @@ interface EnrollmentContextType {
 const EnrollmentContext = createContext<EnrollmentContextType | undefined>(undefined);
 
 export const EnrollmentProvider = ({ children }: { children: ReactNode }) => {
+	const [currentProduct, setCurrentProduct] = useState(null);
 	const [enrollSuccess, setEnrollSuccess] = useState<boolean>(false);
 
-	return <EnrollmentContext.Provider value={{ enrollSuccess, setEnrollSuccess }}>{children}</EnrollmentContext.Provider>;
+	return (
+		<EnrollmentContext.Provider value={{ currentProduct, setCurrentProduct, enrollSuccess, setEnrollSuccess }}>
+			{children}
+		</EnrollmentContext.Provider>
+	);
 };
 
 export const useEnrollment = () => {

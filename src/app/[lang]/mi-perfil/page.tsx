@@ -45,7 +45,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	const [currentItems, setCurrentItems] = useState<UserCourseProgress[]>([]);
 	const [totalPages, setTotalPages] = useState<number>(1);
 	const [userCourses, setUserCourses] = useState<UserCourseProgress[]>([]);
-	const { enrollSuccess, setEnrollSuccess } = useEnrollment();
+	const { currentProduct, enrollSuccess, setEnrollSuccess } = useEnrollment();
 	const [executionCount, setExecutionCount] = useState(0);
 
 	const fetchUser = async () => {
@@ -56,6 +56,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 			if (!res.message) {
 				setUser(res);
 				let coursesList = getUserCourses(res, allCourses);
+				console.log(coursesList, 'courseList');
 				// console.log({ allCourses, coursesList }, res.contact.courses_progress);
 				setUserCourses(coursesList);
 				setTotalPages(Math.ceil(coursesList.length / itemsPerPage));
@@ -76,19 +77,17 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	useEffect(() => {
 		let timeoutId: NodeJS.Timeout | null = null; // Variable para almacenar el timeout
 
-		if (enrollSuccess && executionCount < 5) {
-			// Verifica que enrollSuccess sea true y que el contador sea menor que 5
+		if (enrollSuccess && currentProduct?.status !== 'Activo' && executionCount < 5) {
 			timeoutId = setTimeout(() => {
-				// Aquí colocas la lógica que quieres ejecutar cuando se inscribe exitosamente
-				fetchUser(); // Por ejemplo, llamar a la función fetchUser
+				setExecutionCount((prevCount) => prevCount + 1);
 
-				setExecutionCount((prevCount) => prevCount + 1); // Incrementa el contador
-
+				fetchUser();
+				console.log(currentProduct, 'producto global');
+				console.log(currentItems, 'current items use Efects');
 				if (executionCount + 1 === 5) {
-					// Verifica si alcanzaste las 5 ejecuciones
-					setEnrollSuccess(false); // Resetea el estado solo después de la quinta ejecución
+					setEnrollSuccess(false);
 				}
-			}, 3000); // Tiempo de espera de 2 segundos
+			}, 3000);
 		}
 
 		return () => {
@@ -104,6 +103,8 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 		setCurrentItems(userCourses.slice(indexOfFirstItem, indexOfLastItem));
 	}, [indexOfFirstItem, indexOfLastItem, userCourses]);
 	// console.log('page currentItems', currentItems);
+
+	console.log(userCourses, 'userCourses');
 
 	const handlePageChange = (pageNumber: number) => {
 		setCurrentPage(pageNumber);
@@ -227,7 +228,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 										))}
 									</div>
 
-									{totalPages > 1 ? (
+									{totalPages > 2 ? (
 										<div className='flex justify-center'>
 											<StorePagination totalPages={totalPages} onPageChange={handlePageChange} currentPage={currentPage} />
 										</div>
