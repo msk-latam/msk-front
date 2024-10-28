@@ -16,7 +16,7 @@ const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({ product, 
 	const router = useRouter();
 	const [whenActivate, setWhenActivate] = useState(false);
 	const [isDisabledActivate, setIsDisabledActivate] = useState(false);
-	const { setEnrollSuccess } = useEnrollment();
+	const { setCurrentProduct, setEnrollSuccess } = useEnrollment();
 
 	const disabledRender = () => {
 		return (
@@ -60,6 +60,7 @@ const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({ product, 
 		if (response.data[0].code.includes('SUCCESS')) {
 			product.status = 'Activo';
 			// setEnrollSuccess(true);
+			// setCurrentProduct(product);
 		}
 	};
 
@@ -97,7 +98,7 @@ const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({ product, 
 				<button
 					className='course-network text-primary font-bold disabled:text-grey-disabled disabled:cursor-not-allowed disabled:opacity-70'
 					onClick={handleProductAction}
-					disabled={isDisabledActivate || product.status === 'Listo para enrolar'}
+					disabled={isDisabledActivate}
 				>
 					{whenActivate ? (
 						<div className='flex justify-center items-center transition-opacity duration-300'>

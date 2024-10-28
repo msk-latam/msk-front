@@ -67,10 +67,12 @@ class ApiSSRService {
 		let tagParam = tag ? `&tag=${tag}` : '';
 		const withAllParam = withAll ? '&filter=all' : '';
 
-		const queryParams = [countryParam, tagParam, withAllParam].filter(Boolean).join('');
+		// const queryParams = [countryParam, tagParam, withAllParam].filter(Boolean).join('');
+		const queryParams = [countryParam, withAllParam].filter(Boolean).join('');
 
 		const cacheKey = 'all-courses';
-		const TTL = 2 * 60 * 60 * 1000; // 24 horas
+		// const TTL = 2 * 60 * 60 * 1000; // 24 horas
+		const TTL = 0; // 24 horas
 
 		try {
 			// Verificar si estamos en un entorno donde `window` está disponible
@@ -93,6 +95,7 @@ class ApiSSRService {
 			}
 
 			// Si no hay datos válidos en `localStorage`, hacer la llamada a la API
+			console.log(queryParams, 'queryparams');
 			const response = await fetch(`${API_URL}/products?limit=-1${queryParams}&asd=tes2`);
 
 			if (!response.ok) {
@@ -142,7 +145,8 @@ class ApiSSRService {
 		// Crear clave única para almacenamiento
 		const queryParams = [countryParam, tagParam].filter(Boolean).join('');
 		const cacheKey = `store-courses-${country}-${tag}`;
-		const TTL = 2 * 60 * 60 * 1000; // 24 horas
+		const TTL = 0; // 24 horas
+		// const TTL = 2 * 60 * 60 * 1000; // 24 horas
 
 		try {
 			// Verificar si estamos en un entorno donde `window` está disponible
