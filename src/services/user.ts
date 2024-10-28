@@ -31,20 +31,13 @@ export const getUserProducts = (res: any, courses: any): UserCourse[] => {
 
 export const getUserCourses = (res: any, courses: any): UserCourseProgress[] => {
 	const COUNTRY = localStorage.getItem('country');
-	// console.log(COUNTRY, ' aveeeer');
+
 	const coursesList: UserCourseProgress[] = [];
 	const seenProductIds: { [productId: number]: boolean } = {};
 	res.contact.courses_progress.forEach((cp: CourseProgress) => {
 		const globalProduct = courses.find(
 			(productAux: { product_code: number }) => productAux.product_code === cp.Product_Code,
-			console.log(cp.Product_Code, 'product code cp'),
 		);
-
-		console.log(courses, 'courses 43');
-		console.log(globalProduct, 'globalproduct');
-		// console.log(res.contact.courses_progress, 'course progress');
-
-		// console.log(cp, { globalProduct });
 
 		if (globalProduct && !seenProductIds[cp.Product_Code]) {
 			seenProductIds[cp.Product_Code] = true;

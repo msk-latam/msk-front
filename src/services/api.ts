@@ -242,8 +242,6 @@ class ApiService {
 
 				const data = await response.json();
 
-				console.log(data, 'data de usuario con cursos');
-
 				// Guardar datos en `localStorage` con un nuevo timestamp
 				if (!isServer) {
 					localStorage.removeItem(cacheKey);
@@ -283,14 +281,12 @@ class ApiService {
 			const queryParams = [tagParam, countryParam, filterParam].filter(Boolean).join('');
 			const response = await fetch(`${API_URL}/products?limit=-1${queryParams}&asd=tes4`);
 
-			console.log(response, 'response api');
-
 			if (!response.ok) {
 				throw new Error(`Failed to fetch courses. HTTP status ${response.status}`);
 			}
 
 			const courses = await response.json();
-			console.log(courses, 'courses 291');
+
 			return courses.products;
 		} catch (error) {
 			return error;
@@ -528,9 +524,8 @@ class ApiService {
 
 	async getLinkLMS(product_code: number, cod_curso: string, email: string) {
 		try {
-			console.log(product_code, cod_curso, email);
 			let url = `${baseUrl}/api/sso/link`;
-			console.log(url);
+
 			const response = await fetch(url, {
 				method: 'POST',
 				headers: {
