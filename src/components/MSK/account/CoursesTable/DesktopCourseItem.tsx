@@ -78,7 +78,7 @@ const DesktopCourseItem: FC<DesktopCourseItemProps> = ({ item, email, goToLMS })
 					<CategoryBadgeList categories={[trialName]} isTrial={item.ov.includes('Trial')} />
 				) : (
 					<Badge
-						name={statusOV.isDisabled ? item.status : statusOV.hasText}
+						name={statusOV.isDisabled ? statusOV.disabledText : statusOV.hasText}
 						color={colorStatus(statusOV.isDisabled ? statusOV.hasText : item.status)}
 						textSize='text-sm'
 					/>
