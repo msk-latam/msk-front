@@ -56,7 +56,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 			if (!res.message) {
 				setUser(res);
 				let coursesList = getUserCourses(res, allCourses);
-				console.log(coursesList, 'courseList');
+
 				// console.log({ allCourses, coursesList }, res.contact.courses_progress);
 				setUserCourses(coursesList);
 				setTotalPages(Math.ceil(coursesList.length / itemsPerPage));
@@ -103,8 +103,6 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 		setCurrentItems(userCourses.slice(indexOfFirstItem, indexOfLastItem));
 	}, [indexOfFirstItem, indexOfLastItem, userCourses]);
 	// console.log('page currentItems', currentItems);
-
-	console.log(userCourses, 'userCourses');
 
 	const handlePageChange = (pageNumber: number) => {
 		setCurrentPage(pageNumber);

@@ -95,7 +95,7 @@ class ApiSSRService {
 			}
 
 			// Si no hay datos válidos en `localStorage`, hacer la llamada a la API
-			console.log(queryParams, 'queryparams');
+
 			const response = await fetch(`${API_URL}/products?limit=-1${queryParams}&asd=tes2`);
 
 			if (!response.ok) {
@@ -213,8 +213,6 @@ class ApiSSRService {
 
 			console.log('getBestSellers URL', `${API_URL}/home/best-sellers?country=${countryParam}`);
 			const response = await fetch(`${API_URL}/home/best-sellers?country=${countryParam}`);
-
-			console.log(country);
 
 			if (!response.ok) {
 				throw new Error(`Failed to fetch best sellers. HTTP status ${response.status}`);
@@ -572,8 +570,6 @@ class ApiSSRService {
 		try {
 			let validCountries = countries.map((item) => item.id);
 			const countryParam = validCountries.includes(country) ? `&country=${country}` : `&country=int`;
-
-			//console.log(`${API_URL}${endpoint}${countryParam}`)
 
 			const response = await fetch(`${API_URL}${endpoint}?${countryParam}`);
 
