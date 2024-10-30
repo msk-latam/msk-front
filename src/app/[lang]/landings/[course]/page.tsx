@@ -8,7 +8,7 @@ import HotjarLandings from '@/hotjar/hotjarLandings';
 
 const LandingPage: FC = async ({ params }: any) => {
 	const currentCountry = params.lang || cookies().get('country')?.value;
-	const allowedCountries = ['co', 'cr', 'pe'];
+	const allowedCountries = ['co', 'cr', 'pe', 'es'];
 	const allowedCourses = ['accsap', 'medicina-interna'];
 
 	const reqHeaders = headers();
