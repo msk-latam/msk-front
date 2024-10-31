@@ -154,7 +154,7 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 										</div>
 									)}
 									<div
-										className='text-violet-strong font-normal [&>p]:mb-4'
+										className='text-violet-strong font-normal [&>p]:mb-4 [&>div]:mb-4'
 										dangerouslySetInnerHTML={{
 											__html: product.ficha.description,
 										}}
