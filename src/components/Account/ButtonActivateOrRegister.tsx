@@ -98,7 +98,7 @@ const ButtonActivateOrRegister: FC<ButtonActivateOrRegisterProps> = ({ product, 
 				<button
 					className='course-network text-primary font-bold disabled:text-grey-disabled disabled:cursor-not-allowed disabled:opacity-70'
 					onClick={handleProductAction}
-					disabled={isDisabledActivate}
+					disabled={isDisabledActivate || product.ov === 'Baja'}
 				>
 					{whenActivate ? (
 						<div className='flex justify-center items-center transition-opacity duration-300'>

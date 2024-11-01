@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { User, UserCourseProgress } from '@/data/types';
 import { getStatusIcon, statusCourse, statusOrdenVenta } from '@/lib/account';
 import { GlobalStateContext } from '@/app/[lang]/mi-perfil/GlobalStateContext';
+import CentroAyudaLink from '@/components/CentroAyudaLink/CentroAyudaLink';
 
 // CancelTrialButton Component
 export const CancelTrialButton: FC<{
@@ -54,6 +55,7 @@ export const ProductAccountButton: FC<{
             )} */}
 					</span>
 				</div>
+
 				<ButtonActivateOrRegister
 					product={product}
 					user={user}
