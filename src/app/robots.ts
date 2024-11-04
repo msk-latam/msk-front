@@ -2,16 +2,42 @@ import { IS_PROD } from '@/contains/constants';
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  return {
-    rules: IS_PROD
-      ? {
-          userAgent: '*',
-          allow: '/',
-        }
-      : {
-          userAgent: '*',
-          disallow: '/',
-        },
-    sitemap: IS_PROD ? 'https://msklatam.com/sitemap.xml' : '',
-  };
+	return {
+		rules: IS_PROD
+			? [
+					{
+						userAgent: '*',
+						allow: '/',
+					},
+					{
+						userAgent: '*',
+						disallow: '/wp/', // Bloqueo de  /wp/
+					},
+					{
+						userAgent: '*',
+						disallow: '/*?*utm_*', // Bloqueo de UTM (?)
+					},
+					{
+						userAgent: '*',
+						disallow: '/*&utm_*', // Bloqueo de UTM (&)
+					},
+					{
+						userAgent: '*',
+						disallow: '/dev/', // Bloqueo de /dev/
+					},
+					{
+						userAgent: '*',
+						disallow: '/*archivo*', // Bloqueo de "archivo"
+					},
+					{
+						userAgent: '*',
+						disallow: '/*page*', // Bloqueo de "page"
+					},
+			  ]
+			: {
+					userAgent: '*',
+					disallow: '/',
+			  },
+		sitemap: IS_PROD ? 'https://msklatam.com/sitemap.xml' : '',
+	};
 }
