@@ -1,6 +1,6 @@
-// src/components/FooterLinksSection.tsx
-
+import ssr from '@/services/ssr';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 interface LinkItem {
 	title: string;
@@ -13,7 +13,7 @@ interface Category {
 }
 
 const FooterLinksSection: React.FC = () => {
-	const categories: Category[] = [
+	const [categories, setCategories] = useState<Category[]>([
 		{
 			title: 'Cursos más elegidos',
 			links: [
@@ -23,10 +23,6 @@ const FooterLinksSection: React.FC = () => {
 				{ title: 'Curso superior de neonatología', url: '/curso/neonatologia/' },
 				{ title: 'Curso superior de obstetricia', url: '/curso/obstetricia/' },
 				{ title: 'Formación integral en medicina de urgencias para enfermeros', url: '/curso/enfermeria-en-urgencias/' },
-				{ title: '', url: '' },
-				{ title: '', url: '' },
-				{ title: '', url: '' },
-				// Agrega más enlaces aquí
 			],
 		},
 		{
@@ -38,10 +34,6 @@ const FooterLinksSection: React.FC = () => {
 				{ title: 'Curso superior de neonatología', url: '/curso/neonatologia/' },
 				{ title: 'Curso superior de obstetricia', url: '/curso/obstetricia/' },
 				{ title: 'Formación integral en medicina de urgencias para enfermeros', url: '/curso/enfermeria-en-urgencias/' },
-				{ title: '', url: '' },
-				{ title: '', url: '' },
-				{ title: '', url: '' },
-				// Agrega más enlaces aquí
 			],
 		},
 		{
@@ -53,38 +45,64 @@ const FooterLinksSection: React.FC = () => {
 				{ title: 'Cursos de medicina familiar', url: '/tienda/medicina-familiar/' },
 				{ title: 'Cursos de emergentología', url: '/tienda/emergentologia/' },
 				{ title: 'Cursos de medicina general', url: '/tienda/medicina-general/' },
-				{ title: '', url: '' },
-
-				// Agrega más enlaces aquí
 			],
 		},
-		{
-			title: 'Contenidos destacados',
-			links: [
-				{
-					title: 'Cómo estudiantes de medicina se convierten en influences',
-					url: '/blog/estudiantes-de-medicina-e-influencers/',
-				},
-				{
-					title: 'Como evoluciona la cirugía robótica en pediatría',
-					url: '/blog/evolucion-de-la-cirugia-robotica-en-pediatria/',
-				},
-				{
-					title: 'Cuál es el fármaco llamado a prevenir el cáncer de mama',
-					url: '/blog/farmaco-podria-prevenir-el-cancer-de-mama/',
-				},
-				{ title: '4 innovaciones para el tratamiento del dolor', url: '/blog/innovaciones-para-el-tratamiento-del-dolor/' },
-				{ title: 'Realidad virtual vs. trastorno de estrés postraumático', url: '/blog/realidad-virtual-vs-tept/' },
-				{
-					title: 'Cómo avanza el tratamiento de las hemoglobinopatías',
-					url: '/blog/como-avanza-el-tratamiento-de-las-hemoglobinopatias/',
-				},
-				{ title: '', url: '' },
+	]);
 
-				// Agrega más enlaces aquí
-			],
-		},
-	];
+	const fetchPosts = async () => await ssr.getPosts('ar');
+
+	const parseDate = (dateStr: any) => {
+		const months = {
+			Enero: 'January',
+			Febrero: 'February',
+			Marzo: 'March',
+			Abril: 'April',
+			Mayo: 'May',
+			Junio: 'June',
+			Julio: 'July',
+			Agosto: 'August',
+			Septiembre: 'September',
+			Octubre: 'October',
+			Noviembre: 'November',
+			Diciembre: 'December',
+		};
+
+		// Separar día, mes y año
+		const [mes, dia, año] = dateStr.split(' ').map((part: any) => part.trim());
+
+		// Reemplazar el mes en español por inglés
+		const monthEnglish = months[mes as keyof typeof months];
+		return new Date(`${dia} ${monthEnglish} ${año}`);
+	};
+
+	useEffect(() => {
+		const processPosts = async () => {
+			const posts = await fetchPosts();
+
+			const sortedPosts = posts
+				.map((post: any) => ({
+					...post,
+					date: parseDate(post.date),
+				}))
+				.sort((a: any, b: any) => b.date - a.date)
+				.slice(0, 6);
+
+			const dynamicCategory = {
+				title: 'Contenidos destacados',
+				links: sortedPosts.map((post: any) => ({
+					title: post.title,
+					url: `/blog/${post.slug}/`,
+				})),
+			};
+
+			setCategories((prevCategories) => {
+				const exists = prevCategories.some((category) => category.title === 'Contenidos destacados');
+				return exists ? prevCategories : [...prevCategories, dynamicCategory];
+			});
+		};
+
+		processPosts();
+	}, []);
 
 	return (
 		<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7'>
