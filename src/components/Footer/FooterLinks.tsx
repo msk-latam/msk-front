@@ -1,5 +1,6 @@
 import ssr from '@/services/ssr';
 import Link from 'next/link';
+
 import { useEffect, useState } from 'react';
 
 interface LinkItem {
@@ -13,6 +14,7 @@ interface Category {
 }
 
 const FooterLinksSection: React.FC = () => {
+	const [countryCode, setCountryCode] = useState<string>();
 	const [categories, setCategories] = useState<Category[]>([
 		{
 			title: 'Cursos más elegidos',
@@ -49,7 +51,17 @@ const FooterLinksSection: React.FC = () => {
 		},
 	]);
 
-	const fetchPosts = async () => await ssr.getPosts('ar');
+	useEffect(() => {
+		// Detecta el país desde la URL en el lado del cliente
+		if (typeof window !== 'undefined') {
+			const path = window.location.pathname;
+			const country = path.split('/')[1]; // Extrae el primer segmento de la URL
+			setCountryCode(country); // Guarda el país en el estado
+			console.log(country);
+		}
+	}, []);
+
+	const fetchPosts = async () => await ssr.getPosts(countryCode);
 
 	const parseDate = (dateStr: any) => {
 		const months = {
