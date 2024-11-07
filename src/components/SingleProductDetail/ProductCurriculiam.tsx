@@ -53,6 +53,10 @@ const ProductCurriculiam: FC<Props> = ({ topics, hours, link, slug }) => {
 	};
 
 	const updateFormSent = async (value: boolean, body: any) => {
+		console.log(value);
+		console.log(body);
+		console.log(link);
+		console.log(slug);
 		try {
 			if (link && slug) await api.temarioDownload(body, link, slug);
 			setIsFormSent(value);
@@ -72,8 +76,8 @@ const ProductCurriculiam: FC<Props> = ({ topics, hours, link, slug }) => {
 				<div className='font-semibold text-[16px] sm:text-xl'>Qué temas verás</div>
 				<div className='flex items-center justify-between'>
 					<p className='modules-description'>
-						{accordionContent.length} módulos <br className='md:hidden' />{' '}
-						<span className='hidden md:inline-block'>•</span> {hours?.value} horas estimadas
+						{accordionContent.length} módulos <br className='md:hidden' /> <span className='hidden md:inline-block'>•</span>{' '}
+						{hours?.value} horas estimadas
 					</p>
 					{link ? (
 						<ButtonPrimary
