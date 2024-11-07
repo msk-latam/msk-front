@@ -30,6 +30,7 @@ const FooterEduman = () => {
 	};
 
 	const pathname = usePathname();
+	const isLandingPage = pathname.includes('/landings/');
 
 	useEffect(() => {
 		setIsOnBlog(pathname == '/blog');
@@ -39,10 +40,10 @@ const FooterEduman = () => {
 
 	return (
 		<footer>
-			<div className='footer-area'>
+			<div className='footer-area '>
 				<div className=''>
-					<div className='container'>
-						{isOnBlog ? null : (
+					<div className='lg:container'>
+						{isOnBlog || isLandingPage ? null : (
 							<div className='copyright-area grid grid-cols-1 md:grid-cols-6 items-center sm:gap-1 mb-6 w-screen left-1/2 transform -translate-x-1/2 relative md:w-auto md:left-auto md:transform-none md:-translate-x-0 '>
 								<div className='footer-column col-span-6 md:mx-auto text-center md:text-left lg:col-span-1'>
 									<div className='copyright-text'>
@@ -78,10 +79,10 @@ const FooterEduman = () => {
 								</div>
 							</div>
 						)}
-						<div className='footer-main'>
+						<div className='footer-main '>
 							{/* nueva seccion  */}
 
-							<FooterLinksSection />
+							{!isLandingPage && <FooterLinksSection />}
 
 							{/* nueva seccion  */}
 							<div className='h-[400px] bg-[#1A1F27] w-screen left-1/2 transform -translate-x-1/2 relative mt-10 '></div>
@@ -126,7 +127,7 @@ const FooterEduman = () => {
 										</div>
 									</div>
 								</div>
-								<div className={`grid grid-cols-2 col-span-2`}>
+								<div className={`md:grid grid-cols-2 col-span-2 hidden`}>
 									<div className={`col-span-1 flex justify-center `}>
 										<div className='footer-widget f-w4 mt-6'>
 											<ul className='text-sm md:text-base'>
@@ -167,7 +168,7 @@ const FooterEduman = () => {
 											</ul>
 										</div>
 									</div>
-									<div className={`col-span-1 flex justify-center `}>
+									<div className={`col-span-1 flex justify-start `}>
 										<div className='footer-widget f-w3 mt-6 '>
 											<ul className='text-sm md:text-base'>
 												<li>

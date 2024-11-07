@@ -34,6 +34,11 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
 		fetchContent();
 	}, [product]);
 
+	console.log(productSlug);
+
+	const accsapTranslateMessage =
+		'La edición en español de ACCSAP ha sido traducida de la edición en inglés por Dandelion Contents, SL con permiso de la American College of Cardiology Foundation (ACCF). La ACCF se exime de cualquier responsabilidad derivada de cualquier error contenido en el producto o en los materiales de marketing.';
+
 	return (
 		<>
 			<footer>
@@ -81,8 +86,18 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
 						</div>
 					</div>
 				</div>
-				<div className=' h-0 lg:h-[250px]'>
-					<div className='bg-[#F3F4F6] h-[250px] w-screen  translate-x-[-50%]  absolute z-0 left-1/2'></div>
+				<div className={`hidden lg:block h-0 ${productSlug === 'accsap' ? 'w-[2000] lg:h-[400px]' : 'lg:h-[250px]'}`}>
+					<div
+						className={`bg-[#F3F4F6] ${
+							productSlug === 'accsap' ? 'h-[200px] lg:h-[400px]' : 'lg:h-[250px]'
+						} w-screen translate-x-[-50%] absolute z-0 left-1/2`}
+					>
+						{productSlug === 'accsap' && (
+							<div className='relative z-50 pt-[250px] mb-10 container text-[#6474A6] text-xl !font-lora-italic'>
+								{accsapTranslateMessage}
+							</div>
+						)}
+					</div>
 				</div>
 			</footer>
 		</>

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React, { FC } from 'react';
 import { cedenteTropos } from './LandingsVariables';
 import Link from 'next/link';
+import LandingHeaderCTA from './LandingHeaderCTA';
 
 interface LandingProps {
 	product: FetchSingleProduct;
@@ -44,43 +45,38 @@ const LandingHeader: FC<LandingProps> = ({ product, country }) => {
 			? '/webp-images/landing-images/header-medicina-interna.png'
 			: '/webp-images/landing-images/header-accsap.png';
 
-	const cedenteImage =
-		product.params.slug === 'medicina-interna'
-			? '/webp-images/landing-icons/cedente-tropos.svg'
-			: '/webp-images/landing-icons/cedente-accsap.svg';
-
 	const headerDescription =
 		product.params.slug === 'medicina-interna'
 			? 'Con este amplio curso de actualización en medicina interna incorporarás los conocimientos necesarios para el abordaje de distintas enfermedades, el diagnóstico de estados patológicos poco frecuentes, el manejo clínico de las comorbilidades y la toma de decisiones sobre la derivación del paciente.'
-			: product.ficha.description;
+			: 'Con el programa ACCSAP en MSK podrás actualizar y fortalecer tus conocimientos sobre guías y protocolos clínicos, obtener información de investigaciones emergentes e implementar nuevas herramientas para tu práctica y para tu rendimiento en la actividad profesional, alcanzando los más altos estándares internacionales. ';
 
 	return (
 		<>
 			<div className='relative'>
-				<div className='absolute inset-0 w-screen left-1/2 transform -translate-x-1/2 overflow-hidden '>
-					<Image src={bannerImage} alt='Banner' layout='fill' objectFit='cover' quality={100} className='z-0' />
+				<div className='absolute inset-0 w-screen left-1/2 transform -translate-x-1/2 overflow-hidden bg-[#E2E8EC] lg:bg-transparent'>
+					{/* Imagen para desktop */}
+					<div className='hidden lg:block'>
+						<Image src={bannerImage} alt='Banner' layout='fill' objectFit='cover' quality={100} className='z-0' />
+					</div>
+					{/* Color de fondo para mobile */}
+					<div className='lg:hidden bg-[#E2E8EC] w-full h-full'></div>
 				</div>
 				<div className='relative z-10'>
 					<div className='inline-block bg-[#FEF9C3] px-2 py-1 rounded-sm my-4'>
-						<p className='font-medium text-[#8E5A1C] '>Capacitación a distancia</p>
+						<p className='font-medium text-[#8E5A1C] '>Prueba 7 días gratis</p>
 					</div>
 					<h2 className='font-bold text-3xl text-[#392C35] mb-4'>{product.ficha.title}</h2>
 					<p
-						className='text-[#6474A6] font-inter mb-6 mr-0 lg:mr-60 font-medium'
+						className='text-[#6474A6] font-inter pb-[100px] mr-0 lg:mr-60  text-xl'
 						dangerouslySetInnerHTML={{ __html: headerDescription }}
 					></p>
-					<p className='text-[#6474A6] font-inter font-bold'>CERTIFICADO Y AVALADO POR:</p>
-					<div className='flex gap-4 my-4 overflow-x-auto whitespace-nowrap'>
-						{headerIcons.map((icon, index) => (
-							<Image key={index} src={icon} alt={`icon-${index}`} width={500} height={500} className='inline-block' />
-						))}
-					</div>
-					<Link href={`https://www.msklatam.com/${country}/contacto`}>
+
+					{/* <Link href={`https://www.msklatam.com/${country}/contacto`}>
 						<button className='rounded-md border-2 border-[#9200AD] text-[#9200AD] py-2 px-4 my-8 mb-12 font-bold'>
 							Contáctanos para más información
 						</button>
-					</Link>
-					<div className='flex flex-col md:flex-row relative z-0'>
+					</Link> */}
+					{/* <div className='flex flex-col md:flex-row relative z-0'>
 						<div className='bg-[#E0E7FF] flex gap-2 px-4 py-6 lg:py-6 lg:pr-6 lg:pl-0 justify-start  items-center w-screen lg:w-auto left-1/2 translate-x-[-50vw] lg:translate-x-0 absolute lg:static top-0 h-[100px] before:content-[""] before:absolute before:top-0 before:left-[-360px] before:h-full before:w-[360px] before:bg-[#E0E7FF] z-0'>
 							<div className='rounded-full p-2 bg-white'>
 								<Image src={cedenteImage} alt='Cedente' width={50} height={50} className='rounded-full' />
@@ -111,8 +107,17 @@ const LandingHeader: FC<LandingProps> = ({ product, country }) => {
 								<p>100% online</p>
 							</div>
 						</div>
-					</div>
+					</div> */}
 				</div>
+			</div>
+			<div className='transform translate-y-[-70px]'>
+				<LandingHeaderCTA country={country} product={product} />
+			</div>
+			<p className='text-[#6474A6] font-inter font-bold'>CERTIFICADO Y AVALADO POR:</p>
+			<div className='flex gap-4 my-4 overflow-x-auto whitespace-nowrap'>
+				{headerIcons.map((icon, index) => (
+					<Image key={index} src={icon} alt={`icon-${index}`} width={500} height={500} className='inline-block' />
+				))}
 			</div>
 		</>
 	);
