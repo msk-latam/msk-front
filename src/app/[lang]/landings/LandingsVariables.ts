@@ -1,7 +1,7 @@
 import { FetchSingleProduct } from '@/data/types';
 
 export const cedenteTropos = (product: FetchSingleProduct) =>
-	product.params.slug === 'medicina-interna' ? 'formación' : '';
+	product.params.slug === 'medicina-interna' ? 'Formación' : '';
 
 export const paymentLinks: any = {
 	co: {
@@ -85,24 +85,25 @@ export const landingFAQs = (country: string) => ({
 	items: [
 		{
 			titulo: '¿Qué ofrece la prueba de 7 días gratis?',
-			parrafo: 'Con la prueba gratuita de MSK accedes a todos los contenidos del curso sin costo durante 7 días.',
+			parrafo: '<p>Con la prueba gratuita de MSK accedes a todos los contenidos del curso sin costo durante 7 días.</p>',
 		},
 		{
 			titulo: '¿Se puede cancelar una prueba gratuita?',
-			parrafo: 'Sí, puedes cancelarla dentro de los 7 días luego de solicitada la prueba y no abonarás nada.',
+			parrafo: '<p>Sí, puedes cancelarla dentro de los 7 días luego de solicitada la prueba y no abonarás nada.</p>',
 		},
 		{
 			titulo: '¿Qué ocurre si no se cancela una prueba gratuita?',
 			parrafo:
-				'A partir del octavo día desde la solicitud, se confirmará tu inscripción definitiva al curso, abonando su valor total en pagos.',
+				'<p>A partir del octavo día desde la solicitud, se confirmará tu inscripción definitiva al curso, abonando su valor total en pagos.</p>',
 		},
 		{
 			titulo: '¿Se pueden realizar dos pruebas gratuitas a la vez?',
-			parrafo: 'No se puede acceder a más de una prueba en distintos cursos a la vez.',
+			parrafo: '<p>No se puede acceder a más de una prueba en distintos cursos a la vez.</p>',
 		},
 		{
 			titulo: '¿Se puede obtener otra prueba gratuita sobre un curso ya solicitado?',
-			parrafo: 'No se puede solicitar otra prueba gratuita sobre un curso en el cual ya has adquirido una previamente.',
+			parrafo:
+				'<p>No se puede solicitar otra prueba gratuita sobre un curso en el cual ya has adquirido una previamente.</p>',
 		},
 	],
 });

@@ -85,7 +85,7 @@ const LandingTemarioCTA: FC<LandingProps> = ({ product, country }) => {
 								</div>
 							</div>
 							<div>
-								<p className='text-[#6474A6] font-bold font-inter text-sm'>MODALIDAD</p>
+								<p className='text-[#6474A6] font-bold font-inter text-sm'>Modalidad</p>
 								<p className='font-inter font-medium text-[#392C35] text-base'>100% online</p>
 							</div>
 						</div>
@@ -94,7 +94,7 @@ const LandingTemarioCTA: FC<LandingProps> = ({ product, country }) => {
 
 				{/* Botón a la derecha */}
 				<ButtonPrimary onClick={() => onOpenDownloadModal()} className='!text-lg !font-bold !py-2'>
-					Descargar Temario
+					Descargar temario
 				</ButtonPrimary>
 			</div>
 			<div>

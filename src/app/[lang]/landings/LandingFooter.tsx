@@ -39,6 +39,8 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
 	const accsapTranslateMessage =
 		'La edición en español de ACCSAP ha sido traducida de la edición en inglés por Dandelion Contents, SL con permiso de la American College of Cardiology Foundation (ACCF). La ACCF se exime de cualquier responsabilidad derivada de cualquier error contenido en el producto o en los materiales de marketing.';
 
+	const modulesTitle = productSlug === 'medicina-interna' ? '60 módulos' : '130 temas en 10 módulos';
+
 	return (
 		<>
 			<footer>
@@ -66,15 +68,15 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
 
 						<div className='lg:flex lg:gap-6 flex flex-wrap'>
 							<div className='flex gap-2'>
-								<p className='font-medium'>{product.details.duration.value} horas</p>
-								<p className='font-medium'>|</p>
-								<p className='font-medium'>{product.cantidad_modulos} módulos</p>
+								{/* <p className='font-medium'>{product.details.duration.value} horas</p> */}
+								{/* <p className='font-medium'>|</p> */}
+								<p className='font-medium'> {modulesTitle} </p>
 							</div>
 							<div>
 								<p className='text-[#CCD1DC]'>|</p>
 							</div>
 							<div className='flex gap-2'>
-								<p className='font-medium'>MODALIDAD</p>
+								<p className='font-medium'>Modalidad</p>
 								<p className='font-medium'>100% online</p>
 							</div>
 						</div>

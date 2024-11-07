@@ -67,7 +67,7 @@ const LandingHeader: FC<LandingProps> = ({ product, country }) => {
 					</div>
 					<h2 className='font-bold text-3xl text-[#392C35] mb-4'>{product.ficha.title}</h2>
 					<p
-						className='text-[#6474A6] font-inter pb-[100px] mr-0 lg:mr-60  text-xl'
+						className='text-[#6474A6] font-inter pb-[100px] mr-0 lg:mr-60  text-xl lg:w-[800px]'
 						dangerouslySetInnerHTML={{ __html: headerDescription }}
 					></p>
 
