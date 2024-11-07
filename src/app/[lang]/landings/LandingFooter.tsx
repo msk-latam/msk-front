@@ -66,7 +66,7 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
 						</div>
 						<hr className='border-t border-[#CCD1DC] my-2' />
 
-						<div className='lg:flex lg:gap-6 flex flex-wrap'>
+						<div className='lg:flex gap-4 lg:gap-6 flex flex-wrap'>
 							<div className='flex gap-2'>
 								{/* <p className='font-medium'>{product.details.duration.value} horas</p> */}
 								{/* <p className='font-medium'>|</p> */}
