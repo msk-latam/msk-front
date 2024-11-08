@@ -96,7 +96,7 @@ const FooterEduman = () => {
 													<NcImage src={'/images/msk-logo-light.svg'} alt='footer-logo' width='100' height='100' />
 												</div>
 											</NcLink>
-											<p className='footer-copyright w-full'>
+											<p className='footer-copyright lg:w-full'>
 												Una propuesta moderna que desafía a expandir las metas profesionales
 											</p>
 											<p>© {currentYear} • Medical&Scientific Knowledge S.L.</p>
