@@ -24,7 +24,7 @@ const LandingHeaderCTA: FC<LandingProps> = ({ product, country }) => {
 			{/* Contenido a la izquierda en desktop y debajo en mobile */}
 			<div className=''>
 				<h2 className='!font-raleway font-light text-xl lg:text-2xl text-[#392C35]'>{headerTitle}</h2>
-				<ul className='mt-2 text-[#6474A6] text-base lg:text-xl'>
+				<ul className='mt-2 text-[#6474A6] text-base lg:text-[18px]'>
 					<li>→ Acceso a todos los contenidos del programa</li>
 					<li>→ Asesoramiento académico personalizado</li>
 					<li>→ Asimilación progresiva de tus conocimientos</li>

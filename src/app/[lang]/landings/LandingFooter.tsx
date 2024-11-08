@@ -95,7 +95,7 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
 						} w-screen translate-x-[-50%] absolute z-0 left-1/2`}
 					>
 						{productSlug === 'accsap' && (
-							<div className='relative z-50 pt-[250px] mb-10 container text-[#6474A6] text-xl !font-lora-italic'>
+							<div className='relative z-50 pt-[250px] mb-10 container text-[#6474A6] text-[18px] !font-lora-italic'>
 								{accsapTranslateMessage}
 							</div>
 						)}

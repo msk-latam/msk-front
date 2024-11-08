@@ -17,7 +17,7 @@ interface LandingProps {
 const Landing: FC<LandingProps> = ({ product, country }) => {
 	return (
 		<>
-			<div className='mb-[70px]'>
+			<div className='mb-[80px]'>
 				<LandingNavBar product={product} country={country} />
 			</div>
 			<LandingHeader product={product} country={country} />

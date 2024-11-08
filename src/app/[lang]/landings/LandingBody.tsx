@@ -57,7 +57,7 @@ const LandingBody: FC<LandingProps> = ({ product, country }) => {
 		<>
 			<div className='my-6'>
 				<h2 className='text-2xl mb-2 font-light text-[#392C35]'> {aboutCourse} </h2>
-				<p className='text-[#392C35]  text-lg whitespace-pre-line'> {aboutCourseBody} </p>
+				<p className='text-[#392C35]  text-[18px] whitespace-pre-line'> {aboutCourseBody} </p>
 
 				<div className='my-8'>
 					<LandingTemarioCTA product={product} country={country} />
