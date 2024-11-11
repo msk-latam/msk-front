@@ -54,8 +54,8 @@ const LandingTemarioCTA: FC<LandingProps> = ({ product, country }) => {
 			>
 				{/* Texto a la izquierda */}
 				<div className='text-[#392C35] font-light !font-raleway text-base lg:text-2xl '>
-					<p className='w-52 lg:w-auto'>{aprendeTitle}</p>
-					<p className='mr-20 lg:mr-0'>¡Obtén el temario y descubre todo su contenido!</p>
+					<p className='w-52 lg:w-auto text-xl'>{aprendeTitle}</p>
+					<p className='mr-14 lg:mr-0 text-xl'>¡Obtén el temario y descubre todo su contenido!</p>
 					<div className='flex flex-col lg:flex-row relative z-0'>
 						<div className='flex gap-1  py-6 lg:py-6 lg:pr-4 lg:pl-0 justify-start  items-center  lg:w-auto  lg:translate-x-0 absolute lg:static top-0 h-[100px] '>
 							<div className='rounded-full p-2 bg-white'>

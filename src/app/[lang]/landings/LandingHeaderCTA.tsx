@@ -15,15 +15,19 @@ const LandingHeaderCTA: FC<LandingProps> = ({ product, country }) => {
 	const productSlug = product?.params?.slug || '';
 	const paymentLink = paymentLinks[country]?.[productSlug] || '#';
 
-	const headerTitle =
-		productSlug === 'medicina-interna'
-			? 'Aprende medicina interna gratis durante 7 días 🚀'
-			: 'Prueba ACCSAP gratis durante 7 días 🚀';
+	const headerTitlePrefix = productSlug === 'medicina-interna' ? 'Aprende medicina interna gratis' : 'Prueba ACCSAP gratis';
+
+	const headerTitleSuffix = 'durante 7 días 🚀';
 	return (
 		<div className='border border-[#DBDBDB] rounded-lg p-6 lg:p-8 lg:pl-12 bg-[#F5F8FF] flex flex-col-reverse lg:flex-row justify-between items-center'>
 			{/* Contenido a la izquierda en desktop y debajo en mobile */}
 			<div className=''>
-				<h2 className='!font-raleway font-light text-xl lg:text-2xl text-[#392C35]'>{headerTitle}</h2>
+				<h2 className='!font-raleway font-light text-xl lg:text-2xl text-[#392C35]'>
+					{headerTitlePrefix}{' '}
+					<span className='block sm:inline !font-raleway font-light text-xl lg:text-2xl text-[#392C35]'>
+						{headerTitleSuffix}
+					</span>
+				</h2>
 				<ul className='mt-2 text-[#6474A6] text-base lg:text-[18px]'>
 					<li>→ Acceso a todos los contenidos del programa</li>
 					<li>→ Asesoramiento académico personalizado</li>

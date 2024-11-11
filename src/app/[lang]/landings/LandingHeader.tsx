@@ -113,7 +113,7 @@ const LandingHeader: FC<LandingProps> = ({ product, country }) => {
 			<div className='transform translate-y-[-70px]'>
 				<LandingHeaderCTA country={country} product={product} />
 			</div>
-			<p className='text-[#6474A6] font-inter font-bold'>CERTIFICADO Y AVALADO POR:</p>
+			<p className='text-[#6474A6] font-inter font-bold -mt-8'>CERTIFICADO Y AVALADO POR:</p>
 			<div className='flex gap-4 my-4 overflow-x-auto whitespace-nowrap'>
 				{headerIcons.map((icon, index) => (
 					<Image key={index} src={icon} alt={`icon-${index}`} width={500} height={500} className='inline-block' />
