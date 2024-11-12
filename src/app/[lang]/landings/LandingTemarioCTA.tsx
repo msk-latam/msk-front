@@ -56,8 +56,8 @@ const LandingTemarioCTA: FC<LandingProps> = ({ product, country }) => {
 			>
 				{/* Texto a la izquierda */}
 				<div className='text-[#392C35] font-light !font-raleway text-base lg:text-2xl '>
-					<p className='w-52 lg:w-auto lg:text-xl font-medium'>{aprendeTitle}</p>
-					<p className='mr-14 lg:mr-0 lg:text-xl font-medium'>¡Obtén el temario y descubre todo su contenido!</p>
+					<p className='w-60 lg:w-auto lg:text-xl font-medium text-[20px]'>{aprendeTitle}</p>
+					<p className='mr-8 lg:mr-0 lg:text-xl font-medium text-[20px] '>¡Obtén el temario y descubre todo su contenido!</p>
 					<div className='flex flex-col lg:flex-row relative z-0'>
 						<div className='flex gap-1  py-6 lg:py-6 lg:pr-4 lg:pl-0 justify-start  items-center  lg:w-auto  lg:translate-x-0 absolute lg:static top-0 h-[100px] '>
 							<div className='rounded-full p-2 bg-white'>
@@ -65,9 +65,9 @@ const LandingTemarioCTA: FC<LandingProps> = ({ product, country }) => {
 							</div>
 
 							<div className='flex flex-col '>
-								<p className='text-[#6474A6] font-bold font-inter text-[12px]'>CEDENTE</p>
+								<p className='text-[#6474A6] font-bold font-inter text-[12px] lg:text-base'>CEDENTE</p>
 								<div className='flex gap-1'>
-									<p className='font-inter text-[#392C35] text-[12px] font-medium'>
+									<p className='font-inter text-[#392C35] text-[12px] lg:text-base font-medium'>
 										{product.lista_de_cedentes?.[0]?.post_title}
 									</p>
 									<p className='font-inter font-medium text-[#392C35] text-base'> {cedenteTropos(product)} </p>
@@ -79,16 +79,18 @@ const LandingTemarioCTA: FC<LandingProps> = ({ product, country }) => {
 
 						<div className=' flex gap-6 bg-opacity-50 px-2  lg:p-6 justify-start lg:justify-center items-center  lg:w-auto  lg:translate-x-0 absolute lg:static top-[100px] '>
 							<div className=''>
-								<p className='text-[#6474A6] font-inter font-bold text-[12px]'>DURACIÓN</p>
+								<p className='text-[#6474A6] font-inter font-bold text-[12px] lg:text-base'>DURACIÓN</p>
 								<div className='flex gap-2'>
-									<p className='font-inter font-medium text-[#392C35] text-[14px]'>{product.details.duration.value} horas</p>
+									<p className='font-inter font-medium text-[#392C35] text-[14px] lg:text-base'>
+										{product.details.duration.value} horas
+									</p>
 									{/* <p>|</p> */}
 									{/* <p>{product.cantidad_modulos} módulos</p> */}
 								</div>
 							</div>
 							<div>
-								<p className='text-[#6474A6] font-bold font-inter text-[12px]'>Modalidad</p>
-								<p className='font-inter font-medium text-[#392C35] text-[14px]'>100% online</p>
+								<p className='text-[#6474A6] font-bold font-inter text-[12px] lg:text-base'>Modalidad</p>
+								<p className='font-inter font-medium text-[#392C35] text-[14px] lg:text-base'>100% online</p>
 							</div>
 						</div>
 					</div>

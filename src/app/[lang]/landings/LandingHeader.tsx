@@ -52,8 +52,8 @@ const LandingHeader: FC<LandingProps> = ({ product, country }) => {
 
 	return (
 		<>
-			<div className='relative'>
-				<div className='absolute inset-0 w-screen left-1/2 transform -translate-x-1/2 overflow-hidden bg-[#E2E8EC] lg:bg-transparent'>
+			<div className='relative '>
+				<div className='absolute inset-0 w-screen left-1/2 transform -translate-x-1/2 overflow-hidden bg-[#E2E8EC] lg:bg-transparent '>
 					{/* Imagen para desktop */}
 					<div className='hidden lg:block'>
 						<Image src={bannerImage} alt='Banner' layout='fill' objectFit='cover' quality={100} className='z-0' />
@@ -61,13 +61,13 @@ const LandingHeader: FC<LandingProps> = ({ product, country }) => {
 					{/* Color de fondo para mobile */}
 					<div className='lg:hidden bg-[#E2E8EC] w-full h-full'></div>
 				</div>
-				<div className='relative z-10'>
-					<div className='inline-block bg-[#FEF9C3] px-2 py-1 rounded-sm my-4'>
+				<div className='relative z-10 pt-10 pb-[120px]'>
+					<div className='inline-block bg-[#FEF9C3] px-2 py-1 rounded-sm my-4 '>
 						<p className='font-medium text-[#8E5A1C] '>Prueba 7 días gratis</p>
 					</div>
 					<h2 className='font-bold text-3xl text-[#392C35] mb-4'>{product.ficha.title}</h2>
 					<p
-						className='text-[#6474A6] font-inter pb-[100px] mr-0 lg:mr-60  text-[18px] lg:w-[800px]'
+						className='text-[#6474A6] font-inter  mr-0 lg:mr-60  text-[18px] lg:w-[800px] '
 						dangerouslySetInnerHTML={{ __html: headerDescription }}
 					></p>
 
