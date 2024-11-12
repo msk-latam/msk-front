@@ -66,17 +66,17 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
 						</div>
 						<hr className='border-t border-[#CCD1DC] my-2' />
 
-						<div className='lg:flex gap-4 lg:gap-6 flex flex-wrap'>
+						<div className='lg:flex gap-2 lg:gap-4 flex flex-wrap'>
 							<div className='flex gap-2'>
 								{/* <p className='font-medium'>{product.details.duration.value} horas</p> */}
 								{/* <p className='font-medium'>|</p> */}
 								<p className='font-medium'> {modulesTitle} </p>
 							</div>
-							<div>
+							<div className='flex gap-2 lg:gap-6'>
 								<p className='text-[#CCD1DC]'>|</p>
-							</div>
-							<div className='flex gap-2'>
 								<p className='font-medium'>Modalidad</p>
+							</div>
+							<div className='flex'>
 								<p className='font-medium'>100% online</p>
 							</div>
 						</div>
@@ -95,7 +95,7 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
 						} w-screen translate-x-[-50%] absolute z-0 left-1/2`}
 					>
 						{productSlug === 'accsap' && (
-							<div className='relative z-50 pt-[250px] mb-10 container text-[#6474A6] text-xl !font-lora-italic'>
+							<div className='relative z-50 pt-[250px] mb-10 container text-[#6474A6] text-[18px] !font-lora-italic'>
 								{accsapTranslateMessage}
 							</div>
 						)}

@@ -82,7 +82,7 @@ const FooterEduman = () => {
 						<div className='footer-main '>
 							{/* nueva seccion  */}
 
-							{!isLandingPage && <FooterLinksSection />}
+							{/* {!isLandingPage && <FooterLinksSection />} */}
 
 							{/* nueva seccion  */}
 							<div className='h-[400px] bg-[#1A1F27] w-screen left-1/2 transform -translate-x-1/2 relative mt-10 '></div>
@@ -96,7 +96,7 @@ const FooterEduman = () => {
 													<NcImage src={'/images/msk-logo-light.svg'} alt='footer-logo' width='100' height='100' />
 												</div>
 											</NcLink>
-											<p className='footer-copyright'>
+											<p className='footer-copyright lg:w-full'>
 												Una propuesta moderna que desafía a expandir las metas profesionales
 											</p>
 											<p>© {currentYear} • Medical&Scientific Knowledge S.L.</p>

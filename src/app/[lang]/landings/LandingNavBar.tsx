@@ -16,7 +16,7 @@ const LandingNavBar: FC<LandingProps> = ({ product, country }) => {
 	return (
 		<div className='fixed top-0 left-0 w-full  py-3 px-4 bg-white shadow-md z-50'>
 			<div className='lg:container flex justify-between items-center'>
-				<Logo isOnBlog={false} />
+				<Logo target={'_blank'} isOnBlog={false} />
 				<ButtonPrimary href={paymentLink} targetBlank={true} rel='noopener noreferrer' className='!py-2 !m-0'>
 					¡Quiero la prueba gratuita!
 				</ButtonPrimary>
