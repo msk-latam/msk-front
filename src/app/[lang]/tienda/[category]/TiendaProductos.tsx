@@ -35,6 +35,10 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 			let filteredCourses = storeCourses;
 
 			// Filtra por categoría
+			if (category === 'medicina-de-urgencias') {
+				category = 'emergentologia';
+			}
+
 			if (category) {
 				filteredCourses = storeCourses.filter((course: any) => course.categories.some((cat: any) => cat.slug === category));
 			}

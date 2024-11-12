@@ -4,6 +4,7 @@ import { Specialty } from '@/data/types';
 import Image from 'next/image';
 import { FC } from 'react';
 import { categoriesData } from './categoriesData';
+import { usePathname } from 'next/navigation';
 
 interface TiendaProps {
 	category: string;
@@ -21,7 +22,24 @@ const TiendaHeader: FC<TiendaProps> = ({ category }) => {
 	};
 
 	const matchedSpecialty = specialties.find((specialty) => generateSlug(specialty.name) === category);
-	const categoryData = categoriesData[category];
+	let categoryData = categoriesData[category];
+
+	const pathName = usePathname();
+	const getCountryFromPath = (pathname: string) => {
+		const pathParts = pathname.split('/'); // Dividimos la URL en partes
+		const countryCode = pathParts[1]; // El país debe estar en la segunda posición (índice 1)
+		return countryCode;
+	};
+	const userCountry = getCountryFromPath(pathName);
+	console.log(category);
+
+	if (category === 'medicina-de-urgencias' && userCountry === 'ar') {
+		categoryData = {
+			...categoryData,
+			headerTitle: 'Cursos de emergentología',
+			pageTitle: '¿Quieres capacitarte en emergentología?',
+		};
+	}
 	return (
 		<div className='relative'>
 			<div className='absolute inset-0 w-screen left-1/2 transform -translate-x-1/2 overflow-hidden h-52'>
