@@ -88,10 +88,10 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
 						</div>
 					</div>
 				</div>
-				<div className={`hidden lg:block h-0 ${productSlug === 'accsap' ? 'w-[2000] lg:h-[400px]' : 'lg:h-[250px]'}`}>
+				<div className={`hidden lg:block h-0 ${productSlug === 'accsap' ? 'w-[2000] lg:h-[380px]' : 'lg:h-[250px]'}`}>
 					<div
 						className={`bg-[#F3F4F6] ${
-							productSlug === 'accsap' ? 'h-[200px] lg:h-[400px]' : 'lg:h-[250px]'
+							productSlug === 'accsap' ? 'h-[200px] lg:h-[480px]' : 'lg:h-[350px]'
 						} w-screen translate-x-[-50%] absolute z-0 left-1/2`}
 					>
 						{productSlug === 'accsap' && (

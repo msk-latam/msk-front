@@ -85,7 +85,7 @@ const FooterEduman = () => {
 							{!isLandingPage && <FooterLinksSection />}
 
 							{/* nueva seccion  */}
-							<div className='h-[480px] lg:h-[300px] bg-[#1A1F27] w-screen left-1/2 transform -translate-x-1/2 relative mt-10  -mb-40 lg:mb-0 overflow-y-auto'></div>
+							<div className='h-[485px] lg:h-[300px] bg-[#1A1F27] w-screen left-1/2 transform -translate-x-1/2 relative mt-10  -mb-[163.69px] lg:mb-0 overflow-y-auto'></div>
 							{/* <div className={`transform -translate-y-full  lg:w-[60rem]`}>
 								<div className={` flex justify-center  `}>
 									<div className='footer-widget  mt-6'>
