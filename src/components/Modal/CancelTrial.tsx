@@ -98,8 +98,10 @@ const CancelTrialModal: FC<CancelTrialModalProps> = ({ isOpenProp, item, onClose
 				contentExtraClass='max-w-[500px]'
 				renderContent={() => (
 					<TrialModalContent
-						title='Hubo un error al finalizar tu prueba'
-						desc='Intenta nuevamente mas tarde'
+						title='Has finalizado tu prueba de 7 días gratis'
+						// title='Hubo un error al finalizar tu prueba'
+						// desc='Intenta nuevamente mas tarde'
+						desc='Para continuar con este curso, debes inscribirte.'
 						textButton='Volver'
 						productSlug={item.slug}
 						setShow={setErrorModal}

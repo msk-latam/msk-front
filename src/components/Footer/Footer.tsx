@@ -82,7 +82,7 @@ const FooterEduman = () => {
 						<div className='footer-main '>
 							{/* nueva seccion  */}
 
-							{!isLandingPage && <FooterLinksSection />}
+							{/* {!isLandingPage && <FooterLinksSection />} */}
 
 							{/* nueva seccion  */}
 							<div className='h-[485px] lg:h-[300px] bg-[#1A1F27] w-screen left-1/2 transform -translate-x-1/2 relative mt-10  -mb-[163.69px] lg:mb-0 overflow-y-auto'></div>
