@@ -7,10 +7,11 @@ import ofrecemosIcon from '@/public/webp-images/icons/ofrecemosIcon.svg';
 import recursosIcon from '@/public/webp-images/icons/recursosIcon.svg';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import arrowLeft from '@/public/images/icons/ArrowLeft.svg';
 import arrowDownWhite from '@/public/images/icons/arrowDownWhite.svg';
 import arrowDownBlack from '@/public/images/icons/arrowDownBlack.svg';
+import { filter } from 'lodash';
 
 const CategoriesDropdown = ({ onClickClose }: any) => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -36,10 +37,32 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 		name: 'Neurología',
 	});
 
+	const pathName = usePathname();
+	const getCountryFromPath = (pathname: string) => {
+		const pathParts = pathname.split('/'); // Dividimos la URL en partes
+		const countryCode = pathParts[1]; // El país debe estar en la segunda posición (índice 1)
+		return countryCode;
+	};
+	const userCountry = getCountryFromPath(pathName);
+
+	sortedCategories = sortedCategories.map((category) => {
+		if (category.name === 'Emergentología' && userCountry !== 'ar') {
+			return {
+				...category,
+				name: 'Medicina de urgencias',
+			};
+		}
+		return category;
+	});
+
 	// Ordenamos de nuevo para incluir "Neurología" en la posición correcta
 	sortedCategories = sortedCategories.sort((a, b) => a.name.localeCompare(b.name));
 
 	const handleCategoryClick = (category: Specialty) => {
+		// Si la categoría es "Medicina de urgencias", la reemplazamos por "Emergentología" internamente.
+		if (category.name === 'Medicina de urgencias') {
+			category.name = 'Emergentología';
+		}
 		setActiveCategory(category); // Activa el dropdown secundario con la categoría seleccionada
 	};
 
@@ -78,12 +101,17 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 	});
 
 	const redirectToCategory = (slug: string) => {
-		const formattedSlug = slug
+		console.log(slug);
+		let formattedSlug = slug
 			.toLowerCase() // Convertir a minúsculas
 			.normalize('NFD')
 			.replace(/[^a-z0-9\s]/g, '') // Eliminar caracteres raros
 			.replace(/\s+/g, '-') // Reemplazar espacios con guiones medios
 			.trim(); // Eliminar espacios en blanco al principio y al final
+
+		if (formattedSlug === 'emergentologia') {
+			formattedSlug = 'medicina-de-urgencias';
+		}
 
 		// Redirigir a la ruta correspondiente
 		setIsOpen(!isOpen);
@@ -137,6 +165,8 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 		// Limpiar el listener al desmontar
 		return () => window.removeEventListener('resize', handleResize);
 	}, []);
+
+	console.log(filteredCourses);
 
 	return (
 		<div className='relative block overscroll-none ' ref={dropdownRef}>
@@ -203,7 +233,11 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 									</div>
 								</div>
 
-								<h2 className='!font-inter font-bold mb-2 pt-1 pb-2  text-lg'>{activeCategory.name}</h2>
+								<h2 className='!font-inter font-bold mb-2 pt-1 pb-2 text-lg'>
+									{(activeCategory.name as string) === 'Emergentología' && (userCountry as string) !== 'ar'
+										? 'Medicina de urgencias'
+										: activeCategory.name}
+								</h2>
 								<ul className=' overflow-y-scroll lg:overflow-y-visible h-[calc(53vh-10rem)] lg:h-auto lg:max-h-none z-50 scrollbar-thin scrollbar-thumb-[#6474A6]'>
 									{filteredCourses?.length > 0 ? (
 										filteredCourses

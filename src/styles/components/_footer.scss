@@ -27,7 +27,7 @@
 	}
 	p {
 		color: white;
-		margin-bottom: 30px;
+		// margin-bottom: 30px;
 	}
 	h3 {
 		color: $white;
@@ -182,7 +182,7 @@
 .copyright-subcribe .field input {
 	height: 70px;
 	width: 100%;
-	padding: 0 190px 0 45px;
+	padding: 0 167px 0 45px;
 	background: $heading-color;
 	border: 0;
 	border-radius: 5px;
@@ -195,7 +195,7 @@
 		padding-left: 0px 0px 0px 45px;
 	}
 	@media #{$xs} {
-		padding: 0 20px 0 45px;
+		// padding: 0 20px 0 45px;
 		height: 60px;
 	}
 	&::placeholder {
@@ -228,8 +228,10 @@
 	}
 	@media #{$xs} {
 		margin-bottom: 20px;
-		position: relative;
-		left: 0;
+		// position: relative;
+		top: 5px;
+		left: 248px;
+		width: 60px;
 	}
 	@media #{$lg} {
 		width: 130px;

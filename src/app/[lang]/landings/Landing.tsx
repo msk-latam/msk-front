@@ -17,11 +17,13 @@ interface LandingProps {
 const Landing: FC<LandingProps> = ({ product, country }) => {
 	return (
 		<>
-			<div className='mb-[80px]'>
+			<div className='mb-[70px]'>
 				<LandingNavBar product={product} country={country} />
 			</div>
 			<LandingHeader product={product} country={country} />
+
 			<LandingBody product={product} country={country} />
+
 			{/* <LandingTemario product={product} country={country} /> */}
 			<LandingFooter product={product} country={country} />
 

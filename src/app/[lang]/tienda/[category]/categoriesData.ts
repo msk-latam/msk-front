@@ -49,7 +49,7 @@ export const categoriesData: CategoriesData = {
 		headerTitle: 'Cursos de emergentología',
 		pageTitle: '¿Quieres capacitarte en emergentología?',
 		pageDescription:
-			'Tienes distintas opciones para cursar a distancia.Con ellas desarrollarás las habilidades esenciales para poner en práctica en los servicios de urgencias y emergencias. Comprenderás en profundidad un amplio rango de enfermedades, incluso aquellas poco frecuentes, y te prepararás para una correcta toma de decisiones que derive en tratamientos más eficientes.',
+			'Tienes distintas opciones para cursar a distancia. Con ellas desarrollarás las habilidades esenciales para poner en práctica en los servicios de urgencias y emergencias. Comprenderás en profundidad un amplio rango de enfermedades, incluso aquellas poco frecuentes, y te prepararás para una correcta toma de decisiones que derive en tratamientos más eficientes.',
 	},
 	endocrinologia: {
 		headerTitle: 'Cursos de endocrinología',
@@ -80,6 +80,12 @@ export const categoriesData: CategoriesData = {
 		pageTitle: '¿Quieres capacitarte en infectología?',
 		pageDescription:
 			'¡Haces bien! Es el momento ideal para comenzar, debido a que el panorama de alta prevalencia de enfermedades transmisibles requiere de profesionales óptimamente preparados para el abordaje de estas afecciones. Aprende sobre infectología en MSK y adquiere conocimientos para la atención eficaz de patologías por agentes infecciosos y para establecer terapias racionales para cada paciente.',
+	},
+	'medicina-de-urgencias': {
+		headerTitle: 'Cursos de medicina de urgencias',
+		pageTitle: '¿Quieres capacitarte en medicina de urgencias?',
+		pageDescription:
+			'Tienes distintas opciones para cursar a distancia. Con ellas desarrollarás las habilidades esenciales para poner en práctica en los servicios de urgencias y emergencias. Comprenderás en profundidad un amplio rango de enfermedades, incluso aquellas poco frecuentes, y te prepararás para una correcta toma de decisiones que derive en tratamientos más eficientes.',
 	},
 	'medicina-familiar': {
 		headerTitle: 'Cursos de medicina familiar y comunitaria',

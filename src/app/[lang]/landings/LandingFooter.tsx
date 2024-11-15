@@ -13,12 +13,12 @@ interface LandingProps {
 }
 
 const LandingFooter: FC<LandingProps> = ({ product, country }) => {
-	const [faqs, setFaqs] = useState<any>(null);
+	// const [faqs, setFaqs] = useState<any>(null);
 
-	const fetchContent = async () => {
-		const fetchedContent = await ssr.getWpContent('/home-msk', country);
-		setFaqs(fetchedContent);
-	};
+	// const fetchContent = async () => {
+	// 	const fetchedContent = await ssr.getWpContent('/home-msk', country);
+	// 	setFaqs(fetchedContent);
+	// };
 
 	const footerImage =
 		product.params.slug === 'medicina-interna'
@@ -30,9 +30,9 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
 	const productSlug = product?.params?.slug || '';
 	const paymentLink = paymentLinks[country]?.[productSlug] || '#';
 
-	useEffect(() => {
-		fetchContent();
-	}, [product]);
+	// useEffect(() => {
+	// 	fetchContent();
+	// }, [product]);
 
 	console.log(productSlug);
 
@@ -46,7 +46,7 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
 			<footer>
 				<Questions content={landingFAQs(country) as FAQS} isLanding={true} />
 
-				<div className=' lg:absolute lg:flex  bg-[#FFFFFF] rounded-3xl shadow-2xl shadow-black/25 translate-y-[-50px] z-10'>
+				<div className=' lg:absolute lg:flex  lg:w-[1270px] w-auto  bg-[#FFFFFF] rounded-3xl shadow-2xl shadow-black/25 translate-y-[-50px] z-10'>
 					<div className='lg:flex'>
 						<Image src={footerImage} alt='banner' width={750} height={550} className='p-0 m-0' />
 					</div>
@@ -68,8 +68,6 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
 
 						<div className='lg:flex gap-2 lg:gap-4 flex flex-wrap'>
 							<div className='flex gap-2'>
-								{/* <p className='font-medium'>{product.details.duration.value} horas</p> */}
-								{/* <p className='font-medium'>|</p> */}
 								<p className='font-medium'> {modulesTitle} </p>
 							</div>
 							<div className='flex gap-2 lg:gap-6'>
@@ -88,10 +86,10 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
 						</div>
 					</div>
 				</div>
-				<div className={`hidden lg:block h-0 ${productSlug === 'accsap' ? 'w-[2000] lg:h-[400px]' : 'lg:h-[250px]'}`}>
+				<div className={`hidden lg:block h-0 ${productSlug === 'accsap' ? 'w-[2000] lg:h-[380px]' : 'lg:h-[250px]'}`}>
 					<div
 						className={`bg-[#F3F4F6] ${
-							productSlug === 'accsap' ? 'h-[200px] lg:h-[400px]' : 'lg:h-[250px]'
+							productSlug === 'accsap' ? 'h-[200px] lg:h-[480px]' : 'lg:h-[350px]'
 						} w-screen translate-x-[-50%] absolute z-0 left-1/2`}
 					>
 						{productSlug === 'accsap' && (

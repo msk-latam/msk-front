@@ -40,27 +40,27 @@ const FooterEduman = () => {
 
 	return (
 		<footer>
-			<div className='footer-area '>
+			<div className={isLandingPage ? '' : 'footer-area'}>
 				<div className=''>
 					<div className='lg:container'>
 						{isOnBlog || isLandingPage ? null : (
 							<div className='copyright-area grid grid-cols-1 md:grid-cols-6 items-center sm:gap-1 mb-6 w-screen left-1/2 transform -translate-x-1/2 relative md:w-auto md:left-auto md:transform-none md:-translate-x-0 '>
 								<div className='footer-column col-span-6 md:mx-auto text-center md:text-left lg:col-span-1'>
-									<div className='copyright-text'>
-										<p>Nuestro newsletter</p>
+									<div className='copyright-text -mb-3'>
+										<p className='!text-[18px]'>Nuestro newsletter</p>
 									</div>
 								</div>
 								<div className='footer-column col-span-6 mx-auto lg:col-span-2'>
 									<div className='divisor' />
-									<p className='discounts md:mx-auto text-center md:text-left text-[12px] sm:text-[18px] leading-4 sm:leading-6'>
-										Descuentos exclusivos y becas completas solo con tu suscripción
+									<p className='discounts md:mx-auto text-center md:text-left text-[12px] sm:text-[14px] leading-4 sm:leading-6'>
+										Descuentos exclusivos y becas <br className='sm:hidden' /> completas solo con tu suscripción
 									</p>
 									<div className='divisor' />
 								</div>
 								<div className='footer-column col-span-6 md:mx-auto text-center md:text-left lg:col-span-3'>
 									<div className='copyright-subcribe '>
-										<form onSubmit={openModal} method='post' className='widget__subscribe'>
-											<div className='field'>
+										<form onSubmit={openModal} method='post' className='widget__subscribe '>
+											<div className='field relative '>
 												<NcImage src={'/images/icons/email_alt.svg'} alt='' width='10' height='20' />
 												<input
 													type='email'
@@ -70,8 +70,8 @@ const FooterEduman = () => {
 													required
 												/>
 											</div>
-											<button type='submit'>
-												Suscribirme
+											<button type='submit' className='!p-0'>
+												<span className='hidden lg:inline'>Suscribirme</span>
 												<NcImage src={'/images/icons/plane.svg'} alt='' width='20' height='20' />
 											</button>
 										</form>
@@ -85,23 +85,141 @@ const FooterEduman = () => {
 							{/* {!isLandingPage && <FooterLinksSection />} */}
 
 							{/* nueva seccion  */}
-							<div className='h-[400px] bg-[#1A1F27] w-screen left-1/2 transform -translate-x-1/2 relative mt-10 '></div>
+							<div className='h-[585px] lg:h-[300px] bg-[#1A1F27] w-screen left-1/2 transform -translate-x-1/2 relative mt-10  -mb-[224px] lg:mb-0 overflow-y-auto'></div>
+							{/* <div className={`transform -translate-y-full  lg:w-[60rem]`}>
+								<div className={` flex justify-center  `}>
+									<div className='footer-widget  mt-6'>
+										<ul className='text-sm md:text-base'>
+											<li>
+												<NcLink href='/contacto' className='font-light'>
+													Contacto
+												</NcLink>
+											</li>
+											<li>
+												<NcLink href='/bases-promocionales' className='font-light'>
+													Bases promocionales
+												</NcLink>
+											</li>
+											<li>
+												<NcLink href='/politica-de-privacidad' className='font-light'>
+													Política de privacidad
+												</NcLink>
+											</li>
+											<li>
+												<NcLink href='/politica-de-cookies' className='font-light'>
+													Política de cookies
+												</NcLink>
+											</li>
+											<li>
+												<NcLink href='/terminos-y-condiciones' className='font-light'>
+													Términos y condiciones
+												</NcLink>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div className={`col-span-1 flex justify-start `}>
+									<div className='footer-widget  mt-6 '>
+										<ul className='text-sm md:text-base'>
+											<li>
+												<NcLink href='/mision' className='font-light'>
+													Nuestra misión
+												</NcLink>
+											</li>
+											<li>
+												<NcLink href='/nosotros' className='font-light'>
+													Quiénes Somos
+												</NcLink>
+											</li>
 
-							<div className='grid grid-cols-1 lg:grid-cols-3 transform -translate-y-[100%] absolute '>
-								<div className={`col-span-1 footer-col-1`}>
-									<div className='footer-widget f-w1 mb-20'>
-										<div className='footer-img grid-cols-1 align-center content-center'>
+											<li>
+												<a href='https://ayuda.msklatam.com/' target='_blank'>
+													Centro de ayuda
+												</a>
+											</li>
+
+											{countryState.country.includes('ec') && (
+												<li>
+													<NcLink href='/cancelar-suscripcion'>Arrepentimiento de compra</NcLink>
+												</li>
+											)}
+										</ul>
+									</div>
+								</div>
+							</div> */}
+
+							<div className='lg:transform lg:-translate-y-[160%]  grid grid-cols-2 gap-4  px-8 lg:hidden relative mt-[-160%] pt-8'>
+								<div className='footer-widget mt-6'>
+									<ul className='text-sm md:text-base'>
+										<li>
+											<NcLink href='/contacto' className='font-light'>
+												Contacto
+											</NcLink>
+										</li>
+										<li>
+											<NcLink href='/bases-promocionales' className='font-light'>
+												Bases promocionales
+											</NcLink>
+										</li>
+										<li>
+											<NcLink href='/politica-de-privacidad' className='font-light'>
+												Política de privacidad
+											</NcLink>
+										</li>
+										<li>
+											<NcLink href='/politica-de-cookies' className='font-light'>
+												Política de cookies
+											</NcLink>
+										</li>
+										<li>
+											<NcLink href='/terminos-y-condiciones' className='font-light'>
+												Términos y condiciones
+											</NcLink>
+										</li>
+									</ul>
+								</div>
+
+								<div className='footer-widget mt-6'>
+									<ul className='text-sm md:text-base'>
+										<li>
+											<NcLink href='/mision' className='font-light'>
+												Nuestra misión
+											</NcLink>
+										</li>
+										<li>
+											<NcLink href='/nosotros' className='font-light'>
+												Quiénes Somos
+											</NcLink>
+										</li>
+										<li>
+											<a href='https://ayuda.msklatam.com/' target='_blank' className='font-light'>
+												Centro de ayuda
+											</a>
+										</li>
+										{countryState.country.includes('ec') && (
+											<li>
+												<NcLink href='/cancelar-suscripcion' className='font-light'>
+													Arrepentimiento de compra
+												</NcLink>
+											</li>
+										)}
+									</ul>
+								</div>
+							</div>
+
+							<div className='grid grid-cols-1 lg:grid-cols-3 lg:transform lg:-translate-y-[100%] lg:absolute relative mt-24 lg:mt-0 '>
+								<div className={`px-6 mb-6 lg:mb-0 lg:px-0 lg:w-[35rem]`}>
+									<div className='footer-widget f-w1 mb-2'>
+										<div className='footer-img  align-center content-center'>
 											<NcLink href='/'>
 												<div className='w-[150px]'>
 													<NcImage src={'/images/msk-logo-light.svg'} alt='footer-logo' width='100' height='100' />
 												</div>
 											</NcLink>
-											<p className='footer-copyright lg:w-full'>
-												Una propuesta moderna que desafía a expandir las metas profesionales
-											</p>
-											<p>© {currentYear} • Medical&Scientific Knowledge S.L.</p>
+											<p className=' lg:w-full mb-1'>Una propuesta moderna que desafía a expandir las metas profesionales</p>
+											<p className='mb-8'>© {currentYear} • Medical&Scientific Knowledge S.L.</p>
 										</div>
-										<div className='footer-icon ml-auto'>
+										<div className='footer-icon '>
 											<a href='https://www.facebook.com/msk.online.learning' target='_blank' rel='noopener noreferrer'>
 												<NcImage src={'/images/icons/fb.svg'} alt='' width='10' height='10' className='object-fill' />
 											</a>
@@ -127,9 +245,9 @@ const FooterEduman = () => {
 										</div>
 									</div>
 								</div>
-								<div className={`md:grid grid-cols-2 col-span-2 hidden`}>
-									<div className={`col-span-1 flex justify-center `}>
-										<div className='footer-widget f-w4 mt-6'>
+								<div className={`md:grid grid-cols-2 col-span-2 hidden lg:w-[60rem]`}>
+									<div className={` flex justify-center  `}>
+										<div className='footer-widget  mt-6'>
 											<ul className='text-sm md:text-base'>
 												<li>
 													<NcLink href='/contacto' className='font-light'>
@@ -169,7 +287,7 @@ const FooterEduman = () => {
 										</div>
 									</div>
 									<div className={`col-span-1 flex justify-start `}>
-										<div className='footer-widget f-w3 mt-6 '>
+										<div className='footer-widget  mt-6 '>
 											<ul className='text-sm md:text-base'>
 												<li>
 													<NcLink href='/mision' className='font-light'>

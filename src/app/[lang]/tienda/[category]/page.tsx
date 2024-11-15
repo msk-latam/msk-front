@@ -2,12 +2,19 @@ import { FC } from 'react';
 import { cookies } from 'next/headers';
 import Tienda from './Tienda';
 import HotjarTienda from '@/hotjar/HotjarTienda';
+import { generateCategoryMetadata } from '@/SEO/tienda/categoryMetadata';
+import { Metadata } from 'next';
 
 interface CategoryPageProps {
 	params: {
 		category: string;
 		lang: string;
 	};
+}
+
+export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+	const { category, lang } = params;
+	return generateCategoryMetadata({ category, lang });
 }
 
 const CategoryPage: FC<CategoryPageProps> = ({ params }) => {
