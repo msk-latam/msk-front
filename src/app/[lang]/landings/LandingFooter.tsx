@@ -13,12 +13,12 @@ interface LandingProps {
 }
 
 const LandingFooter: FC<LandingProps> = ({ product, country }) => {
-	const [faqs, setFaqs] = useState<any>(null);
+	// const [faqs, setFaqs] = useState<any>(null);
 
-	const fetchContent = async () => {
-		const fetchedContent = await ssr.getWpContent('/home-msk', country);
-		setFaqs(fetchedContent);
-	};
+	// const fetchContent = async () => {
+	// 	const fetchedContent = await ssr.getWpContent('/home-msk', country);
+	// 	setFaqs(fetchedContent);
+	// };
 
 	const footerImage =
 		product.params.slug === 'medicina-interna'
@@ -30,9 +30,9 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
 	const productSlug = product?.params?.slug || '';
 	const paymentLink = paymentLinks[country]?.[productSlug] || '#';
 
-	useEffect(() => {
-		fetchContent();
-	}, [product]);
+	// useEffect(() => {
+	// 	fetchContent();
+	// }, [product]);
 
 	console.log(productSlug);
 
@@ -68,8 +68,6 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
 
 						<div className='lg:flex gap-2 lg:gap-4 flex flex-wrap'>
 							<div className='flex gap-2'>
-								{/* <p className='font-medium'>{product.details.duration.value} horas</p> */}
-								{/* <p className='font-medium'>|</p> */}
 								<p className='font-medium'> {modulesTitle} </p>
 							</div>
 							<div className='flex gap-2 lg:gap-6'>
