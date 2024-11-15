@@ -148,7 +148,7 @@ const FooterEduman = () => {
 								</div>
 							</div> */}
 
-							<div className='lg:transform lg:-translate-y-[160%]  grid grid-cols-2 gap-4  px-8 lg:hidden relative mt-[-161%]'>
+							<div className='lg:transform lg:-translate-y-[160%]  grid grid-cols-2 gap-4  px-8 lg:hidden relative mt-[-160%] pt-2'>
 								<div className='footer-widget mt-6'>
 									<ul className='text-sm md:text-base'>
 										<li>
@@ -207,7 +207,7 @@ const FooterEduman = () => {
 								</div>
 							</div>
 
-							<div className='grid grid-cols-1 lg:grid-cols-3 lg:transform lg:-translate-y-[100%] lg:absolute relative mt-10 lg:mt-0 '>
+							<div className='grid grid-cols-1 lg:grid-cols-3 lg:transform lg:-translate-y-[100%] lg:absolute relative mt-24 lg:mt-0 '>
 								<div className={`px-6 mb-6 lg:mb-0 lg:px-0 lg:w-[35rem]`}>
 									<div className='footer-widget f-w1 mb-2'>
 										<div className='footer-img  align-center content-center'>
