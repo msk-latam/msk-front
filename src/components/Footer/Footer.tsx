@@ -85,7 +85,7 @@ const FooterEduman = () => {
 							{/* {!isLandingPage && <FooterLinksSection />} */}
 
 							{/* nueva seccion  */}
-							<div className='h-[485px] lg:h-[300px] bg-[#1A1F27] w-screen left-1/2 transform -translate-x-1/2 relative mt-10  -mb-[163.69px] lg:mb-0 overflow-y-auto'></div>
+							<div className='h-[585px] lg:h-[300px] bg-[#1A1F27] w-screen left-1/2 transform -translate-x-1/2 relative mt-10  -mb-[224px] lg:mb-0 overflow-y-auto'></div>
 							{/* <div className={`transform -translate-y-full  lg:w-[60rem]`}>
 								<div className={` flex justify-center  `}>
 									<div className='footer-widget  mt-6'>
@@ -148,7 +148,7 @@ const FooterEduman = () => {
 								</div>
 							</div> */}
 
-							<div className='transform -translate-y-[190%]  grid grid-cols-2 gap-4  px-8 lg:hidden'>
+							<div className='transform -translate-y-[160%]  grid grid-cols-2 gap-4  px-8 lg:hidden'>
 								{/* Columna izquierda */}
 								<div className='footer-widget mt-6'>
 									<ul className='text-sm md:text-base'>
