@@ -148,7 +148,7 @@ const FooterEduman = () => {
 								</div>
 							</div> */}
 
-							<div className='lg:transform lg:-translate-y-[160%]  grid grid-cols-2 gap-4  px-8 lg:hidden relative mt-[-160%] pt-2'>
+							<div className='lg:transform lg:-translate-y-[160%]  grid grid-cols-2 gap-4  px-8 lg:hidden relative mt-[-160%] pt-8'>
 								<div className='footer-widget mt-6'>
 									<ul className='text-sm md:text-base'>
 										<li>
