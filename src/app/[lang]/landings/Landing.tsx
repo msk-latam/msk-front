@@ -21,7 +21,7 @@ const Landing: FC<LandingProps> = ({ product, country }) => {
 				<LandingNavBar product={product} country={country} />
 			</div>
 			<LandingHeader product={product} country={country} />
-			<div className='-mb-6 lg:mb-0'>
+			<div className=''>
 				<LandingBody product={product} country={country} />
 			</div>
 			{/* <LandingTemario product={product} country={country} /> */}
