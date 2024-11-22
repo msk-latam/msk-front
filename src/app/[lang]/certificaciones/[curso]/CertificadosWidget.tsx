@@ -17,7 +17,7 @@ const countryKeywords: Record<string, string[]> = {
 	Colombia: ['Colombia', 'Federación Médica Colombiana', 'FMC'],
 	México: ['México', 'Hospital General de México', 'Sociedad Médica del Hospital General de México', 'Saxum University'],
 	USA: ['ACC', 'American College of Cardiology'],
-	España: ['España', 'European University Gasteiz', 'EUNEIZ'],
+	España: ['España', 'European University Gasteiz', 'EUNEIZ', 'Madrid '],
 	Perú: ['Perú', 'Sociedad Peruana de Medicina Interna'],
 };
 
@@ -45,13 +45,48 @@ const CertificadosWidget: React.FC<CertificadosWidgetProps> = ({ product }) => {
 		return acc;
 	}, {});
 
-	// Ordenar países alfabéticamente y ordenar los avales dentro de cada país
 	const sortedCountries = Object.entries(groupedByCountry)
+		.filter(([country]) => country !== 'USA') // Excluir USA
 		.sort(([countryA], [countryB]) => countryA.localeCompare(countryB))
 		.map(([country, avales]) => ({
 			country,
 			avales: avales.sort((a, b) => decodeHtmlEntities(a.title).localeCompare(decodeHtmlEntities(b.title))),
 		}));
+
+	// const courses = localStorage.getItem('all-courses');
+	// if (!courses) {
+	// 	console.log('No hay cursos en el localStorage');
+	// 	return; // Salir si no hay datos
+	// }
+
+	// let parsedCourses;
+	// try {
+	// 	// Parsear el string de courses
+	// 	const parsedData = JSON.parse(courses);
+	// 	console.log(parsedData);
+
+	// 	// Verificar que existe la clave 'value' y que es un array
+	// 	if (!parsedData.value || !Array.isArray(parsedData.value)) {
+	// 		console.log('No se encontraron cursos en la clave "value" o no es un array', parsedData);
+	// 		return; // Salir si no se encuentra el array en 'value'
+	// 	}
+
+	// 	parsedCourses = parsedData.value;
+	// 	console.log(parsedCourses);
+	// } catch (error) {
+	// 	console.error('Error al parsear los cursos:', error);
+	// 	return; // Salir si no se puede parsear
+	// }
+
+	// // Filtrar los cursos donde father_post_type no sea "downloadable"
+	// const filteredCourses = parsedCourses.filter((course: any) => course.father_post_type !== 'downloadable');
+
+	// console.log(filteredCourses);
+
+	// // Filtrar solo los cursos de tipo 'course' y extraer el 'slug'
+	// const certificateUrls = filteredCourses.map((course: any) => `https://msklatam.com/certificaciones/${course.slug}`);
+
+	// console.log(certificateUrls.join('\n'));
 
 	return (
 		<div>
