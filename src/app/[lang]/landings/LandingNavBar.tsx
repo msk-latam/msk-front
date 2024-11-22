@@ -1,3 +1,4 @@
+'use client';
 import ButtonPrimary from '@/components/Button/ButtonPrimary';
 import Logo from '@/components/Logo/Logo';
 import { FetchSingleProduct } from '@/data/types';
