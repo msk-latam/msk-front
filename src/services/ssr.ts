@@ -51,6 +51,80 @@ class ApiSSRService {
 		}
 	}
 
+	// async getAllCourses(country?: string, tag?: string, withAll: boolean = false, currentUrl = '') {
+	// 	setLoadingCourses(true);
+
+	// 	// Validar países
+	// 	let validCountries = countries.map((item) => item.id);
+	// 	let onValidCountry = country && validCountries.includes(country);
+	// 	const countryParam = onValidCountry ? `&country=${country}` : '&country=int';
+
+	// 	// Obtener el tag de la URL si no se pasa como argumento
+	// 	if (!tag) {
+	// 		let tagFromURL = new URLSearchParams(currentUrl).get('tag');
+	// 		tag = tagFromURL ? tagFromURL : '';
+	// 	}
+	// 	let tagParam = tag ? `&tag=${tag}` : '';
+	// 	const withAllParam = withAll ? '&filter=all' : '';
+
+	// 	// const queryParams = [countryParam, tagParam, withAllParam].filter(Boolean).join('');
+	// 	const queryParams = [countryParam, withAllParam].filter(Boolean).join('');
+
+	// 	const cacheKey = 'all-courses';
+	// 	// const TTL = 2 * 60 * 60 * 1000; // 24 horas
+	// 	const TTL = 0; // 24 horas
+
+	// 	try {
+	// 		// Verificar si estamos en un entorno donde `window` está disponible
+	// 		const isServer = typeof window === 'undefined';
+
+	// 		if (!isServer) {
+	// 			// Verificar si ya tenemos datos guardados en `localStorage`
+	// 			const cachedData = localStorage.getItem(cacheKey);
+	// 			if (cachedData) {
+	// 				const { value, timestamp } = JSON.parse(cachedData);
+	// 				const now = new Date().getTime();
+
+	// 				if (now - timestamp < TTL) {
+	// 					console.log(`getallcourses obtenidos de localStorage para ${cacheKey}`);
+	// 					setAllCourses(value);
+	// 					setLoadingCourses(false);
+	// 					return value;
+	// 				}
+	// 			}
+	// 		}
+
+	// 		// Si no hay datos válidos en `localStorage`, hacer la llamada a la API
+
+	// 		const response = await fetch(`${API_URL}/products?limit=-1${queryParams}&asd=tes2`);
+
+	// 		if (!response.ok) {
+	// 			throw new Error(`Failed to fetch courses. HTTP status ${response.status}`);
+	// 		}
+
+	// 		const data = await response.json();
+
+	// 		// Guardar los datos en `localStorage`
+	// 		if (!isServer) {
+	// 			localStorage.setItem(
+	// 				cacheKey,
+	// 				JSON.stringify({
+	// 					value: data.products,
+	// 					timestamp: new Date().getTime(),
+	// 				}),
+	// 			);
+	// 			console.log(`getallcourses obtenidos de la API para ${cacheKey}`);
+	// 		}
+
+	// 		setAllCourses(data.products);
+	// 		setLoadingCourses(false);
+	// 		return data.products;
+	// 	} catch (error) {
+	// 		console.error('Network error:', error);
+	// 		setLoadingCourses(false);
+	// 		return error;
+	// 	}
+	// }
 	async getAllCourses(country?: string, tag?: string, withAll: boolean = false, currentUrl = '') {
 		setLoadingCourses(true);
 
@@ -66,36 +140,43 @@ class ApiSSRService {
 		}
 		let tagParam = tag ? `&tag=${tag}` : '';
 		const withAllParam = withAll ? '&filter=all' : '';
-
-		// const queryParams = [countryParam, tagParam, withAllParam].filter(Boolean).join('');
 		const queryParams = [countryParam, withAllParam].filter(Boolean).join('');
 
 		const cacheKey = 'all-courses';
-		// const TTL = 2 * 60 * 60 * 1000; // 24 horas
-		const TTL = 0; // 24 horas
+		const countryCacheKey = 'current-country';
+		const TTL = 0; // Ajusta el TTL si deseas usar caché por tiempo
 
 		try {
 			// Verificar si estamos en un entorno donde `window` está disponible
 			const isServer = typeof window === 'undefined';
 
 			if (!isServer) {
-				// Verificar si ya tenemos datos guardados en `localStorage`
-				const cachedData = localStorage.getItem(cacheKey);
-				if (cachedData) {
-					const { value, timestamp } = JSON.parse(cachedData);
-					const now = new Date().getTime();
+				// Obtener país almacenado en `localStorage`
+				const cachedCountry = localStorage.getItem(countryCacheKey);
 
-					if (now - timestamp < TTL) {
-						console.log(`getallcourses obtenidos de localStorage para ${cacheKey}`);
-						setAllCourses(value);
-						setLoadingCourses(false);
-						return value;
+				// Si el país es diferente, limpiar caché y guardar el nuevo país
+				if (cachedCountry !== country) {
+					console.log(`Cambio de país detectado: ${cachedCountry} -> ${country}`);
+					localStorage.removeItem(cacheKey);
+					localStorage.setItem(countryCacheKey, country || 'int');
+				} else {
+					// Verificar si ya tenemos datos guardados en `localStorage`
+					const cachedData = localStorage.getItem(cacheKey);
+					if (cachedData) {
+						const { value, timestamp } = JSON.parse(cachedData);
+						const now = new Date().getTime();
+
+						if (now - timestamp < TTL) {
+							console.log(`getAllCourses obtenidos de localStorage para ${cacheKey}`);
+							setAllCourses(value);
+							setLoadingCourses(false);
+							return value;
+						}
 					}
 				}
 			}
 
 			// Si no hay datos válidos en `localStorage`, hacer la llamada a la API
-
 			const response = await fetch(`${API_URL}/products?limit=-1${queryParams}&asd=tes2`);
 
 			if (!response.ok) {
@@ -113,7 +194,7 @@ class ApiSSRService {
 						timestamp: new Date().getTime(),
 					}),
 				);
-				console.log(`getallcourses obtenidos de la API para ${cacheKey}`);
+				console.log(`getAllCourses obtenidos de la API para ${cacheKey}`);
 			}
 
 			setAllCourses(data.products);
