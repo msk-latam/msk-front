@@ -8,6 +8,7 @@ import NcLink from '../NcLink/NcLink';
 import NcImage from '../NcImage/NcImage';
 import { usePathname } from 'next/navigation';
 import FooterLinksSection from './FooterLinks';
+import FooterCTA from './FooterCTA';
 
 const FooterEduman = () => {
 	const [show, setShow] = useState(false);
@@ -35,8 +36,6 @@ const FooterEduman = () => {
 	useEffect(() => {
 		setIsOnBlog(pathname == '/blog');
 	}, [pathname]);
-
-	const currentYear = new Date().getFullYear();
 
 	return (
 		<footer>
@@ -79,246 +78,12 @@ const FooterEduman = () => {
 								</div>
 							</div>
 						)}
-						<div className='footer-main '>
-							{/* nueva seccion  */}
-
-							{/* {!isLandingPage && <FooterLinksSection />} */}
-
-							{/* nueva seccion  */}
-							<div className='h-[585px] lg:h-[300px] bg-[#1A1F27] w-screen left-1/2 transform -translate-x-1/2 relative mt-10  -mb-[224px] lg:mb-0 overflow-y-auto'></div>
-							{/* <div className={`transform -translate-y-full  lg:w-[60rem]`}>
-								<div className={` flex justify-center  `}>
-									<div className='footer-widget  mt-6'>
-										<ul className='text-sm md:text-base'>
-											<li>
-												<NcLink href='/contacto' className='font-light'>
-													Contacto
-												</NcLink>
-											</li>
-											<li>
-												<NcLink href='/bases-promocionales' className='font-light'>
-													Bases promocionales
-												</NcLink>
-											</li>
-											<li>
-												<NcLink href='/politica-de-privacidad' className='font-light'>
-													Política de privacidad
-												</NcLink>
-											</li>
-											<li>
-												<NcLink href='/politica-de-cookies' className='font-light'>
-													Política de cookies
-												</NcLink>
-											</li>
-											<li>
-												<NcLink href='/terminos-y-condiciones' className='font-light'>
-													Términos y condiciones
-												</NcLink>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<div className={`col-span-1 flex justify-start `}>
-									<div className='footer-widget  mt-6 '>
-										<ul className='text-sm md:text-base'>
-											<li>
-												<NcLink href='/mision' className='font-light'>
-													Nuestra misión
-												</NcLink>
-											</li>
-											<li>
-												<NcLink href='/nosotros' className='font-light'>
-													Quiénes Somos
-												</NcLink>
-											</li>
-
-											<li>
-												<a href='https://ayuda.msklatam.com/' target='_blank'>
-													Centro de ayuda
-												</a>
-											</li>
-
-											{countryState.country.includes('ec') && (
-												<li>
-													<NcLink href='/cancelar-suscripcion'>Arrepentimiento de compra</NcLink>
-												</li>
-											)}
-										</ul>
-									</div>
-								</div>
-							</div> */}
-
-							<div className='lg:transform lg:-translate-y-[160%]  grid grid-cols-2 gap-4  px-8 lg:hidden relative mt-[-160%] pt-8'>
-								<div className='footer-widget mt-6'>
-									<ul className='text-sm md:text-base'>
-										<li>
-											<NcLink href='/contacto' className='font-light'>
-												Contacto
-											</NcLink>
-										</li>
-										<li>
-											<NcLink href='/bases-promocionales' className='font-light'>
-												Bases promocionales
-											</NcLink>
-										</li>
-										<li>
-											<NcLink href='/politica-de-privacidad' className='font-light'>
-												Política de privacidad
-											</NcLink>
-										</li>
-										<li>
-											<NcLink href='/politica-de-cookies' className='font-light'>
-												Política de cookies
-											</NcLink>
-										</li>
-										<li>
-											<NcLink href='/terminos-y-condiciones' className='font-light'>
-												Términos y condiciones
-											</NcLink>
-										</li>
-									</ul>
-								</div>
-
-								<div className='footer-widget mt-6'>
-									<ul className='text-sm md:text-base'>
-										<li>
-											<NcLink href='/mision' className='font-light'>
-												Nuestra misión
-											</NcLink>
-										</li>
-										<li>
-											<NcLink href='/nosotros' className='font-light'>
-												Quiénes Somos
-											</NcLink>
-										</li>
-										<li>
-											<a href='https://ayuda.msklatam.com/' target='_blank' className='font-light'>
-												Centro de ayuda
-											</a>
-										</li>
-										{countryState.country.includes('ec') && (
-											<li>
-												<NcLink href='/cancelar-suscripcion' className='font-light'>
-													Arrepentimiento de compra
-												</NcLink>
-											</li>
-										)}
-									</ul>
-								</div>
-							</div>
-
-							<div className='grid grid-cols-1 lg:grid-cols-3 lg:transform lg:-translate-y-[100%] lg:absolute relative mt-24 lg:mt-0 '>
-								<div className={`px-6 mb-6 lg:mb-0 lg:px-0 lg:w-[35rem]`}>
-									<div className='footer-widget f-w1 mb-2'>
-										<div className='footer-img  align-center content-center'>
-											<NcLink href='/'>
-												<div className='w-[150px]'>
-													<NcImage src={'/images/msk-logo-light.svg'} alt='footer-logo' width='100' height='100' />
-												</div>
-											</NcLink>
-											<p className=' lg:w-full mb-1'>Una propuesta moderna que desafía a expandir las metas profesionales</p>
-											<p className='mb-8'>© {currentYear} • Medical&Scientific Knowledge S.L.</p>
-										</div>
-										<div className='footer-icon '>
-											<a href='https://www.facebook.com/msk.online.learning' target='_blank' rel='noopener noreferrer'>
-												<NcImage src={'/images/icons/fb.svg'} alt='' width='10' height='10' className='object-fill' />
-											</a>
-											<a href='https://www.instagram.com/msk.latam' target='_blank' rel='noopener noreferrer'>
-												<NcImage src={'/images/icons/ig.svg'} alt='' width='20' height='20' className='object-fill' />
-											</a>
-											<a href='https://www.youtube.com/@msk.online.learning' target='_blank' rel='noopener noreferrer'>
-												<NcImage
-													src={'/images/icons/yt.svg'}
-													className='object-fill pt-[4px]'
-													alt=''
-													width='20'
-													height='20'
-												/>
-											</a>
-											<a
-												href='https://www.linkedin.com/company/msk-online-learning/'
-												target='_blank'
-												rel='noopener noreferrer'
-											>
-												<NcImage src={'/images/icons/in.svg'} className='object-fill' alt='' width='20' height='20' />
-											</a>
-										</div>
-									</div>
-								</div>
-								<div className={`md:grid grid-cols-2 col-span-2 hidden lg:w-[60rem]`}>
-									<div className={` flex justify-center  `}>
-										<div className='footer-widget  mt-6'>
-											<ul className='text-sm md:text-base'>
-												<li>
-													<NcLink href='/contacto' className='font-light'>
-														Contacto
-													</NcLink>
-												</li>
-												<li>
-													<NcLink href='/bases-promocionales' className='font-light'>
-														Bases promocionales
-													</NcLink>
-												</li>
-												<li>
-													<NcLink href='/politica-de-privacidad' className='font-light'>
-														Política de privacidad
-													</NcLink>
-												</li>
-												<li>
-													<NcLink href='/politica-de-cookies' className='font-light'>
-														Política de cookies
-													</NcLink>
-												</li>
-												<li>
-													<NcLink href='/terminos-y-condiciones' className='font-light'>
-														Términos y condiciones
-													</NcLink>
-												</li>
-
-												{/* <li>
-                        <NcLink
-                          href="/condiciones-de-contratacion"
-                          className="font-light"
-                        >
-                          Condiciones de contratación
-                        </NcLink>
-                      </li> */}
-											</ul>
-										</div>
-									</div>
-									<div className={`col-span-1 flex justify-start `}>
-										<div className='footer-widget  mt-6 '>
-											<ul className='text-sm md:text-base'>
-												<li>
-													<NcLink href='/mision' className='font-light'>
-														Nuestra misión
-													</NcLink>
-												</li>
-												<li>
-													<NcLink href='/nosotros' className='font-light'>
-														Quiénes Somos
-													</NcLink>
-												</li>
-
-												<li>
-													<a href='https://ayuda.msklatam.com/' target='_blank'>
-														Centro de ayuda
-													</a>
-												</li>
-
-												{countryState.country.includes('ec') && (
-													<li>
-														<NcLink href='/cancelar-suscripcion'>Arrepentimiento de compra</NcLink>
-													</li>
-												)}
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						<div className='footer-main '>{/* {!isLandingPage && <FooterLinksSection />} */}</div>
 					</div>
 				</div>
+			</div>
+			<div className=' bg-[#1A1F27] relative'>
+				<FooterCTA />
 			</div>
 			<NcModal
 				isOpenProp={show}

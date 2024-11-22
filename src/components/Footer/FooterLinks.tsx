@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 interface LinkItem {
 	title: string;
 	url: string;
+	target?: string;
 }
 
 interface Category {
@@ -15,109 +16,148 @@ interface Category {
 
 const FooterLinksSection: React.FC = () => {
 	const [countryCode, setCountryCode] = useState<string>();
-	const [categories, setCategories] = useState<Category[]>([
-		{
-			title: 'Cursos más elegidos',
-			links: [
-				{ title: 'Curso superior de cardiología', url: '/curso/accsap/' },
-				{ title: 'Curso superior de emergentología', url: '/curso/medicina-de-urgencias/' },
-				{ title: 'Curso superior de ginecología', url: '/curso/ginecologia/' },
-				{ title: 'Curso superior de neonatología', url: '/curso/neonatologia/' },
-				{ title: 'Curso superior de obstetricia', url: '/curso/obstetricia/' },
-				{ title: 'Formación integral en medicina de urgencias para enfermeros', url: '/curso/enfermeria-en-urgencias/' },
-			],
-		},
-		{
-			title: 'Cursos más buscados',
-			links: [
-				{ title: 'Curso superior de cardiología', url: '/curso/accsap/' },
-				{ title: 'Curso superior de emergentología', url: '/curso/medicina-de-urgencias/' },
-				{ title: 'Curso superior de ginecología', url: '/curso/ginecologia/' },
-				{ title: 'Curso superior de neonatología', url: '/curso/neonatologia/' },
-				{ title: 'Curso superior de obstetricia', url: '/curso/obstetricia/' },
-				{ title: 'Formación integral en medicina de urgencias para enfermeros', url: '/curso/enfermeria-en-urgencias/' },
-			],
-		},
-		{
-			title: 'Especialidades',
-			links: [
-				{ title: 'Cursos de cardiología', url: '/tienda/cardiologia/' },
-				{ title: 'Cursos de administración y gestión', url: '/tienda/administracion-y-gestion/' },
-				{ title: 'Cursos de ginecología', url: '/tienda/ginecologia/' },
-				{ title: 'Cursos de medicina familiar', url: '/tienda/medicina-familiar/' },
-				{ title: 'Cursos de emergentología', url: '/tienda/emergentologia/' },
-				{ title: 'Cursos de medicina general', url: '/tienda/medicina-general/' },
-			],
-		},
-	]);
+	const [categories, setCategories] = useState<Category[]>([]);
+	// const [categories, setCategories] = useState<Category[]>([
+	// 	{
+	// 		title: 'Cursos más elegidos',
+	// 		links: [
+	// 			{ title: 'Curso superior de cardiología', url: '/curso/accsap/' },
+	// 			{ title: 'Curso superior de emergentología', url: '/curso/medicina-de-urgencias/' },
+	// 			{ title: 'Curso superior de ginecología', url: '/curso/ginecologia/' },
+	// 			{ title: 'Curso superior de neonatología', url: '/curso/neonatologia/' },
+	// 			{ title: 'Curso superior de obstetricia', url: '/curso/obstetricia/' },
+	// 			{ title: 'Formación integral en medicina de urgencias para enfermeros', url: '/curso/enfermeria-en-urgencias/' },
+	// 		],
+	// 	},
+	// 	{
+	// 		title: 'Cursos más buscados',
+	// 		links: [
+	// 			{ title: 'Curso superior de cardiología', url: '/curso/accsap/' },
+	// 			{ title: 'Curso superior de emergentología', url: '/curso/medicina-de-urgencias/' },
+	// 			{ title: 'Curso superior de ginecología', url: '/curso/ginecologia/' },
+	// 			{ title: 'Curso superior de neonatología', url: '/curso/neonatologia/' },
+	// 			{ title: 'Curso superior de obstetricia', url: '/curso/obstetricia/' },
+	// 			{ title: 'Formación integral en medicina de urgencias para enfermeros', url: '/curso/enfermeria-en-urgencias/' },
+	// 		],
+	// 	},
+	// 	{
+	// 		title: 'Especialidades',
+	// 		links: [
+	// 			{ title: 'Cursos de cardiología', url: '/tienda/cardiologia/' },
+	// 			{ title: 'Cursos de administración y gestión', url: '/tienda/administracion-y-gestion/' },
+	// 			{ title: 'Cursos de ginecología', url: '/tienda/ginecologia/' },
+	// 			{ title: 'Cursos de medicina familiar', url: '/tienda/medicina-familiar/' },
+	// 			{ title: 'Cursos de emergentología', url: '/tienda/emergentologia/' },
+	// 			{ title: 'Cursos de medicina general', url: '/tienda/medicina-general/' },
+	// 		],
+	// 	},
+	// ]);
 
 	useEffect(() => {
-		// Detecta el país desde la URL en el lado del cliente
-		if (typeof window !== 'undefined') {
-			const path = window.location.pathname;
-			const country = path.split('/')[1]; // Extrae el primer segmento de la URL
-			setCountryCode(country); // Guarda el país en el estado
-			console.log(country);
-		}
-	}, []);
+		const fetchFooterData = async () => {
+			try {
+				const response = await fetch(`https://wp.msklatam.com/wp-json/wp/api/footer?country=${countryCode}`);
+				if (!response.ok) {
+					throw new Error('Error fetching footer data');
+				}
+				const data = await response.json();
 
-	const fetchPosts = async () => await ssr.getPosts(countryCode);
+				// Mapeamos la estructura del API a nuestro estado
+				const parsedCategories: Category[] = [
+					{
+						title: 'Cursos más elegidos',
+						links: data.cursos_mas_elegidos || [], // Usa un array vacío si no hay datos
+					},
+					{
+						title: 'Cursos más buscados',
+						links: data.cursos_mas_buscados || [],
+					},
+					{
+						title: 'Especialidades',
+						links: data.especialidades || [],
+					},
+					{
+						title: 'Contenidos destacados',
+						links: data.contenidos_destacados || [],
+					},
+				];
 
-	const parseDate = (dateStr: any) => {
-		const months = {
-			Enero: 'January',
-			Febrero: 'February',
-			Marzo: 'March',
-			Abril: 'April',
-			Mayo: 'May',
-			Junio: 'June',
-			Julio: 'July',
-			Agosto: 'August',
-			Septiembre: 'September',
-			Octubre: 'October',
-			Noviembre: 'November',
-			Diciembre: 'December',
+				setCategories(parsedCategories);
+			} catch (error) {
+				console.error('Error fetching footer data:', error);
+			}
 		};
 
-		// Separar día, mes y año
-		const [mes, dia, año] = dateStr.split(' ').map((part: any) => part.trim());
+		fetchFooterData();
+	}, [countryCode]);
 
-		// Reemplazar el mes en español por inglés
-		const monthEnglish = months[mes as keyof typeof months];
-		return new Date(`${dia} ${monthEnglish} ${año}`);
-	};
+	// useEffect(() => {
+	// 	// Detecta el país desde la URL en el lado del cliente
+	// 	if (typeof window !== 'undefined') {
+	// 		const path = window.location.pathname;
+	// 		const country = path.split('/')[1]; // Extrae el primer segmento de la URL
+	// 		setCountryCode(country); // Guarda el país en el estado
+	// 		console.log(country);
+	// 	}
+	// }, []);
 
-	useEffect(() => {
-		const processPosts = async () => {
-			const posts = await fetchPosts();
+	// const fetchPosts = async () => await ssr.getPosts(countryCode);
 
-			const sortedPosts = posts
-				.map((post: any) => ({
-					...post,
-					date: parseDate(post.date),
-				}))
-				.sort((a: any, b: any) => b.date - a.date)
-				.slice(0, 6);
+	// const parseDate = (dateStr: any) => {
+	// 	const months = {
+	// 		Enero: 'January',
+	// 		Febrero: 'February',
+	// 		Marzo: 'March',
+	// 		Abril: 'April',
+	// 		Mayo: 'May',
+	// 		Junio: 'June',
+	// 		Julio: 'July',
+	// 		Agosto: 'August',
+	// 		Septiembre: 'September',
+	// 		Octubre: 'October',
+	// 		Noviembre: 'November',
+	// 		Diciembre: 'December',
+	// 	};
 
-			const dynamicCategory = {
-				title: 'Contenidos destacados',
-				links: sortedPosts.map((post: any) => ({
-					title: post.title,
-					url: `/blog/${post.slug}/`,
-				})),
-			};
+	// 	// Separar día, mes y año
+	// 	const [mes, dia, año] = dateStr.split(' ').map((part: any) => part.trim());
 
-			setCategories((prevCategories) => {
-				const exists = prevCategories.some((category) => category.title === 'Contenidos destacados');
-				return exists ? prevCategories : [...prevCategories, dynamicCategory];
-			});
-		};
+	// 	// Reemplazar el mes en español por inglés
+	// 	const monthEnglish = months[mes as keyof typeof months];
+	// 	return new Date(`${dia} ${monthEnglish} ${año}`);
+	// };
 
-		processPosts();
-	}, []);
+	// useEffect(() => {
+	// 	const processPosts = async () => {
+	// 		const posts = await fetchPosts();
+
+	// 		const sortedPosts = posts
+	// 			.map((post: any) => ({
+	// 				...post,
+	// 				date: parseDate(post.date),
+	// 			}))
+	// 			.sort((a: any, b: any) => b.date - a.date)
+	// 			.slice(0, 6);
+
+	// 		const dynamicCategory = {
+	// 			title: 'Contenidos destacados',
+	// 			links: sortedPosts.map((post: any) => ({
+	// 				title: post.title,
+	// 				url: `/blog/${post.slug}/`,
+	// 			})),
+	// 		};
+
+	// 		setCategories((prevCategories) => {
+	// 			const exists = prevCategories.some((category) => category.title === 'Contenidos destacados');
+	// 			return exists ? prevCategories : [...prevCategories, dynamicCategory];
+	// 		});
+	// 	};
+
+	// 	processPosts();
+	// }, []);
 
 	return (
-		<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7'>
+		<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:pb-6'>
 			{categories.map((category, index) => (
 				<div key={index} className='footer-column px-8 lg:px-0'>
 					<h4 className='text-lg font-semibold mb-4 text-white !font-inter'>{category.title}</h4>
