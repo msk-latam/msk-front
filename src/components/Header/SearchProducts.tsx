@@ -61,7 +61,7 @@ const SearchProducts = () => {
 				let productsCountry = countryState.country === 'int' ? '' : countryState.country;
 
 				// Si estamos en el blog, no se buscan cursos
-				if (pathname?.includes('/blogg')) {
+				if (pathname?.includes('/blog')) {
 					// console.log('Estamos en el blog. No se fetch de productos.');
 					setIsOnBlog(true);
 				} else {
@@ -109,7 +109,7 @@ const SearchProducts = () => {
 					value={inputValue}
 					onChange={triggerSearch}
 					onFocus={onFocus}
-					onBlur={onBlur}
+					// onBlur={onBlur}
 				/>
 				<NcImage
 					src={'/images/icons/search.svg'}
