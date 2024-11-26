@@ -14,53 +14,22 @@ interface Category {
 	links: LinkItem[];
 }
 
-const FooterLinksSection: React.FC = () => {
-	const [countryCode, setCountryCode] = useState<string>();
+const FooterLinksSection: React.FC = ({ params }: any) => {
+	const [countryCode, setCountryCode] = useState<string>('ar');
 	const [categories, setCategories] = useState<Category[]>([]);
-	// const [categories, setCategories] = useState<Category[]>([
-	// 	{
-	// 		title: 'Cursos más elegidos',
-	// 		links: [
-	// 			{ title: 'Curso superior de cardiología', url: '/curso/accsap/' },
-	// 			{ title: 'Curso superior de emergentología', url: '/curso/medicina-de-urgencias/' },
-	// 			{ title: 'Curso superior de ginecología', url: '/curso/ginecologia/' },
-	// 			{ title: 'Curso superior de neonatología', url: '/curso/neonatologia/' },
-	// 			{ title: 'Curso superior de obstetricia', url: '/curso/obstetricia/' },
-	// 			{ title: 'Formación integral en medicina de urgencias para enfermeros', url: '/curso/enfermeria-en-urgencias/' },
-	// 		],
-	// 	},
-	// 	{
-	// 		title: 'Cursos más buscados',
-	// 		links: [
-	// 			{ title: 'Curso superior de cardiología', url: '/curso/accsap/' },
-	// 			{ title: 'Curso superior de emergentología', url: '/curso/medicina-de-urgencias/' },
-	// 			{ title: 'Curso superior de ginecología', url: '/curso/ginecologia/' },
-	// 			{ title: 'Curso superior de neonatología', url: '/curso/neonatologia/' },
-	// 			{ title: 'Curso superior de obstetricia', url: '/curso/obstetricia/' },
-	// 			{ title: 'Formación integral en medicina de urgencias para enfermeros', url: '/curso/enfermeria-en-urgencias/' },
-	// 		],
-	// 	},
-	// 	{
-	// 		title: 'Especialidades',
-	// 		links: [
-	// 			{ title: 'Cursos de cardiología', url: '/tienda/cardiologia/' },
-	// 			{ title: 'Cursos de administración y gestión', url: '/tienda/administracion-y-gestion/' },
-	// 			{ title: 'Cursos de ginecología', url: '/tienda/ginecologia/' },
-	// 			{ title: 'Cursos de medicina familiar', url: '/tienda/medicina-familiar/' },
-	// 			{ title: 'Cursos de emergentología', url: '/tienda/emergentologia/' },
-	// 			{ title: 'Cursos de medicina general', url: '/tienda/medicina-general/' },
-	// 		],
-	// 	},
-	// ]);
 
 	useEffect(() => {
 		const fetchFooterData = async () => {
 			try {
 				const response = await fetch(`https://wp.msklatam.com/wp-json/wp/api/footer?country=${countryCode}`);
+				console.log(response);
+
 				if (!response.ok) {
 					throw new Error('Error fetching footer data');
 				}
 				const data = await response.json();
+
+				console.log(data);
 
 				// Mapeamos la estructura del API a nuestro estado
 				const parsedCategories: Category[] = [
@@ -74,7 +43,11 @@ const FooterLinksSection: React.FC = () => {
 					},
 					{
 						title: 'Especialidades',
-						links: data.especialidades || [],
+						links:
+							data.especialidades.map((item: any) => ({
+								title: item.especialidad.especialidad,
+								url: item.especialidad.url_especialidad,
+							})) || [],
 					},
 					{
 						title: 'Contenidos destacados',
