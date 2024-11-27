@@ -344,7 +344,7 @@ class ApiSSRService {
 	async getSingleProduct(slug: string, country: string) {
 		try {
 			const response = await fetch(`${API_URL}/product/${slug}?country=${country}`);
-			console.log(`${API_URL}/product/${slug}?country=${country}`);
+			// console.log(`${API_URL}/product/${slug}?country=${country}`);
 
 			if (!response.ok) {
 				throw new Error(`Failed to fetch single product. HTTP status ${response.status}`);
@@ -360,7 +360,7 @@ class ApiSSRService {
 	}
 
 	async getSinglePost(slug: string, country: string) {
-		console.log({ slug, country }, `${API_URL}/posts/${slug}?country=${country}`);
+		// console.log({ slug, country }, `${API_URL}/posts/${slug}?country=${country}`);
 		try {
 			const response = await fetch(`${API_URL}/posts/${slug}?country=${country}`);
 
@@ -401,7 +401,7 @@ class ApiSSRService {
 		try {
 			// Comprobamos si `window` está definido
 			if (typeof window === 'undefined') {
-				console.log('Se está ejecutando en un entorno sin window.');
+				// console.log('Se está ejecutando en un entorno sin window.');
 				return []; // Devuelve un array vacío o maneja la lógica para entornos del lado del servidor
 			}
 
@@ -413,7 +413,7 @@ class ApiSSRService {
 				const { value, timestamp } = JSON.parse(storedData);
 				const now = new Date().getTime();
 				if (now - timestamp < COUNTRY_TTL) {
-					console.log('specialtystore obtenidos de localStorage');
+					// console.log('specialtystore obtenidos de localStorage');
 					return value; // Devuelve los datos almacenados
 				}
 			}
@@ -444,7 +444,7 @@ class ApiSSRService {
 				}),
 			);
 
-			console.log('Datos obtenidos de la API specialstore');
+			// console.log('Datos obtenidos de la API specialstore');
 			return data.specialities.map((specialty: { speciality_name: string; products: number; image: string }) => {
 				return {
 					name: specialty.speciality_name,
@@ -473,12 +473,12 @@ class ApiSSRService {
 				const { value, timestamp } = JSON.parse(storedProfessions);
 				const now = new Date().getTime();
 				if (now - timestamp < PROFESSIONS_TTL) {
-					console.log('All professions tomados de localStorage');
+					// console.log('All professions tomados de localStorage');
 					return value; // Retorna los datos almacenados
 				}
 			}
 
-			console.log('Llamando a la API para obtener todas las profesiones');
+			// console.log('Llamando a la API para obtener todas las profesiones');
 			const response = await fetch(`${baseUrl}/api/store/professions`);
 
 			if (!response.ok) {
@@ -557,7 +557,7 @@ class ApiSSRService {
 			}
 
 			// Si no hay datos o el TTL ha expirado, realizar una nueva llamada a la API
-			console.log('haciendo llamada api');
+			// console.log('haciendo llamada api');
 			const response = await fetch(`${baseUrl}/api/professions`);
 
 			if (!response.ok) {
@@ -565,7 +565,7 @@ class ApiSSRService {
 			}
 
 			const data = await response.json();
-			console.log('getProfessions', { data });
+			// console.log('getProfessions', { data });
 
 			// Guardar los datos en localStorage solo si estamos en el cliente
 			if (typeof window !== 'undefined') {
@@ -615,12 +615,12 @@ class ApiSSRService {
 				const { value, timestamp } = JSON.parse(storedSpecialties);
 				const now = new Date().getTime();
 				if (now - timestamp < SPECIALTIES_TTL) {
-					console.log('especialidades tomados de localStorage');
+					// console.log('especialidades tomados de localStorage');
 					return value; // Retorna los datos almacenados
 				}
 			}
 
-			console.log('Llamando a la API para obtener especialidades y grupos');
+			// console.log('Llamando a la API para obtener especialidades y grupos');
 			const response = await fetch(`${baseUrl}/api/specialities`);
 
 			if (!response.ok) {
@@ -731,7 +731,7 @@ class ApiSSRService {
 			if (contentType && contentType.includes('application/json')) {
 				return await response.json();
 			} else {
-				console.log(response);
+				// console.log(response);
 				return response;
 			}
 		} catch (e) {
@@ -785,7 +785,7 @@ class ApiSSRService {
 	}
 
 	async postPaymentMercadoPago(paymentData: any) {
-		console.log(paymentData);
+		// console.log(paymentData);
 		try {
 			const response = await fetch(
 				// `http://localhost:8000/api/gateway/api/mercadopago/arg/our_test`,
@@ -805,7 +805,7 @@ class ApiSSRService {
 
 			if (response.status == 200) {
 				const data = await response.json();
-				console.log('Pago ok', { data });
+				// console.log('Pago ok', { data });
 				return data;
 			}
 		} catch (err) {
@@ -881,13 +881,13 @@ class ApiSSRService {
 			grand_total: product?.total_price,
 		};
 
-		console.log({ body });
+		// console.log({ body });
 
 		return body;
 	}
 
 	async callDraftContractApi(body: object) {
-		console.log({ body });
+		// console.log({ body });
 		try {
 			const response = await fetch(
 				`https://payment.msklatam.net/api/msk-crm/api/zoho/sales_order/create_contract`,
@@ -904,7 +904,7 @@ class ApiSSRService {
 			);
 
 			const data = await response.json();
-			console.log({ data });
+			// console.log({ data });
 
 			return data;
 		} catch (err) {
@@ -915,7 +915,7 @@ class ApiSSRService {
 
 	async createDraftContract(product: FetchSingleProduct, profile: UserProfile | null) {
 		const body = this.buildDraftContractBody(product, profile);
-		console.log({ body });
+		// console.log({ body });
 
 		const data = await this.callDraftContractApi(body);
 
