@@ -111,7 +111,7 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({ product, quotes, co
 	const createDraftContract = async (product: any, profile: any) => {
 		try {
 			const response = await ssr.createDraftContract(product, profile);
-			console.log(response);
+			// console.log(response);
 			if (response && response.data[0].code === 'SUCCESS') {
 				return { status: 200, data: response.data[0] };
 			} else {
@@ -125,7 +125,7 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({ product, quotes, co
 	};
 
 	const handleSubmit = async (values: any) => {
-		console.log({ values });
+		// console.log({ values });
 		setOnPaymentRequest(true);
 		setStatusMessage('');
 		setErrorMessage('');
@@ -133,7 +133,7 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({ product, quotes, co
 		let contract;
 		try {
 			contract = await createDraftContract(product, profile);
-			console.log({ contract });
+			// console.log({ contract });
 			if (contract.status === 200 && contract.data) {
 				setStatusMessage('Contrato creado correctamente.');
 				// setContractDraftCreated(contract.data);
@@ -167,13 +167,13 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({ product, quotes, co
 		);
 		setStatusMessage('Preparando los datos para procesar el pago...');
 
-		console.log(paymentData);
-		console.log(JSON.stringify(paymentData));
+		// console.log(paymentData);
+		// console.log(JSON.stringify(paymentData));
 
 		try {
 			const response = await ssr.postPaymentMercadoPago(paymentData);
 			if (response) {
-				console.log(response);
+				// console.log(response);
 				setPaymentStatus(response.status);
 				setStatusMessage('Pago procesado exitosamente.');
 				setOnPaymentRequest(false);
@@ -211,8 +211,8 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({ product, quotes, co
 		checkAndSetState();
 	}, [profile, product]);
 
-	console.log(profile);
-	console.log(product);
+	// console.log(profile);
+	// console.log(product);
 
 	const paymentStatusMessages = {
 		approved: {
@@ -311,21 +311,11 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({ product, quotes, co
 													<ErrorMessage name='cardNumber' component='span' className='error' />
 												</div>
 												<div className='contact-from-input col-span-2'>
-													<Field
-														type='text'
-														name='expirationMonth'
-														placeholder='Mes (MM)'
-														className='contact-from-input'
-													/>
+													<Field type='text' name='expirationMonth' placeholder='Mes (MM)' className='contact-from-input' />
 													<ErrorMessage name='expirationMonth' component='span' className='error' />
 												</div>
 												<div className='contact-from-input col-span-2'>
-													<Field
-														type='text'
-														name='expirationYear'
-														placeholder='Año (AAAA)'
-														className='contact-from-input'
-													/>
+													<Field type='text' name='expirationYear' placeholder='Año (AAAA)' className='contact-from-input' />
 													<ErrorMessage name='expirationYear' component='span' className='error' />
 												</div>
 												<div className='contact-from-input col-span-4'>

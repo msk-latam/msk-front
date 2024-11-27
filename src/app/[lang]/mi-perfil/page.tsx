@@ -82,8 +82,8 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 				setExecutionCount((prevCount) => prevCount + 1);
 
 				fetchUser();
-				console.log(currentProduct, 'producto global');
-				console.log(currentItems, 'current items use Efects');
+				// console.log(currentProduct, 'producto global');
+				// console.log(currentItems, 'current items use Efects');
 				if (executionCount + 1 === 5) {
 					setEnrollSuccess(false);
 				}

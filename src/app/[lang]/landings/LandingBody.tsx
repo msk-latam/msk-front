@@ -41,7 +41,7 @@ const LandingBody: FC<LandingProps> = ({ product, country }) => {
 	const dataRef = courseReviewRefs[slug] ? courseReviewRefs[slug] : courseReviewRefs['general'];
 
 	useEffect(() => {
-		console.log('cargando embed');
+		// console.log('cargando embed');
 		if (!document.getElementById('EmbedSocialHashtagScript')) {
 			const script = document.createElement('script');
 			script.id = 'EmbedSocialHashtagScript';

@@ -15,7 +15,7 @@ const LandingPage: FC = async ({ params }: any) => {
 	const currentHost = reqHeaders.get('host') || '';
 	const isProduction = currentHost.includes('msklatam.com');
 	const courseSlug = params.course;
-	console.log(currentCountry, 'pais');
+	// console.log(currentCountry, 'pais');
 
 	if (isProduction && (!allowedCountries.includes(currentCountry) || !allowedCourses.includes(courseSlug))) {
 		redirect('/');

@@ -48,7 +48,7 @@ const Invoices: React.FC<InvoicesProps> = ({ data }) => {
 		setLoadingInvoice(null);
 	};
 
-	console.log(data, 'Data');
+	// console.log(data, 'Data');
 
 	return (
 		<>
