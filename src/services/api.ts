@@ -152,7 +152,7 @@ class ApiService {
 				throw new Error(`Failed to get email by ID from Zoho CRM. HTTP status ${response.status}`);
 			}
 			let data = await response.json();
-			console.log({ data });
+			// console.log({ data });
 			return data;
 		} catch (error) {
 			return error;
@@ -218,7 +218,7 @@ class ApiService {
 
 						// Validar si los datos en `localStorage` son recientes
 						if (now - timestamp < TTL) {
-							console.log(`Datos de usuario obtenidos de localStorage para ${email}`);
+							// console.log(`Datos de usuario obtenidos de localStorage para ${email}`);
 							return value;
 						}
 					}
@@ -252,7 +252,7 @@ class ApiService {
 					//     timestamp: new Date().getTime(),
 					//   }),
 					// );
-					console.log(`Datos de usuario obtenidos de la API para ${email}`);
+					// console.log(`Datos de usuario obtenidos de la API para ${email}`);
 				}
 
 				return data.user;
@@ -342,12 +342,12 @@ class ApiService {
 				const { value, timestamp } = JSON.parse(storedBestSellers);
 				const now = new Date().getTime();
 				if (now - timestamp < BEST_SELLERS_TTL) {
-					console.log('BestSeller tomados de localStorage');
+					// console.log('BestSeller tomados de localStorage');
 					return value; // Retorna los datos almacenados
 				}
 			}
 
-			console.log('Llamando a la API para obtener los bestseller');
+			// console.log('Llamando a la API para obtener los bestseller');
 			const countryParam = validCountries.includes(COUNTRY) ? COUNTRY : 'int';
 			const response = await fetch(`${API_URL}/home/best-sellers?country=${countryParam}`);
 
@@ -385,7 +385,7 @@ class ApiService {
 			}
 
 			const data = await response.json();
-			console.log('getProfessions', { data });
+			// console.log('getProfessions', { data });
 			return data;
 		} catch (error) {
 			return error;
@@ -407,12 +407,12 @@ class ApiService {
 				const { value, timestamp } = JSON.parse(storedProfessions);
 				const now = new Date().getTime();
 				if (now - timestamp < PROFESSIONS_TTL) {
-					console.log('store professions tomados de localStorage');
+					// console.log('store professions tomados de localStorage');
 					return value; // Retorna los datos almacenados
 				}
 			}
 
-			console.log('Llamando a la API para obtener las profesiones');
+			// console.log('Llamando a la API para obtener las profesiones');
 			const response = await fetch(`${baseUrl}/api/store/professions`);
 
 			if (!response.ok) {
@@ -643,11 +643,11 @@ class ApiService {
 				const { value, timestamp } = JSON.parse(storedCountryData);
 				const now = new Date().getTime();
 				if (now - timestamp < COUNTRY_CODE_TTL) {
-					console.log('IP tomada del localStorage');
+					// console.log('IP tomada del localStorage');
 					return value;
 				}
 			}
-			console.log('Llamando a la API para obtener la IP');
+			// console.log('Llamando a la API para obtener la IP');
 			const ipResponse = await fetch('https://api.ipify.org/?format=json');
 			const ipData = await ipResponse.json();
 			const ip = ipData.ip;
@@ -776,12 +776,12 @@ class ApiService {
 				const { value, timestamp } = JSON.parse(storedImages);
 				const now = new Date().getTime();
 				if (now - timestamp < IMAGES_TTL) {
-					console.log('Banners tomados de localStorage');
+					// console.log('Banners tomados de localStorage');
 					return value; // Retorna los datos almacenados
 				}
 			}
 
-			console.log('Llamando a la API para obtener banners');
+			// console.log('Llamando a la API para obtener banners');
 			const countryParam = country ? `?country=${country}` : '';
 			const response = await fetch(`${API_URL}/banners${countryParam}`);
 
@@ -948,7 +948,7 @@ class ApiService {
 			});
 
 			const result = await res.json();
-			console.log({ result });
+			// console.log({ result });
 
 			if (result.error) {
 				let templateMessage = `
