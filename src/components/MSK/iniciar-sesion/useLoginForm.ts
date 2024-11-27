@@ -48,7 +48,7 @@ export const useLoginForm = () => {
 						// recaptcha_token: await executeRecaptcha('login'),
 						recaptcha_token: recaptchaToken,
 					};
-					console.log(formData);
+					// console.log(formData);
 
 					const { data, status } = await api.postLogin(formData);
 					// console.log(data);

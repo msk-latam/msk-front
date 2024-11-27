@@ -31,7 +31,7 @@ const TiendaHeader: FC<TiendaProps> = ({ category }) => {
 		return countryCode;
 	};
 	const userCountry = getCountryFromPath(pathName);
-	console.log(category);
+	// console.log(category);
 
 	if (category === 'medicina-de-urgencias' && userCountry === 'ar') {
 		categoryData = {

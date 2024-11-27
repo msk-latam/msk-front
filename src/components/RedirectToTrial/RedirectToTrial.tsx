@@ -6,45 +6,45 @@ import { useRouter } from 'next/navigation';
 import { useContext, useEffect } from 'react';
 
 const RedirectToTrial = () => {
-  const router = useRouter();
-  const { state: authState } = useContext(AuthContext);
-  const { countryState } = useContext(CountryContext);
+	const router = useRouter();
+	const { state: authState } = useContext(AuthContext);
+	const { countryState } = useContext(CountryContext);
 
-  useEffect(() => {
-    const handleRedirect = async () => {
-      if (typeof window !== 'undefined') {
-        const redirectToTrial = localStorage.getItem('trialURL');
-        router.prefetch('/');
+	useEffect(() => {
+		const handleRedirect = async () => {
+			if (typeof window !== 'undefined') {
+				const redirectToTrial = localStorage.getItem('trialURL');
+				router.prefetch('/');
 
-        console.log('RedirectToTrial', { window, redirectToTrial, authState });
+				// console.log('RedirectToTrial', { window, redirectToTrial, authState });
 
-        if (redirectToTrial && authState.isAuthenticated) {
-          try {
-            const fullURL = '/' + countryState.country + redirectToTrial;
+				if (redirectToTrial && authState.isAuthenticated) {
+					try {
+						const fullURL = '/' + countryState.country + redirectToTrial;
 
-            console.log('Full redirect URL:', fullURL);
-            window.location.href = fullURL;
-            console.log('Redirection successful to:', fullURL);
-            localStorage.removeItem('trialURL');
-          } catch (error) {
-            console.error('Redirection error:', error);
-          }
-        } else {
-          if (!redirectToTrial) {
-            console.log('No redirect URL found in localStorage.');
-          }
-          if (!authState.isAuthenticated) {
-            console.log('User is not authenticated.');
-            // router.push('/');
-          }
-        }
-      }
-    };
+						// console.log('Full redirect URL:', fullURL);
+						window.location.href = fullURL;
+						// console.log('Redirection successful to:', fullURL);
+						localStorage.removeItem('trialURL');
+					} catch (error) {
+						console.error('Redirection error:', error);
+					}
+				} else {
+					if (!redirectToTrial) {
+						// console.log('No redirect URL found in localStorage.');
+					}
+					if (!authState.isAuthenticated) {
+						// console.log('User is not authenticated.');
+						// router.push('/');
+					}
+				}
+			}
+		};
 
-    handleRedirect();
-  }, [authState.isAuthenticated, router]);
+		handleRedirect();
+	}, [authState.isAuthenticated, router]);
 
-  return <></>;
+	return <></>;
 };
 
 export default RedirectToTrial;

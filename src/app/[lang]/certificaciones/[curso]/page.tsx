@@ -18,7 +18,7 @@ interface PageCourseProps {
 const page: FC<PageCourseProps> = async ({ params }) => {
 	const { product } = await ssr.getSingleProduct(params.curso, params.lang);
 	const country = params.lang;
-	console.log(product);
+	// console.log(product);
 	return (
 		<LayoutPage heading='Avales y certificaciones ' className='pt-10'>
 			<LandingNavBar product={product} country={country} />

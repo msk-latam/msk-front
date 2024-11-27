@@ -22,14 +22,14 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 		const fetchFooterData = async () => {
 			try {
 				const response = await fetch(`https://wp.msklatam.com/wp-json/wp/api/footer?country=${countryCode}`);
-				console.log(response);
+				// console.log(response);
 
 				if (!response.ok) {
 					throw new Error('Error fetching footer data');
 				}
 				const data = await response.json();
 
-				console.log(data);
+				// console.log(data);
 
 				// Mapeamos la estructura del API a nuestro estado
 				const parsedCategories: Category[] = [

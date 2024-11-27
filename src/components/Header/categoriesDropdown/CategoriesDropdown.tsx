@@ -83,7 +83,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 
 			// Verificar si los datos están dentro del tiempo de vida útil (TTL)
 			if (now - timestamp < TTL) {
-				console.log(`getCachedCourses obtenidos de localStorage para ${cacheKey}`);
+				// console.log(`getCachedCourses obtenidos de localStorage para ${cacheKey}`);
 				return value;
 			}
 			return value;
@@ -101,7 +101,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 	});
 
 	const redirectToCategory = (slug: string) => {
-		console.log(slug);
+		// console.log(slug);
 		let formattedSlug = slug
 			.toLowerCase() // Convertir a minúsculas
 			.normalize('NFD')
@@ -166,7 +166,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 		return () => window.removeEventListener('resize', handleResize);
 	}, []);
 
-	console.log(filteredCourses);
+	// console.log(filteredCourses);
 
 	return (
 		<div className='relative block overscroll-none ' ref={dropdownRef}>
