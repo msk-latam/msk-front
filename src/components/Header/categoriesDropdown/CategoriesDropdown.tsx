@@ -168,6 +168,21 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 
 	// console.log(filteredCourses);
 
+	const getCategoryLink = (slug: string): string => {
+		let formattedSlug = slug
+			.toLowerCase() // Convertir a minúsculas
+			.normalize('NFD') // Normalizar caracteres unicode
+			.replace(/[^a-z0-9\s]/g, '') // Eliminar caracteres raros
+			.replace(/\s+/g, '-') // Reemplazar espacios con guiones medios
+			.trim(); // Eliminar espacios al principio y al final
+
+		if (formattedSlug === 'emergentologia') {
+			formattedSlug = 'medicina-de-urgencias';
+		}
+
+		return `https://msklatam.com/tienda/${formattedSlug}`;
+	};
+
 	return (
 		<div className='relative block overscroll-none ' ref={dropdownRef}>
 			<div className='flex'>
@@ -204,6 +219,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 										className='flex justify-between items-center lg:px-4 py-1 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md w-80 lg:w-auto'
 									>
 										<span>{category.name}</span>
+										<a href={getCategoryLink(category.name)}></a>
 										<img src={`${breadcrumArrowIcon.src}`} className='w-3 h-3' alt='Arrow' />
 									</li>
 								))}
