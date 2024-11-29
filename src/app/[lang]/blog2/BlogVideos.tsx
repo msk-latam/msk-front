@@ -5,7 +5,7 @@ const BlogVideos: React.FC = () => {
 	// Lista de videos con miniaturas
 	const videoList = [
 		{
-			title: 'Video 1',
+			title: 'Desafíos del diagnóstico y tratamiento del SIBO',
 			url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
 			thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
 		},
@@ -74,7 +74,7 @@ const BlogVideos: React.FC = () => {
 							className='rounded-2xl'
 						/>
 					</div>
-					<h3 className='mt-4 text-lg font-semibold text-[#392C35]'>{currentVideo.title}</h3>
+					<h3 className='mt-4 text-4xl font-semibold text-[#392C35] !font-raleway'>{currentVideo.title}</h3>
 				</div>
 
 				{/* Lista de videos con miniaturas */}

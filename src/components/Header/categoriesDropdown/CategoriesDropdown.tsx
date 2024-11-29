@@ -169,6 +169,13 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 	// console.log(filteredCourses);
 
 	const getCategoryLink = (slug: string): string => {
+		// Obtener la URL actual
+		const pathname = window.location.pathname;
+
+		// Extraer el código del país (el primer segmento después del dominio)
+		const country = pathname.split('/')[1]; // Por ejemplo, en "/ar/tienda", extraerá "ar"
+
+		// Formatear el slug
 		let formattedSlug = slug
 			.toLowerCase() // Convertir a minúsculas
 			.normalize('NFD') // Normalizar caracteres unicode
@@ -176,11 +183,13 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 			.replace(/\s+/g, '-') // Reemplazar espacios con guiones medios
 			.trim(); // Eliminar espacios al principio y al final
 
+		// Reemplazar categorías específicas si aplica
 		if (formattedSlug === 'emergentologia') {
 			formattedSlug = 'medicina-de-urgencias';
 		}
 
-		return `https://msklatam.com/tienda/${formattedSlug}`;
+		// Retornar el enlace completo
+		return `https://msklatam.com/${country}/tienda/${formattedSlug}`;
 	};
 
 	return (
