@@ -10,8 +10,8 @@ const BlogGuiasProfesionales = async ({ params }: PageProps) => {
 	const allBestSellers = await ssr.getBestSellers(currentCountry);
 	return (
 		<section id='guias-profesionales' className='py-8'>
-			<h2 className='text-2xl font-bold mb-4'>Guías Profesionales</h2>
-			<p>Contenido de la sección Guías Profesionales...</p>
+			<h2 className='!font-raleway text-4xl font-medium text-[#392C35]'>Guías Profesionales</h2>
+			<p className='!font-inter text-[#6474A6] text-xl font-light'>Contenido de la sección Guías Profesionales...</p>
 
 			<SectionSliderBestSellers
 				posts={allBestSellers}

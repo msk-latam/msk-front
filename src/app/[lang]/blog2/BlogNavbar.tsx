@@ -7,23 +7,39 @@ const BlogNavbar = () => {
 		{ label: 'Guías Profesionales', href: '#guias-profesionales' },
 		{ label: 'Videos', href: '#videos' },
 		{ label: 'Infografías', href: '#infografias' },
-		{ label: 'Arma tu CV', href: '#arma-tu-cv' },
 	];
 
 	const [activeSection, setActiveSection] = useState('');
+	const [isFixed, setIsFixed] = useState(false);
 
-	// Detecta la sección activa al hacer scroll
+	// Detectar el scroll y cambiar la posición del navbar
+	useEffect(() => {
+		const threshold = -50; // Umbral para volver a relativo un poco antes de llegar al tope
+
+		const handleScroll = () => {
+			const navbar = document.querySelector('#blog-navbar') as HTMLElement | null;
+			const navbarTop = (navbar?.offsetTop || 0) - threshold; // Reducir el umbral
+
+			// Fijar el navbar si el scroll supera su posición ajustada
+			setIsFixed(window.scrollY > navbarTop);
+		};
+
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, []);
+
+	// Detectar la sección activa al hacer scroll
 	useEffect(() => {
 		const handleScroll = () => {
 			const offsets = menuItems.map((item) => {
-				const section = document.querySelector(item.href);
+				const section = document.querySelector(item.href) as HTMLElement | null;
 				return {
 					href: item.href,
 					offsetTop: section ? section.offsetTop : 0,
 				};
 			});
 
-			const scrollPosition = window.scrollY + 100; // Ajuste para considerar sticky navbar
+			const scrollPosition = window.scrollY + 100;
 
 			const current = offsets.findLast((item) => scrollPosition >= item.offsetTop);
 
@@ -35,24 +51,37 @@ const BlogNavbar = () => {
 		window.addEventListener('scroll', handleScroll);
 
 		return () => window.removeEventListener('scroll', handleScroll);
-	}, []);
+	}, [menuItems]);
+
+	// Actualizar activeSection al hacer clic
+	const handleClick = (href: string) => {
+		setActiveSection(href);
+	};
 
 	return (
-		<nav className='bg-white shadow-md sticky top-0 z-50'>
-			<ul className='flex'>
-				{menuItems.map((item, index) => (
-					<li key={item.label} className={`flex items-center ${index !== 0 ? 'border-l border-gray-300' : ''}`}>
-						<a
-							href={item.href}
-							className={`px-4 py-2 text-gray-700 hover:text-blue-600 transition-colors duration-200 ${
-								activeSection === item.href ? 'font-bold text-blue-600' : ''
-							}`}
-						>
-							{item.label}
-						</a>
-					</li>
-				))}
-			</ul>
+		<nav
+			id='blog-navbar'
+			className={`z-50 bg-[#F3F4F6] w-screen -translate-x-1/2 left-1/2 transition-all duration-300 ${
+				isFixed ? 'fixed top-0' : 'relative'
+			}`}
+		>
+			<div className='container'>
+				<ul className='flex'>
+					{menuItems.map((item, index) => (
+						<li key={item.label} className={`flex items-center ${index !== 0 ? 'border-l border-gray-300' : ''}`}>
+							<a
+								href={item.href}
+								onClick={() => handleClick(item.href)} // Actualizar al hacer clic
+								className={`py-2 text-[#392C35] hover:text-[#FF5D5E] transition-colors duration-200 ${
+									index === 0 ? 'pr-4' : 'px-4'
+								} ${activeSection === item.href ? 'font-bold text-[#FF5D5E]' : ''}`}
+							>
+								{item.label}
+							</a>
+						</li>
+					))}
+				</ul>
+			</div>
 		</nav>
 	);
 };

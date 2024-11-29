@@ -11,8 +11,8 @@ const BlogInfografias: React.FC = () => {
 
 	return (
 		<section id='infografias' className='py-8'>
-			<h2 className='text-2xl font-bold mb-4'>Infografías</h2>
-			<p className='mb-6'>Descárgalas, imprímelas y súmalas a tu consultorio</p>
+			<h2 className='!font-raleway text-4xl font-medium text-[#392C35]'>Infografías</h2>
+			<p className='!font-inter text-[#6474A6] text-xl font-light'>Descárgalas, imprímelas y súmalas a tu consultorio</p>
 
 			<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8'>
 				{infografiaList.map((infografia, index) => (
