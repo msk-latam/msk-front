@@ -7,10 +7,12 @@ const BlogArchivo = async () => {
 	const allPosts = await ssr.getPosts();
 	return (
 		<section id='archivo' className='py-8'>
-			<h2 className='text-2xl font-bold mb-4'>Artículos</h2>
-			<p>Encuentra aquí la información y los testimonios más importantes</p>
+			<h2 className='!font-raleway text-4xl font-medium text-[#392C35]'>Artículos</h2>
+			<p className='!font-inter text-[#6474A6] text-xl font-light'>
+				Encuentra aquí la información y los testimonios más importantes
+			</p>
 
-			<BlogSummary posts={allPosts} tabs={TABS_BLOG} className='py-16' desc='' heading='' showTitle forSingleNote={false} />
+			<BlogSummary posts={allPosts} tabs={TABS_BLOG} className='py-12' desc='' heading='' showTitle forSingleNote={false} />
 		</section>
 	);
 };
