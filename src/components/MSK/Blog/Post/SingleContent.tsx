@@ -20,9 +20,9 @@ const SingleContent: FC<SingleContentProps> = ({ data, sources, bestSellers, fiv
 	const { author, date, reading_time, articles } = data;
 	const [noteIntroduction, ...noteArticles] = articles;
 
-	const aspectosRelevantes = data.aspectos_relevantes?.map((aspecto) => aspecto.item);
-
 	console.log(data);
+
+	console.log(noteIntroduction?.content, 'notaaa');
 
 	return (
 		<div className=' nc-SingleContent  relative space-y-10 mb-16'>
@@ -44,38 +44,12 @@ const SingleContent: FC<SingleContentProps> = ({ data, sources, bestSellers, fiv
 								</ul>
 							</>
 						)}
-						<div>
-							{/* Comprobamos que noteIntroduction exista */}
-							{noteIntroduction ? (
-								<>
-									{/* Renderizar contenido HTML de la introducción */}
-									{noteIntroduction.content && (
-										<div
-											className='text-xl font-lora font-normal lg:pr-20'
-											dangerouslySetInnerHTML={{ __html: noteIntroduction.content }}
-										/>
-									)}
-
-									{/* Si hay aspectos relevantes, los renderizamos */}
-									{aspectosRelevantes && (
-										<div className='mt-6'>
-											<h2 className='text-2xl font-bold'>Aspectos Relevantes</h2>
-											<ul className='list-disc pl-6'>
-												{aspectosRelevantes.map((aspecto: any, index: any) => (
-													<li key={index} className='text-lg'>
-														{aspecto}
-													</li>
-												))}
-											</ul>
-										</div>
-									)}
-								</>
-							) : (
-								// Si no hay noteIntroduction, no renderizamos nada o mostramos un mensaje
-								<p>No hay información disponible.</p>
-							)}
-						</div>
-
+						<div
+							className='text-xl font-lora font-normal lg:pr-20 '
+							dangerouslySetInnerHTML={{
+								__html: noteIntroduction?.content as string,
+							}}
+						/>
 						<PostHtmlArticles articles={noteArticles} featured_text_field={data.featured_text_field} />
 						<NoteExtraData suggest_content={data.suggest_content} />
 						<div>
