@@ -74,20 +74,23 @@ const BlogVideos: React.FC = () => {
 							className='rounded-2xl'
 						/>
 					</div>
-					<h3 className='mt-4 text-4xl font-semibold text-[#392C35] !font-raleway'>{currentVideo.title}</h3>
+					<div className='p-8'>
+						<span className='bg-[#FDCEBC] text-[#903916] py-2 px-4 rounded-md'>Videoinfografía</span>
+						<h3 className='mt-4 text-4xl font-semibold text-[#392C35] !font-raleway'>{currentVideo.title}</h3>
+					</div>
 				</div>
 
 				{/* Lista de videos con miniaturas */}
 				<div className='w-full lg:w-1/5'>
 					<ul
-						className='space-y-4 overflow-y-auto'
+						className='space-y-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200'
 						style={{ maxHeight: '600px' }} // Ajusta la altura máxima según lo que necesites
 					>
 						{videoList.map((video, index) => (
 							<li
 								key={index}
 								className={`flex items-center gap-4 cursor-pointer transition-colors rounded-2xl ${
-									video.url === currentVideo.url ? 'bg-[#FF5D5E] text-white' : 'bg-white hover:bg-gray-100'
+									video.url === currentVideo.url ? ' text-white' : 'bg-white hover:bg-gray-100'
 								}`}
 								onClick={() => setCurrentVideo(video)}
 							>

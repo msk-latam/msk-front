@@ -74,7 +74,7 @@ const FooterCTA = () => {
 				</div>
 			</div>
 
-			<div className='grid grid-cols-1 lg:grid-cols-4 lg:transform  relative mt-24 lg:mt-0 lg:pt-6'>
+			<div className='grid grid-cols-1 lg:grid-cols-4 lg:transform  relative mt-10 lg:mt-0 lg:pt-6'>
 				<div className={`px-6 mb-6 lg:mb-0 lg:px-0 col-span-1 lg:col-span-2`}>
 					<div className='footer-widget f-w1 mb-2'>
 						<div className='footer-img  align-center content-center'>

@@ -114,5 +114,6 @@ module.exports = {
 		require('@tailwindcss/aspect-ratio'),
 		require('tailwindcss-animated'),
 		require('tailwind-scrollbar'),
+		require('tailwind-scrollbar-hide'),
 	],
 };
