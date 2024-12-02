@@ -78,7 +78,7 @@ const FooterEduman = () => {
 								</div>
 							</div>
 						)}
-						<div className='footer-main '>{/* {!isLandingPage && <FooterLinksSection />} */}</div>
+						<div className='footer-main '>{!isLandingPage && <FooterLinksSection />}</div>
 					</div>
 				</div>
 			</div>

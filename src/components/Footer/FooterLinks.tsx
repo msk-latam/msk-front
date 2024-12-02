@@ -1,5 +1,7 @@
 import ssr from '@/services/ssr';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 import { useEffect, useState } from 'react';
 
@@ -15,13 +17,81 @@ interface Category {
 }
 
 const FooterLinksSection: React.FC = ({ params }: any) => {
+	const pathname = usePathname(); // Obtén el pathname de la URL
 	const [countryCode, setCountryCode] = useState<string>('ar');
+
+	useEffect(() => {
+		if (pathname) {
+			const pathParts = pathname.split('/'); // Divide la ruta por '/'
+			const code = pathParts[1]; // El primer segmento después del dominio
+			setCountryCode(code);
+		}
+	}, [pathname]);
 	const [categories, setCategories] = useState<Category[]>([]);
+	const countryToLangMap = {
+		ar: 'arg',
+		us: 'us',
+		mx: 'mx',
+		co: 'co',
+		ve: 've',
+		es: 'es',
+		bo: 'bo',
+		cr: 'cr',
+		cl: 'cl',
+	};
+
+	function getLangCode(countryCode: any) {
+		return countryToLangMap[countryCode.toLowerCase()];
+	}
+	function mapCategories(data: any) {
+		return [
+			{
+				title: 'Cursos más elegidos',
+				links: data.cursos_mas_elegidos
+					.filter((curso: any) => curso.url) // Filtra elementos sin URL
+					.map((curso: any) => ({
+						title: curso.title,
+						url: curso.url,
+					})),
+			},
+			{
+				title: 'Cursos más buscados',
+				links: data.cursos_mas_buscados
+					.filter((curso: any) => curso.url) // Filtra elementos sin URL
+					.map((curso: any) => ({
+						title: curso.title,
+						url: curso.url,
+					})),
+			},
+			{
+				title: 'Especialidades',
+				links: data.especialidades
+					.filter((item: any) => item.especialidad.url_especialidad) // Filtra elementos sin URL
+					.map((item: any) => ({
+						title: item.especialidad.especialidad.trim(),
+						url: item.especialidad.url_especialidad,
+					})),
+			},
+			{
+				title: 'Contenidos destacados',
+				links: data.contenidos_destacados
+					.filter((contenido: any) => contenido.url) // Filtra elementos sin URL
+					.map((contenido: any) => ({
+						title: contenido.title,
+						url: contenido.url,
+					})),
+			},
+		];
+	}
+
+	const langCode = getLangCode(countryCode);
 
 	useEffect(() => {
 		const fetchFooterData = async () => {
 			try {
-				const response = await fetch(`https://wp.msklatam.com/wp-json/wp/api/footer?country=${countryCode}`);
+				const response = await fetch(
+					`https://wp.msklatam.com/wp-json/wp/api/footer?country=${countryCode}&lang=${langCode}`,
+				);
 				// console.log(response);
 
 				if (!response.ok) {
@@ -29,33 +99,10 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 				}
 				const data = await response.json();
 
-				// console.log(data);
+				console.log(data);
 
-				// Mapeamos la estructura del API a nuestro estado
-				const parsedCategories: Category[] = [
-					{
-						title: 'Cursos más elegidos',
-						links: data.cursos_mas_elegidos || [], // Usa un array vacío si no hay datos
-					},
-					{
-						title: 'Cursos más buscados',
-						links: data.cursos_mas_buscados || [],
-					},
-					{
-						title: 'Especialidades',
-						links:
-							data.especialidades.map((item: any) => ({
-								title: item.especialidad.especialidad,
-								url: item.especialidad.url_especialidad,
-							})) || [],
-					},
-					{
-						title: 'Contenidos destacados',
-						links: data.contenidos_destacados || [],
-					},
-				];
-
-				setCategories(parsedCategories);
+				const mappedCategories = mapCategories(data);
+				setCategories(mappedCategories);
 			} catch (error) {
 				console.error('Error fetching footer data:', error);
 			}
@@ -63,71 +110,6 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 
 		fetchFooterData();
 	}, [countryCode]);
-
-	// useEffect(() => {
-	// 	// Detecta el país desde la URL en el lado del cliente
-	// 	if (typeof window !== 'undefined') {
-	// 		const path = window.location.pathname;
-	// 		const country = path.split('/')[1]; // Extrae el primer segmento de la URL
-	// 		setCountryCode(country); // Guarda el país en el estado
-	// 		console.log(country);
-	// 	}
-	// }, []);
-
-	// const fetchPosts = async () => await ssr.getPosts(countryCode);
-
-	// const parseDate = (dateStr: any) => {
-	// 	const months = {
-	// 		Enero: 'January',
-	// 		Febrero: 'February',
-	// 		Marzo: 'March',
-	// 		Abril: 'April',
-	// 		Mayo: 'May',
-	// 		Junio: 'June',
-	// 		Julio: 'July',
-	// 		Agosto: 'August',
-	// 		Septiembre: 'September',
-	// 		Octubre: 'October',
-	// 		Noviembre: 'November',
-	// 		Diciembre: 'December',
-	// 	};
-
-	// 	// Separar día, mes y año
-	// 	const [mes, dia, año] = dateStr.split(' ').map((part: any) => part.trim());
-
-	// 	// Reemplazar el mes en español por inglés
-	// 	const monthEnglish = months[mes as keyof typeof months];
-	// 	return new Date(`${dia} ${monthEnglish} ${año}`);
-	// };
-
-	// useEffect(() => {
-	// 	const processPosts = async () => {
-	// 		const posts = await fetchPosts();
-
-	// 		const sortedPosts = posts
-	// 			.map((post: any) => ({
-	// 				...post,
-	// 				date: parseDate(post.date),
-	// 			}))
-	// 			.sort((a: any, b: any) => b.date - a.date)
-	// 			.slice(0, 6);
-
-	// 		const dynamicCategory = {
-	// 			title: 'Contenidos destacados',
-	// 			links: sortedPosts.map((post: any) => ({
-	// 				title: post.title,
-	// 				url: `/blog/${post.slug}/`,
-	// 			})),
-	// 		};
-
-	// 		setCategories((prevCategories) => {
-	// 			const exists = prevCategories.some((category) => category.title === 'Contenidos destacados');
-	// 			return exists ? prevCategories : [...prevCategories, dynamicCategory];
-	// 		});
-	// 	};
-
-	// 	processPosts();
-	// }, []);
 
 	return (
 		<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:pb-6'>
@@ -137,7 +119,7 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 					<ul className='space-y-2'>
 						{category.links.map((link, linkIndex) => (
 							<li key={linkIndex}>
-								<Link href={link.url} className='text-sm text-[#95A295] hover:underline'>
+								<Link href={link.url || '#'} className='text-sm text-[#95A295] hover:underline'>
 									{link.title}
 								</Link>
 							</li>
