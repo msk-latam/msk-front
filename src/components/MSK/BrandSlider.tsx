@@ -12,6 +12,16 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 	const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 	const [isHovered, setIsHovered] = useState(false);
 
+	const handleScrollStep = (direction: 'prev' | 'next') => {
+		const container = scrollContainerRef.current;
+		if (!container) return;
+
+		const brandWidth = container.scrollWidth / brands.length; // Ancho de una imagen
+		const scrollAmount = direction === 'next' ? brandWidth : -brandWidth;
+
+		container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+	};
+
 	useEffect(() => {
 		const container = scrollContainerRef.current;
 		if (!container) return;
@@ -33,9 +43,9 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 						startScrolling(); // Reinicia el scroll
 					}, 3000); // 3 segundos de retraso
 				} else {
-					container.scrollLeft += 2; // Movimiento suave
+					container.scrollLeft += container.scrollWidth / brands.length; // Moverse al siguiente paso
 				}
-			}, 16); // Intervalo de 16ms para suavidad
+			}, 3000); // Cada paso se mueve después de 3 segundos
 		};
 
 		// Comienza el scroll automáticamente si no está en hover
@@ -44,14 +54,21 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 		}
 
 		return () => {
-			// Limpieza al desmontar el componente
 			if (scrollInterval) clearInterval(scrollInterval);
 			if (delayTimeout) clearTimeout(delayTimeout);
 		};
-	}, [isHovered]);
+	}, [isHovered, brands.length]);
 
 	return (
 		<div className='relative'>
+			{/* Botón "Anterior" */}
+			<button
+				className='absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-full z-10'
+				onClick={() => handleScrollStep('prev')}
+			>
+				‹
+			</button>
+
 			{/* Contenedor con scroll horizontal */}
 			<div
 				className='overflow-x-auto flex space-x-8 py-4 scrollbar-hide'
@@ -67,6 +84,14 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 					))}
 				</div>
 			</div>
+
+			{/* Botón "Siguiente" */}
+			<button
+				className='absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-full z-10'
+				onClick={() => handleScrollStep('next')}
+			>
+				›
+			</button>
 		</div>
 	);
 };
