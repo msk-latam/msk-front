@@ -78,7 +78,7 @@ const LandingHeader: FC<LandingProps> = ({ product, country }) => {
 			<div
 				className={`flex ${
 					product.params.slug === 'accsap' ? 'gap-7' : 'gap-4'
-				} my-4 py-4 !overflow-x-visible whitespace-nowrap`}
+				} my-4 py-4 overflow-x-auto whitespace-nowrap scrollbar-hide`}
 			>
 				{headerIcons.map((icon, index) => (
 					<Image key={index} src={icon} alt={`icon-${index}`} width={500} height={500} className='inline-block' />
