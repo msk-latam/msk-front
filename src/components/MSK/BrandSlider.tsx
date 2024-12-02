@@ -14,79 +14,39 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 
 	useEffect(() => {
 		const container = scrollContainerRef.current;
-		if (!container) {
-			// console.log('Contenedor no encontrado, saliendo del efecto.');
-			return;
-		}
+		if (!container) return;
 
 		let scrollInterval: NodeJS.Timeout | null = null;
 		let delayTimeout: NodeJS.Timeout | null = null;
 
 		const startScrolling = () => {
-			// console.log('Iniciando scroll automático...');
 			scrollInterval = setInterval(() => {
 				const scrollPosition = Math.round(container.scrollLeft + container.offsetWidth);
 				const scrollWidth = Math.round(container.scrollWidth);
-				const atEnd = scrollPosition >= scrollWidth - 2; // Margen de tolerancia de 2 píxeles
-
-				// console.log(
-				// 	`Posición actual: ${container.scrollLeft}, Ancho visible: ${container.offsetWidth}, Ancho total: ${container.scrollWidth}, ¿Final?: ${atEnd}`,
-				// );
+				const atEnd = scrollPosition >= scrollWidth - 2; // Tolerancia de 2 píxeles
 
 				if (atEnd) {
-					// console.log('Se alcanzó el final del scroll.');
-
-					// Detener el intervalo cuando se alcanza el final
-					if (scrollInterval) {
-						clearInterval(scrollInterval);
-						// console.log('Scroll detenido temporalmente.');
-					}
-
-					// Esperar 3 segundos antes de reiniciar
+					// Detener el intervalo y agregar retraso antes del reinicio
+					clearInterval(scrollInterval);
 					delayTimeout = setTimeout(() => {
-						// console.log('Reiniciando scroll al inicio después de 3 segundos.');
-						container.scrollLeft = 0; // Reiniciar al inicio
-						startScrolling(); // Reanudar el scroll
-					}, 3000);
+						container.scrollLeft = 0; // Reinicia al principio
+						startScrolling(); // Reinicia el scroll
+					}, 3000); // 3 segundos de retraso
 				} else {
 					container.scrollLeft += 2; // Movimiento suave
-					// console.log(`Moviendo scroll a: ${container.scrollLeft}`);
 				}
 			}, 16); // Intervalo de 16ms para suavidad
 		};
 
-		const handleHoverState = (hovered: boolean) => {
-			if (hovered) {
-				// console.log('Hover detectado, deteniendo scroll.');
-				if (scrollInterval) clearInterval(scrollInterval);
-				if (delayTimeout) clearTimeout(delayTimeout);
-			} else {
-				// console.log('Hover terminado, esperando 3 segundos antes de reanudar scroll.');
-				delayTimeout = setTimeout(() => {
-					startScrolling();
-				}, 3000);
-			}
-		};
-
-		// Agregar retraso inicial antes de comenzar a desplazarse
+		// Comienza el scroll automáticamente si no está en hover
 		if (!isHovered) {
-			// console.log('Esperando 3 segundos antes de iniciar el scroll automático.');
-			delayTimeout = setTimeout(() => {
-				// console.log('Iniciando scroll después del retraso inicial.');
-				startScrolling();
-			}, 3000);
+			startScrolling();
 		}
 
 		return () => {
-			// Limpiar intervalo y timeout al desmontar el componente o reiniciar
-			if (scrollInterval) {
-				clearInterval(scrollInterval);
-				// console.log('ScrollInterval limpiado.');
-			}
-			if (delayTimeout) {
-				clearTimeout(delayTimeout);
-				// console.log('DelayTimeout limpiado.');
-			}
+			// Limpieza al desmontar el componente
+			if (scrollInterval) clearInterval(scrollInterval);
+			if (delayTimeout) clearTimeout(delayTimeout);
 		};
 	}, [isHovered]);
 
@@ -96,9 +56,8 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 			<div
 				className='overflow-x-auto flex space-x-8 py-4 scrollbar-hide'
 				ref={scrollContainerRef}
-				// Manejo de hover
-				onMouseEnter={() => setIsHovered(true)} // Detener al hacer hover
-				onMouseLeave={() => setIsHovered(false)} // Reanudar al salir
+				onMouseEnter={() => setIsHovered(true)} // Pausar scroll al hacer hover
+				onMouseLeave={() => setIsHovered(false)} // Reanudar scroll al salir
 			>
 				<div className='flex items-center space-x-8'>
 					{brands?.map((brand, index) => (
