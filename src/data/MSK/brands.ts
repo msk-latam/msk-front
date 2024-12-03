@@ -41,10 +41,10 @@ const DEFAULT_BRANDS: Brand[] = [
 	{ img: brand10, width: 220, url: 'https://www.euneiz.com/' },
 	{ img: brand11, width: 80, url: 'https://www.sociedadmedicahgm.com/' },
 	{ img: brand12, width: 200, url: 'https://www.inspiranetwork.com/' },
-	{ img: brand13, width: 80, url: 'https://saxum.com.mx/' },
+	{ img: brand13, width: 70, url: 'https://saxum.com.mx/' },
 	{ img: brand14, width: 200, url: 'https://www.seen.es/portal/' },
-	{ img: brand15, width: 100, url: 'https://www.federacionmedicacolombiana.com/' },
-	{ img: brand16, width: 250, url: 'https://www.medicinainterna.net.pe/' },
+	{ img: brand15, width: 90, url: 'https://www.federacionmedicacolombiana.com/' },
+	{ img: brand16, width: 300, url: 'https://www.medicinainterna.net.pe/' },
 	{ img: brand17, width: 200, url: 'https://troposformacion.com/' },
 	{ img: brand18, width: 200, url: 'https://www.udima.es/' },
 ];

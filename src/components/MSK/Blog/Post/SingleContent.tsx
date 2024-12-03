@@ -20,10 +20,6 @@ const SingleContent: FC<SingleContentProps> = ({ data, sources, bestSellers, fiv
 	const { author, date, reading_time, articles } = data;
 	const [noteIntroduction, ...noteArticles] = articles;
 
-	console.log(data);
-
-	console.log(noteIntroduction?.content, 'notaaa');
-
 	return (
 		<div className=' nc-SingleContent  relative space-y-10 mb-16'>
 			<div className=' grid grid-cols-12 gap-4'>

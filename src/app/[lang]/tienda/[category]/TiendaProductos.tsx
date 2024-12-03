@@ -38,6 +38,9 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 			if (category === 'medicina-de-urgencias') {
 				category = 'emergentologia';
 			}
+			if (category === 'radiologia-e-imagenologia') {
+				category = 'radiologia';
+			}
 
 			if (category) {
 				filteredCourses = storeCourses.filter((course: any) => course.categories.some((cat: any) => cat.slug === category));
@@ -90,6 +93,7 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 			// }
 
 			const paginatedCourses = filteredCourses.slice(indexOfFirstItem, indexOfLastItem);
+			console.log(paginatedCourses);
 
 			setCurrentItems(paginatedCourses);
 		};
@@ -112,6 +116,8 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 	};
 
 	// console.log(currentItems, 'currentItems');
+
+	console.log(category);
 
 	return (
 		<>
