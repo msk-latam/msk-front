@@ -32,7 +32,7 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 				} else {
 					container.scrollBy({ left: 200, behavior: 'smooth' });
 				}
-			}, 3000);
+			}, 1500);
 		};
 
 		startScrolling();
@@ -98,14 +98,14 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 	return (
 		<div className='relative'>
 			{/* Difuminación izquierda */}
-			{/* <div className='absolute top-0 left-0 h-full w-10 pointer-events-none bg-gradient-to-r from-white via-white/70 to-transparent z-10'></div> */}
+			<div className='absolute top-0 left-0 h-full w-5 pointer-events-none bg-gradient-to-r from-white via-white/70 to-transparent z-10'></div>
 
 			{/* Difuminación derecha */}
 			<div className='absolute top-0 right-0 h-full w-20 pointer-events-none bg-gradient-to-l from-white via-white/70 to-transparent z-10'></div>
 
 			{/* Contenedor del slider */}
 			<div
-				className='overflow-x-auto flex space-x-8 py-4 scrollbar-hide overscroll-none'
+				className='overflow-x-auto flex space-x-8 py-4 scrollbar-hide overscroll-none pl-5'
 				ref={scrollContainerRef}
 				onMouseEnter={() => setIsHovered(true)} // Detener el scroll automático
 				onMouseDown={handleMouseDown}
