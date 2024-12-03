@@ -21,6 +21,7 @@ import { StaticImageData } from 'next/image';
 interface Brand {
 	img: StaticImageData;
 	width: number;
+	url: string;
 }
 
 interface BrandsByCountry {
@@ -28,24 +29,24 @@ interface BrandsByCountry {
 }
 
 const DEFAULT_BRANDS: Brand[] = [
-	{ img: brand1, width: 200 },
-	{ img: brand2, width: 200 },
-	{ img: brand3, width: 100 },
-	{ img: brand4, width: 200 },
-	{ img: brand5, width: 200 },
-	{ img: brand6, width: 200 },
-	{ img: brand7, width: 100 },
-	{ img: brand8, width: 200 },
-	{ img: brand9, width: 200 },
-	{ img: brand10, width: 200 },
-	{ img: brand11, width: 100 },
-	{ img: brand12, width: 200 },
-	{ img: brand13, width: 100 },
-	{ img: brand14, width: 200 },
-	{ img: brand15, width: 100 },
-	{ img: brand16, width: 200 },
-	{ img: brand17, width: 200 },
-	{ img: brand18, width: 200 },
+	{ img: brand1, width: 200, url: 'https://www.acc.org/' },
+	{ img: brand2, width: 200, url: 'http://www.afeme.org.ec/pagina/' },
+	{ img: brand3, width: 80, url: 'https://anamer.org/' },
+	{ img: brand4, width: 320, url: 'https://www.nutricionistaspba.org.ar/' },
+	{ img: brand5, width: 250, url: 'https://www.colmed3.com.ar/' },
+	{ img: brand6, width: 250, url: 'https://www.conamege.org.mx/' },
+	{ img: brand7, width: 80, url: 'https://consejomedicosc.org.ar/' },
+	{ img: brand8, width: 150, url: 'https://consejomedicolp.org.ar/' },
+	{ img: brand9, width: 300, url: 'https://www.eimec.com/' },
+	{ img: brand10, width: 220, url: 'https://www.euneiz.com/' },
+	{ img: brand11, width: 80, url: 'https://www.sociedadmedicahgm.com/' },
+	{ img: brand12, width: 200, url: 'https://www.inspiranetwork.com/' },
+	{ img: brand13, width: 80, url: 'https://saxum.com.mx/' },
+	{ img: brand14, width: 200, url: 'https://www.seen.es/portal/' },
+	{ img: brand15, width: 100, url: 'https://www.federacionmedicacolombiana.com/' },
+	{ img: brand16, width: 250, url: 'https://www.medicinainterna.net.pe/' },
+	{ img: brand17, width: 200, url: 'https://troposformacion.com/' },
+	{ img: brand18, width: 200, url: 'https://www.udima.es/' },
 ];
 
 export const BRANDS_BY_COUNTRY: BrandsByCountry = {
