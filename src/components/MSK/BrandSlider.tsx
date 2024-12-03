@@ -13,11 +13,12 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 	const [isDragging, setIsDragging] = useState(false);
 	const [startX, setStartX] = useState(0);
 	const [scrollLeft, setScrollLeft] = useState(0);
-	const [dragMoved, setDragMoved] = useState(false); // Para diferenciar arrastre de click
+	const [dragMoved, setDragMoved] = useState(false);
+	const [isHovered, setIsHovered] = useState(false);
 
 	useEffect(() => {
 		const container = scrollContainerRef.current;
-		if (!container || isDragging) return;
+		if (!container || isDragging || isHovered) return;
 
 		let scrollInterval: NodeJS.Timeout;
 
@@ -39,7 +40,7 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 		return () => {
 			clearInterval(scrollInterval);
 		};
-	}, [isDragging]);
+	}, [isDragging, isHovered]);
 
 	const handleMouseDown = (e: React.MouseEvent) => {
 		const container = scrollContainerRef.current;
@@ -70,6 +71,7 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 
 	const handleMouseUp = () => {
 		setIsDragging(false);
+		setIsHovered(false);
 	};
 
 	const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -105,6 +107,7 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 			<div
 				className='overflow-x-auto flex space-x-8 py-4 scrollbar-hide overscroll-none'
 				ref={scrollContainerRef}
+				onMouseEnter={() => setIsHovered(true)} // Detener el scroll automático
 				onMouseDown={handleMouseDown}
 				onMouseMove={handleMouseMove}
 				onMouseUp={handleMouseUp}
