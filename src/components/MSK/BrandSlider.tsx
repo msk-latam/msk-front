@@ -10,74 +10,118 @@ interface BrandSliderProps {
 const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 	const brands = BRANDS_BY_COUNTRY[country] || BRANDS_BY_COUNTRY['default'];
 	const scrollContainerRef = useRef<HTMLDivElement | null>(null);
-	const [isHovering, setIsHovering] = useState(false); // Estado para controlar el hover
+	const [isDragging, setIsDragging] = useState(false);
+	const [startX, setStartX] = useState(0);
+	const [scrollLeft, setScrollLeft] = useState(0);
+	const [dragMoved, setDragMoved] = useState(false); // Para diferenciar arrastre de click
 
 	useEffect(() => {
 		const container = scrollContainerRef.current;
-		if (!container) return;
+		if (!container || isDragging) return;
 
-		let scrollInterval: NodeJS.Timeout | null = null;
-		let delayTimeout: NodeJS.Timeout | null = null;
+		let scrollInterval: NodeJS.Timeout;
 
 		const startScrolling = () => {
 			scrollInterval = setInterval(() => {
-				if (isHovering) return; // Si está en hover, no hacer scroll
-
-				const scrollPosition = Math.round(container.scrollLeft + container.offsetWidth);
-				const scrollWidth = Math.round(container.scrollWidth);
-				const atEnd = scrollPosition >= scrollWidth - 2; // Tolerancia de 2 píxeles
+				const scrollPosition = container.scrollLeft + container.offsetWidth;
+				const atEnd = scrollPosition >= container.scrollWidth;
 
 				if (atEnd) {
-					clearInterval(scrollInterval);
-					delayTimeout = setTimeout(() => {
-						container.scrollTo({ left: 0, behavior: 'smooth' });
-						startScrolling();
-					}, 3000);
+					container.scrollTo({ left: 0, behavior: 'smooth' });
 				} else {
-					// Calcular un desplazamiento proporcional y más suave
-					const brandWidth = container.querySelector('div > div')?.clientWidth || 0; // Obtener el ancho de la primera imagen
-					const scrollAmount = brandWidth * 0.3; // Desplazar solo el 50% del ancho de la imagen
-					container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+					container.scrollBy({ left: 200, behavior: 'smooth' });
 				}
 			}, 3000);
 		};
 
-		// Retrasar el inicio del scroll para asegurarse de que las imágenes se han cargado
-		delayTimeout = setTimeout(() => {
-			startScrolling();
-		}, 100); // Ajusta este valor según sea necesario
+		startScrolling();
 
 		return () => {
-			if (scrollInterval) clearInterval(scrollInterval);
-			if (delayTimeout) clearTimeout(delayTimeout);
+			clearInterval(scrollInterval);
 		};
-	}, [brands.length, isHovering]);
+	}, [isDragging]);
+
+	const handleMouseDown = (e: React.MouseEvent) => {
+		const container = scrollContainerRef.current;
+		if (!container) return;
+
+		setIsDragging(true);
+		setStartX(e.pageX - container.offsetLeft);
+		setScrollLeft(container.scrollLeft);
+		setDragMoved(false); // Resetear el estado de arrastre
+	};
+
+	const handleMouseMove = (e: React.MouseEvent) => {
+		if (!isDragging) return;
+
+		e.preventDefault();
+		const container = scrollContainerRef.current;
+		if (!container) return;
+
+		const x = e.pageX - container.offsetLeft;
+		const walk = x - startX;
+		container.scrollLeft = scrollLeft - walk;
+
+		if (Math.abs(walk) > 5) {
+			// Si el desplazamiento es significativo, es arrastre
+			setDragMoved(true);
+		}
+	};
+
+	const handleMouseUp = () => {
+		setIsDragging(false);
+	};
+
+	const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+		// Si hubo movimiento, prevenir el comportamiento por defecto
+		if (dragMoved) {
+			e.preventDefault();
+		}
+	};
 
 	const handleWheel = (event: React.WheelEvent) => {
 		const container = scrollContainerRef.current;
 		if (!container) return;
 
-		// Retroceder cuando se mueva la rueda hacia atrás
-		if (event.deltaY < 0) {
-			container.scrollBy({ left: -200, behavior: 'smooth' }); // Desplazamiento más pequeño
-		} else {
-			container.scrollBy({ left: 200, behavior: 'smooth' }); // Desplazamiento más pequeño
-		}
+		container.scrollBy({
+			left: event.deltaY > 0 ? 200 : -200,
+			behavior: 'smooth',
+		});
+	};
+
+	const preventImageDrag = (e: React.DragEvent) => {
+		e.preventDefault();
 	};
 
 	return (
 		<div className='relative'>
+			{/* Difuminación izquierda */}
+			{/* <div className='absolute top-0 left-0 h-full w-10 pointer-events-none bg-gradient-to-r from-white via-white/70 to-transparent z-10'></div> */}
+
+			{/* Difuminación derecha */}
+			<div className='absolute top-0 right-0 h-full w-20 pointer-events-none bg-gradient-to-l from-white via-white/70 to-transparent z-10'></div>
+
+			{/* Contenedor del slider */}
 			<div
 				className='overflow-x-auto flex space-x-8 py-4 scrollbar-hide overscroll-none'
 				ref={scrollContainerRef}
-				onWheel={handleWheel} // Agregar el evento de la rueda
-				onMouseEnter={() => setIsHovering(true)} // Pausar cuando el mouse entra
-				onMouseLeave={() => setIsHovering(false)} // Reanudar cuando el mouse sale
+				onMouseDown={handleMouseDown}
+				onMouseMove={handleMouseMove}
+				onMouseUp={handleMouseUp}
+				onMouseLeave={handleMouseUp}
+				onWheel={handleWheel}
 			>
 				<div className='flex items-center space-x-8'>
 					{brands?.map((brand, index) => (
 						<div key={index} className='flex-shrink-0'>
-							<a href={brand.url} target='_blank' rel='noopener noreferrer'>
+							<a
+								href={brand.url}
+								target='_blank'
+								rel='noopener noreferrer'
+								onClick={handleClick}
+								draggable={false}
+								onDragStart={preventImageDrag}
+							>
 								<Image
 									src={brand.img}
 									alt='Brand logo'
