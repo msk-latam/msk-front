@@ -98,14 +98,14 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 	return (
 		<div className='relative'>
 			{/* Difuminación izquierda */}
-			<div className='absolute top-0 left-0 h-full w-5 pointer-events-none bg-gradient-to-r from-white via-white/70 to-transparent z-10'></div>
+			<div className='absolute top-0 left-0 h-full w-16 pointer-events-none bg-gradient-to-r from-white via-white/70 to-transparent z-10'></div>
 
 			{/* Difuminación derecha */}
-			<div className='absolute top-0 right-0 h-full w-20 pointer-events-none bg-gradient-to-l from-white via-white/70 to-transparent z-10'></div>
+			<div className='absolute top-0 right-0 h-full w-16 pointer-events-none bg-gradient-to-l from-white via-white/70 to-transparent z-10'></div>
 
 			{/* Contenedor del slider */}
 			<div
-				className='overflow-x-auto flex space-x-8 py-4 scrollbar-hide overscroll-none pl-5'
+				className='overflow-x-auto flex space-x-8 py-4 scrollbar-hide overscroll-none pl-16'
 				ref={scrollContainerRef}
 				onMouseEnter={() => setIsHovered(true)} // Detener el scroll automático
 				onMouseDown={handleMouseDown}
@@ -116,21 +116,29 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 			>
 				<div className='flex items-center space-x-8'>
 					{brands?.map((brand, index) => (
-						<div key={index} className='flex-shrink-0'>
+						<div key={index} className='flex-shrink-0 group'>
 							<a
 								href={brand.url}
 								target='_blank'
 								rel='noopener noreferrer'
-								onClick={handleClick}
-								draggable={false}
-								onDragStart={preventImageDrag}
+								className='relative flex items-center justify-center w-auto h-auto'
 							>
+								{/* SVG normal */}
 								<Image
-									src={brand.img}
+									src={brand.imgDefault} // Imagen SVG por defecto
 									alt='Brand logo'
 									width={brand.width}
 									height={100}
-									className='object-contain cursor-pointer'
+									className='object-contain group-hover:hidden transition-all duration-500 ease-in-out opacity-100'
+								/>
+
+								{/* SVG alternativo (hover) */}
+								<Image
+									src={brand.imgHover} // Imagen SVG para hover
+									alt='Brand logo hover'
+									width={brand.width}
+									height={100}
+									className='object-contain hidden group-hover:block transition-all duration-500 ease-in-out opacity-0 group-hover:opacity-100'
 								/>
 							</a>
 						</div>
