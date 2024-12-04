@@ -122,6 +122,8 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 								target='_blank'
 								rel='noopener noreferrer'
 								className='relative flex items-center justify-center w-auto h-auto'
+								onDragStart={preventImageDrag}
+								onClick={handleClick}
 							>
 								{/* SVG normal */}
 								<Image
