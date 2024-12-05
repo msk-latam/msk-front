@@ -56,8 +56,8 @@ const BlogVideos: React.FC = () => {
 
 	return (
 		<section id='videos' className='py-8'>
-			<h2 className='!font-raleway text-4xl font-medium text-[#392C35]'>Videos</h2>
-			<p className='!font-inter text-[#6474A6] text-xl font-light'>Otra manera de informarte y desarrollar tu aprendizaje</p>
+			<h2 className='!font-raleway text-3xl font-medium text-[#392C35] mb-1'>Videos</h2>
+			<p className='!font-inter text-[#6474A6] text-lg font-light'>Otra manera de informarte y desarrollar tu aprendizaje</p>
 
 			<div className='flex flex-col lg:flex-row gap-20 mt-6'>
 				{/* Video principal */}

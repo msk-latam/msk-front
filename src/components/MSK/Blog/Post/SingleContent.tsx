@@ -40,12 +40,14 @@ const SingleContent: FC<SingleContentProps> = ({ data, sources, bestSellers, fiv
 								</ul>
 							</>
 						)}
+
 						<div
 							className='text-xl font-lora font-normal lg:pr-20 '
 							dangerouslySetInnerHTML={{
 								__html: noteIntroduction?.content as string,
 							}}
 						/>
+
 						<PostHtmlArticles articles={noteArticles} featured_text_field={data.featured_text_field} />
 						<NoteExtraData suggest_content={data.suggest_content} />
 						<div>

@@ -3,7 +3,7 @@ import React from 'react';
 
 const BlogNewsletter = () => {
 	return (
-		<div className=' relative'>
+		<div className=' relative -mt-20'>
 			<NewsletterBlog />
 		</div>
 	);
