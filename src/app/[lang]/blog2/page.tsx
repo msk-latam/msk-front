@@ -16,7 +16,9 @@ const BlogPage: React.FC<BlogPageProps> = ({ params }) => {
 	return (
 		<>
 			<BlogHeader />
-			<BlogNavbar />
+			<div className='hidden lg:block'>
+				<BlogNavbar />
+			</div>
 			<BlogArchivo />
 			<BlogGuiasProfesionales params={params} />
 			<BlogVideos />
