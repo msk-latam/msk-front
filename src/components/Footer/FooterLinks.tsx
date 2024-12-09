@@ -99,7 +99,7 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 				}
 				const data = await response.json();
 
-				console.log(data);
+				// console.log(data);
 
 				const mappedCategories = mapCategories(data);
 				setCategories(mappedCategories);

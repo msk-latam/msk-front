@@ -20,10 +20,6 @@ const SingleContent: FC<SingleContentProps> = ({ data, sources, bestSellers, fiv
 	const { author, date, reading_time, articles } = data;
 	const [noteIntroduction, ...noteArticles] = articles;
 
-	console.log(data);
-
-	console.log(noteIntroduction?.content, 'notaaa');
-
 	return (
 		<div className=' nc-SingleContent  relative space-y-10 mb-16'>
 			<div className=' grid grid-cols-12 gap-4'>
@@ -44,12 +40,14 @@ const SingleContent: FC<SingleContentProps> = ({ data, sources, bestSellers, fiv
 								</ul>
 							</>
 						)}
+
 						<div
 							className='text-xl font-lora font-normal lg:pr-20 '
 							dangerouslySetInnerHTML={{
 								__html: noteIntroduction?.content as string,
 							}}
 						/>
+
 						<PostHtmlArticles articles={noteArticles} featured_text_field={data.featured_text_field} />
 						<NoteExtraData suggest_content={data.suggest_content} />
 						<div>

@@ -10,15 +10,15 @@ const BlogGuiasProfesionales = async ({ params }: PageProps) => {
 	const allBestSellers = await ssr.getBestSellers(currentCountry);
 	return (
 		<section id='guias-profesionales' className='py-8'>
-			<h2 className='!font-raleway text-4xl font-medium text-[#392C35]'>Guías Profesionales</h2>
-			<p className='!font-inter text-[#6474A6] text-xl font-light'>Contenido de la sección Guías Profesionales...</p>
+			<h2 className='!font-raleway text-3xl font-medium text-[#392C35] mb-1'>Guías profesionales</h2>
+			<p className='!font-inter text-[#6474A6] text-lg font-light mb-8'>Contenido de nivel académico y acceso gratuito.</p>
 
 			<SectionSliderBestSellers
 				posts={allBestSellers}
-				className='w-full section-slider-posts-container px-12 md:px-4 !text-left'
+				className='w-full section-slider-posts-container lg:px-12 md:px-4 !text-left'
 				postCardName='card9'
-				heading='Guías profesionales'
-				subHeading='Contenido de nivel académico y acceso gratuito'
+				heading=''
+				subHeading=''
 				sliderStype='style2'
 				uniqueSliderClass='pageBlog-section6'
 			/>
