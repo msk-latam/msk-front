@@ -11,7 +11,7 @@ const BlogGuiasProfesionales = async ({ params }: PageProps) => {
 	return (
 		<section id='guias-profesionales' className='py-8'>
 			<h2 className='!font-raleway text-3xl font-medium text-[#392C35] mb-1'>Guías profesionales</h2>
-			<p className='!font-inter text-[#6474A6] text-lg font-light mb-8'>Contenido de la sección guías profesionales...</p>
+			<p className='!font-inter text-[#6474A6] text-lg font-light mb-8'>Contenido de nivel académico y acceso gratuito.</p>
 
 			<SectionSliderBestSellers
 				posts={allBestSellers}

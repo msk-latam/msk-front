@@ -8,13 +8,60 @@ interface BrandSliderProps {
 }
 
 const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
-	const brands = BRANDS_BY_COUNTRY[country] || BRANDS_BY_COUNTRY['default'];
+	async function fetchBrands(country: any) {
+		try {
+			// Construir la URL con el parámetro de país
+			const url = `https://wp.msklatam.com/wp-json/wp/api/carrusel-instituciones?country=${country}`;
+
+			// Realizar la petición al endpoint
+			const response = await fetch(url);
+
+			// Verificar que la respuesta sea válida
+			if (!response.ok) {
+				throw new Error(`Error al obtener los datos: ${response.statusText}`);
+			}
+
+			// Parsear la respuesta como JSON
+			const data = await response.json();
+
+			// Si no hay datos para el país, intentar con la opción por defecto
+			return data.length > 0 ? data : await fetchDefaultBrands();
+		} catch (error) {
+			console.error('Error al obtener las marcas:', error);
+			return await fetchDefaultBrands(); // En caso de error, obtener las marcas por defecto
+		}
+	}
+
+	// Función para obtener las marcas por defecto
+	async function fetchDefaultBrands() {
+		try {
+			const url = 'https://wp.msklatam.com/wp-json/wp/api/carrusel-instituciones?country=int';
+			const response = await fetch(url);
+			if (!response.ok) {
+				throw new Error(`Error al obtener las marcas por defecto: ${response.statusText}`);
+			}
+			return await response.json();
+		} catch (error) {
+			console.error('Error al obtener las marcas por defecto:', error);
+			return []; // Retornar un array vacío en caso de error
+		}
+	}
+
+	// const brands = BRANDS_BY_COUNTRY[country] || BRANDS_BY_COUNTRY['default'];
 	const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 	const [isDragging, setIsDragging] = useState(false);
 	const [startX, setStartX] = useState(0);
 	const [scrollLeft, setScrollLeft] = useState(0);
 	const [dragMoved, setDragMoved] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
+	const [brands, setBrands] = useState<any>([]);
+
+	useEffect(() => {
+		(async () => {
+			const fetchedBrands = await fetchBrands(country);
+			setBrands(fetchedBrands);
+		})();
+	}, [country]);
 
 	useEffect(() => {
 		const container = scrollContainerRef.current;
@@ -115,7 +162,7 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 				onWheel={handleWheel}
 			>
 				<div className='flex items-center space-x-8'>
-					{brands?.map((brand, index) => (
+					{brands?.map((brand: any, index: number) => (
 						<div key={index} className='flex-shrink-0 group'>
 							<a
 								href={brand.url}
