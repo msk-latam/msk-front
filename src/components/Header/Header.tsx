@@ -54,7 +54,8 @@ const Header: FC<HeaderProps> = () => {
 	}, []);
 
 	const pathname = usePathname();
-	const isLandingPage = pathname.includes('/landings/') || pathname.includes('/certificaciones/');
+	const isLandingPage =
+		pathname.includes('/landings/') || pathname.includes('/certificaciones/') || pathname.includes('/checkout/');
 
 	return (
 		<div className='nc-Header sticky top-0 w-full left-0 right-0 z-40 transition-all ' ref={containerRef}>

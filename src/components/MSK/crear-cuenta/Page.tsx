@@ -271,12 +271,7 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
 								</div>
 							</div>
 
-							<InputField
-								label='Identificacion'
-								type='text'
-								name='identification'
-								placeholder='Ingresar identificacion'
-							/>
+							<InputField label='Identificacion' type='text' name='identification' placeholder='Ingresar identificacion' />
 
 							<div className='col-xl-6 col-span-2 md:col-span-1'>
 								<div className='form-select-std'>
@@ -406,11 +401,7 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
 							</div>
 
 							<div className='flex flex-wrap gap-1 mt-2 mb-4'>
-								<ButtonPrimary
-									type='submit'
-									className='w-full'
-									disabled={!formik.values.Terms_And_Conditions || onRequest}
-								>
+								<ButtonPrimary type='submit' className='w-full' disabled={!formik.values.Terms_And_Conditions || onRequest}>
 									{onRequest ? 'Creando...' : 'Crear'}
 								</ButtonPrimary>
 								{error && <ShowErrorMessage text={error} visible={error !== ''} />}

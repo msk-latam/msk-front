@@ -32,10 +32,14 @@ const FooterEduman = () => {
 
 	const pathname = usePathname();
 	const isLandingPage = pathname.includes('/landings/');
+	const isCheckoutPage = pathname.includes('/checkout/');
 
 	useEffect(() => {
 		setIsOnBlog(pathname == '/blog');
 	}, [pathname]);
+	if (isCheckoutPage) {
+		return null;
+	}
 
 	return (
 		<footer>

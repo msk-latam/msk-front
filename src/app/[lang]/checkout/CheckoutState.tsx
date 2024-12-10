@@ -1,6 +1,17 @@
 import React from 'react';
+import { useCheckout } from './CheckoutContext';
 
 const CheckoutState: React.FC = () => {
+	const { activeStep, setActiveStep, subStep, setSubStep, completeStep, setPaymentType } = useCheckout();
+	const handlePreviousStep = () => {
+		if (subStep > 0) {
+			setSubStep(subStep - 1);
+			setPaymentType(null);
+		} else if (activeStep > 1) {
+			setActiveStep(activeStep - 1);
+			setSubStep(1);
+		}
+	};
 	const paymentStatus = {
 		approved: {
 			title: 'Aprobada',
@@ -19,13 +30,18 @@ const CheckoutState: React.FC = () => {
 			message: 'Prueba otro método de pago o contáctanos para brindarte soporte.',
 			color: '#E11D48',
 			buttons: [
-				{ label: 'Ir al centro de ayuda', action: () => console.log('Ir al centro de ayuda'), color: 'transparent' },
-				{ label: 'Volver', action: () => console.log('Volver'), color: '#9200AD' },
+				{
+					label: 'Ir al centro de ayuda',
+					action: () => console.log('Ir al centro de ayuda'),
+					color: 'transparent',
+					textColor: '#9200AD',
+				},
+				{ label: 'Volver', action: () => handlePreviousStep(), color: '#9200AD' },
 			],
 		},
 	};
 
-	const paymentStatusType: 'approved' | 'pending' | 'rejected' = 'approved';
+	const paymentStatusType: 'approved' | 'pending' | 'rejected' = 'rejected';
 
 	const PaymentStatusCard: React.FC<{ status: typeof paymentStatusType }> = ({ status }) => {
 		const { title, message, color, buttons } = paymentStatus[status];
@@ -48,13 +64,17 @@ const CheckoutState: React.FC = () => {
 					{/* Renderizamos los botones */}
 					<div className='mt-4 flex space-x-4'></div>
 				</div>
-				<div className='flex justify-end mt-8'>
+				<div className='flex justify-end mt-8 gap-4'>
 					{buttons.map((button, index) => (
 						<button
 							key={index}
 							onClick={button.action}
 							className='px-12 py-3 rounded-sm text-white font-semibold focus:outline-none transition-colors duration-300'
-							style={{ backgroundColor: button.color }}
+							style={{
+								backgroundColor: button.color,
+								color: button.textColor ? button.textColor : undefined,
+								border: button.textColor ? `1px solid ${button.textColor}` : 'none',
+							}}
 						>
 							{button.label}
 						</button>

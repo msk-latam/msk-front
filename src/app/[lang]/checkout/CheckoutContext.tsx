@@ -4,10 +4,10 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface CheckoutContextType {
 	activeStep: number;
-	subStep: number; // Nuevo estado para manejar subpasos
+	subStep: number;
 	completedSteps: number[];
 	setActiveStep: (step: number) => void;
-	setSubStep: (subStep: number) => void; // Método para actualizar el subpaso
+	setSubStep: (subStep: number) => void;
 	completeStep: (step: number) => void;
 	paymentType: string | null;
 	setPaymentType: (type: string | null) => void;
@@ -17,7 +17,7 @@ const CheckoutContext = createContext<CheckoutContextType | undefined>(undefined
 
 export const CheckoutProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 	const [activeStep, setActiveStep] = useState(1);
-	const [subStep, setSubStep] = useState(0); // Inicializamos subStep en 0 (sin subpaso)
+	const [subStep, setSubStep] = useState(0);
 	const [completedSteps, setCompletedSteps] = useState<number[]>([]);
 	const [paymentType, setPaymentType] = useState<string | null>(null);
 
@@ -34,7 +34,7 @@ export const CheckoutProvider: React.FC<{ children: ReactNode }> = ({ children }
 				subStep,
 				completedSteps,
 				setActiveStep,
-				setSubStep, // Pasamos la función para manejar subpasos
+				setSubStep,
 				completeStep,
 				paymentType,
 				setPaymentType,

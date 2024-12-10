@@ -9,10 +9,6 @@ import { useCheckout } from './CheckoutContext';
 const CheckoutContent: React.FC = () => {
 	const { activeStep, subStep, paymentType } = useCheckout();
 
-	console.log(activeStep, 'paso activo');
-	console.log(subStep, 'sub paso');
-	console.log(paymentType, ' tipo de pago');
-
 	if (activeStep === 2) {
 		if (subStep === 0 && !paymentType) {
 			return <PaymentTypeSelection />;

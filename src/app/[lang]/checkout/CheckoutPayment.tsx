@@ -1,8 +1,10 @@
 'use client';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useCheckout } from './CheckoutContext';
+import { AuthContext } from '@/context/user/AuthContext';
 
 const CheckoutPayment: React.FC = () => {
+	const { state } = useContext(AuthContext);
 	const { activeStep, setActiveStep, subStep, setSubStep, completeStep, setPaymentType } = useCheckout();
 	const [formData, setFormData] = useState({
 		cardholderName: '',
@@ -18,6 +20,90 @@ const CheckoutPayment: React.FC = () => {
 		address: '',
 		postalCode: '',
 	});
+	const [errors, setErrors] = useState({
+		cardholderName: '',
+		cardNumber: '',
+		expiryMonth: '',
+		expiryYear: '',
+		cvv: '',
+		idType: '',
+		documentNumber: '',
+		country: '',
+		state: '',
+		city: '',
+		address: '',
+		postalCode: '',
+	});
+
+	const [touched, setTouched] = useState<Record<string, boolean>>({});
+	const [isFormValid, setIsFormValid] = useState(false);
+
+	const validateField = (field: string, value: string | boolean) => {
+		switch (field) {
+			case 'cardholderName':
+				return value.toString().trim() ? '' : 'El nombre completo es obligatorio.';
+			case 'cardNumber':
+				return value.toString().trim() ? '' : 'El numero de tarjeta es obligatorio.';
+			case 'expiryMonth':
+				return value.toString() ? '' : 'Introduzca un mes valido';
+			case 'expiryYear':
+				return value.toString() ? '' : 'introduzca un año valido';
+			case 'cvv':
+				return value.toString() ? '' : 'introduzca un numero valido';
+			case 'idType':
+				return value ? '' : 'Seleccione un tipo de documento';
+			case 'documentNumber':
+				return value ? '' : 'ingrese un numero valido';
+			case 'country':
+				return value ? '' : 'ingrese un pais';
+			case 'state':
+				return value ? '' : 'ingrese una provincia o estado';
+			case 'city':
+				return value ? '' : 'ingrese una ciudad';
+			case 'addres':
+				return value ? '' : 'ingrese su direccion';
+			case 'postalCode':
+				return value ? '' : 'ingrese su codigo postal';
+			default:
+				return '';
+		}
+	};
+	useEffect(() => {
+		const formIsValid =
+			Object.values(errors).every((error) => error === '') && Object.values(formData).every((value) => value !== '');
+		setIsFormValid(formIsValid);
+	}, [formData, errors]);
+
+	const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => {
+		const { id } = e.target;
+
+		setTouched((prevTouched) => ({
+			...prevTouched,
+			[id]: true,
+		}));
+
+		setErrors((prevErrors) => ({
+			...prevErrors,
+			[id]: validateField(id, formData[id as keyof typeof formData]),
+		}));
+	};
+
+	console.log(state);
+	useEffect(() => {
+		// Asegúrate de que `state.profile` existe y que no es null
+		if (state && state.profile) {
+			setFormData((prevState) => ({
+				...prevState,
+				cardholderName: `${state.profile.name} ${state.profile.last_name}`,
+				documentNumber: state.profile.identification || '',
+				idType: state.profile.type_doc || '',
+				country: state.profile.country || '',
+				state: state.profile.state || '',
+				address: state.profile.address || '',
+				postalCode: state.profile.postal_code || '',
+			}));
+		}
+	}, [state]);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { name, value } = e.target;
@@ -73,9 +159,13 @@ const CheckoutPayment: React.FC = () => {
 									type='text'
 									value={formData.cardholderName}
 									onChange={handleChange}
+									onBlur={handleBlur}
 									placeholder='Ingrese nombre y apellido del titular'
-									className='mt-2 p-3 w-full border border-gray-300 rounded-md'
+									className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 								/>
+								{touched.cardholderName && errors.cardholderName && (
+									<p className='text-red-500 text-sm'>{errors.cardholderName}</p>
+								)}
 							</div>
 
 							<div>
@@ -88,9 +178,11 @@ const CheckoutPayment: React.FC = () => {
 									type='text'
 									value={formData.cardNumber}
 									onChange={handleChange}
+									onBlur={handleBlur}
 									placeholder='Ingrese número de tarjeta'
-									className='mt-2 p-3 w-full border border-gray-300 rounded-md'
+									className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 								/>
+								{touched.cardNumber && errors.cardNumber && <p className='text-red-500 text-sm'>{errors.cardNumber}</p>}
 							</div>
 						</div>
 
@@ -108,9 +200,11 @@ const CheckoutPayment: React.FC = () => {
 										maxLength={2}
 										value={formData.expiryMonth}
 										onChange={handleChange}
+										onBlur={handleBlur}
 										placeholder='MM'
-										className='p-3 w-16 border border-gray-300 rounded-md text-center'
+										className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 									/>
+									{touched.expiryMonth && errors.expiryMonth && <p className='text-red-500 text-sm'>{errors.expiryMonth}</p>}
 									<span className='text-[#6474A6] flex items-center'>/</span>
 									<input
 										id='expiryYear'
@@ -119,9 +213,11 @@ const CheckoutPayment: React.FC = () => {
 										maxLength={4}
 										value={formData.expiryYear}
 										onChange={handleChange}
+										onBlur={handleBlur}
 										placeholder='AAAA'
-										className='p-3 w-20 border border-gray-300 rounded-md text-center'
+										className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 									/>
+									{touched.expiryYear && errors.expiryYear && <p className='text-red-500 text-sm'>{errors.expiryYear}</p>}
 								</div>
 							</div>
 
@@ -135,10 +231,12 @@ const CheckoutPayment: React.FC = () => {
 									type='text'
 									value={formData.cvv}
 									onChange={handleChange}
+									onBlur={handleBlur}
 									placeholder='CVV'
 									maxLength={4}
-									className='mt-2 p-3 w-16 border border-gray-300 rounded-md text-center'
+									className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 								/>
+								{touched.cvv && errors.cvv && <p className='text-red-500 text-sm'>{errors.cvv}</p>}
 							</div>
 						</div>
 					</div>
@@ -155,8 +253,10 @@ const CheckoutPayment: React.FC = () => {
 								name='idType'
 								value={formData.idType}
 								onChange={handleChange}
-								className='mt-2 p-3 w-full border border-gray-300 rounded-md'
+								onBlur={handleBlur}
+								className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 							>
+								{touched.idType && errors.idType && <p className='text-red-500 text-sm'>{errors.idType}</p>}
 								<option value='' disabled>
 									Seleccione tipo de documento
 								</option>
@@ -176,9 +276,13 @@ const CheckoutPayment: React.FC = () => {
 								type='text'
 								value={formData.documentNumber}
 								onChange={handleChange}
+								onBlur={handleBlur}
 								placeholder='Ingrese número de documento'
-								className='mt-2 p-3 w-40 border border-gray-300 rounded-md'
+								className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 							/>
+							{touched.documentNumber && errors.documentNumber && (
+								<p className='text-red-500 text-sm'>{errors.documentNumber}</p>
+							)}
 						</div>
 					</div>
 
@@ -196,9 +300,11 @@ const CheckoutPayment: React.FC = () => {
 								type='text'
 								value={formData.country}
 								onChange={handleChange}
+								onBlur={handleBlur}
 								placeholder='Ingrese país'
-								className='mt-2 p-3 w-full border border-gray-300 rounded-md'
+								className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 							/>
+							{touched.country && errors.country && <p className='text-red-500 text-sm'>{errors.country}</p>}
 						</div>
 
 						<div>
@@ -211,9 +317,11 @@ const CheckoutPayment: React.FC = () => {
 								type='text'
 								value={formData.state}
 								onChange={handleChange}
+								onBlur={handleBlur}
 								placeholder='Ingrese estado'
-								className='mt-2 p-3 w-full border border-gray-300 rounded-md'
+								className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 							/>
+							{touched.state && errors.state && <p className='text-red-500 text-sm'>{errors.state}</p>}
 						</div>
 
 						{/* Ciudad y Dirección */}
@@ -227,9 +335,11 @@ const CheckoutPayment: React.FC = () => {
 								type='text'
 								value={formData.city}
 								onChange={handleChange}
+								onBlur={handleBlur}
 								placeholder='Ingrese ciudad'
-								className='mt-2 p-3 w-full border border-gray-300 rounded-md'
+								className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 							/>
+							{touched.city && errors.city && <p className='text-red-500 text-sm'>{errors.city}</p>}
 						</div>
 
 						<div>
@@ -242,9 +352,11 @@ const CheckoutPayment: React.FC = () => {
 								type='text'
 								value={formData.address}
 								onChange={handleChange}
+								onBlur={handleBlur}
 								placeholder='Ingrese dirección'
-								className='mt-2 p-3 w-full border border-gray-300 rounded-md'
+								className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 							/>
+							{touched.address && errors.address && <p className='text-red-500 text-sm'>{errors.address}</p>}
 						</div>
 
 						{/* Código Postal (fila completa) */}
@@ -258,30 +370,34 @@ const CheckoutPayment: React.FC = () => {
 								type='text'
 								value={formData.postalCode}
 								onChange={handleChange}
+								onBlur={handleBlur}
 								placeholder='Ingrese código postal'
-								className='mt-2 p-3 w-full border border-gray-300 rounded-md'
+								className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 							/>
+							{touched.postalCode && errors.postalCode && <p className='text-red-500 text-sm'>{errors.postalCode}</p>}
 						</div>
 					</div>
-
-					<div className='mt-6 gap-4 flex justify-end'>
-						<button
-							type='button'
-							className='px-12 py-3 text-[#9200AD] border border-[#9200AD] font-bold bg-transparent rounded-sm  transition'
-							onClick={handlePreviousStep}
-						>
-							Volver
-						</button>
-
-						<button
-							type='button'
-							className='px-12 py-3 text-white font-bold bg-[#9200AD] rounded-sm  focus:outline-none focus:ring-2  '
-							onClick={handleNextStep}
-						>
-							Siguiente
-						</button>
-					</div>
 				</form>
+			</div>
+			<div className='my-6 gap-4 flex justify-end'>
+				<button
+					type='button'
+					className='px-12 py-3 text-[#9200AD] border border-[#9200AD] font-bold bg-transparent rounded-md  transition'
+					onClick={handlePreviousStep}
+				>
+					Volver
+				</button>
+
+				<button
+					type='button'
+					className={`px-12 py-3 font-bold rounded-md focus:outline-none focus:ring-2 ${
+						isFormValid ? 'bg-[#9200AD] text-white' : 'bg-gray-400 text-gray-600 cursor-not-allowed'
+					}`}
+					onClick={handleNextStep}
+					disabled={!isFormValid}
+				>
+					Siguiente
+				</button>
 			</div>
 		</>
 	);
