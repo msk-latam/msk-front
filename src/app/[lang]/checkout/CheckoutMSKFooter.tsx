@@ -8,7 +8,7 @@ const CheckoutMSKFooter = () => {
 	const currentYear = new Date().getFullYear();
 	return (
 		<>
-			<div className='flex justify-between items-center  py-10 bg-[#141517] w-screen transform -translate-x-1/2 left-1/2 relative'>
+			<div className='flex justify-between items-center mt-20  py-10 bg-[#141517] w-screen transform -translate-x-1/2 left-1/2 relative'>
 				<div className='container flex justify-between items-center'>
 					<div className='flex items-end gap-4'>
 						<NcLink href='/'>

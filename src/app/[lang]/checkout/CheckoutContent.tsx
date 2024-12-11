@@ -10,10 +10,10 @@ const CheckoutContent: React.FC = () => {
 	const { activeStep, subStep, paymentType } = useCheckout();
 
 	if (activeStep === 2) {
-		if (subStep === 0 && !paymentType) {
+		if (subStep === 0) {
 			return <PaymentTypeSelection />;
 		}
-		if (subStep === 1 && paymentType) {
+		if (subStep === 1) {
 			return <CheckoutPayment />;
 		}
 		return <div>Debe seleccionar el tipo de pago</div>;

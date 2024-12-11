@@ -1,15 +1,25 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCheckout } from './CheckoutContext';
 
 const PaymentTypeSelection: React.FC = () => {
-	const { setPaymentType, setSubStep } = useCheckout(); // Usamos setSubStep en lugar de setActiveStep
+	const { setPaymentType, setSubStep } = useCheckout();
+	const [selectedPaymentType, setSelectedPaymentType] = useState<string | null>(null);
 
-	const handleSelection = (paymentType: string) => {
-		setPaymentType(paymentType); // Establecemos el tipo de pago seleccionado
-		setSubStep(1); // Avanzamos al subpaso 1, que es el formulario de pago
+	const handleCheckboxChange = (paymentType: string) => {
+		setSelectedPaymentType(paymentType);
+		setPaymentType(paymentType);
 	};
+
+	const handleNextStep = () => {
+		setSubStep(1);
+	};
+
+	useEffect(() => {
+		setPaymentType('cuotas');
+		setSubStep(1);
+	}, []);
 
 	return (
 		<>
@@ -20,21 +30,45 @@ const PaymentTypeSelection: React.FC = () => {
 				Pago
 			</h2>
 			<div className='p-6 bg-white border border-gray-300 rounded-lg '>
-				<h2 className='text-2xl font-semibold text-[#392C35]'>¿Cómo deseas pagar?</h2>
+				<h2 className='text-2xl font-semibold text-[#392C35]'>¿Cómo quieres pagar?</h2>
 				<div className='mt-4'>
-					<button
-						onClick={() => handleSelection('unico')}
-						className='px-6 py-2 mr-4 text-white font-bold bg-[#9200AD] rounded-sm'
-					>
+					<label className='flex items-center mb-4 cursor-pointer'>
+						<input
+							type='checkbox'
+							name='paymentType'
+							value='unico'
+							checked={selectedPaymentType === 'unico'}
+							onChange={() => handleCheckboxChange('unico')}
+							className='appearance-none w-5 h-5 border border-gray-300 rounded-[4px] checked:bg-[#9200AD] checked:border-[#9200AD] focus:ring-2 focus:ring-[#9200AD] focus:outline-none mr-2'
+						/>
 						Pago Único
-					</button>
-					<button
-						onClick={() => handleSelection('cuotas')}
-						className='px-6 py-2 text-white font-bold bg-[#9200AD] rounded-sm'
-					>
-						Pago en Cuotas
-					</button>
+					</label>
+					<label className='flex items-center cursor-pointer'>
+						<input
+							type='checkbox'
+							name='paymentType'
+							value='cuotas'
+							checked={selectedPaymentType === 'cuotas'}
+							onChange={() => handleCheckboxChange('cuotas')}
+							className='appearance-none w-5 h-5 border border-gray-300 rounded-[4px] checked:bg-[#9200AD] checked:border-[#9200AD] focus:ring-2 focus:ring-[#9200AD] focus:outline-none mr-2'
+						/>
+						<div>
+							<span>Pago en Cuotas</span>
+							<p className='text-sm text-[#6474A6] '>Abona en plazos con montos fijos, ¡sin recargos!</p>
+						</div>
+					</label>
 				</div>
+			</div>
+			<div className='flex justify-end'>
+				<button
+					onClick={handleNextStep}
+					disabled={!selectedPaymentType}
+					className={`mt-4 px-12 py-3 text-sm rounded-md ${
+						selectedPaymentType ? 'bg-[#9200AD] text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+					}`}
+				>
+					Siguiente
+				</button>
 			</div>
 		</>
 	);
