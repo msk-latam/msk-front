@@ -163,6 +163,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	// localStorage.removeItem('trialURL')
 
 	// console.log(CourseList);
+	console.log(currentItems);
 
 	return (
 		<div className={`nc-PageAuthor  ${className} `} data-nc-id='PageAuthor'>
@@ -226,7 +227,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 										))}
 									</div>
 
-									{totalPages > 2 ? (
+									{totalPages > 1 ? (
 										<div className='flex justify-center'>
 											<StorePagination totalPages={totalPages} onPageChange={handlePageChange} currentPage={currentPage} />
 										</div>

@@ -2,6 +2,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useCheckout } from './CheckoutContext';
 import { AuthContext } from '@/context/user/AuthContext';
+import CardDetailsForm from './forms/CardDetailsForm';
 
 const CheckoutPayment: React.FC = () => {
 	const { state } = useContext(AuthContext);
@@ -146,8 +147,15 @@ const CheckoutPayment: React.FC = () => {
 
 				<form className='mt-6'>
 					{/* Datos de tarjeta */}
-					<div className='space-y-6'>
-						{/* Fila para el nombre y número de tarjeta */}
+					<CardDetailsForm
+						formData={formData}
+						handleBlur={handleBlur}
+						handleChange={handleChange}
+						errors={errors}
+						touched={touched}
+					/>
+					{/* <div className='space-y-6'>
+						
 						<div className='grid grid-cols-2 gap-4'>
 							<div>
 								<label htmlFor='cardholderName' className='block text-sm font-medium text-[#6474A6]'>
@@ -186,7 +194,6 @@ const CheckoutPayment: React.FC = () => {
 							</div>
 						</div>
 
-						{/* Fila para la fecha de vencimiento y CVV */}
 						<div className='grid grid-cols-2 gap-4'>
 							<div className='flex flex-col'>
 								<label htmlFor='expiryDate' className='block text-sm font-medium text-[#6474A6]'>
@@ -239,7 +246,7 @@ const CheckoutPayment: React.FC = () => {
 								{touched.cvv && errors.cvv && <p className='text-red-500 text-sm'>{errors.cvv}</p>}
 							</div>
 						</div>
-					</div>
+					</div> */}
 
 					{/* Datos de facturación */}
 					<h3 className='mt-8 text-xl font-semibold text-[#392C35]'>Datos de facturación</h3>
@@ -382,8 +389,13 @@ const CheckoutPayment: React.FC = () => {
 			<div className='my-6 gap-4 flex justify-end'>
 				<button
 					type='button'
-					className='px-12 py-3 text-[#9200AD] border border-[#9200AD] font-bold bg-transparent rounded-md  transition'
+					className={`px-12 py-3 font-bold rounded-md transition focus:outline-none focus:ring-2 ${
+						true
+							? 'bg-gray-400 text-gray-600 border border-gray-400 cursor-not-allowed'
+							: 'text-[#9200AD] border border-[#9200AD] bg-transparent'
+					}`}
 					onClick={handlePreviousStep}
+					disabled={true}
 				>
 					Volver
 				</button>
