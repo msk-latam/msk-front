@@ -2,10 +2,12 @@ import { useState, useEffect, useContext } from 'react';
 import { useCheckout } from './CheckoutContext';
 import { AuthContext } from '@/context/user/AuthContext';
 import ssr from '@/services/ssr';
+import UserForm from './forms/UserForm';
+import { validateUserField } from './validators/userValidator';
 
 const CheckoutRegister: React.FC = () => {
 	const { state } = useContext(AuthContext);
-	const { activeStep, setActiveStep, completeStep } = useCheckout();
+	const { activeStep, setActiveStep, completeStep, setUser } = useCheckout();
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
 	const [success, setSuccess] = useState(false);
@@ -33,32 +35,6 @@ const CheckoutRegister: React.FC = () => {
 	const [touched, setTouched] = useState<Record<string, boolean>>({});
 	const [isFormValid, setIsFormValid] = useState(false);
 
-	const validateEmail = (email: string): boolean => {
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		return emailRegex.test(email);
-	};
-
-	const validateField = (field: string, value: string | boolean) => {
-		switch (field) {
-			case 'firstName':
-				return value.toString().trim() ? '' : 'El nombre es obligatorio.';
-			case 'lastName':
-				return value.toString().trim() ? '' : 'El apellido es obligatorio.';
-			case 'email':
-				return validateEmail(value.toString()) ? '' : 'El correo electrónico no es válido.';
-			case 'phone':
-				return value.toString().trim() ? '' : 'El teléfono es obligatorio.';
-			case 'profession':
-				return value.toString() ? '' : 'Debe seleccionar una profesión.';
-			case 'specialty':
-				return value.toString() ? '' : 'Debe seleccionar una especialidad.';
-			case 'privacyPolicy':
-				return value ? '' : 'Debe aceptar las condiciones de privacidad.';
-			default:
-				return '';
-		}
-	};
-
 	useEffect(() => {
 		const formIsValid =
 			Object.values(errors).every((error) => error === '') &&
@@ -69,7 +45,6 @@ const CheckoutRegister: React.FC = () => {
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { id, value, type } = e.target;
 
-		// Verificar si el elemento es un input de tipo checkbox
 		const fieldValue = type === 'checkbox' && e.target instanceof HTMLInputElement ? e.target.checked : value;
 
 		setFormData((prevData) => ({
@@ -78,10 +53,9 @@ const CheckoutRegister: React.FC = () => {
 		}));
 
 		if (touched[id]) {
-			// Revalidar el campo si ya fue tocado
 			setErrors((prevErrors) => ({
 				...prevErrors,
-				[id]: validateField(id, fieldValue),
+				[id]: validateUserField(id, fieldValue),
 			}));
 		}
 	};
@@ -96,17 +70,16 @@ const CheckoutRegister: React.FC = () => {
 
 		setErrors((prevErrors) => ({
 			...prevErrors,
-			[id]: validateField(id, formData[id as keyof typeof formData]),
+			[id]: validateUserField(id, formData[id as keyof typeof formData]),
 		}));
 	};
 
 	const handleNextStep = async () => {
 		if (isFormValid) {
 			try {
-				setLoading(true); // Activar el estado de carga
-				setError(''); // Limpiar cualquier error previo
+				setLoading(true);
+				setError('');
 
-				// Prepara los datos que necesitas enviar para registrar al usuario
 				const formDataCreate = {
 					...formData,
 					name: `${formData.firstName} ${formData.lastName}`,
@@ -125,16 +98,16 @@ const CheckoutRegister: React.FC = () => {
 					phone: formData.phone,
 					profession: formData.profession,
 					speciality: formData.specialty,
-					Otra_profesion: '', // Si no tienes valor para este campo, déjalo vacío o con valor predeterminado
-					Otra_especialidad: '', // Lo mismo para este campo
-					Career: '', // Lo mismo para este campo
-					Year: '', // Lo mismo para este campo
-					country: 'Argentina', // Si tienes un valor predeterminado o lo tomas de algún lugar, inclúyelo
-					type: 'DNI', // También puedes dejar esto como valor fijo si se ajusta a tu caso
-					identification: '', // Si no tienes valor para este campo, déjalo vacío
-					Terms_And_Conditions: formData.privacyPolicy, // Asumí que 'privacyPolicy' mapea con 'Terms_And_Conditions'
+					Otra_profesion: '',
+					Otra_especialidad: '',
+					Career: '',
+					Year: '',
+					country: 'Argentina',
+					type: '',
+					identification: '',
+					Terms_And_Conditions: formData.privacyPolicy,
 					name: formData.name,
-					recaptcha_token: '', // Este campo se genera en el backend o con alguna librería de reCAPTCHA, así que déjalo vacío por ahora
+					recaptcha_token: '',
 					utm_source: '',
 					utm_medium: '',
 					utm_campaign: '',
@@ -142,11 +115,10 @@ const CheckoutRegister: React.FC = () => {
 					converted_by: formData.converted_by,
 				};
 
-				// Aquí deberías hacer la solicitud POST para registrar al usuario
-				const res = await ssr.postSignUp(mappedData); // Usar el endpoint adecuado
-
+				const res = await ssr.postSignUp(mappedData);
 				if (res?.access_token) {
 					setSuccess(true);
+					setUser(formData);
 					setTimeout(() => {
 						completeStep(activeStep);
 						setActiveStep(activeStep + 1);
@@ -156,13 +128,13 @@ const CheckoutRegister: React.FC = () => {
 					const errorMessages = Object.values(res.errors)
 						.map((errorMessage: any) => ` ${errorMessage}`)
 						.join('<br />');
-					setError(errorMessages); // Mostrar el error en caso de fallo
+					setError(errorMessages);
 				}
 			} catch (err) {
 				setError('Hubo un problema al crear tu cuenta. Intenta nuevamente más tarde.');
-				console.error(err); // Puedes agregar más detalles del error si es necesario
+				console.error(err);
 			} finally {
-				setLoading(false); // Desactivar el estado de carga
+				setLoading(false);
 			}
 		} else {
 			setTouched((prevTouched) => Object.keys(formData).reduce((acc, key) => ({ ...acc, [key]: true }), prevTouched));
@@ -186,104 +158,13 @@ const CheckoutRegister: React.FC = () => {
 			</h2>
 
 			<div className='bg-white border border-gray-300 rounded-lg p-6'>
-				<form className='grid grid-cols-2 gap-4'>
-					<div>
-						<label htmlFor='firstName' className='block text-sm font-medium text-[#6474A6]'>
-							Nombre
-						</label>
-						<input
-							type='text'
-							id='firstName'
-							value={formData.firstName}
-							onChange={handleChange}
-							onBlur={handleBlur}
-							placeholder='Ingresar Nombre'
-							className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-						/>
-						{touched.firstName && errors.firstName && <p className='text-red-500 text-sm'>{errors.firstName}</p>}
-					</div>
-					<div>
-						<label htmlFor='lastName' className='block text-sm font-medium text-[#6474A6]'>
-							Apellido
-						</label>
-						<input
-							type='text'
-							id='lastName'
-							value={formData.lastName}
-							onChange={handleChange}
-							onBlur={handleBlur}
-							placeholder='Ingresar Apellido'
-							className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-						/>
-						{touched.lastName && errors.lastName && <p className='text-red-500 text-sm'>{errors.lastName}</p>}
-					</div>
-					<div>
-						<label htmlFor='email' className='block text-sm font-medium text-[#6474A6]'>
-							Correo electrónico
-						</label>
-						<input
-							type='email'
-							id='email'
-							value={formData.email}
-							onChange={handleChange}
-							onBlur={handleBlur}
-							placeholder='Ingresar Correo'
-							className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-						/>
-						{touched.email && errors.email && <p className='text-red-500 text-sm'>{errors.email}</p>}
-					</div>
-					<div>
-						<label htmlFor='phone' className='block text-sm font-medium text-[#6474A6]'>
-							Teléfono
-						</label>
-						<input
-							type='text'
-							id='phone'
-							value={formData.phone}
-							onChange={handleChange}
-							onBlur={handleBlur}
-							placeholder='Ingresar Teléfono'
-							className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-						/>
-						{touched.phone && errors.phone && <p className='text-red-500 text-sm'>{errors.phone}</p>}
-					</div>
-					<div>
-						<label htmlFor='profession' className='block text-sm font-medium text-[#6474A6]'>
-							Profesión
-						</label>
-						<select
-							id='profession'
-							value={formData.profession}
-							onChange={handleChange}
-							onBlur={handleBlur}
-							className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-						>
-							<option value=''>Seleccione una profesión</option>
-							<option value='Doctor'>Doctor</option>
-							<option value='Enfermero'>Enfermero</option>
-							<option value='Otro'>Otro</option>
-						</select>
-						{touched.profession && errors.profession && <p className='text-red-500 text-sm'>{errors.profession}</p>}
-					</div>
-					<div>
-						<label htmlFor='specialty' className='block text-sm font-medium text-[#6474A6]'>
-							Especialidad
-						</label>
-						<select
-							id='specialty'
-							value={formData.specialty}
-							onChange={handleChange}
-							onBlur={handleBlur}
-							className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-						>
-							<option value=''>Seleccione una especialidad</option>
-							<option value='Cardiología'>Cardiología</option>
-							<option value='Pediatría'>Pediatría</option>
-							<option value='Otra'>Otra</option>
-						</select>
-						{touched.specialty && errors.specialty && <p className='text-red-500 text-sm'>{errors.specialty}</p>}
-					</div>
-				</form>
+				<UserForm
+					handleBlur={handleBlur}
+					handleChange={handleChange}
+					errors={errors}
+					touched={touched}
+					formData={formData}
+				/>
 			</div>
 
 			<div className='flex items-center justify-end space-y-4 gap-4 my-6'>

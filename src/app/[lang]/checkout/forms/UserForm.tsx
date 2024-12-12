@@ -1,0 +1,122 @@
+import React from 'react';
+
+interface UserFormProps {
+	formData: {
+		firstName: string;
+		lastName: string;
+		email: string;
+		phone: string;
+		profession: string;
+		specialty: string;
+		privacyPolicy: boolean;
+	};
+	errors: Record<string, string>;
+	touched: Record<string, boolean>;
+	handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+	handleBlur: (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => void;
+}
+
+const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleChange, handleBlur }) => {
+	return (
+		<form className='grid grid-cols-2 gap-4'>
+			<div>
+				<label htmlFor='firstName' className='block text-sm font-medium text-[#6474A6]'>
+					Nombre
+				</label>
+				<input
+					type='text'
+					id='firstName'
+					value={formData.firstName}
+					onChange={handleChange}
+					onBlur={handleBlur}
+					placeholder='Ingresar Nombre'
+					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+				/>
+				{touched.firstName && errors.firstName && <p className='text-red-500 text-sm'>{errors.firstName}</p>}
+			</div>
+			<div>
+				<label htmlFor='lastName' className='block text-sm font-medium text-[#6474A6]'>
+					Apellido
+				</label>
+				<input
+					type='text'
+					id='lastName'
+					value={formData.lastName}
+					onChange={handleChange}
+					onBlur={handleBlur}
+					placeholder='Ingresar Apellido'
+					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+				/>
+				{touched.lastName && errors.lastName && <p className='text-red-500 text-sm'>{errors.lastName}</p>}
+			</div>
+			<div>
+				<label htmlFor='email' className='block text-sm font-medium text-[#6474A6]'>
+					Correo electrónico
+				</label>
+				<input
+					type='email'
+					id='email'
+					value={formData.email}
+					onChange={handleChange}
+					onBlur={handleBlur}
+					placeholder='Ingresar Correo'
+					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+				/>
+				{touched.email && errors.email && <p className='text-red-500 text-sm'>{errors.email}</p>}
+			</div>
+			<div>
+				<label htmlFor='phone' className='block text-sm font-medium text-[#6474A6]'>
+					Teléfono
+				</label>
+				<input
+					type='text'
+					id='phone'
+					value={formData.phone}
+					onChange={handleChange}
+					onBlur={handleBlur}
+					placeholder='Ingresar Teléfono'
+					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+				/>
+				{touched.phone && errors.phone && <p className='text-red-500 text-sm'>{errors.phone}</p>}
+			</div>
+			<div>
+				<label htmlFor='profession' className='block text-sm font-medium text-[#6474A6]'>
+					Profesión
+				</label>
+				<select
+					id='profession'
+					value={formData.profession}
+					onChange={handleChange}
+					onBlur={handleBlur}
+					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+				>
+					<option value=''>Seleccione una profesión</option>
+					<option value='Doctor'>Doctor</option>
+					<option value='Enfermero'>Enfermero</option>
+					<option value='Otro'>Otro</option>
+				</select>
+				{touched.profession && errors.profession && <p className='text-red-500 text-sm'>{errors.profession}</p>}
+			</div>
+			<div>
+				<label htmlFor='specialty' className='block text-sm font-medium text-[#6474A6]'>
+					Especialidad
+				</label>
+				<select
+					id='specialty'
+					value={formData.specialty}
+					onChange={handleChange}
+					onBlur={handleBlur}
+					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+				>
+					<option value=''>Seleccione una especialidad</option>
+					<option value='Cardiología'>Cardiología</option>
+					<option value='Pediatría'>Pediatría</option>
+					<option value='Otra'>Otra</option>
+				</select>
+				{touched.specialty && errors.specialty && <p className='text-red-500 text-sm'>{errors.specialty}</p>}
+			</div>
+		</form>
+	);
+};
+
+export default UserForm;

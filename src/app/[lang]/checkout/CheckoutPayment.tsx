@@ -27,6 +27,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		setIsSubmitting,
 		setPaymentStatus,
 		isSubmitting,
+		user,
 	} = useCheckout();
 	const [formData, setFormData] = useState({
 		cardholderName: '',
@@ -82,7 +83,20 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 
 	eitnerLog(state);
 	useEffect(() => {
-		if (state && state.profile) {
+		if (user) {
+			// Si el usuario está disponible en el contexto, usamos esos datos
+			setFormData((prevState) => ({
+				...prevState,
+				cardholderName: `${user.firstName} ${user.lastName}`,
+				documentNumber: '', // O el campo que desees usar para el documento
+				idType: '', // O el campo que desees usar para el tipo de documento
+				country: '', // O el campo que desees usar para el país
+				state: '', // Este campo puedes configurarlo o dejarlo vacío si no lo tienes en el contexto
+				address: '', // Igual para la dirección
+				postalCode: '', // Igual para el código postal
+			}));
+		} else if (state && state.profile) {
+			// Si el usuario no está en el contexto, usamos los datos del state
 			setFormData((prevState) => ({
 				...prevState,
 				cardholderName: `${state.profile.name} ${state.profile.last_name}`,
@@ -94,7 +108,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				postalCode: state.profile.postal_code || '',
 			}));
 		}
-	}, [state]);
+	}, [user, state]);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { name, value } = e.target;
@@ -169,7 +183,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				},
 			},
 			additional_information: {
-				telefono: state.profile.phone || '',
+				telefono: '',
 				direccion: formData.address,
 				ciudad: formData.city,
 				provincia: formData.state,

@@ -3,6 +3,16 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import eitnerLog from '../../../../eitnerLog';
 
+interface User {
+	firstName: string;
+	lastName: string;
+	email: string;
+	phone: string;
+	profession: string;
+	specialty: string;
+	privacyPolicy: boolean;
+}
+
 interface CheckoutContextType {
 	activeStep: number;
 	subStep: number;
@@ -16,6 +26,8 @@ interface CheckoutContextType {
 	setIsSubmitting: (submitting: boolean) => void;
 	paymentStatus: 'approved' | 'pending' | 'rejected';
 	setPaymentStatus: (status: 'approved' | 'pending' | 'rejected') => void;
+	user: User | null;
+	setUser: (user: User | null) => void;
 }
 
 const CheckoutContext = createContext<CheckoutContextType | undefined>(undefined);
@@ -27,6 +39,7 @@ export const CheckoutProvider: React.FC<{ children: ReactNode }> = ({ children }
 	const [paymentType, setPaymentType] = useState<string | null>(null);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [paymentStatus, setPaymentStatus] = useState<'approved' | 'pending' | 'rejected'>('pending');
+	const [user, setUser] = useState<User | null>(null);
 
 	const completeStep = (step: number) => {
 		if (!completedSteps.includes(step)) {
@@ -49,6 +62,8 @@ export const CheckoutProvider: React.FC<{ children: ReactNode }> = ({ children }
 				setIsSubmitting,
 				paymentStatus,
 				setPaymentStatus,
+				user,
+				setUser,
 			}}
 		>
 			{children}
