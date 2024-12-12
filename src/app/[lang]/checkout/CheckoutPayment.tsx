@@ -3,10 +3,31 @@ import { useContext, useEffect, useState } from 'react';
 import { useCheckout } from './CheckoutContext';
 import { AuthContext } from '@/context/user/AuthContext';
 import CardDetailsForm from './forms/CardDetailsForm';
+import eitnerLog from '../../../../eitnerLog';
+import DocumentDetailsForm from './forms/DocumentDetailsForm';
+import AddressForm from './forms/AddressForm';
+import { validatePaymentField } from './validators/paymentValidator';
 
-const CheckoutPayment: React.FC = () => {
+interface CheckoutContentProps {
+	product: any;
+	country: string;
+}
+
+const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) => {
+	eitnerLog(product);
 	const { state } = useContext(AuthContext);
-	const { activeStep, setActiveStep, subStep, setSubStep, completeStep, setPaymentType } = useCheckout();
+	const {
+		activeStep,
+		setActiveStep,
+		subStep,
+		setSubStep,
+		completeStep,
+		setPaymentType,
+		paymentType,
+		setIsSubmitting,
+		setPaymentStatus,
+		isSubmitting,
+	} = useCheckout();
 	const [formData, setFormData] = useState({
 		cardholderName: '',
 		cardNumber: '',
@@ -39,36 +60,6 @@ const CheckoutPayment: React.FC = () => {
 	const [touched, setTouched] = useState<Record<string, boolean>>({});
 	const [isFormValid, setIsFormValid] = useState(false);
 
-	const validateField = (field: string, value: string | boolean) => {
-		switch (field) {
-			case 'cardholderName':
-				return value.toString().trim() ? '' : 'El nombre completo es obligatorio.';
-			case 'cardNumber':
-				return value.toString().trim() ? '' : 'El numero de tarjeta es obligatorio.';
-			case 'expiryMonth':
-				return value.toString() ? '' : 'Introduzca un mes valido';
-			case 'expiryYear':
-				return value.toString() ? '' : 'introduzca un año valido';
-			case 'cvv':
-				return value.toString() ? '' : 'introduzca un numero valido';
-			case 'idType':
-				return value ? '' : 'Seleccione un tipo de documento';
-			case 'documentNumber':
-				return value ? '' : 'ingrese un numero valido';
-			case 'country':
-				return value ? '' : 'ingrese un pais';
-			case 'state':
-				return value ? '' : 'ingrese una provincia o estado';
-			case 'city':
-				return value ? '' : 'ingrese una ciudad';
-			case 'addres':
-				return value ? '' : 'ingrese su direccion';
-			case 'postalCode':
-				return value ? '' : 'ingrese su codigo postal';
-			default:
-				return '';
-		}
-	};
 	useEffect(() => {
 		const formIsValid =
 			Object.values(errors).every((error) => error === '') && Object.values(formData).every((value) => value !== '');
@@ -85,13 +76,12 @@ const CheckoutPayment: React.FC = () => {
 
 		setErrors((prevErrors) => ({
 			...prevErrors,
-			[id]: validateField(id, formData[id as keyof typeof formData]),
+			[id]: validatePaymentField(id, formData[id as keyof typeof formData]),
 		}));
 	};
 
-	console.log(state);
+	eitnerLog(state);
 	useEffect(() => {
-		// Asegúrate de que `state.profile` existe y que no es null
 		if (state && state.profile) {
 			setFormData((prevState) => ({
 				...prevState,
@@ -134,6 +124,124 @@ const CheckoutPayment: React.FC = () => {
 		}
 	};
 
+	const currencies: any = {
+		cl: 'CLP',
+		ar: 'ARS',
+		ec: 'USD',
+		mx: 'MXN',
+		bo: 'BOB',
+		co: 'COP',
+		cr: 'CRC',
+		sv: 'USD',
+		gt: 'USD',
+		hn: 'HNL',
+		ni: 'USD',
+		pa: 'USD',
+		py: 'PYG',
+		pe: 'PEN',
+		uy: 'UYU',
+		ve: 'USD',
+	};
+	const currency = currencies[country] || 'USD';
+
+	const mapFormDataToRequest = (formData: any) => {
+		return {
+			transaction_amount: product.total_price,
+			installments: paymentType === 'unico' ? 1 : 12,
+			description: 'Pago de contrato MSK',
+			payer: {
+				email: state.email,
+				first_name: formData.cardholderName.split(' ')[0] || 'Nombre',
+				last_name: formData.cardholderName.split(' ')[1] || 'Apellido',
+				identification: {
+					type: formData.idType,
+					number: formData.documentNumber,
+				},
+			},
+			payment_data: {
+				cardNumber: formData.cardNumber,
+				expirationMonth: formData.expiryMonth,
+				expirationYear: formData.expiryYear,
+				securityCode: formData.cvv,
+				identification: {
+					type: formData.idType,
+					number: formData.documentNumber,
+				},
+			},
+			additional_information: {
+				telefono: state.profile.phone || '',
+				direccion: formData.address,
+				ciudad: formData.city,
+				provincia: formData.state,
+				cp: formData.postalCode,
+			},
+			product: {
+				items: {
+					code: product.ficha.product_code,
+					quantity: 1,
+					price: product.regular_price,
+					total: product.regular_price,
+					net_total: product.regular_price,
+					total_after_discount: product.regular_price,
+					list_price: product.regular_price,
+				},
+				currency,
+				country: formData.country,
+				sub_total: product.regular_price,
+				grand_total: product.total_price,
+			},
+		};
+	};
+
+	const handleSubmit = async () => {
+		if (!isFormValid) return;
+
+		const requestBody = mapFormDataToRequest(formData);
+		setIsSubmitting(true);
+
+		try {
+			const response = await fetch(
+				'http://localhost:8465/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
+				// const response = await fetch('https://gateway.msklatam.net/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: 'Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6',
+					},
+					body: JSON.stringify(requestBody),
+				},
+			);
+
+			if (!response.ok) {
+				throw new Error('Error al procesar el pago');
+			}
+
+			const data = await response.json();
+			console.log('Respuesta del servidor:', data);
+			const status = data.paymentStatus || 'rejected';
+			setPaymentStatus(status);
+
+			if (subStep === 0) {
+				completeStep(activeStep);
+				setActiveStep(activeStep + 1);
+			} else {
+				setActiveStep(activeStep + 1);
+				completeStep(activeStep);
+				setSubStep(0);
+			}
+		} catch (error) {
+			// Maneja errores en la solicitud
+			completeStep(activeStep);
+			setActiveStep(activeStep + 1);
+			console.error('Error al enviar los datos:', error);
+			// setPaymentStatus('rejected');
+			setPaymentStatus('approved');
+		} finally {
+			setIsSubmitting(false);
+		}
+	};
+
 	return (
 		<>
 			<h2 className='flex items-center text-[#392C35] text-2xl font-semibold my-8'>
@@ -154,236 +262,26 @@ const CheckoutPayment: React.FC = () => {
 						errors={errors}
 						touched={touched}
 					/>
-					{/* <div className='space-y-6'>
-						
-						<div className='grid grid-cols-2 gap-4'>
-							<div>
-								<label htmlFor='cardholderName' className='block text-sm font-medium text-[#6474A6]'>
-									Nombre y apellido del titular
-								</label>
-								<input
-									id='cardholderName'
-									name='cardholderName'
-									type='text'
-									value={formData.cardholderName}
-									onChange={handleChange}
-									onBlur={handleBlur}
-									placeholder='Ingrese nombre y apellido del titular'
-									className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-								/>
-								{touched.cardholderName && errors.cardholderName && (
-									<p className='text-red-500 text-sm'>{errors.cardholderName}</p>
-								)}
-							</div>
-
-							<div>
-								<label htmlFor='cardNumber' className='block text-sm font-medium text-[#6474A6]'>
-									Número de tarjeta
-								</label>
-								<input
-									id='cardNumber'
-									name='cardNumber'
-									type='text'
-									value={formData.cardNumber}
-									onChange={handleChange}
-									onBlur={handleBlur}
-									placeholder='Ingrese número de tarjeta'
-									className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-								/>
-								{touched.cardNumber && errors.cardNumber && <p className='text-red-500 text-sm'>{errors.cardNumber}</p>}
-							</div>
-						</div>
-
-						<div className='grid grid-cols-2 gap-4'>
-							<div className='flex flex-col'>
-								<label htmlFor='expiryDate' className='block text-sm font-medium text-[#6474A6]'>
-									Fecha de vencimiento (MM/AAAA)
-								</label>
-								<div className='flex gap-2 mt-2'>
-									<input
-										id='expiryMonth'
-										name='expiryMonth'
-										type='text'
-										maxLength={2}
-										value={formData.expiryMonth}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										placeholder='MM'
-										className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-									/>
-									{touched.expiryMonth && errors.expiryMonth && <p className='text-red-500 text-sm'>{errors.expiryMonth}</p>}
-									<span className='text-[#6474A6] flex items-center'>/</span>
-									<input
-										id='expiryYear'
-										name='expiryYear'
-										type='text'
-										maxLength={4}
-										value={formData.expiryYear}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										placeholder='AAAA'
-										className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-									/>
-									{touched.expiryYear && errors.expiryYear && <p className='text-red-500 text-sm'>{errors.expiryYear}</p>}
-								</div>
-							</div>
-
-							<div>
-								<label htmlFor='cvv' className='block text-sm font-medium text-[#6474A6]'>
-									Código de seguridad (CVV)
-								</label>
-								<input
-									id='cvv'
-									name='cvv'
-									type='text'
-									value={formData.cvv}
-									onChange={handleChange}
-									onBlur={handleBlur}
-									placeholder='CVV'
-									maxLength={4}
-									className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-								/>
-								{touched.cvv && errors.cvv && <p className='text-red-500 text-sm'>{errors.cvv}</p>}
-							</div>
-						</div>
-					</div> */}
 
 					{/* Datos de facturación */}
 					<h3 className='mt-8 text-xl font-semibold text-[#392C35]'>Datos de facturación</h3>
-					<div className='grid grid-cols-2 gap-4'>
-						<div>
-							<label htmlFor='idType' className='block text-sm font-medium text-[#6474A6]'>
-								Tipo de documento
-							</label>
-							<select
-								id='idType'
-								name='idType'
-								value={formData.idType}
-								onChange={handleChange}
-								onBlur={handleBlur}
-								className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-							>
-								{touched.idType && errors.idType && <p className='text-red-500 text-sm'>{errors.idType}</p>}
-								<option value='' disabled>
-									Seleccione tipo de documento
-								</option>
-								<option value='DNI'>DNI</option>
-								<option value='RUT'>RUT</option>
-								<option value='Pasaporte'>Pasaporte</option>
-							</select>
-						</div>
-
-						<div>
-							<label htmlFor='documentNumber' className='block text-sm font-medium text-[#6474A6]'>
-								Número de documento
-							</label>
-							<input
-								id='documentNumber'
-								name='documentNumber'
-								type='text'
-								value={formData.documentNumber}
-								onChange={handleChange}
-								onBlur={handleBlur}
-								placeholder='Ingrese número de documento'
-								className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-							/>
-							{touched.documentNumber && errors.documentNumber && (
-								<p className='text-red-500 text-sm'>{errors.documentNumber}</p>
-							)}
-						</div>
-					</div>
+					<DocumentDetailsForm
+						formData={formData}
+						handleBlur={handleBlur}
+						handleChange={handleChange}
+						errors={errors}
+						touched={touched}
+					/>
 
 					{/* Dirección de facturación */}
 					<h3 className='mt-8 text-xl font-semibold text-[#392C35]'>Dirección de facturación</h3>
-					<div className='grid grid-cols-2 gap-4'>
-						{/* País y Estado */}
-						<div>
-							<label htmlFor='country' className='block text-sm font-medium text-[#6474A6]'>
-								País
-							</label>
-							<input
-								id='country'
-								name='country'
-								type='text'
-								value={formData.country}
-								onChange={handleChange}
-								onBlur={handleBlur}
-								placeholder='Ingrese país'
-								className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-							/>
-							{touched.country && errors.country && <p className='text-red-500 text-sm'>{errors.country}</p>}
-						</div>
-
-						<div>
-							<label htmlFor='state' className='block text-sm font-medium text-[#6474A6]'>
-								Estado
-							</label>
-							<input
-								id='state'
-								name='state'
-								type='text'
-								value={formData.state}
-								onChange={handleChange}
-								onBlur={handleBlur}
-								placeholder='Ingrese estado'
-								className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-							/>
-							{touched.state && errors.state && <p className='text-red-500 text-sm'>{errors.state}</p>}
-						</div>
-
-						{/* Ciudad y Dirección */}
-						<div>
-							<label htmlFor='city' className='block text-sm font-medium text-[#6474A6]'>
-								Ciudad
-							</label>
-							<input
-								id='city'
-								name='city'
-								type='text'
-								value={formData.city}
-								onChange={handleChange}
-								onBlur={handleBlur}
-								placeholder='Ingrese ciudad'
-								className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-							/>
-							{touched.city && errors.city && <p className='text-red-500 text-sm'>{errors.city}</p>}
-						</div>
-
-						<div>
-							<label htmlFor='address' className='block text-sm font-medium text-[#6474A6]'>
-								Dirección
-							</label>
-							<input
-								id='address'
-								name='address'
-								type='text'
-								value={formData.address}
-								onChange={handleChange}
-								onBlur={handleBlur}
-								placeholder='Ingrese dirección'
-								className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-							/>
-							{touched.address && errors.address && <p className='text-red-500 text-sm'>{errors.address}</p>}
-						</div>
-
-						{/* Código Postal (fila completa) */}
-						<div className='col-span-2'>
-							<label htmlFor='postalCode' className='block text-sm font-medium text-[#6474A6]'>
-								Código postal
-							</label>
-							<input
-								id='postalCode'
-								name='postalCode'
-								type='text'
-								value={formData.postalCode}
-								onChange={handleChange}
-								onBlur={handleBlur}
-								placeholder='Ingrese código postal'
-								className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-							/>
-							{touched.postalCode && errors.postalCode && <p className='text-red-500 text-sm'>{errors.postalCode}</p>}
-						</div>
-					</div>
+					<AddressForm
+						formData={formData}
+						handleChange={handleChange}
+						handleBlur={handleBlur}
+						errors={errors}
+						touched={touched}
+					/>
 				</form>
 			</div>
 			<div className='my-6 gap-4 flex justify-end'>
@@ -405,10 +303,26 @@ const CheckoutPayment: React.FC = () => {
 					className={`px-12 py-3 font-bold rounded-md focus:outline-none focus:ring-2 ${
 						isFormValid ? 'bg-[#9200AD] text-white' : 'bg-gray-400 text-gray-600 cursor-not-allowed'
 					}`}
-					onClick={handleNextStep}
-					disabled={!isFormValid}
+					onClick={handleSubmit}
+					disabled={!isFormValid || isSubmitting} // Deshabilitar si está enviando
 				>
-					Siguiente
+					{isSubmitting ? (
+						<svg
+							className='animate-spin h-5 w-5 text-white mx-auto'
+							xmlns='http://www.w3.org/2000/svg'
+							fill='none'
+							viewBox='0 0 24 24'
+						>
+							<circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4'></circle>
+							<path
+								className='opacity-75'
+								fill='currentColor'
+								d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+							></path>
+						</svg>
+					) : (
+						'Siguiente'
+					)}
 				</button>
 			</div>
 		</>

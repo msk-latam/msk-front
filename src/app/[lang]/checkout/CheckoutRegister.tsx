@@ -100,16 +100,6 @@ const CheckoutRegister: React.FC = () => {
 		}));
 	};
 
-	// const handleNextStep = () => {
-	// 	if (isFormValid) {
-	// 		completeStep(activeStep);
-	// 		setActiveStep(activeStep + 1);
-	// 		console.log(formData);
-	// 	} else {
-	// 		setTouched((prevTouched) => Object.keys(formData).reduce((acc, key) => ({ ...acc, [key]: true }), prevTouched));
-	// 	}
-	// };
-
 	const handleNextStep = async () => {
 		if (isFormValid) {
 			try {
