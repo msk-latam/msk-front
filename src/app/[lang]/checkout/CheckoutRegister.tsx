@@ -4,6 +4,7 @@ import { AuthContext } from '@/context/user/AuthContext';
 import ssr from '@/services/ssr';
 import UserForm from './forms/UserForm';
 import { validateUserField } from './validators/userValidator';
+import CheckoutRegisterButtons from './buttons/CheckoutRegisterButtons';
 
 const CheckoutRegister: React.FC = () => {
 	const { state } = useContext(AuthContext);
@@ -116,6 +117,7 @@ const CheckoutRegister: React.FC = () => {
 				};
 
 				const res = await ssr.postSignUp(mappedData);
+				console.log(res);
 				if (res?.access_token) {
 					setSuccess(true);
 					setUser(formData);
@@ -129,6 +131,7 @@ const CheckoutRegister: React.FC = () => {
 						.map((errorMessage: any) => ` ${errorMessage}`)
 						.join('<br />');
 					setError(errorMessages);
+					console.log(errorMessages);
 				}
 			} catch (err) {
 				setError('Hubo un problema al crear tu cuenta. Intenta nuevamente más tarde.');
@@ -166,43 +169,18 @@ const CheckoutRegister: React.FC = () => {
 					formData={formData}
 				/>
 			</div>
-
-			<div className='flex items-center justify-end space-y-4 gap-4 my-6'>
-				<div className='flex items-center'>
-					<input
-						type='checkbox'
-						id='privacyPolicy'
-						checked={formData.privacyPolicy}
-						onChange={handleChange}
-						onBlur={handleBlur}
-						className='w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500'
-					/>
-					<label htmlFor='privacyPolicy' className='ml-2 text-sm font-medium text-gray-700'>
-						Acepto las{' '}
-						<a
-							href='/politica-de-privacidad/'
-							target='_blank'
-							className='text-[#9200AD] underline hover:no-underline focus:outline-none focus:ring-1 focus:ring-[#9200AD]'
-						>
-							condiciones de privacidad
-						</a>
-					</label>
-				</div>
-				{touched.privacyPolicy && errors.privacyPolicy && <p className='text-red-500 text-sm'>{errors.privacyPolicy}</p>}
-				<button
-					type='button'
-					className={`px-12 py-3 font-bold rounded-sm focus:outline-none focus:ring-2 !mt-0 flex items-center justify-center space-x-2 ${
-						isFormValid ? 'bg-[#9200AD] text-white' : 'bg-gray-400 text-gray-600 cursor-not-allowed'
-					}`}
-					onClick={handleNextStep}
-					disabled={!isFormValid || loading}
-				>
-					{loading ? (
-						<div className='w-5 h-5 border-4 border-t-4 border-transparent border-t-white rounded-full animate-spin'></div>
-					) : (
-						'Siguiente'
-					)}
-				</button>
+			<div className='flex  items-center justify-between'>
+				<p className='text-red-500 font-bold my-6'> {error}</p>
+				<CheckoutRegisterButtons
+					formData={formData}
+					errors={errors}
+					touched={touched}
+					handleBlur={handleBlur}
+					handleChange={handleChange}
+					handleNextStep={handleNextStep}
+					isFormValid={isFormValid}
+					loading={loading}
+				/>
 			</div>
 		</>
 	);

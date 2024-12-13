@@ -7,6 +7,7 @@ import eitnerLog from '../../../../eitnerLog';
 import DocumentDetailsForm from './forms/DocumentDetailsForm';
 import AddressForm from './forms/AddressForm';
 import { validatePaymentField } from './validators/paymentValidator';
+import CheckoutPaymentButtons from './buttons/CheckoutPaymentButtons';
 
 interface CheckoutContentProps {
 	product: any;
@@ -214,18 +215,16 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		setIsSubmitting(true);
 
 		try {
-			const response = await fetch(
-				'http://localhost:8465/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
-				// const response = await fetch('https://gateway.msklatam.net/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: 'Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6',
-					},
-					body: JSON.stringify(requestBody),
+			// const response = await fetch(
+			// 	'http://localhost:8465/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
+			const response = await fetch('https://gateway.msklatam.net/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: 'Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6',
 				},
-			);
+				body: JSON.stringify(requestBody),
+			});
 
 			if (!response.ok) {
 				throw new Error('Error al procesar el pago');
@@ -298,47 +297,13 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 					/>
 				</form>
 			</div>
-			<div className='my-6 gap-4 flex justify-end'>
-				<button
-					type='button'
-					className={`px-12 py-3 font-bold rounded-md transition focus:outline-none focus:ring-2 ${
-						true
-							? 'bg-gray-400 text-gray-600 border border-gray-400 cursor-not-allowed'
-							: 'text-[#9200AD] border border-[#9200AD] bg-transparent'
-					}`}
-					onClick={handlePreviousStep}
-					disabled={true}
-				>
-					Volver
-				</button>
-
-				<button
-					type='button'
-					className={`px-12 py-3 font-bold rounded-md focus:outline-none focus:ring-2 ${
-						isFormValid ? 'bg-[#9200AD] text-white' : 'bg-gray-400 text-gray-600 cursor-not-allowed'
-					}`}
-					onClick={handleSubmit}
-					disabled={!isFormValid || isSubmitting} // Deshabilitar si está enviando
-				>
-					{isSubmitting ? (
-						<svg
-							className='animate-spin h-5 w-5 text-white mx-auto'
-							xmlns='http://www.w3.org/2000/svg'
-							fill='none'
-							viewBox='0 0 24 24'
-						>
-							<circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4'></circle>
-							<path
-								className='opacity-75'
-								fill='currentColor'
-								d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-							></path>
-						</svg>
-					) : (
-						'Siguiente'
-					)}
-				</button>
-			</div>
+			<CheckoutPaymentButtons
+				isFormValid={isFormValid}
+				isSubmitting={isSubmitting}
+				handlePreviousStep={handlePreviousStep}
+				handleSubmit={handleSubmit}
+				isDisabled
+			/>
 		</>
 	);
 };
