@@ -8,14 +8,17 @@ import DocumentDetailsForm from './forms/DocumentDetailsForm';
 import AddressForm from './forms/AddressForm';
 import { validatePaymentField } from './validators/paymentValidator';
 import CheckoutPaymentButtons from './buttons/CheckoutPaymentButtons';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import api from '@/services/api';
 
 interface CheckoutContentProps {
-	product: any;
-	country: string;
+	product?: any;
+	country?: string;
 }
 
 const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) => {
 	eitnerLog(product);
+	const { executeRecaptcha } = useGoogleReCaptcha();
 	const { state } = useContext(AuthContext);
 	const {
 		activeStep,
@@ -242,6 +245,41 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				setActiveStep(activeStep + 1);
 				completeStep(activeStep);
 				setSubStep(0);
+			}
+			try {
+				// Preparar los datos para la actualización del usuario
+				const userUpdateData = {
+					...formData,
+					recaptcha_token: await executeRecaptcha('edit_profile'),
+				};
+
+				// Llamar al endpoint de actualización
+				// const userResponse = await fetch('https://tu-api.com/update-user', {
+				// 		method: 'POST',
+				// 		headers: {
+				// 				'Content-Type': 'application/json',
+				// 				Authorization: 'Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6',
+				// 		},
+				// 		body: JSON.stringify(userUpdateData),
+				// });
+
+				const userResponse = await api.updateUserData(formData);
+				console.log(userResponse);
+
+				if (!userResponse.ok) {
+					throw new Error('Error al actualizar los datos del usuario');
+				}
+
+				const userData = await userResponse.json();
+				console.log('Respuesta del servidor (actualización de usuario):', userData);
+
+				if (userData.code === 'SUCCESS') {
+					console.log('Usuario actualizado correctamente.');
+				} else {
+					console.error('Error en la respuesta del servidor al actualizar el usuario:', userData);
+				}
+			} catch (userError) {
+				console.error('Error al actualizar el usuario:', userError);
 			}
 		} catch (error) {
 			// Maneja errores en la solicitud

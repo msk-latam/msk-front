@@ -29,12 +29,12 @@ const CursoCheckout: FC<Props> = async ({ params }) => {
 						</div>
 					</div>
 				</div>
-				{/* Footer siempre al fondo */}
 				<div className='mt-auto'>
 					<CheckoutMSKFooter />
 				</div>
 			</div>
 		</CheckoutProvider>
+		// Hecho por Ariel Eitner
 	);
 };
 

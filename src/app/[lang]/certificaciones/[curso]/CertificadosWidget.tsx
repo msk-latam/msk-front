@@ -53,40 +53,92 @@ const CertificadosWidget: React.FC<CertificadosWidgetProps> = ({ product }) => {
 			avales: avales.sort((a, b) => decodeHtmlEntities(a.title).localeCompare(decodeHtmlEntities(b.title))),
 		}));
 
-	// const courses = localStorage.getItem('all-courses');
-	// if (!courses) {
-	// 	console.log('No hay cursos en el localStorage');
-	// 	return; // Salir si no hay datos
-	// }
+	const courses = localStorage.getItem('all-courses');
+	if (!courses) {
+		console.log('No hay cursos en el localStorage');
+		return; // Salir si no hay datos
+	}
 
-	// let parsedCourses;
-	// try {
-	// 	// Parsear el string de courses
-	// 	const parsedData = JSON.parse(courses);
-	// 	console.log(parsedData);
+	let parsedCourses;
+	try {
+		// Parsear el string de courses
+		const parsedData = JSON.parse(courses);
+		console.log(parsedData);
 
-	// 	// Verificar que existe la clave 'value' y que es un array
-	// 	if (!parsedData.value || !Array.isArray(parsedData.value)) {
-	// 		console.log('No se encontraron cursos en la clave "value" o no es un array', parsedData);
-	// 		return; // Salir si no se encuentra el array en 'value'
-	// 	}
+		// Verificar que existe la clave 'value' y que es un array
+		if (!parsedData.value || !Array.isArray(parsedData.value)) {
+			console.log('No se encontraron cursos en la clave "value" o no es un array', parsedData);
+			return; // Salir si no se encuentra el array en 'value'
+		}
 
-	// 	parsedCourses = parsedData.value;
-	// 	console.log(parsedCourses);
-	// } catch (error) {
-	// 	console.error('Error al parsear los cursos:', error);
-	// 	return; // Salir si no se puede parsear
-	// }
+		parsedCourses = parsedData.value;
+		// console.log(parsedCourses);
+	} catch (error) {
+		console.error('Error al parsear los cursos:', error);
+		return; // Salir si no se puede parsear
+	}
 
-	// // Filtrar los cursos donde father_post_type no sea "downloadable"
-	// const filteredCourses = parsedCourses.filter((course: any) => course.father_post_type !== 'downloadable');
+	// Filtrar los cursos donde father_post_type no sea "downloadable"
+	const filteredCourses = parsedCourses.filter(
+		(course: any) =>
+			course.father_post_type !== 'downloadable' && course.regular_price !== '0' && course.cantidad_modulos !== 0,
+	);
 
 	// console.log(filteredCourses);
 
-	// // Filtrar solo los cursos de tipo 'course' y extraer el 'slug'
-	// const certificateUrls = filteredCourses.map((course: any) => `https://msklatam.com/certificaciones/${course.slug}`);
+	const linksCursos = filteredCourses.map((course: any) => `https://msklatam.com/curso/${course.slug}`);
+	const precioCursos = filteredCourses.map((course: any) => `Precio Total ${course.regular_price}`);
+	const cuotasCursos = filteredCourses.map((course: any) => `Precio Cuotas ${course.price_installments}`);
+	const modulosCursos = filteredCourses.map((course: any) => `Cantidad de modulos ${course.cantidad_modulos}`);
+	const titleCursos = filteredCourses.map((course: any) => `Titulo ${course.title}`);
+	const horasCursos = filteredCourses.map((course: any) => `Horas ${course.duration}`);
+	const descriptionCursos = filteredCourses.map((course: any) => {
+		const tempElement = document.createElement('div');
+		tempElement.innerHTML = course.why_course;
+		return `Descripcion ${tempElement.innerText.trim()}`;
+	});
+	const categoriasCursos = filteredCourses.flatMap((course: any) => course.categories.map((category: any) => category.name));
 
-	// console.log(certificateUrls.join('\n'));
+	const cursosOrganizados = filteredCourses.map((course: any) => {
+		// Extraer descripción sin etiquetas HTML
+		const tempElement = document.createElement('div');
+		tempElement.innerHTML = course.why_course;
+		const descripcion = tempElement.innerText.trim();
+
+		// Extraer nombres de categorías
+		const categorias = course.categories.map((category: any) => category.name).join(', ');
+
+		// Construir el texto del curso con formato mejorado
+		return `
+	Título: ${course.title}
+	Link: https://msklatam.com/curso/${course.slug}
+	Precio Total: ${course.regular_price}
+	Precio Cuotas: ${course.price_installments}
+	Cantidad de Módulos: ${course.cantidad_modulos}
+	Horas: ${course.duration}
+	Descripción:
+	${descripcion}
+	
+	Categorías: ${categorias}
+		`.trim();
+	});
+
+	// Unir todos los textos con un separador entre cada bloque
+	const textoFinal = cursosOrganizados.join(
+		'\n\n-------------------------------------------------------------------------------------------------------------------------------\n\n',
+	);
+
+	// Mostrar todo en un único console.log
+	console.log(textoFinal);
+
+	// console.log(linksCursos.join('\n'));
+	// console.log(precioCursos.join('\n'));
+	// console.log(cuotasCursos.join('\n'));
+	// console.log(modulosCursos.join('\n'));
+	// console.log(titleCursos.join('\n'));
+	// console.log(horasCursos.join('\n'));
+	// console.log(descriptionCursos.join('\n'));
+	// console.log(categoriasCursos.join('\n'));
 
 	return (
 		<div>
