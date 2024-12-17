@@ -26,8 +26,8 @@ interface Props {
 const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 	const router = useRouter();
 	const [userData, setUserData] = useState(user);
-	const [localUser, setLocalUser] = useState<Contact>(userData.contact as Contact);
 	const [defaultCountry, setDefaultCountry] = useState('' as CountryCode);
+	const [localUser, setLocalUser] = useState<Contact>(userData.contact as Contact);
 	const initialValues = {
 		name: localUser?.name || '',
 		last_name: localUser?.last_name || '',

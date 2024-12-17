@@ -10,29 +10,48 @@ interface BrandSliderProps {
 const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 	async function fetchBrands(country: any) {
 		try {
-			// Construir la URL con el parámetro de país
-			const url = `https://wp.msklatam.com/wp-json/wp/api/carrusel-instituciones?country=${country}`;
+			const mappedCountry = country === 'ar' ? 'arg' : country;
+			const url = `https://wp.msklatam.com/wp-json/wp/api/carrusel-instituciones?country=${mappedCountry}&lang=${mappedCountry}`;
 
-			// Realizar la petición al endpoint
 			const response = await fetch(url);
 
-			// Verificar que la respuesta sea válida
 			if (!response.ok) {
 				throw new Error(`Error al obtener los datos: ${response.statusText}`);
 			}
 
-			// Parsear la respuesta como JSON
 			const data = await response.json();
 
-			// Si no hay datos para el país, intentar con la opción por defecto
-			return data.length > 0 ? data : await fetchDefaultBrands();
+			// "https://msklatam.com/wp-content/uploads/2024/12/acc-1.svg"
+			// "https://wp.msklatam.com/wp-content/uploads/2024/12/acc-1.svg"
+			const processedData = data.map((item: any) => {
+				const removeCountryFromUrl = (url: string) => {
+					// Eliminar prefijo de país
+					let processedUrl = url.replace(/^https?:\/\/[a-z]{2}\./, 'https://');
+
+					// Verificar si falta "wp." y agregarlo si es necesario
+					if (!processedUrl.includes('//wp.')) {
+						processedUrl = processedUrl.replace('//', '//wp.');
+					}
+
+					return processedUrl;
+				};
+
+				return {
+					...item,
+					imgDefault: removeCountryFromUrl(item.imgDefault),
+					imgHover: removeCountryFromUrl(item.imgHover),
+				};
+			});
+
+			console.log(processedData);
+
+			return processedData.length > 0 ? processedData : await fetchDefaultBrands();
 		} catch (error) {
 			console.error('Error al obtener las marcas:', error);
-			return await fetchDefaultBrands(); // En caso de error, obtener las marcas por defecto
+			return await fetchDefaultBrands();
 		}
 	}
 
-	// Función para obtener las marcas por defecto
 	async function fetchDefaultBrands() {
 		try {
 			const url = 'https://wp.msklatam.com/wp-json/wp/api/carrusel-instituciones?country=int';
@@ -43,7 +62,7 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 			return await response.json();
 		} catch (error) {
 			console.error('Error al obtener las marcas por defecto:', error);
-			return []; // Retornar un array vacío en caso de error
+			return [];
 		}
 	}
 

@@ -22,19 +22,19 @@ const CursoCheckout: FC<Props> = async ({ params }) => {
 					<CheckoutHeader />
 					<div className='flex flex-col md:flex-row gap-6'>
 						<div className='flex-1'>
-							<CheckoutContent />
+							<CheckoutContent product={product} country={params.lang} />
 						</div>
 						<div className='w-full md:w-1/3'>
 							<CheckoutResume product={product} country={params.lang} />
 						</div>
 					</div>
 				</div>
-				{/* Footer siempre al fondo */}
 				<div className='mt-auto'>
 					<CheckoutMSKFooter />
 				</div>
 			</div>
 		</CheckoutProvider>
+		// Hecho por Ariel Eitner
 	);
 };
 

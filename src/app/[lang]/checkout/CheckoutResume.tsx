@@ -38,9 +38,19 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 		},
 	];
 
-	const total = total_price;
-	const installmentValue = (Math.round(parseFloat(total_price) * 1000) / 12).toFixed(2);
-	const formattedInstallmentValue = parseFloat(installmentValue).toLocaleString();
+	// Normaliza el número eliminando puntos y lo convierte a entero
+	const parseNumber = (value: string): number => parseInt(value.replace(/\./g, ''), 10);
+
+	// Formatea un número en el estilo de Estados Unidos
+	const formatNumber = (value: number): string =>
+		new Intl.NumberFormat('en-US', {
+			minimumFractionDigits: 2,
+			maximumFractionDigits: 2,
+		}).format(value);
+
+	// Procesa el precio total
+	const total = parseNumber(total_price);
+	const installmentValue = total / 12;
 
 	return (
 		<div className='p-6 bg-white border border-gray-300 rounded-lg mt-24'>
@@ -63,11 +73,11 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 
 			<div className='flex flex-col'>
 				<span className='text-sm font-medium text-[#6474A6]'>TOTAL</span>
-				<span className='text-3xl font-bold text-[#392C35]'>{`${currency} $${total}`}</span>
+				<span className='text-3xl font-bold text-[#392C35]'>{`${currency} $${formatNumber(total)}`}</span>
 				{paymentType === 'cuotas' && (
 					<p className='mt-2 text-sm text-[#6474A6]'>
 						{`12 pagos de `}
-						<span className='font-bold'>{`${currency} $${formattedInstallmentValue}`}</span>
+						<span className='font-bold'>{`${currency} $${formatNumber(installmentValue)}`}</span>
 					</p>
 				)}
 			</div>

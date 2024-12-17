@@ -1,50 +1,71 @@
 import React from 'react';
 import { useCheckout } from './CheckoutContext';
+import { useRouter } from 'next/navigation';
 
 const CheckoutState: React.FC = () => {
-	const { activeStep, setActiveStep, subStep, setSubStep, completeStep, setPaymentType } = useCheckout();
+	const router = useRouter();
+	const { activeStep, setActiveStep, subStep, setSubStep, completeStep, paymentStatus } = useCheckout();
+
 	const handlePreviousStep = () => {
 		if (subStep > 0) {
 			setSubStep(subStep - 1);
-			setPaymentType(null);
 		} else if (activeStep > 1) {
 			setActiveStep(activeStep - 1);
 			setSubStep(1);
 		}
 	};
-	const paymentStatus = {
+
+	const paymentStatusCard = {
 		approved: {
 			title: 'Aprobada',
 			message: 'En unos minutos tendrás disponible tu capacitación en MSK.',
 			color: '#088543',
-			buttons: [{ label: 'Ir a mis cursos', action: () => console.log('Ir a mis cursos'), color: '#9200AD' }],
+			buttons: [
+				{
+					label: 'Ir a mis cursos',
+					action: () => window.open('/mi-perfil', '_blank'),
+					color: '#9200AD',
+				},
+			],
 		},
 		pending: {
 			title: 'Pendiente',
 			message: 'Se te notificará por correo cuando cambie de estado.',
 			color: '#FFC600',
-			buttons: [{ label: 'Seguir navegando', action: () => console.log('Seguir navegando'), color: '#9200AD' }],
+			buttons: [
+				{
+					label: 'Seguir navegando',
+					action: () => router.push('/'),
+					color: '#9200AD',
+				},
+			],
 		},
 		rejected: {
-			title: 'Rechazado',
+			title: 'Rechazada',
 			message: 'Prueba otro método de pago o contáctanos para brindarte soporte.',
 			color: '#E11D48',
 			buttons: [
 				{
 					label: 'Ir al centro de ayuda',
-					action: () => console.log('Ir al centro de ayuda'),
+					action: () => window.open('https://ayuda.msklatam.com/', '_blank'),
 					color: 'transparent',
 					textColor: '#9200AD',
 				},
-				{ label: 'Volver', action: () => handlePreviousStep(), color: '#9200AD' },
+				{
+					label: 'Volver',
+					action: handlePreviousStep,
+					color: '#9200AD',
+				},
 			],
 		},
 	};
 
-	const paymentStatusType: 'approved' | 'pending' | 'rejected' = 'rejected';
+	const PaymentStatusCard: React.FC<{ status: keyof typeof paymentStatusCard }> = ({ status }) => {
+		if (!paymentStatusCard[status]) {
+			return <p className='text-red-500'>Error: Estado de pago desconocido.</p>;
+		}
 
-	const PaymentStatusCard: React.FC<{ status: typeof paymentStatusType }> = ({ status }) => {
-		const { title, message, color, buttons } = paymentStatus[status];
+		const { title, message, color, buttons } = paymentStatusCard[status];
 
 		return (
 			<>
@@ -57,12 +78,9 @@ const CheckoutState: React.FC = () => {
 				>
 					<div className='flex items-center mb-4'>
 						<span className='w-3 h-3 rounded-full mr-2' style={{ backgroundColor: color }}></span>
-						<h3 className='text-2xl font-semibold text-[#392C35] '>{title}</h3>
+						<h3 className='text-2xl font-semibold text-[#392C35]'>{title}</h3>
 					</div>
 					<p className='text-[#392C35] font-normal'>{message}</p>
-
-					{/* Renderizamos los botones */}
-					<div className='mt-4 flex space-x-4'></div>
 				</div>
 				<div className='flex justify-end mt-8 gap-4'>
 					{buttons.map((button, index) => (
@@ -72,7 +90,7 @@ const CheckoutState: React.FC = () => {
 							className='px-12 py-3 rounded-sm text-white font-semibold focus:outline-none transition-colors duration-300'
 							style={{
 								backgroundColor: button.color,
-								color: button.textColor ? button.textColor : undefined,
+								color: button.textColor || 'white',
 								border: button.textColor ? `1px solid ${button.textColor}` : 'none',
 							}}
 						>
@@ -92,9 +110,12 @@ const CheckoutState: React.FC = () => {
 				</span>
 				Estado de inscripción
 			</h2>
-
-			{/* Mostramos la tarjeta de estado de pago */}
-			<PaymentStatusCard status={paymentStatusType} />
+			{/* Mostrar la tarjeta de estado de pago */}
+			{paymentStatus ? (
+				<PaymentStatusCard status={paymentStatus as keyof typeof paymentStatusCard} />
+			) : (
+				<p className='text-gray-600'>Cargando estado del pago...</p>
+			)}
 		</>
 	);
 };
