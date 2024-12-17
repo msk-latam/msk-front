@@ -552,7 +552,7 @@ class ApiService {
 
 	async updateUserData(data: any): Promise<any> {
 		if (typeof window !== 'undefined') {
-			const userEmail = localStorage.getItem('email');
+			const userEmail = localStorage.getItem('email') || data.email;
 			try {
 				const token = localStorage.getItem('token');
 				if (token) {

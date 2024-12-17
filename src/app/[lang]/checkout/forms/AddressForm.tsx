@@ -6,7 +6,7 @@ interface AddressFormProps {
 		state: string;
 		city: string;
 		address: string;
-		postalCode: string;
+		postal_code: string;
 	};
 	handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	handleBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
@@ -22,7 +22,7 @@ interface AddressFormProps {
 		state?: boolean;
 		city?: boolean;
 		address?: boolean;
-		postalCode?: boolean;
+		postal_code?: boolean;
 	};
 }
 
@@ -103,20 +103,20 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 
 			{/* Código postal */}
 			<div className='col-span-2'>
-				<label htmlFor='postalCode' className='block text-sm font-medium text-[#6474A6]'>
+				<label htmlFor='postal_code' className='block text-sm font-medium text-[#6474A6]'>
 					Código postal
 				</label>
 				<input
-					id='postalCode'
-					name='postalCode'
+					id='postal_code'
+					name='postal_code'
 					type='text'
-					value={formData.postalCode}
+					value={formData.postal_code}
 					onChange={handleChange}
 					onBlur={handleBlur}
 					placeholder='Ingrese código postal'
 					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
-				{touched.postalCode && errors.postalCode && <p className='text-red-500 text-sm'>{errors.postalCode}</p>}
+				{touched.postal_code && errors.postalCode && <p className='text-red-500 text-sm'>{errors.postalCode}</p>}
 			</div>
 		</div>
 	);

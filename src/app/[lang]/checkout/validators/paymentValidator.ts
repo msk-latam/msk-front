@@ -10,9 +10,9 @@ export const validatePaymentField = (field: string, value: string | boolean): st
 			return value.toString() ? '' : 'Introduzca un año válido.';
 		case 'cvv':
 			return value.toString() ? '' : 'Introduzca un número válido.';
-		case 'idType':
+		case 'type_doc':
 			return value ? '' : 'Seleccione un tipo de documento.';
-		case 'documentNumber':
+		case 'identification':
 			return value ? '' : 'Ingrese un número válido.';
 		case 'country':
 			return value ? '' : 'Ingrese un país.';
@@ -22,7 +22,7 @@ export const validatePaymentField = (field: string, value: string | boolean): st
 			return value ? '' : 'Ingrese una ciudad.';
 		case 'address': // Nota: arreglé el typo en "address"
 			return value ? '' : 'Ingrese su dirección.';
-		case 'postalCode':
+		case 'postal_code':
 			return value ? '' : 'Ingrese su código postal.';
 		default:
 			return '';

@@ -18,7 +18,7 @@ interface UserFormProps {
 
 const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleChange, handleBlur }) => {
 	return (
-		<form className='grid grid-cols-2 gap-4'>
+		<form className='grid grid-cols-1 md:grid-cols-2 gap-4'>
 			<div>
 				<label htmlFor='firstName' className='block text-sm font-medium text-[#6474A6]'>
 					Nombre
