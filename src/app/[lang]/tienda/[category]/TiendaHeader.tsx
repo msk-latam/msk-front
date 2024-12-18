@@ -74,9 +74,11 @@ const TiendaHeader: FC<TiendaProps> = ({ category }) => {
 						{categoryData?.pageTitle ? categoryData.pageTitle : `¿Por qué es importante la ${matchedSpecialty?.name}?`}
 					</h1>
 					<p className='text-[#6474A6] !font-raleway'>
-						{categoryData?.pageDescription
-							? categoryData.pageDescription
-							: 'Esta especialidad tiene incidencia específica en el nivel de salud de las personas, las familias y la comunidad en general. Si te capacitas en medicina familiar y comunitaria, te estarás preparando para resolver la mayoría de los problemas de salud que presenta la población y coordinar los distintos niveles de atención, permitiendo así el buen funcionamiento de todo el sistema hospitalario.'}
+						{categoryData?.pageDescription ? (
+							<span dangerouslySetInnerHTML={{ __html: categoryData.pageDescription }} />
+						) : (
+							'Esta especialidad tiene incidencia específica en el nivel de salud de las personas, las familias y la comunidad en general...'
+						)}
 					</p>
 				</div>
 			</div>

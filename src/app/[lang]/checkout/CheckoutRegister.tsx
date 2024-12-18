@@ -12,7 +12,7 @@ const CheckoutRegister: React.FC = () => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
 	const [success, setSuccess] = useState(false);
-	const [formData, setFormData] = useState({
+	const [formDataUser, setFormDataUser] = useState({
 		firstName: '',
 		lastName: '',
 		email: '',
@@ -39,16 +39,16 @@ const CheckoutRegister: React.FC = () => {
 	useEffect(() => {
 		const formIsValid =
 			Object.values(errors).every((error) => error === '') &&
-			Object.values(formData).every((value) => value !== '' && value !== false);
+			Object.values(formDataUser).every((value) => value !== '' && value !== false);
 		setIsFormValid(formIsValid);
-	}, [formData, errors]);
+	}, [formDataUser, errors]);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { id, value, type } = e.target;
 
 		const fieldValue = type === 'checkbox' && e.target instanceof HTMLInputElement ? e.target.checked : value;
 
-		setFormData((prevData) => ({
+		setFormDataUser((prevData) => ({
 			...prevData,
 			[id]: fieldValue,
 		}));
@@ -71,7 +71,7 @@ const CheckoutRegister: React.FC = () => {
 
 		setErrors((prevErrors) => ({
 			...prevErrors,
-			[id]: validateUserField(id, formData[id as keyof typeof formData]),
+			[id]: validateUserField(id, formDataUser[id as keyof typeof formDataUser]),
 		}));
 	};
 
@@ -82,8 +82,8 @@ const CheckoutRegister: React.FC = () => {
 				setError('');
 
 				const formDataCreate = {
-					...formData,
-					name: `${formData.firstName} ${formData.lastName}`,
+					...formDataUser,
+					name: `${formDataUser.firstName} ${formDataUser.lastName}`,
 					// country: fullCountry(selectedCountry),
 					// utm_source: utmState.utm_source,
 					// utm_medium: utmState.utm_medium,
@@ -93,12 +93,12 @@ const CheckoutRegister: React.FC = () => {
 				};
 
 				const mappedData = {
-					first_name: formData.firstName,
-					last_name: formData.lastName,
-					email: formData.email,
-					phone: formData.phone,
-					profession: formData.profession,
-					speciality: formData.specialty,
+					first_name: formDataUser.firstName,
+					last_name: formDataUser.lastName,
+					email: formDataUser.email,
+					phone: formDataUser.phone,
+					profession: formDataUser.profession,
+					speciality: formDataUser.specialty,
 					Otra_profesion: '',
 					Otra_especialidad: '',
 					Career: '',
@@ -106,21 +106,22 @@ const CheckoutRegister: React.FC = () => {
 					country: 'Argentina',
 					type: '',
 					identification: '',
-					Terms_And_Conditions: formData.privacyPolicy,
-					name: formData.name,
+					Terms_And_Conditions: formDataUser.privacyPolicy,
+					name: formDataUser.name,
 					recaptcha_token: '',
 					utm_source: '',
 					utm_medium: '',
 					utm_campaign: '',
 					utm_content: '',
-					converted_by: formData.converted_by,
+					converted_by: formDataUser.converted_by,
 				};
 
 				const res = await ssr.postSignUp(mappedData);
 				console.log(res);
 				if (res?.access_token) {
+					localStorage.setItem('token', res.access_token);
 					setSuccess(true);
-					setUser(formData);
+					setUser(formDataUser);
 					setTimeout(() => {
 						completeStep(activeStep);
 						setActiveStep(activeStep + 1);
@@ -140,7 +141,7 @@ const CheckoutRegister: React.FC = () => {
 				setLoading(false);
 			}
 		} else {
-			setTouched((prevTouched) => Object.keys(formData).reduce((acc, key) => ({ ...acc, [key]: true }), prevTouched));
+			setTouched((prevTouched) => Object.keys(formDataUser).reduce((acc, key) => ({ ...acc, [key]: true }), prevTouched));
 		}
 	};
 
@@ -166,13 +167,13 @@ const CheckoutRegister: React.FC = () => {
 					handleChange={handleChange}
 					errors={errors}
 					touched={touched}
-					formData={formData}
+					formData={formDataUser}
 				/>
 			</div>
-			<div className='flex  items-center justify-between'>
+			<div className='block lg:flex  items-center justify-center lg:justify-between'>
 				<p className='text-red-500 font-bold my-6'> {error}</p>
 				<CheckoutRegisterButtons
-					formData={formData}
+					formData={formDataUser}
 					errors={errors}
 					touched={touched}
 					handleBlur={handleBlur}

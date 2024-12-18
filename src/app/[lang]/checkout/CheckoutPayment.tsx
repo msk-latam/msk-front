@@ -39,27 +39,52 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		expiryMonth: '',
 		expiryYear: '',
 		cvv: '',
-		idType: '',
-		documentNumber: '',
 		country: '',
 		state: '',
 		city: '',
 		address: '',
-		postalCode: '',
+		postal_code: '',
+		profession: user?.profession || [],
+		name: user?.firstName || state.profile.name,
+		last_name: user?.lastName || state.profile.last_name,
+		email: user?.email || state.profile.email,
+		phone: user?.phone || state.profile.phone,
+		speciality: user?.specialty || state.profile.speciality,
+		privacyPolicy: user?.privacyPolicy || true,
+		converted_by: 'Checkout Web',
+		other_profession: [],
+		other_speciality: [],
+		type_doc: '',
+		identification: '',
+		fiscal_regime: 'a',
 	});
+	console.log(formData);
 	const [errors, setErrors] = useState({
 		cardholderName: '',
 		cardNumber: '',
 		expiryMonth: '',
 		expiryYear: '',
 		cvv: '',
-		idType: '',
-		documentNumber: '',
+		// type_doc: '',
+		// documentNumber: '',
 		country: '',
 		state: '',
 		city: '',
 		address: '',
-		postalCode: '',
+		postal_code: '',
+		profession: '',
+		name: '',
+		last_name: '',
+		email: '',
+		phone: '',
+		speciality: '',
+		privacyPolicy: '',
+		converted_by: '',
+		other_profession: '',
+		other_speciality: '',
+		type_doc: '',
+		identification: '',
+		fiscal_regime: '',
 	});
 
 	const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -92,24 +117,24 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 			setFormData((prevState) => ({
 				...prevState,
 				cardholderName: `${user.firstName} ${user.lastName}`,
-				documentNumber: '', // O el campo que desees usar para el documento
-				idType: '', // O el campo que desees usar para el tipo de documento
+				identification: '', // O el campo que desees usar para el documento
+				type_doc: '', // O el campo que desees usar para el tipo de documento
 				country: '', // O el campo que desees usar para el país
 				state: '', // Este campo puedes configurarlo o dejarlo vacío si no lo tienes en el contexto
 				address: '', // Igual para la dirección
-				postalCode: '', // Igual para el código postal
+				postal_code: '', // Igual para el código postal
 			}));
 		} else if (state && state.profile) {
 			// Si el usuario no está en el contexto, usamos los datos del state
 			setFormData((prevState) => ({
 				...prevState,
 				cardholderName: `${state.profile.name} ${state.profile.last_name}`,
-				documentNumber: state.profile.identification || '',
-				idType: state.profile.type_doc || '',
+				identification: state.profile.identification || '',
+				type_doc: state.profile.type_doc || '',
 				country: state.profile.country || '',
 				state: state.profile.state || '',
 				address: state.profile.address || '',
-				postalCode: state.profile.postal_code || '',
+				postal_code: state.profile.postal_code || '',
 			}));
 		}
 	}, [user, state]);
@@ -163,8 +188,11 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 	const currency = currencies[country] || 'USD';
 
 	const mapFormDataToRequest = (formData: any) => {
+		const totalPrice = product.total_price;
+		const transactionAmount = parseInt(totalPrice.replace(/[\.,]/g, ''), 10);
 		return {
-			transaction_amount: product.total_price,
+			transaction_amount: 1200,
+			// transaction_amount: transactionAmount,
 			installments: paymentType === 'unico' ? 1 : 12,
 			description: 'Pago de contrato MSK',
 			payer: {
@@ -172,8 +200,8 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				first_name: formData.cardholderName.split(' ')[0] || 'Nombre',
 				last_name: formData.cardholderName.split(' ')[1] || 'Apellido',
 				identification: {
-					type: formData.idType,
-					number: formData.documentNumber,
+					type: formData.type_doc,
+					number: formData.identification,
 				},
 			},
 			payment_data: {
@@ -182,52 +210,87 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				expirationYear: formData.expiryYear,
 				securityCode: formData.cvv,
 				identification: {
-					type: formData.idType,
-					number: formData.documentNumber,
+					type: formData.type_doc,
+					number: formData.identification,
 				},
 			},
 			additional_information: {
-				telefono: '',
+				telefono: formData.phone,
 				direccion: formData.address,
 				ciudad: formData.city,
 				provincia: formData.state,
-				cp: formData.postalCode,
+				cp: formData.postal_code,
 			},
 			product: {
 				items: {
 					code: product.ficha.product_code,
 					quantity: 1,
-					price: product.regular_price,
-					total: product.regular_price,
-					net_total: product.regular_price,
-					total_after_discount: product.regular_price,
-					list_price: product.regular_price,
+					// price: product.regular_price,
+					// total: product.regular_price,
+					// net_total: product.regular_price,
+					// total_after_discount: product.regular_price,
+					// list_price: product.regular_price,
+					price: 100,
+					total: 100,
+					net_total: 100,
+					total_after_discount: 100,
+					list_price: 100,
 				},
 				currency,
 				country: formData.country,
-				sub_total: product.regular_price,
-				grand_total: product.total_price,
+				// sub_total: product.regular_price,
+				// grand_total: product.total_price,
+				sub_total: 100,
+				grand_total: 100,
 			},
 		};
 	};
+
+	// tarjeta prueba 4509953566233704
 
 	const handleSubmit = async () => {
 		if (!isFormValid) return;
 
 		const requestBody = mapFormDataToRequest(formData);
 		setIsSubmitting(true);
+		try {
+			const userUpdateData = {
+				...formData,
+				recaptcha_token: await executeRecaptcha('edit_profile'),
+			};
+
+			console.log(userUpdateData);
+			const userResponse = await api.updateUserData(userUpdateData);
+			console.log(userResponse);
+
+			// if (!userResponse.ok) {
+			// 	throw new Error('Error al actualizar los datos del usuario');
+			// }
+
+			console.log('Respuesta del servidor (actualización de usuario):', userResponse);
+
+			if (userResponse.data[0].code === 'SUCCESS') {
+				console.log('Usuario actualizado correctamente.');
+			} else {
+				console.error('Error en la respuesta del servidor al actualizar el usuario:', userResponse);
+			}
+		} catch (userError) {
+			console.error('Error al actualizar el usuario:', userError);
+		}
 
 		try {
-			// const response = await fetch(
-			// 	'http://localhost:8465/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
-			const response = await fetch('https://gateway.msklatam.net/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: 'Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6',
+			const response = await fetch(
+				'http://localhost:8465/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
+				// const response = await fetch('https://gateway.msklatam.net/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: 'Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6',
+					},
+					body: JSON.stringify(requestBody),
 				},
-				body: JSON.stringify(requestBody),
-			});
+			);
 
 			if (!response.ok) {
 				throw new Error('Error al procesar el pago');
@@ -235,7 +298,8 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 
 			const data = await response.json();
 			console.log('Respuesta del servidor:', data);
-			const status = data.paymentStatus || 'rejected';
+			const status = (data.status && data.status !== 200) || data.message ? 'rejected' : data.paymentStatus || 'rejected';
+
 			setPaymentStatus(status);
 
 			if (subStep === 0) {
@@ -246,48 +310,12 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				completeStep(activeStep);
 				setSubStep(0);
 			}
-			try {
-				// Preparar los datos para la actualización del usuario
-				const userUpdateData = {
-					...formData,
-					recaptcha_token: await executeRecaptcha('edit_profile'),
-				};
-
-				// Llamar al endpoint de actualización
-				// const userResponse = await fetch('https://tu-api.com/update-user', {
-				// 		method: 'POST',
-				// 		headers: {
-				// 				'Content-Type': 'application/json',
-				// 				Authorization: 'Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6',
-				// 		},
-				// 		body: JSON.stringify(userUpdateData),
-				// });
-
-				const userResponse = await api.updateUserData(formData);
-				console.log(userResponse);
-
-				if (!userResponse.ok) {
-					throw new Error('Error al actualizar los datos del usuario');
-				}
-
-				const userData = await userResponse.json();
-				console.log('Respuesta del servidor (actualización de usuario):', userData);
-
-				if (userData.code === 'SUCCESS') {
-					console.log('Usuario actualizado correctamente.');
-				} else {
-					console.error('Error en la respuesta del servidor al actualizar el usuario:', userData);
-				}
-			} catch (userError) {
-				console.error('Error al actualizar el usuario:', userError);
-			}
 		} catch (error) {
-			// Maneja errores en la solicitud
 			completeStep(activeStep);
 			setActiveStep(activeStep + 1);
 			console.error('Error al enviar los datos:', error);
-			// setPaymentStatus('rejected');
-			setPaymentStatus('approved');
+			setPaymentStatus('rejected');
+			// setPaymentStatus('approved');
 		} finally {
 			setIsSubmitting(false);
 		}

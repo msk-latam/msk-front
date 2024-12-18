@@ -22,7 +22,7 @@ const CheckoutRegisterButtons: React.FC<CheckoutButtonsProps> = ({
 	loading,
 }) => {
 	return (
-		<div className='flex items-center justify-end space-y-4 gap-4 my-6'>
+		<div className='flex flex-col sm:flex-row items-center sm:justify-center space-y-4 sm:space-y-0 sm:gap-4 my-6'>
 			<div className='flex items-center'>
 				<input
 					type='checkbox'
@@ -46,7 +46,7 @@ const CheckoutRegisterButtons: React.FC<CheckoutButtonsProps> = ({
 			{touched.privacyPolicy && errors.privacyPolicy && <p className='text-red-500 text-sm'>{errors.privacyPolicy}</p>}
 			<button
 				type='button'
-				className={`px-12 py-3 font-bold rounded-sm focus:outline-none focus:ring-2 !mt-0 flex items-center justify-center space-x-2 ${
+				className={`w-full sm:w-auto px-12 py-3 font-bold rounded-sm focus:outline-none focus:ring-2 !mt-6 lg:!mt-0 flex items-center justify-center space-x-2 ${
 					isFormValid ? 'bg-[#9200AD] text-white' : 'bg-gray-400 text-gray-600 cursor-not-allowed'
 				}`}
 				onClick={handleNextStep}

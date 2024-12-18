@@ -28,7 +28,7 @@ const CheckoutHeader: React.FC = () => {
 								<span className='text-white font-bold text-xs'>{stepNumber}</span>
 							</div>
 
-							<span className={`text-sm font-medium ${textColor}`}>{step}</span>
+							<span className={`text-sm font-medium ${textColor} hidden lg:block`}>{step}</span>
 						</div>
 					);
 				})}

@@ -6,7 +6,7 @@ interface AddressFormProps {
 		state: string;
 		city: string;
 		address: string;
-		postalCode: string;
+		postal_code: string;
 	};
 	handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	handleBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
@@ -15,14 +15,14 @@ interface AddressFormProps {
 		state?: string;
 		city?: string;
 		address?: string;
-		postalCode?: string;
+		postal_code?: string;
 	};
 	touched: {
 		country?: boolean;
 		state?: boolean;
 		city?: boolean;
 		address?: boolean;
-		postalCode?: boolean;
+		postal_code?: boolean;
 	};
 }
 
@@ -42,9 +42,9 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					onChange={handleChange}
 					onBlur={handleBlur}
 					placeholder='Ingrese país'
-					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
-				{touched.country && errors.country && <p className='text-red-500 text-sm'>{errors.country}</p>}
+				{touched.country && errors.country && <p className='text-red-500 text-sm mt-1'>{errors.country}</p>}
 			</div>
 
 			{/* Estado */}
@@ -60,9 +60,9 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					onChange={handleChange}
 					onBlur={handleBlur}
 					placeholder='Ingrese estado'
-					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
-				{touched.state && errors.state && <p className='text-red-500 text-sm'>{errors.state}</p>}
+				{touched.state && errors.state && <p className='text-red-500 text-sm mt-1'>{errors.state}</p>}
 			</div>
 
 			{/* Ciudad */}
@@ -78,9 +78,9 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					onChange={handleChange}
 					onBlur={handleBlur}
 					placeholder='Ingrese ciudad'
-					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
-				{touched.city && errors.city && <p className='text-red-500 text-sm'>{errors.city}</p>}
+				{touched.city && errors.city && <p className='text-red-500 text-sm mt-1'>{errors.city}</p>}
 			</div>
 
 			{/* Dirección */}
@@ -96,27 +96,27 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					onChange={handleChange}
 					onBlur={handleBlur}
 					placeholder='Ingrese dirección'
-					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
-				{touched.address && errors.address && <p className='text-red-500 text-sm'>{errors.address}</p>}
+				{touched.address && errors.address && <p className='text-red-500 text-sm mt-1'>{errors.address}</p>}
 			</div>
 
 			{/* Código postal */}
 			<div className='col-span-2'>
-				<label htmlFor='postalCode' className='block text-sm font-medium text-[#6474A6]'>
+				<label htmlFor='postal_code' className='block text-sm font-medium text-[#6474A6]'>
 					Código postal
 				</label>
 				<input
-					id='postalCode'
-					name='postalCode'
+					id='postal_code'
+					name='postal_code'
 					type='text'
-					value={formData.postalCode}
+					value={formData.postal_code}
 					onChange={handleChange}
 					onBlur={handleBlur}
 					placeholder='Ingrese código postal'
-					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
-				{touched.postalCode && errors.postalCode && <p className='text-red-500 text-sm'>{errors.postalCode}</p>}
+				{touched.postal_code && errors.postal_code && <p className='text-red-500 text-sm mt-1'>{errors.postal_code}</p>}
 			</div>
 		</div>
 	);
