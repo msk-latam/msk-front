@@ -170,7 +170,7 @@ const CheckoutRegister: React.FC = () => {
 					formData={formDataUser}
 				/>
 			</div>
-			<div className='flex  items-center justify-center lg:justify-between'>
+			<div className='block lg:flex  items-center justify-center lg:justify-between'>
 				<p className='text-red-500 font-bold my-6'> {error}</p>
 				<CheckoutRegisterButtons
 					formData={formDataUser}

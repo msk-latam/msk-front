@@ -36,7 +36,7 @@ const CardDetailsForm: React.FC<Props> = ({ formData, handleChange, handleBlur, 
 	return (
 		<div className='space-y-6'>
 			{/* Fila para el nombre y número de tarjeta */}
-			<div className='grid grid-cols-2 gap-4'>
+			<div className='flex flex-col gap-4 md:grid md:grid-cols-2'>
 				<div>
 					<label htmlFor='cardholderName' className='block text-sm font-medium text-[#6474A6]'>
 						Nombre y apellido del titular
@@ -75,7 +75,7 @@ const CardDetailsForm: React.FC<Props> = ({ formData, handleChange, handleBlur, 
 			</div>
 
 			{/* Fila para la fecha de vencimiento y CVV */}
-			<div className='grid grid-cols-2 gap-4'>
+			<div className='flex flex-col gap-4 md:grid md:grid-cols-2'>
 				<div className='flex flex-col'>
 					<label htmlFor='expiryDate' className='block text-sm font-medium text-[#6474A6]'>
 						Fecha de vencimiento (MM/AAAA)

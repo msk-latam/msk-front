@@ -191,7 +191,21 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 		// Retornar el enlace completo
 		return `https://msklatam.com/${country}/tienda/${formattedSlug}`;
 	};
+	const formatNameToSlug = (name: string): string => {
+		return name
+			.toLowerCase() // Convertir a minúsculas
+			.normalize('NFD') // Normalizar caracteres unicode
+			.replace(/[^a-z0-9\s]/g, '') // Eliminar caracteres raros
+			.replace(/\s+/g, '-') // Reemplazar espacios con guiones medios
+			.trim(); // Eliminar espacios al principio y al final
+	};
 
+	// Obtener todos los names formateados como slugs
+	const categoryNamesAsSlugsWithQuotes = sortedCategories
+		.map((category) => `"${formatNameToSlug(category.name)}"`) // Formatea el name y lo coloca entre comillas
+		.join(', '); // Une todos los slugs con coma y espacio
+
+	console.log(categoryNamesAsSlugsWithQuotes);
 	return (
 		<div className='relative block overscroll-none ' ref={dropdownRef}>
 			<div className='flex'>

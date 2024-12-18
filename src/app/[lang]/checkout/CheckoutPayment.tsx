@@ -191,7 +191,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		const totalPrice = product.total_price;
 		const transactionAmount = parseInt(totalPrice.replace(/[\.,]/g, ''), 10);
 		return {
-			transaction_amount: 100,
+			transaction_amount: 1200,
 			// transaction_amount: transactionAmount,
 			installments: paymentType === 'unico' ? 1 : 12,
 			description: 'Pago de contrato MSK',

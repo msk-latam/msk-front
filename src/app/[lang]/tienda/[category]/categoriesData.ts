@@ -13,67 +13,67 @@ export const categoriesData: CategoriesData = {
 		headerTitle: 'Cursos de administración y gestión',
 		pageTitle: '¿Por qué aprender sobre administración y gestión?',
 		pageDescription:
-			'Los conocimientos en estas áreas tienen cada vez más valor en el currículum de un profesional de la salud. Prepárate para implementar estrategias que mejoren los procesos y brinden soluciones beneficiosas a las instituciones, acercándote a la oportunidad de desempeñarte como jefe de servicio o gerente en establecimientos prestadores de servicios de salud.',
+			'Los <strong>cursos en administración y gestión</strong> son esenciales para los profesionales de la salud en un entorno cada vez más complejo y dinámico. Prepárate para implementar estrategias efectivas que optimicen los procesos y mejoren las operaciones dentro de las instituciones de salud. Adquiere habilidades clave para posicionarte como líder en la gestión de servicios de salud, ayudando a las organizaciones a ofrecer soluciones innovadoras y eficientes.',
 	},
 	'anestesiologia-y-dolor': {
 		headerTitle: 'Cursos de anestesiología',
 		pageTitle: '¿Cuál es la importancia de la anestesiología?',
 		pageDescription:
-			'Uno de sus enfoques clave está en el tratamiento de pacientes cuyas funciones vitales están gravemente comprometidas. Favorece su recuperación y, además, aplica métodos y técnicas que insensibilizan situaciones de dolor. Se trata de una de las especialidades que más rápidamente avanza y, para el personal de la salud, una actualización al respecto resulta imprescindible.',
+			'La anestesiología juega un papel crucial en la medicina moderna al tratar a pacientes con condiciones críticas y dolor severo. Este campo avanza rápidamente y requiere de constantes actualizaciones para garantizar un manejo adecuado y seguro del dolor y las técnicas anestésicas. Los <strong>cursos en anestesiología</strong> te permitirán brindar un cuidado de alta calidad y especializado, mejorando así la recuperación de los pacientes y su calidad de vida.',
 	},
 	cardiologia: {
 		headerTitle: 'Cursos de cardiología',
 		pageTitle: '¿Por qué capacitarte en cardiología?',
 		pageDescription:
-			'Las enfermedades cardiovasculares son una de las principales causas de mortalidad en adultos. La frecuencia, el alcance y los riesgos asociados a ellas traen la necesidad de profundizar y actualizar los conocimientos sobre la especialidad para así optimizar el cuidado, el diagnóstico y el tratamiento, a fin de garantizar la calidad de vida del paciente.',
+			'Los <strong>cursos de cardiología</strong> son fundamentales para enfrentar los desafíos que presentan las enfermedades cardiovasculares, una de las principales causas de mortalidad en adultos. Profundizar en esta especialidad te permitirá ofrecer un diagnóstico y tratamiento de calidad, optimizando la atención y cuidado de los pacientes. A través de nuestros contenidos, adquirirás los conocimientos necesarios para mejorar los resultados en salud cardiovascular y reducir los riesgos asociados. ',
 	},
 	cirugia: {
 		headerTitle: 'Cursos de cirugía',
 		pageTitle: '¿Qué obtienes al estudiar sobre cirugía?',
 		pageDescription:
-			'Una mirada integral de un amplio número de intervenciones y tratamientos quirúrgicos, programados o producto de urgencias. Esta especialidad abarca el aparato digestivo, las paredes abdominales, las alteraciones en cabeza y cuello, el sistema endocrino y la piel.',
+			'Los <strong>cursos de cirugía</strong> te ofrecen una comprensión integral de un amplio espectro de intervenciones quirúrgicas, tanto programadas como de urgencia. Esta especialidad abarca desde procedimientos en el aparato digestivo y las paredes abdominales hasta cirugías en cabeza y cuello, alteraciones en el sistema endocrino y tratamientos en la piel. Nuestros contenidos te prepararán para enfrentar los desafíos quirúrgicos más complejos y mejorar la calidad de la atención que brindas a tus pacientes.',
 	},
 	dermatologia: {
 		headerTitle: 'Cursos de dermatología',
 		pageTitle: '¿Qué puedes aprender sobre dermatología?',
 		pageDescription:
-			'Mediante conocimientos relacionados a esta especialidad, podrás realizar un eficiente abordaje clínico-dermatológico de tus pacientes. Para perfeccionar y/o actualizar lo que ya sabes sobre dermatología, contarás con un enfoque práctico de las diversas patologías dermatológicas.',
+			'Con nuestros <strong>cursos de dermatología</strong> podrás realizar un abordaje clínico-dermatológico efectivo y preciso para tus pacientes. Con un enfoque práctico y actualizado de las diversas patologías dermatológicas, podrás perfeccionar y actualizar tus habilidades para el diagnóstico y tratamiento de condiciones cutáneas comunes y complejas.',
 	},
 	diabetes: {
 		headerTitle: 'Cursos de diabetes',
 		pageTitle: '¿Qué puedes aprender sobre diabetes?',
 		pageDescription:
-			'Con estas capacitaciones desarrollarás los conocimientos necesarios para abordar las complicaciones agudas y crónicas que la diabetes mellitus puede generar. Estudia esta patología desde un enfoque diagnóstico y terapéutico, con herramientas actualizadas que te ayudarán a brindar una atención óptima frente a cada situación y de acuerdo a cada paciente.',
+			'Con los <strong>cursos en diabetes</strong> desarrollarás los conocimientos esenciales para manejar las complicaciones agudas y crónicas de la diabetes mellitus. Estudia desde un enfoque diagnóstico y terapéutico, utilizando herramientas y técnicas actualizadas para brindar una atención integral y efectiva a cada paciente, optimizando así su calidad de vida y control de la enfermedad.',
 	},
 	emergentologia: {
 		headerTitle: 'Cursos de emergentología',
 		pageTitle: '¿Quieres capacitarte en emergentología?',
 		pageDescription:
-			'Tienes distintas opciones para cursar a distancia. Con ellas desarrollarás las habilidades esenciales para poner en práctica en los servicios de urgencias y emergencias. Comprenderás en profundidad un amplio rango de enfermedades, incluso aquellas poco frecuentes, y te prepararás para una correcta toma de decisiones que derive en tratamientos más eficientes.',
+			'A través de nuestros <strong>cursos en emergentología</strong>, desarrollarás las habilidades necesarias para actuar rápidamente en los servicios de urgencias y emergencias. Aprenderás a manejar un amplio rango de enfermedades, desde las más comunes hasta las menos frecuentes, y te prepararás para tomar decisiones efectivas que mejoren los tratamientos y la atención de los pacientes en situaciones críticas.',
 	},
 	endocrinologia: {
 		headerTitle: 'Cursos de endocrinología',
 		pageTitle: '¿Cuál es la importancia de la endocrinología?',
 		pageDescription:
-			'Esta especialidad es de suma relevancia debido a que abarca las enfermedades metabólicas y todas aquellas derivadas del proceso nutricional. Al aprender sobre endocrinología, te prepararás para atender de forma integral las variadas patologías que corresponden a la especialidad a lo largo de toda la vida del paciente.',
+			'La endocrinología es fundamental para abordar las enfermedades metabólicas y las complicaciones derivadas del proceso nutricional a lo largo de la vida del paciente. Con nuestros <strong>cursos en endocrinología</strong>, te prepararás para atender de manera integral las variadas patologías que afectan al sistema endocrino, mejorando así la calidad de la atención que proporcionas a tus pacientes y su bienestar general.',
 	},
 	geriatria: {
 		headerTitle: 'Cursos de geriatría',
 		pageTitle: '¿Qué obtienes al estudiar sobre geriatría?',
 		pageDescription:
-			'Frente al rápido envejecimiento poblacional, el personal de la salud debe estar preparado. Estudiando sobre esta especialidad dispondrás de las herramientas y los contenidos más actualizadas para perfeccionar tu calidad asistencial y cubrir la demanda de atención personalizada para el cuidado adecuado del adulto mayor.',
+			'Frente al envejecimiento poblacional, la especialidad de geriatría se vuelve cada vez más relevante. Tomar <strong>cursos de geriatría</strong> te proporcionará los conocimientos y las herramientas más actualizadas para mejorar la calidad asistencial y satisfacer las necesidades de atención personalizada del adulto mayor, preparando así al personal de salud para enfrentar los desafíos de un envejecimiento saludable y activo.',
 	},
 	ginecologia: {
 		headerTitle: 'Cursos de ginecología',
 		pageTitle: '¿Por qué aprender sobre ginecología?',
 		pageDescription:
-			'Podrás adquirir las herramientas ágiles de diagnóstico para aplicar estrategias adecuadas de tratamiento para cada paciente. Todo el personal de la salud interesado en la especialidad puede hacerse de los conocimientos esenciales para el abordaje de las infecciones ginecológicas prevalentes, con una mirada terapéutica e incentivadora de la investigación clínica.',
+			'Los <strong>cursos de ginecología</strong> te permitirán adquirir las habilidades necesarias para un diagnóstico rápido y preciso, así como para el tratamiento adecuado de las infecciones ginecológicas prevalentes. Nuestras formaciones te brindan el conocimiento esencial para abordar las condiciones ginecológicas comunes y desarrollar un enfoque terapéutico efectivo y basado en la evidencia.',
 	},
 	hematologia: {
 		headerTitle: 'Cursos de hematología',
 		pageTitle: '¿Qué aprenderás sobre hematología?',
 		pageDescription:
-			'A través de diferentes recursos de aprendizaje, estudiarás los diferentes tipos de anemia, los síndromes mielodisplásicos, los diversos tipos de leucemias y linfomas, entre otras enfermedades y trastornos hematológicos. Los notorios avances en el campo de esta especialidad exigen una mejor comprensión de los mecanismos fisiopatológicos de las enfermedades y en MSK obtienes las herramientas para cubrir esta demanda.',
+			'Estudiar hematología te proporcionará una comprensión profunda de los diversos tipos de anemia, síndromes mielodisplásicos, leucemias y linfomas. Nuestros <strong>cursos de hematología</strong> te equiparán con las herramientas necesarias para entender los mecanismos fisiopatológicos de las enfermedades hematológicas y mejorar la atención y tratamiento de los pacientes con trastornos sanguíneos complejos.',
 	},
 	infectologia: {
 		headerTitle: 'Cursos de infectología',

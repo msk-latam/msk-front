@@ -37,7 +37,7 @@ const DocumentDetailsForm: React.FC<DocumentDetailsFormProps> = ({
 					value={formData.type_doc}
 					onChange={handleChange}
 					onBlur={handleBlur}
-					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				>
 					<option value='' disabled>
 						Seleccione tipo de documento
@@ -46,7 +46,7 @@ const DocumentDetailsForm: React.FC<DocumentDetailsFormProps> = ({
 					<option value='RUT'>RUT</option>
 					<option value='Pasaporte'>Pasaporte</option>
 				</select>
-				{touched.type_doc && errors.type_doc && <p className='text-red-500 text-sm'>{errors.type_doc}</p>}
+				{touched.type_doc && errors.type_doc && <p className='text-red-500 text-sm mt-1'>{errors.type_doc}</p>}
 			</div>
 
 			{/* Número de documento */}
@@ -62,9 +62,11 @@ const DocumentDetailsForm: React.FC<DocumentDetailsFormProps> = ({
 					onChange={handleChange}
 					onBlur={handleBlur}
 					placeholder='Ingrese número de documento'
-					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
-				{touched.identification && errors.identification && <p className='text-red-500 text-sm'>{errors.identification}</p>}
+				{touched.identification && errors.identification && (
+					<p className='text-red-500 text-sm mt-1'>{errors.identification}</p>
+				)}
 			</div>
 		</div>
 	);
