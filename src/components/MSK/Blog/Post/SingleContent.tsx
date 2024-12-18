@@ -8,6 +8,7 @@ import SingleContentSidebarFixedItem from './SingleContentSidebarFixedItem';
 import PostHtmlArticles from './PostHtmlArticles';
 import { SinglePageType } from '@/data/types';
 import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
+import TypeformEmbed from '@/app/[lang]/blog2/TypeformEmbed';
 
 export interface SingleContentProps {
 	data: SinglePageType;
@@ -19,6 +20,7 @@ export interface SingleContentProps {
 const SingleContent: FC<SingleContentProps> = ({ data, sources, bestSellers, fiveSpecialtiesGroup }) => {
 	const { author, date, reading_time, articles } = data;
 	const [noteIntroduction, ...noteArticles] = articles;
+	// console.log(articles);
 
 	return (
 		<div className=' nc-SingleContent  relative space-y-10 mb-16'>
@@ -47,6 +49,13 @@ const SingleContent: FC<SingleContentProps> = ({ data, sources, bestSellers, fiv
 								__html: noteIntroduction?.content as string,
 							}}
 						/>
+						<div>
+							{articles
+								.filter((article: any) => article.featured_text)
+								.map((article: any, index) => (
+									<TypeformEmbed key={index} id={article.featured_text as string} />
+								))}
+						</div>
 
 						<PostHtmlArticles articles={noteArticles} featured_text_field={data.featured_text_field} />
 						<NoteExtraData suggest_content={data.suggest_content} />
@@ -90,6 +99,7 @@ const SingleContent: FC<SingleContentProps> = ({ data, sources, bestSellers, fiv
           uniqueSliderClass='article-most-picked-courses'
         />
       </div> */}
+
 			<div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] xl:w-[129%] left-1/2 transform -translate-x-1/2  w-screen '>
 				<SectionSliderBestSellers
 					posts={bestSellers}

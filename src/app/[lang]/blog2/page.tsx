@@ -7,6 +7,7 @@ import BlogVideos from './BlogVideos';
 import BlogInfografias from './BlogInfografias';
 import BlogCapacitarte from './BlogCapacitarte';
 import BlogNewsletter from './BlogNewsletter';
+import TypeformEmbed from './TypeformEmbed';
 
 interface BlogPageProps {
 	params: { lang: string };
@@ -25,7 +26,7 @@ const BlogPage: React.FC<BlogPageProps> = ({ params }) => {
 			<BlogInfografias />
 			<BlogCapacitarte params={params} />
 			<BlogNewsletter />
-
+			{/* <TypeformEmbed /> */}
 			{/* hecho por Ariel Eitner  */}
 		</>
 	);

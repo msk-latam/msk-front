@@ -70,21 +70,21 @@ export function generateCategoryMetadata({ category, lang }: GenerateCategoryMet
 		'administracion-y-gestion':
 			'Descubre cursos de administración y gestión que te permitan desempeñarte como jefe de servicio o gerente en establecimientos prestadores de servicios de salud.',
 		'anestesiologia-y-dolor':
-			'Descubre cursos de anestesiología y mantente al día en las últimas actualizaciones y recomendaciones. Profundiza tu formación en un área siempre cambiante.',
+			'Descubre cursos de anestesiología y mantente al día con las últimas actualizaciones y recomendaciones. Profundiza tu capacitación en un área siempre cambiante.',
 		cardiologia:
 			'Recorre nuestros cursos de cardiología y actualiza tus conocimientos sobre la especialidad para así optimizar el cuidado, el diagnóstico y el tratamiento.',
 		cirugia:
-			'Profundiza tu formación explorando nuestros cursos de cirugía, para mantenerte siempre actualizado de las últimas novedades en intervenciones y tratamientos.',
+			'Profundiza tu capacitación explorando nuestros cursos de cirugía, para mantener tus conocimientos actualizados sobre las últimas novedades en intervenciones y tratamientos.',
 		dermatologia:
 			'Conoce nuestra oferta en cursos de dermatología para perfeccionar y/o actualizar tus conocimientos, conocer nuevos enfoques y profundizar tu aprendizaje',
 		diabetes:
-			'Explora nuestros cursos de diabetes para abordar las complicaciones agudas y crónicas que puede generar. Mantente al día en tu formación profesional con MSK.',
+			'Explora nuestros cursos de diabetes para abordar las complicaciones agudas y crónicas que puede generar. Mantente al día en tu capacitación profesional con MSK.',
 		emergentologia:
-			'Con nuestros cursos de emergentología desarrollarás las habilidades y conocimientos esenciales para poner en práctica en servicios de urgencias y emergencias.',
+			'Con nuestros cursos de emergentología desarrollarás las habilidades y los conocimientos esenciales para poner en práctica en servicios de urgencias y emergencias.',
 		endocrinologia:
-			'Explora nuestros cursos de endocrinología y fórmate en las enfermedades metabólicas y aquellas derivadas del proceso nutricional. Amplía tu formación con MSK.',
+			'Explora nuestros cursos de endocrinología y fórmate en las enfermedades metabólicas y aquellas derivadas del proceso nutricional. Amplía tus posibilidades con MSK.',
 		gastroenterologia:
-			'Con nuestros cursos de gastroenterología podrás formate para identificar, diagnosticar e implementar tratamientos para trastornos del aparato digestivo',
+			'Con nuestros cursos de gastroenterología podrás capacitarte para identificar, diagnosticar e implementar tratamientos para trastornos del aparato digestivo.',
 		geriatria:
 			'Con nuestros cursos de geriatría dispondrás de las herramientas y los contenidos más actualizados para perfeccionar tu calidad asistencial para el adulto mayor.',
 		ginecologia: 'Explora nuestros cursos de ginecología para profundizar en el abordaje de las infecciones ginecológicas',
