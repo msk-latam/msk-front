@@ -7,6 +7,7 @@ import BlogVideos from './BlogVideos';
 import BlogInfografias from './BlogInfografias';
 import BlogCapacitarte from './BlogCapacitarte';
 import BlogNewsletter from './BlogNewsletter';
+import TypeformEmbed from './TypeformEmbed';
 
 interface BlogPageProps {
 	params: { lang: string };

@@ -19,13 +19,13 @@ export const categoriesData: CategoriesData = {
 		headerTitle: 'Cursos de anestesiología',
 		pageTitle: '¿Cuál es la importancia de la anestesiología?',
 		pageDescription:
-			'La anestesiología juega un papel crucial en la medicina moderna al tratar a pacientes con condiciones críticas y dolor severo. Este campo avanza rápidamente y requiere de constantes actualizaciones para garantizar un manejo adecuado y seguro del dolor y las técnicas anestésicas. Los <strong>cursos en anestesiología</strong> te permitirán brindar un cuidado de alta calidad y especializado, mejorando así la recuperación de los pacientes y su calidad de vida.',
+			'La anestesiología juega un papel crucial en la medicina moderna al tratar a pacientes con condiciones críticas y dolor severo. Este campo avanza rápidamente y requiere de constantes actualizaciones para garantizar un manejo adecuado y seguro del dolor y las técnicas anestésicas. Los <strong>cursos en anestesiología</strong> te permitirán capacitarte para brindar un cuidado de alta calidad y especializado, mejorando así la recuperación de los pacientes y su calidad de vida.',
 	},
 	cardiologia: {
 		headerTitle: 'Cursos de cardiología',
 		pageTitle: '¿Por qué capacitarte en cardiología?',
 		pageDescription:
-			'Los <strong>cursos de cardiología</strong> son fundamentales para enfrentar los desafíos que presentan las enfermedades cardiovasculares, una de las principales causas de mortalidad en adultos. Profundizar en esta especialidad te permitirá ofrecer un diagnóstico y tratamiento de calidad, optimizando la atención y cuidado de los pacientes. A través de nuestros contenidos, adquirirás los conocimientos necesarios para mejorar los resultados en salud cardiovascular y reducir los riesgos asociados. ',
+			'Los <strong>cursos de cardiología</strong> son fundamentales para enfrentar los desafíos que presentan las enfermedades cardiovasculares, una de las principales causas de mortalidad en adultos. Profundizar en esta especialidad te permitirá ofrecer un diagnóstico y tratamiento de calidad, optimizando la atención y el cuidado de los pacientes. A través de nuestros contenidos, adquirirás los conocimientos necesarios para mejorar los resultados en salud cardiovascular y reducir los riesgos asociados.',
 	},
 	cirugia: {
 		headerTitle: 'Cursos de cirugía',
@@ -43,7 +43,7 @@ export const categoriesData: CategoriesData = {
 		headerTitle: 'Cursos de diabetes',
 		pageTitle: '¿Qué puedes aprender sobre diabetes?',
 		pageDescription:
-			'Con los <strong>cursos en diabetes</strong> desarrollarás los conocimientos esenciales para manejar las complicaciones agudas y crónicas de la diabetes mellitus. Estudia desde un enfoque diagnóstico y terapéutico, utilizando herramientas y técnicas actualizadas para brindar una atención integral y efectiva a cada paciente, optimizando así su calidad de vida y control de la enfermedad.',
+			'Con los <strong>cursos en diabetes</strong> desarrollarás los conocimientos esenciales para manejar las complicaciones agudas y crónicas de la diabetes mellitus. Aprende desde un enfoque diagnóstico y terapéutico, utilizando herramientas y técnicas actualizadas para brindar una atención integral y efectiva a cada paciente, optimizando así su calidad de vida y el control de la enfermedad.',
 	},
 	emergentologia: {
 		headerTitle: 'Cursos de emergentología',
@@ -57,23 +57,29 @@ export const categoriesData: CategoriesData = {
 		pageDescription:
 			'La endocrinología es fundamental para abordar las enfermedades metabólicas y las complicaciones derivadas del proceso nutricional a lo largo de la vida del paciente. Con nuestros <strong>cursos en endocrinología</strong>, te prepararás para atender de manera integral las variadas patologías que afectan al sistema endocrino, mejorando así la calidad de la atención que proporcionas a tus pacientes y su bienestar general.',
 	},
+	gastroenterologia: {
+		headerTitle: 'Cursos de gastroenterología',
+		pageTitle: '¿Por qué capacitarte sobre gastroenterología?',
+		pageDescription:
+			'Capacitarse en gastroenterología es esencial para los profesionales de la salud que buscan un manejo efectivo de los trastornos del aparato digestivo. Nuestros <strong>cursos en gastroenterología</strong> te dotarán de las herramientas necesarias para identificar, diagnosticar y tratar de manera eficaz las enfermedades gastrointestinales más comunes, así como para prevenir y manejar sus complicaciones más frecuentes.',
+	},
 	geriatria: {
 		headerTitle: 'Cursos de geriatría',
 		pageTitle: '¿Qué obtienes al estudiar sobre geriatría?',
 		pageDescription:
-			'Frente al envejecimiento poblacional, la especialidad de geriatría se vuelve cada vez más relevante. Tomar <strong>cursos de geriatría</strong> te proporcionará los conocimientos y las herramientas más actualizadas para mejorar la calidad asistencial y satisfacer las necesidades de atención personalizada del adulto mayor, preparando así al personal de salud para enfrentar los desafíos de un envejecimiento saludable y activo.',
+			'Frente al envejecimiento poblacional, la especialidad de geriatría se vuelve cada vez más relevante. Tomar <strong>cursos de geriatría</strong> te proporcionará los conocimientos y las herramientas más actualizadas para mejorar la calidad asistencial y satisfacer las necesidades de atención personalizada del adulto mayor, preparándote para enfrentar los desafíos de un envejecimiento saludable y activo.',
 	},
 	ginecologia: {
 		headerTitle: 'Cursos de ginecología',
 		pageTitle: '¿Por qué aprender sobre ginecología?',
 		pageDescription:
-			'Los <strong>cursos de ginecología</strong> te permitirán adquirir las habilidades necesarias para un diagnóstico rápido y preciso, así como para el tratamiento adecuado de las infecciones ginecológicas prevalentes. Nuestras formaciones te brindan el conocimiento esencial para abordar las condiciones ginecológicas comunes y desarrollar un enfoque terapéutico efectivo y basado en la evidencia.',
+			'Los <strong>cursos de ginecología</strong> te permitirán adquirir las habilidades necesarias para un diagnóstico rápido y preciso, así como para el tratamiento adecuado de las infecciones ginecológicas prevalentes. Nuestras capacitaciones te brindan el conocimiento esencial para abordar las condiciones ginecológicas comunes y desarrollar un enfoque terapéutico efectivo y basado en la evidencia.',
 	},
 	hematologia: {
 		headerTitle: 'Cursos de hematología',
 		pageTitle: '¿Qué aprenderás sobre hematología?',
 		pageDescription:
-			'Estudiar hematología te proporcionará una comprensión profunda de los diversos tipos de anemia, síndromes mielodisplásicos, leucemias y linfomas. Nuestros <strong>cursos de hematología</strong> te equiparán con las herramientas necesarias para entender los mecanismos fisiopatológicos de las enfermedades hematológicas y mejorar la atención y tratamiento de los pacientes con trastornos sanguíneos complejos.',
+			'Estudiar hematología te proporcionará una comprensión profunda de los diversos tipos de anemia, síndromes mielodisplásicos, leucemias y linfomas. Nuestros <strong>cursos de hematología</strong> te brindarán las herramientas necesarias para entender los mecanismos fisiopatológicos de las enfermedades hematológicas y mejorar la atención y el tratamiento de los pacientes con trastornos sanguíneos complejos.',
 	},
 	infectologia: {
 		headerTitle: 'Cursos de infectología',
@@ -105,6 +111,12 @@ export const categoriesData: CategoriesData = {
 		pageDescription:
 			'La atención de aquellos pacientes con alteraciones fisiopatológicas que ponen en peligro la vida es uno de los contextos más desafiantes en el ámbito de la salud. Por este motivo, es clave tu preparación para realizar un abordaje eficaz del paciente crítico, con un criterio sólido para la toma de decisiones complejas en situaciones de gran presión.',
 	},
+	nefrologia: {
+		headerTitle: 'Cursos de nefrología',
+		pageTitle: '¿Qué obtienes al aprender sobre nefrología?',
+		pageDescription:
+			'Hazte de las competencias necesarias para atender de forma integral, tanto ambulatoria como hospitalaria, las variadas patologías que corresponden a la especialidad a lo largo de toda la vida del paciente. Con una capacitación en nefrología podrás estudiar la estructura y la función de los riñones, tanto en la salud como en la enfermedad, incluyendo la prevención, el diagnóstico y el tratamiento de las enfermedades renales.',
+	},
 	neurologia: {
 		headerTitle: 'Cursos de neurología',
 		pageTitle: '¿Qué aprenderás sobre neurología?',
@@ -128,6 +140,12 @@ export const categoriesData: CategoriesData = {
 		pageTitle: '¿Qué aprenderás sobre obstetricia?',
 		pageDescription:
 			'Mediante un enfoque práctico, interdisciplinario, académicamente riguroso y actualizado, obtendrás conocimientos y competencias para acompañar el embarazo y el puerperio brindando siempre un seguimiento atento de los controles prenatales, la sintomatología, los tratamientos y las medidas de prevención de posibles complicaciones en cada etapa del proceso.',
+	},
+	oftalmologia: {
+		headerTitle: 'Cursos de oftalmología',
+		pageTitle: '¿Qué puedes aprender sobre oftalmología?',
+		pageDescription:
+			'Capacitándote a través de contenido elaborado, revisado y actualizado por profesionales de reconocido prestigio, podrás conocer las bases anatómicas y funcionales del aparato de la visión y los principios de la óptica y la refracción, así como estudiar el abordaje de patologías de la especialidad, tales como ametropía, conjuntivitis, catarata, glaucoma, retinopatías y traumatología ocular, entre otras.',
 	},
 	oncologia: {
 		headerTitle: 'Cursos de oncología',
@@ -160,24 +178,6 @@ export const categoriesData: CategoriesData = {
 			'Hazte de las competencias y las habilidades necesarias para realizar de manera oportuna y eficaz el abordaje, la evaluación inicial, el diagnóstico y los diferentes tipos de tratamientos de la patología traumatológica en el paciente adulto, infantil y oncológico. Estudia las afecciones traumatológicas en su totalidad: miembro superior y miembro inferior, la columna, la pelvis y el pie.',
 	},
 
-	gastroenterologia: {
-		headerTitle: 'Cursos de gastroenterología',
-		pageTitle: '¿Por qué capacitarte sobre gastroenterología?',
-		pageDescription:
-			'Los cursos de actualización en gastroenterología se han posicionado como una herramienta imprescindible en el ámbito de la salud. Capacitándote en esta especialidad, podrás contar con las herramientas y los conocimientos clave para identificar, realizar el diagnóstico diferencial e implementar el tratamiento adecuado de los trastornos más comunes del aparato digestivo y ser capaz de prevenir y tratar las complicaciones más frecuentes de sus distintas enfermedades.',
-	},
-	nefrologia: {
-		headerTitle: 'Cursos de nefrología',
-		pageTitle: '¿Qué obtienes al aprender sobre nefrología?',
-		pageDescription:
-			'Hazte de las competencias necesarias para atender de forma integral, tanto ambulatoria como hospitalaria, las variadas patologías que corresponden a la especialidad a lo largo de toda la vida del paciente. Con una capacitación en nefrología podrás estudiar la estructura y la función de los riñones, tanto en la salud como en la enfermedad, incluyendo la prevención, el diagnóstico y el tratamiento de las enfermedades renales.',
-	},
-	oftalmologia: {
-		headerTitle: 'Cursos de oftalmología',
-		pageTitle: '¿Qué puedes aprender sobre oftalmología?',
-		pageDescription:
-			'Capacitándote a través de contenido elaborado, revisado y actualizado por profesionales de reconocido prestigio, podrás conocer las bases anatómicas y funcionales del aparato de la visión y los principios de la óptica y la refracción, así como estudiar el abordaje de patologías de la especialidad, tales como ametropía, conjuntivitis, catarata, glaucoma, retinopatías y traumatología ocular, entre otras.',
-	},
 	urologia: {
 		headerTitle: 'Cursos de urología',
 		pageTitle: '¿Quieres capacitarte en urología?',

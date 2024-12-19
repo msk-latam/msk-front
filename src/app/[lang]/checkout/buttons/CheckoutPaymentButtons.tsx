@@ -5,7 +5,7 @@ interface StepButtonsProps {
 	isSubmitting: boolean;
 	handlePreviousStep: () => void;
 	handleSubmit: () => void;
-	isDisabled?: boolean; // Si quieres una prop extra para deshabilitar el botón Volver
+	isDisabled?: boolean;
 }
 
 const StepButtons: React.FC<StepButtonsProps> = ({
@@ -16,7 +16,7 @@ const StepButtons: React.FC<StepButtonsProps> = ({
 	isDisabled = false,
 }) => {
 	return (
-		<div className='my-6 gap-4 flex justify-end'>
+		<div className='my-6 gap-4 flex flex-col md:flex-row justify-end'>
 			<button
 				type='button'
 				className={`px-12 py-3 font-bold rounded-md transition focus:outline-none focus:ring-2 ${
