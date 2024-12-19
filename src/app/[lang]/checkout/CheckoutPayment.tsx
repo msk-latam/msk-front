@@ -87,6 +87,8 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		fiscal_regime: '',
 	});
 
+	console.log(formData, 'de pago');
+
 	const [touched, setTouched] = useState<Record<string, boolean>>({});
 	const [isFormValid, setIsFormValid] = useState(false);
 
@@ -196,7 +198,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 			installments: paymentType === 'unico' ? 1 : 12,
 			description: 'Pago de contrato MSK',
 			payer: {
-				email: state.email,
+				email: formData.email || state.email,
 				first_name: formData.cardholderName.split(' ')[0] || 'Nombre',
 				last_name: formData.cardholderName.split(' ')[1] || 'Apellido',
 				identification: {
@@ -246,37 +248,37 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		};
 	};
 
-	// tarjeta prueba 4509953566233704
+	// tarjeta prueba 4509953566233704 || 5031755734530604
 
 	const handleSubmit = async () => {
 		if (!isFormValid) return;
 
 		const requestBody = mapFormDataToRequest(formData);
 		setIsSubmitting(true);
-		try {
-			const userUpdateData = {
-				...formData,
-				recaptcha_token: await executeRecaptcha('edit_profile'),
-			};
+		// try {
+		// 	const userUpdateData = {
+		// 		...formData,
+		// 		recaptcha_token: await executeRecaptcha('edit_profile'),
+		// 	};
 
-			console.log(userUpdateData);
-			const userResponse = await api.updateUserData(userUpdateData);
-			console.log(userResponse);
+		// 	console.log(userUpdateData);
+		// 	const userResponse = await api.updateUserData(userUpdateData);
+		// 	console.log(userResponse);
 
-			// if (!userResponse.ok) {
-			// 	throw new Error('Error al actualizar los datos del usuario');
-			// }
+		// 	// if (!userResponse.ok) {
+		// 	// 	throw new Error('Error al actualizar los datos del usuario');
+		// 	// }
 
-			console.log('Respuesta del servidor (actualización de usuario):', userResponse);
+		// 	console.log('Respuesta del servidor (actualización de usuario):', userResponse);
 
-			if (userResponse.data[0].code === 'SUCCESS') {
-				console.log('Usuario actualizado correctamente.');
-			} else {
-				console.error('Error en la respuesta del servidor al actualizar el usuario:', userResponse);
-			}
-		} catch (userError) {
-			console.error('Error al actualizar el usuario:', userError);
-		}
+		// 	if (userResponse.data[0].code === 'SUCCESS') {
+		// 		console.log('Usuario actualizado correctamente.');
+		// 	} else {
+		// 		console.error('Error en la respuesta del servidor al actualizar el usuario:', userResponse);
+		// 	}
+		// } catch (userError) {
+		// 	console.error('Error al actualizar el usuario:', userError);
+		// }
 
 		try {
 			const response = await fetch(
@@ -298,24 +300,34 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 
 			const data = await response.json();
 			console.log('Respuesta del servidor:', data);
-			const status = (data.status && data.status !== 200) || data.message ? 'rejected' : data.paymentStatus || 'rejected';
 
-			setPaymentStatus(status);
+			// Aquí verificamos si el pago fue procesado correctamente en Zoho
+			if (data.status === 200 && data.message === 'Se cobro el pago y creo en zoho') {
+				console.log('Pago exitoso y creado en Zoho');
 
-			if (subStep === 0) {
-				completeStep(activeStep);
-				setActiveStep(activeStep + 1);
+				// Cambiar el estado del pago a 'approved' cuando la respuesta sea positiva
+				const status = data.paymentStatus || 'approved'; // Ajusta el valor de status según el API
+				setPaymentStatus(status);
+
+				// Continuar con la lógica del siguiente paso
+				if (subStep === 0) {
+					completeStep(activeStep);
+					setActiveStep(activeStep + 1);
+				} else {
+					setActiveStep(activeStep + 1);
+					completeStep(activeStep);
+					setSubStep(0);
+				}
 			} else {
-				setActiveStep(activeStep + 1);
-				completeStep(activeStep);
-				setSubStep(0);
+				// Si la respuesta no es la esperada, se considera 'rejected'
+				console.error('Pago no procesado correctamente');
+				setPaymentStatus('rejected');
 			}
 		} catch (error) {
 			completeStep(activeStep);
 			setActiveStep(activeStep + 1);
 			console.error('Error al enviar los datos:', error);
 			setPaymentStatus('rejected');
-			// setPaymentStatus('approved');
 		} finally {
 			setIsSubmitting(false);
 		}

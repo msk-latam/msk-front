@@ -26,7 +26,7 @@ const BlogPage: React.FC<BlogPageProps> = ({ params }) => {
 			<BlogInfografias />
 			<BlogCapacitarte params={params} />
 			<BlogNewsletter />
-			{/* <TypeformEmbed /> */}
+
 			{/* hecho por Ariel Eitner  */}
 		</>
 	);
