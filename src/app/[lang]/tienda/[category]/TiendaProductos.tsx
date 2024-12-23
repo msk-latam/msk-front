@@ -122,7 +122,7 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 	return (
 		<>
 			<SpecialtiesModal isOpen={isModalOpen} onClose={toggleModal} fixed='fixed' />
-			<ButtonPrimary onClick={toggleModal}>Ver Especialidades</ButtonPrimary>
+			<ButtonPrimary onClick={toggleModal}>Ver especialidades</ButtonPrimary>
 
 			<div className='flex gap-6 mb-10'>
 				<div>

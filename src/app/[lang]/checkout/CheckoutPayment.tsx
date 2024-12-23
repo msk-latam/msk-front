@@ -192,6 +192,8 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 	const mapFormDataToRequest = (formData: any) => {
 		const totalPrice = product.total_price;
 		const transactionAmount = parseInt(totalPrice.replace(/[\.,]/g, ''), 10);
+		const regularPrice = product.regular_price;
+		const regularPriceFixed = parseInt(regularPrice.replace(/[\.,]/g, ''), 10);
 		return {
 			transaction_amount: 1200,
 			// transaction_amount: transactionAmount,
@@ -227,11 +229,11 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				items: {
 					code: product.ficha.product_code,
 					quantity: 1,
-					// price: product.regular_price,
-					// total: product.regular_price,
-					// net_total: product.regular_price,
-					// total_after_discount: product.regular_price,
-					// list_price: product.regular_price,
+					// price: regularPriceFixed,
+					// total: regularPriceFixed,
+					// net_total: regularPriceFixed,
+					// total_after_discount: regularPriceFixed,
+					// list_price: regularPriceFixed,
 					price: 100,
 					total: 100,
 					net_total: 100,
@@ -240,8 +242,8 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				},
 				currency,
 				country: formData.country,
-				// sub_total: product.regular_price,
-				// grand_total: product.total_price,
+				// sub_total: regularPriceFixed,
+				// grand_total: transactionAmount,
 				sub_total: 100,
 				grand_total: 100,
 			},
@@ -281,18 +283,16 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		// }
 
 		try {
-			const response = await fetch(
-				'http://localhost:8465/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
-				// const response = await fetch('https://gateway.msklatam.net/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: 'Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6',
-					},
-					body: JSON.stringify(requestBody),
+			// const response = await fetch(
+			// 	'http://localhost:8465/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
+			const response = await fetch('https://gateway.msklatam.net/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: 'Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6',
 				},
-			);
+				body: JSON.stringify(requestBody),
+			});
 
 			if (!response.ok) {
 				throw new Error('Error al procesar el pago');
