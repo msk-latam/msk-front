@@ -1,13 +1,14 @@
 import { useState, useEffect, useContext } from 'react';
 import { useCheckout } from './CheckoutContext';
 import { AuthContext } from '@/context/user/AuthContext';
-import ssr from '@/services/ssr';
 import UserForm from './forms/UserForm';
 import { validateUserField } from './validators/userValidator';
 import CheckoutRegisterButtons from './buttons/CheckoutRegisterButtons';
+import React from 'react';
 
 const CheckoutRegister: React.FC = () => {
 	const { state } = useContext(AuthContext);
+
 	const { activeStep, setActiveStep, completeStep, setUser } = useCheckout();
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
@@ -158,7 +159,7 @@ const CheckoutRegister: React.FC = () => {
 		}
 	}, [state?.user, activeStep, setActiveStep, completeStep]);
 
-	console.log(formDataUser);
+	// console.log(formDataUser);
 
 	return (
 		<>

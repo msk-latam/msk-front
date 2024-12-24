@@ -1,4 +1,5 @@
-import React from 'react';
+import { DataContext } from '@/context/data/DataContext';
+import React, { useContext, useState } from 'react';
 
 interface UserFormProps {
 	formData: {
@@ -17,6 +18,10 @@ interface UserFormProps {
 }
 
 const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleChange, handleBlur }) => {
+	const {
+		state: { allSpecialties: specialties, allSpecialtiesGroups: specialtiesGroup, allProfessions: professions },
+	} = useContext(DataContext);
+
 	return (
 		<form className='grid grid-cols-1 md:grid-cols-2 gap-4'>
 			<div>
@@ -91,12 +96,15 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				>
 					<option value=''>Seleccione una profesión</option>
-					<option value='Doctor'>Doctor</option>
-					<option value='Enfermero'>Enfermero</option>
-					<option value='Otro'>Otro</option>
+					{professions.map((profession: any) => (
+						<option key={profession.id} value={profession.name}>
+							{profession.name}
+						</option>
+					))}
 				</select>
 				{touched.profession && errors.profession && <p className='text-red-500 text-sm'>{errors.profession}</p>}
 			</div>
+
 			<div>
 				<label htmlFor='specialty' className='block text-sm font-medium text-[#6474A6]'>
 					Especialidad
@@ -109,9 +117,11 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				>
 					<option value=''>Seleccione una especialidad</option>
-					<option value='Cardiología'>Cardiología</option>
-					<option value='Pediatría'>Pediatría</option>
-					<option value='Otra'>Otra</option>
+					{specialties.map((specialty: any) => (
+						<option key={specialty.id} value={specialty.name}>
+							{specialty.name}
+						</option>
+					))}
 				</select>
 				{touched.specialty && errors.specialty && <p className='text-red-500 text-sm'>{errors.specialty}</p>}
 			</div>

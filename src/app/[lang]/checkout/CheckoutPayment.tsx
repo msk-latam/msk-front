@@ -3,13 +3,11 @@ import { useContext, useEffect, useState } from 'react';
 import { useCheckout } from './CheckoutContext';
 import { AuthContext } from '@/context/user/AuthContext';
 import CardDetailsForm from './forms/CardDetailsForm';
-import eitnerLog from '../../../../eitnerLog';
 import DocumentDetailsForm from './forms/DocumentDetailsForm';
 import AddressForm from './forms/AddressForm';
 import { validatePaymentField } from './validators/paymentValidator';
 import CheckoutPaymentButtons from './buttons/CheckoutPaymentButtons';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
-import api from '@/services/api';
 
 interface CheckoutContentProps {
 	product?: any;
@@ -17,7 +15,6 @@ interface CheckoutContentProps {
 }
 
 const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) => {
-	eitnerLog(product);
 	const { executeRecaptcha } = useGoogleReCaptcha();
 	const { state } = useContext(AuthContext);
 	const {
@@ -58,7 +55,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		identification: '',
 		fiscal_regime: 'a',
 	});
-	console.log(formData);
+	// console.log(formData);
 	const [errors, setErrors] = useState({
 		cardholderName: '',
 		cardNumber: '',
@@ -87,7 +84,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		fiscal_regime: '',
 	});
 
-	console.log(formData, 'de pago');
+	// console.log(formData, 'de pago');
 
 	const [touched, setTouched] = useState<Record<string, boolean>>({});
 	const [isFormValid, setIsFormValid] = useState(false);
@@ -112,7 +109,6 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		}));
 	};
 
-	eitnerLog(state);
 	useEffect(() => {
 		if (user) {
 			// Si el usuario está disponible en el contexto, usamos esos datos
@@ -125,6 +121,8 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				state: '', // Este campo puedes configurarlo o dejarlo vacío si no lo tienes en el contexto
 				address: '', // Igual para la dirección
 				postal_code: '', // Igual para el código postal
+				profession: user.profession,
+				speciality: user.specialty,
 			}));
 		} else if (state && state.profile) {
 			// Si el usuario no está en el contexto, usamos los datos del state
@@ -201,8 +199,8 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 			description: 'Pago de contrato MSK',
 			payer: {
 				email: formData.email || state.email,
-				first_name: formData.cardholderName.split(' ')[0] || 'Nombre',
-				last_name: formData.cardholderName.split(' ')[1] || 'Apellido',
+				first_name: formData.cardholderName.trim().split(' ')[0] || 'Nombre',
+				last_name: formData.cardholderName.trim().split(' ').slice(1).join(' ') || 'Apellido',
 				identification: {
 					type: formData.type_doc,
 					number: formData.identification,
@@ -224,6 +222,8 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				ciudad: formData.city,
 				provincia: formData.state,
 				cp: formData.postal_code,
+				profesion: formData.profession,
+				especialidad: formData.speciality,
 			},
 			product: {
 				items: {
@@ -283,27 +283,29 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		// }
 
 		try {
-			// const response = await fetch(
-			// 	'http://localhost:8465/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
-			const response = await fetch('https://gateway.msklatam.net/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: 'Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6',
+			const response = await fetch(
+				'http://localhost:8465/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
+				// const response = await fetch('https://gateway.msklatam.net/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: 'Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6',
+					},
+					body: JSON.stringify(requestBody),
 				},
-				body: JSON.stringify(requestBody),
-			});
+			);
 
 			if (!response.ok) {
 				throw new Error('Error al procesar el pago');
 			}
 
 			const data = await response.json();
-			console.log('Respuesta del servidor:', data);
+			// console.log('Respuesta del servidor:', data);
 
 			// Aquí verificamos si el pago fue procesado correctamente en Zoho
 			if (data.status === 200 && data.message === 'Se cobro el pago y creo en zoho') {
-				console.log('Pago exitoso y creado en Zoho');
+				// console.log('Pago exitoso y creado en Zoho');
 
 				// Cambiar el estado del pago a 'approved' cuando la respuesta sea positiva
 				const status = data.paymentStatus || 'approved'; // Ajusta el valor de status según el API

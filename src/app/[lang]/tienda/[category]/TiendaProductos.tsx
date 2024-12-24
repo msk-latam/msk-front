@@ -93,7 +93,7 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 			// }
 
 			const paginatedCourses = filteredCourses.slice(indexOfFirstItem, indexOfLastItem);
-			console.log(paginatedCourses);
+			// console.log(paginatedCourses);
 
 			setCurrentItems(paginatedCourses);
 		};
@@ -117,7 +117,7 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 
 	// console.log(currentItems, 'currentItems');
 
-	console.log(category);
+	// console.log(category);
 
 	return (
 		<>

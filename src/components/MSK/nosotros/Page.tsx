@@ -71,7 +71,7 @@ const SINGLE: SinglePageType = {
 const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({ className = '' }) => {
 	const { countryState } = useContext(CountryContext);
 	const { data } = useNosotros(countryState.country);
-	console.log(data);
+	// console.log(data);
 
 	function cleanHTML(html: string) {
 		// Crear un elemento temporal para manipular el HTML

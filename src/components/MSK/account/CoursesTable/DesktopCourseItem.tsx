@@ -26,8 +26,8 @@ const DesktopCourseItem: FC<DesktopCourseItemProps> = ({ item, email, goToLMS })
 	const trialName = item.ov.includes('suspendido') ? 'Prueba cancelada' : 'Prueba';
 	const { state: authState } = useContext(AuthContext);
 
-	console.log(statusOV, 'status ov');
-	console.log(item, 'item status');
+	// console.log(statusOV, 'status ov');
+	// console.log(item, 'item status');
 
 	return (
 		<tr key={item.product_code}>

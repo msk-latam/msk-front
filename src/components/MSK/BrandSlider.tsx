@@ -43,7 +43,7 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 				};
 			});
 
-			console.log(processedData);
+			// console.log(processedData);
 
 			return processedData.length > 0 ? processedData : await fetchDefaultBrands();
 		} catch (error) {

@@ -304,7 +304,7 @@ const MercadoPagoCheckout: FC<MercadoPagoCheckoutProps> = ({ product, quotes, co
 														className='contact-from-input'
 														onChange={(e: any) => setFieldValue('cardNumber', e.target.value.trim())}
 														onBlur={(e: any) => {
-															console.log(e);
+															// console.log(e);
 															setFieldValue('cardNumber', e.target.value.trim());
 														}}
 													/>

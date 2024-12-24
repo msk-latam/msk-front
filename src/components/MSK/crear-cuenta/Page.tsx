@@ -176,7 +176,7 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
 
 				try {
 					const res = await ssr.postSignUp(formData);
-					console.log({ res });
+					// console.log({ res });
 					if (!res?.access_token) {
 						setSuccess(false);
 						console.error(res);
