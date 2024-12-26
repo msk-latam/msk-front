@@ -21,6 +21,17 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 	const {
 		state: { allSpecialties: specialties, allSpecialtiesGroups: specialtiesGroup, allProfessions: professions },
 	} = useContext(DataContext);
+	const [selectedProfessionIndex, setSelectedProfessionIndex] = useState<number | null>(null);
+
+	const handleProfessionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const selectedIndex = e.target.selectedIndex;
+		setSelectedProfessionIndex(selectedIndex);
+		handleChange(e);
+	};
+	const filteredSpecialties =
+		selectedProfessionIndex !== null && specialtiesGroup[selectedProfessionIndex]
+			? specialtiesGroup[selectedProfessionIndex].slice().sort((a: any, b: any) => a.name.localeCompare(b.name))
+			: [];
 
 	return (
 		<form className='grid grid-cols-1 md:grid-cols-2 gap-4'>
@@ -91,7 +102,7 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 				<select
 					id='profession'
 					value={formData.profession}
-					onChange={handleChange}
+					onChange={handleProfessionChange}
 					onBlur={handleBlur}
 					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				>
@@ -116,8 +127,8 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 					onBlur={handleBlur}
 					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				>
-					<option value=''>Seleccione una especialidad</option>
-					{specialties.map((specialty: any) => (
+					{/* <option value=''>Seleccione una especialidad</option> */}
+					{filteredSpecialties.map((specialty: any) => (
 						<option key={specialty.id} value={specialty.name}>
 							{specialty.name}
 						</option>
