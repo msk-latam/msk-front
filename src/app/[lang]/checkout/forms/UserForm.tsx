@@ -127,7 +127,7 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 					onBlur={handleBlur}
 					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				>
-					{/* <option value=''>Seleccione una especialidad</option> */}
+					<option value=''>Seleccione una especialidad</option>
 					{filteredSpecialties.map((specialty: any) => (
 						<option key={specialty.id} value={specialty.name}>
 							{specialty.name}

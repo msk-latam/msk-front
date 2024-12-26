@@ -84,7 +84,8 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		fiscal_regime: '',
 	});
 
-	// console.log(formData, 'de pago');
+	console.log(formData, 'de pago');
+	console.log(user);
 
 	const [touched, setTouched] = useState<Record<string, boolean>>({});
 	const [isFormValid, setIsFormValid] = useState(false);
@@ -115,17 +116,16 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 			setFormData((prevState) => ({
 				...prevState,
 				cardholderName: `${user.firstName} ${user.lastName}`,
-				identification: '', // O el campo que desees usar para el documento
-				type_doc: '', // O el campo que desees usar para el tipo de documento
-				country: '', // O el campo que desees usar para el país
-				state: '', // Este campo puedes configurarlo o dejarlo vacío si no lo tienes en el contexto
-				address: '', // Igual para la dirección
-				postal_code: '', // Igual para el código postal
+				identification: '',
+				type_doc: '',
+				country: '',
+				state: '',
+				address: '',
+				postal_code: '',
 				profession: user.profession,
 				speciality: user.specialty,
 			}));
 		} else if (state && state.profile) {
-			// Si el usuario no está en el contexto, usamos los datos del state
 			setFormData((prevState) => ({
 				...prevState,
 				cardholderName: `${state.profile.name} ${state.profile.last_name}`,
@@ -193,14 +193,17 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		const regularPrice = product.regular_price;
 		const regularPriceFixed = parseInt(regularPrice.replace(/[\.,]/g, ''), 10);
 		return {
-			transaction_amount: 1200,
+			transaction_amount: 1200.0,
 			// transaction_amount: transactionAmount,
 			installments: paymentType === 'unico' ? 1 : 12,
 			description: 'Pago de contrato MSK',
 			payer: {
 				email: formData.email || state.email,
-				first_name: formData.cardholderName.trim().split(' ')[0] || 'Nombre',
-				last_name: formData.cardholderName.trim().split(' ').slice(1).join(' ') || 'Apellido',
+				// first_name: formData.cardholderName.trim().split(' ')[0] || 'Nombre',
+				// last_name: formData.cardholderName.trim().split(' ').slice(1).join(' ') || 'Apellido',
+				first_name: formData.firstName || user.firstName, // Asegúrate de que no dependa de cardholderName
+				last_name: formData.lastName || user.lastName,
+
 				identification: {
 					type: formData.type_doc,
 					number: formData.identification,
@@ -234,18 +237,18 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 					// net_total: regularPriceFixed,
 					// total_after_discount: regularPriceFixed,
 					// list_price: regularPriceFixed,
-					price: 1200,
-					total: 1200,
-					net_total: 1200,
-					total_after_discount: 1200,
-					list_price: 1200,
+					price: 1200.0,
+					total: 1200.0,
+					net_total: 1200.0,
+					total_after_discount: 1200.0,
+					list_price: 1200.0,
 				},
 				currency,
 				country: formData.country,
 				// sub_total: regularPriceFixed,
 				// grand_total: transactionAmount,
-				sub_total: 1200,
-				grand_total: 1200,
+				sub_total: 1200.0,
+				grand_total: 1200.0,
 			},
 		};
 	};
@@ -299,17 +302,10 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 			}
 
 			const data = await response.json();
-			// console.log('Respuesta del servidor:', data);
-
-			// Aquí verificamos si el pago fue procesado correctamente en Zoho
 			if (data.status === 200 && data.message === 'Se cobro el pago y creo en zoho') {
-				// console.log('Pago exitoso y creado en Zoho');
-
-				// Cambiar el estado del pago a 'approved' cuando la respuesta sea positiva
-				const status = data.paymentStatus || 'approved'; // Ajusta el valor de status según el API
+				const status = data.paymentStatus || 'approved';
 				setPaymentStatus(status);
 
-				// Continuar con la lógica del siguiente paso
 				if (subStep === 0) {
 					completeStep(activeStep);
 					setActiveStep(activeStep + 1);
@@ -319,7 +315,6 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 					setSubStep(0);
 				}
 			} else {
-				// Si la respuesta no es la esperada, se considera 'rejected'
 				console.error('Pago no procesado correctamente');
 				setPaymentStatus('rejected');
 			}
