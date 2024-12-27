@@ -89,35 +89,35 @@ export function generateCategoryMetadata({ category, lang }: GenerateCategoryMet
 			'Con nuestros cursos de geriatría dispondrás de las herramientas y los contenidos más actualizados para perfeccionar tu calidad asistencial para el adulto mayor.',
 		ginecologia: 'Explora nuestros cursos de ginecología para profundizar en el abordaje de las infecciones ginecológicas',
 		hematologia:
-			'Explora el estudio de las enfermedades de la sangre, como anemias, leucemias y trastornos relacionados con la hematología.',
-		// infectologia:
-		// 	'Cursos sobre la prevención, diagnóstico y tratamiento de enfermedades infecciosas que afectan a pacientes en diversas circunstancias.',
-		// 'medicina-familiar':
-		// 	'Adquiere una visión integral de la salud familiar, abordando desde la prevención hasta el tratamiento de enfermedades comunes.',
-		// 'medicina-general':
-		// 	'Desarrolla tus habilidades en medicina general para brindar atención primaria efectiva y tratamiento a una amplia gama de enfermedades.',
-		// 'medicina-intensiva':
-		// 	'Profundiza en el cuidado de pacientes en estado crítico con cursos de medicina intensiva, cubriendo todos los aspectos esenciales.',
-		// nefrologia:
-		// 	'Aprende sobre las enfermedades renales y su tratamiento, especializándote en el manejo de pacientes con insuficiencia renal y otras afecciones.',
-		// neurologia:
-		// 	'Cursos especializados en neurología, orientados al diagnóstico y tratamiento de trastornos neurológicos que afectan al sistema nervioso.',
-		// nutricion:
-		// 	'Conoce los fundamentos de la nutrición y cómo aplicar esos conocimientos para promover una salud óptima a través de una alimentación adecuada.',
-		// obstetricia:
-		// 	'Especialízate en obstetricia y aprende a manejar todos los aspectos relacionados con el embarazo, el parto y el posparto.',
-		// oncologia:
-		// 	'Cursos de oncología que te permitirán conocer las últimas investigaciones y tratamientos en el tratamiento del cáncer.',
-		// pediatria:
-		// 	'Enfócate en la atención médica de niños y adolescentes, conociendo enfermedades pediátricas y su tratamiento específico.',
-		// psiquiatria:
-		// 	'Desarrolla competencias en el diagnóstico y tratamiento de enfermedades mentales a través de los cursos de psiquiatría.',
-		// 'radiologia-e-imagenologia':
-		// 	'Cursos sobre diagnóstico por imágenes, enfocándose en las técnicas avanzadas utilizadas para estudiar diversas condiciones médicas.',
-		// traumatologia:
-		// 	'Cursos de traumatología, orientados al diagnóstico y tratamiento de lesiones traumáticas que afectan huesos, músculos y tejidos blandos.',
-		// urologia:
-		// 	'Estudia la urología para conocer el diagnóstico y tratamiento de enfermedades del sistema urinario y reproductivo masculino.',
+			'Explora nuestros cursos de hematología y profundiza en el estudio de los distintos tipos de anemia, los síndromes mielodisplásicos, los tipos de leucemia y linfoma.',
+		infectologia:
+			'Amplía tus conocimientos con nuestros cursos de  infectología. Aprende de expertos y mejora tu práctica profesional. ¡Inscríbete ahora!',
+		'medicina-familiar':
+			'Descubre los cursos de medicina familiar en MSK. Formación especializada para mejorar la atención integral de tus pacientes. Comienza hoy.',
+		'medicina-general':
+			'Capacítate con los cursos de medicina general de MSK. Adquiere nuevas habilidades y potencia tu carrera médica. ¡Regístrate hoy!',
+		'medicina-intensiva':
+			'Mejora tus competencias en medicina intensiva con cursos diseñados para profesionales. Aprende con MSK y marca la diferencia',
+		nefrologia:
+			'Especialízate con nuestros cursos de nefrología. Formación online de calidad para médicos que buscan la excelencia clínica.',
+		neurologia:
+			'Aprende las últimas actualizaciones en neurología con los cursos de MSK. Formación médica avanzada a tu alcance.',
+		nutricion:
+			'Descubre los cursos de nutrición en MSK. Capacitación profesional para mejorar la salud y el bienestar de tus pacientes.',
+		obstetricia:
+			'Perfecciona tus habilidades en obstetricia con los cursos de MSK. Formación para garantizar un cuidado materno-infantil óptimo.',
+		oncologia:
+			'Especialízate en oncología con cursos diseñados para profesionales médicos. Aprende en MSK y brinda una mejor atención a tus pacientes.',
+		pediatria:
+			'Capacítate en pediatría con los cursos online de MSK. Formación especializada para brindar una atención de calidad.',
+		psiquiatria:
+			'Avanza en tu carrera con los cursos de psiquiatría de MSK. Formación online para abordar la salud mental de manera efectiva.',
+		'radiologia-e-imagenologia':
+			'Domina la radiología e imagenología con los cursos de MSK. Capacitación médica avanzada para interpretar estudios con precisión.',
+		traumatologia:
+			'Especialízate en traumatología con los cursos de MSK. Aprende técnicas avanzadas para el diagnóstico y tratamiento eficaz.',
+		urologia:
+			'Amplía tus conocimientos en urología con los cursos online de MSK. Formación diseñada para médicos comprometidos con la excelencia.',
 	};
 	const categoryTitlesMap = slugs.reduce((acc, slug, index) => {
 		acc[slug] = titles[index];

@@ -85,7 +85,25 @@ export const categoriesData: CategoriesData = {
 		headerTitle: 'Cursos de infectología',
 		pageTitle: '¿Quieres capacitarte en infectología?',
 		pageDescription:
-			'¡Haces bien! Es el momento ideal para comenzar, debido a que el panorama de alta prevalencia de enfermedades transmisibles requiere de profesionales óptimamente preparados para el abordaje de estas afecciones. Aprende sobre infectología en MSK y adquiere conocimientos para la atención eficaz de patologías por agentes infecciosos y para establecer terapias racionales para cada paciente.',
+			'La infectología es una especialidad médica que se enfoca en la prevención, el diagnóstico y el tratamiento de enfermedades infecciosas, como bacterias, virus, hongos y parásitos. En un mundo globalizado donde las enfermedades emergentes y la resistencia a los antimicrobianos son desafíos constantes, tomar <strong>cursos de infectología</strong> es esencial para garantizar una atención médica efectiva y oportuna.',
+	},
+	'medicina-familiar': {
+		headerTitle: 'Cursos de medicina familiar y comunitaria',
+		pageTitle: '¿Por qué es importante la medicina familiar?',
+		pageDescription:
+			'La medicina familiar es una disciplina clave para la atención integral de pacientes a lo largo de todas las etapas de la vida. Se centra en la prevención, el diagnóstico y el tratamiento de enfermedades comunes, así como en el manejo continuo de la salud en el contexto familiar y comunitario. Una capacitación sólida con nuestros <strong>cursos de medicina familiar</strong> te permitirá brindar un cuidado holístico y personalizado.',
+	},
+	'medicina-general': {
+		headerTitle: 'Cursos de medicina general',
+		pageTitle: '¿Qué es la medicina general?',
+		pageDescription:
+			'La medicina general es la base de la atención médica, ya que aborda una amplia variedad de enfermedades y condiciones que afectan a pacientes de todas las edades. Tomar <strong>cursos de medicina general</strong> es esencial, ya que el personal médico generalista es el primer punto de contacto en el sistema de salud, lo que les lleva a desempeñar un papel crucial en el diagnóstico temprano, el tratamiento y la derivación especializada.',
+	},
+	'medicina-intensiva': {
+		headerTitle: 'Cursos de medicina intensiva',
+		pageTitle: '¿Por qué capacitarte en medicina intensiva?',
+		pageDescription:
+			'En los <strong>cursos de medicina</strong> intensiva se estudia el manejo de pacientes críticos que requieren monitoreo y tratamiento avanzado en unidades de cuidados intensivos. Es una especialidad fundamental para salvar vidas en situaciones complejas, como fallas orgánicas múltiples, infecciones graves o postoperatorios delicados.',
 	},
 	'medicina-de-urgencias': {
 		headerTitle: 'Cursos de medicina de urgencias',
@@ -93,35 +111,17 @@ export const categoriesData: CategoriesData = {
 		pageDescription:
 			'Tienes distintas opciones para cursar a distancia. Con ellas desarrollarás las habilidades esenciales para poner en práctica en los servicios de urgencias y emergencias. Comprenderás en profundidad un amplio rango de enfermedades, incluso aquellas poco frecuentes, y te prepararás para una correcta toma de decisiones que derive en tratamientos más eficientes.',
 	},
-	'medicina-familiar': {
-		headerTitle: 'Cursos de medicina familiar y comunitaria',
-		pageTitle: '¿Por qué es importante la medicina familiar?',
-		pageDescription:
-			'Esta especialidad tiene incidencia específica en el nivel de salud de las personas, las familias y la comunidad en general. Si te capacitas en medicina familiar y comunitaria, te estarás preparando para resolver la mayoría de los problemas de salud que presenta la población y coordinar los distintos niveles de atención, permitiendo así el buen funcionamiento de todo el sistema hospitalario.',
-	},
-	'medicina-general': {
-		headerTitle: 'Cursos de medicina general',
-		pageTitle: '¿Qué es la medicina general?',
-		pageDescription:
-			'Consta de una rama fundamental de conocimientos para todo el personal de la salud, ya que permite diagnosticar y tratar una amplia gama de enfermedades comunes en pacientes de todas las edades. Además, proporciona las habilidades necesarias para ofrecer una atención integral, promover la salud y gestionar enfermedades crónicas, contribuyendo así a la salud global de la comunidad.',
-	},
-	'medicina-intensiva': {
-		headerTitle: 'Cursos de medicina intensiva',
-		pageTitle: '¿Por qué capacitarte en medicina intensiva?',
-		pageDescription:
-			'La atención de aquellos pacientes con alteraciones fisiopatológicas que ponen en peligro la vida es uno de los contextos más desafiantes en el ámbito de la salud. Por este motivo, es clave tu preparación para realizar un abordaje eficaz del paciente crítico, con un criterio sólido para la toma de decisiones complejas en situaciones de gran presión.',
-	},
 	nefrologia: {
 		headerTitle: 'Cursos de nefrología',
 		pageTitle: '¿Qué obtienes al aprender sobre nefrología?',
 		pageDescription:
-			'Hazte de las competencias necesarias para atender de forma integral, tanto ambulatoria como hospitalaria, las variadas patologías que corresponden a la especialidad a lo largo de toda la vida del paciente. Con una capacitación en nefrología podrás estudiar la estructura y la función de los riñones, tanto en la salud como en la enfermedad, incluyendo la prevención, el diagnóstico y el tratamiento de las enfermedades renales.',
+			'La nefrología estudia y trata las enfermedades que afectan a los riñones, órganos vitales para la regulación de líquidos y electrolitos, y para la eliminación de desechos del cuerpo. Con el aumento de patologías como la enfermedad renal crónica y la hipertensión, tomar <strong>cursos de nefrología</strong> es crucial para ofrecer una atención de calidad.',
 	},
 	neurologia: {
 		headerTitle: 'Cursos de neurología',
 		pageTitle: '¿Qué aprenderás sobre neurología?',
 		pageDescription:
-			'Comprenderás el desarrollo, la estructura y la función del sistema nervioso (central, periférico y autónomo) en estado normal y patológico. Desarrollarás conocimientos sobre la semiología en el diagnóstico clínico y las múltiples técnicas clínicas e instrumentales de estudio y diagnóstico actualmente en uso.',
+			'La neurología se dedica al estudio y tratamiento de los trastornos del sistema nervioso, que incluye el cerebro, la médula espinal y los nervios periféricos. Dada la creciente prevalencia de enfermedades como el Alzheimer, los accidentes cerebrovasculares y la epilepsia, los cursos en neurología se vuelven esenciales para abordar estos desafíos de salud pública.',
 	},
 	neumonologia: {
 		headerTitle: 'Cursos de neumología',
@@ -133,13 +133,13 @@ export const categoriesData: CategoriesData = {
 		headerTitle: 'Cursos de nutrición',
 		pageTitle: '¿Por qué hacer un curso de nutrición?',
 		pageDescription:
-			'La alimentación correcta es uno de los pilares de la salud a nivel biopsicosocial. Por este motivo, tiene una relevancia fundamental y motiva la necesidad de contar con profesionales altamente capacitados en el manejo nutricional de los pacientes. Aprende ahora 100% a distancia y actualízate en esta ciencia que interactúa de manera interdisciplinaria con todas las especialidades clínicas y quirúrgicas.',
+			'La nutrición es la ciencia que estudia la relación entre los alimentos y la salud, considerando factores fisiológicos, metabólicos y culturales. En un contexto donde las enfermedades relacionadas con la alimentación, como la obesidad y la diabetes, están en aumento, los <strong>cursos de nutrición</strong> permiten a los profesionales mejorar la calidad de vida de las personas.',
 	},
 	obstetricia: {
 		headerTitle: 'Cursos de obstetricia',
 		pageTitle: '¿Qué aprenderás sobre obstetricia?',
 		pageDescription:
-			'Mediante un enfoque práctico, interdisciplinario, académicamente riguroso y actualizado, obtendrás conocimientos y competencias para acompañar el embarazo y el puerperio brindando siempre un seguimiento atento de los controles prenatales, la sintomatología, los tratamientos y las medidas de prevención de posibles complicaciones en cada etapa del proceso.',
+			'Los <strong>cursos de obstetricia</strong> se centran en el cuidado de la mujer durante el embarazo, parto y puerperio, asegurando el bienestar tanto de la madre como del bebé. Es una disciplina clave para reducir riesgos y garantizar nacimientos saludables, lo que la convierte en una especialidad fundamental en la medicina.',
 	},
 	oftalmologia: {
 		headerTitle: 'Cursos de oftalmología',
@@ -151,38 +151,38 @@ export const categoriesData: CategoriesData = {
 		headerTitle: 'Cursos de oncología',
 		pageTitle: '¿Por qué capacitarte en oncología?',
 		pageDescription:
-			'Los avances en este ámbito demandan tu actualización. En este contexto, puedes aprender sobre la epidemiología de los principales tipos de cáncer, sus bases genéticas, los métodos de diagnóstico y estadificación, el manejo de los tumores según su evolución y los diversos recursos terapéuticos aplicables.',
+			'La oncología aborda el diagnóstico, el tratamiento y el seguimiento del cáncer, una de las principales causas de muerte en el mundo. Dado el avance constante en terapias y tecnologías, tomar <strong>cursos de oncología</strong> es imprescindible para ofrecer tratamientos efectivos y humanizados.',
 	},
 	pediatria: {
 		headerTitle: 'Cursos de pediatría',
 		pageTitle: '¿Qué obtienes al aprender sobre pediatría?',
 		pageDescription:
-			'Con cursos desarrollados por expertos en la especialidad, accedes a los más amplios conocimientos para responder de forma efectiva al desafío que representa la atención pediátrica, desde el nacimiento hasta la adolescencia. Estudia en profundidad las complicaciones, patologías y alteraciones que puede sufris el paciente pediátrico.',
+			'La pediatría se ocupa de la salud y el bienestar de niños y adolescentes, desde su nacimiento hasta la adolescencia. Esta especialidad es esencial para garantizar un desarrollo físico, mental y emocional saludable, abordando en los <strong>cursos de pediatría</strong> tanto enfermedades comunes como necesidades específicas de esta población.',
 	},
 	psiquiatria: {
 		headerTitle: 'Cursos de psiquiatría',
 		pageTitle: '¿Quieres capacitarte en psiquiatría?',
 		pageDescription:
-			'Nuestra propuesta de aprendizaje en esta especialidad se basa en un enfoque práctico, muy útil para la puesta al día y mejora de los conocimientos y las herramientas relacionadas con trastornos afectivos, esquizofrenia y trastornos de personalidad, así como también para la actualización sobre el uso clínico de algunos fármacos.',
+			'La psiquiatría se centra en el diagnóstico, el tratamiento y la prevención de trastornos mentales, emocionales y conductuales. Con el creciente reconocimiento de la importancia de la salud mental, los <strong>cursos de psiquiatría</strong> te permitirán brindar un apoyo vital a tus pacientes.',
 	},
 	'radiologia-e-imagenologia': {
 		headerTitle: 'Cursos de radiología',
 		pageTitle: '¿Qué aprenderás sobre radiología?',
 		pageDescription:
-			'Prepárate para adquirir un conocimiento integral de esta especialidad y sus aplicaciones. A través de material teórico y audiovisual, estudiarás las bases de la técnica y sus diferentes modalidades, hasta los aspectos fundamentales de las radiologías torácica y cardíaca, abdominal, mamaria, osteomolecular, entre otras.',
+			'La radiología e imagenología son herramientas médicas fundamentales para el diagnóstico y monitoreo de enfermedades a través de técnicas avanzadas como rayos X, tomografías y resonancias magnéticas. Capacitarte en <strong>cursos de radiología</strong> te garantiza un dominio técnico y clínico que mejora tu atención al paciente.',
 	},
 	traumatologia: {
 		headerTitle: 'Cursos de traumatología',
 		pageTitle: '¿Qué consigues al estudiar sobre traumatología?',
 		pageDescription:
-			'Hazte de las competencias y las habilidades necesarias para realizar de manera oportuna y eficaz el abordaje, la evaluación inicial, el diagnóstico y los diferentes tipos de tratamientos de la patología traumatológica en el paciente adulto, infantil y oncológico. Estudia las afecciones traumatológicas en su totalidad: miembro superior y miembro inferior, la columna, la pelvis y el pie.',
+			'La traumatología se ocupa del diagnóstico y el tratamiento de lesiones del sistema musculoesquelético, como fracturas, luxaciones y problemas articulares. Es una especialidad crucial en accidentes y lesiones deportivas, sobre la que podrás capacitarte en profundidad con nuestros <strong>cursos de traumatología</strong>, preparándote para asegurar una recuperación funcional óptima a tus pacientes.',
 	},
 
 	urologia: {
 		headerTitle: 'Cursos de urología',
 		pageTitle: '¿Quieres capacitarte en urología?',
 		pageDescription:
-			'Nuestra propuesta de aprendizaje en esta especialidad está sustentada por la experiencia de autores de prestigio en el ámbito académico. Capacítate para conocer en profundidad las afecciones del aparato urinario y órganos situados en el retroperitoneo, así como del aparato genital masculino, motivadas por alteraciones congénitas, traumáticas, sépticas, metabólicas, obstructivas u oncológicas.',
+			'La urología se enfoca en el estudio, el diagnóstico y el tratamiento de enfermedades del sistema urinario y del aparato reproductor masculino. Con el aumento de condiciones como las infecciones urinarias y el cáncer de próstata, los <strong>cursos de urología</strong> se vuelven claves para mejorar la calidad de vida de los pacientes.',
 	},
 	'': {
 		headerTitle: '',

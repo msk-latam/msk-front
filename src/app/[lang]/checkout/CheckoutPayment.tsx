@@ -195,7 +195,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		return {
 			transaction_amount: 1100,
 			// transaction_amount: transactionAmount,
-			installments: paymentType === 'unico' ? 1 : 12,
+			installments: paymentType === 'unico' ? 1 : 14,
 			description: 'Pago de contrato MSK',
 			payer: {
 				email: formData.email || state.email,
