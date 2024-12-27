@@ -193,7 +193,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		const regularPrice = product.regular_price;
 		const regularPriceFixed = parseInt(regularPrice.replace(/[\.,]/g, ''), 10);
 		return {
-			transaction_amount: 1200,
+			transaction_amount: 1100,
 			// transaction_amount: transactionAmount,
 			installments: paymentType === 'unico' ? 1 : 12,
 			description: 'Pago de contrato MSK',
