@@ -20,7 +20,7 @@ export interface SingleContentProps {
 const SingleContent: FC<SingleContentProps> = ({ data, sources, bestSellers, fiveSpecialtiesGroup }) => {
 	const { author, date, reading_time, articles } = data;
 	const [noteIntroduction, ...noteArticles] = articles;
-	// console.log(articles);
+	console.log(noteIntroduction);
 
 	return (
 		<div className=' nc-SingleContent  relative space-y-10 mb-16'>
@@ -88,17 +88,6 @@ const SingleContent: FC<SingleContentProps> = ({ data, sources, bestSellers, fiv
 					/>
 				</div>
 			</div>
-			{/* <div className=' relative py-16 bg-neutral-100 px-14 md:rounded-[40px] -mx-4 xl:mx-24 xl:px-40'>
-        <BackgroundSection />
-        <SectionSliderBestSellers
-          posts={bestSellers}
-          postCardName='card9'
-          heading='Nuestros cursos más elegidos'
-          subHeading='Profesionales como tú ya se capacitaron con ellos. ¡Ahora te toca a ti!'
-          sliderStype='style2'
-          uniqueSliderClass='article-most-picked-courses'
-        />
-      </div> */}
 
 			<div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] xl:w-[129%] left-1/2 transform -translate-x-1/2  w-screen '>
 				<SectionSliderBestSellers

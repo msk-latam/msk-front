@@ -88,8 +88,8 @@ export function generateCategoryMetadata({ category, lang }: GenerateCategoryMet
 		geriatria:
 			'Con nuestros cursos de geriatría dispondrás de las herramientas y los contenidos más actualizados para perfeccionar tu calidad asistencial para el adulto mayor.',
 		ginecologia: 'Explora nuestros cursos de ginecología para profundizar en el abordaje de las infecciones ginecológicas',
-		// hematologia:
-		// 	'Explora el estudio de las enfermedades de la sangre, como anemias, leucemias y trastornos relacionados con la hematología.',
+		hematologia:
+			'Explora el estudio de las enfermedades de la sangre, como anemias, leucemias y trastornos relacionados con la hematología.',
 		// infectologia:
 		// 	'Cursos sobre la prevención, diagnóstico y tratamiento de enfermedades infecciosas que afectan a pacientes en diversas circunstancias.',
 		// 'medicina-familiar':

@@ -193,7 +193,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		const regularPrice = product.regular_price;
 		const regularPriceFixed = parseInt(regularPrice.replace(/[\.,]/g, ''), 10);
 		return {
-			transaction_amount: 1200.0,
+			transaction_amount: 1200,
 			// transaction_amount: transactionAmount,
 			installments: paymentType === 'unico' ? 1 : 12,
 			description: 'Pago de contrato MSK',
@@ -237,18 +237,18 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 					// net_total: regularPriceFixed,
 					// total_after_discount: regularPriceFixed,
 					// list_price: regularPriceFixed,
-					price: 1200.0,
-					total: 1200.0,
-					net_total: 1200.0,
-					total_after_discount: 1200.0,
-					list_price: 1200.0,
+					price: 1300,
+					total: 1400,
+					net_total: 1500,
+					total_after_discount: 1600,
+					list_price: 1700,
 				},
 				currency,
 				country: formData.country,
 				// sub_total: regularPriceFixed,
 				// grand_total: transactionAmount,
-				sub_total: 1200.0,
-				grand_total: 1200.0,
+				sub_total: 1800,
+				grand_total: 1900,
 			},
 		};
 	};
