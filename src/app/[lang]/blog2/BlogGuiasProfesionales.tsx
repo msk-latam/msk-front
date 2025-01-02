@@ -17,7 +17,7 @@ const BlogGuiasProfesionales = async ({ params }: PageProps) => {
 				<div>
 					<h2 className='!font-raleway text-3xl font-medium text-[#392C35] mb-1'>Guías profesionales</h2>
 					<p className='!font-inter text-[#6474A6] text-lg font-light mb-8'>
-						Contenido de nivel académico y acceso gratuito.
+						Contenido de nivel académico y acceso gratuito
 					</p>
 				</div>
 				<div>

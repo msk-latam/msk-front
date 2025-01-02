@@ -77,7 +77,7 @@ const BlogInfografias: React.FC = () => {
 					<p className='!font-inter text-[#6474A6] text-lg font-light'>Descárgalas, imprímelas y súmalas a tu consultorio</p>
 				</div>
 				<div>
-					<Link href={'/tienda/?recurso=guias-profesionales'} className={`sm:block flex-shrink-0`}>
+					<Link href={'/blog/archivo'} className={`sm:block flex-shrink-0`}>
 						<ButtonSecondary
 							className='!leading-none border-solid border-1 border-neutral-200 text-neutral-400'
 							sizeClass='px-3 py-2 sm:py-3 sm:px-6 text-[11px]'
@@ -108,14 +108,6 @@ const BlogInfografias: React.FC = () => {
 
 			<div className='relative -mx-4 sm:-mx-6 lg:mx-0 overflow-hidden'>
 				<div className='flex items-center gap-2'>
-					{/* <button
-						onClick={() => handleScroll('left')}
-						className='bg-white dark:bg-neutral-900 border border-neutral-200 rounded-full w-[70px] h-10 flex items-center justify-center hover:border-neutral-300'
-						title='Previous'
-					>
-						<i className='las la-angle-left'></i>
-					</button> */}
-
 					<div ref={containerRef} className='flex gap-6 whitespace-nowrap my-4 items-center overflow-x-hidden relative'>
 						{infografiaList.map((infografia, index) => (
 							<a
@@ -138,15 +130,23 @@ const BlogInfografias: React.FC = () => {
 							</a>
 						))}
 					</div>
-
-					<button
-						onClick={() => handleScroll('right')}
-						className='bg-white dark:bg-neutral-900 border border-neutral-200 rounded-full w-[70px] h-10 flex items-center justify-center hover:border-neutral-300'
-						title='Next'
-					>
-						<i className='las la-angle-right'></i>
-					</button>
 				</div>
+			</div>
+			<div className='flex justify-center gap-2'>
+				<button
+					onClick={() => handleScroll('left')}
+					className='bg-white dark:bg-neutral-900 border border-neutral-200 rounded-full w-12 h-12 flex items-center justify-center hover:border-neutral-300'
+					title='Previous'
+				>
+					<i className='las la-angle-left'></i>
+				</button>
+				<button
+					onClick={() => handleScroll('right')}
+					className='bg-white dark:bg-neutral-900 border border-neutral-200 rounded-full w-12 h-12 flex items-center justify-center hover:border-neutral-300'
+					title='Next'
+				>
+					<i className='las la-angle-right'></i>
+				</button>
 			</div>
 		</section>
 	);

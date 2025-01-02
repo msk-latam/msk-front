@@ -67,32 +67,6 @@ const BlogVideos: React.FC = () => {
 						Otra manera de informarte y desarrollar tu aprendizaje
 					</p>
 				</div>
-				<div>
-					<ButtonSecondary
-						className='!leading-none border-solid border-1 border-neutral-200 text-neutral-400'
-						sizeClass='px-3 py-2 sm:py-3 sm:px-6 text-[11px]'
-					>
-						<span className='text-[11px] sm:text-sm'>Ver más</span>
-						<svg className='w-3 h-3 sm:w-5 sm:h-5 ml-3 rtl:rotate-180' viewBox='0 0 24 24' fill='none'>
-							<path
-								d='M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699'
-								stroke='currentColor'
-								strokeWidth='1.5'
-								strokeMiterlimit='10'
-								strokeLinecap='round'
-								strokeLinejoin='round'
-							/>
-							<path
-								d='M3.5 12H20.33'
-								stroke='currentColor'
-								strokeWidth='1.5'
-								strokeMiterlimit='10'
-								strokeLinecap='round'
-								strokeLinejoin='round'
-							/>
-						</svg>
-					</ButtonSecondary>
-				</div>
 			</div>
 
 			<div className='flex flex-col lg:flex-row gap-8 mt-6'>
