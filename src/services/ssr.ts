@@ -321,39 +321,47 @@ class ApiSSRService {
 				countryParam = `${country}`;
 			}
 
-			// Primera solicitud con el año actual
+			const postsList: any[] = [];
+
+			// Solicitud para el año actual
 			let response = await fetch(`${API_URL}/posts?year=${currentYear}&country=${countryParam}&limit=-1`);
 
 			if (!response.ok) {
-				throw new Error(`Failed to fetch posts. HTTP status ${response.status}`);
+				throw new Error(`Failed to fetch posts for ${currentYear}. HTTP status ${response.status}`);
 			}
 
 			let data = await response.json();
 
-			// Si no hay posts, intenta con el año anterior
-			if (data.code === 'no_posts') {
-				console.log(`No posts found for ${currentYear}. Retrying with ${currentYear - 1}`);
-				response = await fetch(`${API_URL}/posts?year=${currentYear - 1}&country=${countryParam}&limit=-1`);
-
-				if (!response.ok) {
-					throw new Error(`Failed to fetch posts for ${currentYear - 1}. HTTP status ${response.status}`);
-				}
-
-				data = await response.json();
+			if (data.posts && data.posts.length > 0) {
+				const currentYearPosts = data.posts.map((post: any) => ({
+					...post,
+					image: post.thumbnail,
+				}));
+				postsList.push(...currentYearPosts);
+			} else {
+				console.log(`No posts found for ${currentYear}.`);
 			}
 
-			// Verifica nuevamente si hay posts después de la segunda solicitud
-			if (data.code === 'no_posts') {
-				console.log('No posts were found for both years.');
-				return [];
+			// Solicitud para el año anterior
+			response = await fetch(`${API_URL}/posts?year=${currentYear - 1}&country=${countryParam}&limit=-1`);
+
+			if (!response.ok) {
+				throw new Error(`Failed to fetch posts for ${currentYear - 1}. HTTP status ${response.status}`);
 			}
 
-			console.log(data, 'desde ssr');
+			data = await response.json();
 
-			const postsList = data.posts.map((post: any) => ({
-				...post,
-				image: post.thumbnail,
-			}));
+			if (data.posts && data.posts.length > 0) {
+				const previousYearPosts = data.posts.map((post: any) => ({
+					...post,
+					image: post.thumbnail,
+				}));
+				postsList.push(...previousYearPosts);
+			} else {
+				console.log(`No posts found for ${currentYear - 1}.`);
+			}
+
+			// console.log(postsList, 'Final combined posts list');
 
 			return postsList;
 		} catch (error) {

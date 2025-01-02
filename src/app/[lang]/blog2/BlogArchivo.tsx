@@ -6,7 +6,7 @@ import React from 'react';
 const BlogArchivo = async () => {
 	const allPosts = await ssr.getPosts();
 	return (
-		<section id='archivo' className='py-8'>
+		<section id='articulos' className='py-8'>
 			<h2 className='!font-raleway text-3xl font-medium text-[#392C35] mb-1'>Artículos</h2>
 			<p className='!font-inter text-[#6474A6] text-lg font-light'>
 				Encuentra aquí la información y los testimonios más importantes

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 const BlogNavbar = () => {
 	const menuItems = [
-		{ label: 'Artículos', href: '#archivo' },
+		{ label: 'Artículos', href: '#articulos' },
 		{ label: 'Guías profesionales', href: '#guias-profesionales' },
 		{ label: 'Videos', href: '#videos' },
 		{ label: 'Infografías', href: '#infografias' },

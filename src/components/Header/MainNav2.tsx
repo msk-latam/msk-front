@@ -15,6 +15,7 @@ import { useCurrentLocale } from 'next-i18n-router/client';
 // @ts-ignore
 import i18nConfig from '@/i18nConfig';
 import CategoriesDropdown from './categoriesDropdown/CategoriesDropdown';
+import Link from 'next/link';
 
 const MainNav2: FC = () => {
 	const locale = useCurrentLocale(i18nConfig);
@@ -30,6 +31,7 @@ const MainNav2: FC = () => {
 	};
 
 	const pathName = usePathname();
+	console.log(pathName);
 
 	useEffect(() => {
 		setIsOnBlog(pathName.includes('/blog'));
@@ -42,14 +44,27 @@ const MainNav2: FC = () => {
 				<div className='flex items-center space-x-3 sm:space-x-8'>
 					<Logo isOnBlog={isOnBlog} />
 					<div className='hidden sm:block h-10 border-l border-neutral-300 dark:border-neutral-6000 m-0'></div>
-					<div className='hidden xl:block'>
-						<CategoriesDropdown />
+					<div>
+						{!pathName.includes('blog2') && (
+							<div className='hidden xl:block'>
+								<CategoriesDropdown />
+							</div>
+						)}
 					</div>
 				</div>
 
 				{/* Esta parte empuja SearchProducts a la derecha */}
-				<div className='hidden sm:flex flex-grow  justify-end mr-10'>
+				<div className={`hidden sm:flex flex-grow mr-10 ${pathName.includes('blog2') ? 'justify-start' : 'justify-end'}`}>
 					<SearchProducts />
+				</div>
+				<div>
+					{pathName.includes('blog2') && (
+						<div>
+							<Link href={'/'} target='_blank' className='mr-5'>
+								Capacítate
+							</Link>
+						</div>
+					)}
 				</div>
 
 				{initialLoad && (
