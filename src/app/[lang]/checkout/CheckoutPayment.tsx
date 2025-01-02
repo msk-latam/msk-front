@@ -286,9 +286,10 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		// }
 
 		try {
+			// const response = await fetch(
+			// 	'http://localhost:8465/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
 			const response = await fetch(
-				'http://localhost:8465/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
-				// const response = await fetch('https://gateway.msklatam.net/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
+				'https://gateway.msklatam.net/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
 				//
 				{
 					method: 'POST',
