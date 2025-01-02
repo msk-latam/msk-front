@@ -195,7 +195,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		return {
 			transaction_amount: 1100,
 			// transaction_amount: transactionAmount,
-			installments: paymentType === 'unico' ? 1 : 6,
+			installments: paymentType === 'unico' ? 1 : 12,
 			description: 'Pago de contrato MSK',
 			payer: {
 				email: formData.email || state.email,
@@ -286,16 +286,19 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		// }
 
 		try {
-			// const response = await fetch(
-			// 	'http://localhost:8465/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
-			const response = await fetch('https://gateway.msklatam.net/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: 'Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6',
+			const response = await fetch(
+				'http://localhost:8465/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
+				// const response = await fetch('https://gateway.msklatam.net/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
+				//
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: 'Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6',
+					},
+					body: JSON.stringify(requestBody),
 				},
-				body: JSON.stringify(requestBody),
-			});
+			);
 
 			if (!response.ok) {
 				throw new Error('Error al procesar el pago');

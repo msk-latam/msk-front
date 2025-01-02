@@ -20,20 +20,21 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 	const [showDownArrow, setShowDownArrow] = useState(true);
 	const scrollContainerRef = useRef<HTMLUListElement | null>(null);
 	const router = useRouter();
+	const dropdownRef = useRef<HTMLDivElement>(null);
 	useEffect(() => {
 		console.log(scrollContainerRef);
 		const container = scrollContainerRef.current;
 		if (!container) {
-			console.error('El contenedor de scroll no está definido en useEffect.');
+			// console.error('El contenedor de scroll no está definido en useEffect.');
 			return;
 		}
 
 		const handleScroll = () => {
 			const { scrollTop, scrollHeight, clientHeight } = container;
 
-			console.log('ScrollTop:', scrollTop);
-			console.log('ScrollHeight:', scrollHeight);
-			console.log('ClientHeight:', clientHeight);
+			// console.log('ScrollTop:', scrollTop);
+			// console.log('ScrollHeight:', scrollHeight);
+			// console.log('ClientHeight:', clientHeight);
 
 			const isScrolledToTop = scrollTop === 0;
 			const isScrolledToBottom = 362 - scrollTop <= 0;
@@ -43,15 +44,13 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 		};
 
 		container.addEventListener('scroll', handleScroll);
-		console.log('Listener de scroll añadido.');
+		// console.log('Listener de scroll añadido.');
 
 		return () => {
 			container.removeEventListener('scroll', handleScroll);
-			console.log('Listener de scroll eliminado.');
+			// console.log('Listener de scroll eliminado.');
 		};
 	}, [scrollContainerRef.current]);
-
-	const dropdownRef = useRef<HTMLDivElement>(null);
 
 	const toggleDropdown = () => {
 		setIsOpen(!isOpen);
@@ -284,7 +283,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 								))}
 							</ul>
 							{showDownArrow && (
-								<div className='absolute bottom-[250px] left-1/2 transform'>
+								<div className='absolute bottom-[7px] lg:bottom-[250px] left-1/2 transform'>
 									<svg
 										xmlns='http://www.w3.org/2000/svg'
 										className='h-6 w-6 animate-bounce text-gray-500'

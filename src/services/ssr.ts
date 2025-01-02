@@ -321,13 +321,34 @@ class ApiSSRService {
 				countryParam = `${country}`;
 			}
 
-			const response = await fetch(`${API_URL}/posts?year=${currentYear}&country=${countryParam}&limit=-1`);
+			// Primera solicitud con el año actual
+			let response = await fetch(`${API_URL}/posts?year=${currentYear}&country=${countryParam}&limit=-1`);
 
 			if (!response.ok) {
 				throw new Error(`Failed to fetch posts. HTTP status ${response.status}`);
 			}
 
-			const data = await response.json();
+			let data = await response.json();
+
+			// Si no hay posts, intenta con el año anterior
+			if (data.code === 'no_posts') {
+				console.log(`No posts found for ${currentYear}. Retrying with ${currentYear - 1}`);
+				response = await fetch(`${API_URL}/posts?year=${currentYear - 1}&country=${countryParam}&limit=-1`);
+
+				if (!response.ok) {
+					throw new Error(`Failed to fetch posts for ${currentYear - 1}. HTTP status ${response.status}`);
+				}
+
+				data = await response.json();
+			}
+
+			// Verifica nuevamente si hay posts después de la segunda solicitud
+			if (data.code === 'no_posts') {
+				console.log('No posts were found for both years.');
+				return [];
+			}
+
+			console.log(data, 'desde ssr');
 
 			const postsList = data.posts.map((post: any) => ({
 				...post,
