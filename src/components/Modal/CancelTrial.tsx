@@ -19,10 +19,10 @@ const CancelTrialModal: FC<CancelTrialModalProps> = ({ isOpenProp, item, onClose
 
 	const suspendTrial = async () => {
 		const res = await api.cancelTrialCourse(item, authState);
-		console.log('item', item);
-		console.log('authState', authState);
+		// console.log('item', item);
+		// console.log('authState', authState);
 
-		console.log({ res });
+		// console.log({ res });
 		let errorConditionCRM = res.error ?? res.data[0]?.data[0]?.code?.includes('INVALID_DATA');
 
 		if (!errorConditionCRM) {

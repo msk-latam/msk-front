@@ -16,9 +16,41 @@ import { filter } from 'lodash';
 const CategoriesDropdown = ({ onClickClose }: any) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [activeCategory, setActiveCategory] = useState<Specialty | null>(null);
+	const [showUpArrow, setShowUpArrow] = useState(false);
+	const [showDownArrow, setShowDownArrow] = useState(true);
+	const scrollContainerRef = useRef<HTMLUListElement | null>(null);
 	const router = useRouter();
-
 	const dropdownRef = useRef<HTMLDivElement>(null);
+	useEffect(() => {
+		console.log(scrollContainerRef);
+		const container = scrollContainerRef.current;
+		if (!container) {
+			// console.error('El contenedor de scroll no está definido en useEffect.');
+			return;
+		}
+
+		const handleScroll = () => {
+			const { scrollTop, scrollHeight, clientHeight } = container;
+
+			// console.log('ScrollTop:', scrollTop);
+			// console.log('ScrollHeight:', scrollHeight);
+			// console.log('ClientHeight:', clientHeight);
+
+			const isScrolledToTop = scrollTop === 0;
+			const isScrolledToBottom = 362 - scrollTop <= 0;
+
+			setShowUpArrow(!isScrolledToTop);
+			setShowDownArrow(!isScrolledToBottom);
+		};
+
+		container.addEventListener('scroll', handleScroll);
+		// console.log('Listener de scroll añadido.');
+
+		return () => {
+			container.removeEventListener('scroll', handleScroll);
+			// console.log('Listener de scroll eliminado.');
+		};
+	}, [scrollContainerRef.current]);
 
 	const toggleDropdown = () => {
 		setIsOpen(!isOpen);
@@ -220,7 +252,24 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 								activeCategory ? 'max-h-64' : ''
 							} lg:max-h-[52vh]   scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent`}
 						>
-							<ul className=' lg:overflow-auto lg:max-h-[50vh] scrollbar-thumb-[#6474A6] scrollbar-thin scrollbar-track-transparent'>
+							{showUpArrow && (
+								<div className='absolute top-[70px] left-1/2 transform'>
+									<svg
+										xmlns='http://www.w3.org/2000/svg'
+										className='h-6 w-6 animate-bounce text-gray-500'
+										fill='none'
+										viewBox='0 0 24 24'
+										stroke='currentColor'
+									>
+										<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 15l7-7 7 7' />
+									</svg>
+								</div>
+							)}
+
+							<ul
+								className=' lg:overflow-auto lg:max-h-[50vh] scrollbar-thumb-[#6474A6] scrollbar-thin scrollbar-track-transparent'
+								ref={scrollContainerRef}
+							>
 								{sortedCategories.map((category, index) => (
 									<li
 										onClick={() => handleCategoryClick(category)}
@@ -233,6 +282,19 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 									</li>
 								))}
 							</ul>
+							{showDownArrow && (
+								<div className='absolute bottom-[7px] lg:bottom-[250px] left-1/2 transform'>
+									<svg
+										xmlns='http://www.w3.org/2000/svg'
+										className='h-6 w-6 animate-bounce text-gray-500'
+										fill='none'
+										viewBox='0 0 24 24'
+										stroke='currentColor'
+									>
+										<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 9l-7 7-7-7' />
+									</svg>
+								</div>
+							)}
 						</div>
 
 						{activeCategory && (

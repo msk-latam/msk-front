@@ -1,7 +1,6 @@
 'use client';
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import eitnerLog from '../../../../eitnerLog';
 
 interface User {
 	firstName: string;
@@ -73,7 +72,6 @@ export const CheckoutProvider: React.FC<{ children: ReactNode }> = ({ children }
 
 export const useCheckout = () => {
 	const context = useContext(CheckoutContext);
-	eitnerLog(context);
 	if (!context) {
 		throw new Error('useCheckout must be used within a CheckoutProvider');
 	}

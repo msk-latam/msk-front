@@ -144,7 +144,7 @@ const FooterCTA = () => {
 							</li>
 							<li>
 								<NcLink href='/nosotros' className='font-light'>
-									Quiénes Somos
+									Quiénes somos
 								</NcLink>
 							</li>
 

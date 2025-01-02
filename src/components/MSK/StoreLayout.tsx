@@ -28,7 +28,7 @@ const StoreLayout: FC<LayoutPageProps> = ({ className = '', children, country })
 		const fetchData = async () => {
 			try {
 				const response = await api.getWpImages('banners_shop', country);
-				console.log({ response });
+				// console.log({ response });
 				if (response.length > 0) {
 					setBannerImgs(response);
 				}
@@ -60,16 +60,8 @@ const StoreLayout: FC<LayoutPageProps> = ({ className = '', children, country })
 						{bannerImgs.map((img, index) => (
 							<SwiperSlide key={`img_${index}`}>
 								<a href={img.url?.href ? img.url?.href : '#'}>
-									<img
-										src={img.imagen_desktop.link}
-										alt='hero'
-										className='store-banner-desktop hidden md:block w-full'
-									/>
-									<img
-										src={img.imagen_mobile.link}
-										alt='hero'
-										className='store-banner-desktop block md:hidden w-full'
-									/>
+									<img src={img.imagen_desktop.link} alt='hero' className='store-banner-desktop hidden md:block w-full' />
+									<img src={img.imagen_mobile.link} alt='hero' className='store-banner-desktop block md:hidden w-full' />
 								</a>
 							</SwiperSlide>
 						))}

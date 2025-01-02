@@ -27,11 +27,11 @@ const SearchProducts = () => {
 		const value = event.target.value;
 		setInputValue(value);
 		if (value) {
-			console.log(value);
+			// console.log(value);
 			const filteredProducts = auxProducts.filter((product) =>
 				removeAccents(product.title.toLowerCase()).includes(removeAccents(value.toLowerCase())),
 			);
-			console.log(filteredProducts);
+			// console.log(filteredProducts);
 			setProducts(filteredProducts);
 		} else {
 			setProducts(auxProducts);
@@ -84,10 +84,10 @@ const SearchProducts = () => {
 							setProducts(courses);
 							setIsOnBlog(false);
 						} else {
-							console.warn('No courses found for country:', productsCountry);
+							// console.warn('No courses found for country:', productsCountry);
 						}
 					} else {
-						console.log('Products already exist, no need to fetch.');
+						// console.log('Products already exist, no need to fetch.');
 					}
 				}
 			} catch (error) {

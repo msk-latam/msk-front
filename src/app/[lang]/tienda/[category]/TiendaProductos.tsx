@@ -93,7 +93,7 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 			// }
 
 			const paginatedCourses = filteredCourses.slice(indexOfFirstItem, indexOfLastItem);
-			console.log(paginatedCourses);
+			// console.log(paginatedCourses);
 
 			setCurrentItems(paginatedCourses);
 		};
@@ -117,12 +117,12 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 
 	// console.log(currentItems, 'currentItems');
 
-	console.log(category);
+	// console.log(category);
 
 	return (
 		<>
 			<SpecialtiesModal isOpen={isModalOpen} onClose={toggleModal} fixed='fixed' />
-			<ButtonPrimary onClick={toggleModal}>Ver Especialidades</ButtonPrimary>
+			<ButtonPrimary onClick={toggleModal}>Ver especialidades</ButtonPrimary>
 
 			<div className='flex gap-6 mb-10'>
 				<div>

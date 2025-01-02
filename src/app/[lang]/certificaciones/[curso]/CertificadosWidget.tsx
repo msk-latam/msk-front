@@ -55,7 +55,7 @@ const CertificadosWidget: React.FC<CertificadosWidgetProps> = ({ product }) => {
 
 	const courses = localStorage.getItem('all-courses');
 	if (!courses) {
-		console.log('No hay cursos en el localStorage');
+		// console.log('No hay cursos en el localStorage');
 		return; // Salir si no hay datos
 	}
 
@@ -63,11 +63,11 @@ const CertificadosWidget: React.FC<CertificadosWidgetProps> = ({ product }) => {
 	try {
 		// Parsear el string de courses
 		const parsedData = JSON.parse(courses);
-		console.log(parsedData);
+		// console.log(parsedData);
 
 		// Verificar que existe la clave 'value' y que es un array
 		if (!parsedData.value || !Array.isArray(parsedData.value)) {
-			console.log('No se encontraron cursos en la clave "value" o no es un array', parsedData);
+			// console.log('No se encontraron cursos en la clave "value" o no es un array', parsedData);
 			return; // Salir si no se encuentra el array en 'value'
 		}
 
@@ -129,7 +129,7 @@ const CertificadosWidget: React.FC<CertificadosWidgetProps> = ({ product }) => {
 	);
 
 	// Mostrar todo en un único console.log
-	console.log(textoFinal);
+	// console.log(textoFinal);
 
 	// console.log(linksCursos.join('\n'));
 	// console.log(precioCursos.join('\n'));

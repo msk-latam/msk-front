@@ -34,7 +34,7 @@ const LandingFooter: FC<LandingProps> = ({ product, country }) => {
 	// 	fetchContent();
 	// }, [product]);
 
-	console.log(productSlug);
+	// console.log(productSlug);
 
 	const accsapTranslateMessage =
 		'La edición en español de ACCSAP ha sido traducida de la edición en inglés por Dandelion Contents, SL con permiso de la American College of Cardiology Foundation (ACCF). La ACCF se exime de cualquier responsabilidad derivada de cualquier error contenido en el producto o en los materiales de marketing.';
