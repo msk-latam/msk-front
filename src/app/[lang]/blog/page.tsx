@@ -39,6 +39,7 @@ const PageBlog: React.FC<PageProps> = async ({ params }) => {
 
 	const allPosts = await ssr.getPosts();
 	const welcomePosts = allPosts.filter((p: FetchPostType, i: number) => i < 4);
+	// console.log(allPosts);
 
 	return (
 		<div className='nc-PageBlog relative animate-fade-down'>

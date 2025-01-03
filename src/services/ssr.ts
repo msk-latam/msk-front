@@ -311,57 +311,97 @@ class ApiSSRService {
 		}
 	}
 
+	// async getPosts(country?: string) {
+	// 	try {
+	// 		let currentYear = new Date().getFullYear();
+	// 		let validCountries = countries.map((item) => item.id);
+	// 		let countryParam = 'int';
+
+	// 		if (country && validCountries.includes(country)) {
+	// 			countryParam = `${country}`;
+	// 		}
+
+	// 		const postsList: any[] = [];
+
+	// 		// Solicitud para el año actual
+	// 		let response = await fetch(`${API_URL}/posts?year=${currentYear}&country=${countryParam}&limit=-1`);
+
+	// 		if (!response.ok) {
+	// 			throw new Error(`Failed to fetch posts for ${currentYear}. HTTP status ${response.status}`);
+	// 		}
+
+	// 		let data = await response.json();
+	// 		console.log(data.posts);
+
+	// 		if (data.posts && data.posts.length > 0) {
+	// 			const currentYearPosts = data.posts.map((post: any) => ({
+	// 				...post,
+	// 				image: post.thumbnail,
+	// 			}));
+	// 			postsList.push(...currentYearPosts);
+	// 		} else {
+	// 			console.log(`No posts found for ${currentYear}.`);
+	// 		}
+
+	// 		// Solicitud para el año anterior
+	// 		response = await fetch(`${API_URL}/posts?year=${currentYear - 1}&country=${countryParam}&limit=-1`);
+
+	// 		if (!response.ok) {
+	// 			throw new Error(`Failed to fetch posts for ${currentYear - 1}. HTTP status ${response.status}`);
+	// 		}
+
+	// 		data = await response.json();
+
+	// 		if (data.posts && data.posts.length > 0) {
+	// 			const previousYearPosts = data.posts.map((post: any) => ({
+	// 				...post,
+	// 				image: post.thumbnail,
+	// 			}));
+	// 			postsList.push(...previousYearPosts);
+	// 		} else {
+	// 			console.log(`No posts found for ${currentYear - 1}.`);
+	// 		}
+
+	// 		// console.log(postsList, 'Final combined posts list');
+
+	// 		return postsList;
+	// 	} catch (error) {
+	// 		console.error('Network error:', error);
+	// 		return [];
+	// 	}
+	// }
+
 	async getPosts(country?: string) {
 		try {
-			let currentYear = new Date().getFullYear();
-			let validCountries = countries.map((item) => item.id);
-			let countryParam = 'int';
-
-			if (country && validCountries.includes(country)) {
-				countryParam = `${country}`;
-			}
-
+			const currentYear = new Date().getFullYear();
+			const validCountries = countries.map((item) => item.id);
+			const countryParam = country && validCountries.includes(country) ? `${country}` : 'int';
+			const startYear = 2023; // Año inicial
 			const postsList: any[] = [];
 
-			// Solicitud para el año actual
-			let response = await fetch(`${API_URL}/posts?year=${currentYear}&country=${countryParam}&limit=-1`);
+			for (let year = currentYear; year >= startYear; year--) {
+				const response = await fetch(`${API_URL}/posts?year=${year}&country=${countryParam}&limit=-1`);
 
-			if (!response.ok) {
-				throw new Error(`Failed to fetch posts for ${currentYear}. HTTP status ${response.status}`);
+				if (!response.ok) {
+					console.warn(`Failed to fetch posts for ${year}. HTTP status ${response.status}`);
+					continue; // Pasar al siguiente año si hay un error
+				}
+
+				const data = await response.json();
+
+				const postDate = data?.posts[0].date;
+				console.log(postDate);
+
+				if (data.posts && data.posts.length > 0) {
+					const yearPosts = data.posts.map((post: any) => ({
+						...post,
+						image: post.thumbnail,
+					}));
+					postsList.push(...yearPosts);
+				} else {
+					console.log(`No posts found for ${year}.`);
+				}
 			}
-
-			let data = await response.json();
-
-			if (data.posts && data.posts.length > 0) {
-				const currentYearPosts = data.posts.map((post: any) => ({
-					...post,
-					image: post.thumbnail,
-				}));
-				postsList.push(...currentYearPosts);
-			} else {
-				console.log(`No posts found for ${currentYear}.`);
-			}
-
-			// Solicitud para el año anterior
-			response = await fetch(`${API_URL}/posts?year=${currentYear - 1}&country=${countryParam}&limit=-1`);
-
-			if (!response.ok) {
-				throw new Error(`Failed to fetch posts for ${currentYear - 1}. HTTP status ${response.status}`);
-			}
-
-			data = await response.json();
-
-			if (data.posts && data.posts.length > 0) {
-				const previousYearPosts = data.posts.map((post: any) => ({
-					...post,
-					image: post.thumbnail,
-				}));
-				postsList.push(...previousYearPosts);
-			} else {
-				console.log(`No posts found for ${currentYear - 1}.`);
-			}
-
-			// console.log(postsList, 'Final combined posts list');
 
 			return postsList;
 		} catch (error) {
