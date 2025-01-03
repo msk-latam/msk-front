@@ -2,40 +2,43 @@
 import ButtonSecondary from '@/components/Button/ButtonSecondary';
 import React, { useState } from 'react';
 
+type Video = {
+	title: string;
+	url: string;
+};
+
 const BlogVideos: React.FC = () => {
 	// Lista de videos con miniaturas
-	const videoList = [
+	const rawVideoList: Video[] = [
 		{
 			title: 'Desafíos del diagnóstico y tratamiento del SIBO',
-			url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-			thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
+			url: 'https://www.youtube.com/watch?v=1P5yyeeYF9o',
 		},
 		{
-			title: 'Video 2',
-			url: 'https://www.youtube.com/embed/oHg5SJYRHA0',
-			thumbnail: 'https://img.youtube.com/vi/oHg5SJYRHA0/hqdefault.jpg',
-		},
-		{
-			title: 'Video 3',
-			url: 'https://www.youtube.com/embed/kJQP7kiw5Fk',
-			thumbnail: 'https://img.youtube.com/vi/kJQP7kiw5Fk/hqdefault.jpg',
-		},
-		{
-			title: 'Video 3',
-			url: 'https://www.youtube.com/embed/kJQP7kiw5Fk',
-			thumbnail: 'https://img.youtube.com/vi/kJQP7kiw5Fk/hqdefault.jpg',
-		},
-		{
-			title: 'Video 3',
-			url: 'https://www.youtube.com/embed/kJQP7kiw5Fk',
-			thumbnail: 'https://img.youtube.com/vi/kJQP7kiw5Fk/hqdefault.jpg',
-		},
-		{
-			title: 'Video 3',
-			url: 'https://www.youtube.com/embed/kJQP7kiw5Fk',
-			thumbnail: 'https://img.youtube.com/vi/kJQP7kiw5Fk/hqdefault.jpg',
+			title: 'Cómo inscribirte a un curso | Medical & Scientific Knowledge',
+			url: 'https://www.youtube.com/watch?v=WzTRgehFvn0',
 		},
 	];
+
+	// Función para normalizar URLs
+	const normalizeYouTubeUrl = (url: string): string => {
+		const videoIdMatch = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|watch\?v=|v\/))([\w-]{11})/);
+		if (videoIdMatch && videoIdMatch[1]) {
+			return `https://www.youtube.com/embed/${videoIdMatch[1]}`;
+		}
+		return url; // Retorna el original si no se encuentra un ID válido
+	};
+
+	// Normalizar la lista de videos
+	const videoList: Video[] = rawVideoList.map((video) => ({
+		...video,
+		url: normalizeYouTubeUrl(video.url),
+	}));
+
+	const getThumbnailFromUrl = (url: string) => {
+		const videoId = url.split('/').pop(); // Extraer el ID del video
+		return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+	};
 
 	// Estado para manejar el índice del video actual
 	const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
@@ -64,38 +67,12 @@ const BlogVideos: React.FC = () => {
 						Otra manera de informarte y desarrollar tu aprendizaje
 					</p>
 				</div>
-				<div>
-					<ButtonSecondary
-						className='!leading-none border-solid border-1 border-neutral-200 text-neutral-400'
-						sizeClass='px-3 py-2 sm:py-3 sm:px-6 text-[11px]'
-					>
-						<span className='text-[11px] sm:text-sm'>Ver más</span>
-						<svg className='w-3 h-3 sm:w-5 sm:h-5 ml-3 rtl:rotate-180' viewBox='0 0 24 24' fill='none'>
-							<path
-								d='M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699'
-								stroke='currentColor'
-								strokeWidth='1.5'
-								strokeMiterlimit='10'
-								strokeLinecap='round'
-								strokeLinejoin='round'
-							/>
-							<path
-								d='M3.5 12H20.33'
-								stroke='currentColor'
-								strokeWidth='1.5'
-								strokeMiterlimit='10'
-								strokeLinecap='round'
-								strokeLinejoin='round'
-							/>
-						</svg>
-					</ButtonSecondary>
-				</div>
 			</div>
 
 			<div className='flex flex-col lg:flex-row gap-8 mt-6'>
 				{/* Video principal */}
 				<div className='flex-1'>
-					<div className='aspect-w-16 aspect-h-9'>
+					<div className='aspect-w-16 aspect-h-9 z-10'>
 						<iframe
 							width='120%'
 							height='120%'
@@ -107,8 +84,8 @@ const BlogVideos: React.FC = () => {
 							className='rounded-2xl'
 						/>
 					</div>
-					<div className='p-6 lg:p-8 bg-white shadow-md rounded-b-lg pt-8'>
-						<span className='bg-[#FDCEBC] text-[#903916] py-2 px-4 rounded-md'>Videoinfografía</span>
+					<div className='p-6 lg:p-8 lg:pt-14 bg-white shadow-md rounded-b-2xl pt-8 relative transform -translate-y-6 z-0 '>
+						<span className='bg-[#FDCEBC] text-[#903916] py-2 px-4 rounded-md '>Videoinfografía</span>
 						<h3 className='mt-4 text-2xl font-semibold text-[#392C35] !font-raleway'>{currentVideo.title}</h3>
 					</div>
 
@@ -140,10 +117,10 @@ const BlogVideos: React.FC = () => {
 				</div>
 
 				{/* Lista de videos con miniaturas (solo en pantallas grandes) */}
-				<div className='hidden lg:block lg:w-1/5 p-4 '>
+				<div className='hidden lg:block lg:w-1/5 px-4 '>
 					<ul
 						className='space-y-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200'
-						style={{ maxHeight: '600px' }}
+						style={{ maxHeight: '690px' }}
 					>
 						{videoList.map((video, index) => (
 							<li
@@ -153,8 +130,11 @@ const BlogVideos: React.FC = () => {
 								}`}
 								onClick={() => setCurrentVideoIndex(index)}
 							>
-								<img src={video.thumbnail} alt={`Thumbnail for ${video.title}`} className=' object-cover rounded' />
-								{/* <p className='truncate'>{video.title}</p> */}
+								<img
+									src={getThumbnailFromUrl(video.url)}
+									alt={`Thumbnail for ${video.title}`}
+									className=' object-cover rounded'
+								/>
 							</li>
 						))}
 					</ul>
