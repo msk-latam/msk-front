@@ -84,9 +84,6 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		fiscal_regime: '',
 	});
 
-	console.log(formData, 'de pago');
-	console.log(user);
-
 	const [touched, setTouched] = useState<Record<string, boolean>>({});
 	const [isFormValid, setIsFormValid] = useState(false);
 
@@ -253,6 +250,73 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		};
 	};
 
+	const countryToCode = {
+		ar: 'ARG', // Argentina
+		cl: 'CHL', // Chile
+		cr: 'CRI', // Costa Rica
+		co: 'COL', // Colombia
+		hn: 'HND', // Honduras
+	};
+	const getCountryCode = (country: string): string | null => {
+		const lowerCaseCountry = country.toLowerCase();
+		return countryToCode[lowerCaseCountry] || null; // Devuelve null si el país no está mapeado
+	};
+	const countryCode = getCountryCode(country);
+
+	const gateways = {
+		ar: {
+			name: 'MercadoPago',
+			// url: 'http://localhost:8465/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
+			url: 'https://gateway.msklatam.net/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
+			authToken: '$2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6',
+		},
+		cl: {
+			name: 'Rebill',
+			// url: 'http://localhost:8465/api/rebill/cl/realizarPago',
+			url: 'https://payment.msklatam.net/api/rebill/chl/checkout',
+			authToken: 'cfe671ea-88a9-4de6-9b7c-c5f34ec3282a',
+		},
+		cr: {
+			name: 'Stripe',
+			// url: 'http://localhost:8465/api/stripe/cr/realizarPago',
+			url: `https://payment.msklatam.com/api/gateway/stripe/payment/${countryCode}/process-payment`,
+			authToken: 'your-stripe-auth-token',
+		},
+		co: {
+			name: 'Stripe',
+			// url: 'http://localhost:8465/api/stripe/co/realizarPago',
+			url: `https://payment.msklatam.com/api/gateway/stripe/payment/${countryCode}/process-payment`,
+			authToken: 'your-stripe-auth-token',
+		},
+		hn: {
+			name: 'Stripe',
+			// url: 'http://localhost:8465/api/stripe/hn/realizarPago',
+			url: `https://payment.msklatam.com/api/gateway/stripe/payment/${countryCode}/process-payment`,
+			authToken: 'your-stripe-auth-token',
+		},
+		ec: {
+			name: 'MercadoPago',
+			url: 'http://localhost:8465/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
+			// url: `https://payment.msklatam.com/api/gateway/stripe/payment/${countryCode}/process-payment`,
+			// authToken: 'your-stripe-auth-token',
+			authToken: '$2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6',
+		},
+		pe: {
+			name: 'MercadoPago',
+			url: 'http://localhost:8465/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
+			// url: `https://payment.msklatam.com/api/gateway/stripe/payment/${countryCode}/process-payment`,
+			// authToken: 'your-stripe-auth-token',
+			authToken: '$2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6',
+		},
+	};
+
+	const selectedGateway = gateways[country.toLowerCase()];
+	// console.log(selectedGateway);
+
+	if (!selectedGateway) {
+		console.error(`No gateway configured for country: ${country}`);
+	}
+
 	// tarjeta prueba 4509953566233704 || 5031755734530604
 
 	const handleSubmit = async () => {
@@ -286,20 +350,14 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		// }
 
 		try {
-			const response = await fetch(
-				'http://localhost:8465/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
-				// const response = await fetch(
-				// 	'https://gateway.msklatam.net/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
-				//
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: 'Bearer $2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6',
-					},
-					body: JSON.stringify(requestBody),
+			const response = await fetch(selectedGateway.url, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${selectedGateway.authToken}`,
 				},
-			);
+				body: JSON.stringify(requestBody),
+			});
 
 			if (!response.ok) {
 				throw new Error('Error al procesar el pago');
@@ -361,6 +419,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 						handleChange={handleChange}
 						errors={errors}
 						touched={touched}
+						country={country}
 					/>
 
 					{/* Dirección de facturación */}
