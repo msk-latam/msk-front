@@ -22,7 +22,7 @@ const page: FC<PageCourseProps> = async ({ params }) => {
 	return (
 		<LayoutPage heading='Avales y certificaciones ' className='pt-10'>
 			<LandingNavBar product={product} country={country} />
-			<CertificadosWidget product={product} />
+			<CertificadosWidget product={product} country={country} />
 		</LayoutPage>
 	);
 };

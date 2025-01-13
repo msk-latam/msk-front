@@ -20,7 +20,7 @@ export interface SingleContentProps {
 const SingleContent: FC<SingleContentProps> = ({ data, sources, bestSellers, fiveSpecialtiesGroup }) => {
 	const { author, date, reading_time, articles } = data;
 	const [noteIntroduction, ...noteArticles] = articles;
-	console.log(noteIntroduction);
+	console.log(noteArticles);
 
 	return (
 		<div className=' nc-SingleContent  relative space-y-10 mb-16'>
