@@ -32,9 +32,10 @@ const detectCountry = (title: string, description: string): string => {
 
 interface CertificadosWidgetProps {
 	product: FetchSingleProduct;
+	country: string;
 }
 
-const CertificadosWidget: React.FC<CertificadosWidgetProps> = ({ product }) => {
+const CertificadosWidget: React.FC<CertificadosWidgetProps> = ({ product, country }) => {
 	// Agrupar los avales por país
 	const groupedByCountry = product.avales.reduce<Record<string, typeof product.avales>>((acc, aval) => {
 		const country = detectCountry(decodeHtmlEntities(aval.title), decodeHtmlEntities(aval.description));
@@ -100,6 +101,7 @@ const CertificadosWidget: React.FC<CertificadosWidgetProps> = ({ product }) => {
 	const categoriasCursos = filteredCourses.flatMap((course: any) => course.categories.map((category: any) => category.name));
 
 	const cursosOrganizados = filteredCourses.map((course: any) => {
+		// console.log(course);
 		// Extraer descripción sin etiquetas HTML
 		const tempElement = document.createElement('div');
 		tempElement.innerHTML = course.why_course;
@@ -109,18 +111,7 @@ const CertificadosWidget: React.FC<CertificadosWidgetProps> = ({ product }) => {
 		const categorias = course.categories.map((category: any) => category.name).join(', ');
 
 		// Construir el texto del curso con formato mejorado
-		return `
-	Título: ${course.title}
-	Link: https://msklatam.com/curso/${course.slug}
-	Precio Total: ${course.regular_price}
-	Precio Cuotas: ${course.price_installments}
-	Cantidad de Módulos: ${course.cantidad_modulos}
-	Horas: ${course.duration}
-	Descripción:
-	${descripcion}
-	
-	Categorías: ${categorias}
-		`.trim();
+		return `Título: ${course.title} \nLink: https://msklatam.com/curso/${course.slug} \nPrecio Total: ${course.regular_price} \nPrecio Cuotas: ${course.price_installments} \nCantidad de Módulos: ${course.cantidad_modulos} \nHoras: ${course.duration} \nCategorías: ${categorias} \nDescripción: \n${descripcion}`.trim();
 	});
 
 	// Unir todos los textos con un separador entre cada bloque
@@ -128,8 +119,32 @@ const CertificadosWidget: React.FC<CertificadosWidgetProps> = ({ product }) => {
 		'\n\n-------------------------------------------------------------------------------------------------------------------------------\n\n',
 	);
 
-	// Mostrar todo en un único console.log
-	// console.log(textoFinal);
+	const countryMapping = {
+		ar: 'Argentina',
+		bo: 'Bolivia',
+		br: 'Brasil',
+		cl: 'Chile',
+		co: 'Colombia',
+		cr: 'Costa Rica',
+		cu: 'Cuba',
+		do: 'República Dominicana',
+		ec: 'Ecuador',
+		sv: 'El Salvador',
+		gt: 'Guatemala',
+		hn: 'Honduras',
+		mx: 'México',
+		ni: 'Nicaragua',
+		pa: 'Panamá',
+		py: 'Paraguay',
+		pe: 'Perú',
+		pr: 'Puerto Rico',
+		uy: 'Uruguay',
+		ve: 'Venezuela',
+	};
+	function getFullCountryName(code) {
+		return countryMapping[code.toLowerCase()] || 'País desconocido';
+	}
+	console.log(` País: ${getFullCountryName(country)}\n\n`, textoFinal);
 
 	// console.log(linksCursos.join('\n'));
 	// console.log(precioCursos.join('\n'));
