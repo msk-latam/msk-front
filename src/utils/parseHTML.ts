@@ -39,9 +39,9 @@ export const parseHtml = (
 				} else {
 					brCount = 0;
 				}
-				if (brCount >= 2) {
-					brElement.remove();
-				}
+				// if (brCount >= 4) {
+				// 	brElement.remove();
+				// }
 			});
 		});
 
