@@ -26,7 +26,7 @@ export const parseHtml = (
 			if (options != null || (!span.classList.contains('font-lora') && span.id != 'font-lora-italic')) {
 				span.className = '';
 				if (options != null && options.ignoreClassName !== 'font-lora') {
-					span.classList.add('font-lora');
+					span.classList.add('!font-lora');
 				}
 			}
 
