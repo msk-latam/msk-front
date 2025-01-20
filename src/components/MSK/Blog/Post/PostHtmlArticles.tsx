@@ -21,7 +21,7 @@ const PostHtmlArticles: FC<PostHtmlArticlesProps> = ({ articles, featured_text_f
 						{
 							<div
 								key={index}
-								className='font-lora text-xl lg:pr-20 '
+								className='!font-lora text-xl lg:pr-20 '
 								dangerouslySetInnerHTML={{ __html: parseHtml(art.content) }}
 							/>
 						}

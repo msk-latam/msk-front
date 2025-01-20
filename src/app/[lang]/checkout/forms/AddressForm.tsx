@@ -27,6 +27,24 @@ interface AddressFormProps {
 }
 
 const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handleBlur, errors, touched }) => {
+	const provinciasDeChile = [
+		'Arica y Parinacota',
+		'Tarapacá',
+		'Antofagasta',
+		'Atacama',
+		'Coquimbo',
+		// 'Valparaíso',
+		// 'Región Metropolitana de Santiago',
+		// "O'Higgins",
+		// 'Maule',
+		// 'Ñuble',
+		// 'Biobío',
+		// 'Araucanía',
+		// 'Los Ríos',
+		// 'Los Lagos',
+		// 'Aysén',
+		// 'Magallanes y la Antártica Chilena',
+	];
 	return (
 		<div className='grid grid-cols-2 gap-4'>
 			{/* País */}
@@ -50,18 +68,36 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 			{/* Estado */}
 			<div>
 				<label htmlFor='state' className='block text-sm font-medium text-[#6474A6]'>
-					Estado
+					{formData.country === 'Chile' ? 'Provincia' : 'Estado'}
 				</label>
-				<input
-					id='state'
-					name='state'
-					type='text'
-					value={formData.state}
-					onChange={handleChange}
-					onBlur={handleBlur}
-					placeholder='Ingrese estado'
-					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-				/>
+				{formData.country === 'Chile' ? (
+					<select
+						id='state'
+						name='state'
+						value={formData.state}
+						onChange={handleChange}
+						onBlur={handleBlur}
+						className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					>
+						<option value=''>Seleccione una provincia</option>
+						{provinciasDeChile.map((provincia) => (
+							<option key={provincia} value={provincia}>
+								{provincia}
+							</option>
+						))}
+					</select>
+				) : (
+					<input
+						id='state'
+						name='state'
+						type='text'
+						value={formData.state}
+						onChange={handleChange}
+						onBlur={handleBlur}
+						placeholder='Ingrese estado'
+						className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					/>
+				)}
 				{touched.state && errors.state && <p className='text-red-500 text-sm mt-1'>{errors.state}</p>}
 			</div>
 

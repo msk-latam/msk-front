@@ -8,11 +8,159 @@ import AddressForm from './forms/AddressForm';
 import { validatePaymentField } from './validators/paymentValidator';
 import CheckoutPaymentButtons from './buttons/CheckoutPaymentButtons';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+// import CheckoutRebill from './CheckoutRebill';
 
 interface CheckoutContentProps {
 	product?: any;
 	country?: string;
 }
+
+// import { useEffect } from 'react';
+
+interface CheckoutRebillProps {
+	formData: {
+		amount: number;
+		currency: string;
+		productName: string;
+		description?: string;
+		frequency?: {
+			type: string;
+			quantity: number;
+		};
+		debitDay?: number;
+		repetitions?: number | null;
+		customerData?: {
+			email?: string;
+			firstName?: string;
+			lastName?: string;
+			phoneNumber?: {
+				number: number;
+			};
+			identification?: {
+				type: string;
+				id: string;
+			};
+		};
+		billing?: {
+			city: string;
+			country: string;
+			line1: string;
+			line2: string;
+			zipCode: string;
+			state: string;
+		};
+	};
+	mode?: 'payment' | 'subscription'; // Define si es un pago único o una suscripción
+}
+
+let checkoutForm: any;
+const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payment' }) => {
+	useEffect(() => {
+		if (!window.Rebill) {
+			console.error(
+				'Rebill SDK no está disponible. Verifica que el script https://sdk.rebill.com/v3/rebill.js se haya cargado correctamente.',
+			);
+			return;
+		}
+
+		const container = document.getElementById('rebill-container');
+		if (container) {
+			container.innerHTML = '';
+		}
+
+		const rebill = new window.Rebill('pk_test_8f248fff-0734-11ef-92e2-0e2c69b9aaf7');
+
+		try {
+			if (mode === 'payment') {
+				// Crea un formulario para pagos únicos
+				checkoutForm = rebill.checkout.create({
+					name: formData.productName,
+					description: formData.description || '',
+					amount: formData.amount,
+					currency: formData.currency,
+				});
+				console.log(formData.customerData?.identification?.type);
+				checkoutForm.set({
+					customerInformation: {
+						email: formData.customerData.email || '',
+						firstName: formData.customerData.firstName || '',
+						lastName: formData.customerData.lastName || '',
+						phoneNumber: formData.customerData.phoneNumber || { number: 0 },
+						identification: {
+							type: formData.customerData?.identification?.type,
+							id: formData.customerData?.identification?.id,
+						},
+					},
+					billing: {
+						city: formData.billing?.city || '',
+						country: formData.billing?.country || '',
+						line1: formData.billing?.line1 || '',
+						line2: formData.billing?.line2 || '',
+						zipCode: formData.billing?.zipCode || '',
+						state: formData.billing?.state || '',
+					},
+				});
+				checkoutForm.display({
+					userLogin: false,
+					billing: false,
+					customerInformation: false,
+					// cardholderDetails: false,
+					discountCode: false,
+					// checkoutSummary: false,
+					submitButton: false,
+					// resetButton: false,
+					excludePaymentMethods: ['CASH', 'REBILL_PIX', 'TRANSFER'],
+				});
+				checkoutForm.custom({
+					css: `
+					
+					 [id^="headlessui-listbox-option"]:nth-child(n+6) {
+		  display: none !important;
+		}
+				`,
+				});
+			}
+
+			checkoutForm.custom({
+				css: `
+				
+				 [id^="headlessui-listbox-option"]:nth-child(n+6) {
+      display: none !important;
+    }
+			`,
+			});
+
+			// Monta el formulario en el contenedor
+			checkoutForm.mount('rebill-container');
+
+			checkoutForm.on('approved', (e) => {
+				console.log('Pago aprobado:', e);
+			});
+
+			checkoutForm.on('error', (e) => {
+				console.error('Error en el formulario:', e);
+			});
+
+			checkoutForm.on('rejected', (e) => {
+				console.warn('Pago rechazado:', e);
+			});
+
+			// console.log('Formulario inicializado:', checkoutForm);
+		} catch (error) {
+			console.error('Error al inicializar Rebill Checkout:', error);
+		}
+	}, [formData, mode]);
+
+	return (
+		<div className=''>
+			<div id='rebill-container' className='p-6 bg-white border border-gray-300 rounded-lg flex h-[500px]'>
+				{/* El iframe se montará aquí */}
+			</div>
+		</div>
+	);
+};
+
+// export default CheckoutRebill;
 
 const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) => {
 	const { executeRecaptcha } = useGoogleReCaptcha();
@@ -31,12 +179,12 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		user,
 	} = useCheckout();
 	const [formData, setFormData] = useState({
-		cardholderName: '',
-		cardNumber: '',
-		expiryMonth: '',
-		expiryYear: '',
-		cvv: '',
-		country: '',
+		// cardholderName: '',
+		// cardNumber: '',
+		// expiryMonth: '',
+		// expiryYear: '',
+		// cvv: '',
+		country: country || '',
 		state: '',
 		city: '',
 		address: '',
@@ -57,11 +205,11 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 	});
 	// console.log(formData);
 	const [errors, setErrors] = useState({
-		cardholderName: '',
-		cardNumber: '',
-		expiryMonth: '',
-		expiryYear: '',
-		cvv: '',
+		// cardholderName: '',
+		// cardNumber: '',
+		// expiryMonth: '',
+		// expiryYear: '',
+		// cvv: '',
 		// type_doc: '',
 		// documentNumber: '',
 		country: '',
@@ -83,15 +231,21 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		identification: '',
 		fiscal_regime: '',
 	});
-
 	const [touched, setTouched] = useState<Record<string, boolean>>({});
 	const [isFormValid, setIsFormValid] = useState(false);
+	const [rebillValid, setRebillValid] = useState(false);
 
 	useEffect(() => {
 		const formIsValid =
 			Object.values(errors).every((error) => error === '') && Object.values(formData).every((value) => value !== '');
 		setIsFormValid(formIsValid);
 	}, [formData, errors]);
+
+	useEffect(() => {
+		if (isFormValid) {
+			setRebillValid(true);
+		}
+	}, [isFormValid]);
 
 	const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { id } = e.target;
@@ -107,6 +261,20 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		}));
 	};
 
+	const countryMap = {
+		ar: 'Argentina',
+		cl: 'Chile',
+		br: 'Brasil',
+		mx: 'Mexico',
+		// Agrega más países según sea necesario
+	};
+	const normalizeCountryCode = (code) => code?.toLowerCase() || '';
+	const getCountryName = (code) => {
+		const normalizedCode = normalizeCountryCode(code);
+		return countryMap[normalizedCode] || '';
+	};
+
+	const countryName = getCountryName(country);
 	useEffect(() => {
 		if (user) {
 			// Si el usuario está disponible en el contexto, usamos esos datos
@@ -115,7 +283,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				cardholderName: `${user.firstName} ${user.lastName}`,
 				identification: '',
 				type_doc: '',
-				country: '',
+				country: countryName || '',
 				state: '',
 				address: '',
 				postal_code: '',
@@ -184,11 +352,12 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 	};
 	const currency = currencies[country] || 'USD';
 
+	const totalPrice = product.total_price;
+	const transactionAmount = parseInt(totalPrice.replace(/[\.,]/g, ''), 10);
+	const regularPrice = product.regular_price;
+	const regularPriceFixed = parseInt(regularPrice.replace(/[\.,]/g, ''), 10);
+
 	const mapFormDataToRequest = (formData: any) => {
-		const totalPrice = product.total_price;
-		const transactionAmount = parseInt(totalPrice.replace(/[\.,]/g, ''), 10);
-		const regularPrice = product.regular_price;
-		const regularPriceFixed = parseInt(regularPrice.replace(/[\.,]/g, ''), 10);
 		return {
 			// transaction_amount: 1100,
 			transaction_amount: transactionAmount,
@@ -274,7 +443,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		},
 		cl: {
 			name: 'Rebill',
-			url: 'http://localhost:8465/api/rebill/test/checkout/full',
+			url: 'http://localhost:8465/api/rebill/CL/checkout/full',
 			// url: 'https://gateway.msklatam.net/api/rebill/CL/checkout/full',
 			authToken: '$2y$12$O4BEY9Ghrs2GCb5MtrNBWeeaG4H9MlWJsViHO7vKYhMb2ChNcPYRK',
 		},
@@ -320,12 +489,97 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 	}
 
 	// tarjeta prueba 4509953566233704 || 5031755734530604
+	const productCRM: any = {
+		total_price: product.total_price,
+		country: product.country,
+		title: product.ficha.title,
+		product_code: product.ficha.product_code,
+	};
 
+	console.log(isFormValid);
+	console.log(rebillValid, 'rebill');
 	const handleSubmit = async () => {
 		if (!isFormValid) return;
 
 		const requestBody = mapFormDataToRequest(formData);
+
+		const response = await checkoutForm.submit();
+
+		const dataCRM: any = {
+			product: productCRM,
+			userData: formData,
+			rebillResponse: response,
+		};
+		console.log(dataCRM);
+		setIsSubmitting(false);
+
+		if (response.status === 'approved' && response.data.payment.status === 'SUCCEEDED') {
+			setPaymentStatus(response.status);
+			if (subStep === 0) {
+				completeStep(activeStep);
+				setActiveStep(activeStep + 1);
+			} else {
+				setActiveStep(activeStep + 1);
+				completeStep(activeStep);
+				setSubStep(0);
+			}
+		} else {
+			// console.error('Pago no procesado correctamente');
+			setPaymentStatus('rejected');
+			completeStep(activeStep);
+			setActiveStep(activeStep + 1);
+			// console.error('Error al enviar los datos:', error);
+			setPaymentStatus('rejected');
+			setIsSubmitting(false);
+		}
+
+		// try {
+		// 	const response = await fetch(selectedGateway.url, {
+		// 		method: 'POST',
+		// 		headers: {
+		// 			'Content-Type': 'application/json',
+		// 			Authorization: `Bearer ${selectedGateway.authToken}`,
+		// 		},
+		// 		body: JSON.stringify(requestBody),
+		// 	});
+
+		// 	if (!response.ok) {
+		// 		throw new Error('Error al procesar el pago');
+		// 	}
+
+		// 	const data = await response.json();
+		// 	if (data.status === 200 && data.message === 'Se cobro el pago y creo en zoho') {
+		// 		const status = data.paymentStatus || 'approved';
+		// 		setPaymentStatus(status);
+
+		// 		if (subStep === 0) {
+		// 			completeStep(activeStep);
+		// 			setActiveStep(activeStep + 1);
+		// 		} else {
+		// 			setActiveStep(activeStep + 1);
+		// 			completeStep(activeStep);
+		// 			setSubStep(0);
+		// 		}
+		// 	} else {
+		// 		console.error('Pago no procesado correctamente');
+		// 		setPaymentStatus('rejected');
+		// 	}
+		// } catch (error) {
+		// 	completeStep(activeStep);
+		// 	setActiveStep(activeStep + 1);
+		// 	console.error('Error al enviar los datos:', error);
+		// 	setPaymentStatus('rejected');
+		// } finally {
+		// 	setIsSubmitting(false);
+		// }
+	};
+
+	const handleSubmit1 = async () => {
+		if (!isFormValid) return;
+
+		const requestBody = mapFormDataToRequest(formData);
 		setIsSubmitting(true);
+
 		// try {
 		// 	const userUpdateData = {
 		// 		...formData,
@@ -391,6 +645,34 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 			setIsSubmitting(false);
 		}
 	};
+	const excludedCountriesForForm = ['cl']; // Lista de países donde no se renderiza el formulario
+	const allowedCountriesForRebill = ['cl'];
+	const rebillForm = {
+		amount: transactionAmount,
+		currency: currency || 'USD',
+		productName: product.ficha.title,
+		customerData: {
+			// document: '12345678',
+			email: user?.email || state.profile.email,
+			// city: 'Santiago',
+			firstName: user?.firstName || state.profile.name,
+			lastName: user?.lastName || state.profile.last_name,
+			phoneNumber: { number: user?.phone || state.profile.phone },
+			identification: {
+				type: formData.type_doc === '05 - CÉDULA' ? 'CI' : formData.type_doc,
+
+				id: formData.identification,
+			},
+		},
+		billing: {
+			city: formData.city || '',
+			country: countryName || '',
+			line1: formData.address,
+			line2: '',
+			zipCode: formData.postal_code || '',
+			state: formData.state || '',
+		},
+	};
 
 	return (
 		<>
@@ -400,20 +682,19 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				</span>
 				Pago
 			</h2>
+
 			<div className='p-6 bg-white border border-gray-300 rounded-lg '>
 				<h2 className='text-2xl font-semibold text-[#392C35]'>Datos de tarjeta</h2>
 
 				<form className='mt-6'>
-					{/* Datos de tarjeta */}
-					<CardDetailsForm
+					{/* <CardDetailsForm
 						formData={formData}
 						handleBlur={handleBlur}
 						handleChange={handleChange}
 						errors={errors}
 						touched={touched}
-					/>
+					/> */}
 
-					{/* Datos de facturación */}
 					<h3 className='mt-8 text-xl font-semibold text-[#392C35]'>Datos de facturación</h3>
 					<DocumentDetailsForm
 						formData={formData}
@@ -424,7 +705,6 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 						country={country}
 					/>
 
-					{/* Dirección de facturación */}
 					<h3 className='mt-8 text-xl font-semibold text-[#392C35]'>Dirección de facturación</h3>
 					<AddressForm
 						formData={formData}
@@ -434,6 +714,12 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 						touched={touched}
 					/>
 				</form>
+
+				{rebillValid && (
+					<div className='w-full'>
+						<CheckoutRebill formData={rebillForm} />
+					</div>
+				)}
 			</div>
 			<CheckoutPaymentButtons
 				isFormValid={isFormValid}
