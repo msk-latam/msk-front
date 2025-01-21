@@ -61,10 +61,10 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 		const fetchedCourses = await ssr.getAllCourses(currentCountry);
 		setAllCourses(JSONProduct.products);
 	}
-	if (!getAllBestSellers().length) {
-		const fetchedBestSellers = await ssr.getBestSellers(currentCountry);
-		setAllBestSellers(fetchedBestSellers);
-	}
+	// if (!getAllBestSellers().length) {
+	// 	const fetchedBestSellers = await ssr.getBestSellers(currentCountry);
+	// 	setAllBestSellers(fetchedBestSellers);
+	// }
 	if (!getAllPosts() || !getAllPosts().length) {
 		const fetchedPosts = await ssr.getPosts(currentCountry);
 		setAllPosts(fetchedPosts);
