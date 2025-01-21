@@ -119,8 +119,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
 					<div className=' relative'>
 						<CoursesForYou
-							// courses={getAllCourses().filter((course: FetchCourseType) => course.father_post_type === 'course')}
-							courses={fetchedContent}
+							courses={arJSON.products.filter((course: FetchCourseType) => course.father_post_type === 'course')}
 							bestSeller={getAllBestSellers()}
 							tabs={TABS_HOME}
 							className='pt-8 pb-2'
@@ -142,8 +141,8 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 					</div>
 
 					<div className=' md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20  relative py-8 md:py-16 mb-[96px] xl:w-[129%] left-1/2 transform -translate-x-1/2  w-screen -mt-10'>
-						{/* <SectionSliderBestSellers
-							posts={arJSON.products}
+						<SectionSliderBestSellers
+							posts={getAllBestSellers()}
 							loading={loadingBestSellers}
 							className='w-full section-slider-posts-container px-12 md:px-4'
 							postCardName='card9'
@@ -151,7 +150,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 							subHeading='Profesionales como tú ya se capacitaron con ellos. ¡Ahora te toca a ti!'
 							sliderStype='style2'
 							uniqueSliderClass='pageNewHome-section6'
-						/> */}
+						/>
 					</div>
 
 					<div className=' grid grid-cols-1 md:grid-cols-3 gap-4 my-16'>
