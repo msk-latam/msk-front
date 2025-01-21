@@ -217,7 +217,8 @@ class ApiSSRService {
 			const countryFile = validCountries.includes(country || '') ? `${country}.json` : `int.json`;
 
 			// Construir la URL para el archivo JSON
-			const fileUrl = `/products/${countryFile}`;
+			const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
+			const fileUrl = `${baseUrl}/products/${countryFile}`;
 
 			// Obtener los datos desde el archivo JSON
 			const response = await fetch(fileUrl);
