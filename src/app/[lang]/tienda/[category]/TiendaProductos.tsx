@@ -8,7 +8,7 @@ import { useSearchParams } from 'next/navigation';
 import { FC, useContext, useEffect, useState } from 'react';
 import SpecialtiesModal from './SpecialtiesModal';
 import ssr from '@/services/ssr';
-import arJSON from '@/app/products/ar.json';
+import { getJSONByCountry } from '@/app/products';
 
 interface TiendaProps {
 	category: string;
@@ -33,11 +33,12 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 	const professionFilter = searchParams.get('profesion');
 
 	const [courses, setCourses] = useState<any[]>([]);
+	const JSONProduct = getJSONByCountry(country);
 
 	useEffect(() => {
 		const fetchCourses = async () => {
 			const coursesData = await ssr.getAllCourses(country);
-			setCourses(arJSON.products);
+			setCourses(JSONProduct.products);
 			// setCurrentItems(coursesData);
 			console.log(coursesData);
 		};

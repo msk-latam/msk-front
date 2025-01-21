@@ -23,7 +23,7 @@ import Card19 from '@/components/Card19/Card19';
 import Card20 from '@/components/Card20/Card20';
 import ImageSkeleton from '@/components/Skeleton/ImageSkeleton';
 import { DataContext } from '@/context/data/DataContext';
-import arJSON from '@/app/products/ar.json';
+import { getJSONByCountry } from '@/app/products';
 
 export interface SectionSliderBestSellers {
 	className?: string;
@@ -71,10 +71,11 @@ const SectionSliderBestSellers: FC<SectionSliderBestSellers> = ({
 	const {
 		state: { storeCourses },
 	} = useContext(DataContext);
+	const JSONProduct = getJSONByCountry('int');
 
 	// const top_picks = posts.sort((a: any, b: any) => b.viewdCount - a.viewdCount);
 	const allowedProductCodes = posts?.map((p: any) => p.product_code);
-	const bridgeElements = arJSON.products?.filter((sc: any) => allowedProductCodes.includes(sc.product_code));
+	const bridgeElements = JSONProduct.products?.filter((sc: any) => allowedProductCodes.includes(sc.product_code));
 
 	const MY_GLIDE = new Glide(`.${UNIQUE_CLASS}`, {
 		direction: 'ltr',

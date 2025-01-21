@@ -5,7 +5,7 @@ import { FetchSingleProduct, SignUp, UserProfile } from '@/data/types';
 import { BASE_URL, IS_PROD, SITE_URL } from '@/contains/constants';
 import { BodyNewPassword } from '@/components/MSK/PageNewPassword';
 import { notFound } from 'next/navigation';
-import arJSON from '@/app/products/ar.json';
+import { getJSONByCountry } from '@/app/products';
 
 let validCountries = countries.map((item) => item.id);
 
@@ -210,6 +210,7 @@ class ApiSSRService {
 	// }
 
 	async getAllCourses(country?: string): Promise<void> {
+		const JSONProduct = getJSONByCountry(country);
 		setLoadingCourses(true); // Iniciar indicador de carga
 
 		try {
@@ -221,7 +222,7 @@ class ApiSSRService {
 			// const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
 			// const fileUrl = `/products/${countryFile}`;
 			// const response = await fetch(`/app/products/${country || 'int'}.json`);
-			const response = arJSON;
+			const response = JSONProduct;
 			// Obtener los datos desde el archivo JSON
 			// const response = await fetch(fileUrl);
 			// console.log(response);
@@ -317,6 +318,7 @@ class ApiSSRService {
 
 	async getStoreCourses(country?: string): Promise<void> {
 		setLoadingCourses(true); // Asegúrate de que esta función esté definida en el contexto
+		const JSONProduct = getJSONByCountry(country);
 
 		try {
 			// Lista de países válidos
@@ -337,7 +339,7 @@ class ApiSSRService {
 
 			// // Actualizar el estado con los productos
 			// setStoreCourses(data.products); // Asegúrate de que esta función esté definida
-			const response = arJSON;
+			const response = JSONProduct;
 			// Obtener los datos desde el archivo JSON
 			// const response = await fetch(fileUrl);
 			// console.log(response);

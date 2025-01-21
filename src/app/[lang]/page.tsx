@@ -23,6 +23,7 @@ import dynamic from 'next/dynamic';
 import { generateHomeMetadata } from '@/SEO/home/metaData/homeMetaData';
 import { homeFAQs } from '@/components/faqs/homeFAQs';
 import ClearLocalStorage from '@/components/versionStorage/ClearLocalStorage';
+import { getJSONByCountry } from '../products';
 
 const BlogSummary = dynamic(() => import('@/components/MSK/BlogSummary'));
 const BrandSlider = dynamic(() => import('@/components/MSK/BrandSlider'));
@@ -36,7 +37,6 @@ const SectionGridCategoryBox = dynamic(() => import('@/components/SectionGridCat
 const SectionHero = dynamic(() => import('@/components/SectionHero/SectionHero'));
 const SectionSliderBestSellers = dynamic(() => import('@/components/Sections/SectionSliderBestSellers'));
 const WelcomeBox = dynamic(() => import('@/components/WelcomeBox/WelcomeBox'));
-import arJSON from '@/app/products/ar.json';
 
 export async function generateMetadata({ params }: { params: { lang: string } }) {
 	return await generateHomeMetadata({ params });
@@ -55,10 +55,11 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const jsonLd = generateSchemaJson('WebSite');
 	const currentCountry = params.lang || cookies().get('country')?.value;
 	const loadingBestSellers = false;
+	const JSONProduct = getJSONByCountry(currentCountry);
 
 	if (true) {
 		const fetchedCourses = await ssr.getAllCourses(currentCountry);
-		setAllCourses(arJSON.products);
+		setAllCourses(JSONProduct.products);
 	}
 	if (!getAllBestSellers().length) {
 		const fetchedBestSellers = await ssr.getBestSellers(currentCountry);
@@ -119,7 +120,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
 					<div className=' relative'>
 						<CoursesForYou
-							courses={arJSON.products.filter((course: FetchCourseType) => course.father_post_type === 'course')}
+							courses={JSONProduct.products.filter((course: FetchCourseType) => course.father_post_type === 'course')}
 							bestSeller={getAllBestSellers()}
 							tabs={TABS_HOME}
 							className='pt-8 pb-2'

@@ -14,6 +14,7 @@ import { FAQS } from '../../page';
 import TiendaHeader from './TiendaHeader';
 import TiendaProductos from './TiendaProductos';
 import ssr from '@/services/ssr';
+import { getJSONByCountry } from '@/app/products';
 
 interface TiendaProps {
 	category: string;
@@ -27,10 +28,12 @@ const Tienda: FC<TiendaProps> = ({ category, country }) => {
 	const [courses, setCourses] = useState<any[]>([]);
 	const searchParams = useSearchParams();
 
+	const JSONProduct = getJSONByCountry(country);
+
 	useEffect(() => {
 		const fetchCourses = async () => {
 			const coursesData = await ssr.getAllCourses(country);
-			setCourses(coursesData);
+			setCourses(JSONProduct.products);
 		};
 
 		fetchCourses();

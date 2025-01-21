@@ -14,10 +14,10 @@ import arrowDownBlack from '@/public/images/icons/arrowDownBlack.svg';
 import { filter } from 'lodash';
 import { cookies } from 'next/headers';
 import ssr from '@/services/ssr';
-import arJSON from '@/app/products/ar.json';
+import { getJSONByCountry } from '@/app/products';
 
 const CategoriesDropdown = ({ onClickClose, country }: any) => {
-	console.log(arJSON);
+	const JSONProduct = getJSONByCountry(country);
 	const [isOpen, setIsOpen] = useState(false);
 	const [activeCategory, setActiveCategory] = useState<Specialty | null>(null);
 	const [showUpArrow, setShowUpArrow] = useState(false);
@@ -27,7 +27,6 @@ const CategoriesDropdown = ({ onClickClose, country }: any) => {
 	const router = useRouter();
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	useEffect(() => {
-		console.log(scrollContainerRef);
 		const container = scrollContainerRef.current;
 		if (!container) {
 			// console.error('El contenedor de scroll no está definido en useEffect.');
@@ -132,8 +131,7 @@ const CategoriesDropdown = ({ onClickClose, country }: any) => {
 		const fetchCourses = async () => {
 			try {
 				const coursesData = await ssr.getAllCourses(country);
-				setCachedCourses(arJSON.products); // Actualiza el estado con los cursos
-				console.log(coursesData); // Verifica que los cursos se hayan obtenido correctamente
+				setCachedCourses(JSONProduct.products); // Actualiza el estado con los cursos
 			} catch (error) {
 				console.error('Error fetching courses:', error);
 			}
@@ -141,8 +139,6 @@ const CategoriesDropdown = ({ onClickClose, country }: any) => {
 
 		fetchCourses();
 	}, []);
-
-	console.log(cachedCourses);
 
 	const filteredCourses = cachedCourses?.filter((course: FetchCourseType) => {
 		return (
@@ -152,8 +148,6 @@ const CategoriesDropdown = ({ onClickClose, country }: any) => {
 			course.is_test_product !== true
 		);
 	});
-
-	console.log(filteredCourses);
 
 	const redirectToCategory = (slug: string) => {
 		// console.log(slug);
