@@ -224,7 +224,7 @@ class ApiSSRService {
 			const response = arJSON;
 			// Obtener los datos desde el archivo JSON
 			// const response = await fetch(fileUrl);
-			console.log(response);
+			// console.log(response);
 
 			// if (!response.ok) {
 			// 	throw new Error(`No se pudo cargar el archivo ${countryFile}. Código de estado: ${response.status}`);
@@ -340,7 +340,7 @@ class ApiSSRService {
 			const response = arJSON;
 			// Obtener los datos desde el archivo JSON
 			// const response = await fetch(fileUrl);
-			console.log(response);
+			// console.log(response);
 
 			// if (!response.ok) {
 			// 	throw new Error(`No se pudo cargar el archivo ${countryFile}. Código de estado: ${response.status}`);
@@ -468,7 +468,7 @@ class ApiSSRService {
 				const data = await response.json();
 
 				const postDate = data?.posts[0].date;
-				console.log(postDate);
+				// console.log(postDate);
 
 				if (data.posts && data.posts.length > 0) {
 					const yearPosts = data.posts.map((post: any) => ({
