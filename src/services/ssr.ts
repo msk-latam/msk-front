@@ -5,6 +5,7 @@ import { FetchSingleProduct, SignUp, UserProfile } from '@/data/types';
 import { BASE_URL, IS_PROD, SITE_URL } from '@/contains/constants';
 import { BodyNewPassword } from '@/components/MSK/PageNewPassword';
 import { notFound } from 'next/navigation';
+import arJSON from '@/app/products/ar.json';
 
 let validCountries = countries.map((item) => item.id);
 
@@ -218,20 +219,22 @@ class ApiSSRService {
 
 			// Construir la URL para el archivo JSON
 			// const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
-			const fileUrl = `https://msklatam.tech/products/${countryFile}`;
-
+			// const fileUrl = `/products/${countryFile}`;
+			// const response = await fetch(`/app/products/${country || 'int'}.json`);
+			const response = arJSON;
 			// Obtener los datos desde el archivo JSON
-			const response = await fetch(fileUrl);
+			// const response = await fetch(fileUrl);
+			console.log(response);
 
-			if (!response.ok) {
-				throw new Error(`No se pudo cargar el archivo ${countryFile}. Código de estado: ${response.status}`);
-			}
+			// if (!response.ok) {
+			// 	throw new Error(`No se pudo cargar el archivo ${countryFile}. Código de estado: ${response.status}`);
+			// }
 
-			const data = await response.json();
+			// const data = await response.json();
 
-			console.log(data);
-			setAllCourses(data.products);
-			return data.products || [];
+			// console.log(data);
+			setAllCourses(response);
+			return response;
 		} catch (error) {
 			console.error('Error al cargar los cursos:', error);
 			setAllCourses([]); // Si hay un error, establece una lista vacía
@@ -322,17 +325,32 @@ class ApiSSRService {
 			const countryFile = validCountries.includes(country || '') ? `${country}.json` : `int.json`;
 
 			// Intentar cargar el archivo JSON
-			const response = await fetch(`/products/${countryFile}`);
-			if (!response.ok) {
-				throw new Error(`Failed to fetch JSON file. HTTP status ${response.status}`);
-			}
+			// const response = await fetch(`/api/products/${country || 'int'}`);
+			// console.log(response);
+			// if (!response.ok) {
+			// 	throw new Error(`Failed to fetch JSON file. HTTP status ${response.status}`);
+			// }
 
-			// Parsear los datos JSON
-			const data = await response.json();
-			console.log(data);
+			// // Parsear los datos JSON
+			// const data = await response.json();
+			// console.log(data);
 
-			// Actualizar el estado con los productos
-			setStoreCourses(data.products); // Asegúrate de que esta función esté definida
+			// // Actualizar el estado con los productos
+			// setStoreCourses(data.products); // Asegúrate de que esta función esté definida
+			const response = arJSON;
+			// Obtener los datos desde el archivo JSON
+			// const response = await fetch(fileUrl);
+			console.log(response);
+
+			// if (!response.ok) {
+			// 	throw new Error(`No se pudo cargar el archivo ${countryFile}. Código de estado: ${response.status}`);
+			// }
+
+			// const data = await response.json();
+
+			// console.log(data);
+			setAllCourses(response);
+			return response;
 		} catch (error) {
 			console.error('Error al cargar los datos:', error);
 			setStoreCourses([]); // Asegúrate de que esta función esté definida

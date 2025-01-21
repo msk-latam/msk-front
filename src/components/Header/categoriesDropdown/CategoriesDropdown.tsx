@@ -14,8 +14,10 @@ import arrowDownBlack from '@/public/images/icons/arrowDownBlack.svg';
 import { filter } from 'lodash';
 import { cookies } from 'next/headers';
 import ssr from '@/services/ssr';
+import arJSON from '@/app/products/ar.json';
 
 const CategoriesDropdown = ({ onClickClose, country }: any) => {
+	console.log(arJSON);
 	const [isOpen, setIsOpen] = useState(false);
 	const [activeCategory, setActiveCategory] = useState<Specialty | null>(null);
 	const [showUpArrow, setShowUpArrow] = useState(false);
@@ -126,12 +128,11 @@ const CategoriesDropdown = ({ onClickClose, country }: any) => {
 	}
 
 	// const currentCountry = cookies().get('country')?.value;
-	console.log(country, 'de aca');
 	useEffect(() => {
 		const fetchCourses = async () => {
 			try {
 				const coursesData = await ssr.getAllCourses(country);
-				setCachedCourses(coursesData); // Actualiza el estado con los cursos
+				setCachedCourses(arJSON.products); // Actualiza el estado con los cursos
 				console.log(coursesData); // Verifica que los cursos se hayan obtenido correctamente
 			} catch (error) {
 				console.error('Error fetching courses:', error);
@@ -140,6 +141,8 @@ const CategoriesDropdown = ({ onClickClose, country }: any) => {
 
 		fetchCourses();
 	}, []);
+
+	console.log(cachedCourses);
 
 	const filteredCourses = cachedCourses?.filter((course: FetchCourseType) => {
 		return (

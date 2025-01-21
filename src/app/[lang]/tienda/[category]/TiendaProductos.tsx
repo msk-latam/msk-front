@@ -8,6 +8,7 @@ import { useSearchParams } from 'next/navigation';
 import { FC, useContext, useEffect, useState } from 'react';
 import SpecialtiesModal from './SpecialtiesModal';
 import ssr from '@/services/ssr';
+import arJSON from '@/app/products/ar.json';
 
 interface TiendaProps {
 	category: string;
@@ -36,7 +37,7 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 	useEffect(() => {
 		const fetchCourses = async () => {
 			const coursesData = await ssr.getAllCourses(country);
-			setCourses(coursesData);
+			setCourses(arJSON.products);
 			// setCurrentItems(coursesData);
 			console.log(coursesData);
 		};
