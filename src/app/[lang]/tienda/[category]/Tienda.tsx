@@ -13,6 +13,7 @@ import { FAQS } from '../../page';
 
 import TiendaHeader from './TiendaHeader';
 import TiendaProductos from './TiendaProductos';
+import ssr from '@/services/ssr';
 
 interface TiendaProps {
 	category: string;
@@ -23,7 +24,17 @@ const Tienda: FC<TiendaProps> = ({ category, country }) => {
 	const { state: dataState } = useContext(DataContext);
 	const { storeCourses, allStoreProfessions } = dataState;
 	const [currentItems, setCurrentItems] = useState<FetchCourseType[]>([]);
+	const [courses, setCourses] = useState<any[]>([]);
 	const searchParams = useSearchParams();
+
+	useEffect(() => {
+		const fetchCourses = async () => {
+			const coursesData = await ssr.getAllCourses(country);
+			setCourses(coursesData);
+		};
+
+		fetchCourses();
+	}, [country]);
 
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -42,22 +53,46 @@ const Tienda: FC<TiendaProps> = ({ category, country }) => {
 
 	let { storeFilters, addFilter, removeFilter, updateFilter, clearSpecialties } = useStoreFilters();
 
+	// useEffect(() => {
+	// 	const filterCourses = () => {
+	// 		let filteredCourses = courses;
+
+	// 		// Filtra por categoría
+	// 		console.log(filteredCourses);
+	// 		if (category && courses) {
+	// 			filteredCourses = courses.filter((course: any) => course.categories.some((cat: any) => cat.slug === category));
+	// 		}
+
+	// 		filteredCourses = filteredCourses.filter((course: any) => course.father_post_type === 'course');
+
+	// 		setCurrentItems(filteredCourses);
+	// 	};
+
+	// 	filterCourses();
+	// 	console.log(filterCourses);
+	// }, [category, country, courses, currentPage]);
+
 	useEffect(() => {
 		const filterCourses = () => {
-			let filteredCourses = storeCourses;
+			if (!courses.length) return; // Salir si courses está vacío
 
-			// Filtra por categoría
+			let filteredCourses = courses;
+
+			// Filtrar por categoría
 			if (category) {
-				filteredCourses = storeCourses.filter((course: any) => course.categories.some((cat: any) => cat.slug === category));
+				filteredCourses = filteredCourses.filter((course: any) =>
+					course.categories.some((cat: any) => cat.slug === category),
+				);
 			}
 
+			// Filtrar por tipo de curso
 			filteredCourses = filteredCourses.filter((course: any) => course.father_post_type === 'course');
 
-			setCurrentItems(filteredCourses);
+			setCurrentItems(filteredCourses); // Actualizar los cursos filtrados
 		};
 
 		filterCourses();
-	}, [category, country, storeCourses, currentPage]);
+	}, [category, courses]);
 
 	const onChangeProfession = (profession: Profession) => {
 		resetPage();
@@ -85,28 +120,28 @@ const Tienda: FC<TiendaProps> = ({ category, country }) => {
 		} else addFilter('duration', duration);
 	};
 
-	const triggerSearch = (event: any) => {
-		if (event) {
-			const filteredProducts = currentItems.filter((product: any) =>
-				removeAccents(product.title.toLowerCase()).includes(removeAccents(event.toLowerCase())),
-			);
-			// console.log('SEARCH TRIGGERED', event, {
-			//   filteredProducts,
-			// });
+	// const triggerSearch = (event: any) => {
+	// 	if (event) {
+	// 		const filteredProducts = currentItems.filter((product: any) =>
+	// 			removeAccents(product.title.toLowerCase()).includes(removeAccents(event.toLowerCase())),
+	// 		);
+	// 		// console.log('SEARCH TRIGGERED', event, {
+	// 		//   filteredProducts,
+	// 		// });
 
-			setCurrentItems(filteredProducts);
-		} else {
-			let filteredByCategory = storeCourses;
+	// 		setCurrentItems(filteredProducts);
+	// 	} else {
+	// 		let filteredByCategory = storeCourses;
 
-			if (category) {
-				filteredByCategory = storeCourses.filter((course: any) =>
-					course.categories.some((cat: any) => cat.slug === category),
-				);
-			}
+	// 		if (category) {
+	// 			filteredByCategory = storeCourses.filter((course: any) =>
+	// 				course.categories.some((cat: any) => cat.slug === category),
+	// 			);
+	// 		}
 
-			setCurrentItems(filteredByCategory);
-		}
-	};
+	// 		setCurrentItems(filteredByCategory);
+	// 	}
+	// };
 
 	const generateSlug = (name: string) => {
 		return name

@@ -21,6 +21,30 @@ const MainNav2: FC = () => {
 	const locale = useCurrentLocale(i18nConfig);
 
 	const { state } = useContext(AuthContext);
+	const countryCodes: { [key: string]: string } = {
+		Argentina: 'ar',
+		Bolivia: 'bo',
+		Brasil: 'br',
+		Chile: 'cl',
+		Colombia: 'co',
+		'Costa Rica': 'cr',
+		Cuba: 'cu',
+		Ecuador: 'ec',
+		'El Salvador': 'sv',
+		Guatemala: 'gt',
+		Honduras: 'hn',
+		México: 'mx',
+		Nicaragua: 'ni',
+		Panamá: 'pa',
+		Paraguay: 'py',
+		Perú: 'pe',
+		Uruguay: 'uy',
+		Venezuela: 've',
+		España: 'es',
+	};
+
+	const countryName = state?.profile?.country; // Esto trae "Argentina", por ejemplo
+	const countryCode = countryCodes[countryName] || 'ar';
 	const [isOnBlog, setIsOnBlog] = useState(false);
 	const [isOnArchive, setIsOnArchive] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -47,7 +71,7 @@ const MainNav2: FC = () => {
 					<div>
 						{!pathName.includes('blog2') && (
 							<div className='hidden xl:block'>
-								<CategoriesDropdown />
+								<CategoriesDropdown country={countryCode} />
 							</div>
 						)}
 					</div>

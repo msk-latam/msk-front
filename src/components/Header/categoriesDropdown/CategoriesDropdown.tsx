@@ -12,12 +12,15 @@ import arrowLeft from '@/public/images/icons/ArrowLeft.svg';
 import arrowDownWhite from '@/public/images/icons/arrowDownWhite.svg';
 import arrowDownBlack from '@/public/images/icons/arrowDownBlack.svg';
 import { filter } from 'lodash';
+import { cookies } from 'next/headers';
+import ssr from '@/services/ssr';
 
-const CategoriesDropdown = ({ onClickClose }: any) => {
+const CategoriesDropdown = ({ onClickClose, country }: any) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [activeCategory, setActiveCategory] = useState<Specialty | null>(null);
 	const [showUpArrow, setShowUpArrow] = useState(false);
 	const [showDownArrow, setShowDownArrow] = useState(true);
+	const [cachedCourses, setCachedCourses] = useState<any[]>([]);
 	const scrollContainerRef = useRef<HTMLUListElement | null>(null);
 	const router = useRouter();
 	const dropdownRef = useRef<HTMLDivElement>(null);
@@ -122,7 +125,22 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 		}
 	}
 
-	const cachedCourses = getCachedCourses();
+	// const currentCountry = cookies().get('country')?.value;
+	console.log(country, 'de aca');
+	useEffect(() => {
+		const fetchCourses = async () => {
+			try {
+				const coursesData = await ssr.getAllCourses(country);
+				setCachedCourses(coursesData); // Actualiza el estado con los cursos
+				console.log(coursesData); // Verifica que los cursos se hayan obtenido correctamente
+			} catch (error) {
+				console.error('Error fetching courses:', error);
+			}
+		};
+
+		fetchCourses();
+	}, []);
+
 	const filteredCourses = cachedCourses?.filter((course: FetchCourseType) => {
 		return (
 			course.categories &&
@@ -131,6 +149,8 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 			course.is_test_product !== true
 		);
 	});
+
+	console.log(filteredCourses);
 
 	const redirectToCategory = (slug: string) => {
 		// console.log(slug);

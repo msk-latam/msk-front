@@ -163,7 +163,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	// localStorage.removeItem('trialURL')
 
 	// console.log(CourseList);
-	// console.log(currentItems);
+	console.log(currentItems);
 
 	return (
 		<div className={`nc-PageAuthor  ${className} `} data-nc-id='PageAuthor'>

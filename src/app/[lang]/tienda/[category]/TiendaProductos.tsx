@@ -7,6 +7,7 @@ import { FetchCourseType } from '@/data/types';
 import { useSearchParams } from 'next/navigation';
 import { FC, useContext, useEffect, useState } from 'react';
 import SpecialtiesModal from './SpecialtiesModal';
+import ssr from '@/services/ssr';
 
 interface TiendaProps {
 	category: string;
@@ -30,9 +31,25 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 	const durationFilter = searchParams.get('duracion');
 	const professionFilter = searchParams.get('profesion');
 
+	const [courses, setCourses] = useState<any[]>([]);
+
+	useEffect(() => {
+		const fetchCourses = async () => {
+			const coursesData = await ssr.getAllCourses(country);
+			setCourses(coursesData);
+			// setCurrentItems(coursesData);
+			console.log(coursesData);
+		};
+
+		fetchCourses();
+		console.log(category);
+	}, [country]);
+
 	useEffect(() => {
 		const filterCourses = () => {
-			let filteredCourses = storeCourses;
+			let filteredCourses = courses;
+
+			console.log(filteredCourses);
 
 			// Filtra por categoría
 			if (category === 'medicina-de-urgencias') {
@@ -43,10 +60,11 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 			}
 
 			if (category) {
-				filteredCourses = storeCourses.filter((course: any) => course.categories.some((cat: any) => cat.slug === category));
+				filteredCourses = courses.filter((course: any) => course.categories.some((cat: any) => cat.slug === category));
+				console.log(filteredCourses);
+				filteredCourses = filteredCourses.filter((course: any) => course.father_post_type === 'course');
 			}
-
-			filteredCourses = filteredCourses.filter((course: any) => course.father_post_type === 'course');
+			setCurrentItems(filteredCourses);
 
 			// if (resourceFilter) {
 			//   filteredCourses = filteredCourses.filter(course => {
@@ -102,10 +120,12 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 	}, [
 		category,
 		country,
-		storeCourses,
-		resourceFilter,
-		durationFilter,
-		professionFilter,
+		courses,
+		// storeCourses,
+		// currentItems,
+		// resourceFilter,
+		// durationFilter,
+		// professionFilter,
 		indexOfFirstItem,
 		indexOfLastItem,
 		currentPage,
@@ -115,7 +135,7 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 		setIsModalOpen(!isModalOpen);
 	};
 
-	// console.log(currentItems, 'currentItems');
+	console.log(currentItems, 'currentItems');
 
 	// console.log(category);
 
@@ -126,7 +146,7 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 
 			<div className='flex gap-6 mb-10'>
 				<div>
-					{!storeCourses?.length ? (
+					{!currentItems?.length ? (
 						<div className='mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full mb-12'>
 							<StoreSkeleton />
 							<StoreSkeleton />

@@ -55,7 +55,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const currentCountry = params.lang || cookies().get('country')?.value;
 	const loadingBestSellers = false;
 
-	if (!getAllCourses().length) {
+	if (true) {
 		const fetchedCourses = await ssr.getAllCourses(currentCountry);
 		setAllCourses(fetchedCourses);
 	}
@@ -118,7 +118,8 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
 					<div className=' relative'>
 						<CoursesForYou
-							courses={getAllCourses().filter((course: FetchCourseType) => course.father_post_type === 'course')}
+							// courses={getAllCourses().filter((course: FetchCourseType) => course.father_post_type === 'course')}
+							courses={fetchedContent}
 							bestSeller={getAllBestSellers()}
 							tabs={TABS_HOME}
 							className='pt-8 pb-2'
