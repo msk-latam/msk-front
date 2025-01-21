@@ -218,7 +218,7 @@ class ApiSSRService {
 
 			// Construir la URL para el archivo JSON
 			// const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
-			const fileUrl = `/products/${countryFile}`;
+			const fileUrl = `https://msklatam.tech/products/${countryFile}`;
 
 			// Obtener los datos desde el archivo JSON
 			const response = await fetch(fileUrl);
