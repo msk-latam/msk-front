@@ -149,7 +149,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 						<Questions content={faqs} />
 					</div>
 
-					<div className=' md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20  relative py-8 md:py-16 mb-[96px] xl:w-[129%] left-1/2 transform -translate-x-1/2  w-screen -mt-10'>
+					{/* <div className=' md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20  relative py-8 md:py-16 mb-[96px] xl:w-[129%] left-1/2 transform -translate-x-1/2  w-screen -mt-10'>
 						<SectionSliderBestSellers
 							posts={allBestSellers}
 							loading={loadingBestSellers}
@@ -160,7 +160,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 							sliderStype='style2'
 							uniqueSliderClass='pageNewHome-section6'
 						/>
-					</div>
+					</div> */}
 
 					<div className=' grid grid-cols-1 md:grid-cols-3 gap-4 my-16'>
 						<ContactForm />
