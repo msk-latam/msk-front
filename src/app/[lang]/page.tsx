@@ -110,21 +110,21 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 					<WelcomeBox content={pageHomeWpContent as WpContentData} />
 
 					<div className=' relative mb-10 md:mb-28'>
-						<BrandSlider country={currentCountry} />
+						{/* <BrandSlider country={currentCountry} />
 						<Phrase content={pageHomeWpContent?.cedentes.texto as string} />
 						<SectionGridCategoryBox
 							headingCenter={false}
 							categories={HOME_SPECIALTIES.filter((_, i) => i < 4)}
 							categoryCardType='card2'
 							className='pb-8 lg:pb-28'
-						/>
+						/> */}
 
 						<HomeExtraInfo country={currentCountry} />
 					</div>
 
-					<div className='md:w-[124%] left-1/2 transform -translate-x-1/2 relative w-screen'>
+					{/* <div className='md:w-[124%] left-1/2 transform -translate-x-1/2 relative w-screen'>
 						<CommentReferences content={pageHomeWpContent as WpContentData} />
-					</div>
+					</div> */}
 
 					<div className=' relative'>
 						<CoursesForYou
