@@ -107,7 +107,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 						/>
 					</div>
 
-					<WelcomeBox content={pageHomeWpContent as WpContentData} />
+					{/* <WelcomeBox content={pageHomeWpContent as WpContentData} /> */}
 
 					<div className=' relative mb-10 md:mb-28'>
 						{/* <BrandSlider country={currentCountry} />
@@ -119,7 +119,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 							className='pb-8 lg:pb-28'
 						/> */}
 
-						<HomeExtraInfo country={currentCountry} />
+						{/* <HomeExtraInfo country={currentCountry} /> */}
 					</div>
 
 					{/* <div className='md:w-[124%] left-1/2 transform -translate-x-1/2 relative w-screen'>
@@ -146,7 +146,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 							forSingleNote={false}
 						/>
 
-						<Questions content={faqs} />
+						{/* <Questions content={faqs} /> */}
 					</div>
 
 					{/* <div className=' md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20  relative py-8 md:py-16 mb-[96px] xl:w-[129%] left-1/2 transform -translate-x-1/2  w-screen -mt-10'>
@@ -162,9 +162,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 						/>
 					</div> */}
 
-					<div className=' grid grid-cols-1 md:grid-cols-3 gap-4 my-16'>
-						<ContactForm />
-					</div>
+					<div className=' grid grid-cols-1 md:grid-cols-3 gap-4 my-16'>{/* <ContactForm /> */}</div>
 				</section>
 			</div>
 		</div>
