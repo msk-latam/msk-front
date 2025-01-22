@@ -127,7 +127,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 					</div> */}
 
 					<div className=' relative'>
-						<CoursesForYou
+						{/* <CoursesForYou
 							courses={JSONProduct.products.filter((course: FetchCourseType) => course.father_post_type === 'course')}
 							bestSeller={getAllBestSellers()}
 							tabs={TABS_HOME}
@@ -135,7 +135,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 							heading='Oportunidades para ti'
 							desc='Cursos destacados para realizar a distancia'
 							loading={isLoadingCourses() || isLoadingBestSellers()}
-						/>
+						/> */}
 						{/* <BlogSummary
 							posts={JSONBlog.posts}
 							tabs={TABS_BLOG}
