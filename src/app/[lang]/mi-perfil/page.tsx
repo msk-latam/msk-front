@@ -20,6 +20,7 @@ import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSel
 import CursoPerfil from './CursoPerfil';
 import CourseList from '../mi-cuenta/diplomas/CourseList';
 import { useEnrollment } from '@/context/EnrollmentContext/EnrollmentContext';
+import { getJSONPostByCountry } from '@/app/posts';
 
 export interface PageAuthorProps {
 	className?: string;
@@ -34,6 +35,7 @@ const TABS = [
 
 const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	const { state: dataState, loadingBestSellers } = useContext(DataContext);
+	console.log(dataState);
 
 	const router = useRouter();
 	const { allBestSellers, allCourses } = dataState;
@@ -47,15 +49,18 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	const [userCourses, setUserCourses] = useState<UserCourseProgress[]>([]);
 	const { currentProduct, enrollSuccess, setEnrollSuccess } = useEnrollment();
 	const [executionCount, setExecutionCount] = useState(0);
+	// const JSONBlog = getJSONPostByCountry(currentCountry);
 
 	const fetchUser = async () => {
 		try {
 			setTotalPages(Math.ceil(allCourses.length / itemsPerPage));
 			const res = await api.getUserData();
 			// console.log('FETCH USER RES: ', res);
-			if (!res.message) {
+			// console.log(res.message);
+			if (res) {
 				setUser(res);
 				let coursesList = getUserCourses(res, allCourses);
+				console.log(coursesList);
 
 				// console.log({ allCourses, coursesList }, res.contact.courses_progress);
 				setUserCourses(coursesList);
@@ -65,7 +70,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 				router.push('/iniciar-sesion');
 			}
 		} catch (error) {
-			// console.log(error);
+			console.log(error);
 			router.push('/iniciar-sesion');
 		}
 	};
