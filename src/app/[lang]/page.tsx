@@ -136,7 +136,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 							desc='Cursos destacados para realizar a distancia'
 							loading={isLoadingCourses() || isLoadingBestSellers()}
 						/>
-						<BlogSummary
+						{/* <BlogSummary
 							posts={JSONBlog.posts}
 							tabs={TABS_BLOG}
 							className='pt-4 md:mt-16 md:mb-8 pb-8'
@@ -144,7 +144,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 							desc='Recursos para informarte y aprender de distintas maneras'
 							showTitle
 							forSingleNote={false}
-						/>
+						/> */}
 
 						{/* <Questions content={faqs} /> */}
 					</div>
