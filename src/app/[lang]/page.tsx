@@ -107,24 +107,24 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 						/>
 					</div>
 
-					{/* <WelcomeBox content={pageHomeWpContent as WpContentData} /> */}
+					<WelcomeBox content={pageHomeWpContent as WpContentData} />
 
 					<div className=' relative mb-10 md:mb-28'>
-						{/* <BrandSlider country={currentCountry} />
+						<BrandSlider country={currentCountry} />
 						<Phrase content={pageHomeWpContent?.cedentes.texto as string} />
 						<SectionGridCategoryBox
 							headingCenter={false}
 							categories={HOME_SPECIALTIES.filter((_, i) => i < 4)}
 							categoryCardType='card2'
 							className='pb-8 lg:pb-28'
-						/> */}
+						/>
 
-						{/* <HomeExtraInfo country={currentCountry} /> */}
+						<HomeExtraInfo country={currentCountry} />
 					</div>
 
-					{/* <div className='md:w-[124%] left-1/2 transform -translate-x-1/2 relative w-screen'>
+					<div className='md:w-[124%] left-1/2 transform -translate-x-1/2 relative w-screen'>
 						<CommentReferences content={pageHomeWpContent as WpContentData} />
-					</div> */}
+					</div>
 
 					<div className=' relative'>
 						{/* <CoursesForYou
@@ -136,7 +136,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 							desc='Cursos destacados para realizar a distancia'
 							loading={isLoadingCourses() || isLoadingBestSellers()}
 						/> */}
-						{/* <BlogSummary
+						<BlogSummary
 							posts={JSONBlog.posts}
 							tabs={TABS_BLOG}
 							className='pt-4 md:mt-16 md:mb-8 pb-8'
@@ -144,12 +144,12 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 							desc='Recursos para informarte y aprender de distintas maneras'
 							showTitle
 							forSingleNote={false}
-						/> */}
+						/>
 
 						{/* <Questions content={faqs} /> */}
 					</div>
 
-					{/* <div className=' md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20  relative py-8 md:py-16 mb-[96px] xl:w-[129%] left-1/2 transform -translate-x-1/2  w-screen -mt-10'>
+					<div className=' md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20  relative py-8 md:py-16 mb-[96px] xl:w-[129%] left-1/2 transform -translate-x-1/2  w-screen -mt-10'>
 						<SectionSliderBestSellers
 							posts={allBestSellers}
 							loading={loadingBestSellers}
@@ -160,7 +160,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 							sliderStype='style2'
 							uniqueSliderClass='pageNewHome-section6'
 						/>
-					</div> */}
+					</div>
 
 					<div className=' grid grid-cols-1 md:grid-cols-3 gap-4 my-16'>{/* <ContactForm /> */}</div>
 				</section>
