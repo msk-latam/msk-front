@@ -104,7 +104,7 @@ export default async function RootLayout({ params, children, showHeaderFooter = 
 													</GlobalStateProvider>
 												</LoaderProvider>
 												<BotMaker />
-												{showHeaderFooter && <Footer />}
+												{/* {showHeaderFooter && <Footer />} */}
 
 												<Suspense fallback={null}>
 													<NavigationEvents />
