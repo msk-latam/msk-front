@@ -55,7 +55,6 @@ const MainNav2: FC = () => {
 	};
 
 	const pathName = usePathname();
-	console.log(pathName);
 
 	useEffect(() => {
 		setIsOnBlog(pathName.includes('/blog'));

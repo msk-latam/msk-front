@@ -10,6 +10,7 @@ import { SITE_URL } from '@/contains/constants';
 import { Props } from '@/app/layout';
 import { Metadata } from 'next';
 import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
+import { getJSONPostByCountry } from '@/app/posts';
 
 interface PageProps {
 	params: any;
@@ -36,10 +37,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const PageBlog: React.FC<PageProps> = async ({ params }) => {
 	const currentCountry = params.lang || cookies().get('country')?.value;
 	const allBestSellers = await ssr.getBestSellers(currentCountry);
+	const JSONBlog = getJSONPostByCountry(currentCountry);
 
 	const allPosts = await ssr.getPosts();
-	const welcomePosts = allPosts.filter((p: FetchPostType, i: number) => i < 4);
-	// console.log(allPosts);
+	// const welcomePosts = allPosts.filter((p: FetchPostType, i: number) => i < 4);
+	const welcomePosts = JSONBlog.posts.filter((p: FetchPostType, i: number) => i < 4);
+	// console.log(JSONBlog.posts);
 
 	return (
 		<div className='nc-PageBlog relative animate-fade-down'>
@@ -47,7 +50,7 @@ const PageBlog: React.FC<PageProps> = async ({ params }) => {
 				<div className=' relative'>
 					<WelcomeBlog tabs={[]} heading='' posts={welcomePosts} />
 					<BlogSummary
-						posts={allPosts}
+						posts={JSONBlog.posts}
 						tabs={TABS_BLOG}
 						className='py-16'
 						desc=''

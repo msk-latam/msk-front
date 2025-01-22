@@ -24,6 +24,8 @@ import { generateHomeMetadata } from '@/SEO/home/metaData/homeMetaData';
 import { homeFAQs } from '@/components/faqs/homeFAQs';
 import ClearLocalStorage from '@/components/versionStorage/ClearLocalStorage';
 import { getJSONByCountry } from '../products';
+import arblog from '../posts/ar.json';
+import { getJSONPostByCountry } from '../posts';
 
 const BlogSummary = dynamic(() => import('@/components/MSK/BlogSummary'));
 const BrandSlider = dynamic(() => import('@/components/MSK/BrandSlider'));
@@ -56,6 +58,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const currentCountry = params.lang || cookies().get('country')?.value;
 	const loadingBestSellers = false;
 	const JSONProduct = getJSONByCountry(currentCountry);
+	const JSONBlog = getJSONPostByCountry(currentCountry);
 
 	if (true) {
 		const fetchedCourses = await ssr.getAllCourses(currentCountry);
@@ -65,9 +68,13 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	// 	const fetchedBestSellers = await ssr.getBestSellers(currentCountry);
 	// 	setAllBestSellers(fetchedBestSellers);
 	// }
-	if (!getAllPosts() || !getAllPosts().length) {
+	// if (!getAllPosts() || !getAllPosts().length) {
+	// 	const fetchedPosts = await ssr.getPosts(currentCountry);
+	// 	setAllPosts(fetchedPosts);
+	// }
+	if (true) {
 		const fetchedPosts = await ssr.getPosts(currentCountry);
-		setAllPosts(fetchedPosts);
+		setAllPosts(JSONBlog);
 	}
 
 	const fetchedContent = await ssr.getWpContent('/home-msk', currentCountry);
@@ -82,6 +89,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const heroImageWEBP = '/webp-images/home/home-msk.webp';
 
 	const faqs = homeFAQs(currentCountry);
+	const allBestSellers = await ssr.getBestSellers(currentCountry);
 
 	return (
 		<div className='nc- relative animate-fade-down'>
@@ -129,7 +137,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 							loading={isLoadingCourses() || isLoadingBestSellers()}
 						/>
 						<BlogSummary
-							posts={getAllPosts()}
+							posts={JSONBlog.posts}
 							tabs={TABS_BLOG}
 							className='pt-4 md:mt-16 md:mb-8 pb-8'
 							heading='Blog'
@@ -143,7 +151,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
 					<div className=' md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20  relative py-8 md:py-16 mb-[96px] xl:w-[129%] left-1/2 transform -translate-x-1/2  w-screen -mt-10'>
 						<SectionSliderBestSellers
-							posts={getAllBestSellers()}
+							posts={allBestSellers}
 							loading={loadingBestSellers}
 							className='w-full section-slider-posts-container px-12 md:px-4'
 							postCardName='card9'

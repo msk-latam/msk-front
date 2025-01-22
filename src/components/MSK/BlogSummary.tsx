@@ -32,7 +32,7 @@ const BlogSummary: FC<BlogSummaryProps> = ({
 }) => {
 	const [tabActive, setTabActive] = useState<string>(tabs[0]);
 	const [auxPosts, setPosts] = useState<FetchPostType[]>([]);
-	// console.log(posts);
+	console.log(posts);
 
 	const handleClickTab = (item: string) => {
 		const itemParsed = removeAccents(item);
@@ -60,6 +60,8 @@ const BlogSummary: FC<BlogSummaryProps> = ({
 			handleClickTab(categoryValue || 'Actualidad');
 		}
 	}, [posts]);
+
+	// console.log(auxPosts[0]);
 
 	return (
 		<div className={`nc-BlogSummary ${className} animate-fade-down`}>
