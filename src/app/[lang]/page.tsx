@@ -2,12 +2,12 @@ import { TABS_HOME } from '@/data/MSK/courses';
 import { TABS_BLOG } from '@/data/MSK/blog';
 import { HOME_SPECIALTIES } from '@/data/MSK/specialties';
 import {
-	// getAllBestSellers,
+	getAllBestSellers,
 	// getAllCourses,
 	// getAllPosts,
-	// isLoadingBestSellers,
-	// isLoadingCourses,
-	// setAllBestSellers,
+	isLoadingBestSellers,
+	isLoadingCourses,
+	setAllBestSellers,
 	setAllCourses,
 	setAllPosts,
 	setPageHomeWpContent,
@@ -61,13 +61,13 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const JSONBlog = getJSONPostByCountry(currentCountry);
 
 	if (true) {
-		// const fetchedCourses = await ssr.getAllCourses(currentCountry);
+		//  const fetchedCourses = await ssr.getAllCourses(currentCountry);
 		setAllCourses(JSONProduct.products);
 	}
-	// if (!getAllBestSellers().length) {
-	// 	const fetchedBestSellers = await ssr.getBestSellers(currentCountry);
-	// 	setAllBestSellers(fetchedBestSellers);
-	// }
+	if (!getAllBestSellers().length) {
+		const fetchedBestSellers = await ssr.getBestSellers(currentCountry);
+		setAllBestSellers(fetchedBestSellers);
+	}
 	// if (!getAllPosts() || !getAllPosts().length) {
 	// 	const fetchedPosts = await ssr.getPosts(currentCountry);
 	// 	setAllPosts(fetchedPosts);
@@ -127,7 +127,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 					</div>
 
 					<div className=' relative'>
-						{/* <CoursesForYou
+						<CoursesForYou
 							courses={JSONProduct.products.filter((course: FetchCourseType) => course.father_post_type === 'course')}
 							bestSeller={getAllBestSellers()}
 							tabs={TABS_HOME}
@@ -135,7 +135,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 							heading='Oportunidades para ti'
 							desc='Cursos destacados para realizar a distancia'
 							loading={isLoadingCourses() || isLoadingBestSellers()}
-						/> */}
+						/>
 						<BlogSummary
 							posts={JSONBlog.posts}
 							tabs={TABS_BLOG}
@@ -146,7 +146,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 							forSingleNote={false}
 						/>
 
-						{/* <Questions content={faqs} /> */}
+						<Questions content={faqs} />
 					</div>
 
 					<div className=' md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20  relative py-8 md:py-16 mb-[96px] xl:w-[129%] left-1/2 transform -translate-x-1/2  w-screen -mt-10'>

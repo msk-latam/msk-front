@@ -21,9 +21,9 @@ export const isLoadingCourses = () => loadingCourses;
 // Best Sellers
 let allBestSellers: any = [];
 let loadingBestSellers: boolean = false;
-// export const setAllBestSellers = (bestSellers: any) => {
-// 	allBestSellers = bestSellers;
-// };
+export const setAllBestSellers = (bestSellers: any) => {
+	allBestSellers = bestSellers;
+};
 export const getAllBestSellers = () => allBestSellers;
 export const setLoadingBestSellers = (value: boolean) => (loadingBestSellers = value);
 export const isLoadingBestSellers = () => loadingBestSellers;
