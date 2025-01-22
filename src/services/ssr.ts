@@ -361,35 +361,35 @@ class ApiSSRService {
 		}
 	}
 
-	async getBestSellers(country?: string, tag?: string) {
-		setLoadingBestSellers(true);
+	// async getBestSellers(country?: string, tag?: string) {
+	// 	setLoadingBestSellers(true);
 
-		try {
-			let countryParam = 'int';
-			let validCountries = countries.map((item) => item.id);
+	// 	try {
+	// 		let countryParam = 'int';
+	// 		let validCountries = countries.map((item) => item.id);
 
-			if (country && validCountries.includes(country)) {
-				countryParam = `${country}`;
-			}
+	// 		if (country && validCountries.includes(country)) {
+	// 			countryParam = `${country}`;
+	// 		}
 
-			// console.log('getBestSellers URL', `${API_URL}/home/best-sellers?country=${countryParam}`);
-			const response = await fetch(`${API_URL}/home/best-sellers?country=${countryParam}`);
+	// 		// console.log('getBestSellers URL', `${API_URL}/home/best-sellers?country=${countryParam}`);
+	// 		const response = await fetch(`${API_URL}/home/best-sellers?country=${countryParam}`);
 
-			if (!response.ok) {
-				throw new Error(`Failed to fetch best sellers. HTTP status ${response.status}`);
-			}
+	// 		if (!response.ok) {
+	// 			throw new Error(`Failed to fetch best sellers. HTTP status ${response.status}`);
+	// 		}
 
-			const data = await response.json();
+	// 		const data = await response.json();
 
-			setLoadingBestSellers(false);
+	// 		setLoadingBestSellers(false);
 
-			return data.products;
-		} catch (error) {
-			setLoadingBestSellers(false);
-			console.error('Network error:', error);
-			return error;
-		}
-	}
+	// 		return data.products;
+	// 	} catch (error) {
+	// 		setLoadingBestSellers(false);
+	// 		console.error('Network error:', error);
+	// 		return error;
+	// 	}
+	// }
 
 	// async getPosts(country?: string) {
 	// 	try {
@@ -451,44 +451,44 @@ class ApiSSRService {
 	// 	}
 	// }
 
-	async getPosts(country?: string) {
-		try {
-			const currentYear = new Date().getFullYear();
-			const validCountries = countries.map((item) => item.id);
-			const countryParam = country && validCountries.includes(country) ? `${country}` : 'int';
-			const startYear = 2023; // Año inicial
-			const postsList: any[] = [];
+	// async getPosts(country?: string) {
+	// 	try {
+	// 		const currentYear = new Date().getFullYear();
+	// 		const validCountries = countries.map((item) => item.id);
+	// 		const countryParam = country && validCountries.includes(country) ? `${country}` : 'int';
+	// 		const startYear = 2023; // Año inicial
+	// 		const postsList: any[] = [];
 
-			for (let year = currentYear; year >= startYear; year--) {
-				const response = await fetch(`${API_URL}/posts?year=${year}&country=${countryParam}&limit=-1`);
+	// 		for (let year = currentYear; year >= startYear; year--) {
+	// 			const response = await fetch(`${API_URL}/posts?year=${year}&country=${countryParam}&limit=-1`);
 
-				if (!response.ok) {
-					console.warn(`Failed to fetch posts for ${year}. HTTP status ${response.status}`);
-					continue; // Pasar al siguiente año si hay un error
-				}
+	// 			if (!response.ok) {
+	// 				console.warn(`Failed to fetch posts for ${year}. HTTP status ${response.status}`);
+	// 				continue; // Pasar al siguiente año si hay un error
+	// 			}
 
-				const data = await response.json();
+	// 			const data = await response.json();
 
-				const postDate = data?.posts[0].date;
-				// console.log(postDate);
+	// 			const postDate = data?.posts[0].date;
+	// 			// console.log(postDate);
 
-				if (data.posts && data.posts.length > 0) {
-					const yearPosts = data.posts.map((post: any) => ({
-						...post,
-						image: post.thumbnail,
-					}));
-					postsList.push(...yearPosts);
-				} else {
-					console.log(`No posts found for ${year}.`);
-				}
-			}
+	// 			if (data.posts && data.posts.length > 0) {
+	// 				const yearPosts = data.posts.map((post: any) => ({
+	// 					...post,
+	// 					image: post.thumbnail,
+	// 				}));
+	// 				postsList.push(...yearPosts);
+	// 			} else {
+	// 				console.log(`No posts found for ${year}.`);
+	// 			}
+	// 		}
 
-			return postsList;
-		} catch (error) {
-			console.error('Network error:', error);
-			return [];
-		}
-	}
+	// 		return postsList;
+	// 	} catch (error) {
+	// 		console.error('Network error:', error);
+	// 		return [];
+	// 	}
+	// }
 
 	async getSingleProduct(slug: string, country: string) {
 		try {
