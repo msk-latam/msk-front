@@ -2,12 +2,12 @@ import { TABS_HOME } from '@/data/MSK/courses';
 import { TABS_BLOG } from '@/data/MSK/blog';
 import { HOME_SPECIALTIES } from '@/data/MSK/specialties';
 import {
-	getAllBestSellers,
-	getAllCourses,
-	getAllPosts,
-	isLoadingBestSellers,
-	isLoadingCourses,
-	setAllBestSellers,
+	// getAllBestSellers,
+	// getAllCourses,
+	// getAllPosts,
+	// isLoadingBestSellers,
+	// isLoadingCourses,
+	// setAllBestSellers,
 	setAllCourses,
 	setAllPosts,
 	setPageHomeWpContent,
@@ -61,7 +61,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const JSONBlog = getJSONPostByCountry(currentCountry);
 
 	if (true) {
-		const fetchedCourses = await ssr.getAllCourses(currentCountry);
+		// const fetchedCourses = await ssr.getAllCourses(currentCountry);
 		setAllCourses(JSONProduct.products);
 	}
 	// if (!getAllBestSellers().length) {
@@ -73,7 +73,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	// 	setAllPosts(fetchedPosts);
 	// }
 	if (true) {
-		const fetchedPosts = await ssr.getPosts(currentCountry);
+		// const fetchedPosts = await ssr.getPosts(currentCountry);
 		setAllPosts(JSONBlog);
 	}
 
