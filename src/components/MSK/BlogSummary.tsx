@@ -32,7 +32,6 @@ const BlogSummary: FC<BlogSummaryProps> = ({
 }) => {
 	const [tabActive, setTabActive] = useState<string>(tabs[0]);
 	const [auxPosts, setPosts] = useState<FetchPostType[]>([]);
-	console.log(posts);
 
 	const handleClickTab = (item: string) => {
 		const itemParsed = removeAccents(item);

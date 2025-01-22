@@ -38,7 +38,7 @@ const productsByCountry: Record<string, any> = {
 };
 
 export const getJSONByCountry = (country: string) => {
-	const data = productsByCountry[country.toLowerCase() || 'int'];
+	const data = productsByCountry[country?.toLowerCase() || 'int'];
 	if (!data) {
 		throw new Error(`No se encontró información para el país: ${country}`);
 	}
