@@ -90,7 +90,7 @@ const PageStore: FC<PageStoreProps> = ({ className = '', params }) => {
 			<StoreLayout subHeading='' headingEmoji='' heading='Tienda' country={currentCountry}>
 				<HotjarTienda />
 				<section className=' text-neutral-600 text-sm md:text-base overflow-hidden'>
-					<StoreContent />
+					<StoreContent country={currentCountry} />
 				</section>
 			</StoreLayout>
 		</div>

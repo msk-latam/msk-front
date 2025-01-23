@@ -84,7 +84,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const heroTitle =
 		'<p>Cursos de medicina <br /> para <span id="font-lora-italic" class="font-lora-italic"> expandir </span> tus <br /> metas profesionales</p>';
 
-	const heroImage = pageHomeWpContent?.header.imagen || '';
+	// const heroImage = pageHomeWpContent?.header.imagen || '';
 
 	const heroImageWEBP = '/webp-images/home/home-msk.webp';
 
