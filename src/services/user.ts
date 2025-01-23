@@ -35,7 +35,7 @@ export const getUserCourses = (res: any, courses: any): UserCourseProgress[] => 
 	const coursesList: UserCourseProgress[] = [];
 	const seenProductIds: { [productId: number]: boolean } = {};
 	res.contact.courses_progress.forEach((cp: CourseProgress) => {
-		const globalProduct = courses.find(
+		const globalProduct = courses.products.find(
 			(productAux: { product_code: number }) => productAux.product_code === cp.Product_Code,
 		);
 

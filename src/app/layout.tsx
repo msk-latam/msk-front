@@ -26,7 +26,7 @@ import Script from 'next/script';
 import EmblueScript from '@/components/EmblueScript/EmblueScript';
 import { organizationDataSEO, reviewsDataSEO, websiteDataSEO } from '@/SEO/generales/structuredData';
 import { EnrollmentProvider } from '@/context/EnrollmentContext/EnrollmentContext';
-import { UserProvider } from '@auth0/nextjs-auth0/client';
+// import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 // export const runtime = 'edge';
 
@@ -90,32 +90,32 @@ export default async function RootLayout({ params, children, showHeaderFooter = 
 			<body>
 				<div className='bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200 '>
 					<GoogleCaptchaWrapper>
-						<UserProvider>
-							<CountryProvider>
-								<EnrollmentProvider>
-									<DataProvider>
-										<UTMProvider>
-											<AuthProvider>
-												<StoreProvider>
-													{showHeaderFooter && <Header />}
-													<LoaderProvider>
-														<GlobalStateProvider>
-															<div className='container'>{children}</div>
-														</GlobalStateProvider>
-													</LoaderProvider>
-													<BotMaker />
-													{showHeaderFooter && <Footer />}
+						{/* <UserProvider> */}
+						<CountryProvider>
+							<EnrollmentProvider>
+								<DataProvider>
+									<UTMProvider>
+										<AuthProvider>
+											<StoreProvider>
+												{showHeaderFooter && <Header />}
+												<LoaderProvider>
+													<GlobalStateProvider>
+														<div className='container'>{children}</div>
+													</GlobalStateProvider>
+												</LoaderProvider>
+												<BotMaker />
+												{showHeaderFooter && <Footer />}
 
-													<Suspense fallback={null}>
-														<NavigationEvents />
-													</Suspense>
-												</StoreProvider>
-											</AuthProvider>
-										</UTMProvider>
-									</DataProvider>
-								</EnrollmentProvider>
-							</CountryProvider>
-						</UserProvider>
+												<Suspense fallback={null}>
+													<NavigationEvents />
+												</Suspense>
+											</StoreProvider>
+										</AuthProvider>
+									</UTMProvider>
+								</DataProvider>
+							</EnrollmentProvider>
+						</CountryProvider>
+						{/* </UserProvider> */}
 					</GoogleCaptchaWrapper>
 				</div>
 			</body>

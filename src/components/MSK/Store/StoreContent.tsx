@@ -27,15 +27,22 @@ import { CountryContext } from '@/context/country/CountryContext';
 import { DataContext } from '@/context/data/DataContext';
 import { useSearchParams } from 'next/navigation';
 import EitnerCrum from '@/components/EitnerCrum/EitnerCrum';
+import { getJSONByCountry } from '@/app/products';
 
 let resources = resourcesMapping;
 let durations = durationsMapping;
 
-const StoreContent: FC<{}> = () => {
+const StoreContent: FC = ({ country }: any) => {
 	let { storeFilters, addFilter, removeFilter, updateFilter, clearSpecialties } = useStoreFilters();
 
 	const { state: dataState } = useContext(DataContext);
-	const { storeCourses, allStoreProfessions } = dataState;
+	const {
+		// storeCourses,
+		allStoreProfessions,
+	} = dataState;
+	console.log(country, 'de tienda');
+	const JSONProduct = getJSONByCountry(country);
+	let storeCourses = JSONProduct.products;
 	const { specialties } = useStoreFilters();
 	const { countryState } = useContext(CountryContext);
 	const searchParams = useSearchParams();

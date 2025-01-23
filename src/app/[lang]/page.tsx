@@ -3,8 +3,8 @@ import { TABS_BLOG } from '@/data/MSK/blog';
 import { HOME_SPECIALTIES } from '@/data/MSK/specialties';
 import {
 	getAllBestSellers,
-	getAllCourses,
-	getAllPosts,
+	// getAllCourses,
+	// getAllPosts,
 	isLoadingBestSellers,
 	isLoadingCourses,
 	setAllBestSellers,
@@ -23,6 +23,9 @@ import dynamic from 'next/dynamic';
 import { generateHomeMetadata } from '@/SEO/home/metaData/homeMetaData';
 import { homeFAQs } from '@/components/faqs/homeFAQs';
 import ClearLocalStorage from '@/components/versionStorage/ClearLocalStorage';
+import { getJSONByCountry } from '../products';
+import arblog from '../posts/ar.json';
+import { getJSONPostByCountry } from '../posts';
 
 const BlogSummary = dynamic(() => import('@/components/MSK/BlogSummary'));
 const BrandSlider = dynamic(() => import('@/components/MSK/BrandSlider'));
@@ -54,18 +57,24 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const jsonLd = generateSchemaJson('WebSite');
 	const currentCountry = params.lang || cookies().get('country')?.value;
 	const loadingBestSellers = false;
+	const JSONProduct = getJSONByCountry(currentCountry);
+	const JSONBlog = getJSONPostByCountry(currentCountry);
 
-	if (!getAllCourses().length) {
-		const fetchedCourses = await ssr.getAllCourses(currentCountry);
-		setAllCourses(fetchedCourses);
+	if (true) {
+		//   const fetchedCourses = await ssr.getAllCourses(currentCountry);
+		setAllCourses(JSONProduct.products);
 	}
 	if (!getAllBestSellers().length) {
 		const fetchedBestSellers = await ssr.getBestSellers(currentCountry);
 		setAllBestSellers(fetchedBestSellers);
 	}
-	if (!getAllPosts() || !getAllPosts().length) {
-		const fetchedPosts = await ssr.getPosts(currentCountry);
-		setAllPosts(fetchedPosts);
+	// if (!getAllPosts() || !getAllPosts().length) {
+	// 	const fetchedPosts = await ssr.getPosts(currentCountry);
+	// 	setAllPosts(fetchedPosts);
+	// }
+	if (true) {
+		// const fetchedPosts = await ssr.getPosts(currentCountry);
+		setAllPosts(JSONBlog);
 	}
 
 	const fetchedContent = await ssr.getWpContent('/home-msk', currentCountry);
@@ -75,11 +84,12 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const heroTitle =
 		'<p>Cursos de medicina <br /> para <span id="font-lora-italic" class="font-lora-italic"> expandir </span> tus <br /> metas profesionales</p>';
 
-	const heroImage = pageHomeWpContent?.header.imagen || '';
+	// const heroImage = pageHomeWpContent?.header.imagen || '';
 
 	const heroImageWEBP = '/webp-images/home/home-msk.webp';
 
 	const faqs = homeFAQs(currentCountry);
+	const allBestSellers = await ssr.getBestSellers(currentCountry);
 
 	return (
 		<div className='nc- relative animate-fade-down'>
@@ -118,7 +128,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
 					<div className=' relative'>
 						<CoursesForYou
-							courses={getAllCourses().filter((course: FetchCourseType) => course.father_post_type === 'course')}
+							courses={JSONProduct.products.filter((course: FetchCourseType) => course.father_post_type === 'course')}
 							bestSeller={getAllBestSellers()}
 							tabs={TABS_HOME}
 							className='pt-8 pb-2'
@@ -127,7 +137,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 							loading={isLoadingCourses() || isLoadingBestSellers()}
 						/>
 						<BlogSummary
-							posts={getAllPosts()}
+							posts={JSONBlog.posts}
 							tabs={TABS_BLOG}
 							className='pt-4 md:mt-16 md:mb-8 pb-8'
 							heading='Blog'
@@ -141,7 +151,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
 					<div className=' md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20  relative py-8 md:py-16 mb-[96px] xl:w-[129%] left-1/2 transform -translate-x-1/2  w-screen -mt-10'>
 						<SectionSliderBestSellers
-							posts={getAllBestSellers()}
+							posts={allBestSellers}
 							loading={loadingBestSellers}
 							className='w-full section-slider-posts-container px-12 md:px-4'
 							postCardName='card9'
@@ -152,9 +162,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 						/>
 					</div>
 
-					<div className=' grid grid-cols-1 md:grid-cols-3 gap-4 my-16'>
-						<ContactForm />
-					</div>
+					<div className=' grid grid-cols-1 md:grid-cols-3 gap-4 my-16'>{/* <ContactForm /> */}</div>
 				</section>
 			</div>
 		</div>

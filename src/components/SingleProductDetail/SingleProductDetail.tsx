@@ -43,6 +43,12 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 	};
 
 	let { isEbook, imagen, title } = productDetails(product);
+	isEbook = product.ficha.title == 'Abordaje diagnóstico del dolor abdominal agudo' ? true : false;
+
+	product.ficha.description =
+		product.ficha.title == 'Abordaje diagnóstico del dolor abdominal agudo'
+			? 'El dolor abdominal agudo (DAA) es un síntoma común que, a menudo, conduce a la solicitud de atención médica, representando hasta el 10% de motivos de consultas en los servicios de urgencias. La importancia de este tema radica, por tanto, en conocer los fundamentos sobre los que se basa el dolor abdominal, así como adquirir la capacidad de diferenciar estos dos tipos de situaciones diametralmente opuestas.'
+			: product.ficha.description;
 
 	const slug = product.params.slug;
 
@@ -134,11 +140,14 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 									ficha={product.ficha}
 									details={product.details}
 									sideData={{
-										modalidad: product.modalidad.includes('100% online') ? '100% online' : product.modalidad,
+										modalidad:
+											product.modalidad && product.modalidad.includes('100% online')
+												? '100% online'
+												: product.modalidad || '100% online',
 										curso_disponible: product.curso_disponible,
 										asesoramiento_academico: product.asesoramiento_academico,
 										certificacion: product.certificacion,
-										idioma: product.idioma,
+										idioma: product.idioma || 'Español',
 									}}
 									product={product}
 									isEbook={isEbook}
@@ -205,7 +214,10 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 							ficha={product.ficha}
 							details={product.details}
 							sideData={{
-								modalidad: product.modalidad.includes('100% online') ? '100% online' : product.modalidad,
+								modalidad:
+									product.modalidad && product.modalidad.includes('100% online')
+										? '100% online'
+										: product.modalidad || '100% online',
 								curso_disponible: product.curso_disponible,
 								asesoramiento_academico: product.asesoramiento_academico,
 								certificacion: product.certificacion,
