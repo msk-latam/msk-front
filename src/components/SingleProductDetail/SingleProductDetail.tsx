@@ -134,11 +134,14 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 									ficha={product.ficha}
 									details={product.details}
 									sideData={{
-										modalidad: product.modalidad.includes('100% online') ? '100% online' : product.modalidad,
+										modalidad:
+											product.modalidad && product.modalidad.includes('100% online')
+												? '100% online'
+												: product.modalidad || '100% online',
 										curso_disponible: product.curso_disponible,
 										asesoramiento_academico: product.asesoramiento_academico,
 										certificacion: product.certificacion,
-										idioma: product.idioma,
+										idioma: product.idioma || 'Español',
 									}}
 									product={product}
 									isEbook={isEbook}
@@ -205,7 +208,10 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 							ficha={product.ficha}
 							details={product.details}
 							sideData={{
-								modalidad: product.modalidad.includes('100% online') ? '100% online' : product.modalidad,
+								modalidad:
+									product.modalidad && product.modalidad.includes('100% online')
+										? '100% online'
+										: product.modalidad || '100% online',
 								curso_disponible: product.curso_disponible,
 								asesoramiento_academico: product.asesoramiento_academico,
 								certificacion: product.certificacion,
