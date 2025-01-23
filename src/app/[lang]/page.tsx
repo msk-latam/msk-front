@@ -61,7 +61,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const JSONBlog = getJSONPostByCountry(currentCountry);
 
 	if (true) {
-		//  const fetchedCourses = await ssr.getAllCourses(currentCountry);
+		//   const fetchedCourses = await ssr.getAllCourses(currentCountry);
 		setAllCourses(JSONProduct.products);
 	}
 	if (!getAllBestSellers().length) {

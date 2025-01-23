@@ -39,7 +39,7 @@ const PageBlog: React.FC<PageProps> = async ({ params }) => {
 	const allBestSellers = await ssr.getBestSellers(currentCountry);
 	const JSONBlog = getJSONPostByCountry(currentCountry);
 
-	const allPosts = await ssr.getPosts();
+	// const allPosts = await ssr.getPosts();
 	// const welcomePosts = allPosts.filter((p: FetchPostType, i: number) => i < 4);
 	const welcomePosts = JSONBlog.posts.filter((p: FetchPostType, i: number) => i < 4);
 	// console.log(JSONBlog.posts);
