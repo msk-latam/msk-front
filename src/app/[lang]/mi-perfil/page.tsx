@@ -67,7 +67,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 				setTotalPages(Math.ceil(coursesList.length / itemsPerPage));
 				setLoadingUser(false);
 			} else {
-				router.push('/iniciar-sesion');
+				// router.push('/iniciar-sesion');
 			}
 		} catch (error) {
 			console.log(error);
