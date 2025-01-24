@@ -23,9 +23,10 @@ import dynamic from 'next/dynamic';
 import { generateHomeMetadata } from '@/SEO/home/metaData/homeMetaData';
 import { homeFAQs } from '@/components/faqs/homeFAQs';
 import ClearLocalStorage from '@/components/versionStorage/ClearLocalStorage';
-import { getJSONByCountry } from '../products';
+// import { getJSONByCountry } from '../products';
 import arblog from '../posts/ar.json';
 import { getJSONPostByCountry } from '../posts';
+import { getJSONTiendaByCountry } from '../productsTienda';
 
 const BlogSummary = dynamic(() => import('@/components/MSK/BlogSummary'));
 const BrandSlider = dynamic(() => import('@/components/MSK/BrandSlider'));
@@ -57,7 +58,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const jsonLd = generateSchemaJson('WebSite');
 	const currentCountry = params.lang || cookies().get('country')?.value;
 	const loadingBestSellers = false;
-	const JSONProduct = getJSONByCountry(currentCountry);
+	const JSONProduct = getJSONTiendaByCountry(currentCountry);
 	const JSONBlog = getJSONPostByCountry(currentCountry);
 
 	if (true) {
