@@ -24,7 +24,6 @@ export const GET = async (req: Request) => {
 			return product.father_post_type !== 'downloadable';
 		});
 
-		// Transformar los productos filtrados
 		const transformedProducts = nonDownloadableProducts.map((product: Product) => {
 			const totalPriceNumber = parseFloat(product.total_price.replace(/\./g, ''));
 
