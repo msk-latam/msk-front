@@ -5,6 +5,8 @@ export const GET = async (req: Request) => {
 	const { searchParams } = new URL(req.url);
 	const countryParam = searchParams.get('country');
 
+	// father_post_type!='downloadable'
+
 	try {
 		const response = await fetch(`https://msklatam.com/products/${countryParam}.json`);
 		// const response = await fetch(
@@ -18,7 +20,12 @@ export const GET = async (req: Request) => {
 		const data = await response.json();
 		const { products } = data;
 
-		const transformedProducts = products.map((product: Product) => {
+		const nonDownloadableProducts = products.filter((product: Product) => {
+			return product.father_post_type !== 'downloadable';
+		});
+
+		// Transformar los productos filtrados
+		const transformedProducts = nonDownloadableProducts.map((product: Product) => {
 			const totalPriceNumber = parseFloat(product.total_price.replace(/\./g, ''));
 
 			return {
