@@ -55,8 +55,8 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 		try {
 			setTotalPages(Math.ceil(allCourses.length / itemsPerPage));
 			const res = await api.getUserData();
-			// console.log('FETCH USER RES: ', res);
-			// console.log(res.message);
+			console.log('FETCH USER RES: ', res);
+			console.log(res.message);
 			if (!res.message) {
 				setUser(res);
 				let coursesList = getUserCourses(res, allCourses);
@@ -67,7 +67,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 				setTotalPages(Math.ceil(coursesList.length / itemsPerPage));
 				setLoadingUser(false);
 			} else {
-				// router.push('/iniciar-sesion');
+				router.push('/iniciar-sesion');
 			}
 		} catch (error) {
 			console.log(error);
