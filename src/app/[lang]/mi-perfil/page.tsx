@@ -51,6 +51,8 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	const [executionCount, setExecutionCount] = useState(0);
 	// const JSONBlog = getJSONPostByCountry(currentCountry);
 
+	console.log(allCourses);
+
 	const fetchUser = async () => {
 		try {
 			setTotalPages(Math.ceil(allCourses.length / itemsPerPage));

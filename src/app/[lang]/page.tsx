@@ -23,7 +23,7 @@ import dynamic from 'next/dynamic';
 import { generateHomeMetadata } from '@/SEO/home/metaData/homeMetaData';
 import { homeFAQs } from '@/components/faqs/homeFAQs';
 import ClearLocalStorage from '@/components/versionStorage/ClearLocalStorage';
-// import { getJSONByCountry } from '../products';
+import { getJSONByCountry } from '../products';
 import arblog from '../posts/ar.json';
 import { getJSONPostByCountry } from '../posts';
 import { getJSONTiendaByCountry } from '../productsTienda';
