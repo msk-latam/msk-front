@@ -50,7 +50,7 @@ interface CheckoutRebillProps {
 			state: string;
 		};
 	};
-	mode?: 'payment' | 'subscription'; // Define si es un pago único o una suscripción
+	mode?: 'payment' | 'subscription';
 }
 
 let checkoutForm: any;
@@ -179,11 +179,11 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		user,
 	} = useCheckout();
 	const [formData, setFormData] = useState({
-		// cardholderName: '',
-		// cardNumber: '',
-		// expiryMonth: '',
-		// expiryYear: '',
-		// cvv: '',
+		cardholderName: '',
+		cardNumber: '',
+		expiryMonth: '',
+		expiryYear: '',
+		cvv: '',
 		country: country || '',
 		state: '',
 		city: '',
@@ -205,13 +205,13 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 	});
 	// console.log(formData);
 	const [errors, setErrors] = useState({
-		// cardholderName: '',
-		// cardNumber: '',
-		// expiryMonth: '',
-		// expiryYear: '',
-		// cvv: '',
-		// type_doc: '',
-		// documentNumber: '',
+		cardholderName: '',
+		cardNumber: '',
+		expiryMonth: '',
+		expiryYear: '',
+		cvv: '',
+		type_doc: '',
+		documentNumber: '',
 		country: '',
 		state: '',
 		city: '',
@@ -496,12 +496,10 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		product_code: product.ficha.product_code,
 	};
 
-	console.log(isFormValid);
-	console.log(rebillValid, 'rebill');
-	const handleSubmit = async () => {
+	const handleSubmitRebill = async () => {
 		if (!isFormValid) return;
 
-		const requestBody = mapFormDataToRequest(formData);
+		// const requestBody = mapFormDataToRequest(formData);
 
 		const response = await checkoutForm.submit();
 
@@ -532,49 +530,9 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 			setPaymentStatus('rejected');
 			setIsSubmitting(false);
 		}
-
-		// try {
-		// 	const response = await fetch(selectedGateway.url, {
-		// 		method: 'POST',
-		// 		headers: {
-		// 			'Content-Type': 'application/json',
-		// 			Authorization: `Bearer ${selectedGateway.authToken}`,
-		// 		},
-		// 		body: JSON.stringify(requestBody),
-		// 	});
-
-		// 	if (!response.ok) {
-		// 		throw new Error('Error al procesar el pago');
-		// 	}
-
-		// 	const data = await response.json();
-		// 	if (data.status === 200 && data.message === 'Se cobro el pago y creo en zoho') {
-		// 		const status = data.paymentStatus || 'approved';
-		// 		setPaymentStatus(status);
-
-		// 		if (subStep === 0) {
-		// 			completeStep(activeStep);
-		// 			setActiveStep(activeStep + 1);
-		// 		} else {
-		// 			setActiveStep(activeStep + 1);
-		// 			completeStep(activeStep);
-		// 			setSubStep(0);
-		// 		}
-		// 	} else {
-		// 		console.error('Pago no procesado correctamente');
-		// 		setPaymentStatus('rejected');
-		// 	}
-		// } catch (error) {
-		// 	completeStep(activeStep);
-		// 	setActiveStep(activeStep + 1);
-		// 	console.error('Error al enviar los datos:', error);
-		// 	setPaymentStatus('rejected');
-		// } finally {
-		// 	setIsSubmitting(false);
-		// }
 	};
 
-	const handleSubmit1 = async () => {
+	const handleSubmitMercadoPago = async () => {
 		if (!isFormValid) return;
 
 		const requestBody = mapFormDataToRequest(formData);
@@ -687,13 +645,15 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				<h2 className='text-2xl font-semibold text-[#392C35]'>Datos de tarjeta</h2>
 
 				<form className='mt-6'>
-					{/* <CardDetailsForm
-						formData={formData}
-						handleBlur={handleBlur}
-						handleChange={handleChange}
-						errors={errors}
-						touched={touched}
-					/> */}
+					{country === 'ar' && (
+						<CardDetailsForm
+							formData={formData}
+							handleBlur={handleBlur}
+							handleChange={handleChange}
+							errors={errors}
+							touched={touched}
+						/>
+					)}
 
 					<h3 className='mt-8 text-xl font-semibold text-[#392C35]'>Datos de facturación</h3>
 					<DocumentDetailsForm
@@ -715,7 +675,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 					/>
 				</form>
 
-				{rebillValid && (
+				{rebillValid && country !== 'ar' && (
 					<div className='w-full'>
 						<CheckoutRebill formData={rebillForm} />
 					</div>
@@ -725,7 +685,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				isFormValid={isFormValid}
 				isSubmitting={isSubmitting}
 				handlePreviousStep={handlePreviousStep}
-				handleSubmit={handleSubmit}
+				handleSubmit={handleSubmitRebill}
 				isDisabled
 			/>
 		</>
