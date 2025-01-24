@@ -14,13 +14,14 @@ import TextSkeleton from '@/components/Skeleton/TextSkeleton';
 import ItemSkeleton from '@/components/Skeleton/ItemSkeleton';
 import ProductAccount from '@/components/Containers/profile/ProductAccount';
 import StorePagination from '@/components/MSK/Store/StorePagination';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import RedirectToTrial from '@/components/RedirectToTrial/RedirectToTrial';
 import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
 import CursoPerfil from './CursoPerfil';
 import CourseList from '../mi-cuenta/diplomas/CourseList';
 import { useEnrollment } from '@/context/EnrollmentContext/EnrollmentContext';
 import { getJSONPostByCountry } from '@/app/posts';
+import { getJSONByCountry } from '@/app/products';
 
 export interface PageAuthorProps {
 	className?: string;
@@ -38,7 +39,10 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	console.log(dataState);
 
 	const router = useRouter();
-	const { allBestSellers, allCourses } = dataState;
+	const {
+		allBestSellers,
+		// allCourses
+	} = dataState;
 	const [tabActive, setTabActive] = useState<string>(TABS[0]);
 	const [coursesTabActive, setCoursesTabActive] = useState<string>('Todo');
 	const [user, setUser] = useState<User>({} as User);
@@ -50,6 +54,15 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	const { currentProduct, enrollSuccess, setEnrollSuccess } = useEnrollment();
 	const [executionCount, setExecutionCount] = useState(0);
 	// const JSONBlog = getJSONPostByCountry(currentCountry);
+
+	const pathname = usePathname();
+
+	// Extraer el código de país del pathname
+	const countryCode = pathname.split('/')[1];
+
+	const JSONProduct = getJSONByCountry(countryCode);
+
+	let allCourses = JSONProduct;
 
 	console.log(allCourses);
 
@@ -69,6 +82,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 				setTotalPages(Math.ceil(coursesList.length / itemsPerPage));
 				setLoadingUser(false);
 			} else {
+				console.log('ejecutando else');
 				router.push('/iniciar-sesion');
 			}
 		} catch (error) {
