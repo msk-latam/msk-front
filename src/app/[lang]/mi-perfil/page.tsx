@@ -57,7 +57,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 			const res = await api.getUserData();
 			// console.log('FETCH USER RES: ', res);
 			// console.log(res.message);
-			if (res) {
+			if (!res.message) {
 				setUser(res);
 				let coursesList = getUserCourses(res, allCourses);
 				console.log(coursesList);
