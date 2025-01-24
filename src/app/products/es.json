@@ -1,7 +1,8 @@
 {
 	"params": {
-		"country": "es",
-		"limit": "-1"
+		"filter": "all",
+		"limit": "-1",
+		"country": "es"
 	},
 	"products": [
 		{
@@ -20,7 +21,7 @@
 			"featured_product_text": "<p>Completa el formulario para descargar automáticamente el material</p>\n",
 			"is_test_product": false,
 			"title": "Abordaje diagnóstico del dolor abdominal agudo",
-			"image": "https://wp.msklatam.com/wp-content/uploads/2021/05/imagen-primaria-1.jpg",
+			"image": "",
 			"thumbnail": {
 				"high": "",
 				"medium": "",
@@ -233,7 +234,7 @@
 			"permalink": "https://es.wp.msklatam.com/producto/actividades-preventivas-en-el-adulto/",
 			"temario": "https://es.wp.msklatam.com/wp-content/uploads/2024/11/Actividades-preventivas-en-el-adulto.pdf",
 			"cantidad_modulos": 0,
-			"why_course": "<p><span data-olk-copy-source=\"MessageBody\">La prevención de enfermedades y condiciones para el paciente adulto tiene distintos puntos de abordaje. En esta guía profesional de descarga gratuita accederás a una cobertura completa sobre dos puntos clave para el personal médico que desea especializarse en medicina familiar. </span></p>\n",
+			"why_course": "<p><span data-olk-copy-source=\"MessageBody\">La prevención de enfermedades y condiciones para el paciente adulto tiene distintos puntos de abordaje. En esta guía profesional de descarga gratuita accederás a una cobertura completa sobre dos puntos clave para el personal médico que desea especializarse en medicina familiar. </span></p>\n",
 			"is_new": true,
 			"nac_schools": null,
 			"int_schools": null,
@@ -247,6 +248,196 @@
 			"max_installments": "12",
 			"price_installments": "0",
 			"created_at": "2024-11-22 13:11:49"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 263247,
+			"related_tag": "",
+			"father_id": 262988,
+			"slug": "actualidad-en-diabetes",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 9005847,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "Actualidad en diabetes",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2023/10/foto-primaria-2.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2023/10/foto-secundaria-2.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2023/10/foto-secundaria-2.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2023/10/foto-secundaria-2-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1213,
+					"name": "Diabetes",
+					"slug": "diabetes"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "50",
+			"permalink": "https://es.wp.msklatam.com/producto/actualidad-en-diabetes/",
+			"temario": "https://es.wp.msklatam.com/wp-content/uploads/2023/10/Actualidad-en-diabetes-2.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 254531,
+					"post_author": "2",
+					"post_date": "2023-08-08 15:59:07",
+					"post_date_gmt": "2023-08-08 15:59:07",
+					"post_content": "",
+					"post_title": "Medical & Scientific Knowledge",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "medical-scientific-knowledge",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2023-08-17 14:42:31",
+					"post_modified_gmt": "2023-08-17 14:42:31",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=254531",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/Isologo-msk-1.png"
+				}
+			],
+			"cantidad_modulos": 4,
+			"why_course": "<p>La diabetes <em>mellitus </em>es una enfermedad crónica que puede manifestarse de diferentes formas, como la diabetes tipo 1, en la que el cuerpo no produce insulina, y la diabetes tipo 2, en la que hay una resistencia a la insulina o una producción insuficiente de la misma. Esta patología afecta múltiples órganos y sistemas y, según el tipo, puede derivar en enfermedades cardiovasculares, neuropatías, nefropatías y retinopatías. Un experto en diabetes proporciona un enfoque integral en el diagnóstico, tratamiento y prevención de esta enfermedad, ofreciendo una atención personalizada y continua para controlar los niveles de glucosa, prevenir complicaciones y mejorar la calidad de vida del paciente.</p>\n<p>El curso de Actualidad en diabetes de MSK pone a tu alcance herramientas diagnósticas, tratamientos de vanguardia y actualizaciones de las principales guías y estudios recientes que te permitirán optimizar tus conocimientos y brindar una atención de calidad al paciente diabético.</p>\n<p>Con este curso de Actualidad en diabetes, accedes a contenidos de primer nivel en el ámbito académico. En sus 4 módulos aprenderás sobre diabetes y comorbilidades asociadas, hipertrigliceridemia, hipertensión arterial y técnicas ómicas y diabetes gestacional y ejercicio, entre otros temas.</p>\n",
+			"is_new": false,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-36-9",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2023-10-04 11:10:17"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 314490,
+			"related_tag": "",
+			"father_id": 313838,
+			"slug": "actualizacion-en-dengue-zika-y-chikunguna",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 9005860,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "Actualización en dengue, Zika y Chikunguña",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2024/07/foto-primaria.webp",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2024/07/foto-secundaria.webp",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2024/07/foto-secundaria.webp",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2024/07/foto-secundaria-150x150.webp"
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				},
+				{
+					"term_id": 1094,
+					"name": "Infectología",
+					"slug": "infectologia"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				},
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": "50",
+			"permalink": "https://es.wp.msklatam.com/producto/actualizacion-en-dengue-zika-y-chikunguna/",
+			"temario": "https://es.wp.msklatam.com/wp-content/uploads/2024/07/Actualizacion-dengue-zika-y-chikunguna-1.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 254531,
+					"post_author": "2",
+					"post_date": "2023-08-08 15:59:07",
+					"post_date_gmt": "2023-08-08 15:59:07",
+					"post_content": "",
+					"post_title": "Medical & Scientific Knowledge",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "medical-scientific-knowledge",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2023-08-17 14:42:31",
+					"post_modified_gmt": "2023-08-17 14:42:31",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=254531",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/Isologo-msk-1.png"
+				}
+			],
+			"cantidad_modulos": 5,
+			"why_course": "<p>El dengue, el zika y la chikunguña son enfermedades virales que se transmiten a través de la picadura de mosquitos del género Aedes. Con los cambios en la demografía, el aumento de viajes y el impacto del cambio climático, la propagación de infecciones emergentes y reemergentes está en aumento. Por esta razón, es sumamente importante evaluar, diagnosticar y tratar al paciente con sospechas del virus del dengue, así como de los virus del Zika y la fiebre Chikunguña, dado que son tres enfermedades que pueden manifestarse con síntomas similares a los de una infección viral común. Un profesional especializado en la materia tiene un papel clave en la identificación, el manejo y la prevención de estas infecciones.</p>\n<p>El curso de Dengue, Zika y Chikunguña en MSK te acerca los conocimientos indispensables para evaluar las manifestaciones clínicas y pruebas diagnósticas recomendadas, conocer la evolución de la enfermedad según la gravedad y actualizarte sobre vacunas disponibles y en proceso de revisión.</p>\n<p>Organizado en cinco módulos, el curso de Dengue, Zika y Chikunguña aborda temas como patrones y factores de transmisión, etapas de la enfermedad, diagnóstico y tratamientos sugeridos, infecciones en poblaciones especiales y análisis de casos clínicos.</p>\n",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-51-2",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2024-07-23 18:07:50"
 		},
 		{
 			"meta_titulo": null,
@@ -795,6 +986,134 @@
 			"max_installments": "12",
 			"price_installments": "0",
 			"created_at": "2020-06-02 14:06:05"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 317501,
+			"related_tag": "",
+			"father_id": 221900,
+			"slug": "auditoria-medica-ecuador",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 9005814,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "Auditoría Médica (Ecuador)",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2022/07/foto-primaria-Auditoria-medica-EC.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2022/07/Auditoria-medica-Ecuador-secund.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2022/07/Auditoria-medica-Ecuador-secund.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2022/07/Auditoria-medica-Ecuador-secund-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				},
+				{
+					"term_id": 60090,
+					"name": "Administración y gestión",
+					"slug": "administracion-y-gestion"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				},
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				},
+				{
+					"title": "Otra Profesión",
+					"name": "otra-profesion"
+				}
+			],
+			"duration": "200",
+			"permalink": "https://es.wp.msklatam.com/producto/auditoria-medica-ecuador/",
+			"temario": "https://es.wp.msklatam.com/wp-content/uploads/2022/08/Auditoria-medica-Ecuador-1.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 210852,
+					"post_author": "34",
+					"post_date": "2022-05-17 14:39:23",
+					"post_date_gmt": "2022-05-17 14:39:23",
+					"post_content": "",
+					"post_title": "Colegio de Médicos de la Provincia de Buenos Aires - Distrito III",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "colegio-de-medicos-de-la-provincia-de-buenos-aires-distrito-iii-escuela-superior-de-ensenanza-medica",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2024-09-18 12:55:07",
+					"post_modified_gmt": "2024-09-18 12:55:07",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=210852",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/colmed_1x.webp"
+				},
+				{
+					"ID": 255898,
+					"post_author": "102",
+					"post_date": "2023-08-29 14:29:55",
+					"post_date_gmt": "2023-08-29 14:29:55",
+					"post_content": "",
+					"post_title": "Colegio de Médicos de la Provincia de Buenos Aires - Distrito III -",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "colegio-de-medicos-de-la-provincia-de-buenos-aires-distrito-iii",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2024-09-10 17:48:52",
+					"post_modified_gmt": "2024-09-10 17:48:52",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=255898",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/colmed_1x.webp"
+				}
+			],
+			"cantidad_modulos": 15,
+			"why_course": "<p>La auditoría médica es un proceso sistemático de revisión y evaluación de los servicios médicos y de salud para asegurar que se cumplan los estándares de calidad y las normativas vigentes. Este proceso permite identificar áreas de mejora, garantizar la eficiencia en la utilización de recursos y promover la seguridad del paciente. Quienes trabajan en auditorías médicas, revisan la documentación clínica, los procedimientos de atención y los resultados de los tratamientos para asegurar la conformidad con las normas establecidas y las mejores prácticas clínicas.</p>\n<p>Este curso de Auditoría médica te proporciona las habilidades y conocimientos necesarios para realizar auditorías efectivas en entornos médicos. El curso cubre los principios fundamentales de la auditoría médica, así como las mejores prácticas para mejorar la calidad y la seguridad de los servicios de salud.</p>\n<p>El curso de Auditoría médica de MSK se estructura en módulos detallados que proporcionan una capacitación completa y actualizada. Los módulos del curso incluyen temas como normativas y estándares de calidad en el sistema de salud ecuatoriano, metodologías de auditoría, gestión de riesgos y seguridad del paciente, auditoría en procesos clínicos y análisis de resultados y mejora continua. Cada módulo está diseñado para ofrecer una comprensión exhaustiva y práctica de la auditoría médica, capacitándote para realizar auditorías efectivas y contribuir a la mejora de la calidad en la atención médica. Al finalizar el curso, sabrás cómo implementar auditorías en tus entornos laborales, garantizando la conformidad con los estándares y promoviendo la excelencia de la atención al paciente.</p>\n",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-08-6",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "629",
+			"total_price": "629",
+			"max_installments": "12",
+			"price_installments": "52",
+			"created_at": "2022-07-29 14:07:48"
 		},
 		{
 			"id": 268023,
@@ -2230,6 +2549,94 @@
 			"meta_titulo": null,
 			"meta_descripcion": null,
 			"title_contenido": null,
+			"id": 331761,
+			"related_tag": "",
+			"father_id": 331652,
+			"slug": "cirugia-general-y-del-aparato-digestivo-amir",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 9005877,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "Curso superior de cirugía general y del aparato digestivo AMIR",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/cirugiageneraldigestivo-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/01/cirugiageneraldigestivo-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/01/cirugiageneraldigestivo-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/01/cirugiageneraldigestivo-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1096,
+					"name": "Cirugía",
+					"slug": "cirugia"
+				},
+				{
+					"term_id": 1293,
+					"name": "Gastroenterología",
+					"slug": "gastroenterologia"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "380",
+			"permalink": "https://es.wp.msklatam.com/producto/cirugia-general-y-del-aparato-digestivo-amir/",
+			"temario": "https://es.wp.msklatam.com/wp-content/uploads/2025/01/Cirugia-general-y-del-aparato-digestivo-AMIR.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 331572,
+					"post_author": "102",
+					"post_date": "2025-01-09 20:13:07",
+					"post_date_gmt": "2025-01-09 20:13:07",
+					"post_content": "",
+					"post_title": "AMIR",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "amir",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2025-01-10 18:57:34",
+					"post_modified_gmt": "2025-01-10 18:57:34",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=331572",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2025/01/cedente_amir.png"
+				}
+			],
+			"cantidad_modulos": 5,
+			"why_course": "<p>La cirugía general, y particularmente la del aparato digestivo, se enfoca en el diagnóstico y el tratamiento de diversas enfermedades a través de intervenciones quirúrgicas, que pueden ser programadas o producto de urgencias. El objeto de estudio de esta especialidad abarca el aparato digestivo, las paredes abdominales, las alteraciones en la cabeza y el cuello, así como en el sistema endocrino y la piel.</p>\n<p>Este curso de Cirugía general y del aparato digestivo AMIR te permitirá profundizar en el manejo de las diferentes circunstancias que se presentan durante la actividad profesional, así como actualizar tus conocimientos fundamentales fisiopatológicos, clínicos, diagnósticos y terapéuticos.</p>\n<p>El curso de Cirugía general y del aparato digestivo AMIR en MSK cuenta con cinco módulos actualizados en los que podrás aprender sobre principios de técnica quirúrgica, anestesia, cuidados postoperatorios, infecciones en cirugía, trasplantes y cirugía mayor ambulatoria, entre otros temas.</p>\n",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-65-9",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2025-01-09 20:01:32"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
 			"id": 323107,
 			"related_tag": "",
 			"father_id": 323048,
@@ -2714,6 +3121,99 @@
 			"meta_titulo": null,
 			"meta_descripcion": null,
 			"title_contenido": null,
+			"id": 331725,
+			"related_tag": "",
+			"father_id": 331575,
+			"slug": "gastroenterologia-digestivo-amir",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 9005875,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "Curso superior de gastroenterología AMIR",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/gastroenterologiadigestivo-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/01/gastroenterologiadigestivo-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/01/gastroenterologiadigestivo-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/01/gastroenterologiadigestivo-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1293,
+					"name": "Gastroenterología",
+					"slug": "gastroenterologia"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "300",
+			"permalink": "https://es.wp.msklatam.com/producto/gastroenterologia-digestivo-amir/",
+			"temario": "https://es.wp.msklatam.com/wp-content/uploads/2025/01/Gastroenterologia-digestivo-AMIR.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 331572,
+					"post_author": "102",
+					"post_date": "2025-01-09 20:13:07",
+					"post_date_gmt": "2025-01-09 20:13:07",
+					"post_content": "",
+					"post_title": "AMIR",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "amir",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2025-01-10 18:57:34",
+					"post_modified_gmt": "2025-01-10 18:57:34",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=331572",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2025/01/cedente_amir.png"
+				}
+			],
+			"cantidad_modulos": 4,
+			"why_course": "<p>La gastroenterología es una especialidad médica dedicada al diagnóstico, tratamiento y prevención de las enfermedades que afectan al sistema digestivo. El profesional especializado en gastroenterología aplica sus conocimientos en la evaluación y el manejo de patologías como trastornos esofágicos, gástricos, hepáticos, pancreáticos e intestinales. Además, es responsable de realizar procedimientos diagnósticos como endoscopias y colonoscopias, así como de supervisar el seguimiento y tratamiento integral de los pacientes.</p>\n<p>Con este curso de Gastroenterología AMIR en MSK podrás obtener los conocimientos fisiopatológicos, preventivos, clínicos, diagnósticos y terapéuticos fundamentales en el ámbito de la especialidad del aparato digestivo.</p>\n<p>El curso de Gastroenterología AMIR cuenta con cuatro módulos con contenidos actualizados sobre temas como patologías esofágicas, alteraciones del tracto gastrointestinal, enfermedad ulcerosa, hemorragia digestiva, gastritis crónica, hepatología, procedimientos diagnósticos y terapéuticos, entre otros.</p>\n",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-63-5",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2025-01-09 20:01:06"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
 			"id": 63934,
 			"related_tag": "",
 			"father_id": 63877,
@@ -3182,6 +3682,181 @@
 			"max_installments": "12",
 			"price_installments": "0",
 			"created_at": "2020-03-18 04:03:12"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 294175,
+			"related_tag": "",
+			"father_id": 294158,
+			"slug": "medicina-familiar-y-comunitaria",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 9005852,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "Curso superior de medicina familiar",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2024/02/foto-primaria-2.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2024/02/foto-secundaria-1.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2024/02/foto-secundaria-1.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2024/02/foto-secundaria-1-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				},
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": "400",
+			"permalink": "https://es.wp.msklatam.com/producto/medicina-familiar-y-comunitaria/",
+			"temario": "https://es.wp.msklatam.com/wp-content/uploads/2024/02/Medicina-Familiar-y-Comunitaria-2.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 254526,
+					"post_author": "2",
+					"post_date": "2023-08-07 23:12:56",
+					"post_date_gmt": "2023-08-07 23:12:56",
+					"post_content": "",
+					"post_title": "Tropos",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "tropos",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2023-08-22 20:17:07",
+					"post_modified_gmt": "2023-08-22 20:17:07",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=254526",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/cedentes_tropos.png"
+				}
+			],
+			"cantidad_modulos": 50,
+			"why_course": "<p>La medicina familiar y comunitaria o de primer contacto es una especialidad que se centra en proporcionar atención médica integral a individuos y familias, abordando tanto la prevención como el tratamiento de una amplia gama de enfermedades. Tiene una gran importancia en el sistema sanitario, ya que incide de manera específica en el nivel de salud de las personas, las familias y la comunidad en general.</p>\n<p>Este curso de Medicina familiar está diseñado para capacitarte en la atención clínica eficaz basada en la evidencia, permitiéndote brindar una solución terapéutica a los problemas planteados en la comunidad, comprendiendo que las disfunciones familiares pueden provocar patologías.</p>\n<p>El curso de Medicina familiar de MSK cuenta con módulos actualizados en los que podrás aprender sobre los fundamentos de la medicina familiar o de primer contacto, la prevención y promoción de la salud, el manejo de enfermedades crónicas, la intervención comunitaria y la atención de poblaciones especiales como, por ejemplo, pediátrica y geriátrica, entre otros temas.</p>\n",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-126088-8-5",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2024-02-01 14:02:35"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 331744,
+			"related_tag": "",
+			"father_id": 331614,
+			"slug": "medicina-familiar-y-comunitaria-amir",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 9005876,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "Curso superior de medicina familiar y comunitaria AMIR",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinafamiliar-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinafamiliar-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinafamiliar-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinafamiliar-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "750",
+			"permalink": "https://es.wp.msklatam.com/producto/medicina-familiar-y-comunitaria-amir/",
+			"temario": "https://es.wp.msklatam.com/wp-content/uploads/2025/01/Medicina-familiar-y-comunitaria-AMIR.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 331572,
+					"post_author": "102",
+					"post_date": "2025-01-09 20:13:07",
+					"post_date_gmt": "2025-01-09 20:13:07",
+					"post_content": "",
+					"post_title": "AMIR",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "amir",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2025-01-10 18:57:34",
+					"post_modified_gmt": "2025-01-10 18:57:34",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=331572",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2025/01/cedente_amir.png"
+				}
+			],
+			"cantidad_modulos": 8,
+			"why_course": "<p>La medicina familiar y comunitaria o de primer contacto es una especialidad que se centra en proporcionar atención médica integral a individuos y familias, abordando tanto la prevención como el tratamiento de una amplia gama de enfermedades. Tiene una gran importancia en el sistema sanitario, ya que incide de manera específica en el nivel de salud de las personas, las familias y la comunidad en general.</p>\n<p>Este curso de Medicina familiar AMIR disponible en MSK está diseñado para que puedas actualizarte en todas las áreas médicas y quirúrgicas, así como también de psiquiatría y de gestión sanitaria: los cuidados y la rehabilitación del enfermo, la salud mental, la planificación familiar en ginecología y obstetricia, los cuidados pediátricos y más.</p>\n<p>El curso de Medicina familiar AMIR en MSK cuenta con ocho módulos actualizados en los que también aprenderás sobre medicina preventiva, demografía y salud pública, epidemiología de las enfermedades transmisibles, uso racional de medicamentos en atención primaria, promoción de la salud y educación sanitaria, entre otros temas</p>\n",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-64-2",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2025-01-09 20:01:51"
 		},
 		{
 			"meta_titulo": null,
@@ -3793,6 +4468,99 @@
 			"max_installments": "12",
 			"price_installments": "0",
 			"created_at": "2020-04-23 18:04:54"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 331705,
+			"related_tag": "",
+			"father_id": 331534,
+			"slug": "oftalmologia-amir",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 9005874,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "Curso superior de oftalmología AMIR",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/oftalmologia_primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/01/oftalmologia_secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/01/oftalmologia_secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/01/oftalmologia_secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1318,
+					"name": "Oftalmología",
+					"slug": "oftalmologia"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "300",
+			"permalink": "https://es.wp.msklatam.com/producto/oftalmologia-amir/",
+			"temario": "https://es.wp.msklatam.com/wp-content/uploads/2025/01/Oftalmologia-AMIR.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 331572,
+					"post_author": "102",
+					"post_date": "2025-01-09 20:13:07",
+					"post_date_gmt": "2025-01-09 20:13:07",
+					"post_content": "",
+					"post_title": "AMIR",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "amir",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2025-01-10 18:57:34",
+					"post_modified_gmt": "2025-01-10 18:57:34",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=331572",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2025/01/cedente_amir.png"
+				}
+			],
+			"cantidad_modulos": 3,
+			"why_course": "<p>La oftalmología se dedica al diagnóstico, tratamiento y prevención de las enfermedades que afectan los ojos y el sistema visual. Los especialistas en oftalmología utilizan sus conocimientos para abordar trastornos como cataratas, glaucoma, enfermedades de la retina y errores refractivos, además de realizar procedimientos diagnósticos avanzados y cirugías oculares para preservar o restaurar la visión.</p>\n<p>Con el curso de Oftalmología AMIR en MSK profundizarás en los conocimientos fisiopatológicos, clínicos,<br />\ndiagnósticos y terapéuticos fundamentales en el ámbito de la especialidad.</p>\n<p>Este curso de Oftalmología AMIR está integrado por tres módulos en los que se abordan temas como óptica y refracción, cirugía refractiva, glaucoma, neuro-oftalmología, traumatología ocular, tumores intraoculares, aplicación láser, migrañas, cefaleas y algias faciales, entre otros.</p>\n",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-62-8",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2025-01-09 20:01:39"
 		},
 		{
 			"meta_titulo": null,
@@ -5128,7 +5896,7 @@
 			"permalink": "https://es.wp.msklatam.com/producto/diagnostico-del-shock-en-urgencias/",
 			"temario": "https://es.wp.msklatam.com/wp-content/uploads/2023/03/Diagnostico-del-shock-en-urgencias-3.pdf",
 			"cantidad_modulos": 0,
-			"why_course": "<p>Los pacientes en estado de <em>shock</em> deben ser evaluados de forma rápida y exhaustiva de pies a cabeza. Es fundamental diagnosticar el <em>shock</em> en este estadio, ya que la supervivencia depende en gran medida del tiempo transcurrido entre el comienzo del <em>shock</em> y el inicio del tratamiento.</p>\n",
+			"why_course": "<p>Los pacientes en estado de <em>shock</em> deben ser evaluados de forma rápida y exhaustiva de pies a cabeza. Es fundamental diagnosticar el <em>shock</em> en este estadio, ya que la supervivencia depende en gran medida del tiempo transcurrido entre el comienzo del <em>shock</em> y el inicio del tratamiento.</p>\n",
 			"is_new": false,
 			"nac_schools": null,
 			"int_schools": null,
@@ -5609,7 +6377,7 @@
 			"product_code": 9005808,
 			"featured_product_text": "",
 			"is_test_product": false,
-			"title": "Electrocardiografia para enfermería",
+			"title": "Electrocardiografia para enfermería",
 			"image": "https://wp.msklatam.com/wp-content/uploads/2020/03/foto-primaria-13.jpg",
 			"thumbnail": {
 				"high": "https://wp.msklatam.com/wp-content/uploads/2020/03/foto-secundaria-3.jpg",
@@ -5783,6 +6551,104 @@
 			"max_installments": "12",
 			"price_installments": "0",
 			"created_at": "2023-02-15 12:02:10"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 332325,
+			"related_tag": "",
+			"father_id": 332252,
+			"slug": "enfermeria-de-salud-mental",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 9005878,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "Enfermería de salud mental",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/saludmentalenfermeria-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/01/saludmentalenfermeria-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/01/saludmentalenfermeria-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/01/saludmentalenfermeria-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				},
+				{
+					"term_id": 1104,
+					"name": "Psicología",
+					"slug": "psicologia"
+				},
+				{
+					"term_id": 1412,
+					"name": "Psiquiatría",
+					"slug": "psiquiatria"
+				}
+			],
+			"professions": [
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": "100",
+			"permalink": "https://es.wp.msklatam.com/producto/enfermeria-de-salud-mental/",
+			"temario": "https://es.wp.msklatam.com/wp-content/uploads/2025/01/Enfermeria-de-salud-mental.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 254526,
+					"post_author": "2",
+					"post_date": "2023-08-07 23:12:56",
+					"post_date_gmt": "2023-08-07 23:12:56",
+					"post_content": "",
+					"post_title": "Tropos",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "tropos",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2023-08-22 20:17:07",
+					"post_modified_gmt": "2023-08-22 20:17:07",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=254526",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/cedentes_tropos.png"
+				}
+			],
+			"cantidad_modulos": 8,
+			"why_course": "<p>La salud mental es un estado psicológico que ha ido adquiriendo, en los últimos años, un interés creciente. Cada vez se da más relevancia a los problemas en esta esfera y, por consiguiente, a la actuación sanitaria que se proporciona a las personas con patologías relacionadas. Esto obliga a los profesionales sanitarios a una continua actualización, siendo el personal de enfermería responsable de un papel esencial en este ámbito, dada su cercanía con los pacientes y familiares.</p>\n<p>El curso de Enfermería de salud mental de MSK te permitirá obtener capacidades de resolución de problemas altamente especializados en la enfermería de salud mental, así como en los procedimientos diagnósticos y las técnicas de salud mental en el abordaje de distintas situaciones con el paciente.</p>\n<p>Organizado en nueve temas, este curso de Enfermería de salud mental aborda tópicos como la recuperación del trastorno mental grave, la atención en enfermería de urgencias psiquiátricas, el abordaje de pacientes con trastorno de conducta alimentaria (TCA) y la salud mental infanto-juvenil, entre otros.</p>\n",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-66-6",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2025-01-14 16:01:48"
 		},
 		{
 			"id": 269882,
@@ -6183,6 +7049,216 @@
 			"meta_titulo": null,
 			"meta_descripcion": null,
 			"title_contenido": null,
+			"id": 263317,
+			"related_tag": "",
+			"father_id": 263109,
+			"slug": "estudios-de-imagenes-en-atencion-primaria",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 9005849,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "Estudios de imágenes en atención primaria",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2023/10/foto-primaria-3.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2023/10/foto-secundaria-3.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2023/10/foto-secundaria-3.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2023/10/foto-secundaria-3-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				},
+				{
+					"term_id": 60093,
+					"name": "Radiología e imagenología",
+					"slug": "radiologia"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "100",
+			"permalink": "https://es.wp.msklatam.com/producto/estudios-de-imagenes-en-atencion-primaria/",
+			"temario": "https://es.wp.msklatam.com/wp-content/uploads/2023/10/Estudios-de-imagenes-en-Atencion-Primaria.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 254531,
+					"post_author": "2",
+					"post_date": "2023-08-08 15:59:07",
+					"post_date_gmt": "2023-08-08 15:59:07",
+					"post_content": "",
+					"post_title": "Medical & Scientific Knowledge",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "medical-scientific-knowledge",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2023-08-17 14:42:31",
+					"post_modified_gmt": "2023-08-17 14:42:31",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=254531",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/Isologo-msk-1.png"
+				}
+			],
+			"cantidad_modulos": 8,
+			"why_course": "<p>Las pruebas de imagen constituyen una herramienta fundamental para el diagnóstico temprano de diversas patologías y para la orientación eficaz de la acción médica. Dada la amplitud de sus funciones, resulta de gran utilidad que los profesionales de la salud adquieran nociones fundamentales sobre el funcionamiento y la interpretación de imágenes normales y patológicas obtenidas mediante ultrasonido, radiografía, tomografía y resonancia magnética.</p>\n<p>El curso de Estudios de imágenes en atención primaria de MSK reúne conocimientos y herramientas sobre estudios de imagen que podrás incorporar a la práctica para una atención eficaz e integral.</p>\n<p>Dentro de sus 8 módulos, en el curso de Estudios de imágenes en atención primaria de MSK encontrarás un abordaje sobre terminologías y aspectos técnicos de las distintas modalidades imagenológicas, y aprenderás a identificar patrones de imágenes normales y patológicos.</p>\n",
+			"is_new": false,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-38-3",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2023-10-04 11:10:31"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 309995,
+			"related_tag": "",
+			"father_id": 312483,
+			"slug": "euneiz-apostillada",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 2000003,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "EUNEIZ APOSTILLADA",
+			"image": "",
+			"thumbnail": {
+				"high": "",
+				"medium": "",
+				"low": ""
+			},
+			"categories": [
+				{
+					"term_id": 15,
+					"name": "Uncategorized",
+					"slug": "uncategorized"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": null,
+			"permalink": "https://es.wp.msklatam.com/producto/euneiz-apostillada/",
+			"temario": false,
+			"cantidad_modulos": 0,
+			"why_course": "",
+			"is_new": false,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": null,
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2024-06-19 18:06:43"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 330865,
+			"related_tag": "",
+			"father_id": 330799,
+			"slug": "euneiz-faro",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 2000010,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "EUNEIZ FARO",
+			"image": "",
+			"thumbnail": {
+				"high": "",
+				"medium": "",
+				"low": ""
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				},
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": null,
+			"permalink": "https://es.wp.msklatam.com/producto/euneiz-faro/",
+			"temario": false,
+			"cantidad_modulos": 0,
+			"why_course": "",
+			"is_new": false,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": null,
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2025-01-02 13:01:12"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
 			"id": 313553,
 			"related_tag": "",
 			"father_id": 313410,
@@ -6276,6 +7352,195 @@
 			"max_installments": "12",
 			"price_installments": "0",
 			"created_at": "2024-07-16 19:07:09"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 312888,
+			"related_tag": "",
+			"father_id": 312865,
+			"slug": "extension-3",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 3000001,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "Extensión 3",
+			"image": "",
+			"thumbnail": {
+				"high": "",
+				"medium": "",
+				"low": ""
+			},
+			"categories": [
+				{
+					"term_id": 15,
+					"name": "Uncategorized",
+					"slug": "uncategorized"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				},
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": null,
+			"permalink": "https://es.wp.msklatam.com/producto/extension-3/",
+			"temario": false,
+			"cantidad_modulos": 0,
+			"why_course": "",
+			"is_new": false,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": null,
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "100.000",
+			"total_price": "100.000",
+			"max_installments": "12",
+			"price_installments": "8.333",
+			"created_at": "2024-07-10 19:07:16"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 312914,
+			"related_tag": "",
+			"father_id": 312867,
+			"slug": "extension-6",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 3000002,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "Extensión 6",
+			"image": "",
+			"thumbnail": {
+				"high": "",
+				"medium": "",
+				"low": ""
+			},
+			"categories": [
+				{
+					"term_id": 15,
+					"name": "Uncategorized",
+					"slug": "uncategorized"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				},
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": null,
+			"permalink": "https://es.wp.msklatam.com/producto/extension-6/",
+			"temario": false,
+			"cantidad_modulos": 0,
+			"why_course": "",
+			"is_new": false,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": null,
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "210.000",
+			"total_price": "210.000",
+			"max_installments": "12",
+			"price_installments": "17.500",
+			"created_at": "2024-07-10 19:07:13"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 312938,
+			"related_tag": "",
+			"father_id": 312869,
+			"slug": "extension-9",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 3000003,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "Extensión 9",
+			"image": "",
+			"thumbnail": {
+				"high": "",
+				"medium": "",
+				"low": ""
+			},
+			"categories": [
+				{
+					"term_id": 15,
+					"name": "Uncategorized",
+					"slug": "uncategorized"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				},
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": null,
+			"permalink": "https://es.wp.msklatam.com/producto/extension-9/",
+			"temario": false,
+			"cantidad_modulos": 0,
+			"why_course": "",
+			"is_new": false,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": null,
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "315.000",
+			"total_price": "315.000",
+			"max_installments": "12",
+			"price_installments": "26.250",
+			"created_at": "2024-07-10 20:07:58"
 		},
 		{
 			"id": 209485,
@@ -8201,6 +9466,94 @@
 			"created_at": "2022-11-01 14:11:23"
 		},
 		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 263284,
+			"related_tag": "",
+			"father_id": 263162,
+			"slug": "intoxicaciones-en-pediatria",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 9005848,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "Intoxicaciones en pediatría",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2023/10/foto-primaria-4.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2023/10/foto-secundaria-4.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2023/10/foto-secundaria-4.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2023/10/foto-secundaria-4-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1106,
+					"name": "Pediatría",
+					"slug": "pediatria"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "50",
+			"permalink": "https://es.wp.msklatam.com/producto/intoxicaciones-en-pediatria/",
+			"temario": "https://es.wp.msklatam.com/wp-content/uploads/2023/10/Intoxicaciones-en-pediatria-1.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 254531,
+					"post_author": "2",
+					"post_date": "2023-08-08 15:59:07",
+					"post_date_gmt": "2023-08-08 15:59:07",
+					"post_content": "",
+					"post_title": "Medical & Scientific Knowledge",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "medical-scientific-knowledge",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2023-08-17 14:42:31",
+					"post_modified_gmt": "2023-08-17 14:42:31",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=254531",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/Isologo-msk-1.png"
+				}
+			],
+			"cantidad_modulos": 6,
+			"why_course": "<p>Las intoxicaciones en pediatría son un problema frecuente por ingesta, inhalación o contacto con sustancias tóxicas como productos de limpieza, pesticidas o plantas venenosas. Las intoxicaciones pueden afectar múltiples órganos y sistemas, y su gravedad varía según la cantidad y el tipo de sustancia involucrada. Un especialista en intoxicaciones en pediatría puede diagnosticar y tratar estas emergencias, implementando medidas rápidas de desintoxicación y prevención de complicaciones, y orientando a los cuidadores sobre la prevención de futuros incidentes.</p>\n<p>Con el curso de Intoxicaciones en pediatría de MSK conocerás los pasos para un abordaje eficaz de las intoxicaciones pediátricas, desde la estabilización inicial hasta el tratamiento específico, y serás capaz de establecer diagnósticos acertados mediante la correlación de toxíndromes, signos y síntomas del paciente.</p>\n<p>El curso de Intoxicaciones en pediatría está dividido en 6 módulos que incluyen temas como fase de emergencias y descontaminación, intoxicaciones medicamentosas, intoxicación por drogas de abuso, toxiinfecciones por alimentos y primeros auxilios y traslados, entre otros.</p>\n",
+			"is_new": false,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-37-6",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2023-10-04 11:10:29"
+		},
+		{
 			"id": 324326,
 			"related_tag": "",
 			"father_id": 324235,
@@ -8250,6 +9603,98 @@
 			"max_installments": "12",
 			"price_installments": "0",
 			"created_at": "2024-10-29 16:10:44"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 332491,
+			"related_tag": "",
+			"father_id": 331802,
+			"slug": "investigacion-clinica-diseno-y-gestion-integral",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 9005879,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "Investigación clínica: diseño y gestión integral",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/gestionclinica-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/01/gestionclinica-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/01/gestionclinica-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/01/gestionclinica-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				}
+			],
+			"professions": [
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				},
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "200",
+			"permalink": "https://es.wp.msklatam.com/producto/investigacion-clinica-diseno-y-gestion-integral/",
+			"temario": "https://es.wp.msklatam.com/wp-content/uploads/2025/01/Investigacion-clinica-diseno-y-gestion-integral.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 210852,
+					"post_author": "34",
+					"post_date": "2022-05-17 14:39:23",
+					"post_date_gmt": "2022-05-17 14:39:23",
+					"post_content": "",
+					"post_title": "Colegio de Médicos de la Provincia de Buenos Aires - Distrito III",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "colegio-de-medicos-de-la-provincia-de-buenos-aires-distrito-iii-escuela-superior-de-ensenanza-medica",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2024-09-18 12:55:07",
+					"post_modified_gmt": "2024-09-18 12:55:07",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=210852",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/colmed_1x.webp"
+				}
+			],
+			"cantidad_modulos": 16,
+			"why_course": "<p>La investigación clínica es fundamental para dar respuesta a preguntas sobre eficacia y seguridad<br />\nde nuevos medicamentos, productos médicos y procedimientos. El personal capacitado para tratar enfermedades o acompañar a sus pacientes desde distintos roles, puede ser parte del ámbito de la investigación clínica, debido a su conocimiento sobre las necesidades de sus pacientes.</p>\n<p>El curso de Investigación clínica: diseño y gestión integral de MSK te capacitará en la toma de decisiones, el uso de indicadores periódicos y auditorías internas para la medición de la calidad de los procesos, involucrando la mejora en la competitividad y la seguridad del paciente.</p>\n<p>Organizado en 16 módulos, el curso de Investigación clínica: diseño y gestión integral aborda temas como gestión de centros de investigación, diseño de estudios clínicos, estadística aplicada en salud, muestreo y mejora continua, farmacovigilancia, aspectos éticos, tendencias actuales y más.</p>\n",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-67-3",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "474.278",
+			"total_price": "474.278",
+			"max_installments": "12",
+			"price_installments": "39.523",
+			"created_at": "2025-01-10 19:01:17"
 		},
 		{
 			"id": 103753,
@@ -8338,7 +9783,7 @@
 			"permalink": "https://es.wp.msklatam.com/producto/manejo-del-dolor-en-el-neonato/",
 			"temario": "https://es.wp.msklatam.com/wp-content/uploads/2021/02/Manejo-del-dolor-neonato-1.pdf",
 			"cantidad_modulos": 0,
-			"why_course": "<p>El tratamiento del niño con dolor y la prevención del dolor iatrogénico deben integrarse en el  cuidado del paciente, ya que afecta no solo a la satisfacción y el bienestar de este, sino también a la evolución de la patología subyacente. El dolor no tratado puede causar no solo efectos negativos a nivel emocional, sino también afectar negativamente el curso de la enfermedad.</p>\n",
+			"why_course": "<p>El tratamiento del niño con dolor y la prevención del dolor iatrogénico deben integrarse en el  cuidado del paciente, ya que afecta no solo a la satisfacción y el bienestar de este, sino también a la evolución de la patología subyacente. El dolor no tratado puede causar no solo efectos negativos a nivel emocional, sino también afectar negativamente el curso de la enfermedad.</p>\n",
 			"is_new": false,
 			"nac_schools": null,
 			"int_schools": null,
@@ -8491,7 +9936,7 @@
 			"permalink": "https://es.wp.msklatam.com/producto/metodologia-para-el-diagnostico-de-las-enfermedades-neurologicas/",
 			"temario": "https://es.wp.msklatam.com/wp-content/uploads/2024/02/Metodologia-para-el-diagnostico-de-las-enfermedades-neurologicas.pdf",
 			"cantidad_modulos": 0,
-			"why_course": "<p>La neurología es la especialidad que trata las enfermedades del sistema nervioso central y periférico. Las enfermedades neurológicas son especialmente variadas y por ello la correcta evaluación de los pacientes cobra un papel  fundamental. En la evaluación de todo paciente neurológico debe seguirse un método que permita la correcta interpretación de los síntomas y signos y oriente al diagnóstico del paciente.</p>\n",
+			"why_course": "<p>La neurología es la especialidad que trata las enfermedades del sistema nervioso central y periférico. Las enfermedades neurológicas son especialmente variadas y por ello la correcta evaluación de los pacientes cobra un papel  fundamental. En la evaluación de todo paciente neurológico debe seguirse un método que permita la correcta interpretación de los síntomas y signos y oriente al diagnóstico del paciente.</p>\n",
 			"is_new": true,
 			"nac_schools": null,
 			"int_schools": null,
@@ -9812,7 +11257,7 @@
 			"permalink": "https://es.wp.msklatam.com/producto/resistencia-a-los-antimicrobianos/",
 			"temario": "https://es.wp.msklatam.com/wp-content/uploads/2022/05/Resistencia-a-los-antimicrobianos-2.pdf",
 			"cantidad_modulos": 0,
-			"why_course": "<p>Después de los descubrimientos de la penicilina y las sulfamidas y su aplicación en la práctica médica, el uso de los antibióticos en el tratamiento de las enfermedades infectocontagiosas ha contribuido a disminuir la morbimortalidad ocasionada por estas que, cabe destacar, ocupaban el primer lugar entre las causas de muerte. Esto ha determinado que el desarrollo de la utilización de los tratamientos con antibióticos sea  considerado como una auténtica transformación que ha revolucionado la medicina contemporánea.</p>\n",
+			"why_course": "<p>Después de los descubrimientos de la penicilina y las sulfamidas y su aplicación en la práctica médica, el uso de los antibióticos en el tratamiento de las enfermedades infectocontagiosas ha contribuido a disminuir la morbimortalidad ocasionada por estas que, cabe destacar, ocupaban el primer lugar entre las causas de muerte. Esto ha determinado que el desarrollo de la utilización de los tratamientos con antibióticos sea  considerado como una auténtica transformación que ha revolucionado la medicina contemporánea.</p>\n",
 			"is_new": false,
 			"nac_schools": null,
 			"int_schools": null,
@@ -9935,7 +11380,7 @@
 			"product_code": 9005871,
 			"featured_product_text": "",
 			"is_test_product": false,
-			"title": "Salud mental perinatal: estrategias de detección y prevención en obstetricia",
+			"title": "Salud mental perinatal: estrategias de detección y prevención en obstetricia",
 			"image": "https://wp.msklatam.com/wp-content/uploads/2024/11/saludmentalperinatal-prim.jpg",
 			"thumbnail": {
 				"high": "https://wp.msklatam.com/wp-content/uploads/2024/11/saludmentalperinatal-sec.jpg",
@@ -10017,6 +11462,69 @@
 			"max_installments": "12",
 			"price_installments": "26.786",
 			"created_at": "2024-11-21 14:11:24"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 310019,
+			"related_tag": "",
+			"father_id": 310002,
+			"slug": "saxum",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 2000002,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "SAXUM",
+			"image": "",
+			"thumbnail": {
+				"high": "",
+				"medium": "",
+				"low": ""
+			},
+			"categories": [
+				{
+					"term_id": 15,
+					"name": "Uncategorized",
+					"slug": "uncategorized"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				},
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": null,
+			"permalink": "https://es.wp.msklatam.com/producto/saxum/",
+			"temario": false,
+			"cantidad_modulos": 0,
+			"why_course": "",
+			"is_new": false,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": null,
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2024-06-19 18:06:13"
 		},
 		{
 			"id": 127233,
@@ -10804,6 +12312,118 @@
 			"meta_titulo": null,
 			"meta_descripcion": null,
 			"title_contenido": null,
+			"id": 316575,
+			"related_tag": "",
+			"father_id": 316556,
+			"slug": "udima",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 2000005,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "UDIMA",
+			"image": "",
+			"thumbnail": {
+				"high": "",
+				"medium": "",
+				"low": ""
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": null,
+			"permalink": "https://es.wp.msklatam.com/producto/udima/",
+			"temario": false,
+			"cantidad_modulos": 0,
+			"why_course": "",
+			"is_new": false,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": null,
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2024-08-07 16:08:05"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 330817,
+			"related_tag": "",
+			"father_id": 330797,
+			"slug": "universidad-catolica-san-antonio-de-murcia-ucam",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "es",
+			"language_name": "España",
+			"product_code": 2000009,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "Universidad Católica San Antonio de Murcia (UCAM)",
+			"image": "",
+			"thumbnail": {
+				"high": "",
+				"medium": "",
+				"low": ""
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				},
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": null,
+			"permalink": "https://es.wp.msklatam.com/producto/universidad-catolica-san-antonio-de-murcia-ucam/",
+			"temario": false,
+			"cantidad_modulos": 0,
+			"why_course": "",
+			"is_new": false,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": null,
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "135.000",
+			"total_price": "135.000",
+			"max_installments": "12",
+			"price_installments": "11.250",
+			"created_at": "2025-01-02 13:01:05"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
 			"id": 324009,
 			"related_tag": "",
 			"father_id": 322451,
@@ -11007,28 +12627,7 @@
 	],
 	"country": "es",
 	"total_products": 180,
-	"total_products_in_response": 160,
-	"skips": 20,
-	"skips_detalle": [
-		"Is test product production 9005847",
-		"Is test product production 9005860",
-		"Is test product production 9005814",
-		"Is test product production 9005877",
-		"Is test product production 9005875",
-		"Is test product production 9005852",
-		"Is test product production 9005876",
-		"Is test product production 9005874",
-		"Is test product production 9005878",
-		"Is test product production 9005849",
-		"Is test product production 2000003",
-		"Is test product production 2000010",
-		"Is test product production 3000001",
-		"Is test product production 3000002",
-		"Is test product production 3000003",
-		"Is test product production 9005848",
-		"Is test product production 9005879",
-		"Is test product production 2000002",
-		"Is test product production 2000005",
-		"Is test product production 2000009"
-	]
+	"total_products_in_response": 180,
+	"skips": 0,
+	"skips_detalle": []
 }
