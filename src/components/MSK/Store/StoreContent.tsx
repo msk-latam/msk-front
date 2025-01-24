@@ -28,6 +28,7 @@ import { DataContext } from '@/context/data/DataContext';
 import { useSearchParams } from 'next/navigation';
 import EitnerCrum from '@/components/EitnerCrum/EitnerCrum';
 import { getJSONByCountry } from '@/app/products';
+import { getJSONTiendaByCountry } from '@/app/productsTienda';
 
 let resources = resourcesMapping;
 let durations = durationsMapping;
@@ -41,7 +42,7 @@ const StoreContent: FC = ({ country }: any) => {
 		allStoreProfessions,
 	} = dataState;
 	console.log(country, 'de tienda');
-	const JSONProduct = getJSONByCountry(country);
+	const JSONProduct = getJSONTiendaByCountry(country);
 	let storeCourses = JSONProduct.products;
 	const { specialties } = useStoreFilters();
 	const { countryState } = useContext(CountryContext);
