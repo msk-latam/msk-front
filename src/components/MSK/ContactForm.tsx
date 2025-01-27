@@ -215,32 +215,43 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 						if (isEbook && typeof resourceMedia === 'string') {
 							try {
 								// Realiza la solicitud para obtener el archivo PDF
-								const replacedUrl = resourceMedia.replace(/^(https?:\/\/)(ar\.|mx\.|cl\.|ec\.)/, '$1');
-								const response = await fetch(replacedUrl);
+								// const replacedUrl = resourceMedia.replace(/^(https?:\/\/)(ar\.|mx\.|cl\.|ec\.)/, '$1');
+								const replacedUrl = resourceMedia.replace(
+									/^(https?:\/\/)(ar\.|bo\.|br\.|cl\.|co\.|cr\.|cu\.|do\.|ec\.|es\.|sv\.|gt\.|ht\.|hn\.|jm\.|mx\.|ni\.|pa\.|py\.|pe\.|pr\.|uy\.|ve\.)/,
+									'$1',
+								);
+								// const response = await fetch(replacedUrl);
 
-								if (!response.ok) {
-									throw new Error('No se pudo descargar el archivo PDF');
-								}
+								console.log(response);
 
-								const blob = await response.blob();
+								// if (!response.ok) {
+								// 	throw new Error('No se pudo descargar el archivo PDF');
+								// }
+
+								// const blob = await response.blob();
 
 								// Crea un enlace temporal y simula un clic para descargar el archivo con su nombre original
 								const a = document.createElement('a');
-								a.href = typeof window !== 'undefined' ? window.URL.createObjectURL(blob) : '';
+								// a.href = typeof window !== 'undefined' ? window.URL.createObjectURL(blob) : '';
+								a.href = replacedUrl;
 
 								// Obtén el nombre del archivo del encabezado Content-Disposition si está presente
-								const contentDisposition = response.headers.get('Content-Disposition');
-								const fileNameMatch = contentDisposition && contentDisposition.match(/filename="(.+)"/);
+								// const contentDisposition = response.headers.get('Content-Disposition');
+								// const fileNameMatch = contentDisposition && contentDisposition.match(/filename="(.+)"/);
 
-								if (fileNameMatch && fileNameMatch[1]) {
-									a.download = fileNameMatch[1];
-								} else {
-									// Si no se encontró el nombre del archivo en el encabezado, utiliza un nombre predeterminado
-									a.download = `${resourcePDFName}.pdf`;
-								}
+								// if (fileNameMatch && fileNameMatch[1]) {
+								// 	a.download = fileNameMatch[1];
+								// } else {
+								// 	// Si no se encontró el nombre del archivo en el encabezado, utiliza un nombre predeterminado
+								// }
 
+								a.download = `${resourcePDFName}.pdf`;
+								// a.download = `descarga.pdf`;
+								console.log(a);
 								// Simula un clic en el enlace para iniciar la descarga
-								a.click();
+								// a.click();
+
+								window.open(replacedUrl, '_blank');
 
 								// Libera el objeto URL creado
 								if (typeof window !== 'undefined') window.URL.revokeObjectURL(a.href);
@@ -292,8 +303,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 		'Terms_And_Conditions',
 	];
 
-	const isSubmitDisabled =
-		!formik.dirty || !isFormValid(requiredFormFields, formik.values, formik.errors, formik.touched);
+	const isSubmitDisabled = !formik.dirty || !isFormValid(requiredFormFields, formik.values, formik.errors, formik.touched);
 
 	return (
 		<>
