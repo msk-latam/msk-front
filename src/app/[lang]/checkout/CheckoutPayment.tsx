@@ -179,11 +179,11 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		user,
 	} = useCheckout();
 	const [formData, setFormData] = useState({
-		cardholderName: '',
-		cardNumber: '',
-		expiryMonth: '',
-		expiryYear: '',
-		cvv: '',
+		// cardholderName: '',
+		// cardNumber: '',
+		// expiryMonth: '',
+		// expiryYear: '',
+		// cvv: '',
 		country: country || '',
 		state: '',
 		city: '',
@@ -205,11 +205,11 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 	});
 	// console.log(formData);
 	const [errors, setErrors] = useState({
-		cardholderName: '',
-		cardNumber: '',
-		expiryMonth: '',
-		expiryYear: '',
-		cvv: '',
+		// cardholderName: '',
+		// cardNumber: '',
+		// expiryMonth: '',
+		// expiryYear: '',
+		// cvv: '',
 		type_doc: '',
 		documentNumber: '',
 		country: '',
@@ -234,6 +234,54 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 	const [touched, setTouched] = useState<Record<string, boolean>>({});
 	const [isFormValid, setIsFormValid] = useState(false);
 	const [rebillValid, setRebillValid] = useState(false);
+
+	useEffect(() => {
+		if (country !== 'cl') {
+			// Agregar campos de tarjeta a formData
+			setFormData((prevState) => ({
+				...prevState,
+				cardholderName: '',
+				cardNumber: '',
+				expiryMonth: '',
+				expiryYear: '',
+				cvv: '',
+			}));
+
+			// Agregar campos de tarjeta a errors
+			setErrors((prevState) => ({
+				...prevState,
+				cardholderName: '',
+				cardNumber: '',
+				expiryMonth: '',
+				expiryYear: '',
+				cvv: '',
+			}));
+		} else {
+			// Eliminar campos de tarjeta de formData
+			setFormData((prevState) => {
+				const newState = { ...prevState };
+				delete newState.cardholderName;
+				delete newState.cardNumber;
+				delete newState.expiryMonth;
+				delete newState.expiryYear;
+				delete newState.cvv;
+				return newState;
+			});
+
+			// Eliminar campos de tarjeta de errors
+			setErrors((prevState) => {
+				const newState = { ...prevState };
+				delete newState.cardholderName;
+				delete newState.cardNumber;
+				delete newState.expiryMonth;
+				delete newState.expiryYear;
+				delete newState.cvv;
+				return newState;
+			});
+		}
+	}, [country]);
+
+	console.log(formData);
 
 	useEffect(() => {
 		const formIsValid =
@@ -278,6 +326,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 	useEffect(() => {
 		if (user) {
 			// Si el usuario está disponible en el contexto, usamos esos datos
+			console.log('hay user');
 			setFormData((prevState) => ({
 				...prevState,
 				cardholderName: `${user.firstName} ${user.lastName}`,
@@ -291,6 +340,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				speciality: user.specialty,
 			}));
 		} else if (state && state.profile) {
+			console.log('viene de state');
 			setFormData((prevState) => ({
 				...prevState,
 				cardholderName: `${state.profile.name} ${state.profile.last_name}`,
@@ -356,6 +406,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 	const transactionAmount = parseInt(totalPrice.replace(/[\.,]/g, ''), 10);
 	const regularPrice = product.regular_price;
 	const regularPriceFixed = parseInt(regularPrice.replace(/[\.,]/g, ''), 10);
+	console.log(user);
 
 	const mapFormDataToRequest = (formData: any) => {
 		return {
@@ -367,8 +418,8 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				email: formData.email || state.email,
 				// first_name: formData.cardholderName.trim().split(' ')[0] || 'Nombre',
 				// last_name: formData.cardholderName.trim().split(' ').slice(1).join(' ') || 'Apellido',
-				first_name: formData.firstName || user.firstName, // Asegúrate de que no dependa de cardholderName
-				last_name: formData.lastName || user.lastName,
+				first_name: formData.firstName || user?.firstName || state.profile.name, // Asegúrate de que no dependa de cardholderName
+				last_name: formData.lastName || user?.lastName || state.profile.last_name,
 
 				identification: {
 					type: formData.type_doc,
@@ -685,7 +736,8 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				isFormValid={isFormValid}
 				isSubmitting={isSubmitting}
 				handlePreviousStep={handlePreviousStep}
-				handleSubmit={handleSubmitRebill}
+				handleSubmit={country == 'ar' ? handleSubmitMercadoPago : handleSubmitRebill}
+				// handleSubmit={handleSubmitRebill}
 				isDisabled
 			/>
 		</>
