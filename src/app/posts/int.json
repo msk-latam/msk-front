@@ -7,6 +7,266 @@
 	"total_products": 221,
 	"posts": [
 		{
+			"id": 332656,
+			"title": "Cómo fortalecer tu práctica en medicina interna",
+			"slug": "fortalecer-tu-practica-en-medicina-interna",
+			"permalink": "https://wp.msklatam.com/nota/e-learning/fortalecer-tu-practica-en-medicina-interna/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-fortalecer-tu-practica-en-medicina-interna-scaled-e1737723350451.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-fortalecer-tu-practica-en-medicina-interna-scaled-e1737723350451.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "Accede a guías profesionales, cursos especializados y artículos destacados que te ayudarán a profundizar tus conocimientos en medicina interna. Desde el manejo de infecciones nosocomiales hasta los efectos secundarios de tratamientos oncológicos, descubre herramientas esenciales para tu desarrollo.",
+			"date": "Enero 23, 2025",
+			"author": {
+				"id": 103,
+				"name": "Contenidos MSK",
+				"email": "contenidos@msklatam.com",
+				"avatar": "https://secure.gravatar.com/avatar/d77ba09cb0734abf46a7f69267816ecd?s=96&d=mm&r=g"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 103,
+					"name": "Contenidos MSK",
+					"email": "contenidos@msklatam.com",
+					"avatar": "https://secure.gravatar.com/avatar/d77ba09cb0734abf46a7f69267816ecd?s=96&d=mm&r=g"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 332710,
+					"title": "IA: el futuro de la educación médica",
+					"slug": "ia-el-futuro-de-la-educacion-medica",
+					"link": "https://wp.msklatam.com/nota/e-learning/ia-el-futuro-de-la-educacion-medica/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-IA-el-futuro-de-la-educacion-medica-scaled-e1737729040163.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332348,
+					"title": "Recursos esenciales para tu actualización en diabetes",
+					"slug": "recursos-esenciales-de-actualizacion-en-diabetes",
+					"link": "https://wp.msklatam.com/nota/e-learning/recursos-esenciales-de-actualizacion-en-diabetes/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-recursos-esenciales-de-actualizacion-en-diabetes-scaled-e1737030977896.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 331864,
+					"title": "Cómo se relaciona la depresión con la microbiota intestinal",
+					"slug": "relacion-entre-depresion-y-microbiota-intestinal",
+					"link": "https://wp.msklatam.com/nota/medicina/relacion-entre-depresion-y-microbiota-intestinal/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-relacion-entre-depresion-y-microbiota-intestinal-scaled-e1736792703955.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 331318,
+					"title": "Cómo actualizarte en medicina de urgencias: guías y cursos clave",
+					"slug": "como-actualizarte-en-medicina-de-urgencias",
+					"link": "https://wp.msklatam.com/nota/e-learning/como-actualizarte-en-medicina-de-urgencias/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-medicina-de-urgencias-recursos-para-capacitarte-scaled-e1736358336518.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 331189,
+					"title": "Cómo aprender sobre administración y gestión en 2025",
+					"slug": "como-aprender-sobre-administracion-y-gestion-2025",
+					"link": "https://wp.msklatam.com/nota/e-learning/como-aprender-sobre-administracion-y-gestion-2025/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-como-aprender-sobre-administracion-y-gestion-2025-scaled-e1735922275771.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"categories": [
+				{
+					"id": 59968,
+					"primary": true,
+					"name": "E-Learning",
+					"slug": "e-learning",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/e-learning/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59968",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1139,
+				"filter": "raw"
+			},
+			"reading_time": "3",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
+			"id": 332710,
+			"title": "IA: el futuro de la educación médica",
+			"slug": "ia-el-futuro-de-la-educacion-medica",
+			"permalink": "https://wp.msklatam.com/nota/e-learning/ia-el-futuro-de-la-educacion-medica/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-IA-el-futuro-de-la-educacion-medica-scaled-e1737729040163.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-IA-el-futuro-de-la-educacion-medica-scaled-e1737729040163.jpg",
+				"1000",
+				"666",
+				""
+			],
+			"excerpt": "En este artículo especial, explora cómo la inteligencia artificial está revolucionando la educación médica mediante la personalización del aprendizaje, la mejora en los procesos formativos y las simulaciones clínicas avanzadas, capacitando a profesionales más preparados para la práctica médica.",
+			"date": "Enero 23, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 332656,
+					"title": "Cómo fortalecer tu práctica en medicina interna",
+					"slug": "fortalecer-tu-practica-en-medicina-interna",
+					"link": "https://wp.msklatam.com/nota/e-learning/fortalecer-tu-practica-en-medicina-interna/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-fortalecer-tu-practica-en-medicina-interna-scaled-e1737723350451.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332348,
+					"title": "Recursos esenciales para tu actualización en diabetes",
+					"slug": "recursos-esenciales-de-actualizacion-en-diabetes",
+					"link": "https://wp.msklatam.com/nota/e-learning/recursos-esenciales-de-actualizacion-en-diabetes/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-recursos-esenciales-de-actualizacion-en-diabetes-scaled-e1737030977896.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 331864,
+					"title": "Cómo se relaciona la depresión con la microbiota intestinal",
+					"slug": "relacion-entre-depresion-y-microbiota-intestinal",
+					"link": "https://wp.msklatam.com/nota/medicina/relacion-entre-depresion-y-microbiota-intestinal/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-relacion-entre-depresion-y-microbiota-intestinal-scaled-e1736792703955.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 331318,
+					"title": "Cómo actualizarte en medicina de urgencias: guías y cursos clave",
+					"slug": "como-actualizarte-en-medicina-de-urgencias",
+					"link": "https://wp.msklatam.com/nota/e-learning/como-actualizarte-en-medicina-de-urgencias/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-medicina-de-urgencias-recursos-para-capacitarte-scaled-e1736358336518.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 331189,
+					"title": "Cómo aprender sobre administración y gestión en 2025",
+					"slug": "como-aprender-sobre-administracion-y-gestion-2025",
+					"link": "https://wp.msklatam.com/nota/e-learning/como-aprender-sobre-administracion-y-gestion-2025/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-como-aprender-sobre-administracion-y-gestion-2025-scaled-e1735922275771.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "https://amfem.edu.mx/revista/rmem_24_11_1.pdf"
+				},
+				{
+					"fuente": "https://www.elsevier.com/es-es/connect/siete-preguntas-clave-entender-transformando-la-educacion-medica-la-inteligencia-artificial"
+				},
+				{
+					"fuente": "https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S2014-98322024000200002"
+				}
+			],
+			"categories": [
+				{
+					"id": 59968,
+					"primary": true,
+					"name": "E-Learning",
+					"slug": "e-learning",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/e-learning/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59968",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1139,
+				"filter": "raw"
+			},
+			"reading_time": "5",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
 			"id": 332348,
 			"title": "Recursos esenciales para tu actualización en diabetes",
 			"slug": "recursos-esenciales-de-actualizacion-en-diabetes",

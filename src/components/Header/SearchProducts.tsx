@@ -7,6 +7,7 @@ import NcImage from '../NcImage/NcImage';
 import { usePathname } from 'next/navigation';
 import ssr from '@/services/ssr';
 import { removeFirstSubdomain } from '@/utils/removeFirstSubdomain';
+import { getJSONPostByCountry } from '@/app/posts';
 
 const SearchProducts = () => {
 	const [auxProducts, setAuxProducts] = useState<FetchCourseType[]>([]);
@@ -28,9 +29,11 @@ const SearchProducts = () => {
 		setInputValue(value);
 		if (value) {
 			// console.log(value);
+			// console.log(auxProducts);
 			const filteredProducts = auxProducts.filter((product) =>
 				removeAccents(product.title.toLowerCase()).includes(removeAccents(value.toLowerCase())),
 			);
+			// console.log(filteredProducts);
 			// console.log(filteredProducts);
 			setProducts(filteredProducts);
 		} else {
@@ -55,6 +58,7 @@ const SearchProducts = () => {
 	const pathname = usePathname();
 	useEffect(() => {
 		const fetchData = async () => {
+			console.log('ejecutando fetch');
 			try {
 				// Variables locales
 				let courses;
@@ -64,8 +68,13 @@ const SearchProducts = () => {
 				if (pathname?.includes('/blog')) {
 					// console.log('Estamos en el blog. No se fetch de productos.');
 					setIsOnBlog(true);
+					console.log('estamos en blog');
+					const JSONBlog = getJSONPostByCountry(productsCountry);
+					setAuxProducts(JSONBlog.posts);
+					setProducts(JSONBlog.posts);
 				} else {
 					// Si no hay productos aún, hacemos fetch de los productos
+					console.log(products);
 					if (!products || products.length === 0) {
 						// console.log(
 						//   'No products found, fetching products for country:',
@@ -73,15 +82,18 @@ const SearchProducts = () => {
 						// );
 
 						// Hacemos fetch de productos desde el SSR
-						courses = await ssr.getStoreCourses(productsCountry, window.location.href);
+						courses = await ssr.getStoreCourses(productsCountry);
+						// console.log(courses.products);
+						// courses = await ssr.getStoreCourses(productsCountry, window.location.href);
 
 						// Debug logs
 						// console.log('Courses fetched:', courses);
 
 						// Seteamos los productos si encontramos cursos
-						if (courses && courses.length > 0) {
-							setAuxProducts(courses);
-							setProducts(courses);
+						if (courses) {
+							console.log('seteando cursos');
+							setAuxProducts(courses.products);
+							setProducts(courses.products);
 							setIsOnBlog(false);
 						} else {
 							// console.warn('No courses found for country:', productsCountry);
@@ -96,7 +108,9 @@ const SearchProducts = () => {
 		};
 
 		fetchData();
-	}, [pathname, countryState, products]);
+	}, [pathname, countryState]);
+
+	// console.log(products);
 
 	return (
 		<div className='search-products lg:w-[20vw]'>
@@ -130,7 +144,12 @@ const SearchProducts = () => {
 								onClick={() => clearInputValue()}
 							>
 								<div className='img-container'>
-									<NcImage src={removeFirstSubdomain(product.image)} alt={product.title} width='50' height='50' />
+									<NcImage
+										src={isOnBlog ? product.featured_image[0] : removeFirstSubdomain(product.image)}
+										alt={product.title}
+										width='50'
+										height='50'
+									/>
 								</div>
 								<p>{product.title}</p>
 							</NcLink>
