@@ -43,7 +43,8 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 	};
 
 	let { isEbook, imagen, title } = productDetails(product);
-	isEbook = product.ficha.title == 'Abordaje diagnóstico del dolor abdominal agudo' ? true : false;
+	console.log(product);
+	isEbook = product.total_price == '0' && product.cantidad_modulos == 0 ? true : false;
 
 	product.ficha.description =
 		product.ficha.title == 'Abordaje diagnóstico del dolor abdominal agudo'

@@ -33,7 +33,7 @@ const ProductDetailSidebar: FC<Props> = ({ ficha, product, details, isEbook, sid
 	const [bottomDistance, setBottomDistance] = useState(0);
 	let scrollPosition = 0;
 	console.log(ficha);
-	isEbook = ficha.title == 'Abordaje diagnóstico del dolor abdominal agudo' ? true : false;
+	isEbook = product.total_price == '0' ? true : false;
 
 	const image =
 		ficha.title === 'Abordaje diagnóstico del dolor abdominal agudo'
@@ -98,6 +98,8 @@ const ProductDetailSidebar: FC<Props> = ({ ficha, product, details, isEbook, sid
 
 	const hasGateway = Object.values(REBILL_CONF.GATEWAYS).some((array) => array.includes(countryState.country));
 	//console.log(hasCoursedRequested)
+
+	console.log(product);
 	return (
 		<div
 			className={`${
@@ -146,9 +148,9 @@ const ProductDetailSidebar: FC<Props> = ({ ficha, product, details, isEbook, sid
 												<span>{translations[key] ? translations[key] + ':' : ''}</span>
 												{key == 'idioma' ? (
 													sideData[key]?.length && sideData[key][0] != null ? (
-														// <>{sideData[key].join(', ')}</>
-														<></>
+														<>{sideData[key].join(', ')}</>
 													) : (
+														// <></>
 														'Español'
 													)
 												) : (

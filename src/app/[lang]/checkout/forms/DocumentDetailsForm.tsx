@@ -28,12 +28,12 @@ const DocumentDetailsForm: React.FC<DocumentDetailsFormProps> = ({
 }) => {
 	const documentsByCountry: any = {
 		ar: [
+			{ value: 'DNI', label: 'DNI' },
 			{ value: 'CUIT', label: 'CUIT' },
 			{ value: 'CUIL', label: 'CUIL' },
 			{ value: 'CDI', label: 'CDI' },
 			{ value: 'LE', label: 'Libreta de enrolamiento' },
 			{ value: 'LC', label: 'Libreta cívica' },
-			{ value: 'DNI', label: 'DNI' },
 			{ value: 'Pasaporte', label: 'Pasaporte' },
 		],
 		bo: [
