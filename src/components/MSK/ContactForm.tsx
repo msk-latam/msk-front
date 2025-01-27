@@ -215,7 +215,11 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 						if (isEbook && typeof resourceMedia === 'string') {
 							try {
 								// Realiza la solicitud para obtener el archivo PDF
-								const replacedUrl = resourceMedia.replace(/^(https?:\/\/)(ar\.|mx\.|cl\.|ec\.)/, '$1');
+								// const replacedUrl = resourceMedia.replace(/^(https?:\/\/)(ar\.|mx\.|cl\.|ec\.)/, '$1');
+								const replacedUrl = resourceMedia.replace(
+									/^(https?:\/\/)(ar\.|bo\.|br\.|cl\.|co\.|cr\.|cu\.|do\.|ec\.|es\.|sv\.|gt\.|ht\.|hn\.|jm\.|mx\.|ni\.|pa\.|py\.|pe\.|pr\.|uy\.|ve\.)/,
+									'$1',
+								);
 								// const response = await fetch(replacedUrl);
 
 								console.log(response);
