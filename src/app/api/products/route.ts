@@ -8,7 +8,14 @@ export const GET = async (req: Request) => {
 	// father_post_type!='downloadable'
 
 	try {
-		const response = await fetch(`https://msklatam.com/products/${countryParam}.json`);
+		let url = `https://msklatam.com/products/${countryParam}.json`;
+
+		if (countryParam === 'ch') {
+			url = `https://msklatam.com/products/${countryParam}VP.json`;
+		}
+
+		const response = await fetch(url);
+		// const response = await fetch(`https://msklatam.com/products/${countryParam}.json`);
 		// const response = await fetch(
 		//   `https://wp.msklatam.com/wp-json/wp/api/products?limit=-1&filter=all&country=${countryParam}&vp`,
 		// );
@@ -23,6 +30,8 @@ export const GET = async (req: Request) => {
 		const nonDownloadableProducts = products.filter((product: Product) => {
 			return product.father_post_type !== 'downloadable';
 		});
+
+		console.log(nonDownloadableProducts);
 
 		const transformedProducts = nonDownloadableProducts.map((product: Product) => {
 			const totalPriceNumber = parseFloat(product.total_price.replace(/\./g, ''));
