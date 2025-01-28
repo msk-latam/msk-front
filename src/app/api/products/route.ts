@@ -11,8 +11,8 @@ export const GET = async (req: Request) => {
 		let url = `https://msklatam.com/products/${countryParam}.json`;
 
 		if (countryParam === 'cl') {
-			url = `https://msklatam.com/products/${countryParam}VP.json`;
-			// url = `http://localhost:3000/products/${countryParam}VP.json`;
+			url = `https://msklatam.com/products/${countryParam}vp.json`;
+			// url = `http://localhost:3000/products/${countryParam}vp.json`;
 		}
 
 		const response = await fetch(url);
