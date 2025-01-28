@@ -236,7 +236,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 	const [rebillValid, setRebillValid] = useState(false);
 
 	useEffect(() => {
-		if (country !== 'cl') {
+		if (country !== 'cl' && country !== 'mx') {
 			// Agregar campos de tarjeta a formData
 			setFormData((prevState) => ({
 				...prevState,
@@ -492,6 +492,12 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 			// url: 'https://gateway.msklatam.net/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
 			authToken: '$2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6',
 		},
+		mx: {
+			name: 'Rebill',
+			url: 'http://localhost:8465/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
+			// url: 'https://gateway.msklatam.net/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho',
+			authToken: '$2y$12$zg.e9Gk2MpnXHrZfdJcFOuFsCdBh/kzrb61aiLSbDRFBruRwCqkZ6',
+		},
 		cl: {
 			name: 'Rebill',
 			url: 'http://localhost:8465/api/rebill/CL/checkout/full',
@@ -683,6 +689,8 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		},
 	};
 
+	console.log(rebillValid);
+
 	return (
 		<>
 			<h2 className='flex items-center text-[#392C35] text-2xl font-semibold my-8'>
@@ -737,7 +745,6 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				isSubmitting={isSubmitting}
 				handlePreviousStep={handlePreviousStep}
 				handleSubmit={country == 'ar' ? handleSubmitMercadoPago : handleSubmitRebill}
-				// handleSubmit={handleSubmitRebill}
 				isDisabled
 			/>
 		</>
