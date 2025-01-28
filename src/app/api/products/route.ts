@@ -23,6 +23,7 @@ export const GET = async (req: Request) => {
 		if (!response.ok) {
 			throw new Error(`Failed to fetch data from the API`);
 		}
+		// console.log(url, 'url');
 
 		const data = await response.json();
 		const { products } = data;
@@ -30,8 +31,6 @@ export const GET = async (req: Request) => {
 		const nonDownloadableProducts = products.filter((product: Product) => {
 			return product.father_post_type !== 'downloadable';
 		});
-
-		console.log(nonDownloadableProducts);
 
 		const transformedProducts = nonDownloadableProducts.map((product: Product) => {
 			const totalPriceNumber = parseFloat(product.total_price.replace(/\./g, ''));
@@ -45,6 +44,7 @@ export const GET = async (req: Request) => {
 		});
 
 		const res = NextResponse.json(transformedProducts);
+		// console.log(transformedProducts);
 
 		return res;
 	} catch (error) {
