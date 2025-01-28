@@ -10,8 +10,9 @@ export const GET = async (req: Request) => {
 	try {
 		let url = `https://msklatam.com/products/${countryParam}.json`;
 
-		if (countryParam === 'ch') {
+		if (countryParam === 'cl') {
 			url = `https://msklatam.com/products/${countryParam}VP.json`;
+			// url = `http://localhost:3000/products/${countryParam}VP.json`;
 		}
 
 		const response = await fetch(url);
@@ -23,7 +24,7 @@ export const GET = async (req: Request) => {
 		if (!response.ok) {
 			throw new Error(`Failed to fetch data from the API`);
 		}
-		// console.log(url, 'url');
+		console.log(url, 'url');
 
 		const data = await response.json();
 		const { products } = data;
