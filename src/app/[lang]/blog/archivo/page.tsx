@@ -6,6 +6,7 @@ import { cookies } from 'next/headers';
 import { Props } from '@/app/layout';
 import { Metadata } from 'next';
 import { SITE_URL } from '@/contains/constants';
+import { getJSONPostByCountry } from '@/app/posts';
 // export const runtime = 'edge';
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -27,9 +28,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const PageArchive: FC<{ params: { lang: string } }> = async ({ params }) => {
 	const currentCountry = params.lang || cookies().get('country')?.value;
-	if (!getAllPosts() || !getAllPosts().length) {
-		const fetchedPosts = await ssr.getPosts(currentCountry);
-		setAllPosts(fetchedPosts);
+	if (true) {
+		// if (!getAllPosts() || !getAllPosts().length) {
+		// const fetchedPosts = await ssr.getPosts(currentCountry);
+		const fetchedPosts = getJSONPostByCountry(currentCountry);
+		setAllPosts(fetchedPosts.posts);
 	}
 	const posts = getAllPosts();
 	const filteredPosts = posts.filter((post) => {
