@@ -7,6 +7,138 @@
 	"total_products": 260,
 	"posts": [
 		{
+			"id": 332897,
+			"title": "Actualización sobre enfermedad de Kawasaki: diagnóstico y terapias clave",
+			"slug": "actualizacion-sobre-kawasaki-diagnostico-y-terapias",
+			"permalink": "https://wp.msklatam.com/nota/medicina/actualizacion-sobre-kawasaki-diagnostico-y-terapias/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-actualizacion-sobre-kawasaki-diagnostico-y-terapias-scaled-e1738153748727.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-actualizacion-sobre-kawasaki-diagnostico-y-terapias-scaled-e1738153748727.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "Conoce los hallazgos más recientes sobre esta enfermedad que, aunque poco frecuente, es la principal causa de cardiopatías adquiridas en niños. Aprende sobre las estrategias actuales para prevenir complicaciones cardíacas y garantizar una atención integral a lo largo del tiempo.",
+			"date": "",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 332771,
+					"title": "Innovaciones y desafíos en el tratamiento del Síndrome de Moebius",
+					"slug": "innovaciones-y-desafios-en-el-sindrome-de-moebius",
+					"link": "https://wp.msklatam.com/nota/medicina/innovaciones-y-desafios-en-el-sindrome-de-moebius/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-innovaciones-y-desafios-en-el-sindrome-de-moebius-scaled-e1738070462595.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332710,
+					"title": "IA: el futuro de la educación médica",
+					"slug": "ia-el-futuro-de-la-educacion-medica",
+					"link": "https://wp.msklatam.com/nota/e-learning/ia-el-futuro-de-la-educacion-medica/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-IA-el-futuro-de-la-educacion-medica-scaled-e1737729040163.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332656,
+					"title": "Cómo fortalecer tu práctica en medicina interna",
+					"slug": "fortalecer-tu-practica-en-medicina-interna",
+					"link": "https://wp.msklatam.com/nota/e-learning/fortalecer-tu-practica-en-medicina-interna/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-fortalecer-tu-practica-en-medicina-interna-scaled-e1737723350451.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332348,
+					"title": "Recursos esenciales para tu actualización en diabetes",
+					"slug": "recursos-esenciales-de-actualizacion-en-diabetes",
+					"link": "https://wp.msklatam.com/nota/e-learning/recursos-esenciales-de-actualizacion-en-diabetes/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-recursos-esenciales-de-actualizacion-en-diabetes-scaled-e1737030977896.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 331864,
+					"title": "Cómo se relaciona la depresión con la microbiota intestinal",
+					"slug": "relacion-entre-depresion-y-microbiota-intestinal",
+					"link": "https://wp.msklatam.com/nota/medicina/relacion-entre-depresion-y-microbiota-intestinal/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-relacion-entre-depresion-y-microbiota-intestinal-scaled-e1736792703955.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Pei-Ni Jone, Adriana Tremoulet, Nadine Choueiter, Samuel R. Dominguez, Ashraf S. Harahsheh, Yoshihide Mitani, Meghan Zimmerman, Ming-Tai Lin, Kevin G. Friedman - Update on Diagnosis and Management of Kawasaki Disease: A Scientific Statement From the American Heart Association, November 13, 2024, Circulation, AHAIASA Journals (2024). https://doi.org/10.1161/CIR.0000000000001295"
+				},
+				{
+					"fuente": "https://newsroom.heart.org/news/la-deteccion-temprana-y-el-tratamiento-intensivo-son-cruciales-para-los-pacientes-de-alto-riesgo-con-enfermedad-de-kawasaki"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1100,
+				"name": "Cardiología",
+				"slug": "cardiologia",
+				"term_group": 0,
+				"term_taxonomy_id": 1100,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 201,
+				"filter": "raw"
+			},
+			"reading_time": "6",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
 			"id": 332771,
 			"title": "Innovaciones y desafíos en el tratamiento del Síndrome de Moebius",
 			"slug": "innovaciones-y-desafios-en-el-sindrome-de-moebius",
