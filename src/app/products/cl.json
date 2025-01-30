@@ -1270,7 +1270,7 @@
 			"language_code": "cl",
 			"language_name": "Chile",
 			"product_code": 9005842,
-			"featured_product_text": "",
+			"featured_product_text": "<p>Este curso cuenta con el código del Servicio Nacional de Capacitación y Empleo de Chile (SENCE): 1238073799</p>\n",
 			"is_test_product": false,
 			"title": "Comunicación en salud",
 			"image": "https://wp.msklatam.com/wp-content/uploads/imagenes-cursos/9004354_fotoprimaria.jpg",
@@ -10686,7 +10686,7 @@
 			"product_code": 0,
 			"featured_product_text": "",
 			"is_test_product": false,
-			"title": "Patología respiratoria &#8211; Manejo de la neumonía adquirida en la comunidad",
+			"title": "Patología respiratoria Manejo de la neumonía adquirida en la comunidad",
 			"image": "https://wp.msklatam.com/wp-content/uploads/2023/03/foto-primaria-1.jpg",
 			"thumbnail": {
 				"high": "https://wp.msklatam.com/wp-content/uploads/2023/03/foto-secundaria-1.jpg",

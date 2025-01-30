@@ -635,6 +635,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 			paymentMethod: 'Cobro recurrente',
 			Fecha_de_primer_cobro: new Date().toISOString().split('T')[0],
 		};
+
 		console.log(contractData);
 
 		const responseContract = await fetch('http://localhost:8577/api/zoho/sales_order/create_contract', {
@@ -646,8 +647,33 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 			body: JSON.stringify(contractData),
 		});
 
-		console.log(responseContract);
+		const contractResponseData = await responseContract.json();
 
+		let contractId: any;
+
+		if (contractResponseData?.data?.length > 0 && contractResponseData.data[0]?.status === 'success') {
+			contractId = contractResponseData.data[0].details.id;
+			console.log('ID extraído:', contractId);
+		}
+
+		// const updateForm: any = {
+		// 	amount: 1200,
+		// };
+
+		// const updatePaso5 = await fetch(
+		// 	`http://localhost:8577/api/zoho/sales_order/create_contract/add_step_5/contract_id/${contractId}`,
+		// 	{
+		// 		method: 'PUT',
+		// 		headers: {
+		// 			Authorization: `Bearer ${token}`,
+		// 			'Content-Type': 'application/json',
+		// 		},
+		// 		body: JSON.stringify(updateForm),
+		// 	},
+		// );
+
+		// const responseUpdate = await updatePaso5.json();
+		// console.log(responseUpdate);
 		// console.log(dataCRM);
 		setIsSubmitting(false);
 
