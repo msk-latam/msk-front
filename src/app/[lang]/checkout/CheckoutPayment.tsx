@@ -55,7 +55,7 @@ interface CheckoutRebillProps {
 }
 
 let checkoutForm: any;
-let rebillPayment;
+let rebillPayment: any;
 const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payment' }) => {
 	useEffect(() => {
 		if (!window.Rebill) {
@@ -118,6 +118,9 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payme
 					 [id^="headlessui-listbox-option"]:nth-child(n+6) {
 		  display: none !important;
 		}
+		    html {
+    overflow: visible !important;
+}
 				`,
 				});
 			}
@@ -128,6 +131,9 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payme
 				 [id^="headlessui-listbox-option"]:nth-child(n+6) {
       display: none !important;
     }
+	  html {
+    overflow: visible !important;
+}
 			`,
 			});
 
@@ -136,17 +142,17 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payme
 
 			checkoutForm.on('approved', (e) => {
 				console.log('Pago aprobado:', e);
-				rebillPayment = e.data.payment.status;
+				rebillPayment = 'Contrato Efectivo';
 			});
 
 			checkoutForm.on('error', (e) => {
 				console.error('Error en el formulario:', e);
-				rebillPayment = e.data.payment.status;
+				rebillPayment = 'Contrato en proceso de cobro';
 			});
 
 			checkoutForm.on('rejected', (e) => {
 				console.warn('Pago rechazado:', e);
-				rebillPayment = e.data.payment.status;
+				rebillPayment = 'Pago rechazado';
 			});
 
 			// console.log('Formulario inicializado:', checkoutForm);
@@ -157,7 +163,7 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payme
 
 	return (
 		<div className=''>
-			<div id='rebill-container' className='p-6 bg-white border border-gray-300 rounded-lg flex h-[500px]'>
+			<div id='rebill-container' className='p-6 bg-white border border-gray-300 rounded-lg flex h-[800px] '>
 				{/* El iframe se montará aquí */}
 			</div>
 		</div>
@@ -592,6 +598,8 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 
 		let customer_id;
 
+		console.log(rebillPayment);
+
 		if (createUserResponse?.data?.length > 0) {
 			const responseData = createUserResponse.data[0];
 
@@ -603,6 +611,8 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				console.log('Usuario ya existía con ID:', customer_id);
 			}
 		}
+		const response = await checkoutForm.submit();
+		console.log(response);
 		const contractData = {
 			customer_id,
 			products: [
@@ -616,7 +626,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 					list_price: transactionAmount,
 				},
 			],
-			status: 'Borrador',
+			status: rebillPayment,
 			currency: currency,
 			country: countryCompleteName,
 			sub_total: transactionAmount,
@@ -638,7 +648,6 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 
 		console.log(responseContract);
 
-		const response = await checkoutForm.submit();
 		// console.log(dataCRM);
 		setIsSubmitting(false);
 
