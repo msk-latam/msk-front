@@ -7,6 +7,126 @@
 	"total_products": 265,
 	"posts": [
 		{
+			"id": 333151,
+			"title": "Quiz MSK: ¿cuánto sabes de auditoría médica?",
+			"slug": "quiz-msk-auditoria-medica",
+			"permalink": "https://wp.msklatam.com/nota/e-learning/quiz-msk-auditoria-medica/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/01/portada-quiz-auditoria.jpg",
+			"featured_image": ["https://wp.msklatam.com/wp-content/uploads/2025/01/portada-quiz-auditoria.jpg", "1000", "667", ""],
+			"excerpt": "La auditoría médica capta cada vez mayor interés entre profesionales que buscan distintas opciones de desarrollo. ¡Anímate a este desafío! Contesta el quiz y aprende con los contenidos de MSK. ",
+			"date": "Enero 29, 2025",
+			"author": {
+				"id": 103,
+				"name": "Contenidos MSK",
+				"email": "contenidos@msklatam.com",
+				"avatar": "https://secure.gravatar.com/avatar/d77ba09cb0734abf46a7f69267816ecd?s=96&d=mm&r=g"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 103,
+					"name": "Contenidos MSK",
+					"email": "contenidos@msklatam.com",
+					"avatar": "https://secure.gravatar.com/avatar/d77ba09cb0734abf46a7f69267816ecd?s=96&d=mm&r=g"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 332897,
+					"title": "Actualización sobre enfermedad de Kawasaki: diagnóstico y terapias clave",
+					"slug": "actualizacion-sobre-kawasaki-diagnostico-y-terapias",
+					"link": "https://wp.msklatam.com/nota/medicina/actualizacion-sobre-kawasaki-diagnostico-y-terapias/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-actualizacion-sobre-kawasaki-diagnostico-y-terapias-scaled-e1738153748727.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332771,
+					"title": "Innovaciones y desafíos en el tratamiento del Síndrome de Moebius",
+					"slug": "innovaciones-y-desafios-en-el-sindrome-de-moebius",
+					"link": "https://wp.msklatam.com/nota/medicina/innovaciones-y-desafios-en-el-sindrome-de-moebius/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-innovaciones-y-desafios-en-el-sindrome-de-moebius-scaled-e1738070462595.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332710,
+					"title": "IA: el futuro de la educación médica",
+					"slug": "ia-el-futuro-de-la-educacion-medica",
+					"link": "https://wp.msklatam.com/nota/e-learning/ia-el-futuro-de-la-educacion-medica/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-IA-el-futuro-de-la-educacion-medica-scaled-e1737729040163.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332656,
+					"title": "Cómo fortalecer tu práctica en medicina interna",
+					"slug": "fortalecer-tu-practica-en-medicina-interna",
+					"link": "https://wp.msklatam.com/nota/e-learning/fortalecer-tu-practica-en-medicina-interna/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-fortalecer-tu-practica-en-medicina-interna-scaled-e1737723350451.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332348,
+					"title": "Recursos esenciales para tu actualización en diabetes",
+					"slug": "recursos-esenciales-de-actualizacion-en-diabetes",
+					"link": "https://wp.msklatam.com/nota/e-learning/recursos-esenciales-de-actualizacion-en-diabetes/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-recursos-esenciales-de-actualizacion-en-diabetes-scaled-e1737030977896.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"categories": [
+				{
+					"id": 59968,
+					"primary": true,
+					"name": "E-Learning",
+					"slug": "e-learning",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/e-learning/"
+				},
+				{
+					"id": 59969,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				}
+			],
+			"primary_category": "59968",
+			"tags": [],
+			"specialty": {
+				"term_id": 60090,
+				"name": "Administración y gestión",
+				"slug": "administracion-y-gestion",
+				"term_group": 0,
+				"term_taxonomy_id": 60090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 23,
+				"filter": "raw"
+			},
+			"reading_time": "5",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
 			"id": 332897,
 			"title": "Actualización sobre enfermedad de Kawasaki: diagnóstico y terapias clave",
 			"slug": "actualizacion-sobre-kawasaki-diagnostico-y-terapias",

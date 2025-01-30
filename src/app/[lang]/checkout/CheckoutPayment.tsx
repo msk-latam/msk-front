@@ -8,6 +8,7 @@ import AddressForm from './forms/AddressForm';
 import { validatePaymentField } from './validators/paymentValidator';
 import CheckoutPaymentButtons from './buttons/CheckoutPaymentButtons';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import axios from 'axios';
 // import CheckoutRebill from './CheckoutRebill';
 
 interface CheckoutContentProps {
@@ -54,6 +55,7 @@ interface CheckoutRebillProps {
 }
 
 let checkoutForm: any;
+let rebillPayment: any;
 const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payment' }) => {
 	useEffect(() => {
 		if (!window.Rebill) {
@@ -79,7 +81,6 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payme
 					amount: formData.amount,
 					currency: formData.currency,
 				});
-				console.log(formData.customerData?.identification?.type);
 				checkoutForm.set({
 					customerInformation: {
 						email: formData.customerData.email || '',
@@ -117,6 +118,9 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payme
 					 [id^="headlessui-listbox-option"]:nth-child(n+6) {
 		  display: none !important;
 		}
+		    html {
+    overflow: visible !important;
+}
 				`,
 				});
 			}
@@ -127,6 +131,9 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payme
 				 [id^="headlessui-listbox-option"]:nth-child(n+6) {
       display: none !important;
     }
+	  html {
+    overflow: visible !important;
+}
 			`,
 			});
 
@@ -135,14 +142,17 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payme
 
 			checkoutForm.on('approved', (e) => {
 				console.log('Pago aprobado:', e);
+				rebillPayment = 'Contrato Efectivo';
 			});
 
 			checkoutForm.on('error', (e) => {
 				console.error('Error en el formulario:', e);
+				rebillPayment = 'Contrato en proceso de cobro';
 			});
 
 			checkoutForm.on('rejected', (e) => {
 				console.warn('Pago rechazado:', e);
+				rebillPayment = 'Pago rechazado';
 			});
 
 			// console.log('Formulario inicializado:', checkoutForm);
@@ -153,7 +163,7 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payme
 
 	return (
 		<div className=''>
-			<div id='rebill-container' className='p-6 bg-white border border-gray-300 rounded-lg flex h-[500px]'>
+			<div id='rebill-container' className='p-6 bg-white border border-gray-300 rounded-lg flex h-[800px] '>
 				{/* El iframe se montará aquí */}
 			</div>
 		</div>
@@ -281,8 +291,6 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		}
 	}, [country]);
 
-	console.log(formData);
-
 	useEffect(() => {
 		const formIsValid =
 			Object.values(errors).every((error) => error === '') && Object.values(formData).every((value) => value !== '');
@@ -326,7 +334,6 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 	useEffect(() => {
 		if (user) {
 			// Si el usuario está disponible en el contexto, usamos esos datos
-			console.log('hay user');
 			setFormData((prevState) => ({
 				...prevState,
 				cardholderName: `${user.firstName} ${user.lastName}`,
@@ -340,7 +347,6 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				speciality: user.specialty,
 			}));
 		} else if (state && state.profile) {
-			console.log('viene de state');
 			setFormData((prevState) => ({
 				...prevState,
 				cardholderName: `${state.profile.name} ${state.profile.last_name}`,
@@ -406,7 +412,6 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 	const transactionAmount = parseInt(totalPrice.replace(/[\.,]/g, ''), 10);
 	const regularPrice = product.regular_price;
 	const regularPriceFixed = parseInt(regularPrice.replace(/[\.,]/g, ''), 10);
-	console.log(user);
 
 	const mapFormDataToRequest = (formData: any) => {
 		return {
@@ -553,19 +558,97 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 		product_code: product.ficha.product_code,
 	};
 
+	const countryToName: Record<string, string> = {
+		ar: 'Argentina',
+		cl: 'Chile',
+		cr: 'Costa Rica',
+		co: 'Colombia',
+		hn: 'Honduras',
+	};
+
+	const getCountryCompleteName = (code: string): string | null => {
+		const lowerCaseCode = code.toLowerCase();
+		return countryToName[lowerCaseCode] || null; // Devuelve null si el código no está en el objeto
+	};
+
+	const countryCompleteName = getCountryCompleteName(country);
+
 	const handleSubmitRebill = async () => {
 		if (!isFormValid) return;
 
 		// const requestBody = mapFormDataToRequest(formData);
 
-		const response = await checkoutForm.submit();
+		// const dataCRM: any = {
+		// 	product: productCRM,
+		// 	userData: formData,
+		// 	rebillResponse: response,
+		// };
+		const token = '$2y$12$tdFqIBqa413sfYENjGjVR.lUOfcRnRaXBgBDUeQIBg1BjujlLbmQW';
+		const responseUser = await fetch('http://localhost:8577/api/zoho/contacts/', {
+			method: 'POST',
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ userData: formData }), // Si formData es un objeto JSON, conviértelo a string
+		});
 
-		const dataCRM: any = {
-			product: productCRM,
-			userData: formData,
-			rebillResponse: response,
+		const createUserResponse = await responseUser.json();
+		console.log(createUserResponse);
+
+		let customer_id;
+
+		console.log(rebillPayment);
+
+		if (createUserResponse?.data?.length > 0) {
+			const responseData = createUserResponse.data[0];
+
+			if (responseData.status === 'success') {
+				customer_id = responseData.details.id;
+				console.log('Usuario creado con ID:', customer_id);
+			} else if (responseData.status === 'error' && responseData.code === 'DUPLICATE_DATA') {
+				customer_id = responseData.details.id;
+				console.log('Usuario ya existía con ID:', customer_id);
+			}
+		}
+		const response = await checkoutForm.submit();
+		console.log(response);
+		const contractData = {
+			customer_id,
+			products: [
+				{
+					code: product.ficha.product_code,
+					quantity: 1,
+					price: transactionAmount,
+					total: transactionAmount,
+					net_total: transactionAmount,
+					total_after_discount: transactionAmount,
+					list_price: transactionAmount,
+				},
+			],
+			status: rebillPayment,
+			currency: currency,
+			country: countryCompleteName,
+			sub_total: transactionAmount,
+			grand_total: transactionAmount,
+			payment: 'Rebill',
+			paymentMethod: 'Cobro recurrente',
+			Fecha_de_primer_cobro: new Date().toISOString().split('T')[0],
 		};
-		console.log(dataCRM);
+		console.log(contractData);
+
+		const responseContract = await fetch('http://localhost:8577/api/zoho/sales_order/create_contract', {
+			method: 'POST',
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(contractData),
+		});
+
+		console.log(responseContract);
+
+		// console.log(dataCRM);
 		setIsSubmitting(false);
 
 		if (response.status === 'approved' && response.data.payment.status === 'SUCCEEDED') {
@@ -688,8 +771,6 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 			state: formData.state || '',
 		},
 	};
-
-	console.log(rebillValid);
 
 	return (
 		<>
