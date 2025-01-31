@@ -525,6 +525,7 @@ class ApiService {
 	async getLinkLMS(product_code: number, cod_curso: string, email: string) {
 		try {
 			let url = `${baseUrl}/api/sso/link`;
+			// let url = `http://localhost:8001/api/sso/link`;
 
 			const response = await fetch(url, {
 				method: 'POST',
