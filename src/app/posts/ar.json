@@ -7,6 +7,270 @@
 	"total_products": 259,
 	"posts": [
 		{
+			"id": 333205,
+			"title": "¡Quiz MSK! 10 preguntas sobre oftalmología",
+			"slug": "quiz-msk-preguntas-sobre-oftalmologia",
+			"permalink": "https://wp.msklatam.com/nota/e-learning/quiz-msk-preguntas-sobre-oftalmologia/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-quiz-msk-preguntas-sobre-oftalmologia.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-quiz-msk-preguntas-sobre-oftalmologia.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "En MSK lanzamos el nuevo curso de Oftalmología. Por este motivo, queremos que repases tus conocimientos sobre esta especialidad médica. ¿Te animas a responder este quiz?",
+			"date": "Enero 30, 2025",
+			"author": {
+				"id": 103,
+				"name": "Contenidos MSK",
+				"email": "contenidos@msklatam.com",
+				"avatar": "https://secure.gravatar.com/avatar/d77ba09cb0734abf46a7f69267816ecd?s=96&d=mm&r=g"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 103,
+					"name": "Contenidos MSK",
+					"email": "contenidos@msklatam.com",
+					"avatar": "https://secure.gravatar.com/avatar/d77ba09cb0734abf46a7f69267816ecd?s=96&d=mm&r=g"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 332933,
+					"title": "Tipos de agua y su impacto en la salud: ¿mitos o realidad?",
+					"slug": "tipos-de-agua-mitos-y-realidades",
+					"link": "https://wp.msklatam.com/nota/medicina/tipos-de-agua-mitos-y-realidades/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-tipos-de-agua-mitos-y-realidades-scaled-e1738157524930.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332897,
+					"title": "Actualización sobre enfermedad de Kawasaki: diagnóstico y terapias clave",
+					"slug": "actualizacion-sobre-kawasaki-diagnostico-y-terapias",
+					"link": "https://wp.msklatam.com/nota/medicina/actualizacion-sobre-kawasaki-diagnostico-y-terapias/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-actualizacion-sobre-kawasaki-diagnostico-y-terapias-scaled-e1738153748727.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332771,
+					"title": "Innovaciones y desafíos en el tratamiento del Síndrome de Moebius",
+					"slug": "innovaciones-y-desafios-en-el-sindrome-de-moebius",
+					"link": "https://wp.msklatam.com/nota/medicina/innovaciones-y-desafios-en-el-sindrome-de-moebius/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-innovaciones-y-desafios-en-el-sindrome-de-moebius-scaled-e1738070462595.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332710,
+					"title": "IA: el futuro de la educación médica",
+					"slug": "ia-el-futuro-de-la-educacion-medica",
+					"link": "https://wp.msklatam.com/nota/e-learning/ia-el-futuro-de-la-educacion-medica/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-IA-el-futuro-de-la-educacion-medica-scaled-e1737729040163.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332656,
+					"title": "Cómo fortalecer tu práctica en medicina interna",
+					"slug": "fortalecer-tu-practica-en-medicina-interna",
+					"link": "https://wp.msklatam.com/nota/e-learning/fortalecer-tu-practica-en-medicina-interna/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-fortalecer-tu-practica-en-medicina-interna-scaled-e1737723350451.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"categories": [
+				{
+					"id": 59968,
+					"primary": true,
+					"name": "E-Learning",
+					"slug": "e-learning",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/e-learning/"
+				},
+				{
+					"id": 59969,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				}
+			],
+			"primary_category": "59968",
+			"tags": [],
+			"specialty": {
+				"term_id": 1318,
+				"name": "Oftalmología",
+				"slug": "oftalmologia",
+				"term_group": 0,
+				"term_taxonomy_id": 1318,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 43,
+				"filter": "raw"
+			},
+			"reading_time": "4",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
+			"id": 332933,
+			"title": "Tipos de agua y su impacto en la salud: ¿mitos o realidad?",
+			"slug": "tipos-de-agua-mitos-y-realidades",
+			"permalink": "https://wp.msklatam.com/nota/medicina/tipos-de-agua-mitos-y-realidades/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-tipos-de-agua-mitos-y-realidades-scaled-e1738157524930.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-tipos-de-agua-mitos-y-realidades-scaled-e1738157524930.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "En esta columna de opinión, la Dra. Alma Medrano, directora médica de MSK, analiza el impacto de los distintos tipos de agua en la salud a partir de un enfoque basado en evidencia científica. Lee su palabra y reflexiona sobre la importancia de educar a tus pacientes con información confiable y fundamentada.",
+			"date": "Enero 30, 2025",
+			"author": {
+				"id": 332969,
+				"name": "Dra. Alma Medrano",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2025/01/foto-alma-medrano-square.png"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 332969,
+					"name": "Dra. Alma Medrano",
+					"description": "Directora médica de Medical & Scientific Knowledge",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2025/01/foto-alma-medrano-square.png"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 332897,
+					"title": "Actualización sobre enfermedad de Kawasaki: diagnóstico y terapias clave",
+					"slug": "actualizacion-sobre-kawasaki-diagnostico-y-terapias",
+					"link": "https://wp.msklatam.com/nota/medicina/actualizacion-sobre-kawasaki-diagnostico-y-terapias/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-actualizacion-sobre-kawasaki-diagnostico-y-terapias-scaled-e1738153748727.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332771,
+					"title": "Innovaciones y desafíos en el tratamiento del Síndrome de Moebius",
+					"slug": "innovaciones-y-desafios-en-el-sindrome-de-moebius",
+					"link": "https://wp.msklatam.com/nota/medicina/innovaciones-y-desafios-en-el-sindrome-de-moebius/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-innovaciones-y-desafios-en-el-sindrome-de-moebius-scaled-e1738070462595.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332710,
+					"title": "IA: el futuro de la educación médica",
+					"slug": "ia-el-futuro-de-la-educacion-medica",
+					"link": "https://wp.msklatam.com/nota/e-learning/ia-el-futuro-de-la-educacion-medica/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-IA-el-futuro-de-la-educacion-medica-scaled-e1737729040163.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332656,
+					"title": "Cómo fortalecer tu práctica en medicina interna",
+					"slug": "fortalecer-tu-practica-en-medicina-interna",
+					"link": "https://wp.msklatam.com/nota/e-learning/fortalecer-tu-practica-en-medicina-interna/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-fortalecer-tu-practica-en-medicina-interna-scaled-e1737723350451.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332348,
+					"title": "Recursos esenciales para tu actualización en diabetes",
+					"slug": "recursos-esenciales-de-actualizacion-en-diabetes",
+					"link": "https://wp.msklatam.com/nota/e-learning/recursos-esenciales-de-actualizacion-en-diabetes/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-recursos-esenciales-de-actualizacion-en-diabetes-scaled-e1737030977896.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Sunardi, D., Chandra, D. N., Medise, B. E., Manikam, N. R. M., Friska, D., Lestari, W., & Insani, P. N. C. (2022). Health effects of alkaline, oxygenated, and demineralized water compared to mineral water among healthy population: a systematic review. Review of Environmental Health, 39(2), 339-349. https://doi.org/10.1515/reveh-2022-0057"
+				},
+				{
+					"fuente": "Vitali, M., Fontana, M., De Giorgi, A., Marotta, D., Crucianelli, S., Antonucci, A., & Protano, C. (2023). Natural Mineral Water and Diuresis: A Systematic Review. International Journal of Environmental Research and Public Health, 20(8), 5527. https://doi.org/10.3390/ijerph20085527"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				},
+				{
+					"id": 1711,
+					"name": "Opinion",
+					"slug": "opinion",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/opinion/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1102,
+				"name": "Nutrición",
+				"slug": "nutricion",
+				"term_group": 0,
+				"term_taxonomy_id": 1102,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 274,
+				"filter": "raw"
+			},
+			"reading_time": "3",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
 			"id": 333151,
 			"title": "Quiz MSK: ¿cuánto sabes de auditoría médica?",
 			"slug": "quiz-msk-auditoria-medica",
