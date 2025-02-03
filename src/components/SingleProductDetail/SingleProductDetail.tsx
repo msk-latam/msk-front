@@ -94,7 +94,7 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 									<div>
 										{product.authors.length || product.temario || (product.details && product.details['duration']) ? (
 											<div className={`grid grid-cols-12 ${isEbook && 'border-0'}`}>
-												{product.authors.length ? (
+												{true ? (
 													<div className='col-span-12 sm:col-span-5'>
 														<div className='course-meta-wrapper'>
 															<div className='course-meta-img'>
@@ -109,7 +109,7 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 														</div>
 													</div>
 												) : null}
-												{product.authors.length ? <div className='hidden sm:block border-line-meta' /> : null}
+												{true ? <div className='hidden sm:block border-line-meta' /> : null}
 												{product.temario ? (
 													<div className='col-span-4 sm:col-span-2 my-auto text-violet-strong pb-0 md:pb-2 mb-2 md:mb-auto md:-ml-5'>
 														<div className='flex flex-col '>

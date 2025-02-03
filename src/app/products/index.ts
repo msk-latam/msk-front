@@ -19,6 +19,7 @@ import ve from './ve.json';
 
 const productsByCountry: Record<string, any> = {
 	ar,
+	bo,
 	cl,
 	co,
 	cr,
