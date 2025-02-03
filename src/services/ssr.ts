@@ -500,6 +500,7 @@ class ApiSSRService {
 			}
 
 			const data = await response.json();
+
 			return { product: data };
 		} catch (error) {
 			console.error('Network error:', error);
