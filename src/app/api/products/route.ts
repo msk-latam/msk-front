@@ -24,7 +24,7 @@ export const GET = async (req: Request) => {
 		if (!response.ok) {
 			throw new Error(`Failed to fetch data from the API`);
 		}
-		console.log(url, 'url');
+		// console.log(url, 'url');
 
 		const data = await response.json();
 		const { products } = data;

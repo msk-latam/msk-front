@@ -17,7 +17,7 @@ interface Props {
 
 const StoreProduct: FC<Props> = ({ product, className, hoverEffect = false, kind }) => {
 	const imageURL = removeFirstSubdomain(product.thumbnail.high) || getDefaultImage(product.title);
-	console.log(product);
+	// console.log(product);
 	function getDefaultImage(title) {
 		const defaultImages = {
 			'Abordaje diagnóstico del dolor abdominal agudo':

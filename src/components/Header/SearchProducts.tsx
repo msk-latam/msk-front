@@ -58,7 +58,7 @@ const SearchProducts = () => {
 	const pathname = usePathname();
 	useEffect(() => {
 		const fetchData = async () => {
-			console.log('ejecutando fetch');
+			// console.log('ejecutando fetch');
 			try {
 				// Variables locales
 				let courses;
@@ -68,13 +68,13 @@ const SearchProducts = () => {
 				if (pathname?.includes('/blog')) {
 					// console.log('Estamos en el blog. No se fetch de productos.');
 					setIsOnBlog(true);
-					console.log('estamos en blog');
+					// console.log('estamos en blog');
 					const JSONBlog = getJSONPostByCountry(productsCountry);
 					setAuxProducts(JSONBlog.posts);
 					setProducts(JSONBlog.posts);
 				} else {
 					// Si no hay productos aún, hacemos fetch de los productos
-					console.log(products);
+					// console.log(products);
 					if (!products || products.length === 0) {
 						// console.log(
 						//   'No products found, fetching products for country:',
@@ -91,7 +91,7 @@ const SearchProducts = () => {
 
 						// Seteamos los productos si encontramos cursos
 						if (courses) {
-							console.log('seteando cursos');
+							// console.log('seteando cursos');
 							setAuxProducts(courses.products);
 							setProducts(courses.products);
 							setIsOnBlog(false);

@@ -32,17 +32,16 @@ const ProductDetailSidebar: FC<Props> = ({ ficha, product, details, isEbook, sid
 	const [isFixed, setIsFixed] = useState(false);
 	const [bottomDistance, setBottomDistance] = useState(0);
 	let scrollPosition = 0;
-	console.log(details);
-	console.log(ficha);
-	console.log(product);
-	console.log(isEbook, 'desde parametro');
-	// isEbook = product.total_price == '0' ? true : false;
+	// console.log(details);
+	// console.log(ficha);
+	// console.log(product);
+	// console.log(isEbook, 'desde parametro');
 
 	const image =
 		ficha.title === 'Abordaje diagnóstico del dolor abdominal agudo'
 			? 'https://wp.msklatam.com/wp-content/uploads/2021/05/imagen-primaria-1.jpg'
 			: ficha.image;
-	console.log(ficha);
+	// console.log(ficha);
 
 	const calculateDistanceToBottom = () => {
 		const windowHeight = window.innerHeight;

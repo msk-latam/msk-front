@@ -40,18 +40,18 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 			const coursesData = await ssr.getAllCourses(country);
 			setCourses(JSONProduct.products);
 			// setCurrentItems(coursesData);
-			console.log(coursesData);
+			// console.log(coursesData);
 		};
 
 		fetchCourses();
-		console.log(category);
+		// console.log(category);
 	}, [country]);
 
 	useEffect(() => {
 		const filterCourses = () => {
 			let filteredCourses = courses;
 
-			console.log(filteredCourses);
+			// console.log(filteredCourses);
 
 			// Filtra por categoría
 			if (category === 'medicina-de-urgencias') {
@@ -63,7 +63,7 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 
 			if (category) {
 				filteredCourses = courses.filter((course: any) => course.categories.some((cat: any) => cat.slug === category));
-				console.log(filteredCourses);
+				// console.log(filteredCourses);
 				filteredCourses = filteredCourses.filter((course: any) => course.father_post_type === 'course');
 			}
 			setCurrentItems(filteredCourses);
@@ -137,7 +137,7 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 		setIsModalOpen(!isModalOpen);
 	};
 
-	console.log(currentItems, 'currentItems');
+	// console.log(currentItems, 'currentItems');
 
 	// console.log(category);
 
