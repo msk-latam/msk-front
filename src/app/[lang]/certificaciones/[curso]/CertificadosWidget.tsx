@@ -144,7 +144,7 @@ const CertificadosWidget: React.FC<CertificadosWidgetProps> = ({ product, countr
 	function getFullCountryName(code) {
 		return countryMapping[code.toLowerCase()] || 'País desconocido';
 	}
-	console.log(` País: ${getFullCountryName(country)}\n\n`, textoFinal);
+	// console.log(` País: ${getFullCountryName(country)}\n\n`, textoFinal);
 
 	// console.log(linksCursos.join('\n'));
 	// console.log(precioCursos.join('\n'));

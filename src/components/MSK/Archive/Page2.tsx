@@ -46,7 +46,7 @@ const PageArchiveComponent: FC<PageArchiveProps> = ({ className = '', posts }) =
 	const [auxPosts, setAuxPosts] = useState<PostDataType[]>([]);
 	const [loadingPosts, setLoadingPosts] = useState(true);
 
-	console.log(posts);
+	// console.log(posts);
 
 	useEffect(() => {
 		setAuxPosts(posts);

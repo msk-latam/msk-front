@@ -40,7 +40,7 @@ const StoreLayout: FC<LayoutPageProps> = ({ className = '', children, country })
 		fetchData();
 	}, []);
 
-	console.log({ bannerImgs });
+	// console.log({ bannerImgs });
 
 	return (
 		<div className={`nc-LayoutPage relative ${className} `} data-nc-id='LayoutPage'>

@@ -36,7 +36,7 @@ const TABS = [
 
 const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	const { state: dataState, loadingBestSellers } = useContext(DataContext);
-	console.log(dataState);
+	// console.log(dataState);
 
 	const router = useRouter();
 	const {
@@ -64,25 +64,25 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 
 	let allCourses = JSONProduct;
 
-	console.log(allCourses);
+	// console.log(allCourses);
 
 	const fetchUser = async () => {
 		try {
 			setTotalPages(Math.ceil(allCourses.length / itemsPerPage));
 			const res = await api.getUserData();
-			console.log('FETCH USER RES: ', res);
-			console.log(res.message);
+			// console.log('FETCH USER RES: ', res);
+			// console.log(res.message);
 			if (!res.message) {
 				setUser(res);
 				let coursesList = getUserCourses(res, allCourses);
-				console.log(coursesList);
+				// console.log(coursesList);
 
 				// console.log({ allCourses, coursesList }, res.contact.courses_progress);
 				setUserCourses(coursesList);
 				setTotalPages(Math.ceil(coursesList.length / itemsPerPage));
 				setLoadingUser(false);
 			} else {
-				console.log('ejecutando else');
+				// console.log('ejecutando else');
 				router.push('/iniciar-sesion');
 			}
 		} catch (error) {
@@ -184,7 +184,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	// localStorage.removeItem('trialURL')
 
 	// console.log(CourseList);
-	console.log(currentItems);
+	// console.log(currentItems);
 
 	return (
 		<div className={`nc-PageAuthor  ${className} `} data-nc-id='PageAuthor'>

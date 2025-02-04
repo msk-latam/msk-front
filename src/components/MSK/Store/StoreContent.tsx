@@ -41,7 +41,7 @@ const StoreContent: FC = ({ country }: any) => {
 		// storeCourses,
 		allStoreProfessions,
 	} = dataState;
-	console.log(country, 'de tienda');
+	// console.log(country, 'de tienda');
 	const JSONProduct = getJSONTiendaByCountry(country);
 	let storeCourses = JSONProduct.products;
 	const { specialties } = useStoreFilters();

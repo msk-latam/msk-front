@@ -29,7 +29,7 @@ const Card11: FC<Card11Props> = ({
 	const imageURL = thumbnail?.replace('mx.', '');
 	const [isHover, setIsHover] = useState(false);
 
-	console.log(post);
+	// console.log(post);
 
 	//Fix para encoding de HTML que viene de la API
 	function decodeEntities(encodedString: string) {

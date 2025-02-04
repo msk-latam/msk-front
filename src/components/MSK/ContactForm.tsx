@@ -222,7 +222,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 								);
 								// const response = await fetch(replacedUrl);
 
-								console.log(response);
+								// console.log(response);
 
 								// if (!response.ok) {
 								// 	throw new Error('No se pudo descargar el archivo PDF');
@@ -247,7 +247,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 
 								a.download = `${resourcePDFName}.pdf`;
 								// a.download = `descarga.pdf`;
-								console.log(a);
+								// console.log(a);
 								// Simula un clic en el enlace para iniciar la descarga
 								// a.click();
 
