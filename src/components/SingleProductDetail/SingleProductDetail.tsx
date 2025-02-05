@@ -188,7 +188,7 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 								</div>
 							)}
 
-							{product.featured_product_text && !isEbook && <ProductFeaturedText text={product.featured_product_text} />}
+							{product.featured_product_text && <ProductFeaturedText text={product.featured_product_text} />}
 
 							{product.requirements && <CourseRequirements title='Qué necesitas' requirements={product.requirements} />}
 							{product.temario && (
