@@ -56,7 +56,9 @@ export interface FAQS {
 
 const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const jsonLd = generateSchemaJson('WebSite');
-	const currentCountry = params.lang || cookies().get('country')?.value;
+	// const currentCountry = params.lang || cookies().get('country')?.value;
+	const currentCountry = 'ar';
+
 	const loadingBestSellers = false;
 	const JSONProduct = getJSONTiendaByCountry(currentCountry);
 	const JSONBlog = getJSONPostByCountry(currentCountry);
