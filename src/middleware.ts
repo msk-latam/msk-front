@@ -7,7 +7,7 @@ import i18nConfig from './i18nConfig';
 const protectedRoutes = ['/mi-cuenta', 'mi-perfil'];
 
 export function middleware(request: NextRequest) {
-	return i18nRouter(request, i18nConfig);
+	// return i18nRouter(request, i18nConfig); //esto hace la redireccion automatica
 }
 
 // only applies this middleware to files in the app directory

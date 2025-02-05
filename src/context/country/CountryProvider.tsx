@@ -14,8 +14,10 @@ interface Props {
 
 export const CountryProvider: React.FC<Props> = ({ children }) => {
 	const initialState: CountryState = {
-		country: Cookies.get('NEXT_LOCALE') || 'int',
+		// country: Cookies.get('NEXT_LOCALE') || 'int',
+		country: '',
 	};
+	console.log(initialState); //initial state esta vacio, aun asi redirije a argentina ???
 
 	const [countryState, dispatch] = useReducer(countryReducer, initialState);
 	const [loading, setLoading] = useState(true);
@@ -30,35 +32,40 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 			try {
 				setLoading(true);
 				let currentCountry = await api.getCountryCode();
+				console.log(`🌍 País detectado por API: ${currentCountry}`);
+
 				const currentPathName = window.location.pathname.split('/')[1];
+				console.log(`📂 Pathname detectado: ${currentPathName}`);
 
 				if (validCountries.includes(currentPathName)) {
+					console.log(`✅ Pathname es un país válido: ${currentPathName}`);
 					if (currentCountry !== currentPathName) {
-						console.log(`Estás en ${currentCountry}, viendo contenido de ${currentPathName}`);
+						console.log(`⚠️ Usuario en ${currentCountry}, viendo ${currentPathName}`);
 						setUserCountry(currentCountry);
 						setUrlCountry(currentPathName);
 						setShowBanner(true);
 					}
-
 					dispatch({ type: 'SET_COUNTRY', payload: { country: currentPathName } });
 					setLoading(false);
 					return;
 				}
 
 				if (!validCountries.includes(currentCountry)) {
+					console.log(`❌ ${currentCountry} no es válido, asignando 'int'`);
 					currentCountry = 'int';
 				}
 
-				const newPath = window.location.pathname.replace(/^\/[^/]+/, `/${currentCountry}`);
-				if (window.location.pathname !== newPath) {
-					console.log(`Redirigiendo a: ${newPath}`);
-					window.location.href = newPath;
-				}
+				// const newPath = window.location.pathname.replace(/^\/[^/]+/, `/${currentCountry}`);
+				// console.log(`🔄 Posible nueva URL: ${newPath}`);
+				// if (window.location.pathname !== newPath) {
+				// 	console.log(`🚀 Redirigiendo a: ${newPath}`);
+				// 	window.location.href = newPath;
+				// }
 
 				dispatch({ type: 'SET_COUNTRY', payload: { country: currentCountry } });
 				setLoading(false);
 			} catch (error) {
-				console.error(error);
+				console.error(`❗ Error en fetchData: ${error}`);
 				setLoading(false);
 			}
 		};
@@ -110,9 +117,10 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 					}`}
 				>
 					<p className='text-sm md:text-base'>
-						Estás en <strong>{getCountryName(userCountry)}</strong>, viendo contenido de{' '}
-						<strong>{getCountryName(urlCountry)}</strong>. ¿Quieres cambiar de país?
+						Estás visitando <strong>MSK {getCountryName(urlCountry)}</strong> desde{' '}
+						<strong>{getCountryName(userCountry)}</strong>. ¿Quieres cambiar de país?
 					</p>
+
 					<div className='ml-4 flex space-x-3'>
 						<button
 							onClick={handleSwitchCountry}

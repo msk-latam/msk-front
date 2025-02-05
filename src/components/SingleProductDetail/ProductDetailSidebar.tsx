@@ -37,6 +37,8 @@ const ProductDetailSidebar: FC<Props> = ({ ficha, product, details, isEbook, sid
 	// console.log(product);
 	// console.log(isEbook, 'desde parametro');
 
+	console.log(sideData);
+
 	const image =
 		ficha.title === 'Abordaje diagnóstico del dolor abdominal agudo'
 			? 'https://wp.msklatam.com/wp-content/uploads/2021/05/imagen-primaria-1.jpg'
