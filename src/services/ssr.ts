@@ -493,7 +493,7 @@ class ApiSSRService {
 	async getSingleProduct(slug: string, country: string) {
 		try {
 			const response = await fetch(`${API_URL}/product/${slug}?country=${country}`);
-			// console.log(`${API_URL}/product/${slug}?country=${country}`);
+			console.log(`${API_URL}/product/${slug}?country=${country}`);
 
 			if (!response.ok) {
 				throw new Error(`Failed to fetch single product. HTTP status ${response.status}`);
