@@ -111,7 +111,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 					<WelcomeBox content={pageHomeWpContent as WpContentData} />
 
 					<div className=' relative mb-10 md:mb-28'>
-						<BrandSlider country={currentCountry} />
+						{/* <BrandSlider country={currentCountry} /> */}
 						<Phrase content={pageHomeWpContent?.cedentes.texto as string} />
 						<SectionGridCategoryBox
 							headingCenter={false}
