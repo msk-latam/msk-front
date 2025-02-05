@@ -84,7 +84,7 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 		];
 	}
 
-	const langCode = getLangCode(countryCode);
+	const langCode = getLangCode('ar');
 
 	useEffect(() => {
 		const fetchFooterData = async () => {
@@ -113,20 +113,21 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 
 	return (
 		<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:pb-6'>
-			{categories.map((category, index) => (
-				<div key={index} className='footer-column px-8 lg:px-0 mb-4'>
-					<h4 className='text-lg font-semibold mb-2 text-white !font-inter'>{category.title}</h4>
-					<ul className='space-y-2'>
-						{category.links.map((link, linkIndex) => (
-							<li key={linkIndex}>
-								<Link href={link.url || '#'} className='text-sm text-[#95A295] hover:underline'>
-									{link.title}
-								</Link>
-							</li>
-						))}
-					</ul>
-				</div>
-			))}
+			{categories &&
+				categories.map((category, index) => (
+					<div key={index} className='footer-column px-8 lg:px-0 mb-4'>
+						<h4 className='text-lg font-semibold mb-2 text-white !font-inter'>{category.title}</h4>
+						<ul className='space-y-2'>
+							{category.links.map((link, linkIndex) => (
+								<li key={linkIndex}>
+									<Link href={link.url || '#'} className='text-sm text-[#95A295] hover:underline'>
+										{link.title}
+									</Link>
+								</li>
+							))}
+						</ul>
+					</div>
+				))}
 		</div>
 	);
 };
