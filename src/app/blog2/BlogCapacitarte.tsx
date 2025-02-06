@@ -7,7 +7,8 @@ interface PageProps {
 
 const BlogCapacitarte = async ({ params }: PageProps) => {
 	// Obtener el idioma actual desde params
-	const currentCountry = params.lang;
+	const currentCountry = 'ar';
+	// const currentCountry = params.lang;
 	const allBestSellers = await ssr.getBestSellers(currentCountry);
 	// console.log(allBestSellers);
 	return (

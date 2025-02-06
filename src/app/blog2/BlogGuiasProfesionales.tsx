@@ -9,7 +9,8 @@ interface PageProps {
 }
 const BlogGuiasProfesionales = async ({ params }: PageProps) => {
 	// Obtener el idioma actual desde params
-	const currentCountry = params.lang;
+	const currentCountry = 'ar';
+	// const currentCountry = params.lang;
 	const allBestSellers = await ssr.getBestSellers(currentCountry);
 	return (
 		<section id='guias-profesionales' className='py-8'>
