@@ -8,10 +8,19 @@ interface BrandSliderProps {
 }
 
 const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
+	function getUrl() {
+		let host = window.location.hostname;
+		let url = 'http://localhost:3000';
+		if (host != 'localhost') {
+			return `https://${host}`;
+		}
+		return url;
+	}
 	async function fetchBrands(country: any) {
 		try {
 			const mappedCountry = country === 'ar' ? 'arg' : country;
-			const url = `https://wp.msklatam.com/wp-json/wp/api/carrusel-instituciones?country=${mappedCountry}&lang=${mappedCountry}`;
+			// const url = `https://wp.msklatam.com/wp-json/wp/api/carrusel-instituciones?country=${mappedCountry}&lang=${mappedCountry}`;
+			const url = `${getUrl()}/instituciones/${country}.json`;
 
 			const response = await fetch(url);
 
@@ -21,14 +30,10 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 
 			const data = await response.json();
 
-			// "https://msklatam.com/wp-content/uploads/2024/12/acc-1.svg"
-			// "https://wp.msklatam.com/wp-content/uploads/2024/12/acc-1.svg"
 			const processedData = data.map((item: any) => {
 				const removeCountryFromUrl = (url: string) => {
-					// Eliminar prefijo de país
 					let processedUrl = url.replace(/^https?:\/\/[a-z]{2}\./, 'https://');
 
-					// Verificar si falta "wp." y agregarlo si es necesario
 					if (!processedUrl.includes('//wp.')) {
 						processedUrl = processedUrl.replace('//', '//wp.');
 					}
@@ -42,8 +47,6 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 					imgHover: removeCountryFromUrl(item.imgHover),
 				};
 			});
-
-			// console.log(processedData);
 
 			return processedData.length > 0 ? processedData : await fetchDefaultBrands();
 		} catch (error) {
