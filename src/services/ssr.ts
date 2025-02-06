@@ -371,15 +371,21 @@ class ApiSSRService {
 			if (country && validCountries.includes(country)) {
 				countryParam = `${country}`;
 			}
+			const baseURL = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
 
-			console.log('getBestSellers URL', `${API_URL}/home/best-sellers?country=${countryParam}`);
-			const response = await fetch(`${API_URL}/home/best-sellers?country=${countryParam}`);
+			const response = await fetch(`${baseURL}/bestSellers/${countryParam}.json`);
+
+			// console.log('getBestSellers URL', `${API_URL}/home/best-sellers?country=${countryParam}`);
+			// const response = await fetch(`${API_URL}/home/best-sellers?country=${countryParam}`);
+			// const response = await fetch(`http://localhost:3000/bestSellers/${countryParam}.json`);
 
 			if (!response.ok) {
 				throw new Error(`Failed to fetch best sellers. HTTP status ${response.status}`);
 			}
 
 			const data = await response.json();
+
+			// console.log(data.products);
 
 			setLoadingBestSellers(false);
 

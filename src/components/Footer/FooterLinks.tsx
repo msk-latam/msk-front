@@ -1,3 +1,4 @@
+import { baseUrl } from '@/data/api';
 import ssr from '@/services/ssr';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -84,14 +85,16 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 		];
 	}
 
-	const langCode = getLangCode('ar');
+	const langCode = getLangCode(countryCode);
 
 	useEffect(() => {
 		const fetchFooterData = async () => {
 			try {
-				const response = await fetch(
-					`https://wp.msklatam.com/wp-json/wp/api/footer?country=${countryCode}&lang=${langCode}`,
-				);
+				// const response = await fetch(
+				// 	`https://wp.msklatam.com/wp-json/wp/api/footer?country=${countryCode}&lang=${langCode}`,
+				// );
+				const baseURL = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
+				const response = await fetch(`${baseURL}/footerLinks/${countryCode}.json`);
 				// console.log(response);
 
 				if (!response.ok) {
@@ -99,7 +102,7 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 				}
 				const data = await response.json();
 
-				// console.log(data);
+				console.log(data);
 
 				const mappedCategories = mapCategories(data);
 				setCategories(mappedCategories);
@@ -113,21 +116,20 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 
 	return (
 		<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:pb-6'>
-			{categories &&
-				categories.map((category, index) => (
-					<div key={index} className='footer-column px-8 lg:px-0 mb-4'>
-						<h4 className='text-lg font-semibold mb-2 text-white !font-inter'>{category.title}</h4>
-						<ul className='space-y-2'>
-							{category.links.map((link, linkIndex) => (
-								<li key={linkIndex}>
-									<Link href={link.url || '#'} className='text-sm text-[#95A295] hover:underline'>
-										{link.title}
-									</Link>
-								</li>
-							))}
-						</ul>
-					</div>
-				))}
+			{categories.map((category, index) => (
+				<div key={index} className='footer-column px-8 lg:px-0 mb-4'>
+					<h4 className='text-lg font-semibold mb-2 text-white !font-inter'>{category.title}</h4>
+					<ul className='space-y-2'>
+						{category.links.map((link, linkIndex) => (
+							<li key={linkIndex}>
+								<Link href={link.url || '#'} className='text-sm text-[#95A295] hover:underline'>
+									{link.title}
+								</Link>
+							</li>
+						))}
+					</ul>
+				</div>
+			))}
 		</div>
 	);
 };
