@@ -385,7 +385,7 @@ class ApiSSRService {
 
 			const data = await response.json();
 
-			console.log(data.products);
+			console.log(data);
 
 			setLoadingBestSellers(false);
 
@@ -506,7 +506,6 @@ class ApiSSRService {
 			}
 
 			const data = await response.json();
-			console.log(data.featured_product_text);
 
 			return { product: data };
 		} catch (error) {

@@ -7,6 +7,13 @@ import i18nConfig from './i18nConfig';
 const protectedRoutes = ['/mi-cuenta', 'mi-perfil'];
 
 export function middleware(request: NextRequest) {
+	const { pathname } = request.nextUrl;
+
+	if (pathname.startsWith('/ar')) {
+		// Elimina "/ar" y mantiene el resto de la URL
+		const newPath = pathname.replace(/^\/ar/, '');
+		return NextResponse.redirect(new URL(newPath || '/', request.url));
+	}
 	// return i18nRouter(request, i18nConfig); //esto hace la redireccion automatica
 }
 

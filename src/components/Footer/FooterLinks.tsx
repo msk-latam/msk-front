@@ -23,8 +23,8 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 
 	useEffect(() => {
 		if (pathname) {
-			const pathParts = pathname.split('/'); // Divide la ruta por '/'
-			const code = pathParts[1]; // El primer segmento después del dominio
+			const pathParts = pathname.split('/');
+			const code = pathParts[1] || 'ar';
 			setCountryCode(code);
 		}
 	}, [pathname]);
@@ -95,19 +95,49 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 		return url;
 	}
 
+	console.log(countryCode);
+
 	useEffect(() => {
 		const fetchFooterData = async () => {
 			try {
 				// const response = await fetch(
 				// 	`https://wp.msklatam.com/wp-json/wp/api/footer?country=${countryCode}&lang=${langCode}`,
 				// );
+
+				const replaceDomain = (url: string) => {
+					return url.startsWith('https://msklatam.com/') ? url.replace('https://msklatam.com/', getUrl() + '/') : url;
+				};
+				const updateUrls = (data: any) => {
+					return {
+						...data,
+						cursos_mas_elegidos: data.cursos_mas_elegidos.map((course: any) => ({
+							...course,
+							url: replaceDomain(course.url),
+						})),
+						cursos_mas_buscados: data.cursos_mas_buscados.map((course: any) => ({
+							...course,
+							url: replaceDomain(course.url),
+						})),
+						especialidades: data.especialidades.map((item: any) => ({
+							especialidad: {
+								...item.especialidad,
+								url_especialidad: replaceDomain(item.especialidad.url_especialidad),
+							},
+						})),
+						contenidos_destacados: data.contenidos_destacados.map((content: any) => ({
+							...content,
+							url: replaceDomain(content.url),
+						})),
+					};
+				};
 				const response = await fetch(`${getUrl()}/footerLinks/${countryCode}.json`);
 				// console.log(response);
 
 				if (!response.ok) {
 					throw new Error('Error fetching footer data');
 				}
-				const data = await response.json();
+				let data = await response.json();
+				data = updateUrls(data);
 
 				console.log(data);
 
