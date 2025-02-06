@@ -373,7 +373,7 @@ class ApiSSRService {
 			}
 			const baseURL = process.env.NEXT_PUBLIC_HOST;
 
-			const response = await fetch(`${baseURL}/bestSellers/${countryParam}.json`);
+			const response = await fetch(`${baseURL}/bestSellers/${country}.json`);
 
 			// console.log('getBestSellers URL', `${API_URL}/home/best-sellers?country=${countryParam}`);
 			// const response = await fetch(`${API_URL}/home/best-sellers?country=${countryParam}`);
@@ -385,7 +385,7 @@ class ApiSSRService {
 
 			const data = await response.json();
 
-			// console.log(data.products);
+			console.log(data.products);
 
 			setLoadingBestSellers(false);
 
