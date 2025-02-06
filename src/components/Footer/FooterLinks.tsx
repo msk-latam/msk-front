@@ -93,7 +93,7 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 				// const response = await fetch(
 				// 	`https://wp.msklatam.com/wp-json/wp/api/footer?country=${countryCode}&lang=${langCode}`,
 				// );
-				const baseURL = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
+				const baseURL = typeof window !== 'undefined' ? window.location.origin : 'https://msklatam.tech';
 				const response = await fetch(`${baseURL}/footerLinks/${countryCode}.json`);
 				// console.log(response);
 
