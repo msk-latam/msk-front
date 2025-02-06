@@ -96,12 +96,12 @@ const ProductDetailSidebar: FC<Props> = ({ ficha, product, details, isEbook, sid
 	const requestTrial = (slug: string) => {
 		router.push(authState.isAuthenticated ? `/suscribe/${slug}` : `/trial/${slug}`);
 	};
+	console.log(product);
 	const { hasCoursedRequested } = useRequestedTrialCourse(product);
 
 	const hasGateway = Object.values(REBILL_CONF.GATEWAYS).some((array) => array.includes(countryState.country));
 	//console.log(hasCoursedRequested)
 
-	console.log(product);
 	return (
 		<div
 			className={`${
