@@ -1,3 +1,4 @@
+import { baseUrl } from '@/data/api';
 import ssr from '@/services/ssr';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -85,13 +86,22 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 	}
 
 	const langCode = getLangCode(countryCode);
+	function getUrl() {
+		let host = window.location.hostname;
+		let url = 'http://localhost:3000';
+		if (host != 'localhost') {
+			return `https://${host}`;
+		}
+		return url;
+	}
 
 	useEffect(() => {
 		const fetchFooterData = async () => {
 			try {
-				const response = await fetch(
-					`https://wp.msklatam.com/wp-json/wp/api/footer?country=${countryCode}&lang=${langCode}`,
-				);
+				// const response = await fetch(
+				// 	`https://wp.msklatam.com/wp-json/wp/api/footer?country=${countryCode}&lang=${langCode}`,
+				// );
+				const response = await fetch(`${getUrl()}/footerLinks/${countryCode}.json`);
 				// console.log(response);
 
 				if (!response.ok) {
@@ -99,7 +109,7 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 				}
 				const data = await response.json();
 
-				// console.log(data);
+				console.log(data);
 
 				const mappedCategories = mapCategories(data);
 				setCategories(mappedCategories);
