@@ -371,7 +371,7 @@ class ApiSSRService {
 			if (country && validCountries.includes(country)) {
 				countryParam = `${country}`;
 			}
-			const baseURL = typeof window !== 'undefined' ? window.location.origin : 'https://msklatam.tech';
+			const baseURL = process.env.NEXT_PUBLIC_HOST;
 
 			const response = await fetch(`${baseURL}/bestSellers/${countryParam}.json`);
 

@@ -8,10 +8,19 @@ interface BrandSliderProps {
 }
 
 const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
+	function getUrl() {
+		let host = window.location.hostname;
+		let url = 'http://localhost:3000';
+		if (host != 'localhost') {
+			return `https://${host}`;
+		}
+		return url;
+	}
 	async function fetchBrands(country: any) {
 		try {
 			const mappedCountry = country === 'ar' ? 'arg' : country;
-			const url = `https://wp.msklatam.com/wp-json/wp/api/carrusel-instituciones?country=${mappedCountry}&lang=${mappedCountry}`;
+			// const url = `https://wp.msklatam.com/wp-json/wp/api/carrusel-instituciones?country=${mappedCountry}&lang=${mappedCountry}`;
+			const url = `${getUrl()}/instituciones/${country}.json`;
 
 			const response = await fetch(url);
 

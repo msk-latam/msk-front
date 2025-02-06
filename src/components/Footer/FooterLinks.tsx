@@ -86,6 +86,14 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 	}
 
 	const langCode = getLangCode(countryCode);
+	function getUrl() {
+		let host = window.location.hostname;
+		let url = 'http://localhost:3000';
+		if (host != 'localhost') {
+			return `https://${host}`;
+		}
+		return url;
+	}
 
 	useEffect(() => {
 		const fetchFooterData = async () => {
@@ -93,8 +101,7 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 				// const response = await fetch(
 				// 	`https://wp.msklatam.com/wp-json/wp/api/footer?country=${countryCode}&lang=${langCode}`,
 				// );
-				const baseURL = typeof window !== 'undefined' ? window.location.origin : 'https://msklatam.tech';
-				const response = await fetch(`${baseURL}/footerLinks/${countryCode}.json`);
+				const response = await fetch(`${getUrl()}/footerLinks/${countryCode}.json`);
 				// console.log(response);
 
 				if (!response.ok) {
