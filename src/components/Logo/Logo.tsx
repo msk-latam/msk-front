@@ -7,6 +7,7 @@ export interface LogoProps {
 	imgLight?: string;
 	isOnBlog: boolean;
 	target?: string;
+	country?: string;
 }
 
 const Logo: React.FC<LogoProps> = ({
@@ -14,9 +15,14 @@ const Logo: React.FC<LogoProps> = ({
 	isOnBlog,
 	imgLight = '/images/logo-light.png',
 	target,
+	country,
 }) => {
 	return (
-		<NcLink href={isOnBlog ? '/blog' : '/'} className='ttnc-logo inline-block text-primary-6000 w-[100px] ' target={target}>
+		<NcLink
+			href={isOnBlog ? '/blog' : `/${country}`}
+			className='ttnc-logo inline-block text-primary-6000 w-[100px] '
+			target={target}
+		>
 			<NcImage src={img} alt='Logo' width='100' height='60' />
 		</NcLink>
 	);

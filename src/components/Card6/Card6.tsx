@@ -5,6 +5,7 @@ import CategoryBadgeList from '@/components/CategoryBadgeList/CategoryBadgeList'
 import CardAuthor2 from '@/components/CardAuthor2/CardAuthor2';
 import NcLink from '../NcLink/NcLink';
 import { compareByNameOrderSet } from '@/lib/compareByNameOrderSet';
+import { usePathname } from 'next/navigation';
 
 export interface Card6Props {
 	className?: string;
@@ -18,12 +19,19 @@ export interface Card6Props {
 const Card6: FC<Card6Props> = ({ className = 'h-full', post, authorRow, kind = 'blog', badgeColor, forSingleNote }) => {
 	const { title, slug, image, categories, link, author, date, reading_time } = post;
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? match[1] : '';
+
 	return (
 		<div
 			className={`nc-Card6 relative flex group flex-col-reverse sm:flex-row sm:items-center p-4  [ nc-box-has-hover ] [ nc-dark-box-bg-has-hover ] ${className}`}
 			data-nc-id='Card6'
 		>
-			<NcLink href={`/${kind}/${slug}`} className='absolute inset-0 z-0'></NcLink>
+			<NcLink
+				href={country === '' ? `${window.location.origin}/${kind}/${slug}` : `/${country}/${kind}/${slug}`}
+				className='absolute inset-0 z-0'
+			></NcLink>
 			<div className='flex flex-col flex-grow'>
 				<div className='space-y-3 mb-4'>
 					<CategoryBadgeList
@@ -34,7 +42,11 @@ const Card6: FC<Card6Props> = ({ className = 'h-full', post, authorRow, kind = '
 						isEbook={kind === 'guia'}
 					/>
 					<h2 className={`block font-semibold text-base`}>
-						<NcLink href={`/${kind}/${slug}`} className='line-clamp-2 font-medium' colorClass='text-black'>
+						<NcLink
+							href={country === '' ? `${window.location.origin}/${kind}/${slug}` : `/${country}/${kind}/${slug}`}
+							className='line-clamp-2 font-medium'
+							colorClass='text-black'
+						>
 							{title}
 						</NcLink>
 					</h2>
@@ -51,7 +63,7 @@ const Card6: FC<Card6Props> = ({ className = 'h-full', post, authorRow, kind = '
 			</div>
 
 			<NcLink
-				href={`/${kind}/${slug}`}
+				href={country === '' ? `${window.location.origin}/${kind}/${slug}` : `/${country}/${kind}/${slug}`}
 				className={`block relative flex-shrink-0 w-full sm:w-40 h-40 sm:h-full sm:ml-5 rounded-2xl overflow-hidden mb-5 sm:mb-0 `}
 			>
 				<NcImage

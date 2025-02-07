@@ -97,16 +97,39 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 
 	// console.log(countryCode);
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? match[1] : '';
+
 	useEffect(() => {
 		const fetchFooterData = async () => {
 			try {
-				// const response = await fetch(
-				// 	`https://wp.msklatam.com/wp-json/wp/api/footer?country=${countryCode}&lang=${langCode}`,
-				// );
-
 				const replaceDomain = (url: string) => {
-					return url.startsWith('https://msklatam.com/') ? url.replace('https://msklatam.com/', getUrl() + '/') : url;
+					const base = getUrl();
+
+					// Si la URL pertenece a "msklatam.com", reemplazarla por la base correcta
+					if (url.startsWith('https://msklatam.com/')) {
+						url = url.replace('https://msklatam.com/', '/'); // Convertimos a una ruta relativa
+					}
+
+					// Si la URL ya es absoluta (http o https de otro dominio), no modificarla
+					if (url.startsWith('http://') || url.startsWith('https://')) {
+						return url;
+					}
+
+					// Asegurar que la base y la URL están bien formateadas
+					const formattedBase = base.endsWith('/') ? base.slice(0, -1) : base;
+					const formattedUrl = url.startsWith('/') ? url : `/${url}`;
+
+					// Si la URL ya tiene un código de país en la ruta, no agregar otro
+					if (formattedUrl.match(/^\/[a-z]{2}\//)) {
+						return `${formattedBase}${formattedUrl}`;
+					}
+
+					// Agregar el código de país si corresponde
+					return country ? `${formattedBase}/${country}${formattedUrl}` : `${formattedBase}${formattedUrl}`;
 				};
+
 				const updateUrls = (data: any) => {
 					return {
 						...data,

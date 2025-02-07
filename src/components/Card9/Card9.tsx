@@ -8,6 +8,7 @@ import { CountryContext } from '@/context/country/CountryContext';
 import Showing from '@/components/Showing/Showing';
 import moduleIcon from '/public/images/icons/moduleIcon.svg';
 import timeIcon from '/public/images/icons/timeIcon.svg';
+import { usePathname } from 'next/navigation';
 
 export interface Card9Props {
 	className?: string;
@@ -63,10 +64,14 @@ const Card9: FC<Card9Props> = ({
 
 	const filteredCategory = categories && categories.length > 0 ? [categories[0]] : [];
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? match[1] : '';
+
 	return (
 		<div className={`nc-Card9 relative flex flex-col group rounded-3xl overflow-hidden z-0 ${hoverClass} ${className}`}>
 			<div className={`flex items-start relative w-full ${ratio}`}></div>
-			<Link href={`/curso/${slug}`}>
+			<Link href={country === '' ? `${window.location.origin}/curso/${slug}` : `/${country}/curso/${slug}`}>
 				<NcImage
 					containerClassName='absolute inset-0 rounded-2xl sm:rounded-3xl'
 					src={imageURL}
@@ -79,11 +84,14 @@ const Card9: FC<Card9Props> = ({
 				<span className='absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-100 md:opacity-80 group-hover:opacity-100 transition-opacity'></span>
 			</Link>
 			<Link
-				href={`/curso/${slug}`}
+				href={country === '' ? `${window.location.origin}/curso/${slug}` : `/${country}/curso/${slug}`}
 				className='absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-black opacity-50'
 			></Link>
 			<div className='absolute bottom-0 inset-x-0 p-4 flex flex-col flex-grow'>
-				<Link href={`/curso/${slug}`} className='absolute inset-0'></Link>
+				<Link
+					href={country === '' ? `${window.location.origin}/curso/${slug}` : `/${country}/curso/${slug}`}
+					className='absolute inset-0'
+				></Link>
 				<div className='mb-3'>
 					<CategoryBadgeList
 						categories={filteredCategory}

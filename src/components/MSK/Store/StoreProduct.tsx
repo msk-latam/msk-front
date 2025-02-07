@@ -7,6 +7,7 @@ import Image from 'next/image';
 import clockIcon from '/public/images/icons/clock.svg';
 import { removeFirstSubdomain } from '@/utils/removeFirstSubdomain';
 import { useStoreFilters } from '@/context/storeFilters/StoreProvider';
+import { usePathname } from 'next/navigation';
 
 interface Props {
 	product: FetchCourseType;
@@ -45,11 +46,17 @@ const StoreProduct: FC<Props> = ({ product, className, hoverEffect = false, kind
 		} else addFilter('resources', resource);
 	};
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? match[1] : '';
+
 	const filteredCategory = product.categories && product.categories.length > 0 ? [product.categories[0]] : [];
 	return (
 		<div className={`protfolio-course-2-wrapper ${className}`}>
 			<div className='student-course-img'>
-				<NcLink href={`/curso/${product.slug}`}>
+				<NcLink
+					href={country === '' ? `${window.location.origin}/curso/${product.slug}` : `${country}/curso/${product.slug}`}
+				>
 					<Image src={imageURL} className='transition-all' width={1000} height={1000} alt={`${product.title}`} />
 				</NcLink>
 			</div>

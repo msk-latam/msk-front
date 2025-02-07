@@ -8,6 +8,7 @@ import ImageSkeleton from '@/components/MSK/ImageSkeleton';
 import { removeAccents } from '@/lib/removeAccents';
 import NoResults from '../NoResults/NoResults';
 import BlogSlider from '@/components/Sliders/BlogSlider';
+import { usePathname } from 'next/navigation';
 
 export interface BlogSummaryProps {
 	tabs: string[];
@@ -62,6 +63,10 @@ const BlogSummary: FC<BlogSummaryProps> = ({
 
 	// console.log(auxPosts[0]);
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? match[1] : '';
+
 	return (
 		<div className={`nc-BlogSummary ${className} animate-fade-down`}>
 			<HeaderFilter
@@ -70,7 +75,7 @@ const BlogSummary: FC<BlogSummaryProps> = ({
 				heading={heading}
 				onClickTab={handleClickTab}
 				desc={desc}
-				viewMore='/blog/archivo'
+				viewMore={country === '' ? '/blog/archivo' : `/${country}/blog/archivo`}
 				mobileHidden='block'
 			/>
 			{loading && (

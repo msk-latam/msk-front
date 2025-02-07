@@ -3,6 +3,7 @@ import { Specialty } from '@/data/types';
 import { slugifySpecialty } from '@/lib/Slugify';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 
 interface ModalProps {
@@ -16,6 +17,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, fixed }) => {
 
 	let specialties: Specialty[] = useStoreFilters().specialties;
 	// console.log(specialties);
+
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : '';
 
 	return (
 		<div className={`${fixed || ''} inset-0 flex items-center justify-center z-50 backdrop-blur-[2px] rounded-3xl`}>
@@ -33,7 +38,15 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, fixed }) => {
 						.filter((specialty) => specialty.name !== 'Oftalmología')
 						.sort((a, b) => a.name.localeCompare(b.name))
 						.map((specialty, index) => (
-							<Link key={index} href={`/tienda/${slugifySpecialty(specialty.name)}`} onClick={onClose}>
+							<Link
+								key={index}
+								href={
+									country === ''
+										? `/tienda/${slugifySpecialty(specialty.name)}`
+										: `/${country}/tienda/${slugifySpecialty(specialty.name)}`
+								}
+								onClick={onClose}
+							>
 								<div className='flex gap-2 items-center'>
 									<div className='flex items-center justify-center'>
 										<Image

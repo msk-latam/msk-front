@@ -57,7 +57,7 @@ const MainNav2: FC = () => {
 
 	const pathName = usePathname();
 	const match = pathName.match(/^\/([a-z]{2})\b/);
-	const country = match ? `${match[1]}` : 'ar';
+	const country = match ? `${match[1]}` : '';
 
 	console.log(country);
 
@@ -70,7 +70,7 @@ const MainNav2: FC = () => {
 		<div className={`nc-MainNav nc-MainNav2 relative z-10 container`}>
 			<div className='py-5 relative flex items-center justify-between'>
 				<div className='flex items-center space-x-3 sm:space-x-8'>
-					<Logo isOnBlog={isOnBlog} />
+					<Logo isOnBlog={isOnBlog} country={country} />
 					<div className='hidden sm:block h-10 border-l border-neutral-300 dark:border-neutral-6000 m-0'></div>
 					<div>
 						{!pathName.includes('blog2') && (
