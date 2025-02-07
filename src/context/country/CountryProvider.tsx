@@ -55,12 +55,12 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 					currentCountry = 'int';
 				}
 
-				// const newPath = window.location.pathname.replace(/^\/[^/]+/, `/${currentCountry}`);
-				// console.log(`🔄 Posible nueva URL: ${newPath}`);
-				// if (window.location.pathname !== newPath) {
-				// 	console.log(`🚀 Redirigiendo a: ${newPath}`);
-				// 	window.location.href = newPath;
-				// }
+				const newPath = window.location.pathname.replace(/^\/[^/]+/, `/${currentCountry}`);
+				console.log(`🔄 Posible nueva URL: ${newPath}`);
+				if (window.location.pathname !== newPath) {
+					console.log(`🚀 Redirigiendo a: ${newPath}`);
+					window.location.href = newPath;
+				}
 
 				dispatch({ type: 'SET_COUNTRY', payload: { country: currentCountry } });
 				setLoading(false);

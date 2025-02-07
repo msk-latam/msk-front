@@ -95,7 +95,7 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 		return url;
 	}
 
-	console.log(countryCode);
+	// console.log(countryCode);
 
 	useEffect(() => {
 		const fetchFooterData = async () => {
@@ -139,7 +139,7 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 				let data = await response.json();
 				data = updateUrls(data);
 
-				console.log(data);
+				// console.log(data);
 
 				const mappedCategories = mapCategories(data);
 				setCategories(mappedCategories);

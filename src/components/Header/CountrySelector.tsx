@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 
 const countries = [
 	{ code: 'ar', name: 'Argentina', flag: '🇦🇷' },
@@ -20,12 +21,51 @@ const countries = [
 	{ code: 've', name: 'Venezuela', flag: '🇻🇪' },
 ];
 
-export default function CountrySelector() {
-	const [selected, setSelected] = useState(countries[0]);
+export default function CountrySelector({ country }: any) {
+	const [selected, setSelected] = useState(countries.find((c) => c.code === country) || countries[0]);
 	const [open, setOpen] = useState(false);
+	const pathname = usePathname();
+	const router = useRouter();
+	const dropdownRef = useRef<HTMLDivElement | null>(null);
+	console.log(country);
+
+	useEffect(() => {
+		if (country) {
+			const matchedCountry = countries.find((c) => c.code === country);
+			if (matchedCountry) {
+				setSelected(matchedCountry);
+			}
+		}
+	}, [country]);
+
+	useEffect(() => {
+		function handleClickOutside(event: MouseEvent) {
+			if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+				setOpen(false);
+			}
+		}
+
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, []);
+
+	const handleCountryChange = (newCountry: { code: string; name: string; flag: string }) => {
+		setSelected(newCountry);
+		setOpen(false);
+
+		const currentPath = pathname.replace(/^\/[a-z]{2}(\/|$)/, '/'); // Elimina el código de país si existe
+		const newPath = newCountry.code === 'ar' ? currentPath : `/${newCountry.code}${currentPath}`;
+
+		router.push(newPath);
+		setTimeout(() => {
+			window.location.reload();
+		}, 1500);
+	};
 
 	return (
-		<div className='relative w-52 ml-6'>
+		<div className='relative w-52 ml-6' ref={dropdownRef}>
 			<button
 				onClick={() => setOpen(!open)}
 				className='w-full bg-white px-4 py-2 rounded-lg flex items-center justify-between'
@@ -43,6 +83,7 @@ export default function CountrySelector() {
 							onClick={() => {
 								setSelected(country);
 								setOpen(false);
+								handleCountryChange(country);
 							}}
 							className='p-2 hover:bg-gray-100 flex items-center cursor-pointer rounded-lg'
 						>

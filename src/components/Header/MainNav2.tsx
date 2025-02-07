@@ -56,6 +56,10 @@ const MainNav2: FC = () => {
 	};
 
 	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : 'ar';
+
+	console.log(country);
 
 	useEffect(() => {
 		setIsOnBlog(pathName.includes('/blog'));
@@ -127,7 +131,7 @@ const MainNav2: FC = () => {
 								</>
 							)}
 						</div>
-						<CountrySelector />
+						<CountrySelector country={country} />
 						<div className='flex items-center space-x-4 xl:hidden'>
 							<NavigationUser />
 							<MenuBar />
