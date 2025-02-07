@@ -16,6 +16,7 @@ import { useCurrentLocale } from 'next-i18n-router/client';
 import i18nConfig from '@/i18nConfig';
 import CategoriesDropdown from './categoriesDropdown/CategoriesDropdown';
 import Link from 'next/link';
+import CountrySelector from './CountrySelector';
 
 const MainNav2: FC = () => {
 	const locale = useCurrentLocale(i18nConfig);
@@ -126,6 +127,7 @@ const MainNav2: FC = () => {
 								</>
 							)}
 						</div>
+						<CountrySelector />
 						<div className='flex items-center space-x-4 xl:hidden'>
 							<NavigationUser />
 							<MenuBar />
