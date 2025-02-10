@@ -1,5 +1,6 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import { FlagIcon } from 'react-flag-kit';
 
 const countries = [
 	{ code: 'ar', name: 'Argentina', flag: '🇦🇷' },
@@ -99,11 +100,12 @@ export default function CountrySelector({ country }: any) {
 		<div className='relative w-52 ml-6' ref={dropdownRef}>
 			<button
 				onClick={() => setOpen(!open)}
-				className='w-full bg-white px-4 py-2 rounded-lg flex items-center justify-between'
+				className='w-full bg-white px-6 py-2 rounded-lg flex items-center justify-start gap-2 '
 			>
-				<span>
-					{selected.flag} {selected.name}
+				<span className='flex'>
+					<FlagIcon code={selected.code.toLocaleUpperCase()} />
 				</span>
+				{selected.name}
 			</button>
 
 			{open && (
@@ -118,7 +120,10 @@ export default function CountrySelector({ country }: any) {
 							}}
 							className='p-2 hover:bg-gray-100 flex items-center cursor-pointer rounded-lg'
 						>
-							<span className='mr-2'>{country.flag}</span> {country.name}
+							<span className='mr-2'>
+								<FlagIcon code={country.code.toLocaleUpperCase()} />
+							</span>{' '}
+							{country.name}
 						</li>
 					))}
 				</ul>
