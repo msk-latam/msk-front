@@ -65,6 +65,14 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 
 	let allCourses = JSONProduct;
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	let country = match ? `${match[1]}` : '';
+
+	if (country === 'mi') {
+		country = '';
+	}
+
 	// console.log(allCourses);
 
 	const fetchUser = async () => {
@@ -84,11 +92,17 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 				setLoadingUser(false);
 			} else {
 				// console.log('ejecutando else');
-				router.push('/iniciar-sesion');
+				router.push(
+					country === ''
+						? `${window.location.origin}/iniciar-sesion`
+						: `${window.location.origin}/${country}/iniciar-sesion`,
+				);
 			}
 		} catch (error) {
 			console.log(error);
-			router.push('/iniciar-sesion');
+			router.push(
+				country === '' ? `${window.location.origin}/iniciar-sesion` : `${window.location.origin}/${country}/iniciar-sesion`,
+			);
 		}
 	};
 

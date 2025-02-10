@@ -15,7 +15,8 @@ interface TiendaProps {
 	country: string | undefined;
 }
 
-const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
+const TiendaProductos: FC<TiendaProps> = ({ category }) => {
+	const country = 'ar';
 	const { state: dataState } = useContext(DataContext);
 	const { storeCourses, allStoreProfessions } = dataState;
 	const [currentItems, setCurrentItems] = useState<FetchCourseType[]>([]);

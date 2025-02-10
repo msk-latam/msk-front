@@ -19,7 +19,7 @@ const Logo: React.FC<LogoProps> = ({
 }) => {
 	return (
 		<NcLink
-			href={isOnBlog ? '/blog' : `/${country}`}
+			href={isOnBlog ? `${window.location.origin}/${country}/blog` : `${window.location.origin}/${country}`}
 			className='ttnc-logo inline-block text-primary-6000 w-[100px] '
 			target={target}
 		>

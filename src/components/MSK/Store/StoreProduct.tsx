@@ -55,7 +55,11 @@ const StoreProduct: FC<Props> = ({ product, className, hoverEffect = false, kind
 		<div className={`protfolio-course-2-wrapper ${className}`}>
 			<div className='student-course-img'>
 				<NcLink
-					href={country === '' ? `${window.location.origin}/curso/${product.slug}` : `${country}/curso/${product.slug}`}
+					href={
+						country === ''
+							? `${window.location.origin}/curso/${product.slug}`
+							: `${window.location.origin}/${country}/curso/${product.slug}`
+					}
 				>
 					<Image src={imageURL} className='transition-all' width={1000} height={1000} alt={`${product.title}`} />
 				</NcLink>

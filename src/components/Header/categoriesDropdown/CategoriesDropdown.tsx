@@ -16,8 +16,11 @@ import { cookies } from 'next/headers';
 import ssr from '@/services/ssr';
 import { getJSONByCountry } from '@/app/products';
 
-const CategoriesDropdown = ({ onClickClose, country }: any) => {
-	const JSONProduct = getJSONByCountry(country);
+const CategoriesDropdown = ({ onClickClose }: any) => {
+	const pathname = usePathname();
+	const match = pathname.match(/^\/([a-z]{2})\b/);
+	const country = match ? match[1] : '';
+	const JSONProduct = getJSONByCountry(country || 'ar');
 	const [isOpen, setIsOpen] = useState(false);
 	const [activeCategory, setActiveCategory] = useState<Specialty | null>(null);
 	const [showUpArrow, setShowUpArrow] = useState(false);
@@ -166,7 +169,11 @@ const CategoriesDropdown = ({ onClickClose, country }: any) => {
 		setIsOpen(!isOpen);
 		setActiveCategory(null);
 		onClickClose;
-		router.push(`/tienda/${formattedSlug}`);
+		router.push(
+			country === ''
+				? `${window.location.origin}/tienda/${formattedSlug}`
+				: `${window.location.origin}/${country}/tienda/${formattedSlug}`,
+		);
 	};
 
 	const handleLinkClick = () => {
@@ -349,7 +356,15 @@ const CategoriesDropdown = ({ onClickClose, country }: any) => {
 											.slice(0, 4)
 											.map((course: any) => (
 												<li key={course.id} className='mb-2 '>
-													<Link href={`/curso/${course.slug}`} onClick={handleLinkClick} className=' text-xs'>
+													<Link
+														href={
+															country === ''
+																? `${window.location.origin}/curso/${course.slug}`
+																: `${window.location.origin}/${country}/curso/${course.slug}`
+														}
+														onClick={handleLinkClick}
+														className=' text-xs'
+													>
 														<div className='flex items-center gap-4'>
 															<Image
 																src={course.thumbnail.low}
@@ -396,7 +411,11 @@ const CategoriesDropdown = ({ onClickClose, country }: any) => {
 								<li className='w-full'>
 									<Link
 										onClick={handleLinkClick}
-										href={'/tienda/?profesion=medicos&recurso=curso'}
+										href={
+											country === ''
+												? `${window.location.origin}/tienda/?profesion=medicos&recurso=curso`
+												: `${window.location.origin}/${country}/tienda/?profesion=medicos&recurso=curso`
+										}
 										className='block lg:px-4 py-1 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
 									>
 										Cursos para personal médico
@@ -405,7 +424,11 @@ const CategoriesDropdown = ({ onClickClose, country }: any) => {
 								<li className='w-full'>
 									<Link
 										onClick={handleLinkClick}
-										href={'/tienda/?profesion=otra-profesion'}
+										href={
+											country === ''
+												? `${window.location.origin}/tienda/?profesion=otra-profesion`
+												: `${window.location.origin}/${country}/tienda/?profesion=otra-profesion`
+										}
 										className='block lg:px-4 py-1 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
 									>
 										Cursos para enfermería y otras profesiones
@@ -425,7 +448,11 @@ const CategoriesDropdown = ({ onClickClose, country }: any) => {
 							<li className='w-full'>
 								<Link
 									onClick={handleLinkClick}
-									href={'/tienda/?recurso=guias-profesionales'}
+									href={
+										country === ''
+											? `${window.location.origin}/tienda/?recurso=guias-profesionales`
+											: `${window.location.origin}/${country}/tienda/?recurso=guias-profesionales`
+									}
 									className='block lg:px-4 py-1 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
 								>
 									Guías profesionales
@@ -434,7 +461,7 @@ const CategoriesDropdown = ({ onClickClose, country }: any) => {
 							<li className='w-full'>
 								<Link
 									onClick={handleLinkClick}
-									href={'/blog'}
+									href={country === '' ? `${window.location.origin}/blog` : `${window.location.origin}/${country}/blog`}
 									className='block lg:px-4 py-1 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
 								>
 									Blog

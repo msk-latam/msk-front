@@ -57,7 +57,11 @@ const MainNav2: FC = () => {
 
 	const pathName = usePathname();
 	const match = pathName.match(/^\/([a-z]{2})\b/);
-	const country = match ? `${match[1]}` : '';
+	let country = match ? `${match[1]}` : '';
+
+	if (country === 'mi') {
+		country = '';
+	}
 
 	console.log(country);
 
@@ -117,7 +121,11 @@ const MainNav2: FC = () => {
 								<>
 									<div className='hidden sm:block h-10 border-l border-neutral-300 dark:border-neutral-6000 pr-5'></div>
 									<ButtonSecondary
-										href='/iniciar-sesion'
+										href={
+											country === ''
+												? `${window.location.origin}/iniciar-sesion`
+												: `${window.location.origin}/${country}/iniciar-sesion`
+										}
 										locale={locale}
 										sizeClass='px-4 py-2 sm:px-5'
 										className='border-solid border-1 border-neutral-200 text-neutral-500'
@@ -125,7 +133,15 @@ const MainNav2: FC = () => {
 									>
 										Iniciar sesión
 									</ButtonSecondary>
-									<ButtonPrimary href={`/crear-cuenta`} sizeClass='px-4 py-2 sm:px-5' className='font-semibold'>
+									<ButtonPrimary
+										href={
+											country === ''
+												? `${window.location.origin}/crear-cuenta`
+												: `${window.location.origin}/${country}/crear-cuenta`
+										}
+										sizeClass='px-4 py-2 sm:px-5'
+										className='font-semibold'
+									>
 										Crear cuenta
 									</ButtonPrimary>
 								</>

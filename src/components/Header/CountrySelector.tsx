@@ -26,7 +26,9 @@ export default function CountrySelector({ country }: any) {
 	const [open, setOpen] = useState(false);
 	const pathname = usePathname();
 	const router = useRouter();
+	const [prevPath, setPrevPath] = useState(pathname);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
+
 	console.log(country);
 
 	useEffect(() => {
@@ -51,17 +53,46 @@ export default function CountrySelector({ country }: any) {
 		};
 	}, []);
 
+	// useEffect(() => {
+	// 	if (prevPath !== pathname) {
+	// 		console.log(pathname);
+	// 		console.log(prevPath);
+	// 		if (pathname !== '/mi-perfil/') {
+	// 			window.location.reload();
+	// 		}
+	// 		setPrevPath(pathname); // Actualiza el path anterior para evitar recargas infinitas
+	// 	}
+	// }, [pathname, prevPath]);
+
+	useEffect(() => {
+		// Extraemos el primer segmento de la URL como "país" (si está presente y tiene 2 letras)
+		const currentCountry = pathname.split('/')[1];
+		const prevCountry = prevPath.split('/')[1];
+
+		// Validamos si el segmento es un código de país válido (2 letras)
+		const isValidCountry = (country: string) => /^[a-zA-Z]{2}$/.test(country);
+
+		if (prevPath !== pathname) {
+			console.log(`Ruta actual: ${pathname}`);
+			console.log(`Ruta anterior: ${prevPath}`);
+
+			// Si el primer segmento de la URL es un código de país válido y ha cambiado
+			if (isValidCountry(currentCountry) && currentCountry !== prevCountry) {
+				console.log(`El país cambió, recargando la página`);
+				window.location.reload();
+			}
+
+			setPrevPath(pathname); // Actualiza el path anterior para evitar recargas infinitas
+		}
+	}, [pathname, prevPath]);
+
 	const handleCountryChange = (newCountry: { code: string; name: string; flag: string }) => {
-		setSelected(newCountry);
-		setOpen(false);
-
 		const currentPath = pathname.replace(/^\/[a-z]{2}(\/|$)/, '/'); // Elimina el código de país si existe
-		const newPath = newCountry.code === 'ar' ? currentPath : `/${newCountry.code}${currentPath}`;
+		const newPath = newCountry.code === '' ? currentPath : `/${newCountry.code}${currentPath}`;
 
-		router.push(newPath);
-		setTimeout(() => {
-			window.location.reload();
-		}, 1500);
+		if (pathname !== newPath) {
+			router.push(newPath);
+		}
 	};
 
 	return (

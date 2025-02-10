@@ -13,12 +13,12 @@ interface CategoryPageProps {
 }
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
-	const { category, lang } = params;
-	return generateCategoryMetadata({ category, lang });
+	const { category } = params;
+	return generateCategoryMetadata({ category, lang: 'ar' });
 }
 
 const CategoryPage: FC<CategoryPageProps> = ({ params }) => {
-	const currentCountry = params.lang || cookies().get('country')?.value;
+	const currentCountry = 'ar';
 	const { category } = params;
 
 	return (

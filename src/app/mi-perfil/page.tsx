@@ -55,8 +55,6 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	const [executionCount, setExecutionCount] = useState(0);
 	// const JSONBlog = getJSONPostByCountry(currentCountry);
 
-	const pathname = usePathname();
-
 	// Extraer el código de país del pathname
 	const countryCode = 'ar';
 
@@ -66,11 +64,21 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 
 	// console.log(allCourses);
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	let country = match ? `${match[1]}` : '';
+
+	if (country === 'mi') {
+		country = '';
+	}
+
+	console.log(country);
+
 	const fetchUser = async () => {
 		try {
 			setTotalPages(Math.ceil(allCourses.length / itemsPerPage));
 			const res = await api.getUserData();
-			// console.log('FETCH USER RES: ', res);
+			console.log('FETCH USER RES: ', res);
 			// console.log(res.message);
 			if (!res.message) {
 				setUser(res);
@@ -83,11 +91,17 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 				setLoadingUser(false);
 			} else {
 				// console.log('ejecutando else');
-				router.push('/iniciar-sesion');
+				router.push(
+					country === ''
+						? `${window.location.origin}/iniciar-sesion`
+						: `${window.location.origin}/${country}/iniciar-sesion`,
+				);
 			}
 		} catch (error) {
 			console.log(error);
-			router.push('/iniciar-sesion');
+			router.push(
+				country === '' ? `${window.location.origin}/iniciar-sesion` : `${window.location.origin}/${country}/iniciar-sesion`,
+			);
 		}
 	};
 

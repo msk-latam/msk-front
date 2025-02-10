@@ -41,9 +41,16 @@ const PageDashboard: FC<PageDashboardProps> = ({ children, className = '' }) => 
 
 	const { state } = useContext(AuthContext);
 	const router = useRouter();
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	let country = match ? `${match[1]}` : '';
+
+	if (country === 'mi') {
+		country = '';
+	}
 	useEffect(() => {
 		if (state && state.stateLoaded && !state.isAuthenticated) {
-			router.push('/');
+			router.push(`${window.location.origin}/${country}`);
 		}
 	}, [state]);
 	const subPages: DashboardPage[] = [

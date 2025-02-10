@@ -34,8 +34,12 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 				let currentCountry = await api.getCountryCode();
 				console.log(`🌍 País detectado por API: ${currentCountry}`);
 
-				const currentPathName = window.location.pathname.split('/')[1];
+				let currentPathName = window.location.pathname.split('/')[1];
 				console.log(`📂 Pathname detectado: ${currentPathName}`);
+
+				if (currentPathName === 'mi' && window.location.pathname === '/mi-perfil') {
+					currentPathName = ''; // Tratar "mi" como "ar"
+				}
 
 				if (validCountries.includes(currentPathName)) {
 					console.log(`✅ Pathname es un país válido: ${currentPathName}`);
@@ -50,16 +54,22 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 					return;
 				}
 
-				if (!validCountries.includes(currentCountry)) {
-					console.log(`❌ ${currentCountry} no es válido, asignando 'int'`);
-					currentCountry = 'int';
-				}
+				// Si el país detectado no es válido, usamos 'ar' por defecto
+				if (!validCountries.includes(currentPathName)) {
+					let newPath = `/${currentCountry}${window.location.pathname}`;
 
-				const newPath = window.location.pathname.replace(/^\/[^/]+/, `/${currentCountry}`);
-				console.log(`🔄 Posible nueva URL: ${newPath}`);
-				if (window.location.pathname !== newPath) {
-					console.log(`🚀 Redirigiendo a: ${newPath}`);
-					window.location.href = newPath;
+					// Si el país es 'ar' (cadena vacía), aseguramos que la URL tenga el hostname correcto
+					if (currentCountry === 'ar') {
+						newPath = `${window.location.origin}${window.location.pathname}`;
+					}
+
+					console.log(`🔄 Posible nueva URL: ${newPath}`);
+
+					if (window.location.href !== newPath) {
+						console.log(`🚀 Redirigiendo a: ${newPath}`);
+						window.location.href = newPath;
+						return;
+					}
 				}
 
 				dispatch({ type: 'SET_COUNTRY', payload: { country: currentCountry } });

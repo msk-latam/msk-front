@@ -21,7 +21,8 @@ interface TiendaProps {
 	country: string | undefined;
 }
 
-const Tienda: FC<TiendaProps> = ({ category, country }) => {
+const Tienda: FC<TiendaProps> = ({ category }) => {
+	const country = 'ar';
 	const { state: dataState } = useContext(DataContext);
 	const { storeCourses, allStoreProfessions } = dataState;
 	const [currentItems, setCurrentItems] = useState<FetchCourseType[]>([]);
@@ -32,7 +33,7 @@ const Tienda: FC<TiendaProps> = ({ category, country }) => {
 
 	useEffect(() => {
 		const fetchCourses = async () => {
-			const coursesData = await ssr.getAllCourses(country);
+			// const coursesData = await ssr.getAllCourses(country);
 			setCourses(JSONProduct.products);
 		};
 

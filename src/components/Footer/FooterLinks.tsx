@@ -24,10 +24,21 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 	useEffect(() => {
 		if (pathname) {
 			const pathParts = pathname.split('/');
-			const code = pathParts[1] || 'ar';
+			let code = pathParts[1] || 'ar'; // Default to 'ar' if no country is specified
+
+			// Verifica que el primer segmento sea un código de país válido
+			const isValidCountry = /^[a-zA-Z]{2}$/.test(code);
+
+			// Si el primer segmento no es un código de país válido, asigna 'ar'
+			if (!isValidCountry) {
+				code = 'ar';
+			}
+
+			console.log(`Código de país detectado: ${code}`);
 			setCountryCode(code);
 		}
 	}, [pathname]);
+
 	const [categories, setCategories] = useState<Category[]>([]);
 	const countryToLangMap = {
 		ar: 'arg',

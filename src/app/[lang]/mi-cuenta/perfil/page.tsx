@@ -4,7 +4,7 @@ import { FC, useContext, useEffect, useState } from 'react';
 import { User } from '@/data/types';
 import { AuthContext } from '@/context/user/AuthContext';
 import InputSkeleton from '@/components/Skeleton/InputSkeleton';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import ssr from '@/services/ssr';
 
 export interface PageDashboardProps {
@@ -16,13 +16,19 @@ const PageDashboard: FC<PageDashboardProps> = ({ className = '' }) => {
 	const { state, dispatch } = useContext(AuthContext);
 	const [user, setUser] = useState<User>({} as User);
 	const [isLoading, setLoading] = useState(true);
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : '';
+	console.log(country);
 
 	useEffect(() => {
 		router.prefetch('/');
 	}, []);
 
 	useEffect(() => {
-		router.prefetch('/iniciar-sesion');
+		router.prefetch(
+			country === '' ? `${window.location.origin}/iniciar-sesion` : `${window.location.origin}/${country}/iniciar-sesion`,
+		);
 	}, []);
 
 	useEffect(() => {
@@ -43,7 +49,9 @@ const PageDashboard: FC<PageDashboardProps> = ({ className = '' }) => {
 				},
 			});
 		} else {
-			router.push('/iniciar-sesion');
+			router.push(
+				country === '' ? `${window.location.origin}/iniciar-sesion` : `${window.location.origin}/${country}/iniciar-sesion`,
+			);
 		}
 		setLoading(false);
 	};
