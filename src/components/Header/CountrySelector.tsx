@@ -9,15 +9,15 @@ const countries = [
 	{ code: 'co', name: 'Colombia', flag: '🇨🇴' },
 	{ code: 'cr', name: 'Costa Rica', flag: '🇨🇷' },
 	{ code: 'ec', name: 'Ecuador', flag: '🇪🇨' },
-	{ code: 'sv', name: 'El Salvador', flag: '🇸🇻' },
+	{ code: 'es', name: 'España', flag: '🇪🇸' },
 	{ code: 'gt', name: 'Guatemala', flag: '🇬🇹' },
 	{ code: 'hn', name: 'Honduras', flag: '🇭🇳' },
 	{ code: 'mx', name: 'México', flag: '🇲🇽' },
 	{ code: 'ni', name: 'Nicaragua', flag: '🇳🇮' },
 	{ code: 'pa', name: 'Panamá', flag: '🇵🇦' },
-	{ code: 'py', name: 'Paraguay', flag: '🇵🇾' },
 	{ code: 'pe', name: 'Perú', flag: '🇵🇪' },
-	{ code: 'es', name: 'España', flag: '🇪🇸' },
+	{ code: 'py', name: 'Paraguay', flag: '🇵🇾' },
+	{ code: 'sv', name: 'El Salvador', flag: '🇸🇻' },
 	{ code: 'uy', name: 'Uruguay', flag: '🇺🇾' },
 	{ code: 've', name: 'Venezuela', flag: '🇻🇪' },
 ];
@@ -78,8 +78,11 @@ export default function CountrySelector({ country }: any) {
 			console.log(`Ruta anterior: ${prevPath}`);
 
 			// Si el primer segmento de la URL es un código de país válido y ha cambiado
-			if (isValidCountry(currentCountry) && currentCountry !== prevCountry) {
-				console.log(`El país cambió, recargando la página`);
+			if (
+				(isValidCountry(currentCountry) && currentCountry !== prevCountry) ||
+				(isValidCountry(prevCountry) && !isValidCountry(currentCountry))
+			) {
+				console.log(`🔄 El país cambió o desapareció, recargando la página`);
 				window.location.reload();
 			}
 

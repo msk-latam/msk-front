@@ -32,6 +32,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 			try {
 				setLoading(true);
 				let currentCountry = await api.getCountryCode();
+				// let currentCountry = 'es';
 				console.log(`🌍 País detectado por API: ${currentCountry}`);
 
 				let currentPathName = window.location.pathname.split('/')[1];
@@ -48,6 +49,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 						setUserCountry(currentCountry);
 						setUrlCountry(currentPathName);
 						setShowBanner(true);
+						console.log(showBanner, 'el banner');
 					}
 					dispatch({ type: 'SET_COUNTRY', payload: { country: currentPathName } });
 					setLoading(false);
