@@ -55,8 +55,6 @@ export async function generateBlogMetadata({ params }: Props) {
 			alternates: IS_PROD
 				? {
 						canonical: `${siteUrl}/${currentCountry}/blog/${postMetadata.slug}`,
-						// canonical: hreflangUrls['es-ar'],
-						// languages: hreflangUrls,
 				  }
 				: undefined,
 			robots: IS_PROD ? { index: true, follow: true } : { index: false, follow: false },
