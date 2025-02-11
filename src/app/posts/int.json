@@ -7,6 +7,129 @@
 	"total_products": 221,
 	"posts": [
 		{
+			"id": 333528,
+			"title": "Actualidad de la equidad de género en el ámbito médico",
+			"slug": "actualidad-equidad-de-genero-en-medicina",
+			"permalink": "https://ar.wp.msklatam.com/nota/actualidad-arg/actualidad-equidad-de-genero-en-medicina/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-actualidad-equidad-de-genero-en-medicina-scaled-e1739280717491.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-actualidad-equidad-de-genero-en-medicina-scaled-e1739280717491.jpg",
+				"2560",
+				"1638",
+				""
+			],
+			"excerpt": "Si bien cada vez más mujeres ejercen la medicina en Latinoamérica, la equidad de género aún enfrenta barreras estructurales. La representación en roles de liderazgo, la división del trabajo médico y los estereotipos siguen marcando diferencias en la profesión. En este artículo, explorarás estudios recientes sobre el impacto de la feminización de la medicina.",
+			"date": "Febrero 10, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 332935,
+					"title": "Tipos de agua y su impacto en la salud: ¿mitos o realidad?",
+					"slug": "tipos-de-agua-mitos-y-realidades",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/tipos-de-agua-mitos-y-realidades/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-tipos-de-agua-mitos-y-realidades-scaled-e1738157524930.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332899,
+					"title": "Actualización sobre enfermedad de Kawasaki: diagnóstico y terapias clave",
+					"slug": "actualizacion-sobre-kawasaki-diagnostico-y-terapias",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/actualizacion-sobre-kawasaki-diagnostico-y-terapias/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-actualizacion-sobre-kawasaki-diagnostico-y-terapias-scaled-e1738153748727.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332773,
+					"title": "Innovaciones y desafíos en el tratamiento del Síndrome de Moebius",
+					"slug": "innovaciones-y-desafios-en-el-sindrome-de-moebius",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/innovaciones-y-desafios-en-el-sindrome-de-moebius/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-innovaciones-y-desafios-en-el-sindrome-de-moebius-scaled-e1738070462595.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332730,
+					"title": "IA: el futuro de la educación médica",
+					"slug": "ia-el-futuro-de-la-educacion-medica",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/ia-el-futuro-de-la-educacion-medica/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-IA-el-futuro-de-la-educacion-medica-scaled-e1737729040163.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332676,
+					"title": "Cómo fortalecer tu práctica en medicina interna",
+					"slug": "fortalecer-tu-practica-en-medicina-interna",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/fortalecer-tu-practica-en-medicina-interna/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-fortalecer-tu-practica-en-medicina-interna-scaled-e1737723350451.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "The feminization of medicine in Latin America: ‘More-the-merrier’ will not beget gender equity or strengthen health systems\r\nKnaul, Felicia Marie et al. The Lancet Regional Health – Americas, Volume 8, 100201"
+				},
+				{
+					"fuente": "Villanueva, Marcia. (2023).“El alfa es el cirujano”: Estereotipos de género y prestigio en las especialidades médicas. Revista Interdisciplinaria de Estudios de Género de El Colegio de México, 9, e1054. doi: http://dx.doi.org/10.24201/reg.v9i1.1054"
+				},
+				{
+					"fuente": "Wiedmann, María & Gerometta, Rosana & González, Ignacio. (2023). La feminización de la medicina en las facultades de Latinoamérica. Revista de Investigación Científica y Tecnológica. 7. 119-130. 10.36003/Rev.investig.cient.tecnol.V7N1(2023)9."
+				}
+			],
+			"categories": [
+				{
+					"id": 37878,
+					"name": "Actualidad",
+					"slug": "actualidad-arg",
+					"description": "",
+					"link": "https://ar.wp.msklatam.com/nota/category/actualidad-arg/"
+				},
+				{
+					"id": 59971,
+					"name": "Medicina",
+					"slug": "medicina-arg",
+					"description": "",
+					"link": "https://ar.wp.msklatam.com/nota/category/medicina-arg/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": null,
+			"reading_time": "6",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
 			"id": 333151,
 			"title": "Quiz MSK: ¿cuánto sabes de auditoría médica?",
 			"slug": "quiz-msk-auditoria-medica",

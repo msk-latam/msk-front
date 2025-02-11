@@ -1,10 +1,12 @@
+import { getJSONPostByCountry } from '@/app/posts';
 import BlogSummary from '@/components/MSK/BlogSummary';
 import { TABS_BLOG } from '@/data/MSK/blog';
 import ssr from '@/services/ssr';
 import React from 'react';
 
 const BlogArchivo = async () => {
-	const allPosts = await ssr.getPosts();
+	// const allPosts = await ssr.getPosts();
+	const allPosts = getJSONPostByCountry('ar');
 	return (
 		<section id='articulos' className='py-8'>
 			<h2 className='!font-raleway text-3xl font-medium text-[#392C35] mb-1'>Artículos</h2>
@@ -12,7 +14,15 @@ const BlogArchivo = async () => {
 				Encuentra aquí la información y los testimonios más importantes
 			</p>
 
-			<BlogSummary posts={allPosts} tabs={TABS_BLOG} className='py-12' desc='' heading='' showTitle forSingleNote={false} />
+			<BlogSummary
+				posts={allPosts.posts}
+				tabs={TABS_BLOG}
+				className='py-12'
+				desc=''
+				heading=''
+				showTitle
+				forSingleNote={false}
+			/>
 		</section>
 	);
 };
