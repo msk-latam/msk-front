@@ -56,11 +56,11 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 
 				// Si el país detectado no es válido, usamos 'ar' por defecto
 				if (!validCountries.includes(currentPathName)) {
-					let newPath = `/${currentCountry}${window.location.pathname}`;
+					let newPath = `/${currentCountry}${window.location.pathname}${window.location.search}`;
 
 					// Si el país es 'ar' (cadena vacía), aseguramos que la URL tenga el hostname correcto
 					if (currentCountry === 'ar') {
-						newPath = `${window.location.origin}${window.location.pathname}`;
+						newPath = `${window.location.origin}${window.location.pathname}${window.location.search}`;
 					}
 
 					// console.log(`🔄 Posible nueva URL: ${newPath}`);

@@ -8,7 +8,7 @@ import { CountryContext } from '@/context/country/CountryContext';
 import { DataContext } from '@/context/data/DataContext';
 import NcLink from '../NcLink/NcLink';
 import api from '@/services/api';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import ShowErrorMessage from '@/components/ShowErrorMessage';
 import { useYupValidation } from '@/hooks/useYupValidation';
@@ -184,17 +184,13 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
 		},
 	});
 
-	const requiredFormFields = [
-		'First_Name',
-		'Last_Name',
-		'Email',
-		'Profesion',
-		'Temas_de_interes',
-		'Terms_And_Conditions2',
-	];
+	const requiredFormFields = ['First_Name', 'Last_Name', 'Email', 'Profesion', 'Temas_de_interes', 'Terms_And_Conditions2'];
 
-	const isSubmitDisabled =
-		!formik.dirty || !isFormValid(requiredFormFields, formik.values, formik.errors, formik.touched);
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : '';
+
+	const isSubmitDisabled = !formik.dirty || !isFormValid(requiredFormFields, formik.values, formik.errors, formik.touched);
 	return (
 		<FormikProvider value={formik}>
 			<Form onSubmit={formik.handleSubmit} action='/leads' className='' autoComplete='off' ref={formRef}>
@@ -362,7 +358,15 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
 							/>
 							<label>
 								Acepto las{' '}
-								<NcLink href='/politica-de-privacidad' target='_blank' className='text-primary'>
+								<NcLink
+									href={
+										country === ''
+											? `${window.location.origin}/politica-de-privacidad`
+											: `${window.location.origin}/${country}/politica-de-privacidad`
+									}
+									target='_blank'
+									className='text-primary'
+								>
 									politicas de privacidad
 								</NcLink>
 							</label>
@@ -378,13 +382,7 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
 						>
 							<div className='flex center gap-2 px-2 text-sm my-auto'>
 								Suscribirme
-								<Image
-									width={15}
-									height={15}
-									alt='suscribe icon'
-									src='/images/icons/plane.svg'
-									className='subscribe-icon'
-								/>
+								<Image width={15} height={15} alt='suscribe icon' src='/images/icons/plane.svg' className='subscribe-icon' />
 							</div>
 						</button>
 					</div>

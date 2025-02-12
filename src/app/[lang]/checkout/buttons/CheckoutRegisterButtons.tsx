@@ -1,3 +1,4 @@
+import { usePathname } from 'next/navigation';
 import React from 'react';
 
 interface CheckoutButtonsProps {
@@ -21,6 +22,9 @@ const CheckoutRegisterButtons: React.FC<CheckoutButtonsProps> = ({
 	isFormValid,
 	loading,
 }) => {
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : '';
 	return (
 		<div className='flex flex-col sm:flex-row items-center sm:justify-center space-y-4 sm:space-y-0 sm:gap-4 my-6'>
 			<div className='flex items-center'>
@@ -35,7 +39,11 @@ const CheckoutRegisterButtons: React.FC<CheckoutButtonsProps> = ({
 				<label htmlFor='privacyPolicy' className='ml-2 text-sm font-medium text-gray-700'>
 					Acepto las{' '}
 					<a
-						href='/politica-de-privacidad/'
+						href={
+							country === ''
+								? `${window.location.origin}/politica-de-privacidad`
+								: `${window.location.origin}/${country}/politica-de-privacidad`
+						}
 						target='_blank'
 						className='text-[#9200AD] underline hover:no-underline focus:outline-none focus:ring-1 focus:ring-[#9200AD]'
 					>

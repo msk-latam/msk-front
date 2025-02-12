@@ -112,6 +112,10 @@ const SearchProducts = () => {
 
 	// console.log(products);
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : '';
+
 	return (
 		<div className='search-products lg:w-[20vw]'>
 			<div className='relative'>
@@ -138,7 +142,11 @@ const SearchProducts = () => {
 					{products
 						.map((product, index) => (
 							<NcLink
-								href={`/${isOnBlog ? 'blog' : 'curso'}/${product.slug}`}
+								href={
+									country === ''
+										? `${window.location.origin}/${isOnBlog ? 'blog' : 'curso'}/${product.slug}`
+										: `${window.location.origin}/${country}/${isOnBlog ? 'blog' : 'curso'}/${product.slug}`
+								}
 								key={product.id}
 								className='product-item font-medium'
 								onClick={() => clearInputValue()}

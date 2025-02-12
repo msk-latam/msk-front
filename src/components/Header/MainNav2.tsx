@@ -145,7 +145,7 @@ const MainNav2: FC = () => {
 								</>
 							)}
 						</div>
-						<CountrySelector country={country} />
+						{/* <CountrySelector country={country} /> */}
 						<div className='flex items-center space-x-4 xl:hidden'>
 							<NavigationUser />
 							<MenuBar />

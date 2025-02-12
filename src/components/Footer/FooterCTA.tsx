@@ -3,6 +3,7 @@ import NcLink from '../NcLink/NcLink';
 import { CountryContext } from '@/context/country/CountryContext';
 import NcImage from '../NcImage/NcImage';
 import { usePathname } from 'next/navigation';
+import CountrySelector from '../Header/CountrySelector';
 
 const FooterCTA = () => {
 	const { countryState } = useContext(CountryContext);
@@ -101,6 +102,7 @@ const FooterCTA = () => {
 							<p className='lg:w-full mb-1'>Una propuesta moderna que desafía a expandir las metas profesionales</p>
 							<p className='mb-8'>© {currentYear} • Medical&Scientific Knowledge S.L.</p>
 						</div>
+						<CountrySelector country={country} />
 						<div className='footer-icon'>
 							<a href='https://www.facebook.com/msk.online.learning' target='_blank' rel='noopener noreferrer'>
 								<NcImage src={'/images/icons/fb.svg'} alt='' width='10' height='10' className='object-fill' />

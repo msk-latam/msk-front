@@ -8,7 +8,7 @@ import { ErrorMessage, Field, Form, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { DataContext } from '@/context/data/DataContext';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 import { JsonIdentificationsMapping } from '@/data/types';
 import { AuthContext } from '@/context/user/AuthContext';
 import useSingleProduct from '@/hooks/useSingleProduct';
@@ -243,6 +243,10 @@ const PageTrial: FC<PageTrialProps> = ({ className = '' }) => {
 		}
 	}, []);
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : '';
+
 	return (
 		<div className={`nc-PageSignUp ${className} animate-fade-down`} data-nc-id='PageSignUp'>
 			<LayoutPage
@@ -315,12 +319,7 @@ const PageTrial: FC<PageTrialProps> = ({ className = '' }) => {
 									</div>
 								</div>
 
-								<InputField
-									label='Identificacion'
-									type='text'
-									name='identification'
-									placeholder='Ingresar identificacion'
-								/>
+								<InputField label='Identificacion' type='text' name='identification' placeholder='Ingresar identificacion' />
 
 								<div className='col-xl-6 col-span-2 md:col-span-1'>
 									<div className='form-select-std'>
@@ -435,7 +434,15 @@ const PageTrial: FC<PageTrialProps> = ({ className = '' }) => {
 											/>
 											<label>
 												Acepto las{' '}
-												<Link href='/politica-de-privacidad' target='_blank' className='text-primary'>
+												<Link
+													href={
+														country === ''
+															? `${window.location.origin}/terminos-y-condiciones/#trial`
+															: `${window.location.origin}/${country}/terminos-y-condiciones/#trial`
+													}
+													target='_blank'
+													className='text-primary'
+												>
 													politicas de privacidad
 												</Link>
 											</label>
@@ -454,7 +461,11 @@ const PageTrial: FC<PageTrialProps> = ({ className = '' }) => {
 									{error && <ShowErrorMessage text={error} visible={error !== ''} />}
 									<div className='mx-auto mt-2'>
 										<Link
-											href='/terminos-y-condiciones/#trial'
+											href={
+												country === ''
+													? `${window.location.origin}/terminos-y-condiciones/#trial`
+													: `${window.location.origin}/${country}/terminos-y-condiciones/#trial`
+											}
 											target='_blank'
 											className='text-primary hover:text-primary underline'
 										>

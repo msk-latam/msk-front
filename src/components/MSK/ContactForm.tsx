@@ -305,6 +305,9 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 
 	const isSubmitDisabled = !formik.dirty || !isFormValid(requiredFormFields, formik.values, formik.errors, formik.touched);
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : '';
 	return (
 		<>
 			<div className='col-span-3 ' id='contactanos'>
@@ -516,7 +519,15 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 														/>
 														<label>
 															Acepto las{' '}
-															<NcLink href='/politica-de-privacidad' target='_blank' className='text-primary underline'>
+															<NcLink
+																href={
+																	country === ''
+																		? `${window.location.origin}/politica-de-privacidad`
+																		: `${window.location.origin}/${country}/politica-de-privacidad`
+																}
+																target='_blank'
+																className='text-primary underline'
+															>
 																condiciones de privacidad
 															</NcLink>
 														</label>

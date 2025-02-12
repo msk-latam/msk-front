@@ -23,7 +23,8 @@ interface DashboardLocationState {
 	'/cerrar-sesion'?: {};
 }
 interface DashboardPage {
-	sPath: keyof DashboardLocationState;
+	sPath: any;
+	// sPath: keyof DashboardLocationState;
 	exact?: boolean;
 	// component: ComponentType<Object>;
 	icon: string;
@@ -35,14 +36,11 @@ const PageDashboard: FC<PageDashboardProps> = ({ children, className = '' }) => 
 	const handleModalLogout = () => {
 		setIsModalOpen(!isModalOpen);
 	};
-	useEffect(() => {
-		router.prefetch('/');
-	}, []);
 
-	const { state } = useContext(AuthContext);
 	const router = useRouter();
-	const pathName = usePathname();
-	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const { state } = useContext(AuthContext);
+	const pathname = usePathname();
+	const match = pathname.match(/^\/([a-z]{2})\b/);
 	let country = match ? `${match[1]}` : '';
 
 	if (country === 'mi') {
@@ -55,23 +53,35 @@ const PageDashboard: FC<PageDashboardProps> = ({ children, className = '' }) => 
 	}, [state]);
 	const subPages: DashboardPage[] = [
 		{
-			sPath: '/inicio',
+			sPath:
+				country === ''
+					? `${window.location.origin}/mi-cuenta/inicio`
+					: `${window.location.origin}/${country}/mi-cuenta/inicio`,
 			exact: true,
 			icon: 'home',
 			pageName: 'Inicio',
 		},
 		{
-			sPath: '/cursos',
+			sPath:
+				country === ''
+					? `${window.location.origin}/mi-cuenta/cursos`
+					: `${window.location.origin}/${country}/mi-cuenta/cursos`,
 			icon: 'file',
 			pageName: 'Mis cursos',
 		},
 		{
-			sPath: '/perfil',
+			sPath:
+				country === ''
+					? `${window.location.origin}/mi-cuenta/perfil`
+					: `${window.location.origin}/${country}/mi-cuenta/perfil`,
 			icon: 'personal-data',
 			pageName: 'Datos personales',
 		},
 		{
-			sPath: '/facturas',
+			sPath:
+				country === ''
+					? `${window.location.origin}/mi-cuenta/facturas`
+					: `${window.location.origin}/${country}/mi-cuenta/facturas`,
 			icon: 'factura',
 			pageName: 'Mis Facturas',
 		},
@@ -91,7 +101,6 @@ const PageDashboard: FC<PageDashboardProps> = ({ children, className = '' }) => 
 		'flex px-6 py-2.5 rounded-lg hover:text-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-100 account-menu-item';
 	const activeClassName =
 		'bg-red-400 dark:bg-neutral-800 text-neutral-100 dark:text-neutral-100 invert-image active-account-menu-item';
-	const pathname = usePathname();
 
 	return (
 		<div className={`nc-PageDashboard animate-fade-down ${className}`} data-nc-id='PageDashboard'>
@@ -111,7 +120,7 @@ const PageDashboard: FC<PageDashboardProps> = ({ children, className = '' }) => 
 												<NcLink
 													className={`${pathname.includes(`/mi-cuenta${sPath}`) && activeClassName} ${navClassName}`}
 													colorClass={pathname.includes(`/mi-cuenta${sPath}`) ? 'text-white' : 'text-white-900'}
-													href={`/mi-cuenta${sPath}`}
+													href={`${sPath}`}
 												>
 													<Image
 														src={`/images/icons/${icon}.svg`}

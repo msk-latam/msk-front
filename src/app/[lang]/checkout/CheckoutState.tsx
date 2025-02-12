@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCheckout } from './CheckoutContext';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const CheckoutState: React.FC = () => {
 	const router = useRouter();
@@ -14,6 +14,9 @@ const CheckoutState: React.FC = () => {
 			setSubStep(1);
 		}
 	};
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : '';
 
 	const paymentStatusCard = {
 		approved: {
@@ -23,7 +26,11 @@ const CheckoutState: React.FC = () => {
 			buttons: [
 				{
 					label: 'Ir a mis cursos',
-					action: () => window.open('/mi-perfil', '_blank'),
+					action: () =>
+						window.open(
+							country === '' ? `${window.location.origin}/mi-perfil` : `${window.location.origin}/${country}/mi-perfil`,
+							'_blank',
+						),
 					color: '#9200AD',
 				},
 			],
@@ -35,7 +42,7 @@ const CheckoutState: React.FC = () => {
 			buttons: [
 				{
 					label: 'Seguir navegando',
-					action: () => router.push('/'),
+					action: () => router.push(country === '' ? `${window.location.origin}` : `${window.location.origin}/${country}`),
 					color: '#9200AD',
 				},
 			],

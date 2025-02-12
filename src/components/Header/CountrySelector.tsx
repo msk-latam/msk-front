@@ -90,7 +90,7 @@ export default function CountrySelector({ country }: any) {
 
 	const handleCountryChange = (newCountry: { code: string; name: string; flag: string }) => {
 		const currentPath = pathname.replace(/^\/[a-z]{2}(\/|$)/, '/'); // Elimina el código de país si existe
-		const newPath = newCountry.code === '' ? currentPath : `/${newCountry.code}${currentPath}`;
+		const newPath = newCountry.code === '' ? currentPath : `/${newCountry.code}${currentPath}${window.location.search}`;
 
 		if (pathname !== newPath) {
 			router.push(newPath);
@@ -98,10 +98,10 @@ export default function CountrySelector({ country }: any) {
 	};
 
 	return (
-		<div className='relative w-52 ml-6' ref={dropdownRef}>
+		<div className='relative w-52 mb-8' ref={dropdownRef}>
 			<button
 				onClick={() => setOpen(!open)}
-				className='w-full bg-white px-6 py-2 rounded-lg flex items-center justify-start gap-2 '
+				className='w-full bg-[#1A1F27]  py-2 rounded-lg flex items-center justify-start gap-2 text-white '
 			>
 				<span className='flex'>
 					<FlagIcon code={selected.code.toLocaleUpperCase()} />
@@ -110,7 +110,7 @@ export default function CountrySelector({ country }: any) {
 			</button>
 
 			{open && (
-				<ul className='absolute left-0 w-full bg-white border rounded-lg shadow-md mt-2 z-10 p-4 max-h-80 overflow-y-auto scrollbar-thumb-[#6474A6] scrollbar-thin scrollbar-track-transparent'>
+				<ul className='absolute left-28 bottom-4 w-full bg-[#1A1F27] border rounded-lg shadow-md mt-2 z-10 p-4 max-h-80 overflow-y-auto scrollbar-thumb-[#6474A6] scrollbar-thin scrollbar-track-transparent'>
 					{countries.map((country) => (
 						<li
 							key={country.code}
@@ -119,7 +119,7 @@ export default function CountrySelector({ country }: any) {
 								setOpen(false);
 								handleCountryChange(country);
 							}}
-							className='p-2 hover:bg-gray-100 flex items-center cursor-pointer rounded-lg'
+							className='p-2 hover:bg-gray-700 flex items-center cursor-pointer rounded-lg text-white'
 						>
 							<span className='mr-2'>
 								<FlagIcon code={country.code.toLocaleUpperCase()} />

@@ -15,7 +15,7 @@ import * as Yup from 'yup';
 import { countries } from '@/data/countries';
 import { DataContext } from '@/context/data/DataContext';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { utmInitialState, utmReducer } from '@/context/utm/UTMReducer';
 import { JsonIdentificationsMapping } from '@/data/types';
 import countryIdentificationsMapping from '@/data/jsons/__countryIdentifications.json';
@@ -25,6 +25,9 @@ export interface PageContactProps {
 	className?: string;
 }
 const PageContact: FC<PageContactProps> = ({ className = '' }) => {
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : '';
 	const {
 		state: {
 			allSpecialties: specialties,
@@ -377,7 +380,11 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
 								<div className='contact-checkbox signup-checkbox'>
 									<ErrorMessage name='Terms_And_Conditions' component='span' className='error' />
 									<Link
-										href='/terminos-y-condiciones/#trial'
+										href={
+											country === ''
+												? `${window.location.origin}/terminos-y-condiciones/#trial`
+												: `${window.location.origin}/${country}/terminos-y-condiciones/#trial`
+										}
 										target='_blank'
 										className='text-primary hover:text-primary underline'
 									>
@@ -392,7 +399,15 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
 										/>
 										<label>
 											Acepto las{' '}
-											<Link href='/politica-de-privacidad' target='_blank' className='text-primary'>
+											<Link
+												href={
+													country === ''
+														? `${window.location.origin}/politica-de-privacidad`
+														: `${window.location.origin}/${country}/politica-de-privacidad`
+												}
+												target='_blank'
+												className='text-primary'
+											>
 												politicas de privacidad
 											</Link>
 										</label>

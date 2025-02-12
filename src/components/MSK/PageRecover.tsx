@@ -1,6 +1,6 @@
 'use client';
 import ssr from '@/services/ssr';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { FC, SetStateAction, useState } from 'react';
 import LayoutPage from './LayoutPage';
 import Input from '../Input/Input';
@@ -17,6 +17,9 @@ interface Recover {
 }
 
 const PageForgotPass: FC<PageForgotPassProps> = ({ className = '' }) => {
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : '';
 	const [email, setEmail] = useState<string>('');
 	const history = useRouter();
 	const [error, setError] = useState('');
@@ -40,7 +43,11 @@ const PageForgotPass: FC<PageForgotPassProps> = ({ className = '' }) => {
 
 		if (res?.status == 200) {
 			setTimeout(() => {
-				history.push('/correo-enviado');
+				history.push(
+					country === ''
+						? `${window.location.origin}/correo-enviado`
+						: `${window.location.origin}/${country}/correo-enviado`,
+				);
 			}, 1500);
 		} else {
 			console.error('Error:', { res });
@@ -75,7 +82,14 @@ const PageForgotPass: FC<PageForgotPassProps> = ({ className = '' }) => {
 					{/* ==== */}
 					<span className='block text-center text-neutral-700 dark:text-neutral-300'>
 						Volver a {` `}
-						<NcLink href='/iniciar-sesion' className='underline'>
+						<NcLink
+							href={
+								country === ''
+									? `${window.location.origin}/iniciar-sesion`
+									: `${window.location.origin}/${country}/iniciar-sesion`
+							}
+							className='underline'
+						>
 							Iniciar sesión
 						</NcLink>
 					</span>

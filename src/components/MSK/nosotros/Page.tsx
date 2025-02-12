@@ -14,6 +14,7 @@ import LoadingText from '../Loader/Text';
 import SectionSliderPosts from '@/components/Sections/SectionSliderPosts';
 import Link from 'next/link';
 import InfoPageHeader from '@/components/InfoPageHeader/InfoPageHeader';
+import { usePathname } from 'next/navigation';
 
 const SINGLE: SinglePageType = {
 	id: 'eae0212192f63287e0c212',
@@ -93,6 +94,10 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({ className = ''
 		return cleanedText;
 	}
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : '';
+
 	return (
 		<>
 			<InfoPageHeader pageData={SINGLE} />
@@ -120,7 +125,7 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({ className = ''
 								continua. Puedes conocer más sobre nuestra misión{' '}
 								<Link
 									className='text-[#9200AD] underline text-base sm:text-lg lg:text-xl'
-									href='/mision'
+									href={country === '' ? `${window.location.origin}/mision` : `${window.location.origin}/${country}/mision`}
 									target='_blank'
 									rel='noopener noreferrer'
 								>

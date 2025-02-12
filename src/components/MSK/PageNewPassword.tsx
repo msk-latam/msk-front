@@ -3,7 +3,7 @@ import React, { FC, useContext, useEffect, useState } from 'react';
 import LayoutPage from '@/components/MSK/LayoutPage';
 import Input from '@/components/Input/Input';
 import ButtonPrimary from '@/components/Button/ButtonPrimary';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import ssr from '@/services/ssr';
 import { AuthContext } from '@/context/user/AuthContext';
 
@@ -23,6 +23,9 @@ const PageNewPassword: FC<PageNewPasswordProps> = ({ className = '' }) => {
 	const [password, setPassword] = useState<string>('');
 	const [error, setError] = useState('');
 	const [onRequest, setOnRequest] = useState(false);
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : '';
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -44,7 +47,11 @@ const PageNewPassword: FC<PageNewPasswordProps> = ({ className = '' }) => {
 		if (res.original.data[0].code === 'SUCCESS') {
 			// console.log(data);
 			setTimeout(() => {
-				router.push('/gracias?origen=new-password');
+				router.push(
+					country === ''
+						? `${window.location.origin}/gracias?origen=new-password`
+						: `${window.location.origin}/${country}/gracias?origen=new-password`,
+				);
 			}, 1500);
 		} else {
 			console.log('Error:', res);
