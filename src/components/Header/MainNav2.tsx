@@ -63,8 +63,6 @@ const MainNav2: FC = () => {
 		country = '';
 	}
 
-	console.log(country);
-
 	useEffect(() => {
 		setIsOnBlog(pathName.includes('/blog'));
 		setInitialLoad(true);

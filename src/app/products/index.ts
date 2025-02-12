@@ -40,7 +40,6 @@ const productsByCountry: Record<string, any> = {
 
 export const getJSONByCountry = (country: string) => {
 	if (country === 'mi') {
-		console.log('Detectado "mi", usando "ar"');
 		country = 'ar';
 	}
 	const data = productsByCountry[country?.toLowerCase() || 'int'];

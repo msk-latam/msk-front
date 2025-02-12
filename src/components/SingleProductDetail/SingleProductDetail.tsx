@@ -29,8 +29,6 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 		loadingBestSellers,
 	} = useContext(DataContext);
 
-	console.log(allBestSellers);
-
 	const productsGoals = (htmlString: string) => {
 		const paragraphs = htmlString.split('</p>\n<p>');
 		const listOfGoals = paragraphs.map((paragraph) => {
@@ -43,7 +41,6 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 	};
 
 	let { isEbook, imagen, title } = productDetails(product);
-	console.log(product);
 	isEbook = product.total_price == '0' && product.cantidad_modulos == 0 ? true : false;
 
 	product.ficha.description =
@@ -55,10 +52,8 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 
 	const dataRef = courseReviewRefs[slug] ? courseReviewRefs[slug] : courseReviewRefs['general'];
 
-	console.log(dataRef);
-
 	useEffect(() => {
-		console.log('cargando embed');
+		// console.log('cargando embed');
 		if (!document.getElementById('EmbedSocialHashtagScript')) {
 			const script = document.createElement('script');
 			script.id = 'EmbedSocialHashtagScript';
@@ -71,8 +66,6 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 		//   document.body.removeChild(script);
 		// };
 	}, [dataRef]);
-
-	console.log(product);
 
 	// @ts-ignore
 	return (

@@ -37,7 +37,6 @@ const TABS = [
 const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	const { state: dataState, loadingBestSellers } = useContext(DataContext);
 	// console.log(dataState);
-	console.log('test');
 
 	const router = useRouter();
 	const {

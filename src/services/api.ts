@@ -242,7 +242,7 @@ class ApiService {
 
 				const data = await response.json();
 
-				console.log(data);
+				// console.log(data);
 
 				// Guardar datos en `localStorage` con un nuevo timestamp
 				if (!isServer) {

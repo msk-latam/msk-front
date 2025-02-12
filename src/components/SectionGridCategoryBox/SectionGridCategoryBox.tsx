@@ -33,7 +33,6 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
 		setIsModalOpen(!isModalOpen);
 	};
 	let CardComponentName = CardCategory2;
-	console.log(categoryCardType);
 	switch (categoryCardType) {
 		case 'card1':
 			CardComponentName = CardCategory1;

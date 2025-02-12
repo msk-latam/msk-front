@@ -14,8 +14,6 @@ export const useAuth = () => {
 		country = '';
 	}
 
-	console.log(country, 'authprovider');
-
 	const fetchProfile = useCallback(async () => {
 		try {
 			const res = await ssr.getUserData();

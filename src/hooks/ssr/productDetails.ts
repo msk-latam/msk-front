@@ -1,7 +1,7 @@
 import { FetchSingleProduct } from '@/data/types';
 
 const productDetails = (product: FetchSingleProduct) => {
-	console.log(product);
+	// console.log(product);
 	const details = product.details || {};
 	const isEbookProduct = Object.values(details).some((detail) => detail.value.includes('Ebook'));
 	const { lista_de_cedentes, authors } = product;

@@ -17,7 +17,6 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 		// country: Cookies.get('NEXT_LOCALE') || 'int',
 		country: '',
 	};
-	console.log(initialState); //initial state esta vacio, aun asi redirije a argentina ???
 
 	const [countryState, dispatch] = useReducer(countryReducer, initialState);
 	const [loading, setLoading] = useState(true);
@@ -33,23 +32,22 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 				setLoading(true);
 				let currentCountry = await api.getCountryCode();
 				// let currentCountry = 'es';
-				console.log(`🌍 País detectado por API: ${currentCountry}`);
+				// console.log(`🌍 País detectado por API: ${currentCountry}`);
 
 				let currentPathName = window.location.pathname.split('/')[1];
-				console.log(`📂 Pathname detectado: ${currentPathName}`);
+				// console.log(`📂 Pathname detectado: ${currentPathName}`);
 
 				if (currentPathName === 'mi' && window.location.pathname === '/mi-perfil') {
 					currentPathName = ''; // Tratar "mi" como "ar"
 				}
 
 				if (validCountries.includes(currentPathName)) {
-					console.log(`✅ Pathname es un país válido: ${currentPathName}`);
+					// console.log(`✅ Pathname es un país válido: ${currentPathName}`);
 					if (currentCountry !== currentPathName) {
-						console.log(`⚠️ Usuario en ${currentCountry}, viendo ${currentPathName}`);
+						// console.log(`⚠️ Usuario en ${currentCountry}, viendo ${currentPathName}`);
 						setUserCountry(currentCountry);
 						setUrlCountry(currentPathName);
 						setShowBanner(true);
-						console.log(showBanner, 'el banner');
 					}
 					dispatch({ type: 'SET_COUNTRY', payload: { country: currentPathName } });
 					setLoading(false);
@@ -65,10 +63,10 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 						newPath = `${window.location.origin}${window.location.pathname}`;
 					}
 
-					console.log(`🔄 Posible nueva URL: ${newPath}`);
+					// console.log(`🔄 Posible nueva URL: ${newPath}`);
 
 					if (window.location.href !== newPath) {
-						console.log(`🚀 Redirigiendo a: ${newPath}`);
+						// console.log(`🚀 Redirigiendo a: ${newPath}`);
 						window.location.href = newPath;
 						return;
 					}

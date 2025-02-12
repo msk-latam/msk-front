@@ -34,7 +34,6 @@ const PageArchive: FC<{ params: { lang: string } }> = async ({ params }) => {
 		// const fetchedPosts = await ssr.getPosts(currentCountry);
 		const fetchedPosts = getJSONPostByCountry(currentCountry);
 		setAllPosts(fetchedPosts.posts);
-		console.log(fetchedPosts);
 	}
 	const posts = getAllPosts();
 	const filteredPosts = posts.filter((post) => {

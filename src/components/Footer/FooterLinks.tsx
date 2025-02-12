@@ -34,7 +34,6 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 				code = 'ar';
 			}
 
-			console.log(`Código de país detectado: ${code}`);
 			setCountryCode(code);
 		}
 	}, [pathname]);

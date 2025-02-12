@@ -32,8 +32,6 @@ const signOutContent: FC<Props> = ({ setShow, onClose }) => {
 		country = '';
 	}
 
-	console.log(country);
-
 	const handleLogout = async () => {
 		setLoading(true);
 		try {

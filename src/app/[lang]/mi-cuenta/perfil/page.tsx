@@ -19,7 +19,6 @@ const PageDashboard: FC<PageDashboardProps> = ({ className = '' }) => {
 	const pathName = usePathname();
 	const match = pathName.match(/^\/([a-z]{2})\b/);
 	const country = match ? `${match[1]}` : '';
-	console.log(country);
 
 	useEffect(() => {
 		router.prefetch('/');

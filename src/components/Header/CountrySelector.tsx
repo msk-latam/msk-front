@@ -30,8 +30,6 @@ export default function CountrySelector({ country }: any) {
 	const [prevPath, setPrevPath] = useState(pathname);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-	console.log(country);
-
 	useEffect(() => {
 		if (country) {
 			const matchedCountry = countries.find((c) => c.code === country);
@@ -74,15 +72,15 @@ export default function CountrySelector({ country }: any) {
 		const isValidCountry = (country: string) => /^[a-zA-Z]{2}$/.test(country);
 
 		if (prevPath !== pathname) {
-			console.log(`Ruta actual: ${pathname}`);
-			console.log(`Ruta anterior: ${prevPath}`);
+			// console.log(`Ruta actual: ${pathname}`);
+			// console.log(`Ruta anterior: ${prevPath}`);
 
 			// Si el primer segmento de la URL es un código de país válido y ha cambiado
 			if (
 				(isValidCountry(currentCountry) && currentCountry !== prevCountry) ||
 				(isValidCountry(prevCountry) && !isValidCountry(currentCountry))
 			) {
-				console.log(`🔄 El país cambió o desapareció, recargando la página`);
+				// console.log(`🔄 El país cambió o desapareció, recargando la página`);
 				window.location.reload();
 			}
 

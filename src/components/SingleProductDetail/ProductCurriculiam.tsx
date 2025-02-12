@@ -53,10 +53,6 @@ const ProductCurriculiam: FC<Props> = ({ topics, hours, link, slug }) => {
 	};
 
 	const updateFormSent = async (value: boolean, body: any) => {
-		console.log(value);
-		console.log(body);
-		console.log(link);
-		console.log(slug);
 		try {
 			if (link && slug) await api.temarioDownload(body, link, slug);
 			setIsFormSent(value);

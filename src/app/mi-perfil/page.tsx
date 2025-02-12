@@ -72,13 +72,11 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 		country = '';
 	}
 
-	console.log(country);
-
 	const fetchUser = async () => {
 		try {
 			setTotalPages(Math.ceil(allCourses.length / itemsPerPage));
 			const res = await api.getUserData();
-			console.log('FETCH USER RES: ', res);
+			// console.log('FETCH USER RES: ', res);
 			// console.log(res.message);
 			if (!res.message) {
 				setUser(res);
