@@ -9,6 +9,18 @@ const nextConfig = {
 				destination: '/:lang/nosotros', // Redirige a la misma subruta del país
 				permanent: true, // Redirección permanente (código 301)
 			},
+			{
+				source: '/:lang/blog2',
+				has: [
+					{
+						type: 'host',
+						value: 'msklatam.com',
+						// value: 'localhost',
+					},
+				],
+				destination: '/',
+				permanent: true,
+			},
 		];
 	},
 	async headers() {
