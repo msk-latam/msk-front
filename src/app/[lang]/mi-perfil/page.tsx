@@ -149,7 +149,10 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 			name: 'Mis Cursos',
 			description: 'Controla todo lo relacionado\n' + 'con tus capacitaciones',
 			age: '',
-			href: '/mi-cuenta/cursos',
+			href:
+				country === ''
+					? `${window.location.origin}/mi-cuenta/cursos`
+					: `${window.location.origin}/${country}/mi-cuenta/cursos`,
 		},
 		{
 			name: 'Centro de ayuda',
@@ -161,7 +164,10 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 			name: 'Configurar mi cuenta',
 			description: 'Controlar todo lo referido\n' + 'a tu perfil personal',
 			image: '',
-			href: '/mi-cuenta/perfil',
+			href:
+				country === ''
+					? `${window.location.origin}/mi-cuenta/perfil`
+					: `${window.location.origin}/${country}/mi-cuenta/perfil`,
 		},
 	];
 

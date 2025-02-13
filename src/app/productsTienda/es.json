@@ -1624,11 +1624,11 @@
 			"featured_product_text": "<p>Completa el formulario para descargar automáticamente el material</p>\n",
 			"is_test_product": false,
 			"title": "Clasificación de las anemias",
-			"image": "",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2021/07/foto-primaria-1.jpg",
 			"thumbnail": {
-				"high": "",
-				"medium": "",
-				"low": ""
+				"high": "https://wp.msklatam.com/wp-content/uploads/2021/07/foto-secundaria-1.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2021/07/foto-secundaria-1.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2021/07/foto-secundaria-1-150x150.jpg"
 			},
 			"categories": [
 				{
@@ -5711,11 +5711,11 @@
 			"featured_product_text": "",
 			"is_test_product": false,
 			"title": "Disfagia y aspiración pulmonar crónica en pediatría",
-			"image": "",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2021/02/foto-primaria-4.jpg",
 			"thumbnail": {
-				"high": "",
-				"medium": "",
-				"low": ""
+				"high": "https://wp.msklatam.com/wp-content/uploads/2021/02/foto-secundaria-5.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2021/02/foto-secundaria-5.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2021/02/foto-secundaria-5-150x150.jpg"
 			},
 			"categories": [
 				{
@@ -9125,11 +9125,11 @@
 			"featured_product_text": "",
 			"is_test_product": false,
 			"title": "Migrañas, cefaleas y algias faciales",
-			"image": "",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2021/06/foto-primaria-3.jpg",
 			"thumbnail": {
-				"high": "",
-				"medium": "",
-				"low": ""
+				"high": "https://wp.msklatam.com/wp-content/uploads/2021/06/foto-secundaria-3.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2021/06/foto-secundaria-3.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2021/06/foto-secundaria-3-150x150.jpg"
 			},
 			"categories": [
 				{
@@ -11268,11 +11268,11 @@
 			"featured_product_text": "",
 			"is_test_product": false,
 			"title": "Tromboembolismo pulmonar y COVID-19",
-			"image": "",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2021/04/imagen-primaria.jpg",
 			"thumbnail": {
-				"high": "",
-				"medium": "",
-				"low": ""
+				"high": "https://wp.msklatam.com/wp-content/uploads/2021/04/imagen-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2021/04/imagen-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2021/04/imagen-secundaria-150x150.jpg"
 			},
 			"categories": [
 				{
