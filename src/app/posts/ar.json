@@ -7,6 +7,144 @@
 	"total_products": 259,
 	"posts": [
 		{
+			"id": 235584,
+			"title": "Liderazgo médico: su importancia y la preparación para desarrollarlo",
+			"slug": "liderazgo-medico-importancia-y-preparacion",
+			"permalink": "https://wp.msklatam.com/nota/medicina/liderazgo-medico-importancia-y-preparacion/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2022/10/Liderazgo-medico-las-habilidades-clinicas-no-alcanzan-para-gestionar.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2022/10/Liderazgo-medico-las-habilidades-clinicas-no-alcanzan-para-gestionar.jpg",
+				"1000",
+				"627",
+				""
+			],
+			"excerpt": "Aunque tradicionalmente se ha pensado que el liderazgo médico es una habilidad innata, hoy se reconoce que puede desarrollarse con formación y especialización. Descubre en este artículo cómo el liderazgo médico influye en la eficiencia, la innovación y la calidad de la atención sanitaria.",
+			"date": "Febrero 12, 2025",
+			"author": {
+				"id": 258873,
+				"name": "Fernando Fuentes",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/09/IMG-20230825-WA0000.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 258873,
+					"name": "Fernando Fuentes",
+					"description": "Médico. Especialista en Neumonología por la Universidad de Buenos Aires. Comunicador científico.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/09/IMG-20230825-WA0000.jpg"
+				},
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 333526,
+					"title": "Actualidad de la equidad de género en el ámbito médico",
+					"slug": "actualidad-equidad-de-genero-en-medicina",
+					"link": "https://wp.msklatam.com/nota/medicina/actualidad-equidad-de-genero-en-medicina/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-actualidad-equidad-de-genero-en-medicina-scaled-e1739280717491.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332933,
+					"title": "Tipos de agua y su impacto en la salud: ¿mitos o realidad?",
+					"slug": "tipos-de-agua-mitos-y-realidades",
+					"link": "https://wp.msklatam.com/nota/medicina/tipos-de-agua-mitos-y-realidades/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-tipos-de-agua-mitos-y-realidades-scaled-e1738157524930.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332897,
+					"title": "Actualización sobre enfermedad de Kawasaki: diagnóstico y terapias clave",
+					"slug": "actualizacion-sobre-kawasaki-diagnostico-y-terapias",
+					"link": "https://wp.msklatam.com/nota/medicina/actualizacion-sobre-kawasaki-diagnostico-y-terapias/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-actualizacion-sobre-kawasaki-diagnostico-y-terapias-scaled-e1738153748727.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332771,
+					"title": "Innovaciones y desafíos en el tratamiento del Síndrome de Moebius",
+					"slug": "innovaciones-y-desafios-en-el-sindrome-de-moebius",
+					"link": "https://wp.msklatam.com/nota/medicina/innovaciones-y-desafios-en-el-sindrome-de-moebius/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-innovaciones-y-desafios-en-el-sindrome-de-moebius-scaled-e1738070462595.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332710,
+					"title": "IA: el futuro de la educación médica",
+					"slug": "ia-el-futuro-de-la-educacion-medica",
+					"link": "https://wp.msklatam.com/nota/e-learning/ia-el-futuro-de-la-educacion-medica/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-IA-el-futuro-de-la-educacion-medica-scaled-e1737729040163.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Contreras-Carreto, Nilson A., & Ramírez-Montiel, Martha L.. (2020). Problemas de liderazgo en la alta dirección de instituciones de salud. Cirugía y cirujanos, 88(4), 526-532. Epub 08 de noviembre de 2021. https://doi.org/10.24875/ciru.19001413"
+				},
+				{
+					"fuente": "O'Sullivan, Helen & Mckimm, Judy. (2011). Medical leadership: An international perspective. British journal of hospital medicine (London, England : 2005). 72. 638-41. 10.12968/hmed.2011.72.11.638."
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1216,
+				"filter": "raw"
+			},
+			"reading_time": "5",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
 			"id": 333528,
 			"title": "Actualidad de la equidad de género en el ámbito médico",
 			"slug": "actualidad-equidad-de-genero-en-medicina",
