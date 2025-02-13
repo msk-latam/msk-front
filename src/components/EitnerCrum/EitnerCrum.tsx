@@ -45,7 +45,7 @@ const EitnerCrum: React.FC<EitnerCrumProps> = ({ product, post }) => {
 	if (pathSegments.length === 0) return null;
 
 	// Lista de países (puedes agregar más si es necesario)
-	const countryList = ['cl', 'pe', 'mx'];
+	const countryList = ['bo', 'cl', 'co', 'cr', 'ec', 'es', 'gt', 'hn', 'mx', 'ni', 'pa', 'pe', 'py', 'sv', 'uy', 've'];
 
 	const hasCountry = countryList.includes(pathSegments[0]);
 	const countrySegment = hasCountry ? pathSegments[0] : 'ar'; // Si no hay país, asumimos Argentina
