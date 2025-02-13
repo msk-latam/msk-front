@@ -14,7 +14,8 @@ type Props = {
 };
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
-	const currentCountry = params.lang || cookies().get('country')?.value;
+	const currentCountry = 'ar';
+	// const currentCountry = params.lang || cookies().get('country')?.value;
 	const page = Number(searchParams.page);
 
 	const maxPages = 9;
