@@ -24,6 +24,19 @@ interface EitnerCrumProps {
 	product?: Product;
 	post?: Post;
 }
+const normalizeUrlSegment = (segment: string) => {
+	if (!segment) return '';
+	return segment
+		.toLowerCase() // Convertir a minúsculas
+		.normalize('NFD') // Descomponer caracteres acentuados
+		.replace(/[\u0300-\u036f]/g, '') // Eliminar marcas de acentos
+		.replace(/[^a-z0-9]+/g, '-') // Reemplazar caracteres no válidos por guiones
+		.replace(/^-+|-+$/g, ''); // Eliminar guiones adicionales al inicio o final
+};
+
+const formatLabel = (label: string) => {
+	return label.replace(/-/g, ' ');
+};
 
 const EitnerCrum: React.FC<EitnerCrumProps> = ({ product, post }) => {
 	const pathname = usePathname();
@@ -31,73 +44,78 @@ const EitnerCrum: React.FC<EitnerCrumProps> = ({ product, post }) => {
 
 	if (pathSegments.length === 0) return null;
 
-	const countrySegment = pathSegments[0];
-	const isBlog = pathSegments[1] === 'blog';
+	// Lista de países (puedes agregar más si es necesario)
+	const countryList = ['cl', 'pe', 'mx'];
+
+	const hasCountry = countryList.includes(pathSegments[0]);
+	const countrySegment = hasCountry ? pathSegments[0] : 'ar'; // Si no hay país, asumimos Argentina
+
+	// Ajustamos el índice del segmento
+	const mainSegmentIndex = hasCountry ? 1 : 0;
+	const isBlog = pathSegments[mainSegmentIndex] === 'blog';
+	const isTienda = pathSegments[mainSegmentIndex] === 'tienda';
+
 	const tiendaSegment = 'Tienda';
 	const blogSegment = 'Blog';
-	const categoriaSegment = product
-		? product.ficha.categorias[0].name
-		: post
-		? post.categories[0].name
-		: pathSegments[1] === 'tienda' && pathSegments.length === 2
-		? ''
-		: pathSegments[2] || 'Categoría';
-	const productOrPostSegment = product ? product.ficha.title : post ? post.title : pathSegments[3] || '';
 
-	const normalizeUrlSegment = (segment: string) => {
-		if (!segment) return '';
-		return segment
-			.toLowerCase() // Convertir a minúsculas
-			.normalize('NFD') // Descomponer caracteres acentuados
-			.replace(/[\u0300-\u036f]/g, '') // Eliminar marcas de acentos
-			.replace(/[^a-z0-9]+/g, '-') // Reemplazar caracteres no válidos por guiones
-			.replace(/^-+|-+$/g, ''); // Eliminar guiones adicionales al inicio o final
-	};
+	const categoriaSegment =
+		product && product.ficha.categorias.length > 0
+			? product.ficha.categorias[0].name
+			: post && post.categories.length > 0
+			? post.categories[0].name
+			: isTienda && pathSegments.length === mainSegmentIndex + 1
+			? ''
+			: pathSegments[mainSegmentIndex + 1] || 'Categoría';
 
-	const formatLabel = (label: string) => {
-		return label.replace(/-/g, ' ');
-	};
+	const productOrPostSegment = product ? product.ficha.title : post ? post.title : pathSegments[mainSegmentIndex + 2] || '';
 
 	const breadcrumbLinks = isBlog
 		? [
 				{
-					href: `/${countrySegment}/blog`,
+					href: hasCountry ? `/${countrySegment}/blog` : `/blog`,
 					label: blogSegment,
-					isLastSegment: pathSegments.length === 2,
+					isLastSegment: pathSegments.length === mainSegmentIndex + 1,
 				},
 				!post &&
 					pathSegments.includes('archivo') && {
-						href: `/${countrySegment}/blog/archivo`,
+						href: hasCountry ? `/${countrySegment}/blog/archivo` : `/blog/archivo`,
 						label: 'Archivo',
-						isLastSegment: pathSegments.length === 3,
+						isLastSegment: pathSegments.length === mainSegmentIndex + 2,
 					},
 				post &&
 					post.categories[0] && {
-						href: `/${countrySegment}/blog/archivo/?categoria=${normalizeUrlSegment(post.categories[0].name)}`,
-						label: formatLabel(post.categories[0].name.charAt(0).toUpperCase() + post.categories[0].name.slice(1)),
-						isLastSegment: !post && pathSegments.length === 3,
+						href: hasCountry
+							? `/${countrySegment}/blog/archivo/?categoria=${normalizeUrlSegment(post.categories[0].name)}`
+							: `/blog/archivo/?categoria=${normalizeUrlSegment(post.categories[0].name)}`,
+						label: formatLabel(post.categories[0].name),
+						isLastSegment: pathSegments.length === mainSegmentIndex + 2,
 					},
 				post && {
-					href: `/${countrySegment}/blog/${normalizeUrlSegment(post.title)}`,
+					href: hasCountry
+						? `/${countrySegment}/blog/${normalizeUrlSegment(post.title)}`
+						: `/blog/${normalizeUrlSegment(post.title)}`,
 					label: formatLabel(post.title),
 					isLastSegment: true,
 				},
-		  ]
+		  ].filter(Boolean)
 		: [
 				{
-					href: `/${countrySegment}/tienda`,
+					href: hasCountry ? `/${countrySegment}/tienda` : `/tienda`,
 					label: tiendaSegment,
-					isLastSegment: !product && pathSegments.length === 2,
+					isLastSegment: !product && pathSegments.length === mainSegmentIndex + 1,
 				},
-
 				categoriaSegment &&
 					categoriaSegment.trim() !== '' && {
-						href: `/${countrySegment}/tienda/${normalizeUrlSegment(categoriaSegment)}`,
-						label: formatLabel(categoriaSegment.charAt(0).toUpperCase() + categoriaSegment.slice(1)),
-						isLastSegment: !product && pathSegments.length === 3,
+						href: hasCountry
+							? `/${countrySegment}/tienda/${normalizeUrlSegment(categoriaSegment)}`
+							: `/tienda/${normalizeUrlSegment(categoriaSegment)}`,
+						label: formatLabel(categoriaSegment),
+						isLastSegment: !product && pathSegments.length === mainSegmentIndex + 2,
 					},
 				product && {
-					href: `/${countrySegment}/curso/${normalizeUrlSegment(productOrPostSegment)}`,
+					href: hasCountry
+						? `/${countrySegment}/curso/${normalizeUrlSegment(productOrPostSegment)}`
+						: `/curso/${normalizeUrlSegment(productOrPostSegment)}`,
 					label: formatLabel(productOrPostSegment),
 					isLastSegment: true,
 				},
