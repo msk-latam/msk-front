@@ -21,24 +21,24 @@
 			"excerpt": "Aunque tradicionalmente se ha pensado que el liderazgo médico es una habilidad innata, hoy se reconoce que puede desarrollarse con formación y especialización. Descubre en este artículo cómo el liderazgo médico influye en la eficiencia, la innovación y la calidad de la atención sanitaria.",
 			"date": "Febrero 12, 2025",
 			"author": {
-				"id": 258873,
-				"name": "Fernando Fuentes",
-				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/09/IMG-20230825-WA0000.jpg"
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
 			},
 			"is_contenido_exclusivo": false,
 			"is_contenido_legado": false,
 			"authors": [
 				{
-					"id": 258873,
-					"name": "Fernando Fuentes",
-					"description": "Médico. Especialista en Neumonología por la Universidad de Buenos Aires. Comunicador científico.",
-					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/09/IMG-20230825-WA0000.jpg"
-				},
-				{
 					"id": 254592,
 					"name": "Santiago Ríos Hernández",
 					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
 					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				},
+				{
+					"id": 258873,
+					"name": "Fernando Fuentes",
+					"description": "Médico. Especialista en Neumonología por la Universidad de Buenos Aires. Comunicador científico.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/09/IMG-20230825-WA0000.jpg"
 				}
 			],
 			"featured_text_field": "",
