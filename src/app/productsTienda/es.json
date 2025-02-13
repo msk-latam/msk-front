@@ -572,11 +572,11 @@
 			"featured_product_text": "<p>Completa el formulario para descargar automáticamente el material</p>\n",
 			"is_test_product": false,
 			"title": "Abordaje diagnóstico del dolor abdominal agudo",
-			"image": "",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2021/05/imagen-primaria-1.jpg",
 			"thumbnail": {
-				"high": "",
-				"medium": "",
-				"low": ""
+				"high": "https://wp.msklatam.com/wp-content/uploads/2021/05/imagen-secundaria-1.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2021/05/imagen-secundaria-1.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2021/05/imagen-secundaria-1-150x150.jpg"
 			},
 			"categories": [
 				{
@@ -912,11 +912,11 @@
 			"featured_product_text": "",
 			"is_test_product": false,
 			"title": "Aféresis terapéutica en enfermedades hematológicas",
-			"image": "",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2021/03/imagen-primaria.jpg",
 			"thumbnail": {
-				"high": "",
-				"medium": "",
-				"low": ""
+				"high": "https://wp.msklatam.com/wp-content/uploads/2021/03/imagen-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2021/03/imagen-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2021/03/imagen-secundaria-150x150.jpg"
 			},
 			"categories": [
 				{
