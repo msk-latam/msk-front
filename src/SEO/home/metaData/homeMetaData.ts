@@ -31,7 +31,7 @@ export async function generateHomeMetadata({ params }: { params: { lang: string 
 	};
 
 	const hreflangUrls = Object.fromEntries(
-		Object.keys(countries).map((country) => [`es-${country}`, `${siteUrl}${country === 'ar' ? '' : `/${country}`}`]),
+		Object.keys(countries).map((country) => [`es-${country}`, `${siteUrl}${country === 'ar' ? '/' : `/${country}/`}`]),
 	);
 	return {
 		title: 'Cursos de medicina para expandir tus metas profesionales | MSK',

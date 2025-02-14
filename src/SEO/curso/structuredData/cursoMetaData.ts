@@ -51,13 +51,15 @@ export async function generateCourseMetadata({ params }: Props) {
 		]),
 	);
 
+	console.log(currentCountry, ' pais');
+
 	const metadata: { [key: string]: any } = {
 		title: courseMetaData?.ficha.meta_titulo?.trim() || 'MSK - Cursos de medicina',
 		description: courseMetaData?.ficha.meta_description?.replace(/<\/?[^>]+(>|$)/g, ''),
 		alternates: IS_PROD
 			? {
 					// canonical: `${SITE_URL}/${currentCountry}/curso/${params.slug}`,
-					canonical: hreflangUrls['es-ar'], // Define cuál es la versión principal (puedes cambiarla si es otra)
+					canonical: hreflangUrls[`es-${currentCountry === undefined ? 'ar' : currentCountry}`], // Define cuál es la versión principal (puedes cambiarla si es otra)
 					languages: hreflangUrls,
 			  }
 			: undefined,

@@ -12,7 +12,7 @@ export function middleware(request: NextRequest) {
 	if (pathname.startsWith('/ar')) {
 		// Elimina "/ar" y mantiene el resto de la URL
 		const newPath = pathname.replace(/^\/ar/, '');
-		return NextResponse.redirect(new URL(newPath || '/', request.url));
+		return NextResponse.redirect(new URL(newPath || '/', request.url), 301);
 	}
 	// return i18nRouter(request, i18nConfig); //esto hace la redireccion automatica
 }

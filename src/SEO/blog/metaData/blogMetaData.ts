@@ -9,11 +9,13 @@ type Props = {
 export async function generateBlogMetadata({ params }: Props) {
 	const currentCountry = params.lang || cookies().get('country')?.value;
 
+	console.log(currentCountry);
+
 	try {
 		const [postMetadata] = await ssr.getSinglePost(params.slug, currentCountry as string);
 		const hostname = process.env.VERCEL_URL || '';
-		const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
-		// const IS_PROD = true;
+		// const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
+		const IS_PROD = true;
 
 		// const siteUrl = 'http://localhost:3000';
 		// const siteUrl = 'https://masklatam.tech'
@@ -54,10 +56,10 @@ export async function generateBlogMetadata({ params }: Props) {
 			description: postMetadata.excerpt,
 			alternates: IS_PROD
 				? {
-						canonical: `${siteUrl}/${currentCountry}/blog/${postMetadata.slug}`,
+						canonical: `${siteUrl}/blog/${postMetadata.slug}`,
 				  }
 				: undefined,
-			robots: IS_PROD ? { index: true, follow: true } : { index: false, follow: false },
+			robots: IS_PROD && currentCountry === undefined ? { index: true, follow: true } : { index: false, follow: false },
 		};
 	} catch (error: any) {
 		throw new Error('Metadata fetch failed');
