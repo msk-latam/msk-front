@@ -2,8 +2,8 @@ import { SITE_URL } from '@/contains/constants';
 
 export async function generateHomeMetadata({ params }: { params: { lang: string } }) {
 	const hostname = process.env.VERCEL_URL || '';
-	const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
-	// const IS_PROD = true;
+	// const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
+	const IS_PROD = true;
 	// const siteUrl = 'http://localhost:3000';
 	// const siteUrl = 'https://masklatam.tech'
 	const siteUrl = 'https://msklatam.com';

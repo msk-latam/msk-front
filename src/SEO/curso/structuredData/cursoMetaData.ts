@@ -14,8 +14,8 @@ export async function generateCourseMetadata({ params }: Props) {
 	const currentCountry = params.lang || cookies().get('country')?.value;
 
 	const hostname = process.env.VERCEL_URL || '';
-	const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
-	// const IS_PROD = true;
+	// const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
+	const IS_PROD = true;
 
 	// const siteUrl = 'http://localhost:3000';
 	// const siteUrl = 'https://masklatam.tech'
