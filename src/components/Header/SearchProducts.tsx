@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 import ssr from '@/services/ssr';
 import { removeFirstSubdomain } from '@/utils/removeFirstSubdomain';
 import { getJSONPostByCountry } from '@/app/posts';
+import { getJSONTiendaByCountry } from '@/app/productsTienda';
 
 const SearchProducts = () => {
 	const [auxProducts, setAuxProducts] = useState<FetchCourseType[]>([]);
@@ -82,7 +83,8 @@ const SearchProducts = () => {
 						// );
 
 						// Hacemos fetch de productos desde el SSR
-						courses = await ssr.getStoreCourses(productsCountry);
+						// courses = await ssr.getStoreCourses(productsCountry);
+						courses = getJSONTiendaByCountry(productsCountry);
 						// console.log(courses.products);
 						// courses = await ssr.getStoreCourses(productsCountry, window.location.href);
 
