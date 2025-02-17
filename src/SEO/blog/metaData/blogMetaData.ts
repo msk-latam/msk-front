@@ -56,7 +56,7 @@ export async function generateBlogMetadata({ params }: Props) {
 			description: postMetadata.excerpt,
 			alternates: IS_PROD
 				? {
-						canonical: `${siteUrl}/blog/${postMetadata.slug}`,
+						canonical: `${siteUrl}/blog/${postMetadata.slug}/`,
 				  }
 				: undefined,
 			robots: IS_PROD && currentCountry === undefined ? { index: true, follow: true } : { index: false, follow: false },
