@@ -24,7 +24,7 @@ const CheckoutContent: React.FC<CheckoutContentProps> = ({ product, country }) =
 
 	switch (activeStep) {
 		case 1:
-			return <CheckoutRegister />;
+			return <CheckoutRegister product={product} />;
 		case 3:
 			return <CheckoutState />;
 		default:
