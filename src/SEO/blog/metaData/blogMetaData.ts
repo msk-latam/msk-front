@@ -14,8 +14,8 @@ export async function generateBlogMetadata({ params }: Props) {
 	try {
 		const [postMetadata] = await ssr.getSinglePost(params.slug, currentCountry as string);
 		const hostname = process.env.VERCEL_URL || '';
-		// const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
-		const IS_PROD = true;
+		const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
+		// const IS_PROD = true;
 
 		// const siteUrl = 'http://localhost:3000';
 		// const siteUrl = 'https://masklatam.tech'
