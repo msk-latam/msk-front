@@ -51,8 +51,6 @@ export async function generateCourseMetadata({ params }: Props) {
 		]),
 	);
 
-	console.log(currentCountry, ' pais');
-
 	const metadata: { [key: string]: any } = {
 		title: courseMetaData?.ficha.meta_titulo?.trim() || 'MSK - Cursos de medicina',
 		description: courseMetaData?.ficha.meta_description?.replace(/<\/?[^>]+(>|$)/g, ''),
