@@ -182,6 +182,10 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 		handleReCaptchaVerify();
 	}, [handleReCaptchaVerify]);
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? match[1] : '';
+
 	const formik = useFormik({
 		initialValues,
 		validationSchema: contactFormValidation,
@@ -207,7 +211,10 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 					}
 					// @ts-ignore
 					if (response.data[0].code === 'SUCCESS') {
-						let routeChange = isEbook ? '/gracias?origen=descarga-ebook' : '/gracias?origen=contact';
+						// let routeChange = isEbook ? '/gracias?origen=descarga-ebook' : '/gracias?origen=contact';
+						const routeChange = `${window.location.origin}${country ? `/${country}` : ''}/gracias?origen=${
+							isEbook ? 'descarga-ebook' : 'contact'
+						}`;
 
 						setFormSent(true);
 						resetForm();
@@ -305,9 +312,6 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 
 	const isSubmitDisabled = !formik.dirty || !isFormValid(requiredFormFields, formik.values, formik.errors, formik.touched);
 
-	const pathName = usePathname();
-	const match = pathName.match(/^\/([a-z]{2})\b/);
-	const country = match ? `${match[1]}` : '';
 	return (
 		<>
 			<div className='col-span-3 ' id='contactanos'>
