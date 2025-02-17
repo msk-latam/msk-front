@@ -8,7 +8,6 @@ import React from 'react';
 
 const CheckoutRegister: React.FC = ({ product }: any) => {
 	const { state } = useContext(AuthContext);
-
 	const { activeStep, setActiveStep, completeStep, setUser } = useCheckout();
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
