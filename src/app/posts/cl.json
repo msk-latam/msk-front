@@ -7,6 +7,119 @@
 	"total_products": 263,
 	"posts": [
 		{
+			"id": 333830,
+			"title": "Enfermedad de Crohn: guía de aprendizaje médico",
+			"slug": "guia-de-aprendizaje-enfermedad-de-crohn",
+			"permalink": "https://ar.wp.msklatam.com/nota/e-learning-arg/guia-de-aprendizaje-enfermedad-de-crohn/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-guia-de-aprendizaje-enfermedad-de-crohn-scaled-e1739543624583.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-guia-de-aprendizaje-enfermedad-de-crohn-scaled-e1739543624583.jpg",
+				"2560",
+				"1707",
+				""
+			],
+			"excerpt": "La Enfermedad de Crohn es un desafío para quienes la padecen y para los profesionales de la salud que la tratan. Desde los factores genéticos y ambientales hasta las estrategias de tratamiento según la gravedad del cuadro, esta guía te brinda información esencial desarrollada por expertos.",
+			"date": "Febrero 13, 2025",
+			"author": {
+				"id": 103,
+				"name": "Contenidos MSK",
+				"email": "contenidos@msklatam.com",
+				"avatar": "https://secure.gravatar.com/avatar/d77ba09cb0734abf46a7f69267816ecd?s=96&d=mm&r=g"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 103,
+					"name": "Contenidos MSK",
+					"email": "contenidos@msklatam.com",
+					"avatar": "https://secure.gravatar.com/avatar/d77ba09cb0734abf46a7f69267816ecd?s=96&d=mm&r=g"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 235640,
+					"title": "Liderazgo médico: su importancia y la preparación para desarrollarlo",
+					"slug": "liderazgo-medico-importancia-y-preparacion",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/liderazgo-medico-importancia-y-preparacion/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/10/Liderazgo-medico-las-habilidades-clinicas-no-alcanzan-para-gestionar.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 333528,
+					"title": "Actualidad de la equidad de género en el ámbito médico",
+					"slug": "actualidad-equidad-de-genero-en-medicina",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/actualidad-equidad-de-genero-en-medicina/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-actualidad-equidad-de-genero-en-medicina-scaled-e1739280717491.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332935,
+					"title": "Tipos de agua y su impacto en la salud: ¿mitos o realidad?",
+					"slug": "tipos-de-agua-mitos-y-realidades",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/tipos-de-agua-mitos-y-realidades/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-tipos-de-agua-mitos-y-realidades-scaled-e1738157524930.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332899,
+					"title": "Actualización sobre enfermedad de Kawasaki: diagnóstico y terapias clave",
+					"slug": "actualizacion-sobre-kawasaki-diagnostico-y-terapias",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/actualizacion-sobre-kawasaki-diagnostico-y-terapias/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-actualizacion-sobre-kawasaki-diagnostico-y-terapias-scaled-e1738153748727.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332773,
+					"title": "Innovaciones y desafíos en el tratamiento del Síndrome de Moebius",
+					"slug": "innovaciones-y-desafios-en-el-sindrome-de-moebius",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/innovaciones-y-desafios-en-el-sindrome-de-moebius/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-innovaciones-y-desafios-en-el-sindrome-de-moebius-scaled-e1738070462595.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"categories": [
+				{
+					"id": 59970,
+					"name": "E-Learning",
+					"slug": "e-learning-arg",
+					"description": "",
+					"link": "https://ar.wp.msklatam.com/nota/category/e-learning-arg/"
+				},
+				{
+					"id": 59971,
+					"name": "Medicina",
+					"slug": "medicina-arg",
+					"description": "",
+					"link": "https://ar.wp.msklatam.com/nota/category/medicina-arg/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": null,
+			"reading_time": "8",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
 			"id": 235584,
 			"title": "Liderazgo médico: su importancia y la preparación para desarrollarlo",
 			"slug": "liderazgo-medico-importancia-y-preparacion",
