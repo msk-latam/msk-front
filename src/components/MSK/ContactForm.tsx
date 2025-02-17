@@ -212,9 +212,9 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 					// @ts-ignore
 					if (response.data[0].code === 'SUCCESS') {
 						// let routeChange = isEbook ? '/gracias?origen=descarga-ebook' : '/gracias?origen=contact';
-						const routeChange = country
-							? `/${country}/gracias?origen=${isEbook ? 'descarga-ebook' : 'contact'}`
-							: `${window.location.origin}/gracias?origen=${isEbook ? 'descarga-ebook' : 'contact'}`;
+						const routeChange = `${window.location.origin}${country ? `/${country}` : ''}/gracias?origen=${
+							isEbook ? 'descarga-ebook' : 'contact'
+						}`;
 
 						setFormSent(true);
 						resetForm();
