@@ -2,16 +2,20 @@
 import Logo from '@/components/Logo/Logo';
 import NcImage from '@/components/NcImage/NcImage';
 import NcLink from '@/components/NcLink/NcLink';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 
 const CheckoutMSKFooter = () => {
 	const currentYear = new Date().getFullYear();
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : '';
 	return (
 		<>
 			<div className='flex justify-between items-center mt-20  py-10 bg-[#141517] w-screen transform -translate-x-1/2 left-1/2 relative'>
 				<div className='container flex justify-between items-center'>
 					<div className='flex items-end gap-4'>
-						<NcLink href='/'>
+						<NcLink href={country === '' ? `${window.location.origin}` : `${window.location.origin}${country}`}>
 							<div className='w-[100px]'>
 								<NcImage src={'/images/msk-logo-light.svg'} alt='footer-logo' width='80' height='80' />
 							</div>

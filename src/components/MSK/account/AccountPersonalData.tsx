@@ -15,7 +15,7 @@ import { DataContext } from '@/context/data/DataContext';
 import countryIdentificationsMapping from '../../../data/jsons/__countryIdentifications.json';
 import InputField from '@/components/InputField/InputField';
 import api from '@/services/api';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import translateDocumentType from '@/utils/translateDocumentType';
 
 interface Props {
@@ -280,6 +280,10 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 		}
 	}, [user]);
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : '';
+
 	return (
 		<div className='rounded-xl md:border md:border-neutral-100 dark:border-neutral-800 md:p-6'>
 			<FormikProvider value={formik}>
@@ -431,7 +435,11 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 						<span className='dark:text-primary-500 forgot-password'>
 							¿Necesitas cambiar tu contraseña?{' '}
 							<NcLink
-								href='/recuperar'
+								href={
+									country === '' || country === 'mi'
+										? `${window.location.origin}/recuperar`
+										: `${window.location.origin}/${country}/recuperar`
+								}
 								className='nc-NcLink underline text-primary-6000 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-6000'
 							>
 								Hazlo aquí

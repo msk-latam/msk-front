@@ -4,6 +4,7 @@ import CategoryBadgeList from '@/components/CategoryBadgeList/CategoryBadgeList'
 import { FetchPostType } from '@/data/types';
 import { compareByNameDescending } from '@/lib/compareByNameDescending';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export interface Card18Props {
 	className?: string;
@@ -25,6 +26,9 @@ const Card18: FC<Card18Props> = ({
 	showCategories = true,
 }) => {
 	const { slug, title, image, categories } = post;
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? match[1] : '';
 
 	const renderMeta = () => {
 		return (
@@ -45,7 +49,7 @@ const Card18: FC<Card18Props> = ({
         <PostCardSaveAction className="relative" postData={post} />
       </div> */}
 			<div className={`flex items-start relative w-full ${ratio}`}></div>
-			<Link href={`/${kind}/${slug}`}>
+			<Link href={`/${country !== '' ? `${country}/` : ''}${kind}/${slug}`}>
 				<NcImage
 					containerClassName='absolute inset-0 rounded-xl'
 					className='object-cover w-full h-full rounded-xl'
@@ -64,11 +68,11 @@ const Card18: FC<Card18Props> = ({
 			</Link>
 
 			<Link
-				href={`/${kind}/${slug}`}
+				href={`/${country !== '' ? `${country}/` : ''}${kind}/${slug}`}
 				className='absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-black opacity-80'
 			></Link>
 			<div className='absolute bottom-0 inset-x-0 p-6 flex flex-col flex-grow'>
-				<Link href={`/${kind}/${slug}`} className='absolute inset-0'></Link>
+				<Link href={`/${country !== '' ? `${country}/` : ''}${kind}/${slug}`} className='absolute inset-0'></Link>
 				{showCategories && (
 					<div className='mb-3'>
 						<CategoryBadgeList categories={categoriesOrder} isPost={kind === 'blog'} />

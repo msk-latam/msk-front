@@ -11,7 +11,7 @@ export function getCachedCourses() {
 		const now = Date.now();
 
 		if (now - timestamp < TTL) {
-			console.log('Courses fetched from cache');
+			// console.log('Courses fetched from cache');
 			return value;
 		}
 	}

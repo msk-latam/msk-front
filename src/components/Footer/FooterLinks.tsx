@@ -23,11 +23,21 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 
 	useEffect(() => {
 		if (pathname) {
-			const pathParts = pathname.split('/'); // Divide la ruta por '/'
-			const code = pathParts[1]; // El primer segmento después del dominio
+			const pathParts = pathname.split('/');
+			let code = pathParts[1] || 'ar'; // Default to 'ar' if no country is specified
+
+			// Verifica que el primer segmento sea un código de país válido
+			const isValidCountry = /^[a-zA-Z]{2}$/.test(code);
+
+			// Si el primer segmento no es un código de país válido, asigna 'ar'
+			if (!isValidCountry) {
+				code = 'ar';
+			}
+
 			setCountryCode(code);
 		}
 	}, [pathname]);
+
 	const [categories, setCategories] = useState<Category[]>([]);
 	const countryToLangMap = {
 		ar: 'arg',
@@ -95,21 +105,74 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 		return url;
 	}
 
+	// console.log(countryCode);
+
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? match[1] : '';
+
 	useEffect(() => {
 		const fetchFooterData = async () => {
 			try {
-				// const response = await fetch(
-				// 	`https://wp.msklatam.com/wp-json/wp/api/footer?country=${countryCode}&lang=${langCode}`,
-				// );
+				const replaceDomain = (url: string) => {
+					const base = getUrl();
+
+					// Si la URL pertenece a "msklatam.com", reemplazarla por la base correcta
+					if (url.startsWith('https://msklatam.com/')) {
+						url = url.replace('https://msklatam.com/', '/'); // Convertimos a una ruta relativa
+					}
+
+					// Si la URL ya es absoluta (http o https de otro dominio), no modificarla
+					if (url.startsWith('http://') || url.startsWith('https://')) {
+						return url;
+					}
+
+					// Asegurar que la base y la URL están bien formateadas
+					const formattedBase = base.endsWith('/') ? base.slice(0, -1) : base;
+					const formattedUrl = url.startsWith('/') ? url : `/${url}`;
+
+					// Si la URL ya tiene un código de país en la ruta, no agregar otro
+					if (formattedUrl.match(/^\/[a-z]{2}\//)) {
+						return `${formattedBase}${formattedUrl}`;
+					}
+
+					// Agregar el código de país si corresponde
+					return country ? `${formattedBase}/${country}${formattedUrl}` : `${formattedBase}${formattedUrl}`;
+				};
+
+				const updateUrls = (data: any) => {
+					return {
+						...data,
+						cursos_mas_elegidos: data.cursos_mas_elegidos.map((course: any) => ({
+							...course,
+							url: replaceDomain(course.url),
+						})),
+						cursos_mas_buscados: data.cursos_mas_buscados.map((course: any) => ({
+							...course,
+							url: replaceDomain(course.url),
+						})),
+						especialidades: data.especialidades.map((item: any) => ({
+							especialidad: {
+								...item.especialidad,
+								url_especialidad: replaceDomain(item.especialidad.url_especialidad),
+							},
+						})),
+						contenidos_destacados: data.contenidos_destacados.map((content: any) => ({
+							...content,
+							url: replaceDomain(content.url),
+						})),
+					};
+				};
 				const response = await fetch(`${getUrl()}/footerLinks/${countryCode}.json`);
 				// console.log(response);
 
 				if (!response.ok) {
 					throw new Error('Error fetching footer data');
 				}
-				const data = await response.json();
+				let data = await response.json();
+				data = updateUrls(data);
 
-				console.log(data);
+				// console.log(data);
 
 				const mappedCategories = mapCategories(data);
 				setCategories(mappedCategories);

@@ -4,7 +4,7 @@ import { AuthContext } from '@/context/user/AuthContext';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import * as Yup from 'yup';
 import api from '@/services/api';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { CountryContext } from '@/context/country/CountryContext';
 
@@ -34,6 +34,10 @@ export const useLoginForm = () => {
 		password: Yup.string().required('La contraseña es requerida'),
 	});
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : '';
+
 	const formik = useFormik({
 		initialValues,
 		validationSchema,
@@ -61,7 +65,9 @@ export const useLoginForm = () => {
 						};
 
 						dispatch({ type: 'LOGIN', payload: loginData });
-						router.push('/mi-perfil');
+						router.push(
+							country === '' ? `${window.location.origin}/mi-perfil` : `${window.location.origin}/${country}/mi-perfil`,
+						);
 					} else {
 						setLoginError(data?.message as string);
 					}

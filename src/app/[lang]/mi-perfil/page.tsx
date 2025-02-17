@@ -64,6 +64,14 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 
 	let allCourses = JSONProduct;
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	let country = match ? `${match[1]}` : '';
+
+	if (country === 'mi') {
+		country = '';
+	}
+
 	// console.log(allCourses);
 
 	const fetchUser = async () => {
@@ -83,11 +91,17 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 				setLoadingUser(false);
 			} else {
 				// console.log('ejecutando else');
-				router.push('/iniciar-sesion');
+				router.push(
+					country === ''
+						? `${window.location.origin}/iniciar-sesion`
+						: `${window.location.origin}/${country}/iniciar-sesion`,
+				);
 			}
 		} catch (error) {
 			console.log(error);
-			router.push('/iniciar-sesion');
+			router.push(
+				country === '' ? `${window.location.origin}/iniciar-sesion` : `${window.location.origin}/${country}/iniciar-sesion`,
+			);
 		}
 	};
 
@@ -135,7 +149,10 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 			name: 'Mis Cursos',
 			description: 'Controla todo lo relacionado\n' + 'con tus capacitaciones',
 			age: '',
-			href: '/mi-cuenta/cursos',
+			href:
+				country === ''
+					? `${window.location.origin}/mi-cuenta/cursos`
+					: `${window.location.origin}/${country}/mi-cuenta/cursos`,
 		},
 		{
 			name: 'Centro de ayuda',
@@ -147,7 +164,10 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 			name: 'Configurar mi cuenta',
 			description: 'Controlar todo lo referido\n' + 'a tu perfil personal',
 			image: '',
-			href: '/mi-cuenta/perfil',
+			href:
+				country === ''
+					? `${window.location.origin}/mi-cuenta/perfil`
+					: `${window.location.origin}/${country}/mi-cuenta/perfil`,
 		},
 	];
 

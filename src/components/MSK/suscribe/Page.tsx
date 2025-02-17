@@ -147,7 +147,11 @@ const PageTrialSuscribe: FC<PageTrialSuscribeProps> = () => {
 						{renderCheckoutComponent()}
 
 						<NcLink
-							href='/terminos-y-condiciones/#trial'
+							href={
+								country === ''
+									? `${window.location.origin}/terminos-y-condiciones/#trial`
+									: `${window.location.origin}/${country}/terminos-y-condiciones/#trial`
+							}
 							target='_blank'
 							className='text-primary hover:text-primary underline flex items-center justify-center mt-3'
 						>

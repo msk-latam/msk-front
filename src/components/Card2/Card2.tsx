@@ -5,6 +5,7 @@ import CardAuthor2 from '@/components/CardAuthor2/CardAuthor2';
 import CategoryBadgeList from '@/components/CategoryBadgeList/CategoryBadgeList';
 import { compareByNameDescending } from '@/lib/compareByNameDescending';
 import NcLink from '../NcLink/NcLink';
+import { usePathname } from 'next/navigation';
 
 export interface Card2Props {
 	className?: string;
@@ -30,8 +31,24 @@ const Card2: FC<Card2Props> = ({
 }) => {
 	const { title, image, slug, categories, father_post_type, excerpt, date, author, reading_time } = post;
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? match[1] : '';
+
 	const imageURL = image?.replace('mx.', '');
-	const url = redirectAccount ? `/mi-cuenta/cursos` : `/${kind}/${slug}`;
+	// const url = redirectAccount ? `/mi-cuenta/cursos` : `/${kind}/${slug}`;
+	const getFullUrl = (path: string) => {
+		const domain = window.location.origin; // Obtiene el dominio actual (localhost, .com, .tech, etc.)
+		return `${domain}${path.startsWith('/') ? path : `/${path}`}`;
+	};
+
+	const url = redirectAccount
+		? country === ''
+			? getFullUrl(`/mi-cuenta/cursos`)
+			: `/${country}/mi-cuenta/cursos`
+		: country === ''
+		? getFullUrl(`/${kind}/${slug}`)
+		: `/${country}/${kind}/${slug}`;
 	const categoriesOrder = kind === 'blog' ? categories.sort(compareByNameDescending) : categories;
 
 	return (

@@ -20,17 +20,23 @@ interface PageProps {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const currentCountry = params.lang || cookies().get('country')?.value;
 	const hostname = process.env.VERCEL_URL || '';
-	const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
+	// const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
+	const IS_PROD = true;
+	// const siteUrl = 'http://localhost:3000';
+	// const siteUrl = 'https://masklatam.tech'
+	const siteUrl = 'https://msklatam.com';
 	return {
 		title: 'Blog | MSK',
 		description:
 			'Descubre todos nuestros artículos informativos sobre avances médicos, cursos, e información relevante para tu desarollo profesional.',
 		alternates: IS_PROD
 			? {
-					canonical: `${SITE_URL}/${currentCountry}/blog`,
+					// canonical: `${siteUrl}/${currentCountry}/blog`,
+					canonical: `${siteUrl}/blog`,
 			  }
 			: undefined,
-		robots: IS_PROD ? { index: true, follow: true } : { index: false, follow: false },
+		robots: { index: false, follow: false },
+		// robots: IS_PROD ? { index: true, follow: true } : { index: false, follow: false },
 	};
 }
 

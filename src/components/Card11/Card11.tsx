@@ -8,6 +8,7 @@ import PostCardMeta from '@/components/PostCardMeta/PostCardMeta';
 import PostFeaturedMedia from '@/components/PostFeaturedMedia/PostFeaturedMedia';
 import NcImage from '@/components/NcImage/NcImage';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export interface Card11Props {
 	className?: string;
@@ -39,6 +40,10 @@ const Card11: FC<Card11Props> = ({
 	}
 	title = decodeEntities(title);
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? match[1] : '';
+
 	return (
 		<div
 			className={`nc-Card11 animate-fade-down relative flex flex-col group [ nc-box-has-hover ] [ nc-dark-box-bg-has-hover ] ${className}`}
@@ -65,7 +70,12 @@ const Card11: FC<Card11Props> = ({
           <span className="text-xs text-neutral-500">{date}</span>
         )} */}
 				<h2 className='nc-card-title block text-base font-semibold text-neutral-900 dark:text-neutral-100 '>
-					<Link href={`/${kind}/${slug}`} className='line-clamp-2' title={title}>
+					<Link
+						href={country === '' ? `${window.location.origin}/${kind}/${slug}` : `/${country}/${kind}/${slug}`}
+						className='line-clamp-2'
+						title={title}
+					>
+						{/* <Link href={`/${kind}/${slug}`} className='line-clamp-2' title={title}> */}
 						{title}
 					</Link>
 				</h2>

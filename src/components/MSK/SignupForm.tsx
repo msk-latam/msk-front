@@ -173,7 +173,11 @@ const SignupForm: FC<SignupFormProps> = ({ productName = '', isEbook = false, su
 					} else {
 						setFormError('');
 						setTimeout(() => {
-							router.push('/correo-enviado');
+							router.push(
+								country === ''
+									? `${window.location.origin}/correo-enviado`
+									: `${window.location.origin}/${country}/correo-enviado`,
+							);
 						}, 1500);
 					}
 				} catch (error) {
@@ -186,6 +190,9 @@ const SignupForm: FC<SignupFormProps> = ({ productName = '', isEbook = false, su
 	});
 
 	const optionsArray = [1, 2, 3, 4, 5];
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : '';
 
 	return (
 		<>
@@ -341,7 +348,15 @@ const SignupForm: FC<SignupFormProps> = ({ productName = '', isEbook = false, su
 													/>
 													<label>
 														Acepto las{' '}
-														<NcLink href='/politica-de-privacidad' target='_blank' className='text-primary underline'>
+														<NcLink
+															href={
+																country === ''
+																	? `${window.location.origin}/politica-de-privacidad`
+																	: `${window.location.origin}/${country}/politica-de-privacidad`
+															}
+															target='_blank'
+															className='text-primary underline'
+														>
 															políticas de privacidad
 														</NcLink>
 													</label>

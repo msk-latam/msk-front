@@ -8,111 +8,103 @@ import { CountryContext } from '@/context/country/CountryContext';
 import Showing from '@/components/Showing/Showing';
 import moduleIcon from '/public/images/icons/moduleIcon.svg';
 import timeIcon from '/public/images/icons/timeIcon.svg';
+import { usePathname } from 'next/navigation';
 
 export interface Card9Props {
-  className?: string;
-  ratio?: string;
-  post: any;
-  hoverClass?: string;
-  showDescription?: boolean;
-  badgeColor?: string;
-  kind: 'curso' | 'guia' | 'blog';
+	className?: string;
+	ratio?: string;
+	post: any;
+	hoverClass?: string;
+	showDescription?: boolean;
+	badgeColor?: string;
+	kind: 'curso' | 'guia' | 'blog';
 }
 
 const Card9: FC<Card9Props> = ({
-  className = 'h-full',
-  ratio = 'aspect-w-3 aspect-h-3 sm:aspect-h-4',
-  post,
-  hoverClass = '',
-  showDescription = false,
-  badgeColor = 'yellow',
-  kind,
+	className = 'h-full',
+	ratio = 'aspect-w-3 aspect-h-3 sm:aspect-h-4',
+	post,
+	hoverClass = '',
+	showDescription = false,
+	badgeColor = 'yellow',
+	kind,
 }) => {
-  const { title, categories, id, slug, image } = post;
-  const { countryState } = useContext(CountryContext);
-  const imageURL = image
-    ? image.replace(`${countryState.country || 'mx'}.`, '')
-    : '';
+	const { title, categories, id, slug, image } = post;
+	const { countryState } = useContext(CountryContext);
+	const imageURL = image ? image.replace(`${countryState.country || 'mx'}.`, '') : '';
 
-  const renderMeta = () => {
-    return (
-      <div className='inline-flex items-center text-xs text-neutral-300'>
-        <div className='block '>
-          <h4 className='block text-lg font-semibold text-white mb-2'>
-            <span className='text-xl font-raleway font-bold' title={title}>
-              {title}
-            </span>
-          </h4>
-          {post.cantidad_modulos && (
-            <Showing
-              title={`${post.cantidad_modulos} temas`}
-              icon={moduleIcon.src}
-              className='mb-2'
-            />
-          )}
-          {post.duration && (
-            <Showing
-              title={`${post.duration} horas estimadas`}
-              icon={timeIcon.src}
-            />
-          )}
-          <>
-            {showDescription && post.lista_de_cedentes ? (
-              <div className='sm:block mt-2'>
-                <span className='text-neutral-300 text-[10px] line-clamp-1'>
-                  Certificación
-                </span>
+	// console.log(imageURL);
 
-                <span className='text-neutral-300 text-sm line-clamp-1 '>
-                  {post.lista_de_cedentes[0].post_title}
-                </span>
-              </div>
-            ) : null}
-          </>
-        </div>
-      </div>
-    );
-  };
+	const renderMeta = () => {
+		return (
+			<div className='inline-flex items-center text-xs text-neutral-300'>
+				<div className='block '>
+					<h4 className='block text-lg font-semibold text-white mb-2'>
+						<span className='text-xl font-raleway font-bold' title={title}>
+							{title}
+						</span>
+					</h4>
+					{post.cantidad_modulos && (
+						<Showing title={`${post.cantidad_modulos} temas`} icon={moduleIcon.src} className='mb-2' />
+					)}
+					{post.duration && <Showing title={`${post.duration} horas estimadas`} icon={timeIcon.src} />}
+					<>
+						{showDescription && post.lista_de_cedentes ? (
+							<div className='sm:block mt-2'>
+								<span className='text-neutral-300 text-[10px] line-clamp-1'>Certificación</span>
 
-  const filteredCategory =
-    categories && categories.length > 0 ? [categories[0]] : [];
+								<span className='text-neutral-300 text-sm line-clamp-1 '>{post.lista_de_cedentes[0].post_title}</span>
+							</div>
+						) : null}
+					</>
+				</div>
+			</div>
+		);
+	};
 
-  return (
-    <div
-      className={`nc-Card9 relative flex flex-col group rounded-3xl overflow-hidden z-0 ${hoverClass} ${className}`}
-    >
-      <div className={`flex items-start relative w-full ${ratio}`}></div>
-      <Link href={`/curso/${slug}`}>
-        <NcImage
-          containerClassName='absolute inset-0 rounded-2xl sm:rounded-3xl'
-          src={imageURL}
-          fill
-          sizes='200px'
-          alt='categories'
-          className='object-cover'
-        />
+	const filteredCategory = categories && categories.length > 0 ? [categories[0]] : [];
 
-        <span className='absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-100 md:opacity-80 group-hover:opacity-100 transition-opacity'></span>
-      </Link>
-      <Link
-        href={`/curso/${slug}`}
-        className='absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-black opacity-50'
-      ></Link>
-      <div className='absolute bottom-0 inset-x-0 p-4 flex flex-col flex-grow'>
-        <Link href={`/curso/${slug}`} className='absolute inset-0'></Link>
-        <div className='mb-3'>
-          <CategoryBadgeList
-            categories={filteredCategory}
-            color={badgeColor}
-            isPost={kind === 'blog'}
-            isCourse={kind === 'curso'}
-            isEbook={kind === 'guia'}
-          />
-        </div>
-        {renderMeta()}
-      </div>
-    </div>
-  );
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? match[1] : '';
+
+	return (
+		<div className={`nc-Card9 relative flex flex-col group rounded-3xl overflow-hidden z-0 ${hoverClass} ${className}`}>
+			<div className={`flex items-start relative w-full ${ratio}`}></div>
+			<Link href={country === '' ? `${window.location.origin}/curso/${slug}` : `/${country}/curso/${slug}`}>
+				<NcImage
+					containerClassName='absolute inset-0 rounded-2xl sm:rounded-3xl'
+					src={imageURL}
+					fill
+					sizes='200px'
+					alt='categories'
+					className='object-cover'
+				/>
+
+				<span className='absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-100 md:opacity-80 group-hover:opacity-100 transition-opacity'></span>
+			</Link>
+			<Link
+				href={country === '' ? `${window.location.origin}/curso/${slug}` : `/${country}/curso/${slug}`}
+				className='absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-black opacity-50'
+			></Link>
+			<div className='absolute bottom-0 inset-x-0 p-4 flex flex-col flex-grow'>
+				<Link
+					href={country === '' ? `${window.location.origin}/curso/${slug}` : `/${country}/curso/${slug}`}
+					className='absolute inset-0'
+				></Link>
+				<div className='mb-3'>
+					<CategoryBadgeList
+						categories={filteredCategory}
+						color={badgeColor}
+						isPost={kind === 'blog'}
+						isCourse={kind === 'curso'}
+						isEbook={kind === 'guia'}
+					/>
+				</div>
+				{renderMeta()}
+			</div>
+		</div>
+	);
 };
 
 export default Card9;

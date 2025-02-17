@@ -16,6 +16,7 @@ import { useCurrentLocale } from 'next-i18n-router/client';
 import i18nConfig from '@/i18nConfig';
 import CategoriesDropdown from './categoriesDropdown/CategoriesDropdown';
 import Link from 'next/link';
+import CountrySelector from './CountrySelector';
 
 const MainNav2: FC = () => {
 	const locale = useCurrentLocale(i18nConfig);
@@ -55,6 +56,12 @@ const MainNav2: FC = () => {
 	};
 
 	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	let country = match ? `${match[1]}` : '';
+
+	if (country === 'mi') {
+		country = '';
+	}
 
 	useEffect(() => {
 		setIsOnBlog(pathName.includes('/blog'));
@@ -65,7 +72,7 @@ const MainNav2: FC = () => {
 		<div className={`nc-MainNav nc-MainNav2 relative z-10 container`}>
 			<div className='py-5 relative flex items-center justify-between'>
 				<div className='flex items-center space-x-3 sm:space-x-8'>
-					<Logo isOnBlog={isOnBlog} />
+					<Logo isOnBlog={isOnBlog} country={country} />
 					<div className='hidden sm:block h-10 border-l border-neutral-300 dark:border-neutral-6000 m-0'></div>
 					<div>
 						{!pathName.includes('blog2') && (
@@ -112,7 +119,11 @@ const MainNav2: FC = () => {
 								<>
 									<div className='hidden sm:block h-10 border-l border-neutral-300 dark:border-neutral-6000 pr-5'></div>
 									<ButtonSecondary
-										href='/iniciar-sesion'
+										href={
+											country === ''
+												? `${window.location.origin}/iniciar-sesion`
+												: `${window.location.origin}/${country}/iniciar-sesion`
+										}
 										locale={locale}
 										sizeClass='px-4 py-2 sm:px-5'
 										className='border-solid border-1 border-neutral-200 text-neutral-500'
@@ -120,12 +131,21 @@ const MainNav2: FC = () => {
 									>
 										Iniciar sesión
 									</ButtonSecondary>
-									<ButtonPrimary href={`/crear-cuenta`} sizeClass='px-4 py-2 sm:px-5' className='font-semibold'>
+									<ButtonPrimary
+										href={
+											country === ''
+												? `${window.location.origin}/crear-cuenta`
+												: `${window.location.origin}/${country}/crear-cuenta`
+										}
+										sizeClass='px-4 py-2 sm:px-5'
+										className='font-semibold'
+									>
 										Crear cuenta
 									</ButtonPrimary>
 								</>
 							)}
 						</div>
+						{/* <CountrySelector country={country} /> */}
 						<div className='flex items-center space-x-4 xl:hidden'>
 							<NavigationUser />
 							<MenuBar />

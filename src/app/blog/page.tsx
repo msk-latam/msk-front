@@ -1,0 +1,88 @@
+import { TABS_BLOG } from '@/data/MSK/blog';
+import BlogSummary from '@/components/MSK/BlogSummary';
+import HomeExtraInfo from '@/components/MSK/HomeExtraInfo';
+import { cookies } from 'next/headers';
+import ssr from '@/services/ssr';
+import { FetchPostType } from '@/data/types';
+import WelcomeBlog from '@/components/MSK/Blog/WelcomeBlog';
+import NewsletterBlog from '@/components/MSK/Blog/NewsletterBlog';
+import { SITE_URL } from '@/contains/constants';
+import { Props } from '@/app/layout';
+import { Metadata } from 'next';
+import SectionSliderBestSellers from '@/components/Sections/SectionSliderBestSellers';
+import { getJSONPostByCountry } from '@/app/posts';
+
+interface PageProps {
+	params: any;
+}
+// export const runtime = 'edge';
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+	const currentCountry = 'ar';
+	const hostname = process.env.VERCEL_URL || '';
+	// const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
+	const IS_PROD = true;
+	// const siteUrl = 'http://localhost:3000';
+	// const siteUrl = 'https://masklatam.tech'
+	const siteUrl = 'https://msklatam.com';
+	return {
+		title: 'Blog | MSK',
+		description:
+			'Descubre todos nuestros artículos informativos sobre avances médicos, cursos, e información relevante para tu desarollo profesional.',
+		alternates: IS_PROD
+			? {
+					canonical: `${siteUrl}/blog`,
+					// canonical: `${siteUrl}/${currentCountry}/blog`,
+			  }
+			: undefined,
+		robots: IS_PROD ? { index: true, follow: true } : { index: false, follow: false },
+	};
+}
+
+const PageBlog: React.FC<PageProps> = async ({ params }) => {
+	const currentCountry = 'ar';
+	const allBestSellers = await ssr.getBestSellers(currentCountry);
+	const JSONBlog = getJSONPostByCountry(currentCountry);
+
+	// const allPosts = await ssr.getPosts();
+	// const welcomePosts = allPosts.filter((p: FetchPostType, i: number) => i < 4);
+	const welcomePosts = JSONBlog.posts.filter((p: FetchPostType, i: number) => i < 4);
+	// console.log(JSONBlog.posts);
+
+	return (
+		<div className='nc-PageBlog relative animate-fade-down'>
+			<div className=' relative'>
+				<div className=' relative'>
+					<WelcomeBlog tabs={[]} heading='' posts={welcomePosts} />
+					<BlogSummary
+						posts={JSONBlog.posts}
+						tabs={TABS_BLOG}
+						className='py-16'
+						desc=''
+						heading=''
+						showTitle
+						forSingleNote={false}
+					/>
+					<HomeExtraInfo country={currentCountry} />
+				</div>
+
+				<div className='md:rounded-[40px] bg-neutral-100 dark:bg-black dark:bg-opacity-20 relative py-8 md:py-16 mb-[96px] xl:w-[129%] left-1/2 transform -translate-x-1/2  w-screen mt-16'>
+					<SectionSliderBestSellers
+						posts={allBestSellers}
+						className='w-full section-slider-posts-container px-12 md:px-4'
+						postCardName='card9'
+						heading='¿Buscas capacitarte a distancia?'
+						subHeading='Estos son los cursos más elegidos entre profesionales de la salud'
+						sliderStype='style2'
+						uniqueSliderClass='pageBlog-section6'
+					/>
+				</div>
+				<div className=' relative'>
+					<NewsletterBlog />
+				</div>
+			</div>
+		</div>
+	);
+};
+
+export default PageBlog;

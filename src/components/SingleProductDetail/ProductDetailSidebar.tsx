@@ -32,10 +32,6 @@ const ProductDetailSidebar: FC<Props> = ({ ficha, product, details, isEbook, sid
 	const [isFixed, setIsFixed] = useState(false);
 	const [bottomDistance, setBottomDistance] = useState(0);
 	let scrollPosition = 0;
-	// console.log(details);
-	// console.log(ficha);
-	// console.log(product);
-	// console.log(isEbook, 'desde parametro');
 
 	const image =
 		ficha.title === 'Abordaje diagnóstico del dolor abdominal agudo'
@@ -96,7 +92,6 @@ const ProductDetailSidebar: FC<Props> = ({ ficha, product, details, isEbook, sid
 	const requestTrial = (slug: string) => {
 		router.push(authState.isAuthenticated ? `/suscribe/${slug}` : `/trial/${slug}`);
 	};
-	console.log(product);
 	const { hasCoursedRequested } = useRequestedTrialCourse(product);
 
 	const hasGateway = Object.values(REBILL_CONF.GATEWAYS).some((array) => array.includes(countryState.country));

@@ -132,11 +132,45 @@ export function generateCategoryMetadata({ category, lang }: GenerateCategoryMet
 		categoryDescriptionsMap[category] ||
 		'Descubre nuestro catálogo de cursos, entradas de blog y guías profesionales diseñados para impulsarte en tu carrera y profundizar en tus conocimientos.';
 
+	const countries = {
+		ar: 'Argentina',
+		mx: 'México',
+		cl: 'Chile',
+		cr: 'Costa Rica',
+		co: 'Colombia',
+		pe: 'Perú',
+		uy: 'Uruguay',
+		py: 'Paraguay',
+		bo: 'Bolivia',
+		ec: 'Ecuador',
+		ve: 'Venezuela',
+		pa: 'Panamá',
+		do: 'República Dominicana',
+		gt: 'Guatemala',
+		hn: 'Honduras',
+		sv: 'El Salvador',
+		ni: 'Nicaragua',
+		cu: 'Cuba',
+		pr: 'Puerto Rico',
+		es: 'España',
+	};
+	// const siteUrl = 'http://localhost:3000';
+	// const siteUrl = 'https://masklatam.tech'
+	const siteUrl = 'https://msklatam.com';
+
+	const hreflangUrls = Object.fromEntries(
+		Object.keys(countries).map((country) => [
+			`es-${country}`,
+			`${siteUrl}${country === 'ar' ? '' : `/${country}`}/tienda/${category}/`,
+		]),
+	);
+
 	return {
 		title: `Cursos de ${categoryTitle} | MSK`,
 		description: categoryDescription,
 		alternates: {
-			canonical: canonicalUrl,
+			canonical: hreflangUrls['es-ar'],
+			languages: hreflangUrls,
 		},
 	};
 }

@@ -7,6 +7,7 @@ import Image from 'next/image';
 import clockIcon from '/public/images/icons/clock.svg';
 import { removeFirstSubdomain } from '@/utils/removeFirstSubdomain';
 import { useStoreFilters } from '@/context/storeFilters/StoreProvider';
+import { usePathname } from 'next/navigation';
 
 interface Props {
 	product: FetchCourseType;
@@ -45,11 +46,21 @@ const StoreProduct: FC<Props> = ({ product, className, hoverEffect = false, kind
 		} else addFilter('resources', resource);
 	};
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? match[1] : '';
+
 	const filteredCategory = product.categories && product.categories.length > 0 ? [product.categories[0]] : [];
 	return (
 		<div className={`protfolio-course-2-wrapper ${className}`}>
 			<div className='student-course-img'>
-				<NcLink href={`/curso/${product.slug}`}>
+				<NcLink
+					href={
+						country === ''
+							? `${window.location.origin}/curso/${product.slug}`
+							: `${window.location.origin}/${country}/curso/${product.slug}`
+					}
+				>
 					<Image src={imageURL} className='transition-all' width={1000} height={1000} alt={`${product.title}`} />
 				</NcLink>
 			</div>
@@ -63,18 +74,38 @@ const StoreProduct: FC<Props> = ({ product, className, hoverEffect = false, kind
 								isCourse={kind === 'course'}
 								isEbook={kind === 'downloadable'}
 							/>
-							<NcLink href={`/curso/${product.slug}`}>
+							<NcLink
+								href={
+									country === ''
+										? `${window.location.origin}/curso/${product.slug}`
+										: `${window.location.origin}/${country}/curso/${product.slug}`
+								}
+							>
 								<h3 className=''>{product.title}</h3>
 							</NcLink>
 
 							<div className='course-action'>
-								<NcLink href={`/curso/${product.slug}`} className='view-details-btn'>
+								<NcLink
+									href={
+										country === ''
+											? `${window.location.origin}/curso/${product.slug}`
+											: `${window.location.origin}/${country}/curso/${product.slug}`
+									}
+									className='view-details-btn'
+								>
 									Ver más
 								</NcLink>
 								<button className='wishlist-btn'>
 									<i className='flaticon-like'></i>
 								</button>
-								<NcLink href={`/curso/${product.slug}`} className='c-share-btn'>
+								<NcLink
+									href={
+										country === ''
+											? `${window.location.origin}/curso/${product.slug}`
+											: `${window.location.origin}/${country}/curso/${product.slug}`
+									}
+									className='c-share-btn'
+								>
 									<i className='flaticon-previous'></i>
 								</NcLink>
 							</div>
@@ -92,7 +123,9 @@ const StoreProduct: FC<Props> = ({ product, className, hoverEffect = false, kind
 									icon='elearning'
 									color='emerald-post'
 									name='Guía profesional'
-									href={`/tienda?recurso=guias-profesionales`}
+									href={
+										country === '' ? `/tienda?recurso=guias-profesionales` : `/${country}/tienda?recurso=guias-profesionales`
+									}
 									textSize='text-xs sm:text-xs'
 								/>
 							)}
@@ -106,7 +139,13 @@ const StoreProduct: FC<Props> = ({ product, className, hoverEffect = false, kind
 						</div>
 
 						<div className='portfolio-course-2 line-clamp-3'>
-							<NcLink href={`/curso/${product.slug}`}>
+							<NcLink
+								href={
+									country === ''
+										? `${window.location.origin}/curso/${product.slug}`
+										: `${window.location.origin}/${country}/curso/${product.slug}`
+								}
+							>
 								<h3 className='font-bold text-sm'>{product.title}</h3>
 							</NcLink>
 						</div>
@@ -126,7 +165,14 @@ const StoreProduct: FC<Props> = ({ product, className, hoverEffect = false, kind
 					<div></div>
 				)}
 
-				<NcLink href={`/curso/${product.slug}`} className='course-network text-primary font-bold text-sm'>
+				<NcLink
+					href={
+						country === ''
+							? `${window.location.origin}/curso/${product.slug}`
+							: `${window.location.origin}/${country}/curso/${product.slug}`
+					}
+					className='course-network text-primary font-bold text-sm'
+				>
 					Descubrir
 				</NcLink>
 			</div>
