@@ -37,7 +37,8 @@ export default function robots(): MetadataRoute.Robots {
 			  ]
 			: {
 					userAgent: '*',
-					disallow: '/',
+					disallow: '',
+					// disallow: '/',
 			  },
 		sitemap: IS_PROD ? 'https://msklatam.com/sitemap.xml' : 'https://msklatam.com/sitemap.xml',
 	};
