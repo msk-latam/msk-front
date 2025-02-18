@@ -544,7 +544,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 	};
 
 	const selectedGateway = gateways[country.toLowerCase()];
-	// console.log(selectedGateway);
+	console.log(selectedGateway);
 
 	if (!selectedGateway) {
 		console.error(`No gateway configured for country: ${country}`);

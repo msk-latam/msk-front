@@ -7,6 +7,147 @@
 	"total_products": 265,
 	"posts": [
 		{
+			"id": 247623,
+			"title": "Qué habilidades blandas requiere la medicina hoy",
+			"slug": "habilidades-blandas-medicina-hoy",
+			"permalink": "https://wp.msklatam.com/nota/medicina/habilidades-blandas-medicina-hoy/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2023/03/¿Que-habilidades-blandas-pediran-los-y-las-pacientes-del-futuro.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2023/03/¿Que-habilidades-blandas-pediran-los-y-las-pacientes-del-futuro.jpg",
+				"1000",
+				"668",
+				""
+			],
+			"excerpt": "La práctica asistencial sufre cambios acelerados y los profesionales de la salud buscan cubrir las necesidades de los pacientes actuales y futuros. Lee este artículo y conoce qué habilidades blandas son las más demandadas y cómo han ganado relevancia con el correr de los años.",
+			"date": "Febrero 17, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				},
+				{
+					"id": 258873,
+					"name": "Fernando Fuentes",
+					"description": "Médico. Especialista en Neumonología por la Universidad de Buenos Aires. Comunicador científico.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/09/IMG-20230825-WA0000.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 235584,
+					"title": "Liderazgo médico: su importancia y la preparación para desarrollarlo",
+					"slug": "liderazgo-medico-importancia-y-preparacion",
+					"link": "https://wp.msklatam.com/nota/medicina/liderazgo-medico-importancia-y-preparacion/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/10/Liderazgo-medico-las-habilidades-clinicas-no-alcanzan-para-gestionar.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 333526,
+					"title": "Actualidad de la equidad de género en el ámbito médico",
+					"slug": "actualidad-equidad-de-genero-en-medicina",
+					"link": "https://wp.msklatam.com/nota/medicina/actualidad-equidad-de-genero-en-medicina/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-actualidad-equidad-de-genero-en-medicina-scaled-e1739280717491.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332933,
+					"title": "Tipos de agua y su impacto en la salud: ¿mitos o realidad?",
+					"slug": "tipos-de-agua-mitos-y-realidades",
+					"link": "https://wp.msklatam.com/nota/medicina/tipos-de-agua-mitos-y-realidades/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-tipos-de-agua-mitos-y-realidades-scaled-e1738157524930.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332897,
+					"title": "Actualización sobre enfermedad de Kawasaki: diagnóstico y terapias clave",
+					"slug": "actualizacion-sobre-kawasaki-diagnostico-y-terapias",
+					"link": "https://wp.msklatam.com/nota/medicina/actualizacion-sobre-kawasaki-diagnostico-y-terapias/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-actualizacion-sobre-kawasaki-diagnostico-y-terapias-scaled-e1738153748727.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332771,
+					"title": "Innovaciones y desafíos en el tratamiento del Síndrome de Moebius",
+					"slug": "innovaciones-y-desafios-en-el-sindrome-de-moebius",
+					"link": "https://wp.msklatam.com/nota/medicina/innovaciones-y-desafios-en-el-sindrome-de-moebius/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-innovaciones-y-desafios-en-el-sindrome-de-moebius-scaled-e1738070462595.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Vargas, Rafael & Acosta, Marisa. (2023). Habilidades Blandas: una respuesta para la mejora de la atención de profesionales de la salud. Revista Española de Educación Médica. 4. 10.6018/edumed.576321. "
+				},
+				{
+					"fuente": "Rosario Pacahuala Emilio Augusto, Sanchez Pimentel Janett Isabel, Medina Gamero Aldo Rafael - Las habilidades blandas en consultas telemáticas de cardiología, Revista Española de Cardiología, ISSN 03008932, https://doi.org/10.1016/j.recesp.2021.01.022"
+				},
+				{
+					"fuente": "https://www.elsevier.com/connect/clinician-of-the-future"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1216,
+				"filter": "raw"
+			},
+			"reading_time": "6",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
 			"id": 333830,
 			"title": "Enfermedad de Crohn: guía de aprendizaje médico",
 			"slug": "guia-de-aprendizaje-enfermedad-de-crohn",

@@ -103,12 +103,12 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payme
 				});
 				checkoutForm.display({
 					userLogin: false,
-					billing: false,
-					customerInformation: false,
+					// billing: false,
+					// customerInformation: false,
 					// cardholderDetails: false,
-					discountCode: false,
+					// discountCode: false,
 					// checkoutSummary: false,
-					submitButton: false,
+					// submitButton: false,
 					// resetButton: false,
 					excludePaymentMethods: ['CASH', 'REBILL_PIX', 'TRANSFER'],
 				});
