@@ -1,7 +1,9 @@
 import { SITE_URL } from '@/contains/constants';
+import { cookies } from 'next/headers';
 
 export async function generateHomeMetadata({ params }: { params: { lang: string } }) {
 	const hostname = process.env.VERCEL_URL || '';
+	const currentCountry = params.lang || cookies().get('country')?.value;
 	const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
 	// const IS_PROD = true;
 	// const siteUrl = 'http://localhost:3000';
@@ -38,7 +40,7 @@ export async function generateHomeMetadata({ params }: { params: { lang: string 
 		description: 'Una propuesta moderna para expandir tus metas profesionales',
 		alternates: IS_PROD
 			? {
-					canonical: hreflangUrls['es-ar'],
+					canonical: hreflangUrls[`es-${currentCountry === undefined ? 'ar' : currentCountry}`],
 					languages: hreflangUrls,
 			  }
 			: undefined,
