@@ -22,13 +22,10 @@ export async function generateHomeMetadata({ params }: { params: { lang: string 
 		ec: 'Ecuador',
 		ve: 'Venezuela',
 		pa: 'Panamá',
-		do: 'República Dominicana',
 		gt: 'Guatemala',
 		hn: 'Honduras',
 		sv: 'El Salvador',
 		ni: 'Nicaragua',
-		cu: 'Cuba',
-		pr: 'Puerto Rico',
 		es: 'España',
 	};
 
