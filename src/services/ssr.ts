@@ -361,41 +361,41 @@ class ApiSSRService {
 		}
 	}
 
-	async getBestSellers(country?: string, tag?: string) {
-		setLoadingBestSellers(true);
+	// async getBestSellers(country?: string, tag?: string) {
+	// 	setLoadingBestSellers(true);
 
-		try {
-			let countryParam = 'int';
-			let validCountries = countries.map((item) => item.id);
+	// 	try {
+	// 		let countryParam = 'int';
+	// 		let validCountries = countries.map((item) => item.id);
 
-			if (country && validCountries.includes(country)) {
-				countryParam = `${country}`;
-			}
-			const baseURL = process.env.NEXT_PUBLIC_HOST;
+	// 		if (country && validCountries.includes(country)) {
+	// 			countryParam = `${country}`;
+	// 		}
+	// 		const baseURL = process.env.NEXT_PUBLIC_HOST;
 
-			const response = await fetch(`${baseURL}/bestSellers/${country}.json`);
+	// 		const response = await fetch(`${baseURL}/bestSellers/${country}.json`);
 
-			// console.log('getBestSellers URL', `${API_URL}/home/best-sellers?country=${countryParam}`);
-			// const response = await fetch(`${API_URL}/home/best-sellers?country=${countryParam}`);
-			// const response = await fetch(`http://localhost:3000/bestSellers/${countryParam}.json`);
+	// 		// console.log('getBestSellers URL', `${API_URL}/home/best-sellers?country=${countryParam}`);
+	// 		// const response = await fetch(`${API_URL}/home/best-sellers?country=${countryParam}`);
+	// 		// const response = await fetch(`http://localhost:3000/bestSellers/${countryParam}.json`);
 
-			if (!response.ok) {
-				throw new Error(`Failed to fetch best sellers. HTTP status ${response.status}`);
-			}
+	// 		if (!response.ok) {
+	// 			throw new Error(`Failed to fetch best sellers. HTTP status ${response.status} Country ${country}`);
+	// 		}
 
-			const data = await response.json();
+	// 		const data = await response.json();
 
-			console.log(data);
+	// 		console.log(data);
 
-			setLoadingBestSellers(false);
+	// 		setLoadingBestSellers(false);
 
-			return data.products;
-		} catch (error) {
-			setLoadingBestSellers(false);
-			console.error('Network error:', error);
-			return error;
-		}
-	}
+	// 		return data.products;
+	// 	} catch (error) {
+	// 		setLoadingBestSellers(false);
+	// 		console.error('Network error:', error);
+	// 		return error;
+	// 	}
+	// }
 
 	// async getPosts(country?: string) {
 	// 	try {
@@ -456,6 +456,40 @@ class ApiSSRService {
 	// 		return [];
 	// 	}
 	// }
+
+	async getBestSellers(country?: string, tag?: string) {
+		setLoadingBestSellers(true);
+
+		try {
+			let countryParam = 'int';
+			let validCountries = countries.map((item) => item.id);
+
+			if (country && validCountries.includes(country)) {
+				countryParam = country; // Solo asigna si es un país válido
+			}
+
+			const baseURL = process.env.NEXT_PUBLIC_HOST;
+			let response = await fetch(`${baseURL}/bestSellers/${countryParam}.json`);
+
+			if (!response.ok) {
+				console.warn(`Fallo con ${countryParam}, intentando con 'int'...`);
+				response = await fetch(`${baseURL}/bestSellers/int.json`);
+			}
+
+			if (!response.ok) {
+				throw new Error(`No se encontraron datos ni para ${countryParam} ni para 'int'.`);
+			}
+
+			const data = await response.json();
+			setLoadingBestSellers(false);
+
+			return data.products || [];
+		} catch (error) {
+			setLoadingBestSellers(false);
+			console.error('Error de red:', error);
+			return [];
+		}
+	}
 
 	async getPosts(country?: string) {
 		try {
