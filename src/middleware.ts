@@ -18,6 +18,10 @@ export function middleware(request: NextRequest) {
 		const newPath = pathname.replace(/^\/us/, ''); // Elimina "/us" y mantiene el resto
 		return NextResponse.redirect(new URL(newPath, request.url), 301);
 	}
+	if (pathname.startsWith('/br') && !pathname.startsWith('/br/br')) {
+		const newPath = pathname.replace(/^\/us/, ''); // Elimina "/us" y mantiene el resto
+		return NextResponse.redirect(new URL(newPath, request.url), 301);
+	}
 	// return i18nRouter(request, i18nConfig); //esto hace la redireccion automatica
 }
 
