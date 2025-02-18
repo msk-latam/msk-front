@@ -155,7 +155,11 @@ const CheckoutRegister: React.FC = ({ product }: any) => {
 					converted_by: formDataUser.converted_by,
 				};
 				setUser(formDataUser);
-				const token = '$2y$12$tdFqIBqa413sfYENjGjVR.lUOfcRnRaXBgBDUeQIBg1BjujlLbmQW';
+				const token = process.env.NEXT_PUBLIC_CRM_BACKEND_TOKEN;
+
+				if (!token) {
+					throw new Error('CRM_BACKEND_TOKEN no está definido en el .env');
+				}
 				const responseUser = await fetch('http://localhost:8577/api/zoho/contacts/', {
 					method: 'POST',
 					headers: {
@@ -172,6 +176,8 @@ const CheckoutRegister: React.FC = ({ product }: any) => {
 					firstResponse.code === 'SUCCESS' || firstResponse.code === 'DUPLICATE_DATA' ? firstResponse.details.id : undefined;
 
 				console.log(customer_id);
+
+				const cuotas = '6';
 
 				const contractData = {
 					customer_id,
@@ -194,9 +200,9 @@ const CheckoutRegister: React.FC = ({ product }: any) => {
 					payment: 'Mercado Pago',
 					paymentMethod: 'Cobro recurrente',
 					Fecha_de_primer_cobro: new Date().toISOString().split('T')[0],
-					Seleccione_total_de_pagos_recurrentes: '6', //dinamizar
-					Cantidad_de_pagos_recurrentes_restantes: '5', //dinamizar
-					Monto_de_cada_pago_restantes: (transactionAmount / 6).toFixed(2),
+					Seleccione_total_de_pagos_recurrentes: cuotas,
+					Cantidad_de_pagos_recurrentes_restantes: (parseInt(cuotas, 10) - 1).toString(),
+					Monto_de_cada_pago_restantes: (transactionAmount / parseInt(cuotas, 10)).toFixed(2),
 				};
 
 				const responseContract = await fetch('http://localhost:8577/api/zoho/sales_order/create_contract', {
