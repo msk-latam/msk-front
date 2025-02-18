@@ -1,7 +1,8 @@
-import { IS_PROD } from '@/contains/constants';
+// import { IS_PROD } from '@/contains/constants';
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
+	const IS_PROD = false;
 	return {
 		rules: IS_PROD
 			? [
@@ -38,6 +39,6 @@ export default function robots(): MetadataRoute.Robots {
 					userAgent: '*',
 					disallow: '/',
 			  },
-		sitemap: IS_PROD ? 'https://msklatam.com/sitemap.xml' : '',
+		sitemap: IS_PROD ? 'https://msklatam.com/sitemap.xml' : 'https://msklatam.com/sitemap.xml',
 	};
 }
