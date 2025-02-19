@@ -33,6 +33,9 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 			if (!isValidCountry) {
 				code = 'ar';
 			}
+			if (code === 'mi') {
+				code = 'ar';
+			}
 
 			setCountryCode(code);
 		}
