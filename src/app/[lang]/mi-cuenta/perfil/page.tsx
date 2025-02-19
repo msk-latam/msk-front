@@ -20,15 +20,15 @@ const PageDashboard: FC<PageDashboardProps> = ({ className = '' }) => {
 	const match = pathName.match(/^\/([a-z]{2})\b/);
 	const country = match ? `${match[1]}` : '';
 
-	useEffect(() => {
-		router.prefetch('/');
-	}, []);
+	// useEffect(() => {
+	// 	// router.prefetch('/');
+	// }, []);
 
-	useEffect(() => {
-		router.prefetch(
-			country === '' ? `${window.location.origin}/iniciar-sesion` : `${window.location.origin}/${country}/iniciar-sesion`,
-		);
-	}, []);
+	// useEffect(() => {
+	// 	router.prefetch(
+	// 		country === '' ? `${window.location.origin}/iniciar-sesion` : `${window.location.origin}/${country}/iniciar-sesion`,
+	// 	);
+	// }, []);
 
 	useEffect(() => {
 		if (!user.id) fetchUser();

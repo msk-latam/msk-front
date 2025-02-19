@@ -17,9 +17,9 @@ export const useLoginForm = () => {
 	const formRef = useRef<HTMLFormElement>(null);
 	const { countryState: countryState } = useContext(CountryContext);
 
-	useEffect(() => {
-		router.prefetch(`/${countryState.country}/mi-perfil`);
-	}, []);
+	// useEffect(() => {
+	// 	router.prefetch(`/${countryState.country}/mi-perfil`);
+	// }, []);
 
 	const initialValues = {
 		email: '',
