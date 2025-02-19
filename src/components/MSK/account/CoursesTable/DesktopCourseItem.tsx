@@ -23,7 +23,7 @@ const DesktopCourseItem: FC<DesktopCourseItemProps> = ({ item, email, goToLMS })
 	const statusOV = statusOrdenVenta(item.ov);
 	const productExpiration = useRef(new Date(item.expiration));
 	const productExpirationEnroll = useRef(new Date(item.limit_enroll));
-	const trialName = item.ov.includes('suspendido') ? 'Prueba cancelada' : 'Prueba';
+	const trialName = item.ov?.includes('suspendido') ? 'Prueba cancelada' : 'Prueba';
 	const { state: authState } = useContext(AuthContext);
 
 	// console.log(statusOV, 'status ov');
@@ -74,7 +74,7 @@ const DesktopCourseItem: FC<DesktopCourseItemProps> = ({ item, email, goToLMS })
 				</div>
 			</td>
 			<td className='px-6 py-4 status-badge'>
-				{item.ov.includes('Trial') ? (
+				{item.ov?.includes('Trial') ? (
 					<CategoryBadgeList categories={[trialName]} isTrial={item.ov.includes('Trial')} />
 				) : (
 					<Badge

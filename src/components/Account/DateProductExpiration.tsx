@@ -14,7 +14,7 @@ interface DateProductExpirationProps {
 const DateProductExpiration: FC<DateProductExpirationProps> = ({ date, text, user, product }) => {
 	const [trialDateEnd, setTrialDateEnd] = useState<Date | null>(null);
 	useEffect(() => {
-		if (product.ov.includes('Trial')) {
+		if (product.ov?.includes('Trial')) {
 			user?.contact?.trial_course_sites?.filter((tcs: any) => {
 				let contract = JSON.parse(tcs.contractJson);
 				// console.log({ contract });
