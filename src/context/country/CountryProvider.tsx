@@ -100,13 +100,10 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 		ec: 'Ecuador',
 		ve: 'Venezuela',
 		pa: 'Panamá',
-		do: 'República Dominicana',
 		gt: 'Guatemala',
 		hn: 'Honduras',
 		sv: 'El Salvador',
 		ni: 'Nicaragua',
-		cu: 'Cuba',
-		pr: 'Puerto Rico',
 		es: 'España',
 	};
 

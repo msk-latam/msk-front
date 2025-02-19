@@ -7,6 +7,28 @@ import i18nConfig from './i18nConfig';
 const protectedRoutes = ['/mi-cuenta', 'mi-perfil'];
 
 export function middleware(request: NextRequest) {
+	const validCountries = [
+		'ar',
+		'mx',
+		'cl',
+		'es',
+		'co',
+		'cr',
+		'pe',
+		'uy',
+		'bo',
+		'ec',
+		've',
+		'pa',
+		'gt',
+		'hn',
+		'sv',
+		'ni',
+		'es',
+		'br',
+		'in',
+		'us',
+	];
 	const { pathname } = request.nextUrl;
 
 	if (pathname.startsWith('/ar')) {
@@ -14,18 +36,30 @@ export function middleware(request: NextRequest) {
 		const newPath = pathname.replace(/^\/ar/, '');
 		return NextResponse.redirect(new URL(newPath || '/', request.url), 301);
 	}
-	if (pathname.startsWith('/us') && !pathname.startsWith('/us/us')) {
-		const newPath = pathname.replace(/^\/us/, ''); // Elimina "/us" y mantiene el resto
-		return NextResponse.redirect(new URL(newPath, request.url), 301);
+	const segments = pathname.split('/').filter(Boolean); // Divide la ruta en segmentos
+
+	// Si la URL tiene múltiples repeticiones del país, redirige a la versión limpia
+	if (segments.length > 1 && validCountries.includes(segments[0]) && segments[0] === segments[1]) {
+		const newPath = `/${segments.slice(1).join('/')}`; // Elimina la repetición
+		return NextResponse.redirect(new URL(newPath || '/', request.url), 301);
 	}
-	if (pathname.startsWith('/br') && !pathname.startsWith('/br/br')) {
-		const newPath = pathname.replace(/^\/us/, ''); // Elimina "/us" y mantiene el resto
-		return NextResponse.redirect(new URL(newPath, request.url), 301);
+
+	// Si el primer segmento es un país válido, dejamos la URL como está
+	if (validCountries.includes(segments[0])) {
+		return NextResponse.next();
 	}
-	if (pathname.startsWith('/ch') && !pathname.startsWith('/ch/ch')) {
-		const newPath = pathname.replace(/^\/us/, ''); // Elimina "/us" y mantiene el resto
-		return NextResponse.redirect(new URL(newPath, request.url), 301);
-	}
+	// if (pathname.startsWith('/us') && !pathname.startsWith('/us/us')) {
+	// 	const newPath = pathname.replace(/^\/us/, ''); // Elimina "/us" y mantiene el resto
+	// 	return NextResponse.redirect(new URL(newPath, request.url), 301);
+	// }
+	// if (pathname.startsWith('/br') && !pathname.startsWith('/br/br')) {
+	// 	const newPath = pathname.replace(/^\/us/, ''); // Elimina "/us" y mantiene el resto
+	// 	return NextResponse.redirect(new URL(newPath, request.url), 301);
+	// }
+	// if (pathname.startsWith('/ch') && !pathname.startsWith('/ch/ch')) {
+	// 	const newPath = pathname.replace(/^\/us/, ''); // Elimina "/us" y mantiene el resto
+	// 	return NextResponse.redirect(new URL(newPath, request.url), 301);
+	// }
 	// return i18nRouter(request, i18nConfig); //esto hace la redireccion automatica
 }
 
