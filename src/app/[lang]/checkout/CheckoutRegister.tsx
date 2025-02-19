@@ -5,11 +5,14 @@ import UserForm from './forms/UserForm';
 import { validateUserField } from './validators/userValidator';
 import CheckoutRegisterButtons from './buttons/CheckoutRegisterButtons';
 import React from 'react';
+import CardDetailsForm from './forms/CardDetailsForm';
+import DocumentDetailsForm from './forms/DocumentDetailsForm';
+import AddressForm from './forms/AddressForm';
 
 const CheckoutRegister: React.FC = ({ product, country }: any) => {
 	const { state } = useContext(AuthContext);
 
-	const { activeStep, setActiveStep, completeStep, setUser } = useCheckout();
+	const { activeStep, setActiveStep, completeStep, setUser, user } = useCheckout();
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
 	const [success, setSuccess] = useState(false);
@@ -22,6 +25,31 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 		specialty: '',
 		privacyPolicy: false,
 		converted_by: 'Checkout Web ',
+	});
+	const [formData, setFormData] = useState({
+		// cardholderName: '',
+		// cardNumber: '',
+		// expiryMonth: '',
+		// expiryYear: '',
+		// cvv: '',
+		country: country || '',
+		state: '',
+		city: '',
+		address: '',
+		postal_code: '',
+		profession: user?.profession || [],
+		// name: user?.firstName || state.profile.name,
+		// last_name: user?.lastName || state.profile.last_name,
+		// email: user?.email || state.profile.email,
+		// phone: user?.phone || state.profile.phone,
+		// speciality: user?.specialty || state.profile.speciality,
+		privacyPolicy: user?.privacyPolicy || true,
+		converted_by: 'Checkout Web',
+		other_profession: [],
+		other_speciality: [],
+		type_doc: '',
+		identification: '',
+		fiscal_regime: 'a',
 	});
 
 	const [errors, setErrors] = useState({
@@ -60,6 +88,13 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 				[id]: validateUserField(id, fieldValue),
 			}));
 		}
+	};
+	const handleChange2 = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+		const { name, value } = e.target;
+		setFormData((prevState) => ({
+			...prevState,
+			[name]: value,
+		}));
 	};
 
 	const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -270,6 +305,22 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 					errors={errors}
 					touched={touched}
 					formData={formDataUser}
+				/>
+
+				<DocumentDetailsForm
+					formData={formData}
+					handleBlur={handleBlur}
+					handleChange={handleChange2}
+					errors={errors}
+					touched={touched}
+					country={country}
+				/>
+				<AddressForm
+					formData={formData}
+					handleChange={handleChange2}
+					handleBlur={handleBlur}
+					errors={errors}
+					touched={touched}
 				/>
 			</div>
 			<div className='block lg:flex  items-center justify-center lg:justify-between'>
