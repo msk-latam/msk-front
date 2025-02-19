@@ -60,6 +60,21 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 		profession: '',
 		specialty: '',
 		privacyPolicy: '',
+		type_doc: '',
+		documentNumber: '',
+		country: '',
+		state: '',
+		city: '',
+		address: '',
+		postal_code: '',
+		name: '',
+		last_name: '',
+		speciality: '',
+		converted_by: '',
+		other_profession: '',
+		other_speciality: '',
+		identification: '',
+		fiscal_regime: '',
 	});
 
 	const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -159,7 +174,13 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 					name: `${formDataUser.firstName}`,
 					last_name: formDataUser.lastName,
 					speciality: formDataUser.specialty,
-					// country: fullCountry(selectedCountry),
+					country: countryCompleteName,
+					state: formData.state,
+					city: formData.city,
+					address: formData.address,
+					postal_code: formData.postal_code,
+					type_doc: formData.type_doc,
+					identification: formData.identification,
 					// utm_source: utmState.utm_source,
 					// utm_medium: utmState.utm_medium,
 					// utm_campaign: utmState.utm_campaign,
@@ -201,6 +222,64 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 					body: JSON.stringify({ userData: formDataCreate }), // Si formData es un objeto JSON, conviértelo a string
 				});
 
+				const rebillCreateUser = {
+					email: formDataUser.email,
+					first_name: formDataUser.firstName,
+					last_name: formDataUser.lastName,
+					phone_country_code: '',
+					phone_area_code: '',
+					phone_number: formDataUser.phone,
+					personal_id_type: formData.type_doc,
+					personal_id_number: formData.identification,
+					tax_id_type: '',
+					tax_id_number: '',
+					address_street: formData.address,
+					address_city: formData.city,
+					address_state: formData.state,
+					address_country: countryCompleteName,
+					address_zipcode: formData.postal_code,
+					address_number: formData.address,
+					address_floor: '',
+					address_apartment: '',
+					address_description: '',
+					birthday: '1995-06-20', //agregar al formulario
+				};
+
+				const createUserRebill = await fetch('http://localhost:8465/api/rebill/test/customers', {
+					method: 'POST',
+					headers: {
+						Authorization: `Bearer $2y$12$O4BEY9Ghrs2GCb5MtrNBWeeaG4H9MlWJsViHO7vKYhMb2ChNcPYRK`,
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						email: formDataUser.email,
+						first_name: formDataUser.firstName,
+						last_name: formDataUser.lastName,
+						phone_country_code: '',
+						phone_area_code: '',
+						phone_number: formDataUser.phone,
+						personal_id_type: formData.type_doc,
+						personal_id_number: formData.identification,
+						tax_id_type: '',
+						tax_id_number: '',
+						address_street: formData.address,
+						address_city: formData.city,
+						address_state: formData.state,
+						address_country: countryCompleteName,
+						address_zipcode: formData.postal_code,
+						address_number: formData.address,
+						address_floor: '',
+						address_apartment: '',
+						address_description: '',
+						birthday: '1995-06-20',
+					}),
+				});
+
+				const createUserRebillResponse = await createUserRebill.json();
+
+				console.log(createUserRebillResponse);
+				let idRebillUser = createUserRebillResponse.id;
+				console.log(idRebillUser);
 				const createUserResponse = await responseUser.json();
 				console.log(createUserResponse);
 				const firstResponse = createUserResponse.data[0];
@@ -306,22 +385,25 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 					touched={touched}
 					formData={formDataUser}
 				/>
-
-				<DocumentDetailsForm
-					formData={formData}
-					handleBlur={handleBlur}
-					handleChange={handleChange2}
-					errors={errors}
-					touched={touched}
-					country={country}
-				/>
-				<AddressForm
-					formData={formData}
-					handleChange={handleChange2}
-					handleBlur={handleBlur}
-					errors={errors}
-					touched={touched}
-				/>
+				<div className='mt-4'>
+					<DocumentDetailsForm
+						formData={formData}
+						handleBlur={handleBlur}
+						handleChange={handleChange2}
+						errors={errors}
+						touched={touched}
+						country={country}
+					/>
+				</div>
+				<div className='mt-4'>
+					<AddressForm
+						formData={formData}
+						handleChange={handleChange2}
+						handleBlur={handleBlur}
+						errors={errors}
+						touched={touched}
+					/>
+				</div>
 			</div>
 			<div className='block lg:flex  items-center justify-center lg:justify-between'>
 				<p className='text-red-500 font-bold my-6'> {error}</p>

@@ -27,6 +27,20 @@ interface AddressFormProps {
 }
 
 const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handleBlur, errors, touched }) => {
+	const countryMap = {
+		ar: 'Argentina',
+		cl: 'Chile',
+		br: 'Brasil',
+		mx: 'Mexico',
+		// Agrega más países según sea necesario
+	};
+	const normalizeCountryCode = (code: any) => code?.toLowerCase() || '';
+	const getCountryName = (code: any) => {
+		const normalizedCode = normalizeCountryCode(code);
+		return countryMap[normalizedCode] || '';
+	};
+
+	const countryName = getCountryName(formData.country);
 	const provinciasPorPais = {
 		Chile: [
 			'Arica y Parinacota',
@@ -213,7 +227,8 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 		return provinciasPorPais[country] || [];
 	}
 
-	const provincias = obtenerProvincias(formData.country);
+	const provincias = obtenerProvincias(countryName);
+
 	return (
 		<div className='grid grid-cols-2 gap-4'>
 			{/* País */}
@@ -225,9 +240,11 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					id='country'
 					name='country'
 					type='text'
-					value={formData.country}
-					onChange={handleChange}
-					onBlur={handleBlur}
+					value={countryName}
+					// value={formData.country}
+					// onChange={handleChange}
+					// onBlur={handleBlur}
+					disabled
 					placeholder='Ingrese país'
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
@@ -237,7 +254,8 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 			{/* Estado */}
 			<div>
 				<label htmlFor='state' className='block text-sm font-medium text-[#6474A6]'>
-					{formData.country === 'Chile' ? 'Provincia' : 'Estado'}
+					{countryName === 'Chile' ? 'Provincia' : 'Estado'}
+					{/* {formData.country === 'Chile' ? 'Provincia' : 'Estado'} */}
 				</label>
 				{
 					formData.country && (
