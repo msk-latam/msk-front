@@ -27,11 +27,20 @@ const BotMaker = () => {
 			return;
 		}
 		if (!mountedBot) {
-			const script = document.createElement('script');
-			script.type = 'text/javascript';
-			script.async = true;
-			script.src = 'https://go.botmaker.com/rest/webchat/p/XG5DC3KZSF/init.js';
-			document.body.appendChild(script);
+			// Verifica si ya existe el script antes de agregarlo
+			if (!document.querySelector('script[src="https://go.botmaker.com/rest/webchat/p/XG5DC3KZSF/init.js"]')) {
+				const script = document.createElement('script');
+				script.type = 'text/javascript';
+				script.async = true;
+				script.src = 'https://go.botmaker.com/rest/webchat/p/XG5DC3KZSF/init.js';
+
+				// Manejo de errores en la carga del script
+				script.onerror = () => {
+					console.error('Error al cargar BotMaker. El chat no estará disponible.');
+				};
+
+				document.body.appendChild(script);
+			}
 			setMountedBot(true);
 		}
 
