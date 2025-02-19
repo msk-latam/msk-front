@@ -35,9 +35,9 @@ const PageDashboard: FC<PageDashboardProps> = ({ children, className = '' }) => 
 	const handleModalLogout = () => {
 		setIsModalOpen(!isModalOpen);
 	};
-	useEffect(() => {
-		router.prefetch('/');
-	}, []);
+	// useEffect(() => {
+	// 	router.prefetch('/');
+	// }, []);
 
 	const { state } = useContext(AuthContext);
 	const router = useRouter();

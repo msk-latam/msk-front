@@ -14,7 +14,7 @@ const RedirectToTrial = () => {
 		const handleRedirect = async () => {
 			if (typeof window !== 'undefined') {
 				const redirectToTrial = localStorage.getItem('trialURL');
-				router.prefetch('/');
+				// router.prefetch('/');
 
 				// console.log('RedirectToTrial', { window, redirectToTrial, authState });
 

@@ -28,7 +28,7 @@ export const useAuth = () => {
 				router.push(`${window.location.origin}/${country}`);
 			}
 		} catch (error) {
-			router.prefetch(`${window.location.origin}/${country}`);
+			// router.prefetch(`${window.location.origin}/${country}`);
 			console.error('Failed to fetch user profile:', error);
 			dispatch({ type: 'LOGOUT' });
 			router.push(`${window.location.origin}/${country}`);
