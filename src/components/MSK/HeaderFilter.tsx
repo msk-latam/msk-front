@@ -35,10 +35,11 @@ const HeaderFilter: FC<HeaderFilterProps> = ({
 		country = '';
 	}
 
-	viewMore =
-		country === ''
-			? `${window.location.origin}/tienda?recurso=curso`
-			: `${window.location.origin}/${country}/tienda?recurso=curso`;
+	const isBlogPage = pathName.includes('/blog');
+
+	viewMore = isBlogPage
+		? `${window.location.origin}${country === '' ? '/blog/archivo' : `/${country}/blog/archivo`}`
+		: `${window.location.origin}${country === '' ? '/tienda?recurso=curso' : `/${country}/tienda?recurso=curso`}`;
 	return (
 		<div className='flex flex-col mb-8 relative '>
 			{desc.length || heading.length ? <Heading desc={desc}>{heading}</Heading> : null}
