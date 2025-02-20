@@ -231,8 +231,9 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 		// Extraer el código del país (el primer segmento después del dominio)
 		const country = pathname.split('/')[1]; // Por ejemplo, en "/ar/tienda", extraerá "ar"
 
-		// Formatear el slug
-		let formattedSlug = slug
+		let formattedSlug = typeof slug === 'string' ? slug : '';
+
+		formattedSlug = formattedSlug
 			.toLowerCase() // Convertir a minúsculas
 			.normalize('NFD') // Normalizar caracteres unicode
 			.replace(/[^a-z0-9\s]/g, '') // Eliminar caracteres raros
