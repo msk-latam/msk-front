@@ -25,6 +25,7 @@ import { homeFAQs } from '@/components/faqs/homeFAQs';
 import ClearLocalStorage from '@/components/versionStorage/ClearLocalStorage';
 import { getJSONTiendaByCountry } from './productsTienda';
 import { getJSONPostByCountry } from './posts';
+import PasswordGate from '@/components/PasswordGate/PasswordGate';
 
 const BlogSummary = dynamic(() => import('@/components/MSK/BlogSummary'));
 const BrandSlider = dynamic(() => import('@/components/MSK/BrandSlider'));
