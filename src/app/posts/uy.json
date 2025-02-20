@@ -7,6 +7,132 @@
 	"total_products": 260,
 	"posts": [
 		{
+			"id": 230702,
+			"title": "Cómo actúa el liderazgo transformacional ante el síndrome de burnout",
+			"slug": "liderazgo-transformacional-ante-el-sindrome-de-burnout",
+			"permalink": "https://ar.wp.msklatam.com/nota/actualidad-arg/liderazgo-transformacional-ante-el-sindrome-de-burnout/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2022/09/shutterstock_2265615125-scaled-e1740055547157.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2022/09/shutterstock_2265615125-scaled-e1740055547157.jpg",
+				"2560",
+				"1350",
+				""
+			],
+			"excerpt": "Un estudio reciente revela cómo este enfoque de liderazgo, basado en la motivación y la comunicación efectiva, impacta directamente en la disminución del agotamiento profesional. Descubre por qué desarrollar estas habilidades es fundamental para mejorar el bienestar de los equipos médicos y la calidad de la atención sanitaria.",
+			"date": "Febrero 19, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				},
+				{
+					"id": 258873,
+					"name": "Fernando Fuentes",
+					"description": "Médico. Especialista en Neumonología por la Universidad de Buenos Aires. Comunicador científico.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/09/IMG-20230825-WA0000.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 247984,
+					"title": "Qué habilidades blandas requiere la medicina hoy",
+					"slug": "habilidades-blandas-medicina-hoy",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/habilidades-blandas-medicina-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2023/03/¿Que-habilidades-blandas-pediran-los-y-las-pacientes-del-futuro.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 235640,
+					"title": "Liderazgo médico: su importancia y la preparación para desarrollarlo",
+					"slug": "liderazgo-medico-importancia-y-preparacion",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/liderazgo-medico-importancia-y-preparacion/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/10/Liderazgo-medico-las-habilidades-clinicas-no-alcanzan-para-gestionar.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 333528,
+					"title": "Actualidad de la equidad de género en el ámbito médico",
+					"slug": "actualidad-equidad-de-genero-en-medicina",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/actualidad-equidad-de-genero-en-medicina/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-actualidad-equidad-de-genero-en-medicina-scaled-e1739280717491.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332935,
+					"title": "Tipos de agua y su impacto en la salud: ¿mitos o realidad?",
+					"slug": "tipos-de-agua-mitos-y-realidades",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/tipos-de-agua-mitos-y-realidades/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-tipos-de-agua-mitos-y-realidades-scaled-e1738157524930.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332899,
+					"title": "Actualización sobre enfermedad de Kawasaki: diagnóstico y terapias clave",
+					"slug": "actualizacion-sobre-kawasaki-diagnostico-y-terapias",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/actualizacion-sobre-kawasaki-diagnostico-y-terapias/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-actualizacion-sobre-kawasaki-diagnostico-y-terapias-scaled-e1738153748727.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "García-Rivera, Blanca Rosa, Mendoza-Martínez, Ignacio Alejandro, Olguín-Tiznado Jesús Everardo . Liderazgo transformacional y agotamiento profesional en personal hospitalario. Investigación Administrativa [en linea]. 2022, 51(129), 1-15[fecha de Consulta 19 de Febrero de 2025]. ISSN: 1870-6614. Disponible en: https://www.redalyc.org/articulo.oa?id=456069571008"
+				},
+				{
+					"fuente": "Ahmed Z, Ellahham S, Soomro M, Shams S, Latif K. Exploring the impact of compassion and leadership on patient safety and quality in healthcare systems: a narrative review. BMJ Open Qual. 2024;13(Suppl 2):e002651. Published 2024 May 7. doi:10.1136/bmjoq-2023-002651"
+				}
+			],
+			"categories": [
+				{
+					"id": 37878,
+					"name": "Actualidad",
+					"slug": "actualidad-arg",
+					"description": "",
+					"link": "https://ar.wp.msklatam.com/nota/category/actualidad-arg/"
+				},
+				{
+					"id": 59971,
+					"name": "Medicina",
+					"slug": "medicina-arg",
+					"description": "",
+					"link": "https://ar.wp.msklatam.com/nota/category/medicina-arg/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": null,
+			"reading_time": "6",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
 			"id": 247623,
 			"title": "Qué habilidades blandas requiere la medicina hoy",
 			"slug": "habilidades-blandas-medicina-hoy",
