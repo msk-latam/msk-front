@@ -1,5 +1,6 @@
 // generateCategoryMetadata.ts
 import { Metadata } from 'next';
+import { cookies } from 'next/headers';
 
 interface GenerateCategoryMetadataProps {
 	category: string;
@@ -8,6 +9,10 @@ interface GenerateCategoryMetadataProps {
 
 export function generateCategoryMetadata({ category, lang }: GenerateCategoryMetadataProps): Metadata {
 	const canonicalUrl = `https://msklatam.com/${lang}/tienda/${category}/`;
+	const currentCountry = lang || cookies().get('country')?.value;
+	const hostname = process.env.VERCEL_URL || '';
+	const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
+	// const IS_PROD = true;
 
 	const titles = [
 		'Administración y gestión',
@@ -145,13 +150,10 @@ export function generateCategoryMetadata({ category, lang }: GenerateCategoryMet
 		ec: 'Ecuador',
 		ve: 'Venezuela',
 		pa: 'Panamá',
-		do: 'República Dominicana',
 		gt: 'Guatemala',
 		hn: 'Honduras',
 		sv: 'El Salvador',
 		ni: 'Nicaragua',
-		cu: 'Cuba',
-		pr: 'Puerto Rico',
 		es: 'España',
 	};
 	// const siteUrl = 'http://localhost:3000';
@@ -168,9 +170,12 @@ export function generateCategoryMetadata({ category, lang }: GenerateCategoryMet
 	return {
 		title: `Cursos de ${categoryTitle} | MSK`,
 		description: categoryDescription,
-		alternates: {
-			canonical: hreflangUrls['es-ar'],
-			languages: hreflangUrls,
-		},
+		alternates: IS_PROD
+			? {
+					canonical: hreflangUrls['es-ar'],
+					languages: hreflangUrls,
+			  }
+			: undefined,
+		robots: IS_PROD && currentCountry === undefined ? { index: true, follow: true } : { index: false, follow: false },
 	};
 }
