@@ -48,10 +48,16 @@ export type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const currentCountry = params.lang || cookies().get('country')?.value;
+	let currentCountry = params.lang || cookies().get('country')?.value;
+	if (currentCountry === undefined) {
+		currentCountry = '';
+	}
 
 	const hostname = process.env.VERCEL_URL || '';
 	const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
+	// const siteUrl = 'http://localhost:3000';
+	// const siteUrl = 'https://masklatam.tech'
+	const siteUrl = 'https://msklatam.com';
 
 	return {
 		title: {
@@ -59,10 +65,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 			template: '%s',
 		},
 		description: 'Cursos de medicina para expandir tus metas profesionales',
-		metadataBase: new URL(`${SITE_URL}/${currentCountry}`),
-		alternates: {
-			canonical: '/',
-		},
+		metadataBase: IS_PROD ? new URL(`${siteUrl}/${currentCountry}`) : undefined,
+		alternates: IS_PROD
+			? {
+					canonical: '/',
+			  }
+			: undefined,
 		robots: IS_PROD ? { index: true, follow: true } : { index: false, follow: false },
 	};
 }

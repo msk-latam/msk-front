@@ -66,7 +66,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 
 	let categories: Specialty[] = useStoreFilters().specialties;
 
-	let sortedCategories = [...categories].sort((a, b) => a.name.localeCompare(b.name));
+	let sortedCategories = [...categories].sort((a, b) => a.name?.localeCompare(b.name));
 
 	// Filtramos la categoría "Oftalmología" (asumiendo que el nombre es case-sensitive)
 	sortedCategories = sortedCategories.filter((category) => category.name !== 'Oftalmología');
@@ -95,7 +95,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 	});
 
 	// Ordenamos de nuevo para incluir "Neurología" en la posición correcta
-	sortedCategories = sortedCategories.sort((a, b) => a.name.localeCompare(b.name));
+	sortedCategories = sortedCategories.sort((a, b) => a.name?.localeCompare(b.name));
 
 	const handleCategoryClick = (category: Specialty) => {
 		// Si la categoría es "Medicina de urgencias", la reemplazamos por "Emergentología" internamente.
@@ -224,15 +224,16 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 
 	// console.log(filteredCourses);
 
-	const getCategoryLink = (slug: string): string => {
+	const getCategoryLink = (slug: string = ''): string => {
 		// Obtener la URL actual
 		const pathname = window.location.pathname;
 
 		// Extraer el código del país (el primer segmento después del dominio)
 		const country = pathname.split('/')[1]; // Por ejemplo, en "/ar/tienda", extraerá "ar"
 
-		// Formatear el slug
-		let formattedSlug = slug
+		let formattedSlug = typeof slug === 'string' ? slug : '';
+
+		formattedSlug = formattedSlug
 			.toLowerCase() // Convertir a minúsculas
 			.normalize('NFD') // Normalizar caracteres unicode
 			.replace(/[^a-z0-9\s]/g, '') // Eliminar caracteres raros
@@ -301,7 +302,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 										className='flex justify-between items-center lg:px-4 py-1 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md w-80 lg:w-auto'
 									>
 										<span>{category.name}</span>
-										<a href={getCategoryLink(category.name)}></a>
+										<a href={getCategoryLink(category?.name)}></a>
 										<img src={`${breadcrumArrowIcon.src}`} className='w-3 h-3' alt='Arrow' />
 									</li>
 								))}
