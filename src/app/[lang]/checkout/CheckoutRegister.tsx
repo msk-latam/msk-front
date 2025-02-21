@@ -178,6 +178,7 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 					...formDataUser,
 					name: `${formDataUser.firstName}`,
 					last_name: formDataUser.lastName,
+					Last_Name: formDataUser.lastName,
 					speciality: formDataUser.specialty,
 					country: countryCompleteName,
 					state: formData.state,
