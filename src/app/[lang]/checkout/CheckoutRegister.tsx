@@ -10,7 +10,7 @@ import DocumentDetailsForm from './forms/DocumentDetailsForm';
 import AddressForm from './forms/AddressForm';
 import { useRecoilState } from 'recoil';
 import { rebillIdState } from './checkoutAtom';
-import { ENDPOINT_CRM } from './rebill/rebillEndpoints';
+import { ENDPOINT_CRM, ENDPOINT_GATEWAY } from './rebill/rebillEndpoints';
 
 const CheckoutRegister: React.FC = ({ product, country }: any) => {
 	const { state } = useContext(AuthContext);
@@ -251,7 +251,8 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 					birthday: formDataUser.birthday,
 				};
 
-				const createUserRebill = await fetch('http://localhost:8465/api/rebill/test/customers', {
+				const createUserRebill = await fetch(`${ENDPOINT_GATEWAY}/api/rebill/test/customers`, {
+					// const createUserRebill = await fetch('http://localhost:8465/api/rebill/test/customers', {
 					method: 'POST',
 					headers: {
 						Authorization: `Bearer $2y$12$O4BEY9Ghrs2GCb5MtrNBWeeaG4H9MlWJsViHO7vKYhMb2ChNcPYRK`,
@@ -321,7 +322,8 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 					Monto_de_cada_pago_restantes: (transactionAmount / 6).toFixed(2),
 				};
 
-				const responseContract = await fetch('http://localhost:8577/api/zoho/sales_order/create_contract', {
+				const responseContract = await fetch(`${ENDPOINT_CRM}/api/zoho/sales_order/create_contract`, {
+					// const responseContract = await fetch('http://localhost:8577/api/zoho/sales_order/create_contract', {
 					method: 'POST',
 					headers: {
 						Authorization: `Bearer ${token}`,
