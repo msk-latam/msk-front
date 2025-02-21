@@ -12,7 +12,8 @@ const PasswordGate = ({ children }: { children: React.ReactNode }) => {
 
 	useEffect(() => {
 		const hostname = window.location.hostname;
-		const isTechOrLocalhost = hostname.includes('tech');
+		const isTechOrLocalhost = false;
+		// const isTechOrLocalhost = hostname.includes('tech');
 
 		// Si no es `.tech` ni `localhost`, permitir acceso directo
 		if (!isTechOrLocalhost) {
