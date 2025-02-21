@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useCheckout } from './CheckoutContext';
 import { selectCountryKey } from './rebill/rebillKeys';
+import { useRecoilValue } from 'recoil';
+import { rebillIdState } from './checkoutAtom';
 
 let checkoutForm: any;
 let rebillPayment: any;
@@ -44,6 +46,9 @@ interface CheckoutRebillProps {
 
 const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payment', country }) => {
 	const { user } = useCheckout();
+	const rebillId = useRecoilValue(rebillIdState);
+	console.log(rebillId);
+
 	console.log('revisando pais de checkout rebill', country);
 
 	const variables = selectCountryKey(country);
@@ -64,8 +69,8 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payme
 		const rebill = new window.Rebill(variables.API_KEY);
 
 		try {
-			if (mode === 'payment') {
-				checkoutForm = rebill.card.create('4ae8f580-15e6-4445-99ea-102623bb8b88');
+			if (rebillId !== '') {
+				checkoutForm = rebill.card.create(rebillId);
 
 				checkoutForm.display({
 					userLogin: false,

@@ -8,9 +8,12 @@ import React from 'react';
 import CardDetailsForm from './forms/CardDetailsForm';
 import DocumentDetailsForm from './forms/DocumentDetailsForm';
 import AddressForm from './forms/AddressForm';
+import { useRecoilState } from 'recoil';
+import { rebillIdState } from './checkoutAtom';
 
 const CheckoutRegister: React.FC = ({ product, country }: any) => {
 	const { state } = useContext(AuthContext);
+	const [rebillId, setRebillId] = useRecoilState(rebillIdState);
 
 	const { activeStep, setActiveStep, completeStep, setUser, user } = useCheckout();
 	const [loading, setLoading] = useState(false);
@@ -280,11 +283,7 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 
 				console.log(createUserRebillResponse);
 				let idRebillUser = createUserRebillResponse.id;
-				console.log(idRebillUser);
-				setUser((prevUser) => ({
-					...prevUser,
-					idRebillUser: createUserRebillResponse.id,
-				}));
+				setRebillId(idRebillUser);
 
 				const createUserResponse = await responseUser.json();
 				console.log(createUserResponse);

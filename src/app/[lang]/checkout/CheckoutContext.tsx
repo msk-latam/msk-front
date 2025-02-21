@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { RecoilRoot } from 'recoil';
 
 interface User {
 	firstName: string;
@@ -10,6 +11,7 @@ interface User {
 	profession: string;
 	specialty: string;
 	privacyPolicy: boolean;
+	idRebillUser?: string;
 }
 
 interface CheckoutContextType {
@@ -65,7 +67,7 @@ export const CheckoutProvider: React.FC<{ children: ReactNode }> = ({ children }
 				setUser,
 			}}
 		>
-			{children}
+			<RecoilRoot>{children}</RecoilRoot>
 		</CheckoutContext.Provider>
 	);
 };

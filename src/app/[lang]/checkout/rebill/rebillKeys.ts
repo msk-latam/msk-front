@@ -11,4 +11,17 @@ const countryMap: any = {
 		API_KEY: process.env.NEXT_PUBLIC_REBILL_PUBLIC_KEY_TEST,
 		ORG_ID: process.env.NEXT_PUBLIC_REBILL_ORG_ID_TEST,
 	},
+	uy: {
+		API_KEY: process.env.NEXT_PUBLIC_REBILL_UY_API_KEY_PRD,
+		ORG_ID: process.env.NEXT_PUBLIC_REBILL_UY_ORG_ID_PRD,
+	},
+
+	co: {
+		API_KEY: process.env.NEXT_PUBLIC_REBILL_COP_API_KEY_PRD,
+		ORG_ID: process.env.NEXT_PUBLIC_REBILL_COP_ORG_ID_PRD,
+	},
+	// co: {
+	// 	API_KEY: process.env,
+	// 	ORG_ID: process.env,
+	// },
 };
