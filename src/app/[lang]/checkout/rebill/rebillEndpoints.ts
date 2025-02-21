@@ -5,7 +5,7 @@ const getCRMBaseURL = () => {
 		if (host.includes('localhost')) {
 			return 'http://localhost:8577';
 		} else if (host.includes('msklatam.tech') || host.includes('msklatam.com')) {
-			return 'https://crm.msklatam.net';
+			return process.env.NEXT_PUBLIC_CRM_ENDPOINT;
 		}
 	}
 
@@ -19,7 +19,7 @@ const getGatewayBaseURL = () => {
 		if (host.includes('localhost')) {
 			return 'http://localhost:8465';
 		} else if (host.includes('msklatam.tech') || host.includes('msklatam.com')) {
-			return 'https://gateway.msklatam.net';
+			return process.env.NEXT_PUBLIC_GATEWAY_ENDPOINT;
 		}
 	}
 
