@@ -270,7 +270,7 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 					birthday: formDataUser.birthday,
 				};
 
-				const createUserRebill = await fetch(`${ENDPOINT_GATEWAY}/api/rebill/test/customers`, {
+				const createUserRebill = await fetch(`${ENDPOINT_GATEWAY}/api/rebill/${country}/customers`, {
 					// const createUserRebill = await fetch('http://localhost:8465/api/rebill/test/customers', {
 					method: 'POST',
 					headers: {
