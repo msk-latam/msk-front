@@ -51,7 +51,7 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payme
 
 	console.log('revisando pais de checkout rebill', country);
 
-	const variables = selectCountryKey('test');
+	const variables = selectCountryKey(country);
 	// const variables = selectCountryKey(country);
 	console.log(variables);
 	useEffect(() => {
