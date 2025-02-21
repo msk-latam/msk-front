@@ -226,7 +226,25 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 						Authorization: `Bearer ${token}`,
 						'Content-Type': 'application/json',
 					},
-					body: JSON.stringify({ userData: formDataCreate }), // Si formData es un objeto JSON, conviértelo a string
+					body: JSON.stringify({
+						...formDataUser,
+						name: `${formDataUser.firstName}`,
+						last_name: formDataUser.lastName,
+						Last_Name: formDataUser.lastName,
+						speciality: formDataUser.specialty,
+						country: countryCompleteName,
+						state: formData.state,
+						city: formData.city,
+						address: formData.address,
+						postal_code: formData.postal_code,
+						type_doc: formData.type_doc,
+						identification: formData.identification,
+						// utm_source: utmState.utm_source,
+						// utm_medium: utmState.utm_medium,
+						// utm_campaign: utmState.utm_campaign,
+						// utm_content: utmState.utm_content,
+						converted_by: 'Checkout Web ',
+					}), // Si formData es un objeto JSON, conviértelo a string
 				});
 
 				const rebillCreateUser = {
