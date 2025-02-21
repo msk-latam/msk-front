@@ -5,9 +5,9 @@ const getBaseURL = () => {
 		if (host.includes('localhost')) {
 			return 'http://localhost:8577';
 		} else if (host.includes('msklatam.tech')) {
-			return 'https://crm.msklatam.com';
+			return 'https://crm.msklatam.net';
 		} else if (host.includes('msklatam.com')) {
-			return 'https://crm.msklatam.com';
+			return 'https://crm.msklatam.net';
 		}
 	}
 
