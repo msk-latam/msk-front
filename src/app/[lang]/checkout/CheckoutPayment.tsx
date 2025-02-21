@@ -9,6 +9,7 @@ import { validatePaymentField } from './validators/paymentValidator';
 import CheckoutPaymentButtons from './buttons/CheckoutPaymentButtons';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import axios from 'axios';
+import { selectCountryKey } from './rebill/rebillKeys';
 // import CheckoutRebill from './CheckoutRebill';
 
 interface CheckoutContentProps {
@@ -52,11 +53,17 @@ interface CheckoutRebillProps {
 		};
 	};
 	mode?: 'payment' | 'subscription';
+	country?: string;
 }
 
 let checkoutForm: any;
 let rebillPayment: any;
-const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payment' }) => {
+const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payment', country }) => {
+	const { user } = useCheckout();
+	console.log('revisando pais de checkout rebill', country);
+
+	const variables = selectCountryKey(country);
+	console.log(variables);
 	useEffect(() => {
 		if (!window.Rebill) {
 			console.error(
@@ -70,37 +77,39 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payme
 			container.innerHTML = '';
 		}
 
-		const rebill = new window.Rebill('pk_test_8f248fff-0734-11ef-92e2-0e2c69b9aaf7');
+		const rebill = new window.Rebill(variables.API_KEY);
 
 		try {
 			if (mode === 'payment') {
 				// Crea un formulario para pagos únicos
-				checkoutForm = rebill.checkout.create({
-					name: formData.productName,
-					description: formData.description || '',
-					amount: formData.amount,
-					currency: formData.currency,
-				});
-				checkoutForm.set({
-					customerInformation: {
-						email: formData.customerData.email || '',
-						firstName: formData.customerData.firstName || '',
-						lastName: formData.customerData.lastName || '',
-						phoneNumber: formData.customerData.phoneNumber || { number: 0 },
-						identification: {
-							type: formData.customerData?.identification?.type,
-							id: formData.customerData?.identification?.id,
-						},
-					},
-					billing: {
-						city: formData.billing?.city || '',
-						country: formData.billing?.country || '',
-						line1: formData.billing?.line1 || '',
-						line2: formData.billing?.line2 || '',
-						zipCode: formData.billing?.zipCode || '',
-						state: formData.billing?.state || '',
-					},
-				});
+				checkoutForm = rebill.card.create('4ae8f580-15e6-4445-99ea-102623bb8b88');
+				// checkoutForm = rebill.card.create(user.idRebillUser);
+				// checkoutForm = rebill.checkout.create({
+				// 	name: formData.productName,
+				// 	description: formData.description || '',
+				// 	amount: formData.amount,
+				// 	currency: formData.currency,
+				// });
+				// checkoutForm.set({
+				// 	customerInformation: {
+				// 		email: formData.customerData.email || '',
+				// 		firstName: formData.customerData.firstName || '',
+				// 		lastName: formData.customerData.lastName || '',
+				// 		phoneNumber: formData.customerData.phoneNumber || { number: 0 },
+				// 		identification: {
+				// 			type: formData.customerData?.identification?.type,
+				// 			id: formData.customerData?.identification?.id,
+				// 		},
+				// 	},
+				// 	billing: {
+				// 		city: formData.billing?.city || '',
+				// 		country: formData.billing?.country || '',
+				// 		line1: formData.billing?.line1 || '',
+				// 		line2: formData.billing?.line2 || '',
+				// 		zipCode: formData.billing?.zipCode || '',
+				// 		state: formData.billing?.state || '',
+				// 	},
+				// });
 				checkoutForm.display({
 					userLogin: false,
 					// billing: false,
@@ -112,30 +121,30 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ formData, mode = 'payme
 					// resetButton: false,
 					excludePaymentMethods: ['CASH', 'REBILL_PIX', 'TRANSFER'],
 				});
-				checkoutForm.custom({
-					css: `
-					
-					 [id^="headlessui-listbox-option"]:nth-child(n+6) {
-		  display: none !important;
-		}
-		    html {
-    overflow: visible !important;
-}
-				`,
-				});
+				// 				checkoutForm.custom({
+				// 					css: `
+
+				// 					 [id^="headlessui-listbox-option"]:nth-child(n+6) {
+				// 		  display: none !important;
+				// 		}
+				// 		    html {
+				//     overflow: visible !important;
+				// }
+				// 				`,
+				// 				});
 			}
 
-			checkoutForm.custom({
-				css: `
-				
-				 [id^="headlessui-listbox-option"]:nth-child(n+6) {
-      display: none !important;
-    }
-	  html {
-    overflow: visible !important;
-}
-			`,
-			});
+			// 			checkoutForm.custom({
+			// 				css: `
+
+			// 				 [id^="headlessui-listbox-option"]:nth-child(n+6) {
+			//       display: none !important;
+			//     }
+			// 	  html {
+			//     overflow: visible !important;
+			// }
+			// 			`,
+			// 			});
 
 			// Monta el formulario en el contenedor
 			checkoutForm.mount('rebill-container');
@@ -810,7 +819,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 			<div className='p-6 bg-white border border-gray-300 rounded-lg '>
 				<h2 className='text-2xl font-semibold text-[#392C35]'>Datos de tarjeta</h2>
 
-				<form className='mt-6'>
+				{/* <form className='mt-6'>
 					{country === 'ar' && (
 						<CardDetailsForm
 							formData={formData}
@@ -839,13 +848,13 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 						errors={errors}
 						touched={touched}
 					/>
-				</form>
+				</form> */}
 
-				{rebillValid && country !== 'ar' && (
+				{/* {rebillValid && country !== 'ar' && (
 					<div className='w-full'>
-						<CheckoutRebill formData={rebillForm} />
 					</div>
-				)}
+				)} */}
+				<CheckoutRebill formData={rebillForm} country={country} />
 			</div>
 			<CheckoutPaymentButtons
 				isFormValid={isFormValid}

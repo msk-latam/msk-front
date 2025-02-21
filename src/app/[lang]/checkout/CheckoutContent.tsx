@@ -5,6 +5,7 @@ import CheckoutPayment from './CheckoutPayment';
 import CheckoutState from './CheckoutState';
 import PaymentTypeSelection from './CheckoutPaymentTypeSelection';
 import { useCheckout } from './CheckoutContext';
+import CheckoutPaymentTest from './CheckoutPaymentTest';
 interface CheckoutContentProps {
 	product: any;
 	country: string;
@@ -17,7 +18,8 @@ const CheckoutContent: React.FC<CheckoutContentProps> = ({ product, country }) =
 			return <PaymentTypeSelection />;
 		}
 		if (subStep === 1) {
-			return <CheckoutPayment product={product} country={country} />;
+			// return <CheckoutPayment product={product} country={country} />;
+			return <CheckoutPaymentTest product={product} country={country} />;
 		}
 		return <div>Debe seleccionar el tipo de pago</div>;
 	}

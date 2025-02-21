@@ -25,6 +25,7 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 		specialty: '',
 		privacyPolicy: false,
 		converted_by: 'Checkout Web ',
+		birthday: '',
 	});
 	const [formData, setFormData] = useState({
 		// cardholderName: '',
@@ -242,7 +243,7 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 					address_floor: '',
 					address_apartment: '',
 					address_description: '',
-					birthday: '1995-06-20', //agregar al formulario
+					birthday: formDataUser.birthday,
 				};
 
 				const createUserRebill = await fetch('http://localhost:8465/api/rebill/test/customers', {
@@ -271,7 +272,7 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 						address_floor: '',
 						address_apartment: '',
 						address_description: '',
-						birthday: '1995-06-20',
+						birthday: formDataUser.birthday,
 					}),
 				});
 
@@ -280,6 +281,11 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 				console.log(createUserRebillResponse);
 				let idRebillUser = createUserRebillResponse.id;
 				console.log(idRebillUser);
+				setUser((prevUser) => ({
+					...prevUser,
+					idRebillUser: createUserRebillResponse.id,
+				}));
+
 				const createUserResponse = await responseUser.json();
 				console.log(createUserResponse);
 				const firstResponse = createUserResponse.data[0];
