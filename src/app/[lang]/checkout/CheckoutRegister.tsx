@@ -10,6 +10,7 @@ import DocumentDetailsForm from './forms/DocumentDetailsForm';
 import AddressForm from './forms/AddressForm';
 import { useRecoilState } from 'recoil';
 import { rebillIdState } from './checkoutAtom';
+import { ENDPOINT_CRM } from './rebill/rebillEndpoints';
 
 const CheckoutRegister: React.FC = ({ product, country }: any) => {
 	const { state } = useContext(AuthContext);
@@ -217,7 +218,8 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 				};
 				setUser(formDataUser);
 				const token = '$2y$12$tdFqIBqa413sfYENjGjVR.lUOfcRnRaXBgBDUeQIBg1BjujlLbmQW';
-				const responseUser = await fetch('http://localhost:8577/api/zoho/contacts/', {
+				const responseUser = await fetch(`${ENDPOINT_CRM}/api/zoho/contacts/`, {
+					// const responseUser = await fetch('http://localhost:8577/api/zoho/contacts/', {
 					method: 'POST',
 					headers: {
 						Authorization: `Bearer ${token}`,
