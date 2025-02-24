@@ -39,6 +39,7 @@ export default function robots(): MetadataRoute.Robots {
 					userAgent: '*',
 					disallow: ' ',
 					// disallow: '/',
+					allow: '/_next/static/',
 			  },
 		sitemap: IS_PROD ? 'https://msklatam.com/sitemap.xml' : 'https://msklatam.com/sitemap.xml',
 	};
