@@ -599,7 +599,7 @@ const CheckoutPayment: React.FC<CheckoutContentProps> = ({ product, country }) =
 				Authorization: `Bearer ${token}`,
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ userData: formData }), // Si formData es un objeto JSON, conviértelo a string
+			body: JSON.stringify({ userData: formData }),
 		});
 
 		const createUserResponse = await responseUser.json();

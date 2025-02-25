@@ -30,8 +30,8 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 	const countryMap = {
 		ar: 'Argentina',
 		cl: 'Chile',
-		br: 'Brasil',
 		mx: 'Mexico',
+		uy: 'Uruguay',
 		// Agrega más países según sea necesario
 	};
 	const normalizeCountryCode = (code: any) => code?.toLowerCase() || '';
