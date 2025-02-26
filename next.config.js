@@ -21,7 +21,6 @@ const nextConfig = {
 				destination: '/',
 				permanent: true,
 			},
-			{ source: '/ar', destination: '/ar/', permanent: true },
 		];
 	},
 	async headers() {

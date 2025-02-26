@@ -175,21 +175,11 @@ export function middleware(request: NextRequest) {
 
 	const { pathname } = request.nextUrl;
 
-	if (pathname === '/ar' || pathname === '/ar/') {
-		return NextResponse.redirect(new URL('/', request.url), 301);
+	if (pathname.startsWith('/ar')) {
+		// Elimina "/ar" y mantiene el resto de la URL
+		const newPath = pathname.replace(/^\/ar/, '');
+		return NextResponse.redirect(new URL(newPath || '/', request.url), 301);
 	}
-
-	// Si la URL comienza con "/ar/", redirige eliminando "/ar"
-	if (pathname.startsWith('/ar/')) {
-		const newPath = pathname.replace(/^\/ar\//, '/');
-		return NextResponse.redirect(new URL(newPath, request.url), 301);
-	}
-
-	// if (pathname.startsWith('/ar')) {
-	// 	// Elimina "/ar" y mantiene el resto de la URL
-	// 	const newPath = pathname.replace(/^\/ar/, '');
-	// 	return NextResponse.redirect(new URL(newPath || '/', request.url), 301);
-	// }
 	const segments = pathname.split('/').filter(Boolean); // Divide la ruta en segmentos
 
 	// Si la URL tiene múltiples repeticiones del país, redirige a la versión limpia
