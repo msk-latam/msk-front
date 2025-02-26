@@ -7,6 +7,144 @@
 	"total_products": 262,
 	"posts": [
 		{
+			"id": 334786,
+			"title": "Habilidades esenciales para el liderazgo en salud",
+			"slug": "habilidades-esenciales-para-el-liderazgo-en-salud",
+			"permalink": "https://wp.msklatam.com/nota/medicina/habilidades-esenciales-para-el-liderazgo-en-salud/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-habilidades-esenciales-para-el-liderazgo-en-salud-scaled-e1740583131814.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-habilidades-esenciales-para-el-liderazgo-en-salud-scaled-e1740583131814.jpg",
+				"1000",
+				"693",
+				""
+			],
+			"excerpt": "El liderazgo en salud es un factor clave para la calidad asistencial, la motivación del equipo y la eficiencia de los sistemas sanitarios. Desarrollar habilidades adecuadas te permite influir positivamente en tus equipos y mejorar la atención a tus pacientes. Descubre qué competencias son esenciales para liderar en el ámbito sanitario y cómo potenciar tu impacto en la gestión de la salud.",
+			"date": "Febrero 25, 2025",
+			"author": {
+				"id": 273557,
+				"name": "Gonzalo Busquets",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2024/01/foto-cv-blurred.png"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 273557,
+					"name": "Gonzalo Busquets",
+					"description": "Periodista. Especialista en comunicación regional para el segmento e-learning y salud.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2024/01/foto-cv-blurred.png"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 334423,
+					"title": "Alto porcentaje de supervivencia en detección temprana del cáncer infantil",
+					"slug": "deteccion-temprana-en-cancer-infantil",
+					"link": "https://wp.msklatam.com/nota/medicina/deteccion-temprana-en-cancer-infantil/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-deteccion-temprana-en-cancer-infantil-scaled-e1740162838899.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 230620,
+					"title": "Cómo actúa el liderazgo transformacional ante el síndrome de burnout",
+					"slug": "liderazgo-transformacional-ante-el-sindrome-de-burnout",
+					"link": "https://wp.msklatam.com/nota/medicina/liderazgo-transformacional-ante-el-sindrome-de-burnout/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/09/shutterstock_2265615125-scaled-e1740055547157.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 247623,
+					"title": "Qué habilidades blandas requiere la medicina hoy",
+					"slug": "habilidades-blandas-medicina-hoy",
+					"link": "https://wp.msklatam.com/nota/medicina/habilidades-blandas-medicina-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2023/03/¿Que-habilidades-blandas-pediran-los-y-las-pacientes-del-futuro.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 235584,
+					"title": "Liderazgo médico: su importancia y la preparación para desarrollarlo",
+					"slug": "liderazgo-medico-importancia-y-preparacion",
+					"link": "https://wp.msklatam.com/nota/medicina/liderazgo-medico-importancia-y-preparacion/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/10/Liderazgo-medico-las-habilidades-clinicas-no-alcanzan-para-gestionar.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 333526,
+					"title": "Actualidad de la equidad de género en el ámbito médico",
+					"slug": "actualidad-equidad-de-genero-en-medicina",
+					"link": "https://wp.msklatam.com/nota/medicina/actualidad-equidad-de-genero-en-medicina/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-actualidad-equidad-de-genero-en-medicina-scaled-e1739280717491.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "https://msklatam.com/blog/liderazgo-medico-importancia-y-preparacion/"
+				},
+				{
+					"fuente": "https://msklatam.com/blog/habilidades-blandas-medicina-hoy/"
+				},
+				{
+					"fuente": "https://msklatam.com/blog/liderazgo-transformacional-ante-el-sindrome-de-burnout/"
+				},
+				{
+					"fuente": "Puertas EB, Sotelo JM, Ramos G. Liderazgo y gestión estratégica en sistemas de salud basados en atención primaria de salud [Leadership and strategic management in health systems based on primary health care]. Rev Panam Salud Publica. 2020;44:e124. Published 2020 Nov 2. doi:10.26633/RPSP.2020.124"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 60090,
+				"name": "Administración y gestión",
+				"slug": "administracion-y-gestion",
+				"term_group": 0,
+				"term_taxonomy_id": 60090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 23,
+				"filter": "raw"
+			},
+			"reading_time": "4",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
 			"id": 334423,
 			"title": "Alto porcentaje de supervivencia en detección temprana del cáncer infantil",
 			"slug": "deteccion-temprana-en-cancer-infantil",
