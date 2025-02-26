@@ -4,8 +4,10 @@ export const selectCountryKey = (country: string | undefined) => {
 
 const countryMap: any = {
 	cl: {
-		API_KEY: process.env.NEXT_PUBLIC_REBILL_CL_API_KEY_PRD,
-		ORG_ID: process.env.NEXT_PUBLIC_REBILL_CL_ORG_ID_PRD,
+		API_KEY: process.env.NEXT_PUBLIC_REBILL_CL_API_KEY_test,
+		// API_KEY: process.env.NEXT_PUBLIC_REBILL_CL_API_KEY_PRD,
+		// ORG_ID: process.env.NEXT_PUBLIC_REBILL_CL_ORG_ID_PRD,
+		ORG_ID: process.env.NEXT_PUBLIC_REBILL_CL_ORG_ID_test,
 	},
 	test: {
 		API_KEY: process.env.NEXT_PUBLIC_REBILL_PUBLIC_KEY_TEST,
