@@ -175,11 +175,21 @@ export function middleware(request: NextRequest) {
 
 	const { pathname } = request.nextUrl;
 
-	if (pathname.startsWith('/ar')) {
-		// Elimina "/ar" y mantiene el resto de la URL
-		const newPath = pathname.replace(/^\/ar/, '');
-		return NextResponse.redirect(new URL(newPath || '/', request.url), 301);
+	if (pathname === '/ar' || pathname === '/ar/') {
+		return NextResponse.redirect(new URL('/', request.url), 301);
 	}
+
+	// Si la URL comienza con "/ar/", redirige eliminando "/ar"
+	if (pathname.startsWith('/ar/')) {
+		const newPath = pathname.replace(/^\/ar\//, '/');
+		return NextResponse.redirect(new URL(newPath, request.url), 301);
+	}
+
+	// if (pathname.startsWith('/ar')) {
+	// 	// Elimina "/ar" y mantiene el resto de la URL
+	// 	const newPath = pathname.replace(/^\/ar/, '');
+	// 	return NextResponse.redirect(new URL(newPath || '/', request.url), 301);
+	// }
 	const segments = pathname.split('/').filter(Boolean); // Divide la ruta en segmentos
 
 	// Si la URL tiene múltiples repeticiones del país, redirige a la versión limpia
@@ -192,19 +202,6 @@ export function middleware(request: NextRequest) {
 	if (validCountries.includes(segments[0])) {
 		return NextResponse.next();
 	}
-	// if (pathname.startsWith('/us') && !pathname.startsWith('/us/us')) {
-	// 	const newPath = pathname.replace(/^\/us/, ''); // Elimina "/us" y mantiene el resto
-	// 	return NextResponse.redirect(new URL(newPath, request.url), 301);
-	// }
-	// if (pathname.startsWith('/br') && !pathname.startsWith('/br/br')) {
-	// 	const newPath = pathname.replace(/^\/us/, ''); // Elimina "/us" y mantiene el resto
-	// 	return NextResponse.redirect(new URL(newPath, request.url), 301);
-	// }
-	// if (pathname.startsWith('/ch') && !pathname.startsWith('/ch/ch')) {
-	// 	const newPath = pathname.replace(/^\/us/, ''); // Elimina "/us" y mantiene el resto
-	// 	return NextResponse.redirect(new URL(newPath, request.url), 301);
-	// }
-	// return i18nRouter(request, i18nConfig); //esto hace la redireccion automatica
 }
 
 // only applies this middleware to files in the app directory
