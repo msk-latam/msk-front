@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCheckout } from './CheckoutContext';
 import { selectCountryKey } from './rebill/rebillKeys';
 import { useRecoilValue } from 'recoil';
@@ -113,204 +113,105 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 	);
 };
 
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import { ENDPOINT_GATEWAY } from './rebill/rebillEndpoints';
 
 const CheckoutStripe = () => {
-	const formik = useFormik({
-		initialValues: {
-			transaction_amount: '',
-			description: '',
-			payer: {
-				email: '',
-				first_name: '',
-				last_name: '',
-			},
-			payment_data: {
-				cardNumber: '',
-				expirationMonth: '',
-				expirationYear: '',
-				securityCode: '',
-				identification: {
-					type: '',
-					number: '',
-				},
-			},
+	const [formData, setFormData] = useState({
+		quote_amount: 170,
+		total_contract_amount: 2040,
+		currency: 'PEN',
+		quotes: 12,
+		contract_id: '5344455000199991681',
+		contract_so: '5344455000199991682',
+		customer: {
+			name: 'Albert Reis',
+			email: 'areis@msklatam.com',
+			first_name: 'Albert',
+			last_name: 'Reis',
+			reference: '5344455000199886983',
+			country: 'Brasil',
 		},
-		validationSchema: Yup.object({
-			transaction_amount: Yup.number().min(1, 'Debe ser mayor a 0').required('Requerido'),
-			description: Yup.string().max(255, 'Máximo 255 caracteres').required('Requerido'),
-			payer: Yup.object({
-				email: Yup.string().email('Email inválido').required('Requerido'),
-				first_name: Yup.string().max(255, 'Máximo 255 caracteres').required('Requerido'),
-				last_name: Yup.string().max(255, 'Máximo 255 caracteres').required('Requerido'),
-			}),
-			payment_data: Yup.object({
-				cardNumber: Yup.string()
-					.matches(/^\d{16}$/, 'Debe tener 16 dígitos')
-					.required('Requerido'),
-				expirationMonth: Yup.string()
-					.matches(/^\d{2}$/, 'Debe ser MM')
-					.required('Requerido'),
-				expirationYear: Yup.string()
-					.matches(/^\d{4}$/, 'Debe ser AAAA')
-					.required('Requerido'),
-				securityCode: Yup.string()
-					.matches(/^\d{3,4}$/, 'Debe ser de 3 o 4 dígitos')
-					.required('Requerido'),
-				identification: Yup.object({
-					type: Yup.string().required('Requerido'),
-					number: Yup.string().required('Requerido'),
-				}),
-			}),
-		}),
-		onSubmit: async (values) => {
-			try {
-				const response = await fetch('/api/process-payment', {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify(values),
-				});
-
-				const result = await response.json();
-				if (response.ok) {
-					alert('Pago procesado con éxito');
-				} else {
-					alert(`Error: ${result.message}`);
-				}
-			} catch (error) {
-				alert('Error al procesar el pago');
-			}
+		product: {
+			name: 'ACCSAP',
+			product_code: '9005817',
+			amount: 2040,
 		},
 	});
 
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		const keys = name.split('.');
+		if (keys.length > 1) {
+			setFormData((prev) => ({
+				...prev,
+				[keys[0]]: { ...prev[keys[0]], [keys[1]]: value },
+			}));
+		} else {
+			setFormData((prev) => ({ ...prev, [name]: value }));
+		}
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		const token = '$2y$12$O4BEY9Ghrs2GCb5MtrNBWeeaG4H9MlWJsViHO7vKYhMb2ChNcPYRK';
+		try {
+			const response = await fetch(`${ENDPOINT_GATEWAY}/api/stripe/subscription/ecommerce`, {
+				method: 'POST',
+				headers: {
+					Authorization: `Bearer ${token}`,
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(formData),
+			});
+
+			const result = await response.json();
+			if (response.ok) {
+				console.log('Pago procesado con éxito');
+			} else {
+				console.log(`Error: ${result.message}`);
+			}
+		} catch (error) {
+			console.log('Error al procesar el pago');
+		}
+	};
+
 	return (
-		<form onSubmit={formik.handleSubmit} className='max-w-md mx-auto p-4 bg-white shadow-lg rounded-lg'>
+		<form onSubmit={handleSubmit} className='max-w-md mx-auto p-4 bg-white shadow-lg rounded-lg'>
 			<h2 className='text-xl font-bold mb-4'>Formulario de Pago</h2>
 
-			<label className='block mb-2'>
-				Monto:
-				<input type='number' name='transaction_amount' {...formik.getFieldProps('transaction_amount')} className='input' />
-				{formik.touched.transaction_amount && formik.errors.transaction_amount && (
-					<p className='text-red-500'>{formik.errors.transaction_amount}</p>
-				)}
-			</label>
-
-			<label className='block mb-2'>
-				Descripción:
-				<input type='text' name='description' {...formik.getFieldProps('description')} className='input' />
-				{formik.touched.description && formik.errors.description && (
-					<p className='text-red-500'>{formik.errors.description}</p>
-				)}
-			</label>
-
-			<h3 className='font-semibold mt-4'>Datos del Pagador</h3>
-			<label className='block mb-2'>
-				Email:
-				<input type='email' name='payer.email' {...formik.getFieldProps('payer.email')} className='input' />
-				{formik.touched.payer?.email && formik.errors.payer?.email && (
-					<p className='text-red-500'>{formik.errors.payer.email}</p>
-				)}
-			</label>
-
-			<label className='block mb-2'>
-				Nombre:
-				<input type='text' name='payer.first_name' {...formik.getFieldProps('payer.first_name')} className='input' />
-				{formik.touched.payer?.first_name && formik.errors.payer?.first_name && (
-					<p className='text-red-500'>{formik.errors.payer.first_name}</p>
-				)}
-			</label>
-
-			<label className='block mb-2'>
-				Apellido:
-				<input type='text' name='payer.last_name' {...formik.getFieldProps('payer.last_name')} className='input' />
-				{formik.touched.payer?.last_name && formik.errors.payer?.last_name && (
-					<p className='text-red-500'>{formik.errors.payer.last_name}</p>
-				)}
-			</label>
-
-			<h3 className='font-semibold mt-4'>Datos de la Tarjeta</h3>
-			<label className='block mb-2'>
-				Número de Tarjeta:
-				<input
-					type='text'
-					name='payment_data.cardNumber'
-					{...formik.getFieldProps('payment_data.cardNumber')}
-					className='input'
-				/>
-				{formik.touched.payment_data?.cardNumber && formik.errors.payment_data?.cardNumber && (
-					<p className='text-red-500'>{formik.errors.payment_data.cardNumber}</p>
-				)}
-			</label>
-
-			<label className='block mb-2'>
-				Expiración (MM/AAAA):
-				<div className='flex gap-2'>
-					<input
-						type='text'
-						name='payment_data.expirationMonth'
-						{...formik.getFieldProps('payment_data.expirationMonth')}
-						className='input w-1/2'
-						placeholder='MM'
-					/>
-					<input
-						type='text'
-						name='payment_data.expirationYear'
-						{...formik.getFieldProps('payment_data.expirationYear')}
-						className='input w-1/2'
-						placeholder='AAAA'
-					/>
-				</div>
-				{formik.touched.payment_data?.expirationMonth && formik.errors.payment_data?.expirationMonth && (
-					<p className='text-red-500'>{formik.errors.payment_data.expirationMonth}</p>
-				)}
-				{formik.touched.payment_data?.expirationYear && formik.errors.payment_data?.expirationYear && (
-					<p className='text-red-500'>{formik.errors.payment_data.expirationYear}</p>
-				)}
-			</label>
-
-			<label className='block mb-2'>
-				Código de Seguridad:
-				<input
-					type='text'
-					name='payment_data.securityCode'
-					{...formik.getFieldProps('payment_data.securityCode')}
-					className='input'
-				/>
-				{formik.touched.payment_data?.securityCode && formik.errors.payment_data?.securityCode && (
-					<p className='text-red-500'>{formik.errors.payment_data.securityCode}</p>
-				)}
-			</label>
-
-			<h3 className='font-semibold mt-4'>Identificación</h3>
-			<label className='block mb-2'>
-				Tipo:
-				<input
-					type='text'
-					name='payment_data.identification.type'
-					{...formik.getFieldProps('payment_data.identification.type')}
-					className='input'
-				/>
-				{formik.touched.payment_data?.identification?.type && formik.errors.payment_data?.identification?.type && (
-					<p className='text-red-500'>{formik.errors.payment_data.identification.type}</p>
-				)}
-			</label>
-
-			<label className='block mb-2'>
-				Número:
-				<input
-					type='text'
-					name='payment_data.identification.number'
-					{...formik.getFieldProps('payment_data.identification.number')}
-					className='input'
-				/>
-				{formik.touched.payment_data?.identification?.number && formik.errors.payment_data?.identification?.number && (
-					<p className='text-red-500'>{formik.errors.payment_data.identification.number}</p>
-				)}
-			</label>
+			{Object.entries(formData).map(([key, value]) =>
+				typeof value === 'object' ? (
+					<div key={key}>
+						<h3 className='font-semibold mt-4'>{key.charAt(0).toUpperCase() + key.slice(1)}</h3>
+						{Object.entries(value).map(([subKey, subValue]) => (
+							<label key={subKey} className='block mb-2'>
+								{subKey.charAt(0).toUpperCase() + subKey.slice(1)}:
+								<input
+									type={typeof subValue === 'number' ? 'number' : 'text'}
+									name={`${key}.${subKey}`}
+									value={subValue}
+									onChange={handleChange}
+									className='input'
+								/>
+							</label>
+						))}
+					</div>
+				) : (
+					<label key={key} className='block mb-2'>
+						{key.charAt(0).toUpperCase() + key.slice(1)}:
+						<input
+							type={typeof value === 'number' ? 'number' : 'text'}
+							name={key}
+							value={value}
+							onChange={handleChange}
+							className='input'
+						/>
+					</label>
+				),
+			)}
 
 			<button type='submit' className='w-full mt-4 bg-blue-600 text-white p-2 rounded-lg'>
-				Pagar
+				Enviar Pago
 			</button>
 		</form>
 	);
