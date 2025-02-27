@@ -192,19 +192,6 @@ export function middleware(request: NextRequest) {
 	if (validCountries.includes(segments[0])) {
 		return NextResponse.next();
 	}
-	// if (pathname.startsWith('/us') && !pathname.startsWith('/us/us')) {
-	// 	const newPath = pathname.replace(/^\/us/, ''); // Elimina "/us" y mantiene el resto
-	// 	return NextResponse.redirect(new URL(newPath, request.url), 301);
-	// }
-	// if (pathname.startsWith('/br') && !pathname.startsWith('/br/br')) {
-	// 	const newPath = pathname.replace(/^\/us/, ''); // Elimina "/us" y mantiene el resto
-	// 	return NextResponse.redirect(new URL(newPath, request.url), 301);
-	// }
-	// if (pathname.startsWith('/ch') && !pathname.startsWith('/ch/ch')) {
-	// 	const newPath = pathname.replace(/^\/us/, ''); // Elimina "/us" y mantiene el resto
-	// 	return NextResponse.redirect(new URL(newPath, request.url), 301);
-	// }
-	// return i18nRouter(request, i18nConfig); //esto hace la redireccion automatica
 }
 
 // only applies this middleware to files in the app directory

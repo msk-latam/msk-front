@@ -7,6 +7,144 @@
 	"total_products": 260,
 	"posts": [
 		{
+			"id": 334858,
+			"title": "Enfermedades raras: retos y soluciones en Latinoamérica",
+			"slug": "enfermedades-raras-retos-y-soluciones",
+			"permalink": "https://wp.msklatam.com/nota/medicina/enfermedades-raras-retos-y-soluciones/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-enfermedades-raras-retos-y-soluciones-scaled-e1740662888363.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-enfermedades-raras-retos-y-soluciones-scaled-e1740662888363.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "Aunque poco frecuentes individualmente, las enfermedades raras afectan a millones de personas en el mundo. En Latinoamérica, el acceso a diagnósticos y tratamientos sigue siendo un desafío, pero algunas propuestas buscan cambiar esta realidad. Descubre el panorama actual, los obstáculos que enfrentan los pacientes y las acciones necesarias para mejorar su calidad de vida.",
+			"date": "Febrero 26, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 334786,
+					"title": "Habilidades esenciales para el liderazgo en salud",
+					"slug": "habilidades-esenciales-para-el-liderazgo-en-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/habilidades-esenciales-para-el-liderazgo-en-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-habilidades-esenciales-para-el-liderazgo-en-salud-scaled-e1740583131814.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334423,
+					"title": "Alto porcentaje de supervivencia en detección temprana del cáncer infantil",
+					"slug": "deteccion-temprana-en-cancer-infantil",
+					"link": "https://wp.msklatam.com/nota/medicina/deteccion-temprana-en-cancer-infantil/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-deteccion-temprana-en-cancer-infantil-scaled-e1740162838899.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 230620,
+					"title": "Cómo actúa el liderazgo transformacional ante el síndrome de burnout",
+					"slug": "liderazgo-transformacional-ante-el-sindrome-de-burnout",
+					"link": "https://wp.msklatam.com/nota/medicina/liderazgo-transformacional-ante-el-sindrome-de-burnout/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/09/shutterstock_2265615125-scaled-e1740055547157.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 247623,
+					"title": "Qué habilidades blandas requiere la medicina hoy",
+					"slug": "habilidades-blandas-medicina-hoy",
+					"link": "https://wp.msklatam.com/nota/medicina/habilidades-blandas-medicina-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2023/03/¿Que-habilidades-blandas-pediran-los-y-las-pacientes-del-futuro.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 235584,
+					"title": "Liderazgo médico: su importancia y la preparación para desarrollarlo",
+					"slug": "liderazgo-medico-importancia-y-preparacion",
+					"link": "https://wp.msklatam.com/nota/medicina/liderazgo-medico-importancia-y-preparacion/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/10/Liderazgo-medico-las-habilidades-clinicas-no-alcanzan-para-gestionar.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Gonzaga-Jauregui C, Salazar C, MacDonald J, Reichardt JKV, Groft SC. ERCAL, a regional initiative for rare diseases in Latin America and the Caribbean. Rare Dis Orphan Drugs J. 2024;3:6. http://dx.doi.org/10.20517/rdodj.2023.48"
+				},
+				{
+					"fuente": "https://www.latimes.com/espanol/internacional/articulo/2022-02-28/latinoamerica-enfrenta-las-enfermedades-raras-con-multiples-carencias"
+				},
+				{
+					"fuente": "https://medical-impact.org/los-grandes-retos-detras-de-las-enfermedades-raras/"
+				},
+				{
+					"fuente": "https://www.swissinfo.ch/spa/el-mit-advierte-de-retos-para-diagnosticar-y-tratar-enfermedades-raras-en-latinoam%C3%A9rica/74993894"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1180,
+				"filter": "raw"
+			},
+			"reading_time": "4",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
 			"id": 334786,
 			"title": "Habilidades esenciales para el liderazgo en salud",
 			"slug": "habilidades-esenciales-para-el-liderazgo-en-salud",
