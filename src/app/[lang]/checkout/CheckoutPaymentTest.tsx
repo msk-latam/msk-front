@@ -221,7 +221,7 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 	return (
 		<>
 			<CheckoutRebill country={country} />
-			<CheckoutStripe />
+			{/* <CheckoutStripe /> */}
 		</>
 	);
 };

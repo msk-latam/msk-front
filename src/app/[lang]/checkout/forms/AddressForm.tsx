@@ -241,10 +241,10 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					name='country'
 					type='text'
 					value={countryName}
-					// value={formData.country}
-					// onChange={handleChange}
-					// onBlur={handleBlur}
-					disabled
+					value={formData.country}
+					onChange={handleChange}
+					onBlur={handleBlur}
+					// disabled
 					placeholder='Ingrese país'
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>

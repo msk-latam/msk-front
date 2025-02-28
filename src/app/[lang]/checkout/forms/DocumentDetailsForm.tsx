@@ -44,6 +44,7 @@ const DocumentDetailsForm: React.FC<DocumentDetailsFormProps> = ({
 			{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
 			{ value: 'RUT', label: 'RUT' },
 			{ value: 'Pasaporte', label: 'Pasaporte' },
+			{ value: 'DNI', label: 'DNI' },
 		],
 		co: [
 			{ value: 'Cédula de ciudadanía', label: 'Cédula de ciudadanía' },

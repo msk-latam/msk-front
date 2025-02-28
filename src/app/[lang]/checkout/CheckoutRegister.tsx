@@ -281,19 +281,20 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 						email: formDataUser.email,
 						first_name: formDataUser.firstName,
 						last_name: formDataUser.lastName,
-						phone_country_code: '',
-						phone_area_code: '',
-						phone_number: formDataUser.phone,
-						personal_id_type: formData.type_doc,
-						personal_id_number: formData.identification,
-						tax_id_type: '',
-						tax_id_number: '',
-						address_street: formData.address,
-						address_city: formData.city,
-						address_state: formData.state,
-						address_country: countryCompleteName,
-						address_zipcode: formData.postal_code,
-						address_number: formData.address,
+						// phone_country_code: '',
+						// phone_area_code: '',
+						// phone_number: formDataUser.phone,
+						// personal_id_type: formData.type_doc,
+						// personal_id_number: formData.identification,
+						// tax_id_type: '',
+						// tax_id_number: '',
+						// address_street: formData.address,
+						// address_city: formData.city,
+						// address_state: formData.state,
+						address_country: 'Argentina',
+						// address_country: countryCompleteName,
+						// address_zipcode: formData.postal_code,
+						// address_number: formData.address,
 						address_floor: '',
 						address_apartment: '',
 						address_description: '',
@@ -353,37 +354,37 @@ const CheckoutRegister: React.FC = ({ product, country }: any) => {
 
 				const contractResponseData = await responseContract.json();
 
-				const createStripeSubscription = await fetch(`${ENDPOINT_GATEWAY}/api/rebill/${country}/customers`, {
-					// const createUserRebill = await fetch('http://localhost:8465/api/rebill/test/customers', {
-					method: 'POST',
-					headers: {
-						Authorization: `Bearer $2y$12$O4BEY9Ghrs2GCb5MtrNBWeeaG4H9MlWJsViHO7vKYhMb2ChNcPYRK`,
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({
-						quote_amount: 170,
-						total_contract_amount: 2040,
-						currency: 'PEN',
-						quotes: 12,
-						contract_id: '5344455000199991681',
-						contract_so: '5344455000199991682',
-						customer: {
-							name: 'Albert Reis',
-							email: 'areis@msklatam.com',
-							first_name: 'Albert',
-							last_name: 'Reis',
-							reference: '5344455000199886983',
-							country: 'Brasil',
-						},
-						product: {
-							name: 'ACCSAP',
-							product_code: '9005817',
-							amount: 2040,
-						},
-					}),
-				});
-				const stripeResponse = await createStripeSubscription.json();
-				console.log(stripeResponse);
+				// const createStripeSubscription = await fetch(`${ENDPOINT_GATEWAY}/api/stripe/subscription/ecommerce`, {
+				// 	// const createUserRebill = await fetch('http://localhost:8465/api/rebill/test/customers', {
+				// 	method: 'POST',
+				// 	headers: {
+				// 		Authorization: `Bearer $2y$12$O4BEY9Ghrs2GCb5MtrNBWeeaG4H9MlWJsViHO7vKYhMb2ChNcPYRK`,
+				// 		'Content-Type': 'application/json',
+				// 	},
+				// 	body: JSON.stringify({
+				// 		quote_amount: 170,
+				// 		total_contract_amount: 2040,
+				// 		currency: 'PEN',
+				// 		quotes: 12,
+				// 		contract_id: '5344455000199991681',
+				// 		contract_so: '5344455000199991682',
+				// 		customer: {
+				// 			name: 'Albert Reis',
+				// 			email: 'areis@msklatam.com',
+				// 			first_name: 'Albert',
+				// 			last_name: 'Reis',
+				// 			reference: '5344455000199886983',
+				// 			country: 'Brasil',
+				// 		},
+				// 		product: {
+				// 			name: 'ACCSAP',
+				// 			product_code: '9005817',
+				// 			amount: 2040,
+				// 		},
+				// 	}),
+				// });
+				// const stripeResponse = await createStripeSubscription.json();
+				// console.log(stripeResponse.response);
 				setSuccess(true);
 				setUser(formDataUser);
 				setTimeout(() => {
