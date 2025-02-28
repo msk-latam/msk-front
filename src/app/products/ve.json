@@ -288,24 +288,19 @@
 			"language_name": "Venezuela",
 			"product_code": 9005880,
 			"featured_product_text": "",
-			"is_test_product": true,
+			"is_test_product": false,
 			"title": "Curso superior de medicina legal y forense",
-			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/foto-primaria-ACCSAP_1.jpg",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinalegalforense-imagenprimaria.jpg",
 			"thumbnail": {
-				"high": "https://wp.msklatam.com/wp-content/uploads/2025/01/foto-secundaria-ACCSAP_1.jpg",
-				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/01/foto-secundaria-ACCSAP_1.jpg",
-				"low": "https://wp.msklatam.com/wp-content/uploads/2025/01/foto-secundaria-ACCSAP_1-150x150.jpg"
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinalegalforense-imagensecundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinalegalforense-imagensecundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinalegalforense-imagensecundaria-150x150.jpg"
 			},
 			"categories": [
 				{
 					"term_id": 1090,
 					"name": "Medicina general",
 					"slug": "medicina-general"
-				},
-				{
-					"term_id": 1449,
-					"name": "Medicina familiar",
-					"slug": "medicina-familiar"
 				}
 			],
 			"professions": [
@@ -314,9 +309,9 @@
 					"name": "medicos"
 				}
 			],
-			"duration": "120",
+			"duration": "200",
 			"permalink": "https://wp.msklatam.com/producto/medicina-legal-y-forense/",
-			"temario": false,
+			"temario": "https://wp.msklatam.com/wp-content/uploads/2025/01/Medicina-legal-y-forense-1.pdf",
 			"lista_de_cedentes": [
 				{
 					"ID": 210852,
@@ -346,8 +341,8 @@
 					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/colmed_1x.webp"
 				}
 			],
-			"cantidad_modulos": 0,
-			"why_course": "",
+			"cantidad_modulos": 16,
+			"why_course": "<p>La medicina legal y forense es una disciplina que combina conocimientos médicos y jurídicos para la evaluación y resolución de casos en el ámbito de la justicia. Su aplicación es clave en la investigación de delitos, la elaboración de peritajes, la determinación de causas de muerte y la evaluación de daños corporales, garantizando el cumplimiento de normativas legales y éticas en el ejercicio profesional.</p>\n<p>Este curso de Medicina legal y forense de MSK es una capacitación integral sobre los principios fundamentales de la especialidad. A través de un enfoque práctico, podrás desarrollar habilidades para interpretar informes periciales, aplicar criterios de evaluación de lesiones y comprender el marco normativo vigente.</p>\n<p>Organizado en 16 módulos, el curso curso de Medicina legal y forense de MSK abarca desde los fundamentos de la medicina legal hasta el análisis de casos específicos en violencia, delitos contra la integridad sexual, aborto, trasplantes y psiquiatría forense, entre otros temas.</p>\n",
 			"is_new": true,
 			"nac_schools": null,
 			"int_schools": null,
@@ -356,27 +351,27 @@
 			"diploma": null,
 			"is_free": false,
 			"sale_price": "0",
-			"regular_price": "0",
-			"total_price": "0",
+			"regular_price": "950",
+			"total_price": "950",
 			"max_installments": "12",
-			"price_installments": "0",
+			"price_installments": "79",
 			"created_at": "2025-01-31 14:01:32"
 		},
 		{
 			"meta_titulo": null,
 			"meta_descripcion": null,
 			"title_contenido": null,
-			"id": 333413,
+			"id": 334442,
 			"related_tag": "",
 			"father_id": 333396,
-			"slug": "curso-superior-de-medicina-intensiva-amir",
+			"slug": "medicina-intensiva-amir",
 			"is_presale_product": false,
 			"father_post_type": "course",
 			"language_code": "ve",
 			"language_name": "Venezuela",
 			"product_code": 9005882,
 			"featured_product_text": "",
-			"is_test_product": true,
+			"is_test_product": false,
 			"title": "Curso superior de medicina intensiva AMIR",
 			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinaintensivaamir-primaria.jpg",
 			"thumbnail": {
@@ -407,9 +402,9 @@
 					"name": "medicos"
 				}
 			],
-			"duration": "400",
-			"permalink": "https://wp.msklatam.com/producto/curso-superior-de-medicina-intensiva-amir/",
-			"temario": false,
+			"duration": "350",
+			"permalink": "https://wp.msklatam.com/producto/medicina-intensiva-amir/",
+			"temario": "https://wp.msklatam.com/wp-content/uploads/2025/01/Medicina-intensiva-AMIR.pdf",
 			"lista_de_cedentes": [
 				{
 					"ID": 331572,
@@ -439,8 +434,8 @@
 					"imagen": "https://wp.msklatam.com/wp-content/uploads/2025/01/cedente_amir.png"
 				}
 			],
-			"cantidad_modulos": 0,
-			"why_course": "",
+			"cantidad_modulos": 7,
+			"why_course": "<p>La medicina intensiva es la especialidad encargada del diagnóstico y tratamiento de pacientes en estado crítico, garantizando soporte vital y monitorización continua. Abarca el manejo de patologías complejas que requieren atención inmediata en Unidades de Cuidados Intensivos (UCI), incluyendo el abordaje de fallos multiorgánicos, sepsis, insuficiencia respiratoria y afecciones neurológicas graves.</p>\n<p>Con el curso de Medicina intensiva AMIR de MSK desarrollarás habilidades avanzadas en el manejo de pacientes críticos, aplicando protocolos actualizados en ventilación mecánica, soporte hemodinámico, reanimación cardiopulmonar y control de infecciones en la UCI.</p>\n<p>Organizado en ocho bloques temáticos, el curso de Medicina intensiva AMIR de MSK aborda temas como patologías infecciosas y cardiovasculares, manejo del paciente politraumatizado, bioética en cuidados intensivos y humanización en la UCI, entre otros.</p>\n",
 			"is_new": true,
 			"nac_schools": null,
 			"int_schools": null,
@@ -449,11 +444,11 @@
 			"diploma": null,
 			"is_free": false,
 			"sale_price": "0",
-			"regular_price": "0",
-			"total_price": "0",
+			"regular_price": "950",
+			"total_price": "950",
 			"max_installments": "12",
-			"price_installments": "0",
-			"created_at": "2025-01-31 15:01:40"
+			"price_installments": "79",
+			"created_at": "2025-02-20 15:02:05"
 		},
 		{
 			"meta_titulo": null,
@@ -469,7 +464,7 @@
 			"language_name": "Venezuela",
 			"product_code": 9005883,
 			"featured_product_text": "",
-			"is_test_product": true,
+			"is_test_product": false,
 			"title": "Curso superior de pediatría AMIR",
 			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/pediatriahospitalariaamir-primaria.jpg",
 			"thumbnail": {
@@ -502,7 +497,7 @@
 			],
 			"duration": "400",
 			"permalink": "https://wp.msklatam.com/producto/pediatria-hospitalaria-amir/",
-			"temario": false,
+			"temario": "https://wp.msklatam.com/wp-content/uploads/2025/01/Pediatria-hospitalaria-AMIR.pdf",
 			"lista_de_cedentes": [
 				{
 					"ID": 331572,
@@ -532,8 +527,8 @@
 					"imagen": "https://wp.msklatam.com/wp-content/uploads/2025/01/cedente_amir.png"
 				}
 			],
-			"cantidad_modulos": 0,
-			"why_course": "",
+			"cantidad_modulos": 14,
+			"why_course": "<p>La pediatría se especializa en el cuidado de la salud de los niños y adolescentes, desde el nacimiento hasta la adolescencia. Esta rama se centra en el diagnóstico, tratamiento y prevención de enfermedades específicas que afectan a esta población. El personal pediátrico juega un papel fundamental en la promoción de la salud, proporcionando atención integral a los pacientes y a sus familias.</p>\n<p>El curso de Pediatría AMIR de MSK te permitirá profundizar en los principales desafíos de esta especialidad, desde el manejo del recién nacido hasta la atención de enfermedades complejas en la infancia y adolescencia. A través de un enfoque basado en la evidencia, adquirirás herramientas para optimizar protocolos clínicos, mejorar la coordinación asistencial y brindar una atención integral en el ámbito hospitalario.</p>\n<p>Organizado en 14 módulos, el curso de Pediatría AMIR abarca temáticas como neonatología, patología respiratoria y digestiva, endocrinología, nefrología, oncología pediátrica y neurología infantil, salud mental, pediatría social y cuidados paliativos, entre otras.</p>\n",
 			"is_new": true,
 			"nac_schools": null,
 			"int_schools": null,
@@ -542,10 +537,10 @@
 			"diploma": null,
 			"is_free": false,
 			"sale_price": "0",
-			"regular_price": "0",
-			"total_price": "0",
+			"regular_price": "950",
+			"total_price": "950",
 			"max_installments": "12",
-			"price_installments": "0",
+			"price_installments": "79",
 			"created_at": "2025-01-31 15:01:02"
 		},
 		{
