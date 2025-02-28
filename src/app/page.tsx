@@ -89,6 +89,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const heroImageWEBP = '/webp-images/home/home-msk.webp';
 
 	const faqs = homeFAQs(currentCountry);
+
 	const allBestSellers = await ssr.getBestSellers(currentCountry);
 
 	return (
