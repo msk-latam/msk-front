@@ -8,38 +8,6 @@ let checkoutForm: any;
 let rebillPayment: any;
 
 interface CheckoutRebillProps {
-	// formData: {
-	// 	amount: number;
-	// 	currency: string;
-	// 	productName: string;
-	// 	description?: string;
-	// 	frequency?: {
-	// 		type: string;
-	// 		quantity: number;
-	// 	};
-	// 	debitDay?: number;
-	// 	repetitions?: number | null;
-	// 	customerData?: {
-	// 		email?: string;
-	// 		firstName?: string;
-	// 		lastName?: string;
-	// 		phoneNumber?: {
-	// 			number: number;
-	// 		};
-	// 		identification?: {
-	// 			type: string;
-	// 			id: string;
-	// 		};
-	// 	};
-	// 	billing?: {
-	// 		city: string;
-	// 		country: string;
-	// 		line1: string;
-	// 		line2: string;
-	// 		zipCode: string;
-	// 		state: string;
-	// 	};
-	// };
 	mode?: 'payment' | 'subscription';
 	country?: string;
 }
@@ -86,20 +54,39 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 
 			// Monta el formulario en el contenedor
 			checkoutForm.mount('rebill-container');
+			const tokenGATEWAY = process.env.NEXT_PUBLIC_GATEWAY_BACKEND_TOKEN;
 
-			checkoutForm.on('approved', (e: any) => {
-				console.log('Pago aprobado:', e);
-				rebillPayment = 'Contrato Efectivo';
+			checkoutForm.on('success', async (e: any) => {
+				console.log('Tarjeta tokenizadaa', e);
+
+				try {
+					const response = await fetch(`${ENDPOINT_GATEWAY}/api/rebill/test/checkout/new`, {
+						// const response = await fetch(`${ENDPOINT_GATEWAY}/api/rebill/${country}/checkout/new`, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							Authorization: `Bearer ${tokenGATEWAY}`,
+						},
+						body: JSON.stringify({
+							email: 'ari7@gmail.com',
+							contract_id: '5344455000262757432',
+							amount: 2222,
+							currency: 'CLP',
+							recurrence: 12,
+							card_id: '43264273-7b61-4ce1-a28a-4b03dbdb1db4',
+						}),
+					});
+
+					const data = await response.json();
+					console.log('Respuesta del checkout:', data);
+				} catch (error) {
+					console.error('Error en la solicitud de checkout:', error);
+				}
 			});
 
 			checkoutForm.on('error', (e: any) => {
-				console.error('Error en el formulario:', e);
+				console.error('Error en tarjeta:', e);
 				rebillPayment = 'Contrato en proceso de cobro';
-			});
-
-			checkoutForm.on('rejected', (e: any) => {
-				console.warn('Pago rechazado:', e);
-				rebillPayment = 'Pago rechazado';
 			});
 		} catch (error) {
 			console.error('Error al inicializar Rebill Checkout:', error);

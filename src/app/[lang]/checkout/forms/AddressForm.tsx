@@ -223,7 +223,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 		],
 	};
 
-	function obtenerProvincias(country) {
+	function obtenerProvincias(country: string) {
 		return provinciasPorPais[country] || [];
 	}
 
@@ -241,10 +241,10 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					name='country'
 					type='text'
 					value={countryName}
-					value={formData.country}
+					// value={formData.country}
 					onChange={handleChange}
 					onBlur={handleBlur}
-					// disabled
+					disabled
 					placeholder='Ingrese país'
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
