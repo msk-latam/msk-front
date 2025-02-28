@@ -92,6 +92,9 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
 	const allBestSellers = await ssr.getBestSellers(currentCountry);
 
+	console.log(JSONProduct.products, 'mostrnado productos');
+	return false;
+
 	return (
 		<div className='nc- relative animate-fade-down'>
 			<ClearLocalStorage />
