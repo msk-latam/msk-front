@@ -26,7 +26,6 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 		const fetchData = async () => {
 			try {
 				const data = await getJSONByCountry(country ?? 'ar');
-				console.log(data.products);
 				const filteredProducts = data.products.filter((product) => product.slug !== 'accsap');
 
 				setJSONProduct(filteredProducts);
