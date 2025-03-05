@@ -278,10 +278,21 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 
 			console.log(rebillResponse, crmResponse, customer_id);
 
-			await createContractCRM(customer_id, product, transactionAmount, currency, countryCompleteName, tokenCRM);
+			const createContractResponse = await createContractCRM(
+				customer_id,
+				product,
+				transactionAmount,
+				currency,
+				countryCompleteName,
+				tokenCRM,
+			);
+			const contract_id = createContractResponse.data[0].details.id;
+			console.log(contract_id, 'de aca');
+
+			const updatedFormDataUser = { ...formDataUser, contract_id };
 
 			setSuccess(true);
-			setUser(formDataUser);
+			setUser(updatedFormDataUser);
 			setTimeout(() => {
 				completeStep(activeStep);
 				setActiveStep(activeStep + 1);

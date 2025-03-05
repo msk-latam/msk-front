@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useCheckout } from './CheckoutContext';
 import { selectCountryKey } from './rebill/rebillKeys';
 import { useRecoilValue } from 'recoil';
@@ -10,16 +10,59 @@ let rebillPayment: any;
 interface CheckoutRebillProps {
 	mode?: 'payment' | 'subscription';
 	country?: string;
+	formData: {
+		amount: number;
+		currency: string;
+		productName: string;
+		description?: string;
+		frequency?: {
+			type: string;
+			quantity: number;
+		};
+		debitDay?: number;
+		repetitions?: number | null;
+		customerData?: {
+			email?: string;
+			firstName?: string;
+			lastName?: string;
+			phoneNumber?: {
+				number: number;
+			};
+			identification?: {
+				type: string;
+				id: string;
+			};
+		};
+		billing?: {
+			city: string;
+			country: string;
+			line1: string;
+			line2: string;
+			zipCode: string;
+			state: string;
+		};
+	};
 }
 
-const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', country }) => {
+const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', country, formData }) => {
+	const {
+		user,
+		activeStep,
+		setActiveStep,
+		subStep,
+		setSubStep,
+		completeStep,
+		setPaymentType,
+		paymentType,
+		setIsSubmitting,
+		setPaymentStatus,
+		isSubmitting,
+	} = useCheckout();
 	const rebillId = useRecoilValue(rebillIdState);
-	console.log(rebillId);
-
-	// console.log('revisando pais de checkout rebill', country);
-
 	const variables = selectCountryKey(country);
-	console.log(variables);
+	// console.log(rebillId);
+	// console.log(variables);
+
 	useEffect(() => {
 		if (!window.Rebill) {
 			console.error(
@@ -41,13 +84,6 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 
 				checkoutForm.display({
 					userLogin: false,
-					// billing: false,
-					// customerInformation: false,
-					// cardholderDetails: false,
-					// discountCode: false,
-					// checkoutSummary: false,
-					// submitButton: false,
-					// resetButton: false,
 					excludePaymentMethods: ['CASH', 'REBILL_PIX', 'TRANSFER'],
 				});
 			}
@@ -57,7 +93,7 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 			const tokenGATEWAY = process.env.NEXT_PUBLIC_GATEWAY_BACKEND_TOKEN;
 
 			checkoutForm.on('success', async (e: any) => {
-				console.log('Tarjeta tokenizadaa', e);
+				console.log('Tarjeta tokenizada', e);
 
 				try {
 					const response = await fetch(`${ENDPOINT_GATEWAY}/api/rebill/test/checkout/new`, {
@@ -68,17 +104,36 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 							Authorization: `Bearer ${tokenGATEWAY}`,
 						},
 						body: JSON.stringify({
-							email: 'ari7@gmail.com',
-							contract_id: '5344455000262757432',
-							amount: 2222,
-							currency: 'CLP',
+							email: formData.customerData?.email,
+							contract_id: user.contract_id,
+							amount: formData.amount,
+							currency: formData.currency,
 							recurrence: 12,
-							card_id: '43264273-7b61-4ce1-a28a-4b03dbdb1db4',
+							card_id: e.card.id,
 						}),
 					});
 
 					const data = await response.json();
 					console.log('Respuesta del checkout:', data);
+					if (response.status === 'approved' && response.data.payment.status === 'SUCCEEDED') {
+						setPaymentStatus(response.status);
+						if (subStep === 0) {
+							completeStep(activeStep);
+							setActiveStep(activeStep + 1);
+						} else {
+							setActiveStep(activeStep + 1);
+							completeStep(activeStep);
+							setSubStep(0);
+						}
+					} else {
+						// console.error('Pago no procesado correctamente');
+						setPaymentStatus('rejected');
+						completeStep(activeStep);
+						setActiveStep(activeStep + 1);
+						// console.error('Error al enviar los datos:', error);
+						setPaymentStatus('rejected');
+						setIsSubmitting(false);
+					}
 				} catch (error) {
 					console.error('Error en la solicitud de checkout:', error);
 				}
@@ -101,6 +156,8 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 };
 
 import { ENDPOINT_GATEWAY } from './rebill/rebillEndpoints';
+import { currencies } from './utils/utils';
+import { AuthContext } from '@/context/user/AuthContext';
 
 const CheckoutStripe = () => {
 	const [formData, setFormData] = useState({
@@ -125,7 +182,7 @@ const CheckoutStripe = () => {
 		},
 	});
 
-	const handleChange = (e) => {
+	const handleChange = (e: any) => {
 		const { name, value } = e.target;
 		const keys = name.split('.');
 		if (keys.length > 1) {
@@ -138,7 +195,7 @@ const CheckoutStripe = () => {
 		}
 	};
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = async (e: any) => {
 		e.preventDefault();
 		const token = '$2y$12$O4BEY9Ghrs2GCb5MtrNBWeeaG4H9MlWJsViHO7vKYhMb2ChNcPYRK';
 		try {
@@ -205,9 +262,26 @@ const CheckoutStripe = () => {
 };
 
 const CheckoutPaymentTest = ({ product, country }: any) => {
+	const { user } = useCheckout();
+	const { state } = useContext(AuthContext);
+	const totalPrice = product.total_price;
+	const transactionAmount = parseInt(totalPrice.replace(/[\.,]/g, ''), 10);
+
+	const currency = currencies[country] || 'USD';
+	const rebillForm = {
+		amount: transactionAmount,
+		currency: currency || 'USD',
+		productName: product.ficha.title,
+		customerData: {
+			email: user?.email || state?.profile?.email || '',
+			firstName: user?.firstName || state?.profile?.name || '',
+			lastName: user?.lastName || state?.profile?.last_name || '',
+			phoneNumber: { number: user?.phone || state?.profile?.phone || '' },
+		},
+	};
 	return (
 		<>
-			<CheckoutRebill country={country} />
+			<CheckoutRebill country={country} formData={rebillForm} />
 			{/* <CheckoutStripe /> */}
 		</>
 	);
