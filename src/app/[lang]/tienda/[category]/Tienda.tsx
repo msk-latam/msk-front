@@ -39,9 +39,7 @@ const Tienda: FC<TiendaProps> = ({ category, country }) => {
 	};
 
 	// Llamada a la función
-	fetchProducts().then((JSONProduct) => {
-		console.log(JSONProduct);
-	});
+	fetchProducts().then((JSONProduct) => {});
 
 	useEffect(() => {
 		const fetchCourses = async () => {

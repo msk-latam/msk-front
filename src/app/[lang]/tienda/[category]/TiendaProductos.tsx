@@ -45,15 +45,12 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 	};
 
 	// Llamada a la función
-	fetchProducts().then((JSONProduct) => {
-		console.log(JSONProduct);
-	});
+	fetchProducts().then((JSONProduct) => {});
 
 	useEffect(() => {
 		const fetchCourses = async () => {
 			// Filtrar el curso con el título exacto antes de actualizar el estado
 			const filteredCourses = JSONProduct?.products.filter((product) => product.slug !== 'accsap');
-			console.log(filteredCourses);
 			setCourses(filteredCourses);
 		};
 

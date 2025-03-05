@@ -63,7 +63,6 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	if (true) {
 		//   const fetchedCourses = await ssr.getAllCourses(currentCountry);
 		if (!JSONProduct || !JSONProduct.products) {
-			console.log(JSONProduct);
 			console.error('No se pudo obtener la lista de productos');
 			return;
 		}
