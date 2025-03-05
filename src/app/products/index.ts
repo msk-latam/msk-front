@@ -1,4 +1,4 @@
-// import ar from './ar.json';
+import ar from './ar.json';
 import bo from './bo.json';
 import cl from './cl.json';
 import co from './co.json';
@@ -17,7 +17,7 @@ import sv from './sv.json';
 import uy from './uy.json';
 import ve from './ve.json';
 
-const ar = 'https://cms1.msklatam.com/wp-content/json/productos-tienda/ar.json';
+// const ar = 'https://cms1.msklatam.com/wp-content/json/productos-tienda/ar.json';
 
 const productsByCountry: Record<string, any> = {
 	ar,
