@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props) {
 
 const PageSingleProduct: FC<PageCourseProps> = async ({ params }) => {
 	const { product } = await ssr.getSingleProduct(params.slug, params.lang);
-	const JSONProduct = getJSONByCountry(params.lang);
+	const JSONProduct = await getJSONByCountry(params.lang);
 	const headersList = headers();
 	const hostname = headersList.get('host');
 	if (product?.total_price === '0' && hostname === 'msklatam.com' && product?.father_post_type === 'course') {

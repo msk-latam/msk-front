@@ -55,13 +55,18 @@ export interface FAQS {
 
 const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const jsonLd = generateSchemaJson('WebSite');
-	const currentCountry = 'ar';
 	const loadingBestSellers = false;
-	const JSONProduct = getJSONTiendaByCountry(currentCountry);
+	const currentCountry = 'ar';
+	const JSONProduct = await getJSONTiendaByCountry(currentCountry);
 	const JSONBlog = getJSONPostByCountry(currentCountry);
 
 	if (true) {
 		//   const fetchedCourses = await ssr.getAllCourses(currentCountry);
+		if (!JSONProduct || !JSONProduct.products) {
+			console.log(JSONProduct);
+			console.error('No se pudo obtener la lista de productos');
+			return;
+		}
 		setAllCourses(JSONProduct.products);
 	}
 	if (!getAllBestSellers().length) {
@@ -92,8 +97,8 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
 	const allBestSellers = await ssr.getBestSellers(currentCountry);
 
-	console.log(JSONProduct.products, 'mostrnado productos');
-	return false;
+	// console.log(JSONProduct, 'mostrnado productos');
+	// return false;
 
 	return (
 		<div className='nc- relative animate-fade-down'>

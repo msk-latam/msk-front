@@ -33,19 +33,32 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 	const professionFilter = searchParams.get('profesion');
 
 	const [courses, setCourses] = useState<any[]>([]);
-	const JSONProduct = getJSONByCountry(country);
+	let JSONProduct: any;
+	const fetchProducts = async () => {
+		try {
+			JSONProduct = await getJSONByCountry(country);
+			return JSONProduct;
+		} catch (error) {
+			console.error('Error al obtener los productos:', error);
+			return { products: [] }; // Evita fallos si JSONProduct es undefined
+		}
+	};
+
+	// Llamada a la función
+	fetchProducts().then((JSONProduct) => {
+		console.log(JSONProduct);
+	});
 
 	useEffect(() => {
 		const fetchCourses = async () => {
-			const coursesData = await ssr.getAllCourses(country);
-			setCourses(JSONProduct.products);
-			// setCurrentItems(coursesData);
-			// console.log(coursesData);
+			// Filtrar el curso con el título exacto antes de actualizar el estado
+			const filteredCourses = JSONProduct?.products.filter((product) => product.slug !== 'accsap');
+			console.log(filteredCourses);
+			setCourses(filteredCourses);
 		};
 
 		fetchCourses();
-		// console.log(category);
-	}, [country]);
+	}, [country, JSONProduct]);
 
 	useEffect(() => {
 		const filterCourses = () => {

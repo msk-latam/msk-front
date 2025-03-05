@@ -27,8 +27,21 @@ const Tienda: FC<TiendaProps> = ({ category, country }) => {
 	const [currentItems, setCurrentItems] = useState<FetchCourseType[]>([]);
 	const [courses, setCourses] = useState<any[]>([]);
 	const searchParams = useSearchParams();
+	let JSONProduct: any;
+	const fetchProducts = async () => {
+		try {
+			JSONProduct = await getJSONByCountry(country);
+			return JSONProduct;
+		} catch (error) {
+			console.error('Error al obtener los productos:', error);
+			return { products: [] }; // Evita fallos si JSONProduct es undefined
+		}
+	};
 
-	const JSONProduct = getJSONByCountry(country);
+	// Llamada a la función
+	fetchProducts().then((JSONProduct) => {
+		console.log(JSONProduct);
+	});
 
 	useEffect(() => {
 		const fetchCourses = async () => {

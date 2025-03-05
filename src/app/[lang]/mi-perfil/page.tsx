@@ -60,7 +60,22 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	// Extraer el código de país del pathname
 	const countryCode = pathname.split('/')[1];
 
-	const JSONProduct = getJSONByCountry(countryCode);
+	let JSONProduct;
+
+	const fetchProducts = async () => {
+		try {
+			JSONProduct = await getJSONByCountry(countryCode);
+			return JSONProduct;
+		} catch (error) {
+			console.error('Error al obtener los productos:', error);
+			return { products: [] }; // Evita fallos si JSONProduct es undefined
+		}
+	};
+
+	// Llamada a la función
+	fetchProducts().then((JSONProduct) => {
+		console.log(JSONProduct);
+	});
 
 	let allCourses = JSONProduct;
 

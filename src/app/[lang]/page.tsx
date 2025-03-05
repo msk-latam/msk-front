@@ -58,7 +58,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const jsonLd = generateSchemaJson('WebSite');
 	const currentCountry = params.lang || cookies().get('country')?.value;
 	const loadingBestSellers = false;
-	const JSONProduct = getJSONTiendaByCountry(currentCountry);
+	const JSONProduct = await getJSONTiendaByCountry(currentCountry);
 	const JSONBlog = getJSONPostByCountry(currentCountry);
 
 	if (true) {
@@ -128,7 +128,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
 					<div className=' relative'>
 						<CoursesForYou
-							courses={JSONProduct.products.filter((course: FetchCourseType) => course.father_post_type === 'course')}
+							courses={JSONProduct?.products?.filter((course: FetchCourseType) => course.father_post_type === 'course')}
 							bestSeller={getAllBestSellers()}
 							tabs={TABS_HOME}
 							className='pt-8 pb-2'

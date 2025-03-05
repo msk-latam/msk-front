@@ -20,7 +20,24 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 	const pathname = usePathname();
 	const match = pathname.match(/^\/([a-z]{2})\b/);
 	const country = match ? match[1] : '';
-	const JSONProduct = getJSONByCountry(country || 'ar');
+	const [JSONProduct, setJSONProduct] = useState<{ products: any[] } | null>(null);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const data = await getJSONByCountry(country ?? 'ar');
+				console.log(data.products);
+				const filteredProducts = data.products.filter((product) => product.slug !== 'accsap');
+
+				setJSONProduct(filteredProducts);
+			} catch (error) {
+				console.error('Error al obtener los productos:', error);
+				setJSONProduct({ products: [] }); // Evitar fallos
+			}
+		};
+
+		fetchData();
+	}, [country]);
 	const [isOpen, setIsOpen] = useState(false);
 	const [activeCategory, setActiveCategory] = useState<Specialty | null>(null);
 	const [showUpArrow, setShowUpArrow] = useState(false);
@@ -134,14 +151,14 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 		const fetchCourses = async () => {
 			try {
 				const coursesData = await ssr.getAllCourses(country);
-				setCachedCourses(JSONProduct.products); // Actualiza el estado con los cursos
+				setCachedCourses(JSONProduct);
 			} catch (error) {
 				console.error('Error fetching courses:', error);
 			}
 		};
 
 		fetchCourses();
-	}, []);
+	}, [JSONProduct]);
 
 	const filteredCourses = cachedCourses?.filter((course: FetchCourseType) => {
 		return (
@@ -376,7 +393,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 															/>
 															<div>
 																<h4 className='!font-inter font-extralight text-sm text-[#7C838F]'>
-																	{course?.lista_de_cedentes[0].post_title}
+																	{course?.lista_de_cedentes?.[0]?.post_title ?? ''}
 																</h4>
 																<h3 className='font-light text-base text-[#6474A6] !font-inter'>{course?.title}</h3>
 															</div>

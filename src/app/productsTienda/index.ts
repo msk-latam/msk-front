@@ -38,22 +38,26 @@ const productsByCountry: Record<string, any> = {
 };
 
 export const getJSONTiendaByCountry = async (country: string) => {
+	if (country === 'mi') {
+		country = 'ar';
+	}
+
 	const normalizedCountry = country?.toLowerCase() || 'int';
 	const data = productsByCountry[normalizedCountry] || productsByCountry['int'];
 
 	if (typeof data === 'string') {
-		// Si es una URL, hacemos fetch para obtener los datos
+		// Si es una URL (caso de 'ar'), hacemos un fetch
 		try {
 			const response = await fetch(data);
 			const json = await response.json();
-			console.log(json);
+			// console.log(json, 'de funcion');
 			return json;
 		} catch (error) {
 			console.error('Error cargando JSON de la tienda:', error);
 			return productsByCountry['int']; // Retornar el JSON por defecto si hay error
 		}
 	} else {
-		console.log(data);
+		// Si es un JSON importado, lo devolvemos tal cual
 		return data;
 	}
 };
