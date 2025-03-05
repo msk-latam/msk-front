@@ -8,6 +8,187 @@
 			"meta_titulo": null,
 			"meta_descripcion": null,
 			"title_contenido": null,
+			"id": 333481,
+			"related_tag": "",
+			"father_id": 333437,
+			"slug": "iniciacion-a-la-investigacion-en-enfermeria",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "ec",
+			"language_name": "Ecuador",
+			"product_code": 9005886,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Iniciación a la investigación en enfermería",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/investigacionenfermeria-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/01/investigacionenfermeria-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/01/investigacionenfermeria-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/01/investigacionenfermeria-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				}
+			],
+			"professions": [
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": "50",
+			"permalink": "https://ec.wp.msklatam.com/producto/iniciacion-a-la-investigacion-en-enfermeria/",
+			"temario": "https://ec.wp.msklatam.com/wp-content/uploads/2025/01/Iniciacion-a-la-investigacion-en-enfermeria.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 254526,
+					"post_author": "2",
+					"post_date": "2023-08-07 23:12:56",
+					"post_date_gmt": "2023-08-07 23:12:56",
+					"post_content": "",
+					"post_title": "Tropos",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "tropos",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2023-08-22 20:17:07",
+					"post_modified_gmt": "2023-08-22 20:17:07",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=254526",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/cedentes_tropos.png"
+				}
+			],
+			"cantidad_modulos": 5,
+			"why_course": "<p>La investigación en enfermería es una disciplina fundamental para el avance del conocimiento y la mejora de la práctica clínica. A través del análisis de datos y la aplicación del método científico, se generan nuevas evidencias que permiten optimizar la atención sanitaria, mejorar la toma de decisiones y garantizar un cuidado basado en la mejor información disponible.</p> <p>El curso de Iniciación a la investigación en enfermería de MSK te brinda las herramientas necesarias para diseñar y desarrollar proyectos de investigación, interpretar datos estadísticos y aplicar metodologías tanto cuantitativas como cualitativas. Además, profundiza en la enfermería basada en la evidencia, permitiéndote adquirir un enfoque analítico y crítico para la toma de decisiones.</p> <p>Organizado en cinco temas, el curso de Iniciación a la investigación en enfermería de MSK abarca desde los fundamentos de la investigación hasta el análisis de datos y la ética en la investigación científica, a partir de materiales completamente actualizados.</p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-74-1",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "260",
+			"total_price": "260",
+			"max_installments": "12",
+			"price_installments": "21",
+			"created_at": "2025-01-31 15:01:32"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 333463,
+			"related_tag": "",
+			"father_id": 333435,
+			"slug": "cuidados-y-controles-de-enfermeria-del-nino-y-el-adolescente",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "ec",
+			"language_name": "Ecuador",
+			"product_code": 9005885,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Cuidados y controles de enfermería del niño y el adolescente",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/cuidadosenfermerianino-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/01/cuidadosenfermerianino-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/01/cuidadosenfermerianino-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/01/cuidadosenfermerianino-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1106,
+					"name": "Pediatría",
+					"slug": "pediatria"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": "50",
+			"permalink": "https://ec.wp.msklatam.com/producto/cuidados-y-controles-de-enfermeria-del-nino-y-el-adolescente/",
+			"temario": "https://ec.wp.msklatam.com/wp-content/uploads/2025/01/Cuidados-y-controles-de-enfermeria-del-nino-y-el-adolescente.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 254526,
+					"post_author": "2",
+					"post_date": "2023-08-07 23:12:56",
+					"post_date_gmt": "2023-08-07 23:12:56",
+					"post_content": "",
+					"post_title": "Tropos",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "tropos",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2023-08-22 20:17:07",
+					"post_modified_gmt": "2023-08-22 20:17:07",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=254526",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/cedentes_tropos.png"
+				}
+			],
+			"cantidad_modulos": 5,
+			"why_course": "<p>La enfermería pediátrica, enfocada en la atención integral de niños y adolescentes, abarca desde la prevención y promoción de la salud hasta el manejo de patologías y el acompañamiento en el desarrollo físico, emocional y social de los más jóvenes. Esta especialización es clave para garantizar una atención de calidad, cubriendo las necesidades específicas de cada etapa de crecimiento.</p> <p>El curso de Cuidados y controles de enfermería del niño y el adolescente de MSK te proporcionará las herramientas necesarias para brindar un cuidado experto y actualizado en la salud infantil y adolescente, a través de un enfoque basado en la evidencia. Profundiza en el control del niño sano, la atención al niño enfermo, los cuidados en la adolescencia y la detección temprana del maltrato infantil.</p> <p>Este curso de Cuidados y controles de enfermería del niño y el adolescente está estructurado en cinco temas que abordan aspectos como el control del crecimiento y desarrollo, la salud preventiva, la educación en hábitos saludables y apoyo emocional, la salud mental en la adolescencia y estrategias de detección y prevención del maltrato infantil.</p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-73-4",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "260",
+			"total_price": "260",
+			"max_installments": "12",
+			"price_installments": "21",
+			"created_at": "2025-01-31 15:01:25"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
 			"id": 334430,
 			"related_tag": "",
 			"father_id": 333396,

@@ -28,14 +28,14 @@ const SearchProducts = () => {
 	const triggerSearch = (event: any) => {
 		const value = event.target.value;
 		setInputValue(value);
+		const excludedTitle = 'accsap';
 		if (value) {
-			// console.log(value);
-			// console.log(auxProducts);
-			const filteredProducts = auxProducts.filter((product) =>
-				removeAccents(product.title.toLowerCase()).includes(removeAccents(value.toLowerCase())),
+			const filteredProducts = auxProducts.filter(
+				(product) =>
+					product.slug !== excludedTitle &&
+					removeAccents(product.title.toLowerCase()).includes(removeAccents(value.toLowerCase())),
 			);
-			// console.log(filteredProducts);
-			// console.log(filteredProducts);
+			console.log(filteredProducts);
 			setProducts(filteredProducts);
 		} else {
 			setProducts(auxProducts);
@@ -84,7 +84,7 @@ const SearchProducts = () => {
 
 						// Hacemos fetch de productos desde el SSR
 						// courses = await ssr.getStoreCourses(productsCountry);
-						courses = getJSONTiendaByCountry(productsCountry);
+						courses = await getJSONTiendaByCountry(productsCountry);
 						// console.log(courses.products);
 						// courses = await ssr.getStoreCourses(productsCountry, window.location.href);
 

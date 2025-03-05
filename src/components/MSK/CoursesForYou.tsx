@@ -75,7 +75,7 @@ const CoursesForYou: FC<Props> = ({
 	};
 
 	useEffect(() => {
-		if (tabActive === 'Novedades' && courses.length > 0) {
+		if (tabActive === 'Novedades' && courses?.length > 0) {
 			const newCourses = [...courses].sort((a, b) => {
 				const dateA = new Date(a.created_at);
 				const dateB = new Date(b.created_at);

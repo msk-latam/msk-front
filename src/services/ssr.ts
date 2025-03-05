@@ -210,7 +210,7 @@ class ApiSSRService {
 	// }
 
 	async getAllCourses(country?: string): Promise<void> {
-		const JSONProduct = getJSONByCountry(country);
+		const JSONProduct = await getJSONByCountry(country);
 		setLoadingCourses(true); // Iniciar indicador de carga
 
 		try {
@@ -318,7 +318,7 @@ class ApiSSRService {
 
 	async getStoreCourses(country?: string): Promise<void> {
 		setLoadingCourses(true); // Asegúrate de que esta función esté definida en el contexto
-		const JSONProduct = getJSONByCountry(country);
+		const JSONProduct = await getJSONByCountry(country);
 
 		try {
 			// Lista de países válidos
