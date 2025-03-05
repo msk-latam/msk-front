@@ -87,8 +87,6 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 		country = '';
 	}
 
-	console.log(allCourses);
-
 	const fetchUser = async () => {
 		try {
 			setTotalPages(Math.ceil(JSONProduct?.products.length / itemsPerPage));

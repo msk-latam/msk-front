@@ -28,13 +28,14 @@ const SearchProducts = () => {
 	const triggerSearch = (event: any) => {
 		const value = event.target.value;
 		setInputValue(value);
-		const excludedTitle = 'ACCSAP. Programa de actualización en cardiología clínica';
+		const excludedTitle = 'accsap';
 		if (value) {
 			const filteredProducts = auxProducts.filter(
 				(product) =>
-					product.title !== excludedTitle &&
+					product.slug !== excludedTitle &&
 					removeAccents(product.title.toLowerCase()).includes(removeAccents(value.toLowerCase())),
 			);
+			console.log(filteredProducts);
 			setProducts(filteredProducts);
 		} else {
 			setProducts(auxProducts);
