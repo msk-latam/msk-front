@@ -57,21 +57,22 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 
 	// Extraer el código de país del pathname
 	const countryCode = 'ar';
-	let JSONProduct;
+	const [JSONProduct, setJSONProduct] = useState<any>(null);
+
 	const fetchProducts = async () => {
 		try {
-			JSONProduct = await getJSONByCountry(countryCode);
-			return JSONProduct;
+			const data = await getJSONByCountry(countryCode);
+			setJSONProduct(data);
 		} catch (error) {
 			console.error('Error al obtener los productos:', error);
-			return { products: [] }; // Evita fallos si JSONProduct es undefined
+			setJSONProduct({ products: [] }); // Evita fallos si ocurre un error
 		}
 	};
 
-	// Llamada a la función
-	fetchProducts().then((JSONProduct) => {
-		console.log(JSONProduct);
-	});
+	// Llamar a la función cuando `countryCode` cambie
+	useEffect(() => {
+		fetchProducts();
+	}, [countryCode]);
 
 	let allCourses = JSONProduct;
 
@@ -87,13 +88,13 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 
 	const fetchUser = async () => {
 		try {
-			setTotalPages(Math.ceil(allCourses.length / itemsPerPage));
+			setTotalPages(Math.ceil(JSONProduct?.products.length / itemsPerPage));
 			const res = await api.getUserData();
 			// console.log('FETCH USER RES: ', res);
 			// console.log(res.message);
 			if (!res.message) {
 				setUser(res);
-				let coursesList = getUserCourses(res, allCourses);
+				let coursesList = getUserCourses(res, JSONProduct);
 				// console.log(coursesList);
 
 				// console.log({ allCourses, coursesList }, res.contact.courses_progress);
@@ -110,9 +111,9 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 			}
 		} catch (error) {
 			console.log(error);
-			router.push(
-				country === '' ? `${window.location.origin}/iniciar-sesion` : `${window.location.origin}/${country}/iniciar-sesion`,
-			);
+			// router.push(
+			// 	country === '' ? `${window.location.origin}/iniciar-sesion` : `${window.location.origin}/${country}/iniciar-sesion`,
+			// );
 		}
 	};
 
