@@ -7,6 +7,131 @@
 	"total_products": 259,
 	"posts": [
 		{
+			"id": 335471,
+			"title": "Resuelve este quiz sobre medicina legal y forense",
+			"slug": "quiz-medicina-legal-y-forense",
+			"permalink": "https://wp.msklatam.com/nota/medicina/quiz-medicina-legal-y-forense/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/03/portada-quiz-medicina-legal-y-forense.jpg",
+			"featured_image": [
+			"https://wp.msklatam.com/wp-content/uploads/2025/03/portada-quiz-medicina-legal-y-forense.jpg",
+			"1000",
+			"667",
+			""
+			],
+			"excerpt": "¿Cuánto sabes de medicina legal y forense? Anímate a este quiz especial de MSK para conocer tu nivel en una disciplina diferente y evaluar tus capacidades más allá de tu especialidad médica.",
+			"date": "",
+			"author": {
+			"id": 103,
+			"name": "Contenidos MSK",
+			"email": "contenidos@msklatam.com",
+			"avatar": "https://secure.gravatar.com/avatar/d77ba09cb0734abf46a7f69267816ecd?s=96&d=mm&r=g"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+			{
+			"id": 103,
+			"name": "Contenidos MSK",
+			"email": "contenidos@msklatam.com",
+			"avatar": "https://secure.gravatar.com/avatar/d77ba09cb0734abf46a7f69267816ecd?s=96&d=mm&r=g"
+			}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+			"description": "",
+			"link": ""
+			},
+			"the_most_read": [
+			{
+			"id": 334858,
+			"title": "Enfermedades raras: retos y soluciones en Latinoamérica",
+			"slug": "enfermedades-raras-retos-y-soluciones",
+			"link": "https://wp.msklatam.com/nota/medicina/enfermedades-raras-retos-y-soluciones/",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-enfermedades-raras-retos-y-soluciones-scaled-e1740662888363.jpg",
+			"category": "Actualidad"
+			},
+			{
+			"id": 334786,
+			"title": "Habilidades esenciales para el liderazgo en salud",
+			"slug": "habilidades-esenciales-para-el-liderazgo-en-salud",
+			"link": "https://wp.msklatam.com/nota/medicina/habilidades-esenciales-para-el-liderazgo-en-salud/",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-habilidades-esenciales-para-el-liderazgo-en-salud-scaled-e1740583131814.jpg",
+			"category": "Actualidad"
+			},
+			{
+			"id": 334423,
+			"title": "Alto porcentaje de supervivencia en detección temprana del cáncer infantil",
+			"slug": "deteccion-temprana-en-cancer-infantil",
+			"link": "https://wp.msklatam.com/nota/medicina/deteccion-temprana-en-cancer-infantil/",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-deteccion-temprana-en-cancer-infantil-scaled-e1740162838899.jpg",
+			"category": "Actualidad"
+			},
+			{
+			"id": 230620,
+			"title": "Cómo actúa el liderazgo transformacional ante el síndrome de burnout",
+			"slug": "liderazgo-transformacional-ante-el-sindrome-de-burnout",
+			"link": "https://wp.msklatam.com/nota/medicina/liderazgo-transformacional-ante-el-sindrome-de-burnout/",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2022/09/shutterstock_2265615125-scaled-e1740055547157.jpg",
+			"category": "Actualidad"
+			},
+			{
+			"id": 247623,
+			"title": "Qué habilidades blandas requiere la medicina hoy",
+			"slug": "habilidades-blandas-medicina-hoy",
+			"link": "https://wp.msklatam.com/nota/medicina/habilidades-blandas-medicina-hoy/",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2023/03/¿Que-habilidades-blandas-pediran-los-y-las-pacientes-del-futuro.jpg",
+			"category": "Actualidad"
+			}
+			],
+			"cursos_recomendados": [
+			{
+			"id": 62098,
+			"title": "Obstetricia para profesionales de la salud",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+			},
+			{
+			"id": 36328,
+			"title": "Medicina de urgencias",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+			}
+			],
+			"categories": [
+			{
+			"id": 59969,
+			"primary": true,
+			"name": "Medicina",
+			"slug": "medicina",
+			"description": "",
+			"link": "https://wp.msklatam.com/nota/category/medicina/"
+			},
+			{
+			"id": 59968,
+			"name": "E-Learning",
+			"slug": "e-learning",
+			"description": "",
+			"link": "https://wp.msklatam.com/nota/category/e-learning/"
+			}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+			"term_id": 1090,
+			"name": "Medicina general",
+			"slug": "medicina-general",
+			"term_group": 0,
+			"term_taxonomy_id": 1090,
+			"taxonomy": "product_cat",
+			"description": "",
+			"parent": 0,
+			"count": 1165,
+			"filter": "raw"
+			},
+			"reading_time": "4",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+			},
+		{
 			"id": 334858,
 			"title": "Enfermedades raras: retos y soluciones en Latinoamérica",
 			"slug": "enfermedades-raras-retos-y-soluciones",
