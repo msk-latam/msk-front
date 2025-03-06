@@ -467,13 +467,14 @@ class ApiSSRService {
 			if (country && validCountries.includes(country)) {
 				countryParam = country; // Solo asigna si es un país válido
 			}
-
+			console.log(countryParam, 'pais a usar');
 			const baseURL = process.env.NEXT_PUBLIC_HOST;
-			let response = await fetch(`${baseURL}/bestSellers/${countryParam}.json`);
+			let response = await fetch(`https://cms1.msklatam.com/wp-content/json/best-sellers/${countryParam}.json`);
+			// let response = await fetch(`${baseURL}/bestSellers/${countryParam}.json`);
 
 			if (!response.ok) {
 				console.warn(`Fallo con ${countryParam}, intentando con 'int'...`);
-				response = await fetch(`${baseURL}/bestSellers/int.json`);
+				response = await fetch(`https://cms1.msklatam.com/wp-content/json/best-sellers/ar.json`);
 			}
 
 			if (!response.ok) {

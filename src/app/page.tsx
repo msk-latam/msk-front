@@ -96,6 +96,8 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
 	const allBestSellers = await ssr.getBestSellers(currentCountry);
 
+	console.log(allBestSellers);
+
 	// console.log(JSONProduct, 'mostrnado productos');
 	// return false;
 
