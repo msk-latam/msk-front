@@ -1,4 +1,6 @@
 import { ENDPOINT_CRM, ENDPOINT_GATEWAY } from '../rebill/rebillEndpoints';
+const tokenGATEWAY = process.env.NEXT_PUBLIC_GATEWAY_BACKEND_TOKEN;
+const tokenCRM = process.env.NEXT_PUBLIC_CRM_BACKEND_TOKEN;
 
 export const currencies: any = {
 	cl: 'CLP',
@@ -20,18 +22,30 @@ export const currencies: any = {
 };
 export const countryToName: Record<string, string> = {
 	ar: 'Argentina',
+	bo: 'Bolivia',
 	cl: 'Chile',
-	cr: 'Costa Rica',
 	co: 'Colombia',
+	cr: 'Costa Rica',
+	ec: 'Ecuador',
+	es: 'España',
+	gt: 'Guatemala',
 	hn: 'Honduras',
+	mx: 'México',
+	ni: 'Nicaragua',
+	pa: 'Panamá',
+	py: 'Paraguay',
+	pe: 'Perú',
+	sv: 'El Salvador',
+	uy: 'Uruguay',
+	ve: 'Venezuela',
 };
 
-export const getCountryCompleteName = (code: string): string | null => {
+export const getCountryCompleteName = (code: string = 'ar'): string | null => {
 	const lowerCaseCode = code.toLowerCase();
 	return countryToName[lowerCaseCode] || null; // Devuelve null si el código no está en el objeto
 };
 
-export const createCRMUser = async (formDataUser: any, countryCompleteName: any, formData: any, tokenCRM: any) => {
+export const createCRMUser = async (formDataUser: any, countryCompleteName: any, formData: any) => {
 	try {
 		const response = await fetch(`${ENDPOINT_CRM}/api/zoho/contacts/`, {
 			method: 'POST',
@@ -63,7 +77,20 @@ export const createCRMUser = async (formDataUser: any, countryCompleteName: any,
 	}
 };
 
-export const createRebillUser = async (formDataUser: any, country: any, tokenGATEWAY: any) => {
+export const getCRMUser = async (email: any) => {
+	try {
+		const response = await fetch(`${ENDPOINT_CRM}/api/zoho/contacts/by_email/${email}`, {
+			method: 'GET',
+			headers: {
+				Authorization: `Bearer ${tokenCRM}`,
+				'Content-Type': 'application/json',
+			},
+		});
+		return response.json();
+	} catch (error) {}
+};
+
+export const createRebillUser = async (formDataUser: any, country: any) => {
 	try {
 		const response = await fetch(`${ENDPOINT_GATEWAY}/api/rebill/${country}/customers`, {
 			method: 'POST',
@@ -75,7 +102,7 @@ export const createRebillUser = async (formDataUser: any, country: any, tokenGAT
 				email: formDataUser.email,
 				first_name: formDataUser.firstName,
 				last_name: formDataUser.lastName,
-				address_country: 'Argentina', // Hardcodeado por testing
+				address_country: country,
 				address_floor: '',
 				address_apartment: '',
 				address_description: '',
@@ -96,7 +123,6 @@ export const createContractCRM = async (
 	transactionAmount: any,
 	currency: any,
 	countryCompleteName: any,
-	tokenCRM: any,
 ) => {
 	try {
 		const contractData = {
@@ -120,9 +146,11 @@ export const createContractCRM = async (
 			payment: 'Rebill',
 			paymentMethod: 'Cobro recurrente',
 			Fecha_de_primer_cobro: new Date().toISOString().split('T')[0],
-			Seleccione_total_de_pagos_recurrentes: '6', // Dinamizar
-			Cantidad_de_pagos_recurrentes_restantes: '5', // Dinamizar
-			Monto_de_cada_pago_restantes: (transactionAmount / 6).toFixed(2),
+			Seleccione_total_de_pagos_recurrentes: '12', // Dinamizar
+			Cantidad_de_pagos_recurrentes_restantes: '11', // Dinamizar
+			Monto_de_cada_pago_restantes: Math.ceil(transactionAmount / 12),
+			Canal_por_el_que_se_cerro_la_venta: 'Web',
+			Fuente_de_cierre_venta: 'Consulta directa',
 		};
 
 		const response = await fetch(`${ENDPOINT_CRM}/api/zoho/sales_order/create_contract`, {
@@ -137,6 +165,59 @@ export const createContractCRM = async (
 		return response.json();
 	} catch (error) {
 		console.error('Error al crear contrato en CRM:', error);
+		throw error;
+	}
+};
+
+export const updateContractCRM = async (contract_id: string) => {
+	try {
+		const contractData = {
+			status: 'Confirmado',
+		};
+		const response = await fetch(`${ENDPOINT_CRM}/api/zoho/sales_order/update_contract/${contract_id}`, {
+			method: 'PUT',
+			headers: {
+				Authorization: `Bearer ${tokenCRM}`,
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(contractData),
+		});
+		return response.json();
+	} catch (error) {
+		console.error('Error al crear contrato en CRM:', error);
+		throw error;
+	}
+};
+
+export const createPaymentRebill = async (
+	email: string | undefined,
+	contractId: string,
+	amount: number,
+	currency: string,
+	cardId: string,
+	country: string | undefined,
+) => {
+	try {
+		const response = await fetch(`${ENDPOINT_GATEWAY}/api/rebill/${country}/checkout/new`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${tokenGATEWAY}`,
+			},
+			body: JSON.stringify({
+				email,
+				contract_id: contractId,
+				// amount: Math.ceil(amount / 12),
+				amount: Math.ceil(100 / 12),
+				currency,
+				recurrence: 12,
+				card_id: cardId,
+			}),
+		});
+
+		return await response.json();
+	} catch (error) {
+		console.error('Error en la solicitud de checkout:', error);
 		throw error;
 	}
 };

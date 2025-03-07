@@ -10,6 +10,7 @@ interface UserFormProps {
 		profession: string;
 		specialty: string;
 		privacyPolicy: boolean;
+		birthday: string;
 	};
 	errors: Record<string, string>;
 	touched: Record<string, boolean>;
@@ -94,6 +95,25 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
 				{touched.phone && errors.phone && <p className='text-red-500 text-sm'>{errors.phone}</p>}
+			</div>
+			<div>
+				<label htmlFor='birthday' className='block text-sm font-medium text-[#6474A6]'>
+					Fecha de nacimiento
+				</label>
+				<input
+					type='date'
+					id='birthday'
+					value={formData.birthday}
+					onChange={(e) => {
+						const selectedDate = new Date(e.target.value).toISOString().split('T')[0];
+						handleChange({ target: { id: 'birthday', value: selectedDate } });
+					}}
+					// onChange={handleChange}
+					onBlur={handleBlur}
+					placeholder='seleccione una fecha'
+					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+				/>
+				{touched.birthday && errors.birthday && <p className='text-red-500 text-sm'>{errors.birthday}</p>}
 			</div>
 			<div>
 				<label htmlFor='profession' className='block text-sm font-medium text-[#6474A6]'>

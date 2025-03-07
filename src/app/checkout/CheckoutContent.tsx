@@ -5,6 +5,7 @@ import CheckoutPayment from './CheckoutPayment';
 import CheckoutState from './CheckoutState';
 import PaymentTypeSelection from './CheckoutPaymentTypeSelection';
 import { useCheckout } from './CheckoutContext';
+import CheckoutRegisterTest from './CheckoutRegisterTest';
 interface CheckoutContentProps {
 	product: any;
 	country: string;
@@ -24,7 +25,8 @@ const CheckoutContent: React.FC<CheckoutContentProps> = ({ product, country }) =
 
 	switch (activeStep) {
 		case 1:
-			return <CheckoutRegister product={product} />;
+			return <CheckoutRegisterTest product={product} />;
+		// return <CheckoutRegister product={product} />;
 		case 3:
 			return <CheckoutState />;
 		default:

@@ -50,7 +50,7 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 
 	// Procesa el precio total
 	const total = parseNumber(total_price);
-	const installmentValue = total / 6;
+	const installmentValue = Math.floor(total / 12);
 
 	return (
 		<div className='p-6 bg-white border border-gray-300 rounded-lg mt-24'>
@@ -76,7 +76,7 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 				<span className='text-3xl font-bold text-[#392C35]'>{`${currency} $${formatNumber(total)}`}</span>
 				{paymentType === 'cuotas' && (
 					<p className='mt-2 text-sm text-[#6474A6]'>
-						{`6 pagos de `}
+						{`12 pagos de `}
 						<span className='font-bold'>{`${currency} $${formatNumber(installmentValue)}`}</span>
 					</p>
 				)}

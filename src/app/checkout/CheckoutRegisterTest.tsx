@@ -1,25 +1,23 @@
 import { AuthContext } from '@/context/user/AuthContext';
 import React, { useContext, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { rebillIdState } from './checkoutAtom';
 import { useCheckout } from './CheckoutContext';
 import { validateUserField } from './validators/userValidator';
-import {
-	createContractCRM,
-	createCRMUser,
-	createRebillUser,
-	currencies,
-	getCountryCompleteName,
-	getCRMUser,
-} from './utils/utils';
+
 import CheckoutRegisterButtons from './buttons/CheckoutRegisterButtons';
 import AddressForm from './forms/AddressForm';
 import DocumentDetailsForm from './forms/DocumentDetailsForm';
 import UserForm from './forms/UserForm';
+import {
+	createContractCRM,
+	createCRMUser,
+	currencies,
+	getCountryCompleteName,
+	getCRMUser,
+} from '../[lang]/checkout/utils/utils';
 
 const CheckoutRegisterTest = ({ product, country }: any) => {
 	const { state } = useContext(AuthContext);
-	const [rebillId, setRebillId] = useRecoilState(rebillIdState);
 
 	const { activeStep, setActiveStep, completeStep, setUser, user } = useCheckout();
 	const [loading, setLoading] = useState(false);
@@ -37,7 +35,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 		birthday: '',
 	});
 	const [formData, setFormData] = useState({
-		country: country || '',
+		country: country || 'ar',
 		state: '',
 		city: '',
 		address: '',
@@ -84,6 +82,8 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 			Object.values(errors).every((error) => error === '') &&
 			Object.values(formDataUser).every((value) => value !== '' && value !== false);
 		setIsFormValid(formIsValid);
+		console.log(formDataUser);
+		console.log(errors);
 	}, [formDataUser, errors]);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -143,19 +143,11 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 			setError('');
 			setUser(formDataUser);
 
-			const [crmResponse, rebillResponse] = await Promise.all([
-				createCRMUser(formDataUser, countryCompleteName, formData),
-				createRebillUser(formDataUser, country),
-			]);
-
-			const idRebillUser = rebillResponse.id;
-			setRebillId(idRebillUser);
+			const [crmResponse] = await Promise.all([createCRMUser(formDataUser, countryCompleteName, formData)]);
 
 			const firstResponse = crmResponse.data[0];
 			const customer_id =
 				firstResponse.code === 'SUCCESS' || firstResponse.code === 'DUPLICATE_DATA' ? firstResponse.details.id : undefined;
-
-			console.log(rebillResponse, crmResponse, customer_id);
 
 			const createContractResponse = await createContractCRM(
 				customer_id,
@@ -197,7 +189,6 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 						};
 						setFormDataUser(updatedFormDataUser);
 						const customer_id = user.id;
-						const rebillResponse = await createRebillUser(updatedFormDataUser, country);
 						const createContractResponse = await createContractCRM(
 							customer_id,
 							product,
@@ -206,8 +197,6 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 							countryCompleteName,
 						);
 						const contract_id = createContractResponse.data[0].details.id;
-						const idRebillUser = rebillResponse.id;
-						setRebillId(idRebillUser);
 						const finalFormDataUser = { ...updatedFormDataUser, contract_id };
 						setUser(finalFormDataUser);
 						completeStep(activeStep);

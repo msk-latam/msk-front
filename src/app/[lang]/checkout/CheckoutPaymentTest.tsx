@@ -60,8 +60,7 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 	} = useCheckout();
 	const rebillId = useRecoilValue(rebillIdState);
 	const variables = selectCountryKey(country);
-	// console.log(rebillId);
-	// console.log(variables);
+	const [processingPayment, setProcessingPayment] = useState(false);
 
 	useEffect(() => {
 		if (!window.Rebill) {
@@ -88,35 +87,37 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 				});
 			}
 
-			// Monta el formulario en el contenedor
 			checkoutForm.mount('rebill-container');
-			const tokenGATEWAY = process.env.NEXT_PUBLIC_GATEWAY_BACKEND_TOKEN;
 
 			checkoutForm.on('success', async (e: any) => {
 				console.log('Tarjeta tokenizada', e);
+				setProcessingPayment(true);
+
+				const contract_id = user.contract_id;
 
 				try {
-					const response = await fetch(`${ENDPOINT_GATEWAY}/api/rebill/test/checkout/new`, {
-						// const response = await fetch(`${ENDPOINT_GATEWAY}/api/rebill/${country}/checkout/new`, {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-							Authorization: `Bearer ${tokenGATEWAY}`,
-						},
-						body: JSON.stringify({
-							email: formData.customerData?.email,
-							contract_id: user.contract_id,
-							amount: formData.amount,
-							currency: formData.currency,
-							recurrence: 12,
-							card_id: e.card.id,
-						}),
-					});
+					const data = await createPaymentRebill(
+						formData.customerData?.email,
+						contract_id,
+						100,
+						//formData.amount
+						formData.currency,
+						e.card.id,
+						country,
+					);
 
-					const data = await response.json();
 					console.log('Respuesta del checkout:', data);
-					if (response.status === 'approved' && response.data.payment.status === 'SUCCEEDED') {
-						setPaymentStatus(response.status);
+					if (
+						data.invoice &&
+						data.failedTransaction === null &&
+						data.invoice.paidBags?.[0]?.payment?.status === 'SUCCEEDED'
+					) {
+						setPaymentStatus('approved');
+
+						const updateContract = await updateContractCRM(contract_id);
+
+						console.log(updateContract);
+
 						if (subStep === 0) {
 							completeStep(activeStep);
 							setActiveStep(activeStep + 1);
@@ -126,22 +127,25 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 							setSubStep(0);
 						}
 					} else {
-						// console.error('Pago no procesado correctamente');
 						setPaymentStatus('rejected');
 						completeStep(activeStep);
 						setActiveStep(activeStep + 1);
-						// console.error('Error al enviar los datos:', error);
-						setPaymentStatus('rejected');
 						setIsSubmitting(false);
 					}
 				} catch (error) {
 					console.error('Error en la solicitud de checkout:', error);
+				} finally {
+					// setProcessingPayment(false);
 				}
 			});
 
 			checkoutForm.on('error', (e: any) => {
 				console.error('Error en tarjeta:', e);
 				rebillPayment = 'Contrato en proceso de cobro';
+				setPaymentStatus('rejected');
+				completeStep(activeStep);
+				setActiveStep(activeStep + 1);
+				setIsSubmitting(false);
 			});
 		} catch (error) {
 			console.error('Error al inicializar Rebill Checkout:', error);
@@ -149,14 +153,21 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 	}, [mode]);
 
 	return (
-		<div className=''>
-			<div id='rebill-container' className='p-6 bg-white border border-gray-300 rounded-lg flex h-[800px] '></div>
+		<div>
+			{processingPayment ? (
+				<div className='flex flex-col items-center justify-center p-6 bg-white border border-gray-300 rounded-lg'>
+					<span className='animate-spin w-8 h-8 border-4 border-gray-300 border-t-[#392C35] rounded-full'></span>
+					<p className='mt-3 text-[#392C35] font-semibold'>Procesando cobro...</p>
+				</div>
+			) : (
+				<div id='rebill-container' className='p-6 bg-white border border-gray-300 rounded-lg flex h-[800px]'></div>
+			)}
 		</div>
 	);
 };
 
 import { ENDPOINT_GATEWAY } from './rebill/rebillEndpoints';
-import { currencies } from './utils/utils';
+import { createPaymentRebill, currencies, updateContractCRM } from './utils/utils';
 import { AuthContext } from '@/context/user/AuthContext';
 
 const CheckoutStripe = () => {
@@ -265,7 +276,8 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 	const { user } = useCheckout();
 	const { state } = useContext(AuthContext);
 	const totalPrice = product.total_price;
-	const transactionAmount = parseInt(totalPrice.replace(/[\.,]/g, ''), 10);
+	const transactionAmount = 100;
+	// const transactionAmount = parseInt(totalPrice.replace(/[\.,]/g, ''), 10);
 
 	const currency = currencies[country] || 'USD';
 	const rebillForm = {
@@ -281,7 +293,9 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 	};
 	return (
 		<>
-			<CheckoutRebill country={country} formData={rebillForm} />
+			<div className='mt-24'>
+				<CheckoutRebill country={country} formData={rebillForm} />
+			</div>
 			{/* <CheckoutStripe /> */}
 		</>
 	);
