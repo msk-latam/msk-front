@@ -7,6 +7,154 @@
 	"total_products": 259,
 	"posts": [
 		{
+			"id": 335568,
+			"title": "Consumo de alcohol y riesgo de cáncer: evidencia actual",
+			"slug": "consumo-de-alcohol-y-riesgo-de-cancer",
+			"permalink": "https://wp.msklatam.com/nota/medicina/consumo-de-alcohol-y-riesgo-de-cancer/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-consumo-de-alcohol-y-riesgo-de-cancer-scaled-e1741351328577.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-consumo-de-alcohol-y-riesgo-de-cancer-scaled-e1741351328577.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "Basándose en evidencia científica reciente, la Dra. Alma Medrano, directora médica de MSK, analiza los mecanismos biológicos involucrados y la importancia de la prevención para reducir el impacto del alcohol en la salud. Lee su reflexión y profundiza en los hallazgos actuales sobre este tema clave.",
+			"date": "Marzo 6, 2025",
+			"author": {
+				"id": 332969,
+				"name": "Dra. Alma Medrano",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2025/01/foto-alma-medrano-square.png"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 332969,
+					"name": "Dra. Alma Medrano",
+					"description": "Directora médica de Medical & Scientific Knowledge",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2025/01/foto-alma-medrano-square.png"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 334858,
+					"title": "Enfermedades raras: retos y soluciones en Latinoamérica",
+					"slug": "enfermedades-raras-retos-y-soluciones",
+					"link": "https://wp.msklatam.com/nota/medicina/enfermedades-raras-retos-y-soluciones/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-enfermedades-raras-retos-y-soluciones-scaled-e1740662888363.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334786,
+					"title": "Habilidades esenciales para el liderazgo en salud",
+					"slug": "habilidades-esenciales-para-el-liderazgo-en-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/habilidades-esenciales-para-el-liderazgo-en-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-habilidades-esenciales-para-el-liderazgo-en-salud-scaled-e1740583131814.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334423,
+					"title": "Alto porcentaje de supervivencia en detección temprana del cáncer infantil",
+					"slug": "deteccion-temprana-en-cancer-infantil",
+					"link": "https://wp.msklatam.com/nota/medicina/deteccion-temprana-en-cancer-infantil/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-deteccion-temprana-en-cancer-infantil-scaled-e1740162838899.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 230620,
+					"title": "Cómo actúa el liderazgo transformacional ante el síndrome de burnout",
+					"slug": "liderazgo-transformacional-ante-el-sindrome-de-burnout",
+					"link": "https://wp.msklatam.com/nota/medicina/liderazgo-transformacional-ante-el-sindrome-de-burnout/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/09/shutterstock_2265615125-scaled-e1740055547157.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 247623,
+					"title": "Qué habilidades blandas requiere la medicina hoy",
+					"slug": "habilidades-blandas-medicina-hoy",
+					"link": "https://wp.msklatam.com/nota/medicina/habilidades-blandas-medicina-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2023/03/¿Que-habilidades-blandas-pediran-los-y-las-pacientes-del-futuro.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Deng, W., Jin, L., Zhuo, H., Vasiliou, V., & Zhang, Y. (2021). Alcohol consumption and risk of stomach cancer: A meta-analysis. Chemico-Biological Interactions, 336, 109365. https://doi.org/10.1016/j.cbi.2021.109365"
+				},
+				{
+					"fuente": "Jun, S., Park, H., Kim, U. J., Choi, E. J., Lee, H. A., Park, B., Lee, S. Y., Jee, S. H., & Park, H. (2023). Cancer risk based on alcohol consumption levels: a comprehensive systematic review and meta-analysis. Epidemiology and Health, 45, e2023092. https://doi.org/10.4178/epih.e2023092"
+				},
+				{
+					"fuente": "Molina, J. C., Guerrero-Morán, J. D., & González-Espinosa, C. (2023). Alcohol: Immunomodulatory Effects and Cancer. Revista de Investigación Clínica, 75(3), 129-142. https://doi.org/10.24875/RIC.23000116"
+				},
+				{
+					"fuente": "Rumgay, H., Murphy, N., Ferrari, P., & Soerjomataram, I. (2021). Alcohol and cancer: Epidemiology and biological mechanisms. Nutrients, 13(9), 3173. https://doi.org/10.3390/nu13093173"
+				},
+				{
+					"fuente": "Starek-Święchowicz, B., Budziszewska, B., & Starek, A. (2023). Alcohol and breast cancer. Pharmacological Reports, 75(1), 69-84. https://doi.org/10.1007/s43440-022-00426-4"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				},
+				{
+					"id": 1711,
+					"name": "Opinion",
+					"slug": "opinion",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/opinion/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1105,
+				"name": "Oncología",
+				"slug": "oncologia",
+				"term_group": 0,
+				"term_taxonomy_id": 1105,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 168,
+				"filter": "raw"
+			},
+			"reading_time": "4",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
 			"id": 335471,
 			"title": "Resuelve este quiz sobre medicina legal y forense",
 			"slug": "quiz-medicina-legal-y-forense",
