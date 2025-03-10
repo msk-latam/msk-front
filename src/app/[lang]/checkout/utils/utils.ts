@@ -178,12 +178,14 @@ export const createContractCRM = async (
 			grand_total: transactionAmount,
 			payment: paymentConfig.payment,
 			paymentMethod: paymentConfig.paymentMethod,
-			M_todo_de_pago: paymentConfig.paymentMethod,
+			Modo_de_pago: paymentConfig.paymentMethod,
+			M_todo_de_pago: paymentConfig.payment,
 			Fecha_de_primer_cobro: new Date().toISOString().split('T')[0],
 			Seleccione_total_de_pagos_recurrentes: paymentConfig.totalPayments.toString(),
 			Cantidad_de_pagos_recurrentes_restantes: paymentConfig.remainingPayments.toString(),
 			Monto_de_cada_pago_restantes: Math.ceil(transactionAmount / paymentConfig.totalPayments),
 			Canal_por_el_que_se_cerro_la_venta: 'Web',
+			channel_sale: 'Web',
 			Fuente_de_cierre_venta: 'Consulta directa',
 		};
 
