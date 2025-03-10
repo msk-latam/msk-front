@@ -221,27 +221,6 @@ const CheckoutRegister: React.FC = ({ product }: any) => {
 					completeStep(activeStep);
 					setActiveStep(activeStep + 1);
 				}, 150);
-				// 	const res = await ssr.postSignUp(mappedData);
-				// 	console.log(res);
-				// 	if (res?.access_token) {
-				// 		localStorage.setItem('token', res.access_token);
-				// 		setSuccess(true);
-				// 		setUser(formDataUser);
-				// 		setTimeout(() => {
-				// 			completeStep(activeStep);
-				// 			setActiveStep(activeStep + 1);
-				// 		}, 1500);
-				// 	} else {
-				// 		setSuccess(false);
-				// 		const errorMessages = Object.values(res.errors)
-				// 			.map((errorMessage: any) => ` ${errorMessage}`)
-				// 			.join('<br />');
-				// 		setError(errorMessages);
-				// 		console.log(errorMessages);
-				// 	}
-				// } catch (err) {
-				// 	setError('Hubo un problema al crear tu cuenta. Intenta nuevamente más tarde.');
-				// 	console.error(err);
 			} finally {
 				setLoading(false);
 			}

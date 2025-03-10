@@ -10,6 +10,7 @@ interface User {
 	profession: string;
 	specialty: string;
 	privacyPolicy: boolean;
+	type_doc?: string;
 }
 
 interface CheckoutContextType {

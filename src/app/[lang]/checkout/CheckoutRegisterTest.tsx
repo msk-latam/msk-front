@@ -163,6 +163,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 				transactionAmount,
 				currency,
 				countryCompleteName,
+				'rebill',
 			);
 			const contract_id = createContractResponse.data[0].details.id;
 
@@ -204,6 +205,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 							transactionAmount,
 							currency,
 							countryCompleteName,
+							'rebill',
 						);
 						const contract_id = createContractResponse.data[0].details.id;
 						const idRebillUser = rebillResponse.id;

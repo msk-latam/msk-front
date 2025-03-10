@@ -117,14 +117,40 @@ export const createRebillUser = async (formDataUser: any, country: any) => {
 	}
 };
 
+interface PaymentConfig {
+	payment: string;
+	paymentMethod: string;
+	totalPayments: number;
+	remainingPayments: number;
+}
+
+const paymentOptions: Record<string, PaymentConfig> = {
+	rebill: {
+		payment: 'Rebill',
+		paymentMethod: 'Cobro recurrente',
+		totalPayments: 12,
+		remainingPayments: 11,
+	},
+	mercadopago: {
+		payment: 'Mercado Pago',
+		paymentMethod: 'Cobro recurrente',
+		totalPayments: 6,
+		remainingPayments: 5,
+	},
+	// En el futuro puedes agregar Stripe u otros métodos aquí
+};
+
 export const createContractCRM = async (
 	customer_id: any,
 	product: any,
 	transactionAmount: any,
 	currency: any,
 	countryCompleteName: any,
+	paymentType: 'rebill' | 'mercadopago',
 ) => {
 	try {
+		const paymentConfig = paymentOptions[paymentType] || paymentOptions.mercadopago;
+
 		const contractData = {
 			customer_id,
 			products: [
@@ -143,12 +169,12 @@ export const createContractCRM = async (
 			country: countryCompleteName,
 			sub_total: transactionAmount,
 			grand_total: transactionAmount,
-			payment: 'Rebill',
-			paymentMethod: 'Cobro recurrente',
+			payment: paymentConfig.payment,
+			paymentMethod: paymentConfig.paymentMethod,
 			Fecha_de_primer_cobro: new Date().toISOString().split('T')[0],
-			Seleccione_total_de_pagos_recurrentes: '12', // Dinamizar
-			Cantidad_de_pagos_recurrentes_restantes: '11', // Dinamizar
-			Monto_de_cada_pago_restantes: Math.ceil(transactionAmount / 12),
+			Seleccione_total_de_pagos_recurrentes: paymentConfig.totalPayments.toString(),
+			Cantidad_de_pagos_recurrentes_restantes: paymentConfig.remainingPayments.toString(),
+			Monto_de_cada_pago_restantes: Math.ceil(transactionAmount / paymentConfig.totalPayments),
 			Canal_por_el_que_se_cerro_la_venta: 'Web',
 			Fuente_de_cierre_venta: 'Consulta directa',
 		};

@@ -155,10 +155,11 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 				transactionAmount,
 				currency,
 				countryCompleteName,
+				'mercadopago',
 			);
 			const contract_id = createContractResponse.data[0].details.id;
 
-			const updatedFormDataUser = { ...formDataUser, contract_id };
+			const updatedFormDataUser = { ...formData, ...formDataUser, contract_id };
 
 			setSuccess(true);
 			setUser(updatedFormDataUser);
@@ -195,6 +196,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 							transactionAmount,
 							currency,
 							countryCompleteName,
+							'mercadopago',
 						);
 						const contract_id = createContractResponse.data[0].details.id;
 						const finalFormDataUser = { ...updatedFormDataUser, contract_id };
