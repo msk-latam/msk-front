@@ -6,6 +6,7 @@ import { validatePaymentField } from './validators/paymentValidator';
 import CardDetailsForm from './forms/CardDetailsForm';
 import CheckoutPaymentButtons from './buttons/CheckoutPaymentButtons';
 import { createPaymentMercadoPago } from './utils/utils';
+import { updateContractCRM } from '../[lang]/checkout/utils/utils';
 
 interface CheckoutContentProps {
 	product?: any;
@@ -129,8 +130,8 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 
 	const mapFormDataToRequest = (formData: any) => {
 		return {
-			// transaction_amount: 1100,
-			transaction_amount: transactionAmount,
+			transaction_amount: 1100,
+			// transaction_amount: transactionAmount,
 			installments: 6,
 			description: 'Pago de contrato MSK',
 			payer: {
@@ -167,24 +168,24 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 					{
 						code: product.ficha.product_code,
 						quantity: 1,
-						price: regularPriceFixed,
-						total: regularPriceFixed,
-						net_total: regularPriceFixed,
-						total_after_discount: regularPriceFixed,
-						list_price: regularPriceFixed,
-						// price: 1300,
-						// total: 1400,
-						// net_total: 1500,
-						// total_after_discount: 1600,
-						// list_price: 1700,
+						// price: regularPriceFixed,
+						// total: regularPriceFixed,
+						// net_total: regularPriceFixed,
+						// total_after_discount: regularPriceFixed,
+						// list_price: regularPriceFixed,
+						price: 1300,
+						total: 1400,
+						net_total: 1500,
+						total_after_discount: 1600,
+						list_price: 1700,
 					},
 				],
 				currency,
 				country: formData.country,
-				sub_total: regularPriceFixed,
-				grand_total: transactionAmount,
-				// sub_total: 1800,
-				// grand_total: 1900,
+				// sub_total: regularPriceFixed,
+				// grand_total: transactionAmount,
+				sub_total: 1800,
+				grand_total: 1900,
 			},
 		};
 	};
@@ -201,6 +202,10 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 			if (data.status === 200 && data.message === 'Se cobro el pago y creo en zoho') {
 				const status = data.paymentStatus || 'approved';
 				setPaymentStatus(status);
+
+				const updateContract = await updateContractCRM(user.contract_id);
+
+				console.log(updateContract);
 
 				if (subStep === 0) {
 					completeStep(activeStep);
