@@ -107,14 +107,16 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 					);
 
 					console.log('Respuesta del checkout:', data);
+
 					if (
 						data.invoice &&
 						data.failedTransaction === null &&
 						data.invoice.paidBags?.[0]?.payment?.status === 'SUCCEEDED'
 					) {
 						setPaymentStatus('approved');
+						const paymentRebillId = data.invoice.paidBags[0].payment.id;
 
-						const updateContract = await updateContractCRM(contract_id);
+						const updateContract = await updateContractCRM(contract_id, paymentRebillId);
 
 						console.log(updateContract);
 

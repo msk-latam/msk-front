@@ -206,11 +206,13 @@ export const createContractCRM = async (
 	}
 };
 
-export const updateContractCRM = async (contract_id: string) => {
+export const updateContractCRM = async (contract_id: string, subscription_id: string) => {
 	try {
 		const contractData = {
 			status: 'Confirmado',
 			Estado_de_cobro: 'Activo',
+			stripe_subscription_id: subscription_id,
+			mp_subscription_id: subscription_id,
 		};
 		const response = await fetch(`${ENDPOINT_CRM}/api/zoho/sales_order/update_contract/${contract_id}`, {
 			method: 'PUT',
@@ -246,7 +248,8 @@ export const createPaymentRebill = async (
 				email,
 				contract_id: contractId,
 				// amount: Math.ceil(amount / 12),
-				amount: Math.ceil(1000 / 12),
+				// amount: Math.ceil(1000 / 12),
+				amount: 400, //caso especial colombia
 				currency,
 				recurrence: 12,
 				card_id: cardId,

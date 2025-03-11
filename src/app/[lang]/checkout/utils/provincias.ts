@@ -255,7 +255,7 @@ export const provinciasPorPais: any = {
 		'Presidente Hayes',
 		'San Pedro',
 	],
-	Peru: [
+	Perú: [
 		'Amazonas',
 		'Áncash',
 		'Apurímac',
