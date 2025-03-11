@@ -135,6 +135,7 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 			installments: 6,
 			description: 'Pago de contrato MSK',
 			payer: {
+				name: formData.firstName || user?.firstName || state.profile.name,
 				email: formData.email || state.email,
 				first_name: formData.firstName || user?.firstName || state.profile.name,
 				last_name: formData.lastName || user?.lastName || state.profile.last_name,
