@@ -246,7 +246,7 @@ export const createPaymentRebill = async (
 				email,
 				contract_id: contractId,
 				// amount: Math.ceil(amount / 12),
-				amount: Math.ceil(100 / 12),
+				amount: Math.ceil(1000 / 12),
 				currency,
 				recurrence: 12,
 				card_id: cardId,
