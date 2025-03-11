@@ -210,6 +210,7 @@ export const updateContractCRM = async (contract_id: string) => {
 	try {
 		const contractData = {
 			status: 'Confirmado',
+			Estado_de_cobro: 'Activo',
 		};
 		const response = await fetch(`${ENDPOINT_CRM}/api/zoho/sales_order/update_contract/${contract_id}`, {
 			method: 'PUT',

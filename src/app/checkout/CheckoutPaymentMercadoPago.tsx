@@ -130,7 +130,7 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 
 	const mapFormDataToRequest = (formData: any) => {
 		return {
-			transaction_amount: 100,
+			transaction_amount: 1000,
 			// transaction_amount: transactionAmount,
 			installments: 6,
 			description: 'Pago de contrato MSK',
@@ -174,19 +174,19 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 						// net_total: regularPriceFixed,
 						// total_after_discount: regularPriceFixed,
 						// list_price: regularPriceFixed,
-						price: 100,
-						total: 100,
-						net_total: 100,
-						total_after_discount: 100,
-						list_price: 100,
+						price: 1000,
+						total: 1000,
+						net_total: 1000,
+						total_after_discount: 1000,
+						list_price: 1000,
 					},
 				],
 				currency,
 				country: formData.country,
 				// sub_total: regularPriceFixed,
 				// grand_total: transactionAmount,
-				sub_total: 100,
-				grand_total: 100,
+				sub_total: 1000,
+				grand_total: 1000,
 			},
 		};
 	};
@@ -200,9 +200,10 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 		try {
 			const data = await createPaymentMercadoPago(requestBody);
 
-			if (data.status === 200 && data.message === 'Se cobro el pago y creo en zoho') {
-				const status = data.paymentStatus || 'approved';
-				setPaymentStatus(status);
+			console.log(data);
+
+			if (data[0].status === 'approved') {
+				setPaymentStatus('approved');
 
 				const updateContract = await updateContractCRM(user.contract_id);
 

@@ -3,7 +3,7 @@ const tokenMP = process.env.NEXT_PUBLIC_MERCADOPAGO_BACKEND_TOKEN;
 
 export const createPaymentMercadoPago = async (requestBody: any) => {
 	try {
-		const response = await fetch(`${ENDPOINT_GATEWAY}/api/mercadopago/arg/our_test/realizarPagoYActualizarZoho`, {
+		const response = await fetch(`${ENDPOINT_GATEWAY}/api/mercadopago/arg/our_test/realizarPago`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

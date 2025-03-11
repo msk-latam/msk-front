@@ -125,7 +125,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 		}));
 	};
 
-	const currency = currencies[country] || 'USD';
+	const currency = 'ARS';
 	const countryCompleteName = getCountryCompleteName(country);
 
 	const totalPrice = product.total_price;
