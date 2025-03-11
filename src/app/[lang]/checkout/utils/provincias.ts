@@ -168,7 +168,7 @@ export const provinciasPorPais: any = {
 		'Valle',
 		'Yoro',
 	],
-	Mexico: [
+	México: [
 		'Aguascalientes',
 		'Baja California',
 		'Baja California Sur',
