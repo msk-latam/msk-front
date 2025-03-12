@@ -7,6 +7,144 @@
 	"total_products": 263,
 	"posts": [
 		{
+			"id": 336596,
+			"title": "Cómo la ciencia busca reducir el impacto del glaucoma",
+			"slug": "avances-para-reducir-el-impacto-del-glaucoma",
+			"permalink": "https://wp.msklatam.com/nota/medicina/avances-para-reducir-el-impacto-del-glaucoma/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-avances-para-reducir-el-impacto-del-glaucoma-scaled-e1741809853664.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-avances-para-reducir-el-impacto-del-glaucoma-scaled-e1741809853664.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "Cada 12 de marzo, el Día Mundial del Glaucoma nos recuerda la importancia de la detección temprana y el avance de la ciencia en la lucha contra esta enfermedad. Investigaciones recientes han revelado datos clave sobre su prevalencia, los mecanismos biológicos que la desencadenan y posibles estrategias para su prevención y tratamiento. Descubre aquí los hallazgos que pueden marcar un antes y un después.",
+			"date": "Marzo 11, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 335568,
+					"title": "Consumo de alcohol y riesgo de cáncer: evidencia actual",
+					"slug": "consumo-de-alcohol-y-riesgo-de-cancer",
+					"link": "https://wp.msklatam.com/nota/medicina/consumo-de-alcohol-y-riesgo-de-cancer/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-consumo-de-alcohol-y-riesgo-de-cancer-scaled-e1741351328577.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334858,
+					"title": "Enfermedades raras: retos y soluciones en Latinoamérica",
+					"slug": "enfermedades-raras-retos-y-soluciones",
+					"link": "https://wp.msklatam.com/nota/medicina/enfermedades-raras-retos-y-soluciones/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-enfermedades-raras-retos-y-soluciones-scaled-e1740662888363.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334786,
+					"title": "Habilidades esenciales para el liderazgo en salud",
+					"slug": "habilidades-esenciales-para-el-liderazgo-en-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/habilidades-esenciales-para-el-liderazgo-en-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-habilidades-esenciales-para-el-liderazgo-en-salud-scaled-e1740583131814.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334423,
+					"title": "Alto porcentaje de supervivencia en detección temprana del cáncer infantil",
+					"slug": "deteccion-temprana-en-cancer-infantil",
+					"link": "https://wp.msklatam.com/nota/medicina/deteccion-temprana-en-cancer-infantil/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-deteccion-temprana-en-cancer-infantil-scaled-e1740162838899.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 230620,
+					"title": "Cómo actúa el liderazgo transformacional ante el síndrome de burnout",
+					"slug": "liderazgo-transformacional-ante-el-sindrome-de-burnout",
+					"link": "https://wp.msklatam.com/nota/medicina/liderazgo-transformacional-ante-el-sindrome-de-burnout/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/09/shutterstock_2265615125-scaled-e1740055547157.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Tham, Yih-Chung et al. Global Prevalence of Glaucoma and Projections of Glaucoma Burden through 2040. , en Ophthalmology, Volume 121, Issue 11, 2081 – 2090. https://10.1016/j.ophtha.2014.05.013"
+				},
+				{
+					"fuente": "Rezaei, M., Faramarzpour, M., Shobeiri, P. et al. A systematic review, meta-analysis, and network analysis of diagnostic microRNAs in glaucoma. Eur J Med Res 28, 137 (2023). https://doi.org/10.1186/s40001-023-01093-8 "
+				},
+				{
+					"fuente": "Miyagishima KJ, Nadal-Nicolás FM, Ma W, Li W. La anexina V se une a una subpoblación de células inmunitarias, alterando su interpretación como biomarcador in vivo de apoptosis en la retina. Int J Biol Sci 2024; 20(15):6073-6089. doi:10.7150/ijbs.102551. https://www.ijbs.com/v20p6073.htm"
+				},
+				{
+					"fuente": "https://www.nei.nih.gov/about/news-and-events/news/university-nebraska-researchers-show-role-cytokines-retinal-cells"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1318,
+				"name": "Oftalmología",
+				"slug": "oftalmologia",
+				"term_group": 0,
+				"term_taxonomy_id": 1318,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 43,
+				"filter": "raw"
+			},
+			"reading_time": "11",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
 			"id": 335568,
 			"title": "Consumo de alcohol y riesgo de cáncer: evidencia actual",
 			"slug": "consumo-de-alcohol-y-riesgo-de-cancer",
