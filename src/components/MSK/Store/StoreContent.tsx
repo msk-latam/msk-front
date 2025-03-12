@@ -70,25 +70,25 @@ const StoreContent: FC = ({ country }: any) => {
 
 		fetchData();
 	}, [country]);
-	let storeCourses = JSONProduct?.products || [];
+	const storeCourses = JSONProduct?.products || [];
 
 	// Excluir el curso con el título específico
 	const excludedTitle = 'ACCSAP. Programa de actualización en cardiología clínica';
 
 	// Filtrar los productos para excluir el curso con ese título
-	storeCourses = storeCourses.filter((product: any) => product.title !== excludedTitle);
+	const storeCourses1 = storeCourses.filter((product: any) => product.title !== excludedTitle);
 	const [totalPages, setTotalPages] = useState(Math.ceil(storeCourses.length / itemsPerPage));
 
 	useEffect(() => {
 		// console.log('USE EFFECT STORE CONTENT');
-		async function fetchData() {
+		function fetchData() {
 			// console.log('All Courses', storeCourses);
-			if (storeCourses.length) {
-				setCurrentItems(storeCourses.slice(indexOfFirstItem, indexOfLastItem));
+			if (storeCourses1.length) {
+				setCurrentItems(storeCourses1.slice(indexOfFirstItem, indexOfLastItem));
 			}
 		}
 		fetchData();
-	}, [countryState.country, storeCourses]);
+	}, [country, storeCourses]);
 
 	const handlePageChange = (pageNumber: number) => {
 		// console.log('HANDLING PAGE CHANGE');
