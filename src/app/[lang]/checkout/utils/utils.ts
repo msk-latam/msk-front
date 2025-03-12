@@ -249,7 +249,7 @@ export const createPaymentRebill = async (
 				contract_id: contractId,
 				// amount: Math.ceil(amount / 12),
 				// amount: Math.ceil(1000 / 12),
-				amount: 400, //caso especial colombia
+				amount: 5,
 				currency,
 				recurrence: 12,
 				card_id: cardId,
