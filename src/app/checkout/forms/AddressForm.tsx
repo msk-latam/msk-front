@@ -100,8 +100,27 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 				{touched.city && errors.city && <p className='text-red-500 text-sm mt-1'>{errors.city}</p>}
 			</div>
 
-			{/* Dirección */}
 			<div>
+				{/* Código postal */}
+				<div>
+					<label htmlFor='postal_code' className='block text-sm font-medium text-[#6474A6]'>
+						Código postal
+					</label>
+					<input
+						id='postal_code'
+						name='postal_code'
+						type='text'
+						value={formData.postal_code}
+						onChange={handleChange}
+						onBlur={handleBlur}
+						placeholder='Ingrese código postal'
+						className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					/>
+					{touched.postal_code && errors.postal_code && <p className='text-red-500 text-sm mt-1'>{errors.postal_code}</p>}
+				</div>
+			</div>
+			{/* Dirección */}
+			<div className='col-span-2'>
 				<label htmlFor='address' className='block text-sm font-medium text-[#6474A6]'>
 					Dirección
 				</label>
@@ -116,24 +135,6 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
 				{touched.address && errors.address && <p className='text-red-500 text-sm mt-1'>{errors.address}</p>}
-			</div>
-
-			{/* Código postal */}
-			<div className='col-span-2'>
-				<label htmlFor='postal_code' className='block text-sm font-medium text-[#6474A6]'>
-					Código postal
-				</label>
-				<input
-					id='postal_code'
-					name='postal_code'
-					type='text'
-					value={formData.postal_code}
-					onChange={handleChange}
-					onBlur={handleBlur}
-					placeholder='Ingrese código postal'
-					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-				/>
-				{touched.postal_code && errors.postal_code && <p className='text-red-500 text-sm mt-1'>{errors.postal_code}</p>}
 			</div>
 		</div>
 	);

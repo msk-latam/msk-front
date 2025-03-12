@@ -86,6 +86,18 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 					excludePaymentMethods: ['CASH', 'REBILL_PIX', 'TRANSFER'],
 				});
 			}
+			checkoutForm.set({
+				issuerCountry: country?.toUpperCase(),
+			});
+
+			checkoutForm.translations({
+				es: {
+					'Add card': 'Pagar',
+				},
+				en: {
+					'Add card': 'Pay',
+				},
+			});
 
 			checkoutForm.mount('rebill-container');
 
@@ -99,8 +111,7 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 					const data = await createPaymentRebill(
 						formData.customerData?.email,
 						contract_id,
-						1000,
-						//formData.amount
+						formData.amount,
 						formData.currency,
 						e.card.id,
 						country,

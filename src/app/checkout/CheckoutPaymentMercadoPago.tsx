@@ -130,8 +130,8 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 
 	const mapFormDataToRequest = (formData: any) => {
 		return {
-			transaction_amount: 1000,
-			// transaction_amount: transactionAmount,
+			// transaction_amount: 1000,
+			transaction_amount: transactionAmount,
 			installments: 6,
 			description: 'Pago de contrato MSK',
 			payer: {
@@ -169,24 +169,24 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 					{
 						code: product.ficha.product_code,
 						quantity: 1,
-						// price: regularPriceFixed,
-						// total: regularPriceFixed,
-						// net_total: regularPriceFixed,
-						// total_after_discount: regularPriceFixed,
-						// list_price: regularPriceFixed,
-						price: 1000,
-						total: 1000,
-						net_total: 1000,
-						total_after_discount: 1000,
-						list_price: 1000,
+						price: regularPriceFixed,
+						total: regularPriceFixed,
+						net_total: regularPriceFixed,
+						total_after_discount: regularPriceFixed,
+						list_price: regularPriceFixed,
+						// price: 1000,
+						// total: 1000,
+						// net_total: 1000,
+						// total_after_discount: 1000,
+						// list_price: 1000,
 					},
 				],
 				currency,
 				country: formData.country,
-				// sub_total: regularPriceFixed,
-				// grand_total: transactionAmount,
-				sub_total: 1000,
-				grand_total: 1000,
+				sub_total: regularPriceFixed,
+				grand_total: transactionAmount,
+				// sub_total: 1000,
+				// grand_total: 1000,
 			},
 		};
 	};
@@ -205,7 +205,9 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 			if (data[0].status === 'approved') {
 				setPaymentStatus('approved');
 
-				const updateContract = await updateContractCRM(user.contract_id);
+				const mercadoPagoPaymentId = data[0].id.toString();
+
+				const updateContract = await updateContractCRM(user.contract_id, mercadoPagoPaymentId);
 
 				console.log(updateContract);
 

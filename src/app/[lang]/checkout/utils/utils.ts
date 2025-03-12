@@ -206,7 +206,7 @@ export const createContractCRM = async (
 	}
 };
 
-export const updateContractCRM = async (contract_id: string, subscription_id: string) => {
+export const updateContractCRM = async (contract_id: string, subscription_id: string = '') => {
 	try {
 		const contractData = {
 			status: 'Confirmado',
@@ -247,9 +247,8 @@ export const createPaymentRebill = async (
 			body: JSON.stringify({
 				email,
 				contract_id: contractId,
-				// amount: Math.ceil(amount / 12),
+				amount: Math.ceil(amount / 12),
 				// amount: Math.ceil(1000 / 12),
-				amount: 5,
 				currency,
 				recurrence: 12,
 				card_id: cardId,
