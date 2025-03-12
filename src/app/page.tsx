@@ -26,6 +26,7 @@ import ClearLocalStorage from '@/components/versionStorage/ClearLocalStorage';
 import { getJSONTiendaByCountry } from './productsTienda';
 import { getJSONPostByCountry } from './posts';
 import PasswordGate from '@/components/PasswordGate/PasswordGate';
+import HomePage from '@/components/HomePage/HomePage';
 
 const BlogSummary = dynamic(() => import('@/components/MSK/BlogSummary'));
 const BrandSlider = dynamic(() => import('@/components/MSK/BrandSlider'));
@@ -101,7 +102,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
 	return (
 		<>
-			<div>home page</div>
+			<HomePage />
 		</>
 	);
 };
