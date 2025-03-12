@@ -28,6 +28,7 @@ import { organizationDataSEO, reviewsDataSEO, websiteDataSEO } from '@/SEO/gener
 import { EnrollmentProvider } from '@/context/EnrollmentContext/EnrollmentContext';
 import PasswordGate from '@/components/PasswordGate/PasswordGate';
 import ErrorBoundary from '@/components/Errors/ErrorBoundary';
+import Navbar from '@/components/Header/navbar/Navbar';
 // import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 // export const runtime = 'edge';
@@ -109,14 +110,14 @@ export default async function RootLayout({ params, children, showHeaderFooter = 
 											<UTMProvider>
 												<AuthProvider>
 													<StoreProvider>
-														{showHeaderFooter && <Header />}
+														{showHeaderFooter && <Navbar />}
 														<LoaderProvider>
 															<GlobalStateProvider>
 																<div className='container'>{children}</div>
 															</GlobalStateProvider>
 														</LoaderProvider>
 														<BotMaker />
-														{showHeaderFooter && <Footer />}
+														{/* {showHeaderFooter && <Footer />} */}
 
 														<Suspense fallback={null}>
 															<NavigationEvents />
