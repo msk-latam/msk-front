@@ -6,7 +6,7 @@ const PASSWORD = 'msktech'; // Cambia la contraseña según necesidad
 const TTL = 60 * 60 * 1000; // 1 hora en milisegundos
 
 const PasswordGate = ({ children }: { children: React.ReactNode }) => {
-	const [isAuthorized, setIsAuthorized] = useState(false);
+	const [isAuthorized, setIsAuthorized] = useState(true);
 	const [password, setPassword] = useState('');
 	const [isChecking, setIsChecking] = useState(true);
 
