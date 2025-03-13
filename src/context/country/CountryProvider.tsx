@@ -6,7 +6,7 @@ import { CountryState } from '@/data/types';
 import { countries } from '@/data/countries';
 import api from '@/services/api';
 import Cookies from 'js-cookie';
-import { Loading } from '@/utils/Loading';
+// import { Loading } from '@/utils/Loading';
 
 interface Props {
 	children: React.ReactNode;
@@ -114,7 +114,8 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 
 	return (
 		<CountryContext.Provider value={{ countryState, dispatch }}>
-			{loading ? <Loading /> : children}
+			{/* {loading ? <Loading /> : children} */}
+			{children}
 
 			{/* 🔥 Banner de cambio de país */}
 			{showBanner && (

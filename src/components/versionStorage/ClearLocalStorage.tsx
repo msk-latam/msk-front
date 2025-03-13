@@ -6,9 +6,15 @@ const CURRENT_APP_VERSION = '1.0.7';
 
 const ClearLocalStorage: React.FC = () => {
 	useEffect(() => {
+		const userAgent = navigator.userAgent || '';
+		const isPrerender = userAgent.includes('Prerender');
+
+		if (isPrerender || typeof window === 'undefined') {
+			return;
+		}
+
 		const savedVersion = localStorage.getItem('appVersion');
 		if (savedVersion !== CURRENT_APP_VERSION) {
-			// console.log('Limpiando localStorage por cambio de versión');
 			localStorage.clear();
 			localStorage.setItem('appVersion', CURRENT_APP_VERSION);
 			window.location.reload();
@@ -17,7 +23,7 @@ const ClearLocalStorage: React.FC = () => {
 		}
 	}, []);
 
-	return null; // Este componente no necesita renderizar nada
+	return null;
 };
 
 export default ClearLocalStorage;
