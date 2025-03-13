@@ -42,10 +42,6 @@ const SectionHero = dynamic(() => import('@/components/SectionHero/SectionHero')
 const SectionSliderBestSellers = dynamic(() => import('@/components/Sections/SectionSliderBestSellers'), { ssr: true });
 const WelcomeBox = dynamic(() => import('@/components/WelcomeBox/WelcomeBox'), { ssr: true });
 
-const headersList = headers();
-const userAgent = headersList.get('user-agent') || '';
-const isPrerender = userAgent.includes('Prerender');
-
 export async function generateMetadata({ params }: { params: { lang: string } }) {
 	return await generateHomeMetadata({ params });
 }
@@ -65,6 +61,9 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const currentCountry = 'ar';
 	const JSONProduct = await getJSONTiendaByCountry(currentCountry);
 	const JSONBlog = getJSONPostByCountry(currentCountry);
+	const headersList = headers();
+	const userAgent = headersList.get('user-agent') || '';
+	const isPrerender = userAgent.includes('Prerender');
 
 	if (true) {
 		//   const fetchedCourses = await ssr.getAllCourses(currentCountry);
