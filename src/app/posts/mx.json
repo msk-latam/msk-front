@@ -7,6 +7,159 @@
 	"total_products": 262,
 	"posts": [
 		{
+			"id": 220699,
+			"title": "Cuál es la situación laboral de la enfermería hoy",
+			"slug": "situacion-laboral-de-la-enfermeria-hoy",
+			"permalink": "https://wp.msklatam.com/nota/enfermeria/situacion-laboral-de-la-enfermeria-hoy/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2022/07/Foto-situacion-laboral-de-la-enfermeria-hoy-scaled-e1741873106125.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2022/07/Foto-situacion-laboral-de-la-enfermeria-hoy-scaled-e1741873106125.jpg",
+				"1000",
+				"527",
+				""
+			],
+			"excerpt": "La enfermería enfrenta una crisis global que impulsa a muchos profesionales a renunciar o emigrar en busca de mejores condiciones. La sobrecarga laboral, los bajos salarios y la precarización afectan la calidad del servicio y la salud de quienes ejercen esta profesión esencial. Sin embargo, algunas iniciativas buscan revertir esta situación. Descubre el panorama actual en distintos países y las estrategias que podrían transformar el futuro de la enfermería.",
+			"date": "Marzo 12, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 336596,
+					"title": "Cómo la ciencia busca reducir el impacto del glaucoma",
+					"slug": "avances-para-reducir-el-impacto-del-glaucoma",
+					"link": "https://wp.msklatam.com/nota/medicina/avances-para-reducir-el-impacto-del-glaucoma/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-avances-para-reducir-el-impacto-del-glaucoma-scaled-e1741809853664.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 335568,
+					"title": "Consumo de alcohol y riesgo de cáncer: evidencia actual",
+					"slug": "consumo-de-alcohol-y-riesgo-de-cancer",
+					"link": "https://wp.msklatam.com/nota/medicina/consumo-de-alcohol-y-riesgo-de-cancer/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-consumo-de-alcohol-y-riesgo-de-cancer-scaled-e1741351328577.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334858,
+					"title": "Enfermedades raras: retos y soluciones en Latinoamérica",
+					"slug": "enfermedades-raras-retos-y-soluciones",
+					"link": "https://wp.msklatam.com/nota/medicina/enfermedades-raras-retos-y-soluciones/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-enfermedades-raras-retos-y-soluciones-scaled-e1740662888363.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334786,
+					"title": "Habilidades esenciales para el liderazgo en salud",
+					"slug": "habilidades-esenciales-para-el-liderazgo-en-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/habilidades-esenciales-para-el-liderazgo-en-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-habilidades-esenciales-para-el-liderazgo-en-salud-scaled-e1740583131814.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334423,
+					"title": "Alto porcentaje de supervivencia en detección temprana del cáncer infantil",
+					"slug": "deteccion-temprana-en-cancer-infantil",
+					"link": "https://wp.msklatam.com/nota/medicina/deteccion-temprana-en-cancer-infantil/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-deteccion-temprana-en-cancer-infantil-scaled-e1740162838899.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "https://www.perfil.com/noticias/salud/hospital-durand-gobierno-porte%C3%B1o-aclaro-no-hubo-renuncia-masiva-enfermeros.phtml#:~:text=En%20medio%20de%20la%20segunda,salarios%20y%20las%20condiciones%20laborales"
+				},
+				{
+					"fuente": "https://www.bostonglobe.com/2022/05/25/opinion/real-reason-nurses-are-burned-out/"
+				},
+				{
+					"fuente": "https://asistenciasanitaria.com.ar/2019/06/01/solo-1-enfermera-atiende-a-19-pacientes-en-las-unidades-materno-infantiles/#:~:text=En%20concreto%2C%20la%20Ley%20de,la%20unidad%20y%20de%20la"
+				},
+				{
+					"fuente": "https://www.redaccionmedica.com/secciones/enfermeria/el-congreso-estudia-fijar-por-ley-un-maximo-de-pacientes-por-enfermera-8644"
+				},
+				{
+					"fuente": "https://www.nationalnursesunited.org/ratios-california-experience"
+				},
+				{
+					"fuente": "https://www.enfermeria21.com/diario-dicen/enfermeras-traslado-trabajo/"
+				},
+				{
+					"fuente": "https://www.insp.mx/informacion-relevante/la-precariedad-laboral-el-elefante-no-visibilizado-en-el-sistema-de-salud-mexicano"
+				},
+				{
+					"fuente": "https://www.economia.gob.mx/datamexico/es/profile/occupation/enfermeras-y-tecnicos-en-medicina"
+				},
+				{
+					"fuente": "https://www.imss.gob.mx/prensa/archivo/202501/007#:~:text=no%20banner%20*%20Enero%202025.%20*%20Con,enfermeros%2C%20IMSS%20fortalece%20atenci%C3%B3n%20y%20servicios%20preventivos."
+				}
+			],
+			"categories": [
+				{
+					"id": 1611,
+					"primary": true,
+					"name": "Enfermería",
+					"slug": "enfermeria",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/enfermeria/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "1611",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1280,
+				"filter": "raw"
+			},
+			"reading_time": "7",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
 			"id": 336596,
 			"title": "Cómo la ciencia busca reducir el impacto del glaucoma",
 			"slug": "avances-para-reducir-el-impacto-del-glaucoma",
