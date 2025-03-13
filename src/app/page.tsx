@@ -64,7 +64,6 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const headersList = headers();
 	const userAgent = headersList.get('user-agent') || '';
 	const isPrerender = userAgent.includes('Prerender');
-	//checking branch
 
 	if (true) {
 		//   const fetchedCourses = await ssr.getAllCourses(currentCountry);
