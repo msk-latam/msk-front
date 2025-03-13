@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-const CURRENT_APP_VERSION = '1.0.7';
+const CURRENT_APP_VERSION = '1.0.8';
 
 const ClearLocalStorage: React.FC = () => {
 	useEffect(() => {
