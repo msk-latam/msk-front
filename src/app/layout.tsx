@@ -113,7 +113,7 @@ export default async function RootLayout({ params, children, showHeaderFooter = 
 														{showHeaderFooter && <Navbar />}
 														<LoaderProvider>
 															<GlobalStateProvider>
-																<div className='container'>{children}</div>
+																<div className=''>{children}</div>
 															</GlobalStateProvider>
 														</LoaderProvider>
 														<BotMaker />
