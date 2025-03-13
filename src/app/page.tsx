@@ -64,7 +64,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const headersList = headers();
 	const userAgent = headersList.get('user-agent') || '';
 	const isPrerender = userAgent.includes('Prerender');
-	//test
+
 	if (true) {
 		//   const fetchedCourses = await ssr.getAllCourses(currentCountry);
 		if (!JSONProduct || !JSONProduct.products) {
