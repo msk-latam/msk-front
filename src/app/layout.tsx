@@ -110,11 +110,11 @@ export default async function RootLayout({ params, children, showHeaderFooter = 
 												<AuthProvider>
 													<StoreProvider>
 														{showHeaderFooter && <Header />}
-														<LoaderProvider>
-															<GlobalStateProvider>
-																<div className='container'>{children}</div>
-															</GlobalStateProvider>
-														</LoaderProvider>
+														{/* <LoaderProvider> */}
+														<GlobalStateProvider>
+															<div className='container'>{children}</div>
+														</GlobalStateProvider>
+														{/* </LoaderProvider> */}
 														<BotMaker />
 														{showHeaderFooter && <Footer />}
 

@@ -13,7 +13,7 @@ import {
 	setPageHomeWpContent,
 	pageHomeWpContent,
 } from '@/lib/allData';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { generateSchemaJson } from '@/lib/pageSchemaJson';
 // import { removeFirstSubdomain } from '@/utils/removeFirstSubdomain';
 import { FetchCourseType, WpContentData } from '@/data/types';
@@ -27,18 +27,20 @@ import { getJSONTiendaByCountry } from './productsTienda';
 import { getJSONPostByCountry } from './posts';
 import PasswordGate from '@/components/PasswordGate/PasswordGate';
 
-const BlogSummary = dynamic(() => import('@/components/MSK/BlogSummary'));
-const BrandSlider = dynamic(() => import('@/components/MSK/BrandSlider'));
-const CommentReferences = dynamic(() => import('@/components/CommentReferences'));
-const ContactForm = dynamic(() => import('@/components/MSK/ContactForm'));
-const CoursesForYou = dynamic(() => import('@/components/MSK/CoursesForYou'));
-const HomeExtraInfo = dynamic(() => import('@/components/MSK/HomeExtraInfo'));
-const Phrase = dynamic(() => import('@/components/Phrase/Phrase'));
-const Questions = dynamic(() => import('@/components/Questions/Questions'));
-const SectionGridCategoryBox = dynamic(() => import('@/components/SectionGridCategoryBox/SectionGridCategoryBox'));
-const SectionHero = dynamic(() => import('@/components/SectionHero/SectionHero'));
-const SectionSliderBestSellers = dynamic(() => import('@/components/Sections/SectionSliderBestSellers'));
-const WelcomeBox = dynamic(() => import('@/components/WelcomeBox/WelcomeBox'));
+const BlogSummary = dynamic(() => import('@/components/MSK/BlogSummary'), { ssr: true });
+const BrandSlider = dynamic(() => import('@/components/MSK/BrandSlider'), { ssr: true });
+const CommentReferences = dynamic(() => import('@/components/CommentReferences'), { ssr: true });
+const ContactForm = dynamic(() => import('@/components/MSK/ContactForm'), { ssr: true });
+const CoursesForYou = dynamic(() => import('@/components/MSK/CoursesForYou'), { ssr: true });
+const HomeExtraInfo = dynamic(() => import('@/components/MSK/HomeExtraInfo'), { ssr: true });
+const Phrase = dynamic(() => import('@/components/Phrase/Phrase'), { ssr: true });
+const Questions = dynamic(() => import('@/components/Questions/Questions'), { ssr: true });
+const SectionGridCategoryBox = dynamic(() => import('@/components/SectionGridCategoryBox/SectionGridCategoryBox'), {
+	ssr: true,
+});
+const SectionHero = dynamic(() => import('@/components/SectionHero/SectionHero'), { ssr: true });
+const SectionSliderBestSellers = dynamic(() => import('@/components/Sections/SectionSliderBestSellers'), { ssr: true });
+const WelcomeBox = dynamic(() => import('@/components/WelcomeBox/WelcomeBox'), { ssr: true });
 
 export async function generateMetadata({ params }: { params: { lang: string } }) {
 	return await generateHomeMetadata({ params });
@@ -59,6 +61,10 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const currentCountry = 'ar';
 	const JSONProduct = await getJSONTiendaByCountry(currentCountry);
 	const JSONBlog = getJSONPostByCountry(currentCountry);
+	const headersList = headers();
+	const userAgent = headersList.get('user-agent') || '';
+	const isPrerender = userAgent.includes('Prerender');
+	//checking branch
 
 	if (true) {
 		//   const fetchedCourses = await ssr.getAllCourses(currentCountry);
@@ -101,7 +107,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
 	return (
 		<div className='nc- relative animate-fade-down'>
-			<ClearLocalStorage />
+			{!isPrerender && <ClearLocalStorage />}
 			<div className='relative  md:overflow-visible '>
 				<section className=''>
 					<div className=' relative'>
