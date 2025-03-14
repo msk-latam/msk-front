@@ -7,6 +7,147 @@
 	"total_products": 265,
 	"posts": [
 		{
+			"id": 238897,
+			"title": "Qué produce el mobbing en el personal de la salud",
+			"slug": "consecuencias-del-mobbing-en-el-personal-de-la-salud",
+			"permalink": "https://wp.msklatam.com/nota/medicina/consecuencias-del-mobbing-en-el-personal-de-la-salud/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2022/11/¿Que-produce-el-mobbing-en-los-y-las-profesionales-de-la-salud.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2022/11/¿Que-produce-el-mobbing-en-los-y-las-profesionales-de-la-salud.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "Según la Organización Mundial de la Salud, el mobbing o acoso psicológico laboral constituye un problema de salud pública. En el personal de la salud, se asocia a impactos en la salud psíquica y física. Lee este artículo e infórmate más al respecto.",
+			"date": "Marzo 13, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				},
+				{
+					"id": 258873,
+					"name": "Fernando Fuentes",
+					"description": "Médico. Especialista en Neumonología por la Universidad de Buenos Aires. Comunicador científico.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/09/IMG-20230825-WA0000.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 220699,
+					"title": "Cuál es la situación laboral de la enfermería hoy",
+					"slug": "situacion-laboral-de-la-enfermeria-hoy",
+					"link": "https://wp.msklatam.com/nota/enfermeria/situacion-laboral-de-la-enfermeria-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/07/Foto-situacion-laboral-de-la-enfermeria-hoy-scaled-e1741873106125.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 336596,
+					"title": "Cómo la ciencia busca reducir el impacto del glaucoma",
+					"slug": "avances-para-reducir-el-impacto-del-glaucoma",
+					"link": "https://wp.msklatam.com/nota/medicina/avances-para-reducir-el-impacto-del-glaucoma/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-avances-para-reducir-el-impacto-del-glaucoma-scaled-e1741809853664.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 335568,
+					"title": "Consumo de alcohol y riesgo de cáncer: evidencia actual",
+					"slug": "consumo-de-alcohol-y-riesgo-de-cancer",
+					"link": "https://wp.msklatam.com/nota/medicina/consumo-de-alcohol-y-riesgo-de-cancer/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-consumo-de-alcohol-y-riesgo-de-cancer-scaled-e1741351328577.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334858,
+					"title": "Enfermedades raras: retos y soluciones en Latinoamérica",
+					"slug": "enfermedades-raras-retos-y-soluciones",
+					"link": "https://wp.msklatam.com/nota/medicina/enfermedades-raras-retos-y-soluciones/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-enfermedades-raras-retos-y-soluciones-scaled-e1740662888363.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334786,
+					"title": "Habilidades esenciales para el liderazgo en salud",
+					"slug": "habilidades-esenciales-para-el-liderazgo-en-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/habilidades-esenciales-para-el-liderazgo-en-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-habilidades-esenciales-para-el-liderazgo-en-salud-scaled-e1740583131814.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Ortiz, M. I., Valencia Ortiz , A. I., & Espinoza Orozco , E. (2022). Mobbing en profesionales de la salud. Educación Y Salud Boletín Científico Instituto De Ciencias De La Salud Universidad Autónoma Del Estado De Hidalgo, 10(20), 244-250. https://doi.org/10.29057/icsa.v10i20.7809"
+				},
+				{
+					"fuente": "Domínguez LC, Torregrosa L, Cuevas L, Peña L, Sánchez S, Pedraza M, Sanabria Á. Workplace bullying and sexual harassment among general surgery residents in Colombia. Biomedica. 2023 Jun 30;43(2):252-260. doi: 10.7705/biomedica.6915. PMID: 37433160; PMCID: PMC10531255."
+				},
+				{
+					"fuente": "https://psicologia.udp.cl/estres-depresion-e-ideacion-suicida-las-duras-cicatrices-del-acoso-laboral-que-sufren-profesionales-de-la-salud-comenta-elisa-ansoleaga/"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1280,
+				"filter": "raw"
+			},
+			"reading_time": "7",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
 			"id": 220699,
 			"title": "Cuál es la situación laboral de la enfermería hoy",
 			"slug": "situacion-laboral-de-la-enfermeria-hoy",
