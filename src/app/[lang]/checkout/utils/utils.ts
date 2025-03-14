@@ -221,7 +221,6 @@ export const updateContractCRM = async (
 			stripe_subscription_id: subscription_id,
 			mp_subscription_id: subscription_id,
 			Monto_de_cada_pago_restantes: parseFloat((transactionAmountWithDescount / paymentConfig.totalPayments).toFixed(2)),
-
 			discount: discount,
 		};
 		const response = await fetch(`${ENDPOINT_CRM}/api/zoho/sales_order/update_contract/${contract_id}`, {
