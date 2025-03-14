@@ -71,11 +71,20 @@ const SectionSliderBestSellers: FC<SectionSliderBestSellers> = ({
 	const {
 		state: { storeCourses },
 	} = useContext(DataContext);
-	const JSONProduct = getJSONByCountry('int');
+	const [JSONProduct, setJSONProduct] = useState(null);
+
+	useEffect(() => {
+		const fetchJSON = async () => {
+			const data = await getJSONByCountry('int'); // Espera el resultado de la promesa
+			setJSONProduct(data); // Guarda el resultado en el estado
+		};
+
+		fetchJSON();
+	}, []);
 
 	// const top_picks = posts.sort((a: any, b: any) => b.viewdCount - a.viewdCount);
 	const allowedProductCodes = posts?.map((p: any) => p.product_code);
-	const bridgeElements = JSONProduct.products?.filter((sc: any) => allowedProductCodes.includes(sc.product_code));
+	const bridgeElements = JSONProduct?.products?.filter((sc: any) => allowedProductCodes.includes(sc.product_code));
 
 	const MY_GLIDE = new Glide(`.${UNIQUE_CLASS}`, {
 		direction: 'ltr',

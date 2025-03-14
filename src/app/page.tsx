@@ -74,7 +74,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 		}
 		setAllCourses(JSONProduct.products);
 	}
-	if (!getAllBestSellers().length) {
+	if (true) {
 		const fetchedBestSellers = await ssr.getBestSellers(currentCountry);
 		setAllBestSellers(fetchedBestSellers);
 	}
@@ -101,6 +101,8 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const faqs = homeFAQs(currentCountry);
 
 	const allBestSellers = await ssr.getBestSellers(currentCountry);
+
+	console.log(allBestSellers);
 
 	// console.log(JSONProduct, 'mostrnado productos');
 	// return false;
