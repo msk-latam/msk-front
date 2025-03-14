@@ -9,6 +9,7 @@ import { FC, useContext, useEffect, useState } from 'react';
 import SpecialtiesModal from './SpecialtiesModal';
 import ssr from '@/services/ssr';
 import { getJSONByCountry } from '@/app/products';
+import { getJSONTiendaByCountry } from '@/app/productsTienda';
 
 interface TiendaProps {
 	category: string;
@@ -36,7 +37,7 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 	let JSONProduct: any;
 	const fetchProducts = async () => {
 		try {
-			JSONProduct = await getJSONByCountry(country);
+			JSONProduct = await getJSONTiendaByCountry(country);
 			return JSONProduct;
 		} catch (error) {
 			console.error('Error al obtener los productos:', error);
