@@ -26,6 +26,7 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 		setPaymentStatus,
 		isSubmitting,
 		user,
+		appliedCoupon,
 	} = useCheckout();
 
 	console.log(user);
@@ -128,10 +129,21 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 	const regularPrice = product.regular_price;
 	const regularPriceFixed = parseInt(regularPrice.replace(/[\.,]/g, ''), 10);
 
+	const discount =
+		appliedCoupon && appliedCoupon.discountType === 'percentage'
+			? transactionAmount * (appliedCoupon.value / 100) // Descuento porcentual
+			: appliedCoupon && appliedCoupon.discountType === 'fixed'
+			? appliedCoupon.value // Descuento fijo
+			: 0;
+
+	// Aplica el descuento asegurando que no haya valores negativos
+	const transactionAmountWithDiscount = Math.max(transactionAmount - discount, 0);
+	const regularPriceWithDiscount = Math.max(regularPriceFixed - discount, 0);
+
 	const mapFormDataToRequest = (formData: any) => {
 		return {
 			// transaction_amount: 1000,
-			transaction_amount: transactionAmount,
+			transaction_amount: transactionAmountWithDiscount,
 			installments: 6,
 			description: 'Pago de contrato MSK',
 			payer: {
@@ -169,11 +181,11 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 					{
 						code: product.ficha.product_code,
 						quantity: 1,
-						price: regularPriceFixed,
-						total: regularPriceFixed,
-						net_total: regularPriceFixed,
-						total_after_discount: regularPriceFixed,
-						list_price: regularPriceFixed,
+						price: regularPriceWithDiscount,
+						total: regularPriceWithDiscount,
+						net_total: regularPriceWithDiscount,
+						total_after_discount: regularPriceWithDiscount,
+						list_price: regularPriceWithDiscount,
 						// price: 1000,
 						// total: 1000,
 						// net_total: 1000,
@@ -183,8 +195,8 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 				],
 				currency,
 				country: formData.country,
-				sub_total: regularPriceFixed,
-				grand_total: transactionAmount,
+				sub_total: regularPriceWithDiscount,
+				grand_total: transactionAmountWithDiscount,
 				// sub_total: 1000,
 				// grand_total: 1000,
 			},
