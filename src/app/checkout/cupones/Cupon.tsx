@@ -18,7 +18,7 @@ const Cupon: React.FC = () => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const mockCoupons: Coupon[] = [
-		{ name: 'Descuento del 10%', code: 'DESCUENTO10', discountType: 'percentage', value: 10, expirationDate: '2025-12-31' },
+		{ name: 'Descuento de $10.000', code: 'DESCUENTO10', discountType: 'fixed', value: 10000, expirationDate: '2025-12-31' },
 		{ name: 'Descuento del 50%', code: 'DESCUENTO50', discountType: 'percentage', value: 50, expirationDate: '2025-12-31' },
 		{ name: 'Descuento de $100', code: 'OFERTA100', discountType: 'fixed', value: 100, expirationDate: '2025-06-30' },
 		{ name: 'Cupón vencido 1', code: 'EXPIRADO1', discountType: 'percentage', value: 15, expirationDate: '2023-05-15' },
