@@ -1,6 +1,5 @@
 import { AuthContext } from '@/context/user/AuthContext';
 import React, { useContext, useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
 import { useCheckout } from './CheckoutContext';
 import { validateUserField } from './validators/userValidator';
 

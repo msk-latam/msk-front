@@ -206,13 +206,32 @@ export const createContractCRM = async (
 	}
 };
 
-export const updateContractCRM = async (contract_id: string, subscription_id: string = '') => {
+export const updateContractCRM = async (
+	contract_id: string,
+	subscription_id: string = '',
+	transactionAmountWithDescount: any,
+	paymentType: 'rebill' | 'mercadopago',
+) => {
+	const paymentConfig = paymentOptions[paymentType] || paymentOptions.mercadopago;
 	try {
 		const contractData = {
 			status: 'Confirmado',
 			Estado_de_cobro: 'Activo',
 			stripe_subscription_id: subscription_id,
 			mp_subscription_id: subscription_id,
+			sub_total: transactionAmountWithDescount,
+			Grand_Total: transactionAmountWithDescount,
+			Monto_de_cada_pago_restantes: Math.floor(transactionAmountWithDescount / paymentConfig.totalPayments),
+			products: [
+				{
+					price: transactionAmountWithDescount,
+					total: transactionAmountWithDescount,
+					net_total: transactionAmountWithDescount,
+					total_after_discount: transactionAmountWithDescount,
+					list_price: transactionAmountWithDescount,
+				},
+			],
+			Discount: transactionAmountWithDescount,
 		};
 		const response = await fetch(`${ENDPOINT_CRM}/api/zoho/sales_order/update_contract/${contract_id}`, {
 			method: 'PUT',

@@ -82,6 +82,14 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 					</div>
 				))}
 			</div>
+
+			{discount > 0 && (
+				<div className='grid grid-cols-2 gap-x-8 mt-2  rounded-md'>
+					<div className='text-sm font-medium text-[#392C35]'>Descuento</div>
+					<div className='text-sm font-medium text-right text-[#6474A6]'>- {`${currency} $${formatNumber(discount)}`}</div>
+				</div>
+			)}
+
 			<Cupon />
 
 			<hr className='my-6 border-dashed border-t-2 border-gray-300' style={{ borderStyle: 'dotted' }} />
