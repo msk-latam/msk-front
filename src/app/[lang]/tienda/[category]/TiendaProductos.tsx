@@ -73,7 +73,7 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 			}
 
 			if (category) {
-				filteredCourses = courses.filter((course: any) => course.categories.some((cat: any) => cat.slug === category));
+				filteredCourses = courses?.filter((course: any) => course.categories.some((cat: any) => cat.slug === category));
 				// console.log(filteredCourses);
 				filteredCourses = filteredCourses.filter((course: any) => course.father_post_type === 'course');
 			}
