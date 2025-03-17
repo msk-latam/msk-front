@@ -64,6 +64,7 @@ const SearchProducts = () => {
 				// Variables locales
 				let courses;
 				let productsCountry = countryState.country === 'int' ? '' : countryState.country;
+				console.log(productsCountry);
 
 				// Si estamos en el blog, no se buscan cursos
 				if (pathname?.includes('/blog')) {
