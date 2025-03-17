@@ -11,6 +11,7 @@ import {
 	currencies,
 	getCountryCompleteName,
 	getCRMUser,
+	rebillCountries,
 } from './utils/utils';
 import CheckoutRegisterButtons from './buttons/CheckoutRegisterButtons';
 import AddressForm from './forms/AddressForm';
@@ -143,12 +144,10 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 			setError('');
 			setUser(formDataUser);
 
-			const [crmResponse, rebillResponse] = await Promise.all([
-				createCRMUser(formDataUser, countryCompleteName, formData),
-				createRebillUser(formDataUser, country),
-			]);
+			const crmResponse = await createCRMUser(formDataUser, countryCompleteName, formData);
+			const rebillResponse = rebillCountries.includes(country) ? await createRebillUser(formDataUser, country) : null;
 
-			const idRebillUser = rebillResponse.id;
+			const idRebillUser = rebillResponse?.id;
 			setRebillId(idRebillUser);
 
 			const firstResponse = crmResponse.data[0];

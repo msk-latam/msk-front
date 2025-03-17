@@ -248,14 +248,14 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 			setPaymentStatus('rejected');
 		} finally {
 			setIsSubmitting(false);
-			const updateContract = await updateContractCRM(
-				user.contract_id,
-				'',
-				transactionAmountWithDiscount,
-				'mercadopago',
-				discount,
-			);
-			console.log(updateContract);
+			// const updateContract = await updateContractCRM(
+			// 	user.contract_id,
+			// 	'',
+			// 	transactionAmountWithDiscount,
+			// 	'mercadopago',
+			// 	discount,
+			// );
+			// console.log(updateContract);
 		}
 	};
 

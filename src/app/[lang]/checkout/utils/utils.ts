@@ -40,6 +40,8 @@ export const countryToName: Record<string, string> = {
 	ve: 'Venezuela',
 };
 
+export const rebillCountries = ['cl', 'uy', 'pe', 'mx', 'co'];
+
 export const getCountryCompleteName = (code: string = 'ar'): string | null => {
 	const lowerCaseCode = code.toLowerCase();
 	return countryToName[lowerCaseCode] || null; // Devuelve null si el código no está en el objeto
