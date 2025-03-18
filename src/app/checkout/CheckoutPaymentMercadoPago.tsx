@@ -29,8 +29,6 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 		appliedCoupon,
 	} = useCheckout();
 
-	console.log(user);
-
 	const [formData, setFormData] = useState({
 		cardholderName: '',
 		cardNumber: '',
@@ -212,8 +210,6 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 		try {
 			const data = await createPaymentMercadoPago(requestBody);
 
-			console.log(data);
-
 			if (data[0].status === 'approved') {
 				setPaymentStatus('approved');
 
@@ -226,8 +222,6 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 					'mercadopago',
 					discount,
 				);
-
-				console.log(updateContract);
 
 				if (subStep === 0) {
 					completeStep(activeStep);
@@ -248,14 +242,6 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 			setPaymentStatus('rejected');
 		} finally {
 			setIsSubmitting(false);
-			// const updateContract = await updateContractCRM(
-			// 	user.contract_id,
-			// 	'',
-			// 	transactionAmountWithDiscount,
-			// 	'mercadopago',
-			// 	discount,
-			// );
-			// console.log(updateContract);
 		}
 	};
 
