@@ -132,6 +132,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 	const totalPrice = product.total_price;
 	const transactionAmount = parseInt(totalPrice.replace(/[\.,]/g, ''), 10);
 	const regularPrice = product.regular_price;
+	const paymentProcessor = rebillCountries.includes(country) ? 'rebill' : 'stripe';
 
 	const handleNextStep = async () => {
 		if (!isFormValid) {
@@ -154,7 +155,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 			const customer_id =
 				firstResponse.code === 'SUCCESS' || firstResponse.code === 'DUPLICATE_DATA' ? firstResponse.details.id : undefined;
 
-			console.log(rebillResponse, crmResponse, customer_id);
+			const paymentProcessor = rebillCountries.includes(country) ? 'rebill' : 'stripe';
 
 			const createContractResponse = await createContractCRM(
 				customer_id,
@@ -162,7 +163,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 				transactionAmount,
 				currency,
 				countryCompleteName,
-				'rebill',
+				paymentProcessor,
 			);
 			const contract_id = createContractResponse.data[0].details.id;
 
@@ -197,17 +198,17 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 						};
 						setFormDataUser(updatedFormDataUser);
 						const customer_id = user.id;
-						const rebillResponse = await createRebillUser(updatedFormDataUser, country);
+						const rebillResponse = rebillCountries.includes(country) ? await createRebillUser(formDataUser, country) : null;
 						const createContractResponse = await createContractCRM(
 							customer_id,
 							product,
 							transactionAmount,
 							currency,
 							countryCompleteName,
-							'rebill',
+							paymentProcessor,
 						);
 						const contract_id = createContractResponse.data[0].details.id;
-						const idRebillUser = rebillResponse.id;
+						const idRebillUser = rebillResponse?.id;
 						setRebillId(idRebillUser);
 						const finalFormDataUser = { ...updatedFormDataUser, contract_id };
 						setUser(finalFormDataUser);

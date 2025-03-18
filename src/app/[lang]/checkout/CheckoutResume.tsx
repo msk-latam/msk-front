@@ -54,14 +54,14 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 	const installmentValue = Math.floor(total / 12);
 	const discount =
 		appliedCoupon && appliedCoupon.discountType === 'percentage'
-			? total * (appliedCoupon.value / 100) // Descuento porcentual
+			? total * (appliedCoupon.value / 100)
 			: appliedCoupon && appliedCoupon.discountType === 'fixed'
-			? appliedCoupon.value // Descuento fijo
+			? appliedCoupon.value
 			: 0;
 
 	const totalWithDiscount = Math.max(total - discount, 0); // Asegura que no sea negativo
 
-	const installmentValueWithDiscount = totalWithDiscount / 6;
+	const installmentValueWithDiscount = totalWithDiscount / 12;
 
 	return (
 		<div className='p-6 bg-white border border-gray-300 rounded-lg mt-24'>

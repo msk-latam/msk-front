@@ -1,6 +1,6 @@
 import { ENDPOINT_CRM, ENDPOINT_GATEWAY } from '../rebill/rebillEndpoints';
-const tokenGATEWAY = process.env.NEXT_PUBLIC_GATEWAY_BACKEND_TOKEN;
-const tokenCRM = process.env.NEXT_PUBLIC_CRM_BACKEND_TOKEN;
+export const tokenGATEWAY = process.env.NEXT_PUBLIC_GATEWAY_BACKEND_TOKEN;
+export const tokenCRM = process.env.NEXT_PUBLIC_CRM_BACKEND_TOKEN;
 
 export const currencies: any = {
 	cl: 'CLP',
@@ -147,6 +147,12 @@ const paymentOptions: Record<string, PaymentConfig> = {
 		totalPayments: 6,
 		remainingPayments: 5,
 	},
+	stripe: {
+		payment: 'Stripe',
+		paymentMethod: 'Cobro recurrente',
+		totalPayments: 12,
+		remainingPayments: 11,
+	},
 	// En el futuro puedes agregar Stripe u otros métodos aquí
 };
 
@@ -156,7 +162,7 @@ export const createContractCRM = async (
 	transactionAmount: any,
 	currency: any,
 	countryCompleteName: any,
-	paymentType: 'rebill' | 'mercadopago',
+	paymentType: 'rebill' | 'mercadopago' | 'stripe',
 ) => {
 	try {
 		const paymentConfig = paymentOptions[paymentType] || paymentOptions.mercadopago;
@@ -212,7 +218,7 @@ export const updateContractCRM = async (
 	contract_id: string,
 	subscription_id: string = '',
 	transactionAmountWithDescount: any,
-	paymentType: 'rebill' | 'mercadopago',
+	paymentType: 'rebill' | 'mercadopago' | 'stripe',
 	discount: any,
 ) => {
 	const paymentConfig = paymentOptions[paymentType] || paymentOptions.mercadopago;

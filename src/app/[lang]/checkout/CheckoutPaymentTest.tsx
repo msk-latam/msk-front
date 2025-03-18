@@ -208,9 +208,9 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 
 	const discount =
 		appliedCoupon && appliedCoupon.discountType === 'percentage'
-			? transactionAmount * (appliedCoupon.value / 100) // Descuento porcentual
+			? transactionAmount * (appliedCoupon.value / 100)
 			: appliedCoupon && appliedCoupon.discountType === 'fixed'
-			? appliedCoupon.value // Descuento fijo
+			? appliedCoupon.value
 			: 0;
 
 	const transactionAmountWithDiscount = Math.max(transactionAmount - discount, 0);

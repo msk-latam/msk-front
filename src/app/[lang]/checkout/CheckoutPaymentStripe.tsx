@@ -1,31 +1,75 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ENDPOINT_GATEWAY } from './rebill/rebillEndpoints';
-import { createPaymentRebill, currencies, updateContractCRM } from './utils/utils';
+import { countryToName, createPaymentRebill, currencies, updateContractCRM } from './utils/utils';
 import { AuthContext } from '@/context/user/AuthContext';
+import { useCheckout } from './CheckoutContext';
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { createStripeSubscription } from './stripe/stripeUtils';
 
-const CheckoutStripe = () => {
+const CheckoutStripe = ({ product, country }: any) => {
+	const {
+		user,
+		activeStep,
+		setActiveStep,
+		subStep,
+		setSubStep,
+		completeStep,
+		setPaymentType,
+		paymentType,
+		setIsSubmitting,
+		setPaymentStatus,
+		isSubmitting,
+		appliedCoupon,
+	} = useCheckout();
+	const currency = currencies[country] || 'USD';
+	const currentCountry = countryToName[country];
+	const stripe = useStripe();
+	const elements = useElements();
+	const [isLoading, setIsLoading] = useState(false);
+
+	const transactionAmount = Number(product.total_price.replace('.', ''));
+
+	const discount =
+		appliedCoupon && appliedCoupon.discountType === 'percentage'
+			? transactionAmount * (appliedCoupon.value / 100)
+			: appliedCoupon && appliedCoupon.discountType === 'fixed'
+			? appliedCoupon.value
+			: 0;
+
+	const transactionAmountWithDiscount = Math.max(transactionAmount - discount, 0);
+
 	const [formData, setFormData] = useState({
-		quote_amount: 170,
-		total_contract_amount: 2040,
-		currency: 'PEN',
+		quote_amount: parseFloat((transactionAmountWithDiscount / 12).toFixed(2)),
+		total_contract_amount: parseFloat(transactionAmountWithDiscount.toFixed(2)),
+		currency: currency,
 		quotes: 12,
-		contract_id: '5344455000199991681',
-		contract_so: '5344455000199991682',
+		contract_id: user.contract_id,
+		contract_so: (BigInt(user.contract_id) + BigInt(1)).toString(),
 		customer: {
-			name: 'Albert Reis',
-			email: 'areis@msklatam.com',
-			first_name: 'Albert',
-			last_name: 'Reis',
-			reference: '5344455000199886983',
-			country: 'Brasil',
+			name: (user?.firstName || state?.profile?.name || '') + ' ' + (user?.lastName || state?.profile?.last_name || ''),
+			email: user?.email || state?.profile?.email || '',
+			first_name: user?.firstName || state?.profile?.name || '',
+			last_name: user?.lastName || state?.profile?.last_name || '',
+			country: currentCountry,
 		},
 		product: {
-			name: 'ACCSAP',
-			product_code: '9005817',
-			amount: 2040,
+			name: product.ficha.title,
+			product_code: product.ficha.product_code,
+			amount: parseFloat(transactionAmountWithDiscount.toFixed(2)),
 		},
 	});
+	useEffect(() => {
+		setFormData((prev) => ({
+			...prev,
+			quote_amount: parseFloat((transactionAmountWithDiscount / 12).toFixed(2)),
+			total_contract_amount: parseFloat(transactionAmountWithDiscount.toFixed(2)),
+			product: {
+				...prev.product,
+				amount: parseFloat(transactionAmountWithDiscount.toFixed(2)),
+			},
+		}));
+	}, [transactionAmountWithDiscount, currency]);
 
 	const handleChange = (e: any) => {
 		const { name, value } = e.target;
@@ -42,65 +86,98 @@ const CheckoutStripe = () => {
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
-		const token = '$2y$12$O4BEY9Ghrs2GCb5MtrNBWeeaG4H9MlWJsViHO7vKYhMb2ChNcPYRK';
+		setIsLoading(true);
+
 		try {
-			const response = await fetch(`${ENDPOINT_GATEWAY}/api/stripe/subscription/ecommerce`, {
-				method: 'POST',
-				headers: {
-					Authorization: `Bearer ${token}`,
-					'Content-Type': 'application/json',
+			const { error, paymentMethod } = await stripe.createPaymentMethod({
+				type: 'card',
+				card: elements.getElement(CardElement),
+				billing_details: {
+					name: formData.customer.name,
+					email: formData.customer.email,
+					address: { country: country },
 				},
-				body: JSON.stringify(formData),
 			});
 
-			const result = await response.json();
-			if (response.ok) {
-				console.log('Pago procesado con éxito');
+			if (error) {
+				console.error(error);
+				return;
+			}
+
+			const paymentMethodId = paymentMethod.id;
+			const updatedFormData = {
+				...formData,
+				paymentMethodId,
+			};
+
+			const stripeSubscriptionResponse = await createStripeSubscription(updatedFormData);
+			const stripeSubscriptionId = stripeSubscriptionResponse.response.subscription_id;
+			console.log(stripeSubscriptionId);
+
+			if (stripeSubscriptionResponse?.response?.subscription_id && stripeSubscriptionResponse?.response?.client_secret) {
+				setPaymentStatus('approved');
+
+				const updateContract = await updateContractCRM(
+					user.contract_id,
+					stripeSubscriptionId,
+					transactionAmountWithDiscount,
+					'stripe',
+					discount,
+				);
+
+				console.log(updateContract);
+
+				if (subStep === 0) {
+					completeStep(activeStep);
+					setActiveStep(activeStep + 1);
+				} else {
+					setActiveStep(activeStep + 1);
+					completeStep(activeStep);
+					setSubStep(0);
+				}
 			} else {
-				console.log(`Error: ${result.message}`);
+				setPaymentStatus('rejected');
+				completeStep(activeStep);
+				setActiveStep(activeStep + 1);
 			}
 		} catch (error) {
-			console.log('Error al procesar el pago');
+			console.error('Error en la solicitud de checkout:', error);
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
 	return (
-		<form onSubmit={handleSubmit} className='max-w-md mx-auto p-4 bg-white shadow-lg rounded-lg'>
-			<h2 className='text-xl font-bold mb-4'>Formulario de Pago</h2>
+		<form
+			onSubmit={handleSubmit}
+			className='max-w-lg w-full mx-auto p-6 bg-white shadow-xl rounded-xl border border-gray-200'
+		>
+			<h2 className='text-xl font-semibold text-gray-700 mb-4 text-center'>Finalizar Pago</h2>
 
-			{Object.entries(formData).map(([key, value]) =>
-				typeof value === 'object' ? (
-					<div key={key}>
-						<h3 className='font-semibold mt-4'>{key.charAt(0).toUpperCase() + key.slice(1)}</h3>
-						{Object.entries(value).map(([subKey, subValue]) => (
-							<label key={subKey} className='block mb-2'>
-								{subKey.charAt(0).toUpperCase() + subKey.slice(1)}:
-								<input
-									type={typeof subValue === 'number' ? 'number' : 'text'}
-									name={`${key}.${subKey}`}
-									value={subValue}
-									onChange={handleChange}
-									className='input'
-								/>
-							</label>
-						))}
-					</div>
+			<div className='p-4 border border-gray-300 rounded-lg bg-gray-50'>
+				<CardElement
+					options={{
+						style: {
+							base: {
+								fontSize: '18px',
+								color: '#333',
+								'::placeholder': { color: '#a0aec0' },
+							},
+						},
+					}}
+				/>
+			</div>
+
+			<button
+				type='submit'
+				className='w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-all duration-300 flex justify-center items-center'
+				disabled={isLoading}
+			>
+				{isLoading ? (
+					<div className='h-6 w-6 border-4 border-white border-t-transparent rounded-full animate-spin'></div>
 				) : (
-					<label key={key} className='block mb-2'>
-						{key.charAt(0).toUpperCase() + key.slice(1)}:
-						<input
-							type={typeof value === 'number' ? 'number' : 'text'}
-							name={key}
-							value={value}
-							onChange={handleChange}
-							className='input'
-						/>
-					</label>
-				),
-			)}
-
-			<button type='submit' className='w-full mt-4 bg-blue-600 text-white p-2 rounded-lg'>
-				Enviar Pago
+					'Pagar'
+				)}
 			</button>
 		</form>
 	);
@@ -108,8 +185,8 @@ const CheckoutStripe = () => {
 
 const CheckoutPaymentStripe = ({ product, country }: any) => {
 	return (
-		<div>
-			<CheckoutStripe />
+		<div className='mt-24'>
+			<CheckoutStripe product={product} country={country} />
 		</div>
 	);
 };

@@ -51,6 +51,11 @@ const Cupon: React.FC = () => {
 			setIsLoading(false);
 		}, 2000);
 	}, [couponCode, isLoading]);
+	const handleRemoveCoupon = () => {
+		setAppliedCoupon(null);
+		setCouponCode('');
+		setError('');
+	};
 
 	return (
 		<div className='mt-4'>
@@ -90,11 +95,15 @@ const Cupon: React.FC = () => {
 			{/* Mensaje de error */}
 			{error && <p className='text-red-500 text-sm mt-2'>{error}</p>}
 
-			{/* Mensaje de cupón aplicado */}
 			{appliedCoupon && (
-				<p className='text-green-600 text-sm mt-2'>
-					Cupón aplicado: <strong>{appliedCoupon.name}</strong> 🎉
-				</p>
+				<div className='mt-2 flex items-center justify-between p-2 border rounded bg-green-100'>
+					<p className='text-green-600 text-sm'>
+						Cupón aplicado: <strong>{appliedCoupon.name}</strong> 🎉
+					</p>
+					<button onClick={handleRemoveCoupon} className='text-red-600 text-sm font-medium hover:underline'>
+						Eliminar
+					</button>
+				</div>
 			)}
 		</div>
 	);
