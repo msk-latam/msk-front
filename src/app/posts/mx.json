@@ -7,6 +7,144 @@
 	"total_products": 262,
 	"posts": [
 		{
+			"id": 213910,
+			"title": "Migración médica: entre la necesidad y la transformación",
+			"slug": "migracion-medica-entre-la-necesidad-y-la-transformacion",
+			"permalink": "https://wp.msklatam.com/nota/medicina/migracion-medica-entre-la-necesidad-y-la-transformacion/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2022/06/shutterstock_2476690065-scaled-e1742302110772.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2022/06/shutterstock_2476690065-scaled-e1742302110772.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "Cada vez más profesionales de la salud emigran dentro y fuera de América Latina en busca de mejores condiciones laborales. Sin embargo, el proceso no es sencillo: convalidación de títulos, discriminación y precarización son solo algunos de los desafíos que enfrentan. ¿Qué factores impulsan esta movilidad? Descubre las claves de este fenómeno y su impacto en la región.",
+			"date": "Marzo 17, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				},
+				{
+					"id": 254588,
+					"name": "Verónica Martínez Moreira",
+					"description": "Licenciada en Ciencias de la Comunicación por la Universidad de Buenos Aires. Desde hace años escribo en medios digitales sobre diversas temáticas como ciencia, salud, tecnología y educación.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/IMG_20230706_184120622-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 238897,
+					"title": "Qué produce el mobbing en el personal de la salud",
+					"slug": "consecuencias-del-mobbing-en-el-personal-de-la-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/consecuencias-del-mobbing-en-el-personal-de-la-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/11/¿Que-produce-el-mobbing-en-los-y-las-profesionales-de-la-salud.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 220699,
+					"title": "Cuál es la situación laboral de la enfermería hoy",
+					"slug": "situacion-laboral-de-la-enfermeria-hoy",
+					"link": "https://wp.msklatam.com/nota/enfermeria/situacion-laboral-de-la-enfermeria-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/07/Foto-situacion-laboral-de-la-enfermeria-hoy-scaled-e1741873106125.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 336596,
+					"title": "Cómo la ciencia busca reducir el impacto del glaucoma",
+					"slug": "avances-para-reducir-el-impacto-del-glaucoma",
+					"link": "https://wp.msklatam.com/nota/medicina/avances-para-reducir-el-impacto-del-glaucoma/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-avances-para-reducir-el-impacto-del-glaucoma-scaled-e1741809853664.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 335568,
+					"title": "Consumo de alcohol y riesgo de cáncer: evidencia actual",
+					"slug": "consumo-de-alcohol-y-riesgo-de-cancer",
+					"link": "https://wp.msklatam.com/nota/medicina/consumo-de-alcohol-y-riesgo-de-cancer/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-consumo-de-alcohol-y-riesgo-de-cancer-scaled-e1741351328577.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334858,
+					"title": "Enfermedades raras: retos y soluciones en Latinoamérica",
+					"slug": "enfermedades-raras-retos-y-soluciones",
+					"link": "https://wp.msklatam.com/nota/medicina/enfermedades-raras-retos-y-soluciones/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-enfermedades-raras-retos-y-soluciones-scaled-e1740662888363.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Ramírez García, T. y Lozano Ascencio, F. (2022). Migración y trabajo de los profesionales de la salud de México y América Latina en Estados Unidos durante la pandemia por la COVID-19. En: Aragonés, A. M. y Salgado, U. (Eds.). Migración mexicana calificada: revertir la tendencia (pp. 203-229). Universidad Nacional Autónoma de México."
+				},
+				{
+					"fuente": "https://www.paho.org/es/eventos/reunion-alto-nivel-sobre-migracion-movilidad-personal-salud-region-americas"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1280,
+				"filter": "raw"
+			},
+			"reading_time": "0",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
 			"id": 238897,
 			"title": "Qué produce el mobbing en el personal de la salud",
 			"slug": "consecuencias-del-mobbing-en-el-personal-de-la-salud",
