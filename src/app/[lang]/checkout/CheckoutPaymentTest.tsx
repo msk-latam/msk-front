@@ -116,7 +116,7 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 			checkoutForm.mount('rebill-container');
 
 			checkoutForm.on('success', async (e: any) => {
-				console.log('Tarjeta tokenizada', e);
+				// console.log('Tarjeta tokenizada', e);
 				setProcessingPayment(true);
 
 				const contract_id = user.contract_id;
@@ -130,8 +130,6 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 						e.card.id,
 						country,
 					);
-
-					console.log('Respuesta del checkout:', data);
 
 					if (
 						data.invoice &&
@@ -148,8 +146,6 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 							'rebill',
 							discount,
 						);
-
-						console.log(updateContract);
 
 						if (subStep === 0) {
 							completeStep(activeStep);

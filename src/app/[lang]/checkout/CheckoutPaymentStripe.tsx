@@ -28,7 +28,7 @@ const CheckoutStripe = ({ product, country }: any) => {
 	const elements = useElements();
 	const [isLoading, setIsLoading] = useState(false);
 
-	const transactionAmount = Number(product.total_price.replace('.', ''));
+	const transactionAmount = Number(product.total_price.replace(/,/g, '').replace('.', ''));
 
 	const discount =
 		appliedCoupon && appliedCoupon.discountType === 'percentage'
@@ -112,7 +112,6 @@ const CheckoutStripe = ({ product, country }: any) => {
 
 			const stripeSubscriptionResponse = await createStripeSubscription(updatedFormData);
 			const stripeSubscriptionId = stripeSubscriptionResponse.response.subscription_id;
-			console.log(stripeSubscriptionId);
 
 			if (stripeSubscriptionResponse?.response?.subscription_id && stripeSubscriptionResponse?.response?.client_secret) {
 				setPaymentStatus('approved');
@@ -124,8 +123,6 @@ const CheckoutStripe = ({ product, country }: any) => {
 					'stripe',
 					discount,
 				);
-
-				console.log(updateContract);
 
 				if (subStep === 0) {
 					completeStep(activeStep);
