@@ -1,7 +1,5 @@
 'use client';
 
-import CheckoutRegister from './CheckoutRegister';
-import CheckoutPayment from './CheckoutPayment';
 import CheckoutState from './CheckoutState';
 import PaymentTypeSelection from './CheckoutPaymentTypeSelection';
 import { useCheckout } from './CheckoutContext';
@@ -29,8 +27,6 @@ const CheckoutContent: React.FC<CheckoutContentProps> = ({ product, country }) =
 			return <PaymentTypeSelection />;
 		}
 		if (subStep === 1) {
-			// Lista de países que deben usar CheckoutPaymentTest
-
 			return rebillCountries.includes(country) ? (
 				<CheckoutPaymentTest product={product} country={country} />
 			) : (
@@ -44,7 +40,6 @@ const CheckoutContent: React.FC<CheckoutContentProps> = ({ product, country }) =
 
 	switch (activeStep) {
 		case 1:
-			// return <CheckoutRegister product={product} country={country} />;
 			return <CheckoutRegisterTest product={product} country={country} />;
 		case 3:
 			return <CheckoutState />;
