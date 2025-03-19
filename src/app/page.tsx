@@ -100,6 +100,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	// console.log(JSONProduct, 'mostrnado productos');
 	// return false;
 
+	console.log('testing branch');
 	return (
 		<>
 			<HomePage />
