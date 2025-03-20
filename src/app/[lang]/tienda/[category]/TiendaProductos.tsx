@@ -75,7 +75,7 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 			if (category) {
 				filteredCourses = courses?.filter((course: any) => course.categories.some((cat: any) => cat.slug === category));
 				// console.log(filteredCourses);
-				filteredCourses = filteredCourses.filter((course: any) => course.father_post_type === 'course');
+				filteredCourses = filteredCourses?.filter((course: any) => course.father_post_type === 'course');
 			}
 			setCurrentItems(filteredCourses);
 
@@ -123,7 +123,7 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 			//   });
 			// }
 
-			const paginatedCourses = filteredCourses.slice(indexOfFirstItem, indexOfLastItem);
+			const paginatedCourses = filteredCourses?.slice(indexOfFirstItem, indexOfLastItem);
 			// console.log(paginatedCourses);
 
 			setCurrentItems(paginatedCourses);
