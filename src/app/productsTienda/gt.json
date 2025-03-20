@@ -5,6 +5,57 @@
 	},
 	"products": [
 		{
+			"id": 337579,
+			"related_tag": "",
+			"father_id": 337516,
+			"slug": "fundamentos-de-investigacion-en-enfermeria",
+			"is_presale_product": false,
+			"father_post_type": "downloadable",
+			"language_code": "gt",
+			"language_name": "Guatemala",
+			"product_code": 0,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Fundamentos de investigación en enfermería",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/foto-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/03/foto-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/03/foto-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/03/foto-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": null,
+			"permalink": "https://gt.wp.msklatam.com/producto/fundamentos-de-investigacion-en-enfermeria/",
+			"temario": "https://gt.wp.msklatam.com/wp-content/uploads/2025/03/Fundamentos-de-investigacion-en-enfermeria.pdf",
+			"cantidad_modulos": 0,
+			"why_course": "<p><span data-olk-copy-source=MessageBody>La investigación en enfermería es clave para mejorar la calidad del cuidado y la toma de decisiones basadas en evidencia. Esta guía profesional de descarga gratuita te brindará los conocimientos esenciales para comprender el diseño de proyectos de investigación, los estudios epidemiológicos y la evaluación de pruebas diagnósticas.</span></p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": null,
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2025-03-20 15:03:24"
+		},
+		{
 			"meta_titulo": null,
 			"meta_descripcion": null,
 			"title_contenido": null,
