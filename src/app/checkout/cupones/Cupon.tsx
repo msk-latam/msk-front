@@ -17,46 +17,42 @@ const Cupon: React.FC = () => {
 	const [error, setError] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 
-	const mockCoupons: Coupon[] = [
-		{ name: 'Descuento de $10.000', code: 'DESCUENTO10', discountType: 'fixed', value: 10000, expirationDate: '2025-12-31' },
-		{
-			name: 'Descuento de $100.000',
-			code: 'DESCUENTO100',
-			discountType: 'fixed',
-			value: 100000,
-			expirationDate: '2025-12-31',
-		},
-		{ name: 'Descuento del 50%', code: 'DESCUENTO50', discountType: 'percentage', value: 50, expirationDate: '2025-12-31' },
-		{ name: 'Descuento de $100', code: 'OFERTA100', discountType: 'fixed', value: 100, expirationDate: '2025-06-30' },
-		{ name: 'Cupón vencido 1', code: 'EXPIRADO1', discountType: 'percentage', value: 15, expirationDate: '2023-05-15' },
-		{ name: 'Cupón vencido 2', code: 'EXPIRADO2', discountType: 'fixed', value: 200, expirationDate: '2024-02-01' },
-	];
-
-	const handleApplyCoupon = useCallback(() => {
+	const handleApplyCoupon = useCallback(async () => {
 		if (isLoading || !couponCode.trim()) return;
 
 		setIsLoading(true);
 		setError('');
 		setAppliedCoupon(null);
 
-		setTimeout(() => {
-			const foundCoupon = mockCoupons.find((coupon) => coupon.code === couponCode.toUpperCase());
+		try {
+			const response = await fetch(`https://api.msklatam.net/validarCupon?cupon=${couponCode.toUpperCase()}`);
+			const data = await response.json();
+			console.log(data);
 
-			if (!foundCoupon) {
+			if (!data.codigo) {
 				setError('Cupón inválido');
 			} else {
 				const today = new Date();
-				const expirationDate = new Date(foundCoupon.expirationDate);
+				const expirationDate = new Date(data.fecha_vencimiento);
 
 				if (expirationDate < today) {
 					setError('Cupón expirado');
 				} else {
-					setAppliedCoupon(foundCoupon);
+					const formattedCoupon: Coupon = {
+						name: data.nombre,
+						code: data.codigo,
+						discountType: data.tipo_descuento.toLowerCase() === 'porcentaje' ? 'percentage' : 'fixed',
+						value: data.monto_descuento,
+						expirationDate: data.fecha_vencimiento,
+					};
+					setAppliedCoupon(formattedCoupon);
 				}
 			}
-
+		} catch (error) {
+			setError('Error al validar el cupón');
+		} finally {
 			setIsLoading(false);
-		}, 2000);
+		}
 	}, [couponCode, isLoading]);
 
 	const handleRemoveCoupon = () => {
@@ -73,7 +69,7 @@ const Cupon: React.FC = () => {
 					type='text'
 					placeholder='Ingresa tu código'
 					value={couponCode}
-					onChange={(e) => setCouponCode(e.target.value)}
+					onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
 					className='border p-2 rounded-l w-full focus:ring focus:ring-[#9200AD]'
 					disabled={isLoading}
 				/>
