@@ -221,7 +221,7 @@ export const provinciasPorPais: any = {
 		'Región Autónoma de la Costa Caribe Norte',
 		'Región Autónoma de la Costa Caribe Sur',
 	],
-	Panama: [
+	Panamá: [
 		'Bocas del Toro',
 		'Coclé',
 		'Colón',
