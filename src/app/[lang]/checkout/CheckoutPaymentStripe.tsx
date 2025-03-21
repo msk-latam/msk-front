@@ -5,7 +5,7 @@ import { countryToName, createPaymentRebill, currencies, updateContractCRM } fro
 import { AuthContext } from '@/context/user/AuthContext';
 import { useCheckout } from './CheckoutContext';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { createStripeSubscription } from './stripe/stripeUtils';
+import { attachCardToUser, createCard, createStripeSubscription, getStripeCustomerIdBySubId } from './stripe/stripeUtils';
 
 const CheckoutStripe = ({ product, country }: any) => {
 	const {
@@ -88,10 +88,23 @@ const CheckoutStripe = ({ product, country }: any) => {
 		e.preventDefault();
 		setIsLoading(true);
 
+		if (!stripe || !elements) {
+			console.error('Stripe.js no ha sido cargado correctamente.');
+			setIsLoading(false);
+			return;
+		}
+
+		const cardElement = elements.getElement(CardElement);
+		if (!cardElement) {
+			console.error('No se encontró el elemento de tarjeta.');
+			setIsLoading(false);
+			return;
+		}
+
 		try {
 			const { error, paymentMethod } = await stripe.createPaymentMethod({
 				type: 'card',
-				card: elements.getElement(CardElement),
+				card: cardElement,
 				billing_details: {
 					name: formData.customer.name,
 					email: formData.customer.email,
@@ -112,6 +125,17 @@ const CheckoutStripe = ({ product, country }: any) => {
 
 			const stripeSubscriptionResponse = await createStripeSubscription(updatedFormData);
 			const stripeSubscriptionId = stripeSubscriptionResponse.response.subscription_id;
+
+			const customerIdResponse = await getStripeCustomerIdBySubId(stripeSubscriptionId);
+			const customerId = customerIdResponse.customer;
+			console.log(customerId);
+			console.log(stripeSubscriptionId);
+			console.log(paymentMethodId);
+
+			await attachCardToUser({
+				customer_id: customerId,
+				payment_method_id: paymentMethodId,
+			});
 
 			if (stripeSubscriptionResponse?.response?.subscription_id && stripeSubscriptionResponse?.response?.client_secret) {
 				setPaymentStatus('approved');
