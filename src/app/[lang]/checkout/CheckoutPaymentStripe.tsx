@@ -5,7 +5,14 @@ import { countryToName, createPaymentRebill, currencies, updateContractCRM } fro
 import { AuthContext } from '@/context/user/AuthContext';
 import { useCheckout } from './CheckoutContext';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { attachCardToUser, createCard, createStripeSubscription, getStripeCustomerIdBySubId } from './stripe/stripeUtils';
+import {
+	attachCardToUser,
+	createCard,
+	createStripeSubscription,
+	getPaymentIntentId,
+	getStripeCustomerIdBySubId,
+	updatePaymentIntent,
+} from './stripe/stripeUtils';
 
 const CheckoutStripe = ({ product, country }: any) => {
 	const {
@@ -126,11 +133,22 @@ const CheckoutStripe = ({ product, country }: any) => {
 			const stripeSubscriptionResponse = await createStripeSubscription(updatedFormData);
 			const stripeSubscriptionId = stripeSubscriptionResponse.response.subscription_id;
 
-			const customerIdResponse = await getStripeCustomerIdBySubId(stripeSubscriptionId);
-			const customerId = customerIdResponse.customer;
-			console.log(customerId);
-			console.log(stripeSubscriptionId);
-			console.log(paymentMethodId);
+			const customerResponse = await getStripeCustomerIdBySubId(stripeSubscriptionId);
+			const customerId = customerResponse.customer;
+			const invoiceId = customerResponse.latest_invoice;
+
+			const paymentIntent = await getPaymentIntentId({ invoiceId });
+
+			const paymentIntentId = paymentIntent.payment_intent;
+
+			const updatePayment = await updatePaymentIntent({ paymentIntentId, paymentMethodId });
+
+			console.log(updatePayment);
+
+			console.log(customerId); //cus
+			console.log(stripeSubscriptionId); //sub
+			console.log(paymentMethodId); //pm
+			console.log(paymentIntentId); //pi
 
 			await attachCardToUser({
 				customer_id: customerId,

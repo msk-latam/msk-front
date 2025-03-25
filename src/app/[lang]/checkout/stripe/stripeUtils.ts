@@ -33,7 +33,6 @@ export const getStripeCustomerIdBySubId = async (subscription_id: any) => {
 		});
 
 		const result = await response.json();
-		console.log(result);
 		if (!response.ok) throw new Error(result.message || 'Error en la suscripción');
 
 		return result;
@@ -52,6 +51,47 @@ export const attachCardToUser = async ({ customer_id, payment_method_id }: any) 
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({ customer_id, payment_method_id }),
+		});
+
+		const result = await response.json();
+		if (!response.ok) throw new Error(result.message || 'Error en la suscripción');
+
+		return result;
+	} catch (error) {
+		console.error('Error al procesar el pago:', error);
+		throw error;
+	}
+};
+
+export const getPaymentIntentId = async ({ invoiceId }: any) => {
+	try {
+		const response = await fetch(`${ENDPOINT_GATEWAY}/api/stripe/invoices/${invoiceId}`, {
+			method: 'GET',
+			headers: {
+				Authorization: `Bearer ${tokenGATEWAY}`,
+				'Content-Type': 'application/json',
+			},
+		});
+
+		const result = await response.json();
+		if (!response.ok) throw new Error(result.message || 'Error en la suscripción');
+
+		return result;
+	} catch (error) {
+		console.error('Error al procesar el pago:', error);
+		throw error;
+	}
+};
+
+export const updatePaymentIntent = async ({ paymentIntentId, paymentMethodId }: any) => {
+	try {
+		const response = await fetch(`${ENDPOINT_GATEWAY}/api/stripe/payment_intents/${paymentIntentId}`, {
+			method: 'PUT',
+			headers: {
+				Authorization: `Bearer ${tokenGATEWAY}`,
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ payment_method: paymentMethodId }),
 		});
 
 		const result = await response.json();
