@@ -7,6 +7,141 @@
 	"total_products": 263,
 	"posts": [
 		{
+			"id": 174796,
+			"title": "Lo que gana (y siente) el personal médico hoy",
+			"slug": "desigualdad-salarial-en-el-personal-medico-hoy",
+			"permalink": "https://ar.wp.msklatam.com/nota/actualidad-arg/desigualdad-salarial-en-el-personal-medico-hoy/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2021/10/Foto-desigualdad-salarial-en-el-personal-medico-hoy-scaled-e1742565126361.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2021/10/Foto-desigualdad-salarial-en-el-personal-medico-hoy-scaled-e1742565126361.jpg",
+				"2560",
+				"1440",
+				""
+			],
+			"excerpt": "El panorama laboral de los profesionales de la salud en América Latina y España refleja brechas salariales, precariedad y desigualdades de género. En este artículo, exploramos qué opinan sobre sus condiciones actuales y cómo estas influyen en su calidad de vida, su motivación y hasta en la decisión de migrar.",
+			"date": "Marzo 24, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				},
+				{
+					"id": 254588,
+					"name": "Verónica Martínez Moreira",
+					"description": "Licenciada en Ciencias de la Comunicación por la Universidad de Buenos Aires. Desde hace años escribo en medios digitales sobre diversas temáticas como ciencia, salud, tecnología y educación.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/IMG_20230706_184120622-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 214975,
+					"title": "Migración médica: entre la necesidad y la transformación",
+					"slug": "migracion-medica-entre-la-necesidad-y-la-transformacion",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/migracion-medica-entre-la-necesidad-y-la-transformacion/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/06/shutterstock_2476690065-scaled-e1742302110772.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 239025,
+					"title": "Qué produce el mobbing en el personal de la salud",
+					"slug": "consecuencias-del-mobbing-en-el-personal-de-la-salud",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/consecuencias-del-mobbing-en-el-personal-de-la-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/11/¿Que-produce-el-mobbing-en-los-y-las-profesionales-de-la-salud.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 220729,
+					"title": "Cuál es la situación laboral de la enfermería hoy",
+					"slug": "situacion-laboral-de-la-enfermeria-hoy",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/situacion-laboral-de-la-enfermeria-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/07/Foto-situacion-laboral-de-la-enfermeria-hoy-scaled-e1741873106125.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 336616,
+					"title": "Cómo la ciencia busca reducir el impacto del glaucoma",
+					"slug": "avances-para-reducir-el-impacto-del-glaucoma",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/avances-para-reducir-el-impacto-del-glaucoma/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-avances-para-reducir-el-impacto-del-glaucoma-scaled-e1741809853664.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 335570,
+					"title": "Consumo de alcohol y riesgo de cáncer: evidencia actual",
+					"slug": "consumo-de-alcohol-y-riesgo-de-cancer",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/consumo-de-alcohol-y-riesgo-de-cancer/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-consumo-de-alcohol-y-riesgo-de-cancer-scaled-e1741351328577.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "https://comercioyjusticia.info/economia/medicos-argentinos-ganan-los-salarios-mas-bajos-del-mundo/"
+				},
+				{
+					"fuente": "https://elpais.com/chile/2024-04-11/el-vuelo-de-los-medicos-gaviota-argentinos-cruzan-la-cordillera-para-trabajar-temporalmente-en-chile.html"
+				},
+				{
+					"fuente": "https://espanol.medscape.com/diapositivas/59000182"
+				},
+				{
+					"fuente": "Rojas, Gabriela C., Chávez-Arana, Andrea, Tarazona-Valencia, Maxly, & Romaní-Romaní, Franco. (2024). Asociación entre la satisfacción laboral y la intención de migrar en médicos y enfermeras del Perú. Horizonte Médico (Lima), 24(4), e2556. Epub 10 de diciembre de 2024.https://doi.org/10.24265/horizmed.2024.v24n4.11"
+				},
+				{
+					"fuente": "https://saniempleo.es/comparativa-salarios-medicos-espana/"
+				}
+			],
+			"categories": [
+				{
+					"id": 37878,
+					"name": "Actualidad",
+					"slug": "actualidad-arg",
+					"description": "",
+					"link": "https://ar.wp.msklatam.com/nota/category/actualidad-arg/"
+				},
+				{
+					"id": 59971,
+					"name": "Medicina",
+					"slug": "medicina-arg",
+					"description": "",
+					"link": "https://ar.wp.msklatam.com/nota/category/medicina-arg/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": null,
+			"reading_time": "7",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
 			"id": 213910,
 			"title": "Migración médica: entre la necesidad y la transformación",
 			"slug": "migracion-medica-entre-la-necesidad-y-la-transformacion",
