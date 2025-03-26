@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useCheckout } from './CheckoutContext';
 import { useRouter } from 'next/navigation';
+import { AuthContext } from '@/context/user/AuthContext';
 
 const CheckoutState: React.FC = () => {
+	const { state } = useContext(AuthContext);
 	const router = useRouter();
 	const { activeStep, setActiveStep, subStep, setSubStep, completeStep, paymentStatus } = useCheckout();
 
@@ -15,10 +17,14 @@ const CheckoutState: React.FC = () => {
 		}
 	};
 
+	const message = state.user
+		? 'En unos minutos tendrás disponible tu capacitación en MSK.'
+		: 'Ahora, debes verificar tu e-mail. Revisa tu bandeja de entrada, spam o correos no deseados. \n Así, podrás acceder a tu cuenta, donde tendrás disponible tu capacitación en MSK.';
+
 	const paymentStatusCard = {
 		approved: {
 			title: 'Aprobada',
-			message: 'En unos minutos tendrás disponible tu capacitación en MSK.',
+			message,
 			color: '#088543',
 			buttons: [
 				{

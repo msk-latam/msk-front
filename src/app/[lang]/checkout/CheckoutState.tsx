@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useCheckout } from './CheckoutContext';
 import { usePathname, useRouter } from 'next/navigation';
+import { AuthContext } from '@/context/user/AuthContext';
 
 const CheckoutState: React.FC = () => {
+	const { state } = useContext(AuthContext);
 	const router = useRouter();
 	const { activeStep, setActiveStep, subStep, setSubStep, completeStep, paymentStatus } = useCheckout();
 
@@ -18,10 +20,14 @@ const CheckoutState: React.FC = () => {
 	const match = pathName.match(/^\/([a-z]{2})\b/);
 	const country = match ? `${match[1]}` : '';
 
+	const message = state.user
+		? 'En unos minutos tendrás disponible tu capacitación en MSK.'
+		: 'Ahora, debes verificar tu e-mail. Revisa tu bandeja de entrada, spam o correos no deseados. \n Así, podrás acceder a tu cuenta, donde tendrás disponible tu capacitación en MSK.';
+
 	const paymentStatusCard = {
 		approved: {
 			title: 'Aprobada',
-			message: 'En unos minutos tendrás disponible tu capacitación en MSK.',
+			message,
 			color: '#088543',
 			buttons: [
 				{
@@ -87,7 +93,9 @@ const CheckoutState: React.FC = () => {
 						<span className='w-3 h-3 rounded-full mr-2' style={{ backgroundColor: color }}></span>
 						<h3 className='text-2xl font-semibold text-[#392C35]'>{title}</h3>
 					</div>
-					<p className='text-[#392C35] font-normal'>{message}</p>
+					<p className='text-[#392C35] font-normal' style={{ whiteSpace: 'pre-line' }}>
+						{message}
+					</p>
 				</div>
 				<div className='flex justify-end mt-8 gap-4'>
 					{buttons.map((button, index) => (
