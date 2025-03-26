@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useCheckout } from './CheckoutContext';
 import { selectCountryKey } from './rebill/rebillKeys';
 import { useRecoilValue } from 'recoil';
@@ -64,6 +64,7 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 	const rebillId = useRecoilValue(rebillIdState);
 	const variables = selectCountryKey(country);
 	const [processingPayment, setProcessingPayment] = useState(false);
+	const checkoutFormRef = useRef<any>(null);
 
 	const transactionAmount = formData.amount;
 
@@ -87,6 +88,11 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 			return;
 		}
 
+		if (checkoutFormRef.current) {
+			console.log('Checkout ya inicializado, evitando duplicaciones');
+			return;
+		}
+
 		const container = document.getElementById('rebill-container');
 		if (container) {
 			container.innerHTML = '';
@@ -97,6 +103,7 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 		try {
 			if (rebillId !== '') {
 				checkoutForm = rebill.card.create(rebillId);
+				checkoutFormRef.current = checkoutForm;
 
 				checkoutForm.display({
 					userLogin: false,
