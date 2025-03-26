@@ -67,6 +67,9 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 
 	const transactionAmount = formData.amount;
 
+	console.log(formData);
+	console.log(transactionAmount);
+
 	const discount =
 		appliedCoupon && appliedCoupon.discountType === 'percentage'
 			? transactionAmount * (appliedCoupon.value / 100) // Descuento porcentual
@@ -125,7 +128,7 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 					const data = await createPaymentRebill(
 						formData.customerData?.email,
 						contract_id,
-						transactionAmountWithDiscount,
+						formData.amount,
 						formData.currency,
 						e.card.id,
 						country,
@@ -198,18 +201,22 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 const CheckoutPaymentTest = ({ product, country }: any) => {
 	const { user, appliedCoupon } = useCheckout();
 	const { state } = useContext(AuthContext);
-	const transactionAmount = product.total_price;
-	// const transactionAmount = 100;
-	// const transactionAmount = parseInt(totalPrice.replace(/[\.,]/g, ''), 10);
+	const formatNumber = (value: any) => {
+		if (!value) return 0;
+		return parseFloat(value.replace(/\./g, '').replace(',', '.'));
+	};
+
+	const transactionAmount = formatNumber(product.total_price);
+
+	const discountValue = Number(appliedCoupon?.value) || 0;
+	const discountType = appliedCoupon?.discountType;
 
 	const discount =
-		appliedCoupon && appliedCoupon.discountType === 'percentage'
-			? transactionAmount * (appliedCoupon.value / 100)
-			: appliedCoupon && appliedCoupon.discountType === 'fixed'
-			? appliedCoupon.value
-			: 0;
+		discountType === 'percentage' ? transactionAmount * (discountValue / 100) : discountType === 'fixed' ? discountValue : 0;
 
-	const transactionAmountWithDiscount = Math.max(transactionAmount - discount, 0);
+	const transactionAmountWithDiscount = Math.max(transactionAmount - discount, 0).toFixed(2);
+
+	console.log(transactionAmountWithDiscount);
 
 	const currency = currencies[country] || 'USD';
 	const rebillForm = {
@@ -223,6 +230,11 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 			phoneNumber: { number: user?.phone || state?.profile?.phone || '' },
 		},
 	};
+
+	console.log('product.total_price:', product.total_price);
+	console.log('appliedCoupon:', appliedCoupon);
+	console.log('appliedCoupon.value:', appliedCoupon?.value);
+	console.log('appliedCoupon.discountType:', appliedCoupon?.discountType);
 	return (
 		<>
 			<div className='mt-24'>
