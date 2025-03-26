@@ -10,6 +10,368 @@
 			"meta_titulo": null,
 			"meta_descripcion": null,
 			"title_contenido": null,
+			"id": 334427,
+			"related_tag": "",
+			"father_id": 333396,
+			"slug": "medicina-intensiva-amir",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "cl",
+			"language_name": "Chile",
+			"product_code": 9005882,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Diplomado en medicina intensiva AMIR",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinaintensivaamir-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinaintensivaamir-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinaintensivaamir-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinaintensivaamir-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1413,
+					"name": "Medicina intensiva",
+					"slug": "medicina-intensiva"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "350",
+			"permalink": "https://cl.wp.msklatam.com/producto/medicina-intensiva-amir/",
+			"temario": "https://cl.wp.msklatam.com/wp-content/uploads/2025/01/Medicina-intensiva-AMIR.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 331572,
+					"post_author": "102",
+					"post_date": "2025-01-09 20:13:07",
+					"post_date_gmt": "2025-01-09 20:13:07",
+					"post_content": "",
+					"post_title": "AMIR",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "amir",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2025-01-10 18:57:34",
+					"post_modified_gmt": "2025-01-10 18:57:34",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=331572",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2025/01/cedente_amir.png"
+				}
+			],
+			"cantidad_modulos": 7,
+			"why_course": "<p>La medicina intensiva es la especialidad encargada del diagnóstico y tratamiento de pacientes en estado crítico, garantizando soporte vital y monitorización continua. Abarca el manejo de patologías complejas que requieren atención inmediata en Unidades de Cuidados Intensivos (UCI), incluyendo el abordaje de fallos multiorgánicos, sepsis, insuficiencia respiratoria y afecciones neurológicas graves.</p>\n<p>Con el curso de Medicina intensiva AMIR de MSK desarrollarás habilidades avanzadas en el manejo de pacientes críticos, aplicando protocolos actualizados en ventilación mecánica, soporte hemodinámico, reanimación cardiopulmonar y control de infecciones en la UCI.</p>\n<p>Organizado en ocho bloques temáticos, el curso de Medicina intensiva AMIR de MSK aborda temas como patologías infecciosas y cardiovasculares, manejo del paciente politraumatizado, bioética en cuidados intensivos y humanización en la UCI, entre otros.</p>\n",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-70-3",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "967.725",
+			"total_price": "967.725",
+			"max_installments": "12",
+			"price_installments": "80.643",
+			"created_at": "2025-02-20 15:02:05"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 334086,
+			"related_tag": "",
+			"father_id": 333414,
+			"slug": "pediatria-hospitalaria-amir",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "cl",
+			"language_name": "Chile",
+			"product_code": 9005883,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Diplomado en pediatría AMIR",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/pediatriahospitalariaamir-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/01/pediatriahospitalariaamir-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/01/pediatriahospitalariaamir-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/01/pediatriahospitalariaamir-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1106,
+					"name": "Pediatría",
+					"slug": "pediatria"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "400",
+			"permalink": "https://cl.wp.msklatam.com/producto/pediatria-hospitalaria-amir/",
+			"temario": "https://cl.wp.msklatam.com/wp-content/uploads/2025/01/Pediatria-hospitalaria-AMIR.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 331572,
+					"post_author": "102",
+					"post_date": "2025-01-09 20:13:07",
+					"post_date_gmt": "2025-01-09 20:13:07",
+					"post_content": "",
+					"post_title": "AMIR",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "amir",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2025-01-10 18:57:34",
+					"post_modified_gmt": "2025-01-10 18:57:34",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=331572",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2025/01/cedente_amir.png"
+				}
+			],
+			"cantidad_modulos": 14,
+			"why_course": "<p>La pediatría se especializa en el cuidado de la salud de los niños y adolescentes, desde el nacimiento hasta la adolescencia. Esta rama se centra en el diagnóstico, tratamiento y prevención de enfermedades específicas que afectan a esta población. El personal pediátrico juega un papel fundamental en la promoción de la salud, proporcionando atención integral a los pacientes y a sus familias.</p>\n<p>El curso de Pediatría AMIR de MSK te permitirá profundizar en los principales desafíos de esta especialidad, desde el manejo del recién nacido hasta la atención de enfermedades complejas en la infancia y adolescencia. A través de un enfoque basado en la evidencia, adquirirás herramientas para optimizar protocolos clínicos, mejorar la coordinación asistencial y brindar una atención integral en el ámbito hospitalario.</p>\n<p>Organizado en 14 módulos, el curso de Pediatría AMIR abarca temáticas como neonatología, patología respiratoria y digestiva, endocrinología, nefrología, oncología pediátrica y neurología infantil, salud mental, pediatría social y cuidados paliativos, entre otras.</p>\n",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-71-0",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "967.725",
+			"total_price": "967.725",
+			"max_installments": "12",
+			"price_installments": "80.643",
+			"created_at": "2025-01-31 15:01:02"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 335438,
+			"related_tag": "",
+			"father_id": 331614,
+			"slug": "medicina-familiar-y-comunitaria-amir",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "cl",
+			"language_name": "Chile",
+			"product_code": 9005876,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Diplomado en medicina familiar y comunitaria AMIR",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinafamiliar-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinafamiliar-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinafamiliar-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinafamiliar-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "400",
+			"permalink": "https://cl.wp.msklatam.com/producto/medicina-familiar-y-comunitaria-amir/",
+			"temario": "https://cl.wp.msklatam.com/wp-content/uploads/2025/01/Medicina-familiar-y-comunitaria-AMIR-2.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 331572,
+					"post_author": "102",
+					"post_date": "2025-01-09 20:13:07",
+					"post_date_gmt": "2025-01-09 20:13:07",
+					"post_content": "",
+					"post_title": "AMIR",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "amir",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2025-01-10 18:57:34",
+					"post_modified_gmt": "2025-01-10 18:57:34",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=331572",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2025/01/cedente_amir.png"
+				}
+			],
+			"cantidad_modulos": 8,
+			"why_course": "<p>La medicina familiar y comunitaria o de primer contacto es una especialidad que se centra en proporcionar atención médica integral a individuos y familias, abordando tanto la prevención como el tratamiento de una amplia gama de enfermedades. Tiene una gran importancia en el sistema sanitario, ya que incide de manera específica en el nivel de salud de las personas, las familias y la comunidad en general.</p> <p>Este curso de Medicina familiar AMIR disponible en MSK está diseñado para que puedas actualizarte en todas las áreas médicas y quirúrgicas, así como también de psiquiatría y de gestión sanitaria: los cuidados y la rehabilitación del enfermo, la salud mental, la planificación familiar en ginecología y obstetricia, los cuidados pediátricos y más.</p> <p>El curso de Medicina familiar AMIR en MSK cuenta con ocho módulos actualizados en los que también aprenderás sobre medicina preventiva, demografía y salud pública, epidemiología de las enfermedades transmisibles, uso racional de medicamentos en atención primaria, promoción de la salud y educación sanitaria, entre otros temas</p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-64-2",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "967.725",
+			"total_price": "967.725",
+			"max_installments": "12",
+			"price_installments": "80.643",
+			"created_at": "2025-01-09 20:01:51"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 335438,
+			"related_tag": "",
+			"father_id": 331614,
+			"slug": "medicina-familiar-y-comunitaria-amir",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "cl",
+			"language_name": "Chile",
+			"product_code": 9005876,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Diplomado en medicina familiar y comunitaria AMIR",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinafamiliar-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinafamiliar-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinafamiliar-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinafamiliar-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "400",
+			"permalink": "https://cl.wp.msklatam.com/producto/medicina-familiar-y-comunitaria-amir/",
+			"temario": "https://cl.wp.msklatam.com/wp-content/uploads/2025/01/Medicina-familiar-y-comunitaria-AMIR-2.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 331572,
+					"post_author": "102",
+					"post_date": "2025-01-09 20:13:07",
+					"post_date_gmt": "2025-01-09 20:13:07",
+					"post_content": "",
+					"post_title": "AMIR",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "amir",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2025-01-10 18:57:34",
+					"post_modified_gmt": "2025-01-10 18:57:34",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=331572",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2025/01/cedente_amir.png"
+				}
+			],
+			"cantidad_modulos": 8,
+			"why_course": "<p>La medicina familiar y comunitaria o de primer contacto es una especialidad que se centra en proporcionar atención médica integral a individuos y familias, abordando tanto la prevención como el tratamiento de una amplia gama de enfermedades. Tiene una gran importancia en el sistema sanitario, ya que incide de manera específica en el nivel de salud de las personas, las familias y la comunidad en general.</p> <p>Este curso de Medicina familiar AMIR disponible en MSK está diseñado para que puedas actualizarte en todas las áreas médicas y quirúrgicas, así como también de psiquiatría y de gestión sanitaria: los cuidados y la rehabilitación del enfermo, la salud mental, la planificación familiar en ginecología y obstetricia, los cuidados pediátricos y más.</p> <p>El curso de Medicina familiar AMIR en MSK cuenta con ocho módulos actualizados en los que también aprenderás sobre medicina preventiva, demografía y salud pública, epidemiología de las enfermedades transmisibles, uso racional de medicamentos en atención primaria, promoción de la salud y educación sanitaria, entre otros temas</p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-64-2",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "967.725",
+			"total_price": "967.725",
+			"max_installments": "12",
+			"price_installments": "80.643",
+			"created_at": "2025-01-09 20:01:51"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
 			"id": 237611,
 			"related_tag": [218752, 218594, 218541],
 			"father_id": 230395,
