@@ -75,7 +75,7 @@ const MainNav2: FC = () => {
 					<Logo isOnBlog={isOnBlog} country={country} />
 					<div className='hidden sm:block h-10 border-l border-neutral-300 dark:border-neutral-6000 m-0'></div>
 					<div>
-						{!pathName.includes('blog2') && (
+						{!pathName.includes('blog') && (
 							<div className='hidden xl:block'>
 								<CategoriesDropdown country={countryCode} />
 							</div>
@@ -84,11 +84,11 @@ const MainNav2: FC = () => {
 				</div>
 
 				{/* Esta parte empuja SearchProducts a la derecha */}
-				<div className={`hidden sm:flex flex-grow mr-10 ${pathName.includes('blog2') ? 'justify-start' : 'justify-end'}`}>
+				<div className={`hidden sm:flex flex-grow mr-10 ${pathName.includes('blog') ? 'justify-start' : 'justify-end'}`}>
 					<SearchProducts />
 				</div>
 				<div>
-					{pathName.includes('blog2') && (
+					{pathName.includes('blog') && (
 						<div>
 							<Link href={'/'} target='_blank' className='mr-5'>
 								Capacítate
