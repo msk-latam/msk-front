@@ -173,16 +173,29 @@ const ProductDetailSidebar: FC<Props> = ({ ficha, product, details, isEbook, sid
 				</button>
 				{!isEbook && hasGateway && !product.is_presale_product && (
 					<>
-						{/* <button
-							onClick={() => requestTrial(slug)}
-							className='video-cart-btn border-2 w-full disabled:!border-grey-disabled disabled:!text-grey-disabled disabled:cursor-not-allowed hover:disabled:!bg-transparent hover:!disabled:border-grey-disabled hover:!disabled:text-grey-disabled'
-							// disabled={hasCoursedRequested || countryState.country === 'ar'}
-							// disabled={true}
-						>
-							{hasCoursedRequested ? 'Prueba ya solicitada' : 'Prueba 7 días gratis'}
-							Inscríbete ahora
-						</button> */}
-						<Link
+						{country === '' || ['mx', 'ec', 'cl'].includes(country) ? (
+							<button
+								onClick={() => requestTrial(slug)}
+								className='video-cart-btn border-2 w-full disabled:!border-grey-disabled disabled:!text-grey-disabled disabled:cursor-not-allowed hover:disabled:!bg-transparent hover:!disabled:border-grey-disabled hover:!disabled:text-grey-disabled'
+								disabled={hasCoursedRequested}
+							>
+								{hasCoursedRequested ? 'Prueba ya solicitada' : 'Prueba 7 días gratis'}
+							</button>
+						) : (
+							<Link
+								href={
+									country === ''
+										? `${window.location.origin}/checkout/${slug}`
+										: `${window.location.origin}/${country}/checkout/${slug}`
+								}
+								className='video-cart-btn border-2 w-full hover:disabled:!bg-transparent hover:!disabled:border-grey-disabled hover:!disabled:text-grey-disabled'
+							>
+								Inscríbete ahora
+							</Link>
+						)}
+
+						{/* boton global */}
+						{/* <Link
 							href={
 								country === ''
 									? `${window.location.origin}/checkout/${slug}`
@@ -191,7 +204,7 @@ const ProductDetailSidebar: FC<Props> = ({ ficha, product, details, isEbook, sid
 							className='video-cart-btn border-2 w-full disabled:!border-grey-disabled disabled:!text-grey-disabled disabled:cursor-not-allowed hover:disabled:!bg-transparent hover:!disabled:border-grey-disabled hover:!disabled:text-grey-disabled'
 						>
 							Inscríbete ahora
-						</Link>
+						</Link> */}
 					</>
 				)}
 			</div>
