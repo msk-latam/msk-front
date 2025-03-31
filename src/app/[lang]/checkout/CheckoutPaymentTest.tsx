@@ -214,7 +214,7 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 		return parseFloat(value.replace(/\./g, '').replace(',', '.'));
 	};
 
-	const transactionAmount = formatNumber(product.total_price);
+	const transactionAmount = Number(product.total_price.replace(/,/g, '').replace('.', ''));
 
 	const discountValue = Number(appliedCoupon?.value) || 0;
 	const discountType = appliedCoupon?.discountType;
