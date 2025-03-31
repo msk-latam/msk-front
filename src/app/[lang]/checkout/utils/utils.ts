@@ -268,7 +268,7 @@ export const createPaymentRebill = async (
 				amount: Math.ceil(amount / 12),
 				// amount: Math.ceil(1000 / 12),
 				currency,
-				recurrence: 12,
+				recurrence: 1,
 				card_id: cardId,
 			}),
 		});
