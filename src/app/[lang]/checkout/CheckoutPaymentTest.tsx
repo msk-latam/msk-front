@@ -135,7 +135,7 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 					const data = await createPaymentRebill(
 						formData.customerData?.email,
 						contract_id,
-						formData.amount,
+						transactionAmountWithDiscount,
 						formData.currency,
 						e.card.id,
 						country,
