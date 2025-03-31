@@ -130,6 +130,7 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 				setProcessingPayment(true);
 
 				const contract_id = user.contract_id;
+				console.log(transactionAmountWithDiscount, 'precio con descuento');
 
 				try {
 					const data = await createPaymentRebill(
