@@ -49,6 +49,12 @@ const SingleProductDetail: FC<Props> = ({ product, country }) => {
 			: product.ficha.description;
 
 	const slug = product.params.slug;
+	console.log(slug);
+	if (slug === 'accsap') {
+		const newUrl = country === undefined ? window.location.origin : `${window.location.origin}/${country}`;
+
+		window.location.href = newUrl; // Redirige a la nueva URL
+	}
 
 	const dataRef = courseReviewRefs[slug] ? courseReviewRefs[slug] : courseReviewRefs['general'];
 

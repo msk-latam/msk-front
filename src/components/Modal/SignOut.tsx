@@ -38,6 +38,7 @@ const signOutContent: FC<Props> = ({ setShow, onClose }) => {
 			dispatchUTM(clearUTMAction);
 			dispatch({ type: 'LOGOUT' });
 			router.push(`${window.location.origin}/${country}`);
+			onClose();
 		} catch (error) {
 			console.error('Error during logout:', error);
 		}

@@ -5,6 +5,140 @@
 	},
 	"products": [
 		{
+			"id": 337574,
+			"related_tag": "",
+			"father_id": 337516,
+			"slug": "fundamentos-de-investigacion-en-enfermeria",
+			"is_presale_product": false,
+			"father_post_type": "downloadable",
+			"language_code": "cl",
+			"language_name": "Chile",
+			"product_code": 0,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Fundamentos de investigación en enfermería",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/foto-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/03/foto-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/03/foto-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/03/foto-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": null,
+			"permalink": "https://cl.wp.msklatam.com/producto/fundamentos-de-investigacion-en-enfermeria/",
+			"temario": "https://cl.wp.msklatam.com/wp-content/uploads/2025/03/Fundamentos-de-investigacion-en-enfermeria.pdf",
+			"cantidad_modulos": 0,
+			"why_course": "<p><span data-olk-copy-source='MessageBody'>La investigación en enfermería es clave para mejorar la calidad del cuidado y la toma de decisiones basadas en evidencia. Esta guía profesional de descarga gratuita te brindará los conocimientos esenciales para comprender el diseño de proyectos de investigación, los estudios epidemiológicos y la evaluación de pruebas diagnósticas.</span></p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": null,
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2025-03-20 15:03:24"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 337158,
+			"related_tag": "",
+			"father_id": 337100,
+			"slug": "nefrologia-con-mencion-en-hemodialisis-dialisis-peritoneal-y-trasplante",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "cl",
+			"language_name": "Chile",
+			"product_code": 9005904,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Diplomado en nefrología con mención en hemodiálisis, diálisis peritoneal y trasplante",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/nefrologiaenfermeria-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/03/nefrologiaenfermeria-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/03/nefrologiaenfermeria-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/03/nefrologiaenfermeria-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 60097,
+					"name": "Nefrología",
+					"slug": "nefrologia"
+				}
+			],
+			"professions": [
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": "400",
+			"permalink": "https://cl.wp.msklatam.com/producto/nefrologia-con-mencion-en-hemodialisis-dialisis-peritoneal-y-trasplante/",
+			"temario": "https://cl.wp.msklatam.com/wp-content/uploads/2025/03/Nefrologia-con-mencion-en-hemodialisis-dialisis-peritoneal-y-trasplante.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 254526,
+					"post_author": "2",
+					"post_date": "2023-08-07 23:12:56",
+					"post_date_gmt": "2023-08-07 23:12:56",
+					"post_content": "",
+					"post_title": "Tropos",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "tropos",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2023-08-22 20:17:07",
+					"post_modified_gmt": "2023-08-22 20:17:07",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=254526",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/cedentes_tropos.png"
+				}
+			],
+			"cantidad_modulos": 55,
+			"why_course": "<p>La nefrología se especializa en el abordaje integral, tanto de forma ambulatoria como hospitalaria, de las variadas patologías que corresponden a la especialidad a lo largo de toda la vida del paciente. Abarca trastornos de la regulación del calcio, fósforo y magnesio, y enfermedades como insuficiencia renal aguda y crónica, alteraciones hidroelectrolíticas, entre otras. El profesional especializado en nefrología también cuenta con la capacitación necesaria para el manejo de terapias de sustitución renal como la diálisis y el trasplante renal.</p> <p>Este curso de Nefrología de MSK te permitirá ahondar en el estudio de la función renal y el sistema urinario, así como también conocer pruebas y técnicas modernas de imagen para su evaluación, innovación diagnóstica y terapéutica, y los principales síndromes clínicos en la especialidad.</p> <p>El curso está organizado en 55 temas, con un plan de estudio que incluye tópicos como exploración de la función renal, trastornos del balance de potasio y de la regulación de calcio, fósforo y magnesio, enfermedades tubulointersticiales, síndromes nefrótico y nefrítico, amiloidosis renal y síndrome urémico, entre otros.</p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-92-5",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "841.500",
+			"total_price": "841.500",
+			"max_installments": "12",
+			"price_installments": "70.125",
+			"created_at": "2025-03-20 13:03:52"
+		},
+		{
 			"meta_titulo": null,
 			"meta_descripcion": null,
 			"title_contenido": null,
@@ -288,7 +422,7 @@
 			"product_code": 9005879,
 			"featured_product_text": "",
 			"is_test_product": true,
-			"title": "Investigación clínica: diseño y gestión integral",
+			"title": "Diplomado en investigación clínica: diseño y gestión integral",
 			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/gestionclinica-primaria.jpg",
 			"thumbnail": {
 				"high": "https://wp.msklatam.com/wp-content/uploads/2025/01/gestionclinica-secundaria.jpg",

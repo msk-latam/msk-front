@@ -35,12 +35,16 @@ export async function generateHomeMetadata({ params }: { params: { lang: string 
 	return {
 		title: 'Cursos de medicina para expandir tus metas profesionales | MSK',
 		description: 'Una propuesta moderna para expandir tus metas profesionales',
-		alternates: IS_PROD
-			? {
-					canonical: hreflangUrls[`es-${currentCountry === undefined ? 'ar' : currentCountry}`],
-					languages: hreflangUrls,
-			  }
-			: undefined,
+		alternates: {
+			canonical: hreflangUrls[`es-${currentCountry === undefined ? 'ar' : currentCountry}`],
+			languages: IS_PROD ? hreflangUrls : undefined,
+		},
+		// alternates: IS_PROD
+		// 	? {
+		// 			canonical: hreflangUrls[`es-${currentCountry === undefined ? 'ar' : currentCountry}`],
+		// 			languages: hreflangUrls,
+		// 	  }
+		// 	: undefined,
 		robots: IS_PROD ? { index: true, follow: true } : { index: false, follow: false },
 	};
 }

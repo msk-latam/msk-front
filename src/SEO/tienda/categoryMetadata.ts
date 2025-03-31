@@ -11,8 +11,8 @@ export function generateCategoryMetadata({ category, lang }: GenerateCategoryMet
 	const canonicalUrl = `https://msklatam.com/${lang}/tienda/${category}/`;
 	const currentCountry = lang || cookies().get('country')?.value;
 	const hostname = process.env.VERCEL_URL || '';
-	const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
-	// const IS_PROD = true;
+	// const IS_PROD = hostname.includes('msklatam') && !hostname.includes('tech');
+	const IS_PROD = true;
 
 	const titles = [
 		'Administración y gestión',
@@ -172,10 +172,10 @@ export function generateCategoryMetadata({ category, lang }: GenerateCategoryMet
 		description: categoryDescription,
 		alternates: IS_PROD
 			? {
-					canonical: hreflangUrls['es-ar'],
+					canonical: hreflangUrls[`es-${currentCountry === undefined ? 'ar' : currentCountry}`],
 					languages: hreflangUrls,
 			  }
 			: undefined,
-		robots: IS_PROD && currentCountry === undefined ? { index: true, follow: true } : { index: false, follow: false },
+		robots: IS_PROD ? { index: true, follow: true } : { index: false, follow: false },
 	};
 }

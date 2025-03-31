@@ -56,7 +56,7 @@ const PageArchive: FC<{ params: { lang: string } }> = async ({ params }) => {
 
 		// Convertir la fecha del post al formato estándar
 		const [month, day, year] = rawDate.split(' ');
-		const formattedDate = `${year}-${monthMapping[month]}-${day.replace(',', '')}`;
+		const formattedDate = `${year}-${monthMapping[month]}-${day?.replace(',', '')}`;
 		const postDate = new Date(formattedDate);
 
 		// Fecha límite (1 octubre 2023)

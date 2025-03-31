@@ -42,8 +42,7 @@ const StoreContent: FC = ({ country }: any) => {
 		allStoreProfessions,
 	} = dataState;
 	// console.log(country, 'de tienda');
-	const JSONProduct = getJSONTiendaByCountry(country);
-	let storeCourses = JSONProduct.products;
+
 	const { specialties } = useStoreFilters();
 	const { countryState } = useContext(CountryContext);
 	const searchParams = useSearchParams();
@@ -54,20 +53,42 @@ const StoreContent: FC = ({ country }: any) => {
 	const itemsPerPage = 18;
 	const indexOfLastItem = currentPage * itemsPerPage;
 	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-	const [totalPages, setTotalPages] = useState(Math.ceil(storeCourses.length / itemsPerPage));
 
 	let products: FetchCourseType[] = [];
+	const [JSONProduct, setJSONProduct] = useState<any>(null);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const data = await getJSONTiendaByCountry(country);
+				setJSONProduct(data);
+			} catch (error) {
+				console.error('Error al obtener los productos:', error);
+				setJSONProduct({ products: [] }); // Evita fallos si es undefined
+			}
+		};
+
+		fetchData();
+	}, [country]);
+	const storeCourses = JSONProduct?.products || [];
+
+	// Excluir el curso con el título específico
+	const excludedTitle = 'ACCSAP. Programa de actualización en cardiología clínica';
+
+	// Filtrar los productos para excluir el curso con ese título
+	const storeCourses1 = storeCourses.filter((product: any) => product.title !== excludedTitle);
+	const [totalPages, setTotalPages] = useState(Math.ceil(storeCourses.length / itemsPerPage));
 
 	useEffect(() => {
 		// console.log('USE EFFECT STORE CONTENT');
-		async function fetchData() {
+		function fetchData() {
 			// console.log('All Courses', storeCourses);
-			if (storeCourses.length) {
-				setCurrentItems(storeCourses.slice(indexOfFirstItem, indexOfLastItem));
+			if (storeCourses1.length) {
+				setCurrentItems(storeCourses1.slice(indexOfFirstItem, indexOfLastItem));
 			}
 		}
 		fetchData();
-	}, [countryState.country, storeCourses]);
+	}, [country, storeCourses]);
 
 	const handlePageChange = (pageNumber: number) => {
 		// console.log('HANDLING PAGE CHANGE');
@@ -95,9 +116,7 @@ const StoreContent: FC = ({ country }: any) => {
 			const filteredProducts = storeCourses.filter((product: any) =>
 				removeAccents(product.title.toLowerCase()).includes(removeAccents(event.toLowerCase())),
 			);
-			// console.log('SEARCH TRIGGERED', event, {
-			//   filteredProducts,
-			// });
+			console.log(filteredProducts);
 
 			setCurrentItems(filteredProducts);
 		} else {

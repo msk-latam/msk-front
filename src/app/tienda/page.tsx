@@ -84,7 +84,8 @@ export interface PageStoreProps {
 }
 
 const PageStore: FC<PageStoreProps> = ({ className = '', params }) => {
-	const currentCountry = params.lang || cookies().get('country')?.value;
+	const currentCountry = 'ar';
+	// const currentCountry = params.lang || cookies().get('country')?.value;
 
 	return (
 		<div className={`nc-PageStore ${className} animate-fade-down`} data-nc-id='PageStore'>

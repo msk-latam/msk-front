@@ -5,6 +5,425 @@
 	},
 	"products": [
 		{
+			"id": 337579,
+			"related_tag": "",
+			"father_id": 337516,
+			"slug": "fundamentos-de-investigacion-en-enfermeria",
+			"is_presale_product": false,
+			"father_post_type": "downloadable",
+			"language_code": "gt",
+			"language_name": "Guatemala",
+			"product_code": 0,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Fundamentos de investigación en enfermería",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/foto-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/03/foto-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/03/foto-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/03/foto-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": null,
+			"permalink": "https://gt.wp.msklatam.com/producto/fundamentos-de-investigacion-en-enfermeria/",
+			"temario": "https://gt.wp.msklatam.com/wp-content/uploads/2025/03/Fundamentos-de-investigacion-en-enfermeria.pdf",
+			"cantidad_modulos": 0,
+			"why_course": "<p><span data-olk-copy-source=MessageBody>La investigación en enfermería es clave para mejorar la calidad del cuidado y la toma de decisiones basadas en evidencia. Esta guía profesional de descarga gratuita te brindará los conocimientos esenciales para comprender el diseño de proyectos de investigación, los estudios epidemiológicos y la evaluación de pruebas diagnósticas.</span></p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": null,
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2025-03-20 15:03:24"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 333483,
+			"related_tag": "",
+			"father_id": 333437,
+			"slug": "iniciacion-a-la-investigacion-en-enfermeria",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "gt",
+			"language_name": "Guatemala",
+			"product_code": 9005886,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Iniciación a la investigación en enfermería",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/investigacionenfermeria-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/01/investigacionenfermeria-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/01/investigacionenfermeria-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/01/investigacionenfermeria-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				}
+			],
+			"professions": [
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": "50",
+			"permalink": "https://gt.wp.msklatam.com/producto/iniciacion-a-la-investigacion-en-enfermeria/",
+			"temario": "https://gt.wp.msklatam.com/wp-content/uploads/2025/01/Iniciacion-a-la-investigacion-en-enfermeria.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 254526,
+					"post_author": "2",
+					"post_date": "2023-08-07 23:12:56",
+					"post_date_gmt": "2023-08-07 23:12:56",
+					"post_content": "",
+					"post_title": "Tropos",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "tropos",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2023-08-22 20:17:07",
+					"post_modified_gmt": "2023-08-22 20:17:07",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=254526",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/cedentes_tropos.png"
+				}
+			],
+			"cantidad_modulos": 5,
+			"why_course": "<p>La investigación en enfermería es una disciplina fundamental para el avance del conocimiento y la mejora de la práctica clínica. A través del análisis de datos y la aplicación del método científico, se generan nuevas evidencias que permiten optimizar la atención sanitaria, mejorar la toma de decisiones y garantizar un cuidado basado en la mejor información disponible.</p> <p>El curso de Iniciación a la investigación en enfermería de MSK te brinda las herramientas necesarias para diseñar y desarrollar proyectos de investigación, interpretar datos estadísticos y aplicar metodologías tanto cuantitativas como cualitativas. Además, profundiza en la enfermería basada en la evidencia, permitiéndote adquirir un enfoque analítico y crítico para la toma de decisiones.</p> <p>Organizado en cinco temas, el curso de Iniciación a la investigación en enfermería de MSK abarca desde los fundamentos de la investigación hasta el análisis de datos y la ética en la investigación científica, a partir de materiales completamente actualizados.</p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-74-1",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "230",
+			"total_price": "230",
+			"max_installments": "12",
+			"price_installments": "19",
+			"created_at": "2025-01-31 15:01:32"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 333465,
+			"related_tag": "",
+			"father_id": 333435,
+			"slug": "cuidados-y-controles-de-enfermeria-del-nino-y-el-adolescente",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "gt",
+			"language_name": "Guatemala",
+			"product_code": 9005885,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Cuidados y controles de enfermería del niño y el adolescente",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/cuidadosenfermerianino-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/01/cuidadosenfermerianino-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/01/cuidadosenfermerianino-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/01/cuidadosenfermerianino-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1106,
+					"name": "Pediatría",
+					"slug": "pediatria"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": "50",
+			"permalink": "https://gt.wp.msklatam.com/producto/cuidados-y-controles-de-enfermeria-del-nino-y-el-adolescente/",
+			"temario": "https://gt.wp.msklatam.com/wp-content/uploads/2025/01/Cuidados-y-controles-de-enfermeria-del-nino-y-el-adolescente.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 254526,
+					"post_author": "2",
+					"post_date": "2023-08-07 23:12:56",
+					"post_date_gmt": "2023-08-07 23:12:56",
+					"post_content": "",
+					"post_title": "Tropos",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "tropos",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2023-08-22 20:17:07",
+					"post_modified_gmt": "2023-08-22 20:17:07",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=254526",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/cedentes_tropos.png"
+				}
+			],
+			"cantidad_modulos": 5,
+			"why_course": "<p>La enfermería pediátrica, enfocada en la atención integral de niños y adolescentes, abarca desde la prevención y promoción de la salud hasta el manejo de patologías y el acompañamiento en el desarrollo físico, emocional y social de los más jóvenes. Esta especialización es clave para garantizar una atención de calidad, cubriendo las necesidades específicas de cada etapa de crecimiento.</p> <p>El curso de Cuidados y controles de enfermería del niño y el adolescente de MSK te proporcionará las herramientas necesarias para brindar un cuidado experto y actualizado en la salud infantil y adolescente, a través de un enfoque basado en la evidencia. Profundiza en el control del niño sano, la atención al niño enfermo, los cuidados en la adolescencia y la detección temprana del maltrato infantil.</p> <p>Este curso de Cuidados y controles de enfermería del niño y el adolescente está estructurado en cinco temas que abordan aspectos como el control del crecimiento y desarrollo, la salud preventiva, la educación en hábitos saludables y apoyo emocional, la salud mental en la adolescencia y estrategias de detección y prevención del maltrato infantil.</p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-73-4",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "230",
+			"total_price": "230",
+			"max_installments": "12",
+			"price_installments": "19",
+			"created_at": "2025-01-31 15:01:25"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 334432,
+			"related_tag": "",
+			"father_id": 333396,
+			"slug": "medicina-intensiva-amir",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "gt",
+			"language_name": "Guatemala",
+			"product_code": 9005882,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Curso superior de medicina intensiva AMIR",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinaintensivaamir-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinaintensivaamir-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinaintensivaamir-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/01/medicinaintensivaamir-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1413,
+					"name": "Medicina intensiva",
+					"slug": "medicina-intensiva"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "350",
+			"permalink": "https://gt.wp.msklatam.com/producto/medicina-intensiva-amir/",
+			"temario": "https://gt.wp.msklatam.com/wp-content/uploads/2025/01/Medicina-intensiva-AMIR.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 331572,
+					"post_author": "102",
+					"post_date": "2025-01-09 20:13:07",
+					"post_date_gmt": "2025-01-09 20:13:07",
+					"post_content": "",
+					"post_title": "AMIR",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "amir",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2025-01-10 18:57:34",
+					"post_modified_gmt": "2025-01-10 18:57:34",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=331572",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2025/01/cedente_amir.png"
+				}
+			],
+			"cantidad_modulos": 7,
+			"why_course": "<p>La medicina intensiva es la especialidad encargada del diagnóstico y tratamiento de pacientes en estado crítico, garantizando soporte vital y monitorización continua. Abarca el manejo de patologías complejas que requieren atención inmediata en Unidades de Cuidados Intensivos (UCI), incluyendo el abordaje de fallos multiorgánicos, sepsis, insuficiencia respiratoria y afecciones neurológicas graves.</p>\n<p>Con el curso de Medicina intensiva AMIR de MSK desarrollarás habilidades avanzadas en el manejo de pacientes críticos, aplicando protocolos actualizados en ventilación mecánica, soporte hemodinámico, reanimación cardiopulmonar y control de infecciones en la UCI.</p>\n<p>Organizado en ocho bloques temáticos, el curso de Medicina intensiva AMIR de MSK aborda temas como patologías infecciosas y cardiovasculares, manejo del paciente politraumatizado, bioética en cuidados intensivos y humanización en la UCI, entre otros.</p>\n",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-70-3",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "950",
+			"total_price": "950",
+			"max_installments": "12",
+			"price_installments": "79",
+			"created_at": "2025-02-20 15:02:05"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 333422,
+			"related_tag": "",
+			"father_id": 333414,
+			"slug": "pediatria-hospitalaria-amir",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "gt",
+			"language_name": "Guatemala",
+			"product_code": 9005883,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Curso superior de pediatría AMIR",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/pediatriahospitalariaamir-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/01/pediatriahospitalariaamir-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/01/pediatriahospitalariaamir-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/01/pediatriahospitalariaamir-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1106,
+					"name": "Pediatría",
+					"slug": "pediatria"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "400",
+			"permalink": "https://gt.wp.msklatam.com/producto/pediatria-hospitalaria-amir/",
+			"temario": "https://gt.wp.msklatam.com/wp-content/uploads/2025/01/Pediatria-hospitalaria-AMIR.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 331572,
+					"post_author": "102",
+					"post_date": "2025-01-09 20:13:07",
+					"post_date_gmt": "2025-01-09 20:13:07",
+					"post_content": "",
+					"post_title": "AMIR",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "amir",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2025-01-10 18:57:34",
+					"post_modified_gmt": "2025-01-10 18:57:34",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=331572",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2025/01/cedente_amir.png"
+				}
+			],
+			"cantidad_modulos": 14,
+			"why_course": "<p>La pediatría se especializa en el cuidado de la salud de los niños y adolescentes, desde el nacimiento hasta la adolescencia. Esta rama se centra en el diagnóstico, tratamiento y prevención de enfermedades específicas que afectan a esta población. El personal pediátrico juega un papel fundamental en la promoción de la salud, proporcionando atención integral a los pacientes y a sus familias.</p>\n<p>El curso de Pediatría AMIR de MSK te permitirá profundizar en los principales desafíos de esta especialidad, desde el manejo del recién nacido hasta la atención de enfermedades complejas en la infancia y adolescencia. A través de un enfoque basado en la evidencia, adquirirás herramientas para optimizar protocolos clínicos, mejorar la coordinación asistencial y brindar una atención integral en el ámbito hospitalario.</p>\n<p>Organizado en 14 módulos, el curso de Pediatría AMIR abarca temáticas como neonatología, patología respiratoria y digestiva, endocrinología, nefrología, oncología pediátrica y neurología infantil, salud mental, pediatría social y cuidados paliativos, entre otras.</p>\n",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-71-0",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "950",
+			"total_price": "950",
+			"max_installments": "12",
+			"price_installments": "79",
+			"created_at": "2025-01-31 15:01:02"
+		},
+
+		{
 			"meta_titulo": null,
 			"meta_descripcion": null,
 			"title_contenido": null,

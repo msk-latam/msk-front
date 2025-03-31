@@ -7,6 +7,1677 @@
 	"total_products": 265,
 	"posts": [
 		{
+			"id": 337994,
+			"title": "Últimas revelaciones científicas sobre trastorno bipolar",
+			"slug": "ultimas-revelaciones-sobre-trastorno-bipolar",
+			"permalink": "https://wp.msklatam.com/nota/medicina/ultimas-revelaciones-sobre-trastorno-bipolar/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-ultimas-revelaciones-sobre-trastorno-bipolar-scaled-e1743168915455.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-ultimas-revelaciones-sobre-trastorno-bipolar-scaled-e1743168915455.jpg",
+				"1000",
+				"563",
+				""
+			],
+			"excerpt": "Cada vez más investigaciones se centran en comprender el trastorno bipolar desde una perspectiva genética, biológica y terapéutica. Conoce los hallazgos más recientes sobre los genes asociados, las diferencias entre tipos I y II, y qué tratamientos muestran mayor eficacia para prevenir nuevos episodios.",
+			"date": "Marzo 27, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 338031,
+					"title": "Retos laborales en el sistema de salud actual",
+					"slug": "retos-laborales-en-el-sistema-de-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/retos-laborales-en-el-sistema-de-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-retos-laborales-en-el-sistema-de-salud-scaled-e1743165884884.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 164077,
+					"title": "Lo que gana (y siente) el personal médico hoy",
+					"slug": "desigualdad-salarial-en-el-personal-medico-hoy",
+					"link": "https://wp.msklatam.com/nota/medicina/desigualdad-salarial-en-el-personal-medico-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2021/10/Foto-desigualdad-salarial-en-el-personal-medico-hoy-scaled-e1742565126361.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 213910,
+					"title": "Migración médica: entre la necesidad y la transformación",
+					"slug": "migracion-medica-entre-la-necesidad-y-la-transformacion",
+					"link": "https://wp.msklatam.com/nota/medicina/migracion-medica-entre-la-necesidad-y-la-transformacion/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/06/shutterstock_2476690065-scaled-e1742302110772.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 238897,
+					"title": "Qué produce el mobbing en el personal de la salud",
+					"slug": "consecuencias-del-mobbing-en-el-personal-de-la-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/consecuencias-del-mobbing-en-el-personal-de-la-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/11/¿Que-produce-el-mobbing-en-los-y-las-profesionales-de-la-salud.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 220699,
+					"title": "Cuál es la situación laboral de la enfermería hoy",
+					"slug": "situacion-laboral-de-la-enfermeria-hoy",
+					"link": "https://wp.msklatam.com/nota/enfermeria/situacion-laboral-de-la-enfermeria-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/07/Foto-situacion-laboral-de-la-enfermeria-hoy-scaled-e1741873106125.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Anastasiya Nestsiarovich, Christopher E.S. Gaudiot, Ross J. Baldessarini, Eduard Vieta, Yiliang Zhu, Mauricio Tohen, Preventing new episodes of bipolar disorder in adults: Systematic review and meta-analysis of randomized controlled trials, European Neuropsychopharmacology, Volume 54, 2022, Pages 75-89, ISSN 0924-977X, https://doi.org/10.1016/j.euroneuro.2021.08.264"
+				},
+				{
+					"fuente": "O-Connell, K.S., Koromina, M., van der Veen, T. et al. La genómica produce una visión biológica y fenotípica sobre el trastorno bipolar. Nature (2025). https://doi.org/10.1038/s41586-024-08468-9"
+				},
+				{
+					"fuente": "https://www.who.int/es/news-room/fact-sheets/detail/bipolar-disorder"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1412,
+				"name": "Psiquiatría",
+				"slug": "psiquiatria",
+				"term_group": 0,
+				"term_taxonomy_id": 1412,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 119,
+				"filter": "raw"
+			},
+			"reading_time": "7",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
+			"id": 338031,
+			"title": "Retos laborales en el sistema de salud actual",
+			"slug": "retos-laborales-en-el-sistema-de-salud",
+			"permalink": "https://wp.msklatam.com/nota/medicina/retos-laborales-en-el-sistema-de-salud/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-retos-laborales-en-el-sistema-de-salud-scaled-e1743165884884.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-retos-laborales-en-el-sistema-de-salud-scaled-e1743165884884.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "Brechas salariales, desgaste profesional, migración, discriminación y precariedad laboral atraviesan hoy al personal de salud en Latinoamérica. En este artículo, podrás explorar los principales desafíos que enfrentan quienes sostienen los sistemas sanitarios y por qué urge pensar soluciones estructurales que mejoren sus condiciones laborales y profesionales.",
+			"date": "Marzo 27, 2025",
+			"author": {
+				"id": 273557,
+				"name": "Gonzalo Busquets",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2024/01/foto-cv-blurred.png"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 273557,
+					"name": "Gonzalo Busquets",
+					"description": "Periodista. Especialista en comunicación regional para el segmento e-learning y salud.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2024/01/foto-cv-blurred.png"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 337994,
+					"title": "Últimas revelaciones científicas sobre trastorno bipolar",
+					"slug": "ultimas-revelaciones-sobre-trastorno-bipolar",
+					"link": "https://wp.msklatam.com/nota/medicina/ultimas-revelaciones-sobre-trastorno-bipolar/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-ultimas-revelaciones-sobre-trastorno-bipolar-scaled-e1743168915455.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 164077,
+					"title": "Lo que gana (y siente) el personal médico hoy",
+					"slug": "desigualdad-salarial-en-el-personal-medico-hoy",
+					"link": "https://wp.msklatam.com/nota/medicina/desigualdad-salarial-en-el-personal-medico-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2021/10/Foto-desigualdad-salarial-en-el-personal-medico-hoy-scaled-e1742565126361.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 213910,
+					"title": "Migración médica: entre la necesidad y la transformación",
+					"slug": "migracion-medica-entre-la-necesidad-y-la-transformacion",
+					"link": "https://wp.msklatam.com/nota/medicina/migracion-medica-entre-la-necesidad-y-la-transformacion/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/06/shutterstock_2476690065-scaled-e1742302110772.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 238897,
+					"title": "Qué produce el mobbing en el personal de la salud",
+					"slug": "consecuencias-del-mobbing-en-el-personal-de-la-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/consecuencias-del-mobbing-en-el-personal-de-la-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/11/¿Que-produce-el-mobbing-en-los-y-las-profesionales-de-la-salud.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 220699,
+					"title": "Cuál es la situación laboral de la enfermería hoy",
+					"slug": "situacion-laboral-de-la-enfermeria-hoy",
+					"link": "https://wp.msklatam.com/nota/enfermeria/situacion-laboral-de-la-enfermeria-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/07/Foto-situacion-laboral-de-la-enfermeria-hoy-scaled-e1741873106125.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "https://msklatam.com/blog/situacion-laboral-de-la-enfermeria-hoy/"
+				},
+				{
+					"fuente": "https://msklatam.com/blog/consecuencias-del-mobbing-en-el-personal-de-la-salud/"
+				},
+				{
+					"fuente": "https://msklatam.com/blog/migracion-medica-entre-la-necesidad-y-la-transformacion/"
+				},
+				{
+					"fuente": "https://msklatam.com/blog/desigualdad-salarial-en-el-personal-medico-hoy/"
+				},
+				{
+					"fuente": "Perez-Cuevas, R., Savedoff, W. D., Nigenda, G., Vladislavovna Doubova, S., Sório, R. E., y Dal Poz, M. (2023). Rumbo al futuro del personal de salud: tendencias y desafíos para el próximo tiempo. https://doi.org/10.18235/0004886"
+				},
+				{
+					"fuente": "https://www.who.int/es/news-room/fact-sheets/detail/mental-health-at-work"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1301,
+				"filter": "raw"
+			},
+			"reading_time": "5",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
+			"id": 174796,
+			"title": "Lo que gana (y siente) el personal médico hoy",
+			"slug": "desigualdad-salarial-en-el-personal-medico-hoy",
+			"permalink": "https://ar.wp.msklatam.com/nota/actualidad-arg/desigualdad-salarial-en-el-personal-medico-hoy/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2021/10/Foto-desigualdad-salarial-en-el-personal-medico-hoy-scaled-e1742565126361.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2021/10/Foto-desigualdad-salarial-en-el-personal-medico-hoy-scaled-e1742565126361.jpg",
+				"2560",
+				"1440",
+				""
+			],
+			"excerpt": "El panorama laboral de los profesionales de la salud en América Latina y España refleja brechas salariales, precariedad y desigualdades de género. En este artículo, exploramos qué opinan sobre sus condiciones actuales y cómo estas influyen en su calidad de vida, su motivación y hasta en la decisión de migrar.",
+			"date": "Marzo 24, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				},
+				{
+					"id": 254588,
+					"name": "Verónica Martínez Moreira",
+					"description": "Licenciada en Ciencias de la Comunicación por la Universidad de Buenos Aires. Desde hace años escribo en medios digitales sobre diversas temáticas como ciencia, salud, tecnología y educación.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/IMG_20230706_184120622-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 214975,
+					"title": "Migración médica: entre la necesidad y la transformación",
+					"slug": "migracion-medica-entre-la-necesidad-y-la-transformacion",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/migracion-medica-entre-la-necesidad-y-la-transformacion/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/06/shutterstock_2476690065-scaled-e1742302110772.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 239025,
+					"title": "Qué produce el mobbing en el personal de la salud",
+					"slug": "consecuencias-del-mobbing-en-el-personal-de-la-salud",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/consecuencias-del-mobbing-en-el-personal-de-la-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/11/¿Que-produce-el-mobbing-en-los-y-las-profesionales-de-la-salud.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 220729,
+					"title": "Cuál es la situación laboral de la enfermería hoy",
+					"slug": "situacion-laboral-de-la-enfermeria-hoy",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/situacion-laboral-de-la-enfermeria-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/07/Foto-situacion-laboral-de-la-enfermeria-hoy-scaled-e1741873106125.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 336616,
+					"title": "Cómo la ciencia busca reducir el impacto del glaucoma",
+					"slug": "avances-para-reducir-el-impacto-del-glaucoma",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/avances-para-reducir-el-impacto-del-glaucoma/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-avances-para-reducir-el-impacto-del-glaucoma-scaled-e1741809853664.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 335570,
+					"title": "Consumo de alcohol y riesgo de cáncer: evidencia actual",
+					"slug": "consumo-de-alcohol-y-riesgo-de-cancer",
+					"link": "https://ar.wp.msklatam.com/nota/actualidad-arg/consumo-de-alcohol-y-riesgo-de-cancer/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-consumo-de-alcohol-y-riesgo-de-cancer-scaled-e1741351328577.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "https://comercioyjusticia.info/economia/medicos-argentinos-ganan-los-salarios-mas-bajos-del-mundo/"
+				},
+				{
+					"fuente": "https://elpais.com/chile/2024-04-11/el-vuelo-de-los-medicos-gaviota-argentinos-cruzan-la-cordillera-para-trabajar-temporalmente-en-chile.html"
+				},
+				{
+					"fuente": "https://espanol.medscape.com/diapositivas/59000182"
+				},
+				{
+					"fuente": "Rojas, Gabriela C., Chávez-Arana, Andrea, Tarazona-Valencia, Maxly, & Romaní-Romaní, Franco. (2024). Asociación entre la satisfacción laboral y la intención de migrar en médicos y enfermeras del Perú. Horizonte Médico (Lima), 24(4), e2556. Epub 10 de diciembre de 2024.https://doi.org/10.24265/horizmed.2024.v24n4.11"
+				},
+				{
+					"fuente": "https://saniempleo.es/comparativa-salarios-medicos-espana/"
+				}
+			],
+			"categories": [
+				{
+					"id": 37878,
+					"name": "Actualidad",
+					"slug": "actualidad-arg",
+					"description": "",
+					"link": "https://ar.wp.msklatam.com/nota/category/actualidad-arg/"
+				},
+				{
+					"id": 59971,
+					"name": "Medicina",
+					"slug": "medicina-arg",
+					"description": "",
+					"link": "https://ar.wp.msklatam.com/nota/category/medicina-arg/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": null,
+			"reading_time": "7",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
+			"id": 213910,
+			"title": "Migración médica: entre la necesidad y la transformación",
+			"slug": "migracion-medica-entre-la-necesidad-y-la-transformacion",
+			"permalink": "https://wp.msklatam.com/nota/medicina/migracion-medica-entre-la-necesidad-y-la-transformacion/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2022/06/shutterstock_2476690065-scaled-e1742302110772.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2022/06/shutterstock_2476690065-scaled-e1742302110772.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "Cada vez más profesionales de la salud emigran dentro y fuera de América Latina en busca de mejores condiciones laborales. Sin embargo, el proceso no es sencillo: convalidación de títulos, discriminación y precarización son solo algunos de los desafíos que enfrentan. ¿Qué factores impulsan esta movilidad? Descubre las claves de este fenómeno y su impacto en la región.",
+			"date": "Marzo 17, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				},
+				{
+					"id": 254588,
+					"name": "Verónica Martínez Moreira",
+					"description": "Licenciada en Ciencias de la Comunicación por la Universidad de Buenos Aires. Desde hace años escribo en medios digitales sobre diversas temáticas como ciencia, salud, tecnología y educación.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/IMG_20230706_184120622-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 238897,
+					"title": "Qué produce el mobbing en el personal de la salud",
+					"slug": "consecuencias-del-mobbing-en-el-personal-de-la-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/consecuencias-del-mobbing-en-el-personal-de-la-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/11/¿Que-produce-el-mobbing-en-los-y-las-profesionales-de-la-salud.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 220699,
+					"title": "Cuál es la situación laboral de la enfermería hoy",
+					"slug": "situacion-laboral-de-la-enfermeria-hoy",
+					"link": "https://wp.msklatam.com/nota/enfermeria/situacion-laboral-de-la-enfermeria-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/07/Foto-situacion-laboral-de-la-enfermeria-hoy-scaled-e1741873106125.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 336596,
+					"title": "Cómo la ciencia busca reducir el impacto del glaucoma",
+					"slug": "avances-para-reducir-el-impacto-del-glaucoma",
+					"link": "https://wp.msklatam.com/nota/medicina/avances-para-reducir-el-impacto-del-glaucoma/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-avances-para-reducir-el-impacto-del-glaucoma-scaled-e1741809853664.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 335568,
+					"title": "Consumo de alcohol y riesgo de cáncer: evidencia actual",
+					"slug": "consumo-de-alcohol-y-riesgo-de-cancer",
+					"link": "https://wp.msklatam.com/nota/medicina/consumo-de-alcohol-y-riesgo-de-cancer/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-consumo-de-alcohol-y-riesgo-de-cancer-scaled-e1741351328577.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334858,
+					"title": "Enfermedades raras: retos y soluciones en Latinoamérica",
+					"slug": "enfermedades-raras-retos-y-soluciones",
+					"link": "https://wp.msklatam.com/nota/medicina/enfermedades-raras-retos-y-soluciones/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-enfermedades-raras-retos-y-soluciones-scaled-e1740662888363.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Ramírez García, T. y Lozano Ascencio, F. (2022). Migración y trabajo de los profesionales de la salud de México y América Latina en Estados Unidos durante la pandemia por la COVID-19. En: Aragonés, A. M. y Salgado, U. (Eds.). Migración mexicana calificada: revertir la tendencia (pp. 203-229). Universidad Nacional Autónoma de México."
+				},
+				{
+					"fuente": "https://www.paho.org/es/eventos/reunion-alto-nivel-sobre-migracion-movilidad-personal-salud-region-americas"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1280,
+				"filter": "raw"
+			},
+			"reading_time": "0",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
+			"id": 238897,
+			"title": "Qué produce el mobbing en el personal de la salud",
+			"slug": "consecuencias-del-mobbing-en-el-personal-de-la-salud",
+			"permalink": "https://wp.msklatam.com/nota/medicina/consecuencias-del-mobbing-en-el-personal-de-la-salud/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2022/11/¿Que-produce-el-mobbing-en-los-y-las-profesionales-de-la-salud.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2022/11/¿Que-produce-el-mobbing-en-los-y-las-profesionales-de-la-salud.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "Según la Organización Mundial de la Salud, el mobbing o acoso psicológico laboral constituye un problema de salud pública. En el personal de la salud, se asocia a impactos en la salud psíquica y física. Lee este artículo e infórmate más al respecto.",
+			"date": "Marzo 13, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				},
+				{
+					"id": 258873,
+					"name": "Fernando Fuentes",
+					"description": "Médico. Especialista en Neumonología por la Universidad de Buenos Aires. Comunicador científico.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/09/IMG-20230825-WA0000.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 220699,
+					"title": "Cuál es la situación laboral de la enfermería hoy",
+					"slug": "situacion-laboral-de-la-enfermeria-hoy",
+					"link": "https://wp.msklatam.com/nota/enfermeria/situacion-laboral-de-la-enfermeria-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/07/Foto-situacion-laboral-de-la-enfermeria-hoy-scaled-e1741873106125.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 336596,
+					"title": "Cómo la ciencia busca reducir el impacto del glaucoma",
+					"slug": "avances-para-reducir-el-impacto-del-glaucoma",
+					"link": "https://wp.msklatam.com/nota/medicina/avances-para-reducir-el-impacto-del-glaucoma/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-avances-para-reducir-el-impacto-del-glaucoma-scaled-e1741809853664.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 335568,
+					"title": "Consumo de alcohol y riesgo de cáncer: evidencia actual",
+					"slug": "consumo-de-alcohol-y-riesgo-de-cancer",
+					"link": "https://wp.msklatam.com/nota/medicina/consumo-de-alcohol-y-riesgo-de-cancer/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-consumo-de-alcohol-y-riesgo-de-cancer-scaled-e1741351328577.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334858,
+					"title": "Enfermedades raras: retos y soluciones en Latinoamérica",
+					"slug": "enfermedades-raras-retos-y-soluciones",
+					"link": "https://wp.msklatam.com/nota/medicina/enfermedades-raras-retos-y-soluciones/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-enfermedades-raras-retos-y-soluciones-scaled-e1740662888363.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334786,
+					"title": "Habilidades esenciales para el liderazgo en salud",
+					"slug": "habilidades-esenciales-para-el-liderazgo-en-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/habilidades-esenciales-para-el-liderazgo-en-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-habilidades-esenciales-para-el-liderazgo-en-salud-scaled-e1740583131814.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Ortiz, M. I., Valencia Ortiz , A. I., & Espinoza Orozco , E. (2022). Mobbing en profesionales de la salud. Educación Y Salud Boletín Científico Instituto De Ciencias De La Salud Universidad Autónoma Del Estado De Hidalgo, 10(20), 244-250. https://doi.org/10.29057/icsa.v10i20.7809"
+				},
+				{
+					"fuente": "Domínguez LC, Torregrosa L, Cuevas L, Peña L, Sánchez S, Pedraza M, Sanabria Á. Workplace bullying and sexual harassment among general surgery residents in Colombia. Biomedica. 2023 Jun 30;43(2):252-260. doi: 10.7705/biomedica.6915. PMID: 37433160; PMCID: PMC10531255."
+				},
+				{
+					"fuente": "https://psicologia.udp.cl/estres-depresion-e-ideacion-suicida-las-duras-cicatrices-del-acoso-laboral-que-sufren-profesionales-de-la-salud-comenta-elisa-ansoleaga/"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1280,
+				"filter": "raw"
+			},
+			"reading_time": "7",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
+			"id": 220699,
+			"title": "Cuál es la situación laboral de la enfermería hoy",
+			"slug": "situacion-laboral-de-la-enfermeria-hoy",
+			"permalink": "https://wp.msklatam.com/nota/enfermeria/situacion-laboral-de-la-enfermeria-hoy/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2022/07/Foto-situacion-laboral-de-la-enfermeria-hoy-scaled-e1741873106125.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2022/07/Foto-situacion-laboral-de-la-enfermeria-hoy-scaled-e1741873106125.jpg",
+				"1000",
+				"527",
+				""
+			],
+			"excerpt": "La enfermería enfrenta una crisis global que impulsa a muchos profesionales a renunciar o emigrar en busca de mejores condiciones. La sobrecarga laboral, los bajos salarios y la precarización afectan la calidad del servicio y la salud de quienes ejercen esta profesión esencial. Sin embargo, algunas iniciativas buscan revertir esta situación. Descubre el panorama actual en distintos países y las estrategias que podrían transformar el futuro de la enfermería.",
+			"date": "Marzo 12, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 336596,
+					"title": "Cómo la ciencia busca reducir el impacto del glaucoma",
+					"slug": "avances-para-reducir-el-impacto-del-glaucoma",
+					"link": "https://wp.msklatam.com/nota/medicina/avances-para-reducir-el-impacto-del-glaucoma/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-avances-para-reducir-el-impacto-del-glaucoma-scaled-e1741809853664.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 335568,
+					"title": "Consumo de alcohol y riesgo de cáncer: evidencia actual",
+					"slug": "consumo-de-alcohol-y-riesgo-de-cancer",
+					"link": "https://wp.msklatam.com/nota/medicina/consumo-de-alcohol-y-riesgo-de-cancer/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-consumo-de-alcohol-y-riesgo-de-cancer-scaled-e1741351328577.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334858,
+					"title": "Enfermedades raras: retos y soluciones en Latinoamérica",
+					"slug": "enfermedades-raras-retos-y-soluciones",
+					"link": "https://wp.msklatam.com/nota/medicina/enfermedades-raras-retos-y-soluciones/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-enfermedades-raras-retos-y-soluciones-scaled-e1740662888363.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334786,
+					"title": "Habilidades esenciales para el liderazgo en salud",
+					"slug": "habilidades-esenciales-para-el-liderazgo-en-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/habilidades-esenciales-para-el-liderazgo-en-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-habilidades-esenciales-para-el-liderazgo-en-salud-scaled-e1740583131814.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334423,
+					"title": "Alto porcentaje de supervivencia en detección temprana del cáncer infantil",
+					"slug": "deteccion-temprana-en-cancer-infantil",
+					"link": "https://wp.msklatam.com/nota/medicina/deteccion-temprana-en-cancer-infantil/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-deteccion-temprana-en-cancer-infantil-scaled-e1740162838899.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "https://www.perfil.com/noticias/salud/hospital-durand-gobierno-porte%C3%B1o-aclaro-no-hubo-renuncia-masiva-enfermeros.phtml#:~:text=En%20medio%20de%20la%20segunda,salarios%20y%20las%20condiciones%20laborales"
+				},
+				{
+					"fuente": "https://www.bostonglobe.com/2022/05/25/opinion/real-reason-nurses-are-burned-out/"
+				},
+				{
+					"fuente": "https://asistenciasanitaria.com.ar/2019/06/01/solo-1-enfermera-atiende-a-19-pacientes-en-las-unidades-materno-infantiles/#:~:text=En%20concreto%2C%20la%20Ley%20de,la%20unidad%20y%20de%20la"
+				},
+				{
+					"fuente": "https://www.redaccionmedica.com/secciones/enfermeria/el-congreso-estudia-fijar-por-ley-un-maximo-de-pacientes-por-enfermera-8644"
+				},
+				{
+					"fuente": "https://www.nationalnursesunited.org/ratios-california-experience"
+				},
+				{
+					"fuente": "https://www.enfermeria21.com/diario-dicen/enfermeras-traslado-trabajo/"
+				},
+				{
+					"fuente": "https://www.insp.mx/informacion-relevante/la-precariedad-laboral-el-elefante-no-visibilizado-en-el-sistema-de-salud-mexicano"
+				},
+				{
+					"fuente": "https://www.economia.gob.mx/datamexico/es/profile/occupation/enfermeras-y-tecnicos-en-medicina"
+				},
+				{
+					"fuente": "https://www.imss.gob.mx/prensa/archivo/202501/007#:~:text=no%20banner%20*%20Enero%202025.%20*%20Con,enfermeros%2C%20IMSS%20fortalece%20atenci%C3%B3n%20y%20servicios%20preventivos."
+				}
+			],
+			"categories": [
+				{
+					"id": 1611,
+					"primary": true,
+					"name": "Enfermería",
+					"slug": "enfermeria",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/enfermeria/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "1611",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1280,
+				"filter": "raw"
+			},
+			"reading_time": "7",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
+			"id": 336596,
+			"title": "Cómo la ciencia busca reducir el impacto del glaucoma",
+			"slug": "avances-para-reducir-el-impacto-del-glaucoma",
+			"permalink": "https://wp.msklatam.com/nota/medicina/avances-para-reducir-el-impacto-del-glaucoma/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-avances-para-reducir-el-impacto-del-glaucoma-scaled-e1741809853664.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-avances-para-reducir-el-impacto-del-glaucoma-scaled-e1741809853664.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "Cada 12 de marzo, el Día Mundial del Glaucoma nos recuerda la importancia de la detección temprana y el avance de la ciencia en la lucha contra esta enfermedad. Investigaciones recientes han revelado datos clave sobre su prevalencia, los mecanismos biológicos que la desencadenan y posibles estrategias para su prevención y tratamiento. Descubre aquí los hallazgos que pueden marcar un antes y un después.",
+			"date": "Marzo 11, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 335568,
+					"title": "Consumo de alcohol y riesgo de cáncer: evidencia actual",
+					"slug": "consumo-de-alcohol-y-riesgo-de-cancer",
+					"link": "https://wp.msklatam.com/nota/medicina/consumo-de-alcohol-y-riesgo-de-cancer/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-consumo-de-alcohol-y-riesgo-de-cancer-scaled-e1741351328577.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334858,
+					"title": "Enfermedades raras: retos y soluciones en Latinoamérica",
+					"slug": "enfermedades-raras-retos-y-soluciones",
+					"link": "https://wp.msklatam.com/nota/medicina/enfermedades-raras-retos-y-soluciones/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-enfermedades-raras-retos-y-soluciones-scaled-e1740662888363.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334786,
+					"title": "Habilidades esenciales para el liderazgo en salud",
+					"slug": "habilidades-esenciales-para-el-liderazgo-en-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/habilidades-esenciales-para-el-liderazgo-en-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-habilidades-esenciales-para-el-liderazgo-en-salud-scaled-e1740583131814.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334423,
+					"title": "Alto porcentaje de supervivencia en detección temprana del cáncer infantil",
+					"slug": "deteccion-temprana-en-cancer-infantil",
+					"link": "https://wp.msklatam.com/nota/medicina/deteccion-temprana-en-cancer-infantil/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-deteccion-temprana-en-cancer-infantil-scaled-e1740162838899.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 230620,
+					"title": "Cómo actúa el liderazgo transformacional ante el síndrome de burnout",
+					"slug": "liderazgo-transformacional-ante-el-sindrome-de-burnout",
+					"link": "https://wp.msklatam.com/nota/medicina/liderazgo-transformacional-ante-el-sindrome-de-burnout/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/09/shutterstock_2265615125-scaled-e1740055547157.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Tham, Yih-Chung et al. Global Prevalence of Glaucoma and Projections of Glaucoma Burden through 2040. , en Ophthalmology, Volume 121, Issue 11, 2081 – 2090. https://10.1016/j.ophtha.2014.05.013"
+				},
+				{
+					"fuente": "Rezaei, M., Faramarzpour, M., Shobeiri, P. et al. A systematic review, meta-analysis, and network analysis of diagnostic microRNAs in glaucoma. Eur J Med Res 28, 137 (2023). https://doi.org/10.1186/s40001-023-01093-8 "
+				},
+				{
+					"fuente": "Miyagishima KJ, Nadal-Nicolás FM, Ma W, Li W. La anexina V se une a una subpoblación de células inmunitarias, alterando su interpretación como biomarcador in vivo de apoptosis en la retina. Int J Biol Sci 2024; 20(15):6073-6089. doi:10.7150/ijbs.102551. https://www.ijbs.com/v20p6073.htm"
+				},
+				{
+					"fuente": "https://www.nei.nih.gov/about/news-and-events/news/university-nebraska-researchers-show-role-cytokines-retinal-cells"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1318,
+				"name": "Oftalmología",
+				"slug": "oftalmologia",
+				"term_group": 0,
+				"term_taxonomy_id": 1318,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 43,
+				"filter": "raw"
+			},
+			"reading_time": "11",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
+			"id": 335568,
+			"title": "Consumo de alcohol y riesgo de cáncer: evidencia actual",
+			"slug": "consumo-de-alcohol-y-riesgo-de-cancer",
+			"permalink": "https://wp.msklatam.com/nota/medicina/consumo-de-alcohol-y-riesgo-de-cancer/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-consumo-de-alcohol-y-riesgo-de-cancer-scaled-e1741351328577.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-consumo-de-alcohol-y-riesgo-de-cancer-scaled-e1741351328577.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "Basándose en evidencia científica reciente, la Dra. Alma Medrano, directora médica de MSK, analiza los mecanismos biológicos involucrados y la importancia de la prevención para reducir el impacto del alcohol en la salud. Lee su reflexión y profundiza en los hallazgos actuales sobre este tema clave.",
+			"date": "Marzo 6, 2025",
+			"author": {
+				"id": 332969,
+				"name": "Dra. Alma Medrano",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2025/01/foto-alma-medrano-square.png"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 332969,
+					"name": "Dra. Alma Medrano",
+					"description": "Directora médica de Medical & Scientific Knowledge",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2025/01/foto-alma-medrano-square.png"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 334858,
+					"title": "Enfermedades raras: retos y soluciones en Latinoamérica",
+					"slug": "enfermedades-raras-retos-y-soluciones",
+					"link": "https://wp.msklatam.com/nota/medicina/enfermedades-raras-retos-y-soluciones/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-enfermedades-raras-retos-y-soluciones-scaled-e1740662888363.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334786,
+					"title": "Habilidades esenciales para el liderazgo en salud",
+					"slug": "habilidades-esenciales-para-el-liderazgo-en-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/habilidades-esenciales-para-el-liderazgo-en-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-habilidades-esenciales-para-el-liderazgo-en-salud-scaled-e1740583131814.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334423,
+					"title": "Alto porcentaje de supervivencia en detección temprana del cáncer infantil",
+					"slug": "deteccion-temprana-en-cancer-infantil",
+					"link": "https://wp.msklatam.com/nota/medicina/deteccion-temprana-en-cancer-infantil/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-deteccion-temprana-en-cancer-infantil-scaled-e1740162838899.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 230620,
+					"title": "Cómo actúa el liderazgo transformacional ante el síndrome de burnout",
+					"slug": "liderazgo-transformacional-ante-el-sindrome-de-burnout",
+					"link": "https://wp.msklatam.com/nota/medicina/liderazgo-transformacional-ante-el-sindrome-de-burnout/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/09/shutterstock_2265615125-scaled-e1740055547157.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 247623,
+					"title": "Qué habilidades blandas requiere la medicina hoy",
+					"slug": "habilidades-blandas-medicina-hoy",
+					"link": "https://wp.msklatam.com/nota/medicina/habilidades-blandas-medicina-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2023/03/¿Que-habilidades-blandas-pediran-los-y-las-pacientes-del-futuro.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Deng, W., Jin, L., Zhuo, H., Vasiliou, V., & Zhang, Y. (2021). Alcohol consumption and risk of stomach cancer: A meta-analysis. Chemico-Biological Interactions, 336, 109365. https://doi.org/10.1016/j.cbi.2021.109365"
+				},
+				{
+					"fuente": "Jun, S., Park, H., Kim, U. J., Choi, E. J., Lee, H. A., Park, B., Lee, S. Y., Jee, S. H., & Park, H. (2023). Cancer risk based on alcohol consumption levels: a comprehensive systematic review and meta-analysis. Epidemiology and Health, 45, e2023092. https://doi.org/10.4178/epih.e2023092"
+				},
+				{
+					"fuente": "Molina, J. C., Guerrero-Morán, J. D., & González-Espinosa, C. (2023). Alcohol: Immunomodulatory Effects and Cancer. Revista de Investigación Clínica, 75(3), 129-142. https://doi.org/10.24875/RIC.23000116"
+				},
+				{
+					"fuente": "Rumgay, H., Murphy, N., Ferrari, P., & Soerjomataram, I. (2021). Alcohol and cancer: Epidemiology and biological mechanisms. Nutrients, 13(9), 3173. https://doi.org/10.3390/nu13093173"
+				},
+				{
+					"fuente": "Starek-Święchowicz, B., Budziszewska, B., & Starek, A. (2023). Alcohol and breast cancer. Pharmacological Reports, 75(1), 69-84. https://doi.org/10.1007/s43440-022-00426-4"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				},
+				{
+					"id": 1711,
+					"name": "Opinion",
+					"slug": "opinion",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/opinion/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1105,
+				"name": "Oncología",
+				"slug": "oncologia",
+				"term_group": 0,
+				"term_taxonomy_id": 1105,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 168,
+				"filter": "raw"
+			},
+			"reading_time": "4",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
+			"id": 335471,
+			"title": "Resuelve este quiz sobre medicina legal y forense",
+			"slug": "quiz-medicina-legal-y-forense",
+			"permalink": "https://wp.msklatam.com/nota/medicina/quiz-medicina-legal-y-forense/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/03/portada-quiz-medicina-legal-y-forense.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/03/portada-quiz-medicina-legal-y-forense.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "¿Cuánto sabes de medicina legal y forense? Anímate a este quiz especial de MSK para conocer tu nivel en una disciplina diferente y evaluar tus capacidades más allá de tu especialidad médica.",
+			"date": "",
+			"author": {
+				"id": 103,
+				"name": "Contenidos MSK",
+				"email": "contenidos@msklatam.com",
+				"avatar": "https://secure.gravatar.com/avatar/d77ba09cb0734abf46a7f69267816ecd?s=96&d=mm&r=g"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 103,
+					"name": "Contenidos MSK",
+					"email": "contenidos@msklatam.com",
+					"avatar": "https://secure.gravatar.com/avatar/d77ba09cb0734abf46a7f69267816ecd?s=96&d=mm&r=g"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 334858,
+					"title": "Enfermedades raras: retos y soluciones en Latinoamérica",
+					"slug": "enfermedades-raras-retos-y-soluciones",
+					"link": "https://wp.msklatam.com/nota/medicina/enfermedades-raras-retos-y-soluciones/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-enfermedades-raras-retos-y-soluciones-scaled-e1740662888363.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334786,
+					"title": "Habilidades esenciales para el liderazgo en salud",
+					"slug": "habilidades-esenciales-para-el-liderazgo-en-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/habilidades-esenciales-para-el-liderazgo-en-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-habilidades-esenciales-para-el-liderazgo-en-salud-scaled-e1740583131814.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334423,
+					"title": "Alto porcentaje de supervivencia en detección temprana del cáncer infantil",
+					"slug": "deteccion-temprana-en-cancer-infantil",
+					"link": "https://wp.msklatam.com/nota/medicina/deteccion-temprana-en-cancer-infantil/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-deteccion-temprana-en-cancer-infantil-scaled-e1740162838899.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 230620,
+					"title": "Cómo actúa el liderazgo transformacional ante el síndrome de burnout",
+					"slug": "liderazgo-transformacional-ante-el-sindrome-de-burnout",
+					"link": "https://wp.msklatam.com/nota/medicina/liderazgo-transformacional-ante-el-sindrome-de-burnout/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/09/shutterstock_2265615125-scaled-e1740055547157.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 247623,
+					"title": "Qué habilidades blandas requiere la medicina hoy",
+					"slug": "habilidades-blandas-medicina-hoy",
+					"link": "https://wp.msklatam.com/nota/medicina/habilidades-blandas-medicina-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2023/03/¿Que-habilidades-blandas-pediran-los-y-las-pacientes-del-futuro.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 59968,
+					"name": "E-Learning",
+					"slug": "e-learning",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/e-learning/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1165,
+				"filter": "raw"
+			},
+			"reading_time": "4",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
+			"id": 334858,
+			"title": "Enfermedades raras: retos y soluciones en Latinoamérica",
+			"slug": "enfermedades-raras-retos-y-soluciones",
+			"permalink": "https://wp.msklatam.com/nota/medicina/enfermedades-raras-retos-y-soluciones/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-enfermedades-raras-retos-y-soluciones-scaled-e1740662888363.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-enfermedades-raras-retos-y-soluciones-scaled-e1740662888363.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "Aunque poco frecuentes individualmente, las enfermedades raras afectan a millones de personas en el mundo. En Latinoamérica, el acceso a diagnósticos y tratamientos sigue siendo un desafío, pero algunas propuestas buscan cambiar esta realidad. Descubre el panorama actual, los obstáculos que enfrentan los pacientes y las acciones necesarias para mejorar su calidad de vida.",
+			"date": "Febrero 26, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 334786,
+					"title": "Habilidades esenciales para el liderazgo en salud",
+					"slug": "habilidades-esenciales-para-el-liderazgo-en-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/habilidades-esenciales-para-el-liderazgo-en-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-habilidades-esenciales-para-el-liderazgo-en-salud-scaled-e1740583131814.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 334423,
+					"title": "Alto porcentaje de supervivencia en detección temprana del cáncer infantil",
+					"slug": "deteccion-temprana-en-cancer-infantil",
+					"link": "https://wp.msklatam.com/nota/medicina/deteccion-temprana-en-cancer-infantil/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-deteccion-temprana-en-cancer-infantil-scaled-e1740162838899.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 230620,
+					"title": "Cómo actúa el liderazgo transformacional ante el síndrome de burnout",
+					"slug": "liderazgo-transformacional-ante-el-sindrome-de-burnout",
+					"link": "https://wp.msklatam.com/nota/medicina/liderazgo-transformacional-ante-el-sindrome-de-burnout/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/09/shutterstock_2265615125-scaled-e1740055547157.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 247623,
+					"title": "Qué habilidades blandas requiere la medicina hoy",
+					"slug": "habilidades-blandas-medicina-hoy",
+					"link": "https://wp.msklatam.com/nota/medicina/habilidades-blandas-medicina-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2023/03/¿Que-habilidades-blandas-pediran-los-y-las-pacientes-del-futuro.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 235584,
+					"title": "Liderazgo médico: su importancia y la preparación para desarrollarlo",
+					"slug": "liderazgo-medico-importancia-y-preparacion",
+					"link": "https://wp.msklatam.com/nota/medicina/liderazgo-medico-importancia-y-preparacion/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/10/Liderazgo-medico-las-habilidades-clinicas-no-alcanzan-para-gestionar.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Gonzaga-Jauregui C, Salazar C, MacDonald J, Reichardt JKV, Groft SC. ERCAL, a regional initiative for rare diseases in Latin America and the Caribbean. Rare Dis Orphan Drugs J. 2024;3:6. http://dx.doi.org/10.20517/rdodj.2023.48"
+				},
+				{
+					"fuente": "https://www.latimes.com/espanol/internacional/articulo/2022-02-28/latinoamerica-enfrenta-las-enfermedades-raras-con-multiples-carencias"
+				},
+				{
+					"fuente": "https://medical-impact.org/los-grandes-retos-detras-de-las-enfermedades-raras/"
+				},
+				{
+					"fuente": "https://www.swissinfo.ch/spa/el-mit-advierte-de-retos-para-diagnosticar-y-tratar-enfermedades-raras-en-latinoam%C3%A9rica/74993894"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1180,
+				"filter": "raw"
+			},
+			"reading_time": "4",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
+			"id": 334786,
+			"title": "Habilidades esenciales para el liderazgo en salud",
+			"slug": "habilidades-esenciales-para-el-liderazgo-en-salud",
+			"permalink": "https://wp.msklatam.com/nota/medicina/habilidades-esenciales-para-el-liderazgo-en-salud/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-habilidades-esenciales-para-el-liderazgo-en-salud-scaled-e1740583131814.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-habilidades-esenciales-para-el-liderazgo-en-salud-scaled-e1740583131814.jpg",
+				"1000",
+				"693",
+				""
+			],
+			"excerpt": "El liderazgo en salud es un factor clave para la calidad asistencial, la motivación del equipo y la eficiencia de los sistemas sanitarios. Desarrollar habilidades adecuadas te permite influir positivamente en tus equipos y mejorar la atención a tus pacientes. Descubre qué competencias son esenciales para liderar en el ámbito sanitario y cómo potenciar tu impacto en la gestión de la salud.",
+			"date": "Febrero 25, 2025",
+			"author": {
+				"id": 273557,
+				"name": "Gonzalo Busquets",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2024/01/foto-cv-blurred.png"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 273557,
+					"name": "Gonzalo Busquets",
+					"description": "Periodista. Especialista en comunicación regional para el segmento e-learning y salud.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2024/01/foto-cv-blurred.png"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 334423,
+					"title": "Alto porcentaje de supervivencia en detección temprana del cáncer infantil",
+					"slug": "deteccion-temprana-en-cancer-infantil",
+					"link": "https://wp.msklatam.com/nota/medicina/deteccion-temprana-en-cancer-infantil/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-deteccion-temprana-en-cancer-infantil-scaled-e1740162838899.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 230620,
+					"title": "Cómo actúa el liderazgo transformacional ante el síndrome de burnout",
+					"slug": "liderazgo-transformacional-ante-el-sindrome-de-burnout",
+					"link": "https://wp.msklatam.com/nota/medicina/liderazgo-transformacional-ante-el-sindrome-de-burnout/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/09/shutterstock_2265615125-scaled-e1740055547157.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 247623,
+					"title": "Qué habilidades blandas requiere la medicina hoy",
+					"slug": "habilidades-blandas-medicina-hoy",
+					"link": "https://wp.msklatam.com/nota/medicina/habilidades-blandas-medicina-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2023/03/¿Que-habilidades-blandas-pediran-los-y-las-pacientes-del-futuro.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 235584,
+					"title": "Liderazgo médico: su importancia y la preparación para desarrollarlo",
+					"slug": "liderazgo-medico-importancia-y-preparacion",
+					"link": "https://wp.msklatam.com/nota/medicina/liderazgo-medico-importancia-y-preparacion/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/10/Liderazgo-medico-las-habilidades-clinicas-no-alcanzan-para-gestionar.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 333526,
+					"title": "Actualidad de la equidad de género en el ámbito médico",
+					"slug": "actualidad-equidad-de-genero-en-medicina",
+					"link": "https://wp.msklatam.com/nota/medicina/actualidad-equidad-de-genero-en-medicina/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-actualidad-equidad-de-genero-en-medicina-scaled-e1739280717491.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "https://msklatam.com/blog/liderazgo-medico-importancia-y-preparacion/"
+				},
+				{
+					"fuente": "https://msklatam.com/blog/habilidades-blandas-medicina-hoy/"
+				},
+				{
+					"fuente": "https://msklatam.com/blog/liderazgo-transformacional-ante-el-sindrome-de-burnout/"
+				},
+				{
+					"fuente": "Puertas EB, Sotelo JM, Ramos G. Liderazgo y gestión estratégica en sistemas de salud basados en atención primaria de salud [Leadership and strategic management in health systems based on primary health care]. Rev Panam Salud Publica. 2020;44:e124. Published 2020 Nov 2. doi:10.26633/RPSP.2020.124"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 60090,
+				"name": "Administración y gestión",
+				"slug": "administracion-y-gestion",
+				"term_group": 0,
+				"term_taxonomy_id": 60090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 23,
+				"filter": "raw"
+			},
+			"reading_time": "4",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
+			"id": 334423,
+			"title": "Alto porcentaje de supervivencia en detección temprana del cáncer infantil",
+			"slug": "deteccion-temprana-en-cancer-infantil",
+			"permalink": "https://wp.msklatam.com/nota/medicina/deteccion-temprana-en-cancer-infantil/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-deteccion-temprana-en-cancer-infantil-scaled-e1740162838899.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-deteccion-temprana-en-cancer-infantil-scaled-e1740162838899.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "En este artículo especial, leerás sobre la importancia de la concientización, la capacitación del personal de salud y las campañas que buscan reducir el tiempo de diagnóstico y mejorar la calidad de atención para miles de niños en Latinoamérica que padecen cáncer.",
+			"date": "Febrero 20, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 230620,
+					"title": "Cómo actúa el liderazgo transformacional ante el síndrome de burnout",
+					"slug": "liderazgo-transformacional-ante-el-sindrome-de-burnout",
+					"link": "https://wp.msklatam.com/nota/medicina/liderazgo-transformacional-ante-el-sindrome-de-burnout/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/09/shutterstock_2265615125-scaled-e1740055547157.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 247623,
+					"title": "Qué habilidades blandas requiere la medicina hoy",
+					"slug": "habilidades-blandas-medicina-hoy",
+					"link": "https://wp.msklatam.com/nota/medicina/habilidades-blandas-medicina-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2023/03/¿Que-habilidades-blandas-pediran-los-y-las-pacientes-del-futuro.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 235584,
+					"title": "Liderazgo médico: su importancia y la preparación para desarrollarlo",
+					"slug": "liderazgo-medico-importancia-y-preparacion",
+					"link": "https://wp.msklatam.com/nota/medicina/liderazgo-medico-importancia-y-preparacion/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/10/Liderazgo-medico-las-habilidades-clinicas-no-alcanzan-para-gestionar.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 333526,
+					"title": "Actualidad de la equidad de género en el ámbito médico",
+					"slug": "actualidad-equidad-de-genero-en-medicina",
+					"link": "https://wp.msklatam.com/nota/medicina/actualidad-equidad-de-genero-en-medicina/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/02/Foto-actualidad-equidad-de-genero-en-medicina-scaled-e1739280717491.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 332933,
+					"title": "Tipos de agua y su impacto en la salud: ¿mitos o realidad?",
+					"slug": "tipos-de-agua-mitos-y-realidades",
+					"link": "https://wp.msklatam.com/nota/medicina/tipos-de-agua-mitos-y-realidades/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/01/Foto-tipos-de-agua-mitos-y-realidades-scaled-e1738157524930.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Rodriguez-Romo L, Olaya Vargas A, Gupta S, Shalkow-Klincovstein J, Vega-Vega L, Reyes-Lopez A, Cicero-Oneto C, Mejia-Arangure J, Gonzalez-Ramella O, Pineiro-Retif R, Lopez-Facundo A, de Los Angeles Del Campo-Martinez M, Tejocote I, Brennan K, Booth CM. Delivery of Pediatric Cancer Care in Mexico: A National Survey. J Glob Oncol. 2018 Jul;4:1-12. doi: 10.1200/JGO.17.00238."
+				},
+				{
+					"fuente": "https://www.gob.mx/salud/prensa/382-con-tratamiento-oportuno-supera-el-cancer-hasta-75-de-pacientes-hospital-infantil-de-mexico?idiom=es"
+				},
+				{
+					"fuente": "https://www.milenio.com/ciencia-y-salud/aumenta-con-el-diagnostico-la-sobrevida-de-cancer-infantil"
+				},
+				{
+					"fuente": "https://www.paho.org/es/campanas/diagnostico-precoz-cancer-infantil"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1105,
+				"name": "Oncología",
+				"slug": "oncologia",
+				"term_group": 0,
+				"term_taxonomy_id": 1105,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 168,
+				"filter": "raw"
+			},
+			"reading_time": "5",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
 			"id": 230702,
 			"title": "Cómo actúa el liderazgo transformacional ante el síndrome de burnout",
 			"slug": "liderazgo-transformacional-ante-el-sindrome-de-burnout",

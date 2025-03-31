@@ -9,6 +9,7 @@ import { FC, useContext, useEffect, useState } from 'react';
 import SpecialtiesModal from './SpecialtiesModal';
 import ssr from '@/services/ssr';
 import { getJSONByCountry } from '@/app/products';
+import { getJSONTiendaByCountry } from '@/app/productsTienda';
 
 interface TiendaProps {
 	category: string;
@@ -33,19 +34,29 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 	const professionFilter = searchParams.get('profesion');
 
 	const [courses, setCourses] = useState<any[]>([]);
-	const JSONProduct = getJSONByCountry(country);
+	let JSONProduct: any;
+	const fetchProducts = async () => {
+		try {
+			JSONProduct = await getJSONTiendaByCountry(country);
+			return JSONProduct;
+		} catch (error) {
+			console.error('Error al obtener los productos:', error);
+			return { products: [] }; // Evita fallos si JSONProduct es undefined
+		}
+	};
+
+	// Llamada a la función
+	fetchProducts().then((JSONProduct) => {});
 
 	useEffect(() => {
 		const fetchCourses = async () => {
-			const coursesData = await ssr.getAllCourses(country);
-			setCourses(JSONProduct.products);
-			// setCurrentItems(coursesData);
-			// console.log(coursesData);
+			// Filtrar el curso con el título exacto antes de actualizar el estado
+			const filteredCourses = JSONProduct?.products.filter((product) => product.slug !== 'accsap');
+			setCourses(filteredCourses);
 		};
 
 		fetchCourses();
-		// console.log(category);
-	}, [country]);
+	}, [country, JSONProduct]);
 
 	useEffect(() => {
 		const filterCourses = () => {
@@ -62,9 +73,9 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 			}
 
 			if (category) {
-				filteredCourses = courses.filter((course: any) => course.categories.some((cat: any) => cat.slug === category));
+				filteredCourses = courses?.filter((course: any) => course.categories.some((cat: any) => cat.slug === category));
 				// console.log(filteredCourses);
-				filteredCourses = filteredCourses.filter((course: any) => course.father_post_type === 'course');
+				filteredCourses = filteredCourses?.filter((course: any) => course.father_post_type === 'course');
 			}
 			setCurrentItems(filteredCourses);
 
@@ -112,7 +123,7 @@ const TiendaProductos: FC<TiendaProps> = ({ category, country }) => {
 			//   });
 			// }
 
-			const paginatedCourses = filteredCourses.slice(indexOfFirstItem, indexOfLastItem);
+			const paginatedCourses = filteredCourses?.slice(indexOfFirstItem, indexOfLastItem);
 			// console.log(paginatedCourses);
 
 			setCurrentItems(paginatedCourses);

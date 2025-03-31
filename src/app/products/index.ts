@@ -17,6 +17,8 @@ import sv from './sv.json';
 import uy from './uy.json';
 import ve from './ve.json';
 
+// const ar = 'https://cms1.msklatam.com/wp-content/json/productos-tienda/ar.json';
+
 const productsByCountry: Record<string, any> = {
 	ar,
 	bo,
@@ -38,13 +40,27 @@ const productsByCountry: Record<string, any> = {
 	ve,
 };
 
-export const getJSONByCountry = (country: string) => {
+export const getJSONByCountry = async (country: string) => {
 	if (country === 'mi') {
 		country = 'ar';
 	}
 
 	const normalizedCountry = country?.toLowerCase() || 'int';
-	const data = productsByCountry[normalizedCountry] || productsByCountry['int']; // Fallback a 'int'
+	const data = productsByCountry[normalizedCountry] || productsByCountry['int'];
 
-	return data;
+	if (typeof data === 'string') {
+		// Si es una URL (caso de 'ar'), hacemos un fetch
+		try {
+			const response = await fetch(data);
+			const json = await response.json();
+
+			return json;
+		} catch (error) {
+			console.error('Error cargando JSON de la tienda:', error);
+			return productsByCountry['int']; // Retornar el JSON por defecto si hay error
+		}
+	} else {
+		// Si es un JSON importado, lo devolvemos tal cual
+		return data;
+	}
 };

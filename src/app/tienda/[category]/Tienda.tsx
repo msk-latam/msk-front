@@ -28,17 +28,32 @@ const Tienda: FC<TiendaProps> = ({ category }) => {
 	const [currentItems, setCurrentItems] = useState<FetchCourseType[]>([]);
 	const [courses, setCourses] = useState<any[]>([]);
 	const searchParams = useSearchParams();
-
-	const JSONProduct = getJSONByCountry(country);
+	const [JSONProduct, setJSONProduct] = useState<{ products: any[] }>({ products: [] });
 
 	useEffect(() => {
-		const fetchCourses = async () => {
-			// const coursesData = await ssr.getAllCourses(country);
-			setCourses(JSONProduct.products);
+		const fetchProducts = async () => {
+			try {
+				const data = await getJSONByCountry(country);
+				setJSONProduct(data); // Actualiza el estado
+			} catch (error) {
+				console.error('Error al obtener los productos:', error);
+				setJSONProduct({ products: [] }); // Evita fallos si hay error
+			}
 		};
 
-		fetchCourses();
-	}, [country]);
+		fetchProducts();
+	}, [country]); // Se ejecuta cuando cambia `country`
+
+	useEffect(() => {
+		if (JSONProduct.products.length > 0) {
+			// Filtrar el curso con el título exacto antes de actualizar el estado
+			const filteredCourses = JSONProduct.products.filter(
+				(product) => product.title !== 'ACCSAP. Programa de Actualización en Cardiología Clínica',
+			);
+
+			setCourses(filteredCourses);
+		}
+	}, [JSONProduct]);
 
 	const [isModalOpen, setIsModalOpen] = useState(false);
 

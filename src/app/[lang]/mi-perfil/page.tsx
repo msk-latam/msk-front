@@ -60,7 +60,22 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 	// Extraer el código de país del pathname
 	const countryCode = pathname.split('/')[1];
 
-	const JSONProduct = getJSONByCountry(countryCode);
+	const [JSONProduct, setJSONProduct] = useState<any>(null);
+
+	const fetchProducts = async () => {
+		try {
+			const data = await getJSONByCountry(countryCode);
+			setJSONProduct(data);
+		} catch (error) {
+			console.error('Error al obtener los productos:', error);
+			setJSONProduct({ products: [] }); // Evita fallos si ocurre un error
+		}
+	};
+
+	// Llamar a la función cuando `countryCode` cambie
+	useEffect(() => {
+		fetchProducts();
+	}, [countryCode]);
 
 	let allCourses = JSONProduct;
 
@@ -72,17 +87,15 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 		country = '';
 	}
 
-	// console.log(allCourses);
-
 	const fetchUser = async () => {
 		try {
-			setTotalPages(Math.ceil(allCourses.length / itemsPerPage));
+			setTotalPages(Math.ceil(JSONProduct?.products.length / itemsPerPage));
 			const res = await api.getUserData();
 			// console.log('FETCH USER RES: ', res);
 			// console.log(res.message);
 			if (!res.message) {
 				setUser(res);
-				let coursesList = getUserCourses(res, allCourses);
+				let coursesList = getUserCourses(res, JSONProduct);
 				// console.log(coursesList);
 
 				// console.log({ allCourses, coursesList }, res.contact.courses_progress);
@@ -99,15 +112,15 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 			}
 		} catch (error) {
 			console.log(error);
-			router.push(
-				country === '' ? `${window.location.origin}/iniciar-sesion` : `${window.location.origin}/${country}/iniciar-sesion`,
-			);
+			// router.push(
+			// 	country === '' ? `${window.location.origin}/iniciar-sesion` : `${window.location.origin}/${country}/iniciar-sesion`,
+			// );
 		}
 	};
 
 	useEffect(() => {
 		fetchUser();
-	}, [allCourses]);
+	}, [allCourses, JSONProduct]);
 
 	useEffect(() => {
 		let timeoutId: NodeJS.Timeout | null = null; // Variable para almacenar el timeout
