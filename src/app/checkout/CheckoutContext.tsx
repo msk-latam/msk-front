@@ -10,6 +10,14 @@ interface User {
 	profession: string;
 	specialty: string;
 	privacyPolicy: boolean;
+	type_doc?: string;
+}
+interface Coupon {
+	name: string;
+	code: string;
+	discountType: 'percentage' | 'fixed';
+	value: number;
+	expirationDate: string;
 }
 
 interface CheckoutContextType {
@@ -27,6 +35,8 @@ interface CheckoutContextType {
 	setPaymentStatus: (status: 'approved' | 'pending' | 'rejected') => void;
 	user: User | null;
 	setUser: (user: User | null) => void;
+	appliedCoupon: Coupon | null;
+	setAppliedCoupon: (coupon: Coupon | null) => void;
 }
 
 const CheckoutContext = createContext<CheckoutContextType | undefined>(undefined);
@@ -39,6 +49,7 @@ export const CheckoutProvider: React.FC<{ children: ReactNode }> = ({ children }
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [paymentStatus, setPaymentStatus] = useState<'approved' | 'pending' | 'rejected'>('pending');
 	const [user, setUser] = useState<User | null>(null);
+	const [appliedCoupon, setAppliedCoupon] = useState<Coupon | null>(null);
 
 	const completeStep = (step: number) => {
 		if (!completedSteps.includes(step)) {
@@ -63,6 +74,8 @@ export const CheckoutProvider: React.FC<{ children: ReactNode }> = ({ children }
 				setPaymentStatus,
 				user,
 				setUser,
+				appliedCoupon,
+				setAppliedCoupon,
 			}}
 		>
 			{children}

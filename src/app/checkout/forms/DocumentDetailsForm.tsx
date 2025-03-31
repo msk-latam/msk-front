@@ -116,7 +116,7 @@ const DocumentDetailsForm: React.FC<DocumentDetailsFormProps> = ({
 		],
 	};
 
-	const documents = documentsByCountry[country] || [];
+	const documents = documentsByCountry['ar'] || [];
 
 	return (
 		<div className='grid grid-cols-2 gap-4'>

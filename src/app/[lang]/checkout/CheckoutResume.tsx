@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useCheckout } from './CheckoutContext';
+import Cupon from './cupones/Cupon';
 interface CheckoutResumeProps {
 	product: any;
 	country: string;
@@ -9,7 +10,7 @@ interface CheckoutResumeProps {
 
 const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => {
 	const { ficha, total_price } = product;
-	const { paymentType } = useCheckout();
+	const { paymentType, appliedCoupon } = useCheckout();
 
 	const currencies: any = {
 		cl: 'CLP',
@@ -50,7 +51,17 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 
 	// Procesa el precio total
 	const total = parseNumber(total_price);
-	const installmentValue = total / 6;
+	const installmentValue = Math.floor(total / 12);
+	const discount =
+		appliedCoupon && appliedCoupon.discountType === 'percentage'
+			? total * (appliedCoupon.value / 100)
+			: appliedCoupon && appliedCoupon.discountType === 'fixed'
+			? appliedCoupon.value
+			: 0;
+
+	const totalWithDiscount = Math.max(total - discount, 0); // Asegura que no sea negativo
+
+	const installmentValueWithDiscount = totalWithDiscount / 12;
 
 	return (
 		<div className='p-6 bg-white border border-gray-300 rounded-lg mt-24'>
@@ -69,15 +80,24 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 				))}
 			</div>
 
+			{discount > 0 && (
+				<div className='grid grid-cols-2 gap-x-8 mt-2  rounded-md'>
+					<div className='text-sm font-medium text-[#392C35]'>Descuento</div>
+					<div className='text-sm font-medium text-right text-[#6474A6]'>- {`${currency} $${formatNumber(discount)}`}</div>
+				</div>
+			)}
+
+			<Cupon />
+
 			<hr className='my-6 border-dashed border-t-2 border-gray-300' style={{ borderStyle: 'dotted' }} />
 
 			<div className='flex flex-col'>
 				<span className='text-sm font-medium text-[#6474A6]'>TOTAL</span>
-				<span className='text-3xl font-bold text-[#392C35]'>{`${currency} $${formatNumber(total)}`}</span>
+				<span className='text-3xl font-bold text-[#392C35]'>{`${currency} $${formatNumber(totalWithDiscount)}`}</span>
 				{paymentType === 'cuotas' && (
 					<p className='mt-2 text-sm text-[#6474A6]'>
-						{`6 pagos de `}
-						<span className='font-bold'>{`${currency} $${formatNumber(installmentValue)}`}</span>
+						{`12 pagos de `}
+						<span className='font-bold'>{`${currency} $${formatNumber(installmentValueWithDiscount)}`}</span>
 					</p>
 				)}
 			</div>

@@ -1,7 +1,7 @@
 import { ContactCRM, JsonMapping } from '@/data/types';
 import rebillCountryPriceMapping from '@/data/jsons/__rebillCurrencyPrices.json';
 import translateDocumentType from '@/utils/translateDocumentType';
-import { IS_PROD } from '@/contains/constants';
+// import { IS_PROD } from '@/contains/constants';
 import {
 	NEXT_PUBLIC_REBILL_API_KEY_PRD,
 	NEXT_PUBLIC_REBILL_API_KEY_TEST,
@@ -55,7 +55,7 @@ declare global {
 		Rebill: any;
 	}
 }
-
+let IS_PROD = false;
 let PROD = IS_PROD;
 
 const rebillCountriesPrices: JsonMapping = rebillCountryPriceMapping;
@@ -105,7 +105,8 @@ export const getRebillV3Initialization = (country: string) => {
 
 	switch (country) {
 		case 'cl':
-			return IS_PROD ? NEXT_PUBLIC_REBILL_CL_PK_PRD : NEXT_PUBLIC_REBILL_CL_PK_TEST;
+			return IS_PROD ? NEXT_PUBLIC_REBILL_CL_PK_PRD : 'pk_test_a025b844-f64b-420a-9099-9aba0fa3c919';
+		// return IS_PROD ? NEXT_PUBLIC_REBILL_CL_PK_PRD : NEXT_PUBLIC_REBILL_CL_PK_TEST;
 		case 'co':
 			return IS_PROD ? NEXT_PUBLIC_REBILL_COP_PK_PRD : NEXT_PUBLIC_REBILL_COP_PK_TEST;
 		case 'uy':

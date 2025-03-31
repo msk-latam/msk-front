@@ -1,10 +1,10 @@
 'use client';
 
-import CheckoutRegister from './CheckoutRegister';
-import CheckoutPayment from './CheckoutPayment';
 import CheckoutState from './CheckoutState';
 import PaymentTypeSelection from './CheckoutPaymentTypeSelection';
 import { useCheckout } from './CheckoutContext';
+import CheckoutRegisterTest from './CheckoutRegisterTest';
+import CheckoutPaymentMercadoPago from './CheckoutPaymentMercadoPago';
 interface CheckoutContentProps {
 	product: any;
 	country: string;
@@ -17,14 +17,14 @@ const CheckoutContent: React.FC<CheckoutContentProps> = ({ product, country }) =
 			return <PaymentTypeSelection />;
 		}
 		if (subStep === 1) {
-			return <CheckoutPayment product={product} country={country} />;
+			return <CheckoutPaymentMercadoPago product={product} country={country} />;
 		}
 		return <div>Debe seleccionar el tipo de pago</div>;
 	}
 
 	switch (activeStep) {
 		case 1:
-			return <CheckoutRegister product={product} />;
+			return <CheckoutRegisterTest product={product} />;
 		case 3:
 			return <CheckoutState />;
 		default:

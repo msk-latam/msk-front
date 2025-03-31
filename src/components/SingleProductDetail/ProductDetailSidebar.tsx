@@ -3,12 +3,13 @@ import { FC, useContext, useEffect, useState } from 'react';
 import { Details, Ficha } from '@/data/types';
 import { CountryContext } from '@/context/country/CountryContext';
 import { AuthContext } from '@/context/user/AuthContext';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 import useRequestedTrialCourse from '@/hooks/useRequestedTrialCourse';
 import Badge from '@/components/Badge/Badge';
 import Image from 'next/image';
 import PricingDetail from '@/components/SingleProductDetail/PricingDetail';
 import { REBILL_CONF } from '@/logic/Rebill';
+import Link from 'next/link';
 
 interface Props {
 	ficha: Ficha;
@@ -97,6 +98,10 @@ const ProductDetailSidebar: FC<Props> = ({ ficha, product, details, isEbook, sid
 	const hasGateway = Object.values(REBILL_CONF.GATEWAYS).some((array) => array.includes(countryState.country));
 	//console.log(hasCoursedRequested)
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : '';
+
 	return (
 		<div
 			className={`${
@@ -167,14 +172,40 @@ const ProductDetailSidebar: FC<Props> = ({ ficha, product, details, isEbook, sid
 					{isEbook ? 'Descargar gratis' : 'Contáctanos'}
 				</button>
 				{!isEbook && hasGateway && !product.is_presale_product && (
-					<button
-						onClick={() => requestTrial(slug)}
-						className='video-cart-btn border-2 w-full disabled:!border-grey-disabled disabled:!text-grey-disabled disabled:cursor-not-allowed hover:disabled:!bg-transparent hover:!disabled:border-grey-disabled hover:!disabled:text-grey-disabled'
-						disabled={hasCoursedRequested || countryState.country === 'ar'}
-						// disabled={true}
-					>
-						{hasCoursedRequested ? 'Prueba ya solicitada' : 'Prueba 7 días gratis'}
-					</button>
+					<>
+						{country === '' || ['mx', 'ec', 'cl'].includes(country) ? (
+							<button
+								onClick={() => requestTrial(slug)}
+								className='video-cart-btn border-2 w-full disabled:!border-grey-disabled disabled:!text-grey-disabled disabled:cursor-not-allowed hover:disabled:!bg-transparent hover:!disabled:border-grey-disabled hover:!disabled:text-grey-disabled'
+								disabled={hasCoursedRequested}
+							>
+								{hasCoursedRequested ? 'Prueba ya solicitada' : 'Prueba 7 días gratis'}
+							</button>
+						) : (
+							<Link
+								href={
+									country === ''
+										? `${window.location.origin}/checkout/${slug}`
+										: `${window.location.origin}/${country}/checkout/${slug}`
+								}
+								className='video-cart-btn border-2 w-full hover:disabled:!bg-transparent hover:!disabled:border-grey-disabled hover:!disabled:text-grey-disabled'
+							>
+								Inscríbete ahora
+							</Link>
+						)}
+
+						{/* boton global */}
+						{/* <Link
+							href={
+								country === ''
+									? `${window.location.origin}/checkout/${slug}`
+									: `${window.location.origin}/${country}/checkout/${slug}`
+							}
+							className='video-cart-btn border-2 w-full disabled:!border-grey-disabled disabled:!text-grey-disabled disabled:cursor-not-allowed hover:disabled:!bg-transparent hover:!disabled:border-grey-disabled hover:!disabled:text-grey-disabled'
+						>
+							Inscríbete ahora
+						</Link> */}
+					</>
 				)}
 			</div>
 		</div>

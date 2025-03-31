@@ -1,4 +1,6 @@
 import React from 'react';
+import { countryToName } from '../utils/utils';
+import { provinciasPorPais } from '../utils/provincias';
 
 interface AddressFormProps {
 	formData: {
@@ -27,193 +29,19 @@ interface AddressFormProps {
 }
 
 const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handleBlur, errors, touched }) => {
-	const provinciasPorPais = {
-		Chile: [
-			'Arica y Parinacota',
-			'Tarapacá',
-			'Antofagasta',
-			'Atacama',
-			'Coquimbo',
-			'Valparaíso',
-			'Región Metropolitana de Santiago',
-			"O'Higgins",
-			'Maule',
-			'Ñuble',
-			'Biobío',
-			'Araucanía',
-			'Los Ríos',
-			'Los Lagos',
-			'Aysén',
-			'Magallanes y la Antártica Chilena',
-		],
-		Argentina: [
-			'Ciudad Autónoma de Buenos Aires',
-			'Buenos Aires',
-			'Catamarca',
-			'Chaco',
-			'Chubut',
-			'Córdoba',
-			'Corrientes',
-			'Entre Ríos',
-			'Formosa',
-			'Jujuy',
-			'La Pampa',
-			'La Rioja',
-			'Mendoza',
-			'Misiones',
-			'Neuquén',
-			'Río Negro',
-			'Salta',
-			'San Juan',
-			'San Luis',
-			'Santa Cruz',
-			'Santa Fe',
-			'Santiago del Estero',
-			'Tierra del Fuego',
-			'Tucumán',
-		],
-		Mexico: [
-			'Aguascalientes',
-			'Baja California',
-			'Baja California Sur',
-			'Campeche',
-			'Chiapas',
-			'Chihuahua',
-			'Ciudad de México',
-			'Coahuila',
-			'Colima',
-			'Durango',
-			'Guanajuato',
-			'Guerrero',
-			'Hidalgo',
-			'Jalisco',
-			'México',
-			'Michoacán',
-			'Morelos',
-			'Nayarit',
-			'Nuevo León',
-			'Oaxaca',
-			'Puebla',
-			'Querétaro',
-			'Quintana Roo',
-			'San Luis Potosí',
-			'Sinaloa',
-			'Sonora',
-			'Tabasco',
-			'Tamaulipas',
-			'Tlaxcala',
-			'Veracruz',
-			'Yucatán',
-			'Zacatecas',
-		],
-		España: [
-			'Andalucía',
-			'Aragón',
-			'Asturias',
-			'Baleares',
-			'Canarias',
-			'Cantabria',
-			'Castilla-La Mancha',
-			'Castilla y León',
-			'Cataluña',
-			'Comunidad Valenciana',
-			'Extremadura',
-			'Galicia',
-			'La Rioja',
-			'Madrid',
-			'Murcia',
-			'Navarra',
-			'País Vasco',
-		],
-		Colombia: [
-			'Amazonas',
-			'Antioquia',
-			'Arauca',
-			'Atlántico',
-			'Bolívar',
-			'Boyacá',
-			'Caldas',
-			'Caquetá',
-			'Casanare',
-			'Cauca',
-			'Cesar',
-			'Chocó',
-			'Córdoba',
-			'Cundinamarca',
-			'Guainía',
-			'Guaviare',
-			'Huila',
-			'La Guajira',
-			'Magdalena',
-			'Meta',
-			'Nariño',
-			'Norte de Santander',
-			'Putumayo',
-			'Quindío',
-			'Risaralda',
-			'San Andrés y Providencia',
-			'Santander',
-			'Sucre',
-			'Tolima',
-			'Valle del Cauca',
-			'Vaupés',
-			'Vichada',
-		],
-		Uruguay: [
-			'Artigas',
-			'Canelones',
-			'Cerro Largo',
-			'Colonia',
-			'Durazno',
-			'Flores',
-			'Florida',
-			'Lavalleja',
-			'Maldonado',
-			'Montevideo',
-			'Paysandú',
-			'Río Negro',
-			'Rivera',
-			'Rocha',
-			'Salto',
-			'San José',
-			'Soriano',
-			'Tacuarembó',
-			'Treinta y Tres',
-		],
-		Peru: [
-			'Amazonas',
-			'Áncash',
-			'Apurímac',
-			'Arequipa',
-			'Ayacucho',
-			'Cajamarca',
-			'Callao',
-			'Cusco',
-			'Huancavelica',
-			'Huánuco',
-			'Ica',
-			'Junín',
-			'La Libertad',
-			'Lambayeque',
-			'Lima',
-			'Loreto',
-			'Madre de Dios',
-			'Moquegua',
-			'Pasco',
-			'Piura',
-			'Puno',
-			'San Martín',
-			'Tacna',
-			'Tumbes',
-			'Ucayali',
-		],
+	const normalizeCountryCode = (code: any) => code?.toLowerCase() || '';
+	const getCountryName = (code: any) => {
+		const normalizedCode = normalizeCountryCode(code);
+		return countryToName[normalizedCode] || '';
 	};
+	const countryName = getCountryName(formData.country);
 
-	function obtenerProvincias(country) {
+	function obtenerProvincias(country: string) {
 		return provinciasPorPais[country] || [];
 	}
 
-	const provincias = obtenerProvincias(formData.country);
+	const provincias = obtenerProvincias(countryName);
+
 	return (
 		<div className='grid grid-cols-2 gap-4'>
 			{/* País */}
@@ -225,9 +53,10 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					id='country'
 					name='country'
 					type='text'
-					value={formData.country}
+					value={countryName}
 					onChange={handleChange}
 					onBlur={handleBlur}
+					disabled
 					placeholder='Ingrese país'
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
@@ -237,7 +66,8 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 			{/* Estado */}
 			<div>
 				<label htmlFor='state' className='block text-sm font-medium text-[#6474A6]'>
-					{formData.country === 'Chile' ? 'Provincia' : 'Estado'}
+					{countryName === 'Chile' ? 'Provincia' : 'Estado'}
+					{/* {formData.country === 'Chile' ? 'Provincia' : 'Estado'} */}
 				</label>
 				{
 					formData.country && (
@@ -291,8 +121,27 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 				{touched.city && errors.city && <p className='text-red-500 text-sm mt-1'>{errors.city}</p>}
 			</div>
 
-			{/* Dirección */}
 			<div>
+				{/* Código postal */}
+				<div>
+					<label htmlFor='postal_code' className='block text-sm font-medium text-[#6474A6]'>
+						Código postal
+					</label>
+					<input
+						id='postal_code'
+						name='postal_code'
+						type='text'
+						value={formData.postal_code}
+						onChange={handleChange}
+						onBlur={handleBlur}
+						placeholder='Ingrese código postal'
+						className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					/>
+					{touched.postal_code && errors.postal_code && <p className='text-red-500 text-sm mt-1'>{errors.postal_code}</p>}
+				</div>
+			</div>
+			{/* Dirección */}
+			<div className='col-span-2'>
 				<label htmlFor='address' className='block text-sm font-medium text-[#6474A6]'>
 					Dirección
 				</label>
@@ -307,24 +156,6 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
 				{touched.address && errors.address && <p className='text-red-500 text-sm mt-1'>{errors.address}</p>}
-			</div>
-
-			{/* Código postal */}
-			<div className='col-span-2'>
-				<label htmlFor='postal_code' className='block text-sm font-medium text-[#6474A6]'>
-					Código postal
-				</label>
-				<input
-					id='postal_code'
-					name='postal_code'
-					type='text'
-					value={formData.postal_code}
-					onChange={handleChange}
-					onBlur={handleBlur}
-					placeholder='Ingrese código postal'
-					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-				/>
-				{touched.postal_code && errors.postal_code && <p className='text-red-500 text-sm mt-1'>{errors.postal_code}</p>}
 			</div>
 		</div>
 	);
