@@ -136,7 +136,7 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 					const data = await createPaymentRebill(
 						formData.customerData?.email,
 						contract_id,
-						transactionAmountWithDiscount,
+						formData.amount,
 						formData.currency,
 						e.card.id,
 						country,
@@ -215,6 +215,7 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 	};
 
 	const transactionAmount = Number(product.total_price.replace(/,/g, '').replace('.', ''));
+	console.log(transactionAmount);
 
 	const discountValue = Number(appliedCoupon?.value) || 0;
 	const discountType = appliedCoupon?.discountType;
@@ -224,11 +225,9 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 
 	const transactionAmountWithDiscount = Math.max(transactionAmount - discount, 0).toFixed(2);
 
-	console.log(transactionAmountWithDiscount);
-
 	const currency = currencies[country] || 'USD';
 	const rebillForm = {
-		amount: transactionAmountWithDiscount,
+		amount: parseFloat(transactionAmountWithDiscount),
 		currency: currency || 'USD',
 		productName: product.ficha.title,
 		customerData: {
@@ -239,10 +238,10 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 		},
 	};
 
-	console.log('product.total_price:', product.total_price);
 	console.log('appliedCoupon:', appliedCoupon);
 	console.log('appliedCoupon.value:', appliedCoupon?.value);
 	console.log('appliedCoupon.discountType:', appliedCoupon?.discountType);
+	console.log('precio total con descuento', parseFloat(transactionAmountWithDiscount));
 	return (
 		<>
 			<div className='mt-24'>
