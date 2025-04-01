@@ -266,7 +266,7 @@ export const createPaymentRebill = async (
 			body: JSON.stringify({
 				email,
 				contract_id: contractId,
-				amount: Math.ceil(amount / 12),
+				amount: parseFloat((amount / 12).toFixed(2)),
 				currency,
 				recurrence: 1,
 				card_id: cardId,

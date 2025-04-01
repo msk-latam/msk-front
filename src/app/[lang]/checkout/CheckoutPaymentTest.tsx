@@ -13,6 +13,7 @@ interface CheckoutRebillProps {
 	mode?: 'payment' | 'subscription';
 	country?: string;
 	formData: {
+		discount?: number;
 		amount: number;
 		currency: string;
 		productName: string;
@@ -65,24 +66,16 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 	const variables = selectCountryKey(country);
 	const [processingPayment, setProcessingPayment] = useState(false);
 	const checkoutFormRef = useRef<any>(null);
-	const transactionAmountWithDiscount = useRecoilState(transactionAmountWithDiscountState);
-	console.log(transactionAmountWithDiscount);
 
 	const transactionAmount = formData.amount;
+	const discountAmount = formData.discount;
 
-	console.log(formData);
-	console.log(transactionAmount);
+	console.log('datos del formulario', formData);
 
-	const discount =
-		appliedCoupon && appliedCoupon.discountType === 'percentage'
-			? transactionAmount * (appliedCoupon.value / 100) // Descuento porcentual
-			: appliedCoupon && appliedCoupon.discountType === 'fixed'
-			? appliedCoupon.value // Descuento fijo
-			: 0;
+	console.log('monto de transaccion para crm', transactionAmount);
+	console.log('descuento para crm', discountAmount);
 
-	// const transactionAmountWithDiscount = Math.max(transactionAmount - discount, 0);
-
-	useEffect(() => {
+	const initializeRebillCheckout = () => {
 		if (!window.Rebill) {
 			console.error(
 				'Rebill SDK no está disponible. Verifica que el script https://sdk.rebill.com/v3/rebill.js se haya cargado correctamente.',
@@ -104,95 +97,90 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 
 		try {
 			if (rebillId !== '') {
-				checkoutForm = rebill.card.create(rebillId);
+				const checkoutForm = rebill.card.create(rebillId);
 				checkoutFormRef.current = checkoutForm;
 
 				checkoutForm.display({
 					userLogin: false,
 					excludePaymentMethods: ['CASH', 'REBILL_PIX', 'TRANSFER'],
 				});
+
+				checkoutForm.set({
+					issuerCountry: country?.toUpperCase(),
+				});
+
+				checkoutForm.translations({
+					es: { 'Add card': 'Pagar' },
+					en: { 'Add card': 'Pay' },
+				});
+
+				checkoutForm.mount('rebill-container');
+
+				checkoutForm.on('success', async (e: any) => {
+					handlePaymentSuccess(e);
+				});
+
+				checkoutForm.on('error', (e: any) => {
+					handlePaymentError(e);
+				});
 			}
-			checkoutForm.set({
-				issuerCountry: country?.toUpperCase(),
-			});
-
-			checkoutForm.translations({
-				es: {
-					'Add card': 'Pagar',
-				},
-				en: {
-					'Add card': 'Pay',
-				},
-			});
-
-			checkoutForm.mount('rebill-container');
-
-			checkoutForm.on('success', async (e: any) => {
-				// console.log('Tarjeta tokenizada', e);
-				setProcessingPayment(true);
-
-				const contract_id = user.contract_id;
-				console.log(transactionAmountWithDiscount, 'precio con descuento');
-
-				try {
-					const data = await createPaymentRebill(
-						formData.customerData?.email,
-						contract_id,
-						transactionAmountWithDiscount,
-						formData.currency,
-						e.card.id,
-						country,
-					);
-
-					if (
-						data.invoice &&
-						data.failedTransaction === null &&
-						data.invoice.paidBags?.[0]?.payment?.status === 'SUCCEEDED'
-					) {
-						setPaymentStatus('approved');
-						const paymentRebillId = data.invoice.paidBags[0].payment.id;
-
-						const updateContract = await updateContractCRM(
-							contract_id,
-							paymentRebillId,
-							transactionAmountWithDiscount,
-							'rebill',
-							discount,
-						);
-
-						if (subStep === 0) {
-							completeStep(activeStep);
-							setActiveStep(activeStep + 1);
-						} else {
-							setActiveStep(activeStep + 1);
-							completeStep(activeStep);
-							setSubStep(0);
-						}
-					} else {
-						setPaymentStatus('rejected');
-						completeStep(activeStep);
-						setActiveStep(activeStep + 1);
-						setIsSubmitting(false);
-					}
-				} catch (error) {
-					console.error('Error en la solicitud de checkout:', error);
-				} finally {
-					// setProcessingPayment(false);
-				}
-			});
-
-			checkoutForm.on('error', (e: any) => {
-				console.error('Error en tarjeta:', e);
-				rebillPayment = 'Contrato en proceso de cobro';
-				setPaymentStatus('rejected');
-				completeStep(activeStep);
-				setActiveStep(activeStep + 1);
-				setIsSubmitting(false);
-			});
 		} catch (error) {
 			console.error('Error al inicializar Rebill Checkout:', error);
 		}
+	};
+
+	useEffect(() => {
+		initializeRebillCheckout();
 	}, [mode]);
+
+	const handlePaymentSuccess = async (e: any) => {
+		setProcessingPayment(true);
+
+		try {
+			const data = await createPaymentRebill(
+				formData.customerData?.email,
+				user.contract_id,
+				formData.amount,
+				formData.currency,
+				e.card.id,
+				country,
+			);
+
+			if (data.invoice && data.failedTransaction === null && data.invoice.paidBags?.[0]?.payment?.status === 'SUCCEEDED') {
+				setPaymentStatus('approved');
+				const paymentRebillId = data.invoice.paidBags[0].payment.id;
+
+				await updateContractCRM(user.contract_id, paymentRebillId, transactionAmount, 'rebill', discountAmount);
+
+				advanceStep();
+			} else {
+				setPaymentStatus('rejected');
+				advanceStep();
+			}
+		} catch (error) {
+			console.error('Error en la solicitud de checkout:', error);
+		} finally {
+			setProcessingPayment(false);
+		}
+	};
+
+	const handlePaymentError = (e: any) => {
+		console.error('Error en tarjeta:', e);
+		setPaymentStatus('rejected');
+		advanceStep();
+		setIsSubmitting(false);
+	};
+
+	const advanceStep = () => {
+		if (subStep === 0) {
+			completeStep(activeStep);
+			setActiveStep(activeStep + 1);
+		} else {
+			setActiveStep(activeStep + 1);
+			completeStep(activeStep);
+			setSubStep(0);
+		}
+	};
 
 	return (
 		<div>
@@ -215,28 +203,19 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 	const transactionAmount = Number(product.total_price.replace(/,/g, '').replace('.', ''));
 	const currency = currencies[country] || 'USD';
 
-	// Estado para manejar el monto con descuento
-	const [transactionAmountWithDiscount, setTransactionAmountWithDiscount] = useRecoilState(
-		transactionAmountWithDiscountState,
-	);
+	const discountValue = Number(appliedCoupon?.value) || 0;
+	const discountType = appliedCoupon?.discountType;
 
-	// Función para actualizar el precio con descuento
-	useEffect(() => {
-		const discountValue = Number(appliedCoupon?.value) || 0;
-		const discountType = appliedCoupon?.discountType;
+	const discount =
+		discountType === 'percentage' ? transactionAmount * (discountValue / 100) : discountType === 'fixed' ? discountValue : 0;
 
-		const discount =
-			discountType === 'percentage'
-				? transactionAmount * (discountValue / 100)
-				: discountType === 'fixed'
-				? discountValue
-				: 0;
+	const transactionAmountWithDiscount = parseFloat(Math.max(transactionAmount - discount, 0).toFixed(2));
 
-		setTransactionAmountWithDiscount(Math.max(transactionAmount - discount, 0));
-	}, [appliedCoupon, transactionAmount]); // Se ejecuta cuando cambia el cupón o el precio base
+	console.log('precio con descuento de recoil', transactionAmountWithDiscount);
 
 	// Datos del formulario para Rebill
 	const rebillForm = {
+		discount,
 		amount: transactionAmountWithDiscount,
 		currency,
 		productName: product.ficha.title,
@@ -248,10 +227,7 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 		},
 	};
 
-	console.log('appliedCoupon:', appliedCoupon);
-	console.log('appliedCoupon.value:', appliedCoupon?.value);
-	console.log('appliedCoupon.discountType:', appliedCoupon?.discountType);
-	console.log('precio total con descuento', transactionAmountWithDiscount);
+	console.log('precio total con descuento despues del form', transactionAmountWithDiscount);
 
 	return (
 		<div className='mt-24'>
