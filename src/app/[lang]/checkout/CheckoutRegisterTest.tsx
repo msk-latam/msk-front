@@ -12,6 +12,7 @@ import {
 	getCountryCompleteName,
 	getCRMUser,
 	rebillCountries,
+	updateCRMUser,
 } from './utils/utils';
 import CheckoutRegisterButtons from './buttons/CheckoutRegisterButtons';
 import AddressForm from './forms/AddressForm';
@@ -154,6 +155,9 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 			const firstResponse = crmResponse.data[0];
 			const customer_id =
 				firstResponse.code === 'SUCCESS' || firstResponse.code === 'DUPLICATE_DATA' ? firstResponse.details.id : undefined;
+			if (firstResponse.code === 'DUPLICATE_DATA') {
+				await updateCRMUser(formDataUser, countryCompleteName, formData, customer_id);
+			}
 
 			const paymentProcessor = rebillCountries.includes(country) ? 'rebill' : 'stripe';
 
@@ -197,7 +201,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 							firstName: user.First_Name,
 							lastName: user.Last_Name,
 							phone: user.Tel_fono_de_facturaci_n,
-							birthDate: user.Date_of_Birth,
+							birthday: user.Date_of_Birth,
 							profession: user.Profesi_n,
 							specialty: user.Especialidad,
 						};
@@ -239,7 +243,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 
 			fetchUser();
 		}
-	}, [state?.user, activeStep, setActiveStep, completeStep]);
+	}, [state?.user]);
 
 	if (loadingUser) {
 		return (

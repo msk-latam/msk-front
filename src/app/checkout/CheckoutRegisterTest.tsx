@@ -13,6 +13,7 @@ import {
 	currencies,
 	getCountryCompleteName,
 	getCRMUser,
+	updateCRMUser,
 } from '../[lang]/checkout/utils/utils';
 
 const CheckoutRegisterTest = ({ product, country }: any) => {
@@ -148,6 +149,9 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 			const customer_id =
 				firstResponse.code === 'SUCCESS' || firstResponse.code === 'DUPLICATE_DATA' ? firstResponse.details.id : undefined;
 
+			if (firstResponse.code === 'DUPLICATE_DATA') {
+				await updateCRMUser(formDataUser, countryCompleteName, formData, customer_id);
+			}
 			const createContractResponse = await createContractCRM(
 				customer_id,
 				product,
@@ -180,28 +184,46 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 				try {
 					setLoadingUser(true);
 					const user = await getCRMUser(state?.email);
+					console.log(user);
+					const capitalizeWords = (str: string) => {
+						return str.replace(/\b\w/g, (char) => char.toUpperCase());
+					};
 					if (user) {
 						const updatedFormDataUser = {
 							...formDataUser,
 							email: user.Email,
 							firstName: user.First_Name,
 							lastName: user.Last_Name,
+							phone: user.Tel_fono_de_facturaci_n,
+							birthday: user.Date_of_Birth,
+							profession: user.Profesi_n,
+							specialty: user.Especialidad,
+						};
+						const updatedFormDataDocumentUser = {
+							...formData,
+							state: capitalizeWords(user.Mailing_State || ''),
+							city: user.Mailing_City,
+							address: user.Mailing_Street,
+							postal_code: user.Mailing_Zip,
+							type_doc: user.Tipo_de_Documento,
+							identification: user.Identificacion,
 						};
 						setFormDataUser(updatedFormDataUser);
-						const customer_id = user.id;
-						const createContractResponse = await createContractCRM(
-							customer_id,
-							product,
-							transactionAmount,
-							currency,
-							countryCompleteName,
-							'mercadopago',
-						);
-						const contract_id = createContractResponse.data[0].details.id;
-						const finalFormDataUser = { ...updatedFormDataUser, contract_id };
-						setUser(finalFormDataUser);
-						completeStep(activeStep);
-						setActiveStep(2);
+						setFormData(updatedFormDataDocumentUser);
+						// const customer_id = user.id;
+						// const createContractResponse = await createContractCRM(
+						// 	customer_id,
+						// 	product,
+						// 	transactionAmount,
+						// 	currency,
+						// 	countryCompleteName,
+						// 	'mercadopago',
+						// );
+						// const contract_id = createContractResponse.data[0].details.id;
+						// const finalFormDataUser = { ...updatedFormDataUser, contract_id };
+						// setUser(finalFormDataUser);
+						// completeStep(activeStep);
+						// setActiveStep(2);
 					}
 				} catch (error) {
 					console.error('Error fetching user:', error);
@@ -212,7 +234,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 
 			fetchUser();
 		}
-	}, [state?.user, activeStep, setActiveStep, completeStep]);
+	}, [state?.user]);
 
 	if (loadingUser) {
 		return (

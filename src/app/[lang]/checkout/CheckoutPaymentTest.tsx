@@ -5,6 +5,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { rebillIdState, transactionAmountWithDiscountState } from './checkoutAtom';
 import { AuthContext } from '@/context/user/AuthContext';
 import { createPaymentRebill, currencies, updateContractCRM } from './utils/utils';
+import StepButtons from './buttons/CheckoutPaymentButtons';
 
 let checkoutForm: any;
 let rebillPayment: any;
@@ -190,14 +191,14 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 					<p className='mt-3 text-[#392C35] font-semibold'>Procesando cobro...</p>
 				</div>
 			) : (
-				<div id='rebill-container' className='p-6 bg-white border border-gray-300 rounded-lg flex h-[800px]'></div>
+				<div id='rebill-container' className='p-6 bg-white border border-gray-300 rounded-lg flex max-h-[750px]'></div>
 			)}
 		</div>
 	);
 };
 
 const CheckoutPaymentTest = ({ product, country }: any) => {
-	const { user, appliedCoupon } = useCheckout();
+	const { user, appliedCoupon, subStep, setSubStep, activeStep, setActiveStep, setPaymentType } = useCheckout();
 	const { state } = useContext(AuthContext);
 
 	const transactionAmount = Number(product.total_price.replace(/,/g, '').replace('.', ''));
@@ -215,7 +216,7 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 
 	// Datos del formulario para Rebill
 	const rebillForm = {
-		discount,
+		discount: parseFloat(discount.toFixed(2)),
 		amount: transactionAmountWithDiscount,
 		currency,
 		productName: product.ficha.title,
@@ -228,10 +229,25 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 	};
 
 	console.log('precio total con descuento despues del form', transactionAmountWithDiscount);
+	const handlePreviousStep = () => {
+		if (subStep > 0) {
+			setSubStep(subStep - 1);
+			setActiveStep(activeStep - 1);
+			setPaymentType(null);
+		} else if (activeStep > 1) {
+			setActiveStep(activeStep - 1);
+		}
+	};
 
 	return (
 		<div className='mt-24'>
 			<CheckoutRebill country={country} formData={rebillForm} />
+			<StepButtons
+				isFormValid={true}
+				isSubmitting={false}
+				handlePreviousStep={handlePreviousStep}
+				handleSubmit={() => console.log('')}
+			/>
 		</div>
 	);
 };

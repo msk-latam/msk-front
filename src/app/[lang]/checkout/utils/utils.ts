@@ -87,6 +87,46 @@ export const createCRMUser = async (formDataUser: any, countryCompleteName: any,
 		throw error;
 	}
 };
+export const updateCRMUser = async (formDataUser: any, countryCompleteName: any, formData: any, id: any) => {
+	try {
+		const response = await fetch(`${ENDPOINT_CRM}/api/zoho/contacts/${id}`, {
+			method: 'PUT',
+			headers: {
+				Authorization: `Bearer ${tokenCRM}`,
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				...formDataUser,
+				Profesi_n: formDataUser.profession,
+				First_Name: formDataUser.firstName,
+				first_name: formDataUser.firstName,
+				Full_Name: formDataUser.firstName,
+				name: formDataUser.firstName,
+				last_name: formDataUser.lastName,
+				Last_Name: formDataUser.lastName,
+				speciality: formDataUser.specialty,
+				Especialidad: formDataUser.specialty,
+				country: countryCompleteName,
+				state: formData.state,
+				city: formData.city,
+				address: formData.address,
+				street: formData.address,
+				postal_code: formData.postal_code,
+				type_doc: formData.type_doc,
+				Tipo_de_Documento: formData.type_doc,
+				identification: formData.identification,
+				converted_by: 'Checkout Web',
+				Raz_n_social: formDataUser.firstName + ' ' + formDataUser.lastName,
+				zipcode: formData.postal_code,
+			}),
+		});
+
+		return response.json();
+	} catch (error) {
+		console.error('Error al crear usuario en CRM:', error);
+		throw error;
+	}
+};
 
 export const getCRMUser = async (email: any) => {
 	try {

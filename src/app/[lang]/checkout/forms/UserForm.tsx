@@ -1,5 +1,7 @@
 import { DataContext } from '@/context/data/DataContext';
-import React, { useContext, useState } from 'react';
+import { AuthContext } from '@/context/user/AuthContext';
+import React, { useContext, useEffect, useState } from 'react';
+import { getCRMUser } from '../utils/utils';
 
 interface UserFormProps {
 	formData: {
@@ -19,9 +21,19 @@ interface UserFormProps {
 }
 
 const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleChange, handleBlur }) => {
+	const { state } = useContext(AuthContext);
 	const {
 		state: { allSpecialties: specialties, allSpecialtiesGroups: specialtiesGroup, allProfessions: professions },
 	} = useContext(DataContext);
+	useEffect(() => {
+		const fetchUser = async () => {
+			const user = await getCRMUser(state?.email);
+			const profIndex = professions.findIndex((prof: any) => prof.name === user?.Profesi_n);
+			console.log(profIndex);
+			setSelectedProfessionIndex(profIndex + 1);
+		};
+		fetchUser();
+	}, [state?.user]);
 	const [selectedProfessionIndex, setSelectedProfessionIndex] = useState<number | null>(null);
 
 	const handleProfessionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

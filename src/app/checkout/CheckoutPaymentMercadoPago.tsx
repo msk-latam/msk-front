@@ -114,6 +114,7 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 	const handlePreviousStep = () => {
 		if (subStep > 0) {
 			setSubStep(subStep - 1);
+			setActiveStep(activeStep - 1);
 			setPaymentType(null);
 		} else if (activeStep > 1) {
 			setActiveStep(activeStep - 1);
@@ -275,7 +276,6 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 					isSubmitting={isSubmitting}
 					handlePreviousStep={handlePreviousStep}
 					handleSubmit={handleSubmitMercadoPago}
-					isDisabled
 				/>
 			</>
 		</div>
