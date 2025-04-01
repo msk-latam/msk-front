@@ -7,7 +7,6 @@ import { useCheckout } from './CheckoutContext';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import {
 	attachCardToUser,
-	createCard,
 	createStripeSubscription,
 	getPaymentIntentId,
 	getStripeCustomerIdBySubId,

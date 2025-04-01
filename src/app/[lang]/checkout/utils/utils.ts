@@ -255,6 +255,7 @@ export const createPaymentRebill = async (
 	cardId: string,
 	country: string | undefined,
 ) => {
+	console.log(amount, 'desde utils');
 	try {
 		const response = await fetch(`${ENDPOINT_GATEWAY}/api/rebill/${country}/checkout/new`, {
 			method: 'POST',
@@ -265,10 +266,9 @@ export const createPaymentRebill = async (
 			body: JSON.stringify({
 				email,
 				contract_id: contractId,
-				amount: Math.ceil(amount / 12),
-				// amount: Math.ceil(1000 / 12),
+				amount: parseFloat((amount / 12).toFixed(2)),
 				currency,
-				recurrence: 12,
+				recurrence: 1,
 				card_id: cardId,
 			}),
 		});
