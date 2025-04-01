@@ -11,6 +11,7 @@ import BlogIndex from '@/modules/home/components/blog/BlogIndex';
 import PubliNotas from '@/modules/home/components/publi-notas/PubliNotas';
 import FAQ from '@/modules/home/components/faq/FAQ';
 import NewsLetter from '@/modules/home/components/newsletter/NewsLetter';
+import Footer from '@/modules/home/components/footer/footer';
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
       <PubliNotas />
       <FAQ />
       <NewsLetter />
+      <Footer />
     </main>
   );
 }
