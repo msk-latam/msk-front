@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useCheckout } from './CheckoutContext';
 import { selectCountryKey } from './rebill/rebillKeys';
-import { useRecoilValue } from 'recoil';
-import { rebillIdState } from './checkoutAtom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { rebillIdState, transactionAmountWithDiscountState } from './checkoutAtom';
 import { AuthContext } from '@/context/user/AuthContext';
 import { createPaymentRebill, currencies, updateContractCRM } from './utils/utils';
 
@@ -65,6 +65,8 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 	const variables = selectCountryKey(country);
 	const [processingPayment, setProcessingPayment] = useState(false);
 	const checkoutFormRef = useRef<any>(null);
+	const transactionAmountWithDiscount = useRecoilState(transactionAmountWithDiscountState);
+	console.log(transactionAmountWithDiscount);
 
 	const transactionAmount = formData.amount;
 
@@ -78,7 +80,7 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 			? appliedCoupon.value // Descuento fijo
 			: 0;
 
-	const transactionAmountWithDiscount = Math.max(transactionAmount - discount, 0);
+	// const transactionAmountWithDiscount = Math.max(transactionAmount - discount, 0);
 
 	useEffect(() => {
 		if (!window.Rebill) {
@@ -209,26 +211,34 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 const CheckoutPaymentTest = ({ product, country }: any) => {
 	const { user, appliedCoupon } = useCheckout();
 	const { state } = useContext(AuthContext);
-	const formatNumber = (value: any) => {
-		if (!value) return 0;
-		return parseFloat(value.replace(/\./g, '').replace(',', '.'));
-	};
 
 	const transactionAmount = Number(product.total_price.replace(/,/g, '').replace('.', ''));
-	console.log(transactionAmount);
-
-	const discountValue = Number(appliedCoupon?.value) || 0;
-	const discountType = appliedCoupon?.discountType;
-
-	const discount =
-		discountType === 'percentage' ? transactionAmount * (discountValue / 100) : discountType === 'fixed' ? discountValue : 0;
-
-	const transactionAmountWithDiscount = Math.max(transactionAmount - discount, 0).toFixed(2);
-
 	const currency = currencies[country] || 'USD';
+
+	// Estado para manejar el monto con descuento
+	const [transactionAmountWithDiscount, setTransactionAmountWithDiscount] = useRecoilState(
+		transactionAmountWithDiscountState,
+	);
+
+	// Función para actualizar el precio con descuento
+	useEffect(() => {
+		const discountValue = Number(appliedCoupon?.value) || 0;
+		const discountType = appliedCoupon?.discountType;
+
+		const discount =
+			discountType === 'percentage'
+				? transactionAmount * (discountValue / 100)
+				: discountType === 'fixed'
+				? discountValue
+				: 0;
+
+		setTransactionAmountWithDiscount(Math.max(transactionAmount - discount, 0));
+	}, [appliedCoupon, transactionAmount]); // Se ejecuta cuando cambia el cupón o el precio base
+
+	// Datos del formulario para Rebill
 	const rebillForm = {
-		amount: parseFloat(transactionAmountWithDiscount),
-		currency: currency || 'USD',
+		amount: transactionAmountWithDiscount,
+		currency,
 		productName: product.ficha.title,
 		customerData: {
 			email: user?.email || state?.profile?.email || '',
@@ -241,13 +251,12 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 	console.log('appliedCoupon:', appliedCoupon);
 	console.log('appliedCoupon.value:', appliedCoupon?.value);
 	console.log('appliedCoupon.discountType:', appliedCoupon?.discountType);
-	console.log('precio total con descuento', parseFloat(transactionAmountWithDiscount));
+	console.log('precio total con descuento', transactionAmountWithDiscount);
+
 	return (
-		<>
-			<div className='mt-24'>
-				<CheckoutRebill country={country} formData={rebillForm} />
-			</div>
-		</>
+		<div className='mt-24'>
+			<CheckoutRebill country={country} formData={rebillForm} />
+		</div>
 	);
 };
 

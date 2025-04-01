@@ -7,6 +7,131 @@
 	"total_products": 261,
 	"posts": [
 		{
+			"id": 338289,
+			"title": "Quiz MSK: responde y obtén beneficios y contenidos gratuitos",
+			"slug": "quiz-ginecologia-y-obstetricia",
+			"permalink": "https://wp.msklatam.com/nota/medicina/quiz-ginecologia-y-obstetricia/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-quiz-ginecologia-y-obstetricia.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-quiz-ginecologia-y-obstetricia.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "¡Lanzamos el nuevo curso de Ginecología y obstetricia AMIR en MSK! Por esa razón, queremos saber cuánto conoces sobre estas especialidades. Contesta las 10 preguntas del quiz y accede a lo mejor de nuestra propuesta académica.",
+			"date": "Marzo 31, 2025",
+			"author": {
+				"id": 103,
+				"name": "Contenidos MSK",
+				"email": "contenidos@msklatam.com",
+				"avatar": "https://secure.gravatar.com/avatar/d77ba09cb0734abf46a7f69267816ecd?s=96&d=mm&r=g"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 103,
+					"name": "Contenidos MSK",
+					"email": "contenidos@msklatam.com",
+					"avatar": "https://secure.gravatar.com/avatar/d77ba09cb0734abf46a7f69267816ecd?s=96&d=mm&r=g"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 337994,
+					"title": "Últimas revelaciones científicas sobre trastorno bipolar",
+					"slug": "ultimas-revelaciones-sobre-trastorno-bipolar",
+					"link": "https://wp.msklatam.com/nota/medicina/ultimas-revelaciones-sobre-trastorno-bipolar/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-ultimas-revelaciones-sobre-trastorno-bipolar-scaled-e1743168915455.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 338031,
+					"title": "Retos laborales en el sistema de salud actual",
+					"slug": "retos-laborales-en-el-sistema-de-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/retos-laborales-en-el-sistema-de-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-retos-laborales-en-el-sistema-de-salud-scaled-e1743165884884.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 164077,
+					"title": "Lo que gana (y siente) el personal médico hoy",
+					"slug": "desigualdad-salarial-en-el-personal-medico-hoy",
+					"link": "https://wp.msklatam.com/nota/medicina/desigualdad-salarial-en-el-personal-medico-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2021/10/Foto-desigualdad-salarial-en-el-personal-medico-hoy-scaled-e1742565126361.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 213910,
+					"title": "Migración médica: entre la necesidad y la transformación",
+					"slug": "migracion-medica-entre-la-necesidad-y-la-transformacion",
+					"link": "https://wp.msklatam.com/nota/medicina/migracion-medica-entre-la-necesidad-y-la-transformacion/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/06/shutterstock_2476690065-scaled-e1742302110772.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 238897,
+					"title": "Qué produce el mobbing en el personal de la salud",
+					"slug": "consecuencias-del-mobbing-en-el-personal-de-la-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/consecuencias-del-mobbing-en-el-personal-de-la-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/11/¿Que-produce-el-mobbing-en-los-y-las-profesionales-de-la-salud.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 59968,
+					"name": "E-Learning",
+					"slug": "e-learning",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/e-learning/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1121,
+				"name": "Ginecología",
+				"slug": "ginecologia",
+				"term_group": 0,
+				"term_taxonomy_id": 1121,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 159,
+				"filter": "raw"
+			},
+			"reading_time": "5",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
 			"id": 337994,
 			"title": "Últimas revelaciones científicas sobre trastorno bipolar",
 			"slug": "ultimas-revelaciones-sobre-trastorno-bipolar",
