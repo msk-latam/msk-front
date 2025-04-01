@@ -18,6 +18,10 @@ const SearchProducts = () => {
 	const { countryState } = useContext(CountryContext);
 	const [isOnBlog, setIsOnBlog] = useState(false);
 
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : '';
+
 	const removeAccents = (str: string) => {
 		return str
 			.normalize('NFD')
@@ -64,6 +68,7 @@ const SearchProducts = () => {
 				// Variables locales
 				let courses;
 				let productsCountry = countryState.country === 'int' ? '' : countryState.country;
+				console.log(country);
 				console.log(productsCountry);
 
 				// Si estamos en el blog, no se buscan cursos
@@ -85,7 +90,7 @@ const SearchProducts = () => {
 
 						// Hacemos fetch de productos desde el SSR
 						// courses = await ssr.getStoreCourses(productsCountry);
-						courses = await getJSONTiendaByCountry(productsCountry);
+						courses = await getJSONTiendaByCountry(country);
 						// console.log(courses.products);
 						// courses = await ssr.getStoreCourses(productsCountry, window.location.href);
 
@@ -114,10 +119,6 @@ const SearchProducts = () => {
 	}, [pathname, countryState]);
 
 	// console.log(products);
-
-	const pathName = usePathname();
-	const match = pathName.match(/^\/([a-z]{2})\b/);
-	const country = match ? `${match[1]}` : '';
 
 	return (
 		<div className='search-products lg:w-[20vw]'>
