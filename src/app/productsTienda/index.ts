@@ -43,6 +43,9 @@ export const getJSONTiendaByCountry = async (country: string) => {
 	if (country === 'mi') {
 		country = 'ar';
 	}
+	if (country === '') {
+		country = 'ar';
+	}
 
 	const normalizedCountry = country?.toLowerCase() || 'int';
 	const data = productsByCountry[normalizedCountry] || productsByCountry['int'];
