@@ -30,7 +30,7 @@ const StepButtons: React.FC<StepButtonsProps> = ({
 				Volver
 			</button>
 
-			<button
+			{/* <button
 				type='button'
 				className={`px-12 py-3 font-bold rounded-md focus:outline-none focus:ring-2 ${
 					isFormValid ? 'bg-[#9200AD] text-white' : 'bg-gray-400 text-gray-600 cursor-not-allowed'
@@ -55,7 +55,7 @@ const StepButtons: React.FC<StepButtonsProps> = ({
 				) : (
 					'Siguiente'
 				)}
-			</button>
+			</button> */}
 		</div>
 	);
 };

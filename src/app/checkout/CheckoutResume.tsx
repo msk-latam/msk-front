@@ -10,7 +10,7 @@ interface CheckoutResumeProps {
 
 const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => {
 	const { ficha, total_price } = product;
-	const { paymentType, appliedCoupon } = useCheckout();
+	const { paymentType, appliedCoupon, activeStep } = useCheckout();
 
 	const currencies: any = {
 		cl: 'CLP',
@@ -88,7 +88,7 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 				</div>
 			)}
 
-			<Cupon />
+			{activeStep <= 1 && <Cupon />}
 
 			<hr className='my-6 border-dashed border-t-2 border-gray-300' style={{ borderStyle: 'dotted' }} />
 

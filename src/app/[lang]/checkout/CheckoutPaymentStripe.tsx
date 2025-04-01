@@ -12,6 +12,7 @@ import {
 	getStripeCustomerIdBySubId,
 	updatePaymentIntent,
 } from './stripe/stripeUtils';
+import StepButtons from './buttons/CheckoutPaymentButtons';
 
 const CheckoutStripe = ({ product, country }: any) => {
 	const {
@@ -222,9 +223,25 @@ const CheckoutStripe = ({ product, country }: any) => {
 };
 
 const CheckoutPaymentStripe = ({ product, country }: any) => {
+	const { subStep, setSubStep, activeStep, setActiveStep, setPaymentType } = useCheckout();
+	const handlePreviousStep = () => {
+		if (subStep > 0) {
+			setSubStep(subStep - 1);
+			setActiveStep(activeStep - 1);
+			setPaymentType(null);
+		} else if (activeStep > 1) {
+			setActiveStep(activeStep - 1);
+		}
+	};
 	return (
 		<div className='mt-24'>
 			<CheckoutStripe product={product} country={country} />
+			<StepButtons
+				isFormValid={true}
+				isSubmitting={false}
+				handlePreviousStep={handlePreviousStep}
+				handleSubmit={() => console.log('')}
+			/>
 		</div>
 	);
 };

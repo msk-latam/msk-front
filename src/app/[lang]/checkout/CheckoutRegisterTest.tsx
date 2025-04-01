@@ -197,7 +197,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 							firstName: user.First_Name,
 							lastName: user.Last_Name,
 							phone: user.Tel_fono_de_facturaci_n,
-							birthDate: user.Date_of_Birth,
+							birthday: user.Date_of_Birth,
 							profession: user.Profesi_n,
 							specialty: user.Especialidad,
 						};
@@ -239,7 +239,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 
 			fetchUser();
 		}
-	}, [state?.user, activeStep, setActiveStep, completeStep]);
+	}, [state?.user]);
 
 	if (loadingUser) {
 		return (
