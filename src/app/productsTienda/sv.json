@@ -5,6 +5,695 @@
 	},
 	"products": [
 		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 336470,
+			"related_tag": "",
+			"father_id": 336165,
+			"slug": "gestion-y-administracion-estrategica-de-cuidados-de-enfermeria",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "sal",
+			"language_name": "El Salvador",
+			"product_code": 9005894,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Curso universitario en gestión y administración estratégica de cuidados de enfermería",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/gestionyadminestrategica-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/03/gestionyadminestrategica-sec.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/03/gestionyadminestrategica-sec.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/03/gestionyadminestrategica-sec-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": "125",
+			"permalink": "https://sv.wp.msklatam.com/producto/gestion-y-administracion-estrategica-de-cuidados-de-enfermeria/",
+			"temario": "https://sv.wp.msklatam.com/wp-content/uploads/2025/03/Gestion-y-administracion-estrategica-de-cuidados-de-enfermeria.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 326246,
+					"post_author": "102",
+					"post_date": "2024-11-11 19:15:00",
+					"post_date_gmt": "2024-11-11 19:15:00",
+					"post_content": "",
+					"post_title": "FARO",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "faro",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2025-02-21 19:50:08",
+					"post_modified_gmt": "2025-02-21 19:50:08",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=326246",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2024/11/Recurso-2faro1.png"
+				}
+			],
+			"cantidad_modulos": 10,
+			"why_course": "<p>La gestión estratégica en enfermería es un enfoque que integra la planificación, organización y liderazgo para optimizar los cuidados de enfermería y mejorar la calidad asistencial en los servicios de salud. Esta disciplina se enfoca en la toma de decisiones estratégicas que permitan gestionar los recursos humanos, materiales y tecnológicos de manera eficiente, asegurando un alto nivel de atención al paciente y un buen funcionamiento de las unidades de enfermería. Además, promueve la mejora continua mediante el análisis de los sistemas sanitarios y la implementación de modelos de gestión de calidad.</p> <p>Con los conocimientos del curso de Gestión estratégica en enfermería de MSK, podrás aplicar principios de administración, planificación y calidad en los entornos de salud. A través de un enfoque práctico, aprenderás a diseñar estrategias efectivas para la gestión de los servicios de enfermería, mejorar la seguridad del paciente y liderar equipos multidisciplinarios.</p> <p>En sus 10 módulos, el curso aborda desde los fundamentos de la administración sanitaria hasta la planificación estratégica, el liderazgo transformacional y la gestión de la calidad en los cuidados de enfermería.</p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-82-6",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "494",
+			"total_price": "494",
+			"max_installments": "12",
+			"price_installments": "41",
+			"created_at": "2025-03-11 18:03:40"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 336434,
+			"related_tag": "",
+			"father_id": 336125,
+			"slug": "direccion-estrategica-en-enfermeria-claves-para-la-gestion-sanitaria-efectiva",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "sal",
+			"language_name": "El Salvador",
+			"product_code": 9005893,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Curso universitario en dirección estratégica en enfermería: claves para la gestión sanitaria efectiva",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Gestion-Sanitaria-Efectiva-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/03/Gestion-Sanitaria-Efectiva-sec.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/03/Gestion-Sanitaria-Efectiva-sec.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/03/Gestion-Sanitaria-Efectiva-sec-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": "175",
+			"permalink": "https://sv.wp.msklatam.com/producto/direccion-estrategica-en-enfermeria-claves-para-la-gestion-sanitaria-efectiva/",
+			"temario": "https://sv.wp.msklatam.com/wp-content/uploads/2025/03/Direccion-estrategica-en-enfermeria-claves-para-la-gestion-sanitaria-efectiva.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 326246,
+					"post_author": "102",
+					"post_date": "2024-11-11 19:15:00",
+					"post_date_gmt": "2024-11-11 19:15:00",
+					"post_content": "",
+					"post_title": "FARO",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "faro",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2025-02-21 19:50:08",
+					"post_modified_gmt": "2025-02-21 19:50:08",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=326246",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2024/11/Recurso-2faro1.png"
+				}
+			],
+			"cantidad_modulos": 6,
+			"why_course": "<p>La dirección estratégica en enfermería es el proceso de planificación, gestión y liderazgo enfocado en optimizar los recursos, la calidad de los servicios y la atención al paciente dentro de las organizaciones sanitarias. Su objetivo es implementar estrategias efectivas que mejoren el rendimiento organizativo, mediante la identificación de metas a largo plazo, la mejora continua y la creación de un entorno de trabajo colaborativo. Combina conocimientos de gestión, liderazgo y calidad para adaptarse a las demandas cambiantes del sector salud.</p> <p>Este curso de Dirección estratégica en enfermería de MSK te brinda un conocimiento completo de los fundamentos y las mejores prácticas de la dirección estratégica en entornos sanitarios, con herramientas sobre principios de calidad, gestión de recursos humanos y liderazgo transformacional en la gestión de servicios de salud.</p> <p>Dividido en seis módulos, el curso de Dirección estratégica en enfermería aborda temas como la planificación de los servicios sanitarios, la gestión del cambio y la innovación en el ámbito de la enfermería, entre otros.</p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-81-9",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "494",
+			"total_price": "494",
+			"max_installments": "12",
+			"price_installments": "41",
+			"created_at": "2025-03-11 18:03:07"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 336584,
+			"related_tag": "",
+			"father_id": 336520,
+			"slug": "liderazgo-y-gestion-enfermera-en-servicios-de-urgencias",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "sal",
+			"language_name": "El Salvador",
+			"product_code": 9005892,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Curso universitario en liderazgo y gestión enfermera en servicios de urgencias",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/liderazgoenfermeria-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/03/liderazgoenfermeria-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/03/liderazgoenfermeria-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/03/liderazgoenfermeria-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": "75",
+			"permalink": "https://sv.wp.msklatam.com/producto/liderazgo-y-gestion-enfermera-en-servicios-de-urgencias/",
+			"temario": "https://sv.wp.msklatam.com/wp-content/uploads/2025/03/Liderazgo-y-gestion-enfermera-en-servicios-de-urgencias.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 326246,
+					"post_author": "102",
+					"post_date": "2024-11-11 19:15:00",
+					"post_date_gmt": "2024-11-11 19:15:00",
+					"post_content": "",
+					"post_title": "FARO",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "faro",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2025-02-21 19:50:08",
+					"post_modified_gmt": "2025-02-21 19:50:08",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=326246",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2024/11/Recurso-2faro1.png"
+				}
+			],
+			"cantidad_modulos": 11,
+			"why_course": "<p>La gestión enfermera en urgencias es una disciplina que se enfoca en la organización, coordinación y liderazgo dentro de los servicios de urgencias, con el objetivo de garantizar una atención rápida, segura y eficiente a los pacientes en situaciones críticas. Este enfoque abarca la gestión de recursos humanos y materiales, la implementación de protocolos de seguridad y la optimización de los procesos operativos en un entorno de alta presión. Los profesionales de enfermería en urgencias desempeñan un papel clave en la toma de decisiones, el manejo de equipos multidisciplinarios y el control de calidad en la atención.</p> <p>Con el curso de Gestión enfermera en urgencias de MSK obtendrás las competencias fundamentales para gestionar y liderar equipos de enfermería en este entorno desafiante. Capacítate para coordinar recursos, gestionar la seguridad del paciente y aplicar estrategias de mejora continua.</p> <p>Organizado en 11 módulos, el curso cubre desde los aspectos organizativos de los servicios de urgencias hasta el liderazgo transformacional, con un enfoque en la gestión del cambio e innovación en los servicios críticos.</p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-80-2",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "370",
+			"total_price": "370",
+			"max_installments": "12",
+			"price_installments": "30",
+			"created_at": "2025-03-12 12:03:45"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 336398,
+			"related_tag": "",
+			"father_id": 336085,
+			"slug": "introduccion-del-profesional-de-enfermeria-en-la-hospitalizacion-a-domicilio",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "sal",
+			"language_name": "El Salvador",
+			"product_code": 9005891,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Curso superior universitario en introducción del profesional de enfermería en la hospitalización a domicilio",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/hospitalizaciondomicilio-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/03/hospitalizaciondomicilio-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/03/hospitalizaciondomicilio-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/03/hospitalizaciondomicilio-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": "25",
+			"permalink": "https://sv.wp.msklatam.com/producto/introduccion-del-profesional-de-enfermeria-en-la-hospitalizacion-a-domicilio/",
+			"temario": "https://sv.wp.msklatam.com/wp-content/uploads/2025/03/Introduccion-del-profesional-de-enfermeria-en-la-hospitalizacion-a-domicilio.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 326246,
+					"post_author": "102",
+					"post_date": "2024-11-11 19:15:00",
+					"post_date_gmt": "2024-11-11 19:15:00",
+					"post_content": "",
+					"post_title": "FARO",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "faro",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2025-02-21 19:50:08",
+					"post_modified_gmt": "2025-02-21 19:50:08",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=326246",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2024/11/Recurso-2faro1.png"
+				}
+			],
+			"cantidad_modulos": 4,
+			"why_course": "<p>La hospitalización a domicilio (HAD) es un modelo asistencial que permite a los pacientes recibir atención hospitalaria en su hogar, brindándoles cuidados médicos y de enfermería avanzados con la misma calidad y seguridad que en un hospital convencional. Este enfoque se basa en protocolos específicos y un seguimiento clínico continuo, optimizando la gestión de los recursos sanitarios y mejorando la experiencia del paciente. La hospitalización a domicilio ha demostrado ser eficaz para reducir los riesgos asociados a la hospitalización tradicional, al mismo tiempo que promueve una recuperación más cómoda para el paciente en su entorno familiar.</p> <p>Este curso de Enfermería en hospitalización a domicilio de MSK te ofrece un aprendizaje completo sobre los principios y características de este modelo de atención. A lo largo del curso, estudiarás la organización de la HAD, el rol del profesional de enfermería, los procedimientos clínicos y las características del paciente en este contexto.</p> <p>Organizado en cinco módulos, el curso cubre desde los fundamentos y la historia de la hospitalización a domicilio hasta los aspectos clínicos, organizativos y el papel de enfermería en este modelo innovador de atención.</p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-79-6",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "258",
+			"total_price": "258",
+			"max_installments": "12",
+			"price_installments": "21",
+			"created_at": "2025-03-11 17:03:29"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 336362,
+			"related_tag": "",
+			"father_id": 336044,
+			"slug": "enfermeria-en-enfermos-cronicos",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "sal",
+			"language_name": "El Salvador",
+			"product_code": 9005890,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Curso universitario en enfermería en enfermos crónicos",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/enfermoscronicos-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/03/enfermoscronicos-sec.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/03/enfermoscronicos-sec.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/03/enfermoscronicos-sec-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": "250",
+			"permalink": "https://sv.wp.msklatam.com/producto/enfermeria-en-enfermos-cronicos/",
+			"temario": "https://sv.wp.msklatam.com/wp-content/uploads/2025/03/Enfermeria-en-enfermos-cronicos.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 326246,
+					"post_author": "102",
+					"post_date": "2024-11-11 19:15:00",
+					"post_date_gmt": "2024-11-11 19:15:00",
+					"post_content": "",
+					"post_title": "FARO",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "faro",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2025-02-21 19:50:08",
+					"post_modified_gmt": "2025-02-21 19:50:08",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=326246",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2024/11/Recurso-2faro1.png"
+				}
+			],
+			"cantidad_modulos": 11,
+			"why_course": "<p>La enfermería de enfermos crónicos se centra en la atención integral de pacientes que padecen enfermedades a largo plazo y que requieren cuidados continuos y especializados. Este enfoque abarca tanto el tratamiento de las enfermedades crónicas como la gestión de sus complicaciones, con un énfasis en la prevención, el control de síntomas y la mejora de la calidad de vida del paciente. Los profesionales de enfermería desempeñan un papel clave en la planificación de cuidados, la educación del paciente y el seguimiento a largo plazo, asegurando que los pacientes reciban el apoyo necesario para manejar su condición de manera efectiva.</p> <p>El curso de Enfermería en enfermos crónicos de MSK te permitirá mejorar la práctica y las estrategias de cuidado para pacientes con enfermedades crónicas. Aprenderás a evaluar las necesidades del paciente, aplicar tratamientos adecuados y coordinar con otros profesionales de la salud para optimizar el manejo de enfermedades como la diabetes, las afecciones cardiovasculares y respiratorias, entre otras.</p> <p>En sus 11 módulos, el curso de Enfermería en enfermos crónicos de MSK cubre temas como los cuidados esenciales para patologías musculoesqueléticas y respiratorias, la atención especializada en enfermedades neurológicas, renales y cutáneas, y mucho más.</p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-78-9",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "494",
+			"total_price": "494",
+			"max_installments": "12",
+			"price_installments": "41",
+			"created_at": "2025-03-11 17:03:32"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 336326,
+			"related_tag": "",
+			"father_id": 336004,
+			"slug": "sindrome-post-uci",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "sal",
+			"language_name": "El Salvador",
+			"product_code": 9005889,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Curso universitario en síndrome post-UCI",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/sindromepostuci-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/03/sindromepostuci-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/03/sindromepostuci-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/03/sindromepostuci-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1413,
+					"name": "Medicina intensiva",
+					"slug": "medicina-intensiva"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": "125",
+			"permalink": "https://sv.wp.msklatam.com/producto/sindrome-post-uci/",
+			"temario": "https://sv.wp.msklatam.com/wp-content/uploads/2025/03/Sindrome-post-UCI.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 326246,
+					"post_author": "102",
+					"post_date": "2024-11-11 19:15:00",
+					"post_date_gmt": "2024-11-11 19:15:00",
+					"post_content": "",
+					"post_title": "FARO",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "faro",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2025-02-21 19:50:08",
+					"post_modified_gmt": "2025-02-21 19:50:08",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=326246",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2024/11/Recurso-2faro1.png"
+				}
+			],
+			"cantidad_modulos": 27,
+			"why_course": "<p>El síndrome post-UCI es un conjunto de secuelas físicas, cognitivas y psicológicas que pueden presentarse en los pacientes después de una estancia prolongada en la Unidad de Cuidados Intensivos (UCI). Estas secuelas incluyen debilidad muscular adquirida, disfunción cognitiva, trastornos emocionales y estrés postraumático, que afectan la calidad de vida y la recuperación de los pacientes. El síndrome puede ser causado por diversos factores, incluyendo la inmovilización prolongada, la hiperglucemia de estrés y las complicaciones relacionadas con la estancia en la UCI.</p> <p>Con este curso de Síndrome post-UCI de MSK aprenderás las características del síndrome, su diagnóstico y las estrategias de tratamiento y rehabilitación. Descubre las intervenciones clave para prevenir y manejar las secuelas, incluyendo la movilización precoz, la nutrición, la rehabilitación respiratoria y la atención de las alteraciones psicológicas.</p> <p>Dividido en 27 módulos, el curso abarca desde la prevención de complicaciones hasta la intervención en el síndrome confusional agudo y el estrés postraumático, con un enfoque práctico y actualizado.</p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-77-2",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "494",
+			"total_price": "494",
+			"max_installments": "12",
+			"price_installments": "41",
+			"created_at": "2025-03-11 17:03:13"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 336288,
+			"related_tag": "",
+			"father_id": 335730,
+			"slug": "salud-mental-y-psiquiatria",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "sal",
+			"language_name": "El Salvador",
+			"product_code": 9005888,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Curso superior de salud mental y psiquiatria",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/saludmentalpsiq-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/03/saludmentalperinatal-sec.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/03/saludmentalperinatal-sec-290x300.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/03/saludmentalperinatal-sec-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1412,
+					"name": "Psiquiatría",
+					"slug": "psiquiatria"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "250",
+			"permalink": "https://sv.wp.msklatam.com/producto/salud-mental-y-psiquiatria/",
+			"temario": "https://sv.wp.msklatam.com/wp-content/uploads/2025/03/Salud-mental-y-psiquiatria-1.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 254526,
+					"post_author": "2",
+					"post_date": "2023-08-07 23:12:56",
+					"post_date_gmt": "2023-08-07 23:12:56",
+					"post_content": "",
+					"post_title": "Tropos",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "tropos",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2023-08-22 20:17:07",
+					"post_modified_gmt": "2023-08-22 20:17:07",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=254526",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/cedentes_tropos.png"
+				}
+			],
+			"cantidad_modulos": 5,
+			"why_course": "<p>La psiquiatría es una rama de la medicina dedicada al diagnóstico, tratamiento y prevención de trastornos mentales y emocionales. Se enfoca en el bienestar psicológico de los pacientes, abordando enfermedades como la depresión, la ansiedad, los trastornos psicóticos y las conductas suicidas, entre otros. Además, la psiquiatría incluye el manejo de las comorbilidades físicas que pueden asociarse a trastornos mentales y trabaja de manera interdisciplinaria con otros profesionales de la salud.</p> <p>Este curso de Salud mental y psiquiatría de MSK es una capacitación integral sobre los aspectos clave de la especialidad, incluyendo la evaluación psicopatológica, el tratamiento de comorbilidades, el manejo de trastornos psicológicos y el diagnóstico de enfermedades mentales desde la atención primaria.</p> <p>Organizado en 25 módulos, el curso cubre desde la salud mental en atención primaria hasta el manejo de emergencias psiquiátricas, con un enfoque práctico y actualizado, desarrollado por expertos en la especialidad.</p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-76-5",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "885",
+			"total_price": "885",
+			"max_installments": "12",
+			"price_installments": "73",
+			"created_at": "2025-03-11 17:03:14"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 336250,
+			"related_tag": "",
+			"father_id": 335917,
+			"slug": "ginecologia-y-obstetricia-amir",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "sal",
+			"language_name": "El Salvador",
+			"product_code": 9005887,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Curso superior de ginecología y obstetricia AMIR",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/ginecobstetriciaamir-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/03/ginecobstetriciaamir-secund.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/03/ginecobstetriciaamir-secund.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/03/ginecobstetriciaamir-secund-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1121,
+					"name": "Ginecología",
+					"slug": "ginecologia"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				},
+				{
+					"term_id": 1251,
+					"name": "Obstetricia",
+					"slug": "obstetricia"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "400",
+			"permalink": "https://sv.wp.msklatam.com/producto/ginecologia-y-obstetricia-amir/",
+			"temario": "https://sv.wp.msklatam.com/wp-content/uploads/2025/03/Ginecologia-y-obstetricia-AMIR.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 331572,
+					"post_author": "102",
+					"post_date": "2025-01-09 20:13:07",
+					"post_date_gmt": "2025-01-09 20:13:07",
+					"post_content": "",
+					"post_title": "AMIR",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "amir",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2025-01-10 18:57:34",
+					"post_modified_gmt": "2025-01-10 18:57:34",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=331572",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2025/01/cedente_amir.png"
+				}
+			],
+			"cantidad_modulos": 3,
+			"why_course": "<p>La ginecología y obstetricia son ramas de la medicina dedicadas a la salud reproductiva femenina. La ginecología se enfoca en el diagnóstico, tratamiento y prevención de las enfermedades del aparato reproductor femenino, mientras que la obstetricia se ocupa del seguimiento del embarazo, el parto y el puerperio. Ambas especialidades trabajan de manera integral, considerando tanto los aspectos médicos como los quirúrgicos de la salud femenina, y juegan un rol clave en la promoción de la salud reproductiva.</p> <p>Con este curso de Ginecología y obstetricia AMIR en MSK conocerás los fundamentos de estas especialidades, incluyendo la anatomía y fisiología del aparato reproductor femenino, las patologías ginecológicas, el manejo de la salud sexual y reproductiva, y el tratamiento de las complicaciones durante el embarazo y el parto.</p> <p>Organizado en 71 temas distribuidos en tres módulos, el curso abarca desde el diagnóstico y tratamiento de enfermedades ginecológicas hasta los cuidados durante el embarazo y el parto, con un enfoque práctico y actualizado.</p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-75-8",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "950",
+			"total_price": "950",
+			"max_installments": "12",
+			"price_installments": "79",
+			"created_at": "2025-03-11 17:03:23"
+		},
+		{
 			"id": 337578,
 			"related_tag": "",
 			"father_id": 337516,
