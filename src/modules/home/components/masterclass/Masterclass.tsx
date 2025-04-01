@@ -26,16 +26,18 @@ const Masterclass = () => {
   }, []);
 
   return (
-    <div className="relative h-auto md:h-[800px] w-full bg-black text-white overflow-hidden z-[0] -mt-30">
+   
+<div className="relative w-full min-h-screen flex items-center justify-center text-white z-[1] font-raleway">
+
 
 
       
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-0 md:hidden" />
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-1 md:hidden" />
       <Image
   src="/images/masterclass/main-masterclass.png"
   alt="Masterclass principal"
   fill
-  className="object-cover object-center absolute inset-0 -z-10"
+  className="object-cover object-center absolute inset-0 z-[1]"
   priority
 />
 
@@ -85,8 +87,8 @@ const Masterclass = () => {
         </div>
 
         {/* Carrusel Mobile */}
-        <div className="md:hidden w-full flex flex-col items-center mt-10 px-4 gap-4 overflow-x-hidden">
-          <p className="text-1xl border border-white rounded-full px-4 py-1">MASTERCLASS</p>
+        <div className="md:hidden w-full flex flex-col items-center mt-10 px-4 gap-4 overflow-x-hidden z-[1]">
+          <p className="text-1xl border border-white rounded-full px-4 py-1 ">MASTERCLASS</p>
           <div className="relative w-full overflow-hidden">
             <div
               {...handlers}

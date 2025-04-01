@@ -38,6 +38,7 @@ module.exports = {
 		},
 
 		extend: {
+			
 			colors: {
 				translucent: {
 					blue: 'rgba(173, 216, 230, 0.5)', // Light Blue
