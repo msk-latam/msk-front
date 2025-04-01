@@ -63,7 +63,7 @@ const Cupon: React.FC = () => {
 
 	return (
 		<div className='mt-4'>
-			<label className='block text-sm font-medium text-gray-700'>Código de cupón</label>
+			<label className='block text-xl font-bold text-gray-700'>Código de cupón</label>
 			<div className='flex mt-2'>
 				<input
 					type='text'

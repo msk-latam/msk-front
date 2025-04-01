@@ -13,6 +13,7 @@ import {
 	currencies,
 	getCountryCompleteName,
 	getCRMUser,
+	updateCRMUser,
 } from '../[lang]/checkout/utils/utils';
 
 const CheckoutRegisterTest = ({ product, country }: any) => {
@@ -148,6 +149,9 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 			const customer_id =
 				firstResponse.code === 'SUCCESS' || firstResponse.code === 'DUPLICATE_DATA' ? firstResponse.details.id : undefined;
 
+			if (firstResponse.code === 'DUPLICATE_DATA') {
+				await updateCRMUser(formDataUser, countryCompleteName, formData, customer_id);
+			}
 			const createContractResponse = await createContractCRM(
 				customer_id,
 				product,
@@ -180,6 +184,10 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 				try {
 					setLoadingUser(true);
 					const user = await getCRMUser(state?.email);
+					console.log(user);
+					const capitalizeWords = (str: string) => {
+						return str.replace(/\b\w/g, (char) => char.toUpperCase());
+					};
 					if (user) {
 						const updatedFormDataUser = {
 							...formDataUser,
@@ -193,7 +201,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 						};
 						const updatedFormDataDocumentUser = {
 							...formData,
-							state: user.Mailing_State,
+							state: capitalizeWords(user.Mailing_State || ''),
 							city: user.Mailing_City,
 							address: user.Mailing_Street,
 							postal_code: user.Mailing_Zip,
