@@ -38,7 +38,7 @@ const HeroHighlight = () => {
           <button
             key={i}
             onClick={() => setActive(i)}
-            className={`w-full md:w-[254px] min-h-10 md:h-[70px] p-4 md:py-[10px] flex items-start md:items-center justify-between text-left text-m md:text-s font-medium whitespace-pre-line md:backdrop-blur-sm transition-all duration-300 shrink-0 ${
+            className={`w-full md:w-[254px] min-h-10 md:h-[70px] p-4 md:py-[10px] flex items-start md:items-center justify-between text-left text-m md:text-xs whitespace-pre-line md:backdrop-blur-sm transition-all duration-300 shrink-0 ${
               active === i ? 'bg-white text-black shadow-md' : 'bg-black/10 text-white'
             }`}
           >
