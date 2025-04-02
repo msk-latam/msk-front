@@ -6,7 +6,7 @@ import { cursosMock } from './cards/data';
 
 const Oportunidades = () => {
   return (
-    <div className="relative w-full px-24 bg-gray-100 pt-24 pb-60 z-[5]"> {/* Aumentado pb para fondo inferior */}
+    <div className="relative w-full md:px-24 bg-gray-100 pt-24 pb-60 z-[5]"> {/* Aumentado pb para fondo inferior */}
       <section className="relative bg-white rounded-[40px] md:max-w-7xl mx-auto -mt-32 -mb-64 z-[5] py-10 shadow-lg">
 
 
