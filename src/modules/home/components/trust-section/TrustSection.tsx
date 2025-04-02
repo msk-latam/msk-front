@@ -42,7 +42,7 @@ const TrustSection = () => {
   }
 
   return (
-    <div className="relative w-full bg-gray-100 pt-24 pb-60 z-0 h-[950px] md:h-[700px] z-[5]">
+    <div className="relative w-full bg-gray-100 pt-24 pb-60 z-0 h-[1400px] md:h-[700px] z-[5]">
 
       {/* Sección 1: Carrusel de testimonios */}
       <section className="relative bg-white rounded-[40px] max-w-7xl mx-auto -mt-40 mb-16 z-[50] py-10 px-5 md:px-10 shadow-lg">

@@ -14,7 +14,7 @@ const FaqSection = () => {
   };
 
   return (
-    <section className="w-full bg-gray-100 pt-24 font-raleway">
+    <section className="w-full bg-gray-100 pt-24 font-raleway -mt-20">
       <div className=" rounded-[40px] max-w-7xl mx-auto px-6 md:px-12 py-12 ">
         <h2 className="text-xl md:text-2xl font-semibold mb-10 text-left">Preguntas frecuentes</h2>
 

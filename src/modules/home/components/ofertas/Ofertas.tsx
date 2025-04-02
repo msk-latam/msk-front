@@ -4,9 +4,9 @@ import Image from 'next/image';
 
 const Ofertas = () => {
   return (
-    <section className="relative w-full min-h-[800px] md:min-h-screen flex items-center justify-center text-white z-[1] font-raleway">
+    <section className="relative w-full min-h-[1100px] md:min-h-[1100px] md:min-h-screen flex items-center justify-center text-white z-[1] font-raleway">
       {/* Imagen de fondo */}
-      <div className="absolute inset-0 z-1 min-h-[800px]">
+      <div className="absolute inset-0 z-1  ">
         <Image
           src="/images/oferta/oferta.png"
           alt="Oferta Salud"
@@ -20,7 +20,7 @@ const Ofertas = () => {
       </div>
 
       {/* Contenido principal */}
-      <div className="relative z-[2] px-6 py-10 max-w-7xl w-full flex flex-col md:flex-row items-start md:items-end justify-between gap-10">
+      <div className="relative z-[2] px-6 py-10 max-w-7xl w-full flex flex-col md:flex-row items-start md:items-end justify-between gap-10 md:mt-20 mt-60">
         {/* Texto (compartido) */}
         <div className="text-left max-w-xl">
           <p className="text-base md:text-lg mb-4">Disponible del 15 al 31 de enero</p>
