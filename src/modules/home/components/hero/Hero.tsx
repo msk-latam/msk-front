@@ -22,7 +22,7 @@ const Hero = () => {
         <div className="md:px-36 container mx-auto md:h-[90%] flex flex-col justify-center items-center text-center gap-4 md:items-start md:text-left md:gap-2">
           <p className="border border-white rounded-full px-4 py-1 text-xs w-fit">Cursos</p>
 
-          <div className="flex wrap flex-col gap-6 md:mt-0 mt-10 md:flex-row md:items-end md:justify-between">
+          <div className="flex wrap w-full flex-col gap-6 md:gap-0 md:mt-0 mt-10 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-3xl md:text-5xl text-white leading-tight">
                 Cursos de medicina para <br/>
