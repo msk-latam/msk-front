@@ -14,6 +14,8 @@ import {
 } from './stripe/stripeUtils';
 import StepButtons from './buttons/CheckoutPaymentButtons';
 
+let isSubmittingPay = false;
+
 const CheckoutStripe = ({ product, country }: any) => {
 	const {
 		user,
@@ -94,10 +96,12 @@ const CheckoutStripe = ({ product, country }: any) => {
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
 		setIsLoading(true);
+		setIsSubmitting(true);
 
 		if (!stripe || !elements) {
 			console.error('Stripe.js no ha sido cargado correctamente.');
 			setIsLoading(false);
+			setIsSubmitting(false);
 			return;
 		}
 
@@ -105,6 +109,7 @@ const CheckoutStripe = ({ product, country }: any) => {
 		if (!cardElement) {
 			console.error('No se encontró el elemento de tarjeta.');
 			setIsLoading(false);
+			setIsSubmitting(false);
 			return;
 		}
 
@@ -183,6 +188,7 @@ const CheckoutStripe = ({ product, country }: any) => {
 			console.error('Error en la solicitud de checkout:', error);
 		} finally {
 			setIsLoading(false);
+			setIsSubmitting(false);
 		}
 	};
 
@@ -223,7 +229,7 @@ const CheckoutStripe = ({ product, country }: any) => {
 };
 
 const CheckoutPaymentStripe = ({ product, country }: any) => {
-	const { subStep, setSubStep, activeStep, setActiveStep, setPaymentType } = useCheckout();
+	const { subStep, setSubStep, activeStep, setActiveStep, setPaymentType, isSubmitting } = useCheckout();
 	const handlePreviousStep = () => {
 		if (subStep > 0) {
 			setSubStep(subStep - 1);
@@ -237,6 +243,7 @@ const CheckoutPaymentStripe = ({ product, country }: any) => {
 		<div className='mt-24'>
 			<CheckoutStripe product={product} country={country} />
 			<StepButtons
+				isDisabled={isSubmitting}
 				isFormValid={true}
 				isSubmitting={false}
 				handlePreviousStep={handlePreviousStep}
