@@ -23,7 +23,7 @@ export const cursosMock = [
     },
     {
       id: 3,
-      categoria: 'Boludos',
+      categoria: 'Administracion',
       titulo: 'Curso superior de administración y gestión hospitalaria',
       temas: 12,
       horas: 400,

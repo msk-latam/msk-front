@@ -32,7 +32,7 @@ const Hero = () => {
 
             <Link
               href="#"
-              className="mt-4 md:mt-0 bg-white text-black px-6 py-3 rounded-full font-semibold text-xs md:text-base flex items-center gap-2 whitespace-nowrap"
+              className="mt-4 md:mt-0 bg-white text-black px-6 py-3 rounded-full font-semibold text-xs md:text-base flex items-center self-center gap-2 whitespace-nowrap"
             >
               Comenzá tu experiencia
               <svg

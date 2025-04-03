@@ -29,7 +29,7 @@ const HeroHighlight = () => {
   }, [active]);
 
   return (
-    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-full max-w-[1500px] md:px-36">
+    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 translate-y-2/3 md:translate-y-0 w-full max-w-[1500px] md:min-w-[1022px] md:px-36 -z-10">
       <div
         ref={containerRef}
         className="rounded-t-xl flex flex-col md:flex-row md:gap-[1px] overflow-y-hidden md:overflow-x-auto justify-start md:justify-center items-center md:items-start scroll-smooth no-scrollbar"
