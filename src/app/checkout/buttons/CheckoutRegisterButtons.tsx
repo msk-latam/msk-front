@@ -23,27 +23,29 @@ const CheckoutRegisterButtons: React.FC<CheckoutButtonsProps> = ({
 }) => {
 	return (
 		<div className='flex flex-col sm:flex-row items-center sm:justify-center space-y-4 sm:space-y-0 sm:gap-4 my-6'>
-			<div className='flex items-center'>
-				<input
-					type='checkbox'
-					id='privacyPolicy'
-					checked={formData.privacyPolicy}
-					onChange={handleChange}
-					onBlur={handleBlur}
-					className='w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500'
-				/>
-				<label htmlFor='privacyPolicy' className='ml-2 text-sm font-medium text-gray-700'>
-					Acepto las{' '}
-					<a
-						href='/politica-de-privacidad/'
-						target='_blank'
-						className='text-[#9200AD] underline hover:no-underline focus:outline-none focus:ring-1 focus:ring-[#9200AD]'
-					>
-						condiciones de privacidad
-					</a>
-				</label>
+			<div>
+				<div className='flex items-center'>
+					<input
+						type='checkbox'
+						id='privacyPolicy'
+						checked={formData.privacyPolicy}
+						onChange={handleChange}
+						onBlur={handleBlur}
+						className='w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500'
+					/>
+					<label htmlFor='privacyPolicy' className='ml-2 text-sm font-medium text-gray-700'>
+						Acepto las{' '}
+						<a
+							href='/politica-de-privacidad/'
+							target='_blank'
+							className='text-[#9200AD] underline hover:no-underline focus:outline-none focus:ring-1 focus:ring-[#9200AD]'
+						>
+							condiciones de privacidad
+						</a>
+					</label>
+				</div>
+				{touched.privacyPolicy && errors.privacyPolicy && <p className='text-red-500 text-sm'>{errors.privacyPolicy}</p>}
 			</div>
-			{touched.privacyPolicy && errors.privacyPolicy && <p className='text-red-500 text-sm'>{errors.privacyPolicy}</p>}
 			<button
 				type='button'
 				className={`w-full sm:w-auto px-12 py-3 font-bold rounded-sm focus:outline-none focus:ring-2 !mt-6 lg:!mt-0 flex items-center justify-center space-x-2 ${

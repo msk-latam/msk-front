@@ -11,6 +11,7 @@ interface AddressFormProps {
 		postal_code: string;
 	};
 	handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+	handleChange2: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	handleBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
 	errors: {
 		country?: string;
@@ -28,7 +29,7 @@ interface AddressFormProps {
 	};
 }
 
-const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handleBlur, errors, touched }) => {
+const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handleChange2, handleBlur, errors, touched }) => {
 	const normalizeCountryCode = (code: any) => code?.toLowerCase() || '';
 	const getCountryName = (code: any) => {
 		const normalizedCode = normalizeCountryCode(code);
@@ -54,7 +55,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					name='country'
 					type='text'
 					value={countryName}
-					onChange={handleChange}
+					onChange={handleChange2}
 					onBlur={handleBlur}
 					disabled
 					placeholder='Ingrese país'
@@ -75,8 +76,8 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 							id='state'
 							name='state'
 							value={formData.state}
-							onChange={handleChange}
-							onBlur={handleBlur}
+							onChange={handleChange2}
+							// onBlur={handleBlur}
 							className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 						>
 							<option value=''>Seleccione una provincia</option>
@@ -109,11 +110,12 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					Ciudad
 				</label>
 				<input
+					required
 					id='city'
 					name='city'
 					type='text'
 					value={formData.city}
-					onChange={handleChange}
+					onChange={handleChange2}
 					onBlur={handleBlur}
 					placeholder='Ingrese ciudad'
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
@@ -128,11 +130,12 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 						Código postal
 					</label>
 					<input
+						required
 						id='postal_code'
 						name='postal_code'
 						type='text'
 						value={formData.postal_code}
-						onChange={handleChange}
+						onChange={handleChange2}
 						onBlur={handleBlur}
 						placeholder='Ingrese código postal'
 						className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
@@ -150,7 +153,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					name='address'
 					type='text'
 					value={formData.address}
-					onChange={handleChange}
+					onChange={handleChange2}
 					onBlur={handleBlur}
 					placeholder='Ingrese dirección'
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'

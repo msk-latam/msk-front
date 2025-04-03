@@ -20,7 +20,7 @@ export const validatePaymentField = (field: string, value: string | boolean): st
 			return value ? '' : 'Ingrese una provincia o estado.';
 		case 'city':
 			return value ? '' : 'Ingrese una ciudad.';
-		case 'address': // Nota: arreglé el typo en "address"
+		case 'address':
 			return value ? '' : 'Ingrese su dirección.';
 		case 'postal_code':
 			return value ? '' : 'Ingrese su código postal.';

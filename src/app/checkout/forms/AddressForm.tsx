@@ -11,7 +11,8 @@ interface AddressFormProps {
 		postal_code: string;
 	};
 	handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	handleBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+	handleChange2: (event: React.ChangeEvent<HTMLInputElement>) => void;
+	handleBlur2: (event: React.FocusEvent<HTMLInputElement>) => void;
 	errors: {
 		// country?: string;
 		state?: string;
@@ -28,7 +29,14 @@ interface AddressFormProps {
 	};
 }
 
-const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handleBlur, errors, touched }) => {
+const AddressForm: React.FC<AddressFormProps> = ({
+	formData,
+	handleChange,
+	handleChange2,
+	handleBlur2,
+	errors,
+	touched,
+}) => {
 	const countryName = getCountryCompleteName();
 
 	function obtenerProvincias(country = 'ar') {
@@ -48,8 +56,8 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					name='country'
 					type='text'
 					value={countryName}
-					onChange={handleChange}
-					onBlur={handleBlur}
+					onChange={handleChange2}
+					onBlur={handleBlur2}
 					placeholder='Ingrese país'
 					disabled
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
@@ -67,8 +75,8 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 						id='state'
 						name='state'
 						value={formData.state}
-						onChange={handleChange}
-						onBlur={handleBlur}
+						onChange={handleChange2}
+						onBlur={handleBlur2}
 						className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 					>
 						<option value=''>Seleccione una provincia</option>
@@ -92,8 +100,8 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					name='city'
 					type='text'
 					value={formData.city}
-					onChange={handleChange}
-					onBlur={handleBlur}
+					onChange={handleChange2}
+					onBlur={handleBlur2}
 					placeholder='Ingrese ciudad'
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
@@ -111,8 +119,8 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 						name='postal_code'
 						type='text'
 						value={formData.postal_code}
-						onChange={handleChange}
-						onBlur={handleBlur}
+						onChange={handleChange2}
+						onBlur={handleBlur2}
 						placeholder='Ingrese código postal'
 						className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 					/>
@@ -129,8 +137,8 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					name='address'
 					type='text'
 					value={formData.address}
-					onChange={handleChange}
-					onBlur={handleBlur}
+					onChange={handleChange2}
+					onBlur={handleBlur2}
 					placeholder='Ingrese dirección'
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>

@@ -13,6 +13,17 @@ export const validateUserField = (field: string, value: string | boolean) => {
 			return validateEmail(value.toString()) ? '' : 'El correo electrónico no es válido.';
 		case 'phone':
 			return value.toString().trim() ? '' : 'El teléfono es obligatorio.';
+		case 'birthday': {
+			if (!value.toString().trim()) {
+				return 'La fecha de nacimiento es obligatoria.';
+			}
+			const selectedDate = new Date(value.toString());
+			const today = new Date();
+			if (selectedDate > today) {
+				return 'La fecha de nacimiento no puede ser en el futuro.';
+			}
+			return '';
+		}
 		case 'profession':
 			return value.toString() ? '' : 'Debe seleccionar una profesión.';
 		case 'specialty':

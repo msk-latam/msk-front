@@ -15,6 +15,7 @@ import {
 	getCRMUser,
 	updateCRMUser,
 } from '../[lang]/checkout/utils/utils';
+import { validatePaymentField } from './validators/paymentValidator';
 
 const CheckoutRegisterTest = ({ product, country }: any) => {
 	const { state } = useContext(AuthContext);
@@ -104,11 +105,21 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 		}
 	};
 	const handleChange2 = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-		const { name, value } = e.target;
-		setFormData((prevState) => ({
-			...prevState,
-			[name]: value,
+		const { id, value, type } = e.target;
+
+		const fieldValue = type === 'checkbox' && e.target instanceof HTMLInputElement ? e.target.checked : value;
+
+		setFormData((prevData) => ({
+			...prevData,
+			[id]: fieldValue,
 		}));
+
+		if (touched[id]) {
+			setErrors((prevErrors) => ({
+				...prevErrors,
+				[id]: validatePaymentField(id, fieldValue),
+			}));
+		}
 	};
 
 	const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -122,6 +133,19 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 		setErrors((prevErrors) => ({
 			...prevErrors,
 			[id]: validateUserField(id, formDataUser[id as keyof typeof formDataUser]),
+		}));
+	};
+	const handleBlur2 = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => {
+		const { id } = e.target;
+
+		setTouched((prevTouched) => ({
+			...prevTouched,
+			[id]: true,
+		}));
+
+		setErrors((prevErrors) => ({
+			...prevErrors,
+			[id]: validatePaymentField(id, formData[id as keyof typeof formData]),
 		}));
 	};
 
@@ -177,6 +201,32 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 		}
 	};
 
+	const validateAndSetErrors = (userData: typeof formDataUser, documentData: typeof formData) => {
+		const newErrors: Record<string, string> = {};
+		const newTouched: Record<string, boolean> = {};
+
+		// Validar datos personales
+		Object.keys(userData).forEach((key) => {
+			const error = validateUserField(key, userData[key as keyof typeof userData]);
+			if (error) {
+				newErrors[key] = error;
+				newTouched[key] = true;
+			}
+		});
+
+		// Validar datos de documento
+		Object.keys(documentData).forEach((key) => {
+			const error = validatePaymentField(key, documentData[key as keyof typeof documentData]);
+			if (error) {
+				newErrors[key] = error;
+				newTouched[key] = true;
+			}
+		});
+
+		setErrors(newErrors);
+		setTouched(newTouched);
+	};
+
 	//este useEffet se ejecuta si el usuario ya esta registrado en msklatam
 	useEffect(() => {
 		if (state?.user && state.user.name) {
@@ -210,20 +260,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 						};
 						setFormDataUser(updatedFormDataUser);
 						setFormData(updatedFormDataDocumentUser);
-						// const customer_id = user.id;
-						// const createContractResponse = await createContractCRM(
-						// 	customer_id,
-						// 	product,
-						// 	transactionAmount,
-						// 	currency,
-						// 	countryCompleteName,
-						// 	'mercadopago',
-						// );
-						// const contract_id = createContractResponse.data[0].details.id;
-						// const finalFormDataUser = { ...updatedFormDataUser, contract_id };
-						// setUser(finalFormDataUser);
-						// completeStep(activeStep);
-						// setActiveStep(2);
+						validateAndSetErrors(updatedFormDataUser, updatedFormDataDocumentUser);
 					}
 				} catch (error) {
 					console.error('Error fetching user:', error);
@@ -265,7 +302,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 				<div className='mt-4'>
 					<DocumentDetailsForm
 						formData={formData}
-						handleBlur={handleBlur}
+						handleBlur={handleBlur2}
 						handleChange={handleChange2}
 						errors={errors}
 						touched={touched}
@@ -275,8 +312,9 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 				<div className='mt-4'>
 					<AddressForm
 						formData={formData}
-						handleChange={handleChange2}
-						handleBlur={handleBlur}
+						handleChange={handleChange}
+						handleChange2={handleChange2}
+						handleBlur2={handleBlur2}
 						errors={errors}
 						touched={touched}
 					/>

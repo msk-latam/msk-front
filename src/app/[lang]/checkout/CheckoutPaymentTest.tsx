@@ -116,12 +116,17 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 				});
 
 				checkoutForm.mount('rebill-container');
+				checkoutForm.on('submit', async (e: any) => {
+					setIsSubmitting(true);
+				});
 
 				checkoutForm.on('success', async (e: any) => {
+					setIsSubmitting(true);
 					handlePaymentSuccess(e);
 				});
 
 				checkoutForm.on('error', (e: any) => {
+					setIsSubmitting(false);
 					handlePaymentError(e);
 				});
 			}
@@ -135,7 +140,8 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 	}, [mode]);
 
 	const handlePaymentSuccess = async (e: any) => {
-		setProcessingPayment(true);
+		// setProcessingPayment(true);
+		setIsSubmitting(true);
 
 		try {
 			const data = await createPaymentRebill(
@@ -161,7 +167,8 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 		} catch (error) {
 			console.error('Error en la solicitud de checkout:', error);
 		} finally {
-			setProcessingPayment(false);
+			// setProcessingPayment(false);
+			setIsSubmitting(false);
 		}
 	};
 
@@ -185,7 +192,7 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 
 	return (
 		<div>
-			{processingPayment ? (
+			{isSubmitting ? (
 				<div className='flex flex-col items-center justify-center p-6 bg-white border border-gray-300 rounded-lg'>
 					<span className='animate-spin w-8 h-8 border-4 border-gray-300 border-t-[#392C35] rounded-full'></span>
 					<p className='mt-3 text-[#392C35] font-semibold'>Procesando cobro...</p>
@@ -198,7 +205,8 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 };
 
 const CheckoutPaymentTest = ({ product, country }: any) => {
-	const { user, appliedCoupon, subStep, setSubStep, activeStep, setActiveStep, setPaymentType } = useCheckout();
+	const { user, appliedCoupon, subStep, setSubStep, activeStep, setActiveStep, setPaymentType, isSubmitting } =
+		useCheckout();
 	const { state } = useContext(AuthContext);
 
 	const transactionAmount = Number(product.total_price.replace(/,/g, '').replace('.', ''));
@@ -239,10 +247,13 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 		}
 	};
 
+	console.log(isSubmitting);
+
 	return (
 		<div className='mt-24'>
 			<CheckoutRebill country={country} formData={rebillForm} />
 			<StepButtons
+				isDisabled={isSubmitting}
 				isFormValid={true}
 				isSubmitting={false}
 				handlePreviousStep={handlePreviousStep}

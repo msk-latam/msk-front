@@ -5,7 +5,7 @@ interface DocumentDetailsFormProps {
 		type_doc: string;
 		identification: string;
 	};
-	handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+	handleChange2: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 	handleBlur: (event: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => void;
 	errors: {
 		type_doc?: string;
@@ -20,7 +20,7 @@ interface DocumentDetailsFormProps {
 
 const DocumentDetailsForm: React.FC<DocumentDetailsFormProps> = ({
 	formData,
-	handleChange,
+	handleChange2,
 	handleBlur,
 	errors,
 	touched,
@@ -130,7 +130,7 @@ const DocumentDetailsForm: React.FC<DocumentDetailsFormProps> = ({
 					id='type_doc'
 					name='type_doc'
 					value={formData.type_doc}
-					onChange={handleChange}
+					onChange={handleChange2}
 					onBlur={handleBlur}
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				>
@@ -156,7 +156,7 @@ const DocumentDetailsForm: React.FC<DocumentDetailsFormProps> = ({
 					name='identification'
 					type='text'
 					value={formData.identification}
-					onChange={handleChange}
+					onChange={handleChange2}
 					onBlur={handleBlur}
 					placeholder='Ingrese número de documento'
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
