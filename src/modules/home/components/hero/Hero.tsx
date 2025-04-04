@@ -19,13 +19,14 @@ const Hero = () => {
         <Navbar />
 
         {/* --- CONTENIDO PRINCIPAL --- */}
-        <div className="md:px-28 px-5 py-2 container mx-auto md:h-[70%] flex flex-col justify-center items-center text-center gap-0 md:items-start md:text-left md:gap-2">
+        <div className="md:px-28 px-5 py-2 md:py-12 container mx-auto md:h-[70%] flex flex-col justify-center items-center md:justify-end text-center gap-0 md:items-start md:text-left md:gap-2">
           <p className="border border-white rounded-full px-[18px] py-2 my-4 md:my-0 text-[12px] w-fit">Cursos</p>
 
-          <div className="flex wrap w-full flex-col gap-4 md:gap-0 md:mt-0 md:flex-row md:items-end md:justify-between">
+          <div className="flex wrap w-fit md:w-full flex-col gap-4 md:gap-0 md:mt-0 md:flex-row md:justify-between">
             <div>
-              <p className="text-[2rem] md:text-5xl text-white leading-none md:leading-tight md:w-[85%]">
-                Cursos de medicina para<span className="italic font-normal"> expandir </span>tus metas profesionales
+              <p className="text-[2rem] md:text-5xl text-white leading-none md:leading-tight md:min-w-full">
+                Cursos de medicina para<span className="italic font-normal"> <span className="hidden md:inline"><br />
+                </span> expandir </span>tus metas profesionales
               </p>
             </div>
 
