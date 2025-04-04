@@ -7,6 +7,144 @@
 	"total_products": 221,
 	"posts": [
 		{
+			"id": 225977,
+			"title": "Cómo destacar en tu práctica profesional con capacitación continua",
+			"slug": "como-destacar-en-tu-practica-con-capacitacion-medica-continua",
+			"permalink": "https://wp.msklatam.com/nota/e-learning/como-destacar-en-tu-practica-con-capacitacion-medica-continua/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2022/08/Foto-como-destacar-en-tu-practica-con-capacitacion-medica-continua-scaled-e1743784815871.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2022/08/Foto-como-destacar-en-tu-practica-con-capacitacion-medica-continua-scaled-e1743784815871.jpg",
+				"1000",
+				"527",
+				""
+			],
+			"excerpt": "La educación continua es esencial para expandir competencias y garantizar una práctica profesional efectiva. El conocimiento profesional en salud tiene una vida útil limitada y puede volverse obsoleto sino se actualiza, lo que puede llevar a un desempeño deficiente que implica serios riesgos para los pacientes.",
+			"date": "Abril 3, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": true,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 338339,
+					"title": "Ética hipocrática hoy: medicina con conciencia",
+					"slug": "etica-hipocratica-medicina-con-conciencia",
+					"link": "https://wp.msklatam.com/nota/medicina/etica-hipocratica-medicina-con-conciencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-etica-hipocratica-medicina-con-conciencia-scaled-e1743689643452.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 337994,
+					"title": "Últimas revelaciones científicas sobre trastorno bipolar",
+					"slug": "ultimas-revelaciones-sobre-trastorno-bipolar",
+					"link": "https://wp.msklatam.com/nota/medicina/ultimas-revelaciones-sobre-trastorno-bipolar/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-ultimas-revelaciones-sobre-trastorno-bipolar-scaled-e1743168915455.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 338031,
+					"title": "Retos laborales en el sistema de salud actual",
+					"slug": "retos-laborales-en-el-sistema-de-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/retos-laborales-en-el-sistema-de-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-retos-laborales-en-el-sistema-de-salud-scaled-e1743165884884.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 164077,
+					"title": "Lo que gana (y siente) el personal médico hoy",
+					"slug": "desigualdad-salarial-en-el-personal-medico-hoy",
+					"link": "https://wp.msklatam.com/nota/medicina/desigualdad-salarial-en-el-personal-medico-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2021/10/Foto-desigualdad-salarial-en-el-personal-medico-hoy-scaled-e1742565126361.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 213910,
+					"title": "Migración médica: entre la necesidad y la transformación",
+					"slug": "migracion-medica-entre-la-necesidad-y-la-transformacion",
+					"link": "https://wp.msklatam.com/nota/medicina/migracion-medica-entre-la-necesidad-y-la-transformacion/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/06/shutterstock_2476690065-scaled-e1742302110772.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Vera Carrasco, Oscar. (2023). La importancia de la educación médica continua en los profesionales de la salud. Cuadernos Hospital de Clínicas, 64(1), 9-11. Recuperado en 03 de abril de 2025, de http://www.scielo.org.bo/scielo.php?script=sci_arttext&pid=S1652-67762023000100001&lng=es&tlng=es."
+				},
+				{
+					"fuente": "Ríos, Norma & Mosca, Ana. (2021). Educación continua en el contexto actual, enfoque desde la enfermería. Salud, Ciencia y Tecnología. 1. 29. 10.56294/saludcyt202129. "
+				},
+				{
+					"fuente": "http://scielo.senescyt.gob.ec/pdf/rae/v4n2/2631-2816-rae-4-02-00067.pdf"
+				},
+				{
+					"fuente": "https://msklatam.com/"
+				}
+			],
+			"categories": [
+				{
+					"id": 59968,
+					"primary": true,
+					"name": "E-Learning",
+					"slug": "e-learning",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/e-learning/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59968",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1301,
+				"filter": "raw"
+			},
+			"reading_time": "7",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
 			"id": 338339,
 			"title": "Ética hipocrática hoy: medicina con conciencia",
 			"slug": "etica-hipocratica-medicina-con-conciencia",
