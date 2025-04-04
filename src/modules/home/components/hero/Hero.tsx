@@ -10,7 +10,7 @@ import Image from 'next/image';
 
 const Hero = () => {
   return (
-    <div className="relative h-[550px] w-full bg-black text-white px-4 overflow-hidden">
+    <div className="relative h-[500px] md:h-[550px] w-full bg-black text-white px-4 overflow-hidden">
       {/* --- BACKGROUND CAROUSEL --- */}
       <HeroCarousel />
 
@@ -19,20 +19,19 @@ const Hero = () => {
         <Navbar />
 
         {/* --- CONTENIDO PRINCIPAL --- */}
-        <div className="md:px-36 container mx-auto md:h-[90%] flex flex-col justify-center items-center text-center gap-4 md:items-start md:text-left md:gap-2">
-          <p className="border border-white rounded-full px-4 py-1 text-xs w-fit">Cursos</p>
+        <div className="md:px-28 px-5 py-2 container mx-auto md:h-[70%] flex flex-col justify-center items-center text-center gap-0 md:items-start md:text-left md:gap-2">
+          <p className="border border-white rounded-full px-[18px] py-2 my-4 md:my-0 text-[12px] w-fit">Cursos</p>
 
-          <div className="flex wrap w-full flex-col gap-6 md:gap-0 md:mt-0 mt-10 md:flex-row md:items-end md:justify-between">
+          <div className="flex wrap w-full flex-col gap-4 md:gap-0 md:mt-0 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-3xl md:text-5xl text-white leading-tight">
-                Cursos de medicina para <br/>
-                <span className="italic font-normal"> expandir </span> tus metas profesionales
+              <p className="text-[2rem] md:text-5xl text-white leading-none md:leading-tight md:w-[85%]">
+                Cursos de medicina para<span className="italic font-normal"> expandir </span>tus metas profesionales
               </p>
             </div>
 
             <Link
               href="#"
-              className="mt-4 md:mt-0 bg-white text-black px-6 py-3 rounded-full font-semibold text-xs md:text-base flex items-center self-center gap-2 whitespace-nowrap"
+              className="mt-4 md:mb-0 mx-6 md:mx-0 md:mt-0 w-full md:w-auto bg-white text-black px-6 py-3 rounded-full font-semibold text-sm md:text-base flex items-center self-center gap-2 whitespace-nowrap"
             >
               Comenzá tu experiencia
               <svg
