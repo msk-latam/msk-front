@@ -54,12 +54,18 @@
               </div>
 
               {/* CTA */}
-              <button className="text-[#9200AD] border border-[#9200AD] rounded-3xl px-4 py-2">
-                Crear cuenta
-              </button>
-              <button className="text-gray-700 border border-[#DBDDE2] rounded-3xl px-4 py-2">
-                Iniciar sesión
-              </button>
+              {/*temporal el HREF*/ }
+<Link href="/login?form=registerForm">
+  <button className="text-[#9200AD] border border-[#9200AD] rounded-3xl px-4 py-2">
+    Crear cuenta
+  </button>
+</Link>
+
+<Link href="/login">
+  <button className="text-gray-700 border border-[#DBDDE2] rounded-3xl px-4 py-2">
+    Iniciar sesión
+  </button>
+</Link>
             </nav>
           </div>
         </div>
