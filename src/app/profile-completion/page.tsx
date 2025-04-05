@@ -5,9 +5,7 @@ import '@/app/globals.css'
 import Navbar from '@/modules/home/components/navbar/Navbar'
 import Newsletter from '@/modules/home/components/newsletter/NewsLetter'
 import Footer from '@/modules/home/components/footer/footer'
-import LoginForm from '@/modules/login/components/loginform/LoginForm'
-
-import RegisterForm from '@/modules/login/components/loginform/RegisterForm'
+import ProfileCompletionWrapper from '@/modules/profile-completion/ProfileCompletionWrapper'
 
 export default function LoginPage() {
     const [showRegister, setShowRegister] = useState(false)
@@ -34,14 +32,7 @@ export default function LoginPage() {
        
           
             {/* Mostrar Login o Registro según el estado */}
-            {showRegister ? (
-  <RegisterForm onBack={() => setShowRegister(false)} />
-) : (
-  <LoginForm
-    onCreateAccount={() => setShowRegister(true)}
-    onBack={() => setShowRegister(false)} // <- esta línea faltaba
-  />
-)}
+            <ProfileCompletionWrapper/>
             {/* Newsletter incluido dentro del bloque para que se vea parte del fondo */}
             
           </div>

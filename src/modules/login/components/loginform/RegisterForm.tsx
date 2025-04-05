@@ -21,10 +21,11 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 
   if (submitted) {
     return (
+    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 p-4 sm:p-20 z-[10] relative overflow-visible max-w-[1600px]">
       <div className="text-center py-20">
         <div className="flex justify-center mb-6 animate-pulse">
           <div className="rounded-full bg-[#F7D6FF] p-6">
-            <img src="/icons/email-purple.svg" alt="Correo enviado" className="w-12 h-12" />
+            <img src="/images/emails/email-icon.png" alt="Correo enviado" className="w-[70px] h-[56px]" />
           </div>
         </div>
         <h2 className="text-xl font-semibold text-gray-900 mb-2">¡Listo!</h2>
@@ -33,6 +34,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
           Revisa tu bandeja de entrada, spam o correos no deseados.
         </p>
       </div>
+    </div>
     )
   }
 
