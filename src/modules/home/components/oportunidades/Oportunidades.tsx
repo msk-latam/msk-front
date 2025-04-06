@@ -1,34 +1,46 @@
-'use client';
+"use client";
 
-import React from 'react';
-import CursoCard from './cards/CursoCard';
-import { cursosMock } from './cards/data';
+import React from "react";
+import CursoCard from "./cards/CursoCard";
+import { cursosMock } from "./cards/data";
 
 const Oportunidades = () => {
   return (
     <div className="relative w-full md:px-20 bg-gray-100 md:pt-24 pb-60 z-[5] translate-y-32 md:translate-y-0">
       {/* Aumentado pb para fondo inferior */}
-      <section className="relative bg-white rounded-[40px] md:max-w-7xl mx-auto -mt-32 -mb-64 z-[5] py-10 shadow-lg">
-
-
-
-        <div className="px-5 md:px-10">
+      <section className="relative bg-white rounded-[38px] md:max-w-7xl mx-auto -mt-32 -mb-64 z-[5] pt-6 md:pt-[72px] md:pb-16 shadow-lg">
+        <div className="px-5 md:px-16 pb-6 md:mb-0">
           {/* Título y descripción */}
-          <div className="text-left mb-8 max-w-4xl">
+          <div className=" md:text-left text-center max-w-4xl px-6 gap-4 md:px-0">
             <h2 className="text-xl md:text-2xl font-medium mb-2">
-              Te damos la bienvenida a Medical & Scientific Knowledge, el lugar ideal para estudiar medicina a distancia a través de nuestros cursos de actualización.
+              Te damos la bienvenida a Medical & Scientific Knowledge, el lugar
+              ideal para estudiar medicina a distancia a través de nuestros
+              cursos de actualización.
             </h2>
             <p className="text-sm text-neutral-600">
-              Encontrá cursos de medicina y de enfermería sobre más de 20 especialidades
+              Encontrá cursos de medicina y de enfermería sobre más de 20
+              especialidades
             </p>
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-4 justify-center md:justify-start mb-8 flex-wrap">
-            {['Novedades', 'Recomendados', 'Gratuitos'].map((tab) => (
+          <div
+            className="flex md:gap-4 gap-5 overflow-x-auto scrollbar-hide md:justify-start my-6 whitespace-nowrap"
+            style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
+          >
+            <style jsx>{`
+              div::-webkit-scrollbar {
+                display: none;
+              }
+            `}</style>
+            {["Novedades", "Recomendados", "Gratuitos"].map((tab, index) => (
               <button
                 key={tab}
-                className="bg-gray-100 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition"
+                className={`md:px-4 md:py-2 px-5 py-3 rounded-full md:text-sm text-base font-medium transition flex-shrink-0 ${
+                  index === 0
+                    ? "text-black border border-gray-300"
+                    : "text-gray-500 border-transparent"
+                }`}
               >
                 {tab}
               </button>
@@ -36,12 +48,37 @@ const Oportunidades = () => {
           </div>
 
           {/* Grid de cards */}
-          <div className="hidden md:grid grid-cols-3 grid-rows-[260px_260px] gap-6">
-            <CursoCard {...cursosMock[0]} variant="large" largeWidth="col-span-1" />
-            <CursoCard {...cursosMock[1]} />
-            <CursoCard {...cursosMock[2]} />
-            <CursoCard {...cursosMock[3]} />
-            <CursoCard {...cursosMock[4]} variant="large" largeWidth="col-span-2" />
+
+          <div className="hidden md:grid grid-cols-4 gap-5 auto-rows-[310px]">
+            {/* Primera fila */}
+            <div className="col-span-2">
+              <CursoCard
+                {...cursosMock[0]}
+                variant="large"
+                className="h-full"
+              />
+            </div>
+            <div>
+              <CursoCard {...cursosMock[1]} className="h-full" />
+            </div>
+            <div>
+              <CursoCard {...cursosMock[2]} className="h-full" />
+            </div>
+
+            {/* Segunda fila */}
+            <div>
+              <CursoCard {...cursosMock[3]} className="h-full" />
+            </div>
+            <div>
+              <CursoCard {...cursosMock[4]} className="h-full" />
+            </div>
+            <div className="col-span-2">
+              <CursoCard
+                {...cursosMock[5]}
+                variant="large"
+                className="h-full"
+              />
+            </div>
           </div>
 
           {/* Grid mobile */}
@@ -52,8 +89,8 @@ const Oportunidades = () => {
           </div>
 
           {/* Ver más (solo en mobile) */}
-          <div className="mt-10 flex justify-center md:hidden">
-            <button className="px-6 py-2 bg-black text-white rounded-full font-medium">
+          <div className="mt-6 flex justify-center md:hidden">
+            <button className="px-6 py-2 w-full md:w-auto bg-black text-white rounded-full font-medium">
               Ver todos →
             </button>
           </div>
