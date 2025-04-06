@@ -40,7 +40,7 @@ const Navbar = () => {
 
         {/* --- NAV DESKTOP --- */}
         <section className="hidden md:flex justify-center py-2 mt-4">
-          <div className="flex items-center max-w-6xl w-full mx-auto pl-20 pr-4">
+          <div className="flex items-center max-w-6xl w-full mx-auto pl-2 pr-4">
             {/* Logo */}
             <figure>
               <Image
