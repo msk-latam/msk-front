@@ -157,7 +157,7 @@ const Navbar = () => {
           className="absolute w-full bg-black/90 z-20 pt-4"
           aria-label="Menú de descubrimiento"
         >
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-6xl mx-auto pb-2">
             <h3 className="text-left mb-4 uppercase tracking-wider ml-6 text-white text-xs font-semibold">
               PARTNERS
             </h3>
