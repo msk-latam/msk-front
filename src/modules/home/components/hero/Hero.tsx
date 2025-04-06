@@ -10,7 +10,7 @@ import Image from "next/image";
 
 const Hero = () => {
   return (
-    <div className="relative h-[500px] md:h-[550px] w-full bg-black text-white px-4 overflow-hidden">
+    <div className="relative h-[550px] w-full bg-black text-white px-4 overflow-hidden">
       {/* --- BACKGROUND CAROUSEL --- */}
       <HeroCarousel />
 
@@ -19,7 +19,7 @@ const Hero = () => {
         <Navbar />
 
         {/* --- CONTENIDO PRINCIPAL --- */}
-        <div className="md:px-28 px-5 py-2 md:py-12 container mx-auto md:h-[70%] flex flex-col justify-center items-center md:justify-end text-center gap-0 md:items-start md:text-left md:gap-2">
+        <div className="md:px-28 px-5 py-3 md:py-12 container mx-auto md:h-[70%] flex flex-col justify-center items-center md:justify-end text-center gap-0 md:items-start md:text-left md:gap-2">
           <p className="border border-white rounded-full px-[18px] py-2 my-4 md:my-0 text-[12px] w-fit">
             Cursos
           </p>
