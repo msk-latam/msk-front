@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import React from 'react';
+import Image from "next/image";
+import React from "react";
 
 type CursoCardProps = {
-  variant?: 'small' | 'large';
+  variant?: "small" | "large";
   className?: string;
   largeWidth?: string;
   id: number;
@@ -18,9 +18,9 @@ type CursoCardProps = {
 };
 
 const CursoCard = ({
-  variant = 'small',
-  className = '',
-  largeWidth = '',
+  variant = "small",
+  className = "",
+  largeWidth = "",
   categoria,
   titulo,
   temas,
@@ -30,7 +30,11 @@ const CursoCard = ({
   imagen,
 }: CursoCardProps) => {
   return (
-    <div className={`relative rounded-2xl overflow-hidden shadow-md bg-black text-white ${variant === 'large' ? largeWidth : ''} ${className}`}>
+    <div
+      className={`relative rounded-2xl overflow-hidden shadow-md bg-black text-white ${
+        variant === "large" ? largeWidth : ""
+      } ${className}`}
+    >
       <div className="relative w-[345px] h-[399px] md:w-full md:h-full">
         <Image
           src={imagen}
@@ -43,18 +47,17 @@ const CursoCard = ({
             {categoria}
           </span>
           <h3 className="font-semibold text-2xl leading-tight">{titulo}</h3>
-          <section className='flex flex-col gap-1'>
-          <p className="text-sm opacity-80">
-            {temas} temas
+          <section className="flex flex-col gap-1">
+            <p className="text-sm opacity-80">{temas} temas</p>
+            <p className="text-sm opacity-80"> {horas} horas</p>
+            <p className="text-sm opacity-80">
+              {" "}
+              {inscriptos.toLocaleString()} inscriptos
             </p>
-            <p className="text-sm opacity-80"> {horas} horas
-              </p>
-              <p className="text-sm opacity-80"> {inscriptos.toLocaleString()} inscriptos
-          </p>
           </section>
           <section>
-          <p className="text-xs opacity-60">Certificación</p>
-          <p className="text-sm opacity-60">{certificado}</p>
+            <p className="text-xs opacity-60">Certificación</p>
+            <p className="text-sm opacity-60">{certificado}</p>
           </section>
         </div>
       </div>

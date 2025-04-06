@@ -21,49 +21,47 @@ const Navbar = () => {
         }`}
       >
         {/* --- NAV MOBILE --- */}
-{/* --- NAV MOBILE --- */}
-<section className="flex justify-start items-center mt-2 py-5 px-6 md:hidden relative">
-  {/* Custom Hamburger Icon */}
-  <button
-  aria-label="Menu"
-  className="relative w-6 h-6 flex items-center justify-center z-20"
-  onClick={toggleDiscover}
->
-  {/* Línea superior */}
-  <span
-    className={`absolute h-0.5 w-5 bg-white transition-all duration-300 ease-in-out ${
-      isDiscoverOpen ? 'rotate-45 translate-y-0' : '-translate-y-2'
-    }`}
-  ></span>
+        {/* --- NAV MOBILE --- */}
+        <section className="flex justify-start items-center mt-2 py-5 px-6 md:hidden relative">
+          {/* Custom Hamburger Icon */}
+          <button
+            aria-label="Menu"
+            className="relative w-6 h-6 flex items-center justify-center z-20"
+            onClick={toggleDiscover}
+          >
+            {/* Línea superior */}
+            <span
+              className={`absolute h-0.5 w-5 bg-white transition-all duration-300 ease-in-out ${
+                isDiscoverOpen ? "rotate-45 translate-y-0" : "-translate-y-2"
+              }`}
+            ></span>
 
-  {/* Línea del medio (más corta) */}
-  <span
-    className={`absolute left-[2px] h-0.5 w-3 bg-white transition-all duration-300 ease-in-out ${
-      isDiscoverOpen ? 'opacity-0' : 'opacity-100'
-    }`}
-  ></span>
+            {/* Línea del medio (más corta) */}
+            <span
+              className={`absolute left-[2px] h-0.5 w-3 bg-white transition-all duration-300 ease-in-out ${
+                isDiscoverOpen ? "opacity-0" : "opacity-100"
+              }`}
+            ></span>
 
-  {/* Línea inferior */}
-  <span
-    className={`absolute h-0.5 w-5 bg-white transition-all duration-300 ease-in-out ${
-      isDiscoverOpen ? '-rotate-45 translate-y-0' : 'translate-y-2'
-    }`}
-  ></span>
-</button>
+            {/* Línea inferior */}
+            <span
+              className={`absolute h-0.5 w-5 bg-white transition-all duration-300 ease-in-out ${
+                isDiscoverOpen ? "-rotate-45 translate-y-0" : "translate-y-2"
+              }`}
+            ></span>
+          </button>
 
-
-  {/* Logo centrado */}
-  <div className="m-auto pr-7 pb-1">
-    <Image
-      src="/images/msk-logo/logo.png"
-      alt="MSK"
-      height={30}
-      width={64}
-      priority
-    />
-  </div>
-</section>
-
+          {/* Logo centrado */}
+          <div className="m-auto pr-7 pb-1">
+            <Image
+              src="/images/msk-logo/logo.png"
+              alt="MSK"
+              height={30}
+              width={64}
+              priority
+            />
+          </div>
+        </section>
 
         {/* --- NAV DESKTOP --- */}
         <section className="hidden md:flex justify-center py-2 mt-4">

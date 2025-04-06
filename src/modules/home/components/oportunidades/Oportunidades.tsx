@@ -49,37 +49,40 @@ const Oportunidades = () => {
 
           {/* Grid de cards */}
 
-          <div className="hidden md:w-full md:grid gap-5 auto-rows-[399px]" style={{ gridTemplateColumns: "1fr 1fr 84px 1fr 1fr" }}>
-  {/* Primera fila */}
-  <div className="col-span-3">
-    <CursoCard
-      {...cursosMock[0]}
-      variant="large"
-      className="h-full"
-    />
-  </div>
-  <div>
-    <CursoCard {...cursosMock[1]} className="h-full" />
-  </div>
-  <div>
-    <CursoCard {...cursosMock[2]} className="h-full" />
-  </div>
+          <div
+            className="hidden md:w-full md:grid gap-5 auto-rows-[399px]"
+            style={{ gridTemplateColumns: "1fr 1fr 84px 1fr 1fr" }}
+          >
+            {/* Primera fila */}
+            <div className="col-span-3">
+              <CursoCard
+                {...cursosMock[0]}
+                variant="large"
+                className="h-full"
+              />
+            </div>
+            <div>
+              <CursoCard {...cursosMock[1]} className="h-full" />
+            </div>
+            <div>
+              <CursoCard {...cursosMock[2]} className="h-full" />
+            </div>
 
-  {/* Segunda fila */}
-  <div>
-    <CursoCard {...cursosMock[3]} className="h-full" />
-  </div>
-  <div>
-    <CursoCard {...cursosMock[4]} className="h-full" />
-  </div>
-  <div className="col-span-3">
-    <CursoCard
-      {...cursosMock[5]}
-      variant="large"
-      className="h-full"
-    />
-  </div>
-</div>
+            {/* Segunda fila */}
+            <div>
+              <CursoCard {...cursosMock[3]} className="h-full" />
+            </div>
+            <div>
+              <CursoCard {...cursosMock[4]} className="h-full" />
+            </div>
+            <div className="col-span-3">
+              <CursoCard
+                {...cursosMock[5]}
+                variant="large"
+                className="h-full"
+              />
+            </div>
+          </div>
 
           {/* Grid mobile */}
           <div className="grid gap-6 md:hidden">
