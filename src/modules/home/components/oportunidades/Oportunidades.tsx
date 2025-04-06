@@ -8,7 +8,7 @@ const Oportunidades = () => {
   return (
     <div className="relative w-full md:px-20 bg-gray-100 md:pt-24 pb-60 z-[5] translate-y-32 md:translate-y-0">
       {/* Aumentado pb para fondo inferior */}
-      <section className="relative bg-white rounded-[38px] md:max-w-7xl mx-auto -mt-32 -mb-64 z-[5] pt-6 md:pt-[72px] md:pb-16 shadow-lg">
+      <section className="relative bg-white rounded-[38px] -mt-32 -mb-64 z-[5] pt-6 md:pt-[72px] md:pb-16 shadow-lg">
         <div className="px-5 md:px-16 pb-6 md:mb-0">
           {/* Título y descripción */}
           <div className=" md:text-left text-center max-w-4xl px-6 gap-4 md:px-0">
@@ -49,37 +49,37 @@ const Oportunidades = () => {
 
           {/* Grid de cards */}
 
-          <div className="hidden md:grid grid-cols-4 gap-5 auto-rows-[310px]">
-            {/* Primera fila */}
-            <div className="col-span-2">
-              <CursoCard
-                {...cursosMock[0]}
-                variant="large"
-                className="h-full"
-              />
-            </div>
-            <div>
-              <CursoCard {...cursosMock[1]} className="h-full" />
-            </div>
-            <div>
-              <CursoCard {...cursosMock[2]} className="h-full" />
-            </div>
+          <div className="hidden md:w-full md:grid gap-5 auto-rows-[399px]" style={{ gridTemplateColumns: "1fr 1fr 84px 1fr 1fr" }}>
+  {/* Primera fila */}
+  <div className="col-span-3">
+    <CursoCard
+      {...cursosMock[0]}
+      variant="large"
+      className="h-full"
+    />
+  </div>
+  <div>
+    <CursoCard {...cursosMock[1]} className="h-full" />
+  </div>
+  <div>
+    <CursoCard {...cursosMock[2]} className="h-full" />
+  </div>
 
-            {/* Segunda fila */}
-            <div>
-              <CursoCard {...cursosMock[3]} className="h-full" />
-            </div>
-            <div>
-              <CursoCard {...cursosMock[4]} className="h-full" />
-            </div>
-            <div className="col-span-2">
-              <CursoCard
-                {...cursosMock[5]}
-                variant="large"
-                className="h-full"
-              />
-            </div>
-          </div>
+  {/* Segunda fila */}
+  <div>
+    <CursoCard {...cursosMock[3]} className="h-full" />
+  </div>
+  <div>
+    <CursoCard {...cursosMock[4]} className="h-full" />
+  </div>
+  <div className="col-span-3">
+    <CursoCard
+      {...cursosMock[5]}
+      variant="large"
+      className="h-full"
+    />
+  </div>
+</div>
 
           {/* Grid mobile */}
           <div className="grid gap-6 md:hidden">
