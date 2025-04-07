@@ -1,56 +1,45 @@
 'use client'
 
-import Navbar from '@/modules/home/components/navbar/Navbar'
-import Footer from '@/modules/home/components/footer/footer'
-import ProductHeader from './components/ProductHeader'
-import ProductSummary from './components/ProductSummary'
-import ProductDescription from './components/ProductDescription'
-import ProductHighlights from './components/ProductHighlights'
-import ProductTeachers from './components/ProductTeachers'
-import ProductCertificate from './components/ProductCertificate'
-import ProductSyllabus from './components/ProductSyllabus'
-import ProductSupportForm from './components/ProductSupportForm'
-import ProductTestimonials from './components/ProductTestimonials'
+interface ProductHeaderProps {
+  title?: string
+  categories?: string[]
+  certification?: boolean
+}
 
-export default function ProductPage() {
+export default function ProductHeader({
+  title = "Curso superior de emergentología",
+  categories = ["Emergentología", "Medicina familiar", "Medicina general"],
+  certification = true,
+}: ProductHeaderProps) {
   return (
-    <>
-      {/* HEADER CON GRADIENTE COMO EN LOGIN */}
-      <div
-        className="w-full"
-        style={{
-          background: `linear-gradient(88.79deg, #9200AD -25.91%, #7B8CC3 -0.1%, #700084 31.13%, #B814D6 58.59%, #3B476C 109.69%, #4D005B 177.81%, #9200AD 245.71%), 
-                       linear-gradient(360deg, rgba(0, 0, 0, 0) -76.85%, rgba(0, 0, 0, 0.2) 113.39%)`,
-        }}
-      >
-        <Navbar />
-        <ProductHeader />
+    <div className="px-4 md:px-10 lg:px-20 py-10 max-w-screen-xl mx-auto text-white">
+      <nav className="text-sm text-white/80 mb-4">
+        <span className="mr-2">Tienda</span>
+        <span className="mr-2">/</span>
+        <span className="mr-2">Medicina general</span>
+        <span className="mr-2">/</span>
+        <span className="text-white font-medium">{title}</span>
+      </nav>
+
+      <h1 className="text-3xl sm:text-4xl font-bold mb-2">{title}</h1>
+
+      {certification && (
+        <p className="flex items-center gap-2 text-sm text-white/90 mb-4">
+          <img src="/icons/certificado.svg" className="w-4 h-4" alt="certificado" />
+          Con certificación
+        </p>
+      )}
+
+      <div className="flex flex-wrap gap-2">
+        {categories.map((cat, idx) => (
+          <span
+            key={idx}
+            className="bg-white/20 text-white text-xs px-3 py-1 rounded-full"
+          >
+            {cat}
+          </span>
+        ))}
       </div>
-
-      {/* CONTENIDO PRINCIPAL */}
-      <main className="bg-gray-50">
-        <div className="flex flex-col-reverse lg:flex-row gap-8 px-4 md:px-10 lg:px-20 py-12 max-w-screen-xl mx-auto">
-          {/* Columna izquierda */}
-          <div className="w-full lg:w-2/3 space-y-12">
-            <ProductDescription />
-            <ProductHighlights />
-            <ProductTeachers />
-            <ProductCertificate />
-            <ProductSyllabus />
-            <ProductSupportForm />
-          </div>
-
-          {/* Columna derecha */}
-          <aside className="w-full lg:w-1/3">
-            <ProductSummary />
-          </aside>
-        </div>
-
-        {/* Testimonios */}
-        <ProductTestimonials />
-      </main>
-
-      <Footer />
-    </>
+    </div>
   )
 }
