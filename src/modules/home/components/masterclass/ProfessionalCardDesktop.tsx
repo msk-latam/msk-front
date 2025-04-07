@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const ProfessionalCardDesktop = ({
   pro,
@@ -11,20 +12,26 @@ const ProfessionalCardDesktop = ({
   <div
     className={`hidden md:flex flex-col relative bg-white text-black rounded-[30px] w-[430px] h-[556px] py-5 px-6 gap-5 shadow-xl border border-gray-200 ${className}`}
   >
-    <div className="text-sm text-black flex flex-row justify-between">
-      NUESTRO EQUIPO
-      <div className="flex items-center gap-2 text-black">
-        <span className="text-xs">
-          {current + 1} / {total}
-        </span>
-        <div onClick={onPrev} className="hover:text-gray-400">
-          ◀
-        </div>
-        <button onClick={onNext} className="hover:text-gray-400">
-          ▶
-        </button>
-      </div>
-    </div>
+<div className="text-sm text-black flex flex-row justify-between">
+  <p className="my-auto">NUESTRO EQUIPO</p>
+  <div className="flex items-center gap-4 text-black bg-white">
+    <button
+      onClick={onPrev}
+      className="p-1 rounded-full hover:bg-gray-100 transition"
+    >
+      <ChevronLeft size={18} />
+    </button>
+    <span className="text-sm font-medium">
+      {current + 1} / {total}
+    </span>
+    <button
+      onClick={onNext}
+      className="p-1 rounded-full hover:bg-gray-100 transition"
+    >
+      <ChevronRight size={18} />
+    </button>
+  </div>
+</div>
     <div className="relative w-full h-[360px] overflow-hidden rounded-xl">
       <Image
         src={pro.imagenDesktop}
