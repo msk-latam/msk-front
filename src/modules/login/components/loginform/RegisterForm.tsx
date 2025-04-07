@@ -39,12 +39,12 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
   }
 
   return (
-    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 p-4 sm:p-20 z-[10] relative overflow-visible max-w-[1600px]">
-    <section className="w-full" style={{ fontFamily: 'Raleway, sans-serif' }}>
+    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 p-4 sm:p-20 z-[10] md:mb-0 min-h-fit    relative overflow-visible max-w-[1600px]">
+    <section className="w-full min-h-fit mb-[70px] md:mb-[0px]" style={{ fontFamily: 'Raleway, sans-serif' }}>
       {/* Botón de volver */}
       <button
         onClick={onBack}
-        className="hidden sm:flex absolute top-6 left-6 items-center justify-center w-10 h-10 rounded-full border border-gray-300 hover:bg-gray-100 transition"
+        className="absolute top-4 left-4 flex z-10 items-center justify-center w-10 h-10 rounded-full border border-gray-300 hover:bg-gray-100 transition absolute top-4 left-4 flex z-10 "
       >
         <svg
           width="6"

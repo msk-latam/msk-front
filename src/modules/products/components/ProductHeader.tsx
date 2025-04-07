@@ -1,0 +1,56 @@
+'use client'
+
+import Navbar from '@/modules/home/components/navbar/Navbar'
+import Footer from '@/modules/home/components/footer/footer'
+import ProductHeader from './components/ProductHeader'
+import ProductSummary from './components/ProductSummary'
+import ProductDescription from './components/ProductDescription'
+import ProductHighlights from './components/ProductHighlights'
+import ProductTeachers from './components/ProductTeachers'
+import ProductCertificate from './components/ProductCertificate'
+import ProductSyllabus from './components/ProductSyllabus'
+import ProductSupportForm from './components/ProductSupportForm'
+import ProductTestimonials from './components/ProductTestimonials'
+
+export default function ProductPage() {
+  return (
+    <>
+      {/* HEADER CON GRADIENTE COMO EN LOGIN */}
+      <div
+        className="w-full"
+        style={{
+          background: `linear-gradient(88.79deg, #9200AD -25.91%, #7B8CC3 -0.1%, #700084 31.13%, #B814D6 58.59%, #3B476C 109.69%, #4D005B 177.81%, #9200AD 245.71%), 
+                       linear-gradient(360deg, rgba(0, 0, 0, 0) -76.85%, rgba(0, 0, 0, 0.2) 113.39%)`,
+        }}
+      >
+        <Navbar />
+        <ProductHeader />
+      </div>
+
+      {/* CONTENIDO PRINCIPAL */}
+      <main className="bg-gray-50">
+        <div className="flex flex-col-reverse lg:flex-row gap-8 px-4 md:px-10 lg:px-20 py-12 max-w-screen-xl mx-auto">
+          {/* Columna izquierda */}
+          <div className="w-full lg:w-2/3 space-y-12">
+            <ProductDescription />
+            <ProductHighlights />
+            <ProductTeachers />
+            <ProductCertificate />
+            <ProductSyllabus />
+            <ProductSupportForm />
+          </div>
+
+          {/* Columna derecha */}
+          <aside className="w-full lg:w-1/3">
+            <ProductSummary />
+          </aside>
+        </div>
+
+        {/* Testimonios */}
+        <ProductTestimonials />
+      </main>
+
+      <Footer />
+    </>
+  )
+}

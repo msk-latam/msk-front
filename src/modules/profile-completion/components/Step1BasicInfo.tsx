@@ -29,7 +29,7 @@ export default function Step1BasicInfo({ data, onNext, onSkip, onBack, onUpdate 
 
   return (
     
-      <section className="w-full" style={{ fontFamily: 'Raleway, sans-serif' }}>
+      <section className="w-full min-h-fit mb-[70px] md:mb-[0px]" style={{ fontFamily: 'Raleway, sans-serif' }}>
         {onBack && (
           <button
             onClick={onBack}

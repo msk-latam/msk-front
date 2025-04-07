@@ -1,0 +1,89 @@
+'use client'
+
+import { useState } from 'react'
+
+export default function NewPasswordForm() {
+  const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+
+  if (submitted) {
+    return (
+      <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:mb-24 p-4 sm:p-20 pb-[80px] md:pb-0 z-[10] relative overflow-visible max-w-[1600px] min-h-fit h-[550px] flex md:items-center justify-center">
+        <section
+          className="w-full max-w-[1632px] relative z-[1] mx-auto px-4 py-6 sm:py-12 text-center"
+          style={{ fontFamily: 'Raleway, sans-serif' }}
+        >
+          <div className="flex justify-center mb-6">
+            <div className="rounded-full bg-[#F7D6FF] p-6">
+              <img src="/images/emails/email-icon.png" alt="Listo" className="w-[70px] h-[56px]" />
+            </div>
+          </div>
+
+          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">¡Listo!</h2>
+          <p className="text-sm text-gray-600 max-w-md mx-auto mb-4">
+            Ya confirmaste tu e-mail. En breve recibirás un correo con tus credenciales de <strong>Medical & Scientific Knowledge</strong>.
+          </p>
+
+          <button className="bg-purple-700 hover:bg-purple-800 text-white py-2 px-6 rounded-[20px]">
+            Seguir navegando
+          </button>
+        </section>
+      </div>
+    )
+  }
+
+  return (
+    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:mb-24 p-4 sm:p-20 pb-[80px] md:pb-0 z-[10] relative overflow-visible max-w-[1600px] min-h-fit h-[550px] flex md:items-center justify-center">
+      <section
+        className="w-full max-w-[1632px] relative z-[1] mx-auto px-4 py-6 sm:py-12"
+        style={{ fontFamily: 'Raleway, sans-serif' }}
+      >
+        <div className="text-center mb-6">
+          <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900">Cambiar contraseña</h1>
+          <p className="text-sm text-gray-500 mt-1">Elige una nueva clave para iniciar sesión</p>
+        </div>
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            setSubmitted(true)
+          }}
+          className="max-w-md mx-auto space-y-5"
+        >
+          <div>
+            <label className="block text-sm font-medium text-gray-700 text-left mb-1">
+              Nueva contraseña
+            </label>
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Ingresar nueva contraseña"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full rounded-[20px] border border-gray-300 p-2 pr-10 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              />
+              <button
+                type="button"
+                className="absolute right-3 top-2.5 text-gray-500"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                👁
+              </button>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            disabled={password.trim() === ''}
+            className={`w-full text-white py-2 px-4 rounded-[20px] transition ${
+              password.trim() !== '' ? 'bg-purple-600 hover:bg-purple-700' : 'bg-gray-300 cursor-not-allowed'
+            }`}
+          >
+            Guardar cambios
+          </button>
+        </form>
+      </section>
+    </div>
+  )
+}
