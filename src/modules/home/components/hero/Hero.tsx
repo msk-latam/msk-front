@@ -19,7 +19,7 @@ const Hero = () => {
         <Navbar />
 
         {/* --- CONTENIDO PRINCIPAL --- */}
-        <div className="md:px-28 px-5 py-3 md:py-12 container mx-auto md:h-[70%] flex flex-col justify-center items-center md:justify-end text-center gap-0 md:items-start md:text-left md:gap-2">
+        <div className="md:px-28 px-5 py-3 md:mt-5 md:py-0 container mx-auto md:h-[70%] flex flex-col justify-center items-center md:justify-end text-center gap-0 md:items-start md:text-left md:gap-2">
           <p className="border border-white rounded-full px-[18px] py-2 my-4 md:my-0 text-[12px] w-fit">
             Cursos
           </p>
