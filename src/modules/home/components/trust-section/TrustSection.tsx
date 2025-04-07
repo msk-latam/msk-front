@@ -103,15 +103,15 @@ const TrustSection = () => {
         {/* Cifras */}
         <div className="flex flex-col pr-5 md:pr-0 md:flex-row justify-between text-center mb-10 gap-6">
           <div>
-            <p className="text-[34px] md:text-[38px] font-bold">+11.000</p>
+            <p className="text-[34px] md:text-[38px] text-start font-bold">+11.000</p>
             <p className="text-sm text-neutral-600">profesionales capacitados</p>
           </div>
           <div>
-            <p className="text-[34px] md:text-[38px] font-bold">+50</p>
+            <p className="text-[34px] md:text-[38px] text-start font-bold">+50</p>
             <p className="text-sm md:text-lg text-neutral-600">capacitaciones disponibles</p>
           </div>
           <div>
-            <p className="text-[34px] md:text-[38px] font-bold">+200</p>
+            <p className="text-[34px] md:text-[38px] text-start font-bold">+200</p>
             <p className="text-sm md:text-lg text-neutral-600">expertos colaborando</p>
           </div>
         </div>
@@ -126,10 +126,10 @@ const TrustSection = () => {
                   alt={testimonial.name}
                   className="w-10 h-10 rounded-full object-cover border border-white shadow"
                 />
-                <p className="text-xs text-neutral-500 font-semibold">{testimonial.name}</p>
+                <p className="text-xs md:text-sm text-neutral-500 font-semibold">{testimonial.name}</p>
               </div>
-              <p className="text-sm text-neutral-700 mb-4">{testimonial.content}</p>
-              <p className="text-right text-sm font-medium mt-auto">{testimonial.rating}</p>
+              <p className="text-lg md:text-xl text-neutral-700 mb-4">{testimonial.content}</p>
+              <p className="text-right text-xs font-medium mt-auto">{testimonial.rating}</p>
             </div>
           ))}
         </div>
