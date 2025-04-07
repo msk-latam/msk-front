@@ -7,6 +7,151 @@
 	"total_products": 262,
 	"posts": [
 		{
+			"id": 338757,
+			"title": "Cómo mejorar los sistemas de salud: un panorama actual",
+			"slug": "actualidad-de-los-sistemas-de-salud-en-latinoamerica",
+			"permalink": "https://wp.msklatam.com/nota/medicina/actualidad-de-los-sistemas-de-salud-en-latinoamerica/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/04/shutterstock_1186830211-scaled-e1744041787582.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/04/shutterstock_1186830211-scaled-e1744041787582.jpg",
+				"1000",
+				"564",
+				""
+			],
+			"excerpt": "Lee este artículo por el Día Mundial de la Salud y obtén una visión actualizada de los problemas más críticos de salud pública en Latinoamérica y de las estrategias que organismos como la OPS están impulsando para superarlos en el corto y mediano plazo.",
+			"date": "Abril 6, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 225977,
+					"title": "Cómo destacar en tu práctica profesional con capacitación continua",
+					"slug": "como-destacar-en-tu-practica-con-capacitacion-medica-continua",
+					"link": "https://wp.msklatam.com/nota/e-learning/como-destacar-en-tu-practica-con-capacitacion-medica-continua/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/08/Foto-como-destacar-en-tu-practica-con-capacitacion-medica-continua-scaled-e1743784815871.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 338339,
+					"title": "Ética hipocrática hoy: medicina con conciencia",
+					"slug": "etica-hipocratica-medicina-con-conciencia",
+					"link": "https://wp.msklatam.com/nota/medicina/etica-hipocratica-medicina-con-conciencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-etica-hipocratica-medicina-con-conciencia-scaled-e1743689643452.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 337994,
+					"title": "Últimas revelaciones científicas sobre trastorno bipolar",
+					"slug": "ultimas-revelaciones-sobre-trastorno-bipolar",
+					"link": "https://wp.msklatam.com/nota/medicina/ultimas-revelaciones-sobre-trastorno-bipolar/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-ultimas-revelaciones-sobre-trastorno-bipolar-scaled-e1743168915455.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 338031,
+					"title": "Retos laborales en el sistema de salud actual",
+					"slug": "retos-laborales-en-el-sistema-de-salud",
+					"link": "https://wp.msklatam.com/nota/medicina/retos-laborales-en-el-sistema-de-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-retos-laborales-en-el-sistema-de-salud-scaled-e1743165884884.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 164077,
+					"title": "Lo que gana (y siente) el personal médico hoy",
+					"slug": "desigualdad-salarial-en-el-personal-medico-hoy",
+					"link": "https://wp.msklatam.com/nota/medicina/desigualdad-salarial-en-el-personal-medico-hoy/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2021/10/Foto-desigualdad-salarial-en-el-personal-medico-hoy-scaled-e1742565126361.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "https://www.paho.org/es/noticias/4-3-2025-nueve-paises-america-latina-caribe-intensifican-sus-esfuerzos-para-frenar"
+				},
+				{
+					"fuente": "https://www.paho.org/es/noticias/5-3-2025-director-ops-subraya-necesidad-abordar-desafios-salud-publica-america-latina"
+				},
+				{
+					"fuente": "https://www.paho.org/es/noticias/26-3-2025-pesar-disminucion-general-mortalidad-prematura-americas-solo-cinco-paises-estan"
+				},
+				{
+					"fuente": "https://iris.paho.org/bitstream/handle/10665.2/61781/OPSEIHHA240006_spa.pdf?sequence=1&isAllowed=y"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				},
+				{
+					"id": 1611,
+					"name": "Enfermería",
+					"slug": "enfermeria",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/enfermeria/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1301,
+				"filter": "raw"
+			},
+			"reading_time": "9",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
 			"id": 225977,
 			"title": "Cómo destacar en tu práctica profesional con capacitación continua",
 			"slug": "como-destacar-en-tu-practica-con-capacitacion-medica-continua",
