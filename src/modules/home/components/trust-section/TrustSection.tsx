@@ -103,15 +103,15 @@ const TrustSection = () => {
         {/* Cifras */}
         <div className="flex flex-col pr-5 md:pr-0 md:flex-row justify-between text-center mb-10 gap-6">
           <div>
-            <p className="text-[34px] md:text-[38px] text-start font-bold">+11.000</p>
+            <p className="text-[34px] md:text-[38px] md:text-start font-bold">+11.000</p>
             <p className="text-sm text-neutral-600">profesionales capacitados</p>
           </div>
           <div>
-            <p className="text-[34px] md:text-[38px] text-start font-bold">+50</p>
+            <p className="text-[34px] md:text-[38px] md:text-start font-bold">+50</p>
             <p className="text-sm md:text-lg text-neutral-600">capacitaciones disponibles</p>
           </div>
           <div>
-            <p className="text-[34px] md:text-[38px] text-start font-bold">+200</p>
+            <p className="text-[34px] md:text-[38px] md:text-start font-bold">+200</p>
             <p className="text-sm md:text-lg text-neutral-600">expertos colaborando</p>
           </div>
         </div>
