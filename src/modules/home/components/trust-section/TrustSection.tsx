@@ -91,7 +91,7 @@ const TrustSection = () => {
   }
 
   return (
-    <div className="relative w-full bg-gray-100 pt-24 pb-60 h-[1400px] md:h-[700px] z-[5]">
+    <div className="relative w-full bg-gray-100 pt-24 pb-60 h-[1200px] md:h-[850px] z-[5]">
       <section className="relative bg-white rounded-[38px] md:p-[72px] md:px-[104px] -mt-40 mb-16 z-[50] py-10 pl-5 md:mx-20 shadow-lg">
         <h2 className="text-center pr-5 md:pr-0 md:text-left text-2xl md:text-[34px] font-semibold mb-4">
           Nos avala nuestra amplia trayectoria y experiencia
@@ -139,17 +139,17 @@ const TrustSection = () => {
       </section>
 
       {/* Logos */}
-      <section className="relative bg-white rounded-[40px] max-w-7xl mx-auto -mt-24 translate-y-[60px] z-[60] py-10 px-5 md:px-10 shadow-lg">
-        <h2 className="text-center text-xl md:text-2xl font-semibold mb-6">
+      <section className="relative bg-white rounded-[40px] md:mx-20 -mt-24 translate-y-[60px] z-[60] py-10 px-5 md:px-10 md:gap-4 shadow-lg">
+        <h2 className="text-center text-xl md:text-2xl font-semibold mb-7">
           Nos respaldan prestigiosas instituciones de todo el mundo con sus certificaciones
         </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 items-center justify-items-center">
-          <img src="https://via.placeholder.com/120x40?text=Tropos" alt="Tropos" width={120} height={40} />
-          <img src="https://via.placeholder.com/120x40?text=Colegio" alt="Colegio" width={120} height={40} />
-          <img src="https://via.placeholder.com/120x40?text=American+College" alt="American College" width={120} height={40} />
-          <img src="https://via.placeholder.com/120x40?text=EUNEIZ" alt="EUNEIZ" width={120} height={40} />
-          <img src="https://via.placeholder.com/120x40?text=CONAMEGE" alt="CONAMEGE" width={120} height={40} />
-          <img src="https://via.placeholder.com/120x40?text=AFEME" alt="AFEME" width={120} height={40} />
+        <div className="grid grid-cols-2 gap-6 items-center justify-items-center w-full md:mx-auto md:w-full md:flex md:flex-row md:gap-4">
+          <img src="https://via.placeholder.com/120x40?text=Tropos" alt="Tropos" width={224} height={140} className='bg-[#f9fafe] rounded-[30px]' />
+          <img src="https://via.placeholder.com/120x40?text=Colegio" alt="Colegio" width={224} height={140} className='bg-[#f9fafe] rounded-[30px]'/>
+          <img src="https://via.placeholder.com/120x40?text=American+College" alt="American College" width={224} height={140} className='bg-[#f9fafe] rounded-[30px]'/>
+          <img src="https://via.placeholder.com/120x40?text=EUNEIZ" alt="EUNEIZ" width={224} height={140} className='bg-[#f9fafe] rounded-[30px]'/>
+          <img src="https://via.placeholder.com/120x40?text=CONAMEGE" alt="CONAMEGE" width={224} height={140} className='bg-[#f9fafe] rounded-[30px]' />
+          <img src="https://via.placeholder.com/120x40?text=AFEME" alt="AFEME" width={224} height={140} className='bg-[#f9fafe] rounded-[30px]'/>
         </div>
       </section>
     </div>
