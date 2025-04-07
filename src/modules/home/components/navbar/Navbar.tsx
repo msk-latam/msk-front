@@ -111,9 +111,7 @@ const Navbar = () => {
     { name: "CONAMEGE", logo: "/images/partners/conamege.png" },
     { name: "AFEME", logo: "/images/partners/afeme.png" },
   ];
-  const handleLoginRedirect = () => {
-    router.push("/login");
-  };
+
 
   // Componente del botón flotante "Crear Cuenta"
   const FloatingCreateAccountButton = () => (
