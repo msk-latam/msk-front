@@ -1,21 +1,49 @@
-import Image from 'next/image';
+import Image from "next/image";
 
-const ProfessionalCardDesktop = ({ pro, current, total, onPrev, onNext, className = '' }: any) => (
-  <div className={`hidden md:flex flex-col relative bg-white text-black rounded-2xl w-[400px] p-5 shadow-xl border border-gray-200 ${className}`}>
-    <div className="text-[10px] text-gray-500 mb-1">NUESTRO EQUIPO</div>
-    <div className="relative w-full h-[260px] overflow-hidden rounded-xl mb-4">
-      <Image src={pro.imagenDesktop} alt={pro.nombre} fill className="object-cover" />
+const ProfessionalCardDesktop = ({
+  pro,
+  current,
+  total,
+  onPrev,
+  onNext,
+  className = "",
+}: any) => (
+  <div
+    className={`hidden md:flex flex-col relative bg-white text-black rounded-[30px] w-[430px] h-[556px] py-5 px-6 gap-5 shadow-xl border border-gray-200 ${className}`}
+  >
+    <div className="text-sm text-black flex flex-row justify-between">
+      NUESTRO EQUIPO
+      <div className="flex items-center gap-2 text-black">
+        <span className="text-xs">
+          {current + 1} / {total}
+        </span>
+        <div onClick={onPrev} className="hover:text-gray-400">
+          ◀
+        </div>
+        <button onClick={onNext} className="hover:text-gray-400">
+          ▶
+        </button>
+      </div>
     </div>
-    <p className="text-[11px] text-gray-500 tracking-wide uppercase mb-1">{pro.especialidad}</p>
-    <p className="text-[15px] font-semibold mb-3">{pro.nombre}</p>
-    <div className="flex justify-between items-center text-xs text-gray-500 mt-auto">
+    <div className="relative w-full h-[360px] overflow-hidden rounded-xl">
+      <Image
+        src={pro.imagenDesktop}
+        alt={pro.nombre}
+        fill
+        className="object-cover"
+      />
+    </div>
+    <div className="flex flex-col gap-[6px]">
+      <p className="text-lg text-black tracking-wide uppercase">
+        {pro.especialidad}
+      </p>
+      <p className="text-2xl font-semibold">{pro.nombre}</p>
+    </div>
+    <div className="flex justify-between items-center text-sm text-black">
       <span>NUESTRO EQUIPO</span>
-      <button className="bg-black text-white rounded-full px-3 py-1 text-[10px]">Ver perfil</button>
-    </div>
-    <div className="absolute top-3 right-4 flex items-center gap-2 text-gray-400">
-      <span className="text-[10px]">{current + 1} / {total}</span>
-      <div onClick={onPrev} className="hover:text-black">◀</div>
-      <button onClick={onNext} className="hover:text-black">▶</button>
+      <button className="bg-black text-white rounded-full py-[14px] px-6 text-base">
+        Ver perfil
+      </button>
     </div>
   </div>
 );

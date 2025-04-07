@@ -40,18 +40,18 @@ const Masterclass = () => {
         priority
       />
 
-      <div className="relative z-10 h-full w-full md:px-20 py-11 mt-8 md:py-0 md:mt-0 flex flex-col justify-center">
-        <div className="container mx-auto h-full flex flex-col justify-center gap-10 md:flex-row md:items-center md:justify-between">
+      <div className="relative z-10 h-full md:h-screen w-full py-11 mt-8 md:py-0 md:mt-0 flex flex-col justify-center md:px-20 md:mb-10">
+        <div className="h-full flex flex-col justify-center gap-10 md:flex-row md:items-center md:justify-between">
           {/* Texto desktop - IZQUIERDA */}
-          <div className="hidden md:flex flex-col gap-6 text-center md:text-left md:max-w-xl md:order-1">
-            <p className="border border-white rounded-full px-4 py-1 text-sm w-fit mx-auto md:mx-0">
+          <div className="hidden md:flex flex-col gap-16 text-center md:text-left md:max-w-2xl md:order-1">
+            <p className="border border-white rounded-full px-6 py-3 text-sm w-fit mx-auto md:mx-0">
               MASTERCLASS
             </p>
-            <div>
-              <p className="text-3xl md:text-6xl font-bold text-white leading-tight">
+            <div className="flex flex-col md:gap-6">
+              <p className="text-3xl md:text-[4rem] md:leading-none font-bold text-white leading-tight">
                 El arte de escuchar los latidos
               </p>
-              <p className="text-sm md:text-base opacity-80 mt-6">
+              <p className="text-sm md:text-lg opacity-80">
                 Aprende de la excelencia con esta masterclass a cargo del{" "}
                 <br className="hidden md:block" />
                 <strong>Dr. Ottenhof</strong>, nuestro referente mundial en
