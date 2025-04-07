@@ -16,7 +16,7 @@ const BlogSection = () => {
   const otherPosts = filteredPosts.filter((post) => !post.featured);
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 md:px-10 py-16 font-raleway">
+    <section className="w-full max-w-7xl mx-auto px-4 md:px-10 py-5 font-raleway">
       {/* Header */}
       <div className="flex flex-col gap-4 md:gap-2">
         {/* Título + Subtítulo */}
