@@ -66,9 +66,9 @@ const FaqSection = () => {
   };
 
   return (
-    <section className="w-full bg-gray-100 pt-24 font-raleway">
-      <div className=" rounded-[40px] max-w-7xl mx-auto px-6 md:px-12 py-12 ">
-        <h2 className="text-xl md:text-2xl font-semibold mb-10 text-left">Preguntas frecuentes</h2>
+    <section className="w-full bg-gray-100 font-raleway">
+      <div className=" rounded-[40px] max-w-7xl mx-auto px-6 md:px-12 pb-12 ">
+        <h2 className="text-xl md:text-2xl font-semibold mb-5 text-left">Preguntas frecuentes</h2>
 
         <div className="divide-y divide-neutral-200">
           {faqItems.map((item, index) => (

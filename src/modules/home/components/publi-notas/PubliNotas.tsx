@@ -19,7 +19,7 @@ const MskNewsSection = () => {
   });
 
   return (
-    <section className="w-full bg-gray-100 py-20 z-[1]">
+    <section className="w-full bg-gray-100 py-10 z-[1]">
       <div className="relative bg-white rounded-[40px] md:mx-20 p-6 md:p-10 shadow-lg z-[1]">
         <h2 className="text-xl md:text-2xl font-semibold mb-8">¿Qué dicen de MSK?</h2>
 
