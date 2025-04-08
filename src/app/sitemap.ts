@@ -4,7 +4,9 @@ import { getJSONPostByCountry } from './posts';
 import { staticRoutes } from '@/SEO/sitemap/staticRoutes';
 import { getBlogRoutes } from '@/SEO/sitemap/blogRoutes';
 import { getCategoryRoutes } from '@/SEO/sitemap/categoryRoutes';
+import { getProductRoutes } from '@/SEO/sitemap/productRoutes';
 export const SUPPORTED_COUNTRIES = [
+	// 'ar',
 	'bo',
 	'cl',
 	'co',
@@ -24,6 +26,7 @@ export const SUPPORTED_COUNTRIES = [
 ];
 
 export const LANGUAGES_HREFLANG: Record<string, string> = {
+	// ar: 'es-AR',
 	bo: 'es-BO',
 	cl: 'es-CL',
 	co: 'es-CO',
@@ -48,24 +51,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	let categorySlugs: Set<string> = new Set();
 	const blogRoutes = await getBlogRoutes();
 	const categoryRoutes = getCategoryRoutes(categorySlugs);
-
-	let productRoutes: MetadataRoute.Sitemap = [];
-	try {
-		const data = await getJSONTiendaByCountry(country);
-
-		if (data?.products) {
-			productRoutes = data.products.map((product: { slug: string; categories: { slug: string }[] }) => {
-				product.categories?.forEach((category) => categorySlugs.add(category.slug));
-
-				return {
-					url: `${baseUrl}/curso/${product.slug}`,
-					lastModified: new Date().toISOString(),
-				};
-			});
-		}
-	} catch (error) {
-		console.error('Error al obtener los productos:', error);
-	}
+	const productRoutes = await getProductRoutes(categorySlugs, country);
 
 	return [...staticRoutes, ...productRoutes, ...blogRoutes, ...categoryRoutes];
 }
