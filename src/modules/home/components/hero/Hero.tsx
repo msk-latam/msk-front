@@ -9,6 +9,7 @@ import Navbar from "../navbar/Navbar";
 import Image from "next/image";
 import { useHomeContent } from "@/modules/home/hooks/useHomeContent";
 import { HeroSlide } from "@/modules/home/types";
+import PopUp from "./PopUp";
 
 
 
@@ -19,7 +20,9 @@ const Hero = () => {
 
 
   return (
-    <div className="relative h-[550px] w-full bg-black text-white px-4 overflow-hidden">
+    <>
+      <PopUp/>
+    <div className="relative h-[550px] md:h-[598px] md:mt-12 w-full bg-black text-white px-4 overflow-hidden">
       {/* --- BACKGROUND CAROUSEL --- */}
       <HeroCarousel slides={slides.map((s) => s.background_image[0])} />
         
@@ -78,6 +81,7 @@ const Hero = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
