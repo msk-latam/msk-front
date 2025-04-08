@@ -99,15 +99,38 @@ export interface Professional {
 
   // FQA SECTION
 
-export type Faq = {
+  export interface Faq {
     question: string;
     answer: string;
-    id: number;
-  };
+  }
   
-  export type FaqResponse = {
-    data: Faq[];
-  };
+  export interface FaqData {
+    title: string;
+    questions: Faq[] | null;
+  }
+
+  //TrustSection
+
+  // types.ts
+
+export interface Figure {
+  figure: string;
+}
+
+export interface Opinion {
+  avatar: [string, number, number, boolean]; // URL de la imagen, tamaño en px, tamaño en px, si la imagen está optimizada
+  name: string;
+  opinion: string;
+  rating: string;
+}
+
+export interface TrustSection {
+  title: string;
+  subtitle: string;
+  figures: Figure[];
+  opinions: Opinion[];
+}
+
   
   
   

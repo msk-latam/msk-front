@@ -1,8 +1,13 @@
-import { Faq } from "@/modules/home/types";  // Import Faq type
+// services.ts
+import { FaqData } from '@/modules/home/types';
 
-export const getFaqSection = async (): Promise<Faq[]> => {
-  const res = await fetch("/api/home/faq");
-  if (!res.ok) throw new Error("Error al cargar datos de las preguntas frecuentes");
-  const data = await res.json();
-  return data.faqs;
+const API_URL = 'https://cms1.msklatam.com/wp-json/msk/v1/front/inicio?lang=es';
+
+export const fetchFaqData = async (): Promise<FaqData> => {
+  const response = await fetch(API_URL);
+  if (!response.ok) {
+    throw new Error('Error fetching FAQ data');
+  }
+  const data = await response.json();
+  return data.faqs; // Asegúrate de que "faqs" esté disponible en el JSON que recibes
 };
