@@ -107,9 +107,9 @@ const Ofertas = () => {
                 <path
                   d="M5.21582 12H19.2158M19.2158 12L12.2158 5M19.2158 12L12.2158 19"
                   stroke="white"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </span>
