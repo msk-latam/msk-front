@@ -1,16 +1,15 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-import classNames from 'classnames';
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import classNames from "classnames";
+import { useHomeContent } from "@/modules/home/hooks/useHomeContent";
 
-const slides = [
-  '/images/hero/hero.png',
-  '/images/hero/hero.png',
-  '/images/hero/hero.png',
-];
+type HeroCarouselProps = {
+  slides: string[];
+};
 
-const HeroCarousel = () => {
+const HeroCarousel = ({ slides }: HeroCarouselProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
@@ -18,7 +17,9 @@ const HeroCarousel = () => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 6000);
     return () => clearInterval(interval);
-  }, []);
+  }, [slides.length]);
+
+  if (!slides.length) return null;
 
   return (
     <div className="absolute top-0 left-0 w-full h-full z-0">
@@ -26,19 +27,17 @@ const HeroCarousel = () => {
         <div
           key={i}
           className={classNames(
-            'absolute inset-0 transition-opacity duration-1000',
+            "absolute inset-0 transition-opacity duration-1000",
             {
-              'opacity-100': i === currentSlide,
-              'opacity-0': i !== currentSlide,
+              "opacity-100": i === currentSlide,
+              "opacity-0": i !== currentSlide,
             }
           )}
         >
-          <Image
+          <img
             src={src}
             alt={`Slide ${i + 1}`}
-            fill
-            className="object-cover"
-            priority={i === 0}
+            className="absolute inset-0 object-cover w-full h-full"
           />
         </div>
       ))}
@@ -46,10 +45,9 @@ const HeroCarousel = () => {
         {slides.map((_, i) => (
           <div
             key={i}
-            className={classNames(
-              'w-2 h-2 rounded-full',
-              i === currentSlide ? 'bg-white' : 'bg-white/50'
-            )}
+            className={`w-2 h-2 rounded-full ${
+              i === currentSlide ? "bg-white" : "bg-white/50"
+            }`}
           />
         ))}
       </div>

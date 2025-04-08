@@ -25,6 +25,7 @@ const nextConfig = {
 			},
 		];
 	},
+	
 	async headers() {
 		return [
 			{
@@ -76,7 +77,12 @@ const nextConfig = {
 
 	
 	images: {
+		 
+			domains: ['es.wp.msklatam.com'],
+			unoptimized: true, // <-- Evita el intento de optimizar vía servidor Next
+		 
 		remotePatterns: [
+			
 			{
 				protocol: 'https',
 				hostname: 'images.pexels.com',
@@ -101,6 +107,12 @@ const nextConfig = {
 				port: '',
 				pathname: '/**',
 			},
+			{
+				protocol: 'https',
+				hostname: 'es.wp.msklatam.com', 
+				port: '',
+				pathname: '/**',
+			  },
 			{
 				protocol: 'https',
 				hostname: 'dev.msklatam.tech',

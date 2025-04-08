@@ -1,18 +1,30 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Menu, Search } from "react-feather";
 import HeroCarousel from "./HeroCarousel";
 import HeroHighlights from "./HeroHighlights";
 import Navbar from "../navbar/Navbar";
 import Image from "next/image";
+import { useHomeContent } from "@/modules/home/hooks/useHomeContent";
+import { HeroSlide } from "@/modules/home/types";
+
+
 
 const Hero = () => {
+  const { data } = useHomeContent();
+  const slides: HeroSlide[] = data?.slides || [];
+
+
+
   return (
     <div className="relative h-[550px] w-full bg-black text-white px-4 overflow-hidden">
       {/* --- BACKGROUND CAROUSEL --- */}
-      <HeroCarousel />
+      <HeroCarousel slides={slides.map((s) => s.background_image[0])} />
+        
+
+
 
       {/* Overlay content */}
       <div className="absolute inset-0 z-10">
@@ -21,28 +33,28 @@ const Hero = () => {
         {/* --- CONTENIDO PRINCIPAL --- */}
         <div className="md:px-28 px-5 py-3 md:mt-5 md:py-0 container mx-auto md:h-[70%] flex flex-col justify-center items-center md:justify-end text-center gap-0 md:items-start md:text-left md:gap-2">
           <p className="border border-white rounded-full px-[18px] py-2 my-4 md:my-0 text-[12px] w-fit">
-            Cursos
+            {slides[0]?.tag || "Cursos"}
           </p>
 
           <div className="flex wrap w-fit md:w-full flex-col gap-4 md:gap-0 md:mt-0 md:flex-row md:justify-between">
             <div>
               <p className="text-[2rem] md:text-5xl text-white leading-none md:leading-tight md:min-w-full">
-                Cursos de medicina para
+                {slides[0]?.title?.split("<em>")[0] || "Cursos de medicina para"}
                 <span className="italic font-normal">
                   {" "}
                   <span className="hidden md:inline">
                     <br />
                   </span>{" "}
-                  expandir{" "}
-                </span>
-                tus metas profesionales
+                  {slides[0]?.title?.match(/<em>(.*?)<\/em>/)?.[1] || "expandir"}
+                </span>{" "}
+                {slides[0]?.title?.split("</em>")[1]?.trim() || "tus metas profesionales"}
               </p>
             </div>
             <Link
-              href="#"
+              href={slides[0]?.cta?.url || "#"}
               className="mt-4 md:mb-0 mx-6 md:mx-0 md:mt-0 w-full md:w-auto bg-white text-black px-5 py-3 rounded-full font-semibold text-base flex justify-center text-center self-center gap-2 whitespace-nowrap"
             >
-              Comenzá tu experiencia
+              {slides[0]?.cta?.title || "Comenzá tu experiencia"}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
@@ -62,7 +74,7 @@ const Hero = () => {
             </Link>
           </div>
 
-          <HeroHighlights />
+          <HeroHighlights  />
         </div>
       </div>
     </div>
