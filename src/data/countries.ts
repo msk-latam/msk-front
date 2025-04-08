@@ -3,10 +3,10 @@ export const countries = [
 		id: 'mx',
 		name: 'México',
 	},
-	// {
-	// 	id: 'br',
-	// 	name: 'Brasil',
-	// },
+	{
+		id: 'br',
+		name: 'Brasil',
+	},
 	{
 		id: 'jp',
 		name: 'Japón',

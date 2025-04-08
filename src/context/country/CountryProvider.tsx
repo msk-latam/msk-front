@@ -32,10 +32,11 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 				setLoading(true);
 				let currentCountry = await api.getCountryCode();
 				// let currentCountry = 'es';
-				// console.log(`🌍 País detectado por API: ${currentCountry}`);
+				console.log(`🌍 País detectado por API: ${currentCountry}`);
 
 				let currentPathName = window.location.pathname.split('/')[1];
-				if (currentPathName === 'br') {
+				if (currentPathName === 'br' || currentPathName === 'fr') {
+					localStorage.clear();
 					window.location.href = `${window.location.origin}/`;
 					return;
 				}
