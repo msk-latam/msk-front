@@ -256,6 +256,7 @@ class ApiService {
 					// );
 					// console.log(`Datos de usuario obtenidos de la API para ${email}`);
 				}
+				console.log('datos de user', data.user);
 
 				return data.user;
 			}
