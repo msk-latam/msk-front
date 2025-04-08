@@ -3,12 +3,12 @@ import React from "react";
 
 const Institutions = () => {
   return (
-    <section className="relative bg-white rounded-[40px] md:mx-20 -mt-24 translate-y-[60px] z-[60] py-10 px-5 md:px-10 md:gap-4 shadow-lg">
+    <section className="relative bg-white rounded-[40px] md:mx-20 -mt-24 translate-y-[60px] z-[60] py-10 px-5 md:px-10 md:gap-4 shadow-lg w-">
       <h2 className="text-center text-xl md:text-2xl font-semibold mb-7">
         Nos respaldan prestigiosas instituciones de todo el mundo con sus
         certificaciones
       </h2>
-      <div className="grid grid-cols-2 gap-6 items-center justify-center w-full md:mx-auto md:w-full md:flex md:flex-row md:gap-4">
+      <div className="grid grid-cols-2 gap-6 items-center justify-center w-full md:mx-auto md:max-w-7xl md:flex md:flex-row md:flex-wrap md:gap-4">
         <div className="bg-[#f9fafe] rounded-[30px] md:px-10 md:p-6 p-6">
         <svg
               width="100"
