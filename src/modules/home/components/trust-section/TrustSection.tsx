@@ -78,19 +78,19 @@ const TrustSection = () => {
   return (
     <div className="relative w-full bg-gray-100 pt-24 pb-60 h-[1200px] md:h-[750px] z-[5]">
       <section className="relative bg-white rounded-[38px] md:p-[72px] md:px-[104px] -mt-40 mb-16 z-[50] py-10 pl-5 md:mx-20 shadow-lg">
-        <h2 className="text-center pr-5 md:pr-0 md:text-left text-2xl md:text-[34px] font-semibold mb-4">
+        <h2 className="text-center pr-5 md:pr-0 md:text-left text-2xl md:text-[34px] font-raleway font-semibold mb-4">
           {title}
         </h2>
-        <p className="text-center pr-5 md:pr-0 md:text-left text-sm text-neutral-600 mb-10">
+        <p className="text-center pr-5 md:pr-0 md:text-left text-sm font-inter text-neutral-600 mb-10">
           {subtitle}
         </p>
 
         {/* Cifras */}
-        <div className="flex flex-col pr-5 md:pr-0 md:flex-row justify-between text-center mb-10 gap-6">
+        <div className="flex flex-col pr-5 md:pr-0 md:flex-row justify-between text-center mb-10 font-lora gap-6">
           {figures.map((figure, index) => (
             <div key={index}>
               <p className="text-[34px] md:text-[38px] md:text-start font-bold">{figure.figure}</p>
-              <p className="text-sm text-neutral-600">
+              <p className="text-sm text-neutral-600 font-raleway">
                 {index === 0
                   ? 'profesionales capacitados'
                   : index === 1
