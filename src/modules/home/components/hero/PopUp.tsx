@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const PopUp = () => {
   return (
-    <section className="fixed hidden sm:flex top-0 left-0 bg-[#FFE5EC] w-full h-12 p-3 mb-20 gap-5 z-50 flex-row text-black justify-center">
+    <section className="block hidden sm:flex top-0 left-0 bg-[#FFE5EC] w-full h-12 p-3 gap-5 z-50 flex-row text-black justify-center">
       <p>
         ¡Últimos cupos disponibles en nuestro Curso Especializado en
         Fonoaudiología!
