@@ -1,40 +1,57 @@
+// app/api/home/blog/route.ts
 import { NextResponse } from "next/server";
+import { BlogPost, Category } from "@/modules/home/types";
 
 export async function GET() {
   try {
-    // Hacer el fetch a la API externa de WordPress
     const res = await fetch("https://cms1.msklatam.com/wp-json/msk/v1/front/inicio?lang=es");
 
-    // Verificar que la respuesta sea exitosa
     if (!res.ok) {
       throw new Error("Error al obtener los datos del blog");
     }
 
-    // Parsear la respuesta a formato JSON
     const json = await res.json();
 
-    // Extraer la sección del blog
     const blogSection = json?.sections?.blog || {};
+    const rawBlogArticles = blogSection.featured_blog_articles || [];
 
-    // Si no se encuentra la sección, devolver un array vacío
-    const featured_blog_articles = blogSection.featured_blog_articles || [];
+    const mappedBlogPosts: BlogPost[] = rawBlogArticles.map((post: any, index: number) => {
+      const categories: Category[] = Array.isArray(post.categories) 
+        ? post.categories.map((cat: any) => ({
+            id: cat.id || 0,
+            name: cat.name || "",
+            slug: cat.slug || ""
+          }))
+        : [];
 
-    // Opcional: Si quieres modificar las URLs de las imágenes, puedes hacerlo aquí
-    const fixImageUrls = (posts: any[]) => {
-      return posts.map((post: any) => ({
-        ...post,
-        featured_image: post.featured_image?.replace("https://es.wp.msklatam.com", "https://cms1.msklatam.com") || "/images/default-image.jpg",
-      }));
-    };
+      // 👇 Asegurarse que featured_image sea una string antes de hacer replace
+      let featuredImage = "/images/default-image.jpg";
+      if (typeof post.featured_image === "string") {
+        featuredImage = post.featured_image.replace(
+          "https://es.wp.msklatam.com",
+          "https://cms1.msklatam.com"
+        );
+      }
 
-    // Modificar las imágenes de los posts destacados
-    const modifiedBlogPosts = fixImageUrls(featured_blog_articles);
+      return {
+        id: post.id || 0,
+        title: post.title || "",
+        subtitle: post.subtitle || "",
+        author: post.author || "",
+        date: post.date || "",
+        readTime: post.time_to_read || null,
+        tags: Array.isArray(post.tags) ? post.tags : [],
+        featured_image: featuredImage,
+        link: post.link || "",
+        categories: categories,
+        featured: index === 0 ? "1" : "0"
+      };
+    });
 
-    // Devolver los datos modificados
     return NextResponse.json({
       title: blogSection.title || '',
       subtitle: blogSection.subtitle || '',
-      featured_blog_articles: modifiedBlogPosts,
+      featured_blog_articles: mappedBlogPosts,
     });
 
   } catch (error) {
