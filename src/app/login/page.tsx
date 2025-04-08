@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import '@/app/globals.css'
 
@@ -37,31 +37,33 @@ export default function LoginPage() {
       {/* 🧾 Contenido principal con formularios */}
       <main className="bg-gray-50 flex justify-center px-0 sm:px-4 relative pt-0 pb-20 -mb-[100px] md:mb-0">
         <section aria-label="Formulario de autenticación" className="w-full max-w-[1600px]">
-          {form === 'newPassword' ? (
-            <NewPasswordForm />
-          ) : showRegister ? (
-            <RegisterForm onBack={() => setShowRegister(false)} />
-          ) : showRecovery ? (
-            showRecoverySent ? (
-              <RecoveryPasswordSent
-                onContinue={() => {
-                  setShowRecovery(false)
-                  setShowRecoverySent(false)
-                }}
-              />
+          <Suspense fallback={<div>Loading...</div>}>
+            {form === 'newPassword' ? (
+              <NewPasswordForm />
+            ) : showRegister ? (
+              <RegisterForm onBack={() => setShowRegister(false)} />
+            ) : showRecovery ? (
+              showRecoverySent ? (
+                <RecoveryPasswordSent
+                  onContinue={() => {
+                    setShowRecovery(false)
+                    setShowRecoverySent(false)
+                  }}
+                />
+              ) : (
+                <RecoveryPassword
+                  onBack={() => setShowRecovery(false)}
+                  onSent={() => setShowRecoverySent(true)}
+                />
+              )
             ) : (
-              <RecoveryPassword
-                onBack={() => setShowRecovery(false)}
-                onSent={() => setShowRecoverySent(true)}
+              <LoginForm
+                onCreateAccount={() => setShowRegister(true)}
+                onForgotPassword={() => setShowRecovery(true)}
+                onBack={() => setShowRegister(false)}
               />
-            )
-          ) : (
-            <LoginForm
-              onCreateAccount={() => setShowRegister(true)}
-              onForgotPassword={() => setShowRecovery(true)}
-              onBack={() => setShowRegister(false)}
-            />
-          )}
+            )}
+          </Suspense>
         </section>
       </main>
 
