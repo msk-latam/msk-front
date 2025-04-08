@@ -100,7 +100,7 @@ export default async function RootLayout({ params, children, showHeaderFooter = 
 			<body>
 				<PasswordGate>
 					<ErrorBoundary>
-						<div className='bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200 '>
+						<div className='text-base bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200 '>
 							<GoogleCaptchaWrapper>
 								{/* <UserProvider> */}
 								<CountryProvider>

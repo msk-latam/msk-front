@@ -35,6 +35,10 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 				// console.log(`🌍 País detectado por API: ${currentCountry}`);
 
 				let currentPathName = window.location.pathname.split('/')[1];
+				if (currentPathName === 'br') {
+					window.location.href = `${window.location.origin}/`;
+					return;
+				}
 				// console.log(`📂 Pathname detectado: ${currentPathName}`);
 
 				if (currentPathName === 'mi' && window.location.pathname === '/mi-perfil') {
@@ -89,6 +93,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 	};
 	const countryNames: Record<string, string> = {
 		ar: 'Argentina',
+		br: 'Brasil',
 		mx: 'México',
 		cl: 'Chile',
 		cr: 'Costa Rica',
@@ -129,7 +134,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 						<strong>{getCountryName(userCountry)}</strong>. ¿Quieres cambiar de país?
 					</p>
 
-					<div className='ml-4 flex space-x-3'>
+					<div className='flex ml-4 space-x-3'>
 						<button
 							onClick={handleSwitchCountry}
 							className='bg-white text-[#9200AD] px-3 py-1 rounded hover:bg-gray-200 transition'
@@ -138,7 +143,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 						</button>
 						<button
 							onClick={() => setShowBanner(false)}
-							className='bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition'
+							className='px-3 py-1 text-gray-800 transition bg-gray-200 rounded hover:bg-gray-300'
 						>
 							No
 						</button>

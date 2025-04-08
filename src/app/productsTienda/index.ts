@@ -18,8 +18,8 @@ import uy from './uy.json';
 import ve from './ve.json';
 
 const productsByCountry: Record<string, any> = {
-	ar,
 	// ar: 'https://cms1.msklatam.com/wp-content/json/productos/ar.json',
+	ar,
 	bo,
 	cl,
 	co,
