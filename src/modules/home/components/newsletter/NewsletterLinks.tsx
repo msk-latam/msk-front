@@ -1,9 +1,9 @@
 const NewsletterLinks = () => {
   return (
-    <div className="w-full max-w-screen-2xl px-6 md:px-10 mt-16 text-white  md:h-[400px] h-[1200px]">
-      <div className="flex flex-col md:flex-row justify-between gap-y-10 md:gap-x-28 text-[14px]">
+    <div className="w-full max-w-screen px-2 md:px-0 py-10 md:py-16 text-white h-fit">
+      <div className="flex flex-col md:flex-row justify-between gap-y-10 text-[14px]">
         {/* Columna 1 */}
-        <div className="flex-1 min-w-[300px]">
+        <div className="flex-1 max-w-[250px]">
           <h4 className="text-[18px] font-bold mb-4">Cursos más elegidos</h4>
           <ul className="space-y-4">
             <li><a href="#" className="hover:underline">Curso superior de medicina de urgencias</a></li>
@@ -16,7 +16,7 @@ const NewsletterLinks = () => {
         </div>
 
         {/* Columna 2 */}
-        <div className="flex-1 min-w-[300px]">
+        <div className="flex-1 max-w-[250px]">
           <h4 className="text-[18px] font-bold mb-4">Cursos más buscados</h4>
           <ul className="space-y-4">
             <li><a href="#" className="hover:underline">Curso medicina interna</a></li>
@@ -29,7 +29,7 @@ const NewsletterLinks = () => {
         </div>
 
         {/* Columna 3 */}
-        <div className="flex-1 min-w-[300px]">
+        <div className="flex-1 max-w-[250px]">
           <h4 className="text-[18px] font-bold mb-4">Especialidades</h4>
           <ul className="space-y-4">
             <li><a href="#" className="hover:underline">Medicina general</a></li>
@@ -42,7 +42,7 @@ const NewsletterLinks = () => {
         </div>
 
         {/* Columna 4 */}
-        <div className="flex-1 min-w-[300px]">
+        <div className="flex-1 max-w-[250px]">
           <h4 className="text-[18px] font-bold mb-4">Contenidos destacados</h4>
           <ul className="space-y-4">
             <li><a href="#" className="hover:underline">Qué es el SIBO y cómo tratarlo correctamente</a></li>
