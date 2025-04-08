@@ -35,7 +35,7 @@ const CursoCard = ({
         variant === "large" ? largeWidth : ""
       } ${className}`}
     >
-      <div className="relative w-[345px] h-[399px] md:w-full md:h-full">
+      <div className="relative w-full h-[399px] md:h-full">
         <Image
           src={imagen}
           alt={`Imagen del curso ${titulo}`}
