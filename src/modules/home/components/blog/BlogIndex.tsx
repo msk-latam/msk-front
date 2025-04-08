@@ -1,17 +1,19 @@
+///src/modules/home/components/blog/BlogIndex.tsx
 'use client';
 
 import React from 'react';
 import BlogSection from '@/modules/home/components/blog/BlogSection';
 
-
-const BlogIndex = () => {
+const BlogIndex: React.FC = () => {
   return (
-    <div className="w-full bg-gray-100 pt-24 ">
-      {/* Sección 1: Artículos y tabs */}
-      <div className="relative bg-white rounded-[40px] md:mx-20 mx:auto -mt-32 z-[5] py-5 shadow-lg">
+    <section className="w-full bg-gray-100 pt-24">
+      <article 
+        className="relative bg-white rounded-[40px] md:mx-20 mx-auto -mt-32 z-[5] py-5 shadow-lg"
+        aria-labelledby="blog-title"
+      >
         <BlogSection />
-      </div>
-    </div>
+      </article>
+    </section>
   );
 };
 

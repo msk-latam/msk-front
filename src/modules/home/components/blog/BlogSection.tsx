@@ -7,191 +7,237 @@ import { useBlogContent } from '@/modules/home/hooks/useBlogContent';
 import type { BlogPost } from '@/modules/home/types';
 import Link from 'next/link';
 
-const categories = ['Artículos', 'Guías profesionales', 'Infografías'];
+// Constants
+const CATEGORIES = ['Artículos', 'Guías profesionales', 'Infografías'] as const;
+type CategoryType = typeof CATEGORIES[number];
+const DEFAULT_CATEGORY: CategoryType = 'Artículos';
 
-const BlogSection = () => {
-  const [activeTab, setActiveTab] = useState('Artículos');
+// Action types
+type ActionVariant = 'primary' | 'secondary' | 'tertiary';
+interface BlogAction {
+  label: string;
+  variant: ActionVariant;
+}
+
+// Component types
+interface BlogDataType {
+  title?: string;
+  subtitle?: string;
+  featured_blog_articles?: BlogPost[];
+}
+
+interface CategoryTabsProps {
+  categories: readonly CategoryType[];
+  activeTab: CategoryType;
+  setActiveTab: (tab: CategoryType) => void;
+}
+
+interface BlogButtonProps {
+  className?: string;
+}
+
+interface LoadingStateProps {
+  title?: string;
+}
+
+interface EmptyStateProps extends LoadingStateProps {
+  subtitle?: string;
+  categories: readonly CategoryType[];
+  activeTab: CategoryType;
+  setActiveTab: (tab: CategoryType) => void;
+}
+
+// Component
+const BlogSection: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<CategoryType>(DEFAULT_CATEGORY);
   const { data, loading } = useBlogContent();
   const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
 
-  // Filtrar posts según la categoría seleccionada
+  // Filter posts based on selected category
   useEffect(() => {
     if (!data?.featured_blog_articles) return;
 
     const posts = data.featured_blog_articles;
     
-    if (activeTab === 'Artículos') {
-      setFilteredPosts(posts);
-    } else if (activeTab === 'Guías profesionales') {
-      setFilteredPosts(posts.filter(post => 
-        post.categories.some(cat => cat.name.includes('Guía') || cat.name.includes('Guia'))
-      ));
-    } else if (activeTab === 'Infografías') {
-      setFilteredPosts(posts.filter(post => 
-        post.categories.some(cat => cat.name.includes('Infografía') || cat.name.includes('Infografia'))
-      ));
+    switch (activeTab) {
+      case 'Artículos':
+        setFilteredPosts(posts);
+        break;
+      case 'Guías profesionales':
+        setFilteredPosts(posts.filter(post => 
+          post.categories.some(cat => cat.name.includes('Guía') || cat.name.includes('Guia'))
+        ));
+        break;
+      case 'Infografías':
+        setFilteredPosts(posts.filter(post => 
+          post.categories.some(cat => cat.name.includes('Infografía') || cat.name.includes('Infografia'))
+        ));
+        break;
+      default:
+        setFilteredPosts(posts);
     }
   }, [activeTab, data]);
 
-  // Estado de carga
+  // Render loading state
   if (loading) {
-    return (
-      <section className="w-full max-w-7xl mx-auto px-4 md:px-10 py-5 font-raleway">
-        <div className="text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold">Blog</h2>
-          <p className="text-sm text-neutral-600">Cargando contenido del blog...</p>
-        </div>
-      </section>
-    );
+    return <LoadingState title={data?.title} />;
   }
 
-  // Si no hay posts después del filtrado
+  // Render empty state
   if (filteredPosts.length === 0 && !loading) {
     return (
-      <section className="w-full max-w-7xl mx-auto pl-4 md:px-10 py-5 font-raleway">
-        <div className="flex flex-col gap-4 md:gap-2">
-          <div className="text-center md:text-left">
-            <h2 className="text-2xl md:text-3xl font-semibold">{data?.title || 'Blog'}</h2>
-            <p className="text-sm text-neutral-600">
-              {data?.subtitle || 'No hay artículos disponibles en esta categoría.'}
-            </p>
-          </div>
-
-          {/* Tabs */}
-          <div className="flex justify-center md:justify-start gap-2 pl-3 overflow-scroll scrollbar-none">
-            {categories.map((cat) => {
-              const isActive = activeTab === cat;
-              return (
-                <button
-                  key={cat}
-                  className={`relative px-6 py-[14px] rounded-[38px] text-sm font-medium whitespace-nowrap transition ${
-                    isActive
-                      ? 'font-bold text-black'
-                      : 'text-gray-600'
-                  }`}
-                  onClick={() => setActiveTab(cat)}
-                >
-                  {isActive && (
-                    <span className="absolute inset-0 border-black border-[1px] rounded-[38px] -z-10" />
-                  )}
-                  {cat}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <EmptyState 
+        title={data?.title} 
+        subtitle={data?.subtitle} 
+        categories={CATEGORIES} 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+      />
     );
   }
 
-  // Encontrar el post destacado y los demás posts
-  const featuredPost = filteredPosts.find(post => post.featured === '1');
-  const otherPosts = filteredPosts.filter(post => post.featured !== '1');
+  // Get first 5 posts for the grid layout
+  const postsToDisplay = filteredPosts.slice(0, 5);
 
   return (
-    <section className="w-full max-w-7xl mx-auto pl-4 md:px-10 py-5 font-raleway">
-    <div className="flex flex-col gap-4 md:gap-2">
-      <div className="text-center md:text-left">
-        <h2 className="text-2xl md:text-3xl font-semibold">{data?.title || 'Blog'}</h2>
+    <section className="w-full font-raleway md:px-16 md:py-5 p-5">
+      <header className="mb-8">
+        <h2 id="blog-title" className="text-2xl md:text-3xl font-semibold text-black mb-1">Blog</h2>
         <p className="text-sm text-neutral-600">
-          {data?.subtitle || 'No hay artículos disponibles en esta categoría.'}
+          Recursos para informarte y aprender de distintas maneras
         </p>
-      </div>
 
-        {/* Tabs + Botón */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:mt-4">
-          {/* Tabs */}
-          <div className="flex justify-start md:justify-start gap-2 pl-3 overflow-scroll scrollbar-none">
-            {categories.map((cat) => {
-              const isActive = activeTab === cat;
-              return (
-                <button
-                  key={cat}
-                  className={`relative px-6 py-[14px] rounded-[38px] text-sm font-medium whitespace-nowrap transition ${
-                    isActive
-                      ? 'font-bold text-black'
-                      : 'text-gray-600'
-                  }`}
-                  onClick={() => setActiveTab(cat)}
-                >
-                  {isActive && (
-                    <span className="absolute inset-0 border-black border-[1px] rounded-[38px] -z-10" />
-                  )}
-                  {cat}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Botón "Ir al blog" – sólo en desktop */}
-          <div className="hidden md:flex">
-            <Link href="/blog">
-              <button className="bg-black text-white px-5 py-2 rounded-full font-medium flex items-center gap-2 hover:bg-gray-900 transition">
-                Ir al blog <ArrowRight className="w-4 h-4" />
-              </button>
-            </Link>
-          </div>
+        <div className="flex flex-wrap justify-between items-center mt-6">
+          <CategoryTabs 
+            categories={CATEGORIES} 
+            activeTab={activeTab} 
+            setActiveTab={setActiveTab} 
+          />
+          <BlogButton className="hidden md:flex" />
         </div>
+      </header>
+
+      {/* Blog Cards Grid Layout - Desktop: 2x3 Grid, Mobile: Stacked */}
+      <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6">
+        {postsToDisplay.map((post, index) => {
+          // Determine if this is the first card (spans 2 columns in desktop)
+          const isFirstCard = index === 0;
+          
+          return (
+            <div 
+              key={post.id} 
+              className={`
+                ${isFirstCard ? 'md:col-span-2 md:row-span-1' : 'md:col-span-1 md:row-span-1'}
+              `}
+            >
+              <BlogCard
+                title={post.title}
+                subtitle={post.subtitle || ''}
+                author={post.author || 'Nombre Apellido'}
+                date={post.date || 'May 20, 2023'}
+                readTime={`${post.readTime || '3'} min read`}
+                tags={post.categories?.map(cat => cat.name) || []}
+                image={post.featured_image || '/images/blog-placeholder.jpg'}
+                action={determineAction(post.title)}
+                featured={isFirstCard}
+              />
+            </div>
+          );
+        })}
       </div>
 
-      {/* Cards */}
-      <div className="mt-10 grid md:grid-cols-3 gap-6 pr-5">
-        {featuredPost && (
-          <BlogCard
-            key={featuredPost.id}
-            title={featuredPost.title}
-            subtitle={featuredPost.subtitle || ''}
-            author={featuredPost.author || 'Nombre Apellido'}
-            date={featuredPost.date || 'May 20, 2025'}
-            readTime={`${featuredPost.readTime || '3'} min read`}
-            tags={featuredPost.categories?.map(cat => cat.name) || []}
-            image={featuredPost.featured_image || '/images/blog-placeholder.jpg'}
-            action={{
-              label: determineActionLabel(featuredPost.title),
-              variant: determineActionVariant(featuredPost.title)
-            }}
-            featured={true}
-          />
-        )}
-        {otherPosts.map((post) => (
-          <BlogCard
-            key={post.id}
-            title={post.title}
-            subtitle={post.subtitle || ''}
-            author={post.author || 'Nombre Apellido'}
-            date={post.date || 'May 20, 2025'}
-            readTime={`${post.readTime || '3'} min read`}
-            tags={post.categories?.map(cat => cat.name) || []}
-            image={post.featured_image || '/images/blog-placeholder.jpg'}
-            action={{
-              label: determineActionLabel(post.title),
-              variant: determineActionVariant(post.title)
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Botón en mobile */}
-      <div className="mt-10 flex justify-center md:hidden">
-        <Link href="/blog">
-          <button className="bg-black text-white px-6 py-2 rounded-full font-medium flex items-center gap-2">
-            Ir al blog <ArrowRight className="w-4 h-4" />
-          </button>
-        </Link>
+      {/* Mobile view only shows "Ir al blog" button at the bottom */}
+      <div className="flex justify-center mt-8 md:hidden">
+        <BlogButton />
       </div>
     </section>
   );
 };
 
-// Función auxiliar para determinar la etiqueta del botón según el título
+// Helper Components
+const CategoryTabs: React.FC<CategoryTabsProps> = ({ categories, activeTab, setActiveTab }) => (
+  <nav 
+    className="flex space-x-2 mb-4 md:mb-0"
+    aria-label="Categorías del blog"
+  >
+    {categories.map((cat) => {
+      const isActive = activeTab === cat;
+      return (
+        <button
+          key={cat}
+          className={`px-4 py-2 text-sm rounded-full ${
+            isActive 
+              ? 'bg-gray-100 border border-gray-200 font-medium text-black' 
+              : 'text-gray-700 hover:bg-gray-50'
+          }`}
+          onClick={() => setActiveTab(cat)}
+          aria-current={isActive ? 'page' : undefined}
+        >
+          {cat}
+        </button>
+      );
+    })}
+  </nav>
+);
+
+const BlogButton: React.FC<BlogButtonProps> = ({ className = '' }) => (
+  <div className={className}>
+    <Link href="/blog">
+      <button 
+        className="bg-black text-white text-sm px-4 py-2 rounded-full flex items-center space-x-1 hover:bg-gray-900 transition"
+        aria-label="Ir al blog principal"
+      >
+        <span>Ir al blog</span>
+        <ArrowRight className="w-4 h-4 ml-1" aria-hidden="true" />
+      </button>
+    </Link>
+  </div>
+);
+
+const LoadingState: React.FC<LoadingStateProps> = ({ title }) => (
+  <section className="w-full">
+    <div className="text-center">
+      <h2 className="text-2xl md:text-3xl font-semibold">Blog</h2>
+      <p className="text-sm text-neutral-600" aria-live="polite">Cargando contenido del blog...</p>
+    </div>
+  </section>
+);
+
+const EmptyState: React.FC<EmptyStateProps> = ({ title, subtitle, categories, activeTab, setActiveTab }) => (
+  <section className="w-full">
+    <header className="mb-8">
+      <h2 className="text-2xl md:text-3xl font-semibold text-black mb-1">Blog</h2>
+      <p className="text-sm text-neutral-600">
+        Recursos para informarte y aprender de distintas maneras
+      </p>
+
+      <div className="flex flex-wrap justify-between items-center mt-6">
+        <CategoryTabs 
+          categories={categories} 
+          activeTab={activeTab} 
+          setActiveTab={setActiveTab} 
+        />
+      </div>
+    </header>
+    <p className="text-center text-gray-600 py-8">No hay artículos disponibles en esta categoría.</p>
+  </section>
+);
+
+// Helper functions
+function determineAction(title: string): BlogAction {
+  return {
+    label: determineActionLabel(title),
+    variant: determineActionVariant(title)
+  };
+}
+
 function determineActionLabel(title: string): string {
   if (title.toLowerCase().includes('tuberculosis')) return 'Descargar';
   if (title.toLowerCase().includes('comunicación')) return 'Descubrir';
   return 'Leer';
 }
 
-// Función auxiliar para determinar la variante del botón según el título
-function determineActionVariant(title: string): 'primary' | 'secondary' | 'tertiary' {
+function determineActionVariant(title: string): ActionVariant {
   if (title.toLowerCase().includes('tuberculosis')) return 'primary';
   if (title.toLowerCase().includes('comunicación')) return 'secondary';
   return 'primary';
