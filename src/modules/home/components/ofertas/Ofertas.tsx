@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Ofertas = () => {
   return (
-<section className="relative w-full min-h-screen flex items-end justify-center text-white font-raleway">
+<section className="relative w-full min-h-screen flex items-end md:items-center justify-center text-white font-raleway">
   {/* Imagen de fondo para mobile */}
   <div className="absolute inset-0 z-0 block lg:hidden">
     <Image
