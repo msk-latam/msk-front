@@ -38,9 +38,9 @@ const Hero = () => {
 
           <div className="flex wrap w-fit md:w-full flex-col gap-4 md:gap-0 md:mt-0 md:flex-row md:justify-between">
             <div>
-              <p className="text-[2rem] md:text-5xl text-white leading-none md:leading-tight md:min-w-full">
+              <p className="text-[2rem] md:text-5xl text-white leading-none md:leading-tight font-raleway md:min-w-full">
                 {slides[0]?.title?.split("<em>")[0] || "Cursos de medicina para"}
-                <span className="italic font-normal">
+                <span className="italic font-lora font-normal">
                   {" "}
                   <span className="hidden md:inline">
                     <br />
