@@ -76,8 +76,8 @@ const Footer = () => {
                 <circle cx="21" cy="20.5" r="20.5" fill="#35383E" />
                 <g clip-path="url(#clip0_266_2910)">
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M22.375 13.75H25.4998V10H22.375C19.963 10 18.0005 11.9625 18.0005 14.3746V16.2496H15.5002V20H17.9997V30H21.7501V20H24.8749L25.4998 16.2496H21.7501V14.3746C21.7501 14.0357 22.0362 13.7497 22.375 13.7497V13.7501L22.375 13.75Z"
                     fill="white"
                   />
