@@ -122,6 +122,10 @@ const BlogSection: React.FC = () => {
         {postsToDisplay.map((post, index) => {
           // Determine if this is the first card (spans 2 columns in desktop)
           const isFirstCard = index === 0;
+          // Determine if this is the last card
+          const isLastCard = index === postsToDisplay.length - 1;
+          // Set custom background color for first and last cards
+          const customBgColor = (isFirstCard || isLastCard) ? "#FCEAFF" : undefined;
           
           return (
             <div 
@@ -140,6 +144,8 @@ const BlogSection: React.FC = () => {
                 image={post.featured_image || '/images/blog-placeholder.jpg'}
                 action={determineAction(post.title)}
                 featured={isFirstCard}
+                link="#"
+                bgColor={customBgColor}
               />
             </div>
           );
