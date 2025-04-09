@@ -59,7 +59,7 @@ const Ofertas = () => {
           </ul>
         </div>
 
-        <div className="flex md:flex-row flex-col md:gap-[27px] md:translate-y-10 w-full gap-6 md:w-auto md:items-center md:items-center items-left">
+        <div className="flex md:flex-row flex-col md:gap-[27px] md:translate-y-10 w-full gap-6 md:w-auto md:items-center items-left">
           {/* Bloque de descuento + botón */}
           <div className="w-auto flex flex-col md:flex-row md:items-center md:justify-end gap-6">
             {/* Descuento */}

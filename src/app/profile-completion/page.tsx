@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import '@/app/globals.css'
-import Navbar from '@/modules/home/components/navbar/Navbar'
+import Navbar from '@/modules/components/navbar/Navbar'
 import Newsletter from '@/modules/home/components/newsletter/NewsLetter'
 import Footer from '@/modules/home/components/footer/footer'
 import ProfileCompletionWrapper from '@/modules/profile-completion/ProfileCompletionWrapper'

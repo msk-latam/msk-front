@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Menu, Search } from "react-feather";
 import HeroCarousel from "./HeroCarousel";
 import HeroHighlights from "./HeroHighlights";
-import Navbar from "../navbar/Navbar";
+import Navbar from "../../../components/navbar/Navbar";
 import Image from "next/image";
 import { useHomeContent } from "@/modules/home/hooks/useHomeContent";
 import { HeroSlide } from "@/modules/home/types";
@@ -43,7 +43,7 @@ const Hero = () => {
             <div>
               <p className="text-[2rem] md:text-5xl text-white leading-none md:leading-tight font-raleway md:min-w-full">
                 {slides[0]?.title?.split("<em>")[0] || "Cursos de medicina para"}
-                <span className="italic font-lora font-normal">
+                <span className="italic font-lora-italic font-normal">
                   {" "}
                   <span className="hidden md:inline">
                     <br />

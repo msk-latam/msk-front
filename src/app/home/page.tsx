@@ -12,11 +12,13 @@ import PubliNotas from '@/modules/home/components/publi-notas/PubliNotas';
 import FAQ from '@/modules/home/components/faq/FAQ';
 import NewsLetter from '@/modules/home/components/newsletter/NewsLetter';
 import Footer from '@/modules/home/components/footer/footer';
+import BotMaker from '@/modules/components/Bot/BotMaker';
 
 export default function Home() {
   return (
     <main className="bg-white text-neutral-900">
       <Hero />
+      <BotMaker/>
       <Oportunidades />
       <Masterclass />
       <TrustSection />

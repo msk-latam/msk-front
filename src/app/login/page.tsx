@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import '@/app/globals.css'
 import { Suspense } from 'react';
 
-import Navbar from '@/modules/home/components/navbar/Navbar'
+import Navbar from '@/modules/components/navbar/Navbar'
 import Newsletter from '@/modules/home/components/newsletter/NewsLetter'
 import Footer from '@/modules/home/components/footer/footer'
 import LoginForm from '@/modules/login/components/loginform/LoginForm'
@@ -75,7 +75,7 @@ export default function LoginPage() {
       </main>
 
       {/* ✉️ Newsletter encimado */}
-      <section className="relative z-[20] -mt-28 md:-mt-[4rem] -mt-[40px]">
+      <section className="relative z-[20] -mt-28 md:-mt-[4rem]">
         <Newsletter />
       </section>
 

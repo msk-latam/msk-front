@@ -1,6 +1,6 @@
 'use client'
 
-import Navbar from '@/modules/home/components/navbar/Navbar'
+import Navbar from '@/modules/components/navbar/Navbar'
 import Footer from '@/modules/home/components/footer/footer'
 import ProductHeader from './components/ProductHeader'
 import ProductSummary from './components/ProductSummary'
