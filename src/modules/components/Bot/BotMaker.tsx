@@ -11,7 +11,7 @@ export const toggleBotVisibility = (visible: boolean) => {
 const adjustBotmakerZIndex = (isMobile: boolean) => {
     const botElement = document.querySelector('iframe[title="Botmaker"]') as HTMLIFrameElement;
     if (botElement && botElement.parentElement) {
-        botElement.parentElement.style.zIndex = isMobile ? '1' : '2147483647'; // Ajustar el z-index para móvil
+        botElement.parentElement.style.zIndex = isMobile ? '[10]' : '[2147483647]'; // Ajustar el z-index para móvil
     }
 };
 

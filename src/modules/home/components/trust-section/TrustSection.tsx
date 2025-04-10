@@ -36,7 +36,7 @@ const TrustSection = () => {
     });
 
     return (
-      <div className="md:hidden w-full flex flex-col items-center gap-6 overflow-x-hidden z-50">
+      <div className="md:hidden w-full flex flex-col items-center gap-6 overflow-x-hidden z-5">
         <div className="relative w-full overflow-hidden">
           <div
             {...handlers}
@@ -73,8 +73,8 @@ const TrustSection = () => {
   };
 
   return (
-    <div className="relative w-full bg-gray-100 pt-24 pb-60 h-[1200px] md:h-[750px] z-[5]">
-      <section className="relative bg-white rounded-[38px] md:p-[72px] md:px-[104px] -mt-40 mb-16 z-[50] py-10 pl-5 md:mx-20 shadow-lg md:min-h-[500px] md:max-h-[750px] overflow-hidden">
+    <div className="relative w-full bg-gray-100 pt-24 pb-60 h-[1200px] md:h-[750px] z-9">
+      <section className="relative bg-white rounded-[38px] md:p-[72px] md:px-[104px] -mt-40 mb-16 z-9 py-10 pl-5 md:mx-20 shadow-lg md:min-h-[500px] md:max-h-[750px] overflow-hidden">
         <h2 className="text-center pr-5 md:pr-0 md:text-left text-2xl md:text-[34px] font-raleway font-semibold mb-4">
           {title}
         </h2>

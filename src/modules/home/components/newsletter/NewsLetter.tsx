@@ -16,7 +16,7 @@ const Newsletter = () => {
   return (
     <div className="w-full px-4 md:px-20 flex flex-col items-center justify-center bg-[#1A1A1A] text-white">
       {/* Newsletter superior */}
-      <div className="bg-[#35383E] w-full max-w-[343px] md:max-w-screen-xl -mt-8 p-6 md:py-6 md:px-10 md:rounded-[38px] rounded-[38px] z-[5] flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 mx-auto">
+      <div className="bg-[#35383E] w-full max-w-[343px] md:max-w-screen-xl -mt-8 p-6 md:py-6 md:px-10 md:rounded-[38px] rounded-[38px] z-5 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 mx-auto">
         
         {/* Título */}
         <div className="text-center md:text-left md:w-[200px] shrink-0">

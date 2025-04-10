@@ -41,7 +41,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
       </div>
 
       <section
-        className="w-full max-w-[1632px] h-[700px] relative z-[1] mx-auto px-4 py-6 sm:py-12"
+        className="w-full max-w-[1632px] h-[700px] relative z-8 mx-auto px-4 py-6 sm:py-12"
         style={{ fontFamily: 'Raleway, sans-serif' }}
       >
         {/* 🧾 Título */}

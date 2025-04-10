@@ -30,17 +30,17 @@ const Masterclass = () => {
   }, []);
 
   return (
-    <div className="relative -translate-y-4 w-full min-h-screen flex items-center justify-center text-white z-[1] font-raleway">
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-1 md:hidden" />
+    <div className="relative -translate-y-4 w-full min-h-screen flex items-center justify-center text-white z-5 font-raleway">
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-3 md:hidden" />
       <Image
         src="/images/masterclass/main-masterclass.png"
         alt="Masterclass principal"
         fill
-        className="object-cover object-center blur-3xl md:blur-none absolute inset-0 z-[1]"
+        className="object-cover object-center blur-3xl md:blur-none absolute inset-0 z-7"
         priority
       />
 
-      <div className="relative z-10 h-full md:h-screen w-full py-11 mt-8 md:py-0 md:mt-0 flex flex-col justify-center md:px-20 md:mb-10">
+      <div className="relative z-5 h-full md:h-screen w-full py-11 mt-8 md:py-0 md:mt-0 flex flex-col justify-center md:px-20 md:mb-10">
         <div className="h-full flex flex-col justify-center gap-10 md:flex-row md:items-center md:justify-between">
           {/* Texto desktop - IZQUIERDA */}
           <div className="hidden md:flex flex-col gap-16 text-center md:text-left md:max-w-2xl md:order-1">
@@ -93,7 +93,7 @@ const Masterclass = () => {
         </div>
 
         {/* Carrusel Mobile */}
-        <div className="md:hidden w-full flex flex-col items-center pl-6 gap-6 overflow-x-hidden z-[1]">
+        <div className="md:hidden w-full flex flex-col items-center pl-6 gap-6 overflow-x-hidden z-5">
           <p className="text-1xl border border-white rounded-full px-6 py-3 self-start">
             MASTERCLASS
           </p>
