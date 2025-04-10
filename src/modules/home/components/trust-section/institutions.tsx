@@ -3,8 +3,8 @@ import React from "react";
 
 const Institutions = () => {
   return (
-    <section className="relative bg-white rounded-[40px] md:mx-20 -mt-24 translate-y-[60px] z-9 py-10 px-5 md:px-10 md:gap-4 shadow-lg w-">
-      <h2 className="text-center text-xl md:text-2xl font-semibold mb-7">
+    <section className="relative bg-white rounded-[40px] md:mx-20 -mt-24 translate-y-[60px] z-10 py-10 px-5 md:px-10 md:gap-4 shadow-lg w-">
+      <h2 className="text-center md:text-left text-xl md:text-2xl font-semibold mb-7">
         Nos respaldan prestigiosas instituciones de todo el mundo con sus
         certificaciones
       </h2>
