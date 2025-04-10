@@ -29,7 +29,7 @@ const HeroHighlight = () => {
   }, [active]);
 
   return (
-    <div className="md:relative md:-bottom-7 md:pb-1 absolute bottom-0 w-full h-40 md:h-auto portrait:-z-10 overflow-scroll md:overflow-hidden scrollbar-track-transparent">
+    <div className="md:relative md:-bottom-8 md:pb-0 absolute bottom-0 w-full h-40 md:h-auto portrait:-z-10 overflow-scroll md:overflow-hidden scrollbar-track-transparent">
       <div
         ref={containerRef}
         className="rounded-t-xl w-fit md:max-w-full flex flex-col md:flex-row md:gap-[2px] overflow-y-hidden overflow-x-hidden justify-start items-center scroll-smooth gap-0 md:no-scrollbar"
