@@ -65,7 +65,7 @@ const Navbar = () => {
         </section>
 
         {/* --- NAV DESKTOP --- */}
-        <section className="hidden md:flex md:flex-row items-center pt-2 mt-4">
+        <section className="hidden md:flex md:flex-row items-center pt-2 mt-6">
           <div className="flex items-top max-w-6xl w-full mx-auto pl-2 pr-4 z-50 relative">
             {/* Logo */}
             <figure>
