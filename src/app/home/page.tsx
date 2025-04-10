@@ -1,7 +1,7 @@
 'use client';
 
+import { useState } from 'react';
 import '@/app/globals.css';
-
 import Hero from '@/modules/home/components/hero/Hero';
 import Oportunidades from '@/modules/home/components/oportunidades/Oportunidades';
 import Masterclass from '@/modules/home/components/masterclass/Masterclass';
@@ -17,10 +17,13 @@ import Navbar from '@/modules/components/navbar/Navbar';
 import PopUp from '@/modules/components/PopUp';
 
 export default function Home() {
+  const [showPopUp, setShowPopUp] = useState(true);
+
+
   return (
-    <main className="bg-white text-neutral-900">
-      <PopUp/>
-      <Navbar/>
+    <main className={`bg-white text-neutral-900 transition-all duration-500 ease-in-out ${showPopUp ? 'md:pt-12' : 'md:pt-0'}`}>
+      {showPopUp && <PopUp onClose={() => setShowPopUp(false)} />}
+      <Navbar />
       <Hero />
       <BotMaker/>
       <Oportunidades />

@@ -22,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="absolute md:top-12 left-0 w-full z-50">
+    <header className="absolute left-0 w-full z-50">
       {/* Overlay fondo oscuro móvil */}
       {isDiscoverOpen && <div className="fixed inset-0 bg-transparent z-50 md:hidden"></div>}
 

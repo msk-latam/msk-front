@@ -1,12 +1,28 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const PopUp = () => {
-  const [isVisible, setIsVisible] = useState(true);
+const PopUp = ({ onClose }: { onClose: () => void }) => {
+  const [isDesktop, setIsDesktop] = useState(false);
 
-  if (!isVisible) return null;
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024); // lg breakpoint
+    };
+
+    // Check on mount
+    handleResize();
+
+    // Listen for resize
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      onClose(); // Se llama cuando se desmonta
+    };
+  }, [onClose]);
+
+  if (!isDesktop) return null;
 
   return (
     <section className="fixed top-0 left-0 w-full h-12 bg-[#FFE5EC] p-3 z-[999] flex flex-row text-black justify-center items-center gap-4">
@@ -33,9 +49,8 @@ const PopUp = () => {
         </svg>
       </button>
 
-      {/* Botón de cierre */}
       <button
-        onClick={() => setIsVisible(false)}
+        onClick={onClose}
         className="absolute right-3 top-2 text-black text-lg font-bold hover:opacity-70"
         aria-label="Cerrar"
       >
