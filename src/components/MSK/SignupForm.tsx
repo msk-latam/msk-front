@@ -175,8 +175,8 @@ const SignupForm: FC<SignupFormProps> = ({ productName = '', isEbook = false, su
 						setTimeout(() => {
 							router.push(
 								country === ''
-									? `${window.location.origin}/correo-enviado`
-									: `${window.location.origin}/${country}/correo-enviado`,
+									? `${window.location.origin}/correo-enviado/`
+									: `${window.location.origin}/${country}/correo-enviado/`,
 							);
 						}, 1500);
 					}
@@ -210,23 +210,23 @@ const SignupForm: FC<SignupFormProps> = ({ productName = '', isEbook = false, su
 								<input type='hidden' name='leadSource' id='leadSource' value={isEbook ? 'Descarga ebook' : ''} />
 								<div>
 									<div className='form-input-std'>
-										<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Nombre</label>
+										<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Nombre</label>
 										<ErrorMessage name='First_Name' component='span' className='error' />
 										<Field type='text' name='First_Name' placeholder='Ingresar nombre' />
 									</div>
 									<div className='form-input-std'>
-										<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Apellido</label>
+										<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Apellido</label>
 										<ErrorMessage className='error' name='Last_Name' component='span' />
 										<Field type='text' name='Last_Name' placeholder='Ingresar apellido' />
 									</div>
 									<div className='form-input-std'>
-										<label className='text-neutral-800 dark:text-neutral-200 mb-1'>E-mail</label>
+										<label className='mb-1 text-neutral-800 dark:text-neutral-200'>E-mail</label>
 										<ErrorMessage name='Email' component='span' className='error' />
 										<Field type='email' name='Email' placeholder='Ingresar e-mail' />
 									</div>
 
 									<div className='form-input-std'>
-										<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Teléfono</label>
+										<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Teléfono</label>
 										<Field name='Phone'>
 											{({ field, form, meta }: any) => (
 												<div>
@@ -247,7 +247,7 @@ const SignupForm: FC<SignupFormProps> = ({ productName = '', isEbook = false, su
 									</div>
 
 									<div className='form-select-std'>
-										<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Profesión</label>
+										<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Profesión</label>
 										<ErrorMessage name='Profesion' component='span' className='error' />
 										<Field
 											as='select'
@@ -269,15 +269,15 @@ const SignupForm: FC<SignupFormProps> = ({ productName = '', isEbook = false, su
 									</div>
 
 									{showInputProfession && (
-										<div className='form-input-std my-4'>
+										<div className='my-4 form-input-std'>
 											<ErrorMessage name='Otra_profesion' component='span' className='error' />
 											<Field type='text' name='Otra_profesion' placeholder='Ingresar profesion' />
 										</div>
 									)}
 
 									{studentInputs ? (
-										<div className='col-xl-12 flex gap-2'>
-											<div className='form-select-std w-1/2'>
+										<div className='flex gap-2 col-xl-12'>
+											<div className='w-1/2 form-select-std'>
 												<ErrorMessage name='year' component='span' className='error' />
 												<Field as='select' name='year'>
 													<option defaultValue=''>Año</option>
@@ -288,7 +288,7 @@ const SignupForm: FC<SignupFormProps> = ({ productName = '', isEbook = false, su
 													))}
 												</Field>
 											</div>
-											<div className='form-select-std w-full'>
+											<div className='w-full form-select-std'>
 												<ErrorMessage name='career' component='span' className='error' />
 												<Field as='select' name='career' onChange={handleOptionCareerChange} value={selectedCareer}>
 													<option defaultValue=''>Seleccionar carrera</option>
@@ -304,7 +304,7 @@ const SignupForm: FC<SignupFormProps> = ({ productName = '', isEbook = false, su
 										<>
 											<div className={`col-xl-6 col-span-2 sm:col-span-1`}>
 												<div className='form-select-std'>
-													<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Especialidad</label>
+													<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Especialidad</label>
 													<ErrorMessage name='Especialidad' component='span' className='error' />
 													<Field
 														as='select'
@@ -327,7 +327,7 @@ const SignupForm: FC<SignupFormProps> = ({ productName = '', isEbook = false, su
 													</Field>
 												</div>
 												{showInputSpecialties && (
-													<div className='form-input-std my-4'>
+													<div className='my-4 form-input-std'>
 														<Field type='text' name='Otra_especialidad' placeholder='Ingresar especialidad' />
 														<ErrorMessage name='Otra_especialidad' component='div' className='error' />
 													</div>
@@ -336,7 +336,7 @@ const SignupForm: FC<SignupFormProps> = ({ productName = '', isEbook = false, su
 										</>
 									)}
 									<div className='col-span-2'>
-										<div className='flex flex-wrap gap-1 mt-2 mb-4 justify-center'>
+										<div className='flex flex-wrap justify-center gap-1 mt-2 mb-4'>
 											<div className='contact-checkbox'>
 												<ErrorMessage name='Terms_And_Conditions' component='div' className='error' />
 												<div className='flex gap-2 center'>
@@ -344,18 +344,18 @@ const SignupForm: FC<SignupFormProps> = ({ productName = '', isEbook = false, su
 														type='checkbox'
 														name='Terms_And_Conditions'
 														checked={formik.values.Terms_And_Conditions}
-														className='hidden-checkbox mt-1'
+														className='mt-1 hidden-checkbox'
 													/>
 													<label>
 														Acepto las{' '}
 														<NcLink
 															href={
 																country === ''
-																	? `${window.location.origin}/politica-de-privacidad`
-																	: `${window.location.origin}/${country}/politica-de-privacidad`
+																	? `${window.location.origin}/politica-de-privacidad/`
+																	: `${window.location.origin}/${country}/politica-de-privacidad/`
 															}
 															target='_blank'
-															className='text-primary underline'
+															className='underline text-primary'
 														>
 															políticas de privacidad
 														</NcLink>
@@ -374,7 +374,7 @@ const SignupForm: FC<SignupFormProps> = ({ productName = '', isEbook = false, su
 											</ButtonPrimary>
 										</div>
 										<p
-											className='text-red-500 font-bold'
+											className='font-bold text-red-500'
 											style={{
 												visibility: formError ? 'visible' : 'hidden',
 											}}

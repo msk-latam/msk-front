@@ -70,10 +70,10 @@ const MainNav2: FC = () => {
 
 	return (
 		<div className={`nc-MainNav nc-MainNav2 relative z-10 container`}>
-			<div className='py-5 relative flex items-center justify-between'>
+			<div className='relative flex items-center justify-between py-5'>
 				<div className='flex items-center space-x-3 sm:space-x-8'>
 					<Logo isOnBlog={isOnBlog} country={country} />
-					<div className='hidden sm:block h-10 border-l border-neutral-300 dark:border-neutral-6000 m-0'></div>
+					<div className='hidden h-10 m-0 border-l sm:block border-neutral-300 dark:border-neutral-6000'></div>
 					<div>
 						{!pathName.includes('blog') && (
 							<div className='hidden xl:block'>
@@ -98,7 +98,7 @@ const MainNav2: FC = () => {
 				</div>
 
 				{initialLoad && (
-					<div className='flex-shrink-0 flex items-center justify-end text-neutral-700 dark:text-neutral-100 space-x-1'>
+					<div className='flex items-center justify-end flex-shrink-0 space-x-1 text-neutral-700 dark:text-neutral-100'>
 						<div className={'hidden items-center xl:flex space-x-2'}>
 							{isOnBlog && <>{/* <Navigation navigations={NAVIGATION_BLOG_MSK} /> */}</>}
 							{isOnArchive && <>{/* <Navigation navigations={NAVIGATION_ARCHIVE_MSK} /> */}</>}
@@ -117,12 +117,12 @@ const MainNav2: FC = () => {
 								</>
 							) : (
 								<>
-									<div className='hidden sm:block h-10 border-l border-neutral-300 dark:border-neutral-6000 pr-5'></div>
+									<div className='hidden h-10 pr-5 border-l sm:block border-neutral-300 dark:border-neutral-6000'></div>
 									<ButtonSecondary
 										href={
 											country === ''
-												? `${window.location.origin}/iniciar-sesion`
-												: `${window.location.origin}/${country}/iniciar-sesion`
+												? `${window.location.origin}/iniciar-sesion/`
+												: `${window.location.origin}/${country}/iniciar-sesion/`
 										}
 										locale={locale}
 										sizeClass='px-4 py-2 sm:px-5'
@@ -134,8 +134,8 @@ const MainNav2: FC = () => {
 									<ButtonPrimary
 										href={
 											country === ''
-												? `${window.location.origin}/crear-cuenta`
-												: `${window.location.origin}/${country}/crear-cuenta`
+												? `${window.location.origin}/crear-cuenta/`
+												: `${window.location.origin}/${country}/crear-cuenta/`
 										}
 										sizeClass='px-4 py-2 sm:px-5'
 										className='font-semibold'

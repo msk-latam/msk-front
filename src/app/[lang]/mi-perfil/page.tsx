@@ -106,8 +106,8 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 				// console.log('ejecutando else');
 				router.push(
 					country === ''
-						? `${window.location.origin}/iniciar-sesion`
-						: `${window.location.origin}/${country}/iniciar-sesion`,
+						? `${window.location.origin}/iniciar-sesion/`
+						: `${window.location.origin}/${country}/iniciar-sesion/`,
 				);
 			}
 		} catch (error) {
@@ -164,8 +164,8 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 			age: '',
 			href:
 				country === ''
-					? `${window.location.origin}/mi-cuenta/cursos`
-					: `${window.location.origin}/${country}/mi-cuenta/cursos`,
+					? `${window.location.origin}/mi-cuenta/cursos/`
+					: `${window.location.origin}/${country}/mi-cuenta/cursos/`,
 		},
 		{
 			name: 'Centro de ayuda',
@@ -179,8 +179,8 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 			image: '',
 			href:
 				country === ''
-					? `${window.location.origin}/mi-cuenta/perfil`
-					: `${window.location.origin}/${country}/mi-cuenta/perfil`,
+					? `${window.location.origin}/mi-cuenta/perfil/`
+					: `${window.location.origin}/${country}/mi-cuenta/perfil/`,
 		},
 	];
 
@@ -224,10 +224,10 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 			<RedirectToTrial />
 			{/* HEADER */}
 			<div className='animate-fade-down'>
-				<div className='bg-neutral-200 dark:bg-neutral-900 dark:border dark:border-neutral-700 p-5 lg:p-16 flex flex-col sm:items-center w-screen  transform -translate-x-1/2 left-1/2 relative'>
+				<div className='relative flex flex-col w-screen p-5 transform -translate-x-1/2 bg-neutral-200 dark:bg-neutral-900 dark:border dark:border-neutral-700 lg:p-16 sm:items-center left-1/2'>
 					{loadingUser ? (
 						<div className='mx-auto'>
-							<AvatarSkeleton className='rounded-full w-24 h-24 mx-auto' />
+							<AvatarSkeleton className='w-24 h-24 mx-auto rounded-full' />
 							<TextSkeleton lines='2' />
 						</div>
 					) : (
@@ -238,8 +238,8 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 								sizeClass='w-20 h-20 text-xl lg:text-3xl lg:w-36 lg:h-36 mx-auto'
 								radius='rounded-full'
 							/>
-							<div className='mt-4 sm:mt-6 gap-1 max-w-lg text-center mx-auto'>
-								<h2 className='inline-block text-2xl sm:text-3xl md:text-4xl font-medium'>{user.name}</h2>
+							<div className='max-w-lg gap-1 mx-auto mt-4 text-center sm:mt-6'>
+								<h2 className='inline-block text-2xl font-medium sm:text-3xl md:text-4xl'>{user.name}</h2>
 								<span className='block text-sm text-neutral-6000 dark:text-neutral-300 md:text-base'>
 									{user.contact?.speciality}
 								</span>
@@ -250,10 +250,10 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 			</div>
 			{/* ====================== END HEADER ====================== */}
 
-			<div className=' py-16 lg:pb-28 lg:pt-20 space-y-16 lg:space-y-28 '>
-				<main className=' '>
+			<div className='py-16 space-y-16 lg:pb-28 lg:pt-20 lg:space-y-28'>
+				<main className=''>
 					{loadingUser ? (
-						<div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mt-8 lg:mt-10 mb-8'>
+						<div className='grid gap-6 mt-8 mb-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-8 lg:mt-10'>
 							<ItemSkeleton />
 							<ItemSkeleton />
 							<ItemSkeleton />
@@ -264,7 +264,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 							<HeaderFilter tabActive={coursesTabActive} tabs={TABS} heading={''} onClickTab={handleUserTabChange} />
 							{currentItems.length ? (
 								<>
-									{/* <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mt-8 lg:mt-10 mb-8'>
+									{/* <div className='grid gap-6 mt-8 mb-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-8 lg:mt-10'>
                     {currentItems
                       ? currentItems.map((post, index) => (
                           <ProductAccount
@@ -275,7 +275,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
                         ))
                       : null}
                   </div> */}
-									<div className='grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4'>
+									<div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4'>
 										{currentItems.map((post, index) => (
 											<CursoPerfil key={`${post.id}_${index}`} product={post} user={user} />
 										))}
@@ -288,12 +288,12 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 									) : null}
 								</>
 							) : (
-								<div className='flex flex-col justify-center items-center gap-6 my-24 lg:mt-10'>
-									<p className='raleway text-3xl w-full md:w-1/2 text-center'>
+								<div className='flex flex-col items-center justify-center gap-6 my-24 lg:mt-10'>
+									<p className='w-full text-3xl text-center raleway md:w-1/2'>
 										Aún puedes descubrir mucho más en Medical & Scientific Knowledge
 									</p>
 
-									<ButtonPrimary href={'/tienda'} sizeClass='py-3 ' className='font-semibold px-6'>
+									<ButtonPrimary href={'/tienda/'} sizeClass='py-3 ' className='px-6 font-semibold'>
 										Comienza un curso
 									</ButtonPrimary>
 								</div>
@@ -301,7 +301,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 						</>
 					)}
 
-					<div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 sm:gap-6 md:gap-8 '>
+					<div className='grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 sm:gap-6 md:gap-8 '>
 						{categories
 							? categories.map((item, i) => (
 									<CardComponentName
@@ -333,7 +333,7 @@ const PageAuthor: FC<PageAuthorProps> = ({ className = '' }) => {
 					<SectionSliderBestSellers
 						posts={allBestSellers}
 						loading={loadingBestSellers}
-						className='w-full section-slider-posts-container px-12 md:px-4'
+						className='w-full px-12 section-slider-posts-container md:px-4'
 						postCardName='card9'
 						heading='Nuestros cursos más elegidos'
 						subHeading='Profesionales como tú ya se capacitaron con ellos. ¡Ahora te toca a ti!'

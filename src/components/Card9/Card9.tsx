@@ -39,8 +39,8 @@ const Card9: FC<Card9Props> = ({
 		return (
 			<div className='inline-flex items-center text-xs text-neutral-300'>
 				<div className='block '>
-					<h4 className='block text-lg font-semibold text-white mb-2'>
-						<span className='text-xl font-raleway font-bold' title={title}>
+					<h4 className='block mb-2 text-lg font-semibold text-white'>
+						<span className='text-xl font-bold font-raleway' title={title}>
 							{title}
 						</span>
 					</h4>
@@ -50,10 +50,10 @@ const Card9: FC<Card9Props> = ({
 					{post.duration && <Showing title={`${post.duration} horas estimadas`} icon={timeIcon.src} />}
 					<>
 						{showDescription && post.lista_de_cedentes ? (
-							<div className='sm:block mt-2'>
+							<div className='mt-2 sm:block'>
 								<span className='text-neutral-300 text-[10px] line-clamp-1'>Certificación</span>
 
-								<span className='text-neutral-300 text-sm line-clamp-1 '>{post.lista_de_cedentes[0].post_title}</span>
+								<span className='text-sm text-neutral-300 line-clamp-1 '>{post.lista_de_cedentes[0].post_title}</span>
 							</div>
 						) : null}
 					</>
@@ -71,7 +71,7 @@ const Card9: FC<Card9Props> = ({
 	return (
 		<div className={`nc-Card9 relative flex flex-col group rounded-3xl overflow-hidden z-0 ${hoverClass} ${className}`}>
 			<div className={`flex items-start relative w-full ${ratio}`}></div>
-			<Link href={country === '' ? `${window.location.origin}/curso/${slug}` : `/${country}/curso/${slug}`}>
+			<Link href={country === '' ? `${window.location.origin}/curso/${slug}/` : `/${country}/curso/${slug}/`}>
 				<NcImage
 					containerClassName='absolute inset-0 rounded-2xl sm:rounded-3xl'
 					src={imageURL}
@@ -81,15 +81,15 @@ const Card9: FC<Card9Props> = ({
 					className='object-cover'
 				/>
 
-				<span className='absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-100 md:opacity-80 group-hover:opacity-100 transition-opacity'></span>
+				<span className='absolute inset-0 transition-opacity opacity-100 bg-gradient-to-b from-transparent to-black md:opacity-80 group-hover:opacity-100'></span>
 			</Link>
 			<Link
-				href={country === '' ? `${window.location.origin}/curso/${slug}` : `/${country}/curso/${slug}`}
-				className='absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-black opacity-50'
+				href={country === '' ? `${window.location.origin}/curso/${slug}/` : `/${country}/curso/${slug}/`}
+				className='absolute inset-x-0 bottom-0 opacity-50 h-1/2 bg-gradient-to-t from-black'
 			></Link>
-			<div className='absolute bottom-0 inset-x-0 p-4 flex flex-col flex-grow'>
+			<div className='absolute inset-x-0 bottom-0 flex flex-col flex-grow p-4'>
 				<Link
-					href={country === '' ? `${window.location.origin}/curso/${slug}` : `/${country}/curso/${slug}`}
+					href={country === '' ? `${window.location.origin}/curso/${slug}/` : `/${country}/curso/${slug}/`}
 					className='absolute inset-0'
 				></Link>
 				<div className='mb-3'>

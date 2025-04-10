@@ -49,7 +49,9 @@ const PageDashboard: FC<PageDashboardProps> = ({ className = '' }) => {
 			});
 		} else {
 			router.push(
-				country === '' ? `${window.location.origin}/iniciar-sesion` : `${window.location.origin}/${country}/iniciar-sesion`,
+				country === ''
+					? `${window.location.origin}/iniciar-sesion/`
+					: `${window.location.origin}/${country}/iniciar-sesion/`,
 			);
 		}
 		setLoading(false);
@@ -58,7 +60,7 @@ const PageDashboard: FC<PageDashboardProps> = ({ className = '' }) => {
 	return (
 		<div className={`nc-PageDashboard animate-fade-down ${className}`} data-nc-id='PageDashboard'>
 			{isLoading ? (
-				<div className='grid grid-cols-1 sm:grid-cols-2 gap-8'>
+				<div className='grid grid-cols-1 gap-8 sm:grid-cols-2'>
 					{[...Array(7)].map((_, index) => (
 						<InputSkeleton key={index} />
 					))}

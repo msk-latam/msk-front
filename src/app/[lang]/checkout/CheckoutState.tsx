@@ -34,7 +34,7 @@ const CheckoutState: React.FC = () => {
 					label: 'Ir a mis cursos',
 					action: () =>
 						window.open(
-							country === '' ? `${window.location.origin}/mi-perfil` : `${window.location.origin}/${country}/mi-perfil`,
+							country === '' ? `${window.location.origin}/mi-perfil/` : `${window.location.origin}/${country}/mi-perfil/`,
 							'_blank',
 						),
 					color: '#9200AD',
@@ -83,26 +83,26 @@ const CheckoutState: React.FC = () => {
 		return (
 			<>
 				<div
-					className='p-6 rounded-lg border'
+					className='p-6 border rounded-lg'
 					style={{
 						borderColor: color,
 						backgroundColor: 'white',
 					}}
 				>
 					<div className='flex items-center mb-4'>
-						<span className='w-3 h-3 rounded-full mr-2' style={{ backgroundColor: color }}></span>
+						<span className='w-3 h-3 mr-2 rounded-full' style={{ backgroundColor: color }}></span>
 						<h3 className='text-2xl font-semibold text-[#392C35]'>{title}</h3>
 					</div>
 					<p className='text-[#392C35] font-normal' style={{ whiteSpace: 'pre-line' }}>
 						{message}
 					</p>
 				</div>
-				<div className='flex justify-end mt-8 gap-4'>
+				<div className='flex justify-end gap-4 mt-8'>
 					{buttons.map((button, index) => (
 						<button
 							key={index}
 							onClick={button.action}
-							className='px-12 py-3 rounded-sm text-white font-semibold focus:outline-none transition-colors duration-300'
+							className='px-12 py-3 font-semibold text-white transition-colors duration-300 rounded-sm focus:outline-none'
 							style={{
 								backgroundColor: button.color,
 								color: button.textColor || 'white',

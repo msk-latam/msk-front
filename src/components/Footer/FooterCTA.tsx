@@ -18,20 +18,20 @@ const FooterCTA = () => {
 
 		if (country === '') {
 			// Para Argentina, no se agrega el código del país
-			return `${domain}/${url}`;
+			return `${domain}/${url}/`;
 		}
 
 		const formattedUrl = `${url}`;
-		return `${domain}/${country}/${formattedUrl}`;
+		return `${domain}/${country}/${formattedUrl}/`;
 	};
 
 	return (
 		<div className='container'>
-			<div className='lg:hidden flex flex-row justify-between pt-6 px-4'>
+			<div className='flex flex-row justify-between px-4 pt-6 lg:hidden'>
 				{/* Primer grupo */}
 				<div className='flex-1'>
 					<div className='footer-widget'>
-						<ul className='text-sm md:text-base space-y-2'>
+						<ul className='space-y-2 text-sm md:text-base'>
 							<li>
 								<NcLink href={addCountryCodeToUrl('contacto')} className='font-light'>
 									Contacto
@@ -64,7 +64,7 @@ const FooterCTA = () => {
 				{/* Segundo grupo */}
 				<div className='flex-1'>
 					<div className='footer-widget'>
-						<ul className='text-sm md:text-base space-y-2'>
+						<ul className='space-y-2 text-sm md:text-base'>
 							<li>
 								<NcLink href={addCountryCodeToUrl('mision')} className='font-light'>
 									Nuestra misión
@@ -90,16 +90,16 @@ const FooterCTA = () => {
 				</div>
 			</div>
 
-			<div className='grid grid-cols-1 lg:grid-cols-4 lg:transform relative mt-10 lg:mt-0 lg:pt-6'>
+			<div className='relative grid grid-cols-1 mt-10 lg:grid-cols-4 lg:transform lg:mt-0 lg:pt-6'>
 				<div className={`px-6 mb-6 lg:mb-0 lg:px-0 col-span-1 lg:col-span-2`}>
-					<div className='footer-widget f-w1 mb-2'>
-						<div className='footer-img align-center content-center'>
+					<div className='mb-2 footer-widget f-w1'>
+						<div className='content-center footer-img align-center'>
 							<NcLink href={addCountryCodeToUrl('/')}>
 								<div className='w-[150px]'>
 									<NcImage src={'/images/msk-logo-light.svg'} alt='footer-logo' width='100' height='100' />
 								</div>
 							</NcLink>
-							<p className='lg:w-full mb-1'>Una propuesta moderna que desafía a expandir las metas profesionales</p>
+							<p className='mb-1 lg:w-full'>Una propuesta moderna que desafía a expandir las metas profesionales</p>
 							<p className='mb-8'>© {currentYear} • Medical&Scientific Knowledge S.L.</p>
 						</div>
 						<CountrySelector country={country} />
@@ -121,8 +121,8 @@ const FooterCTA = () => {
 				</div>
 
 				<div className={`hidden lg:block col-span-1`}>
-					<div className='footer-widget mt-6'>
-						<ul className='text-sm md:text-base space-y-2'>
+					<div className='mt-6 footer-widget'>
+						<ul className='space-y-2 text-sm md:text-base'>
 							<li>
 								<NcLink href={addCountryCodeToUrl('contacto')} className='font-light'>
 									Contacto
@@ -152,8 +152,8 @@ const FooterCTA = () => {
 					</div>
 				</div>
 				<div className={`hidden lg:block col-span-1`}>
-					<div className='footer-widget mt-6'>
-						<ul className='text-sm md:text-base space-y-2'>
+					<div className='mt-6 footer-widget'>
+						<ul className='space-y-2 text-sm md:text-base'>
 							<li>
 								<NcLink href={addCountryCodeToUrl('mision')} className='font-light'>
 									Nuestra misión

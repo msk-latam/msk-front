@@ -55,8 +55,8 @@ const PageDashboard: FC<PageDashboardProps> = ({ children, className = '' }) => 
 		{
 			sPath:
 				country === ''
-					? `${window.location.origin}/mi-cuenta/inicio`
-					: `${window.location.origin}/${country}/mi-cuenta/inicio`,
+					? `${window.location.origin}/mi-cuenta/inicio/`
+					: `${window.location.origin}/${country}/mi-cuenta/inicio/`,
 			exact: true,
 			icon: 'home',
 			pageName: 'Inicio',
@@ -64,24 +64,24 @@ const PageDashboard: FC<PageDashboardProps> = ({ children, className = '' }) => 
 		{
 			sPath:
 				country === ''
-					? `${window.location.origin}/mi-cuenta/cursos`
-					: `${window.location.origin}/${country}/mi-cuenta/cursos`,
+					? `${window.location.origin}/mi-cuenta/cursos/`
+					: `${window.location.origin}/${country}/mi-cuenta/cursos/`,
 			icon: 'file',
 			pageName: 'Mis cursos',
 		},
 		{
 			sPath:
 				country === ''
-					? `${window.location.origin}/mi-cuenta/perfil`
-					: `${window.location.origin}/${country}/mi-cuenta/perfil`,
+					? `${window.location.origin}/mi-cuenta/perfil/`
+					: `${window.location.origin}/${country}/mi-cuenta/perfil/`,
 			icon: 'personal-data',
 			pageName: 'Datos personales',
 		},
 		{
 			sPath:
 				country === ''
-					? `${window.location.origin}/mi-cuenta/facturas`
-					: `${window.location.origin}/${country}/mi-cuenta/facturas`,
+					? `${window.location.origin}/mi-cuenta/facturas/`
+					: `${window.location.origin}/${country}/mi-cuenta/facturas/`,
 			icon: 'factura',
 			pageName: 'Mis Facturas',
 		},
@@ -113,7 +113,7 @@ const PageDashboard: FC<PageDashboardProps> = ({ children, className = '' }) => 
 					>
 						<div className='flex flex-col space-y-8 xl:space-y-0 xl:flex-row'>
 							<div className='flex-shrink-0 w-100 xl:w-80 xl:pr-8'>
-								<ul className='text-base space-y-1 text-neutral-6000 dark:text-neutral-400'>
+								<ul className='space-y-1 text-base text-neutral-6000 dark:text-neutral-400'>
 									{subPages.map(({ sPath, pageName, icon }, index) => {
 										return (
 											<li key={index}>

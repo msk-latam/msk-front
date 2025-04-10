@@ -110,10 +110,10 @@ const ProductDetailSidebar: FC<Props> = ({ ficha, product, details, isEbook, sid
 		>
 			{isFixed && !isEbook ? (
 				<>
-					{product.sale_price !== '0' && <Badge color='sale' name='EN PROMOCIÓN' className='hidden lg:inline-block mb-2' />}
+					{product.sale_price !== '0' && <Badge color='sale' name='EN PROMOCIÓN' className='hidden mb-2 lg:inline-block' />}
 				</>
 			) : (
-				<div className='course-video-thumb mb-2 w-img hidden lg:flex relative'>
+				<div className='relative hidden mb-2 course-video-thumb w-img lg:flex'>
 					{product.sale_price !== '0' && <Badge color='sale' name='EN PROMOCIÓN' className='absolute top-2 left-2' />}
 					<Image src={image} alt={`${slug} image`} width={1000} height={1000} />
 				</div>
@@ -144,7 +144,7 @@ const ProductDetailSidebar: FC<Props> = ({ ficha, product, details, isEbook, sid
 							{Object.keys(sideData).map((key, index) => {
 								return (
 									<li key={`data_${index}`}>
-										<div className='course-vide-icon w-full'>
+										<div className='w-full course-vide-icon'>
 											<img src={`/images/icons/${key}.svg`} width='15' />
 											<p className='text-[14px] sm:text-base w-full flex justify-between text-violet-strong'>
 												<span>{translations[key] ? translations[key] + ':' : ''}</span>
@@ -168,7 +168,7 @@ const ProductDetailSidebar: FC<Props> = ({ ficha, product, details, isEbook, sid
 				</ul>
 			</div>
 			<div className='flex flex-col gap-2'>
-				<button onClick={scrollToContactForm} className='video-cart-btn w-full'>
+				<button onClick={scrollToContactForm} className='w-full video-cart-btn'>
 					{isEbook ? 'Descargar gratis' : 'Contáctanos'}
 				</button>
 				{!isEbook && hasGateway && !product.is_presale_product && (
@@ -185,8 +185,8 @@ const ProductDetailSidebar: FC<Props> = ({ ficha, product, details, isEbook, sid
 							<Link
 								href={
 									country === ''
-										? `${window.location.origin}/checkout/${slug}`
-										: `${window.location.origin}/${country}/checkout/${slug}`
+										? `${window.location.origin}/checkout/${slug}/`
+										: `${window.location.origin}/${country}/checkout/${slug}/`
 								}
 								className='video-cart-btn border-2 w-full hover:disabled:!bg-transparent hover:!disabled:border-grey-disabled hover:!disabled:text-grey-disabled'
 							>

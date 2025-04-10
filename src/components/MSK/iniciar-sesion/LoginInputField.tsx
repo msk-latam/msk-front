@@ -27,12 +27,14 @@ const LoginInput: FC<LoginInputProps> = ({
 	const match = pathName.match(/^\/([a-z]{2})\b/);
 	const country = match ? `${match[1]}` : '';
 	return (
-		<div className='form-input-std my-4'>
-			<label className='flex justify-between items-center text-neutral-800 dark:text-neutral-200'>
+		<div className='my-4 form-input-std'>
+			<label className='flex items-center justify-between text-neutral-800 dark:text-neutral-200'>
 				{label}
 				{isPassword && (
 					<NcLink
-						href={country === '' ? `${window.location.origin}/recuperar` : `${window.location.origin}/${country}/recuperar`}
+						href={
+							country === '' ? `${window.location.origin}/recuperar/` : `${window.location.origin}/${country}/recuperar/`
+						}
 						className='text-sm'
 					>
 						¿Olvidaste tu contraseña?
@@ -44,7 +46,7 @@ const LoginInput: FC<LoginInputProps> = ({
 				{isPassword && toggleShowPassword && (
 					<NcImage
 						src={showPassword ? '/images/icons/eye-solid.svg' : '/images/icons/eye-slash-solid.svg'}
-						className='absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer'
+						className='absolute transform -translate-y-1/2 cursor-pointer top-1/2 right-4'
 						alt='Toggle show password'
 						width='21'
 						height='21'

@@ -57,8 +57,8 @@ const StoreProduct: FC<Props> = ({ product, className, hoverEffect = false, kind
 				<NcLink
 					href={
 						country === ''
-							? `${window.location.origin}/curso/${product.slug}`
-							: `${window.location.origin}/${country}/curso/${product.slug}`
+							? `${window.location.origin}/curso/${product.slug}/`
+							: `${window.location.origin}/${country}/curso/${product.slug}/`
 					}
 				>
 					<Image src={imageURL} className='transition-all' width={1000} height={1000} alt={`${product.title}`} />
@@ -77,8 +77,8 @@ const StoreProduct: FC<Props> = ({ product, className, hoverEffect = false, kind
 							<NcLink
 								href={
 									country === ''
-										? `${window.location.origin}/curso/${product.slug}`
-										: `${window.location.origin}/${country}/curso/${product.slug}`
+										? `${window.location.origin}/curso/${product.slug}/`
+										: `${window.location.origin}/${country}/curso/${product.slug}/`
 								}
 							>
 								<h3 className=''>{product.title}</h3>
@@ -88,8 +88,8 @@ const StoreProduct: FC<Props> = ({ product, className, hoverEffect = false, kind
 								<NcLink
 									href={
 										country === ''
-											? `${window.location.origin}/curso/${product.slug}`
-											: `${window.location.origin}/${country}/curso/${product.slug}`
+											? `${window.location.origin}/curso/${product.slug}/`
+											: `${window.location.origin}/${country}/curso/${product.slug}/`
 									}
 									className='view-details-btn'
 								>
@@ -101,8 +101,8 @@ const StoreProduct: FC<Props> = ({ product, className, hoverEffect = false, kind
 								<NcLink
 									href={
 										country === ''
-											? `${window.location.origin}/curso/${product.slug}`
-											: `${window.location.origin}/${country}/curso/${product.slug}`
+											? `${window.location.origin}/curso/${product.slug}/`
+											: `${window.location.origin}/${country}/curso/${product.slug}/`
 									}
 									className='c-share-btn'
 								>
@@ -142,11 +142,11 @@ const StoreProduct: FC<Props> = ({ product, className, hoverEffect = false, kind
 							<NcLink
 								href={
 									country === ''
-										? `${window.location.origin}/curso/${product.slug}`
-										: `${window.location.origin}/${country}/curso/${product.slug}`
+										? `${window.location.origin}/curso/${product.slug}/`
+										: `${window.location.origin}/${country}/curso/${product.slug}/`
 								}
 							>
-								<h3 className='font-bold text-sm'>{product.title}</h3>
+								<h3 className='text-sm font-bold'>{product.title}</h3>
 							</NcLink>
 						</div>
 					</div>
@@ -168,10 +168,10 @@ const StoreProduct: FC<Props> = ({ product, className, hoverEffect = false, kind
 				<NcLink
 					href={
 						country === ''
-							? `${window.location.origin}/curso/${product.slug}`
-							: `${window.location.origin}/${country}/curso/${product.slug}`
+							? `${window.location.origin}/curso/${product.slug}/`
+							: `${window.location.origin}/${country}/curso/${product.slug}/`
 					}
-					className='course-network text-primary font-bold text-sm'
+					className='text-sm font-bold course-network text-primary'
 				>
 					Descubrir
 				</NcLink>

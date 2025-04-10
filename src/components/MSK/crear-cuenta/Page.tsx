@@ -190,7 +190,7 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
 									const redirectURL = '/iniciar-sesion';
 									const loginLink = document.createElement('a');
 									loginLink.className =
-										'cursor-pointer text-violet-custom hover:underline hover:text-violet-custom font-bold';
+										'font-bold cursor-pointer text-violet-custom hover:underline hover:text-violet-custom';
 									loginLink.href = redirectURL;
 									loginLink.innerHTML = 'Inicia sesión';
 									res.errors.email[0] += ` ${loginLink.outerHTML}`;
@@ -228,7 +228,7 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
 							<InputField label='Apellido' type='text' name='last_name' placeholder='Ingresar apellido' />
 
 							<div className=''>
-								<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Teléfono</label>
+								<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Teléfono</label>
 								<Field name='phone'>
 									{({ field, form, meta }: any) => (
 										<div className='form-phone-std'>
@@ -249,9 +249,9 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
 								</Field>
 							</div>
 
-							<div className='col-xl-6 col-span-2 md:col-span-1'>
+							<div className='col-span-2 col-xl-6 md:col-span-1'>
 								<div className='form-select-std'>
-									<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Tipo de identificacion</label>
+									<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Tipo de identificacion</label>
 									<ErrorMessage name='type' component='span' className='error' />
 
 									<Field
@@ -276,9 +276,9 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
 
 							<InputField label='Identificacion' type='text' name='identification' placeholder='Ingresar identificacion' />
 
-							<div className='col-xl-6 col-span-2 md:col-span-1'>
+							<div className='col-span-2 col-xl-6 md:col-span-1'>
 								<div className='form-select-std'>
-									<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Profesión</label>
+									<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Profesión</label>
 									<ErrorMessage name='profession' component='span' className='error' />
 
 									{loadingProfessions ? (
@@ -305,7 +305,7 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
 								</div>
 
 								{showInputProfession && (
-									<div className='form-input-std my-4'>
+									<div className='my-4 form-input-std'>
 										<ErrorMessage name='Otra_profesion' component='span' className='error' />
 										<Field type='text' name='Otra_profesion' placeholder='Ingresar profesion' />
 									</div>
@@ -313,8 +313,8 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
 							</div>
 
 							{studentInputs ? (
-								<div className='col-xl-12 flex gap-2 mt-2'>
-									<div className='form-select-std w-1/2'>
+								<div className='flex gap-2 mt-2 col-xl-12'>
+									<div className='w-1/2 form-select-std'>
 										<ErrorMessage name='Year' component='span' className='error' />
 										<Field as='select' name='Year'>
 											<option defaultValue=''>Año</option>
@@ -325,7 +325,7 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
 											))}
 										</Field>
 									</div>
-									<div className='form-select-std w-full'>
+									<div className='w-full form-select-std'>
 										<ErrorMessage name='Career' component='span' className='error' />
 										<Field as='select' name='Career' onChange={handleOptionCareerChange} value={selectedCareer}>
 											<option defaultValue=''>Seleccionar carrera</option>
@@ -341,7 +341,7 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
 								<>
 									<div className={`col-xl-6`}>
 										<div className='form-select-std'>
-											<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Especialidad</label>
+											<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Especialidad</label>
 											<ErrorMessage name='speciality' component='span' className='error' />
 											{loadingSpecialties ? (
 												<SimpleInputSkeleton />
@@ -368,7 +368,7 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
 											)}
 										</div>
 										{showInputSpecialties && (
-											<div className='form-input-std my-4'>
+											<div className='my-4 form-input-std'>
 												<Field type='text' name='Otra_especialidad' placeholder='Ingresar especialidad' />
 												<ErrorMessage name='Otra_especialidad' component='div' className='error' />
 											</div>
@@ -386,11 +386,11 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
 												: `${window.location.origin}/${country}/terminos-y-condiciones/#trial`
 										}
 										target='_blank'
-										className='text-primary hover:text-primary underline'
+										className='underline text-primary hover:text-primary'
 									>
 										Ver términos y condiciones
 									</Link>
-									<div className='flex gap-2 center text-center'>
+									<div className='flex gap-2 text-center center'>
 										<Field
 											type='checkbox'
 											name='Terms_And_Conditions'
@@ -402,8 +402,8 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
 											<Link
 												href={
 													country === ''
-														? `${window.location.origin}/politica-de-privacidad`
-														: `${window.location.origin}/${country}/politica-de-privacidad`
+														? `${window.location.origin}/politica-de-privacidad/`
+														: `${window.location.origin}/${country}/politica-de-privacidad/`
 												}
 												target='_blank'
 												className='text-primary'
@@ -421,7 +421,7 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
 								</ButtonPrimary>
 								{error && <ShowErrorMessage text={error} visible={error !== ''} />}
 
-								{success && <p className='text-green-500 text-center w-full'>Registrado correctamente!</p>}
+								{success && <p className='w-full text-center text-green-500'>Registrado correctamente!</p>}
 							</div>
 						</Form>
 					</FormikProvider>

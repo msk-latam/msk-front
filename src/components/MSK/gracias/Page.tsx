@@ -22,7 +22,7 @@ const PageGracias: FC<PageGraciasProps> = ({ className }) => {
 	let subHeading = '';
 	let message = '';
 	let buttonLabel = 'Descubrir';
-	let route = country === '' ? `${window.location.origin}/tienda` : `${window.location.origin}/${country}/tienda`;
+	let route = country === '' ? `${window.location.origin}/tienda/` : `${window.location.origin}/${country}/tienda/`;
 
 	switch (origin) {
 		case 'newsletter':
@@ -51,8 +51,8 @@ const PageGracias: FC<PageGraciasProps> = ({ className }) => {
 			buttonLabel = 'Comienza ahora';
 			route =
 				country === ''
-					? `${window.location.origin}/mi-cuenta/cursos`
-					: `${window.location.origin}/${country}/mi-cuenta/cursos`;
+					? `${window.location.origin}/mi-cuenta/cursos/`
+					: `${window.location.origin}/${country}/mi-cuenta/cursos/`;
 			break;
 
 		default:
@@ -71,7 +71,7 @@ const PageGracias: FC<PageGraciasProps> = ({ className }) => {
 					<h1 className='text-center thank-you-title'>¡Listo!</h1>
 					<div className='max-w-2xl mx-auto space-y-6'>
 						<span
-							className='subheading block text-center text-neutral-700 dark:text-neutral-300'
+							className='block text-center subheading text-neutral-700 dark:text-neutral-300'
 							dangerouslySetInnerHTML={{ __html: subHeading }}
 						></span>
 						<p className='text-center description'>{message}</p>

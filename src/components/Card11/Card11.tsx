@@ -59,19 +59,19 @@ const Card11: FC<Card11Props> = ({
 				</div>
 			</div>
 			{/* <Link to={href} className="absolute inset-0"></Link> */}
-			<span className='absolute top-3 inset-x-3 z-10'>
+			<span className='absolute z-10 top-3 inset-x-3'>
 				<CategoryBadgeList categories={categories} isPost={kind === 'blog'} />
 			</span>
 
-			<div className='p-4 flex flex-col flex-grow space-y-3'>
+			<div className='flex flex-col flex-grow p-4 space-y-3'>
 				{/* {!hiddenAuthor ? (
           <PostCardMeta meta={post} />
         ) : (
           <span className="text-xs text-neutral-500">{date}</span>
         )} */}
-				<h2 className='nc-card-title block text-base font-semibold text-neutral-900 dark:text-neutral-100 '>
+				<h2 className='block text-base font-semibold nc-card-title text-neutral-900 dark:text-neutral-100 '>
 					<Link
-						href={country === '' ? `${window.location.origin}/${kind}/${slug}` : `/${country}/${kind}/${slug}`}
+						href={country === '' ? `${window.location.origin}/${kind}/${slug}/` : `/${country}/${kind}/${slug}/`}
 						className='line-clamp-2'
 						title={title}
 					>

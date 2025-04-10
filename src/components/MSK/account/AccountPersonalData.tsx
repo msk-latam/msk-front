@@ -290,22 +290,22 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 				<Form
 					onSubmit={formik.handleSubmit}
 					action='#'
-					className='md:grid md:grid-cols-2 gap-6'
+					className='gap-6 md:grid md:grid-cols-2'
 					autoComplete='off'
 					ref={formRef}
 				>
 					<div className='form-input-std'>
-						<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Nombre</label>
+						<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Nombre</label>
 						<ErrorMessage name='name' component='span' className='error' />
 						<Field type='text' name='name' placeholder='Ingresar nombre' />
 					</div>
 					<div className='form-input-std'>
-						<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Apellido</label>
+						<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Apellido</label>
 						<ErrorMessage name='last_name' component='span' className='error' />
 						<Field type='text' name='last_name' placeholder='Ingresar apellido' />
 					</div>
 					<div className='form-input-std'>
-						<label className='text-neutral-800 dark:text-neutral-200 mb-1'>E-mail</label>
+						<label className='mb-1 text-neutral-800 dark:text-neutral-200'>E-mail</label>
 						<ErrorMessage name='email' component='span' className='error' />
 						<Field
 							type='text'
@@ -318,7 +318,7 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 					<Field name='phone'>
 						{({ field, form, meta }: any) => (
 							<div className='form-phone-std'>
-								<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Teléfono</label>
+								<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Teléfono</label>
 								<ErrorMessage name='phone' component='span' className='error' />
 								<PhoneInput
 									name='phone'
@@ -336,9 +336,9 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 						)}
 					</Field>
 					<div className='grid grid-cols-2 col-span-2 gap-6'>
-						<div className='col-xl-6 col-span-2 md:col-span-1'>
+						<div className='col-span-2 col-xl-6 md:col-span-1'>
 							<div className='form-select-std'>
-								<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Profesión</label>
+								<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Profesión</label>
 								<ErrorMessage name='profession' component='span' className='error' />
 								<Field
 									as='select'
@@ -360,8 +360,8 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 							</div>
 
 							{showInputProfession && (
-								<div className='form-input-std my-4'>
-									<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Otra Profesión</label>
+								<div className='my-4 form-input-std'>
+									<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Otra Profesión</label>
 									<ErrorMessage name='other_profession' component='span' className='error' />
 									<Field type='text' name='other_profession' placeholder='Ingresar profesion' />
 								</div>
@@ -369,9 +369,9 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 						</div>
 						{studentInputs ? (
 							<div className='col-span-2 md:col-span-1'>
-								<div className='col-xl-12 flex gap-2'>
-									<div className='form-select-std w-1/2'>
-										<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Año</label>
+								<div className='flex gap-2 col-xl-12'>
+									<div className='w-1/2 form-select-std'>
+										<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Año</label>
 										<ErrorMessage name='Year' component='span' className='error' />
 										<Field as='select' name='Year'>
 											<option defaultValue=''>Año</option>
@@ -382,8 +382,8 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 											))}
 										</Field>
 									</div>
-									<div className='form-select-std w-full'>
-										<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Carrera</label>
+									<div className='w-full form-select-std'>
+										<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Carrera</label>
 										<ErrorMessage name='Career' component='span' className='error' />
 										<Field as='select' name='Career' onChange={handleOptionCareerChange} value={selectedCareer}>
 											<option defaultValue=''>Seleccionar carrera</option>
@@ -399,7 +399,7 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 						) : (
 							<div className='col-span-2 md:col-span-1'>
 								<div className='form-select-std'>
-									<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Especialidad</label>
+									<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Especialidad</label>
 									<ErrorMessage name='speciality' component='span' className='error' />
 									<Field
 										as='select'
@@ -422,7 +422,7 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 									</Field>
 								</div>
 								{showInputSpecialties && (
-									<div className='form-input-std my-4'>
+									<div className='my-4 form-input-std'>
 										<Field type='text' name='other_speciality' placeholder='Ingresar especialidad' />
 										<ErrorMessage name='other_speciality' component='div' className='error' />
 									</div>
@@ -437,10 +437,10 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 							<NcLink
 								href={
 									country === '' || country === 'mi'
-										? `${window.location.origin}/recuperar`
-										: `${window.location.origin}/${country}/recuperar`
+										? `${window.location.origin}/recuperar/`
+										: `${window.location.origin}/${country}/recuperar/`
 								}
-								className='nc-NcLink underline text-primary-6000 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-6000'
+								className='underline nc-NcLink text-primary-6000 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-6000'
 							>
 								Hazlo aquí
 							</NcLink>
@@ -448,13 +448,13 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 					</div>
 
 					<div className='form-input-std'>
-						<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Dirección</label>
+						<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Dirección</label>
 						<ErrorMessage name='address' component='span' className='error' />
 						<Field type='text' name='address' placeholder='Ingresar dirección' />
 					</div>
 
-					<div className='form-select-std w-full'>
-						<label className='text-neutral-800 dark:text-neutral-200 mb-1'>País</label>
+					<div className='w-full form-select-std'>
+						<label className='mb-1 text-neutral-800 dark:text-neutral-200'>País</label>
 						<ErrorMessage name='country' component='span' className='error' />
 						<Field
 							as='select'
@@ -473,8 +473,8 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 						</Field>
 					</div>
 
-					<div className='form-select-std w-full'>
-						<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Provincia</label>
+					<div className='w-full form-select-std'>
+						<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Provincia</label>
 						<ErrorMessage name='state' component='span' className='error' />
 						{currentStates ? (
 							<Field
@@ -496,13 +496,13 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 					</div>
 
 					<div className='form-input-std'>
-						<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Código postal</label>
+						<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Código postal</label>
 						<ErrorMessage name='postal_code' component='span' className='error' />
 						<Field type='text' name='postal_code' placeholder='Ingresar código postal' />
 					</div>
 
 					<div className='form-select-std'>
-						<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Tipo de identificacion</label>
+						<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Tipo de identificacion</label>
 						<ErrorMessage name='type_doc' component='span' className='error' />
 
 						<Field
@@ -528,7 +528,7 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 
 					{localUser?.country?.includes('México') && (
 						<div className='form-input-std'>
-							<label className='text-neutral-800 dark:text-neutral-200 mb-1'>Régimen fiscal</label>
+							<label className='mb-1 text-neutral-800 dark:text-neutral-200'>Régimen fiscal</label>
 							<ErrorMessage name='fiscal_regime' component='span' className='error' />
 							<Field type='text' name='fiscal_regime' placeholder='Ingresar régimen fiscal' />
 						</div>

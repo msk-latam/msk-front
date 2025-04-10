@@ -187,8 +187,8 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 		onClickClose;
 		router.push(
 			country === ''
-				? `${window.location.origin}/tienda/${formattedSlug}`
-				: `${window.location.origin}/${country}/tienda/${formattedSlug}`,
+				? `${window.location.origin}/tienda/${formattedSlug}/`
+				: `${window.location.origin}/${country}/tienda/${formattedSlug}/`,
 		);
 	};
 
@@ -262,7 +262,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 		}
 
 		// Retornar el enlace completo
-		return `https://msklatam.com/${country}/tienda/${formattedSlug}`;
+		return `https://msklatam.com/${country}/tienda/${formattedSlug}/`;
 	};
 
 	return (
@@ -284,7 +284,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 			{isOpen && (
 				<div className='overflow-y-scroll scrollbar-thin scrollbar-thumb-[#6474A6] scrollbar-track-transparent lg:overflow-y-visible max-h-[55vh] lg:max-h-none relative xl:absolute mt-2 xl:w-[24vw] bg-white xl:shadow-[0_6px_12px_rgba(0,0,0,0.3)] lg:rounded-l-2xl lg:p-4 '>
 					<ul className='py-2'>
-						<li className='flex gap-2 items-center lg:px-4 py-2 text-lg'>
+						<li className='flex items-center gap-2 py-2 text-lg lg:px-4'>
 							<Image src={especialidadesIcon} alt='icon' width={20} height={20} />
 							<h2 className='!font-inter'>Especialidades</h2>
 						</li>
@@ -297,7 +297,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 								<div className='absolute top-[70px] left-1/2 transform'>
 									<svg
 										xmlns='http://www.w3.org/2000/svg'
-										className='h-6 w-6 animate-bounce text-gray-500'
+										className='w-6 h-6 text-gray-500 animate-bounce'
 										fill='none'
 										viewBox='0 0 24 24'
 										stroke='currentColor'
@@ -327,7 +327,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 								<div className='absolute bottom-[7px] lg:bottom-[250px] left-1/2 transform'>
 									<svg
 										xmlns='http://www.w3.org/2000/svg'
-										className='h-6 w-6 animate-bounce text-gray-500'
+										className='w-6 h-6 text-gray-500 animate-bounce'
 										fill='none'
 										viewBox='0 0 24 24'
 										stroke='currentColor'
@@ -376,17 +376,17 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 													<Link
 														href={
 															country === ''
-																? `${window.location.origin}/curso/${course.slug}`
-																: `${window.location.origin}/${country}/curso/${course.slug}`
+																? `${window.location.origin}/curso/${course.slug}/`
+																: `${window.location.origin}/${country}/curso/${course.slug}/`
 														}
 														onClick={handleLinkClick}
-														className=' text-xs'
+														className='text-xs '
 													>
 														<div className='flex items-center gap-4'>
 															<Image
 																src={course.thumbnail.low}
 																alt={course.title}
-																className='w-20 h-20 object-cover rounded-md'
+																className='object-cover w-20 h-20 rounded-md'
 																height={100}
 																width={100}
 															/>
@@ -420,7 +420,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 						)}
 
 						<li className='flex-col'>
-							<div className='flex gap-2 items-center lg:px-4 py-2 pt-3 text-lg'>
+							<div className='flex items-center gap-2 py-2 pt-3 text-lg lg:px-4'>
 								<Image src={ofrecemosIcon} alt='icon' width={20} height={20} />
 								<h2 className='!font-inter'>Qué ofrecemos</h2>
 							</div>
@@ -478,7 +478,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 							<li className='w-full'>
 								<Link
 									onClick={handleLinkClick}
-									href={country === '' ? `${window.location.origin}/blog` : `${window.location.origin}/${country}/blog`}
+									href={country === '' ? `${window.location.origin}/blog/` : `${window.location.origin}/${country}/blog/`}
 									className='block lg:px-4 py-1 hover:bg-violet-100 cursor-pointer text-[#6474A6] hover:font-bold rounded-md'
 								>
 									Blog

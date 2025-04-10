@@ -126,7 +126,7 @@ const SearchProducts = () => {
 				<Input
 					type='search'
 					placeholder='Buscar'
-					className='pr-10 w-full'
+					className='w-full pr-10'
 					sizeClass='h-[42px] pl-4 py-3'
 					value={inputValue}
 					onChange={triggerSearch}
@@ -148,11 +148,11 @@ const SearchProducts = () => {
 							<NcLink
 								href={
 									country === ''
-										? `${window.location.origin}/${isOnBlog ? 'blog' : 'curso'}/${product.slug}`
-										: `${window.location.origin}/${country}/${isOnBlog ? 'blog' : 'curso'}/${product.slug}`
+										? `${window.location.origin}/${isOnBlog ? 'blog' : 'curso'}/${product.slug}/`
+										: `${window.location.origin}/${country}/${isOnBlog ? 'blog' : 'curso'}/${product.slug}/`
 								}
 								key={product.id}
-								className='product-item font-medium'
+								className='font-medium product-item'
 								onClick={() => clearInputValue()}
 							>
 								<div className='img-container'>
