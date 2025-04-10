@@ -13,10 +13,14 @@ import FAQ from '@/modules/home/components/faq/FAQ';
 import NewsLetter from '@/modules/home/components/newsletter/NewsLetter';
 import Footer from '@/modules/home/components/footer/footer';
 import BotMaker from '@/modules/components/Bot/BotMaker';
+import Navbar from '@/modules/components/navbar/Navbar';
+import PopUp from '@/modules/components/PopUp';
 
 export default function Home() {
   return (
     <main className="bg-white text-neutral-900">
+      <PopUp/>
+      <Navbar/>
       <Hero />
       <BotMaker/>
       <Oportunidades />

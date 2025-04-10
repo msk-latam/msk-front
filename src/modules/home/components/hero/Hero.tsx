@@ -9,7 +9,7 @@ import Navbar from "../../../components/navbar/Navbar";
 import Image from "next/image";
 import { useHomeContent } from "@/modules/home/hooks/useHomeContent";
 import { HeroSlide } from "@/modules/home/types";
-import PopUp from "./PopUp";
+import PopUp from "../../../components/PopUp";
 
 
 
@@ -20,9 +20,10 @@ const Hero = () => {
 
 
   return (
-    <>
-      <PopUp/>
-    <div className="relative h-[550px] w-full bg-black text-white px-4 overflow-hidden">
+  
+      
+    <div className="relative h-[550px] w-full bg-black text-white px-4 overflow-hidden pt-[150px] ">
+
       {/* --- BACKGROUND CAROUSEL --- */}
       <HeroCarousel slides={slides.map((s) => s.background_image[0])} />
         
@@ -31,15 +32,17 @@ const Hero = () => {
 
       {/* Overlay content */}
       <div className="absolute inset-0 z-10">
-        <Navbar />
+        
 
         {/* --- CONTENIDO PRINCIPAL --- */}
-        <div className="md:px-28 px-5 py-3 md:mt-5 md:py-0 container mx-auto md:h-[70%] flex flex-col justify-center items-center md:justify-end text-center gap-0 md:items-start md:text-left md:gap-2">
-          <p className="border border-white rounded-full px-[18px] py-2 my-4 md:my-0 text-[12px] w-fit">
-            {slides[0]?.tag || "Cursos"}
-          </p>
+        <div className="md:px-28 px-5 py-3 md:mt-24 md:py-0 container mx-auto md:h-[71%] flex flex-col justify-center items-center md:justify-end text-center gap-0 md:items-start md:text-left md:gap-2">
+        <p className="mt-20 md:mt-0 border border-white rounded-full px-[18px] py-2 my-4 md:my-0 text-[12px] w-fit">
+  {slides[0]?.tag || "Cursos"}
+</p>
 
-          <div className="flex wrap w-fit md:w-full flex-col gap-4 md:gap-0 md:mt-0 md:flex-row md:justify-between">
+
+          <div className="flex wrap w-fit md:w-full flex-col gap-4 md:gap-0 md:mt-0 md:flex-row mt-10 md:justify-between">
+            
             <div>
               <p className="text-[2rem] md:text-5xl text-white leading-none md:leading-tight font-raleway md:min-w-full">
                 {slides[0]?.title?.split("<em>")[0] || "Cursos de medicina para"}
@@ -81,7 +84,7 @@ const Hero = () => {
         </div>
       </div>
     </div>
-    </>
+    
   );
 };
 
