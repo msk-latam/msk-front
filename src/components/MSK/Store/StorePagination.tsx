@@ -37,7 +37,7 @@ const StorePagination: FC<Props> = ({ totalPages, onPageChange, currentPage, url
 	return (
 		<>
 			{totalPages > 1 ? (
-				<div className='edu-pagination mt-30 mb-20'>
+				<div className='mb-20 edu-pagination mt-30'>
 					<ul className='items-center'>
 						{currentPage > 0 ? (
 							<li
@@ -47,7 +47,7 @@ const StorePagination: FC<Props> = ({ totalPages, onPageChange, currentPage, url
 								{urlTrack ? (
 									<Link
 										href={updateQueryString(
-											country === '' ? `${window.location.origin}/tienda` : `${window.location.origin}/${country}/tienda`,
+											country === '' ? `${window.location.origin}/tienda/` : `${window.location.origin}/${country}/tienda/`,
 											queryString,
 											{
 												key: 'page',
@@ -78,7 +78,9 @@ const StorePagination: FC<Props> = ({ totalPages, onPageChange, currentPage, url
 									{urlTrack ? (
 										<Link
 											href={updateQueryString(
-												country === '' ? `${window.location.origin}/tienda` : `${window.location.origin}/${country}/tienda`,
+												country === ''
+													? `${window.location.origin}/tienda/`
+													: `${window.location.origin}/${country}/tienda/`,
 												queryString,
 												{
 													key: 'page',
@@ -95,11 +97,11 @@ const StorePagination: FC<Props> = ({ totalPages, onPageChange, currentPage, url
 							);
 						})}
 						{totalPages > 1 && currentPage < totalPages ? (
-							<li onClick={() => onPageChange(currentPage + 1)} className='cursor-pointer hidden sm:block'>
+							<li onClick={() => onPageChange(currentPage + 1)} className='hidden cursor-pointer sm:block'>
 								{urlTrack ? (
 									<Link
 										href={updateQueryString(
-											country === '' ? `${window.location.origin}/tienda` : `${window.location.origin}/${country}/tienda`,
+											country === '' ? `${window.location.origin}/tienda/` : `${window.location.origin}/${country}/tienda/`,
 											queryString,
 											{
 												// href={updateQueryString('/tienda', queryString, {
@@ -117,7 +119,7 @@ const StorePagination: FC<Props> = ({ totalPages, onPageChange, currentPage, url
 						) : null}
 					</ul>
 
-					<div className='flex sm:hidden mx-auto justify-center mt-2'>
+					<div className='flex justify-center mx-auto mt-2 sm:hidden'>
 						{currentPage > 1 ? (
 							<li onClick={() => onPageChange(currentPage - 1)} className='cursor-pointer'>
 								{urlTrack ? (

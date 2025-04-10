@@ -50,8 +50,8 @@ const PageLogin: FC<PageLoginProps> = ({ className = '' }) => {
 						<NcLink
 							href={
 								country === ''
-									? `${window.location.origin}/crear-cuenta`
-									: `${window.location.origin}/${country}/crear-cuenta`
+									? `${window.location.origin}/crear-cuenta/`
+									: `${window.location.origin}/${country}/crear-cuenta/`
 							}
 						>
 							Créala aquí

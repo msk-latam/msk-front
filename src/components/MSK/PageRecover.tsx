@@ -45,8 +45,8 @@ const PageForgotPass: FC<PageForgotPassProps> = ({ className = '' }) => {
 			setTimeout(() => {
 				history.push(
 					country === ''
-						? `${window.location.origin}/correo-enviado`
-						: `${window.location.origin}/${country}/correo-enviado`,
+						? `${window.location.origin}/correo-enviado/`
+						: `${window.location.origin}/${country}/correo-enviado/`,
 				);
 			}, 1500);
 		} else {
@@ -85,8 +85,8 @@ const PageForgotPass: FC<PageForgotPassProps> = ({ className = '' }) => {
 						<NcLink
 							href={
 								country === ''
-									? `${window.location.origin}/iniciar-sesion`
-									: `${window.location.origin}/${country}/iniciar-sesion`
+									? `${window.location.origin}/iniciar-sesion/`
+									: `${window.location.origin}/${country}/iniciar-sesion/`
 							}
 							className='underline'
 						>

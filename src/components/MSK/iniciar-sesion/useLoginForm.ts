@@ -66,7 +66,7 @@ export const useLoginForm = () => {
 
 						dispatch({ type: 'LOGIN', payload: loginData });
 						router.push(
-							country === '' ? `${window.location.origin}/mi-perfil` : `${window.location.origin}/${country}/mi-perfil`,
+							country === '' ? `${window.location.origin}/mi-perfil/` : `${window.location.origin}/${country}/mi-perfil/`,
 						);
 					} else {
 						setLoginError(data?.message as string);

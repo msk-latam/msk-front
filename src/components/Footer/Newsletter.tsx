@@ -196,7 +196,7 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
 			<Form onSubmit={formik.handleSubmit} action='/leads' className='' autoComplete='off' ref={formRef}>
 				<input type='hidden' name='URL_ORIGEN' id='URL_ORIGEN' value={window.location.href} />
 				<input type='hidden' name='country' value={countryState?.country} />
-				<div className='grid grid-cols-1 md:grid-cols-3 grid-row-6 gap-4'>
+				<div className='grid grid-cols-1 gap-4 md:grid-cols-3 grid-row-6'>
 					<div className=''>
 						<div className='contact-from-input'>
 							<ErrorMessage name='First_Name' component='span' className='error' />
@@ -216,7 +216,7 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
 						</div>
 					</div>
 				</div>
-				<div className='grid grid-cols-1 md:grid-cols-3 grid-row-6 gap-4 mt-4'>
+				<div className='grid grid-cols-1 gap-4 mt-4 md:grid-cols-3 grid-row-6'>
 					<div className='contact-select'>
 						<div className='contact-select'>
 							<ErrorMessage name='Profesion' component='span' className='error' />
@@ -239,15 +239,15 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
 							</Field>
 						</div>
 						{showInputProfession && (
-							<div className='contact-from-input my-4'>
+							<div className='my-4 contact-from-input'>
 								<ErrorMessage name='Otra_profesion' component='span' className='error' />
 								<Field type='text' name='Otra_profesion' placeholder='Ingresar profesion' />
 							</div>
 						)}
 					</div>
 					{studentInputs ? (
-						<div className='col-xl-12 flex gap-2'>
-							<div className='contact-select w-1/2'>
+						<div className='flex gap-2 col-xl-12'>
+							<div className='w-1/2 contact-select'>
 								<ErrorMessage name='year' component='span' className='error' />
 								<Field as='select' name='year'>
 									<option defaultValue=''>Año</option>
@@ -258,7 +258,7 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
 									))}
 								</Field>
 							</div>
-							<div className='contact-select w-full'>
+							<div className='w-full contact-select'>
 								<ErrorMessage name='career' component='span' className='error' />
 								<Field as='select' name='career'>
 									<option defaultValue=''>Seleccionar carrera</option>
@@ -298,7 +298,7 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
 									</Field>
 								</div>
 								{showInputSpecialties && (
-									<div className='contact-from-input my-4'>
+									<div className='my-4 contact-from-input'>
 										<ErrorMessage name='Otra_especialidad' component='span' className='error' />
 										<Field type='text' name='Otra_especialidad' placeholder='Ingresar especialidad' />
 									</div>
@@ -311,10 +311,10 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
 					<h3 className='mt-6 text-base font-semibold text-neutral-900 lg:text-xl dark:text-neutral-200 font-raleway'>
 						Selecciona tus temas de interés
 					</h3>
-					<ErrorMessage name='Temas_de_interes' component='span' className='error text-left' />
+					<ErrorMessage name='Temas_de_interes' component='span' className='text-left error' />
 					<FieldArray name='Temas_de_interes'>
 						{({ push, remove }) => (
-							<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-row-6 gap-2 mt-2'>
+							<div className='grid grid-cols-1 gap-2 mt-2 md:grid-cols-2 lg:grid-cols-3 grid-row-6'>
 								{newsletterSpecialties && newsletterSpecialties.length
 									? newsletterSpecialties.map((specialty: { name: string; id: number }, index: number) => (
 											<div key={specialty.id} className='interest-topics'>
@@ -346,7 +346,7 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
 					</FieldArray>
 				</div>
 
-				<div className='flex justify-center flex-wrap items-center gap-8'>
+				<div className='flex flex-wrap items-center justify-center gap-8'>
 					<div className='contact-checkbox'>
 						<ErrorMessage name='Terms_And_Conditions2' component='span' className='error' />
 						<div className='flex gap-2 center'>
@@ -361,8 +361,8 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
 								<NcLink
 									href={
 										country === ''
-											? `${window.location.origin}/politica-de-privacidad`
-											: `${window.location.origin}/${country}/politica-de-privacidad`
+											? `${window.location.origin}/politica-de-privacidad/`
+											: `${window.location.origin}/${country}/politica-de-privacidad/`
 									}
 									target='_blank'
 									className='text-primary'
@@ -377,10 +377,10 @@ const FooterNewsletter: FC<Props> = ({ email, setShow }) => {
 						<button
 							type='submit'
 							id='submit-newsletter'
-							className='cont-btn rounded flex center'
+							className='flex rounded cont-btn center'
 							disabled={isSubmitDisabled}
 						>
-							<div className='flex center gap-2 px-2 text-sm my-auto'>
+							<div className='flex gap-2 px-2 my-auto text-sm center'>
 								Suscribirme
 								<Image width={15} height={15} alt='suscribe icon' src='/images/icons/plane.svg' className='subscribe-icon' />
 							</div>

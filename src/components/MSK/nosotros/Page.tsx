@@ -103,7 +103,7 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({ className = ''
 			<InfoPageHeader pageData={SINGLE} />
 
 			{!data && (
-				<div className='flex flex-col gap-8 container'>
+				<div className='container flex flex-col gap-8'>
 					<LoadingText />
 					<LoadingText />
 					<LoadingText />
@@ -111,8 +111,8 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({ className = ''
 			)}
 
 			{data && (
-				<div className=' '>
-					<div className=' nc-SingleContent  relative space-y-10 mb-16 '>
+				<div className=''>
+					<div className='relative mb-16 space-y-10  nc-SingleContent'>
 						<div className='w-full max-w-[50rem] mx-auto px-4 mt-5'>
 							<p className='font-lora  pb-2 pt-4 text-base sm:text-lg lg:text-xl text-[#392C35]'>
 								Medical & Scientific Knowledge es un grupo español con más de ocho años de trayectoria en la industria pharma
@@ -125,7 +125,9 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({ className = ''
 								continua. Puedes conocer más sobre nuestra misión{' '}
 								<Link
 									className='text-[#9200AD] underline text-base sm:text-lg lg:text-xl'
-									href={country === '' ? `${window.location.origin}/mision` : `${window.location.origin}/${country}/mision`}
+									href={
+										country === '' ? `${window.location.origin}/mision/` : `${window.location.origin}/${country}/mision/`
+									}
 									target='_blank'
 									rel='noopener noreferrer'
 								>
@@ -141,7 +143,7 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({ className = ''
 							</p>
 
 							{data.avales && (
-								<div className='bg-neutral-100 slider-container px-4 sm:px-10 py-10 rounded-2xl'>
+								<div className='px-4 py-10 bg-neutral-100 slider-container sm:px-10 rounded-2xl'>
 									<SectionSliderPosts
 										heading=''
 										postCardName='card20'
@@ -163,7 +165,7 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({ className = ''
 											<Image src={person.imagen} alt={person.title} width={100} height={100} className='rounded-md' />
 										</div>
 										<div className='flex flex-col'>
-											<span className='text-base sm:text-lg font-semibold'>{person.title}</span>
+											<span className='text-base font-semibold sm:text-lg'>{person.title}</span>
 											<span className='text-[#6474A6] text-sm sm:text-base'>{person.description}</span>
 										</div>
 									</div>
@@ -175,7 +177,7 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({ className = ''
 											<Image src={person.imagen} alt={person.title} width={100} height={100} className='rounded-md' />
 										</div>
 										<div className='flex flex-col'>
-											<span className='text-base sm:text-lg font-semibold'>{person.title}</span>
+											<span className='text-base font-semibold sm:text-lg'>{person.title}</span>
 											<span className='text-[#6474A6] text-sm sm:text-base'>{person.description}</span>
 										</div>
 									</div>
@@ -189,7 +191,7 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({ className = ''
 			{/* transformar a componente */}
 
 			<div className=''>
-				<div className=' grid grid-cols-1 md:grid-cols-3 gap-4 my-16'>
+				<div className='grid grid-cols-1 gap-4 my-16  md:grid-cols-3'>
 					<ContactForm isNosotros={true} />
 				</div>
 			</div>

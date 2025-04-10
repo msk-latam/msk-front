@@ -56,8 +56,8 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 							dispatch({ type: 'LOGOUT' });
 							router.push(
 								country === ''
-									? `${window.location.origin}/iniciar-sesion`
-									: `${window.location.origin}/${country}/iniciar-sesion`,
+									? `${window.location.origin}/iniciar-sesion/`
+									: `${window.location.origin}/${country}/iniciar-sesion/`,
 							);
 						}
 					}

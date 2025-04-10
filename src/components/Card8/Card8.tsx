@@ -32,19 +32,19 @@ const Card8: FC<Card8Props> = ({ className = 'h-full', post, badgeColor = 'yello
 			data-nc-id='Card8'
 		>
 			<NcLink
-				href={country === '' ? `${window.location.origin}/curso/${slug}` : `/${country}/curso/${slug}`}
+				href={country === '' ? `${window.location.origin}/curso/${slug}/` : `/${country}/curso/${slug}/`}
 				className='block w-full h-0 pt-[100%] sm:pt-[55%] overflow-hidden'
 			>
 				<NcImage containerClassName='absolute inset-0' src={imageURL} alt={title} width='100' height='100' />
-				<span className='absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-100 md:opacity-80 group-hover:opacity-100 transition-opacity'></span>
+				<span className='absolute inset-0 transition-opacity opacity-100 bg-gradient-to-b from-transparent to-black md:opacity-80 group-hover:opacity-100'></span>
 			</NcLink>
 			<NcLink
-				href={country === '' ? `${window.location.origin}/curso/${slug}` : `/${country}/curso/${slug}`}
-				className='absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-black opacity-50'
+				href={country === '' ? `${window.location.origin}/curso/${slug}/` : `/${country}/curso/${slug}/`}
+				className='absolute inset-x-0 bottom-0 opacity-50 h-1/2 bg-gradient-to-t from-black'
 			></NcLink>
-			<div className='absolute inset-x-0 bottom-0 p-4 sm:p-6 flex flex-col'>
+			<div className='absolute inset-x-0 bottom-0 flex flex-col p-4 sm:p-6'>
 				<NcLink
-					href={country === '' ? `${window.location.origin}/curso/${slug}` : `/${country}/curso/${slug}`}
+					href={country === '' ? `${window.location.origin}/curso/${slug}/` : `/${country}/curso/${slug}/`}
 					className='absolute inset-0'
 				/>
 				<CategoryBadgeList
@@ -56,8 +56,8 @@ const Card8: FC<Card8Props> = ({ className = 'h-full', post, badgeColor = 'yello
 				/>
 				<h2 className={`mt-3 mb-2 relative block font-semibold text-neutral-50 text-lg sm:text-2xl `}>
 					<NcLink
-						href={country === '' ? `${window.location.origin}/curso/${slug}` : `/${country}/curso/${slug}`}
-						className='line-clamp-3 text-2xl font-raleway font-bold'
+						href={country === '' ? `${window.location.origin}/curso/${slug}/` : `/${country}/curso/${slug}/`}
+						className='text-2xl font-bold line-clamp-3 font-raleway'
 						colorClass='text-white hover:text-white'
 					>
 						{title}
@@ -68,8 +68,8 @@ const Card8: FC<Card8Props> = ({ className = 'h-full', post, badgeColor = 'yello
 				{post.duration && <Showing title={`${post.duration} horas estimadas`} icon={timeIcon.src} />}
 
 				{post.lista_de_cedentes ? (
-					<div className='sm:block mt-2'>
-						<span className='text-neutral-300 text-sm line-clamp-1'>{post.lista_de_cedentes[0].post_title}</span>
+					<div className='mt-2 sm:block'>
+						<span className='text-sm text-neutral-300 line-clamp-1'>{post.lista_de_cedentes[0].post_title}</span>
 					</div>
 				) : null}
 			</div>

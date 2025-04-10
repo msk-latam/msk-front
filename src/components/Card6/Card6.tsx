@@ -29,11 +29,11 @@ const Card6: FC<Card6Props> = ({ className = 'h-full', post, authorRow, kind = '
 			data-nc-id='Card6'
 		>
 			<NcLink
-				href={country === '' ? `${window.location.origin}/${kind}/${slug}` : `/${country}/${kind}/${slug}`}
+				href={country === '' ? `${window.location.origin}/${kind}/${slug}/` : `/${country}/${kind}/${slug}/`}
 				className='absolute inset-0 z-0'
 			></NcLink>
 			<div className='flex flex-col flex-grow'>
-				<div className='space-y-3 mb-4'>
+				<div className='mb-4 space-y-3'>
 					<CategoryBadgeList
 						categories={categories}
 						color={badgeColor}
@@ -43,8 +43,8 @@ const Card6: FC<Card6Props> = ({ className = 'h-full', post, authorRow, kind = '
 					/>
 					<h2 className={`block font-semibold text-base`}>
 						<NcLink
-							href={country === '' ? `${window.location.origin}/${kind}/${slug}` : `/${country}/${kind}/${slug}`}
-							className='line-clamp-2 font-medium'
+							href={country === '' ? `${window.location.origin}/${kind}/${slug}/` : `/${country}/${kind}/${slug}/`}
+							className='font-medium line-clamp-2'
 							colorClass='text-black'
 						>
 							{title}
@@ -63,7 +63,7 @@ const Card6: FC<Card6Props> = ({ className = 'h-full', post, authorRow, kind = '
 			</div>
 
 			<NcLink
-				href={country === '' ? `${window.location.origin}/${kind}/${slug}` : `/${country}/${kind}/${slug}`}
+				href={country === '' ? `${window.location.origin}/${kind}/${slug}/` : `/${country}/${kind}/${slug}/`}
 				className={`block relative flex-shrink-0 w-full sm:w-40 h-40 sm:h-full sm:ml-5 rounded-2xl overflow-hidden mb-5 sm:mb-0 `}
 			>
 				<NcImage

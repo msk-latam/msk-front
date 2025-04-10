@@ -38,10 +38,10 @@ const HeaderFilter: FC<HeaderFilterProps> = ({
 	const isBlogPage = pathName.includes('/blog');
 
 	viewMore = isBlogPage
-		? `${window.location.origin}${country === '' ? '/blog/archivo' : `/${country}/blog/archivo`}`
+		? `${window.location.origin}${country === '' ? '/blog/archivo/' : `/${country}/blog/archivo/`}`
 		: `${window.location.origin}${country === '' ? '/tienda?recurso=curso' : `/${country}/tienda?recurso=curso`}`;
 	return (
-		<div className='flex flex-col mb-8 relative '>
+		<div className='relative flex flex-col mb-8 '>
 			{desc.length || heading.length ? <Heading desc={desc}>{heading}</Heading> : null}
 			<div className='flex items-center justify-between'>
 				<Nav className='sm:space-x-2' containerClassName='relative flex w-full overflow-x-auto text-sm md:text-base'>
@@ -57,7 +57,7 @@ const HeaderFilter: FC<HeaderFilterProps> = ({
 						sizeClass='px-3 py-2 sm:py-3 sm:px-6 text-[11px]'
 					>
 						<span className='text-[11px] sm:text-sm'>Ver más</span>
-						<svg className='w-3 h-3 sm:w-5 sm:h-5 ml-3 rtl:rotate-180' viewBox='0 0 24 24' fill='none'>
+						<svg className='w-3 h-3 ml-3 sm:w-5 sm:h-5 rtl:rotate-180' viewBox='0 0 24 24' fill='none'>
 							<path
 								d='M14.4301 5.92993L20.5001 11.9999L14.4301 18.0699'
 								stroke='currentColor'

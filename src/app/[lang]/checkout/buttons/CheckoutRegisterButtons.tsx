@@ -26,7 +26,7 @@ const CheckoutRegisterButtons: React.FC<CheckoutButtonsProps> = ({
 	const match = pathName.match(/^\/([a-z]{2})\b/);
 	const country = match ? `${match[1]}` : '';
 	return (
-		<div className='flex flex-col sm:flex-row items-center sm:justify-center space-y-4 sm:space-y-0 sm:gap-4 my-6'>
+		<div className='flex flex-col items-center my-6 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:gap-4'>
 			<div>
 				<div className='flex items-center'>
 					<input
@@ -42,8 +42,8 @@ const CheckoutRegisterButtons: React.FC<CheckoutButtonsProps> = ({
 						<a
 							href={
 								country === ''
-									? `${window.location.origin}/politica-de-privacidad`
-									: `${window.location.origin}/${country}/politica-de-privacidad`
+									? `${window.location.origin}/politica-de-privacidad/`
+									: `${window.location.origin}/${country}/politica-de-privacidad/`
 							}
 							target='_blank'
 							className='text-[#9200AD] underline hover:no-underline focus:outline-none focus:ring-1 focus:ring-[#9200AD]'
@@ -52,7 +52,7 @@ const CheckoutRegisterButtons: React.FC<CheckoutButtonsProps> = ({
 						</a>
 					</label>
 				</div>
-				{touched.privacyPolicy && errors.privacyPolicy && <p className='text-red-500 text-sm'>{errors.privacyPolicy}</p>}
+				{touched.privacyPolicy && errors.privacyPolicy && <p className='text-sm text-red-500'>{errors.privacyPolicy}</p>}
 			</div>
 			<button
 				type='button'
@@ -63,7 +63,7 @@ const CheckoutRegisterButtons: React.FC<CheckoutButtonsProps> = ({
 				disabled={!isFormValid || loading}
 			>
 				{loading ? (
-					<div className='w-5 h-5 border-4 border-t-4 border-transparent border-t-white rounded-full animate-spin'></div>
+					<div className='w-5 h-5 border-4 border-t-4 border-transparent rounded-full border-t-white animate-spin'></div>
 				) : (
 					'Siguiente'
 				)}

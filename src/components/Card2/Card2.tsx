@@ -44,11 +44,11 @@ const Card2: FC<Card2Props> = ({
 
 	const url = redirectAccount
 		? country === ''
-			? getFullUrl(`/mi-cuenta/cursos`)
-			: `/${country}/mi-cuenta/cursos`
+			? getFullUrl(`/mi-cuenta/cursos/`)
+			: `/${country}/mi-cuenta/cursos/`
 		: country === ''
-		? getFullUrl(`/${kind}/${slug}`)
-		: `/${country}/${kind}/${slug}`;
+		? getFullUrl(`/${kind}/${slug}/`)
+		: `/${country}/${kind}/${slug}/`;
 	const categoriesOrder = kind === 'blog' ? categories.sort(compareByNameDescending) : categories;
 
 	return (
@@ -66,7 +66,7 @@ const Card2: FC<Card2Props> = ({
 				/>
 			</span>
 			<NcLink href={url} className='absolute inset-0' />
-			<div className='p-4 sm:p-5 flex flex-col'>
+			<div className='flex flex-col p-4 sm:p-5'>
 				<div className='space-y-3'>
 					<CategoryBadgeList
 						itemClass='relative'
@@ -79,11 +79,11 @@ const Card2: FC<Card2Props> = ({
 							size === 'large' ? 'text-lg sm:text-2xl' : 'text-base'
 						}`}
 					>
-						<NcLink href={url} className='line-clamp-2 truncate block font-medium' colorClass=' text-black'>
+						<NcLink href={url} className='block font-medium truncate line-clamp-2' colorClass=' text-black'>
 							{title}
 						</NcLink>
 					</h4>
-					<span className='block text-neutral-500 dark:text-neutral-400 text-sm line-clamp-2 truncate'>{excerpt}</span>
+					<span className='block text-sm truncate text-neutral-500 dark:text-neutral-400 line-clamp-2'>{excerpt}</span>
 				</div>
 				{hideAuthor ? null : (
 					<CardAuthor2
