@@ -7,6 +7,130 @@
 	"total_products": 260,
 	"posts": [
 		{
+			"id": 339004,
+			"title": "Certificados digitales MSK para una profesión en evolución",
+			"slug": "certificados-digitales-msk-con-blockchain",
+			"permalink": "https://wp.msklatam.com/nota/e-learning/certificados-digitales-msk-con-blockchain/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-certificados-digitales-msk-con-blockchain-e1744295864869.png",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-certificados-digitales-msk-con-blockchain-e1744295864869.png",
+				"1000",
+				"644",
+				""
+			],
+			"excerpt": "Ahora, los certificados emitidos por MSK incorporan tecnología blockchain. Esta innovación garantiza mayor seguridad, trazabilidad y validez internacional para tu trayectoria profesional. Descubre qué implica este avance y cómo acceder a tu certificado.",
+			"date": "",
+			"author": {
+				"id": 273557,
+				"name": "Gonzalo Busquets",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2024/01/foto-cv-blurred.png"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 273557,
+					"name": "Gonzalo Busquets",
+					"description": "Periodista. Especialista en comunicación regional para el segmento e-learning y salud.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2024/01/foto-cv-blurred.png"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 338891,
+					"title": "El valor de la investigación en la práctica médica",
+					"slug": "valor-de-la-investigacion-en-la-practica-medica",
+					"link": "https://wp.msklatam.com/nota/medicina/valor-de-la-investigacion-en-la-practica-medica/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-valor-de-la-investigacion-en-la-practica-medica-scaled-e1744147518586.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 338757,
+					"title": "Cómo mejorar los sistemas de salud: un panorama actual",
+					"slug": "actualidad-de-los-sistemas-de-salud-en-latinoamerica",
+					"link": "https://wp.msklatam.com/nota/medicina/actualidad-de-los-sistemas-de-salud-en-latinoamerica/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/shutterstock_1186830211-scaled-e1744041787582.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 225977,
+					"title": "Cómo destacar en tu práctica profesional con capacitación continua",
+					"slug": "como-destacar-en-tu-practica-con-capacitacion-medica-continua",
+					"link": "https://wp.msklatam.com/nota/e-learning/como-destacar-en-tu-practica-con-capacitacion-medica-continua/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/08/Foto-como-destacar-en-tu-practica-con-capacitacion-medica-continua-scaled-e1743784815871.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 338339,
+					"title": "Ética hipocrática hoy: medicina con conciencia",
+					"slug": "etica-hipocratica-medicina-con-conciencia",
+					"link": "https://wp.msklatam.com/nota/medicina/etica-hipocratica-medicina-con-conciencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-etica-hipocratica-medicina-con-conciencia-scaled-e1743689643452.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 337994,
+					"title": "Últimas revelaciones científicas sobre trastorno bipolar",
+					"slug": "ultimas-revelaciones-sobre-trastorno-bipolar",
+					"link": "https://wp.msklatam.com/nota/medicina/ultimas-revelaciones-sobre-trastorno-bipolar/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/03/Foto-ultimas-revelaciones-sobre-trastorno-bipolar-scaled-e1743168915455.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"categories": [
+				{
+					"id": 59968,
+					"primary": true,
+					"name": "E-Learning",
+					"slug": "e-learning",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/e-learning/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59968",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1320,
+				"filter": "raw"
+			},
+			"reading_time": "3",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
 			"id": 338757,
 			"title": "Cómo mejorar los sistemas de salud: un panorama actual",
 			"slug": "actualidad-de-los-sistemas-de-salud-en-latinoamerica",
