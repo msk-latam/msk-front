@@ -92,6 +92,18 @@ export default async function RootLayout({ params, children, showHeaderFooter = 
 				<Script src='https://sdk.rebill.com/v3/rebill.js' defer />
 				<Script src='https://sdk.mercadopago.com/js/v2' defer />
 				<EmblueScript />
+				<Script id='zoho-salesiq-init' strategy='afterInteractive'>
+					{`
+      window.$zoho=window.$zoho || {};
+      $zoho.salesiq = $zoho.salesiq || { ready: function() {} };
+    `}
+				</Script>
+
+				<Script
+					id='zoho-salesiq-script'
+					src='https://salesiq.zohopublic.com/widget?wc=siqdb499adb8613d4eb1eeda085aebe61bcd878f1c653fa7b28fe451f59de287290'
+					strategy='afterInteractive'
+				/>
 				<Script defer type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationDataSEO) }} />
 				<Script defer type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteDataSEO) }} />
 				<Script defer type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewsDataSEO) }} />
