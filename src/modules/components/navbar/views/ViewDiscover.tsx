@@ -120,7 +120,7 @@
 // components/navbar/views/ViewDiscover.tsx
 import React, { useState } from "react";
 import { ChevronRight, ArrowLeft, ChevronDown, ChevronUp } from "react-feather";
-import specialties from "../../data/specialties";
+import specialties from "../data/specialties";
 
 interface Props {
   navigateTo: (view: string, category?: string | null) => void;

@@ -1,6 +1,7 @@
 import React from "react";
 import { ArrowLeft, ChevronRight } from "react-feather";
-import { institutions, partners } from "../../data/institutions";
+import partners from "../data/partners";
+import Image from "next/image";
 
 interface Props {
   navigateTo: (view: string, category?: string | null) => void;
@@ -11,60 +12,79 @@ const ViewInstitutions: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
   if (!isMobile) {
     // Versión desktop - sin incluir elementos del navbar
     return (
-      <div className="bg-[#1a1a1a] w-full rounded-b-3xl pb-6">
+      <div className="bg-[#1a1a1a] w-full rounded-b-3xl">
         <div className="px-4 py-6">
-          <h3 className="uppercase text-white text-xs font-medium mb-4">
+          <h3 className="uppercase ml-52 text-white text-xs font-medium mb-4">
             PARTNERS
           </h3>
 
-          <div className="grid grid-cols-5 gap-4">
+          <div className="grid grid-cols-9 gap-2">
             <div 
-              className="relative bg-gray-800 rounded-lg p-4 h-32 cursor-pointer"
+              className="relative  col-span-2 rounded-2xl p-4 h-24 cursor-pointer"
               onClick={() => navigateTo("institution-list", "universities")}
+              style={{ backgroundImage: "url('/images/instituciones/universidades.svg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
+            
             >
               <div className="h-full flex flex-col justify-between">
-                <div className="text-white text-sm">Universidades</div>
+              <div className="absolute inset-0 bg-gradient-to-l from-transparent to-[#35383E] rounded-2xl opacity-100"></div>
+              <div className="z-10 text-white text-sm bg-cover">Universidades
+                </div>
               </div>
-              <ChevronRight className="absolute bottom-4 right-4 text-white h-4 w-4" />
+              <ChevronRight className="z-10 absolute bottom-4 right-4 text-white h-4 w-4" />
             </div>
 
-            {partners.slice(0, 2).map((partner, index) => (
+            {partners.slice(0, 3).map((partner, index) => (
               <div
-                key={index}
-                className="bg-gray-800 rounded-lg p-4 h-32 flex items-center justify-center"
-              >
-                <span className="text-sm text-white">{partner.name}</span>
+              key={index}
+              className="relative bg-[#35383E] rounded-lg h-24 flex items-center justify-center overflow-hidden"
+              style={{
+                backgroundImage: `url('${partner.image}')`,
+                backgroundSize: 'contain',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }}
+            >
               </div>
             ))}
 
             <div 
-              className="relative bg-gray-800 rounded-lg p-4 h-32 cursor-pointer"
+              className="relative col-span-2 rounded-2xl p-4 h-24 cursor-pointer"
               onClick={() => navigateTo("institution-list", "companies")}
-            >
+              style={{ backgroundImage: "url('/images/instituciones/empresas.svg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
+>
               <div className="h-full flex flex-col justify-between">
-                <div className="text-white text-sm">Empresas</div>
+  <div className="absolute inset-0 bg-gradient-to-l from-transparent to-[#35383E] rounded-2xl opacity-90"></div>
+                <div className="text-white z-10 text-sm">Empresas</div>
               </div>
-              <ChevronRight className="absolute bottom-4 right-4 text-white h-4 w-4" />
+              <ChevronRight className="absolute z-10 bottom-4 right-4 text-white h-4 w-4" />
             </div>
-
             <div 
-              className="relative bg-gray-800 rounded-lg p-4 h-32 cursor-pointer"
+              className="relative col-span-2 rounded-2xl p-4 h-24 cursor-pointer z-10"
               onClick={() => navigateTo("institution-list", "alliances")}
-            >
+              style={{ backgroundImage: "url('/images/instituciones/alianzas.svg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
+>
               <div className="h-full flex flex-col justify-between">
-                <div className="text-white text-sm">Alianzas</div>
+              <div className="absolute inset-0 bg-gradient-to-l from-transparent to-[#35383E] rounded-2xl opacity-90"></div>
+              <div className="text-white z-10 text-sm">Alianzas</div>
               </div>
-              <ChevronRight className="absolute bottom-4 right-4 text-white h-4 w-4" />
+              <ChevronRight className="absolute z-10 bottom-4 right-4 text-white h-4 w-4" />
             </div>
-
-            {partners.slice(2).map((partner, index) => (
+            <div className="col-span-2"></div>
+            {partners.slice(-3).map((partner, index) => (
               <div
-                key={index}
-                className="bg-gray-800 rounded-lg p-4 h-32 flex items-center justify-center"
-              >
-                <span className="text-sm text-white">{partner.name}</span>
+              key={index}
+              className="relative bg-[#35383E]  rounded-lg h-24 flex items-center justify-center overflow-hidden"
+              style={{
+                backgroundImage: `url('${partner.image}')`,
+                backgroundSize: 'contain',
+                backgroundPosition: 'center',
+                backgroundRepeat: "no-repeat"
+              }}
+            >
               </div>
             ))}
+            <div className="col-span-4"></div>
+
           </div>
         </div>
       </div>
@@ -85,7 +105,7 @@ const ViewInstitutions: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
       </div>
 
       <div className="px-6 pt-2 pb-6">
-        <div className="rounded-lg overflow-hidden mb-6">
+        <div className="rounded-2xl overflow-hidden mb-6">
           <div className="relative bg-gray-800 h-32 flex items-center justify-center">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-70"></div>
             <div className="absolute bottom-4 left-4 text-white">
@@ -105,14 +125,14 @@ const ViewInstitutions: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
           {partners.map((partner, index) => (
             <div
               key={index}
-              className="bg-gray-700 rounded-lg h-24 flex items-center justify-center"
+              className="bg-gray-700 rounded-2xl h-24 flex items-center justify-center"
             >
               <span className="text-sm text-white">{partner.name}</span>
             </div>
           ))}
         </div>
 
-        <div className="rounded-lg overflow-hidden mb-6">
+        <div className="rounded-2xl overflow-hidden mb-6">
           <div className="relative bg-gray-700 h-32 flex items-center justify-center">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-70"></div>
             <div className="absolute bottom-4 left-4 text-white">
@@ -124,7 +144,7 @@ const ViewInstitutions: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
           </div>
         </div>
 
-        <div className="rounded-lg overflow-hidden">
+        <div className="rounded-2xl overflow-hidden">
           <div className="relative bg-gray-700 h-32 flex items-center justify-center">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-70"></div>
             <div className="absolute bottom-4 left-4 text-white">

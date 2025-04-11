@@ -92,7 +92,7 @@
 // components/navbar/views/ViewSpecialtyDetail.tsx
 import React from "react";
 import { ArrowLeft, ChevronRight } from "react-feather";
-import courses from "../../data/courses";
+import courses from "../data/courses";
 
 interface Props {
   selectedCategory: string | null;
