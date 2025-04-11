@@ -39,8 +39,8 @@ export default function Step4Recommendations({ onBack }: Step4RecommendationsPro
   ]
 
   return (
-    <div className="fixed inset-0 z-[99] flex items-center justify-center bg-gradient-to-br backdrop-blur-lg">
-      <div className="bg-white z-[100] rounded-3xl shadow-xl w-full max-w-6xl p-6 sm:p-10 relative mx-4 sm:mx-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br backdrop-blur-lg">
+      <div className="bg-white rounded-3xl shadow-xl w-full max-w-6xl p-6 sm:p-10 relative mx-4 sm:mx-auto">
         <button
           onClick={onBack}
           className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100 transition"
