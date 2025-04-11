@@ -21,15 +21,15 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 
   if (submitted) {
     return (
-    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 p-4 sm:p-20 z-[10] relative overflow-visible max-w-[1600px]">
+    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 p-4 md:mb-20 z-[10] relative overflow-visible max-w-[1600px] h-screen md:h-auto">
       <div className="text-center py-20">
-        <div className="flex justify-center mb-6 animate-pulse">
-          <div className="rounded-full bg-[#F7D6FF] p-6">
-            <img src="/images/emails/email-icon.png" alt="Correo enviado" className="w-[70px] h-[56px]" />
+        <div className="flex justify-center animate-pulse">
+          <div className="w-44 mx-auto h-auto p-6">
+            <img src="/images/emails/email-icon.svg" alt="Correo enviado" />
           </div>
         </div>
         <h2 className="text-xl font-semibold text-gray-900 mb-2">¡Listo!</h2>
-        <p className="text-sm text-gray-600 max-w-md mx-auto">
+        <p className="text-sm text-gray-600 max-w-md md:pb-6 mx-auto">
           Recibirás en tu casilla de e-mail un correo de verificación. <br />
           Revisa tu bandeja de entrada, spam o correos no deseados.
         </p>
