@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import ProgressIndicator from './ProgressIndicator'
 
 interface Step2ProfessionalProps {
   data: any
@@ -32,10 +33,11 @@ export default function Step2Professional({ data, onNext, onBack, onUpdate }: St
         </button>
 
         <div className="text-center mb-6">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900">
-            Cuéntanos sobre tu experiencia profesional
-          </h2>
-        </div>
+  <h2 className="text-2xl sm:text-3xl font-semibold pb-5 text-gray-900">
+    Cuéntanos sobre tu experiencia profesional
+  </h2>
+  <ProgressIndicator currentStep={2} />
+</div>
 
         <form className="max-w-md mx-auto space-y-4">
           <div>

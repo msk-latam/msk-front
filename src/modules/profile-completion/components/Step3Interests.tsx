@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import ProgressIndicator from './ProgressIndicator'
 
 interface Step3InterestsProps {
   onNext: () => void
@@ -63,7 +64,8 @@ export default function Step3Interests({ onNext, onBack, onUpdate, data }: Step3
       </button>
 
       <div>
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Especialidades</h2>
+        <h2 className="text-xl font-bold text-gray-900 pb-4 ">Especialidades</h2>
+  <ProgressIndicator currentStep={3} />
         <div className="flex flex-wrap gap-3 justify-center">
           {specialities.map((tag) => (
             <button

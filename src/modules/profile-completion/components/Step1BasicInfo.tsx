@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import ProgressIndicator from './ProgressIndicator'
 
 interface Step1BasicInfoProps {
   data: {
@@ -41,11 +42,12 @@ export default function Step1BasicInfo({ data, onNext, onSkip, onBack, onUpdate 
           </button>
         )}
 
-        <div className="text-center mb-6">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900">
-            Completa tu perfil y personaliza tu experiencia en MSK
-          </h2>
-        </div>
+<div className="text-center mb-6">
+  <h2 className="text-2xl sm:text-3xl font-semibold pb-5 text-gray-900">
+    Completa tu perfil y personaliza tu experiencia en MSK
+  </h2>
+  <ProgressIndicator currentStep={1} />
+</div>
 
         <form className="max-w-md mx-auto space-y-4">
           <div>

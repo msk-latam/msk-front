@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import ProgressIndicator from './ProgressIndicator'
 
 interface Step4RecommendationsProps {
   data: Record<string, any>
@@ -35,7 +36,8 @@ export default function Step4Recommendations({ data, onBack }: Step4Recommendati
         </button>
 
         <div className="text-center mb-6">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900">Recomendaciones personalizadas</h2>
+          <h2 className="text-2xl sm:text-3xl font-semibold pb-5 text-gray-900">Recomendaciones personalizadas</h2>
+          <ProgressIndicator currentStep={4} />
           <p className="text-sm text-gray-500 mt-1">Basado en tus respuestas, te sugerimos estos cursos</p>
         </div>
 
