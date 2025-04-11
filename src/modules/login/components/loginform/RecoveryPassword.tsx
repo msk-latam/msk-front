@@ -76,7 +76,7 @@ export default function RecoveryPassword({ onBack, onSent }: RecoveryPasswordPro
             type="submit"
             disabled={!isValid}
             className={`w-full text-white py-2 px-4 rounded-[20px] transition ${
-              isValid ? 'bg-purple-600 hover:bg-purple-700' : 'bg-gray-300 cursor-not-allowed'
+              isValid ? 'bg-[#9200ad] hover:bg-purple-700' : 'bg-gray-300 cursor-not-allowed'
             }`}
           >
             Confirmar
@@ -88,7 +88,7 @@ export default function RecoveryPassword({ onBack, onSent }: RecoveryPasswordPro
           <button
             type="button"
             onClick={onBack}
-            className="text-purple-600 underline"
+            className="text-[#9200ad] underline"
           >
             Iniciar sesión
           </button>

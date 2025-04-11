@@ -28,7 +28,7 @@ export default function LoginPage() {
       {/* ======================= */}
       {/* CONTENEDOR DE FORMULARIO */}
       {/* ======================= */}
-      <div className="bg-gray-50 flex justify-center px-0 sm:px-4 relative pt-0 pb-20">
+      <div className="bg-gray-50 flex justify-center px-0 sm:px-4 relative pt-0 z-4 md:pb-20">
        
           
             {/* Mostrar Login o Registro según el estado */}

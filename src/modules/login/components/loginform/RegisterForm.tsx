@@ -138,7 +138,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
             disabled={!isValid}
             className={`w-full text-white py-2 px-4 rounded-[38px] transition ${
               isValid
-                ? "bg-purple-600 hover:bg-purple-700"
+                ? "bg-[#9200ad] hover:bg-purple-700"
                 : "bg-gray-300 cursor-not-allowed"
             }`}
           >
@@ -147,11 +147,11 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 
           <p className="text-xs text-center text-gray-500">
             Al registrarte, aceptás las{" "}
-            <a href="#" className="text-purple-600 underline">
+            <a href="#" className="text-[#9200ad] underline">
               condiciones de privacidad
             </a>{" "}
             y los{" "}
-            <a href="#" className="text-purple-600 underline">
+            <a href="#" className="text-[#9200ad] underline">
               términos y condiciones
             </a>
           </p>
@@ -199,7 +199,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
             <button
               type="button"
               onClick={onBack}
-              className="text-purple-600 underline"
+              className="text-[#9200ad] underline"
             >
               Inicia sesión aquí
             </button>

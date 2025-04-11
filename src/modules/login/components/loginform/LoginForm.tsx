@@ -98,7 +98,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
             disabled={!isFormValid}
             className={`w-full text-white py-2 px-4 rounded-[38px] transition ${
               isFormValid
-                ? 'bg-purple-600 hover:bg-purple-700'
+                ? 'bg-[#9200ad] hover:bg-purple-700'
                 : 'bg-[#989CA4] cursor-not-allowed'
             }`}
           >
