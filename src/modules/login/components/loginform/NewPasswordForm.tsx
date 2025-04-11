@@ -14,9 +14,9 @@ export default function NewPasswordForm() {
           className="w-full max-w-[1632px] relative z-[1] mx-auto px-4 py-6 sm:py-12 text-center"
           style={{ fontFamily: 'Raleway, sans-serif' }}
         >
-          <div className="flex justify-center mb-6">
-            <div className="rounded-full bg-[#F7D6FF] p-6">
-              <img src="/images/emails/email-icon.png" alt="Listo" className="w-[70px] h-[56px]" />
+          <div className="flex justify-center w-full animate-pulse">
+            <div className="w-44 mx-auto h-auto p-6">
+              <img src="/images/emails/email-icon.svg" alt="Correo enviado" />
             </div>
           </div>
 
@@ -25,7 +25,8 @@ export default function NewPasswordForm() {
             Ya confirmaste tu e-mail. En breve recibirás un correo con tus credenciales de <strong>Medical & Scientific Knowledge</strong>.
           </p>
 
-          <button className="bg-purple-700 hover:bg-purple-800 text-white py-2 px-6 rounded-[20px]">
+          <button  className="bg-purple-700 hover:bg-purple-800 text-white py-2 px-6 rounded-[20px]"
+          >
             Seguir navegando
           </button>
         </section>

@@ -55,7 +55,7 @@ const Newsletter = () => {
           {/* BOTÓN */}
           <button
             type="submit"
-            className="w-full md:w-[160px] h-[52px] bg-[#9400D3] hover:bg-[#7A00B6] text-white px-7 py-3.5 rounded-[38px] flex items-center justify-center gap-2 transition-colors md:ml-2"
+            className="w-full md:w-[160px] h-[52px] bg-[#9200ad] hover:bg-[#7A00B6] text-white px-7 py-3.5 rounded-[38px] flex items-center justify-center gap-2 transition-colors md:ml-2"
           >
             <span className="text-sm font-inter">Suscribirme</span>
             {!submitted && (

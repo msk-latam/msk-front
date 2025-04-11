@@ -46,15 +46,19 @@ export default function NewPasswordForm() {
   const [submitted, setSubmitted] = useState(false)
   const [emailSent, setEmailSent] = useState(true) // Estado inicial con pantalla de "Correo enviado"
 
+  const handleRedirect = () => {
+    window.location.href = "/home";
+  };
+
   if (emailSent) {
     return (
       <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:mb-24 py-10 z-[10] relative overflow-visible max-w-[1600px] h-screen md:h-full flex md:items-center justify-center">
         <section
           className="w-full max-w-[1632px] relative z-[1] mx-auto px-4 py-6 sm:py-12 text-center"
           style={{ fontFamily: 'Raleway, sans-serif' }}
-        >
-          <div className="flex justify-center">
-            <div className="rounded-full w-44 mx-auto h-auto p-6">
+        >          
+          <div className="flex justify-center w-full animate-pulse">
+            <div className="w-44 mx-auto h-auto p-6">
               <img src="/images/emails/email-icon.svg" alt="Correo enviado" />
             </div>
           </div>
@@ -100,10 +104,10 @@ export default function NewPasswordForm() {
             strokeLinejoin="round"
           />
         </svg>
-      </button>
-          <div className="flex justify-center mb-6">
-            <div className="rounded-full bg-[#F7D6FF] p-6">
-              <img src="/images/emails/email-icon.png" alt="Listo" className="w-[70px] h-[56px]" />
+      </button>          
+      <div className="flex justify-center w-full animate-pulse">
+            <div className="w-44 mx-auto h-auto p-6">
+              <img src="/images/emails/email-icon.svg" alt="Correo enviado" />
             </div>
           </div>
 
@@ -112,7 +116,10 @@ export default function NewPasswordForm() {
             Ya confirmaste tu e-mail. En breve recibirás un correo con tus credenciales de <strong>Medical & Scientific Knowledge</strong>.
           </p>
 
-          <button className="bg-purple-700 hover:bg-purple-800 text-white py-2 px-6 rounded-[20px]">
+          <button 
+            onClick={handleRedirect} // redirige al home
+            className="bg-[#9200ad] hover:bg-purple-800 text-white py-2 px-6 rounded-[20px]"
+          >
             Seguir navegando
           </button>
         </section>
