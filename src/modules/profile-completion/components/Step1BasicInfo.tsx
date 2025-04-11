@@ -92,11 +92,11 @@ export default function Step1BasicInfo({ data, onNext, onSkip, onBack, onUpdate 
             </select>
           </div>
 
-          <div>
+          <div className='block text-sm font-medium text-gray-700 text-left'>
             <label className="block text-sm font-medium text-gray-700 text-left">Teléfono</label>
             <div className="flex gap-2">
               <select
-                className="rounded-md border border-gray-300 p-2 w-24"
+                className="rounded-[md] border border-gray-300 p-2 w-24"
                 defaultValue="+54"
               >
                 <option value="+54">+54</option>
