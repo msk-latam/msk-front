@@ -54,12 +54,15 @@ const DropdownContent: React.FC<Props> = ({
 
   // En desktop, usamos un contenedor con estilo diferente
   if (!isMobile) {
+    const bgClass = currentView === "institutions" ? "bg-[#1a1a1a]" : "bg-white";
+  
     return (
-      <div className="relative p-5 bg-white shadow-lg z-50 max-w-5xl mx-auto rounded-b-3xl">
+      <div className={`relative p-5 ${bgClass} shadow-lg z-50 max-w-5xl mx-auto rounded-b-3xl`}>
         {getContent()}
       </div>
     );
   }
+  
 
   // Versión móvil (contenedor original)
   return getContent();
