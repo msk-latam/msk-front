@@ -6,6 +6,7 @@ import Link from "next/link";
 import DropdownContent from "./DropdownContent";
 import FloatingCreateAccountButton from "./FloatingCreateAccountButton";
 import { Search, ChevronDown } from "react-feather";
+import { BurgerButton } from "@/modules/components/navbar/common/BurguerButton";
 
 const Navbar = () => {
   const [isDiscoverOpen, setIsDiscoverOpen] = useState(false);
@@ -45,28 +46,8 @@ const Navbar = () => {
         {/* --- NAV MOBILE --- */}
         <section className="flex justify-start items-center mt-2 py-5 px-6 md:hidden relative">
           {/* Botón hamburguesa */}
-          <button
-            aria-label="Menú"
-            className="relative w-6 h-6 flex items-center justify-center z-50"
-            onClick={toggleDiscover}
-          >
-            <span
-              className={`absolute h-0.5 w-5 bg-white transition-all duration-300 ease-in-out ${
-                isDiscoverOpen ? "rotate-45 translate-y-0" : "-translate-y-2"
-              }`}
-            ></span>
-            <span
-              className={`absolute left-[2px] h-0.5 w-3 bg-white transition-all duration-300 ease-in-out ${
-                isDiscoverOpen ? "opacity-0" : "opacity-100"
-              }`}
-            ></span>
-            <span
-              className={`absolute h-0.5 w-5 bg-white transition-all duration-300 ease-in-out ${
-                isDiscoverOpen ? "-rotate-45 translate-y-0" : "translate-y-2"
-              }`}
-            ></span>
-          </button>
 
+          <BurgerButton isOpen={isDiscoverOpen} onClick={toggleDiscover} />
           {/* Logo */}
           <div className="m-auto pr-7 pb-1">
             <Image
@@ -220,9 +201,11 @@ const Navbar = () => {
             isMobile={true}
             onClose={toggleDiscover}
           />
-          <FloatingCreateAccountButton onClose={toggleDiscover} />
         </div>
-      )}
+      )}<FloatingCreateAccountButton
+      isOpen={isDiscoverOpen}
+      onToggle={toggleDiscover}
+    />
     </header>
   );
 };
