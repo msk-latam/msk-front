@@ -46,7 +46,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
       >
         {/* 🧾 Título */}
         <div className="text-center mb-6">
-          <h1 className="md:text-[34px] text-2xl font-semibold text-gray-900">Iniciar sesión</h1>
+          <h1 className="md:text-[34px] text-2xl md:mb-6 mb-2 font-semibold text-gray-900">Iniciar sesión</h1>
           <p className="text-base md:text-[18px] text-gray-500 mt-1">Accede a tu perfil personal</p>
         </div>
 
@@ -63,7 +63,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
               placeholder="Ingresar e-mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 w-full text-base rounded-2xl border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="mt-1 w-full text-base rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] focus:border-1"
             />
           </div>
 
@@ -88,7 +88,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
               placeholder="Ingresar contraseña"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 w-full text-base rounded-2xl border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="mt-1 w-full text-base rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] focus:border-1"
             />
           </div>
 
@@ -99,7 +99,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
             className={`w-full text-white py-2 px-4 rounded-[38px] transition ${
               isFormValid
                 ? 'bg-purple-600 hover:bg-purple-700'
-                : 'bg-gray-300 cursor-not-allowed'
+                : 'bg-[#989CA4] cursor-not-allowed'
             }`}
           >
             Acceder
@@ -140,7 +140,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
               </button>
             ))}
           </div>
-
+{/*error:border-[#F5006D] */}
           {/* Crear cuenta */}
           <p className="text-center text-base font-dmsans text-gray-500 mt-4">
             ¿No tienes una cuenta?{' '}

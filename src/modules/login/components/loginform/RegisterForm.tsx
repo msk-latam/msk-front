@@ -66,7 +66,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
         style={{ fontFamily: 'Raleway, sans-serif' }}>
 
       <div className="text-center mb-6">
-      <h1 className="md:text-[34px] text-2xl font-semibold text-gray-900">Crear cuenta</h1>
+      <h1 className="md:text-[34px] text-2xl md:mb-6 mb-2 font-semibold text-gray-900">Crear cuenta</h1>
       <p className="text-base md:text-[18px] text-gray-500 mt-1">
           Registrate y disfruta al máximo de nuestra propuesta académica
         </p>
@@ -83,7 +83,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
             placeholder="Ingresar e-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="mt-1 w-full text-base rounded-2xl border border-gray-300 p-2"
+            className="mt-1 w-full text-base rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] focus:border-1"
           />
         </div>
 
@@ -94,7 +94,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
             placeholder="Ingresar nombre/s"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            className="mt-1 w-full text-base rounded-2xl border border-gray-300 p-2"
+            className="mt-1 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] focus:border-1 w-full text-base rounded-2xl border border-gray-300 p-2"
           />
         </div>
 
@@ -105,7 +105,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
             placeholder="Ingresar apellido/s"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            className="mt-1 w-full text-base rounded-2xl border border-gray-300 p-2"
+            className="mt-1 w-full text-base rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] focus:border-1"
           />
         </div>
 
@@ -116,7 +116,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
             placeholder="Ingresar contraseña"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mt-1 w-full text-base rounded-2xl border border-gray-300 p-2"
+            className="mt-1 w-full text-base rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] focus:border-1"
           />
         </div>
 
