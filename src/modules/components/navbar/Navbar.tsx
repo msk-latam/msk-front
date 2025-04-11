@@ -17,14 +17,29 @@ const Navbar = () => {
     if (!isDiscoverOpen) setCurrentView("main");
   };
 
+  const toggleInstitutions = () => {
+    if (isDiscoverOpen && currentView === "institutions") {
+      // Si ya está abierto en instituciones, lo cerramos
+      setIsDiscoverOpen(false);
+    } else {
+      // Si está cerrado o en otra vista, abrimos instituciones
+      setIsDiscoverOpen(true);
+      setCurrentView("institutions");
+    }
+  };
+
   const handleCreateAccount = () => {
     window.location.href = "/login";
   };
 
+  const isInstitutionsView = isDiscoverOpen && currentView === "institutions";
+
   return (
     <header className="absolute left-0 w-full z-50">
       {/* Overlay fondo oscuro móvil */}
-      {isDiscoverOpen && <div className="fixed inset-0 bg-transparent z-50 md:hidden"></div>}
+      {isDiscoverOpen && (
+        <div className="fixed inset-0 bg-transparent z-50 md:hidden"></div>
+      )}
 
       <nav className="relative z-50 bg-transparent">
         {/* --- NAV MOBILE --- */}
@@ -83,33 +98,54 @@ const Navbar = () => {
             <div className="w-full">
               <nav
                 className={`flex items-center flex-grow justify-between py-2 mx-16 px-5 transition-colors duration-300 ${
-                  isDiscoverOpen
+                  isDiscoverOpen && currentView === "main"
                     ? "bg-white rounded-t-3xl"
+                    : isDiscoverOpen && currentView === "institutions"
+                    ? "bg-[#1a1a1a]  rounded-t-3xl"
                     : "bg-white shadow-md rounded-full"
                 }`}
               >
                 <div className="flex items-center gap-6 px-4">
                   <button
-                    className="flex items-center gap-1 text-sm font-medium text-gray-800 hover:text-gray-900"
+                    className={`flex items-center gap-1 text-sm font-medium text-gray-800 hover:text-gray-900${
+                  isDiscoverOpen && currentView === "main"
+                    ? ""
+                    : isDiscoverOpen && currentView === "institutions"
+                    ? "bg-[#1a1a1a] text-white"
+                    : ""
+                }`}
                     onClick={toggleDiscover}
                   >
                     Descubre
                     <ChevronDown
                       size={16}
-                      className={`transition-transform duration-300 ${
-                        isDiscoverOpen ? "rotate-180" : ""
+                      className={`transition-transform pt-1 duration-300 ${
+                        isDiscoverOpen && currentView === "main"
+                          ? "rotate-180"
+                          : ""
                       }`}
                     />
                   </button>
 
                   <button
-                    className="text-sm font-medium text-gray-800 hover:text-gray-900"
-                    onClick={() => {
-                      setIsDiscoverOpen(true);
-                      setCurrentView("institutions");
-                    }}
+                    className={`text-sm font-medium flex gap-1  flex-row items-center text-gray-800 hover:text-gray-900${
+                      isDiscoverOpen && currentView === "main"
+                        ? ""
+                        : isDiscoverOpen && currentView === "institutions"
+                        ? " bg-[#35383E] text-white rounded-[38px] px-6 py-3.5 hover:text-gray-500 hover:bg-gray-100"
+                        : ""
+                    }`}
+                    onClick={toggleInstitutions}
                   >
                     Instituciones
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform pt-1 duration-300 ${
+                        isDiscoverOpen && currentView === "institutions"
+                          ? "hidden"
+                          : ""
+                      }`}
+                    />
                   </button>
                 </div>
 
@@ -120,7 +156,13 @@ const Navbar = () => {
                       <input
                         type="search"
                         placeholder="¿Qué tema te interesa?"
-                        className="bg-transparent w-full text-sm py-2 px-4 border-transparent focus:border-transparent focus:ring-0 focus:ring-transparent  text-gray-800 focus:outline-none"
+                        className={`bg-transparent w-full text-sm py-2 px-4 border-transparent focus:border-transparent  focus:ring-0 focus:ring-transparent  focus:outline-none ${
+                      isDiscoverOpen && currentView === "main"
+                        ? ""
+                        : isDiscoverOpen && currentView === "institutions"
+                        ? "text-[#838790] border-[#989ca4]"
+                        : ""
+                    }`}
                       />
                       <button className="absolute right-1 bg-[#8500a0] p-1.5 rounded-full">
                         <Search className="text-white w-3 h-3" />
@@ -131,12 +173,18 @@ const Navbar = () => {
 
                 <div className="flex items-center gap-3">
                   <Link href="/login?form=registerForm">
-                    <button className="bg-[#8500a0] text-white text-sm font-medium rounded-full px-3 py-2.5 whitespace-nowrap hover:bg-[#6d0082]">
+                    <button className="bg-[#8500a0] text-white text-sm font-medium  rounded-[38px] px-6 py-3.5 whitespace-nowrap hover:bg-[#6d0082]">
                       Crear cuenta
                     </button>
                   </Link>
                   <Link href="/login">
-                    <button className="text-sm font-medium rounded-full px-3 py-2.5 transition-colors duration-300 text-gray-800 border border-gray-500 hover:bg-gray-100">
+                    <button className={`text-sm font-medium  rounded-[38px] px-6 py-3.5 transition-colors duration-300 text-gray-800 border border-gray-500 hover:bg-gray-100${
+                      isDiscoverOpen && currentView === "main"
+                        ? ""
+                        : isDiscoverOpen && currentView === "institutions"
+                        ? " text-white hover:bg-gray-300 hover:text-gray-800"
+                        : ""
+                    }`}>
                       Iniciar sesión
                     </button>
                   </Link>
