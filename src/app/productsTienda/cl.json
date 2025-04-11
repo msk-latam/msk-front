@@ -5,6 +5,57 @@
 	},
 	"products": [
 		{
+			"id": 339116,
+			"related_tag": "",
+			"father_id": 339058,
+			"slug": "liderazgo-transformacional-en-urgencias",
+			"is_presale_product": false,
+			"father_post_type": "downloadable",
+			"language_code": "cl",
+			"language_name": "Chile",
+			"product_code": 0,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Liderazgo transformacional en urgencias",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/foto-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/04/foto-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/04/foto-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/04/foto-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				}
+			],
+			"duration": null,
+			"permalink": "https://cl.wp.msklatam.com/producto/liderazgo-transformacional-en-urgencias/",
+			"temario": "https://cl.wp.msklatam.com/wp-content/uploads/2025/04/Liderazgo-transformacional-en-urgencias.pdf",
+			"cantidad_modulos": 0,
+			"why_course": "<p><span data-olk-copy-source=MessageBody>El liderazgo transformacional permite motivar, contener y guiar equipos en contextos críticos. En los servicios de urgencias, es clave para generar entornos colaborativos, promover la innovación y responder con eficacia ante la presión. Conoce fundamentos, competencias y estrategias prácticas en esta guía profesional de descarga gratuita.</span></p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": null,
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2025-04-10 15:04:03"
+		},
+		{
 			"meta_titulo": null,
 			"meta_descripcion": null,
 			"title_contenido": null,
