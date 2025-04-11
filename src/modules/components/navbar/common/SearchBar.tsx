@@ -27,11 +27,11 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ placeholder, className = "" }) => (
-  <div className={`relative rounded-full bg-gray-200 flex items-center ${className}`}>
+  <div className={`relative border-0 border-transparent focus:border-transparent focus:outline-none focus:ring-0 focus:ring-transparent  rounded-full bg-gray-200 flex items-center ${className}`}>
     <input
       type="search"
       placeholder={placeholder}
-      className="bg-transparent w-full text-sm py-3 pl-4 pr-12 rounded-full focus:outline-none text-gray-800"
+      className="bg-transparent w-full text-sm py-3 pl-4 pr-12 rounded-full focus:border-transparent border-transparent focus:outline-none focus:ring-0 focus:ring-transparent  text-gray-800"
     />
     <button className="absolute right-1 bg-[#8500a0] p-2 rounded-full">
       <Search className="text-white w-4 h-4" />

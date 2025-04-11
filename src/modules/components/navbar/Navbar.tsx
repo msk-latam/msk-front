@@ -120,7 +120,7 @@ const Navbar = () => {
                       <input
                         type="search"
                         placeholder="¿Qué tema te interesa?"
-                        className="bg-transparent w-full text-sm py-2 px-4 text-gray-800 focus:outline-none"
+                        className="bg-transparent w-full text-sm py-2 px-4 border-transparent focus:border-transparent focus:ring-0 focus:ring-transparent  text-gray-800 focus:outline-none"
                       />
                       <button className="absolute right-1 bg-[#8500a0] p-1.5 rounded-full">
                         <Search className="text-white w-3 h-3" />
