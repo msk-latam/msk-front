@@ -225,28 +225,28 @@ const ViewDiscover: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
   // Móvil sin cambios
   return (
     <div className="bg-white rounded-t-3xl mt-4 h-full">
-      <div className="flex items-center px-6 py-4">
-        <button className="mr-4 text-gray-800" onClick={() => navigateTo("main")}>
+      <div className="flex flex-row justify-center items-center px-6 py-8">
+        <button className="absolute left-5 top-10 rounded-full border border-black p-2 text-gray-800" onClick={() => navigateTo("main")}>
           <ArrowLeft size={24} />
         </button>
-        <h2 className="text-xl font-medium text-gray-800">Descubre</h2>
+        <h2 className="text-xl text-center font-medium text-gray-800">Descubre</h2>
       </div>
 
-      <div className="px-6 pt-4 pb-6 flex flex-col gap-2">
+      <div className="px-6 pt-4 pb-6 flex flex-col ">
         <button
-          className="flex justify-between items-center bg-gray-200 p-4 rounded-lg text-gray-800"
+          className="flex justify-between items-center rounded-t-2xl bg-gray-200 p-4 text-gray-800"
           onClick={() => navigateTo("specialty", "Especialidades")}
         >
           <span>Especialidades</span>
           <ChevronRight size={20} />
         </button>
 
-        <button className="flex justify-between items-center bg-gray-200 p-4 rounded-lg text-gray-800">
+        <button className="flex justify-between items-center bg-gray-200 p-4  text-gray-800">
           <span>Qué ofrecemos</span>
           <ChevronRight size={20} />
         </button>
 
-        <button className="flex justify-between items-center bg-gray-200 p-4 rounded-lg text-gray-800">
+        <button className="flex justify-between items-center rounded-b-2xl bg-gray-200 p-4 text-gray-800">
           <span>Recursos</span>
           <ChevronRight size={20} />
         </button>

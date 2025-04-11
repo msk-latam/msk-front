@@ -41,7 +41,8 @@ const ViewMain: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
         <SearchBar placeholder="¿Qué tema te interesa?" />
       </div>
 
-      <div className="flex flex-col bg-gray-200 rounded-lg overflow-hidden">
+      <div className="flex flex-col gap-4 overflow-hidden">
+        <div className="flex flex-col bg-gray-200 rounded-2xl">
         <button
           className="flex justify-between items-center p-4 hover:bg-gray-300 text-gray-800"
           onClick={() => navigateTo("discover")}
@@ -56,26 +57,28 @@ const ViewMain: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
           <span>Instituciones</span>
           <ChevronRight size={20} />
         </button>
-        <Link href="/login">
-          <button className="flex justify-between items-center p-4 hover:bg-gray-300 text-gray-800">
-            <span>Iniciar sesión</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-              <polyline points="10 17 15 12 10 7"></polyline>
-              <line x1="15" y1="12" x2="3" y2="12"></line>
-            </svg>
-          </button>
-        </Link>
+        </div>
+        <Link href="/login" className="rounded-2xl bg-gray-200">
+  <button className="w-full flex justify-between items-center p-4 hover:bg-gray-300 text-gray-800">
+    <span>Iniciar sesión</span>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+      <polyline points="10 17 15 12 10 7"></polyline>
+      <line x1="15" y1="12" x2="3" y2="12"></line>
+    </svg>
+  </button>
+</Link>
+
       </div>
     </div>
 
