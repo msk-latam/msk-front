@@ -57,7 +57,7 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 
 	async function fetchDefaultBrands() {
 		try {
-			const url = 'https://wp.msklatam.com/wp-json/wp/api/carrusel-instituciones?country=int';
+			const url = 'https://wp.msklatam.com/wp-json/wp/api/carrusel-instituciones?lang=int';
 			const response = await fetch(url);
 			if (!response.ok) {
 				throw new Error(`Error al obtener las marcas por defecto: ${response.statusText}`);
@@ -167,14 +167,14 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 	return (
 		<div className='relative'>
 			{/* Difuminación izquierda */}
-			<div className='absolute top-0 left-0 h-full w-16 pointer-events-none bg-gradient-to-r from-white via-white/70 to-transparent z-10'></div>
+			<div className='absolute top-0 left-0 z-10 w-16 h-full pointer-events-none bg-gradient-to-r from-white via-white/70 to-transparent'></div>
 
 			{/* Difuminación derecha */}
-			<div className='absolute top-0 right-0 h-full w-16 pointer-events-none bg-gradient-to-l from-white via-white/70 to-transparent z-10'></div>
+			<div className='absolute top-0 right-0 z-10 w-16 h-full pointer-events-none bg-gradient-to-l from-white via-white/70 to-transparent'></div>
 
 			{/* Contenedor del slider */}
 			<div
-				className='overflow-x-auto flex space-x-8 py-4 scrollbar-hide overscroll-none pl-16'
+				className='flex py-4 pl-16 space-x-8 overflow-x-auto scrollbar-hide overscroll-none'
 				ref={scrollContainerRef}
 				onMouseEnter={() => setIsHovered(true)} // Detener el scroll automático
 				onMouseDown={handleMouseDown}
@@ -200,7 +200,7 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 									alt='Brand logo'
 									width={brand.width}
 									height={100}
-									className='object-contain group-hover:hidden transition-all duration-500 ease-in-out opacity-100'
+									className='object-contain transition-all duration-500 ease-in-out opacity-100 group-hover:hidden'
 								/>
 
 								{/* SVG alternativo (hover) */}
@@ -209,7 +209,7 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 									alt='Brand logo hover'
 									width={brand.width}
 									height={100}
-									className='object-contain hidden group-hover:block transition-all duration-500 ease-in-out opacity-0 group-hover:opacity-100'
+									className='hidden object-contain transition-all duration-500 ease-in-out opacity-0 group-hover:block group-hover:opacity-100'
 								/>
 							</a>
 						</div>
