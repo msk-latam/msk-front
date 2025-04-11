@@ -19,13 +19,6 @@ const ViewMain: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
         {/* Se muestra directamente la vista Discover (desktop) */}
         <ViewDiscover navigateTo={navigateTo} isMobile={false} />
 
-        <div className="mt-6 flex justify-end">
-
-        <button className="mt-4 flex items-center justify-between w-full py-3 px-4 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-800">
-            <span>Ver todos los cursos</span>
-            <ChevronRight size={20} />
-          </button>
-        </div>
 
       </div>
     );
