@@ -39,38 +39,40 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
   }
 
   return (
-    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 p-4 sm:p-20 z-[10] md:mb-0 min-h-fit    relative overflow-visible max-w-[1600px]">
-    <section className="w-full min-h-fit mb-[70px] md:mb-[0px]" style={{ fontFamily: 'Raleway, sans-serif' }}>
+    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:p-0 md:mb-20 z-[10] relative overflow-visible mx-auto">
       {/* Botón de volver */}
       <button
         onClick={onBack}
-        className="absolute top-4 left-4 flex z-10 items-center justify-center w-10 h-10 rounded-full border border-gray-300 hover:bg-gray-100 transition absolute top-4 left-4 flex z-10 "
-      >
+        className="md:top-10 md:left-8 top-5 left-5 flex z-10 items-center justify-center w-10 h-10 rounded-full border border-gray-300 hover:bg-gray-100 transition absolute"
+        >
         <svg
           width="6"
           height="12"
           viewBox="0 0 6 12"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-        >
+          >
           <path
             d="M5 1L1 6L5 11"
             stroke="#1F2937"
             strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
-          />
+            />
         </svg>
       </button>
+            <section
+              className="w-full max-w-[1632px] h-fit relative z-8 mx-auto px-6 pt-[84px] pb-28 md:py-16 md:px-9"
+        style={{ fontFamily: 'Raleway, sans-serif' }}>
 
       <div className="text-center mb-6">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900">Crear cuenta</h2>
-        <p className="text-sm text-gray-500 mt-1">
+      <h1 className="md:text-[34px] text-2xl font-semibold text-gray-900">Crear cuenta</h1>
+      <p className="text-base md:text-[18px] text-gray-500 mt-1">
           Registrate y disfruta al máximo de nuestra propuesta académica
         </p>
       </div>
 
-      <form className="max-w-md mx-auto space-y-4" onSubmit={(e) => {
+      <form className="max-w-md mx-auto space-y-6" onSubmit={(e) => {
         e.preventDefault()
         setSubmitted(true)
       }}>
@@ -81,7 +83,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
             placeholder="Ingresar e-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="mt-1 w-full rounded-md border border-gray-300 p-2"
+            className="mt-1 w-full text-base rounded-2xl border border-gray-300 p-2"
           />
         </div>
 
@@ -92,7 +94,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
             placeholder="Ingresar nombre/s"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            className="mt-1 w-full rounded-md border border-gray-300 p-2"
+            className="mt-1 w-full text-base rounded-2xl border border-gray-300 p-2"
           />
         </div>
 
@@ -103,7 +105,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
             placeholder="Ingresar apellido/s"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            className="mt-1 w-full rounded-md border border-gray-300 p-2"
+            className="mt-1 w-full text-base rounded-2xl border border-gray-300 p-2"
           />
         </div>
 
@@ -114,14 +116,14 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
             placeholder="Ingresar contraseña"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mt-1 w-full rounded-md border border-gray-300 p-2"
+            className="mt-1 w-full text-base rounded-2xl border border-gray-300 p-2"
           />
         </div>
 
         <button
           type="submit"
           disabled={!isValid}
-          className={`w-full text-white py-2 px-4 rounded-md transition ${
+          className={`w-full text-white py-2 px-4 rounded-[38px] transition ${
             isValid ? 'bg-purple-600 hover:bg-purple-700' : 'bg-gray-300 cursor-not-allowed'
           }`}
         >
@@ -130,15 +132,15 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 
         <p className="text-xs text-center text-gray-500">
           Al registrarte, aceptás las{' '}
-          <a href="#" className="text-purple-600 hover:underline">condiciones de privacidad</a> y los{' '}
-          <a href="#" className="text-purple-600 hover:underline">términos y condiciones</a>
+          <a href="#" className="text-purple-600 underline">condiciones de privacidad</a> y los{' '}
+          <a href="#" className="text-purple-600 underline">términos y condiciones</a>
         </p>
 
         {/* Divider */}
         <div className="flex items-center gap-2">
           <hr className="w-full border-[#6E737C]" />
           <span
-            className="rounded-full px-3 py-0.5 bg-white border border-[#6E737C] text-[#6E737C]"
+            className=" px-2 py-0.5 bg-white text-[#6E737C]"
             style={{
               fontFamily: 'DM Sans, sans-serif',
               fontWeight: 400,
@@ -153,24 +155,24 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
         </div>
 
         {/* Botones sociales */}
-        <div className="space-y-2">
-          <button className="w-full border border-gray-300 rounded-md py-2 flex items-center justify-center gap-2">
-            <img src="/icons/google.svg" alt="Google" className="h-5 w-5" />
+        <div className="space-y-4">
+          <button className="w-full border border-gray-300 rounded-[38px] py-2 flex items-center justify-center gap-2">
             Crear con Google
+            <img src="/icons/google.svg" alt="Google" className="h-5 w-5" />
           </button>
-          <button className="w-full border border-gray-300 rounded-md py-2 flex items-center justify-center gap-2">
-            <img src="/icons/facebook.svg" alt="Facebook" className="h-5 w-5" />
+          <button className="w-full border border-gray-300 rounded-[38px] py-2 flex items-center justify-center gap-2">
             Crear con Facebook
+            <img src="/icons/facebook.svg" alt="Facebook" className="h-5 w-5" />
           </button>
-          <button className="w-full border border-gray-300 rounded-md py-2 flex items-center justify-center gap-2">
-            <img src="/icons/apple.svg" alt="Apple" className="h-5 w-5" />
+          <button className="w-full border border-gray-300 rounded-[38px] py-2 flex items-center justify-center gap-2">
             Crear con Apple
+            <img src="/icons/apple.svg" alt="Apple" className="h-5 w-5" />
           </button>
         </div>
 
         <p className="text-center text-sm text-gray-500 mt-4">
           ¿Ya tienes una cuenta?{' '}
-          <button type="button" onClick={onBack} className="text-purple-600 hover:underline">
+          <button type="button" onClick={onBack} className="text-purple-600 underline">
             Inicia sesión aquí
           </button>
         </p>

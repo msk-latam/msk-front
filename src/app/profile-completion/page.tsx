@@ -39,10 +39,8 @@ export default function LoginPage() {
         
       
 
-      {/* NEWSLETTER SOBRE EL FORMULARIO */}
-      <div className="relative z-[20] -mt-28 md:-mt-[4rem] -mt-[40px]">
         <Newsletter />
-      </div>
+
 
       <Footer />
     </>
