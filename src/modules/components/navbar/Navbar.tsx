@@ -54,31 +54,31 @@ const Navbar = () => {
 
           <BurgerButton isOpen={isDiscoverOpen} onClick={toggleDiscover} />
           {/* Logo */}
-          <div className="m-auto pr-7 pb-1">
+          <Link href="/home" className="m-auto pr-7 pb-1">
             <Image
-              src="/images/msk-logo/logo.png"
+               src="/images/msk-logo/logo.png"
               alt="MSK"
               height={30}
               width={64}
               priority
             />
-          </div>
+          </Link>
         </section>
 
         {/* --- NAV DESKTOP --- */}
         <section className="hidden md:flex md:flex-row items-center pt-2 mt-6">
           <div className="flex items-top max-w-6xl w-full mx-auto pl-2 pr-4 z-50 relative">
             {/* Logo */}
-            <figure>
-              <Image
-                src="/images/msk-logo/logo.png"
-                alt="MSK"
-                height={36}
-                width={70}
-                priority
-                className="md:pt-3"
-              />
-            </figure>
+            <Link href="/home">
+  <Image
+    src="/images/msk-logo/logo.png"
+    alt="MSK"
+    height={36}
+    width={70}
+    priority
+    className="md:pt-3"
+  />
+</Link>
 
             {/* Navegación central */}
             <div className="w-full">
