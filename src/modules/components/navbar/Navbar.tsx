@@ -33,7 +33,12 @@ const Navbar = () => {
     window.location.href = "/login";
   };
 
+  const isMainView = isDiscoverOpen && currentView === "main";
+  const isDiscoverView = isDiscoverOpen && currentView === "discover";
   const isInstitutionsView = isDiscoverOpen && currentView === "institutions";
+  const isSpecialtyView = isDiscoverOpen && currentView === "specialty";
+  const isSpecialtyDetailView = isDiscoverOpen && currentView === "specialtyDetail";
+
 
   return (
     <header className="absolute left-0 w-full z-50">
@@ -79,9 +84,9 @@ const Navbar = () => {
             <div className="w-full">
               <nav
                 className={`flex items-center flex-grow justify-between py-2 mx-16 px-5 transition-colors duration-300 ${
-                  isDiscoverOpen && currentView === "main"
+                  isMainView || isDiscoverView || isSpecialtyView || isSpecialtyDetailView
                     ? "bg-white rounded-t-3xl"
-                    : isDiscoverOpen && currentView === "institutions"
+                    : isInstitutionsView
                     ? "bg-[#1a1a1a]  rounded-t-3xl"
                     : "bg-white shadow-md rounded-full"
                 }`}
@@ -89,9 +94,9 @@ const Navbar = () => {
                 <div className="flex items-center gap-6 px-4">
                   <button
                     className={`flex items-center gap-1 text-sm font-medium text-gray-800 hover:text-gray-900${
-                  isDiscoverOpen && currentView === "main"
+                  isMainView || isDiscoverView || isSpecialtyView || isSpecialtyDetailView
                     ? ""
-                    : isDiscoverOpen && currentView === "institutions"
+                    : isInstitutionsView
                     ? "bg-[#1a1a1a] text-white"
                     : ""
                 }`}
@@ -101,7 +106,7 @@ const Navbar = () => {
                     <ChevronDown
                       size={16}
                       className={`transition-transform pt-1 duration-300 ${
-                        isDiscoverOpen && currentView === "main"
+                  isMainView || isDiscoverView || isSpecialtyView || isSpecialtyDetailView
                           ? "rotate-180"
                           : ""
                       }`}
@@ -110,9 +115,9 @@ const Navbar = () => {
 
                   <button
                     className={`text-sm font-medium flex gap-1  flex-row items-center text-gray-800 hover:text-gray-900${
-                      isDiscoverOpen && currentView === "main"
+                  isMainView || isDiscoverView || isSpecialtyView || isSpecialtyDetailView
                         ? ""
-                        : isDiscoverOpen && currentView === "institutions"
+                        : isInstitutionsView
                         ? " bg-[#35383E] text-white rounded-[38px] px-6 py-3.5 hover:text-gray-500 hover:bg-gray-100"
                         : ""
                     }`}
@@ -122,7 +127,7 @@ const Navbar = () => {
                     <ChevronDown
                       size={16}
                       className={`transition-transform pt-1 duration-300 ${
-                        isDiscoverOpen && currentView === "institutions"
+                        isInstitutionsView
                           ? "hidden"
                           : ""
                       }`}
@@ -138,9 +143,9 @@ const Navbar = () => {
                         type="search"
                         placeholder="¿Qué tema te interesa?"
                         className={`bg-transparent w-full text-sm py-2 px-4 border-transparent focus:border-transparent  focus:ring-0 focus:ring-transparent  focus:outline-none ${
-                      isDiscoverOpen && currentView === "main"
+                  isMainView || isDiscoverView || isSpecialtyView || isSpecialtyDetailView
                         ? ""
-                        : isDiscoverOpen && currentView === "institutions"
+                        : isInstitutionsView
                         ? "text-[#838790] border-[#989ca4]"
                         : ""
                     }`}
@@ -159,10 +164,10 @@ const Navbar = () => {
                     </button>
                   </Link>
                   <Link href="/login">
-                    <button className={`text-sm font-medium  rounded-[38px] px-6 py-3.5 transition-colors duration-300 text-gray-800 border border-gray-500 hover:bg-gray-100${
-                      isDiscoverOpen && currentView === "main"
+                    <button className={`text-sm font-medium  rounded-[38px] px-6 py-3.5 transition-colors duration-300 text-gray-800 border border-gray-500 hover:bg-gray-300${
+                  isMainView || isDiscoverView || isSpecialtyView || isSpecialtyDetailView
                         ? ""
-                        : isDiscoverOpen && currentView === "institutions"
+                        : isInstitutionsView
                         ? " text-white hover:bg-gray-300 hover:text-gray-800"
                         : ""
                     }`}>

@@ -15,7 +15,7 @@ const ViewMain: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
   if (!isMobile) {
     // Versión desktop: mostramos directamente la vista "Descubre"
     return (
-      <div className="p-6 z-50">
+      <div className="z-50">
         {/* Se muestra directamente la vista Discover (desktop) */}
         <ViewDiscover navigateTo={navigateTo} isMobile={false} />
 

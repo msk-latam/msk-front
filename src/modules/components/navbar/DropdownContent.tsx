@@ -55,7 +55,7 @@ const DropdownContent: React.FC<Props> = ({
   // En desktop, usamos un contenedor con estilo diferente
   if (!isMobile) {
     return (
-      <div className="relative bg-white shadow-lg z-50 max-w-5xl mx-auto rounded-b-3xl">
+      <div className="relative p-5 bg-white shadow-lg z-50 max-w-5xl mx-auto rounded-b-3xl">
         {getContent()}
       </div>
     );
