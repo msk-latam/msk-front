@@ -1,7 +1,7 @@
 'use client'
 
 import Navbar from '@/modules/components/navbar/Navbar'
-import Footer from '@/modules/home/components/footer/footer'
+import Footer from '@/modules/components/footer/footer'
 import ProductHeader from './components/ProductHeader'
 import ProductSummary from './components/ProductSummary'
 import ProductDescription from './components/ProductDescription'

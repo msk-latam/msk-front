@@ -6,8 +6,8 @@ import '@/app/globals.css'
 import { Suspense } from 'react';
 
 import Navbar from '@/modules/components/navbar/Navbar'
-import Newsletter from '@/modules/home/components/newsletter/NewsLetter'
-import Footer from '@/modules/home/components/footer/footer'
+import Newsletter from '@/modules/components/newsletter/NewsLetter'
+import Footer from '@/modules/components/footer/footer'
 import LoginForm from '@/modules/login/components/loginform/LoginForm'
 import RegisterForm from '@/modules/login/components/loginform/RegisterForm'
 import RecoveryPassword from '@/modules/login/components/loginform/RecoveryPassword'

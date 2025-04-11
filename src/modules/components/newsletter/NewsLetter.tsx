@@ -16,11 +16,11 @@ const Newsletter = () => {
   return (
     <div className="w-full px-4 md:px-20 flex flex-col items-center justify-center bg-[#1A1A1A] text-white">
       {/* Newsletter superior */}
-      <div className="bg-[#35383E] w-full max-w-[343px] md:max-w-screen-xl -mt-8 p-6 md:py-6 md:px-10 md:rounded-[38px] rounded-[38px] z-5 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 mx-auto">
+      <div className="bg-[#35383E] w-full max-w-[343px] md:max-w-screen-xl md:-mt-14 -mt-8 p-6 md:py-6 md:px-10 md:rounded-[38px] rounded-[38px] z-5 flex flex-col md:flex-row  justify-between gap-4 md:gap-8 mx-auto">
         
         {/* Título */}
-        <div className="text-center md:text-left md:w-[200px] shrink-0">
-          <p className="text-white md:text-[18px] text-[22px] font-raleway font-semibold text-base  ">
+        <div className="md:w-[200px] shrink-0">
+          <p className="text-white text-left md:text-[18px] text-[22px] font-raleway font-semibold text-base  ">
             Nuestro <br className="hidden md:block" /> newsletter
           </p>
         </div>
@@ -29,7 +29,7 @@ const Newsletter = () => {
         <div className="hidden md:block w-[1px] h-[70px] bg-[#5A5F67] -ml-8" />
 
         {/* Descripción */}
-        <div className="text-[16px] md:text-[18px] text-white text-center md:text-left md:flex-1 font-inter">
+        <div className="text-[16px] md:text-[18px] text-white text-left md:flex-1 font-inter">
           Descuentos exclusivos y becas  <br className="hidden md:block" /> completas solo con tu suscripción
         </div>
 

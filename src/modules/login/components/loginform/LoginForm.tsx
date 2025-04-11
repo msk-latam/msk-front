@@ -14,10 +14,10 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
   const isFormValid = email.trim() !== '' && password.trim() !== ''
 
   return (
-    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 p-5 z-[10] relative overflow-visible mx-20px">
+    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:p-0 md:mb-20 z-[10] relative overflow-visible mx-auto">
 
       {/* 🔙 Botón de volver */}
-      <div className="absolute top-10 left-8 flex z-10">
+      <div className="absolute md:top-10 md:left-8 top-5 left-5 flex z-10">
         <button
           onClick={onBack}
           className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100 transition"
@@ -41,7 +41,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
       </div>
 
       <section
-        className="w-full max-w-[1632px] h-fit relative z-8 mx-auto px-4 py-5"
+        className="w-full max-w-[1632px] h-fit relative z-8 mx-auto px-6 pt-[84px] pb-28 md:py-16 md:px-9"
         style={{ fontFamily: 'Raleway, sans-serif' }}
       >
         {/* 🧾 Título */}
