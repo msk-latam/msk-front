@@ -59,7 +59,7 @@ export default function RecoveryPassword({ onBack, onSent }: RecoveryPasswordPro
         {/* 📧 Formulario */}
         <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-6">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 text-left">
+            <label htmlFor="email" className="block font-semibold text-sm text-gray-700 text-left">
               E-mail
             </label>
             <input
@@ -68,14 +68,14 @@ export default function RecoveryPassword({ onBack, onSent }: RecoveryPasswordPro
               placeholder="Ingresar e-mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 w-full text-base font-dmsans rounded-[20px] border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] focus:border-1"
+              className="mt-1 w-full text-base  font-dmsans rounded-2xl border border-gray-300 p-3 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] focus:border-1"
             />
           </div>
 
           <button
             type="submit"
             disabled={!isValid}
-            className={`w-full text-white py-2 px-4 rounded-[20px] transition ${
+            className={`w-full text-white py-3 px-4 rounded-full transition ${
               isValid ? 'bg-[#9200ad] hover:bg-purple-700' : 'bg-gray-300 cursor-not-allowed'
             }`}
           >
