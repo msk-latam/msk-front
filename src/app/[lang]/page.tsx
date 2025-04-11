@@ -93,11 +93,11 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 	const allBestSellers = await ssr.getBestSellers(currentCountry);
 
 	return (
-		<div className='nc- relative animate-fade-down'>
+		<div className='relative nc- animate-fade-down'>
 			<ClearLocalStorage />
-			<div className='relative  md:overflow-visible '>
+			<div className='relative md:overflow-visible '>
 				<section className=''>
-					<div className=' relative'>
+					<div className='relative '>
 						<SectionHero
 							rightImg={heroImageWEBP}
 							className='pt-10 pb-16 md:py-16 lg:pb-28 lg:pt-20'
@@ -109,7 +109,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
 					<WelcomeBox content={pageHomeWpContent as WpContentData} />
 
-					<div className=' relative mb-10 md:mb-28'>
+					<div className='relative mb-10  md:mb-28'>
 						<BrandSlider country={currentCountry} />
 						<Phrase content={pageHomeWpContent?.cedentes.texto as string} />
 						<SectionGridCategoryBox
@@ -126,7 +126,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 						<CommentReferences content={pageHomeWpContent as WpContentData} />
 					</div>
 
-					<div className=' relative'>
+					<div className='relative '>
 						<CoursesForYou
 							courses={JSONProduct?.products?.filter((course: FetchCourseType) => course.father_post_type === 'course')}
 							bestSeller={getAllBestSellers()}
@@ -139,7 +139,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 						<BlogSummary
 							posts={JSONBlog.posts}
 							tabs={TABS_BLOG}
-							className='pt-4 md:mt-16 md:mb-8 pb-8'
+							className='pt-4 pb-8 md:mt-16 md:mb-8'
 							heading='Blog'
 							desc='Recursos para informarte y aprender de distintas maneras'
 							showTitle
@@ -153,7 +153,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 						<SectionSliderBestSellers
 							posts={allBestSellers}
 							loading={loadingBestSellers}
-							className='w-full section-slider-posts-container px-12 md:px-4'
+							className='w-full px-12 section-slider-posts-container md:px-4'
 							postCardName='card9'
 							heading='Nuestros cursos más elegidos'
 							subHeading='Profesionales como tú ya se capacitaron con ellos. ¡Ahora te toca a ti!'
@@ -162,7 +162,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 						/>
 					</div>
 
-					<div className=' grid grid-cols-1 md:grid-cols-3 gap-4 my-16'>{/* <ContactForm /> */}</div>
+					<div className='grid grid-cols-1 gap-4 my-16  md:grid-cols-3'>{/* <ContactForm /> */}</div>
 				</section>
 			</div>
 		</div>

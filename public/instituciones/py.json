@@ -1,1 +1,154 @@
-[{"imgDefault":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/acc-1.svg","imgHover":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/accHover-1.svg","width":200,"url":"https:\/\/www.acc.org\/","name":"ACCSAP","country":"py"},{"imgDefault":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/afeme-1.svg","imgHover":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/afemeHover-1.svg","width":200,"url":"http:\/\/www.afeme.org.ec\/pagina\/","name":"AFEME","country":"py"},{"imgDefault":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/anamer.svg","imgHover":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/anamerHover.svg","width":80,"url":"https:\/\/anamer.org\/","name":"ANAMER","country":"py"},{"imgDefault":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/colegio-nutricionistas.svg","imgHover":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/colegio-nutricionistasHover.svg","width":320,"url":"https:\/\/www.nutricionistaspba.org.ar\/","name":"colegio nutricionistas","country":"py"},{"imgDefault":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/colmed.svg","imgHover":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/colmedHover.svg","width":250,"url":"https:\/\/www.colmed3.com.ar\/","name":"colmed","country":"py"},{"imgDefault":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/conemege.svg","imgHover":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/conemegeHover.svg","width":250,"url":"https:\/\/www.conamege.org.mx\/","name":"conamege","country":"py"},{"imgDefault":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/consejo-medico-santa-cruz.svg","imgHover":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/consejo-medico-santa-cruzHover.svg","width":80,"url":"https:\/\/consejomedicosc.org.ar\/","name":"consejo medico santa cruz","country":"py"},{"imgDefault":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/consejo-superior-medico.svg","imgHover":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/consejo-superior-medicoHover.svg","width":150,"url":"https:\/\/consejomedicolp.org.ar\/","name":"consejo superior medico","country":"py"},{"imgDefault":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/eimec.svg","imgHover":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/eimecHover.svg","width":300,"url":"https:\/\/www.eimec.com\/","name":"eimec","country":"py"},{"imgDefault":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/euneiz.svg","imgHover":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/euneizHover.svg","width":220,"url":"https:\/\/www.euneiz.com\/","name":"euneiz","country":"py"},{"imgDefault":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/fmc.svg","imgHover":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/fmcHover.svg","width":80,"url":"https:\/\/www.sociedadmedicahgm.com\/","name":"sociedad medica","country":"py"},{"imgDefault":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/inspira-network.svg","imgHover":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/inspira-networkHover.svg","width":200,"url":"https:\/\/www.inspiranetwork.com\/","name":"Inspira Network","country":"py"},{"imgDefault":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/saxum.svg","imgHover":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/saxumHover.svg","width":70,"url":"https:\/\/saxum.com.mx\/","name":"SAXUM ","country":"py"},{"imgDefault":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/seen.svg","imgHover":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/seenHover.svg","width":200,"url":"https:\/\/www.seen.es\/portal\/","name":"SEEN","country":"py"},{"imgDefault":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/smhgm.svg","imgHover":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/smhgmHover.svg","width":90,"url":"https:\/\/www.federacionmedicacolombiana.com\/","name":"federacion medica colombiana","country":"py"},{"imgDefault":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/spmi.svg","imgHover":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/spmiHover.svg","width":300,"url":"https:\/\/www.medicinainterna.net.pe\/","name":"sociedad peruana de medicina interna","country":"py"},{"imgDefault":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/tropos.svg","imgHover":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/troposHover.svg","width":200,"url":"https:\/\/troposformacion.com\/","name":"tropos","country":"py"},{"imgDefault":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/udima.svg","imgHover":"https:\/\/wp.msklatam.com\/wp-content\/uploads\/2024\/12\/udimaHover.svg","width":200,"url":"https:\/\/www.udima.es\/","name":"udima","country":"py"}]
+[
+	{
+		"imgDefault": "https://wp.msklatam.com/wp-content/uploads/2024/12/acc-1.svg",
+		"imgHover": "https://wp.msklatam.com/wp-content/uploads/2024/12/accHover-1.svg",
+		"width": 200,
+		"url": "https://www.acc.org/",
+		"name": "ACCSAP",
+		"country": "py"
+	},
+	{
+		"imgDefault": "https://wp.msklatam.com/wp-content/uploads/2024/12/afeme-1.svg",
+		"imgHover": "https://wp.msklatam.com/wp-content/uploads/2024/12/afemeHover-1.svg",
+		"width": 200,
+		"url": "http://www.afeme.org.ec/pagina/",
+		"name": "AFEME",
+		"country": "py"
+	},
+	{
+		"imgDefault": "https://wp.msklatam.com/wp-content/uploads/2024/12/anamer.svg",
+		"imgHover": "https://wp.msklatam.com/wp-content/uploads/2024/12/anamerHover.svg",
+		"width": 80,
+		"url": "https://anamer.org/",
+		"name": "ANAMER",
+		"country": "py"
+	},
+	{
+		"imgDefault": "https://wp.msklatam.com/wp-content/uploads/2024/12/colegio-nutricionistas.svg",
+		"imgHover": "https://wp.msklatam.com/wp-content/uploads/2024/12/colegio-nutricionistasHover.svg",
+		"width": 320,
+		"url": "https://www.nutricionistaspba.org.ar/",
+		"name": "colegio nutricionistas",
+		"country": "py"
+	},
+	{
+		"imgDefault": "https://wp.msklatam.com/wp-content/uploads/2024/12/colmed.svg",
+		"imgHover": "https://wp.msklatam.com/wp-content/uploads/2024/12/colmedHover.svg",
+		"width": 250,
+		"url": "https://www.colmed3.com.ar/",
+		"name": "colmed",
+		"country": "py"
+	},
+	{
+		"imgDefault": "https://wp.msklatam.com/wp-content/uploads/2025/04/mh.svg",
+		"imgHover": "https://wp.msklatam.com/wp-content/uploads/2025/04/mh-hover.svg",
+		"width": 220,
+		"url": "https://hippocratic-movement.org/",
+		"name": "Movimiento Hipocrático",
+		"country": "int"
+	},
+	{
+		"imgDefault": "https://wp.msklatam.com/wp-content/uploads/2024/12/conemege.svg",
+		"imgHover": "https://wp.msklatam.com/wp-content/uploads/2024/12/conemegeHover.svg",
+		"width": 250,
+		"url": "https://www.conamege.org.mx/",
+		"name": "conamege",
+		"country": "py"
+	},
+	{
+		"imgDefault": "https://wp.msklatam.com/wp-content/uploads/2024/12/consejo-medico-santa-cruz.svg",
+		"imgHover": "https://wp.msklatam.com/wp-content/uploads/2024/12/consejo-medico-santa-cruzHover.svg",
+		"width": 80,
+		"url": "https://consejomedicosc.org.ar/",
+		"name": "consejo medico santa cruz",
+		"country": "py"
+	},
+	{
+		"imgDefault": "https://wp.msklatam.com/wp-content/uploads/2024/12/consejo-superior-medico.svg",
+		"imgHover": "https://wp.msklatam.com/wp-content/uploads/2024/12/consejo-superior-medicoHover.svg",
+		"width": 150,
+		"url": "https://consejomedicolp.org.ar/",
+		"name": "consejo superior medico",
+		"country": "py"
+	},
+	{
+		"imgDefault": "https://wp.msklatam.com/wp-content/uploads/2024/12/eimec.svg",
+		"imgHover": "https://wp.msklatam.com/wp-content/uploads/2024/12/eimecHover.svg",
+		"width": 300,
+		"url": "https://www.eimec.com/",
+		"name": "eimec",
+		"country": "py"
+	},
+	{
+		"imgDefault": "https://wp.msklatam.com/wp-content/uploads/2024/12/euneiz.svg",
+		"imgHover": "https://wp.msklatam.com/wp-content/uploads/2024/12/euneizHover.svg",
+		"width": 220,
+		"url": "https://www.euneiz.com/",
+		"name": "euneiz",
+		"country": "py"
+	},
+	{
+		"imgDefault": "https://wp.msklatam.com/wp-content/uploads/2024/12/fmc.svg",
+		"imgHover": "https://wp.msklatam.com/wp-content/uploads/2024/12/fmcHover.svg",
+		"width": 80,
+		"url": "https://www.sociedadmedicahgm.com/",
+		"name": "sociedad medica",
+		"country": "py"
+	},
+	{
+		"imgDefault": "https://wp.msklatam.com/wp-content/uploads/2024/12/inspira-network.svg",
+		"imgHover": "https://wp.msklatam.com/wp-content/uploads/2024/12/inspira-networkHover.svg",
+		"width": 200,
+		"url": "https://www.inspiranetwork.com/",
+		"name": "Inspira Network",
+		"country": "py"
+	},
+	{
+		"imgDefault": "https://wp.msklatam.com/wp-content/uploads/2024/12/saxum.svg",
+		"imgHover": "https://wp.msklatam.com/wp-content/uploads/2024/12/saxumHover.svg",
+		"width": 70,
+		"url": "https://saxum.com.mx/",
+		"name": "SAXUM ",
+		"country": "py"
+	},
+	{
+		"imgDefault": "https://wp.msklatam.com/wp-content/uploads/2024/12/seen.svg",
+		"imgHover": "https://wp.msklatam.com/wp-content/uploads/2024/12/seenHover.svg",
+		"width": 200,
+		"url": "https://www.seen.es/portal/",
+		"name": "SEEN",
+		"country": "py"
+	},
+	{
+		"imgDefault": "https://wp.msklatam.com/wp-content/uploads/2024/12/smhgm.svg",
+		"imgHover": "https://wp.msklatam.com/wp-content/uploads/2024/12/smhgmHover.svg",
+		"width": 90,
+		"url": "https://www.federacionmedicacolombiana.com/",
+		"name": "federacion medica colombiana",
+		"country": "py"
+	},
+	{
+		"imgDefault": "https://wp.msklatam.com/wp-content/uploads/2024/12/spmi.svg",
+		"imgHover": "https://wp.msklatam.com/wp-content/uploads/2024/12/spmiHover.svg",
+		"width": 300,
+		"url": "https://www.medicinainterna.net.pe/",
+		"name": "sociedad peruana de medicina interna",
+		"country": "py"
+	},
+	{
+		"imgDefault": "https://wp.msklatam.com/wp-content/uploads/2024/12/tropos.svg",
+		"imgHover": "https://wp.msklatam.com/wp-content/uploads/2024/12/troposHover.svg",
+		"width": 200,
+		"url": "https://troposformacion.com/",
+		"name": "tropos",
+		"country": "py"
+	},
+	{
+		"imgDefault": "https://wp.msklatam.com/wp-content/uploads/2024/12/udima.svg",
+		"imgHover": "https://wp.msklatam.com/wp-content/uploads/2024/12/udimaHover.svg",
+		"width": 200,
+		"url": "https://www.udima.es/",
+		"name": "udima",
+		"country": "py"
+	}
+]
