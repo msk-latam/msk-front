@@ -2,7 +2,7 @@
 
 export default function ProductCertificate() {
   return (
-    <section className="bg-white rounded-2xl shadow p-6 md:p-10 mt-10">
+    <section className="bg-white rounded-2xl  md:p-10 mt-10">
       <h2 className="text-2xl font-semibold mb-6">Certificación</h2>
 
       <div className="flex flex-col md:flex-row md:items-center md:justify-between">

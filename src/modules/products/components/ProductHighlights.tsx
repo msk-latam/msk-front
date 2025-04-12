@@ -11,7 +11,7 @@ interface ProductHighlightsProps {
 
 export default function ProductHighlights({ highlights = [] }: ProductHighlightsProps) {
   return (
-    <section className="bg-white rounded-2xl shadow p-6 md:p-10">
+    <section className="bg-white rounded-2xl  md:p-10">
       <h2 className="text-2xl font-semibold mb-6">Qué aprenderás</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

@@ -13,7 +13,7 @@ export default function ProductHeader({
 }: ProductHeaderProps) {
   return (
     <div className="px-4 md:px-10 lg:px-20 py-10 max-w-screen-xl mx-auto text-white">
-      <nav className="text-sm text-white/80 mb-4">
+      <nav className="text-sm text-white/80 mb-4 mt-36">
         <span className="mr-2">Tienda</span>
         <span className="mr-2">/</span>
         <span className="mr-2">Medicina general</span>
