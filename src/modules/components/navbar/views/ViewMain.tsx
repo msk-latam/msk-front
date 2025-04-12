@@ -29,7 +29,7 @@ const ViewMain: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
     <div className="bg-white rounded-t-3xl mt-4 px-6 py-6 flex flex-col h-full">
       <div className="flex items-center justify-center mb-6">
         <Image
-          src="/images/msk-logo/logo.png"
+          src="/images/msk-logo/logo.svg"
           alt="MSK"
           height={30}
           width={60}
