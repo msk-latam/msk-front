@@ -39,7 +39,8 @@ const ViewInstitutions: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
             </div>
 
             {partners.slice(0, 3).map((partner, index) => (
-              <div
+          <div className=" bg-[#35383e] rounded-2xl px-3">
+            <div
                 key={index}
                 className="relative bg-[#35383E] rounded-lg h-24 flex items-center justify-center overflow-hidden"
                 style={{
@@ -49,6 +50,7 @@ const ViewInstitutions: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
                   backgroundRepeat: "no-repeat",
                 }}
               />
+              </div>
             ))}
 
             <div
@@ -86,7 +88,8 @@ const ViewInstitutions: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
             <div className="col-span-2"></div>
 
             {partners.slice(-3).map((partner, index) => (
-              <div
+          <div className=" bg-[#35383e] rounded-2xl px-3">
+            <div
                 key={index}
                 className="relative bg-[#35383E] rounded-lg h-24 flex items-center justify-center overflow-hidden"
                 style={{
@@ -96,6 +99,7 @@ const ViewInstitutions: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
                   backgroundRepeat: "no-repeat",
                 }}
               />
+              </div>
             ))}
 
             <div className="col-span-4"></div>
@@ -144,6 +148,7 @@ const ViewInstitutions: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
 
         <div className="grid grid-cols-2 gap-4 mb-6">
           {partners.map((partner, index) => (
+          <div className=" bg-[#35383e] rounded-2xl p-3">
             <div
               key={index}
               className="rounded-2xl h-24 flex items-center justify-center overflow-hidden"
@@ -154,8 +159,8 @@ const ViewInstitutions: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
                 backgroundRepeat: "no-repeat",
                 backgroundColor: "#35383e",
               }}
-            >
-              {/* Puedes agregar texto si querés */}
+              >
+              </div>
             </div>
           ))}
         </div>
