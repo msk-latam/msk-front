@@ -21,7 +21,7 @@ export default function RecoveryPassword({ onBack, onSent }: RecoveryPasswordPro
 
       
       {/* 🔙 Botón de volver (visible en todas las resoluciones) */}
-      <div className="absolute md:top-10 md:left-8 top-5 left-5 z-10">
+      <div className="relative md:top-10 md:left-8 top-5 left-5 z-10">
         <button
           onClick={onBack}
           className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100 transition"
