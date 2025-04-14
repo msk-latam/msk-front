@@ -7,6 +7,157 @@
 	"total_products": 139,
 	"posts": [
 		{
+			"id": 339351,
+			"title": "CRISPR: la herramienta que está reescribiendo la medicina",
+			"slug": "crispr-esta-reescribiendo-la-medicina",
+			"permalink": "https://wp.msklatam.com/nota/medicina/crispr-esta-reescribiendo-la-medicina/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-crispr-esta-reescribiendo-la-medicina-scaled-e1744393930660.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-crispr-esta-reescribiendo-la-medicina-scaled-e1744393930660.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "Corregir un cambio en el ADN que causa una enfermedad devastadora ya no es ciencia ficción. Es una realidad en evolución, impulsada por CRISPR. Para quienes trabajamos en salud, entender esta herramienta no es un lujo: es una necesidad clínica que define el futuro cercano.",
+			"date": "Abril 13, 2025",
+			"author": {
+				"id": 332969,
+				"name": "Dra. Alma Medrano",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2025/01/foto-alma-medrano-square.png"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 332969,
+					"name": "Dra. Alma Medrano",
+					"description": "Directora médica de Medical & Scientific Knowledge",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2025/01/foto-alma-medrano-square.png"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 339004,
+					"title": "Certificados digitales MSK para una profesión en evolución",
+					"slug": "certificados-digitales-msk-con-blockchain",
+					"link": "https://wp.msklatam.com/nota/e-learning/certificados-digitales-msk-con-blockchain/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-certificados-digitales-msk-con-blockchain-e1744295864869.png",
+					"category": "Actualidad"
+				},
+				{
+					"id": 338891,
+					"title": "El valor de la investigación en la práctica médica",
+					"slug": "valor-de-la-investigacion-en-la-practica-medica",
+					"link": "https://wp.msklatam.com/nota/medicina/valor-de-la-investigacion-en-la-practica-medica/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-valor-de-la-investigacion-en-la-practica-medica-scaled-e1744147518586.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 338757,
+					"title": "Cómo mejorar los sistemas de salud: un panorama actual",
+					"slug": "actualidad-de-los-sistemas-de-salud-en-latinoamerica",
+					"link": "https://wp.msklatam.com/nota/medicina/actualidad-de-los-sistemas-de-salud-en-latinoamerica/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/shutterstock_1186830211-scaled-e1744041787582.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 225977,
+					"title": "Cómo destacar en tu práctica profesional con capacitación continua",
+					"slug": "como-destacar-en-tu-practica-con-capacitacion-medica-continua",
+					"link": "https://wp.msklatam.com/nota/e-learning/como-destacar-en-tu-practica-con-capacitacion-medica-continua/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2022/08/Foto-como-destacar-en-tu-practica-con-capacitacion-medica-continua-scaled-e1743784815871.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 338339,
+					"title": "Ética hipocrática hoy: medicina con conciencia",
+					"slug": "etica-hipocratica-medicina-con-conciencia",
+					"link": "https://wp.msklatam.com/nota/medicina/etica-hipocratica-medicina-con-conciencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-etica-hipocratica-medicina-con-conciencia-scaled-e1743689643452.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Laurent, M., Aynaud, M.-M., Debacker, M., & Voit, R. A. (2024). CRISPR-based gene therapies: From preclinical to clinical treatments. Cells, 13(800). https://doi.org/10.3390/cells13100800"
+				},
+				{
+					"fuente": "Razavi, Z. S., et al. (2024). CRISPR innovations in tissue engineering and gene editing. Life Sciences, 358, 123120. https://doi.org/10.1016/j.lfs.2024.123120"
+				},
+				{
+					"fuente": "Villiger, L., et al. (2024). CRISPR technologies for genome, epigenome and transcriptome editing. Nature Reviews Molecular Cell Biology, 25(6), 464–487. https://doi.org/10.1038/s41580-023-00697-6"
+				},
+				{
+					"fuente": "Davis, D. J., & Yeddula, S. G. R. (2024). CRISPR Advancements for Human Health. Missouri Medicine, 121(2), 170–176."
+				},
+				{
+					"fuente": "ClinicalTrials.gov. (2024). Studies found for: CRISPR/Cas9 [Status: Not yet recruiting, Recruiting, Enrolling by invitation, Active]. https://clinicaltrials.gov/search?intr=CRISPR%2FCas9&aggFilters=status:not%20rec"
+				},
+				{
+					"fuente": "FDA Approves First Gene Therapies to Treat Patients with Sickle Cell Disease | FDA"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				},
+				{
+					"id": 1711,
+					"name": "Opinion",
+					"slug": "opinion",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/opinion/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1341,
+				"filter": "raw"
+			},
+			"reading_time": "4",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
 			"id": 339004,
 			"title": "Certificados digitales MSK para una profesión en evolución",
 			"slug": "certificados-digitales-msk-con-blockchain",
