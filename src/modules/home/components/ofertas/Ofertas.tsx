@@ -34,7 +34,7 @@ const Ofertas = () => {
   </div>
 
       {/* Contenido */}
-      <div className="relative z-5 w-full md:px-36 px-5 py-16 flex flex-col md:flex-row items-center md:items-end md:justify-between justify-end gap-5">
+      <div className="relative z-5 w-full overflow-visible max-w-[1400px] mx-auto px-5 py-16 flex flex-col md:flex-row items-center md:items-end md:justify-between justify-end gap-5">
         {/* Texto */}
         <div className="text-left text-white max-w-xl font-raleway">
           <p className="text-sm md:text-base mb-4 font-inter">

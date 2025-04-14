@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Institutions = () => {
   return (
-    <section className="relative bg-white rounded-[40px] md:mx-20 -mt-24 translate-y-[60px] z-10 py-10 px-5 md:px-10 md:gap-4 shadow-lg w-">
+    <section className="relative bg-white rounded-[40px] overflow-visible max-w-[1400px] mx-auto -mt-24 translate-y-[60px] z-10 py-10 px-5 md:px-10 md:gap-4 shadow-lg w-">
       <h2 className="text-center md:text-left text-xl md:text-2xl font-semibold mb-7">
         Nos respaldan prestigiosas instituciones de todo el mundo con sus
         certificaciones
@@ -1140,3 +1140,23 @@ const Institutions = () => {
 };
 
 export default Institutions;
+
+
+// <div className="grid grid-cols-2 gap-4 mb-6">
+// {partners.map((partner, index) => (
+// <div className=" bg-[#35383e] rounded-2xl p-3">
+//   <div
+//     key={index}
+//     className="rounded-2xl h-24 flex items-center justify-center overflow-hidden"
+//     style={{
+//       backgroundImage: `url('${partner.image}')`,
+//       backgroundSize: "contain",
+//       backgroundPosition: "center",
+//       backgroundRepeat: "no-repeat",
+//       backgroundColor: "#35383e",
+//     }}
+//     >
+//     </div>
+//   </div>
+// ))}
+// </div>

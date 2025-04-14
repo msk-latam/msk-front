@@ -24,7 +24,7 @@ const Oportunidades = () => {
   const isEmpty = cursosMapeados.length === 0;
 
   return (
-    <section className="relative w-full md:px-20 md:pt-24 pb-[240px] z-[1] pt-32" aria-labelledby="oportunidades-heading">
+    <section className="relative w-full overflow-visible max-w-[1400px] mx-auto md:pt-24 pb-[240px] z-[1] pt-32" aria-labelledby="oportunidades-heading">
       <div className="relative bg-white rounded-[38px] -mt-32 -mb-64 pt-6 md:pt-[72px] md:pb-16 shadow-lg">
         <div className="px-5 md:px-16 pb-6 md:mb-0">
           <header className="md:text-left text-center max-w-4xl px-6 gap-4 md:px-0">
