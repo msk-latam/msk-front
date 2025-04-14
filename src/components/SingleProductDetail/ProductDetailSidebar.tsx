@@ -102,6 +102,8 @@ const ProductDetailSidebar: FC<Props> = ({ ficha, product, details, isEbook, sid
 	const match = pathName.match(/^\/([a-z]{2})\b/);
 	const country = match ? `${match[1]}` : '';
 
+	console.log(product);
+
 	return (
 		<div
 			className={`${
@@ -171,7 +173,7 @@ const ProductDetailSidebar: FC<Props> = ({ ficha, product, details, isEbook, sid
 				<button onClick={scrollToContactForm} className='w-full video-cart-btn'>
 					{isEbook ? 'Descargar gratis' : 'Contáctanos'}
 				</button>
-				{!isEbook && hasGateway && !product.is_presale_product && (
+				{!isEbook && hasGateway && !product.is_presale_product && product.sale_price !== '0' && (
 					<>
 						{country === '' || ['mx', 'ec', 'cl'].includes(country) ? (
 							<button
