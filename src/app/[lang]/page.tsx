@@ -23,7 +23,6 @@ import dynamic from 'next/dynamic';
 import { generateHomeMetadata } from '@/SEO/home/metaData/homeMetaData';
 import { homeFAQs } from '@/components/faqs/homeFAQs';
 import ClearLocalStorage from '@/components/versionStorage/ClearLocalStorage';
-import { getJSONByCountry } from '../products';
 import arblog from '../posts/ar.json';
 import { getJSONPostByCountry } from '../posts';
 import { getJSONTiendaByCountry } from '../productsTienda';
@@ -109,7 +108,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 
 					<WelcomeBox content={pageHomeWpContent as WpContentData} />
 
-					<div className='relative mb-10  md:mb-28'>
+					<div className='relative mb-10 md:mb-28'>
 						<BrandSlider country={currentCountry} />
 						<Phrase content={pageHomeWpContent?.cedentes.texto as string} />
 						<SectionGridCategoryBox
@@ -162,7 +161,7 @@ const PageHome: React.FC<PageProps> = async ({ params }) => {
 						/>
 					</div>
 
-					<div className='grid grid-cols-1 gap-4 my-16  md:grid-cols-3'>{/* <ContactForm /> */}</div>
+					<div className='grid grid-cols-1 gap-4 my-16 md:grid-cols-3'>{/* <ContactForm /> */}</div>
 				</section>
 			</div>
 		</div>
