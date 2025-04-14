@@ -68,7 +68,7 @@ const Navbar = () => {
 
         {/* --- NAV DESKTOP --- */}
         <section className="hidden md:flex md:flex-row items-center pt-2 mt-6">
-          <div className="flex items-top max-w-6xl w-full mx-auto pl-2 pr-4 z-50 relative">
+          <div className="flex items-top w-full max-w-[1300px] mx-auto pl-14 pr-28 z-50 relative">
             {/* Logo */}
             <Link href="/home">
               <Image
@@ -84,7 +84,7 @@ const Navbar = () => {
             {/* Navegación central */}
             <div className="w-full">
               <nav
-                className={`flex items-center flex-grow justify-between py-2 mx-16 px-5 transition-colors duration-300 ${
+                className={`flex items-center flex-grow justify-between py-2 ml-28 px-5 transition-colors duration-300 ${
                   isMainView ||
                   isDiscoverView ||
                   isSpecialtyView ||
