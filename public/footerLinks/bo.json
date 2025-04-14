@@ -1,1 +1,101 @@
-{"cursos_mas_elegidos":[{"title":"Curso superior de medicina de urgencias","url":"https:\/\/msklatam.com\/curso\/medicina-de-urgencias\/","target":""},{"title":"Curso superior de medicina familiar","url":"https:\/\/msklatam.com\/curso\/medicina-familiar-y-comunitaria\/","target":""},{"title":"Curso medicina est\u00e9tica facial","url":"https:\/\/msklatam.com\/curso\/medicina-estetica-facial\/","target":""},{"title":"ACCSAP. Programa de Actualizaci\u00f3n en Cardiolog\u00eda Cl\u00ednica","url":"https:\/\/msklatam.com\/curso\/accsap\/","target":""},{"title":"Curso superior de endocrinolog\u00eda y nutrici\u00f3n","url":"https:\/\/msklatam.com\/curso\/endocrinologia-y-nutricion\/","target":""},{"title":"Experto en diabetes","url":"https:\/\/msklatam.com\/curso\/experto-en-diabetes\/","target":""}],"cursos_mas_buscados":[{"title":"Curso medicina interna","url":"https:\/\/msklatam.com\/curso\/medicina-interna\/","target":""},{"title":"Curso superior de hematolog\u00eda y hemoterapia","url":"https:\/\/msklatam.com\/curso\/hematologia-y-hemoterapia\/","target":""},{"title":"Curso superior de neurolog\u00eda","url":"https:\/\/msklatam.com\/curso\/neurologia\/","target":""},{"title":"Auditor\u00eda m\u00e9dica","url":"https:\/\/msklatam.com\/curso\/auditoria-medica\/","target":""},{"title":"Curso superior de terapia intensiva","url":"https:\/\/msklatam.com\/curso\/terapia-intensiva\/","target":""},{"title":"Curso superior de administraci\u00f3n y gesti\u00f3n hospitalaria","url":"https:\/\/msklatam.com\/curso\/administracion-y-gestion-hospitalaria\/","target":""}],"especialidades":[{"especialidad":{"especialidad":"Medicina general","url_especialidad":"https:\/\/msklatam.com\/tienda\/medicina-general\/"}},{"especialidad":{"especialidad":"Medicina familiar","url_especialidad":"https:\/\/msklatam.com\/tienda\/medicina-familiar\/"}},{"especialidad":{"especialidad":"Cardiolog\u00eda","url_especialidad":"https:\/\/msklatam.com\/tienda\/cardiologia\/"}},{"especialidad":{"especialidad":"Nutrici\u00f3n","url_especialidad":"https:\/\/msklatam.com\/tienda\/nutricion\/"}},{"especialidad":{"especialidad":"Traumatolog\u00eda","url_especialidad":"https:\/\/msklatam.com\/tienda\/traumatologia\/"}},{"especialidad":{"especialidad":"Pediatr\u00eda","url_especialidad":"https:\/\/msklatam.com\/tienda\/pediatria\/"}}],"contenidos_destacados":[{"title":"Qu\u00e9 es el SIBO y c\u00f3mo tratarlo correctamente","url":"https:\/\/msklatam.com\/blog\/que-es-el-sibo-y-por-que-se-requiere-cautela-al-tratarlo","target":""},{"title":"C\u00f3mo identificar el autismo en adultos","url":"https:\/\/msklatam.com\/blog\/que-es-el-sibo-y-por-que-se-requiere-cautela-al-tratarlo","target":""},{"title":"Diagn\u00f3stico del shock en urgencias","url":"https:\/\/msklatam.com\/curso\/diagnostico-del-shock-en-urgencias\/","target":""},{"title":"Abordaje diagn\u00f3stico del dolor abdominal agudo","url":"https:\/\/msklatam.com\/curso\/abordaje-diagnostico-del-dolor-abdominal-agudo\/","target":""},{"title":"Dolor oncol\u00f3gico y f\u00e1rmaco gen\u00f3mica","url":"https:\/\/youtu.be\/iWecSpkw8Eo?si=Dk3dmUrcjf4H9RTT","target":"_blank"},{"title":"3 novedades para mantener tus conocimientos actualizados","url":"https:\/\/youtu.be\/rYNsJbntGSw?si=T_dNhjTHU9xrM2V1","target":"_blank"}],"params":{"country":"bo"},"country":"bo"}
+{
+	"cursos_mas_elegidos": [
+		{
+			"title": "Curso superior de medicina de urgencias",
+			"url": "https://msklatam.com/curso/medicina-de-urgencias/",
+			"target": ""
+		},
+		{
+			"title": "Curso superior de medicina familiar",
+			"url": "https://msklatam.com/curso/medicina-familiar-y-comunitaria/",
+			"target": ""
+		},
+		{
+			"title": "Curso medicina est\u00e9tica facial",
+			"url": "https://msklatam.com/curso/medicina-estetica-facial/",
+			"target": ""
+		},
+
+		{
+			"title": "Curso superior de endocrinolog\u00eda y nutrici\u00f3n",
+			"url": "https://msklatam.com/curso/endocrinologia-y-nutricion/",
+			"target": ""
+		},
+		{ "title": "Experto en diabetes", "url": "https://msklatam.com/curso/experto-en-diabetes/", "target": "" }
+	],
+	"cursos_mas_buscados": [
+		{ "title": "Curso medicina interna", "url": "https://msklatam.com/curso/medicina-interna/", "target": "" },
+		{
+			"title": "Curso superior de hematolog\u00eda y hemoterapia",
+			"url": "https://msklatam.com/curso/hematologia-y-hemoterapia/",
+			"target": ""
+		},
+		{ "title": "Curso superior de neurolog\u00eda", "url": "https://msklatam.com/curso/neurologia/", "target": "" },
+		{ "title": "Auditor\u00eda m\u00e9dica", "url": "https://msklatam.com/curso/auditoria-medica/", "target": "" },
+		{ "title": "Curso superior de terapia intensiva", "url": "https://msklatam.com/curso/terapia-intensiva/", "target": "" },
+		{
+			"title": "Curso superior de administraci\u00f3n y gesti\u00f3n hospitalaria",
+			"url": "https://msklatam.com/curso/administracion-y-gestion-hospitalaria/",
+			"target": ""
+		}
+	],
+	"especialidades": [
+		{
+			"especialidad": {
+				"especialidad": "Medicina general",
+				"url_especialidad": "https://msklatam.com/tienda/medicina-general/"
+			}
+		},
+		{
+			"especialidad": {
+				"especialidad": "Medicina familiar",
+				"url_especialidad": "https://msklatam.com/tienda/medicina-familiar/"
+			}
+		},
+		{
+			"especialidad": { "especialidad": "Cardiolog\u00eda", "url_especialidad": "https://msklatam.com/tienda/cardiologia/" }
+		},
+		{ "especialidad": { "especialidad": "Nutrici\u00f3n", "url_especialidad": "https://msklatam.com/tienda/nutricion/" } },
+		{
+			"especialidad": {
+				"especialidad": "Traumatolog\u00eda",
+				"url_especialidad": "https://msklatam.com/tienda/traumatologia/"
+			}
+		},
+		{ "especialidad": { "especialidad": "Pediatr\u00eda", "url_especialidad": "https://msklatam.com/tienda/pediatria/" } }
+	],
+	"contenidos_destacados": [
+		{
+			"title": "Qu\u00e9 es el SIBO y c\u00f3mo tratarlo correctamente",
+			"url": "https://msklatam.com/blog/que-es-el-sibo-y-por-que-se-requiere-cautela-al-tratarlo/",
+			"target": ""
+		},
+		{
+			"title": "C\u00f3mo identificar el autismo en adultos",
+			"url": "https://msklatam.com/blog/como-identificar-autismo-en-adultos/",
+			"target": ""
+		},
+		{
+			"title": "Diagn\u00f3stico del shock en urgencias",
+			"url": "https://msklatam.com/curso/diagnostico-del-shock-en-urgencias/",
+			"target": ""
+		},
+		{
+			"title": "Abordaje diagn\u00f3stico del dolor abdominal agudo",
+			"url": "https://msklatam.com/curso/abordaje-diagnostico-del-dolor-abdominal-agudo/",
+			"target": ""
+		},
+		{
+			"title": "Dolor oncol\u00f3gico y f\u00e1rmaco gen\u00f3mica",
+			"url": "https://youtu.be/iWecSpkw8Eo?si=Dk3dmUrcjf4H9RTT",
+			"target": "_blank"
+		},
+		{
+			"title": "3 novedades para mantener tus conocimientos actualizados",
+			"url": "https://youtu.be/rYNsJbntGSw?si=T_dNhjTHU9xrM2V1",
+			"target": "_blank"
+		}
+	],
+	"params": { "country": "bo" },
+	"country": "bo"
+}
