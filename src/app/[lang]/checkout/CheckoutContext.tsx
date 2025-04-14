@@ -1,6 +1,7 @@
 'use client';
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { useRouter } from 'next/navigation';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { RecoilRoot } from 'recoil';
 
 interface User {
@@ -39,11 +40,16 @@ interface CheckoutContextType {
 	appliedCoupon: Coupon | null;
 	setAppliedCoupon: (coupon: Coupon | null) => void;
 	product?: any;
+	country?: any;
 }
 
 const CheckoutContext = createContext<CheckoutContextType | undefined>(undefined);
 
-export const CheckoutProvider: React.FC<{ children: ReactNode; product?: any }> = ({ children, product }) => {
+export const CheckoutProvider: React.FC<{ children: ReactNode; product?: any; country?: any }> = ({
+	children,
+	product,
+	country,
+}) => {
 	const [activeStep, setActiveStep] = useState(1);
 	const [subStep, setSubStep] = useState(0);
 	const [completedSteps, setCompletedSteps] = useState<number[]>([]);
@@ -52,6 +58,7 @@ export const CheckoutProvider: React.FC<{ children: ReactNode; product?: any }> 
 	const [paymentStatus, setPaymentStatus] = useState<'approved' | 'pending' | 'rejected'>('pending');
 	const [user, setUser] = useState<User | null>(null);
 	const [appliedCoupon, setAppliedCoupon] = useState<Coupon | null>(null);
+	const router = useRouter();
 
 	const completeStep = (step: number) => {
 		if (!completedSteps.includes(step)) {
@@ -59,7 +66,12 @@ export const CheckoutProvider: React.FC<{ children: ReactNode; product?: any }> 
 		}
 	};
 
-	console.log(product, 'de context');
+	console.log(product.total_price, 'de context');
+	useEffect(() => {
+		if (product?.total_price === '0') {
+			router.push(`/${country}/tienda`);
+		}
+	}, [product?.total_price, router]);
 
 	return (
 		<CheckoutContext.Provider
