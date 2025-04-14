@@ -14,7 +14,8 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
   const isFormValid = email.trim() !== '' && password.trim() !== ''
 
   return (
-    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:p-0 md:mb-20 z-[10] relative overflow-visible mx-auto">
+    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:p-0 md:mb-20 z-[10] relative overflow-visible max-w-[1400px] mx-auto
+">
 
       {/* 🔙 Botón de volver */}
       <div className="absolute md:top-10 md:left-8 top-5 left-5 flex z-10">
@@ -41,7 +42,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
       </div>
 
       <section
-        className="w-full max-w-[1632px] h-fit relative z-8 mx-auto px-6 pt-[84px] pb-28 md:py-16 md:px-9"
+        className="w-full h-fit relative z-8 mx-auto px-6 pt-[84px] pb-28 md:py-16 md:px-9"
         style={{ fontFamily: 'Raleway, sans-serif' }}
       >
         {/* 🧾 Título */}
