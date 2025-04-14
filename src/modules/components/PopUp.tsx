@@ -25,7 +25,7 @@ const PopUp = ({ onClose }: { onClose: () => void }) => {
   if (!isDesktop) return null;
 
   return (
-    <section className="fixed top-0 left-0 w-full h-12 bg-[#FFE5EC] p-3 z-[999] flex flex-row text-black justify-center items-center gap-4">
+    <section className="fixed top-0 left-0 w-full h-12 bg-[#FFE5EC] p-3 z-[999] flex flex-row text-[#1A1A1A] justify-center   items-center gap-4">
       <p className="text-sm">
         ¡Últimos cupos disponibles en nuestro Curso Especializado en Fonoaudiología!
       </p>

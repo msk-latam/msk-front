@@ -59,7 +59,7 @@ const Navbar = () => {
             <Image
               src="/images/msk-logo/logo.png"
               alt="MSK"
-              height={30}
+              height={27.33}
               width={64}
               priority
             />
@@ -74,8 +74,8 @@ const Navbar = () => {
               <Image
                 src="/images/msk-logo/logo.png"
                 alt="MSK"
-                height={36}
-                width={70}
+                height={38.43}
+                width={90}
                 priority
                 className="md:pt-3"
               />
@@ -180,7 +180,7 @@ const Navbar = () => {
 
                 <div className="flex items-center gap-3">
                   <Link href="/login?form=registerForm">
-                    <button className="bg-[#8500a0] text-white text-sm font-medium  rounded-[38px] px-6 py-3.5 whitespace-nowrap hover:bg-[#6d0082]">
+                    <button className="bg-[#9200AD] text-white text-sm font-medium  rounded-[38px] px-6 py-3.5 whitespace-nowrap hover:bg-[#6d0082]">
                       Crear cuenta
                     </button>
                   </Link>

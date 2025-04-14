@@ -20,6 +20,16 @@ module.exports = {
 		'./src/**/*.{js,jsx,ts,tsx}',
 		'./app/**/*.{js,jsx,ts,tsx}',
 	  ],
+
+	  theme: {
+		extend: {
+		  fontFamily: {
+			inter: ['Inter', 'sans-serif'],
+			raleway: ['Raleway', 'sans-serif'],
+		  },
+		},
+	  },
+
 	  
 	darkMode: 'class', // or 'media' or 'class',
 	theme: {

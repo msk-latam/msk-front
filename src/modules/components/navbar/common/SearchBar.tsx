@@ -73,14 +73,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
   return (
     <div
-      className={`rounded-full border border-gray-300 overflow-hidden relative flex items-center ${className}`}
+      className={`rounded-full border border-[#DBDDE2]-100 overflow-hidden relative flex items-center ${className}`}
     >
       <input
         type="search"
         placeholder={placeholder}
         className={`bg-transparent w-full text-sm py-3.5 pl-4 pr-12 border-transparent focus:border-transparent focus:ring-0 focus:outline-none ${inputTextStyle}`}
       />
-      <button className="absolute right-1 bg-[#8500a0] p-3 rounded-full">
+      <button className="absolute right-1 bg-[#9200AD] p-3 rounded-full">
         <Search className="text-white w-4 h-4" />
       </button>
     </div>

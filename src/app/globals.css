@@ -1,21 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Raleway:wght@400;700&display=swap');
 
-/* * {
-	outline: 1px solid red;
-} */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Raleway:wght@400;700&display=swap');
+
+@layer base {
+	h1, h2, h3 {
+		font-family: 'Raleway', sans-serif;
+		font-weight: 700;
+	  }
+
+  p,a, button {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+  }
+
+  
+
+}
+
 html,
 body {
-	overflow-x: hidden;
-	
-	
-	  
+  overflow-x: hidden;
 }
 
 @layer components {
-	.custom-grid {
-		@apply grid grid-cols-12 gap-3;
-	}
+  .custom-grid {
+    @apply grid grid-cols-12 gap-3;
+  }
 }
