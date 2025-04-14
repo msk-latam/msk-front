@@ -6,6 +6,293 @@
 	},
 	"products": [
 		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 339710,
+			"related_tag": "",
+			"father_id": 339668,
+			"slug": "avances-en-el-estudio-de-la-microbiota",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "co",
+			"language_name": "Colombia",
+			"product_code": 9005898,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "Avances en el estudio de la microbiota",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/microbiota-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/04/microbiota-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/04/microbiota-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/04/microbiota-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				},
+				{
+					"term_id": 1293,
+					"name": "Gastroenterología",
+					"slug": "gastroenterologia"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				},
+				{
+					"term_id": 1102,
+					"name": "Nutrición",
+					"slug": "nutricion"
+				}
+			],
+			"professions": [
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				},
+				{
+					"title": "Otra Profesión",
+					"name": "otra-profesion"
+				},
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "200",
+			"permalink": "https://co.wp.msklatam.com/producto/avances-en-el-estudio-de-la-microbiota/",
+			"temario": false,
+			"lista_de_cedentes": [
+				{
+					"ID": 254526,
+					"post_author": "2",
+					"post_date": "2023-08-07 23:12:56",
+					"post_date_gmt": "2023-08-07 23:12:56",
+					"post_content": "",
+					"post_title": "Tropos",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "tropos",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2023-08-22 20:17:07",
+					"post_modified_gmt": "2023-08-22 20:17:07",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=254526",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/cedentes_tropos.png"
+				}
+			],
+			"cantidad_modulos": 15,
+			"why_course": "",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-84-0",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2025-04-14 17:04:57"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 339651,
+			"related_tag": "",
+			"father_id": 339537,
+			"slug": "anestesiologia-y-reanimacion-amir",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "co",
+			"language_name": "Colombia",
+			"product_code": 9005897,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "Curso superior de anestesiología y reanimación AMIR",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/anestesiologiaamir-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/04/anestesiologiaamir-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/04/anestesiologiaamir-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/04/anestesiologiaamir-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1089,
+					"name": "Anestesiología y dolor",
+					"slug": "anestesiologia-y-dolor"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": null,
+			"permalink": "https://co.wp.msklatam.com/producto/anestesiologia-y-reanimacion-amir/",
+			"temario": false,
+			"lista_de_cedentes": [
+				{
+					"ID": 331572,
+					"post_author": "102",
+					"post_date": "2025-01-09 20:13:07",
+					"post_date_gmt": "2025-01-09 20:13:07",
+					"post_content": "",
+					"post_title": "AMIR",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "amir",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2025-01-10 18:57:34",
+					"post_modified_gmt": "2025-01-10 18:57:34",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=331572",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2025/01/cedente_amir.png"
+				}
+			],
+			"cantidad_modulos": 0,
+			"why_course": "",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-83-3",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2025-04-14 15:04:13"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 339767,
+			"related_tag": "",
+			"father_id": 339725,
+			"slug": "ginecologia-social",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "co",
+			"language_name": "Colombia",
+			"product_code": 9005895,
+			"featured_product_text": "",
+			"is_test_product": true,
+			"title": "Curso superior de ginecología social",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/ginecosocial-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/04/ginecosocial-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/04/ginecosocial-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/04/ginecosocial-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1121,
+					"name": "Ginecología",
+					"slug": "ginecologia"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "250",
+			"permalink": "https://co.wp.msklatam.com/producto/ginecologia-social/",
+			"temario": false,
+			"lista_de_cedentes": [
+				{
+					"ID": 210852,
+					"post_author": "34",
+					"post_date": "2022-05-17 14:39:23",
+					"post_date_gmt": "2022-05-17 14:39:23",
+					"post_content": "",
+					"post_title": "Colegio de Médicos de la Provincia de Buenos Aires - Distrito III",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "colegio-de-medicos-de-la-provincia-de-buenos-aires-distrito-iii-escuela-superior-de-ensenanza-medica",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2024-09-18 12:55:07",
+					"post_modified_gmt": "2024-09-18 12:55:07",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=210852",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/colmed_1x.webp"
+				}
+			],
+			"cantidad_modulos": 7,
+			"why_course": "",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-91-8",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "0",
+			"total_price": "0",
+			"max_installments": "12",
+			"price_installments": "0",
+			"created_at": "2025-04-14 17:04:16"
+		},
+		{
 			"id": 337575,
 			"related_tag": "",
 			"father_id": 337516,
