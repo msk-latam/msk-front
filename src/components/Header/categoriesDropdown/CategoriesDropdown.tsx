@@ -15,6 +15,7 @@ import { filter } from 'lodash';
 import { cookies } from 'next/headers';
 import ssr from '@/services/ssr';
 import { getJSONByCountry } from '@/app/products';
+import { getJSONTiendaByCountry } from '@/app/productsTienda';
 
 const CategoriesDropdown = ({ onClickClose }: any) => {
 	const pathname = usePathname();
@@ -25,7 +26,7 @@ const CategoriesDropdown = ({ onClickClose }: any) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const data = await getJSONByCountry(country ?? 'ar');
+				const data = await getJSONTiendaByCountry(country ?? 'ar');
 				const filteredProducts = data.products.filter((product) => product.slug !== 'accsap');
 
 				setJSONProduct(filteredProducts);
