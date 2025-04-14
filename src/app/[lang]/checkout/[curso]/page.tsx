@@ -13,9 +13,10 @@ type Props = {
 
 const CursoCheckout: FC<Props> = async ({ params }) => {
 	const { product } = await ssr.getSingleProduct(params.curso, params.lang);
+	const country = params.lang;
 
 	return (
-		<CheckoutProvider product={product}>
+		<CheckoutProvider product={product} country={country}>
 			<div className='flex flex-col min-h-screen'>
 				<div>
 					<CheckoutMSKHeader />
