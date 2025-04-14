@@ -173,7 +173,7 @@ const ProductDetailSidebar: FC<Props> = ({ ficha, product, details, isEbook, sid
 				<button onClick={scrollToContactForm} className='w-full video-cart-btn'>
 					{isEbook ? 'Descargar gratis' : 'Contáctanos'}
 				</button>
-				{!isEbook && hasGateway && !product.is_presale_product && product.sale_price !== '0' && (
+				{!isEbook && hasGateway && !product.is_presale_product && product.total_price !== '0' && (
 					<>
 						{country === '' || ['mx', 'ec', 'cl'].includes(country) ? (
 							<button

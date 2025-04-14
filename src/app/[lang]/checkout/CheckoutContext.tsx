@@ -38,11 +38,12 @@ interface CheckoutContextType {
 	setUser: (user: User | null) => void;
 	appliedCoupon: Coupon | null;
 	setAppliedCoupon: (coupon: Coupon | null) => void;
+	product?: any;
 }
 
 const CheckoutContext = createContext<CheckoutContextType | undefined>(undefined);
 
-export const CheckoutProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const CheckoutProvider: React.FC<{ children: ReactNode; product?: any }> = ({ children, product }) => {
 	const [activeStep, setActiveStep] = useState(1);
 	const [subStep, setSubStep] = useState(0);
 	const [completedSteps, setCompletedSteps] = useState<number[]>([]);
@@ -57,6 +58,8 @@ export const CheckoutProvider: React.FC<{ children: ReactNode }> = ({ children }
 			setCompletedSteps([...completedSteps, step]);
 		}
 	};
+
+	console.log(product, 'de context');
 
 	return (
 		<CheckoutContext.Provider
@@ -77,6 +80,7 @@ export const CheckoutProvider: React.FC<{ children: ReactNode }> = ({ children }
 				setUser,
 				appliedCoupon,
 				setAppliedCoupon,
+				product,
 			}}
 		>
 			<RecoilRoot>{children}</RecoilRoot>
