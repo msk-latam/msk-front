@@ -158,7 +158,9 @@ const MyCoursesSection: React.FC = () => {
 					>
 						{/* Image */}
 						<div className='relative w-full h-[160px]'>
-							<Image src={course.image} alt={course.title} layout='fill' objectFit='cover' />
+							<div className='absolute inset-0'>
+								<Image src={course.image} alt={course.title} fill={true} className='object-cover' />
+							</div>
 						</div>
 						{/* Content */}
 						<div className='p-4 flex flex-col flex-grow justify-between'>

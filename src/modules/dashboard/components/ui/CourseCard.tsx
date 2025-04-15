@@ -13,6 +13,7 @@ interface CourseCardProps {
 	fecha?: string;
 	showDownloadButton?: boolean;
 	altTags?: string[];
+	onClick?: () => void;
 }
 
 export default function CourseCard({
@@ -26,6 +27,7 @@ export default function CourseCard({
 	fecha,
 	showDownloadButton = false,
 	altTags = [],
+	onClick,
 }: CourseCardProps) {
 	const statusColors = {
 		'not-started': 'bg-yellow-400',
@@ -40,9 +42,12 @@ export default function CourseCard({
 	};
 
 	return (
-		<div className='bg-white rounded-3xl shadow-sm overflow-hidden'>
-			<div className='relative h-40 bg-gray-100'>
-				<Image src={image} alt={title} layout='fill' objectFit='cover' />
+		<div
+			className='bg-white rounded-lg shadow overflow-hidden cursor-pointer transform transition duration-300 hover:scale-105'
+			onClick={onClick}
+		>
+			<div className='relative h-48 w-full'>
+				<Image src={image} alt={title} fill={true} className='object-cover' />
 				<div className='absolute top-4 left-4 bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded-full'>
 					{progress}% completado
 				</div>

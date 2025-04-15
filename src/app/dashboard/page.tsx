@@ -4,11 +4,11 @@ import '@/app/globals.css';
 import DashboardHero from '@/dashboard/components/DashboardHero';
 import HelpSection from '@/dashboard/components/HelpSection';
 import PromoBanner from '@/dashboard/components/PromoBanner';
+import Footer from '@/modules/components/footer/footer';
+import Navbar from '@/modules/components/navbar/Navbar';
+import NewsLetter from '@/modules/components/newsletter/NewsLetter';
 import LearningPlanCta from '@/modules/dashboard/components/LearningPlanCta';
 import MyCoursesSection from '@/modules/dashboard/components/MyCoursesSection';
-import Footer from '@/modules/home/components/footer/footer';
-import Navbar from '@/modules/home/components/navbar/Navbar';
-import NewsLetter from '@/modules/home/components/newsletter/NewsLetter';
 import { useEffect, useState } from 'react';
 
 import { UserData, getUserData, updateUserData } from '@/lib/localStorageService/userDataService';

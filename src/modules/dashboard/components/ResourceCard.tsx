@@ -24,7 +24,10 @@ export default function ResourceCard({
 	return (
 		<div className='bg-white rounded-3xl shadow-sm overflow-hidden'>
 			<div className='relative h-48'>
-				<Image src={image} alt={title} layout='fill' objectFit='cover' />
+				<div className='absolute inset-0'>
+					<Image src={image} alt={title} fill={true} className='object-cover' />
+				</div>
+				<div className='absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-50 transition-opacity duration-300'></div>
 				<div className='absolute top-4 left-4'>
 					<span className='bg-white text-xs px-2 py-1 rounded-full text-gray-700'>{category}</span>
 				</div>
