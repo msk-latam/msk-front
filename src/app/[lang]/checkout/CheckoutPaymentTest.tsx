@@ -157,7 +157,14 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 				setPaymentStatus('approved');
 				const paymentRebillId = data.invoice.paidBags[0].payment.id;
 
-				await updateContractCRM(user.contract_id, paymentRebillId, transactionAmount, 'rebill', discountAmount);
+				await updateContractCRM(
+					user.contract_id,
+					paymentRebillId,
+					transactionAmount,
+					'rebill',
+					discountAmount,
+					appliedCoupon?.code ?? null,
+				);
 
 				advanceStep();
 			} else {

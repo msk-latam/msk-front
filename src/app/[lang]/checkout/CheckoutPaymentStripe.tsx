@@ -169,6 +169,7 @@ const CheckoutStripe = ({ product, country }: any) => {
 					transactionAmountWithDiscount,
 					'stripe',
 					discount,
+					appliedCoupon?.code ?? null,
 				);
 
 				if (subStep === 0) {
@@ -195,9 +196,9 @@ const CheckoutStripe = ({ product, country }: any) => {
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className='max-w-lg w-full mx-auto p-6 bg-white shadow-xl rounded-xl border border-gray-200'
+			className='w-full max-w-lg p-6 mx-auto bg-white border border-gray-200 shadow-xl rounded-xl'
 		>
-			<h2 className='text-xl font-semibold text-gray-700 mb-4 text-center'>Finalizar Pago</h2>
+			<h2 className='mb-4 text-xl font-semibold text-center text-gray-700'>Finalizar Pago</h2>
 
 			<div className='p-4 border border-gray-300 rounded-lg bg-gray-50'>
 				<CardElement
@@ -215,11 +216,11 @@ const CheckoutStripe = ({ product, country }: any) => {
 
 			<button
 				type='submit'
-				className='w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-all duration-300 flex justify-center items-center'
+				className='flex items-center justify-center w-full py-3 mt-6 font-semibold text-white transition-all duration-300 bg-blue-600 rounded-lg hover:bg-blue-700'
 				disabled={isLoading}
 			>
 				{isLoading ? (
-					<div className='h-6 w-6 border-4 border-white border-t-transparent rounded-full animate-spin'></div>
+					<div className='w-6 h-6 border-4 border-white rounded-full border-t-transparent animate-spin'></div>
 				) : (
 					'Pagar'
 				)}
