@@ -1,4 +1,7 @@
 'use client'
+import { ChevronRight } from "react-feather";
+import { RiHome6Line } from "react-icons/ri";
+
 
 interface ProductHeaderProps {
   title?: string
@@ -12,16 +15,18 @@ export default function ProductHeader({
   certification = true,
 }: ProductHeaderProps) {
   return (
-    <div className="px-4 md:px-10 lg:px-20 py-10 max-w-screen-xl mx-auto text-white">
-      <nav className="text-sm text-white/80 mb-4">
-        <span className="mr-2">Tienda</span>
-        <span className="mr-2">/</span>
-        <span className="mr-2">Medicina general</span>
-        <span className="mr-2">/</span>
-        <span className="text-white font-medium">{title}</span>
-      </nav>
-
-      <h1 className="text-3xl sm:text-4xl font-bold mb-2">{title}</h1>
+    <div className="px-4 md:px-10 lg:px-20 overflow-visible max-w-[1400px] mx-auto h-96 flex flex-col justify-end text-white">
+      <div className="text-sm text-white/80 mb-20">
+      <nav className="flex flex-row">
+      <span className="my-auto"><RiHome6Line className="text-white my-auto"/></span>
+      <span className=""><ChevronRight/></span>
+        <span className="my-auto">Tienda</span>
+        <span className=""><ChevronRight/></span>
+        <span className="my-auto">Medicina general</span>
+        <span className=""><ChevronRight/></span>
+        <span className="text-white font-medium my-auto">{title}</span>
+        </nav>
+      <h1 className="text-3xl sm:text-4xl font-bold mt-5 mb-3">{title}</h1>
 
       {certification && (
         <p className="flex items-center gap-2 text-sm text-white/90 mb-4">
@@ -34,12 +39,13 @@ export default function ProductHeader({
         {categories.map((cat, idx) => (
           <span
             key={idx}
-            className="bg-white/20 text-white text-xs px-3 py-1 rounded-full"
+            className="bg-black/20 text-white text-xs px-4 py-2 rounded-full"
           >
             {cat}
           </span>
         ))}
       </div>
+            </div>
     </div>
   )
 }

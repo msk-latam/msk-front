@@ -14,10 +14,11 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
   const isFormValid = email.trim() !== '' && password.trim() !== ''
 
   return (
-    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 p-4 sm:p-20 z-[10] relative overflow-visible max-w-[1600px]">
+    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:p-0 md:mb-20 z-[10] relative overflow-visible max-w-[1400px] mx-auto
+">
 
       {/* 🔙 Botón de volver */}
-      <div className="absolute top-4 left-4 flex z-10">
+      <div className="absolute md:top-10 md:left-8 top-5 left-5 flex z-10">
         <button
           onClick={onBack}
           className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100 transition"
@@ -41,17 +42,17 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
       </div>
 
       <section
-        className="w-full max-w-[1632px] h-[700px] relative z-[1] mx-auto px-4 py-6 sm:py-12"
+        className="w-full h-fit relative z-8 mx-auto px-6 pt-[84px] pb-28 md:py-16 md:px-9"
         style={{ fontFamily: 'Raleway, sans-serif' }}
       >
         {/* 🧾 Título */}
         <div className="text-center mb-6">
-          <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900">Iniciar sesión</h1>
-          <p className="text-sm text-gray-500 mt-1">Accede a tu perfil personal</p>
+          <h1 className="md:text-[34px] text-2xl md:mb-6 mb-2 font-semibold text-gray-900">Iniciar sesión</h1>
+          <p className="text-base md:text-[18px] text-gray-500 mt-1">Accede a tu perfil personal</p>
         </div>
 
         {/* 📝 Formulario */}
-        <form className="max-w-md mx-auto space-y-5">
+        <form className="max-w-md mx-auto space-y-6">
           {/* Email */}
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 text-left">
@@ -63,7 +64,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
               placeholder="Ingresar e-mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 w-full rounded-[20px] border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="mt-1 w-full text-base rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] focus:border-1"
             />
           </div>
 
@@ -88,7 +89,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
               placeholder="Ingresar contraseña"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 w-full rounded-[20px] border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="mt-1 w-full text-base rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] focus:border-1"
             />
           </div>
 
@@ -96,10 +97,10 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
           <button
             type="submit"
             disabled={!isFormValid}
-            className={`w-full text-white py-2 px-4 rounded-[20px] transition ${
+            className={`w-full text-white py-2 px-4 rounded-[38px] transition ${
               isFormValid
-                ? 'bg-purple-600 hover:bg-purple-700'
-                : 'bg-gray-300 cursor-not-allowed'
+                ? 'bg-[#9200ad] hover:bg-purple-700'
+                : 'bg-[#989CA4] cursor-not-allowed'
             }`}
           >
             Acceder
@@ -109,7 +110,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
           <div className="flex items-center gap-2 mt-4">
             <hr className="w-full border-[#6E737C]" />
             <span
-              className="rounded-full px-3 py-0.5 bg-white border border-[#6E737C] text-[#6E737C]"
+              className="px-2 py-0.5 bg-white border-[#6E737C] text-[#6E737C]"
               style={{
                 fontFamily: 'DM Sans, sans-serif',
                 fontWeight: 400,
@@ -118,13 +119,13 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
                 letterSpacing: '0.5%',
               }}
             >
-              o
+              O
             </span>
             <hr className="w-full border-[#6E737C]" />
           </div>
 
           {/* Redes sociales */}
-          <div className="space-y-6 mt-2">
+          <div className="space-y-4 mt-2">
             {[
               { name: 'Google', icon: '/icons/google.svg' },
               { name: 'Facebook', icon: '/icons/facebook.svg' },
@@ -133,23 +134,23 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
               <button
                 key={provider.name}
                 type="button"
-                className="w-full border border-gray-300 rounded-[20px] py-2 flex items-center justify-center gap-2"
+                className="w-full border text-sm font-inter border-gray-300 rounded-[38px] py-[14px] flex items-center justify-center gap-2"
               >
-                <img src={provider.icon} alt={provider.name} className="h-5 w-5" />
                 Continuar con {provider.name}
+                <img src={provider.icon} alt={provider.name} className="h-5 w-5" />
               </button>
             ))}
           </div>
-
+{/*error:border-[#F5006D] */}
           {/* Crear cuenta */}
-          <p className="text-center text-sm text-gray-500 mt-4">
+          <p className="text-center text-base font-dmsans text-gray-500 mt-4">
             ¿No tienes una cuenta?{' '}
             <button
               type="button"
               onClick={onCreateAccount}
-              className="text-purple-600 hover:underline"
+              className="text-purple-600 font-inter underline"
             >
-              Crea una
+              Créala aquí
             </button>
           </p>
         </form>

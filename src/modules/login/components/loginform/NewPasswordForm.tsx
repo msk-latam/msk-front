@@ -9,14 +9,14 @@ export default function NewPasswordForm() {
 
   if (submitted) {
     return (
-      <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:mb-24 p-4 sm:p-20 pb-[80px] md:pb-0 z-[10] relative overflow-visible max-w-[1600px] min-h-fit h-[550px] flex md:items-center justify-center">
+      <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:mb-24 p-4 sm:p-20 pb-[80px] md:pb-0 z-[10] relative overflow-visible max-w-[1400px] mx-auto min-h-fit h-[550px] flex md:items-center justify-center">
         <section
           className="w-full max-w-[1632px] relative z-[1] mx-auto px-4 py-6 sm:py-12 text-center"
           style={{ fontFamily: 'Raleway, sans-serif' }}
         >
-          <div className="flex justify-center mb-6">
-            <div className="rounded-full bg-[#F7D6FF] p-6">
-              <img src="/images/emails/email-icon.png" alt="Listo" className="w-[70px] h-[56px]" />
+          <div className="flex justify-center w-full animate-pulse">
+            <div className="w-44 mx-auto h-auto p-6">
+              <img src="/images/emails/email-icon.svg" alt="Correo enviado" />
             </div>
           </div>
 
@@ -25,7 +25,8 @@ export default function NewPasswordForm() {
             Ya confirmaste tu e-mail. En breve recibirás un correo con tus credenciales de <strong>Medical & Scientific Knowledge</strong>.
           </p>
 
-          <button className="bg-purple-700 hover:bg-purple-800 text-white py-2 px-6 rounded-[20px]">
+          <button  className="bg-purple-700 hover:bg-purple-800 text-white py-2 px-6 rounded-[20px]"
+          >
             Seguir navegando
           </button>
         </section>
@@ -34,11 +35,31 @@ export default function NewPasswordForm() {
   }
 
   return (
-    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:mb-24 p-4 sm:p-20 pb-[80px] md:pb-0 z-[10] relative overflow-visible max-w-[1600px] min-h-fit h-[550px] flex md:items-center justify-center">
+    <div       className="w-full max-w-[1632px] h-fit relative z-8 mx-auto px-6 pt-[84px] md:pb-28 mb-16 md:py-16 md:px-9"
+    style={{ fontFamily: "Raleway, sans-serif" }}>
       <section
         className="w-full max-w-[1632px] relative z-[1] mx-auto px-4 py-6 sm:py-12"
         style={{ fontFamily: 'Raleway, sans-serif' }}
       >
+              <button
+        className="md:top-10 md:left-8 top-5 left-5 flex z-10 items-center justify-center w-10 h-10 rounded-full border border-gray-300 text-[#6e737c] hover:bg-gray-100 transition absolute"
+      >
+        <svg
+          width="6"
+          height="12"
+          viewBox="0 0 6 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M5 1L1 6L5 11"
+            stroke="#1F2937"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
         <div className="text-center mb-6">
           <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900">Cambiar contraseña</h1>
           <p className="text-sm text-gray-500 mt-1">Elige una nueva clave para iniciar sesión</p>

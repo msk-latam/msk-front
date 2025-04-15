@@ -34,7 +34,7 @@ const Ofertas = () => {
   </div>
 
       {/* Contenido */}
-      <div className="relative z-5 w-full md:px-36 px-5 py-16 flex flex-col md:flex-row items-center md:items-end md:justify-between justify-end gap-5">
+      <div className="relative z-5 w-full overflow-visible max-w-[1400px] mx-auto px-5 py-16 flex flex-col md:flex-row items-center md:items-end md:justify-between justify-end gap-5">
         {/* Texto */}
         <div className="text-left text-white max-w-xl font-raleway">
           <p className="text-sm md:text-base mb-4 font-inter">
@@ -59,7 +59,7 @@ const Ofertas = () => {
           </ul>
         </div>
 
-        <div className="flex md:flex-row flex-col md:gap-[27px] md:translate-y-10 w-full gap-6 md:w-auto md:items-center md:items-center items-left">
+        <div className="flex md:flex-row flex-col md:gap-[27px] md:translate-y-10 w-full gap-6 md:w-auto md:items-center items-left">
           {/* Bloque de descuento + botón */}
           <div className="w-auto flex flex-col md:flex-row md:items-center md:justify-end gap-6">
             {/* Descuento */}
@@ -107,9 +107,9 @@ const Ofertas = () => {
                 <path
                   d="M5.21582 12H19.2158M19.2158 12L12.2158 5M19.2158 12L12.2158 19"
                   stroke="white"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </span>

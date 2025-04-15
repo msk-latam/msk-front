@@ -102,8 +102,8 @@ const BlogSection: React.FC = () => {
   return (
     <section className="w-full font-raleway md:px-16 md:py-5 p-5">
       <header className="mb-8">
-        <h2 id="blog-title" className="text-2xl md:text-3xl font-semibold text-black mb-1">Blog</h2>
-        <p className="text-sm text-neutral-600">
+        <h2 id="blog-title" className="text-2xl text-center md:text-left md:text-3xl font-semibold text-black mb-1">Blog</h2>
+        <p className="text-sm text-neutral-600 text-center md:text-left">
           Recursos para informarte y aprender de distintas maneras
         </p>
 
@@ -122,6 +122,10 @@ const BlogSection: React.FC = () => {
         {postsToDisplay.map((post, index) => {
           // Determine if this is the first card (spans 2 columns in desktop)
           const isFirstCard = index === 0;
+          // Determine if this is the last card
+          const isLastCard = index === postsToDisplay.length - 1;
+          // Set custom background color for first and last cards
+          const customBgColor = (isFirstCard || isLastCard) ? "#FCEAFF" : undefined;
           
           return (
             <div 
@@ -140,6 +144,8 @@ const BlogSection: React.FC = () => {
                 image={post.featured_image || '/images/blog-placeholder.jpg'}
                 action={determineAction(post.title)}
                 featured={isFirstCard}
+                link="#"
+                bgColor={customBgColor}
               />
             </div>
           );

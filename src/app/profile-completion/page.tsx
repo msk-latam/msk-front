@@ -2,9 +2,9 @@
 
 import { useState } from 'react'
 import '@/app/globals.css'
-import Navbar from '@/modules/home/components/navbar/Navbar'
-import Newsletter from '@/modules/home/components/newsletter/NewsLetter'
-import Footer from '@/modules/home/components/footer/footer'
+import Navbar from '@/modules/components/navbar/Navbar'
+import Newsletter from '@/modules/components/newsletter/NewsLetter'
+import Footer from '@/modules/components/footer/footer'
 import ProfileCompletionWrapper from '@/modules/profile-completion/ProfileCompletionWrapper'
 
 export default function LoginPage() {
@@ -28,7 +28,7 @@ export default function LoginPage() {
       {/* ======================= */}
       {/* CONTENEDOR DE FORMULARIO */}
       {/* ======================= */}
-      <div className="bg-gray-50 flex justify-center px-0 sm:px-4 relative pt-0 pb-20">
+      <div className="bg-gray-50 flex justify-center px-0 sm:px-4 relative pt-0 z-4 md:pb-20">
        
           
             {/* Mostrar Login o Registro según el estado */}
@@ -39,10 +39,8 @@ export default function LoginPage() {
         
       
 
-      {/* NEWSLETTER SOBRE EL FORMULARIO */}
-      <div className="relative z-[20] -mt-28 md:-mt-[4rem] -mt-[40px]">
         <Newsletter />
-      </div>
+
 
       <Footer />
     </>

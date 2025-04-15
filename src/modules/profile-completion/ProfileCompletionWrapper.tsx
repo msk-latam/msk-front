@@ -35,9 +35,9 @@ export default function ProfileCompletionWrapper() {
   }
 
   return (
-    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 p-4 sm:p-20 z-[10] relative overflow-visible max-w-[1600px]">
+    <div className="w-full bg-white md:rounded-3xl rounded-t-3xl  shadow-md -mt-[40px] md:-mt-20 md:mx-20 z-[5] relative overflow-visible max-w-[1600px]">
     
-      <ProgressIndicator currentStep={step} />
+
 
       {step === 1 && (
         <Step1BasicInfo

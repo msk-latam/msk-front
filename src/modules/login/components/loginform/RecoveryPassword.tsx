@@ -17,10 +17,11 @@ export default function RecoveryPassword({ onBack, onSent }: RecoveryPasswordPro
   }
 
   return (
-    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:mb-24 p-4 sm:p-20 pb-[80px] md:pb-0 z-[10] relative overflow-visible max-w-[1600px] min-h-fit h-[550px]  flex md:items-center justify-center">
+    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:p-0 md:mb-20 z-[10]overflow-visible max-w-[1400px] mx-auto h-full min-h-96">
+
       
       {/* 🔙 Botón de volver (visible en todas las resoluciones) */}
-      <div className="absolute top-4 left-4 flex z-10">
+      <div className="relative md:top-10 md:left-8 top-5 left-5 z-10">
         <button
           onClick={onBack}
           className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100 transition"
@@ -44,21 +45,21 @@ export default function RecoveryPassword({ onBack, onSent }: RecoveryPasswordPro
       </div>
 
       <section
-        className="w-full max-w-[1632px] relative z-[1] mx-auto px-4 py-6 sm:py-12"
+        className="w-full max-w-[1632px] h-fit relative z-8 mx-auto px-6 pt-[84px] pb-28 md:py-16 md:px-9"
         style={{ fontFamily: 'Raleway, sans-serif' }}
       >
         {/* 🧾 Título */}
         <div className="text-center mb-6">
-          <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900">Cambiar contraseña</h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <h1 className="md:text-3xl text-2xl font-semibold pb-2 md:pb-6 text-gray-900">Cambiar contraseña</h1>
+          <p className="text-base md:text-[18] font-inter text-gray-500 mt-1">
             Te enviaremos un correo para que puedas crear una nueva
           </p>
         </div>
 
         {/* 📧 Formulario */}
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-5">
+        <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-6">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 text-left">
+            <label htmlFor="email" className="block font-semibold text-sm text-gray-700 text-left">
               E-mail
             </label>
             <input
@@ -67,29 +68,29 @@ export default function RecoveryPassword({ onBack, onSent }: RecoveryPasswordPro
               placeholder="Ingresar e-mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 w-full rounded-[20px] border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="mt-1 w-full text-base  font-dmsans rounded-2xl border border-gray-300 p-3 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] focus:border-1"
             />
           </div>
 
           <button
             type="submit"
             disabled={!isValid}
-            className={`w-full text-white py-2 px-4 rounded-[20px] transition ${
-              isValid ? 'bg-purple-600 hover:bg-purple-700' : 'bg-gray-300 cursor-not-allowed'
+            className={`w-full text-white py-3 px-4 rounded-full transition ${
+              isValid ? 'bg-[#9200ad] hover:bg-purple-700' : 'bg-gray-300 cursor-not-allowed'
             }`}
           >
             Confirmar
           </button>
         </form>
 
-        <p className="text-center text-sm text-gray-500 mt-4">
-          ¿Recordaste tu contraseña?{' '}
+        <p className="text-center text-base font-dmsans text-gray-500 mt-4 mb-24">
+          Volver a{' '}
           <button
             type="button"
             onClick={onBack}
-            className="text-purple-600 hover:underline"
+            className="text-[#9200ad] underline"
           >
-            Inicia sesión aquí
+            Iniciar sesión
           </button>
         </p>
       </section>

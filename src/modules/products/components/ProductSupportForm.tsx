@@ -11,7 +11,7 @@ interface ProductSupportFormProps {
 
 export default function ProductSupportForm(props: ProductSupportFormProps) {
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md space-y-6">
+    <div className="bg-white rounded-2xl p-6  space-y-6">
       <h3 className="text-lg font-semibold text-gray-900">
         ¿Necesitás ayuda para elegir tu curso?
       </h3>
