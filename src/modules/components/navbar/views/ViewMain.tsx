@@ -9,9 +9,10 @@ import ViewDiscover from "./ViewDiscover";
 interface Props {
   navigateTo: (view: string, category?: string | null) => void;
   isMobile?: boolean;
+  onClose?: () => void; 
 }
 
-const ViewMain: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
+const ViewMain: React.FC<Props> = ({ navigateTo, isMobile = true, onClose }) => {
   if (!isMobile) {
     // Versión desktop: mostramos directamente la vista "Descubre"
     return (
@@ -28,7 +29,7 @@ const ViewMain: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
   return (
     <div className="bg-white rounded-t-3xl mt-4 px-6 py-6 flex flex-col h-full">
             <div className="flex flex-row justify-center items-center px-6 pt-1 pb-8">
-        <button className="absolute left-5 top-10 rounded-full border border-black p-2 text-gray-800" onClick={() => navigateTo("main")}>
+        <button className="absolute left-5 top-10 rounded-full border border-black p-2 text-gray-800" onClick={onClose}>
           <X size={24} />
         </button>
         <Image
