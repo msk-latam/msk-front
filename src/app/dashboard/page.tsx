@@ -12,20 +12,40 @@ import NewsLetter from '@/modules/home/components/newsletter/NewsLetter';
 import { useEffect, useState } from 'react';
 
 import { UserData, getUserData, updateUserData } from '@/lib/localStorageService/userDataService';
+import InterestsEditModal from '@/modules/dashboard/components/InterestsEditModal';
 import ProfileEditModal from '@/modules/dashboard/components/ProfileEditModal';
 
 export default function DashboardPage() {
 	const [userData, setUserData] = useState<UserData | null>(null);
 	const [showEditModal, setShowEditModal] = useState(false);
+	const [showInterestsModal, setShowInterestsModal] = useState(false);
+	const [editTargetField, setEditTargetField] = useState<string | undefined>(undefined);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		const initialData = getUserData();
-		setUserData(initialData);
+		const fetchData = async () => {
+			setIsLoading(true);
+			try {
+				// Simulate API delay for demo purposes
+				await new Promise((resolve) => setTimeout(resolve, 800));
+				const initialData = getUserData();
+				setUserData(initialData);
+			} finally {
+				setIsLoading(false);
+			}
+		};
+
+		fetchData();
 	}, []);
 
 	const handleEditProfile = (field?: string) => {
 		console.log('(Page) Edit profile triggered for field:', field || 'general');
-		setShowEditModal(true);
+		setEditTargetField(field);
+		if (field === 'interests') {
+			setShowInterestsModal(true);
+		} else {
+			setShowEditModal(true);
+		}
 	};
 
 	const handleSaveProfile = (formData: Partial<UserData>) => {
@@ -33,11 +53,16 @@ export default function DashboardPage() {
 		const updatedData = updateUserData(formData);
 		setUserData(updatedData);
 		setShowEditModal(false);
+		setEditTargetField(undefined);
 	};
 
-	if (!userData) {
-		return <div className='flex justify-center items-center h-screen'>Loading...</div>;
-	}
+	const handleSaveInterests = (updatedInterests: string[]) => {
+		console.log('(Page) Interests to save:', updatedInterests);
+		const updatedData = updateUserData({ interests: updatedInterests });
+		setUserData(updatedData);
+		setShowInterestsModal(false);
+		setEditTargetField(undefined);
+	};
 
 	return (
 		<>
@@ -53,11 +78,15 @@ export default function DashboardPage() {
 
 			<main className='bg-[#f3f4f6] flex justify-center px-0 sm:px-4 relative pt-0 pb-20 -mb-[100px] md:mb-0'>
 				<section className='w-full -mt-[40px] md:-mt-[420px] z-[10] relative overflow-visible max-w-[1400px] mx-auto'>
-					<DashboardHero userData={userData} onEditProfile={handleEditProfile} />
-					<MyCoursesSection />
-					<LearningPlanCta />
-					<PromoBanner />
-					<HelpSection />
+					<DashboardHero userData={userData} onEditProfile={handleEditProfile} isLoading={isLoading} />
+					{!isLoading && userData && (
+						<>
+							<MyCoursesSection />
+							<LearningPlanCta />
+							<PromoBanner />
+							<HelpSection />
+						</>
+					)}
 				</section>
 			</main>
 
@@ -67,9 +96,24 @@ export default function DashboardPage() {
 			{showEditModal && (
 				<ProfileEditModal
 					isOpen={showEditModal}
-					onClose={() => setShowEditModal(false)}
+					onClose={() => {
+						setShowEditModal(false);
+						setEditTargetField(undefined);
+					}}
 					onSave={handleSaveProfile}
 					initialData={userData}
+				/>
+			)}
+
+			{showInterestsModal && (
+				<InterestsEditModal
+					isOpen={showInterestsModal}
+					onClose={() => {
+						setShowInterestsModal(false);
+						setEditTargetField(undefined);
+					}}
+					onSave={handleSaveInterests}
+					initialInterests={userData?.interests || []}
 				/>
 			)}
 		</>

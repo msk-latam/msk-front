@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // Import UserData type from the service
 import { UserData } from '@/lib/localStorageService/userDataService';
 
@@ -12,6 +12,9 @@ import UserIcon from '@/dashboard/assets/icons/UserIcon';
 import AddButton from '@/dashboard/components/ui/AddButton';
 import CtaButton from '@/dashboard/components/ui/CtaButton';
 import EditButton from '@/dashboard/components/ui/EditButton';
+import dashboardMock from '@/modules/dashboard/data/dashboardMock.json'; // <-- Import mock data
+import DashboardHeroSkeleton from './DashboardHeroSkeleton';
+import InvoicesModal from './InvoicesModal';
 
 // Import only the type, not the functions
 
@@ -61,6 +64,7 @@ interface UserDataForHero {
 interface DashboardHeroProps {
 	userData: UserData | null;
 	onEditProfile: (field?: string) => void;
+	isLoading?: boolean;
 }
 
 // Map for icon components
@@ -72,9 +76,25 @@ const IconMap: Record<string, React.FC> = {
 	UserIcon: UserIcon,
 };
 
-const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile }) => {
+const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, isLoading = false }) => {
 	// Helper function to check if a field is empty
 	const isEmpty = (value: string | undefined | null) => !value || value.trim() === '';
+
+	// Add local loading state with delay to prevent flashing
+	const [showSkeleton, setShowSkeleton] = useState(true);
+	const [showInvoicesModal, setShowInvoicesModal] = useState(false);
+
+	useEffect(() => {
+		// If data is loaded, set a small delay before hiding skeleton
+		if (!isLoading && userData) {
+			const timer = setTimeout(() => {
+				setShowSkeleton(false);
+			}, 300);
+			return () => clearTimeout(timer);
+		} else {
+			setShowSkeleton(true);
+		}
+	}, [isLoading, userData]);
 
 	// Renamed handleEditProfile to call the prop
 	const handleEditClick = (field?: string) => {
@@ -112,6 +132,11 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile }
 		onEditProfile(actualFieldName);
 	};
 
+	// Show skeleton during loading
+	if (showSkeleton) {
+		return <DashboardHeroSkeleton />;
+	}
+
 	// Show loading state or return null if data hasn't loaded yet (handled by parent now)
 	if (!userData) {
 		// Parent component handles loading state
@@ -120,12 +145,14 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile }
 
 	// Use the userData prop directly
 	const data = userData;
+	// Use mock data for recommended resources for now
+	const recommendedResources = dashboardMock.recommendedResources;
 
 	return (
 		<>
 			<div className='grid grid-cols-1 md:grid-cols-[468px_1fr] lg:grid-cols-[468px_3fr_3fr] gap-5 '>
-				{/* User Profile Section - spans 1 column on mobile, 1 column on desktop */}
-				<div className='md:col-span-1 md:row-span-3 bg-white rounded-[30px] p-[36px]'>
+				{/* User Profile Section - Mobile: 1st, Desktop: 1st Col */}
+				<div className='md:col-span-1 md:row-span-3 bg-white rounded-[30px] p-[36px] order-1 md:order-1'>
 					{/* Profile Picture */}
 					<div className='relative w-[126px] h-[126px] mx-auto mb-6'>
 						<div className='w-full h-full overflow-hidden rounded-full border'>
@@ -158,7 +185,18 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile }
 										!isEmpty(data.specialty) ? 'text-[#1A1A1A]' : 'text-[#4F5D89]'
 									}`}
 								>
-									{isEmpty(data.specialty) ? 'Completar especialidad' : data.specialty}
+									{(() => {
+										const specialtyLabels: Record<string, string> = {
+											cardiologia: 'Cardiología',
+											dermatologia: 'Dermatología',
+											endocrinologia: 'Endocrinología',
+											ginecologia: 'Ginecología',
+											nutricion: 'Nutrición',
+										};
+										return isEmpty(data.specialty)
+											? 'Completar especialidad'
+											: specialtyLabels[data.specialty as string] || data.specialty;
+									})()}
 								</p>
 								{isEmpty(data.specialty) ? (
 									<AddButton onClick={() => handleEditClick('Completar especialidad')} />
@@ -169,90 +207,92 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile }
 						</div>
 					</div>
 
-					{/* User Details - Display specified root fields: value if present, placeholder if empty */}
-					{(() => {
-						// Define the root fields to display in this section
-						// Use the full UserData type for better safety with keys
-						const fieldsToDisplayConfig: { key: keyof UserData; placeholder: string; label: string }[] = [
-							{
-								key: 'profesion',
-								placeholder: 'Completar profesión',
-								label: 'Profesión',
-							},
-							{ key: 'email', placeholder: 'Completar email', label: 'Email' },
-							{ key: 'country', placeholder: 'Completar país', label: 'País' },
-							{ key: 'phone', placeholder: 'Completar teléfono', label: 'Teléfono' },
-							// Add other root fields here
-						];
+					{/* User Details Section */}
+					<div className='space-y-4'>
+						{/* Profession */}
+						<div className='flex justify-between items-center mb-4 pb-4 border-b border-gray-100'>
+							<span
+								className={`font-inter font-medium text-base leading-[24px] ${
+									!data.profesion ? 'text-[#4F5D89]' : 'text-[#1A1A1A]'
+								}`}
+							>
+								{data.profesion
+									? data.profesion === 'medico'
+										? 'Personal Médico'
+										: data.profesion === 'enfermero' || data.profesion === 'enfermera'
+										? 'Personal de Enfermería'
+										: data.profesion
+									: 'Completar profesión'}
+							</span>
+							{!data.profesion ? (
+								<AddButton onClick={() => handleEditClick('Completar profesión')} />
+							) : (
+								<EditButton onClick={() => handleEditClick('profesion')} />
+							)}
+						</div>
 
-						return fieldsToDisplayConfig.map((fieldConf, index) => {
-							// Explicitly cast data[fieldConf.key] to string | undefined | null for isEmpty check
-							// Use UserData here as well for consistency
-							const value = data[fieldConf.key as keyof UserData] as string | undefined | null;
-							let displayValue = value; // Use a separate variable for the display value
-							const fieldIsEmpty = isEmpty(value);
+						{/* Email */}
+						<div className='flex justify-between items-center mb-4 pb-4 border-b border-gray-100'>
+							<span
+								className={`font-inter font-medium text-base leading-[24px] ${
+									!data.email ? 'text-[#4F5D89]' : 'text-[#1A1A1A]'
+								}`}
+							>
+								{data.email || 'Completar email'}
+							</span>
+							{!data.email ? (
+								<AddButton onClick={() => handleEditClick('Completar email')} />
+							) : (
+								<EditButton onClick={() => handleEditClick('email')} />
+							)}
+						</div>
 
-							/* mapear profesion usando diccionario */
-							const professionLabels: Record<string, string> = {
-								medico: 'Personal Médico',
-								enfermero: 'Personal de Enfermería',
-								enfermera: 'Personal de Enfermería',
-							};
+						{/* Country */}
+						<div className='flex justify-between items-center mb-4 pb-4 border-b border-gray-100'>
+							<span
+								className={`font-inter font-medium text-base leading-[24px] ${
+									!data.country ? 'text-[#4F5D89]' : 'text-[#1A1A1A]'
+								}`}
+							>
+								{data.country
+									? data.country === 'ar'
+										? 'Argentina'
+										: data.country === 'es'
+										? 'España'
+										: data.country === 'fr'
+										? 'Francia'
+										: data.country === 'de'
+										? 'Alemania'
+										: data.country === 'it'
+										? 'Italia'
+										: data.country === 'pt'
+										? 'Portugal'
+										: data.country
+									: 'Completar país'}
+							</span>
+							{!data.country ? (
+								<AddButton onClick={() => handleEditClick('Completar país')} />
+							) : (
+								<EditButton onClick={() => handleEditClick('country')} />
+							)}
+						</div>
 
-							const countryLabels: Record<string, string> = {
-								ar: 'Argentina',
-								es: 'España',
-								fr: 'Francia',
-								de: 'Alemania',
-								it: 'Italia',
-								pt: 'Portugal',
-							};
-
-							const specialtyLabels: Record<string, string> = {
-								cardiologia: 'Cardiología',
-								dermatologia: 'Dermatología',
-								endocrinologia: 'Endocrinología',
-								ginecologia: 'Ginecología',
-								nutricion: 'Nutrición',
-							};
-
-							if (fieldConf.key === 'specialty') {
-								displayValue = specialtyLabels[value as string] || value;
-							}
-
-							if (fieldConf.key === 'profesion') {
-								displayValue = professionLabels[value as string] || value;
-							}
-
-							if (fieldConf.key === 'country') {
-								displayValue = countryLabels[value as string] || value;
-							}
-
-							return (
-								<div
-									key={index}
-									className='flex justify-between items-center mb-4 pb-4 border-b border-gray-100 last:border-b-0'
-								>
-									<div className='flex justify-between items-center w-full'>
-										<span
-											className={`font-inter font-medium text-base leading-[24px] ${
-												fieldIsEmpty ? 'text-[#4F5D89]' : 'text-[#1A1A1A]'
-											}`}
-										>
-											{fieldIsEmpty ? fieldConf.placeholder : displayValue}
-										</span>
-										{fieldIsEmpty ? (
-											// Pass placeholder to map correctly in handleEditClick
-											<AddButton onClick={() => handleEditClick(fieldConf.placeholder)} />
-										) : (
-											// Pass the actual field key for editing
-											<EditButton onClick={() => handleEditClick(fieldConf.key as string)} />
-										)}
-									</div>
-								</div>
-							);
-						});
-					})()}
+						{/* Phone */}
+						<div className='flex justify-between items-center mb-4 pb-4 border-b border-gray-100'>
+							<span
+								className={`font-inter font-medium text-base leading-[24px] ${
+									!data.phone ? 'text-[#4F5D89]' : 'text-[#1A1A1A]'
+								}`}
+							>
+								{data.phone || 'Completar teléfono'}
+							</span>
+							{!data.phone ? (
+								<AddButton onClick={() => handleEditClick('Completar teléfono')} />
+							) : (
+								<EditButton onClick={() => handleEditClick('phone')} />
+							)}
+						</div>
+					</div>
 
 					{/* Profile Completion Progress */}
 					{data.profileCompletion && data.profileCompletion.percentage < 100 && (
@@ -284,54 +324,43 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile }
 					)}
 				</div>
 
-				{/* Course Section - spans 2 columns on desktop */}
-				{data.currentCourse && (
-					<div className='md:col-span-2 rounded-[30px]  overflow-hidden group'>
-						<div className='bg-cover bg-top h-[300px] relative flex flex-col justify-center p-[36px] text-white overflow-hidden'>
-							<div
-								className='absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 bg-cover bg-top'
-								style={{ backgroundImage: `url(${data.currentCourse.image})` }}
-							></div>
-
-							{/* Overlay gradient */}
-							<div
-								className='absolute inset-0'
-								style={{ background: 'linear-gradient(90deg, rgba(0, 0, 0, 0.54) 38.02%, rgba(0, 0, 0, 0.09) 87.34%)' }}
-							></div>
-
-							{/* Course Label */}
-							<div className='relative z-10 flex justify-between items-center'>
-								<div className='flex flex-col items-start gap-5'>
-									<span className='bg-[#DFE6FF] text-[#29324F] font-inter font-normal text-base  rounded-full px-3 py-1.5'>
-										{data.currentCourse.label || 'Aprendizaje'}
-									</span>
-
-									<h2 className='text-white font-raleway font-[700] text-[36px] leading-[44px] max-w-[25ch]'>
-										{data.currentCourse.title}
-									</h2>
-								</div>
-								<CtaButton onClick={() => {}} showIcon={true}>
-									Continuar
-								</CtaButton>
-							</div>
-
-							{/* Progress Bar */}
-							<div className='w-full h-[40px] bg-[#00000033]  absolute bottom-0 left-0'>
-								<div
-									className='h-full bg-[#00000080] px-[36px] flex items-center justify-start transition-width duration-300 ease-in-out'
-									style={{ width: `${data.currentCourse.progress}` }}
-								>
-									<span className='text-white font-inter font-medium text-base leading-[24px] whitespace-nowrap'>
-										{data.currentCourse.progress} completado
-									</span>
-								</div>
-							</div>
+				{/* Action Cards Section - Mobile: 2nd, Desktop: 4th in 2nd Col */}
+				<div className='md:col-span-2 lg:col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-5 order-2 md:order-4'>
+					{/* Mis facturas */}
+					<button
+						className='bg-white text-left flex items-center justify-start border border-[#DBDDE2] rounded-[30px] p-[36px] hover:shadow-md transition-shadow'
+						onClick={() => setShowInvoicesModal(true)}
+					>
+						<div className=' w-[26px] text-[#9200AD] mr-4 flex-shrink-0'>
+							<DocumentIcon />
 						</div>
-					</div>
-				)}
+						<div>
+							<h3 className='font-raleway font-bold text-[20px] leading-[28px] mb-1 text-[#1A1A1A]'>Mis facturas</h3>
+							<p className='font-inter font-normal text-base leading-6 tracking-[0%] text-[#4F5D89]'>
+								Encuentra y descarga tus facturas
+							</p>
+						</div>
+					</button>
 
-				{/* Interests Section - spans 2 columns on desktop */}
-				<div className='md:col-span-2 bg-white rounded-[30px] p-[36px]'>
+					{/* Mi cuenta (was Mis cursos) */}
+					<button
+						className='bg-white text-left flex items-center justify-start border border-[#DBDDE2] rounded-[30px] p-[36px] hover:shadow-md transition-shadow'
+						onClick={() => handleEditClick()}
+					>
+						<div className=' w-[26px] text-[#9200AD] mr-4 flex-shrink-0'>
+							<UserIcon />
+						</div>
+						<div>
+							<h3 className='font-raleway font-bold text-[20px] leading-[28px] mb-1 text-[#1A1A1A]'>Mi cuenta</h3>
+							<p className='font-inter font-normal text-base leading-6 tracking-[0%]  text-[#4F5D89]'>
+								Gestiona todo lo relacionado con tus datos personales
+							</p>
+						</div>
+					</button>
+				</div>
+
+				{/* Interests Section - Mobile: 3rd, Desktop: 3rd in 2nd Col */}
+				<div className='md:col-span-2 lg:col-span-2 bg-white rounded-[30px] p-[36px] order-3 md:order-3'>
 					<h3 className='font-raleway text-[34px] font-medium leading-[100%] mb-3 text-[#1A1A1A]'>Tus intereses</h3>
 
 					{data.interests && data.interests.length > 0 ? (
@@ -366,110 +395,150 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile }
 					)}
 				</div>
 
-				{/* Action Cards Section - spans 2 columns on desktop */}
-				<div className='md:col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-5'>
-					{/* Mis facturas */}
-					<button className='bg-white text-left flex items-center justify-start border border-[#DBDDE2] rounded-[30px] p-[36px] hover:shadow-md transition-shadow'>
-						<div className=' w-[26px] text-[#9200AD] mr-4 flex-shrink-0'>
-							<DocumentIcon />
-						</div>
-						<div>
-							<h3 className='font-raleway font-bold text-[20px] leading-[28px] mb-1 text-[#1A1A1A]'>Mis facturas</h3>
-							<p className='font-inter font-normal text-base leading-6 tracking-[0%] text-[#4F5D89]'>
-								Encuentra y descarga tus facturas
-							</p>
-						</div>
-					</button>
+				{/* Course Section - Mobile: 4th, Desktop: 2nd in 2nd Col */}
+				{data.currentCourse && (
+					<div className='md:col-span-2 lg:col-span-2 rounded-[30px]  overflow-hidden group order-4 md:order-2'>
+						<div className='bg-cover bg-top h-[300px] rounded-[30px]   relative flex flex-col justify-center p-[36px] text-white overflow-hidden'>
+							<div
+								className='absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 bg-cover bg-top'
+								style={{ backgroundImage: `url(${data.currentCourse.image})` }}
+							></div>
 
-					{/* Mis cursos */}
-					<button className='bg-white text-left flex items-center justify-start border border-[#DBDDE2] rounded-[30px] p-[36px] hover:shadow-md transition-shadow'>
-						<div className=' w-[26px] text-[#9200AD] mr-4 flex-shrink-0'>
-							<UserIcon />
-						</div>
-						<div>
-							<h3 className='font-raleway font-bold text-[20px] leading-[28px] mb-1 text-[#1A1A1A]'>Mi cuenta</h3>
-							<p className='font-inter font-normal text-base leading-6 tracking-[0%]  text-[#4F5D89]'>
-								Gestiona todo lo relacionado con tus datos personales
-							</p>
-						</div>
-					</button>
-				</div>
+							{/* Overlay gradient */}
+							<div
+								className='absolute inset-0'
+								style={{ background: 'linear-gradient(90deg, rgba(0, 0, 0, 0.54) 38.02%, rgba(0, 0, 0, 0.09) 87.34%)' }}
+							></div>
 
-				{/* Recommended Resources Section - spans full width below others */}
-				{data.recommendedResources && data.recommendedResources.length > 0 ? (
-					<div className='md:col-span-2 lg:col-span-3 bg-white rounded-[30px] p-[36px]'>
-						<h3 className='font-raleway text-[34px] font-medium leading-[100%] mb-6 text-[#1A1A1A]'>
-							Recursos recomendados para tí
-						</h3>
-						<div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
-							{data.recommendedResources.map((resource, index) => (
-								<div
-									key={index}
-									className='bg-white rounded-[30px] overflow-hidden flex flex-col md:flex-row border border-[#DBDDE2] hover:shadow-md transition-shadow'
-								>
-									{/* Image Section */}
-									<div className='relative w-full md:w-[200px] h-[180px] md:h-auto flex-shrink-0 bg-gray-100'>
-										<Image
-											src={resource.image || '/placeholder-resource.jpg'}
-											alt={resource.title}
-											layout='fill'
-											objectFit='cover'
-											onError={(e) => {
-												e.currentTarget.src = '/placeholder-resource.jpg';
-											}}
-										/>
-									</div>
+							{/* Course Content: Title, Label, Button */}
+							<div className='relative z-10 flex flex-col items-start gap-4 md:flex-row md:justify-between md:items-center'>
+								{/* Group Label and Title */}
+								<div className='flex flex-col items-start gap-4'>
+									<span className='bg-[#DFE6FF] text-[#29324F] font-inter font-normal text-sm md:text-base rounded-full px-3 py-1.5'>
+										{data.currentCourse.label || 'Aprendizaje'}
+									</span>
 
-									{/* Content Section */}
-									<div className='p-6 flex flex-col justify-between flex-grow'>
-										<div>
-											{/* Tags */}
-											<div className='flex flex-wrap gap-2 mb-3'>
-												{resource.tags?.map((tag, tagIndex) => (
-													<span
-														key={tagIndex}
-														className={`px-3 py-1 rounded-full text-xs font-inter font-medium ${
-															tag === 'Nutrición' || tag === 'Endocrinología'
-																? 'bg-[#DFE6FF] text-[#29324F]'
-																: 'bg-[#FFF4D8] text-[#8E6E3B]'
-														}`}
-													>
-														{tag}
-													</span>
-												))}
-											</div>
-
-											{/* Title */}
-											<h4 className='font-raleway font-bold text-xl leading-tight mb-2 text-[#1A1A1A]'>{resource.title}</h4>
-
-											{/* Author */}
-											<p className='font-inter text-sm text-[#4F5D89] mb-4'>{resource.author}</p>
-										</div>
-
-										{/* Button */}
-										<div className='mt-4 self-start md:self-end'>
-											<CtaButton
-												onClick={() => {
-													console.log('Navigate to:', resource.buttonLink);
-												}}
-											>
-												{resource.buttonText}
-											</CtaButton>
-										</div>
-									</div>
+									<h2 className='text-white font-raleway font-[700] text-[24px] md:text-[36px] leading-[26px] md:leading-[44px] max-w-[25ch]'>
+										{data.currentCourse.title}
+									</h2>
 								</div>
-							))}
+								{/* Button - Aligned below title on mobile, right on desktop */}
+								<div className='w-auto mt-4 md:mt-0'>
+									<CtaButton onClick={() => {}} showIcon={true}>
+										Continuar
+									</CtaButton>
+								</div>
+							</div>
+
+							{/* Progress Bar */}
+							<div className='w-full h-[40px] bg-[#00000033]  absolute bottom-0 left-0'>
+								<div
+									className='h-full bg-[#00000080] px-[36px] flex items-center justify-start transition-width duration-300 ease-in-out'
+									style={{ width: `${data.currentCourse.progress}` }}
+								>
+									<span className='text-white font-inter font-medium text-base leading-[24px] whitespace-nowrap'>
+										{data.currentCourse.progress} completado
+									</span>
+								</div>
+							</div>
 						</div>
 					</div>
+				)}
+
+				{/* Recommended Resources Section - Mobile: 5th, Desktop: 5th in 2nd/3rd Col */}
+				{data.interests && data.interests.length > 0 ? (
+					// Use the imported mock data
+					recommendedResources && recommendedResources.length > 0 ? (
+						<div className='md:col-span-2 lg:col-span-3 bg-white rounded-[30px] p-[36px] order-5 md:order-5'>
+							<h3 className='font-raleway text-[34px] font-medium leading-[100%] mb-6 text-[#1A1A1A]'>
+								Recursos recomendados para tí
+							</h3>
+							{/* Mobile: Carousel / Desktop: Grid */}
+							<div className='flex space-x-4 overflow-x-auto scroll-snap-x scroll-snap-mandatory md:grid md:grid-cols-2 md:gap-5 md:space-x-0 md:overflow-x-visible md:scroll-snap-none pb-4 -mb-4 scrollbar-hide'>
+								{recommendedResources.map((resource, index) => (
+									<div
+										key={index}
+										className='w-[90%] flex-shrink-0 scroll-snap-start md:w-auto md:flex-shrink bg-white rounded-[30px] overflow-hidden flex flex-col md:flex-row border border-[#DBDDE2] hover:shadow-md transition-shadow'
+									>
+										{/* Image Section */}
+										<div className='relative w-full md:w-[200px] h-[180px] md:h-auto flex-shrink-0 bg-gray-100'>
+											<Image
+												src={resource.image || '/placeholder-resource.jpg'}
+												alt={resource.title}
+												layout='fill'
+												objectFit='cover'
+												onError={(e) => {
+													e.currentTarget.src = '/placeholder-resource.jpg';
+												}}
+											/>
+										</div>
+
+										{/* Content Section */}
+										<div className='p-6 flex flex-col justify-between flex-grow'>
+											<div>
+												{/* Tags */}
+												<div className='flex flex-wrap gap-2 mb-3'>
+													{resource.tags?.map((tag, tagIndex) => (
+														<span
+															key={tagIndex}
+															className={`px-3 py-1 rounded-full text-xs font-inter font-medium ${
+																tag === 'Nutrición' || tag === 'Endocrinología'
+																	? 'bg-[#DFE6FF] text-[#29324F]'
+																	: 'bg-[#FFF4D8] text-[#8E6E3B]'
+															}`}
+														>
+															{tag}
+														</span>
+													))}
+												</div>
+
+												{/* Title */}
+												<h4 className='font-raleway font-bold text-xl leading-tight mb-2 text-[#1A1A1A]'>
+													{resource.title}
+												</h4>
+
+												{/* Author */}
+												<p className='font-inter text-sm text-[#4F5D89] mb-4'>{resource.author}</p>
+											</div>
+
+											{/* Button */}
+											<div className='mt-4 self-start md:self-end'>
+												<CtaButton
+													onClick={() => {
+														console.log('Navigate to:', resource.buttonLink);
+													}}
+												>
+													{resource.buttonText}
+												</CtaButton>
+											</div>
+										</div>
+									</div>
+								))}
+							</div>
+						</div>
+					) : (
+						// Optional: Show a different message if interests exist but no resources yet
+						<div className='md:col-span-2 lg:col-span-3 bg-white rounded-[30px] p-[36px] order-5 md:order-5'>
+							<h3 className='font-raleway text-[34px] font-medium leading-[100%] mb-6 text-[#1A1A1A]'>
+								Recursos recomendados para tí
+							</h3>
+							<p className='text-[#4F5D89] font-inter text-center'>
+								Estamos buscando los mejores recursos para tus intereses...
+							</p>
+						</div>
+					)
 				) : (
-					<div className='md:col-span-2 lg:col-span-3 bg-white rounded-[30px] p-[36px]'>
+					<div className='md:col-span-2 lg:col-span-3 bg-white rounded-[30px] p-[36px] order-5 md:order-5'>
 						<h3 className='font-raleway text-[34px] font-medium leading-[100%] mb-6 text-[#1A1A1A]'>
 							Recursos recomendados para tí
 						</h3>
-						<p className='text-[#4F5D89] font-inter text-center'>Completa tu perfil para ver recursos recomendados.</p>
+						<p className='text-[#4F5D89] font-inter text-center'>Completa tus intereses para ver recursos recomendados.</p>
 					</div>
 				)}
 			</div>
+
+			{/* Render the Invoices Modal */}
+			<InvoicesModal isOpen={showInvoicesModal} onClose={() => setShowInvoicesModal(false)} />
 		</>
 	);
 };

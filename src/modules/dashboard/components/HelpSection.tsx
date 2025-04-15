@@ -16,7 +16,7 @@ const HelpSection: React.FC = () => {
 	if (!helpSection) return null;
 
 	return (
-		<div className='bg-white rounded-[30px] p-6 md:p-8 mt-5 flex flex-col  justify-between  gap-4'>
+		<div className='bg-white rounded-[30px] p-6 md:p-8  -mt-8 md:mt-5 flex flex-col  justify-between  gap-4'>
 			<h2 className='font-raleway text-[34px] font-medium leading-[100%] text-[#1A1A1A] mb-6'>{helpSection.title}</h2>
 			<div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
 				{helpSection.cards.map((card, index) => {

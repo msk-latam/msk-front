@@ -209,7 +209,7 @@ export const calculateProfileCompletion = (data: UserData): ProfileCompletion | 
 		{ key: 'specialty', hasValue: !isEmpty(data.specialty) },
 		{ key: 'profesion', hasValue: !isEmpty(data.profesion) },
 		{ key: 'country', hasValue: !isEmpty(data.country) },
-		{ key: 'fullPhoneNumber', hasValue: !isEmpty(data.fullPhoneNumber) && data.fullPhoneNumber.length > 5 },
+		{ key: 'fullPhoneNumber', hasValue: !!data.fullPhoneNumber && data.fullPhoneNumber.length > 5 },
 		...detailChecks,
 		interestCheck,
 		{ key: 'workplace', hasValue: !isEmpty(data.workplace) },
@@ -220,12 +220,41 @@ export const calculateProfileCompletion = (data: UserData): ProfileCompletion | 
 	totalFields = fieldsToCheck.length;
 	completedFields = fieldsToCheck.filter((f) => f.hasValue).length;
 
-	const percentage = totalFields > 0 ? Math.round((completedFields / totalFields) * 100) : 0;
+	const rawPercentage = totalFields > 0 ? (completedFields / totalFields) * 100 : 0;
 
-	if (percentage === 100) return null;
+	// NEW LOGIC based on completion rules
+	let displayPercentage: number;
+	let isComplete = false;
+
+	const hasBasicInfo = !isEmpty(data.firstName) && !isEmpty(data.lastName);
+	const hasContactInfo = !isEmpty(data.email) && !!data.fullPhoneNumber && data.fullPhoneNumber.length > 5;
+	const hasProfessionalInfo = !isEmpty(data.profesion) && !isEmpty(data.specialty) && !isEmpty(data.country);
+	const hasWorkInfo = !isEmpty(data.workplace) && !isEmpty(data.workArea);
+	const hasInterests = Array.isArray(data.interests) && data.interests.length > 0;
+
+	if (hasInterests) {
+		// Interests are the last step, profile is 100% complete
+		isComplete = true;
+		displayPercentage = 100;
+	} else if (hasWorkInfo && hasProfessionalInfo && hasContactInfo && hasBasicInfo) {
+		// Completed up to work info
+		displayPercentage = 75;
+	} else if (hasProfessionalInfo && hasContactInfo && hasBasicInfo) {
+		// Completed up to professional info + contact
+		displayPercentage = 50;
+	} else if (hasBasicInfo && hasContactInfo) {
+		// Basic registration + contact info (assuming email/phone are part of initial?)
+		displayPercentage = 25;
+	} else {
+		// Default starting point (or adjust if registration gives some %)
+		displayPercentage = 0;
+	}
+
+	// Return null if 100% complete (hides the progress bar)
+	if (isComplete) return null;
 
 	return {
-		percentage: percentage,
+		percentage: displayPercentage,
 		message: `Completa los campos para finalizar tu perfil.`,
 		ctaText: 'Completar ahora',
 		ctaLink: '#',

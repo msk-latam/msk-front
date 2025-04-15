@@ -8,7 +8,7 @@ const PromoBanner: React.FC = () => {
 	if (!promoBanner) return null;
 
 	return (
-		<div className='relative rounded-[30px] overflow-hidden mt-5 text-white p-8 md:p-12 min-h-[350px] flex items-center'>
+		<div className='relative md:rounded-[30px] overflow-hidden -z-10 -mt-4 md:mt-5 text-white min-h-[450px] md:min-h-[350px] flex flex-col'>
 			{/* Background Image */}
 			<div
 				className='absolute inset-0 z-0 bg-cover bg-center'
@@ -20,49 +20,57 @@ const PromoBanner: React.FC = () => {
 			{/* Dark Overlay */}
 			<div
 				className='absolute inset-0 z-10'
-				style={{ background: 'linear-gradient(255.21deg, rgba(0, 0, 0, 0) 22.64%, rgba(0, 0, 0, 0.4) 49.04%)' }}
+				style={{
+					background:
+						'linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%), linear-gradient(255.21deg, rgba(0, 0, 0, 0) 22.64%, rgba(0, 0, 0, 0.4) 49.04%)',
+				}}
 			></div>
 
-			{/* Content */}
-			<div className='relative z-20 '>
-				<p className='text-lg font-inter font-normal mb-14'>{promoBanner.availability}</p>
-				<h2 className='text-4xl md:text-5xl font-raleway flex flex-col gap-6 mb-14'>
-					<span className='font-bold'>{promoBanner.title}</span>
-					<span className='font-medium'>{promoBanner.subtitle}</span>
-				</h2>
+			{/* Content Container - Flex Column for Mobile, Relative for Desktop Absolute Positioning */}
+			<div className='relative z-20 flex flex-col flex-grow p-6 mt-40 md:mt-0 md:p-12 justify-between'>
+				{/* Top Text Content */}
+				<div>
+					<p className='text-base md:text-lg font-inter font-normal mb-4 md:mb-8'>{promoBanner.availability}</p>
+					<h2 className='text-3xl md:text-5xl font-raleway flex flex-col gap-2 md:gap-4 mb-6 md:mb-8'>
+						<span className='font-bold'>{promoBanner.title}</span>
+						<span className='font-medium'>{promoBanner.subtitle}</span>
+					</h2>
 
-				<ul className='list-disc list-outside ml-5 mb-8 space-y-6 font-inter text-xl max-w-[500px]'>
-					{promoBanner.features.map((feature, index) => (
-						<li key={index}>{feature}</li>
-					))}
-				</ul>
-			</div>
+					<ul className='list-disc list-outside ml-5 mb-8 space-y-3 md:space-y-4 font-inter text-base md:text-xl max-w-[500px]'>
+						{promoBanner.features.map((feature, index) => (
+							<li key={index}>{feature}</li>
+						))}
+					</ul>
+				</div>
 
-			{/* Discount and Button (Positioned Absolutely on Larger Screens) */}
-			<div className='absolute z-20 bottom-8 right-8 md:bottom-12 md:right-12 flex items-end gap-4'>
-				{/* Discount */}
-				<div className='flex  gap-2 text-right items-end'>
-					<span className='text-[78.49px] font-inter font-bold leading-[100%] tracking-[-13%] align-middle'>
-						{promoBanner.discount.percentage}
-					</span>
-					<div className='flex flex-col gap-2'>
-						<span className='font-inter font-extralight text-[47.42px] leading-[100%] align-middle'>%</span>
-						<span className='text-[19.62px] font-inter font-light leading-[100%] tracking-[-2.5%] align-middle whitespace-pre-line'>
-							OFF
+				{/* Discount and Button Section - Flow on Mobile, Absolute on Desktop */}
+				<div className='flex flex-col items-center md:items-end md:absolute md:bottom-12 md:right-12 md:flex-row gap-4 mt-6 md:mt-0'>
+					{/* Discount - Centered Text on Mobile */}
+					<div className='flex items-end gap-2 text-center md:text-right'>
+						<span className='text-6xl md:text-[78.49px] font-inter font-bold leading-none md:leading-[100%] tracking-tighter md:tracking-[-13%]'>
+							{promoBanner.discount.percentage}
+						</span>
+						<div className='flex flex-col items-center md:items-start gap-1 md:gap-2'>
+							<span className='font-inter font-extralight text-4xl md:text-[47.42px] leading-none md:leading-[100%]'>%</span>
+							<span className='text-sm md:text-[19.62px] font-inter font-light leading-none md:leading-[100%] tracking-[-2.5%] whitespace-pre-line'>
+								OFF
+							</span>
+						</div>
+						<span className='text-xl md:text-[26.16px] font-inter font-extrabold leading-tight md:leading-[90%] tracking-[-2.5%] opacity-90 whitespace-pre-line text-center md:text-start'>
+							{promoBanner.discount.description}
 						</span>
 					</div>
-					<span className='text-[26.16px] font-inter font-extrabold leading-[90%] tracking-[-2.5%] align-middle opacity-90 whitespace-pre-line text-start'>
-						{promoBanner.discount.description}
-					</span>
+					{/* Button - Full width on mobile? No, keep original size but centered below discount */}
+					<div className='w-full flex justify-center md:w-auto mb-10 md:mb-0'>
+						<CtaButton
+							// onClick={() => router.push(promoBanner.buttonLink)} // Add routing later
+							onClick={() => {}}
+							showIcon={true}
+						>
+							{promoBanner.buttonText}
+						</CtaButton>
+					</div>
 				</div>
-				{/* Button */}
-				<CtaButton
-					// onClick={() => router.push(promoBanner.buttonLink)} // Add routing later
-					onClick={() => {}}
-					showIcon={true}
-				>
-					{promoBanner.buttonText}
-				</CtaButton>
 			</div>
 		</div>
 	);

@@ -144,20 +144,18 @@ const MyCoursesSection: React.FC = () => {
 								<option value='Más antiguos'>Más antiguos</option>
 								<option value='Alfabético'>Alfabético</option>
 							</select>
-							<div className='pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700'>
-								<svg className='fill-current h-4 w-4' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'>
-									<path d='M5.516 7.548a.5.5 0 0 1 .707 0L10 11.33l3.777-3.782a.5.5 0 1 1 .707.707l-4.147 4.146a.5.5 0 0 1-.707 0L5.516 8.255a.5.5 0 0 1 0-.707z' />
-								</svg>
-							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			{/* Courses Grid */}
-			<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6'>
+			{/* Courses Grid / Mobile Carousel */}
+			<div className='flex space-x-4 overflow-x-auto scroll-snap-x scroll-snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-5 md:space-x-0 md:overflow-x-visible md:scroll-snap-none pb-4 -mb-4 scrollbar-hide mb-6'>
 				{currentCourses.map((course) => (
-					<div key={course.id} className='bg-white rounded-[20px] border border-[#DBDDE2] overflow-hidden flex flex-col'>
+					<div
+						key={course.id}
+						className='w-[90%] flex-shrink-0 scroll-snap-start md:w-auto md:flex-shrink bg-white rounded-[20px] border border-[#DBDDE2] overflow-hidden flex flex-col'
+					>
 						{/* Image */}
 						<div className='relative w-full h-[160px]'>
 							<Image src={course.image} alt={course.title} layout='fill' objectFit='cover' />
@@ -187,9 +185,9 @@ const MyCoursesSection: React.FC = () => {
 				))}
 			</div>
 
-			{/* Pagination */}
+			{/* Pagination - Hidden on Mobile */}
 			{totalPages > 1 && (
-				<div className='flex justify-center items-center gap-4 mt-6'>
+				<div className='hidden md:flex justify-center items-center gap-4 mt-6'>
 					<button
 						onClick={() => paginate(currentPage - 1)}
 						disabled={currentPage === 1}
