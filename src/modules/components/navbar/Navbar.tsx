@@ -47,29 +47,39 @@ const Navbar = () => {
 
 			<nav className='relative z-50 bg-transparent'>
 				{/* --- NAV MOBILE --- */}
-				<section className='flex justify-start items-center mt-2 py-5 px-6 md:hidden relative'>
-					{/* Botón hamburguesa */}
+				{/* --- NAV MOBILE --- */}
+<section className='flex justify-start items-center mt-2 py-5 px-6 md:hidden relative'>
+  {/* Botón hamburguesa */}
+  <BurgerButton isOpen={isDiscoverOpen} onClick={toggleDiscover} />
 
-					<BurgerButton isOpen={isDiscoverOpen} onClick={toggleDiscover} />
-					{/* Logo */}
-					<Link href='/home' className='m-auto pr-7 pb-1'>
-						<Image src='/images/msk-logo/logo.png' alt='MSK' priority style={{ height: 'auto' }} className='w-16' />
-					</Link>
-				</section>
+  {/* Logo */}
+  <Link href='/home' className='m-auto pr-7 pb-1'>
+    <Image
+      src='/images/msk-logo/logo.png'
+      alt='MSK'
+      priority
+      width={64}
+      height={64}
+      className='w-16 h-auto'
+    />
+  </Link>
+</section>
 
-				{/* --- NAV DESKTOP --- */}
-				<section className='hidden md:flex md:flex-row items-center pt-2 mt-6'>
-					<div className='flex items-top w-full max-w-[1300px] mx-auto pl-14 pr-28 z-50 relative'>
-						{/* Logo */}
-						<Link href='/home'>
-							<Image
-								src='/images/msk-logo/logo.png'
-								alt='MSK'
-								priority
-								className='md:pt-3 w-[90px]'
-								style={{ height: 'auto' }}
-							/>
-						</Link>
+{/* --- NAV DESKTOP --- */}
+<section className='hidden md:flex md:flex-row items-center pt-2 mt-6'>
+  <div className='flex items-top w-full max-w-[1300px] mx-auto pl-14 pr-28 z-50 relative'>
+    {/* Logo */}
+    <Link href='/home'>
+      <Image
+        src='/images/msk-logo/logo.png'
+        alt='MSK'
+        priority
+        width={90}
+        height={90}
+        className='md:pt-3 w-[90px] h-auto'
+      />
+    </Link>
+
 
 						{/* Navegación central */}
 						<div className='w-full'>

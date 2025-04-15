@@ -1,12 +1,7 @@
-// src/modules/home/services/masterclass.service.ts
+import { MasterclassAPIItem } from '../types';
 
-// src/modules/home/services/masterclass.service.ts
-import { Professional } from "@/modules/home/types";
-
-interface MasterclassAPIResponse {
-  masterclass: Professional[];
-  courses?: any;
-  trustsection?: any;
+export interface MasterclassAPIResponse {
+  masterclasses: MasterclassAPIItem[];
 }
 
 export const getMasterClass = async (): Promise<MasterclassAPIResponse> => {

@@ -55,28 +55,23 @@ const BlogSection: React.FC = () => {
 
   // Filter posts based on selected category
   useEffect(() => {
-    if (!data?.featured_blog_articles) return;
-
-    const posts = data.featured_blog_articles;
-    
+    if (!data) return;
+  
     switch (activeTab) {
       case 'Artículos':
-        setFilteredPosts(posts);
+        setFilteredPosts(data.featured_blog_articles || []);
         break;
       case 'Guías profesionales':
-        setFilteredPosts(posts.filter(post => 
-          post.categories.some(cat => cat.name.includes('Guía') || cat.name.includes('Guia'))
-        ));
+        setFilteredPosts(data.featured_blog_guides || []);
         break;
       case 'Infografías':
-        setFilteredPosts(posts.filter(post => 
-          post.categories.some(cat => cat.name.includes('Infografía') || cat.name.includes('Infografia'))
-        ));
+        setFilteredPosts(data.featured_blog_infographies || []);
         break;
       default:
-        setFilteredPosts(posts);
+        setFilteredPosts([]);
     }
   }, [activeTab, data]);
+  
 
   // Render loading state
   if (loading) {

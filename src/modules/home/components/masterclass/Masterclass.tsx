@@ -7,14 +7,15 @@ import { useSwipeable } from "react-swipeable";
 import ProfessionalCardDesktop from "./ProfessionalCardDesktop";
 import ProfessionalCardMobile from "./ProfessionalCardMobile";
 import { useMasterclassSection } from "@/modules/home/hooks/useMasterclassSection";
+import { Professional } from "@/modules/home/types";
 import { professionals as mockProfessionals } from "./professionals";
 
 const Masterclass = () => {
   const { data: fetchedProfessionals, loading, error } = useMasterclassSection();
   const usingMock = !fetchedProfessionals?.length;
-  const professionals = usingMock ? mockProfessionals : fetchedProfessionals;
+  const professionals: Professional[] = usingMock ? mockProfessionals : fetchedProfessionals;
 
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState<number>(0);
 
   const nextSlide = () => setCurrent((prev) => (prev + 1) % professionals.length);
   const prevSlide = () => setCurrent((prev) => (prev - 1 + professionals.length) % professionals.length);
@@ -35,6 +36,8 @@ const Masterclass = () => {
       console.warn("⚠️ Usando contenido mock de profesionales (no hay datos desde la API).");
     }
   }, [usingMock]);
+
+  const currentProfessional = professionals[current];
 
   return (
     <section
@@ -68,7 +71,7 @@ const Masterclass = () => {
             </div>
             <nav aria-label="Inscripción a Masterclass">
               <Link
-                href="#"
+                href={currentProfessional?.perfilUrl || "#"}
                 className="bg-white text-black px-6 py-3 rounded-full font-semibold text-sm md:text-base flex items-center gap-2 w-fit mx-auto md:mx-0"
               >
                 Inscribite ahora
@@ -90,7 +93,7 @@ const Masterclass = () => {
           {/* DERECHA CARD DESKTOP */}
           <article className="md:order-2">
             <ProfessionalCardDesktop
-              pro={professionals[current]}
+              pro={currentProfessional}
               current={current}
               total={professionals.length}
               onNext={nextSlide}

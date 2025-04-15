@@ -1,7 +1,11 @@
 // src/modules/home/hooks/useMasterclassSection.ts
 import { useEffect, useState } from 'react';
 import { getMasterClass } from '../service/masterclass.service';
-import { Professional } from '../types';
+import {
+  Professional,
+  MasterclassAPIItem,
+  mapMasterclassToProfessionals
+} from '../types';
 
 export const useMasterclassSection = () => {
   const [data, setData] = useState<Professional[]>([]);
@@ -11,12 +15,10 @@ export const useMasterclassSection = () => {
   useEffect(() => {
     getMasterClass()
       .then((res) => {
-        const raw = res?.masterclass;
+        const raw: MasterclassAPIItem[] = res?.masterclasses || [];
 
-        // ✅ Corrige si viene como { "": null }
-        const parsed: Professional[] = Array.isArray(raw)
-          ? raw
-          : Object.values(raw || {}).filter(Boolean) as Professional[];
+        // 🔁 Mapea todos los doctores de cada masterclass
+        const parsed: Professional[] = raw.flatMap(mapMasterclassToProfessionals);
 
         setData(parsed);
       })

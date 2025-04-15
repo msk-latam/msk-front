@@ -49,25 +49,50 @@ export const mapCursoWPToCursoCard = (curso: CursoWP): CursoCardProps => ({
 });
 
 // MASTERCLASS SECTION
+export interface Doctor {
+  name: string;
+  specialty?: string;
+  image?: string; // URL de foto
+}
+
 export interface Professional {
-    nombre: string;
-    especialidad: string;
-    imagenDesktop: string;
-    imagenMobile: string;
-    perfilUrl: string;  // URL del perfil del profesional
-  }
+  nombre: string;
+  especialidad: string;
+  imagenDesktop: string;
+  imagenMobile: string;
+  perfilUrl: string;
+}
+
+export interface MasterclassAPIItem {
+  title: string;
+  description: string;
+  background_image: [string, number, number, boolean];
+  link: string;
+  doctors?: Doctor[];
+}
   
-  export interface MasterclassSection {
-    professionals: Professional[];
+export const mapMasterclassToProfessionals = (mc: MasterclassAPIItem): Professional[] => {
+  if (!mc.doctors || mc.doctors.length === 0) {
+    return [{
+      nombre: mc.title,
+      especialidad: "Cardiólogo",
+      imagenDesktop: mc.background_image?.[0] || "/images/masterclass/fallback-desktop.jpg",
+      imagenMobile: mc.background_image?.[0] || "/images/masterclass/fallback-mobile.jpg",
+      perfilUrl: mc.link || "#",
+    }];
   }
-  
-  export const mapProfessionalToCard = (professional: Professional) => ({
-    nombre: professional.nombre,
-    especialidad: professional.especialidad,
-    imagenDesktop: professional.imagenDesktop,
-    imagenMobile: professional.imagenMobile,
-    perfilUrl: professional.perfilUrl,
-  });
+
+  return mc.doctors.map((doctor) => ({
+    nombre: doctor.name,
+    especialidad: doctor.specialty?.trim() || "Cardiólogo",
+    imagenDesktop: doctor.image || mc.background_image?.[0] || "/images/masterclass/fallback-desktop.jpg",
+    imagenMobile: doctor.image || mc.background_image?.[0] || "/images/masterclass/fallback-mobile.jpg",
+    perfilUrl: mc.link || "#",
+  }));
+};
+
+
+
 
   // BLOG SECTION
 
@@ -95,13 +120,15 @@ export interface Professional {
     title: string;
     subtitle: string;
     featured_blog_articles: BlogPost[];
+    featured_blog_guides: BlogPost[];
+    featured_blog_infographies: BlogPost[];
   };
 
   // FQA SECTION
 
   export interface Faq {
     question: string;
-    answer: string;
+    answer: string; // string en HTML
   }
   
   export interface FaqData {

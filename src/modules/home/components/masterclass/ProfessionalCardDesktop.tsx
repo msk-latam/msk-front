@@ -1,5 +1,22 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+
+interface Professional {
+  nombre: string;
+  especialidad: string;
+  imagenDesktop: string;
+  perfilUrl: string;
+}
+
+interface Props {
+  pro: Professional;
+  current: number;
+  total: number;
+  onPrev: () => void;
+  onNext: () => void;
+  className?: string;
+}
 
 const ProfessionalCardDesktop = ({
   pro,
@@ -8,30 +25,33 @@ const ProfessionalCardDesktop = ({
   onPrev,
   onNext,
   className = "",
-}: any) => (
+}: Props) => (
   <div
     className={`hidden md:flex flex-col relative bg-white text-black rounded-[30px] w-[430px] h-[556px] py-5 px-6 gap-5 shadow-xl border border-gray-200 ${className}`}
   >
-<div className="text-sm text-black flex flex-row justify-between">
-  <p className="my-auto">NUESTRO EQUIPO</p>
-  <div className="flex items-center gap-4 text-black bg-white">
-    <button
-      onClick={onPrev}
-      className="p-1 rounded-full hover:bg-gray-100 transition"
-    >
-      <ChevronLeft size={18} />
-    </button>
-    <span className="text-sm font-medium">
-      {current + 1} / {total}
-    </span>
-    <button
-      onClick={onNext}
-      className="p-1 rounded-full hover:bg-gray-100 transition"
-    >
-      <ChevronRight size={18} />
-    </button>
-  </div>
-</div>
+    {/* Header con navegación */}
+    <div className="text-sm text-black flex flex-row justify-between">
+      <p className="my-auto">NUESTRO EQUIPO</p>
+      <div className="flex items-center gap-4 text-black bg-white">
+        <button
+          onClick={onPrev}
+          className="p-1 rounded-full hover:bg-gray-100 transition"
+        >
+          <ChevronLeft size={18} />
+        </button>
+        <span className="text-sm font-medium">
+          {current + 1} / {total}
+        </span>
+        <button
+          onClick={onNext}
+          className="p-1 rounded-full hover:bg-gray-100 transition"
+        >
+          <ChevronRight size={18} />
+        </button>
+      </div>
+    </div>
+
+    {/* Imagen del profesional */}
     <div className="relative w-full h-[360px] overflow-hidden rounded-xl">
       <Image
         src={pro.imagenDesktop}
@@ -40,17 +60,23 @@ const ProfessionalCardDesktop = ({
         className="object-cover"
       />
     </div>
+
+    {/* Info profesional */}
     <div className="flex flex-col gap-[6px]">
-      <p className="text-lg text-black tracking-wide uppercase">
+      <p className="font-[500] text-[18px] tracking-widest text-black uppercase">
         {pro.especialidad}
       </p>
-      <p className="text-2xl font-semibold">{pro.nombre}</p>
+      <p className="text-[24px] font-semibold text-black">{pro.nombre}</p>
     </div>
-    <div className="flex justify-between items-center text-sm text-black">
-      <span>NUESTRO EQUIPO</span>
-      <button className="bg-black text-white rounded-full py-[14px] px-6 text-base">
-        Ver perfil
-      </button>
+
+    {/* Ver perfil */}
+    <div className="flex justify-between items-center text-sm text-black mt-auto">
+      <span className="text-sm">NUESTRO EQUIPO</span>
+      <Link href={pro.perfilUrl || "#"} target="_blank" rel="noopener noreferrer">
+        <button className="bg-black text-white rounded-full py-[10px] px-6 text-base">
+          Ver perfil
+        </button>
+      </Link>
     </div>
   </div>
 );
