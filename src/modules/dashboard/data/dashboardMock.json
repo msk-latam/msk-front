@@ -1,0 +1,166 @@
+{
+	"profileImage": "https://s3-alpha-sig.figma.com/img/a38d/7e4e/0288e5729e16cb773e79a2a1cbf5b2c7?Expires=1745798400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Vr5G9lwTKZ5FNm2hpjjTHXifuq5-vFaxwhqOgHCTGNWp-vxrXx5WpqHb4mqV8xAwCfjWx9DhbuomDXQ6nNQ1s9CXuE4QYZbMPOwLFMdtDijOS0uflYZ-FFehPh5EeYG0ejkueiK3GZ9SsfgZ550LtIAeiKTJhMoNzb5cQz~ghCfF7TRNLBO-E-99Q2QICxJjmUNvng1EI2meZNahC8qNfj-PuCEr08AAZVS~xzEFcXiKwunOX~~8fL8I-zERVfJpwezffQICjonCbm5n-nHwdadZUWG581pskbzSx6FDGPJUQxoouF3EV~cfNgSC8UuGZuU~uFy0VLfGMoQwZ5wFvA__",
+	"name": "Guillermina Elizabeth Hernandez Gutierrez",
+	"specialty": "Nutrición",
+	"details": [
+		{
+			"label": "Profesión",
+			"value": "Personal médico",
+			"placeholder": "Completar profesión"
+		},
+		{
+			"label": "Email",
+			"value": "guillehg@gmail.com",
+			"placeholder": "Completar email"
+		},
+		{
+			"label": "País",
+			"value": "Argentina",
+			"placeholder": "Completar país"
+		},
+		{
+			"label": "Teléfono",
+			"value": "+54 9 2393 546753",
+			"placeholder": "Completar teléfono"
+		}
+	],
+	"currentCourse": {
+		"image": "https://images.ctfassets.net/cnu0m8re1exe/KARd6CSmh3yD656fzK3Kl/d46556b481191e9a679ed0e02388788f/doctor-and-patient.jpg?fm=jpg&fl=progressive&w=1140&h=700&fit=fill",
+		"label": "Continúa tu aprendizaje",
+		"title": "Curso superior de medicina legal y forense",
+		"progress": "25%"
+	},
+	"interests": [
+		"Administración y gestión",
+		"Cursos",
+		"Endocrinología",
+		"Medicina familiar",
+		"Medicina general",
+		"Cardiología",
+		"Nutrición",
+		"Guías profesionales",
+		"Diabetes"
+	],
+	"actionCards": [
+		{
+			"iconName": "DocumentIcon",
+			"title": "Mis facturas",
+			"description": "Encuentra y descarga tus facturas"
+		},
+		{
+			"iconName": "UserIcon",
+			"title": "Mi cuenta",
+			"description": "Gestiona todo lo relacionado con tus datos personales"
+		}
+	],
+	"icons": {
+		"edit": "EditIcon",
+		"arrowRight": "ArrowRight",
+		"plus": "PlusIcon"
+	},
+	"recommendedResources": [
+		{
+			"image": "https://s3-alpha-sig.figma.com/img/4bb9/97d6/c1871a05872504d681b598e2aedbde2d?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=puU9QllmPsAUMMCCn2mNkWOiCzE74vzgG0Wtos9S7cMlQmurZPV39ExgEeZTWiaEUNnXMYHmkpvwrNVCy13nnKEnEd6E8kaq83M-JM31fND7eczg-xGfYk64x0skVgnbnzmfAzZHef7TDudj7wz4bthTsnE1WzQJv8Dnt9dhPdcaq1OWM~S0u7H~mwcvjnAlz3jTp5kuNXNZehVqwajZoTY1yXaRo43vx4RpFiRIFRb4ZDcONdR~lCaulsvRzzk6eqPMqrXShXLQm7rFmVZbxFcj13RLReF~Kjvpb3dVfX9WqM6J49t4SfrsVDBYxwI4618CBB9LBxIGdK7tAp1eYw__",
+			"tags": ["Nutrición", "Curso"],
+			"title": "Nutrición en oncología",
+			"author": "Medical & Scientific Knowledge",
+			"buttonText": "Descubrir",
+			"buttonLink": "#"
+		},
+		{
+			"image": "https://s3-alpha-sig.figma.com/img/da32/2bb1/03647d6efd27d1c011ad96c376c27757?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=YqpcLkzMla~InJAZ~GBDBtr44zNtMZKnRqHlXrHHNqT2x~u6mebPRGisHUp832ZTRkY8ukeXNzhB2rF3noGJkYmCGZseA8aapZDkNpfFoK53p4U1uN2iGwkChrMDkz4y94It2C9IXgtIRSJB3VC8c~IaTbzPERjsl5YFBf8qxvKjKk8Mc9V7gfzfTmN-RbDfEjBQKaUCbeFIWikkQU3AyPrZLY9TgONwlYEmQ1zZG61t5S0FVl~k9bydIGAJAyQS5iQ5bcveBKk87CA~bmVXJQ~PYhhSr2XSOj4v79pLuLbXiwiYXFSQFiEKv35gnO2XlGgGk1OQ8ia~4r36hUUjwA__",
+			"tags": ["Nutrición", "Infografía"],
+			"title": "Planes de nutrición para deportistas profesionales",
+			"author": "Colegio de Médicos de la Prov. de Bs. As. Distrito III",
+			"buttonText": "Descargar gratis",
+			"buttonLink": "#"
+		},
+		{
+			"image": "https://s3-alpha-sig.figma.com/img/8600/ede5/89f508af677a9e9232ed80e34a0706e6?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=S6mwxOdi~LMjJc-Ig4M7ptasPUEGENramrxGgL-C7Q0hZ-yhQgMxEprnYk~WMXorPIBWJ6XXN0xixbnNsYsaBPZMXqNENoWL6FGgRjrulaFzM3GyicHi3zyebg4GfnO0wZG0sBbrzq9CqOOYx19y-ODMoM248tW~afCqCUK38iSbmxol7hVXHideSOp2U6n6Gy~5lJp7kRbugdXu0EcsfDex4QjagQaL2Zq8E~iduqdMx9Li4LcY8FZiclZA9RVj2FzpcSXNgSGxNWXZilY7n1r73temZBgR1p7pu-mh7qN7gjhEwmUvhR3~3NkRosjdgvPreSq9wglSugHHfzqqZw__",
+			"tags": ["Nutrición", "Blog"],
+			"title": "Cómo afecta el deporte en la nutrición",
+			"author": "Colegio de Médicos de la Prov. de Bs. As. Distrito III",
+			"buttonText": "Leer",
+			"buttonLink": "#"
+		},
+		{
+			"image": "https://s3-alpha-sig.figma.com/img/d5b4/88a7/b64de2dba85e54f668a29f2cce1491c1?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=TjfwZJY6NacEcG1y83wUIhGhA7FUYsXjelIz1PWV-0hnptZd5yw8~fq5LZ55RYQdtiQx9ajuH91esBSRjiQ1XDio-pCGtfks3PmLyYAoH4yovODZXsxsivsVxNdQQ5W3eoGZSB8ZsuHqtsspWsu70GQSYnOA0WdJvnn0uRbSsMt306DpYDyvgin2jh-Y7uhP0631qjQ5R6d03uDANrf8kdedYPPUl2ZmzWoUvcaykTtp~Cs8Ja3Zgts-~fjN5VY8vu43AcHVifs-DyRL7fDalPW8shCZRXAM7m9xuF2NDfyNnqQMyb0raOUASBFm9qQa6JJgABTyTUITrpROh8f8dA__",
+			"tags": ["Endocrinología", "Guía profesional"],
+			"title": "Nuevas herramientas para detectar problemas de tiroides",
+			"author": "Colegio de Médicos de la Prov. de Bs. As. Distrito III",
+			"buttonText": "Descargar gratis",
+			"buttonLink": "#"
+		}
+	],
+	"myCourses": [
+		{
+			"id": 1,
+			"image": "https://s3-alpha-sig.figma.com/img/da32/2bb1/03647d6efd27d1c011ad96c376c27757?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=YqpcLkzMla~InJAZ~GBDBtr44zNtMZKnRqHlXrHHNqT2x~u6mebPRGisHUp832ZTRkY8ukeXNzhB2rF3noGJkYmCGZseA8aapZDkNpfFoK53p4U1uN2iGwkChrMDkz4y94It2C9IXgtIRSJB3VC8c~IaTbzPERjsl5YFBf8qxvKjKk8Mc9V7gfzfTmN-RbDfEjBQKaUCbeFIWikkQU3AyPrZLY9TgONwlYEmQ1zZG61t5S0FVl~k9bydIGAJAyQS5iQ5bcveBKk87CA~bmVXJQ~PYhhSr2XSOj4v79pLuLbXiwiYXFSQFiEKv35gnO2XlGgGk1OQ8ia~4r36hUUjwA__",
+			"status": "25% completado",
+			"title": "Cuidados y controles de enfermería del niño y el adolescente",
+			"expiryDate": "10-04-25",
+			"statusType": "progress"
+		},
+		{
+			"id": 2,
+			"image": "https://s3-alpha-sig.figma.com/img/f234/823b/12822785fd7461503a8f149b679249b2?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=ZasCCP34YO6fGGVeTgLw4SIalIP9g60er9P9EUWHIp7EZZjiim-BafeQEmVq2-o0ytjx945gZ1KSaGIUjPI1~TRfPviSvcd9QGR49bzfeTbiLdeJO9gvbdV7Lfz22Hq~q797dEsDzqV5fzkzmtHIDjBXleTpWfGZmO0RP8GCzhCFakH6OevPR~iMgjBxDo7pyVDNfyPrpBnknseblnhirsqqvTFkKX6s8zbB-G7pw6FNu-FhAWHjkLj6~rix5MqHvRuwu00kMLacudS-8PLSjBDPCUJ6mXxMTy3mLqJ-ojry~P4-7lLJx7ibLHqL1j3w0gALQIQYDwvAKmaKh9fdAA__",
+			"status": "Inactivo",
+			"title": "Cuidados y controles de enfermería del niño y el adolescente",
+			"statusType": "inactive"
+		},
+		{
+			"id": 3,
+			"image": "https://s3-alpha-sig.figma.com/img/f9fe/1bfa/eb3f719bf963f1d924dce3a43691f883?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=XD8cZAIlCaW7IYIXEbC5ER7FvVQY87p4KMZIph15E9FIWfoEHhqri-CgDo2TVgc4SqLkfJkaJWxMxSvwCFq6YyqLdH8BspjsPHpx4Pli0qE8xiA~bAJUUdChuZO~lTCo8L5xUDysf499DIrUhUhcdwotcrO-jvmxX1UEsFuwqeIjjtFRLFaIeoUO2iAmRxxrKHjDZPUZMCm1nIc2A5cOU6Cn6bhguvYj~3mvFDCfLR5zdNSPwYkE8RCNbVxQSsJefHo1TDk4hDHmp91mD7eAB9adIlOQeXNL8QhFweMqwC98wRHfr-YSuM05aiIxju~OBlH3pWDKw2Zwx5TR7ZB0tA__",
+			"status": "Finalizado",
+			"title": "Curso superior de medicina familiar y comunitaria AMIR",
+			"qualification": 10,
+			"statusType": "finished"
+		},
+		{
+			"id": 4,
+			"image": "https://s3-alpha-sig.figma.com/img/a42f/c096/a1fec6192647b696ab20347e62c08310?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=ZWEv3P~lSCIw1wfZX33Rvz1msbMyJPjSWn85JZsVBRuE7GwjyOrp1bNI7mIMo0aYC9qWKWmXvTESzBqubFbJRbBKNwBJUDX6idmGEf2hRK1jNbJPNoIeF1zP7e4WZKR8RHobQO5KYoqQ-w9dfm8B3OSe1x1J2k8p83eCRupIxyt2N3cHr0AFAQNwAsQ3GHMvo7~PodFE5TQDiy2ygj0cEWlyAQdR3tQxF7yS8EMBCN7AUtKiHrmxFRujAlaKZmrVtKKdySuvk1q6iJeGdri7FBbZN1pMHHL7eMUiw2-mTRjfBc8TBLOe9o4-fXDyaArtwz035R8VrIyJP3hULY2Meg__",
+			"status": "Expirado",
+			"title": "Curso superior de medicina legal y forense",
+			"statusType": "expired"
+		}
+	],
+	"learningPlan": {
+		"title": "Plan de aprendizaje gratuito",
+		"description": "Capacítate a tu manera y toma el control de tu desarrollo académico",
+		"buttonText": "Ver plan de aprendizaje",
+		"buttonLink": "#"
+	},
+	"promoBanner": {
+		"backgroundImage": "https://s3-alpha-sig.figma.com/img/675f/8a9c/d90fefd336bcaa447214b9d7f7588f18?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=ni7Y8P9~uILLAzd9AITMWTTRvHhdk7lcLDSRcTPj~pMow7AvPhN~6ZO9QJ-bOV~xfAM1RcPcKAHH4rg8lymkLlSCbdMkFKim6lsx2-JXrWRpd7K1p~mgT79dbecnqsdjqPL4zhDk-dsk-g5~TTxl84-8HbMI9eKKvzR2XwvDXTdPUfqdzzthyknwMgM3JQVCuKFURFoUyVFiRc16fo9wtS2OdbhJcBcIdOzQ3PC0fpModqMiDN8tB15Vc8sanY-03wugrgWlj9gb1MjZOvUml1qmuslQF0Pc4a0GCsQfJ1ZX~VpLLzSPlC4y7pHSOZ3Ld6pf6s7XUnGrYc90dBP~6A__",
+		"availability": "Disponible del 15 al 31 de enero",
+		"title": "¿Sos profesional de la salud?",
+		"subtitle": "Lleva tu carrera al siguiente nivel.",
+		"features": [
+			"Accede a cursos diseñados por expertos para potenciar tus habilidades.",
+			"Certificación incluida: Suma valor a tu currículum y gana confianza en cada paso."
+		],
+		"discount": {
+			"percentage": "+20",
+			"description": "en tu\n inscripción"
+		},
+		"buttonText": "Reserva tu cupo ahora",
+		"buttonLink": "#"
+	},
+	"helpSection": {
+		"title": "¿Tienes alguna duda?",
+		"cards": [
+			{
+				"iconName": "QuestionIcon",
+				"title": "Visita el Centro de ayuda",
+				"description": "Encuentra artículos con información útil o envíanos tu consulta",
+				"link": "#"
+			},
+			{
+				"iconName": "ChatIcon",
+				"title": "Habla con tu asesor",
+				"description": "Recibe atención personalizada para resolver tus inquietudes",
+				"link": "#"
+			}
+		]
+	}
+}

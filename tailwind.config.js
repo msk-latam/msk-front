@@ -16,11 +16,8 @@ function customColors(cssVar) {
 }
 
 module.exports = {
-	content: [
-		'./src/**/*.{js,jsx,ts,tsx}',
-		'./app/**/*.{js,jsx,ts,tsx}',
-	  ],
-	  
+	content: ['./src/**/*.{js,jsx,ts,tsx}', './app/**/*.{js,jsx,ts,tsx}'],
+
 	darkMode: 'class', // or 'media' or 'class',
 	theme: {
 		container: {
@@ -35,10 +32,10 @@ module.exports = {
 		fontFamily: {
 			display: ['var(--font-display)', ...defaultTheme.fontFamily.sans],
 			body: ['var(--font-body)', ...defaultTheme.fontFamily.sans],
+			sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
 		},
 
 		extend: {
-			
 			colors: {
 				translucent: {
 					blue: 'rgba(173, 216, 230, 0.5)', // Light Blue
@@ -101,8 +98,8 @@ module.exports = {
 				poppins: ['Poppins', 'sans-serif'],
 				'lora-italic': ['var(--font-lora-italic)', 'sans-serif'],
 				lora: ['Lora', 'sans-serif'],
-				inter: ['Inter', 'sans-serif'],
-				raleway: ['Raleway', 'sans-serif'],
+				inter: ['var(--font-inter)', 'sans-serif'],
+				raleway: ['var(--font-raleway)', 'sans-serif'],
 			},
 		},
 	},
