@@ -45,7 +45,7 @@ const PageArchiveComponent: FC<PageArchiveProps> = ({ className = '', posts }) =
 	const [auxPosts, setAuxPosts] = useState<PostDataType[]>([]);
 	const [loadingPosts, setLoadingPosts] = useState(true);
 
-	// console.log(posts);
+	console.log(posts);
 
 	useEffect(() => {
 		setAuxPosts(posts);
@@ -172,7 +172,7 @@ const PageArchiveComponent: FC<PageArchiveProps> = ({ className = '', posts }) =
 										height='1080'
 									/>
 
-									<div className='absolute inset-0 bg-black text-white bg-opacity-30 flex flex-col items-center justify-center'>
+									<div className='absolute inset-0 flex flex-col items-center justify-center text-white bg-black bg-opacity-30'>
 										<h2 className='inline-block align-middle text-white text-[27px] sm:text-5xl font-semibold md:text-7xl'>
 											{title}
 										</h2>
@@ -185,8 +185,8 @@ const PageArchiveComponent: FC<PageArchiveProps> = ({ className = '', posts }) =
 				)}
 
 				<div className='mt-6'>{<EitnerCrum />}</div>
-				<div className=' my-10 animate-fade-down'>
-					<div className='flex space-between flex-wrap mb-8 gap-2'>
+				<div className='my-10  animate-fade-down'>
+					<div className='flex flex-wrap gap-2 mb-8 space-between'>
 						<ArchiveFilterListBox setFilter={handleCategoryChange} lists={CATEGORIES_FILTERS} />
 						{/* <Button
               onClick={() => setShowSpecialties(true)}
@@ -199,14 +199,14 @@ const PageArchiveComponent: FC<PageArchiveProps> = ({ className = '', posts }) =
 						<ArchiveFilterListBox setFilter={handleFilterChange} lists={FILTERS} className='xs:mr-auto md:ml-auto' />
 					</div>
 					{loadingPosts ? (
-						<div className='container grid grid-cols-1 md:grid-cols-3 gap-10'>
+						<div className='container grid grid-cols-1 gap-10 md:grid-cols-3'>
 							{loaders.map((loader) => {
 								return loader;
 							})}
 						</div>
 					) : (
 						<>
-							<div className='w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 animate-fade-down'>
+							<div className='grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-8 animate-fade-down'>
 								{auxPosts.length ? (
 									<>
 										{currentItems.map((post, index) => (
