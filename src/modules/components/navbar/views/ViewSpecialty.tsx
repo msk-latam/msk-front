@@ -1,6 +1,6 @@
 // components/navbar/views/ViewSpecialty.tsx
 import React, { useState } from "react";
-import { ChevronDown, ChevronUp, ChevronRight, ChevronLeft } from "react-feather";
+import { ChevronDown, ChevronUp, ChevronRight, ChevronLeft, ArrowLeft } from "react-feather";
 import specialties from "../data/specialties";
 
 interface Props {
@@ -18,9 +18,9 @@ const ViewSpecialty: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
   // Mobile mode remains unchanged
   return (
     <div className="bg-white rounded-t-3xl mt-4 h-full overflow-auto">
-      <div className="flex items-center px-6 py-4 sticky top-0 bg-white">
-        <button className="mr-4 text-gray-800" onClick={() => navigateTo("discover")}>
-          <ChevronLeft size={24} />
+      <div className="flex flex-row justify-center items-center px-6 py-8">
+        <button className="absolute left-5 top-10 rounded-full border border-black p-2 text-gray-800" onClick={() => navigateTo("main")}>
+          <ArrowLeft size={24} />
         </button>
         <h2 className="text-xl font-medium text-gray-800">Especialidades</h2>
       </div>

@@ -57,7 +57,7 @@ const DropdownContent: React.FC<Props> = ({
     const bgClass = currentView === "institutions" ? "bg-[#1a1a1a]" : "bg-white";
   
     return (
-      <div className={`relative p-5 ${bgClass} shadow-lg z-50 max-w-5xl mx-auto rounded-b-3xl`}>
+      <div className={`relative ${bgClass} shadow-lg z-50 mx-auto p-5 rounded-b-3xl`}>
         {getContent()}
       </div>
     );

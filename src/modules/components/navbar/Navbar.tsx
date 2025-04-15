@@ -146,30 +146,6 @@ const Navbar = () => {
                   </button>
                 </div>
 
-                {/* Búsqueda en desktop */}
-                {/* <div className="flex-grow max-w-md mx-4">
-                  <div className="rounded-full border border-gray-300 overflow-hidden">
-                    <div className="relative flex items-center">
-                      <input
-                        type="search"
-                        placeholder="¿Qué tema te interesa?"
-                        className={`bg-transparent w-full text-sm py-3 border-transparent focus:border-transparent  focus:ring-0 focus:ring-transparent  focus:outline-none ${
-                          isMainView ||
-                          isDiscoverView ||
-                          isSpecialtyView ||
-                          isSpecialtyDetailView
-                            ? ""
-                            : isInstitutionsView
-                            ? "text-[#838790] border-[#989ca4]"
-                            : ""
-                        }`}
-                      />
-                      <button className="absolute right-2 bg-[#8500a0] p-3 rounded-full">
-                        <Search className="text-white w-3 h-3" />
-                      </button>
-                    </div>
-                  </div>
-                </div> */}
 
                 <div className="flex-grow max-w-md mx-4">
                   <SearchBar
@@ -202,10 +178,8 @@ const Navbar = () => {
                   </Link>
                 </div>
               </nav>
-
-              {/* Dropdown desktop debajo del navbar */}
               {isDiscoverOpen && (
-                <div className="w-full max-w-6xl px-16 z-50 mx-auto">
+                <div className="w-full max-w-6xl pl-28 z-50 mx-auto">
                   <DropdownContent
                     currentView={currentView}
                     selectedCategory={selectedCategory}
@@ -216,6 +190,8 @@ const Navbar = () => {
                   />
                 </div>
               )}
+
+              {/* Dropdown desktop debajo del navbar */}
             </div>
           </div>
         </section>

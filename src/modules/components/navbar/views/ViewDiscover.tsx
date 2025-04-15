@@ -132,7 +132,7 @@ const ViewDiscover: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
 
   if (!isMobile) {
     return (
-      <div className="grid grid-cols-3 max-h-[80vh] overflow-auto mr-10">
+      <div className="grid grid-cols-3 max-h-[80vh] overflow-auto">
         {/* Menú lateral */}
         <div className="col-span-1 bg-gray-100 rounded-2xl">
           <div className="flex flex-col gap-2">

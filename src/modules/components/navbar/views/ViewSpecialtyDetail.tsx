@@ -142,8 +142,8 @@ const ViewSpecialtyDetail: React.FC<Props> = ({ selectedCategory, navigateTo, is
   // Versión móvil - sin cambios
   return (
     <div className="bg-white rounded-t-3xl mt-4 h-full overflow-auto">
-      <div className="flex items-center px-6 py-4 sticky top-0 bg-white">
-        <button className="mr-4 text-gray-800" onClick={() => navigateTo("specialty")}>
+      <div className="flex flex-row justify-center items-center px-6 py-8">
+        <button className="absolute left-5 top-10 rounded-full border border-black p-2 text-gray-800" onClick={() => navigateTo("specialty")}>
           <ArrowLeft size={24} />
         </button>
         <h2 className="text-xl font-medium text-gray-800">{selectedCategory}</h2>
