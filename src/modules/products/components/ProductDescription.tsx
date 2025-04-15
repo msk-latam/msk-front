@@ -25,11 +25,11 @@ export default function ProductDescription({ description = '' }: ProductDescript
     : description;
 
   return (
-    <section className="bg-white rounded-2xl md:p-10">
-      <h1 className="text-2xl font-semibold mb-4 text-[#1A1A1A]">Qué es la medicina de urgencias</h1>
+    <section className="bg-white rounded-2xl md:px-9 md:py-16">
+      <h1 className="text-2xl font-semibold mb-6 text-[#1A1A1A]">Qué es la medicina de urgencias</h1>
 
       {/* Texto con gradiente solo en el final truncado */}
-      <article className="text-[#1A1A1A] text-sm leading-relaxed font-inter font-normal text-[16px] leading-[161%] relative">
+      <article className="text-[#1A1A1A] text-sm font-inter font-normal text-[16px] leading-[161%] relative">
         <p className="m-0">
           {displayDescription}
         </p>
