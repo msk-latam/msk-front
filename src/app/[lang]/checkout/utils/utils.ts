@@ -261,6 +261,7 @@ export const updateContractCRM = async (
 	transactionAmountWithDescount: any,
 	paymentType: 'rebill' | 'mercadopago' | 'stripe',
 	discount: any,
+	cuponCode?: any,
 ) => {
 	const paymentConfig = paymentOptions[paymentType] || paymentOptions.mercadopago;
 	try {
@@ -271,6 +272,7 @@ export const updateContractCRM = async (
 			mp_subscription_id: subscription_id,
 			Monto_de_cada_pago_restantes: parseFloat((transactionAmountWithDescount / paymentConfig.totalPayments).toFixed(2)),
 			discount: discount,
+			Cup_n_aplicado: cuponCode,
 		};
 		const response = await fetch(`${ENDPOINT_CRM}/api/zoho/sales_order/update_contract/${contract_id}`, {
 			method: 'PUT',
