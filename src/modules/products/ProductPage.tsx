@@ -27,7 +27,7 @@ export default function ProductPage() {
 
       {/* CONTENIDO PRINCIPAL */}
       <main className="bg-gray-50">
-        <div className="flex flex-col-reverse lg:flex-row gap-8 px-4 md:px-10 lg:px-20 py-12 max-w-screen-xl mx-auto">
+        <div className="flex flex-col-reverse lg:flex-row gap-8 px-4 md:px-10 lg:px-20 py-12 overflow-visible max-w-[1400px] mx-auto">
           {/* Columna izquierda */}
           <div className="w-full lg:w-2/3 space-y-12">
             <div className="w-full bg-white rounded-[16px] mb-40 relative z-10 -mt-20">
