@@ -18,15 +18,9 @@ const raleway = Raleway({
 	preload: true,
 });
 
-<<<<<<< HEAD
-export const metadata: Metadata = {
-	title: 'MSK',
-	description: 'Masterclass médica y formación profesional.',
-=======
 export const metadata = {
 	title: 'MSK',
 	description: 'Cursos de medicina para toda latinoamerica',
->>>>>>> d5f94bb402d5f1c68dbf452a16bef3ab14ae3128
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
