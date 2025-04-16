@@ -38,14 +38,14 @@ const MskNewsSection = () => {
         <h2 className="text-xl md:text-2xl font-semibold mb-8">¿Qué dicen de MSK?</h2>
 
         {/* Desktop layout */}
-        <div className="hidden md:grid grid-cols-3 gap-6">
+        <div className="hidden md:grid grid-cols-3 gap-6 ">
           {mentions.map((item, index) => (
             <a
               key={index}
               href={item.link.url}
               target={item.link.target}
               rel="noopener noreferrer"
-              className="bg-white rounded-2xl p-6 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow"
+              className="bg-[#F7F9FF] rounded-2xl p-6 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow"
             >
               <div>
                 <h3 className="text-[32px] font-[700] leading-[140%] tracking-[0%] mb-4 font-raleway">{item.title}</h3>

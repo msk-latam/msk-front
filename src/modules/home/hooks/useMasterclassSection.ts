@@ -9,6 +9,7 @@ import {
 
 export const useMasterclassSection = () => {
   const [data, setData] = useState<Professional[]>([]);
+  const [link, setLink] = useState<string | null>(null); // NUEVO
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -17,14 +18,18 @@ export const useMasterclassSection = () => {
       .then((res) => {
         const raw: MasterclassAPIItem[] = res?.masterclasses || [];
 
-        // 🔁 Mapea todos los doctores de cada masterclass
         const parsed: Professional[] = raw.flatMap(mapMasterclassToProfessionals);
-
         setData(parsed);
+
+        // Tomamos el link de la primera masterclass
+        if (raw.length > 0 && raw[0].link) {
+          setLink(raw[0].link);
+        }
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, []);
 
-  return { data, loading, error };
+  return { data, link, loading, error };
 };
+

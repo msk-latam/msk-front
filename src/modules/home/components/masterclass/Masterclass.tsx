@@ -11,7 +11,7 @@ import { Professional } from "@/modules/home/types";
 import { professionals as mockProfessionals } from "./professionals";
 
 const Masterclass = () => {
-  const { data: fetchedProfessionals, loading, error } = useMasterclassSection();
+  const { data: fetchedProfessionals, link: masterclassLink, loading, error } = useMasterclassSection();
   const usingMock = !fetchedProfessionals?.length;
   const professionals: Professional[] = usingMock ? mockProfessionals : fetchedProfessionals;
 
@@ -42,7 +42,7 @@ const Masterclass = () => {
   return (
     <section
       aria-labelledby="masterclass-heading"
-      className="relative -translate-y-4 w-full min-h-screen flex items-center justify-center text-white z-5 font-raleway"
+      className="relative -translate-y-0 w-full min-h-screen flex items-center justify-center text-white z-5 font-raleway"
     >
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-[1] md:hidden" />
       <Image
@@ -71,25 +71,25 @@ const Masterclass = () => {
             </div>
             <nav aria-label="Inscripción a Masterclass">
               <Link
-                href={currentProfessional?.perfilUrl || "#"}
+                href={masterclassLink || "#"}
                 className="bg-white  text-black px-6 py-3 rounded-full font-semibold text-sm md:text-base flex items-center gap-2 w-fit mx-auto md:mx-0 hover:scale-105 transition"
               >
                 Inscribite ahora
                 <svg
-                width="24"
-                height="22"
-                viewBox="0 0 25 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M5.21582 12H19.2158M19.2158 12L12.2158 5M19.2158 12L12.2158 19"
-                  stroke="black"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+                  width="24"
+                  height="22"
+                  viewBox="0 0 25 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5.21582 12H19.2158M19.2158 12L12.2158 5M19.2158 12L12.2158 19"
+                    stroke="black"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </Link>
             </nav>
           </header>

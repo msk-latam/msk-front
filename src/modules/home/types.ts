@@ -55,6 +55,7 @@ export interface Doctor {
   name: string;
   specialty?: string;
   image?: string; // URL de foto
+  link: string; // ✅ Agregar esto
 }
 
 export interface Professional {
@@ -62,7 +63,7 @@ export interface Professional {
   especialidad: string;
   imagenDesktop: string;
   imagenMobile: string;
-  perfilUrl: string;
+  perfilUrl: string; // 👈 esto es clave
 }
 
 export interface MasterclassAPIItem {
@@ -89,9 +90,11 @@ export const mapMasterclassToProfessionals = (mc: MasterclassAPIItem): Professio
     especialidad: doctor.specialty?.trim() || "Cardiólogo",
     imagenDesktop: doctor.image || mc.background_image?.[0] || "/images/masterclass/fallback-desktop.jpg",
     imagenMobile: doctor.image || mc.background_image?.[0] || "/images/masterclass/fallback-mobile.jpg",
-    perfilUrl: mc.link || "#",
+    perfilUrl: doctor.link  || "#", // ✅ usa el link del profesional, y si no, el de la masterclass como backup
   }));
 };
+
+
 
 
 

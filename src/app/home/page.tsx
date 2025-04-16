@@ -21,7 +21,7 @@ export default function Home() {
 
 
   return (
-    <main className={` mx-auto bg-white text-neutral-900 transition-all duration-500 ease-in-out ${showPopUp ? 'md:pt-12' : 'md:pt-0'}`}>
+    <main className={` mx-auto bg-gray-100 text-neutral-900 transition-all duration-500 ease-in-out ${showPopUp ? 'md:pt-12' : 'md:pt-0'}`}>
       {showPopUp && <PopUp onClose={() => setShowPopUp(false)} />}
       <Navbar />
       <Hero />

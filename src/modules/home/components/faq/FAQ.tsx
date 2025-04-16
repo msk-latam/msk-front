@@ -16,7 +16,7 @@ const FaqSection = () => {
 
   if (loading) {
     return (
-      <section className="w-full bg-gray-100 font-raleway">
+      <section className="w-full bg-gray-100 font-inter text-[#1A1A1A]">
         <div className="rounded-[40px] max-w-7xl mx-auto px-6 md:px-12 py-12">
           <h2 className="text-xl md:text-2xl font-semibold mb-5">Preguntas frecuentes</h2>
           <p className="text-sm text-neutral-600">Cargando preguntas frecuentes...</p>
@@ -27,7 +27,7 @@ const FaqSection = () => {
 
   if (error || !faqItems.length) {
     return (
-      <section className="w-full bg-gray-100 font-raleway">
+      <section className="w-full bg-gray-100 font-inter text-[#1A1A1A]">
         <div className="rounded-[40px] max-w-7xl mx-auto px-6 md:px-12 py-12">
           <h2 className="text-xl md:text-2xl font-semibold mb-5">Preguntas frecuentes</h2>
           <p className="text-sm text-neutral-600">No se pudieron cargar las preguntas frecuentes.</p>
@@ -37,22 +37,22 @@ const FaqSection = () => {
   }
 
   return (
-    <section className="w-full bg-gray-100 font-raleway">
+    <section className="w-full bg-gray-100 font-inter text-[#1A1A1A]">
       <div className="rounded-[40px] max-w-7xl mx-auto px-6 md:px-12 pb-12">
         <h2 className="text-xl md:text-2xl font-semibold mb-5 text-left">Preguntas frecuentes</h2>
 
-        <div className="divide-y divide-neutral-200">
+        <div className="divide-y divide-[#C4C7CD]">
           {faqItems.map((item, index) => (
             <div key={index}>
               <button
                 onClick={() => toggle(index)}
                 className="w-full flex justify-between items-center py-6 text-left"
               >
-                <span className="text-base font-medium">{item.question}</span>
+                <span className="md:text-[24px] text-[14px] font-medium">{item.question}</span>
                 {openIndex === index ? (
-                  <ArrowUp className="h-5 w-5 text-gray-500" />
+                  <ArrowUp className="md:h-5 md:w-5 h-4 w-4 text-black" />
                 ) : (
-                  <ArrowDown className="h-5 w-5 text-gray-500" />
+                  <ArrowDown className="md:h-5 md:w-5 h-4 w-4 text-black" />
                 )}
               </button>
 
@@ -68,11 +68,10 @@ const FaqSection = () => {
                  className="overflow-hidden pb-6 pr-2"
                >
                  <div
-                   className="text-sm text-neutral-600"
+                   className="md:text-[20px] text-[14px] text-[#1A1A1A]"
                    dangerouslySetInnerHTML={{ __html: item.answer }}
                  />
                </motion.div>
-               
                 )}
               </AnimatePresence>
             </div>

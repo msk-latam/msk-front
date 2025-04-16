@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-interface Professional {
+interface Doctor {
   nombre: string;
   especialidad: string;
   imagenDesktop: string;
@@ -10,7 +10,7 @@ interface Professional {
 }
 
 interface Props {
-  pro: Professional;
+  pro: Doctor;
   current: number;
   total: number;
   onPrev: () => void;

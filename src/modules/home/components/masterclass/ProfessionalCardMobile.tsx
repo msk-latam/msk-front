@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { Professional } from '@/modules/home/types';
 
-const ProfessionalCardMobile = ({ pro }: any) => (
-  <Link href={pro.perfilUrl || "#"}>
-    <div className="w-[324px] h-[581px] flex-shrink-0 relative overflow-hidden rounded-2xl mr-4 mb-11 cursor-pointer">
+const ProfessionalCardMobile = ({ pro }: { pro: Professional }) => (
+  <Link href={pro.perfilUrl || "#"} target="_blank" rel="noopener noreferrer">
+    <div className="w-[324px] h-[581px] flex-shrink-0 relative overflow-hidden rounded-2xl mr-4 mb-11 cursor-pointer hover:scale-105 transition-transform">
       <Image src={pro.imagenMobile} alt={pro.nombre} fill className="object-cover" />
       <div className="absolute inset-0 bg-black/30" />
 
@@ -21,8 +22,9 @@ const ProfessionalCardMobile = ({ pro }: any) => (
 
         <div className="h-[7px] w-8 rounded-full bg-white my-2" />
 
+        {/* Podés poner acá una frase personalizada si la tenés para cada pro */}
         <h1 className="text-[18px] font-[700] text-center w-[70%]">
-          El arte de escuchar los latidos
+          Ver perfil profesional
         </h1>
         <h1 className="text-[14px] font-[lora] mt-2">1 hora 7 minutos</h1>
       </div>

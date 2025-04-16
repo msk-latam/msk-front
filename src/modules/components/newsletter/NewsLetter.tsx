@@ -14,25 +14,22 @@ const Newsletter = () => {
 	};
 
 	return (
-		<div className='w-full px-4 md:px-20 flex flex-col items-center z-[5] justify-center bg-[#1A1A1A] text-white'>
-			{/* Newsletter superior */}
-			<div className='bg-[#35383E] w-full max-w-[343px] md:max-w-screen-xl md:-mt-14 -mt-8 p-6 md:py-6 md:px-10 md:rounded-[38px] rounded-[38px] z-[1] flex flex-col md:flex-row  justify-between gap-4 md:gap-8 mx-auto'>
+		<div className='w-full px-4 md:px-12 flex flex-col items-center z-[5] justify-center bg-[#1A1A1A] text-white'>
+			<div className='bg-[#35383E] w-full max-w-7xl -mt-8 md:-mt-14 p-6 md:py-6 md:px-10 md:rounded-[38px] rounded-[38px] z-[1] flex flex-col md:flex-row justify-between gap-4 md:gap-8 mx-auto'>
 				{/* Título */}
 				<div className='md:w-[200px] shrink-0'>
-					<p className='text-white text-left md:text-[18px] text-[22px] font-raleway font-semibold text-base  '>
+					<p className='text-white text-left md:text-[18px] text-[22px] font-raleway font-bold md:translate-y-[5px]'>
 						Nuestro <br className='hidden md:block' /> newsletter
 					</p>
 				</div>
 
-				{/* Separador */}
 				<div className='hidden md:block w-[1px] h-[70px] bg-[#5A5F67] -ml-8' />
 
 				{/* Descripción */}
-				<div className='text-[16px] md:text-[18px] text-white text-left md:flex-1 font-inter'>
+				<div className='text-[16px] md:text-[18px] text-white text-left md:flex-1 font-inter font-medium leading-snug shadow-sm md:translate-y-[10px]'>
 					Descuentos exclusivos y becas <br className='hidden md:block' /> completas solo con tu suscripción
 				</div>
 
-				{/* Separador */}
 				<div className='hidden md:block w-[1px] h-[70px] bg-[#5A5F67] ml-6' />
 
 				{/* Formulario */}
@@ -40,7 +37,6 @@ const Newsletter = () => {
 					onSubmit={handleSubmit}
 					className='w-full md:max-w-[450px] flex flex-col md:flex-row items-center gap-4 md:gap-0 md:bg-white md:rounded-full md:pl-6 md:pr-2 md:h-[64px]'
 				>
-					{/* INPUT */}
 					<input
 						type='email'
 						name='email'
@@ -50,8 +46,6 @@ const Newsletter = () => {
 						className='w-full md:w-[478px] h-[52px] md:h-[64px] px-4 py-2 text-black rounded-full focus:outline-none border md:border-0 font-inter md:text-sm text-[16px]'
 						required
 					/>
-
-					{/* BOTÓN */}
 					<button
 						type='submit'
 						className='w-full md:w-[160px] h-[52px] bg-[#9200ad] hover:bg-[#7A00B6] text-white px-7 py-3.5 rounded-[38px] flex items-center justify-center gap-2 transition-colors md:ml-2'
@@ -72,7 +66,6 @@ const Newsletter = () => {
 				</form>
 			</div>
 
-			{/* Secciones con links */}
 			<NewsletterLinks />
 		</div>
 	);

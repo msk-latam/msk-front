@@ -16,15 +16,17 @@ export async function GET() {
         ? item.background_image[0].replace('https://es.wp.msklatam.com', 'https://cms1.msklatam.com')
         : item.background_image?.[0];
 
-      const fixedDoctors = Array.isArray(item.doctors)
-        ? item.doctors.map((doc: any) => ({
-            name: doc?.name || "Nombre no disponible",
-            specialty: doc?.specialty || "",
-            image: typeof doc?.image === "string"
-              ? doc.image.replace('https://es.wp.msklatam.com', 'https://cms1.msklatam.com')
-              : null,
-          }))
-        : [];
+        const fixedDoctors = Array.isArray(item.doctors)
+  ? item.doctors.map((doc: any) => ({
+      name: doc?.name || "Nombre no disponible",
+      specialty: doc?.specialty || "",
+      image: typeof doc?.image === "string"
+        ? doc.image.replace('https://es.wp.msklatam.com', 'https://cms1.msklatam.com')
+        : null,
+      link: doc?.link || "#", // 👈 este campo es clave para que funcione el botón Ver perfil
+    }))
+  : [];
+      
 
       return {
         ...item,
