@@ -7,6 +7,285 @@
 	"total_products": 262,
 	"posts": [
 		{
+			"id": 150769,
+			"title": "Enfermería: MSK, a la vanguardia en capacitación online",
+			"slug": "msk-vanguardia-en-capacitacion-de-enfermeria",
+			"permalink": "https://wp.msklatam.com/nota/enfermeria/msk-vanguardia-en-capacitacion-de-enfermeria/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2019/05/Foto-msk-vanguardia-en-capacitacion-de-enfermeria-scaled-e1744643318525.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2019/05/Foto-msk-vanguardia-en-capacitacion-de-enfermeria-scaled-e1744643318525.jpg",
+				"1000",
+				"665",
+				""
+			],
+			"excerpt": "La capacitación continua en enfermería es clave para mejorar la calidad de atención, adaptarse a nuevos desafíos clínicos y fortalecer el rol profesional. En este artículo, explora cómo MSK se posiciona a la vanguardia en el aprendizaje online, con cursos y recursos especializados para avanzar en tu trayectoria desde cualquier lugar de Latinoamérica.",
+			"date": "Abril 15, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 339497,
+					"title": "Terapias que están cambiando el tratamiento de la hemofilia",
+					"slug": "terapias-que-cambian-el-tratamiento-de-la-hemofilia",
+					"link": "https://wp.msklatam.com/nota/medicina/terapias-que-cambian-el-tratamiento-de-la-hemofilia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-terapias-que-cambian-el-tratamiento-de-la-hemofilia-scaled-e1744642655103.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 339351,
+					"title": "CRISPR: la herramienta que está reescribiendo la medicina",
+					"slug": "crispr-esta-reescribiendo-la-medicina",
+					"link": "https://wp.msklatam.com/nota/medicina/crispr-esta-reescribiendo-la-medicina/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-crispr-esta-reescribiendo-la-medicina-scaled-e1744393930660.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 339004,
+					"title": "Certificados digitales MSK para una profesión en evolución",
+					"slug": "certificados-digitales-msk-con-blockchain",
+					"link": "https://wp.msklatam.com/nota/e-learning/certificados-digitales-msk-con-blockchain/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-certificados-digitales-msk-con-blockchain-e1744295864869.png",
+					"category": "Actualidad"
+				},
+				{
+					"id": 338891,
+					"title": "El valor de la investigación en la práctica médica",
+					"slug": "valor-de-la-investigacion-en-la-practica-medica",
+					"link": "https://wp.msklatam.com/nota/medicina/valor-de-la-investigacion-en-la-practica-medica/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-valor-de-la-investigacion-en-la-practica-medica-scaled-e1744147518586.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 338757,
+					"title": "Cómo mejorar los sistemas de salud: un panorama actual",
+					"slug": "actualidad-de-los-sistemas-de-salud-en-latinoamerica",
+					"link": "https://wp.msklatam.com/nota/medicina/actualidad-de-los-sistemas-de-salud-en-latinoamerica/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/shutterstock_1186830211-scaled-e1744041787582.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "https://msklatam.com/"
+				},
+				{
+					"fuente": "Ríos, Norma & Mosca, Ana. (2021). Educación continua en el contexto actual, enfoque desde la enfermería. Salud, Ciencia y Tecnología. 1. 29. 10.56294/saludcyt202129. "
+				},
+				{
+					"fuente": "https://atenaeditora.com.br/catalogo/dowload-post/92468"
+				}
+			],
+			"categories": [
+				{
+					"id": 1611,
+					"primary": true,
+					"name": "Enfermería",
+					"slug": "enfermeria",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/enfermeria/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "1611",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1341,
+				"filter": "raw"
+			},
+			"reading_time": "8",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
+			"id": 339497,
+			"title": "Terapias que están cambiando el tratamiento de la hemofilia",
+			"slug": "terapias-que-cambian-el-tratamiento-de-la-hemofilia",
+			"permalink": "https://wp.msklatam.com/nota/medicina/terapias-que-cambian-el-tratamiento-de-la-hemofilia/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-terapias-que-cambian-el-tratamiento-de-la-hemofilia-scaled-e1744642655103.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-terapias-que-cambian-el-tratamiento-de-la-hemofilia-scaled-e1744642655103.jpg",
+				"1000",
+				"652",
+				""
+			],
+			"excerpt": "Nuevos avances como la terapia génica, los anticuerpos biespecíficos y la bioingeniería están transformando el abordaje clínico de la hemofilia. En este artículo, encontrarás las opciones terapéuticas más recientes y prometedoras, sus beneficios clínicos y el impacto que pueden tener en la calidad de vida.",
+			"date": "Abril 15, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 150769,
+					"title": "Enfermería: MSK, a la vanguardia en capacitación online",
+					"slug": "msk-vanguardia-en-capacitacion-de-enfermeria",
+					"link": "https://wp.msklatam.com/nota/enfermeria/msk-vanguardia-en-capacitacion-de-enfermeria/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2019/05/Foto-msk-vanguardia-en-capacitacion-de-enfermeria-scaled-e1744643318525.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 339351,
+					"title": "CRISPR: la herramienta que está reescribiendo la medicina",
+					"slug": "crispr-esta-reescribiendo-la-medicina",
+					"link": "https://wp.msklatam.com/nota/medicina/crispr-esta-reescribiendo-la-medicina/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-crispr-esta-reescribiendo-la-medicina-scaled-e1744393930660.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 339004,
+					"title": "Certificados digitales MSK para una profesión en evolución",
+					"slug": "certificados-digitales-msk-con-blockchain",
+					"link": "https://wp.msklatam.com/nota/e-learning/certificados-digitales-msk-con-blockchain/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-certificados-digitales-msk-con-blockchain-e1744295864869.png",
+					"category": "Actualidad"
+				},
+				{
+					"id": 338891,
+					"title": "El valor de la investigación en la práctica médica",
+					"slug": "valor-de-la-investigacion-en-la-practica-medica",
+					"link": "https://wp.msklatam.com/nota/medicina/valor-de-la-investigacion-en-la-practica-medica/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-valor-de-la-investigacion-en-la-practica-medica-scaled-e1744147518586.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 338757,
+					"title": "Cómo mejorar los sistemas de salud: un panorama actual",
+					"slug": "actualidad-de-los-sistemas-de-salud-en-latinoamerica",
+					"link": "https://wp.msklatam.com/nota/medicina/actualidad-de-los-sistemas-de-salud-en-latinoamerica/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/shutterstock_1186830211-scaled-e1744041787582.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "https://www.sobi.com/spain/es/actualidad/notas-prensa/altuvoct-disponible-espana-tratamiento-hemofilia"
+				},
+				{
+					"fuente": "https://espanol.medscape.com/verarticulo/5912772"
+				},
+				{
+					"fuente": "https://www1.wfh.org/publications/files/pdf-2388.pdf"
+				},
+				{
+					"fuente": "https://www.cslbehring.es/noticias/2024-0926-hemgenix-en-espana"
+				},
+				{
+					"fuente": "https://www1.wfh.org/publications/files/pdf-2384.pdf"
+				},
+				{
+					"fuente": "Lenting PJ, Fong S. Gene therapy for hemophilia. Blood Adv. 2024 Dec 10;8(23):6081. doi: 10.1182/bloodadvances.2024013864. PMID: 39378582; PMCID: PMC11652754."
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1211,
+				"name": "Hematología",
+				"slug": "hematologia",
+				"term_group": 0,
+				"term_taxonomy_id": 1211,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 97,
+				"filter": "raw"
+			},
+			"reading_time": "6",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
 			"id": 339351,
 			"title": "CRISPR: la herramienta que está reescribiendo la medicina",
 			"slug": "crispr-esta-reescribiendo-la-medicina",
