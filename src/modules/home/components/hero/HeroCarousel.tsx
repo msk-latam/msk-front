@@ -15,7 +15,7 @@ const HeroCarousel = ({ slides }: HeroCarouselProps) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 6000);
+    }, 8000);
     return () => clearInterval(interval);
   }, [slides.length]);
 

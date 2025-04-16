@@ -15,7 +15,7 @@ const HeroHighlight = () => {
   const pauseTimeout = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const ANIMATION_DURATION = 4000;
+  const ANIMATION_DURATION = 8000;
   const PAUSE_AFTER_INTERACTION = 8000;
 
   useEffect(() => {

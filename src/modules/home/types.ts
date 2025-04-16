@@ -164,7 +164,29 @@ export interface Institution {
   title: string;
   slug: string;
   image: string;
-}  
+}
+
+// Offers SECTION
+
+export interface OfferCTA {
+  title: string;
+  url: string;
+  target: string;
+}
+
+export interface OfferData {
+  background_image: string[];
+  pre_text: string;
+  title: string;
+  content: string;
+  pre_cta_content: string;
+  cta: {
+    title: string;
+    url: string;
+  };
+}
+
+
   
   
   
