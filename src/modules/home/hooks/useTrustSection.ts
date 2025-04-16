@@ -1,3 +1,4 @@
+
 // /modules/home/hooks/useTrustSection.ts
 import { useEffect, useState } from 'react';
 import { fetchTrustSectionData } from '../service/trustsection.service'; // Importar el servicio

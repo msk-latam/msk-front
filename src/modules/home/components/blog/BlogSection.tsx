@@ -168,8 +168,8 @@ const CategoryTabs: React.FC<CategoryTabsProps> = ({ categories, activeTab, setA
           key={cat}
           className={`px-4 py-2 text-sm rounded-full ${
             isActive 
-              ? 'bg-gray-100 border border-gray-200 font-medium text-black' 
-              : 'text-gray-700 hover:bg-gray-50'
+              ? 'bg-gray-100 border border-gray-200 font-medium text-black hover:text-[#6E737C]' 
+              : 'text-gray-700 hover:bg-gray-50 hover:text-[#6E737C]'
           }`}
           onClick={() => setActiveTab(cat)}
           aria-current={isActive ? 'page' : undefined}
@@ -185,7 +185,7 @@ const BlogButton: React.FC<BlogButtonProps> = ({ className = '' }) => (
   <div className={className}>
     <Link href="/blog">
       <button 
-        className="bg-black text-white text-sm px-4 py-2 rounded-full flex items-center space-x-1 hover:bg-gray-900 transition"
+        className="bg-black text-white text-sm px-4 py-2 rounded-full flex items-center space-x-1 hover:bg-gray-900 transition hover:scale-105 transition text-sm w-full md:w-auto"
         aria-label="Ir al blog principal"
       >
         <span>Ir al blog</span>

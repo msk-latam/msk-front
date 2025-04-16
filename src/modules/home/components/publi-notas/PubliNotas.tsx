@@ -62,7 +62,7 @@ const MskNewsSection = () => {
                   </div>
                   <span>{new Date(item.date).toLocaleDateString('es-AR', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                 </div>
-                <button className="px-4 py-2 rounded-full text-sm font-medium bg-black text-white hover:bg-gray-800">{item.link.title}</button>
+                <button className="bg-[#1A1A1A] text-white px-6 py-3 rounded-full md:rounded-[38px] font-inter font-medium shadow-md hover:scale-105 transition text-sm w-full md:w-auto">{item.link.title}</button>
               </div>
             </a>
           ))}

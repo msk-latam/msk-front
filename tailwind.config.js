@@ -21,10 +21,11 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				inter: ['Inter', 'sans-serif'],
-				raleway: ['Raleway', 'sans-serif'],
-			},
-		},
+				inter: ['var(--font-inter)'],
+				raleway: ['var(--font-raleway)'],
+			}
+		}
+		
 	},
 
 	darkMode: 'class', // or 'media' or 'class',

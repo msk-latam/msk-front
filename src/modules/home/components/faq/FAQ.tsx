@@ -58,19 +58,21 @@ const FaqSection = () => {
 
               <AnimatePresence initial={false}>
                 {openIndex === index && (
-                  <motion.div
-                    key="content"
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden pb-6 pr-2"
-                  >
-                    <div
-                      className="text-sm text-neutral-600"
-                      dangerouslySetInnerHTML={{ __html: item.answer }}
-                    />
-                  </motion.div>
+                 <motion.div
+                 key="content"
+                 layout
+                 initial={{ opacity: 0, y: -10 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 exit={{ opacity: 0, y: -10 }}
+                 transition={{ duration: 0.20, ease: 'easeIn' }}
+                 className="overflow-hidden pb-6 pr-2"
+               >
+                 <div
+                   className="text-sm text-neutral-600"
+                   dangerouslySetInnerHTML={{ __html: item.answer }}
+                 />
+               </motion.div>
+               
                 )}
               </AnimatePresence>
             </div>

@@ -8,13 +8,8 @@ import { useSwipeable } from 'react-swipeable';
 const TrustSection = () => {
   const { data, loading, error } = useTrustSection();
 
-  if (loading) {
-    return <div>Loading Trust Section...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
+  if (loading) return <div>Loading Trust Section...</div>;
+  if (error) return <div>{error}</div>;
 
   const { title, subtitle, figures, opinions } = data!;
 
@@ -58,12 +53,15 @@ const TrustSection = () => {
                     {testimonial.name}
                   </p>
                 </div>
-                <p className="text-sm text-neutral-700 mb-4">
-                  {testimonial.opinion}
-                </p>
-                <p className="text-right text-sm font-medium mt-auto">
-                  {testimonial.rating}
-                </p>
+
+                <div className="flex flex-col justify-between flex-grow">
+                  <p className="text-sm text-neutral-700 mb-4 min-h-[96px] leading-snug">
+                    {testimonial.opinion}
+                  </p>
+                  <p className="text-right text-sm font-medium flex items-center justify-end gap-1 text-black">
+                    5/5 <span className="text-black text-base">★</span>
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -75,7 +73,7 @@ const TrustSection = () => {
   return (
     <div className="relative w-full bg-gray-100 pt-24 pb-60 h-[1200px] md:h-[750px] z-9">
       <section className="relative bg-white rounded-[38px] md:p-[72px] md:px-[104px] -mt-40 mb-16 z-9 py-10 pl-5 md:overflow-visible max-w-[1400px] mx-auto shadow-lg md:min-h-[500px] md:max-h-[750px] overflow-hidden">
-        <h2 className="text-center pr-5 md:pr-0 md:text-left text-2xl md:text-[34px] font-raleway font-semibold mb-4">
+        <h2 className="text-center pr-5 md:pr-0 md:text-left text-2xl md:text-[34px] mb-4">
           {title}
         </h2>
         <p className="text-center pr-5 md:pr-0 md:text-left text-sm font-inter text-neutral-600 mb-10">
@@ -86,8 +84,8 @@ const TrustSection = () => {
         <div className="flex flex-col pr-5 md:pr-0 md:flex-row justify-between text-center mb-10 font-lora gap-6">
           {figures.map((figure, index) => (
             <div key={index}>
-              <p className="text-[34px] md:text-[38px] md:text-start font-bold">{figure.figure}</p>
-              <p className="text-sm text-neutral-600 font-raleway">
+              <p className="text-[34px] md:text-[38px] md:text-start md:font-[500] font-[Lora]">{figure.figure}</p>
+              <p className="text-sm font-[500] font-raleway">
                 {index === 0
                   ? 'profesionales capacitados'
                   : index === 1
@@ -115,12 +113,15 @@ const TrustSection = () => {
                   {testimonial.name}
                 </p>
               </div>
-              <p className="text-lg md:text-xl text-neutral-700 mb-4">
-                {testimonial.opinion}
-              </p>
-              <p className="text-right text-xs font-medium mt-auto">
-                {testimonial.rating}
-              </p>
+
+              <div className="flex flex-col justify-between flex-grow">
+                <p className="text-lg font-[400] md:text-[17px]  text-neutral-700 mb-4 min-h-[96px] leading-snug">
+                  {testimonial.opinion}
+                </p>
+                <p className="text-right text-sm font-medium flex items-center justify-end gap-1 text-black">
+                  5/5 <span className="text-black text-base">★</span>
+                </p>
+              </div>
             </div>
           ))}
         </div>

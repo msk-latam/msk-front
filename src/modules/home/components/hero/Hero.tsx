@@ -49,7 +49,7 @@ const Hero = () => {
   <span className="block md:hidden leading-tight ">
     Curso de medicina<br />
     para{" "}
-    <span className="italic font-[Lora,serif] font-medium  tracking-[0%]">
+    <span className="italic font-[Lora,serif]  text-[40px] tracking-[0%]">
       expandir
     </span>{" "}
     tus<br />
@@ -71,7 +71,7 @@ const Hero = () => {
             </div>
             <Link
               href={slides[0]?.cta?.url || "#"}
-              className="mt-4 md:mt-20 md:mb-0 mx-6 md:mx-0 md:mt-0 w-full md:w-auto bg-white text-black px-5 py-3 rounded-full text-[14px] flex justify-center text-center self-center gap-2 whitespace-nowrap"
+              className="mt-4 md:mt-20 md:mb-0 mx-6 md:mx-0 md:mt-0 w-full md:w-auto bg-white text-black px-5 py-3 rounded-full text-[14px] hover:scale-105 transition flex justify-center text-center self-center gap-2 whitespace-nowrap"
 
             >
               {slides[0]?.cta?.title || "Comenzá tu experiencia"}

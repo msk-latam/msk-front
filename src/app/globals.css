@@ -2,43 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Raleway:wght@400;700&display=swap');
-
 @layer base {
-	h1,
-	h2,
-	h3 {
-		font-family: 'Raleway', sans-serif;
-		font-weight: 700;
-	}
+  h1, h2, h3 {
+    font-family: var(--font-raleway), sans-serif;
+    font-weight: 700;
+  }
 
-	h2 {
-		font-family: 'Raleway', sans-serif;
-		font-weight: 500;
-	}
+  h2 {
+    font-weight: 500;
+  }
 
-	p,
-	a,
-	button {
-		font-family: 'Inter', sans-serif;
-		font-weight: 500;
-	}
-}
+  p, a, button, span {
+    font-family: var(--font-inter), sans-serif;
+    font-weight: 500;
+  }
 
-html,
-body {
-	overflow-x: hidden;
-	font-family: var(--font-inter), system-ui, sans-serif;
-}
+  html, body {
+    overflow-x: hidden;
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
 
-@layer base {
-	:root {
-		font-family: var(--font-inter), system-ui, sans-serif;
-	}
+  :root {
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
 }
 
 @layer components {
-	.custom-grid {
-		@apply grid grid-cols-12 gap-3;
-	}
+  .custom-grid {
+    @apply grid grid-cols-12 gap-3;
+  }
 }

@@ -73,7 +73,7 @@ const ProfessionalCardDesktop = ({
     <div className="flex justify-between items-center text-sm text-black mt-auto">
       <span className="text-sm">NUESTRO EQUIPO</span>
       <Link href={pro.perfilUrl || "#"} target="_blank" rel="noopener noreferrer">
-        <button className="bg-black text-white rounded-full py-[10px] px-6 text-base">
+        <button className="bg-[#1A1A1A] text-white px-6 py-3 rounded-full md:rounded-[38px] font-inter font-medium shadow-md hover:scale-105 transition text-sm w-full md:w-auto">
           Ver perfil
         </button>
       </Link>

@@ -4,6 +4,7 @@ import { BlogPost, Category } from "@/modules/home/types";
 export async function GET() {
   try {
     const res = await fetch("https://cms1.msklatam.com/wp-json/msk/v1/front/inicio?lang=int");
+    
 
     if (!res.ok) {
       throw new Error("Error al obtener los datos del blog");

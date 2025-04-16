@@ -31,7 +31,7 @@ const CursoCard = ({
 }: CursoCardProps) => {
   return (
     <div
-      className={`relative rounded-2xl overflow-hidden shadow-md bg-black text-white ${
+      className={`relative rounded-[30px] overflow-hidden shadow-md bg-black text-white ${
         variant === "large" ? largeWidth : ""
       } ${className}`}
     >
@@ -47,15 +47,39 @@ const CursoCard = ({
             {categoria}
           </span>
           <h3 className="font-semibold text-2xl leading-tight">{titulo}</h3>
-          <section className="flex flex-col gap-1">
-            <p className="text-sm opacity-80">{temas} temas</p>
-            <p className="text-sm opacity-80"> {horas} horas</p>
-            <p className="text-sm opacity-80">
-              {" "}
+
+          {/* Iconografía + Info */}
+          <section className="flex flex-col gap-1 text-sm opacity-80">
+            <p className="flex items-center gap-2">
+              <Image
+                src="/icons/topic.png" // ← poné aquí tu ícono real
+                alt="Icono temas"
+                width={16}
+                height={16}
+              />
+              {temas} temas
+            </p>
+            <p className="flex items-center gap-2">
+              <Image
+                src="/icons/time.png" // ← poné aquí tu ícono real
+                alt="Icono horas"
+                width={14}
+                height={14}
+              />
+              {horas} horas
+            </p>
+            <p className="flex items-center gap-2">
+              <Image
+                src="/icons/registered.png" // ← poné aquí tu ícono real
+                alt="Icono inscriptos"
+                width={16}
+                height={16}
+              />
               {inscriptos.toLocaleString()} inscriptos
             </p>
           </section>
-          <section>
+
+          <section className="mt-2">
             <p className="text-xs opacity-60">Certificación</p>
             <p className="text-sm opacity-60">{certificado}</p>
           </section>

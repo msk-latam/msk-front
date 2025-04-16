@@ -94,8 +94,8 @@ const Ofertas = () => {
           </div>
 
           {/* Botón */}
-          <button className="bg-black/80 text-white px-6 py-3 rounded-full md:rounded-[38px] font-semibold shadow-md hover:bg-black/60 transition text-sm w-full md:w-auto">
-            <span className="flex flex-row font-inter gap-1 justify-center">
+          <button className="bg-[#1A1A1A] text-white px-6 md:mt-4 py-3 rounded-full md:rounded-[38px] font-inter font-medium shadow-md hover:scale-105 transition text-sm w-full md:w-auto">
+            <span className="flex flex-row gap-2 justify-center items-center">
               <p className="my-auto">Reservá tu cupo ahora </p>
               <svg
                 width="25"

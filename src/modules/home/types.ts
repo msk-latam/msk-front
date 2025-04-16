@@ -158,8 +158,13 @@ export interface TrustSection {
   opinions: Opinion[];
 }
 
-  
-  
+ // INSTITUTION SECTION 
+export interface Institution {
+  id: number;
+  title: string;
+  slug: string;
+  image: string;
+}  
   
   
   
