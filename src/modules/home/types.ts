@@ -35,6 +35,7 @@ export type CursoCardProps = {
   inscriptos: number;
   certificado: string;
   imagen: string;
+  link: string; // <-- nuevo
 };
 
 export const mapCursoWPToCursoCard = (curso: CursoWP): CursoCardProps => ({
@@ -46,6 +47,7 @@ export const mapCursoWPToCursoCard = (curso: CursoWP): CursoCardProps => ({
   inscriptos: Math.floor(Math.random() * 10000 + 1000), // Mock para inscriptos
   certificado: "Incluido", // Valor por defecto
   imagen: curso.featured_image || "/images/curso-placeholder.jpg", // Si no hay imagen, usa la imagen placeholder
+  link: curso.link, // ← Agregado
 });
 
 // MASTERCLASS SECTION

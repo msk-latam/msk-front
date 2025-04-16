@@ -70,7 +70,8 @@ const Hero = () => {
 
             </div>
             <Link
-              href={slides[0]?.cta?.url || "#"}
+              //href={slides[0]?.cta?.url || "https://msklatam.com/tienda/?recurso=curso"} //Cambiarlo luego de crear la nueva tienda
+              href={"https://msklatam.com/tienda/?recurso=curso"}
               className="mt-4 md:mt-20 md:mb-0 mx-6 md:mx-0 md:mt-0 w-full md:w-auto bg-white text-black px-5 py-3 rounded-full text-[14px] hover:scale-105 transition flex justify-center text-center self-center gap-2 whitespace-nowrap"
 
             >

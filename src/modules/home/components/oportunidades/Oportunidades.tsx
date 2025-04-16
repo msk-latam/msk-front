@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CursoCard from "./cards/CursoCard";
 import { mapCursoWPToCursoCard } from "@/modules/home/types";
+import Link from "next/link";
 
 const tabs = ["Novedades", "Recomendados", "Gratuitos"];
 
@@ -63,11 +64,14 @@ const Oportunidades = () => {
             </nav>
 
             {/* Botón Ver todos (solo desktop) */}
+            <Link href={"https://msklatam.com/tienda/?recurso=curso"} passHref>
             <div className="hidden md:block">
               <button className="px-6 py-2 bg-black text-white rounded-full font-medium hover:scale-105 transition">
                 Ver todos →
               </button>
+
             </div>
+            </Link>
           </div>
 
           {/* Si no hay cursos, mostramos el mensaje */}
@@ -100,11 +104,13 @@ const Oportunidades = () => {
           )}
 
           {/* Botón Ver todos (solo mobile) */}
+          <Link href={"https://msklatam.com/tienda/?recurso=curso"} passHref>
           <div className="mt-6 flex justify-center md:hidden">
             <button className="px-6 py-2 w-full md:w-auto bg-black text-white rounded-full font-medium hover:scale-105 transition">
               Ver todos →
             </button>
           </div>
+          </Link>
         </div>
       </div>
     </section>
