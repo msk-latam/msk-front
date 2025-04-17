@@ -139,8 +139,6 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 	const transactionAmountWithDiscount = Math.max(transactionAmount - discount, 0);
 	const regularPriceWithDiscount = Math.max(regularPriceFixed - discount, 0);
 
-	console.log(appliedCoupon.code);
-
 	const mapFormDataToRequest = (formData: any) => {
 		return {
 			// transaction_amount: 1000,
