@@ -51,7 +51,7 @@ const Footer = () => {
 
 					{/* Redes sociales */}
 					<div className='flex gap-4 mt-2'>
-						<a href='#'>
+						<a href='https://www.facebook.com/msk.online.learning'>
 							<svg width='42' height='41' viewBox='0 0 42 41' fill='none' xmlns='http://www.w3.org/2000/svg'>
 								<circle cx='21' cy='20.5' r='20.5' fill='#35383E' />
 								<g clipPath='url(#clip0_266_2910)'>
@@ -69,7 +69,7 @@ const Footer = () => {
 								</defs>
 							</svg>
 						</a>
-						<a href='#'>
+						<a href='https://www.instagram.com/msk.latam'>
 							<svg width='42' height='41' viewBox='0 0 42 41' fill='none' xmlns='http://www.w3.org/2000/svg'>
 								<circle cx='21' cy='20.5' r='20.5' fill='#35383E' />
 								<g clipPath='url(#clip0_266_2914)'>
@@ -85,7 +85,7 @@ const Footer = () => {
 								</defs>
 							</svg>
 						</a>
-						<a href='#'>
+						<a href='https://www.youtube.com/@msk.online.learning'>
 							<svg width='42' height='41' viewBox='0 0 42 41' fill='none' xmlns='http://www.w3.org/2000/svg'>
 								<circle cx='21' cy='20.5' r='20.5' fill='#35383E' />
 								<g clipPath='url(#clip0_266_2914)'>
@@ -101,7 +101,7 @@ const Footer = () => {
 								</defs>
 							</svg>
 						</a>
-						<a href='#'>
+						<a href='https://www.linkedin.com/company/msk-online-learning/'>
 							<svg width='42' height='41' viewBox='0 0 42 41' fill='none' xmlns='http://www.w3.org/2000/svg'>
 								<circle cx='21' cy='20.5' r='20.5' fill='#35383E' />
 								<g clipPath='url(#clip0_266_2925)'>
@@ -125,33 +125,33 @@ const Footer = () => {
 				{/* BLOQUE DERECHO */}
 				<div className='w-full md:w-1/2 grid grid-cols-2 mx-auto gap-x-4 gap-y-2 md:px-0 px-9 font-inter text-sm text-[#AEB1B9] mt-30 md:mt-10 md:translate-x-[150px]'>
 					<div className='space-y-2'>
-						<a href='#' className='hover:underline block'>
+						<a href='https://msklatam.com/contacto/' className='hover:underline block'>
 							Contacto
 						</a>
-						<a href='#' className='hover:underline block'>
+						<a href='https://msklatam.com/bases-promocionales/' className='hover:underline block'>
 							Bases promocionales
 						</a>
-						<a href='#' className='hover:underline block'>
+						<a href='https://msklatam.com/politica-de-privacidad/' className='hover:underline block'>
 							Política de privacidad
 						</a>
-						<a href='#' className='hover:underline block'>
+						<a href='https://msklatam.com/politica-de-cookies/' className='hover:underline block'>
 							Política de cookies
 						</a>
-						<a href='#' className='hover:underline block'>
+						<a href='https://msklatam.com/terminos-y-condiciones/' className='hover:underline block'>
 							Términos y condiciones
 						</a>
 					</div>
 					<div className='space-y-2'>
-						<a href='#' className='hover:underline block'>
+						<a href='https://msklatam.com/mision/' className='hover:underline block'>
 							Nuestra misión
 						</a>
-						<a href='#' className='hover:underline block'>
+						<a href='https://msklatam.com/nosotros/' className='hover:underline block'>
 							Quiénes somos
 						</a>
 						<a href='#' className='hover:underline block'>
 							Conviértete en partner
 						</a>
-						<a href='#' className='hover:underline block'>
+						<a href='https://ayuda.msklatam.com/' className='hover:underline block'>
 							Centro de ayuda
 						</a>
 					</div>
