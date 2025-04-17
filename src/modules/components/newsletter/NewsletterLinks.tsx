@@ -1,7 +1,7 @@
 const NewsletterLinks = () => {
   return (
-    <div className="w-full px-6 py-10 md:py-16 text-white font-inter translate-x-[-10px] ">
-      <div className="w-full md:w-[1439px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-y-10 md:gap-x-[150px] text-[14px] ">
+    <div className="w-full overflow-visible max-w-[1400px] mx-auto py-10 md:py-16 text-white font-inter translate-x-[-10px] ">
+      <div className="w-full overflow-visible max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-y-10 md:gap-x-[150px] text-[14px] ">
         {/* Columna 1 */}
         <div className="max-w-[250px]  ">
           <h4 className="text-[18px] font-bold mb-4 ">Cursos más elegidos</h4>
