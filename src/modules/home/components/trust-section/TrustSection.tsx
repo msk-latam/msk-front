@@ -36,12 +36,12 @@ const TrustSection = () => {
           <div
             {...handlers}
             className="flex transition-transform duration-500 ease-in-out"
-            style={{ transform: `translateX(-${current * 340}px)` }}
+            style={{ transform: `translateX(-${current * 370}px)` }}
           >
             {testimonials.map((testimonial: any, index: number) => (
               <div
                 key={index}
-                className="min-w-[320px] max-w-[320px] bg-[#f7f9ff] p-6 rounded-2xl shadow-sm flex flex-col justify-between h-[260px] mx-1"
+                className="min-w-[360px] max-w-[320px] bg-[#f7f9ff] p-6 rounded-2xl shadow-sm flex flex-col justify-between h-[260px] mx-1"
               >
                 <div className="flex items-center gap-4 mb-4">
                   <img
@@ -55,7 +55,7 @@ const TrustSection = () => {
                 </div>
 
                 <div className="flex flex-col justify-between flex-grow">
-                  <p className="text-sm text-neutral-700 mb-4 min-h-[96px] leading-snug">
+                  <p className="text-[18px] text-400 mb-4 min-h-[96px] leading-snug">
                     {testimonial.opinion}
                   </p>
                   <p className="text-right text-sm font-medium flex items-center justify-end gap-1 text-black">

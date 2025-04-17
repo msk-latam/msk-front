@@ -15,10 +15,23 @@ const Masterclass = () => {
   const usingMock = !fetchedProfessionals?.length;
   const professionals: Professional[] = usingMock ? mockProfessionals : fetchedProfessionals;
 
-  const [current, setCurrent] = useState<number>(0);
+  // Clonamos el último al principio y el primero al final
+  const extendedProfessionals = [
+    professionals[professionals.length - 1],
+    ...professionals,
+    professionals[0],
+  ];
 
-  const nextSlide = () => setCurrent((prev) => (prev + 1) % professionals.length);
-  const prevSlide = () => setCurrent((prev) => (prev - 1 + professionals.length) % professionals.length);
+  const [current, setCurrent] = useState<number>(1); // empezamos desde el primero real
+  const [withTransition, setWithTransition] = useState(true);
+
+  const nextSlide = () => {
+    setCurrent((prev) => prev + 1);
+  };
+
+  const prevSlide = () => {
+    setCurrent((prev) => prev - 1);
+  };
 
   const handlers = useSwipeable({
     onSwipedLeft: nextSlide,
@@ -26,18 +39,36 @@ const Masterclass = () => {
     trackMouse: true,
   });
 
+  // Autoplay
   useEffect(() => {
     const interval = setInterval(nextSlide, 6000);
     return () => clearInterval(interval);
   }, [professionals]);
 
+  // Loop visual
   useEffect(() => {
-    if (usingMock) {
-      console.warn("⚠️ Usando contenido mock de profesionales (no hay datos desde la API).");
+    // salto del clon último → primero real
+    if (current === extendedProfessionals.length - 1) {
+      setTimeout(() => {
+        setWithTransition(false);
+        setCurrent(1);
+      }, 300);
     }
-  }, [usingMock]);
+    // salto del clon primero → último real
+    if (current === 0) {
+      setTimeout(() => {
+        setWithTransition(false);
+        setCurrent(extendedProfessionals.length - 2);
+      }, 300);
+    }
+  }, [current, extendedProfessionals.length]);
 
-  const currentProfessional = professionals[current];
+  // restaurar transición después del salto
+  useEffect(() => {
+    if (!withTransition) {
+      setTimeout(() => setWithTransition(true), 50);
+    }
+  }, [withTransition]);
 
   return (
     <section
@@ -97,8 +128,8 @@ const Masterclass = () => {
           {/* DERECHA CARD DESKTOP */}
           <article className="md:order-2">
             <ProfessionalCardDesktop
-              pro={currentProfessional}
-              current={current}
+              pro={professionals[(current - 1 + professionals.length) % professionals.length]}
+              current={(current - 1 + professionals.length) % professionals.length}
               total={professionals.length}
               onNext={nextSlide}
               onPrev={prevSlide}
@@ -114,10 +145,13 @@ const Masterclass = () => {
           <div className="relative w-full overflow-hidden">
             <div
               {...handlers}
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${current * 340}px)` }}
+              className={`flex ${withTransition ? "transition-transform duration-500 ease-in-out" : ""}`}
+              style={{
+                transform: `translateX(calc(-${current * 340}px + 20px))`,
+                width: `${extendedProfessionals.length * 340}px`,
+              }}
             >
-              {professionals.map((pro, i) => (
+              {extendedProfessionals.map((pro, i) => (
                 <ProfessionalCardMobile key={i} pro={pro} />
               ))}
             </div>

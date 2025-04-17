@@ -18,7 +18,7 @@ const Newsletter = () => {
 			<div className='bg-[#35383E] w-full -mt-8 md:-mt-14 p-6 md:py-6 md:px-10 md:rounded-[38px] rounded-[38px] z-[1] flex flex-col md:flex-row justify-between gap-4 md:gap-8 md:w-[1439px] mx-auto'>
 				{/* Título */}
 				<div className='md:w-[200px] shrink-0'>
-					<p className='text-white text-left md:text-[18px] text-[22px] font-raleway font-bold md:translate-y-[5px]'>
+					<p className='text-white text-left md:text-[18px] text-[22px] font-Raleway font-bold md:translate-y-[5px]'>
 						Nuestro <br className='hidden md:block' /> newsletter
 					</p>
 				</div>
@@ -27,7 +27,7 @@ const Newsletter = () => {
 
 				{/* Descripción */}
 				<div className='text-[16px] md:text-[18px] text-white text-left md:flex-1 font-inter font-medium leading-snug shadow-sm md:translate-y-[10px]'>
-					Descuentos exclusivos y becas <br className='hidden md:block' /> completas solo con tu suscripción
+					Descuentos exclusivos y becas <br /> completas solo con tu suscripción
 				</div>
 
 				<div className='hidden md:block w-[1px] h-[70px] bg-[#5A5F67] ml-6' />
@@ -43,7 +43,7 @@ const Newsletter = () => {
 						placeholder='Ingresar e-mail'
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
-						className='w-full md:w-[478px] h-[52px] md:h-[64px] px-4 py-2 text-black rounded-full focus:outline-none border md:border-0 font-inter md:text-sm text-[16px]'
+						className='w-full md:w-[478px] h-[52px] md:h-[64px] px-4 py-2 text-black md:rounded-full rounded-[16px] focus:outline-none border md:border-0 font-inter md:text-sm text-[16px]'
 						required
 					/>
 					<button

@@ -28,14 +28,40 @@ const Oportunidades = () => {
       <div className="relative bg-white rounded-[38px] -mt-32 -mb-64 pt-6 md:pt-[72px] md:pb-16 shadow-lg">
         <div className="px-5 md:px-16 pb-6 md:mb-0">
           <header className="md:text-left text-center max-w-7xl px-6 gap-4 md:px-0">
-            <h2 id="oportunidades-heading" className="mb-2 md:text-[34px] text-[22px] leading-[100%] text-[#1A1A1A] align-middle ">
-            Te damos la bienvenida a Medical & Scientific Knowledge, el lugar ideal para 
-  <br className="hidden md:inline" />
-  estudiar medicina a distancia a través de nuestros cursos de actualización.
-            </h2>
-            <p className="md:text-[18px] text-[16px] font-[400] text-[#6E737C] align-middle">
-            Encuentra cursos de medicina y cursos de enfermería sobre más de 20 especialidades
-            </p>
+          <h2
+  id="oportunidades-heading"
+  className="mb-2 md:text-[34px] text-[20px]  leading-[100%] text-[#1A1A1A] align-middle"
+>
+  {/* Mobile: Saltos forzados */}
+  <p className="md:hidden font-Raleway leading-[32px] ">
+    Te damos la bienvenida a <br />
+    Medical & Scientific Knowledge, <br />
+    el lugar ideal para estudiar <br />
+    medicina a distancia a través de <br />
+    nuestros cursos de actualización.
+  </p>
+
+  {/* Desktop: Una sola línea + salto md:inline */}
+  <h2 className="hidden md:inline ">
+    Te damos la bienvenida a Medical & Scientific Knowledge, el lugar ideal para 
+    
+    estudiar medicina a distancia a través de nuestros cursos de actualización.
+  </h2>
+</h2>
+
+<p className="md:text-[18px] text-[14px] font-[400] text-[#838790] align-middle">
+  {/* Mobile */}
+  <p className="md:hidden">
+    Encuentra cursos de medicina y cursos de <br />
+    enfermería sobre más de 20 especialidades
+  </p>
+
+  {/* Desktop */}
+  <p className="hidden md:inline">
+    Encuentra cursos de medicina y cursos de enfermería sobre más de 20 especialidades
+  </p>
+</p>
+
           </header>
 
           {/* NAV + Botón Ver Todos → */}
@@ -95,11 +121,12 @@ const Oportunidades = () => {
               </div>
 
               {/* Grid mobile */}
-              <div className="grid gap-6 md:hidden">
-                {cursosMapeados.map((curso) => (
-                  <CursoCard key={curso.id} {...curso} />
-                ))}
-              </div>
+              {/* Grid mobile - solo 3 cursos */}
+<div className="grid gap-6 md:hidden">
+  {cursosMapeados.slice(0, 3).map((curso) => (
+    <CursoCard key={curso.id} {...curso} />
+  ))}
+</div>
             </>
           )}
 

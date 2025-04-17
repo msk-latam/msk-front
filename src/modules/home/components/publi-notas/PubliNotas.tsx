@@ -78,23 +78,23 @@ const MskNewsSection = () => {
               rel="noopener noreferrer"
               className="keen-slider__slide min-w-[85%]"
             >
-              <div className="bg-white rounded-2xl p-6 shadow-sm h-full flex flex-col justify-between mr-2 hover:shadow-md transition-shadow">
+              <div className="bg-white rounded-3xl p-6 shadow-sm h-full flex flex-col justify-between mr-2 mb-[40px] hover:shadow-md transition-shadow">
                 <div>
                   <h3 className="text-[24px] font-[700] leading-[140%] tracking-[0%] mb-4 font-raleway">{item.title}</h3>
-                  <p className="text-sm font-inter font-normal text-neutral-600">{cleanContent(item.content)}</p>
+                  <p className="text-sm font-inter font-normal text-neutral-600 ">{cleanContent(item.content)}</p>
                 </div>
                 <div className="mt-6 flex items-center justify-between text-xs text-neutral-500 font-inter">
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full overflow-hidden flex items-center justify-center bg-white border">
+                    <div className="w-6 h-6 rounded-full overflow-hidden flex items-center justify-center bg-white border translate-y-[-30px]">
                       <img
                         src={`https://www.google.com/s2/favicons?domain=${new URL(item.link.url).hostname}&sz=64`}
                         alt="favicon"
                         className="w-full h-full object-contain rounded-full"
                       />
                     </div>
-                    <span>{new Date(item.date).toLocaleDateString('es-AR', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                    <span className='translate-y-[-30px]'>{new Date(item.date).toLocaleDateString('es-AR', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                   </div>
-                  <button className="bg-black text-white hover:bg-gray-800 text-xs font-semibold px-4 py-1 rounded-full">{item.link.title}</button>
+                  <button className="px-6 py-4 rounded-[38px] text-[16px] font-medium shadow-md bg-[#1A1A1A] text-white translate-y-[18px]">{item.link.title}</button>
                 </div>
               </div>
             </a>

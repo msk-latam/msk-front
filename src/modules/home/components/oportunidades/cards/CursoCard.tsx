@@ -50,16 +50,16 @@ const CursoCard = ({
             <span className="bg-[#FCEAFF] text-[#9F1DB7] text-xs font-semibold px-3 py-2 rounded-full w-fit">
               {categoria}
             </span>
-            <h3 className="font-semibold text-2xl leading-tight">{titulo}</h3>
+            <h3 className="font-Raleway text-[22px] text-[#FFFFFF] leading-tight">{titulo}</h3>
 
             {/* Iconografía + Info */}
-            <section className="flex flex-col gap-1 text-sm opacity-80">
+            <section className="flex flex-col gap-1 md:text-sm text-[14px] opacity-80 text-[#DBDDE2] ">
               <p className="flex items-center gap-2">
                 <Image
                   src="/icons/topic.png"
                   alt="Icono temas"
-                  width={16}
-                  height={16}
+                  width={15}
+                  height={15}
                 />
                 {temas} temas
               </p>
@@ -67,8 +67,8 @@ const CursoCard = ({
                 <Image
                   src="/icons/time.png"
                   alt="Icono horas"
-                  width={14}
-                  height={14}
+                  width={11.666666030883789}
+                  height={16.66666603088379}
                 />
                 {horas} horas
               </p>
@@ -76,16 +76,16 @@ const CursoCard = ({
                 <Image
                   src="/icons/registered.png"
                   alt="Icono inscriptos"
-                  width={16}
-                  height={16}
+                  width={16.66666603088379}
+                  height={15}
                 />
                 {inscriptos.toLocaleString()} inscriptos
               </p>
             </section>
 
             <section className="mt-2">
-              <p className="text-xs opacity-60">Certificación</p>
-              <p className="text-sm opacity-60">{certificado}</p>
+              <p className="text-xs text-[#DBDDE2] ">Certificación</p>
+              <p className="text-sm text-[#DBDDE2]">{certificado}</p>
             </section>
           </div>
         </div>
