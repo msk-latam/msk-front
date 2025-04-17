@@ -3,7 +3,7 @@ const NewsletterLinks = () => {
     <div className="w-full px-6 py-10 md:py-16 text-white font-inter translate-x-[-10px] ">
       <div className="w-full md:w-[1439px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-y-10 md:gap-x-[150px] text-[14px] ">
         {/* Columna 1 */}
-        <div className="max-w-[250px] md:translate-x-[-150px] ">
+        <div className="max-w-[250px]  ">
           <h4 className="text-[18px] font-bold mb-4 ">Cursos más elegidos</h4>
           <ul className="space-y-4  md:font-normal font-[8px] [&_a]:whitespace-nowrap opacity-80">
             <li><a href="https://msklatam.com/curso/medicina-de-urgencias/" className="hover:underline">Curso superior de medicina de urgencias</a></li>
