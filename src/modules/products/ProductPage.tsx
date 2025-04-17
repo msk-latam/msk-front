@@ -12,7 +12,7 @@ import ProductSyllabus from './components/ProductSyllabus'
 import ProductSupportForm from './components/ProductSupportForm'
 import ProductTestimonials from './components/ProductTestimonials'
 import ProductInstitutions from './components/ProductInstitutions'
-import ProductTags from './components/CourseOverview'
+import CourseOverview from './components/CourseOverview'
 
 export default function ProductPage() {
   return (
@@ -36,7 +36,7 @@ export default function ProductPage() {
               <ProductDescription />
               <ProductInstitutions />
               <ProductHighlights />
-              <ProductTags/>
+              <CourseOverview/>
               <ProductTeachers />
               <ProductCertificate />
             </div>
