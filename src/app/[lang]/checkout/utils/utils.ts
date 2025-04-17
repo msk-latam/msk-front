@@ -39,6 +39,25 @@ export const countryToName: Record<string, string> = {
 	uy: 'Uruguay',
 	ve: 'Venezuela',
 };
+export const countries = [
+	'Argentina',
+	'Bolivia',
+	'Chile',
+	'Colombia',
+	'Costa Rica',
+	'Ecuador',
+	'España',
+	'Guatemala',
+	'Honduras',
+	'México',
+	'Nicaragua',
+	'Panamá',
+	'Paraguay',
+	'Perú',
+	'El Salvador',
+	'Uruguay',
+	'Venezuela',
+];
 
 export const rebillCountries = ['cl', 'uy', 'pe', 'mx', 'co'];
 
@@ -47,7 +66,7 @@ export const getCountryCompleteName = (code: string = 'ar'): string | null => {
 	return countryToName[lowerCaseCode] || null; // Devuelve null si el código no está en el objeto
 };
 
-export const createCRMUser = async (formDataUser: any, countryCompleteName: any, formData: any) => {
+export const createCRMUser = async (formDataUser: any, formData: any) => {
 	try {
 		const response = await fetch(`${ENDPOINT_CRM}/api/zoho/contacts/`, {
 			method: 'POST',
@@ -66,7 +85,7 @@ export const createCRMUser = async (formDataUser: any, countryCompleteName: any,
 				Last_Name: formDataUser.lastName,
 				speciality: formDataUser.specialty,
 				Especialidad: formDataUser.specialty,
-				country: countryCompleteName,
+				country: formData.country,
 				state: formData.state,
 				city: formData.city,
 				address: formData.address,
@@ -87,7 +106,7 @@ export const createCRMUser = async (formDataUser: any, countryCompleteName: any,
 		throw error;
 	}
 };
-export const updateCRMUser = async (formDataUser: any, countryCompleteName: any, formData: any, id: any) => {
+export const updateCRMUser = async (formDataUser: any, formData: any, id: any) => {
 	try {
 		const response = await fetch(`${ENDPOINT_CRM}/api/zoho/contacts/${id}`, {
 			method: 'PUT',
@@ -106,7 +125,7 @@ export const updateCRMUser = async (formDataUser: any, countryCompleteName: any,
 				Last_Name: formDataUser.lastName,
 				speciality: formDataUser.specialty,
 				Especialidad: formDataUser.specialty,
-				country: countryCompleteName,
+				country: formData.country,
 				state: formData.state,
 				city: formData.city,
 				address: formData.address,

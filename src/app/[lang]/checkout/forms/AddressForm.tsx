@@ -1,5 +1,5 @@
 import React from 'react';
-import { countryToName } from '../utils/utils';
+import { countries, countryToName } from '../utils/utils';
 import { provinciasPorPais } from '../utils/provincias';
 
 interface AddressFormProps {
@@ -41,12 +41,35 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 		return provinciasPorPais[country] || [];
 	}
 
-	const provincias = obtenerProvincias(countryName);
+	const provincias = obtenerProvincias(formData.country);
 
 	return (
 		<div className='grid grid-cols-2 gap-4'>
 			{/* País */}
 			<div>
+				<label htmlFor='country' className='block text-sm font-medium text-[#6474A6]'>
+					País
+				</label>
+				<select
+					id='country'
+					name='country'
+					value={formData.country || countryName || ''}
+					onChange={(e) => handleChange2(e)}
+					onBlur={handleBlur}
+					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+				>
+					<option value='' disabled>
+						Seleccione un país
+					</option>
+					{countries.map((country) => (
+						<option key={country} value={country}>
+							{country}
+						</option>
+					))}
+				</select>
+				{touched.country && errors.country && <p className='mt-1 text-sm text-red-500'>{errors.country}</p>}
+			</div>
+			{/* <div>
 				<label htmlFor='country' className='block text-sm font-medium text-[#6474A6]'>
 					País
 				</label>
@@ -57,12 +80,12 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					value={countryName}
 					onChange={handleChange2}
 					onBlur={handleBlur}
-					disabled
+					// disabled
 					placeholder='Ingrese país'
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
-				{touched.country && errors.country && <p className='text-red-500 text-sm mt-1'>{errors.country}</p>}
-			</div>
+				{touched.country && errors.country && <p className='mt-1 text-sm text-red-500'>{errors.country}</p>}
+			</div> */}
 
 			{/* Estado */}
 			<div>
@@ -70,38 +93,24 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					{countryName === 'Chile' ? 'Provincia' : 'Estado'}
 					{/* {formData.country === 'Chile' ? 'Provincia' : 'Estado'} */}
 				</label>
-				{
-					formData.country && (
-						<select
-							id='state'
-							name='state'
-							value={formData.state}
-							onChange={handleChange2}
-							// onBlur={handleBlur}
-							className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-						>
-							<option value=''>Seleccione una provincia</option>
-							{provincias.map((provincia: any) => (
-								<option key={provincia} value={provincia}>
-									{provincia}
-								</option>
-							))}
-						</select>
-					)
-					// (
-					// 	<input
-					// 		id='state'
-					// 		name='state'
-					// 		type='text'
-					// 		value={formData.state}
-					// 		onChange={handleChange}
-					// 		onBlur={handleBlur}
-					// 		placeholder='Ingrese estado'
-					// 		className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-					// 	/>
-					// )
-				}
-				{touched.state && errors.state && <p className='text-red-500 text-sm mt-1'>{errors.state}</p>}
+				{formData.country && (
+					<select
+						id='state'
+						name='state'
+						value={formData.state}
+						onChange={handleChange2}
+						// onBlur={handleBlur}
+						className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					>
+						<option value=''>Seleccione una provincia</option>
+						{provincias.map((provincia: any) => (
+							<option key={provincia} value={provincia}>
+								{provincia}
+							</option>
+						))}
+					</select>
+				)}
+				{touched.state && errors.state && <p className='mt-1 text-sm text-red-500'>{errors.state}</p>}
 			</div>
 
 			{/* Ciudad */}
@@ -120,7 +129,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					placeholder='Ingrese ciudad'
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
-				{touched.city && errors.city && <p className='text-red-500 text-sm mt-1'>{errors.city}</p>}
+				{touched.city && errors.city && <p className='mt-1 text-sm text-red-500'>{errors.city}</p>}
 			</div>
 
 			<div>
@@ -140,7 +149,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 						placeholder='Ingrese código postal'
 						className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 					/>
-					{touched.postal_code && errors.postal_code && <p className='text-red-500 text-sm mt-1'>{errors.postal_code}</p>}
+					{touched.postal_code && errors.postal_code && <p className='mt-1 text-sm text-red-500'>{errors.postal_code}</p>}
 				</div>
 			</div>
 			{/* Dirección */}
@@ -158,7 +167,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					placeholder='Ingrese dirección'
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
-				{touched.address && errors.address && <p className='text-red-500 text-sm mt-1'>{errors.address}</p>}
+				{touched.address && errors.address && <p className='mt-1 text-sm text-red-500'>{errors.address}</p>}
 			</div>
 		</div>
 	);

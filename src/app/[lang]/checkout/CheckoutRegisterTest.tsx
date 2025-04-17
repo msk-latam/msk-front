@@ -106,7 +106,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 			}));
 		}
 	};
-	const handleChange2 = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+	const handleChange2: React.ChangeEventHandler<any> = (e) => {
 		const { id, value, type } = e.target;
 
 		const fieldValue = type === 'checkbox' && e.target instanceof HTMLInputElement ? e.target.checked : value;
@@ -170,7 +170,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 			setError('');
 			setUser(formDataUser);
 
-			const crmResponse = await createCRMUser(formDataUser, countryCompleteName, formData);
+			const crmResponse = await createCRMUser(formDataUser, formData);
 			const rebillResponse = rebillCountries.includes(country) ? await createRebillUser(formDataUser, country) : null;
 
 			const idRebillUser = rebillResponse?.id;
@@ -180,7 +180,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 			const customer_id =
 				firstResponse.code === 'SUCCESS' || firstResponse.code === 'DUPLICATE_DATA' ? firstResponse.details.id : undefined;
 			if (firstResponse.code === 'DUPLICATE_DATA') {
-				await updateCRMUser(formDataUser, countryCompleteName, formData, customer_id);
+				await updateCRMUser(formDataUser, formData, customer_id);
 			}
 
 			const paymentProcessor = rebillCountries.includes(country) ? 'rebill' : 'stripe';
@@ -242,6 +242,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 					setLoadingUser(true);
 					const user = await getCRMUser(state?.email);
 					console.log(user);
+					console.log('pais de usuario', user.Pais);
 					if (user) {
 						const updatedFormDataUser = {
 							...formDataUser,
@@ -261,6 +262,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 							postal_code: user.Mailing_Zip,
 							type_doc: user.Tipo_de_Documento,
 							identification: user.Identificacion,
+							country: user.Pais,
 						};
 						setFormDataUser(updatedFormDataUser);
 						setFormData(updatedFormDataDocumentUser);
@@ -295,7 +297,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 				Crear cuenta
 			</h2>
 
-			<div className='bg-white border border-gray-300 rounded-lg p-6'>
+			<div className='p-6 bg-white border border-gray-300 rounded-lg'>
 				<UserForm
 					handleBlur={handleBlur}
 					handleChange={handleChange}
@@ -310,7 +312,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 						handleChange2={handleChange2}
 						errors={errors}
 						touched={touched}
-						country={country}
+						country={formData.country}
 					/>
 				</div>
 				<div className='mt-4'>
@@ -324,8 +326,8 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 					/>
 				</div>
 			</div>
-			<div className='block lg:flex  items-center justify-center lg:justify-between'>
-				<p className='text-red-500 font-bold my-6'> {error}</p>
+			<div className='items-center justify-center block lg:flex lg:justify-between'>
+				<p className='my-6 font-bold text-red-500'> {error}</p>
 				<CheckoutRegisterButtons
 					formData={formDataUser}
 					errors={errors}

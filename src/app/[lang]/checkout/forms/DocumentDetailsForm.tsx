@@ -27,7 +27,7 @@ const DocumentDetailsForm: React.FC<DocumentDetailsFormProps> = ({
 	country,
 }) => {
 	const documentsByCountry: any = {
-		ar: [
+		Argentina: [
 			{ value: 'DNI', label: 'DNI' },
 			{ value: 'CUIT', label: 'CUIT' },
 			{ value: 'CUIL', label: 'CUIL' },
@@ -36,82 +36,82 @@ const DocumentDetailsForm: React.FC<DocumentDetailsFormProps> = ({
 			{ value: 'LC', label: 'Libreta cívica' },
 			{ value: 'Pasaporte', label: 'Pasaporte' },
 		],
-		bo: [
+		Bolivia: [
 			{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
 			{ value: 'Pasaporte', label: 'Pasaporte' },
 		],
-		cl: [
+		Chile: [
 			{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
 			{ value: 'RUT', label: 'RUT' },
 			{ value: 'Pasaporte', label: 'Pasaporte' },
 			{ value: 'DNI', label: 'DNI' },
 		],
-		co: [
+		Colombia: [
 			{ value: 'Cédula de ciudadanía', label: 'Cédula de ciudadanía' },
 			{ value: 'Cédula de extranjero', label: 'Cédula de extranjero' },
 			{ value: 'NIT', label: 'NIT' },
 			{ value: 'Pasaporte', label: 'Pasaporte' },
 		],
-		cr: [
+		'Costa Rica': [
 			{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
 			{ value: 'Pasaporte', label: 'Pasaporte' },
 		],
-		ec: [
+		Ecuador: [
 			{ value: '04 - RUC', label: 'RUC' },
 			{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
 			{ value: '06 - PASAPORTE', label: 'Pasaporte' },
 		],
-		sv: [
+		'El Salvador': [
 			{ value: 'DUI', label: 'DUI' },
 			{ value: 'Pasaporte', label: 'Pasaporte' },
 		],
-		es: [
+		España: [
 			{ value: 'DNI', label: 'DNI' },
 			{ value: 'Pasaporte', label: 'Pasaporte' },
 			{ value: 'TIE', label: 'TIE' },
 			{ value: 'NIE', label: 'NIE' },
 		],
-		gt: [
+		Guatemala: [
 			{ value: 'DNI', label: 'DNI' },
 			{ value: 'Pasaporte', label: 'Pasaporte' },
 		],
-		hn: [
+		Honduras: [
 			{ value: 'DNI', label: 'DNI' },
 			{ value: 'Pasaporte', label: 'Pasaporte' },
 		],
-		mx: [
+		México: [
 			{ value: 'RFC', label: 'RFC' },
 			{ value: 'Pasaporte', label: 'Pasaporte' },
 		],
-		ni: [
+		Nicaragua: [
 			{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
 			{ value: 'Pasaporte', label: 'Pasaporte' },
 		],
-		pa: [
+		Panamá: [
 			{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
 			{ value: 'Pasaporte', label: 'Pasaporte' },
 		],
-		py: [
+		Paraguay: [
 			{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
 			{ value: 'Pasaporte', label: 'Pasaporte' },
 		],
-		pe: [
+		Perú: [
 			{ value: 'DNI', label: 'DNI' },
 			{ value: 'Pasaporte', label: 'Pasaporte' },
 			{ value: 'Cédula de extranjero', label: 'Cédula de extranjero' },
 			{ value: 'CURP', label: 'CURP' },
 			{ value: 'RUC', label: 'RUC' },
 		],
-		do: [
+		'Republica Dominicana': [
 			{ value: 'DNI', label: 'DNI' },
 			{ value: 'Pasaporte', label: 'Pasaporte' },
 		],
-		uy: [
+		Uruguay: [
 			{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
 			{ value: 'Pasaporte', label: 'Pasaporte' },
 			{ value: 'RUT', label: 'RUT' },
 		],
-		ve: [
+		Venezuela: [
 			{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
 			{ value: 'Pasaporte', label: 'Pasaporte' },
 		],
@@ -143,7 +143,7 @@ const DocumentDetailsForm: React.FC<DocumentDetailsFormProps> = ({
 						</option>
 					))}
 				</select>
-				{touched.type_doc && errors.type_doc && <p className='text-red-500 text-sm mt-1'>{errors.type_doc}</p>}
+				{touched.type_doc && errors.type_doc && <p className='mt-1 text-sm text-red-500'>{errors.type_doc}</p>}
 			</div>
 
 			{/* Número de documento */}
@@ -162,7 +162,7 @@ const DocumentDetailsForm: React.FC<DocumentDetailsFormProps> = ({
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
 				{touched.identification && errors.identification && (
-					<p className='text-red-500 text-sm mt-1'>{errors.identification}</p>
+					<p className='mt-1 text-sm text-red-500'>{errors.identification}</p>
 				)}
 			</div>
 		</div>

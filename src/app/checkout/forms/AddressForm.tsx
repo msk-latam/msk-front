@@ -1,5 +1,5 @@
 import { provinciasPorPais } from '@/app/[lang]/checkout/utils/provincias';
-import { getCountryCompleteName } from '@/app/[lang]/checkout/utils/utils';
+import { countries, getCountryCompleteName } from '@/app/[lang]/checkout/utils/utils';
 import React from 'react';
 
 interface AddressFormProps {
@@ -37,13 +37,14 @@ const AddressForm: React.FC<AddressFormProps> = ({
 	errors,
 	touched,
 }) => {
-	const countryName = getCountryCompleteName();
+	const countryName = getCountryCompleteName(formData.country);
 
-	function obtenerProvincias(country = 'ar') {
+	function obtenerProvincias(country: string) {
 		return provinciasPorPais[country] || [];
 	}
 
-	const provincias = obtenerProvincias('Argentina');
+	const provincias = obtenerProvincias(formData.country);
+
 	return (
 		<div className='grid grid-cols-2 gap-4'>
 			{/* País */}
@@ -51,18 +52,24 @@ const AddressForm: React.FC<AddressFormProps> = ({
 				<label htmlFor='country' className='block text-sm font-medium text-[#6474A6]'>
 					País
 				</label>
-				<input
+				<select
 					id='country'
 					name='country'
-					type='text'
-					value={countryName}
-					onChange={handleChange2}
+					value={formData.country || countryName || ''}
+					onChange={(e) => handleChange2(e)}
 					onBlur={handleBlur2}
-					placeholder='Ingrese país'
-					disabled
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
-				/>
-				{/* {touched.country && errors.country && <p className='text-red-500 text-sm mt-1'>{errors.country}</p>} */}
+				>
+					<option value='' disabled>
+						Seleccione un país
+					</option>
+					{countries.map((country) => (
+						<option key={country} value={country}>
+							{country}
+						</option>
+					))}
+				</select>
+				{touched.country && errors.country && <p className='mt-1 text-sm text-red-500'>{errors.country}</p>}
 			</div>
 
 			{/* Estado */}
@@ -87,7 +94,7 @@ const AddressForm: React.FC<AddressFormProps> = ({
 						))}
 					</select>
 				}
-				{touched.state && errors.state && <p className='text-red-500 text-sm mt-1'>{errors.state}</p>}
+				{touched.state && errors.state && <p className='mt-1 text-sm text-red-500'>{errors.state}</p>}
 			</div>
 
 			{/* Ciudad */}
@@ -105,7 +112,7 @@ const AddressForm: React.FC<AddressFormProps> = ({
 					placeholder='Ingrese ciudad'
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
-				{touched.city && errors.city && <p className='text-red-500 text-sm mt-1'>{errors.city}</p>}
+				{touched.city && errors.city && <p className='mt-1 text-sm text-red-500'>{errors.city}</p>}
 			</div>
 
 			<div>
@@ -124,7 +131,7 @@ const AddressForm: React.FC<AddressFormProps> = ({
 						placeholder='Ingrese código postal'
 						className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 					/>
-					{touched.postal_code && errors.postal_code && <p className='text-red-500 text-sm mt-1'>{errors.postal_code}</p>}
+					{touched.postal_code && errors.postal_code && <p className='mt-1 text-sm text-red-500'>{errors.postal_code}</p>}
 				</div>
 			</div>
 			{/* Dirección */}
@@ -142,7 +149,7 @@ const AddressForm: React.FC<AddressFormProps> = ({
 					placeholder='Ingrese dirección'
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
-				{touched.address && errors.address && <p className='text-red-500 text-sm mt-1'>{errors.address}</p>}
+				{touched.address && errors.address && <p className='mt-1 text-sm text-red-500'>{errors.address}</p>}
 			</div>
 		</div>
 	);
