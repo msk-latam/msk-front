@@ -15,7 +15,7 @@ const Newsletter = () => {
 
 	return (
 		<div className='w-full px-4 md:px-12 flex flex-col items-center z-[5] justify-center bg-[#1A1A1A] text-white'>
-			<div className='bg-[#35383E] w-full max-w-7xl -mt-8 md:-mt-14 p-6 md:py-6 md:px-10 md:rounded-[38px] rounded-[38px] z-[1] flex flex-col md:flex-row justify-between gap-4 md:gap-8 mx-auto'>
+			<div className='bg-[#35383E] w-full -mt-8 md:-mt-14 p-6 md:py-6 md:px-10 md:rounded-[38px] rounded-[38px] z-[1] flex flex-col md:flex-row justify-between gap-4 md:gap-8 md:w-[1439px] mx-auto'>
 				{/* Título */}
 				<div className='md:w-[200px] shrink-0'>
 					<p className='text-white text-left md:text-[18px] text-[22px] font-raleway font-bold md:translate-y-[5px]'>

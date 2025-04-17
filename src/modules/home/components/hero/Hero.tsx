@@ -2,80 +2,93 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Menu, Search } from "react-feather";
 import HeroCarousel from "./HeroCarousel";
 import HeroHighlights from "./HeroHighlights";
-import Navbar from "../../../components/navbar/Navbar";
-import Image from "next/image";
 import { useHomeContent } from "@/modules/home/hooks/useHomeContent";
 import { HeroSlide } from "@/modules/home/types";
-import PopUp from "../../../components/PopUp";
 
-
+const STATIC_HIGHLIGHTS = [
+  "Cursos de medicina para expandir tus metas profesionales",
+  "Medical & Scientific Knowledge, el lugar ideal para estudiar medicina a distancia",
+  "Descubre los nuevos cursos médicos disponibles este mes",
+  "Acceso exclusivo: Cursos médicos diseñados por expertos",
+];
 
 const Hero = () => {
   const { data } = useHomeContent();
   const slides: HeroSlide[] = data?.slides || [];
+  const backgroundImages = slides.map((s) => s.background_image?.[0]).filter(Boolean);
 
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [animationKey, setAnimationKey] = useState(0);
+  const [paused, setPaused] = useState(false);
 
+  useEffect(() => {
+    if (paused) return;
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % STATIC_HIGHLIGHTS.length);
+    }, 8000);
+    return () => clearInterval(interval);
+  }, [paused]);
+
+  useEffect(() => {
+    setAnimationKey((prev) => prev + 1);
+  }, [currentSlide]);
+
+  const handleSelect = (index: number) => {
+    setCurrentSlide(index);
+    setPaused(true);
+    setTimeout(() => setPaused(false), 8000);
+  };
 
   return (
-  
-      
-    <div className="relative md:h-[800px] h-[600px] w-full bg-black text-white px-4 overflow-hidden pt-[150px] ">
+    <div className="relative md:h-[800px] h-[600px] w-full bg-black text-white px-4 overflow-hidden pt-[150px]">
+      {/* BACKGROUND CAROUSEL */}
+      <HeroCarousel
+        slides={backgroundImages}
+        currentSlide={currentSlide}
+        setCurrentSlide={setCurrentSlide}
+      />
 
-      {/* --- BACKGROUND CAROUSEL --- */}
-      <HeroCarousel slides={slides.map((s) => s.background_image[0])} />
-        
-
-
-
-      {/* Overlay content */}
       <div className="absolute inset-0 z-10">
-        
-
-        {/* --- CONTENIDO PRINCIPAL --- */}
         <div className="md:px-28 px-5 py-3 md:mt-40 md:py-0 container mx-auto md:h-[71%] flex flex-col justify-center items-center md:justify-end text-center gap-0 md:items-start md:text-left md:gap-2">
-        <p className="mt-20 md:mt-0 border border-white rounded-full px-[18px] py-2 my-4 md:my-0 text-[14px] w-fit">
-  {slides[0]?.tag || "Cursos"}
-</p>
-
+          <p className="mt-20 md:mt-0 border border-white rounded-full px-[18px] py-2 my-4 md:my-0 text-[14px] w-fit">
+            Cursos
+          </p>
 
           <div className="flex wrap w-fit md:w-full flex-col gap-4 md:gap-0 md:mt-2 md:flex-row mt-10 md:justify-between">
-            
             <div>
-            <h1 className="text-[2rem] md:text-5xl text-white leading-tight md:leading-tight md:min-w-full font-bold">
-  {/* MOBILE VIEW TEXT (custom layout) */}
-  <span className="block md:hidden leading-tight ">
-    Curso de medicina<br />
-    para{" "}
-    <span className="italic font-[Lora,serif]  text-[40px] tracking-[0%]">
-      expandir
-    </span>{" "}
-    tus<br />
-    metas profesionales
-  </span>
-
-  {/* DESKTOP VIEW TEXT (dynamic content from slide) */}
-  <span className="hidden md:inline">
-    {slides[0]?.title?.split("<em>")[0] || "Cursos de medicina para"}
-    <span className="italic font-[Lora,serif] font-normal tracking-[0%] md:leading-[74px] text-[64px]">
-      <br />
-      {slides[0]?.title?.match(/<em>(.*?)<\/em>/)?.[1] || "expandir"}
-    </span>{" "}
-    {slides[0]?.title?.split("</em>")[1]?.trim() || "tus metas profesionales"}
-  </span>
-</h1>
-
-
+              <h1 className="text-[2rem] md:text-5xl text-white leading-tight md:leading-tight md:min-w-full md:text-[60px] font-bold">
+                <span className="block md:hidden leading-tight font-Raleway font-[700] ">
+                  {STATIC_HIGHLIGHTS[currentSlide] === STATIC_HIGHLIGHTS[0] ? (
+                    <>
+                      Cursos de medicina<br />
+                      para <span className="not-italic font-[Lora,serif] md:text-[64px] text-[39px] ">expandir</span> tus<br />
+                      metas profesionales
+                    </>
+                  ) : (
+                    STATIC_HIGHLIGHTS[currentSlide]
+                  )}
+                </span>
+                <span className="hidden md:inline">
+                  {STATIC_HIGHLIGHTS[currentSlide] === STATIC_HIGHLIGHTS[0] ? (
+                    <>
+                      Cursos de medicina para<br />
+                      <span className="not-italic font-[Lora,serif] md:text-[64px] text-[64px]">expandir</span> tus metas profesionales
+                    </>
+                  ) : (
+                    STATIC_HIGHLIGHTS[currentSlide]
+                  )}
+                </span>
+              </h1>
             </div>
+
             <Link
-              //href={slides[0]?.cta?.url || "https://msklatam.com/tienda/?recurso=curso"} //Cambiarlo luego de crear la nueva tienda
               href={"https://msklatam.com/tienda/?recurso=curso"}
               className="mt-4 md:mt-20 md:mb-0 mx-6 md:mx-0 md:mt-0 w-full md:w-auto bg-white text-black px-5 py-3 rounded-full text-[14px] hover:scale-105 transition flex justify-center text-center self-center gap-2 whitespace-nowrap"
-
             >
-              {slides[0]?.cta?.title || "Comenzá tu experiencia"}
+              Comenzá tu experiencia
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
@@ -95,11 +108,16 @@ const Hero = () => {
             </Link>
           </div>
 
-          <HeroHighlights  />
+          {/* HIGHLIGHTS INTERACTIVO */}
+          <HeroHighlights
+            currentSlide={currentSlide}
+            highlights={STATIC_HIGHLIGHTS}
+            onSelect={handleSelect}
+            animationKey={animationKey}
+          />
         </div>
       </div>
     </div>
-    
   );
 };
 

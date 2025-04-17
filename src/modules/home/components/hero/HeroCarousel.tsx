@@ -1,24 +1,15 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
+import React from "react";
 import classNames from "classnames";
-import { useHomeContent } from "@/modules/home/hooks/useHomeContent";
 
 type HeroCarouselProps = {
   slides: string[];
+  currentSlide: number;
+  setCurrentSlide: (index: number) => void;
 };
 
-const HeroCarousel = ({ slides }: HeroCarouselProps) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 8000);
-    return () => clearInterval(interval);
-  }, [slides.length]);
-
+const HeroCarousel = ({ slides, currentSlide, setCurrentSlide }: HeroCarouselProps) => {
   if (!slides.length) return null;
 
   return (
@@ -41,11 +32,13 @@ const HeroCarousel = ({ slides }: HeroCarouselProps) => {
           />
         </div>
       ))}
+
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
         {slides.map((_, i) => (
-          <div
+          <button
             key={i}
-            className={`w-2 h-2 rounded-full ${
+            onClick={() => setCurrentSlide(i)}
+            className={`w-2 h-2 rounded-full transition-colors duration-300 ${
               i === currentSlide ? "bg-white" : "bg-white/50"
             }`}
           />
