@@ -307,7 +307,9 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 						handleChange={handleChange2}
 						errors={errors}
 						touched={touched}
-						country={formData.country}
+						country={
+							(formData.country && formData.country.length > 2 ? formData.country : countryCompleteName) || 'Argentina'
+						}
 					/>
 				</div>
 				<div className='mt-4'>

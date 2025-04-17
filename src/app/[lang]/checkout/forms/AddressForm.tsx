@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { countries, countryToName } from '../utils/utils';
 import { provinciasPorPais } from '../utils/provincias';
 
@@ -31,6 +31,7 @@ interface AddressFormProps {
 
 const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handleChange2, handleBlur, errors, touched }) => {
 	const normalizeCountryCode = (code: any) => code?.toLowerCase() || '';
+
 	const getCountryName = (code: any) => {
 		const normalizedCode = normalizeCountryCode(code);
 		return countryToName[normalizedCode] || '';
@@ -41,7 +42,9 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 		return provinciasPorPais[country] || [];
 	}
 
-	const provincias = obtenerProvincias(formData.country);
+	const provincias = obtenerProvincias(
+		(formData.country && formData.country.length > 2 ? formData.country : countryName) || 'Argentina',
+	);
 
 	return (
 		<div className='grid grid-cols-2 gap-4'>
@@ -53,7 +56,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 				<select
 					id='country'
 					name='country'
-					value={formData.country || countryName || ''}
+					value={(formData.country && formData.country.length > 2 ? formData.country : countryName) || 'Argentina'}
 					onChange={(e) => handleChange2(e)}
 					onBlur={handleBlur}
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
@@ -99,10 +102,12 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 						name='state'
 						value={formData.state}
 						onChange={handleChange2}
-						// onBlur={handleBlur}
+						onBlur={handleBlur}
 						className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 					>
-						<option value=''>Seleccione una provincia</option>
+						<option value='' disabled>
+							Seleccione una provincia
+						</option>
 						{provincias.map((provincia: any) => (
 							<option key={provincia} value={provincia}>
 								{provincia}

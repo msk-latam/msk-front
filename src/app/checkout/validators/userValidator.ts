@@ -14,7 +14,7 @@ export const validateUserField = (field: string, value: string | boolean) => {
 		case 'phone':
 			return value.toString().trim() ? '' : 'El teléfono es obligatorio.';
 		case 'birthday': {
-			if (!value.toString().trim()) {
+			if (!value?.toString().trim()) {
 				return 'La fecha de nacimiento es obligatoria.';
 			}
 			const selectedDate = new Date(value.toString());

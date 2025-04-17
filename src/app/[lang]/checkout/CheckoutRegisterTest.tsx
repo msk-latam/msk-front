@@ -279,6 +279,8 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 		}
 	}, [state?.user]);
 
+	console.log(formData.state);
+
 	if (loadingUser) {
 		return (
 			<div className='flex items-center justify-center h-40'>
@@ -312,7 +314,9 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 						handleChange2={handleChange2}
 						errors={errors}
 						touched={touched}
-						country={formData.country}
+						country={
+							(formData.country && formData.country.length > 2 ? formData.country : countryCompleteName) || 'Argentina'
+						}
 					/>
 				</div>
 				<div className='mt-4'>
