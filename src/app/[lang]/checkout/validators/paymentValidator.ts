@@ -17,7 +17,7 @@ export const validatePaymentField = (field: string, value: string | boolean): st
 		case 'country':
 			return value ? '' : 'Ingrese un país.';
 		case 'state':
-			return value ? '' : 'Ingrese una provincia o estado.';
+			return value.toString() ? '' : 'Ingrese una provincia o estado.';
 		case 'city':
 			return value ? '' : 'Ingrese una ciudad.';
 		case 'address':

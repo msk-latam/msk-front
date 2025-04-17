@@ -43,7 +43,9 @@ const AddressForm: React.FC<AddressFormProps> = ({
 		return provinciasPorPais[country] || [];
 	}
 
-	const provincias = obtenerProvincias(formData.country);
+	const provincias = obtenerProvincias(
+		(formData.country && formData.country.length > 2 ? formData.country : countryName) || 'Argentina',
+	);
 
 	return (
 		<div className='grid grid-cols-2 gap-4'>
@@ -55,7 +57,7 @@ const AddressForm: React.FC<AddressFormProps> = ({
 				<select
 					id='country'
 					name='country'
-					value={formData.country || countryName || ''}
+					value={(formData.country && formData.country.length > 2 ? formData.country : countryName) || 'Argentina'}
 					onChange={(e) => handleChange2(e)}
 					onBlur={handleBlur2}
 					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
