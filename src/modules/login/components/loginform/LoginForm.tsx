@@ -14,7 +14,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
   const isFormValid = email.trim() !== '' && password.trim() !== ''
 
   return (
-    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:p-0 md:mb-20 z-[10] relative overflow-visible max-w-[1400px] mx-auto
+    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:p-0 md:mb-20 z-[10] relative overflow-visible max-w-[1300px] mx-auto
 ">
 
       {/* 🔙 Botón de volver */}

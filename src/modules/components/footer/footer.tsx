@@ -3,7 +3,7 @@
 const Footer = () => {
 	return (
 		<footer className='bg-black w-full md:px-6 py-10 pb-24 md:py-14 text-sm'>
-			<div className='overflow-visible max-w-[1400px] mx-auto flex flex-col-reverse md:flex-row justify-between items-start gap-10 md:gap-16 min-h-[400px] md:min-h-[250px]'>
+			<div className='overflow-visible max-w-[1300px] mx-auto flex flex-col-reverse md:flex-row justify-between items-start gap-10 md:gap-16 min-h-[400px] md:min-h-[250px]'>
 				{/* BLOQUE IZQUIERDO */}
 				<div className='w-full md:w-1/2 text-center md:px-20 md:text-left flex flex-col items-center md:items-start gap-4 md:gap-6 text-white font-inter'>
 					<svg width='141' height='77' viewBox='0 0 141 77' fill='none' xmlns='http://www.w3.org/2000/svg'>

@@ -15,7 +15,7 @@ export default function ProductHeader({
   certification = true,
 }: ProductHeaderProps) {
   return (
-    <div className="px-4 md:px-10 lg:px-20 overflow-visible max-w-[1400px] mx-auto h-96 flex md:flex-col md:justify-end md:items-start flex-row flex-wrap justify-center items-center text-white">
+    <div className="px-4 md:px-10 lg:px-20 overflow-visible max-w-[1300px] mx-auto h-96 flex md:flex-col md:justify-end md:items-start flex-row flex-wrap justify-center items-center text-white">
 
       <div className="text-sm text-white/80 md:mb-20 md:mt-0 my-20 w-full">
       <nav className="flex overflow-hidden whitespace-nowrap text-ellipsis text-sm max-w-full">

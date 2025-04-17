@@ -17,7 +17,7 @@ export default function RecoveryPassword({ onBack, onSent }: RecoveryPasswordPro
   }
 
   return (
-    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:p-0 md:mb-20 z-[10]overflow-visible max-w-[1400px] mx-auto h-full min-h-96">
+    <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:p-0 md:mb-20 z-[10]overflow-visible max-w-[1300px] mx-auto h-full min-h-96">
 
       
       {/* 🔙 Botón de volver (visible en todas las resoluciones) */}

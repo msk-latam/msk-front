@@ -41,7 +41,7 @@ export default function LoginPage() {
 
       {/* 🧾 Contenido principal con formularios */}
       <main className="bg-gray-50 flex justify-center w-full relative pt-0 pb-20 -mb-[100px] md:mb-0">
-        <section aria-label="Formulario de autenticación" className="w-full overflow-visible max-w-[1400px] mx-auto
+        <section aria-label="Formulario de autenticación" className="w-full overflow-visible max-w-[1300px] mx-auto
 ">
           {/* Wrap the entire section inside Suspense */}
           <Suspense fallback={<div>Loading...</div>}>
