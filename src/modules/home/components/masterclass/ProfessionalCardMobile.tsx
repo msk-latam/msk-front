@@ -4,12 +4,12 @@ import { Professional } from '@/modules/home/types';
 
 const ProfessionalCardMobile = ({ pro }: { pro: Professional }) => (
   <Link href={pro.perfilUrl || "#"} target="_blank" rel="noopener noreferrer">
-    <div className="w-[330px] h-[581px] flex-shrink-0 relative overflow-hidden rounded-2xl mr-4 mb-11 cursor-pointer hover:scale-105 transition-transform">
+    <div className="w-[320px] h-[581px] flex-shrink-0 relative overflow-hidden rounded-2xl mr-4 mb-11 cursor-pointer transition-transform">
       <Image src={pro.imagenMobile} alt={pro.nombre} fill className="object-cover" />
       <div className="absolute inset-0 bg-black/30" />
 
       <div className="absolute top-6 left-4 z-8">
-        <p className="text-[12px] font-[400] bg-white text-black py-[6px] px-3 rounded-full font-medium">
+        <p className="text-[12px] bg-white text-black py-[6px] px-3 rounded-full font-medium">
           {pro.especialidad || "Especialidad no disponible"}
         </p>
       </div>

@@ -41,7 +41,7 @@ const TrustSection = () => {
             {testimonials.map((testimonial: any, index: number) => (
               <div
                 key={index}
-                className="min-w-[360px] max-w-[320px] bg-[#f7f9ff] p-6 rounded-2xl shadow-sm flex flex-col justify-between h-[260px] mx-1"
+                className="min-w-80 max-w-[320px] bg-[#f7f9ff] p-6 rounded-2xl shadow-sm flex flex-col justify-between h-[260px] mx-1"
               >
                 <div className="flex items-center gap-4 mb-4">
                   <img

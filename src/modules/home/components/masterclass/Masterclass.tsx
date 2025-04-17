@@ -69,7 +69,10 @@ const Masterclass = () => {
       setTimeout(() => setWithTransition(true), 50);
     }
   }, [withTransition]);
-
+  const cardWidth = 320;
+  const cardMarginRight = 16; // equivalente a Tailwind `mr-4`
+  const totalCardWidth = cardWidth + cardMarginRight;
+  
   return (
     <section
       aria-labelledby="masterclass-heading"
@@ -138,18 +141,19 @@ const Masterclass = () => {
         </div>
 
         {/* MOBILE */}
-        <section className="md:hidden w-full flex flex-col items-center pl-6 gap-6 overflow-x-hidden z-[1]">
+        <section className="md:hidden w-full flex flex-col items-center pl-6 gap-6 overflow-x-hidden z-[1] ">
           <h2 className="text-1xl border border-white rounded-full px-6 py-3 self-start uppercase tracking-widest">
             Masterclass
           </h2>
           <div className="relative w-full overflow-hidden">
             <div
               {...handlers}
-              className={`flex ${withTransition ? "transition-transform duration-500 ease-in-out" : ""}`}
+              className={`flex  ${withTransition ? "transition-transform duration-500 ease-in-out" : ""}`}
               style={{
-                transform: `translateX(calc(-${current * 340}px + 20px))`,
-                width: `${extendedProfessionals.length * 340}px`,
+                transform: `translateX(-${current * totalCardWidth}px)`,
+                width: `${extendedProfessionals.length * totalCardWidth}px`,
               }}
+              
             >
               {extendedProfessionals.map((pro, i) => (
                 <ProfessionalCardMobile key={i} pro={pro} />
