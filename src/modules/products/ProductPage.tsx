@@ -11,12 +11,14 @@ import ProductCertificate from './components/ProductCertificate'
 import ProductSyllabus from './components/ProductSyllabus'
 import ProductSupportForm from './components/ProductSupportForm'
 import ProductTestimonials from './components/ProductTestimonials'
+import ProductInstitutions from './components/ProductInstitutions'
+import ProductTags from './components/CourseOverview'
 
 export default function ProductPage() {
   return (
     <>
       {/* HEADER CON GRADIENTE COMO EN LOGIN */}
-      <div className="w-full relative z-10"
+      <div className="w-full relative z-9"
         style={{
           background: `linear-gradient(88.79deg, #9200AD -25.91%, #7B8CC3 -0.1%, #700084 31.13%, #B814D6 58.59%, #3B476C 109.69%, #4D005B 177.81%, #9200AD 245.71%), 
                        linear-gradient(360deg, rgba(0, 0, 0, 0) -76.85%, rgba(0, 0, 0, 0.2) 113.39%)`,
@@ -27,12 +29,14 @@ export default function ProductPage() {
 
       {/* CONTENIDO PRINCIPAL */}
       <main className="bg-gray-50">
-        <div className="flex flex-col-reverse lg:flex-row gap-8 px-4 md:px-10 lg:px-20 py-12 overflow-visible max-w-[1400px] mx-auto">
+        <div className="flex flex-col-reverse lg:flex-row gap-8 py-12 overflow-visible max-w-[1400px] mx-auto">
           {/* Columna izquierda */}
           <div className="w-full lg:w-2/3 space-y-12">
-            <div className="w-full bg-white rounded-[38px] mb-40 relative z-10 -mt-20">
+            <div className="w-full bg-white rounded-[38px] flex flex-col mb-40 relative z-[5] md:-mt-20 px-5 py-9 md:px-9 gap-6 md:gap-0">
               <ProductDescription />
+              <ProductInstitutions />
               <ProductHighlights />
+              <ProductTags/>
               <ProductTeachers />
               <ProductCertificate />
             </div>
@@ -47,7 +51,7 @@ export default function ProductPage() {
           </div>
 
           {/* Columna derecha */}
-          <aside className="w-full lg:w-1/3 relative z-10 -mt-20">
+          <aside className="w-full lg:w-1/3 relative z-[9] -mt-20">
             <ProductSummary />
           </aside>
         </div>

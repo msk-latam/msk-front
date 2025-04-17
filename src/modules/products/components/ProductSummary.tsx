@@ -16,11 +16,11 @@ export default function ProductSummary({
   enrolled = 2000,
 }: ProductSummaryProps) {
   return (
-    <div className="bg-white rounded-2xl shadow p-6 md:p-8 sticky top-10">
+    <div className="bg-white rounded-[38px] shadow p-6 md:p-8 sticky top-10">
       <img
-        src="/images/course-placeholder.jpg"
+        src="/images/productpage/course.svg"
         alt="Curso"
-        className="rounded-xl w-full h-48 object-cover mb-6"
+        className="rounded-xl w-full object-cover mb-6"
       />
 
       <p className="text-gray-500 line-through text-sm">Total: $878.874 ARS</p>
