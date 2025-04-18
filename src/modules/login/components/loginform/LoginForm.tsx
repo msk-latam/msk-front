@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 
@@ -15,18 +15,61 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+  const [shouldAskToCompleteProfile, setShouldAskToCompleteProfile] = useState(false)
+
   const isFormValid = email.trim() !== '' && password.trim() !== ''
+
+  useEffect(() => {
+    // 🔁 Lógica escalable para cuando se integre Auth0 o localStorage
+    // Por ahora siempre true para mostrar el modal
+    const userShouldCompleteProfile = true // cambiar luego por localStorage / auth0 check
+    setShouldAskToCompleteProfile(userShouldCompleteProfile)
+  }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+
     if (isFormValid) {
-      router.push('/dashboard')
+      if (shouldAskToCompleteProfile) {
+        setShowModal(true)
+      } else {
+        router.push('/dashboard')
+      }
     }
+  }
+
+  const handleRedirect = (path: string) => {
+    setShowModal(false)
+    router.push(path)
   }
 
   return (
     <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:p-0 md:mb-20 z-[10] relative overflow-visible max-w-[1300px] mx-auto">
-      {/* 🔙 Botón de volver */}
+      {/* ✅ Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-2xl max-w-sm w-full shadow-lg text-center">
+            <h2 className="text-lg font-semibold text-gray-800 mb-4">¿Querés completar tu perfil ahora?</h2>
+            <div className="flex justify-between gap-4">
+              <button
+                onClick={() => handleRedirect('/profile-completion')}
+                className="flex-1 bg-[#9200AD] hover:bg-[#700084] text-white font-medium py-2 rounded-full transition"
+              >
+                Sí
+              </button>
+              <button
+                onClick={() => handleRedirect('/dashboard')}
+                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 rounded-full transition"
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Resto del login (sin cambios) */}
       <div className="absolute md:top-10 md:left-8 top-5 left-5 flex z-10">
         <button
           onClick={onBack}
@@ -47,9 +90,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
         <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-6 font-inter">
           {/* Email */}
           <div>
-            <label htmlFor="email" className="block text-[#1A1A1A] font-medium text-left">
-              E-mail
-            </label>
+            <label htmlFor="email" className="block text-[#1A1A1A] font-medium text-left">E-mail</label>
             <input
               id="email"
               type="email"
@@ -63,9 +104,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
           {/* Contraseña */}
           <div>
             <div className="flex justify-between items-center">
-              <label htmlFor="password" className="block text-[#1A1A1A] font-medium text-left">
-                Contraseña
-              </label>
+              <label htmlFor="password" className="block text-[#1A1A1A] font-medium text-left">Contraseña</label>
               <button type="button" onClick={onForgotPassword} className="text-[#9200AD]">
                 ¿Olvidaste tu contraseña?
               </button>
@@ -106,8 +145,8 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
             Acceder
           </button>
 
-          {/* Divider */}
-          <div className="flex items-center gap-2 mt-4">
+           {/* Divider */}
+           <div className="flex items-center gap-2 mt-4">
             <hr className="w-full border-[#6E737C]" />
             <span className="px-2 py-0.5 bg-white text-[#6E737C]" style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '14px', lineHeight: '22px' }}>
               O
@@ -117,15 +156,11 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 
           {/* Redes sociales */}
           <div className="space-y-4 mt-2">
-            {[
-              { name: 'Google', icon: '/icons/google.svg' },
-              { name: 'Facebook', icon: '/icons/facebook.svg' },
-              { name: 'Apple', icon: '/icons/apple.svg' },
-            ].map((provider) => (
+            {[{ name: 'Google', icon: '/icons/google.svg' }, { name: 'Facebook', icon: '/icons/facebook.svg' }, { name: 'Apple', icon: '/icons/apple.svg' }].map((provider) => (
               <button
                 key={provider.name}
                 type="button"
-                className="w-full border text-sm font-medium border-gray-300 rounded-[38px] py-[14px] flex items-center justify-center gap-2 font-inter"
+                className="w-full border text-sm font-medium border-gray-300 rounded-[38px] py-[14px] flex items-center justify-center gap-2 font-inter transition hover:bg-[#6E737C]"
               >
                 Continuar con {provider.name}
                 <img src={provider.icon} alt={provider.name} className="h-5 w-5" />

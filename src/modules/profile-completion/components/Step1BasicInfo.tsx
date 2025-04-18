@@ -124,7 +124,7 @@ export default function Step1BasicInfo({
           </label>
           <div className="flex gap-2 border rounded-2xl border-[#DBDDE2] px-3 py-2 focus-within:ring-4 focus-within:ring-[#F5E6F7]">
             <select
-              className="border-0 bg-transparent focus:ring-0 focus:outline-none text-[#1A1A1A] w-20"
+              className="border-0 bg-transparent focus:ring-0 focus:outline-none text-[#1A1A1A] w-24"
               defaultValue="+54"
             >
               <option value="+54">+54</option>
