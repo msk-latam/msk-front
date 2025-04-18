@@ -1,36 +1,14 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { useSearchParams } from 'next/navigation'
 import '@/app/globals.css'
 import { Suspense } from 'react'
 
 import Navbar from '@/modules/components/navbar/Navbar'
 import Newsletter from '@/modules/components/newsletter/NewsLetter'
 import Footer from '@/modules/components/footer/footer'
-import LoginForm from '@/modules/login/components/loginform/LoginForm'
-import RegisterForm from '@/modules/login/components/loginform/RegisterForm'
-import RecoveryPassword from '@/modules/login/components/loginform/RecoveryPassword'
-import RecoveryPasswordSent from '@/modules/login/components/loginform/RecoveryPasswordSent'
-import NewPasswordForm from '@/modules/login/components/loginform/NewPasswordForm'
+import LoginRouterHandler from '@/modules/login/components/loginform/LoginClientRouter'
 
 export default function LoginPage() {
-  const searchParams = useSearchParams()
-  const formParam = searchParams.get('form')
-
-  const [showRegister, setShowRegister] = useState(false)
-  const [showRecovery, setShowRecovery] = useState(false)
-  const [showRecoverySent, setShowRecoverySent] = useState(false)
-
-  // 🧠 Detecta si hay que mostrar el formulario de registro al cargar la página
-  useEffect(() => {
-    if (formParam === 'registerForm') {
-      setShowRegister(true)
-    } else {
-      setShowRegister(false)
-    }
-  }, [formParam])
-
   return (
     <>
       {/* 🌈 Header con fondo de gradiente */}
@@ -51,29 +29,7 @@ export default function LoginPage() {
           className="w-full overflow-visible max-w-[1300px] mx-auto"
         >
           <Suspense fallback={<div>Loading...</div>}>
-            {showRegister ? (
-              <RegisterForm onBack={() => setShowRegister(false)} />
-            ) : showRecovery ? (
-              showRecoverySent ? (
-                <RecoveryPasswordSent
-                  onContinue={() => {
-                    setShowRecovery(false)
-                    setShowRecoverySent(false)
-                  }}
-                />
-              ) : (
-                <RecoveryPassword
-                  onBack={() => setShowRecovery(false)}
-                  onSent={() => setShowRecoverySent(true)}
-                />
-              )
-            ) : (
-              <LoginForm
-                onCreateAccount={() => setShowRegister(true)}
-                onForgotPassword={() => setShowRecovery(true)}
-                onBack={() => setShowRegister(false)}
-              />
-            )}
+            <LoginRouterHandler />
           </Suspense>
         </section>
       </main>
