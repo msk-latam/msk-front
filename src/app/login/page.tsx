@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import '@/app/globals.css'
-import { Suspense } from 'react';
+import { Suspense } from 'react'
 
 import Navbar from '@/modules/components/navbar/Navbar'
 import Newsletter from '@/modules/components/newsletter/NewsLetter'
@@ -15,16 +15,21 @@ import RecoveryPasswordSent from '@/modules/login/components/loginform/RecoveryP
 import NewPasswordForm from '@/modules/login/components/loginform/NewPasswordForm'
 
 export default function LoginPage() {
+  const searchParams = useSearchParams()
+  const formParam = searchParams.get('form')
+
   const [showRegister, setShowRegister] = useState(false)
   const [showRecovery, setShowRecovery] = useState(false)
   const [showRecoverySent, setShowRecoverySent] = useState(false)
 
-  // Move this to a client-only component to ensure it's only used on the client
-  const ClientSearchParams = () => {
-    const searchParams = useSearchParams()
-    const form = searchParams.get('form')
-    return form
-  }
+  // 🧠 Detecta si hay que mostrar el formulario de registro al cargar la página
+  useEffect(() => {
+    if (formParam === 'registerForm') {
+      setShowRegister(true)
+    } else {
+      setShowRegister(false)
+    }
+  }, [formParam])
 
   return (
     <>
@@ -41,13 +46,11 @@ export default function LoginPage() {
 
       {/* 🧾 Contenido principal con formularios */}
       <main className="bg-gray-50 flex justify-center w-full relative pt-0 pb-20 -mb-[100px] md:mb-0">
-        <section aria-label="Formulario de autenticación" className="w-full overflow-visible max-w-[1300px] mx-auto
-">
-          {/* Wrap the entire section inside Suspense */}
+        <section
+          aria-label="Formulario de autenticación"
+          className="w-full overflow-visible max-w-[1300px] mx-auto"
+        >
           <Suspense fallback={<div>Loading...</div>}>
-            <ClientSearchParams /> {/* Use the client-side only component here */}
-
-            {/* Handle different forms based on searchParams */}
             {showRegister ? (
               <RegisterForm onBack={() => setShowRegister(false)} />
             ) : showRecovery ? (

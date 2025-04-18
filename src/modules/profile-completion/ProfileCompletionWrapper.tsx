@@ -35,7 +35,7 @@ export default function ProfileCompletionWrapper() {
   }
 
   return (
-    <div className="w-full bg-white md:rounded-3xl rounded-t-3xl  shadow-md -mt-[40px] md:-mt-20 md:mx-20 z-[5] relative overflow-visible max-w-[1600px]">
+    <div className="w-full bg-white md:rounded-3xl rounded-t-3xl  shadow-md -mt-[40px] md:-mt-20 md:mx-20 z-[1] relative overflow-visible max-w-[1600px]">
     
 
 
@@ -49,11 +49,16 @@ export default function ProfileCompletionWrapper() {
       )}
       {step === 2 && (
         <Step2Professional
-          data={formData}
-          onNext={nextStep}
-          onBack={prevStep}
-          onUpdate={updateFormData}
-        />
+        data={formData}
+        onNext={nextStep}
+        onBack={prevStep}
+        onUpdate={updateFormData}
+        onSkip={() => {
+          // lógica cuando el usuario quiera omitir
+          nextStep() // o lo que necesites
+        }}
+      />
+      
       )}
       {step === 3 && (
         <Step3Interests
@@ -65,7 +70,7 @@ export default function ProfileCompletionWrapper() {
       )}
       {step === 4 && (
         <Step4Recommendations
-          data={formData}
+          
           onBack={prevStep}
         />
       )}

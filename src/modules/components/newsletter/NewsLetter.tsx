@@ -14,8 +14,8 @@ const Newsletter = () => {
 	};
 
 	return (
-		<div className='w-full px-4 md:px-12 flex flex-col items-center z-[5] justify-center bg-[#1A1A1A] text-white'>
-			<div className='bg-[#35383E] w-full -mt-8 md:-mt-14 p-6 md:py-6 md:px-10 md:rounded-[38px] rounded-[38px] z-[1] flex flex-col md:flex-row justify-between gap-4 md:gap-8 overflow-visible max-w-[1300px] mx-auto'>
+		<div  className='newsletter w-full px-4 md:px-12 flex flex-col items-center z-10 justify-center bg-[#1A1A1A] text-white'>
+			<div className=' bg-[#35383E] w-full -mt-8 md:-mt-14 p-6 md:py-6 md:px-10 md:rounded-[38px] rounded-[38px] z-[5] md:z-[1] flex flex-col md:flex-row justify-between gap-4 md:gap-8 overflow-visible max-w-[1300px] mx-auto'>
 				{/* Título */}
 				<div className='md:w-[200px] shrink-0'>
 					<p className='text-white text-left md:text-[18px] text-[22px] font-Raleway font-bold md:translate-y-[5px]'>
@@ -27,7 +27,7 @@ const Newsletter = () => {
 
 				{/* Descripción */}
 				<div className='text-[16px] md:text-[18px] text-white text-left md:flex-1 font-inter font-medium leading-snug shadow-sm md:translate-y-[10px]'>
-					Descuentos exclusivos y becas <br /> completas solo con tu suscripción
+					Descuentos exclusivos y becas <br  /> completas solo con tu suscripción
 				</div>
 
 				<div className='hidden md:block w-[1px] h-[70px] bg-[#5A5F67] ml-6' />

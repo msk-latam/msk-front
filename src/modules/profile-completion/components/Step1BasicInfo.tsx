@@ -35,13 +35,11 @@ export default function Step1BasicInfo({
   }, [profession, specialty, country, phone]);
 
   return (
-    <section
-      className="w-full max-w-[1632px] h-fit relative z-8 mx-auto px-6 pt-[84px] md:pb-28 mb-16 md:py-16 md:px-9"
-      style={{ fontFamily: "Raleway, sans-serif" }}
-    >
+    <section className="w-full max-w-[1632px] h-fit relative z-8 mx-auto px-6 pt-[84px] md:pb-28 mb-16 md:py-16 md:px-9 font-inter">
+      {/* Botón volver */}
       <button
         onClick={onBack}
-        className="md:top-10 md:left-8 top-5 left-5 flex z-10 items-center justify-center w-10 h-10 rounded-full border border-gray-300 text-[#6e737c] hover:bg-gray-100 transition absolute"
+        className="md:top-10 md:left-8 top-5 left-5 flex z-10 items-center justify-center w-10 h-10 rounded-full border border-gray-300 text-[#6E737C] hover:bg-gray-100 transition absolute"
       >
         <svg
           width="6"
@@ -60,22 +58,23 @@ export default function Step1BasicInfo({
         </svg>
       </button>
 
-      <div className="text-center mb-6">
-        <h2 className="text-2xl sm:text-3xl font-semibold pb-5 text-gray-900">
+      <div className="text-center mb-6 z-[1] ">
+        <h2 className="text-2xl sm:text-3xl font-semibold pb-5 text-[#1A1A1A]">
           Completa tu perfil y personaliza tu experiencia en MSK
         </h2>
         <ProgressIndicator currentStep={1} />
       </div>
 
-      <form className="max-w-md mx-auto space-y-6">
+      <form className="max-w-md mx-auto space-y-6 font-inter">
+        {/* Profesión */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 text-left">
+          <label className="block text-sm font-medium text-[#1A1A1A] text-left">
             Profesión
           </label>
           <select
             value={profession}
             onChange={(e) => setProfession(e.target.value)}
-            className="mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] focus:border-1 text-[#6e737c] py-2.5 px-3.5"
+            className="mt-1 w-full rounded-2xl border border-[#DBDDE2] p-3 text-[#6E737C] focus:ring-4 focus:ring-[#F5E6F7] focus:outline-none"
           >
             <option value="">Seleccionar profesión</option>
             <option value="medico">Médico</option>
@@ -84,14 +83,15 @@ export default function Step1BasicInfo({
           </select>
         </div>
 
+        {/* Especialidad */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 text-left">
+          <label className="block text-sm font-medium text-[#1A1A1A] text-left">
             Especialidad
           </label>
           <select
             value={specialty}
             onChange={(e) => setSpecialty(e.target.value)}
-            className="mt-1 w-full rounded-2xl text-[#6e737c] border border-gray-300 py-2.5 px-3.5 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] focus:border-1"
+            className="mt-1 w-full rounded-2xl border border-[#DBDDE2] p-3 text-[#6E737C] focus:ring-4 focus:ring-[#F5E6F7] focus:outline-none"
           >
             <option value="">Seleccionar especialidad</option>
             <option value="medicina-general">Medicina General</option>
@@ -100,14 +100,15 @@ export default function Step1BasicInfo({
           </select>
         </div>
 
+        {/* País */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 text-left">
+          <label className="block text-sm font-medium text-[#1A1A1A] text-left">
             País
           </label>
           <select
             value={country}
             onChange={(e) => setCountry(e.target.value)}
-            className="mt-1 w-full rounded-2xl border border-gray-300 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] focus:border-1 text-[#6e737c] py-2.5 px-3.5"
+            className="mt-1 w-full rounded-2xl border border-[#DBDDE2] p-3 text-[#6E737C] focus:ring-4 focus:ring-[#F5E6F7] focus:outline-none"
           >
             <option value="">Seleccionar país</option>
             <option value="ar">Argentina</option>
@@ -116,13 +117,14 @@ export default function Step1BasicInfo({
           </select>
         </div>
 
-        <div className="block text-sm font-medium text-gray-700 text-left">
-          <label className="block text-sm font-medium text-gray-700 text-left">
+        {/* Teléfono */}
+        <div>
+          <label className="block text-sm font-medium text-[#1A1A1A] text-left mb-1">
             Teléfono
           </label>
-          <div className="flex gap-2 border rounded-2xl border-gray-300 focus-within:ring-4 focus-within:border-[#DBDDE2] focus-within:ring-[#F5E6F7] focus-within:border-1 px-1.5 py-0.5">
+          <div className="flex gap-2 border rounded-2xl border-[#DBDDE2] px-3 py-2 focus-within:ring-4 focus-within:ring-[#F5E6F7]">
             <select
-              className="border-0 focus:ring-transparent focus:border-0 focus:ring-0 text-[#1a1a1a] w-24"
+              className="border-0 bg-transparent focus:ring-0 focus:outline-none text-[#1A1A1A] w-20"
               defaultValue="+54"
             >
               <option value="+54">+54</option>
@@ -133,29 +135,31 @@ export default function Step1BasicInfo({
               type="tel"
               placeholder="Ingresar teléfono"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="flex-1 focus:ring-transparent border-0 focus:border-0 focus:ring-0 text-[#6e737c]"
+              onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
+              className="flex-1 bg-transparent border-0 focus:ring-0 focus:outline-none text-[#6E737C]"
             />
           </div>
         </div>
 
+        {/* CTA: Siguiente */}
         <button
           type="button"
           disabled={!isValid}
           onClick={onNext}
-          className={`w-full text-white py-3 px-4 rounded-[38px] transition ${
+          className={`w-full text-white py-3 px-4 rounded-[38px] font-inter font-medium transition ${
             isValid
-              ? "bg-[#9200ad] hover:bg-purple-700"
-              : "bg-gray-300 cursor-not-allowed"
+              ? "bg-[#9200AD] hover:bg-[#700084]"
+              : "bg-[#989CA4] cursor-not-allowed"
           }`}
         >
           Siguiente
         </button>
 
+        {/* CTA: Completar más tarde */}
         <button
           type="button"
           onClick={onSkip}
-          className="w-full mt-2 border border-gray-300 font-semibold text-sm text-[#1a1a1a] py-3 px-4 rounded-[38px] hover:bg-gray-100"
+          className="w-full mt-2 border border-gray-300 font-inter font-semibold text-sm text-[#1A1A1A] py-3 px-4 rounded-[38px] hover:bg-[#8387901a]"
         >
           Completar más adelante
         </button>
