@@ -1,30 +1,32 @@
-'use client'
+"use client";
 
-import Navbar from '@/modules/components/navbar/Navbar'
-import Footer from '@/modules/components/footer/footer'
-import ProductHeader from './components/ProductHeader'
-import ProductSummary from './components/ProductSummary'
-import ProductDescription from './components/ProductDescription'
-import ProductHighlights from './components/ProductHighlights'
-import ProductTeachers from './components/ProductTeachers'
-import ProductCertificate from './components/ProductCertificate'
-import ProductSyllabus from './components/ProductSyllabus'
-import ProductSupportForm from './components/ProductSupportForm'
-import ProductTestimonials from './components/ProductTestimonials'
-import ProductInstitutions from './components/ProductInstitutions'
-import CourseOverview from './components/CourseOverview'
-import ProductVideo from './components/ProductVideo'
-import CourseCards from  './components/CourseCards'
+import Navbar from "@/modules/components/navbar/Navbar";
+import Footer from "@/modules/components/footer/footer";
+import ProductHeader from "./components/ProductHeader";
+import ProductSummary from "./components/ProductSummary";
+import ProductDescription from "./components/ProductDescription";
+import ProductHighlights from "./components/ProductHighlights";
+import ProductTeachers from "./components/ProductTeachers";
+import ProductCertificate from "./components/ProductCertificate";
+import ProductSyllabus from "./components/ProductSyllabus";
+import ProductSupportForm from "./components/ProductSupportForm";
+import ProductTestimonials from "./components/ProductTestimonials";
+import ProductInstitutions from "./components/ProductInstitutions";
+import CourseOverview from "./components/CourseOverview";
+import ProductVideo from "./components/ProductVideo";
+import CourseCards from "./components/CourseCards";
 
 export default function ProductPage() {
   return (
     <>
       {/* HEADER CON GRADIENTE COMO EN LOGIN */}
-      <div className="w-full relative z-9"
+      <div
+        className="w-full relative z-9"
         style={{
           background: `linear-gradient(88.79deg, #9200AD -25.91%, #7B8CC3 -0.1%, #700084 31.13%, #B814D6 58.59%, #3B476C 109.69%, #4D005B 177.81%, #9200AD 245.71%), 
                        linear-gradient(360deg, rgba(0, 0, 0, 0) -76.85%, rgba(0, 0, 0, 0.2) 113.39%)`,
-        }}>
+        }}
+      >
         <Navbar />
         <ProductHeader />
       </div>
@@ -38,21 +40,21 @@ export default function ProductPage() {
               <ProductDescription />
               <ProductInstitutions />
               <ProductHighlights />
-              <CourseOverview/>
+              <CourseOverview />
               <ProductTeachers />
-            </div>            
+            </div>
             {/* Nuevo contenedor para video */}
             <div className="w-full  bg-white rounded-[38px] md:py-10 md:px-9 px-6 py-12">
-            <ProductVideo />
+              <ProductVideo />
             </div>
             {/* Nuevo contenedor para Certificate */}
             <div className="w-full  bg-white rounded-[38px] md:py-10 md:px-9 px-6 py-12">
-            <ProductCertificate />
+              <ProductCertificate />
             </div>
             {/* Nuevo contenedor para ProductSyllabus */}
             <div className="w-full  bg-white rounded-[38px] md:py-16 md:px-9 px-6 py-9">
               <ProductSyllabus />
-            </div>          
+            </div>
             {/* Nuevo contenedor para Cards */}
             <div className="w-full md:py-16 md:px-9 px-6 py-9">
               <CourseCards />
@@ -75,5 +77,5 @@ export default function ProductPage() {
 
       <Footer />
     </>
-  )
+  );
 }
