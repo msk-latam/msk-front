@@ -56,7 +56,7 @@ export default function ProductPage() {
               <ProductSyllabus />
             </div>
             {/* Nuevo contenedor para Cards */}
-            <div className="w-full md:py-16 md:px-9 px-6 py-9">
+            <div className="w-full">
               <CourseCards />
             </div>
             {/* Nuevo contenedor para ProductSupportForm */}
