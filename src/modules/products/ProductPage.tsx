@@ -14,6 +14,7 @@ import ProductTestimonials from './components/ProductTestimonials'
 import ProductInstitutions from './components/ProductInstitutions'
 import CourseOverview from './components/CourseOverview'
 import ProductVideo from './components/ProductVideo'
+import CourseCards from  './components/CourseCards'
 
 export default function ProductPage() {
   return (
@@ -51,6 +52,10 @@ export default function ProductPage() {
             {/* Nuevo contenedor para ProductSyllabus */}
             <div className="w-full  bg-white rounded-[38px] md:py-16 md:px-9 px-6 py-9">
               <ProductSyllabus />
+            </div>          
+            {/* Nuevo contenedor para Cards */}
+            <div className="w-full md:py-16 md:px-9 px-6 py-9">
+              <CourseCards />
             </div>
             {/* Nuevo contenedor para ProductSupportForm */}
             <div className="w-full bg-white rounded-[38px] md:py-10 md:px-9 px-6 py-12">
