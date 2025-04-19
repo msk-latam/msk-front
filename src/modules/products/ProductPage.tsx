@@ -49,7 +49,7 @@ export default function ProductPage() {
             <ProductCertificate />
             </div>
             {/* Nuevo contenedor para ProductSyllabus */}
-            <div className="w-full  bg-white rounded-[38px] md:py-10 md:px-9 px-6 py-12">
+            <div className="w-full  bg-white rounded-[38px] md:py-16 md:px-9 px-6 py-9">
               <ProductSyllabus />
             </div>
             {/* Nuevo contenedor para ProductSupportForm */}
