@@ -31,7 +31,7 @@ export default function ProductPage() {
 
       {/* CONTENIDO PRINCIPAL */}
       <main className="bg-gray-50">
-        <div className="flex flex-col-reverse lg:flex-row gap-8 py-12 overflow-visible max-w-[1300px] mx-auto">
+        <div className="flex flex-col-reverse lg:flex-row gap-8 md:py-12 pt-12 overflow-visible max-w-[1300px] mx-auto">
           {/* Columna izquierda */}
           <div className="w-full lg:w-2/3 space-y-6">
             <div className="w-full bg-white rounded-[38px] flex flex-col relative z-[5] md:-mt-20 px-5 pt-9 pb-3 md:px-9 gap-6 md:gap-0">
@@ -58,7 +58,7 @@ export default function ProductPage() {
               <CourseCards />
             </div>
             {/* Nuevo contenedor para ProductSupportForm */}
-            <div className="w-full bg-white rounded-[38px] md:py-10 md:px-9 px-6 py-12">
+            <div className="w-full bg-white rounded-[38px] md:py-16 md:px-9 px-6 py-9">
               <ProductSupportForm />
             </div>
           </div>
