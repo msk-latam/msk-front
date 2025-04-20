@@ -1,59 +1,29 @@
-// 'use client'
-
-// interface Highlight {
-//   title: string
-//   description: string
-// }
-
-// interface ProductHighlightsProps {
-//   highlights?: Highlight[]
-// }
-
-// export default function ProductHighlights({ highlights = [] }: ProductHighlightsProps) {
-//   return (
-//     <section className="bg-white rounded-2xl  md:p-10">
-//       <h2 className="text-2xl font-semibold mb-6">Qué aprenderás</h2>
-
-//       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//         {highlights.map((item, idx) => (
-//           <div key={idx} className="flex items-start gap-3">
-//             <img src="/icons/check-circle.svg" alt="check" className="w-5 h-5 mt-1" />
-//             <div>
-//               <p className="text-gray-900 font-medium text-sm mb-1">{item.title}</p>
-//               <p className="text-sm text-gray-600 leading-relaxed">{item.description}</p>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </section>
-//   )
-// }
 
 'use client'
 
-interface Highlight {
+interface Learning {
   text: string
 }
 
-interface ProductHighlightsProps {
-  highlights?: Highlight[]
+interface ProductLearningProps {
+  learning?: Learning[]
 }
 
-export default function ProductHighlights({
-  highlights = [
+export default function ProductLearning({
+  learning = [
     { text: 'Manejar técnicas avanzadas en emergencias críticas' },
     { text: 'Optimizar la toma de decisiones en situaciones de alta complejidad' },
     { text: 'Aplicar protocolos internacionales para la seguridad del paciente en urgencias' },
     { text: 'Interpretar estudios diagnósticos para intervenciones precisas en emergencias' },
   ],
-}: ProductHighlightsProps) {
+}: ProductLearningProps) {
   // Divide los ítems en dos columnas de forma balanceada
-  const leftColumn = highlights.filter((_, idx) => idx % 2 === 0)
-  const rightColumn = highlights.filter((_, idx) => idx % 2 !== 0)
+  const leftColumn = learning.filter((_, idx) => idx % 2 === 0)
+  const rightColumn = learning.filter((_, idx) => idx % 2 !== 0)
 
   return (
     <section className="bg-white p-5 md:px-0 md:py-3">
-      <h2 className="text-3xl font-medium mb-10 font-raleway text-gray-900">Qué aprenderás</h2>
+      <h2 className="text-3xl font-medium md:text-[34px] mb-6 font-raleway text-gray-900">Qué aprenderás</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-6">
           {leftColumn.map((item, idx) => (

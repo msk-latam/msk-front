@@ -67,7 +67,7 @@ const features = [
 const CourseOverview: React.FC = () => {
   return (
     <section className="py-6 max-w-5xl mx-auto">
-      <h2 className="text-3xl font-medium font-raleway mb-4 text-center md:text-left">
+      <h2 className="text-3xl font-medium md:text-[34px] ont-raleway mb-6 text-center md:text-left">
         Desarróllate en lo importante
       </h2>
 
@@ -82,7 +82,9 @@ const CourseOverview: React.FC = () => {
           </span>
         ))}
       </div>
-
+      <h3 className="pb-6 font-raleway text-[18px] md:text-2xl font-medium md:text-left text-center">
+      Con este curso, mejorarás tu criterio clínico y te convertirás en referente en <span className="font-bold">Emergentología</span>
+        </h3>
       {/* Step by step */}
       <div className="flex flex-col md:flex-row md:flex-nowrap md:items-center md:justify-center md:gap-4 mb-10 text-sm text-[#29324f] w-full">
   {steps.map((item, idx) => (
@@ -116,7 +118,7 @@ const CourseOverview: React.FC = () => {
 </div>
 
 
-      {/* Paso a paso */}
+      {/* Steps */}
       <div className="bg-[#f7f9ff] rounded-[38px] p-6 mb-10">
         <h3 className="pb-6 font-raleway text-[18px] font-medium md:text-left text-center">
           Tu cursada, paso a paso

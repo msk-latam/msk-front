@@ -5,7 +5,7 @@ import Footer from "@/modules/components/footer/footer";
 import ProductHeader from "./components/ProductHeader";
 import ProductSummary from "./components/ProductSummary";
 import ProductDescription from "./components/ProductDescription";
-import ProductHighlights from "./components/ProductHighlights";
+import ProductHighlights from "./components/ProductLearning";
 import ProductTeachers from "./components/ProductTeachers";
 import ProductCertificate from "./components/ProductCertificate";
 import ProductSyllabus from "./components/ProductSyllabus";
@@ -34,9 +34,9 @@ export default function ProductPage() {
 
       {/* CONTENIDO PRINCIPAL */}
       <main className="bg-gray-50 z-[9]">
-        <div className="flex flex-col-reverse lg:flex-row gap-8 md:py-12 pt-12 overflow-visible max-w-[1300px] mx-auto">
+        <div className="flex flex-col-reverse lg:flex-row gap-6 md:py-12 pt-12 overflow-visible max-w-[1300px] mx-auto">
           {/* Columna izquierda */}
-          <div className="w-full lg:w-2/3 space-y-6 z-[9]">
+          <div className="w-full md:w-2/3 space-y-6 z-[9]">
             <div className="w-full bg-white rounded-[38px] flex flex-col relative z-[9] md:-mt-20 px-5 pt-9 pb-3 md:px-9 gap-6 md:gap-0">
               <ProductDescription />
               <ProductInstitutions />
@@ -67,7 +67,7 @@ export default function ProductPage() {
           </div>
 
           {/* Columna derecha */}
-          <aside className="w-full lg:w-1/3 relative z-[9] -mt-20">
+          <aside className="w-full md:w-1/3 relative z-[9] -mt-20">
             <ProductSummary />
           </aside>
         </div>

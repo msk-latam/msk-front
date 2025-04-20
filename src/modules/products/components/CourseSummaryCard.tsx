@@ -24,7 +24,7 @@ export default function CourseSummaryCard({
   onEnroll
 }: CourseSummaryProps) {
   return (
-    <aside className="bg-white rounded-[38px] shadow p-6 w-full max-w-sm space-y-4">
+    <aside className="bg-white rounded-[38px] shadow p-6 w-full space-y-4">
       <Image
         src={image}
         alt="Imagen del curso"

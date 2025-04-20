@@ -16,7 +16,7 @@ export default function ProductSummary({
   enrolled = 2000,
 }: ProductSummaryProps) {
   return (
-    <div className="bg-white rounded-[38px] shadow p-6 md:p-8 sticky top-10 w-full max-w-sm">
+    <div className="bg-white rounded-[38px] shadow p-6 md:p-8 sticky top-10 w-full">
       <img
         src="/images/productpage/course.svg"
         alt="Curso"

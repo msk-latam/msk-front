@@ -1,0 +1,130 @@
+{
+    "id": 333437,
+    "title": "Iniciaci\u00f3n a la investigaci\u00f3n en enfermer\u00eda",
+    "slug": "iniciacion-investigacion-enfermeria",
+    "date": "2025-01-31T15:25:33+00:00",
+    "featured_image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/investigacionenfermeria-primaria.jpg",
+    "categories": [
+        {
+            "term_id": 1090,
+            "name": "Medicina general",
+            "slug": "medicina-general",
+            "is_primary": true
+        },
+        {
+            "term_id": 1449,
+            "name": "Medicina familiar",
+            "slug": "medicina-familiar",
+            "is_primary": false
+        }
+    ],
+    "link": "https:\/\/msklatam.com\/curso\/iniciacion-investigacion-enfermeria",
+    "sections": {
+        "header": {
+            "title": "Iniciaci\u00f3n a la investigaci\u00f3n en enfermer\u00eda",
+            "has_certificate": true,
+            "categories": [
+                {
+                    "term_id": 1090,
+                    "name": "Medicina general",
+                    "slug": "medicina-general",
+                    "is_primary": true
+                },
+                {
+                    "term_id": 1449,
+                    "name": "Medicina familiar",
+                    "slug": "medicina-familiar",
+                    "is_primary": false
+                }
+            ]
+        },
+        "content": {
+            "title": "Qu\u00e9 es la medicina de urgencias",
+            "content": "La medicina de urgencias o emergentolog\u00eda se centra en la detecci\u00f3n, el diagn\u00f3stico, la atenci\u00f3n inicial, la prevenci\u00f3n de complicaciones y la ubicaci\u00f3n de los pacientes que presentan enfermedades agudas y requieren atenci\u00f3n m\u00e9dica inmediata, con el fin de disminuir los riesgos de invalidez o muerte. Un especialista en medicina de urgencias puede brindar una atenci\u00f3n r\u00e1pida y eficaz, estabilizando a sus pacientes en situaciones cr\u00edticas.<\/p>\n Este curso de Medicina de urgencias te preparar\u00e1 para poder realizar un abordaje eficaz de los diversos escenarios que se presentan en los servicios de urgencias y emergencias, abarcando todas las instancias, desde el diagn\u00f3stico hasta la prevenci\u00f3n de complicaciones.\nEl curso de Medicina de urgencias de MSK est\u00e1 organizado en 12 m\u00f3dulos que abarcan temas como atenci\u00f3n inicial y v\u00eda a\u00e9rea, resucitaci\u00f3n en emergencias, sepsis y emergencias infecciosas, trauma en la emergencia, emergencias respiratorias y emergencias cardiovasculares, entre otros.<\/p>\n"
+        },
+        "institutions": [
+            {
+                "id": 230596,
+                "title": "ACC - American College of Cardiology",
+                "slug": "accsap-american-college-of-cardiology",
+                "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2022\/09\/acc_1x.webp"
+            }
+        ],
+        "learning": [
+            {
+                "msk_learning_content": "Manejar t\u00e9cnicas avanzadas en emergencias cr\u00edticas"
+            },
+            {
+                "msk_learning_content": "Optimizar la toma de decisiones en situaciones de alta complejidad\u2028"
+            },
+            {
+                "msk_learning_content": "Aplicar protocolos internacionales para la seguridad del paciente en urgencias"
+            },
+            {
+                "msk_learning_content": "Interpretar estudios diagn\u00f3sticos para intervenciones precisas en emergencias\u2028"
+            }
+        ],
+        "habilities": [
+            {
+                "id": 60166,
+                "name": "Comunicaci\u00f3n efectiva",
+                "slug": "comunicacion-efectiva"
+            },
+            {
+                "id": 60161,
+                "name": "Control de complicaciones",
+                "slug": "control-de-complicaciones"
+            },
+            {
+                "id": 60160,
+                "name": "Diagn\u00f3stico r\u00e1pido",
+                "slug": "diagnostico-rapido"
+            },
+            {
+                "id": 60159,
+                "name": "Estabilizaci\u00f3n cr\u00edtica",
+                "slug": "estabilizacion-critica"
+            },
+            {
+                "id": 60165,
+                "name": "Gesti\u00f3n de riesgos",
+                "slug": "gestion-de-riesgos"
+            },
+            {
+                "id": 60164,
+                "name": "Planificaci\u00f3n trauma",
+                "slug": "planificacion-trauma"
+            },
+            {
+                "id": 60163,
+                "name": "Tecnolog\u00eda emergencias",
+                "slug": "tecnologia-emergencias"
+            },
+            {
+                "id": 60162,
+                "name": "Seguridad del paciente",
+                "slug": "seguridad-del-paciente"
+            }
+        ],
+        "with_this_course": "Con este curso, mejorar\u00e1s tu criterio cl\u00ednico y te convertir\u00e1s en referente en Emergentologia",
+        "teaching_team": [
+            {
+                "id": null,
+                "name": null,
+                "slug": null,
+                "description": null,
+                "image": false,
+                "link": "https:\/\/msklatam.com\/doctor\/"
+            }
+        ],
+        "video": false,
+        "certificate": {
+            "has_certificate": true
+        },
+        "study_plan": {
+            "hours": "",
+            "study_plan_file": false,
+            "modules": false
+        }
+    }
+}
