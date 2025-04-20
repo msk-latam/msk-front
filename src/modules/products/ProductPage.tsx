@@ -15,6 +15,7 @@ import ProductInstitutions from "./components/ProductInstitutions";
 import CourseOverview from "./components/CourseOverview";
 import ProductVideo from "./components/ProductVideo";
 import CourseCards from "./components/CourseCards";
+import Suscribe from "./components/Inscription";
 
 export default function ProductPage() {
   return (
@@ -75,6 +76,7 @@ export default function ProductPage() {
             <div className="w-full z-[5]">
         <ProductTestimonials/>
         </div>
+        <Suscribe/>
       </main>
 
       <Footer />
