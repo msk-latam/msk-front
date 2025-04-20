@@ -64,7 +64,7 @@ const Hero = () => {
                   {STATIC_HIGHLIGHTS[currentSlide] === STATIC_HIGHLIGHTS[0] ? (
                     <>
                       Cursos de medicina<br />
-                      para <span className="not-italic font-[Lora,serif] md:text-[64px] text-[39px] ">expandir</span> tus<br />
+                      para <span className="not-italic font-[Lora,serif] md:text-[64px] text-[40px] ">expandir</span> tus<br />
                       metas profesionales
                     </>
                   ) : (
