@@ -24,7 +24,7 @@ export default function CourseSummaryCard({
   onEnroll
 }: CourseSummaryProps) {
   return (
-    <aside className="bg-white rounded-3xl shadow-lg p-6 w-full max-w-sm space-y-4">
+    <aside className="bg-white rounded-[38px] shadow p-6 w-full max-w-sm space-y-4">
       <Image
         src={image}
         alt="Imagen del curso"
@@ -35,19 +35,40 @@ export default function CourseSummaryCard({
 
       <div className="text-sm text-gray-600">
         <p className="line-through">Total: {totalPrice}</p>
-        <p className="text-2xl font-semibold text-gray-900">${price} ARS</p>
+        <p className="text-2xl font-bold text-purple-700">${price} ARS</p>
       </div>
 
-      <ul className="text-sm text-gray-700 space-y-1">
-        <li>{modules} módulos actualizados</li>
-        <li>{hours} horas estimadas</li>
-        <li>{enrolled.toLocaleString()} profesionales inscriptos</li>
-        <li>Incluye material descargable</li>
+      <ul className="text-sm text-gray-700 space-y-3">
+        <li className="flex items-center gap-2">
+          <img src="/icons/course/summary/world.svg" alt="" className="w-4 h-4" />
+          Modalidad 100% a distancia
+        </li>
+        <li className="flex items-center gap-2">
+          <img src="/icons/course/summary/modules.svg" alt="" className="w-4 h-4" />
+          {modules} módulos actualizados
+        </li>
+        <li className="flex items-center gap-2">
+          <img src="/icons/course/summary/hourglass.svg" alt="" className="w-4 h-4" />
+          {hours} horas estimadas
+        </li>
+        <li className="flex items-center gap-2">
+          <img src="/icons/course/summary/person.svg" alt="" className="w-4 h-4" />
+          {enrolled.toLocaleString()} profesionales inscriptos
+        </li>
+        <li className="flex items-center gap-2">
+          <img src="/icons/course/summary/download.svg" alt="" className="w-4 h-4" />
+          Incluye material descargable
+        </li>
       </ul>
 
       <p className="text-xs text-gray-500">
-        Certifica: <span className="font-medium text-gray-900">{certificationEntity}</span>
+        Certifica:<br />
+        <span className="font-medium text-gray-900">{certificationEntity}</span>
       </p>
+
+      <div className="flex items-center justify-center mb-2">
+        <img src="/images/productpage/certificate.svg" alt="Certifica" className="w-20" />
+      </div>
 
       <button
         onClick={onEnroll}
@@ -57,7 +78,9 @@ export default function CourseSummaryCard({
       </button>
 
       <div className="text-center">
-        <button className="text-sm text-gray-500 hover:underline">Contáctanos 📞</button>
+        <button className="text-sm text-purple-600 border border-purple-600 w-full py-3 rounded-full hover:bg-purple-50">
+          Contáctanos
+        </button>
       </div>
     </aside>
   )
