@@ -52,7 +52,7 @@ export default function ProductPage() {
               <ProductDescription  courseId={id}/>
               <ProductInstitutions courseId={id} />
               <ProductLearning courseId={id}/>
-              <CourseOverview />
+              <CourseOverview courseId={id} />
               <ProductTeachers />
             </div>
             {/* Nuevo contenedor para video */}
