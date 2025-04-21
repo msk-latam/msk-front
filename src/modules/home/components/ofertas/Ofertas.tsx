@@ -67,7 +67,7 @@ const Ofertas = () => {
   const [firstTitlePart, secondTitlePart] = getSplitTitle();
 
   return (
-    <section className="relative w-full md:h-[993px] mt-[120px] min-h-screen flex items-end md:items-center justify-center text-white font-raleway">
+    <section className="relative w-full md:h-[993px] md:px-4 mt-[120px] min-h-screen flex items-end md:items-center justify-center text-white font-raleway">
       {/* Imagen de fondo para mobile */}
       <div className="absolute inset-0 z-0 block lg:hidden translate-y-[80px]">
         <Image

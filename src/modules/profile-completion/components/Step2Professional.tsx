@@ -77,7 +77,7 @@ export default function Step2Professional({
             placeholder="Ingresar lugar de trabajo"
             value={workplace}
             onChange={(e) => setWorkplace(e.target.value)}
-            className="mt-1 w-full rounded-2xl border border-[#DBDDE2] py-2.5 px-3.5 text-[#6E737C] focus:ring-4 focus:ring-[#F5E6F7] focus:outline-none"
+            className="mt-1 w-full rounded-2xl border border-[#DBDDE2] py-2.5 px-3.5 text-[#6E737C] focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]"
           />
         </div>
 
@@ -91,7 +91,7 @@ export default function Step2Professional({
             placeholder="Ingresar área de trabajo"
             value={workArea}
             onChange={(e) => setWorkArea(e.target.value)}
-            className="mt-1 w-full rounded-2xl border border-[#DBDDE2] py-2.5 px-3.5 text-[#6E737C] focus:ring-4 focus:ring-[#F5E6F7] focus:outline-none"
+            className="mt-1 w-full rounded-2xl border border-[#DBDDE2] py-2.5 px-3.5 text-[#6E737C] focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]"
           />
         </div>
 
@@ -103,7 +103,7 @@ export default function Step2Professional({
           <select
             value={medicalAssociation}
             onChange={(e) => setMedicalAssociation(e.target.value)}
-            className="mt-1 w-full rounded-2xl border border-[#DBDDE2] py-2.5 px-3.5 text-[#6E737C] focus:ring-4 focus:ring-[#F5E6F7] focus:outline-none"
+            className="mt-1 w-full rounded-2xl border border-[#DBDDE2] py-2.5 px-3.5 text-[#6E737C] focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]"
           >
             <option value="">Seleccionar</option>
             <option value="sí">Sí</option>
@@ -122,7 +122,7 @@ export default function Step2Professional({
               placeholder="Ingresar colegio médico, sociedad o similar"
               value={associationName}
               onChange={(e) => setAssociationName(e.target.value)}
-              className="mt-1 w-full rounded-2xl border border-[#DBDDE2] py-2.5 px-3.5 text-[#6E737C] focus:ring-4 focus:ring-[#F5E6F7] focus:outline-none"
+              className="mt-1 w-full rounded-2xl border border-[#DBDDE2] py-2.5 px-3.5 text-[#6E737C] focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]"
             />
           </div>
         )}

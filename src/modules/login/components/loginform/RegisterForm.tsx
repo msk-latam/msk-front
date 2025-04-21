@@ -87,7 +87,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
               placeholder="Ingresar e-mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:ring-[#F5E6F7] focus:outline-none"
+              className="mt-1 w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]"
             />
           </div>
 
@@ -99,7 +99,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
               placeholder="Ingresar nombre/s"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              className="mt-1 w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:ring-[#F5E6F7] focus:outline-none"
+              className="mt-1 w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]"
             />
           </div>
 
@@ -111,7 +111,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
               placeholder="Ingresar apellido/s"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              className="mt-1 w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:ring-[#F5E6F7] focus:outline-none"
+              className="mt-1 w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]"
             />
           </div>
 
@@ -124,7 +124,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
                 placeholder="Ingresar contraseña"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 pr-10 focus:ring-4 focus:ring-[#F5E6F7] focus:outline-none"
+                className="mt-1 w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 pr-10 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]"
               />
               <button
                 type="button"
