@@ -42,7 +42,7 @@ export interface CourseHability {
   slug: string
 }
 
-export interface CourseTeachingTeamMember {
+export interface CourseTeachersData {
   id: number | null
   name: string | null
   slug: string | null
@@ -77,7 +77,7 @@ export interface CourseData {
     learning: CourseLearning[]
     habilities: CourseHability[]
     with_this_course: string
-    teaching_team: CourseTeachingTeamMember[]
+    teaching_team: CourseTeachersData[]
     video: string | false
     certificate: CourseCertificate
     study_plan: CourseStudyPlan
