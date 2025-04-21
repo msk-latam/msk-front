@@ -50,7 +50,7 @@ export default function ProductPage() {
           <div className="w-full md:w-2/3 space-y-6 z-[9]">
             <div className="w-full bg-white rounded-[38px] flex flex-col relative z-[9] md:-mt-20 px-5 pt-9 pb-3 md:px-9 gap-6 md:gap-0">
               <ProductDescription  courseId={id}/>
-              <ProductInstitutions />
+              <ProductInstitutions courseId={id} />
               <ProductHighlights />
               <CourseOverview />
               <ProductTeachers />
