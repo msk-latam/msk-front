@@ -36,6 +36,32 @@ export interface CourseDescription {
   content: string
 }
 
+export interface CourseHability {
+  id: number
+  name: string
+  slug: string
+}
+
+export interface CourseTeachingTeamMember {
+  id: number | null
+  name: string | null
+  slug: string | null
+  description: string | null
+  image: string | false
+  link: string
+}
+
+export interface CourseStudyPlan {
+  hours: string
+  study_plan_file: string | false
+  modules: any // Tipar después si lo necesitás
+}
+
+export interface CourseOverviewData {
+  habilities: CourseHability[]
+  with_this_course: string
+}
+
 export interface CourseData {
   id: number
   title: string
@@ -49,29 +75,15 @@ export interface CourseData {
     content: CourseDescription
     institutions: CourseInstitution[]
     learning: CourseLearning[]
-    habilities: {
-      id: number
-      name: string
-      slug: string
-    }[]
+    habilities: CourseHability[]
     with_this_course: string
-    teaching_team: {
-      id: number | null
-      name: string | null
-      slug: string | null
-      description: string | null
-      image: string | false
-      link: string
-    }[]
+    teaching_team: CourseTeachingTeamMember[]
     video: string | false
     certificate: CourseCertificate
-    study_plan: {
-      hours: string
-      study_plan_file: string | false
-      modules: any // podemos tiparlo luego si hace falta
-    }
+    study_plan: CourseStudyPlan
   }
 }
+
 
 export function useCourseData(id: string | number) {
   const [data, setData] = useState<CourseData | null>(null)
