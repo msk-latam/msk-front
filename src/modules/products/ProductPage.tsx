@@ -1,5 +1,7 @@
+// app/tienda/course/[id]/page.tsx
 "use client";
 
+import { useParams } from "next/navigation";
 import Navbar from "@/modules/components/navbar/Navbar";
 import Footer from "@/modules/components/footer/footer";
 import ProductHeader from "./components/ProductHeader";
@@ -18,6 +20,15 @@ import CourseCards from "./components/CourseCards";
 import Suscribe from "./components/Inscription";
 
 export default function ProductPage() {
+  // Obtener el parámetro `id` usando useParams
+//   const { id } = useParams();
+// console.log("aaaaaa",id)
+  // Asegurarse de que `id` esté disponible antes de renderizar el componente
+  // if (!id) {
+  //   return <div>Loading...</div>;
+  // }
+  const id = 333437
+
   return (
     <>
       {/* HEADER CON GRADIENTE COMO EN LOGIN */}
@@ -29,16 +40,16 @@ export default function ProductPage() {
         }}
       >
         <Navbar />
-        <ProductHeader />
+        <ProductHeader courseId={id} />
       </div>
 
       {/* CONTENIDO PRINCIPAL */}
       <main className="bg-gray-50 z-[9]">
-        <div className="flex flex-col-reverse lg:flex-row gap-6 md:py-12 pt-12 overflow-visible max-w-[1300px] mx-auto">
+        <div className="flex flex-col-reverse lg:flex-row gap-6 md:py-12 pt-12 overflow-visible max-w-[1600px] md:px-4 mx-auto">
           {/* Columna izquierda */}
           <div className="w-full md:w-2/3 space-y-6 z-[9]">
             <div className="w-full bg-white rounded-[38px] flex flex-col relative z-[9] md:-mt-20 px-5 pt-9 pb-3 md:px-9 gap-6 md:gap-0">
-              <ProductDescription />
+              <ProductDescription/>
               <ProductInstitutions />
               <ProductHighlights />
               <CourseOverview />
@@ -73,10 +84,10 @@ export default function ProductPage() {
         </div>
 
         {/* Testimonios */}
-            <div className="w-full z-[5]">
-        <ProductTestimonials/>
+        <div className="w-full z-[5]">
+          <ProductTestimonials />
         </div>
-        <Suscribe/>
+        <Suscribe />
       </main>
 
       <Footer />
