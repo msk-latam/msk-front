@@ -2,25 +2,19 @@ import React from 'react';
 
 // Placeholder SearchIcon - Replace with your actual icon component/SVG
 const SearchIcon = ({ className }: { className?: string }) => (
-	<svg
-		className={className}
-		xmlns='http://www.w3.org/2000/svg'
-		fill='none'
-		viewBox='0 0 24 24'
-		strokeWidth={1.5}
-		stroke='currentColor'
-	>
+	<svg width='17' height='18' viewBox='0 0 17 18' fill='none' xmlns='http://www.w3.org/2000/svg' className={className}>
 		<path
+			d='M16.0723 16.5L12.4473 12.875M14.4056 8.16667C14.4056 11.8486 11.4208 14.8333 7.73893 14.8333C4.05703 14.8333 1.07227 11.8486 1.07227 8.16667C1.07227 4.48477 4.05703 1.5 7.73893 1.5C11.4208 1.5 14.4056 4.48477 14.4056 8.16667Z'
+			stroke='#5A5F67'
+			strokeWidth='1.5'
 			strokeLinecap='round'
 			strokeLinejoin='round'
-			d='m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z'
 		/>
 	</svg>
 );
 
 interface StoreCoursesHeadProps {
-	// Make filterCount optional with default value
-	filterCount?: number;
+	filterCount: number;
 	// Add props for search/sort state and handlers from the parent
 	// searchTerm: string;
 	// onSearchChange: (term: string) => void;
@@ -28,10 +22,7 @@ interface StoreCoursesHeadProps {
 	// onSortChange: (key: string) => void;
 }
 
-const StoreCoursesHead: React.FC<StoreCoursesHeadProps> = ({
-	filterCount = 0, // Default to 0 if not provided
-	/*, ...other props */
-}) => {
+const StoreCoursesHead: React.FC<StoreCoursesHeadProps> = ({ filterCount /*, ...other props */ }) => {
 	// Mock sort options for now - move to parent or constants file if needed
 	const sortOptions = [
 		{ id: 'novedades', name: 'Novedades' },

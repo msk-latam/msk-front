@@ -1,6 +1,7 @@
 import Accordion from '@/store/components/ui/Accordion'; // Assuming correct path alias
 import Checkbox from '@/store/components/ui/Checkbox'; // Assuming correct path alias
-import React, { useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import React, { useCallback, useEffect, useState } from 'react';
 
 // Mock Data
 const especialidadesData = [
@@ -36,11 +37,6 @@ const recursoData = ['Curso', 'Guías profesionales'];
 const profesionData = ['Personal médico', 'Personal de enfermería y auxiliares', 'Otra porfesión'];
 
 const duracionData = ['Hasta 300 horas', 'De 100 a 300 horas', 'Más de 300 horas'];
-
-interface StoreFiltersProps {
-	// Make the callback prop optional with a default value
-	onFilterCountChange?: (count: number) => void;
-}
 
 interface FilterSectionProps {
 	title: string;
@@ -100,11 +96,14 @@ const FilterSection: React.FC<FilterSectionProps> = ({
 	);
 };
 
-const StoreFilters: React.FC<StoreFiltersProps> = ({
-	// Provide a default empty function if prop is not passed
-	onFilterCountChange = () => {},
-}) => {
+const StoreFilters = () => {
+	const router = useRouter();
+	const pathname = usePathname();
+	const searchParams = useSearchParams();
+
+	// Initialize the Set with all section indices (0, 1, 2, 3)
 	const [openIndices, setOpenIndices] = useState<Set<number>>(new Set([0, 1, 2, 3]));
+
 	const [selectedFilters, setSelectedFilters] = useState<Record<string, Set<string>>>({
 		especialidades: new Set(),
 		recurso: new Set(),
@@ -112,6 +111,40 @@ const StoreFilters: React.FC<StoreFiltersProps> = ({
 		duracion: new Set(),
 	});
 
+	// Effect to initialize filters from URL on mount and when searchParams change
+	useEffect(() => {
+		const initialFilters: Record<string, Set<string>> = {
+			especialidades: new Set(),
+			recurso: new Set(),
+			profesion: new Set(),
+			duracion: new Set(),
+		};
+
+		searchParams.forEach((value, key) => {
+			if (key in initialFilters) {
+				const items = value.split(',');
+				initialFilters[key] = new Set(items.map((item: string) => item.replace(/-/g, ' '))); // Convert back from URL format
+			}
+		});
+
+		// Check if the initialized filters differ from the current state to avoid loops
+		let needsUpdate = false;
+		for (const key in initialFilters) {
+			if (
+				initialFilters[key].size !== selectedFilters[key].size ||
+				!Array.from(initialFilters[key]).every((val) => selectedFilters[key].has(val))
+			) {
+				needsUpdate = true;
+				break;
+			}
+		}
+
+		if (needsUpdate) {
+			setSelectedFilters(initialFilters);
+		}
+	}, [searchParams]); // Depend on searchParams
+
+	// Toggle function adds or removes the index from the Set
 	const handleToggleAccordion = (index: number) => {
 		setOpenIndices((prevIndices) => {
 			const newIndices = new Set(prevIndices);
@@ -124,28 +157,53 @@ const StoreFilters: React.FC<StoreFiltersProps> = ({
 		});
 	};
 
-	const handleOptionChange = (section: string, option: string) => {
-		setSelectedFilters((prev) => {
-			const newState = { ...prev };
-			const newSectionOptions = new Set(newState[section]);
-			if (newSectionOptions.has(option)) {
-				newSectionOptions.delete(option);
-			} else {
-				newSectionOptions.add(option);
-			}
-			newState[section] = newSectionOptions;
+	// Memoized function to create the query string
+	const createQueryString = useCallback(
+		(params: Record<string, string>) => {
+			const newSearchParams = new URLSearchParams(searchParams.toString());
 
-			// Calculate total count after state updates
-			let totalCount = 0;
-			Object.values(newState).forEach((set) => {
-				totalCount += set.size;
+			Object.entries(params).forEach(([key, value]) => {
+				if (value) {
+					newSearchParams.set(key, value);
+				} else {
+					newSearchParams.delete(key); // Remove the key if the value is empty/null
+				}
 			});
 
-			// Call the callback with the new count
-			onFilterCountChange(totalCount);
+			return newSearchParams.toString();
+		},
+		[searchParams],
+	);
 
-			return newState;
+	const handleOptionChange = (section: string, option: string) => {
+		// Calculate the next state first
+		const nextFilters = { ...selectedFilters };
+		const newSectionOptions = new Set(nextFilters[section]);
+
+		if (newSectionOptions.has(option)) {
+			newSectionOptions.delete(option);
+		} else {
+			newSectionOptions.add(option);
+		}
+		nextFilters[section] = newSectionOptions;
+
+		// Update the state
+		setSelectedFilters(nextFilters);
+
+		// Update the URL
+		const queryParams: Record<string, string> = {};
+		Object.entries(nextFilters).forEach(([key, valueSet]) => {
+			const valueString = Array.from(valueSet)
+				.map((val) => val.replace(/\s+/g, '-'))
+				.join(',');
+			queryParams[key] = valueString; // Assign even if empty to ensure removal via createQueryString
 		});
+
+		// Use router.push with the pathname and the new query string
+		router.push(pathname + '?' + createQueryString(queryParams));
+
+		// Add logic here to actually filter the store items based on selectedFilters
+		console.log('Selected Filters:', nextFilters);
 	};
 
 	return (
