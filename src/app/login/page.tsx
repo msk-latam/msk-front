@@ -26,7 +26,7 @@ export default function LoginPage() {
       <main className="bg-gray-50 flex justify-center w-full relative pt-0 pb-20 -mb-[100px] md:mb-0">
         <section
           aria-label="Formulario de autenticación"
-          className="w-full overflow-visible max-w-[1300px] mx-auto"
+          className="w-full overflow-visible max-w-[1600px] mx-auto md:px-4"
         >
           <Suspense fallback={<div>Loading...</div>}>
             <LoginRouterHandler />

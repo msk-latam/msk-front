@@ -22,7 +22,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 
   if (submitted) {
     return (
-      <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 p-4 md:mb-20 z-[10] relative overflow-visible max-w-[1300px] mx-auto h-screen md:h-auto">
+      <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 p-4 md:mb-20 z-[10] relative overflow-visible max-w-[1600px] mx-auto md:px-4 h-screen md:h-auto">
         <div className="text-center py-20">
           <div className="flex justify-center w-full animate-pulse">
             <div className="w-44 mx-auto h-auto p-6">
