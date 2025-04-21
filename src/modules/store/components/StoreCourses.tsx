@@ -38,8 +38,24 @@ const StoreCourses: React.FC<StoreCoursesProps> = () => {
 			setError(null);
 			try {
 				// Construct the API URL with search parameters
-				const params = new URLSearchParams(searchParams.toString()); // Use existing search params
-				const page = params.get('page') || '1'; // Get page from URL or default to 1
+				const params = new URLSearchParams();
+
+				// Set parameters based on what the API expects
+				params.set('lang', searchParams.get('lang') || 'int');
+				params.set('page', searchParams.get('page') || '1');
+				params.set('per_page', searchParams.get('per_page') || '12');
+				// Only set parameters if they exist in searchParams
+				if (searchParams.has('especialidades')) {
+					params.set('specialty', searchParams.get('especialidades') || '');
+				}
+				if (searchParams.has('profesion')) {
+					params.set('profession', searchParams.get('profesion') || '');
+				}
+				if (searchParams.has('duracion')) {
+					params.set('duration', searchParams.get('duracion') || '');
+				}
+
+				const page = params.get('page') || '1';
 				setCurrentPage(parseInt(page, 10));
 
 				const apiUrl = `https://cms1.msklatam.com/wp-json/msk/v1/courses?${params.toString()}`;
@@ -136,12 +152,31 @@ const StoreCourses: React.FC<StoreCoursesProps> = () => {
 							</div>
 						))
 					) : (
-						<p>No courses found.</p> // Handle no courses found
+						<div className='col-span-full flex flex-col items-center justify-center py-10 px-4 text-center'>
+							<svg
+								className='w-16 h-16 text-gray-400 mb-4'
+								fill='none'
+								stroke='currentColor'
+								viewBox='0 0 24 24'
+								xmlns='http://www.w3.org/2000/svg'
+							>
+								<path
+									strokeLinecap='round'
+									strokeLinejoin='round'
+									strokeWidth={2}
+									d='M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+								/>
+							</svg>
+							<p className='text-lg font-medium text-gray-700'>No se encontraron cursos</p>
+							<p className='text-sm text-gray-500 mt-2'>Intenta con otros filtros o vuelve más tarde</p>
+						</div>
 					)}
 				</div>
 			)}
-			{/* Render Pagination if not loading, no error, and more than one page */}
-			{!isLoading && !error && totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} />}
+			{/* Render Pagination if not loading, no error, has courses, and more than one page */}
+			{!isLoading && !error && courses.length > 0 && totalPages > 1 && (
+				<Pagination currentPage={currentPage} totalPages={totalPages} />
+			)}
 		</div>
 	);
 };
