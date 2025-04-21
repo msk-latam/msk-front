@@ -1,23 +1,20 @@
-
 'use client'
 
-interface Learning {
-  text: string
-}
+import { useCourseLearning } from '../hooks/useCourseLearning'
 
 interface ProductLearningProps {
-  learning?: Learning[]
+  courseId: string | number
 }
 
-export default function ProductLearning({
-  learning = [
-    { text: 'Manejar técnicas avanzadas en emergencias críticas' },
-    { text: 'Optimizar la toma de decisiones en situaciones de alta complejidad' },
-    { text: 'Aplicar protocolos internacionales para la seguridad del paciente en urgencias' },
-    { text: 'Interpretar estudios diagnósticos para intervenciones precisas en emergencias' },
-  ],
-}: ProductLearningProps) {
-  // Divide los ítems en dos columnas de forma balanceada
+export default function ProductLearning({ courseId }: ProductLearningProps) {
+  const { data, loading, error } = useCourseLearning(courseId)
+
+  // En caso de error o loading, mostramos un fallback
+  if (loading) return <p className="p-5">Cargando contenido...</p>
+  if (error || !data) return <p className="p-5">No se pudo cargar el contenido.</p>
+
+  const learning = data.map((item) => ({ text: item.msk_learning_content }))
+
   const leftColumn = learning.filter((_, idx) => idx % 2 === 0)
   const rightColumn = learning.filter((_, idx) => idx % 2 !== 0)
 
@@ -69,4 +66,3 @@ export default function ProductLearning({
     </section>
   )
 }
-

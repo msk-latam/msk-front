@@ -7,7 +7,7 @@ import Footer from "@/modules/components/footer/footer";
 import ProductHeader from "./components/ProductHeader";
 import ProductSummary from "./components/ProductSummary";
 import ProductDescription from "./components/ProductDescription";
-import ProductHighlights from "./components/ProductLearning";
+import ProductLearning from "./components/ProductLearning";
 import ProductTeachers from "./components/ProductTeachers";
 import ProductCertificate from "./components/ProductCertificate";
 import ProductSyllabus from "./components/ProductSyllabus";
@@ -17,7 +17,7 @@ import ProductInstitutions from "./components/ProductInstitutions";
 import CourseOverview from "./components/CourseOverview";
 import ProductVideo from "./components/ProductVideo";
 import CourseCards from "./components/CourseCards";
-import Suscribe from "./components/Inscription";
+import Inscription from "./components/Inscription";
 
 export default function ProductPage() {
   // Obtener el parámetro `id` usando useParams
@@ -51,7 +51,7 @@ export default function ProductPage() {
             <div className="w-full bg-white rounded-[38px] flex flex-col relative z-[9] md:-mt-20 px-5 pt-9 pb-3 md:px-9 gap-6 md:gap-0">
               <ProductDescription  courseId={id}/>
               <ProductInstitutions courseId={id} />
-              <ProductHighlights />
+              <ProductLearning courseId={id}/>
               <CourseOverview />
               <ProductTeachers />
             </div>
@@ -87,7 +87,7 @@ export default function ProductPage() {
         <div className="w-full z-[5]">
           <ProductTestimonials />
         </div>
-        <Suscribe />
+        <Inscription />
       </main>
 
       <Footer />
