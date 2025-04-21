@@ -77,7 +77,7 @@ export default function DashboardPage() {
 			</header>
 
 			<main className='bg-[#f3f4f6] flex justify-center px-0 sm:px-4 relative pt-0 pb-20 -mb-[100px] md:mb-0'>
-				<section className='w-full -mt-[40px] md:-mt-[420px] z-[10] relative overflow-visible max-w-[1300px] mx-auto'>
+				<section className='w-full -mt-[40px] md:-mt-[420px] z-[10] relative overflow-visible max-w-[1600px] mx-auto md:px-4'>
 					<DashboardHero userData={userData} onEditProfile={handleEditProfile} isLoading={isLoading} />
 					{!isLoading && userData && (
 						<>

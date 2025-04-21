@@ -10,7 +10,7 @@ export default function NewPasswordForm() {
 
   if (submitted) {
     return (
-      <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:mb-24 p-4 sm:p-20 pb-[80px] md:pb-0 z-[10] relative overflow-visible max-w-[1300px] mx-auto min-h-fit h-[550px] flex md:items-center justify-center">
+      <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:mb-24 p-4 sm:p-20 pb-[80px] md:pb-0 z-[10] relative overflow-visible max-w-[1600px] mx-auto md:px-4 min-h-fit h-[550px] flex md:items-center justify-center">
         <section
           className="w-full max-w-[1632px] relative z-[1] mx-auto px-4 py-6 sm:py-12 text-center"
           style={{ fontFamily: 'Raleway, sans-serif' }}
