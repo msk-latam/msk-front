@@ -28,10 +28,10 @@ export default function TiendaPage() {
 			<main className='bg-[#f3f4f6] flex justify-center px-0 sm:px-4 relative pt-0 pb-20  md:mb-0'>
 				<section className='w-full  -mt-[40px]  z-[10] relative overflow-visible max-w-[1400px] mx-auto'>
 					<div className='grid grid-cols-1 md:grid-cols-[333px_1fr] gap-5 '>
-						<Suspense fallback={<div>Loading filters...</div>}>
+						<Suspense fallback={<div>Cargando filtros...</div>}>
 							<StoreFilters />
 						</Suspense>
-						<Suspense fallback={<div>Loading courses...</div>}>
+						<Suspense fallback={<div>Cargando cursos...</div>}>
 							<StoreCourses />
 						</Suspense>
 					</div>
