@@ -17,8 +17,8 @@ const raleway = Raleway({
 });
 
 export const metadata: Metadata = {
-	title: 'Dashboard | MSK',
-	description: 'Tu panel de control en MSK para ver tus cursos y recursos recomendados',
+	title: 'Tienda | MSK',
+	description: 'Cursos de medicina para expandir tus metas profesionales',
 	icons: {
 		icon: '/isotipo.ico',
 		shortcut: '/isotipo.ico',
@@ -30,6 +30,6 @@ export const metadata: Metadata = {
 	},
 };
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function TiendaLayout({ children }: { children: React.ReactNode }) {
 	return <section className={`${inter.variable} ${raleway.variable} font-inter`}>{children}</section>;
 }

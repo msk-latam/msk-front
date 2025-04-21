@@ -25,7 +25,8 @@
 		"paths": {
 			"@/*": ["./src/*"],
 			"@/public/*": ["./public/*"],
-			"@/dashboard/*": ["./src/modules/dashboard/*"]
+			"@/dashboard/*": ["./src/modules/dashboard/*"],
+			"@/store/*": ["./src/modules/store/*"]
 		}
 	},
 	"include": [
