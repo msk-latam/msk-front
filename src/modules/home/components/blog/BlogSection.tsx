@@ -167,7 +167,7 @@ const EmptyState: React.FC<{
   activeTab: CategoryType;
   setActiveTab: (tab: CategoryType) => void;
 }> = ({ title, subtitle, categories, activeTab, setActiveTab }) => (
-  <section className="w-full">
+  <section className="w-full ">
     <header className="mb-8">
       <h2 className="text-2xl md:text-3xl font-semibold text-black mb-1">Blog</h2>
       <p className="text-sm text-neutral-600">
