@@ -255,8 +255,8 @@ export const calculateProfileCompletion = (data: UserData): ProfileCompletion | 
 
 	return {
 		percentage: displayPercentage,
-		message: `Completa los campos para finalizar tu perfil.`,
-		ctaText: 'Completar ahora',
+		message: `¿Por qué completar tu perfil?`,
+		ctaText: 'Entérate aquí',
 		ctaLink: '#',
 	};
 };

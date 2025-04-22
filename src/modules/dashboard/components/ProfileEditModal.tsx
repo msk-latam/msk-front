@@ -144,11 +144,11 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ isOpen, onClose, on
 
 	return (
 		<Modal isOpen={isOpen} onClose={onClose} title='Mi cuenta' size='large'>
-			<div className='text-center text-sm text-gray-600 mb-6 -mt-2'>
+			<div className='text-center text-sm text-gray-600 mb-6 mt-2'>
 				Gestiona todo lo relacionado con tus datos personales
 			</div>
 			<form onSubmit={handleSubmit} className='space-y-4'>
-				<div className='grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4'>
+				<div className='grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 p-1'>
 					<Input
 						id='email'
 						label='E-mail'
@@ -283,7 +283,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ isOpen, onClose, on
 				<div className='flex justify-center pt-6 mt-6'>
 					<button
 						type='submit'
-						className='px-8 py-3 bg-[#9200AD] text-white font-medium rounded-full hover:bg-[#7a0092] transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#9200AD]'
+						className='px-8 py-3 w-[500px] bg-[#9200AD] text-white font-medium rounded-full hover:bg-[#7a0092] transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#9200AD]'
 					>
 						Guardar cambios
 					</button>

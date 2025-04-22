@@ -10,7 +10,7 @@ interface CtaButtonProps {
 const CtaButton: React.FC<CtaButtonProps> = ({ onClick, showIcon = false, children }) => (
 	<button
 		onClick={onClick}
-		className='bg-[#1A1A1A] text-white px-6 py-3 rounded-full md:rounded-[38px] font-inter font-medium shadow-md hover:scale-105 transition text-sm w-full md:w-auto'
+		className='bg-[#1A1A1A] text-white px-6 py-3 rounded-full md:rounded-[38px] font-inter font-medium shadow-md hover:bg-[#474b53] transition text-sm w-full md:w-auto'
 	>
 		<span className='flex flex-row gap-2 justify-center items-center'>
 			<p className='my-auto'>{children}</p>

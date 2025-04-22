@@ -50,6 +50,14 @@ interface UserDataForHero {
 		title: string;
 		progress: string;
 	};
+	// Adding a structure for the recommended course when profile is incomplete
+	recommendedCourse?: {
+		image: string;
+		label: string;
+		title: string;
+		buttonText: string;
+		buttonLink: string; // Link for the "Descubrir" button
+	};
 	recommendedResources: {
 		image: string;
 		title: string;
@@ -65,6 +73,8 @@ interface DashboardHeroProps {
 	userData: UserData | null;
 	onEditProfile: (field?: string) => void;
 	isLoading?: boolean;
+	// Define a mock recommended course for the <50% state
+	recommendedCourseData?: UserDataForHero['recommendedCourse'];
 }
 
 // Map for icon components
@@ -76,7 +86,22 @@ const IconMap: Record<string, React.FC> = {
 	UserIcon: UserIcon,
 };
 
-const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, isLoading = false }) => {
+// Example recommended course data (can be passed as prop or defined here)
+const defaultRecommendedCourse = {
+	image:
+		'https://images.ctfassets.net/cnu0m8re1exe/KARd6CSmh3yD656fzK3Kl/d46556b481191e9a679ed0e02388788f/doctor-and-patient.jpg?fm=jpg&fl=progressive&w=1140&h=700&fit=fill', // Use the image from the example
+	label: 'Recomendado para ti',
+	title: 'Curso de Endocrinología y Nutrición',
+	buttonText: 'Descubrir',
+	buttonLink: '#', // Replace with actual link
+};
+
+const DashboardHero: React.FC<DashboardHeroProps> = ({
+	userData,
+	onEditProfile,
+	isLoading = false,
+	recommendedCourseData = defaultRecommendedCourse, // Use default or passed prop
+}) => {
 	// Helper function to check if a field is empty
 	const isEmpty = (value: string | undefined | null) => !value || value.trim() === '';
 
@@ -147,6 +172,9 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 	const data = userData;
 	// Use mock data for recommended resources for now
 	const recommendedResources = dashboardMock.recommendedResources;
+
+	// Determine if the profile is less than 50% complete
+	const isProfileIncomplete = (data.profileCompletion?.percentage ?? 100) < 50;
 
 	return (
 		<>
@@ -302,7 +330,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 									className='absolute top-0 left-0 h-full rounded-full bg-[#9200AD] transition-width duration-300 ease-in-out'
 									style={{ width: `${data.profileCompletion.percentage}%` }}
 								>
-									<span className='absolute px-3 py-1 rounded-full bg-[#9200AD] text-white text-base font-medium -translate-y-1/2 translate-x-2 top-1/2 left-0 whitespace-nowrap'>
+									<span className='absolute px-3 py-1 rounded-full bg-[#9200AD] text-white text-base font-medium -translate-y-1/2  top-1/2 left-0 whitespace-nowrap'>
 										Tu perfil {data.profileCompletion.percentage}%
 									</span>
 								</div>
@@ -336,7 +364,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 						</div>
 						<div>
 							<h3 className='font-raleway font-bold text-[20px] leading-[28px] mb-1 text-[#1A1A1A]'>Mis facturas</h3>
-							<p className='font-inter font-normal text-base leading-6 tracking-[0%] text-[#4F5D89]'>
+							<p className='font-inter font-normal text-base leading-6 tracking-[0%] text-[#1A1A1A]'>
 								Encuentra y descarga tus facturas
 							</p>
 						</div>
@@ -352,7 +380,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 						</div>
 						<div>
 							<h3 className='font-raleway font-bold text-[20px] leading-[28px] mb-1 text-[#1A1A1A]'>Mi cuenta</h3>
-							<p className='font-inter font-normal text-base leading-6 tracking-[0%]  text-[#4F5D89]'>
+							<p className='font-inter font-normal text-base leading-6 tracking-[0%]  text-[#1A1A1A]'>
 								Gestiona todo lo relacionado con tus datos personales
 							</p>
 						</div>
@@ -382,7 +410,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 						</div>
 					) : (
 						<div className='flex flex-col items-center justify-center pt-5'>
-							<p className='text-[#4F5D89] font-inter text-center mb-6'>
+							<p className='text-[#4F5D89] font-raleway font-medium text-center mb-6'>
 								¡No encontramos nada aún! Personaliza tu experiencia en MSK
 							</p>
 							<button
@@ -395,55 +423,89 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 					)}
 				</div>
 
-				{/* Course Section - Mobile: 4th, Desktop: 2nd in 2nd Col */}
-				{data.currentCourse && (
-					<div className='md:col-span-2 lg:col-span-2 rounded-[30px]  overflow-hidden group order-4 md:order-2'>
-						<div className='bg-cover bg-top h-[300px] rounded-[30px]   relative flex flex-col justify-center p-[36px] text-white overflow-hidden'>
-							<div
-								className='absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 bg-cover bg-top'
-								style={{ backgroundImage: `url(${data.currentCourse.image})` }}
-							></div>
-
-							{/* Overlay gradient */}
-							<div
-								className='absolute inset-0'
-								style={{ background: 'linear-gradient(90deg, rgba(0, 0, 0, 0.54) 38.02%, rgba(0, 0, 0, 0.09) 87.34%)' }}
-							></div>
-
-							{/* Course Content: Title, Label, Button */}
-							<div className='relative z-10 flex flex-col items-start gap-4 md:flex-row md:justify-between md:items-center'>
-								{/* Group Label and Title */}
-								<div className='flex flex-col items-start gap-4'>
-									<span className='bg-[#DFE6FF] text-[#29324F] font-inter font-normal text-sm md:text-base rounded-full px-3 py-1.5'>
-										{data.currentCourse.label || 'Aprendizaje'}
-									</span>
-
-									<h2 className='text-white font-raleway font-[700] text-[24px] md:text-[36px] leading-[26px] md:leading-[44px] max-w-[25ch]'>
-										{data.currentCourse.title}
-									</h2>
-								</div>
-								{/* Button - Aligned below title on mobile, right on desktop */}
-								<div className='w-auto mt-4 md:mt-0'>
-									<CtaButton onClick={() => {}} showIcon={true}>
-										Continuar
-									</CtaButton>
-								</div>
-							</div>
-
-							{/* Progress Bar */}
-							<div className='w-full h-[40px] bg-[#00000033]  absolute bottom-0 left-0'>
+				{/* Course Section - Conditionally Rendered */}
+				{/* Mobile: 4th, Desktop: 2nd in 2nd Col */}
+				<div className='md:col-span-2 lg:col-span-2 rounded-[30px] overflow-hidden group order-4 md:order-2'>
+					{
+						isProfileIncomplete && recommendedCourseData ? (
+							// Variant 1: Profile < 50% (Not Started) - based on image
+							<div className='bg-cover bg-center h-[300px] rounded-[30px] relative flex flex-col justify-end p-[36px] text-white overflow-hidden'>
 								<div
-									className='h-full bg-[#00000080] px-[36px] flex items-center justify-start transition-width duration-300 ease-in-out'
-									style={{ width: `${data.currentCourse.progress}` }}
-								>
-									<span className='text-white font-inter font-medium text-base leading-[24px] whitespace-nowrap'>
-										{data.currentCourse.progress} completado
-									</span>
+									className='absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 bg-cover bg-top'
+									style={{ backgroundImage: `url(${recommendedCourseData.image})` }}
+								></div>
+								{/* Overlay gradient */}
+								<div
+									className='absolute inset-0'
+									style={{ background: 'linear-gradient(90deg, rgba(0, 0, 0, 0.54) 38.02%, rgba(0, 0, 0, 0.09) 87.34%)' }}
+								></div>
+								{/* Content */}
+								<div className='relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4'>
+									{/* Left side: Label and Title */}
+									<div className='flex flex-col items-start gap-4'>
+										<span className='bg-[#DFE6FF] text-[#29324F] font-inter font-normal text-sm md:text-base rounded-full px-3 py-1.5'>
+											{recommendedCourseData.label}
+										</span>
+										<h2 className='text-white font-raleway font-[700] text-[24px] md:text-[36px] leading-[26px] md:leading-[44px] max-w-[25ch]'>
+											{recommendedCourseData.title}
+										</h2>
+									</div>
+									{/* Right side: Button */}
+									<div className='w-auto mt-4 md:mt-0'>
+										<CtaButton
+											onClick={() => console.log('Navigate to:', recommendedCourseData.buttonLink)} // Replace with actual navigation
+											showIcon={true}
+										>
+											{recommendedCourseData.buttonText}
+										</CtaButton>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-				)}
+						) : data.currentCourse ? (
+							// Variant 2: Profile >= 50% OR no recommendedCourseData available (Started/In Progress) - Original card
+							<div className='bg-cover bg-top h-[300px] rounded-[30px] relative flex flex-col justify-center p-[36px] text-white overflow-hidden'>
+								<div
+									className='absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 bg-cover bg-top'
+									style={{ backgroundImage: `url(${data.currentCourse.image})` }}
+								></div>
+								{/* Overlay gradient */}
+								<div
+									className='absolute inset-0'
+									style={{ background: 'linear-gradient(90deg, rgba(0, 0, 0, 0.54) 38.02%, rgba(0, 0, 0, 0.09) 87.34%)' }}
+								></div>
+								{/* Course Content: Title, Label, Button */}
+								<div className='relative z-10 flex flex-col items-start gap-4 md:flex-row md:justify-between md:items-center'>
+									{/* Group Label and Title */}
+									<div className='flex flex-col items-start gap-4'>
+										<span className='bg-[#DFE6FF] text-[#29324F] font-inter font-normal text-sm md:text-base rounded-full px-3 py-1.5'>
+											{data.currentCourse.label || 'Aprendizaje'}
+										</span>
+										<h2 className='text-white font-raleway font-[700] text-[24px] md:text-[36px] leading-[26px] md:leading-[44px] max-w-[25ch]'>
+											{data.currentCourse.title}
+										</h2>
+									</div>
+									{/* Button - Aligned below title on mobile, right on desktop */}
+									<div className='w-auto mt-4 md:mt-0'>
+										<CtaButton onClick={() => {}} showIcon={true}>
+											Continuar
+										</CtaButton>
+									</div>
+								</div>
+								{/* Progress Bar */}
+								<div className='w-full h-[40px] bg-[#00000033] absolute bottom-0 left-0'>
+									<div
+										className='h-full bg-[#00000080] px-[36px] flex items-center justify-start transition-width duration-300 ease-in-out'
+										style={{ width: `${data.currentCourse.progress}` }}
+									>
+										<span className='text-white font-inter font-medium text-base leading-[24px] whitespace-nowrap'>
+											{data.currentCourse.progress} completado
+										</span>
+									</div>
+								</div>
+							</div>
+						) : null /* Optional: Render nothing if profile >= 50% and no currentCourse */
+					}
+				</div>
 
 				{/* Recommended Resources Section - Mobile: 5th, Desktop: 5th in 2nd/3rd Col */}
 				{data.interests && data.interests.length > 0 ? (
@@ -454,11 +516,11 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 								Recursos recomendados para tí
 							</h3>
 							{/* Mobile: Carousel / Desktop: Grid */}
-							<div className='flex space-x-4 overflow-x-auto scroll-snap-x scroll-snap-mandatory md:grid md:grid-cols-2 md:gap-5 md:space-x-0 md:overflow-x-visible md:scroll-snap-none pb-4 -mb-4 scrollbar-hide'>
+							<div className='flex space-x-4 overflow-x-auto scroll-snap-x scroll-snap-mandatory md:grid md:grid-cols-2 md:gap-5 md:space-x-0 md:overflow-x-visible md:scroll-snap-none pb-4 -mb-4 scrollbar-hide '>
 								{recommendedResources.map((resource, index) => (
 									<div
 										key={index}
-										className='w-[90%] flex-shrink-0 scroll-snap-start md:w-auto md:flex-shrink bg-white rounded-[30px] overflow-hidden flex flex-col md:flex-row border border-[#DBDDE2] hover:shadow-md transition-shadow'
+										className='w-[90%] flex-shrink-0 scroll-snap-start md:w-auto md:flex-shrink bg-white rounded-[30px] overflow-hidden flex flex-col md:flex-row border border-[#DBDDE2] hover:shadow-md transition-shadow min-h-[280px]'
 									>
 										{/* Image Section */}
 										<div className='relative w-full md:w-[200px] h-[180px] md:h-auto flex-shrink-0 bg-gray-100'>
@@ -474,10 +536,10 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 										</div>
 
 										{/* Content Section */}
-										<div className='p-6 flex flex-col justify-between flex-grow'>
-											<div>
-												{/* Tags */}
-												<div className='flex flex-wrap gap-2 mb-3'>
+										<div className='px-4 py-6 grid grid-rows-[auto_1fr_1fr_1fr] h-full relative w-full'>
+											{/* Tags section - fixed height */}
+											<div className=' mb-2'>
+												<div className='flex flex-wrap gap-2'>
 													{resource.tags?.map((tag, tagIndex) => (
 														<span
 															key={tagIndex}
@@ -491,18 +553,22 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 														</span>
 													))}
 												</div>
-
-												{/* Title */}
-												<h4 className='font-raleway font-bold text-xl leading-tight mb-2 text-[#1A1A1A]'>
-													{resource.title}
-												</h4>
-
-												{/* Author */}
-												<p className='font-inter text-sm text-[#4F5D89] mb-4'>{resource.author}</p>
 											</div>
 
-											{/* Button */}
-											<div className='mt-4 self-start md:self-end'>
+											{/* Title section - fixed height with ellipsis if needed */}
+											<div className='mb-2'>
+												<h4 className='font-raleway font-bold text-xl leading-tight text-[#1A1A1A] line-clamp-2'>
+													{resource.title}
+												</h4>
+											</div>
+
+											{/* Author section - fixed height */}
+											<div className='mb-4'>
+												<p className='font-inter text-sm text-[#4F5D89]'>{resource.author}</p>
+											</div>
+
+											{/* Button - positioned absolutely */}
+											<div className='absolute bottom-4 right-4'>
 												<CtaButton
 													onClick={() => {
 														console.log('Navigate to:', resource.buttonLink);

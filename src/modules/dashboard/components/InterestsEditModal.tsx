@@ -104,17 +104,19 @@ const InterestsEditModal: React.FC<InterestsEditModalProps> = ({ isOpen, onClose
 			<form onSubmit={handleSubmit} className='space-y-6'>
 				{interestData.map((category) => (
 					<div key={category.title}>
-						<h3 className='text-lg font-medium mb-3 text-[#1A1A1A]'>{category.title}</h3>
+						<h3 className='text-lg font-medium text-center mb-3 text-[#1A1A1A]'>{category.title}</h3>
 						{/* Use grid layout for the checkbox section */}
 						<div
 							className={`w-full gap-2 ml-1 ${
-								category.title === '¿Qué te trae a MSK hoy?' ? 'grid grid-cols-1 md:grid-cols-2' : 'flex flex-wrap'
+								category.title === '¿Qué te trae a MSK hoy?'
+									? 'grid grid-cols-1 md:grid-cols-2'
+									: 'flex flex-wrap items-center justify-center'
 							}`}
 						>
 							{category.options.map((option) => {
 								const isSelected = selectedInterests.has(option);
-								const selectedClasses = 'bg-[#9200AD] text-white';
-								const unselectedClasses = 'bg-[#F7F9FF] text-[#29324F] hover:bg-purple-100';
+								const selectedClasses = 'bg-[#DFE6FF] text-[#29324F] font-semibold';
+								const unselectedClasses = 'bg-[#F7F9FF] text-[#29324F] hover:[#DFE6FF]';
 
 								if (category.title === '¿Qué te trae a MSK hoy?') {
 									// Checkbox style

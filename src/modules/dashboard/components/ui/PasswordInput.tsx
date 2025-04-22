@@ -30,6 +30,9 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
 	// Add error state classes
 	const errorClasses = error ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300';
 
+	// Style to hide Edge's default reveal icon
+	const hideBrowserRevealIcon = '[&::-ms-reveal]:hidden';
+
 	return (
 		<div className={`w-full ${containerClassName}`}>
 			<label htmlFor={id} className='block text-sm font-medium text-gray-700 mb-1.5'>
@@ -39,7 +42,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
 				<input
 					type={showPassword ? 'text' : 'password'} // Dynamically change type
 					id={id}
-					className={`${baseClasses} ${errorClasses} ${className}`}
+					className={`${baseClasses} ${errorClasses} ${hideBrowserRevealIcon} ${className}`}
 					{...props}
 				/>
 				<button

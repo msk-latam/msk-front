@@ -64,7 +64,7 @@ const MyCoursesSection: React.FC = () => {
 	const renderInfoLine = (course: Course) => {
 		if (course.expiryDate) {
 			return (
-				<div className='flex items-center gap-1.5 text-xs text-[#4F5D89] font-inter'>
+				<div className='flex items-center gap-1.5 text-xs text-[#4F5D89] font-inter font-medium'>
 					<CalendarIcon />
 					<span>Fecha de Expiración: {course.expiryDate}</span>
 				</div>
@@ -72,7 +72,7 @@ const MyCoursesSection: React.FC = () => {
 		}
 		if (course.qualification !== undefined) {
 			return (
-				<div className='flex items-center gap-1.5 text-xs text-[#4F5D89] font-inter'>
+				<div className='flex items-center gap-1.5 text-xs text-[#4F5D89] font-inter font-medium'>
 					<TrophyIcon />
 					<span>Calificación: {course.qualification}</span>
 				</div>
@@ -83,7 +83,7 @@ const MyCoursesSection: React.FC = () => {
 
 	const renderButtons = (course: Course) => {
 		const secondaryButtonClass =
-			'bg-white text-[#1A1A1A] border border-[#DBDDE2] px-4 py-2 rounded-full font-inter font-medium text-xs hover:bg-gray-50 transition whitespace-nowrap';
+			'bg-white text-[#1A1A1A] border border-[#DBDDE2]  px-6 py-3 rounded-full font-inter font-medium text-sm hover:bg-[#838790] transition whitespace-nowrap';
 
 		switch (course.statusType) {
 			case 'progress':
@@ -150,7 +150,7 @@ const MyCoursesSection: React.FC = () => {
 			</div>
 
 			{/* Courses Grid / Mobile Carousel */}
-			<div className='flex space-x-4 overflow-x-auto scroll-snap-x scroll-snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-5 md:space-x-0 md:overflow-x-visible md:scroll-snap-none pb-4 -mb-4 scrollbar-hide mb-6'>
+			<div className='flex space-x-4 overflow-x-auto scroll-snap-x scroll-snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-5 md:space-x-0 md:overflow-x-visible md:scroll-snap-none pb-4 -mb-4 scrollbar-hide '>
 				{currentCourses.map((course) => (
 					<div
 						key={course.id}
@@ -178,7 +178,7 @@ const MyCoursesSection: React.FC = () => {
 									{course.title}
 								</h4>
 								{/* Info Line */}
-								<div className='min-h-[20px] mb-3'>{renderInfoLine(course as Course)}</div>
+								<div className='min-h-[20px] mb-3 font-inter'>{renderInfoLine(course as Course)}</div>
 							</div>
 							{/* Buttons */}
 							<div className='flex items-center gap-2 justify-end mt-auto'>{renderButtons(course as Course)}</div>
@@ -188,28 +188,25 @@ const MyCoursesSection: React.FC = () => {
 			</div>
 
 			{/* Pagination - Hidden on Mobile */}
-			{totalPages > 1 && (
-				<div className='hidden md:flex justify-center items-center gap-4 mt-6'>
-					<button
-						onClick={() => paginate(currentPage - 1)}
-						disabled={currentPage === 1}
-						className='w-8 h-8 flex items-center justify-center rounded-full border border-[#DBDDE2] text-[#4F5D89] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition'
-					>
-						<ArrowLeftIcon />
-					</button>
-					<span className='font-inter text-sm text-[#1A1A1A]'>
-						<span className='font-medium'>{String(currentPage).padStart(2, '0')}</span>
-						<span className='text-[#C4C7CD]'> / {String(totalPages).padStart(2, '0')}</span>
-					</span>
-					<button
-						onClick={() => paginate(currentPage + 1)}
-						disabled={currentPage === totalPages}
-						className='w-8 h-8 flex items-center justify-center rounded-full border border-[#DBDDE2] text-[#4F5D89] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition'
-					>
-						<ArrowRightIcon />
-					</button>
-				</div>
-			)}
+			<div className='flex justify-center items-center gap-4 mt-6'>
+				<button
+					onClick={() => paginate(currentPage - 1)}
+					disabled={currentPage === 1}
+					className='w-8 h-8 flex items-center justify-center rounded-full border border-[#DBDDE2] text-[#4F5D89] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition'
+				>
+					<ArrowLeftIcon />
+				</button>
+				<span className='font-inter text-sm'>
+					<span className='font-bold text-[#1A1A1A]'>{String(currentPage).padStart(2, '0')}</span>
+				</span>
+				<button
+					onClick={() => paginate(currentPage + 1)}
+					disabled={currentPage === totalPages}
+					className='w-8 h-8 flex items-center justify-center rounded-full border border-[#DBDDE2] text-[#4F5D89] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition'
+				>
+					<ArrowRightIcon />
+				</button>
+			</div>
 		</div>
 	);
 };
