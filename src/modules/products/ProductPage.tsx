@@ -1,4 +1,4 @@
-// app/tienda/course/[id]/page.tsx
+// app/tienda/course/[slug]/page.tsx
 "use client";
 
 import { useParams } from "next/navigation";
@@ -20,14 +20,14 @@ import CourseCards from "./components/CourseCards";
 import Inscription from "./components/Inscription";
 
 export default function CoursePage() {
-  // Obtener el parámetro `id` usando useParams
-//   const { id } = useParams();
-// console.log("aaaaaa",id)
-  // Asegurarse de que `id` esté disponible antes de renderizar el componente
-  // if (!id) {
+  // Obtener el parámetro `slug` usando useParams
+//   const { slug } = useParams();
+// console.log("aaaaaa",slug)
+  // Asegurarse de que `slug` esté disponible antes de renderizar el componente
+  // if (!slug) {
   //   return <div>Loading...</div>;
   // }
-  const id = 333437
+  const slug = 'iniciacion-investigacion-enfermeria'
 
   return (
     <>
@@ -40,7 +40,7 @@ export default function CoursePage() {
         }}
       >
         <Navbar />
-        <CourseHeader courseId={id} />
+        <CourseHeader slug={slug} />
       </div>
 
       {/* CONTENIDO PRINCIPAL */}
@@ -49,16 +49,16 @@ export default function CoursePage() {
           {/* Columna izquierda */}
           <div className="w-full md:w-2/3 space-y-6 z-[9]">
             <div className="w-full bg-white rounded-[38px] flex flex-col relative z-[9] md:-mt-20 px-5 pt-9 pb-3 md:px-9 gap-6 md:gap-0">
-              <CourseDescription  courseId={id}/>
-              <CourseInstitutions courseId={id} />
-              <CourseLearning courseId={id}/>
-              <CourseOverview courseId={id} />
-              {/* <CourseTeachers courseId={id} /> */}
+              <CourseDescription  slug={slug}/>
+              {/* <CourseInstitutions slug={slug} />
+              <CourseLearning slug={slug}/>
+              <CourseOverview slug={slug} /> */} 
+              {/* <CourseTeachers slug={slug} /> */}
               <CourseTeachers/>
             </div>
             {/* Nuevo contenedor para video */}
             <div className="">
-              <CourseVideo courseId={id}/>
+              {/* <CourseVideo slug={slug}/> */}
             </div>
             {/* Nuevo contenedor para Certificate */}
             <div className="w-full  bg-white rounded-[38px] md:py-10 md:px-9 px-6 py-12">
