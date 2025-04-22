@@ -53,7 +53,8 @@ export default function CoursePage() {
               <CourseInstitutions courseId={id} />
               <CourseLearning courseId={id}/>
               <CourseOverview courseId={id} />
-              <CourseTeachers />
+              {/* <CourseTeachers courseId={id} /> */}
+              <CourseTeachers/>
             </div>
             {/* Nuevo contenedor para video */}
             <div className="">

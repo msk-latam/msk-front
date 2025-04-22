@@ -44,7 +44,7 @@ export interface CourseHability {
   slug: string
 }
 
-export interface CourseTeachersData {
+export interface Teacher {
   id: number | null
   name: string | null
   slug: string | null
@@ -52,6 +52,8 @@ export interface CourseTeachersData {
   image: string | false
   link: string
 }
+
+export type CourseTeachersData = Teacher[] 
 
 export interface CourseStudyPlan {
   hours: string

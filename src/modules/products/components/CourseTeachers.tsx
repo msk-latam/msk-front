@@ -1,43 +1,3 @@
-// // 'use client'
-
-// // interface Teacher {
-// //   name: string
-// //   title: string
-// //   image: string
-// //   bioLink?: string
-// // }
-
-// // interface CourseTeachersProps {
-// //   teachers?: Teacher[]
-// // }
-
-// // export default function CourseTeachers({ teachers = [] }: CourseTeachersProps) {
-// //   return (
-// //     <section className="bg-white rounded-2xl  md:p-10">
-// //       <h2 className="text-2xl font-semibold mb-6">Equipo docente</h2>
-
-// //       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-// //         {teachers.map((teacher, idx) => (
-// //           <div key={idx} className="flex items-center gap-4">
-// //             <img src={teacher.image} alt={teacher.name} className="w-16 h-16 rounded-full object-cover" />
-// //             <div>
-// //               <p className="font-medium text-gray-900 text-sm">{teacher.name}</p>
-// //               <p className="text-sm text-gray-600">{teacher.title}</p>
-// //               {teacher.bioLink && (
-// //                 <a href={teacher.bioLink} className="text-purple-600 text-xs hover:underline">
-// //                   Ver biografía
-// //                 </a>
-// //               )}
-// //             </div>
-// //           </div>
-// //         ))}
-// //       </div>
-// //     </section>
-// //   )
-// // }
-
-
-
 'use client'
 
 interface Teacher {
@@ -161,12 +121,11 @@ export default function CourseTeachers({ teachers = mockTeachers }: CourseTeache
 
 //       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 //         {data.map((teacher, idx) => {
-//           const name = teacher.name || 'Docente sin nombre'
-//           const title = teacher.description || 'Sin descripción disponible'
-//           const image =
-//             typeof teacher.image === 'string' && teacher.image !== ''
-//               ? teacher.image
-//               : 'https://via.placeholder.com/150'
+//           const name = teacher.name ?? 'Docente sin nombre'
+//           const title = teacher.description ?? 'Sin descripción disponible'
+//           const image = typeof teacher.image === 'string' && teacher.image !== ''
+//             ? teacher.image
+//             : 'https://via.placeholder.com/150'
 //           const bioLink = teacher.link || null
 
 //           return (
@@ -183,6 +142,8 @@ export default function CourseTeachers({ teachers = mockTeachers }: CourseTeache
 //                   <a
 //                     href={bioLink}
 //                     className="text-purple-600 text-sm mt-1 hover:underline"
+//                     target="_blank"
+//                     rel="noopener noreferrer"
 //                   >
 //                     Ver biografía
 //                   </a>
@@ -211,4 +172,3 @@ export default function CourseTeachers({ teachers = mockTeachers }: CourseTeache
 //     </section>
 //   )
 // }
-
