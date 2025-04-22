@@ -35,7 +35,7 @@ export interface CourseDescription {
   title: string
   content: string
 }
-export interface CourseVideo {
+export interface CourseVideoData {
   video: boolean | string
 }
 export interface CourseHability {
@@ -80,7 +80,7 @@ export interface CourseData {
     habilities: CourseHability[]
     with_this_course: string
     teaching_team: CourseTeachersData[]
-    video: CourseVideo
+    video: CourseVideoData
     certificate: CourseCertificate
     study_plan: CourseStudyPlan
   }

@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { CourseVideo } from './useCourseData'
+import { CourseVideoData } from './useCourseData'
 const API_BASE = 'https://cms1.msklatam.com/wp-json/msk/v1/course'
 
 export function useCourseVideo(courseId: string | number) {
-  const [data, setData] = useState<CourseVideo | null>(null)
+  const [data, setData] = useState<CourseVideoData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 

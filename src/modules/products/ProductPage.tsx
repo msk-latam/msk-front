@@ -15,7 +15,7 @@ import ProductSupportForm from "./components/ProductSupportForm";
 import ProductTestimonials from "./components/ProductTestimonials";
 import ProductInstitutions from "./components/ProductInstitutions";
 import CourseOverview from "./components/CourseOverview";
-import ProductVideo from "./components/ProductVideo";
+import ProductVideo from "./components/CourseVideo";
 import CourseCards from "./components/CourseCards";
 import Inscription from "./components/Inscription";
 

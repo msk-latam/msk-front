@@ -1,15 +1,15 @@
-// components/VideoPlayer.tsx
+// components/CourseVideo.tsx
 'use client';
 
 import React from 'react';
 import { useCourseVideo } from '../hooks/useCourseVideo';
-import { CourseVideo } from '../hooks/useCourseData';
+import { CourseVideoData } from '../hooks/useCourseData';
 
-interface VideoPlayerProps {
+interface CourseVideoProps {
   courseId: string | number;
 }
 
-const VideoPlayer: React.FC<VideoPlayerProps> = ({ courseId }) => {
+const CourseVideo: React.FC<CourseVideoProps> = ({ courseId }) => {
   const { data, loading, error } = useCourseVideo(courseId);
 
   const video = data?.video;
@@ -20,8 +20,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ courseId }) => {
   if (typeof video !== 'string' || video.trim() === '') return null; // seguridad adicional
 
   return (
-    <div className="w-full bg-white rounded-[38px] md:py-10 md:px-9 px-6 py-12">
-      <video controls className="w-full rounded-[38px] shadow-md">
+    <div className="w-full rounded-[30px]">
+      <video controls className="w-full rounded-[30px] shadow-md">
         <source src={video} type="video/mp4" />
         Tu navegador no soporta la reproducción de video.
       </video>
@@ -29,4 +29,4 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ courseId }) => {
   );
 };
 
-export default VideoPlayer;
+export default CourseVideo;
