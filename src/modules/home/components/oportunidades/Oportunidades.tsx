@@ -27,42 +27,40 @@ const Oportunidades = () => {
     <section className="relative w-full overflow-visible max-w-[1600px] mx-auto md:px-4 md:pt-24 pb-[240px] z-[1] pt-32" aria-labelledby="oportunidades-heading">
       <div className="relative bg-white rounded-[38px] -mt-32 -mb-64 pt-6 md:pt-[72px] md:pb-16 shadow-lg">
         <div className="px-5 md:px-16 pb-6 md:mb-0">
-          <header className="md:text-left text-center max-w-7xl px-6 gap-4 md:px-0">
-          <h2
-  id="oportunidades-heading"
-  className="mb-2 md:text-[34px] text-[20px]  leading-[100%] text-[#1A1A1A] align-middle"
->
-  {/* Mobile: Saltos forzados */}
-  <p className="md:hidden font-Raleway leading-[32px] ">
-    Te damos la bienvenida a <br />
-    Medical & Scientific Knowledge, <br />
-    el lugar ideal para estudiar <br />
-    medicina a distancia a través de <br />
-    nuestros cursos de actualización.
-  </p>
+        <header className="md:text-left text-center max-w-7xl px-6 gap-4 md:px-0">
+  <h2
+    id="oportunidades-heading"
+    className="mb-2 md:text-[34px] text-[20px] leading-[100%] text-[#1A1A1A] align-middle"
+  >
+    {/* Mobile */}
+    <span className="block md:hidden font-Raleway leading-[32px]">
+      Te damos la bienvenida a <br />
+      Medical & Scientific Knowledge, <br />
+      el lugar ideal para estudiar <br />
+      medicina a distancia a través de <br />
+      nuestros cursos de actualización.
+    </span>
 
-  {/* Desktop: Una sola línea + salto md:inline */}
-  <h2 className="hidden md:inline ">
-    Te damos la bienvenida a Medical & Scientific Knowledge, el lugar ideal para 
-    
-    estudiar medicina a distancia a través de nuestros cursos de actualización.
+    {/* Desktop */}
+    <span className="hidden md:inline">
+      Te damos la bienvenida a Medical & Scientific Knowledge, el lugar ideal para 
+      estudiar medicina a distancia a través de nuestros cursos de actualización.
+    </span>
   </h2>
-</h2>
 
-<p className="md:text-[18px] text-[14px] font-[400] text-[#838790] align-middle">
-  {/* Mobile */}
-  <p className="md:hidden">
-    Encuentra cursos de medicina y cursos de <br />
-    enfermería sobre más de 20 especialidades
+  <p className="md:text-[18px] text-[14px] font-[400] text-[#838790] align-middle">
+    <span className="block md:hidden">
+      Encuentra cursos de medicina y cursos de <br />
+      enfermería sobre más de 20 especialidades y  <br /> 
+      transforma tu carrera en salud con MSK
+    </span>
+
+    <span className="hidden md:inline">
+      Encuentra cursos de medicina y cursos de enfermería sobre más de 20 especialidades y transforma tu carrera en salud con MSK
+    </span>
   </p>
+</header>
 
-  {/* Desktop */}
-  <p className="hidden md:inline">
-    Encuentra cursos de medicina y cursos de enfermería sobre más de 20 especialidades
-  </p>
-</p>
-
-          </header>
 
           {/* NAV + Botón Ver Todos → */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between md:gap-4 gap-5 my-6">

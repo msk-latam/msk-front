@@ -1,6 +1,6 @@
 'use client'
 
-interface ProductSummaryProps {
+interface CourseSummaryProps {
   price?: string
   certification?: boolean
   duration?: string
@@ -8,13 +8,13 @@ interface ProductSummaryProps {
   enrolled?: number
 }
 
-export default function ProductSummary({
+export default function CourseSummary({
   price = "$146.145 ARS",
   certification = true,
   duration = "600 horas estimadas",
   modules = 16,
   enrolled = 2000,
-}: ProductSummaryProps) {
+}: CourseSummaryProps) {
   return (
     <div className="bg-white rounded-[38px] shadow p-6 md:p-8 sticky top-10 w-full">
       <img

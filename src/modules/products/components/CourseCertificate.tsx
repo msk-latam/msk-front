@@ -1,6 +1,6 @@
 'use client'
 
-export default function ProductCertificate() {
+export default function CourseCertificate() {
   return (
     <section className="bg-white rounded-2xl text-center md:text-left">
       <h2 className="text-2xl md:text-[34px] font-raleway font-medium mb-6">

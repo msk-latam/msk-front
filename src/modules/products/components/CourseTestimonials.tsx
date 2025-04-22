@@ -32,7 +32,7 @@ const sampleTestimonials = [
   },
 ];
 
-export default function ProductTestimonials() {
+export default function CourseTestimonials() {
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {
@@ -47,8 +47,8 @@ export default function ProductTestimonials() {
 
   return (
     <GradientBackground>
-      <section className="text-white py-16 px-4 pt-48 md:pt-60 flex md:block flex-col space-y-96 md:space-y-2">
-        <div className="max-w-screen-xl mx-auto text-left">
+      <section className="text-white py-16 pl-6 pt-48 md:pt-60 flex md:block flex-col space-y-96 md:space-y-2">
+        <div className="max-w-screen-xl mx-auto text-left pr-6">
           <h2 className="text-[32px] md:text-[52px] font-raleway font-bold mb-4 leading-snug">
             Sé parte de nuestra comunidad <br className="hidden md:inline" />
             de profesionales

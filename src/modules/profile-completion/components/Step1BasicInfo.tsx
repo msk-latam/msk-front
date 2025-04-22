@@ -74,7 +74,7 @@ export default function Step1BasicInfo({
           <select
             value={profession}
             onChange={(e) => setProfession(e.target.value)}
-            className="mt-1 w-full rounded-2xl border border-[#DBDDE2] p-3 text-[#6E737C] focus:ring-4 focus:ring-[#F5E6F7] focus:outline-none"
+            className="mt-1 w-full rounded-2xl border border-[#DBDDE2] p-3 text-[#6E737C] focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]"
           >
             <option value="">Seleccionar profesión</option>
             <option value="medico">Médico</option>
@@ -91,7 +91,7 @@ export default function Step1BasicInfo({
           <select
             value={specialty}
             onChange={(e) => setSpecialty(e.target.value)}
-            className="mt-1 w-full rounded-2xl border border-[#DBDDE2] p-3 text-[#6E737C] focus:ring-4 focus:ring-[#F5E6F7] focus:outline-none"
+            className="mt-1 w-full rounded-2xl border border-[#DBDDE2] p-3 text-[#6E737C] focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]"
           >
             <option value="">Seleccionar especialidad</option>
             <option value="medicina-general">Medicina General</option>
@@ -108,7 +108,7 @@ export default function Step1BasicInfo({
           <select
             value={country}
             onChange={(e) => setCountry(e.target.value)}
-            className="mt-1 w-full rounded-2xl border border-[#DBDDE2] p-3 text-[#6E737C] focus:ring-4 focus:ring-[#F5E6F7] focus:outline-none"
+            className="mt-1 w-full rounded-2xl border border-[#DBDDE2] p-3 text-[#6E737C] focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]"
           >
             <option value="">Seleccionar país</option>
             <option value="ar">Argentina</option>

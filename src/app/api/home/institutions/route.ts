@@ -4,7 +4,7 @@ import { Institution } from "@/modules/home/types";
 export async function GET() {
   try {
     const res = await fetch("https://cms1.msklatam.com/wp-json/msk/v1/front/inicio?lang=int&nocache=1", {
-      next: { revalidate: 3600 },
+      next: { revalidate: 0 },
     });
 
     if (!res.ok) {

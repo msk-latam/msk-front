@@ -42,7 +42,13 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang='es'>
-			<body className={`${inter.variable} ${raleway.variable} font-inter`}>{children}</body>
+			<head>
+				<meta name="robots" content="noindex, nofollow" />
+			</head>
+			<body className={`${inter.variable} ${raleway.variable} font-inter`}>
+				{children}
+			</body>
 		</html>
 	);
 }
+
