@@ -215,7 +215,8 @@ const StoreFilters = () => {
 			queryParams[key] = valueString;
 		});
 
-		router.push(pathname + '?' + createQueryString(queryParams));
+		// Add { scroll: false } to prevent scroll on navigation
+		router.push(pathname + '?' + createQueryString(queryParams), { scroll: false });
 
 		console.log('Selected Filter Values:', nextFilters);
 	};
