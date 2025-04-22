@@ -60,8 +60,8 @@ export default function CoursePage() {
               {/* <CourseVideo slug={slug}/> */}
             </div>
             {/* Nuevo contenedor para Certificate */}
-            <div className="w-full  bg-white rounded-[38px] md:py-10 md:px-9 px-6 py-12">
-              <CourseCertificate />
+            <div className="">
+              <CourseCertificate slug={slug}/>
             </div>
             {/* Nuevo contenedor para CourseSyllabus */}
             <div className="w-full  bg-white rounded-[38px] md:py-16 md:px-9 px-6 py-9">
