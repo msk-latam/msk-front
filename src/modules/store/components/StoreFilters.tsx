@@ -3,49 +3,65 @@ import Checkbox from '@/store/components/ui/Checkbox'; // Assuming correct path 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useCallback, useEffect, useState } from 'react';
 
-// Mock Data
-const especialidadesData = [
-	'Administración y gestión',
-	'Anestesiología y dolor',
-	'Cardiología',
-	'Dermatología',
-	'Diabetes',
-	'Emergentología',
-	'Endocrinología',
-	'Gastroenterología',
-	'Geriatría',
-	'Ginecología',
-	'Hematología',
-	'Infectología',
-	'Medicina familiar',
-	'Medicina general',
-	'Medicina intensiva',
-	'Medicina laboral',
-	'Nefrología',
-	'Nutrición',
-	'Oftalmología',
-	'Oncología',
-	'Pediatría',
-	'Psiquiatría',
-	'Radiología e imagenología',
-	'Traumatología',
-	'Urología',
+// Mock Data with value and label
+interface FilterOption {
+	value: string;
+	label: string;
+}
+
+const especialidadesData: FilterOption[] = [
+	{ value: 'administracion-y-gestion', label: 'Administración y gestión' },
+	{ value: 'anestesiologia-y-dolor', label: 'Anestesiología y dolor' },
+	{ value: 'cardiologia', label: 'Cardiología' },
+	{ value: 'dermatologia', label: 'Dermatología' },
+	{ value: 'diabetes', label: 'Diabetes' },
+	{ value: 'emergentologia', label: 'Emergentología' },
+	{ value: 'endocrinologia', label: 'Endocrinología' },
+	{ value: 'gastroenterologia', label: 'Gastroenterología' },
+	{ value: 'geriatria', label: 'Geriatría' },
+	{ value: 'ginecologia', label: 'Ginecología' },
+	{ value: 'hematologia', label: 'Hematología' },
+	{ value: 'infectologia', label: 'Infectología' },
+	{ value: 'medicina-familiar', label: 'Medicina familiar' },
+	{ value: 'medicina-general', label: 'Medicina general' },
+	{ value: 'medicina-intensiva', label: 'Medicina intensiva' },
+	{ value: 'medicina-laboral', label: 'Medicina laboral' },
+	{ value: 'nefrologia', label: 'Nefrología' },
+	{ value: 'nutricion', label: 'Nutrición' },
+	{ value: 'oftalmologia', label: 'Oftalmología' },
+	{ value: 'oncologia', label: 'Oncología' },
+	{ value: 'pediatria', label: 'Pediatría' },
+	{ value: 'psiquiatria', label: 'Psiquiatría' },
+	{ value: 'radiologia-e-imagenologia', label: 'Radiología e imagenología' },
+	{ value: 'traumatologia', label: 'Traumatología' },
+	{ value: 'urologia', label: 'Urología' },
 ];
 
-const recursoData = ['Curso', 'Guías profesionales'];
+const recursoData: FilterOption[] = [
+	{ value: 'curso', label: 'Curso' },
+	{ value: 'guias-profesionales', label: 'Guías profesionales' },
+];
 
-const profesionData = ['Personal médico', 'Personal de enfermería y auxiliares', 'Otra porfesión'];
+const profesionData: FilterOption[] = [
+	{ value: 'medicos', label: 'Personal médico' },
+	{ value: 'enfermeros-auxiliares', label: 'Personal de enfermería y auxiliares' },
+	{ value: 'otra-profesion', label: 'Otra porfesión' },
+];
 
-const duracionData = ['Hasta 300 horas', 'De 100 a 300 horas', 'Más de 300 horas'];
+const duracionData: FilterOption[] = [
+	{ value: 'hasta-300', label: 'Hasta 300 horas' },
+	{ value: '100-300', label: 'De 100 a 300 horas' },
+	{ value: 'mas-300', label: 'Más de 300 horas' },
+];
 
 interface FilterSectionProps {
 	title: string;
-	options: string[];
+	options: FilterOption[]; // Changed from string[]
 	openIndices: Set<number>;
 	sectionIndex: number;
 	onToggle: (index: number) => void;
-	selectedOptions: Set<string>;
-	onOptionChange: (option: string) => void;
+	selectedOptions: Set<string>; // Remains Set<string> to hold selected values
+	onOptionChange: (value: string) => void; // Changed parameter name for clarity
 	className?: string;
 }
 
@@ -56,14 +72,15 @@ const FilterSection: React.FC<FilterSectionProps> = ({
 	sectionIndex,
 	onToggle,
 	selectedOptions,
-	onOptionChange,
+	onOptionChange, // This now expects the value
 	className,
 }) => {
 	const isOpen = openIndices.has(sectionIndex);
 
 	// Determine the appropriate classes for checked items based on the image
-	const getCheckboxWrapperClass = (option: string) => {
-		if (selectedOptions.has(option)) {
+	const getCheckboxWrapperClass = (value: string) => {
+		// Check if the value is selected
+		if (selectedOptions.has(value)) {
 			// Mimic the purple border and light background
 			return 'bg-[#F7F9FF] rounded-full p-3 -ml-2 pr-3'; // Adjust padding as needed
 		}
@@ -80,13 +97,14 @@ const FilterSection: React.FC<FilterSectionProps> = ({
 			>
 				<div className='space-y-2'>
 					{options.map((option) => (
-						<div key={option} className={`${getCheckboxWrapperClass(option)}`}>
+						// Use option.value for key and class checking
+						<div key={option.value} className={`${getCheckboxWrapperClass(option.value)}`}>
 							<Checkbox
-								key={option}
-								label={option}
-								name={`${title}-${option}`.replace(/\s+/g, '-')}
-								checked={selectedOptions.has(option)}
-								onChange={() => onOptionChange(option)}
+								key={option.value} // Use value for key
+								label={option.label} // Use label for display
+								name={`${title}-${option.value}`} // Use value in name
+								checked={selectedOptions.has(option.value)} // Check based on value
+								onChange={() => onOptionChange(option.value)} // Pass value on change
 							/>
 						</div>
 					))}
@@ -101,9 +119,9 @@ const StoreFilters = () => {
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
 
-	// Initialize the Set with all section indices (0, 1, 2, 3)
 	const [openIndices, setOpenIndices] = useState<Set<number>>(new Set([0, 1, 2, 3]));
 
+	// selectedFilters still holds Sets of string values
 	const [selectedFilters, setSelectedFilters] = useState<Record<string, Set<string>>>({
 		especialidades: new Set(),
 		recurso: new Set(),
@@ -123,7 +141,8 @@ const StoreFilters = () => {
 		searchParams.forEach((value, key) => {
 			if (key in initialFilters) {
 				const items = value.split(',');
-				initialFilters[key] = new Set(items.map((item: string) => item.replace(/-/g, ' '))); // Convert back from URL format
+				// Values from URL are already in the correct format (e.g., 'administracion-y-gestion')
+				initialFilters[key] = new Set(items);
 			}
 		});
 
@@ -142,9 +161,10 @@ const StoreFilters = () => {
 		if (needsUpdate) {
 			setSelectedFilters(initialFilters);
 		}
-	}, [searchParams]); // Depend on searchParams
+		// Removed selectedFilters from dependency array as it caused potential loops
+		// The comparison logic should prevent unnecessary updates.
+	}, [searchParams]);
 
-	// Toggle function adds or removes the index from the Set
 	const handleToggleAccordion = (index: number) => {
 		setOpenIndices((prevIndices) => {
 			const newIndices = new Set(prevIndices);
@@ -157,7 +177,6 @@ const StoreFilters = () => {
 		});
 	};
 
-	// Memoized function to create the query string
 	const createQueryString = useCallback(
 		(params: Record<string, string>) => {
 			const newSearchParams = new URLSearchParams(searchParams.toString());
@@ -166,7 +185,7 @@ const StoreFilters = () => {
 				if (value) {
 					newSearchParams.set(key, value);
 				} else {
-					newSearchParams.delete(key); // Remove the key if the value is empty/null
+					newSearchParams.delete(key);
 				}
 			});
 
@@ -175,74 +194,70 @@ const StoreFilters = () => {
 		[searchParams],
 	);
 
-	const handleOptionChange = (section: string, option: string) => {
-		// Calculate the next state first
+	// handleOptionChange now receives the 'value' string
+	const handleOptionChange = (section: string, value: string) => {
 		const nextFilters = { ...selectedFilters };
 		const newSectionOptions = new Set(nextFilters[section]);
 
-		if (newSectionOptions.has(option)) {
-			newSectionOptions.delete(option);
+		if (newSectionOptions.has(value)) {
+			newSectionOptions.delete(value);
 		} else {
-			newSectionOptions.add(option);
+			newSectionOptions.add(value);
 		}
 		nextFilters[section] = newSectionOptions;
 
-		// Update the state
 		setSelectedFilters(nextFilters);
 
-		// Update the URL
 		const queryParams: Record<string, string> = {};
 		Object.entries(nextFilters).forEach(([key, valueSet]) => {
-			const valueString = Array.from(valueSet)
-				.map((val) => val.replace(/\s+/g, '-'))
-				.join(',');
-			queryParams[key] = valueString; // Assign even if empty to ensure removal via createQueryString
+			// Join the values directly, they are already in the desired format
+			const valueString = Array.from(valueSet).join(',');
+			queryParams[key] = valueString;
 		});
 
-		// Use router.push with the pathname and the new query string
-		router.push(pathname + '?' + createQueryString(queryParams));
+		// Add { scroll: false } to prevent scroll on navigation
+		router.push(pathname + '?' + createQueryString(queryParams), { scroll: false });
 
-		// Add logic here to actually filter the store items based on selectedFilters
-		console.log('Selected Filters:', nextFilters);
+		console.log('Selected Filter Values:', nextFilters);
 	};
 
 	return (
 		<div className='md:col-span-1 md:row-span-3 order-1 md:order-1'>
 			<FilterSection
 				title='Especialidades'
-				options={especialidadesData}
+				options={especialidadesData} // Pass the new data structure
 				openIndices={openIndices}
 				sectionIndex={0}
 				onToggle={handleToggleAccordion}
-				selectedOptions={selectedFilters.especialidades}
-				onOptionChange={(option) => handleOptionChange('especialidades', option)}
+				selectedOptions={selectedFilters.especialidades} // Pass the Set of selected values
+				onOptionChange={(value) => handleOptionChange('especialidades', value)} // Pass the value
 			/>
 			<FilterSection
 				title='Recurso'
-				options={recursoData}
+				options={recursoData} // Pass the new data structure
 				openIndices={openIndices}
 				sectionIndex={1}
 				onToggle={handleToggleAccordion}
-				selectedOptions={selectedFilters.recurso}
-				onOptionChange={(option) => handleOptionChange('recurso', option)}
+				selectedOptions={selectedFilters.recurso} // Pass the Set of selected values
+				onOptionChange={(value) => handleOptionChange('recurso', value)} // Pass the value
 			/>
 			<FilterSection
 				title='Profesión'
-				options={profesionData}
+				options={profesionData} // Pass the new data structure
 				openIndices={openIndices}
 				sectionIndex={2}
 				onToggle={handleToggleAccordion}
-				selectedOptions={selectedFilters.profesion}
-				onOptionChange={(option) => handleOptionChange('profesion', option)}
+				selectedOptions={selectedFilters.profesion} // Pass the Set of selected values
+				onOptionChange={(value) => handleOptionChange('profesion', value)} // Pass the value
 			/>
 			<FilterSection
 				title='Duración'
-				options={duracionData}
+				options={duracionData} // Pass the new data structure
 				openIndices={openIndices}
 				sectionIndex={3}
 				onToggle={handleToggleAccordion}
-				selectedOptions={selectedFilters.duracion}
-				onOptionChange={(option) => handleOptionChange('duracion', option)}
+				selectedOptions={selectedFilters.duracion} // Pass the Set of selected values
+				onOptionChange={(value) => handleOptionChange('duracion', value)} // Pass the value
 			/>
 		</div>
 	);

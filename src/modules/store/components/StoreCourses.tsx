@@ -1,8 +1,8 @@
 'use client';
 
 import { Course, CoursesApiResponse } from '@/types/course'; // Import types
-import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'; // Added useRouter, usePathname
+import React, { useEffect, useState } from 'react'; // Added useRef, useCallback
 import CourseCardSkeleton from './CourseCardSkeleton'; // Import Skeleton
 import Pagination from './Pagination'; // Import Pagination
 import StoreCoursesHead from './StoreCoursesHead';
@@ -10,11 +10,27 @@ import StoreCoursesHead from './StoreCoursesHead';
 // Define your filter keys if you need to be specific
 const filterKeys = ['especialidades', 'recurso', 'profesion', 'duracion'];
 
+// Debounce hook utility (can be moved to a utils file)
+function useDebounce<T>(value: T, delay: number): T {
+	const [debouncedValue, setDebouncedValue] = useState<T>(value);
+	useEffect(() => {
+		const handler = setTimeout(() => {
+			setDebouncedValue(value);
+		}, delay);
+		return () => {
+			clearTimeout(handler);
+		};
+	}, [value, delay]);
+	return debouncedValue;
+}
+
 interface StoreCoursesProps {
-	// filterCount: number; // Removed prop, calculated internally
+	// Props if any
 }
 
 const StoreCourses: React.FC<StoreCoursesProps> = () => {
+	const router = useRouter(); // Added
+	const pathname = usePathname(); // Added
 	const searchParams = useSearchParams();
 	const [courses, setCourses] = useState<Course[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
@@ -23,14 +39,44 @@ const StoreCourses: React.FC<StoreCoursesProps> = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(1);
 
+	// State for the search input
+	const [searchTerm, setSearchTerm] = useState<string>('');
+	const debouncedSearchTerm = useDebounce(searchTerm, 500); // 500ms debounce
+
 	// Calculate the total count of selected filter *options*
 	let totalSelectedOptionsCount = 0;
 	searchParams.forEach((value, key) => {
+		// Exclude 'search' and pagination params from filter count
 		if (filterKeys.includes(key)) {
-			const selectedOptions = value.split(',');
+			const selectedOptions = value.split(',').filter(Boolean); // Filter out empty strings if value is empty
 			totalSelectedOptionsCount += selectedOptions.length;
 		}
 	});
+
+	// Effect to initialize searchTerm from URL on mount
+	useEffect(() => {
+		setSearchTerm(searchParams.get('search') || '');
+	}, []); // Run only once on mount
+
+	// Effect to update URL when debounced search term changes
+	useEffect(() => {
+		const current = new URLSearchParams(searchParams.toString());
+		const currentSearch = current.get('search');
+
+		// Update URL only if debounced term is different from current URL search param
+		// or if it's empty and the param exists
+		if (debouncedSearchTerm !== (currentSearch || '')) {
+			const params = new URLSearchParams(searchParams.toString());
+			if (debouncedSearchTerm) {
+				params.set('search', debouncedSearchTerm);
+			} else {
+				params.delete('search');
+			}
+			// Reset page to 1 when search term changes
+			params.set('page', '1');
+			router.push(`${pathname}?${params.toString()}`, { scroll: false });
+		}
+	}, [debouncedSearchTerm, searchParams, pathname, router]);
 
 	useEffect(() => {
 		const fetchCourses = async () => {
@@ -38,11 +84,33 @@ const StoreCourses: React.FC<StoreCoursesProps> = () => {
 			setError(null);
 			try {
 				// Construct the API URL with search parameters
-				const params = new URLSearchParams(searchParams.toString()); // Use existing search params
-				const page = params.get('page') || '1'; // Get page from URL or default to 1
+				const params = new URLSearchParams(searchParams.toString()); // Use current searchParams
+
+				// Ensure required params are set (might be redundant if already in searchParams)
+				params.set('lang', params.get('lang') || 'int');
+				params.set('page', params.get('page') || '1');
+				params.set('per_page', params.get('per_page') || '12');
+
+				// API parameter mapping - use the params directly from searchParams
+				if (params.has('especialidades')) {
+					params.set('specialty', params.get('especialidades') || '');
+					params.delete('especialidades'); // Remove original key if needed by API
+				}
+				if (params.has('profesion')) {
+					params.set('profession', params.get('profesion') || '');
+					params.delete('profesion'); // Remove original key
+				}
+				if (params.has('duracion')) {
+					params.set('duration', params.get('duracion') || '');
+					params.delete('duracion'); // Remove original key
+				}
+				// NOTE: The 'search' parameter is already in `params` because the previous useEffect updated the URL
+
+				const page = params.get('page') || '1';
 				setCurrentPage(parseInt(page, 10));
 
 				const apiUrl = `https://cms1.msklatam.com/wp-json/msk/v1/courses?${params.toString()}`;
+				console.log('Fetching courses with URL:', apiUrl); // Log the URL for debugging
 
 				const response = await fetch(apiUrl);
 				if (!response.ok) {
@@ -50,9 +118,9 @@ const StoreCourses: React.FC<StoreCoursesProps> = () => {
 				}
 				const data: CoursesApiResponse = await response.json();
 				setCourses(data.data);
-				setTotalCourses(data.meta.total); // Store total course count
-				setTotalPages(data.meta.pages); // Store total pages
-				setCurrentPage(data.meta.page); // Store current page from API response
+				setTotalCourses(data.meta.total);
+				setTotalPages(data.meta.pages);
+				setCurrentPage(data.meta.page);
 			} catch (e: any) {
 				console.error('Failed to fetch courses:', e);
 				setError(`Failed to load courses: ${e.message}`);
@@ -62,11 +130,19 @@ const StoreCourses: React.FC<StoreCoursesProps> = () => {
 		};
 
 		fetchCourses();
-	}, [searchParams]); // Re-fetch when searchParams change
+	}, [searchParams]); // Re-fetch ONLY when searchParams change
+
+	const handleSearchChange = (term: string) => {
+		setSearchTerm(term);
+	};
 
 	return (
 		<div className='md:col-span-1 md:row-span-3 bg-white rounded-[30px] p-[36px] order-1 md:order-1'>
-			<StoreCoursesHead filterCount={totalSelectedOptionsCount} />
+			<StoreCoursesHead
+				filterCount={totalSelectedOptionsCount}
+				searchTerm={searchTerm}
+				onSearchChange={handleSearchChange}
+			/>
 			{isLoading ? (
 				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
 					{Array.from({ length: 12 }).map((_, index) => (
@@ -125,9 +201,8 @@ const StoreCourses: React.FC<StoreCoursesProps> = () => {
 										{/* Button always positioned on the right */}
 										<a
 											href={course.link}
-											target='_blank'
 											rel='noopener noreferrer'
-											className='bg-gray-800 text-white px-4 py-2 rounded-full hover:bg-gray-700 transition-colors'
+											className='bg-[#191919] text-white px-4 py-2 rounded-full hover:bg-[#474b53] transition-colors'
 										>
 											Descubrir
 										</a>
@@ -136,12 +211,31 @@ const StoreCourses: React.FC<StoreCoursesProps> = () => {
 							</div>
 						))
 					) : (
-						<p>No courses found.</p> // Handle no courses found
+						<div className='col-span-full flex flex-col items-center justify-center py-10 px-4 text-center'>
+							<svg
+								className='w-16 h-16 text-gray-400 mb-4'
+								fill='none'
+								stroke='currentColor'
+								viewBox='0 0 24 24'
+								xmlns='http://www.w3.org/2000/svg'
+							>
+								<path
+									strokeLinecap='round'
+									strokeLinejoin='round'
+									strokeWidth={2}
+									d='M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+								/>
+							</svg>
+							<p className='text-lg font-medium text-gray-700'>No se encontraron cursos</p>
+							<p className='text-sm text-gray-500 mt-2'>Intenta con otros filtros o vuelve más tarde</p>
+						</div>
 					)}
 				</div>
 			)}
-			{/* Render Pagination if not loading, no error, and more than one page */}
-			{!isLoading && !error && totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} />}
+			{/* Render Pagination if not loading, no error, has courses, and more than one page */}
+			{!isLoading && !error && courses.length > 0 && totalPages > 1 && (
+				<Pagination currentPage={currentPage} totalPages={totalPages} />
+			)}
 		</div>
 	);
 };
