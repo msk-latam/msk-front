@@ -15,6 +15,9 @@ export default function CourseSummary({
   modules = 16,
   enrolled = 2000,
 }: CourseSummaryProps) {
+  // Formateamos el número 'enrolled' para que siempre tenga comas
+  const enrolledFormatted = enrolled.toLocaleString();
+
   return (
     <div className="bg-white rounded-[38px] shadow p-6 md:p-8 sticky top-10 w-full">
       <img
@@ -42,7 +45,7 @@ export default function CourseSummary({
         </li>
         <li className="flex items-center gap-2">
           <img src="/icons/course/summary/person.svg" alt="" className="w-4 h-4" />
-          {enrolled.toLocaleString()} profesionales inscriptos
+          {enrolledFormatted} profesionales inscriptos
         </li>
         <li className="flex items-center gap-2">
           <img src="/icons/course/summary/download.svg" alt="" className="w-4 h-4" />
@@ -67,5 +70,5 @@ export default function CourseSummary({
         Contáctanos
       </button>
     </div>
-  )
+  );
 }

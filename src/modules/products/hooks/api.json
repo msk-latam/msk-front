@@ -40,7 +40,7 @@
         },
         "content": {
             "title": "Qu\u00e9 es la medicina de urgencias",
-            "content": "La medicina de urgencias o emergentolog\u00eda se centra en la detecci\u00f3n, el diagn\u00f3stico, la atenci\u00f3n inicial, la prevenci\u00f3n de complicaciones y la ubicaci\u00f3n de los pacientes que presentan enfermedades agudas y requieren atenci\u00f3n m\u00e9dica inmediata, con el fin de disminuir los riesgos de invalidez o muerte. Un especialista en medicina de urgencias puede brindar una atenci\u00f3n r\u00e1pida y eficaz, estabilizando a sus pacientes en situaciones cr\u00edticas.<\/p>\n Este curso de Medicina de urgencias te preparar\u00e1 para poder realizar un abordaje eficaz de los diversos escenarios que se presentan en los servicios de urgencias y emergencias, abarcando todas las instancias, desde el diagn\u00f3stico hasta la prevenci\u00f3n de complicaciones.\nEl curso de Medicina de urgencias de MSK est\u00e1 organizado en 12 m\u00f3dulos que abarcan temas como atenci\u00f3n inicial y v\u00eda a\u00e9rea, resucitaci\u00f3n en emergencias, sepsis y emergencias infecciosas, trauma en la emergencia, emergencias respiratorias y emergencias cardiovasculares, entre otros.<\/p>\n"
+            "content": "La medicina de urgencias o emergentolog\u00eda se centra en la detecci\u00f3n, el diagn\u00f3stico, la atenci\u00f3n inicial, la prevenci\u00f3n de complicaciones y la ubicaci\u00f3n de los pacientes que presentan enfermedades agudas y requieren atenci\u00f3n m\u00e9dica inmediata, con el fin de disminuir los riesgos de invalidez o muerte. Un especialista en medicina de urgencias puede brindar una atenci\u00f3n r\u00e1pida y eficaz, estabilizando a sus pacientes en situaciones cr\u00edticas.<\/p>Este curso de Medicina de urgencias te preparar\u00e1 para poder realizar un abordaje eficaz de los diversos escenarios que se presentan en los servicios de urgencias y emergencias, abarcando todas las instancias, desde el diagn\u00f3stico hasta la prevenci\u00f3n de complicaciones.\nEl curso de Medicina de urgencias de MSK est\u00e1 organizado en 12 m\u00f3dulos que abarcan temas como atenci\u00f3n inicial y v\u00eda a\u00e9rea, resucitaci\u00f3n en emergencias, sepsis y emergencias infecciosas, trauma en la emergencia, emergencias respiratorias y emergencias cardiovasculares, entre otros.<\/p>
         },
         "institutions": [
             {
@@ -125,6 +125,225 @@
             "hours": "",
             "study_plan_file": false,
             "modules": false
+        }
+    }
+}
+
+{
+    "id": 333437,
+    "title": "Iniciaci\u00f3n a la investigaci\u00f3n en enfermer\u00eda",
+    "slug": "iniciacion-investigacion-enfermeria",
+    "date": "2025-01-31T15:25:33+00:00",
+    "featured_image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/investigacionenfermeria-primaria.jpg",
+    "categories": [
+        {
+            "term_id": 1090,
+            "name": "Medicina general",
+            "slug": "medicina-general",
+            "is_primary": true
+        },
+        {
+            "term_id": 60095,
+            "name": "Endocrinolog\u00eda",
+            "slug": "endocrinologia",
+            "is_primary": false
+        },
+        {
+            "term_id": 1449,
+            "name": "Medicina familiar",
+            "slug": "medicina-familiar",
+            "is_primary": false
+        }
+    ],
+    "link": "https:\/\/msklatam.com\/curso\/iniciacion-investigacion-enfermeria",
+    "sections": {
+        "header": {
+            "title": "Iniciaci\u00f3n a la investigaci\u00f3n en enfermer\u00eda",
+            "has_certificate": true,
+            "categories": [
+                {
+                    "term_id": 1090,
+                    "name": "Medicina general",
+                    "slug": "medicina-general",
+                    "is_primary": true
+                },
+                {
+                    "term_id": 60095,
+                    "name": "Endocrinolog\u00eda",
+                    "slug": "endocrinologia",
+                    "is_primary": false
+                },
+                {
+                    "term_id": 1449,
+                    "name": "Medicina familiar",
+                    "slug": "medicina-familiar",
+                    "is_primary": false
+                }
+            ]
+        },
+        "content": {
+            "title": "Qu\u00e9 es la investigaci\u00f3n en enfermer\u00eda",
+            "content":"
+La investigaci\u00f3n en enfermer\u00eda es una disciplina fundamental para el avance del conocimiento y la mejora de la pr\u00e1ctica cl\u00ednica. A trav\u00e9s del an\u00e1lisis de datos y la aplicaci\u00f3n del m\u00e9todo cient\u00edfico, se generan nuevas evidencias que permiten optimizar la atenci\u00f3n sanitaria, mejorar la toma de decisiones y garantizar un cuidado basado en la mejor informaci\u00f3n disponible.<\/p>
+El curso de Iniciaci\u00f3n a la investigaci\u00f3n en enfermer\u00eda de MSK te brinda las herramientas necesarias para dise\u00f1ar y desarrollar proyectos de investigaci\u00f3n, interpretar datos estad\u00edsticos y aplicar metodolog\u00edas tanto cuantitativas como cualitativas. Adem\u00e1s, profundiza en la enfermer\u00eda basada en la evidencia, permiti\u00e9ndote adquirir un enfoque anal\u00edtico y cr\u00edtico para la toma de decisiones.<\/p>
+Organizado en cinco temas, el curso de Iniciaci\u00f3n a la investigaci\u00f3n en enfermer\u00eda de MSK abarca desde los fundamentos de la investigaci\u00f3n hasta el an\u00e1lisis de datos y la \u00e9tica en la investigaci\u00f3n cient\u00edfica, a partir de materiales completamente actualizados.<\/p>
+        },
+        "institutions": [
+            {
+                "id": 309920,
+                "title": "European University Gasteiz (EUNEIZ)",
+                "slug": "euneiz-european-university-gastei",
+                "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/06\/EUNEKZ.png"
+            },
+            {
+                "id": 293255,
+                "title": "MSK ANDROS OTEC",
+                "slug": "msk-andros-otec",
+                "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/01\/mskandros_otec_1x.webp"
+            },
+            {
+                "id": 96956,
+                "title": "Asociaci\u00f3n de Facultades Ecuatorianas de Ciencias M\u00e9dicas y de la Salud",
+                "slug": "asociacion-de-facultades-ecuatorianas-de-ciencias-medicas-y-de-la-salud",
+                "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2021\/06\/afeme_1x.webp"
+            },
+            {
+                "id": 313571,
+                "title": "Universidad de Cuenca",
+                "slug": "universidad-de-cuenca",
+                "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/07\/ucuenca_1x.webp"
+            },
+            {
+                "id": 309785,
+                "title": "Asociaci\u00f3n Nacional de M\u00e9dicos Rurales del Ecuador (ANAMER)",
+                "slug": "asociacion-de-medicos-rurales-del-ecuador-anamer",
+                "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/06\/anamer_1x.webp"
+            }
+        ],
+        "learning": [
+            {
+                "msk_learning_content": "Comprender el proceso cient\u00edfico aplicado al cuidado enfermero."
+            },
+            {
+                "msk_learning_content": "Formular preguntas de investigaci\u00f3n y dise\u00f1ar proyectos."
+            },
+            {
+                "msk_learning_content": "Interpretar resultados y aplicar la evidencia en la pr\u00e1ctica."
+            },
+            {
+                "msk_learning_content": "Desarrollar habilidades de lectura cr\u00edtica y escritura cient\u00edfica."
+            }
+        ],
+        "habilities": [
+            {
+                "id": 60403,
+                "name": "Lectura cr\u00edtica",
+                "slug": "lectura-critica"
+            },
+            {
+                "id": 60404,
+                "name": "Evidencia en cuidados",
+                "slug": "evidencia-en-cuidados"
+            },
+            {
+                "id": 60405,
+                "name": "Presentaci\u00f3n de trabajos",
+                "slug": "presentacion-de-trabajos"
+            },
+            {
+                "id": 60184,
+                "name": "Redacci\u00f3n cient\u00edfica",
+                "slug": "redaccion-cientifica"
+            },
+            {
+                "id": 60182,
+                "name": "Proyectos de investigaci\u00f3n",
+                "slug": "proyectos-de-investigacion"
+            }
+        ],
+        "with_this_course": "Con este curso, mejorar\u00e1s tu criterio cl\u00ednico y te convertir\u00e1s en referente en Investigaci\u00f3n cient\u00edfica",
+        "your_course_steps": [
+            {
+                "step": "Lectura de m\u00f3dulos teoricos."
+            },
+            {
+                "step": "Clases interactivas con mirada pr\u00e1ctica aplicada a casos cl\u00ednicos."
+            },
+            {
+                "step": "Autoevaluaci\u00f3n al finalizar cada m\u00f3dulo. "
+            },
+            {
+                "step": "Examen final."
+            }
+        ],
+        "teaching_team": [
+            {
+                "id": 335508,
+                "name": "Ana Isabel Parro Moreno",
+                "slug": "ana-isabel-parro-moreno",
+                "description": "Coordinadora del curso",
+                "image": false,
+                "link": "https:\/\/msklatam.com\/doctor\/ana-isabel-parro-moreno"
+            }
+        ],
+        "video": false,
+        "certificate": {
+            "has_certificate": true
+        },
+        "study_plan": {
+            "hours": "50",
+            "study_plan_file": {
+                "ID": 334622,
+                "id": 334622,
+                "title": "Iniciaci\u00f3n a la investigaci\u00f3n en enfermer\u00eda",
+                "filename": "Iniciacion-a-la-investigacion-en-enfermeria.pdf",
+                "filesize": 4102376,
+                "url": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/Iniciacion-a-la-investigacion-en-enfermeria.pdf",
+                "link": "https:\/\/es.wp.msklatam.com\/?attachment_id=334622",
+                "alt": "",
+                "author": "102",
+                "description": "",
+                "caption": "",
+                "name": "iniciacion-a-la-investigacion-en-enfermeria-2",
+                "status": "inherit",
+                "uploaded_to": 333437,
+                "date": "2025-02-21 19: 33: 50",
+                "modified": "2025-02-21 19: 33: 50",
+                "menu_order": 0,
+                "mime_type": "application\/pdf",
+                "type": "application",
+                "subtype": "pdf",
+                "icon": "https:\/\/cms1.msklatam.com\/wp-includes\/images\/media\/document.png"
+            },
+            "modules": [
+                {
+                    "title": "Fundamentos de investigaci\u00f3n",
+                    "content":"
+
+Introducci\u00f3n a la investigaci\u00f3nDise\u00f1o de un proyecto de investigaci\u00f3nComponentes de un protocolo<\/li>Estructura de las publicaciones cient\u00edficas<\/li>\/ul>\/li>\u00c9tica de la investigaci\u00f3nPilares de la \u00e9tica de investigaci\u00f3n<\/li>\/ul>\/li>Contraste de hip\u00f3tesis<\/li>Errores en el contraste<\/li>\/ul>\/li>Estudios epidemiol\u00f3gicosMetodolog\u00eda cuantitativa de investigaci\u00f3n<\/li>Tipos de estudios epidemiol\u00f3gicosEstudios experimentales<\/li>Estudios observacionales<\/li>\/ul>\/li>Conceptos de prevalencia e incidencia<\/li>\/ul>\/li>Estudios sobre pruebas diagn\u00f3sticasLa prueba diagn\u00f3stica ideal: validez y precisi\u00f3n<\/li>Evaluaci\u00f3n de una prueba diagn\u00f3stica<\/li>\/ul>\/li>Fuentes de informaci\u00f3nTipos de documentos<\/li>\/ul>\/li>IndicadoresIndicadores demogr\u00e1ficos, socioecon\u00f3micos, del nivel de salud y medioambientales<\/li>Indicadores demogr\u00e1ficos<\/li>Indicadores socioecon\u00f3micos<\/li>Indicadores del nivel de salud<\/li>Indicadores medioambientales<\/li>\/ul>\/li>C\u00e1lculo de probabilidadesConcepto de probabilidad<\/li>Regla de Laplace<\/li>Regla de probabilidad total<\/li>Teorema de Bayes<\/li>Aplicaci\u00f3n al diagn\u00f3stico cl\u00ednico<\/li>\/ul>\/li>Otros conceptos importantesNiveles de poblaci\u00f3n<\/li>C\u00e1lculo de tama\u00f1o muestral<\/li>T\u00e9cnicas de muestreo<\/li>\/ul>\/li>\/ul>
+                },
+                {
+                    "title": "Tipos de estudios en investigaci\u00f3n cuantitativa",
+                    "content":"
+Tipos de estudios en investigaci\u00f3n cuantitativa\u00a0Estudios descriptivosEstudios transversales o de prevalencia<\/li>Estudios longitudinales<\/li>Estudios ecol\u00f3gicos<\/li>Estudios de casos<\/li>\/ul>\/li>Estudios anal\u00edticos observacionalesEstudios de casos y controles<\/li>Estudios de cohorte<\/li>\/ul>\/li>Estudios anal\u00edticos experimentalesEnsayos controlados<\/li>Estudios cuasiexperimentales<\/li>Limitaciones de los estudios experimentales<\/li>\/ul>\/li>Revisiones sistem\u00e1ticas y metaan\u00e1lisis<\/li>\/ul>\/li>Validez y fiabilidad de las medicionesCalidad de una prueba diagn\u00f3sticaUsos b\u00e1sicos de las pruebas diagn\u00f3sticas<\/li>\/ul>\/li>Evaluaci\u00f3n de una prueba diagn\u00f3sticaSelecci\u00f3n del patr\u00f3n de oro o gold standard<\/em><\/li>\/ul>\/li>Validez interna y validez externaValidez interna: sesgos y confusi\u00f3n<\/li>\/ul>\/li>\/ul>\/li>\/ul>
+                },
+                {
+                    "title": "An\u00e1lisis de los datos en investigaci\u00f3n cuantitativa",
+                    "content":"
+Estad\u00edstica descriptiva y representaci\u00f3n de los datosEstad\u00edstica descriptivaConceptos b\u00e1sicos en estad\u00edstica descriptiva<\/li>\/ul>\/li>Representaci\u00f3n de los datosTabla de frecuencia. Variable cuantitativa discreta<\/li>Tabla de frecuencia. Variable cuantitativa continua<\/li>Otras representaciones gr\u00e1ficas importantes<\/li>\/ul>\/li>Tipos de distribuci\u00f3n y par\u00e1metros que la definenDistribuci\u00f3n normal est\u00e1ndar N (0,
+                    1)<\/li>\/ul>\/li>\/ul>\/li>Inferencia estad\u00edsticaIntervalos de confianza<\/li>Contrastes de hip\u00f3tesisErrores en el contraste<\/li>\/ul>\/li>\/ul>\/li>Correlaci\u00f3n y regresi\u00f3nCorrelaci\u00f3n<\/li>Regresi\u00f3n<\/li>\/ul>\/li>Pruebas no param\u00e9tricasContrastes param\u00e9tricos y no param\u00e9tricos<\/li>\/ul>\/li>Introducci\u00f3n al an\u00e1lisis multivarianteRegresi\u00f3n lineal m\u00faltiple<\/li>Regresi\u00f3n log\u00edstica multivariante\u00bfC\u00f3mo se estudia la asociaci\u00f3n entre Y y x?<\/li>\/ul>\/li>\/ul>\/li>\/ul>
+                },
+                {
+                    "title": "Fundamentos de investigaci\u00f3n cualitativa",
+                    "content":"
+Muestreo en investigaci\u00f3n cualitativaTipo de muestreo<\/li>Tama\u00f1o muestral<\/li>\/ul>\/li>Recolecci\u00f3n de datosT\u00e9cnicas observacionales en la recogida de datosObservaci\u00f3n en el trabajo de campo<\/li>Roles del investigador dentro de la observaci\u00f3n<\/li>Roles de los participantes dentro de la observaci\u00f3n<\/li>\/ul>\/li>T\u00e9cnicas conversacionales en la recogida de datosEntrevistas en profundidad<\/li>Grupos de discusi\u00f3n<\/li>Historias de vida<\/li>\/ul>\/li>\/ul>\/li>An\u00e1lisis de datosCaracter\u00edsticas del an\u00e1lisis de datos<\/li>Tipos de an\u00e1lisis de datos<\/li>Etapas en el an\u00e1lisis de datos<\/li>\/ul>\/li>Calidad en investigaci\u00f3n cualitativa<\/li>\u00c9tica en investigaci\u00f3n cualitativa<\/li>\/ul>
+                },
+                {
+                    "title": "Enfermer\u00eda basada en la evidencia",
+                    "content":"
+Introducci\u00f3n a la enfermer\u00eda basada en la evidenciaNiveles de evidencia<\/li>Fuerza de la recomendaci\u00f3n<\/li>\/ul>\/li>B\u00fasqueda de evidencias cient\u00edficasBases de datos bibliogr\u00e1ficas<\/li>Fuentes documentales de evidenciaFuentes de informaci\u00f3n terciaria<\/li>\/ul>\/li>Revisi\u00f3n bibliogr\u00e1ficaAmpliaci\u00f3n sobre b\u00fasquedas bibliogr\u00e1ficas<\/li>\/ul>\/li>\/ul>\/li>Instrumentos de evidencia cient\u00edfica<\/li>Formulaci\u00f3n de preguntas y b\u00fasqueda de respuestas sobre la pr\u00e1ctica cl\u00ednica<\/li>Evaluaci\u00f3n y s\u00edntesis de los hallazgos de la revisi\u00f3n bibliogr\u00e1ficaDefinici\u00f3n de la calidad de la evidencia<\/li>Factores que determinan la calidad de la evidencia<\/li>S\u00edntesis de los hallazgos de la revisi\u00f3n bibliogr\u00e1fica<\/li>\/ul>\/li>Estructura metodol\u00f3gica de un trabajo cient\u00edfico y sus fasesEstructura metodol\u00f3gica de un trabajo cient\u00edfico<\/li>Fases de un trabajo cient\u00edficoFase conceptual<\/li>\/ul>\/li>\/ul>\/li>\/ul>
+                }
+            ]
         }
     }
 }

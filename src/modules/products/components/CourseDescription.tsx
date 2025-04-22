@@ -88,16 +88,16 @@ import { motion } from 'framer-motion';
 import{ useCourseDescription } from '../hooks/useCourseDescription';
 
 interface CourseDescriptionProps {
-  courseId: string | number;
+  slug: string | number;
 }
 
 function stripHtmlTags(html: string): string {
   return html.replace(/<[^>]*>/g, '');
 }
 
-export default function CourseDescription({ courseId }: CourseDescriptionProps) {
+export default function CourseDescription({ slug }: CourseDescriptionProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const { data, loading, error } = useCourseDescription(courseId);
+  const { data, loading, error } = useCourseDescription(slug);
 
   const MAX_LENGTH = 600;
 
