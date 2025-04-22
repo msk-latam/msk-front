@@ -1,5 +1,5 @@
 'use client'
-
+import { useEffect, useState } from "react"
 interface CourseSummaryProps {
   price?: string
   certification?: boolean
@@ -15,8 +15,11 @@ export default function CourseSummary({
   modules = 16,
   enrolled = 2000,
 }: CourseSummaryProps) {
-  // Formateamos el número 'enrolled' para que siempre tenga comas
-  const enrolledFormatted = enrolled.toLocaleString();
+  const [enrolledFormatted, setEnrolledFormatted] = useState<string | number>(enrolled);
+  useEffect(() => {
+    // Solo formateamos el número en el cliente
+    setEnrolledFormatted(enrolled.toLocaleString());
+  }, [enrolled]);
 
   return (
     <div className="bg-white rounded-[38px] shadow p-6 md:p-8 sticky top-10 w-full">
