@@ -4,7 +4,7 @@ import { CourseOverviewData } from './useCourseData' // Asegurate de que la ruta
 
 const API_BASE = 'https://cms1.msklatam.com/wp-json/msk/v1/course'
 
-export function useCourseOverview(courseId: string | number) {
+export function useCourseOverview(slug: string) {
   const [data, setData] = useState<CourseOverviewData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -13,7 +13,7 @@ export function useCourseOverview(courseId: string | number) {
     async function fetchOverview() {
       setLoading(true)
       try {
-        const res = await axios.get(`${API_BASE}/${courseId}`)
+        const res = await axios.get(`${API_BASE}/${slug}`)
 
         const overviewData: CourseOverviewData = {
           habilities: res.data.sections.habilities,
@@ -29,10 +29,10 @@ export function useCourseOverview(courseId: string | number) {
       }
     }
 
-    if (courseId) {
+    if (slug) {
       fetchOverview()
     }
-  }, [courseId])
+  }, [slug])
 
   return { data, loading, error }
 }

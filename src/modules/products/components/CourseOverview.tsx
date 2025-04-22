@@ -9,7 +9,7 @@ import { useCourseOverview } from "../hooks/useCourseOverview"; // Ajustá la ru
 
 
 interface CourseOverviewProps {
-  courseId: string | number;
+  slug: string;
 }
 const steps = [
   {
@@ -58,8 +58,8 @@ const features = [
   },
 ];
 
-export default function CoutseOverview({ courseId }: CourseOverviewProps) {
-  const { data, loading, error } = useCourseOverview(courseId); // ID fijo o dinámico, según tu routing
+export default function CoutseOverview({ slug }: CourseOverviewProps) {
+  const { data, loading, error } = useCourseOverview(slug); // ID fijo o dinámico, según tu routing
 
   return (
     <section className="py-6 max-w-5xl mx-auto">

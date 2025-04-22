@@ -52,7 +52,7 @@ export default function CoursePage() {
               <CourseDescription  slug={slug}/>
               <CourseInstitutions slug={slug} />
               <CourseLearning slug={slug}/>
-              {/* <CourseOverview slug={slug} /> */}
+              <CourseOverview slug={slug} />
               {/* <CourseTeachers slug={slug} /> */}
               <CourseTeachers/>
             </div>
