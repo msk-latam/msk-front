@@ -35,7 +35,9 @@ export interface CourseDescription {
   title: string
   content: string
 }
-
+export interface CourseVideo {
+  video: boolean | string
+}
 export interface CourseHability {
   id: number
   name: string
@@ -78,7 +80,7 @@ export interface CourseData {
     habilities: CourseHability[]
     with_this_course: string
     teaching_team: CourseTeachersData[]
-    video: string | false
+    video: CourseVideo
     certificate: CourseCertificate
     study_plan: CourseStudyPlan
   }

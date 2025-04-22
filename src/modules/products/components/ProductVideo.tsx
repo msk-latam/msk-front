@@ -1,45 +1,30 @@
 // components/VideoPlayer.tsx
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useCourseVideo } from '../hooks/useCourseVideo';
+import { CourseVideo } from '../hooks/useCourseData';
 
-interface VideoData {
-  videoUrl: string; // asumimos que la API devuelve esto
+interface VideoPlayerProps {
+  courseId: string | number;
 }
 
-const VideoPlayer: React.FC = () => {
-  const [videoUrl, setVideoUrl] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+const VideoPlayer: React.FC<VideoPlayerProps> = ({ courseId }) => {
+  const { data, loading, error } = useCourseVideo(courseId);
 
-  useEffect(() => {
-    const fetchVideo = async () => {
-      try {
-        const res = await fetch('/api/video'); // cambiá esta URL por la real
-        if (!res.ok) throw new Error('Error al cargar el video');
-        const data: VideoData = await res.json();
-        setVideoUrl(data.videoUrl);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchVideo();
-  }, []);
+  const video = data?.video;
 
   if (loading) return <p>Cargando video...</p>;
   if (error) return <p>Error: {error}</p>;
+  if (video === false) return null; // si explícitamente no hay video
+  if (typeof video !== 'string' || video.trim() === '') return null; // seguridad adicional
 
   return (
-    <div className="w-full max-w-3xl mx-auto">
-      {videoUrl && (
-        <video controls className="w-full rounded-[38px] shadow-md">
-          <source src={videoUrl} type="video/mp4" />
-          Tu navegador no soporta la reproducción de video.
-        </video>
-      )}
+    <div className="w-full bg-white rounded-[38px] md:py-10 md:px-9 px-6 py-12">
+      <video controls className="w-full rounded-[38px] shadow-md">
+        <source src={video} type="video/mp4" />
+        Tu navegador no soporta la reproducción de video.
+      </video>
     </div>
   );
 };

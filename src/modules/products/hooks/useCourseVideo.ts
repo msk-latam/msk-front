@@ -1,20 +1,30 @@
-// // src/modules/product/hooks/useCourseVideo.ts
-// import { useEffect, useState } from 'react';
-// import { getCourseVideo } from './useCourseData';
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import { CourseVideo } from './useCourseData'
+const API_BASE = 'https://cms1.msklatam.com/wp-json/msk/v1/course'
 
-// const useCourseVideo = () => {
-//   const [data, setData] = useState(null);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState<string | null>(null);
+export function useCourseVideo(courseId: string | number) {
+  const [data, setData] = useState<CourseVideo | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-//   useEffect(() => {
-//     getCourseVideo()
-//       .then(setData)
-//       .catch(() => setError('No se pudo cargar el video del curso.'))
-//       .finally(() => setLoading(false));
-//   }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true)
+      try {
+        const res = await axios.get(`${API_BASE}/${courseId}`)
+          setData(res.data.sections.video)
+      } catch (err) {
+        setError('Error al cargar la descripción del curso')
+        console.error(err)
+      } finally {
+        setLoading(false)
+      }
+    }
 
-//   return { data, loading, error };
-// };
+    fetchData()
+  }, [courseId])
+  console.log(data)
 
-// export default useCourseVideo;
+  return { data, loading, error }
+}
