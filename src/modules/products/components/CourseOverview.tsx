@@ -78,20 +78,22 @@ console.log(data)
           </span>
         ))}
       </div>
-
       <h3 className="pb-6 font-raleway text-[18px] md:text-2xl font-medium md:text-left text-center">
-  {data?.with_this_course && (() => {
-    const words = data.with_this_course.trim().split(' ');
+  {typeof data?.with_this_course === "string" && data.with_this_course.trim() !== "" ? (() => {
+    const words = data.with_this_course.trim().split(" ");
     const lastWord = words.pop();
-    const firstPart = words.join(' ');
+    const firstPart = words.join(" ");
 
     return (
       <>
         {firstPart} <span className="font-bold">{lastWord}</span>
       </>
     );
-  })()}
+  })() : (
+    "Con este curso desarrollarás nuevas habilidades"
+  )}
 </h3>
+
 
       {/* Step by step */}
       <div className="flex flex-col md:flex-row md:flex-nowrap md:items-center md:justify-center md:gap-4 mb-10 text-sm text-[#29324f] w-full">
