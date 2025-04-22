@@ -13,3 +13,4 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     return NextResponse.json({ message: 'Error fetching course' }, { status: 500 });
   }
 }
+
