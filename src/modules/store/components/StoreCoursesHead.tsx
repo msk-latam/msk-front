@@ -16,13 +16,18 @@ const SearchIcon = ({ className }: { className?: string }) => (
 interface StoreCoursesHeadProps {
 	filterCount: number;
 	// Add props for search/sort state and handlers from the parent
-	// searchTerm: string;
-	// onSearchChange: (term: string) => void;
+	searchTerm: string;
+	onSearchChange: (term: string) => void;
 	// sortKey: string;
 	// onSortChange: (key: string) => void;
 }
 
-const StoreCoursesHead: React.FC<StoreCoursesHeadProps> = ({ filterCount /*, ...other props */ }) => {
+const StoreCoursesHead: React.FC<StoreCoursesHeadProps> = ({
+	filterCount,
+	searchTerm,
+	onSearchChange,
+	/*, ...other props */
+}) => {
 	// Mock sort options for now - move to parent or constants file if needed
 	const sortOptions = [
 		{ id: 'novedades', name: 'Novedades' },
@@ -46,8 +51,8 @@ const StoreCoursesHead: React.FC<StoreCoursesHeadProps> = ({ filterCount /*, ...
 						type='text'
 						placeholder='Buscar'
 						className='w-full pl-4 pr-10 py-2.5 border border-gray-300 rounded-full text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary'
-						// value={searchTerm}
-						// onChange={(e) => onSearchChange(e.target.value)}
+						value={searchTerm}
+						onChange={(e) => onSearchChange(e.target.value)}
 					/>
 					<div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
 						<SearchIcon className='w-5 h-5 text-gray-400' />
