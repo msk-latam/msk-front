@@ -1,85 +1,101 @@
-// 'use client'
-// import { ChevronRight } from "react-feather";
-// import { RiHome6Line } from "react-icons/ri";
 
+// 'use client'
+// import { ChevronRight } from "react-feather"
+// import { RiHome6Line } from "react-icons/ri"
+// import { useCourseHeader } from "../hooks/useCourseHeader"
 
 // interface CourseHeaderProps {
-//   title?: string
-//   categories?: string[]
-//   certification?: boolean
+//   courseId: string | number
 // }
 
-// export default function CourseHeader({
-//   title = "Curso superior de emergentología",
-//   categories = ["Emergentología", "Medicina familiar", "Medicina general"],
-//   certification = true,
-// }: CourseHeaderProps) {
+// export default function CourseHeader({ courseId }: CourseHeaderProps) {
+//   const { data, loading, error } = useCourseHeader(courseId)
+
+//   if (loading) return null
+//   if (error || !data) return <p className="text-red-500 text-center">Error al cargar el encabezado del curso</p>
+
+//   const { title, has_certificate, categories } = data
+
 //   return (
 //     <div className="px-4 md:px-10 lg:px-20 overflow-visible max-w-[1300px] mx-auto h-96 flex md:flex-col md:justify-end md:items-start flex-row flex-wrap justify-center items-center text-white">
-
 //       <div className="text-sm text-white/80 md:mb-20 md:mt-0 my-20 w-full">
-//       <nav className="flex overflow-hidden whitespace-nowrap text-ellipsis text-sm max-w-full">
-//   <span className="my-auto shrink-0"><RiHome6Line className="text-white my-auto"/></span>
-//   <span className="shrink-0"><ChevronRight/></span>
-//   <span className="truncate  my-auto shrink-0">Tienda</span>
-//   <span className="shrink-0"><ChevronRight/></span>
-//   <span className="truncate  my-auto shrink-0">Medicina general</span>
-//   <span className="shrink-0"><ChevronRight/></span>
-//   <span className="truncate text-white font-medium my-auto">{title}</span>
-// </nav>
-
-//       <h1 className="text-3xl sm:text-4xl font-bold text-center md:text-left mt-5 mb-3">{title}</h1>
-
-//       {certification && (
-//         <p className="flex items-center gap-2 text-sm text-white/90 md:justify-normal justify-center mb-4">
-//           <img src="/icons/certificado.svg" className="w-4 h-4" alt="certificado" />
-//           Con certificación
-//         </p>
-//       )}
-
-//       <div className="flex flex-wrap items-center md:items-start justify-center md:justify-normal gap-2">
-//         {categories.map((cat, idx) => (
-//           <span
-//             key={idx}
-//             className="bg-black/20 text-white text-xs px-4 py-2 rounded-full"
-//           >
-//             {cat}
+//         <nav className="flex overflow-hidden whitespace-nowrap text-ellipsis text-sm max-w-full">
+//           <span className="my-auto shrink-0">
+//             <RiHome6Line className="text-white my-auto" />
 //           </span>
-//         ))}
+//           <span className="shrink-0"><ChevronRight /></span>
+//           <span className="truncate my-auto shrink-0">Tienda</span>
+//           <span className="shrink-0"><ChevronRight /></span>
+//           <span className="truncate my-auto shrink-0">{categories[0]?.name ?? "Categoría"}</span>
+//           <span className="shrink-0"><ChevronRight /></span>
+//           <span className="truncate text-white font-medium my-auto">{title}</span>
+//         </nav>
+
+//         <h1 className="text-3xl sm:text-4xl font-bold text-center md:text-left mt-5 mb-3">{title}</h1>
+
+//         {has_certificate && (
+//           <p className="flex items-center gap-2 text-sm text-white/90 md:justify-normal justify-center mb-4">
+//             <img src="/icons/certificado.svg" className="w-4 h-4" alt="certificado" />
+//             Con certificación
+//           </p>
+//         )}
+
+//         <div className="flex flex-wrap items-center md:items-start justify-center md:justify-normal gap-2">
+//           {categories.map((cat) => (
+//             <span
+//               key={cat.term_id}
+//               className="bg-black/20 text-white text-xs px-4 py-2 rounded-full"
+//             >
+//               {cat.name}
+//             </span>
+//           ))}
+//         </div>
 //       </div>
-//             </div>
 //     </div>
 //   )
 // }
 
-'use client'
+
 import { ChevronRight } from "react-feather"
 import { RiHome6Line } from "react-icons/ri"
-import { useCourseHeader } from "../hooks/useCourseHeader"
+import Link from "next/link"
+import { getCourseHeader } from "../hooks/useCourseHeader"
 
 interface CourseHeaderProps {
   courseId: string | number
 }
 
-export default function CourseHeader({ courseId }: CourseHeaderProps) {
-  const { data, loading, error } = useCourseHeader(courseId)
+export default async function CourseHeader({ courseId }: CourseHeaderProps) {
+  const data = await getCourseHeader(courseId)
 
-  if (loading) return null
-  if (error || !data) return <p className="text-red-500 text-center">Error al cargar el encabezado del curso</p>
+  if (!data) {
+    return <p className="text-red-500 text-center">Error al cargar el encabezado del curso</p>
+  }
 
   const { title, has_certificate, categories } = data
 
   return (
     <div className="px-4 md:px-10 lg:px-20 overflow-visible max-w-[1300px] mx-auto h-96 flex md:flex-col md:justify-end md:items-start flex-row flex-wrap justify-center items-center text-white">
       <div className="text-sm text-white/80 md:mb-20 md:mt-0 my-20 w-full">
-        <nav className="flex overflow-hidden whitespace-nowrap text-ellipsis text-sm max-w-full">
-          <span className="my-auto shrink-0">
+        <nav className="flex overflow-hidden whitespace-nowrap text-ellipsis text-sm max-w-full gap-1">
+          <Link href="/" className="my-auto shrink-0">
             <RiHome6Line className="text-white my-auto" />
-          </span>
+          </Link>
           <span className="shrink-0"><ChevronRight /></span>
           <span className="truncate my-auto shrink-0">Tienda</span>
-          <span className="shrink-0"><ChevronRight /></span>
-          <span className="truncate my-auto shrink-0">{categories[0]?.name ?? "Categoría"}</span>
+
+          {categories.map((cat, index) => (
+            <span key={cat.term_id} className="flex items-center">
+              <span className="shrink-0"><ChevronRight /></span>
+              <Link
+                href={`/categoria/${cat.slug}`}
+                className="truncate my-auto shrink-0 hover:underline"
+              >
+                {cat.name}
+              </Link>
+            </span>
+          ))}
+
           <span className="shrink-0"><ChevronRight /></span>
           <span className="truncate text-white font-medium my-auto">{title}</span>
         </nav>
