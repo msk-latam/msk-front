@@ -3,11 +3,11 @@
 import { useCourseLearning } from '../hooks/useCourseLearning'
 
 interface CourseLearningProps {
-  courseId: string | number
+  slug: string
 }
 
-export default function CourseLearning({ courseId }: CourseLearningProps) {
-  const { data, loading, error } = useCourseLearning(courseId)
+export default function CourseLearning({ slug }: CourseLearningProps) {
+  const { data, loading, error } = useCourseLearning(slug)
 
   // En caso de error o loading, mostramos un fallback
   if (loading) return <p className="p-5">Cargando contenido...</p>

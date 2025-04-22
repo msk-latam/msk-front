@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useCourseInstitutions } from '../hooks/useCourseInstitutions'
 
 interface CourseInstitutionProps {
-  slug: string | number
+  slug: string
 }
 
 export default function CourseInstitution({ slug }: CourseInstitutionProps) {

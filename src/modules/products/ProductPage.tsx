@@ -51,7 +51,7 @@ export default function CoursePage() {
             <div className="w-full bg-white rounded-[38px] flex flex-col relative z-[9] md:-mt-20 px-5 pt-9 pb-3 md:px-9 gap-6 md:gap-0">
               <CourseDescription  slug={slug}/>
               <CourseInstitutions slug={slug} />
-              {/* <CourseLearning slug={slug}/> */}
+              <CourseLearning slug={slug}/>
               {/* <CourseOverview slug={slug} /> */}
               {/* <CourseTeachers slug={slug} /> */}
               <CourseTeachers/>
