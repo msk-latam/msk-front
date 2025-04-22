@@ -65,7 +65,7 @@ export default function CoursePage() {
             </div>
             {/* Nuevo contenedor para CourseSyllabus */}
             <div className="w-full  bg-white rounded-[38px] md:py-16 md:px-9 px-6 py-9">
-              <CourseSyllabus />
+              <CourseSyllabus slug={slug}/>
             </div>
             {/* Nuevo contenedor para Cards */}
             <div className="w-full">
