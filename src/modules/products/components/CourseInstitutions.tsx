@@ -3,11 +3,11 @@
 import Image from 'next/image'
 import { useCourseInstitutions } from '../hooks/useCourseInstitutions'
 
-interface InstitutionSupportProps {
+interface CourseInstitutionProps {
   courseId: string | number
 }
 
-export default function InstitutionSupport({ courseId }: InstitutionSupportProps) {
+export default function CourseInstitution({ courseId }: CourseInstitutionProps) {
   const { data: institutions, loading, error } = useCourseInstitutions(courseId)
 
   return (

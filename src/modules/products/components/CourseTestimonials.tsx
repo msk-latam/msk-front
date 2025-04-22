@@ -32,7 +32,7 @@ const sampleTestimonials = [
   },
 ];
 
-export default function ProductTestimonials() {
+export default function CourseTestimonials() {
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {

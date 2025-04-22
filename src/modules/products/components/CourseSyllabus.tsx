@@ -11,13 +11,13 @@ interface Module {
   lessons: string[];
 }
 
-interface ProductSyllabusProps {
+interface CourseSyllabusProps {
   modules?: Module[];
 }
 
-export default function ProductSyllabus({
+export default function CourseSyllabus({
   modules = [],
-}: ProductSyllabusProps) {
+}: CourseSyllabusProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggle = (index: number) => {

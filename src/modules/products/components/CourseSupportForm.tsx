@@ -1,6 +1,6 @@
 "use client";
 
-interface ProductSupportFormProps {
+interface CourseSupportFormProps {
   name?: string;
   email?: string;
   phone?: string;
@@ -9,7 +9,7 @@ interface ProductSupportFormProps {
   message?: string;
 }
 
-export default function ProductSupportForm(props: ProductSupportFormProps) {
+export default function CourseSupportForm(props: CourseSupportFormProps) {
   return (
     <div className="bg-white space-y-6">
       <h3 className="text-lg font-semibold text-gray-900">

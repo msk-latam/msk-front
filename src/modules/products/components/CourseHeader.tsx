@@ -3,17 +3,17 @@
 // import { RiHome6Line } from "react-icons/ri";
 
 
-// interface ProductHeaderProps {
+// interface CourseHeaderProps {
 //   title?: string
 //   categories?: string[]
 //   certification?: boolean
 // }
 
-// export default function ProductHeader({
+// export default function CourseHeader({
 //   title = "Curso superior de emergentología",
 //   categories = ["Emergentología", "Medicina familiar", "Medicina general"],
 //   certification = true,
-// }: ProductHeaderProps) {
+// }: CourseHeaderProps) {
 //   return (
 //     <div className="px-4 md:px-10 lg:px-20 overflow-visible max-w-[1300px] mx-auto h-96 flex md:flex-col md:justify-end md:items-start flex-row flex-wrap justify-center items-center text-white">
 
@@ -57,11 +57,11 @@ import { ChevronRight } from "react-feather"
 import { RiHome6Line } from "react-icons/ri"
 import { useCourseHeader } from "../hooks/useCourseHeader"
 
-interface ProductHeaderProps {
+interface CourseHeaderProps {
   courseId: string | number
 }
 
-export default function ProductHeader({ courseId }: ProductHeaderProps) {
+export default function CourseHeader({ courseId }: CourseHeaderProps) {
   const { data, loading, error } = useCourseHeader(courseId)
 
   if (loading) return null

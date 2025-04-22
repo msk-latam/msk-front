@@ -3,11 +3,11 @@
 // import { useState } from 'react';
 // import { motion, AnimatePresence } from 'framer-motion';
 
-// interface ProductDescriptionProps {
+// interface CourseDescriptionProps {
 //   description?: string;
 // }
 
-// export default function ProductDescription({ description = '' }: ProductDescriptionProps) {
+// export default function CourseDescription({ description = '' }: CourseDescriptionProps) {
 //   const [isExpanded, setIsExpanded] = useState(false);
 
 //   // Establecer una longitud máxima para la descripción antes de mostrar "Leer más"
@@ -75,7 +75,7 @@
 // }
 
 // // Puedes usar esta descripción larga para probar
-// ProductDescription.defaultProps = {
+// CourseDescription.defaultProps = {
 //   description:
 //     'La medicina de urgencias o emergentología se centra en la detección, el diagnóstico, la atención inicial, la prevención de complicaciones y la ubicación de los pacientes que presentan enfermedades agudas y requieren atención médica inmediata. Este curso te preparará para abordar los diferentes escenarios que se presentan en los servicios de urgencias, incluyendo situaciones críticas como traumas, enfermedades cardiovasculares, respiratorias y neurológicas, entre otras. Aprenderás a gestionar los primeros momentos en que un paciente llega al servicio de urgencias, asegurando que reciban la atención adecuada de manera oportuna. Además, se enseñarán protocolos de actuación para optimizar la respuesta ante emergencias médicas, mejorando la calidad del servicio y reduciendo los riesgos de complicaciones graves. Este curso es ideal para profesionales de la salud que deseen especializarse en la atención de urgencias y emergencias.'
 // }
@@ -87,7 +87,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import{ useCourseDescription } from '../hooks/useCourseDescription';
 
-interface ProductDescriptionProps {
+interface CourseDescriptionProps {
   courseId: string | number;
 }
 
@@ -95,7 +95,7 @@ function stripHtmlTags(html: string): string {
   return html.replace(/<[^>]*>/g, '');
 }
 
-export default function ProductDescription({ courseId }: ProductDescriptionProps) {
+export default function CourseDescription({ courseId }: CourseDescriptionProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const { data, loading, error } = useCourseDescription(courseId);
 

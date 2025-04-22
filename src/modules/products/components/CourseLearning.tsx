@@ -2,11 +2,11 @@
 
 import { useCourseLearning } from '../hooks/useCourseLearning'
 
-interface ProductLearningProps {
+interface CourseLearningProps {
   courseId: string | number
 }
 
-export default function ProductLearning({ courseId }: ProductLearningProps) {
+export default function CourseLearning({ courseId }: CourseLearningProps) {
   const { data, loading, error } = useCourseLearning(courseId)
 
   // En caso de error o loading, mostramos un fallback

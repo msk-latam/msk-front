@@ -7,11 +7,11 @@
 // //   bioLink?: string
 // // }
 
-// // interface ProductTeachersProps {
+// // interface CourseTeachersProps {
 // //   teachers?: Teacher[]
 // // }
 
-// // export default function ProductTeachers({ teachers = [] }: ProductTeachersProps) {
+// // export default function CourseTeachers({ teachers = [] }: CourseTeachersProps) {
 // //   return (
 // //     <section className="bg-white rounded-2xl  md:p-10">
 // //       <h2 className="text-2xl font-semibold mb-6">Equipo docente</h2>
@@ -47,7 +47,7 @@ interface Teacher {
   bioLink?: string
 }
 
-interface ProductTeachersProps {
+interface CourseTeachersProps {
   teachers?: Teacher[]
 }
 
@@ -78,7 +78,7 @@ const mockTeachers: Teacher[] = [
   },
 ]
 
-export default function ProductTeachers({ teachers = mockTeachers }: ProductTeachersProps) {
+export default function CourseTeachers({ teachers = mockTeachers }: CourseTeachersProps) {
   return (
     <section className="bg-white rounded-2xl p-6 md:p-10">
       <h2 className="text-2xl font-semibold mb-6">Equipo docente</h2>
@@ -130,11 +130,11 @@ export default function ProductTeachers({ teachers = mockTeachers }: ProductTeac
 
 // import { useCourseTeachers } from '../hooks/useCourseTeachers'
 
-// interface ProductTeachersProps {
+// interface CourseTeachersProps {
 //   courseId: string | number
 // }
 
-// export default function ProductTeachers({ courseId }: ProductTeachersProps) {
+// export default function CourseTeachers({ courseId }: CourseTeachersProps) {
 //   const { data, loading, error } = useCourseTeachers(courseId)
 
 //   if (loading) {
