@@ -30,12 +30,12 @@ const steps = [
   },
 ];
 
-const courseSteps = [
-  "Lectura de módulos teóricos",
-  "Autoevaluación al finalizar cada módulo",
-  "Clases interactivas con mirada práctica aplicada a casos clínicos",
-  "Examen final",
-];
+// const courseSteps = [
+//   "Lectura de módulos teóricos",
+//   "Autoevaluación al finalizar cada módulo",
+//   "Clases interactivas con mirada práctica aplicada a casos clínicos",
+//   "Examen final",
+// ];
 
 const features = [
   {
@@ -58,9 +58,9 @@ const features = [
   },
 ];
 
-export default function CoutseOverview({ slug }: CourseOverviewProps) {
-  const { data, loading, error } = useCourseOverview(slug); // ID fijo o dinámico, según tu routing
-
+export default function CourseOverview({ slug }: CourseOverviewProps) {
+  const { data, loading, error } = useCourseOverview(slug); 
+console.log(data)
   return (
     <section className="py-6 max-w-5xl mx-auto">
       <h2 className="text-3xl font-medium md:text-[34px] ont-raleway mb-6 text-center md:text-left">
@@ -125,10 +125,10 @@ export default function CoutseOverview({ slug }: CourseOverviewProps) {
           Tu cursada, paso a paso
         </h3>
         <div className="grid gap-6 md:grid-cols-2 text-sm text-[#29324f] text-left font-inter">
-          {courseSteps.map((step, idx) => (
+          {data?.your_course_steps.map((step, idx) => (
             <div key={idx} className="flex items-start gap-3">
               <Image src="/icons/msk.svg" alt="" width={20} height={20} />
-              <p>{step}</p>
+              <p>{step.step}</p>
             </div>
           ))}
         </div>

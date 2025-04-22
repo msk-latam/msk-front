@@ -16,9 +16,11 @@ export function useCourseOverview(slug: string) {
         const res = await axios.get(`${API_BASE}/${slug}`)
 
         const overviewData: CourseOverviewData = {
-          habilities: res.data.sections.habilities,
-          with_this_course: res.data.sections.with_this_course,
+          habilities: res.data.sections?.habilities ?? [],
+          with_this_course: res.data.sections?.with_this_course ?? '',
+          your_course_steps: res.data.sections?.your_course_steps ?? []
         }
+        
 
         setData(overviewData)
       } catch (err) {

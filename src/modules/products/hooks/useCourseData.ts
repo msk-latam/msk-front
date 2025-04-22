@@ -179,9 +179,15 @@ export interface CourseStudyPlan {
   modules: any // Tipar después si lo necesitás
 }
 
+export interface Steps {
+  step: string
+}
+
+
 export interface CourseOverviewData {
   habilities: CourseHability[]
   with_this_course: string
+  your_course_steps: Steps[]
 }
 
 export interface CourseData {
@@ -200,6 +206,7 @@ export interface CourseData {
     habilities: CourseHability[]
     with_this_course: string
     teaching_team: CourseTeachersData[]
+    your_course_steps: Steps[]
     video: CourseVideoData
     certificate: CourseCertificate
     study_plan: CourseStudyPlan
