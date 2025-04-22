@@ -57,7 +57,7 @@ export default function CoursePage() {
             </div>
             {/* Nuevo contenedor para video */}
             <div className="">
-              {/* <CourseVideo slug={slug}/> */}
+              <CourseVideo slug={slug}/>
             </div>
             {/* Nuevo contenedor para Certificate */}
             <div className="">
