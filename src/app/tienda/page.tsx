@@ -4,6 +4,8 @@ import '@/app/globals.css';
 import Footer from '@/modules/components/footer/footer';
 import Navbar from '@/modules/components/navbar/Navbar';
 import NewsLetter from '@/modules/components/newsletter/NewsLetter';
+import StoreCoursesSkeleton from '@/modules/store/components/skeletons/StoreCoursesSkeleton';
+import StoreFiltersSkeleton from '@/modules/store/components/skeletons/StoreFiltersSkeleton';
 import StoreCourses from '@/modules/store/components/StoreCourses';
 import StoreFilters from '@/store/components/StoreFilters';
 import StoreHeader from '@/store/components/StoreHeader';
@@ -28,10 +30,10 @@ export default function TiendaPage() {
 			<main className='bg-[#f3f4f6] flex justify-center px-0 sm:px-4 relative pt-0 pb-20  md:mb-0'>
 				<section className='w-full  -mt-[40px]  z-[10] relative overflow-visible max-w-[1400px] mx-auto'>
 					<div className='grid grid-cols-1 md:grid-cols-[333px_1fr] gap-5 '>
-						<Suspense fallback={<div>Cargando filtros...</div>}>
+						<Suspense fallback={<StoreFiltersSkeleton />}>
 							<StoreFilters />
 						</Suspense>
-						<Suspense fallback={<div>Cargando cursos...</div>}>
+						<Suspense fallback={<StoreCoursesSkeleton />}>
 							<StoreCourses />
 						</Suspense>
 					</div>
