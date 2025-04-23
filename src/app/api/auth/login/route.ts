@@ -4,7 +4,7 @@ export async function GET(request: NextRequest) {
 	const { searchParams } = new URL(request.url);
 	const connection = searchParams.get('connection');
 
-	const loginUrl = new URL(`https://dev-msklatam.us.auth0.com/authorize`);
+	const loginUrl = new URL(`${process.env.AUTH0_DOMAIN}/authorize`);
 	loginUrl.searchParams.set('client_id', process.env.AUTH0_CLIENT_ID!);
 	loginUrl.searchParams.set('response_type', 'code');
 	loginUrl.searchParams.set('redirect_uri', `${process.env.AUTH0_BASE_URL}/api/auth/callback`);
