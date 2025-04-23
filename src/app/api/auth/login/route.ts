@@ -1,16 +1,14 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { auth0 } from '@/lib/auth0';
+import { NextRequest } from 'next/server';
 
+// Fase 1: inicia login y redirige a /social-redirect
 export async function GET(request: NextRequest) {
 	const { searchParams } = new URL(request.url);
 	const connection = searchParams.get('connection');
 
-	const loginUrl = new URL(`${process.env.AUTH0_DOMAIN}/authorize`);
-	loginUrl.searchParams.set('client_id', process.env.AUTH0_CLIENT_ID!);
-	loginUrl.searchParams.set('response_type', 'code');
-	loginUrl.searchParams.set('redirect_uri', `${process.env.AUTH0_BASE_URL}/api/auth/callback`);
-	loginUrl.searchParams.set('scope', 'openid profile email');
-	loginUrl.searchParams.set('connection', connection ?? '');
-	loginUrl.searchParams.set('prompt', 'login');
+	const res = await auth0.handleLogin(request, {
+		returnTo: `/api/auth/social-redirect?connection=${connection}`,
+	});
 
-	return NextResponse.redirect(loginUrl.toString());
+	return res;
 }
