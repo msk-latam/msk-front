@@ -524,15 +524,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 									>
 										{/* Image Section */}
 										<div className='relative w-full md:w-[200px] h-[180px] md:h-auto flex-shrink-0 bg-gray-100'>
-											<Image
-												src={resource.image || '/placeholder-resource.jpg'}
-												alt={resource.title}
-												layout='fill'
-												objectFit='cover'
-												onError={(e) => {
-													e.currentTarget.src = '/placeholder-resource.jpg';
-												}}
-											/>
+											<Image src={resource.image} alt={resource.title} layout='fill' objectFit='cover' />
 										</div>
 
 										{/* Content Section */}
