@@ -5,5 +5,5 @@ import { NextRequest } from 'next/server';
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
-	return auth0.handleLogout(request);
+	return auth0.handleLogout();
 }

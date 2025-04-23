@@ -4,7 +4,7 @@ import { NextRequest } from 'next/server';
 export async function GET(request: NextRequest) {
 	console.log('handleCallback');
 	console.log(request);
-	return auth0.handleCallback(request);
+	return auth0.handleCallback();
 }
 export async function POST(request: NextRequest) {
 	const url = new URL(request.url);
@@ -20,5 +20,5 @@ export async function POST(request: NextRequest) {
 	}
 
 	// Handle other errors or fallback to normal callback
-	return auth0.handleCallback(request);
+	return auth0.handleCallback();
 }
