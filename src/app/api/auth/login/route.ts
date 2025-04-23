@@ -1,14 +1,20 @@
 import { auth0 } from '@/lib/auth0';
-import { NextRequest } from 'next/server';
+// Import of NextRequest might be unnecessary now
+// import { NextRequest } from 'next/server';
 
 // Fase 1: inicia login y redirige a /social-redirect
-export async function GET(request: NextRequest) {
-	const { searchParams } = new URL(request.url);
+export const GET = auth0.handleLogin((req) => {
+	if (!req.url) {
+		// Or handle appropriately, maybe return an error response
+		throw new Error('Request URL is missing in login handler');
+	}
+	const url = new URL(req.url); // Guaranteed string now
+	const { searchParams } = url;
 	const connection = searchParams.get('connection');
-
-	const res = await auth0.handleLogin(request, {
+	return {
+		authorizationParams: {
+			connection: connection ?? undefined,
+		},
 		returnTo: `/api/auth/social-redirect?connection=${connection}`,
-	});
-
-	return res;
-}
+	};
+});

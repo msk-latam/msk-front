@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
 		: undefined;
 
 	if (!originalUrl || !connection) {
-		return NextResponse.redirect('/');
+		return NextResponse.redirect(new URL('/', request.url));
 	}
 
 	const url = new URL(originalUrl);
