@@ -11,7 +11,7 @@ type HeroHighlightsProps = {
 
 const HeroHighlights = ({ currentSlide, highlights, onSelect, animationKey }: HeroHighlightsProps) => {
   return (
-    <div className="md:relative rounded-t-2xl md:-bottom-[40px] md:pb-0 absolute bottom-0 w-full h-40 md:h-auto portrait:-z-10 overflow-hidden">
+    <div className="md:relative rounded-t-2xl md:-bottom-[40px] md:pb-0 md:px-6 absolute bottom-0 w-full h-40 md:h-auto portrait:-z-10 overflow-hidden">
       {/* MOBILE vertical scroll */}
       <div className="md:hidden h-full overflow-y-auto max-h-[160px]">
 
