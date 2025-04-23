@@ -1,5 +1,4 @@
 'use client';
-
 import '@/app/globals.css';
 import DashboardHero from '@/dashboard/components/DashboardHero';
 import HelpSection from '@/dashboard/components/HelpSection';
