@@ -38,10 +38,6 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 	const [onRequest, setOnRequest] = useState(false); // Loading state
 	const [loginError, setLoginError] = useState<string | null>(null); // Login error state
 
-	// --- Assuming these are available via context or props ---
-	// const { executeRecaptcha } = useGoogleReCaptcha(); // Example: Get recaptcha function
-	// const dispatch = useAuthDispatch(); // Example: Get dispatch function
-	// --- Remove placeholders below and use context/props ---
 	const executeRecaptcha = async (action: string): Promise<string> => {
 		console.warn('Using placeholder executeRecaptcha');
 		return 'dummy-recaptcha-token';
