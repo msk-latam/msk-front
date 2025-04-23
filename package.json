@@ -10,7 +10,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@auth0/nextjs-auth0": "^3.5.0",
+		"@auth0/nextjs-auth0": "^3.7.0",
 		"@glidejs/glide": "^3.5.2",
 		"@headlessui/react": "^1.7.17",
 		"@heroicons/react": "^2.0.18",

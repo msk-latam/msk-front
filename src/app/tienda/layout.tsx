@@ -20,13 +20,12 @@ export const metadata: Metadata = {
 	title: 'Tienda | MSK',
 	description: 'Cursos de medicina para expandir tus metas profesionales',
 	icons: {
-		icon: '/isotipo.ico',
-		shortcut: '/isotipo.ico',
-		apple: '/isotipo.ico',
-		other: {
-			rel: 'icon',
-			url: '/isotipo.ico',
-		},
+		icon: [
+			{ url: '/isotipo.svg', type: 'image/svg+xml' },
+			{ url: '/icon-16x16.png', type: 'image/png', sizes: '16x16' },
+			{ url: '/icon-32x32.png', type: 'image/png', sizes: '32x32' },
+		],
+		apple: '/apple-icon.png',
 	},
 };
 
