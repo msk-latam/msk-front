@@ -17,7 +17,9 @@ const STATIC_HIGHLIGHTS = [
 const Hero = () => {
   const { data } = useHomeContent();
   const slides: HeroSlide[] = data?.slides || [];
-  const backgroundImages = slides.map((s) => s.background_image?.[0]).filter(Boolean);
+  const backgroundImages = slides
+    .map((s) => s.background_image?.[0])
+    .filter(Boolean);
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [animationKey, setAnimationKey] = useState(0);
@@ -52,62 +54,73 @@ const Hero = () => {
       />
 
       <div className="absolute inset-0 z-10">
-        <div className="md:px-28 px-5 py-3 md:mt-40 md:py-0 container mx-auto md:h-[71%] flex flex-col justify-center items-center md:justify-end text-center gap-0 md:items-start md:text-left md:gap-2">
-          <p className="mt-20 md:mt-0 border border-white rounded-full px-[18px] py-2 my-4 md:my-0 text-[14px] w-fit">
-            Cursos
-          </p>
+        <div className="px-5 py-3 md:mt-40 md:py-0 overflow-visible max-w-[1600px] md:px-6 mx-auto md:h-[71%] flex flex-col justify-center items-center md:justify-end text-center gap-0 md:items-start md:text-left md:gap-2">
+          <div className="md:px-6 flex flex-col justify-center items-center md:justify-end text-center gap-0 md:items-start md:text-left md:gap-2">
+            <p className="mt-20 md:mt-0 border border-white rounded-full px-[18px] py-2 my-4 md:my-0 text-[14px] w-fit">
+              Cursos
+            </p>
 
-          <div className="flex wrap w-fit md:w-full flex-col gap-4 md:gap-0 md:mt-2 md:flex-row mt-10 md:justify-between">
-            <div>
-              <h1 className="text-[2rem] md:text-5xl text-white leading-tight md:leading-tight md:min-w-full md:text-[60px] font-bold">
-                <span className="block md:hidden leading-tight font-Raleway font-[700] ">
-                  {STATIC_HIGHLIGHTS[currentSlide] === STATIC_HIGHLIGHTS[0] ? (
-                    <>
-                      Cursos de medicina<br />
-                      para <span className="not-italic font-[Lora,serif] md:text-[64px] text-[40px] ">expandir</span> tus<br />
-                      metas profesionales
-                    </>
-                  ) : (
-                    STATIC_HIGHLIGHTS[currentSlide]
-                  )}
-                </span>
-                <span className="hidden md:inline">
-                  {STATIC_HIGHLIGHTS[currentSlide] === STATIC_HIGHLIGHTS[0] ? (
-                    <>
-                      Cursos de medicina para<br />
-                      <span className="not-italic font-[Lora,serif] md:text-[64px] text-[64px]">expandir</span> tus metas profesionales
-                    </>
-                  ) : (
-                    STATIC_HIGHLIGHTS[currentSlide]
-                  )}
-                </span>
-              </h1>
-            </div>
+            <div className="flex wrap w-fit md:w-full flex-col gap-4 md:mt-2 md:flex-row mt-10 md:justify-between">
+              <div>
+                <h1 className="text-[2rem] md:text-5xl text-white leading-tight md:leading-tight md:min-w-full md:text-[60px] font-bold ">
+                  <span className="block md:hidden leading-tight font-Raleway font-[700] ">
+                    {STATIC_HIGHLIGHTS[currentSlide] ===
+                    STATIC_HIGHLIGHTS[0] ? (
+                      <>
+                        Cursos de medicina para {" "}
+                        <span className="not-italic font-lora-italic md:text-[64px] text-[40px]">
+                          expandir
+                        </span>{" "}
+                        tus metas profesionales
+                      </>
+                    ) : (
+                      STATIC_HIGHLIGHTS[currentSlide]
+                    )}
+                  </span>
+                  <div className="md:mr-72">
+                    <span className="hidden md:inline ">
+                      {STATIC_HIGHLIGHTS[currentSlide] ===
+                      STATIC_HIGHLIGHTS[0] ? (
+                        <>
+                          Cursos de medicina para
+                          <br />
+                          <span className="not-italic font-lora-italic md:text-[64px] text-[64px]">
+                            expandir
+                          </span>{" "}
+                          tus metas profesionales
+                        </>
+                      ) : (
+                        STATIC_HIGHLIGHTS[currentSlide]
+                      )}
+                    </span>
+                  </div>
+                </h1>
+              </div>
 
-            <Link
-              href={"https://msklatam.com/tienda/?recurso=curso"}
-              className="mt-4 md:mt-20 md:mb-0 mx-6 md:mx-0 md:mt-0 w-full md:w-auto bg-white text-black px-5 py-3 rounded-full text-[14px] hover:scale-105 transition flex justify-center text-center self-center gap-2 whitespace-nowrap"
-            >
-              Comenzá tu experiencia
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-                className="mt-[4px] md:mt-[0.5px]"
+              <Link
+                href={"https://msklatam.com/tienda/?recurso=curso"}
+                className="mt-4 md:mt-20 md:mb-0 mx-6 md:mx-0 w-full md:w-auto bg-white text-black px-5 py-3 rounded-full text-[14px] hover:scale-105 transition flex justify-center text-center self-center gap-2 whitespace-nowrap"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M14 5l7 7-7 7M3 12h18"
-                />
-              </svg>
-            </Link>
+                Comenzá tu experiencia
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className="mt-[4px] md:mt-[0.5px]"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M14 5l7 7-7 7M3 12h18"
+                  />
+                </svg>
+              </Link>
+            </div>
           </div>
-
           {/* HIGHLIGHTS INTERACTIVO */}
           <HeroHighlights
             currentSlide={currentSlide}
