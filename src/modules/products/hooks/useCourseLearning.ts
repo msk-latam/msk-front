@@ -7,7 +7,7 @@ export interface CourseLearning {
   msk_learning_content: string
 }
 
-export function useCourseLearning(courseId: string | number) {
+export function useCourseLearning(slug: string | number) {
   const [data, setData] = useState<CourseLearning[] | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -16,7 +16,7 @@ export function useCourseLearning(courseId: string | number) {
     async function fetchLearning() {
       setLoading(true)
       try {
-        const res = await axios.get(`${API_BASE}/${courseId}`)
+        const res = await axios.get(`${API_BASE}/${slug}`)
         setData(res.data.sections.learning)
       } catch (err) {
         console.error(err)
@@ -27,7 +27,7 @@ export function useCourseLearning(courseId: string | number) {
     }
 
     fetchLearning()
-  }, [courseId])
+  }, [slug])
 
   return { data, loading, error }
 }

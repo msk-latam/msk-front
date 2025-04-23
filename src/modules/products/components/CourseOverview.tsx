@@ -9,7 +9,7 @@ import { useCourseOverview } from "../hooks/useCourseOverview"; // Ajustá la ru
 
 
 interface CourseOverviewProps {
-  courseId: string | number;
+  slug: string;
 }
 const steps = [
   {
@@ -30,12 +30,12 @@ const steps = [
   },
 ];
 
-const courseSteps = [
-  "Lectura de módulos teóricos",
-  "Autoevaluación al finalizar cada módulo",
-  "Clases interactivas con mirada práctica aplicada a casos clínicos",
-  "Examen final",
-];
+// const courseSteps = [
+//   "Lectura de módulos teóricos",
+//   "Autoevaluación al finalizar cada módulo",
+//   "Clases interactivas con mirada práctica aplicada a casos clínicos",
+//   "Examen final",
+// ];
 
 const features = [
   {
@@ -58,9 +58,9 @@ const features = [
   },
 ];
 
-export default function CoutseOverview({ courseId }: CourseOverviewProps) {
-  const { data, loading, error } = useCourseOverview(courseId); // ID fijo o dinámico, según tu routing
-
+export default function CourseOverview({ slug }: CourseOverviewProps) {
+  const { data, loading, error } = useCourseOverview(slug); 
+console.log(data)
   return (
     <section className="py-6 max-w-5xl mx-auto">
       <h2 className="text-3xl font-medium md:text-[34px] ont-raleway mb-6 text-center md:text-left">
@@ -78,20 +78,22 @@ export default function CoutseOverview({ courseId }: CourseOverviewProps) {
           </span>
         ))}
       </div>
-
       <h3 className="pb-6 font-raleway text-[18px] md:text-2xl font-medium md:text-left text-center">
-  {data?.with_this_course && (() => {
-    const words = data.with_this_course.trim().split(' ');
+  {typeof data?.with_this_course === "string" && data.with_this_course.trim() !== "" ? (() => {
+    const words = data.with_this_course.trim().split(" ");
     const lastWord = words.pop();
-    const firstPart = words.join(' ');
+    const firstPart = words.join(" ");
 
     return (
       <>
         {firstPart} <span className="font-bold">{lastWord}</span>
       </>
     );
-  })()}
+  })() : (
+    "Con este curso desarrollarás nuevas habilidades"
+  )}
 </h3>
+
 
       {/* Step by step */}
       <div className="flex flex-col md:flex-row md:flex-nowrap md:items-center md:justify-center md:gap-4 mb-10 text-sm text-[#29324f] w-full">
@@ -125,10 +127,10 @@ export default function CoutseOverview({ courseId }: CourseOverviewProps) {
           Tu cursada, paso a paso
         </h3>
         <div className="grid gap-6 md:grid-cols-2 text-sm text-[#29324f] text-left font-inter">
-          {courseSteps.map((step, idx) => (
+          {data?.your_course_steps.map((step, idx) => (
             <div key={idx} className="flex items-start gap-3">
               <Image src="/icons/msk.svg" alt="" width={20} height={20} />
-              <p>{step}</p>
+              <p>{step.step}</p>
             </div>
           ))}
         </div>

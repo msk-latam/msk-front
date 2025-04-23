@@ -55,7 +55,7 @@
 
 // export type CourseTeachersData = Teacher[] 
 
-// export interface CourseStudyPlan {
+// export interface CourseSyllabus {
 //   hours: string
 //   study_plan_file: string | false
 //   modules: any // Tipar después si lo necesitás
@@ -84,7 +84,7 @@
 //     teaching_team: CourseTeachersData[]
 //     video: CourseVideoData
 //     certificate: CourseCertificate
-//     study_plan: CourseStudyPlan
+//     study_plan: CourseSyllabus
 //   }
 // }
 
@@ -173,15 +173,27 @@ export interface Teacher {
 
 export type CourseTeachersData = Teacher[]
 
-export interface CourseStudyPlan {
+export interface CourseSyllabus {
   hours: string
   study_plan_file: string | false
-  modules: any // Tipar después si lo necesitás
+  modules: Modules[] // Tipar después si lo necesitás
 }
+
+export interface Modules {
+  title: string
+  content:string
+}
+
+
+export interface Steps {
+  step: string
+}
+
 
 export interface CourseOverviewData {
   habilities: CourseHability[]
   with_this_course: string
+  your_course_steps: Steps[]
 }
 
 export interface CourseData {
@@ -200,9 +212,10 @@ export interface CourseData {
     habilities: CourseHability[]
     with_this_course: string
     teaching_team: CourseTeachersData[]
+    your_course_steps: Steps[]
     video: CourseVideoData
     certificate: CourseCertificate
-    study_plan: CourseStudyPlan
+    study_plan: CourseSyllabus
   }
 }
 

@@ -4,21 +4,21 @@ import Image from 'next/image'
 import { useCourseInstitutions } from '../hooks/useCourseInstitutions'
 
 interface CourseInstitutionProps {
-  courseId: string | number
+  slug: string
 }
 
-export default function CourseInstitution({ courseId }: CourseInstitutionProps) {
-  const { data: institutions, loading, error } = useCourseInstitutions(courseId)
+export default function CourseInstitution({ slug }: CourseInstitutionProps) {
+  const { data: institutions, loading, error } = useCourseInstitutions(slug)
 
   return (
-    <section className="md:py-3 text-left">
+    <section className="md:py-3 text-left h-fit">
       <h2 className="text-xl md:text-2xl font-medium mb-6 w-fit">
         Estas instituciones respaldan tu aprendizaje y revalorizan tu perfil profesional
       </h2>
 
       {/* Scroll horizontal en mobile */}
-      <div className="overflow-x-auto md:overflow-visible scrollbar-none">
-        <div className="flex gap-4 md:flex-row md:justify-center flex-nowrap px-2 md:px-6">
+      <div className="overflow-x-auto md:overflow-visible scrollbar-none ">
+        <div className="flex gap-4 md:flex-row md:justify-left flex-nowrap overflow-x-scroll scrollbar-none px-2 md:pr-6 md:pl-0 h-40">
           {loading && <p>Cargando instituciones...</p>}
           {error && <p>{error}</p>}
           {institutions?.map((inst) => (
