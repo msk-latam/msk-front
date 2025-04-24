@@ -9,21 +9,6 @@ interface CourseSummaryProps {
 export default function CourseSummary({ slug }: CourseSummaryProps) {
 	const { data, loading, error } = useCourseSummary(slug);
 
-	console.log('data', data);
-
-	// const enrolledFormatted = data?.enrolled.toLocaleString();
-	/* mock for now */
-
-	/* {
-    "sale_price": "0",
-    "max_installments": "12",
-    "price_installments": "39.504",
-    "duration": "50",
-    "enrolled": 2000,
-    "modules": 5,
-    "certification": true
-} */
-
 	const enrolledFormatted = data?.enrolled;
 	const modules = data?.modules;
 	const duration = data?.duration + ' horas estimadas';
@@ -38,14 +23,8 @@ export default function CourseSummary({ slug }: CourseSummaryProps) {
 
 	const cedente = data?.cedente;
 
-	// const [enrolledFormatted, setEnrolledFormatted] = useState<string | number>(enrolled);
-	// useEffect(() => {
-	// 	setEnrolledFormatted(enrolled.toLocaleString());
-	// }, [enrolled]);
-
 	return (
 		<div className='bg-white rounded-[38px] shadow p-6 md:p-8 sticky top-10 w-full'>
-			{/* <img src='/images/productpage/course.svg' alt='Curso' className='rounded-xl w-full object-cover mb-6' /> */}
 			<Image
 				src={data?.featured_images.medium ?? ''}
 				alt='Curso'

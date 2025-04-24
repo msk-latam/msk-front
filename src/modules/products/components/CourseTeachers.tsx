@@ -152,20 +152,22 @@ export default function CourseTeachers({ slug }: CourseTeachersProps) {
 			</div>
 
 			{/* Paginación (visual) */}
-			<div className='flex justify-center items-center gap-4 mt-10'>
-				<button className='w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 text-gray-600 hover:bg-gray-100'>
-					&lt;
-				</button>
-				<div className='flex items-center gap-3 text-sm text-gray-700 font-medium'>
-					<span className='text-black font-bold'>01</span>
-					<span>02</span>
-					<span>03</span>
-					<span>04</span>
+			{data.length > 4 && (
+				<div className='flex justify-center items-center gap-4 mt-10'>
+					<button className='w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 text-gray-600 hover:bg-gray-100'>
+						&lt;
+					</button>
+					<div className='flex items-center gap-3 text-sm text-gray-700 font-medium'>
+						<span className='text-black font-bold'>01</span>
+						<span>02</span>
+						<span>03</span>
+						<span>04</span>
+					</div>
+					<button className='w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 text-gray-600 hover:bg-gray-100'>
+						&gt;
+					</button>
 				</div>
-				<button className='w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 text-gray-600 hover:bg-gray-100'>
-					&gt;
-				</button>
-			</div>
+			)}
 		</section>
 	);
 }

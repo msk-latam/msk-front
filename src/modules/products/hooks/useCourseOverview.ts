@@ -13,7 +13,7 @@ export function useCourseOverview(slug: string) {
 		async function fetchOverview() {
 			setLoading(true);
 			try {
-				const res = await axios.get(`${API_BASE}/${slug}`);
+				const res = await axios.get(`${API_BASE}/${slug}?nocache=1`);
 
 				const overviewData: CourseOverviewData = {
 					habilities: res.data.sections?.habilities ?? [],

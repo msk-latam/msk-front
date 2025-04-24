@@ -8,6 +8,7 @@ export interface CourseInstitution {
 	title: string;
 	slug: string;
 	image: string;
+	description: string;
 }
 
 export function useCourseInstitutions(slug: string | number) {
@@ -19,7 +20,7 @@ export function useCourseInstitutions(slug: string | number) {
 		async function fetchInstitutions() {
 			setLoading(true);
 			try {
-				const res = await axios.get(`${API_BASE}/${slug}`);
+				const res = await axios.get(`${API_BASE}/${slug}?nocache=1`);
 				setData(res.data.sections.institutions);
 			} catch (err) {
 				console.error(err);
