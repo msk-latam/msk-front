@@ -17,12 +17,13 @@ export async function generateMetadata(
   { params }: { params: { lang: string; slug: string } }
 ): Promise<Metadata> {
   const lang = params.lang || 'ar';
+  const baseUrl = IS_PROD ? 'https://msklatam.com' : SITE_URL;
+
   const res = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/course/${params.slug}`, {
     cache: 'no-cache',
   });
-  const course = await res.json();
 
-  const baseUrl = IS_PROD ? 'https://msklatam.com' : SITE_URL;
+  const course = await res.json();
   const canonical = `${baseUrl}${lang === 'ar' ? '' : `/${lang}`}/tienda/${params.slug}`;
 
   const hreflangs = Object.fromEntries(
@@ -34,12 +35,12 @@ export async function generateMetadata(
 
   return {
     title: `${course.title} | MSK - Cursos de medicina`,
-    description: course.description,
+    description: course.sections?.with_this_course ?? course.description ?? 'Curso de medicina disponible en MSK.',
     alternates: {
       canonical,
       languages: IS_PROD ? hreflangs : undefined,
     },
-    robots: `${IS_PROD ? 'index, follow' : 'noindex, nofollow'}`,
+    robots: IS_PROD ? 'index, follow' : 'noindex, nofollow',
   };
 }
 
@@ -51,7 +52,7 @@ export default async function ProductPage(
   });
 
   const course = await res.json();
-  const structuredData = generateCourseStructuredData(course); // <-- ya no necesitás los p0, p1 vacíos
+  const structuredData = generateCourseStructuredData(course);
 
   return (
     <main className="bg-white text-neutral-900">
