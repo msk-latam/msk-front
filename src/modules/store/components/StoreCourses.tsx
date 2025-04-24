@@ -154,35 +154,43 @@ const StoreCourses: React.FC<StoreCoursesProps> = () => {
 			) : (
 				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
 					{courses.length > 0 ? (
-						courses.map((course) => (
-							// Replace placeholder with actual CourseCard component later
-							<div key={course.id} className='border rounded-[30px] bg-white flex flex-col'>
-								<img src={course.featured_image} alt={course.title} className='w-full h-48 object-cover rounded-t-[30px] ' />
-								{/* Display categories - primary first */}
-								<div className='p-4 flex flex-col  h-full'>
-									<div className='flex flex-wrap gap-2 mb-2 text-xs'>
-										{course.categories
-											.sort((a) => (a.is_primary ? -1 : 1)) // Sort primary category first
-											.slice(0, 2) // Limit to 2 categories for display
-											.map((cat) => (
-												<span
-													key={cat.term_id}
-													className={`px-2 py-1 rounded-full ${
-														cat.is_primary ? 'bg-blue-100 text-blue-800' : 'bg-orange-100 text-orange-800'
-													}`}
-												>
-													{cat.name}
-												</span>
-											))}
-									</div>
-									<h3 className='font-bold text-lg mb-1'>{course.title}</h3>
-									{/* Display cedente name if it exists and is not an empty array */}
-									{typeof course.cedente === 'object' && !Array.isArray(course.cedente) && (
-										<p className='text-sm text-gray-600 mb-3'>{course.cedente.name}</p>
-									)}
-									<div className='flex justify-between items-center text-sm text-gray-500 mt-auto'>
-										{/* Display duration if available */}
-										<div>
+	courses.map((course) => {
+		const lang = pathname.split('/')[1] || 'ar'; // Obtener el idioma desde la ruta
+
+		return (
+			<div key={course.id} className='border rounded-[30px] bg-white flex flex-col'>
+				<img
+					src={course.featured_image}
+					alt={course.title}
+					className='w-full h-48 object-cover rounded-t-[30px]'
+				/>
+				<div className='p-4 flex flex-col h-full'>
+					<div className='flex flex-wrap gap-2 mb-2 text-xs'>
+						{course.categories
+							.sort((a) => (a.is_primary ? -1 : 1))
+							.slice(0, 2)
+							.map((cat) => (
+								<span
+									key={cat.term_id}
+									className={`px-2 py-1 rounded-full ${
+										cat.is_primary
+											? 'bg-blue-100 text-blue-800'
+											: 'bg-orange-100 text-orange-800'
+									}`}
+								>
+									{cat.name}
+								</span>
+							))}
+					</div>
+					<h3 className='font-bold text-lg mb-1'>{course.title}</h3>
+					{typeof course.cedente === 'object' &&
+						!Array.isArray(course.cedente) && (
+							<p className='text-sm text-gray-600 mb-3'>
+								{course.cedente.name}
+							</p>
+						)}
+					<div className='flex justify-between items-center text-sm text-gray-500 mt-auto'>
+					<div>
 											{course.duration && (
 												<span className='flex items-center gap-1'>
 													<svg width='14' height='18' viewBox='0 0 14 18' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -198,19 +206,19 @@ const StoreCourses: React.FC<StoreCoursesProps> = () => {
 												</span>
 											)}
 										</div>
-										{/* Button always positioned on the right */}
-										<a
-											href={course.link}
-											rel='noopener noreferrer'
-											className='bg-[#191919] text-white px-4 py-2 rounded-full hover:bg-[#474b53] transition-colors'
-										>
-											Descubrir
-										</a>
-									</div>
-								</div>
-							</div>
-						))
-					) : (
+
+						<a
+							href={`/${lang}/tienda/${course.slug}`}
+							className='bg-[#191919] text-white px-4 py-2 rounded-full hover:bg-[#474b53] transition-colors'
+						>
+							Descubrir
+						</a>
+					</div>
+				</div>
+			</div>
+		);
+	})
+) : (
 						<div className='col-span-full flex flex-col items-center justify-center py-10 px-4 text-center'>
 							<svg
 								className='w-16 h-16 text-gray-400 mb-4'

@@ -117,7 +117,12 @@ import CourseVideo from "./components/CourseVideo";
 import CourseCards from "./components/CourseCards";
 import Inscription from "./components/Inscription";
 
-export default function CoursePage() {
+interface ProductPageComponentProps {
+  course: any; // idealmente tipalo bien, pero `any` funciona por ahora
+}
+
+export default function ProductPageComponent({ course }: ProductPageComponentProps) {
+  {
   const params = useParams();
   const slug = params?.slug as string;
 
@@ -184,4 +189,5 @@ export default function CoursePage() {
       <Footer />
     </>
   );
+}
 }

@@ -1,5 +1,7 @@
+import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 export default function RootPage() {
-  redirect('/home');
+  const country = cookies().get('country')?.value || 'ar';
+  redirect(`/${country}/home`);
 }
