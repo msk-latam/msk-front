@@ -19,8 +19,22 @@ export interface Course {
 	id: number;
 	title: string;
 	slug: string;
+	resource: string;
+	excerpt: string;
 	date: string; // Consider using Date type if needed
-	featured_image: string;
+	featured_images: {
+		medium: string;
+		large: string;
+		full: string;
+	};
+	prices: {
+		is_free: boolean;
+		sale_price: string;
+		regular_price: string;
+		total_price: string;
+		max_installments: string;
+		price_installments: number;
+	};
 	categories: CourseCategory[];
 	professions: any[]; // Define more specifically if needed
 	codes: CourseCodes;

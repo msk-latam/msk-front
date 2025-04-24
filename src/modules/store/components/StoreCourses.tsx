@@ -104,12 +104,25 @@ const StoreCourses: React.FC<StoreCoursesProps> = () => {
 					params.set('duration', params.get('duracion') || '');
 					params.delete('duracion'); // Remove original key
 				}
+
+				if (params.has('recurso')) {
+					const recursoValue = params.get('recurso') || '';
+					// Translate values: 'curso' to 'course', 'guias-profesionales' to 'downloadable'
+					let translatedValue = recursoValue;
+					if (recursoValue === 'curso') {
+						translatedValue = 'course';
+					} else if (recursoValue === 'guias-profesionales') {
+						translatedValue = 'downloadable';
+					}
+					params.set('resource', translatedValue);
+					params.delete('recurso'); // Remove original key
+				}
 				// NOTE: The 'search' parameter is already in `params` because the previous useEffect updated the URL
 
 				const page = params.get('page') || '1';
 				setCurrentPage(parseInt(page, 10));
 
-				const apiUrl = `https://cms1.msklatam.com/wp-json/msk/v1/courses?${params.toString()}`;
+				const apiUrl = `https://cms1.msklatam.com/wp-json/msk/v1/products?${params.toString()}`;
 				console.log('Fetching courses with URL:', apiUrl); // Log the URL for debugging
 
 				const response = await fetch(apiUrl);
@@ -157,23 +170,40 @@ const StoreCourses: React.FC<StoreCoursesProps> = () => {
 						courses.map((course) => (
 							// Replace placeholder with actual CourseCard component later
 							<div key={course.id} className='border rounded-[30px] bg-white flex flex-col'>
-								<img src={course.featured_image} alt={course.title} className='w-full h-48 object-cover rounded-t-[30px] ' />
+								<img
+									src={course.featured_images.medium}
+									alt={course.title}
+									className='w-full h-48 object-cover rounded-t-[30px] '
+								/>
 								{/* Display categories - primary first */}
 								<div className='p-4 flex flex-col  h-full'>
-									<div className='flex flex-wrap gap-2 mb-2 text-xs'>
-										{course.categories
-											.sort((a) => (a.is_primary ? -1 : 1)) // Sort primary category first
-											.slice(0, 2) // Limit to 2 categories for display
-											.map((cat) => (
-												<span
-													key={cat.term_id}
-													className={`px-2 py-1 rounded-full ${
-														cat.is_primary ? 'bg-blue-100 text-blue-800' : 'bg-orange-100 text-orange-800'
-													}`}
-												>
-													{cat.name}
-												</span>
-											))}
+									<div className='flex flex-wrap gap-1 mb-2 text-xs'>
+										{course.resource === 'downloadable' ? (
+											<>
+												<span className='px-2 py-1 rounded-full bg-green-100 text-green-800'>Guía profesional</span>
+												{course.categories
+													.filter((cat) => cat.is_primary)
+													.map((cat) => (
+														<span key={cat.term_id} className='px-2 py-1 rounded-full bg-blue-100 text-blue-800'>
+															{cat.name}
+														</span>
+													))}
+											</>
+										) : (
+											course.categories
+												.sort((a) => (a.is_primary ? -1 : 1)) // Sort primary category first
+												.slice(0, 2) // Limit to 2 categories for display
+												.map((cat) => (
+													<span
+														key={cat.term_id}
+														className={`px-2 py-1 rounded-full ${
+															cat.is_primary ? 'bg-blue-100 text-blue-800' : 'bg-orange-100 text-orange-800'
+														}`}
+													>
+														{cat.name}
+													</span>
+												))
+										)}
 									</div>
 									<h3 className='font-bold text-lg mb-1'>{course.title}</h3>
 									{/* Display cedente name if it exists and is not an empty array */}
@@ -181,9 +211,9 @@ const StoreCourses: React.FC<StoreCoursesProps> = () => {
 										<p className='text-sm text-gray-600 mb-3'>{course.cedente.name}</p>
 									)}
 									<div className='flex justify-between items-center text-sm text-gray-500 mt-auto'>
-										{/* Display duration if available */}
+										{/* Display duration if available and not zero */}
 										<div>
-											{course.duration && (
+											{course.duration && course.duration !== '0' && (
 												<span className='flex items-center gap-1'>
 													<svg width='14' height='18' viewBox='0 0 14 18' fill='none' xmlns='http://www.w3.org/2000/svg'>
 														<path
