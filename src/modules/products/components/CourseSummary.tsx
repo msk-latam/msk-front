@@ -36,6 +36,8 @@ export default function CourseSummary({ slug }: CourseSummaryProps) {
 		? new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(Number(data.total_price))
 		: '';
 
+	const cedente = data?.cedente;
+
 	// const [enrolledFormatted, setEnrolledFormatted] = useState<string | number>(enrolled);
 	// useEffect(() => {
 	// 	setEnrolledFormatted(enrolled.toLocaleString());
@@ -82,11 +84,11 @@ export default function CourseSummary({ slug }: CourseSummaryProps) {
 			<p className='text-xs text-gray-500 mb-2'>
 				Cedente
 				<br />
-				<strong className='text-[#3b476c] '>Colegio de Médicos de la Prov. de Bs. As. Distrito III</strong>
+				<strong className='text-[#3b476c] '>{cedente?.name}</strong>
 			</p>
 
-			<div className='flex items-center justify-center mb-4'>
-				<img src='/images/partners/andaluza.svg' alt='Certifica' className='h-20' />
+			<div className='flex items-center justify-center mb-4 w-full bg-[#F7F9FF] rounded-[30px] p-2'>
+				<Image src={cedente?.image ?? ''} alt='Certificado' className='h-20 mix-blend-multiply' width={80} height={80} />
 			</div>
 
 			<button className='bg-[#9200AD] hover:bg-[#6b1679] text-white w-full py-3 rounded-full font-medium transition'>

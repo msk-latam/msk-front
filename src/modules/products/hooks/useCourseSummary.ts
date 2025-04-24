@@ -16,6 +16,13 @@ interface CourseSummaryData {
 	enrolled: number;
 	modules: number;
 	certification: boolean;
+	cedente: {
+		id: number;
+		title: string;
+		name: string;
+		slug: string;
+		image: string;
+	};
 }
 
 const API_BASE = 'https://cms1.msklatam.com/wp-json/msk/v1/product';
@@ -53,6 +60,7 @@ export function useCourseSummary(slug: string) {
 					enrolled: result.enrolments,
 					modules: result.modules,
 					certification: true,
+					cedente: result.cedente,
 				};
 
 				setData(setResutl || null);
