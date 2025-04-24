@@ -9,7 +9,6 @@ export const auth0 = initAuth0({
 	clientSecret: process.env.AUTH0_CLIENT_SECRET!,
 	routes: {
 		login: '/api/auth/login',
-		logout: '/api/auth/logout',
 		callback: '/api/auth/callback',
 	},
 	session: {
