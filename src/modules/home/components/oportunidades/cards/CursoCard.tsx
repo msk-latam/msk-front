@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { usePathname } from "next/navigation";
 
 type CursoCardProps = {
   variant?: "small" | "large";
@@ -16,7 +17,8 @@ type CursoCardProps = {
   inscriptos: number;
   certificado: string;
   imagen: string;
-  link: string;
+  link: string; // puede ser "slug" o "tienda/slug"
+  slug: string;
 };
 
 const CursoCard = ({
@@ -32,8 +34,18 @@ const CursoCard = ({
   imagen,
   link,
 }: CursoCardProps) => {
+  const pathname = usePathname();
+  const lang = pathname.split("/")[1] || "ar";
+
+  // Asegura que no empiece con "/"
+  const slug = link.startsWith("/") ? link.slice(1) : link;
+
+  const href = `/${lang}/${slug}`;
+
+  
+
   return (
-    <Link href={link} passHref>
+    <Link href={href} passHref>
       <div
         className={`relative rounded-[30px] overflow-hidden shadow-md bg-black text-white transform transition-transform duration-300 hover:scale-105 cursor-pointer ${
           variant === "large" ? largeWidth : ""
@@ -52,39 +64,23 @@ const CursoCard = ({
             </span>
             <h3 className="font-Raleway text-[22px] text-[#FFFFFF] leading-tight">{titulo}</h3>
 
-            {/* Iconografía + Info */}
-            <section className="flex flex-col gap-1 md:text-sm text-[14px] opacity-80 text-[#DBDDE2] ">
+            <section className="flex flex-col gap-1 md:text-sm text-[14px] opacity-80 text-[#DBDDE2]">
               <p className="flex items-center gap-2">
-                <Image
-                  src="/icons/topic.png"
-                  alt="Icono temas"
-                  width={15}
-                  height={15}
-                />
+                <Image src="/icons/topic.png" alt="Icono temas" width={15} height={15} />
                 {temas} temas
               </p>
               <p className="flex items-center gap-2">
-                <Image
-                  src="/icons/time.png"
-                  alt="Icono horas"
-                  width={11.666666030883789}
-                  height={16.66666603088379}
-                />
+                <Image src="/icons/time.png" alt="Icono horas" width={12} height={17} />
                 {horas} horas
               </p>
               <p className="flex items-center gap-2">
-                <Image
-                  src="/icons/registered.png"
-                  alt="Icono inscriptos"
-                  width={16.66666603088379}
-                  height={15}
-                />
+                <Image src="/icons/registered.png" alt="Icono inscriptos" width={17} height={15} />
                 {inscriptos.toLocaleString()} inscriptos
               </p>
             </section>
 
             <section className="mt-2">
-              <p className="text-xs text-[#DBDDE2] ">Certificación</p>
+              <p className="text-xs text-[#DBDDE2]">Certificación</p>
               <p className="text-sm text-[#DBDDE2]">{certificado}</p>
             </section>
           </div>

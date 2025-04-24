@@ -8,11 +8,14 @@ import { ChevronDown } from 'react-feather';
 import SearchBar from './common/SearchBar';
 import DropdownContent from './DropdownContent';
 import FloatingCreateAccountButton from './FloatingCreateAccountButton';
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
 	const [isDiscoverOpen, setIsDiscoverOpen] = useState(false);
 	const [currentView, setCurrentView] = useState('main');
 	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+	const pathname = usePathname();
+  const lang = pathname.split('/')[1] || 'ar';
 
 	const toggleDiscover = () => {
 		setIsDiscoverOpen(!isDiscoverOpen);
@@ -21,10 +24,8 @@ const Navbar = () => {
 
 	const toggleInstitutions = () => {
 		if (isDiscoverOpen && currentView === 'institutions') {
-			// Si ya está abierto en instituciones, lo cerramos
 			setIsDiscoverOpen(false);
 		} else {
-			// Si está cerrado o en otra vista, abrimos instituciones
 			setIsDiscoverOpen(true);
 			setCurrentView('institutions');
 		}
@@ -42,46 +43,39 @@ const Navbar = () => {
 
 	return (
 		<header className='absolute left-0 w-full z-50'>
-			{/* Overlay fondo oscuro móvil */}
 			{isDiscoverOpen && <div className='fixed inset-0 bg-transparent z-50 md:hidden'></div>}
 
 			<nav className='relative z-50 bg-transparent'>
 				{/* --- NAV MOBILE --- */}
-				{/* --- NAV MOBILE --- */}
-<section className='flex justify-start items-center mt-2 py-5 px-6 md:hidden relative'>
-  {/* Botón hamburguesa */}
-  <BurgerButton isOpen={isDiscoverOpen} onClick={toggleDiscover} />
+				<section className='flex justify-start items-center mt-2 py-5 px-6 md:hidden relative'>
+					<BurgerButton isOpen={isDiscoverOpen} onClick={toggleDiscover} />
 
-  {/* Logo */}
-  <Link href='/home' className='m-auto pr-7 pb-1'>
-    <Image
-      src='/images/msk-logo/logo.png'
-      alt='MSK'
-      priority
-      width={64}
-      height={64}
-      className='w-16 h-auto'
-    />
-  </Link>
-</section>
+					<Link href={`/${lang}/home`} className='m-auto pr-7 pb-1'>
+						<Image
+							src='/images/msk-logo/logo.png'
+							alt='MSK'
+							priority
+							width={64}
+							height={64}
+							className='w-16 h-auto'
+						/>
+					</Link>
+				</section>
 
-{/* --- NAV DESKTOP --- */}
-<section className='hidden md:flex md:flex-row items-center pt-2 mt-6'>
-  <div className='flex items-top w-full max-w-[1300px] mx-auto pl-14 pr-28 z-50 relative'>
-    {/* Logo */}
-    <Link href='/home'>
-      <Image
-        src='/images/msk-logo/logo.png'
-        alt='MSK'
-        priority
-        width={90}
-        height={90}
-        className='md:pt-3 w-[90px] h-auto'
-      />
-    </Link>
+				{/* --- NAV DESKTOP --- */}
+				<section className='hidden md:flex md:flex-row items-center pt-2 mt-6'>
+					<div className='flex items-top w-full max-w-[1300px] mx-auto pl-14 pr-28 z-50 relative'>
+						<Link href={`/${lang}/home`}>
+							<Image
+								src='/images/msk-logo/logo.png'
+								alt='MSK'
+								priority
+								width={90}
+								height={90}
+								className='md:pt-3 w-[90px] h-auto'
+							/>
+						</Link>
 
-
-						{/* Navegación central */}
 						<div className='w-full'>
 							<nav
 								className={`flex items-center flex-grow justify-between py-2 ml-28 px-5 transition-colors duration-300 ${
@@ -107,7 +101,9 @@ const Navbar = () => {
 										<ChevronDown
 											size={16}
 											className={`transition-transform pt-1 duration-300 ${
-												isMainView || isDiscoverView || isSpecialtyView || isSpecialtyDetailView ? 'rotate-180' : ''
+											isMainView || isDiscoverView || isSpecialtyView || isSpecialtyDetailView
+												? 'rotate-180'
+												: ''
 											}`}
 										/>
 									</button>
@@ -125,7 +121,9 @@ const Navbar = () => {
 										Instituciones
 										<ChevronDown
 											size={16}
-											className={`transition-transform pt-1 duration-300 ${isInstitutionsView ? 'hidden' : ''}`}
+											className={`transition-transform pt-1 duration-300 ${
+											isInstitutionsView ? 'hidden' : ''
+											}`}
 										/>
 									</button>
 								</div>
@@ -135,12 +133,12 @@ const Navbar = () => {
 								</div>
 
 								<div className='flex items-center gap-3'>
-									<Link href='/login?form=registerForm'>
+									<Link href={`/${lang}/login?form=registerForm`}>
 										<button className='bg-[#9200AD] text-white text-sm font-medium  rounded-[38px] px-6 py-3.5 whitespace-nowrap hover:bg-[#6d0082]'>
 											Crear cuenta
 										</button>
 									</Link>
-									<Link href='/login'>
+									<Link href={`/${lang}/login`}>
 										<button
 											className={`text-sm font-medium whitespace-nowrap rounded-[38px] px-6 py-3.5 transition-colors duration-300 text-gray-800 border border-gray-500 hover:bg-gray-300${
 												isMainView || isDiscoverView || isSpecialtyView || isSpecialtyDetailView
@@ -148,7 +146,7 @@ const Navbar = () => {
 													: isInstitutionsView
 													? ' text-white hover:bg-gray-300 hover:text-gray-800'
 													: ''
-											}`}
+												}`}
 										>
 											Iniciar sesión
 										</button>
@@ -167,14 +165,11 @@ const Navbar = () => {
 									/>
 								</div>
 							)}
-
-							{/* Dropdown desktop debajo del navbar */}
 						</div>
 					</div>
 				</section>
 			</nav>
 
-			{/* Contenido dinámico móvil */}
 			{isDiscoverOpen && (
 				<div className='fixed inset-x-0 top-0 bottom-0 z-50 mt-16 md:hidden overflow-auto'>
 					<DropdownContent

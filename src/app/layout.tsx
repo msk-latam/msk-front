@@ -33,8 +33,11 @@ const interItalic = Inter({
 
 export const metadata = {
 	title: 'MSK',
-	description: 'Cursos de medicina para toda latinoamerica',
-	icon: '/isotipo.svg',
+	description: 'Cursos de medicina online para toda Latinoamérica',
+	icons: {
+		icon: '/isotipo.svg', // o '/favicon.ico'
+		// apple: '/apple-touch-icon.png' // opcional
+	},
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
