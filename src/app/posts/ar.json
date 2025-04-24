@@ -7,6 +7,150 @@
 	"total_products": 259,
 	"posts": [
 		{
+			"id": 340790,
+			"title": "Capacitación y especialización continua: la nueva ruta profesional",
+			"slug": "capacitacion-y-especializacion-continua-en-salud",
+			"permalink": "https://wp.msklatam.com/nota/e-learning/capacitacion-y-especializacion-continua-en-salud/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-capacitacion-y-especializacion-continua-en-salud-1-scaled-e1745441536261.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-capacitacion-y-especializacion-continua-en-salud-1-scaled-e1745441536261.jpg",
+				"1000",
+				"563",
+				""
+			],
+			"excerpt": "En un sistema de salud que evoluciona constantemente, la actualización de conocimientos te permite afrontar mejor los desafíos. Explora cómo la formación continua transforma tu carrera. Una guía integral sobre nuevas herramientas, recursos disponibles y el valor estratégico de especializarse.",
+			"date": "Abril 23, 2025",
+			"author": {
+				"id": 273557,
+				"name": "Gonzalo Busquets",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2024/01/foto-cv-blurred.png"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 273557,
+					"name": "Gonzalo Busquets",
+					"description": "Periodista. Especialista en comunicación regional para el segmento e-learning y salud.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2024/01/foto-cv-blurred.png"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 339497,
+					"title": "Terapias que están cambiando el tratamiento de la hemofilia",
+					"slug": "terapias-que-cambian-el-tratamiento-de-la-hemofilia",
+					"link": "https://wp.msklatam.com/nota/medicina/terapias-que-cambian-el-tratamiento-de-la-hemofilia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-terapias-que-cambian-el-tratamiento-de-la-hemofilia-scaled-e1744642655103.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 339351,
+					"title": "CRISPR: la herramienta que está reescribiendo la medicina",
+					"slug": "crispr-esta-reescribiendo-la-medicina",
+					"link": "https://wp.msklatam.com/nota/medicina/crispr-esta-reescribiendo-la-medicina/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-crispr-esta-reescribiendo-la-medicina-scaled-e1744393930660.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 339004,
+					"title": "Certificados digitales MSK para una profesión en evolución",
+					"slug": "certificados-digitales-msk-con-blockchain",
+					"link": "https://wp.msklatam.com/nota/e-learning/certificados-digitales-msk-con-blockchain/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-certificados-digitales-msk-con-blockchain-e1744295864869.png",
+					"category": "Actualidad"
+				},
+				{
+					"id": 338891,
+					"title": "El valor de la investigación en la práctica médica",
+					"slug": "valor-de-la-investigacion-en-la-practica-medica",
+					"link": "https://wp.msklatam.com/nota/medicina/valor-de-la-investigacion-en-la-practica-medica/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-valor-de-la-investigacion-en-la-practica-medica-scaled-e1744147518586.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 338757,
+					"title": "Cómo mejorar los sistemas de salud: un panorama actual",
+					"slug": "actualidad-de-los-sistemas-de-salud-en-latinoamerica",
+					"link": "https://wp.msklatam.com/nota/medicina/actualidad-de-los-sistemas-de-salud-en-latinoamerica/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/shutterstock_1186830211-scaled-e1744041787582.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "https://msklatam.com/blog/como-destacar-en-tu-practica-con-capacitacion-medica-continua/"
+				},
+				{
+					"fuente": "https://msklatam.com/blog/msk-vanguardia-en-capacitacion-de-enfermeria/"
+				},
+				{
+					"fuente": "https://msklatam.com/blog/capacitacion-permanente-para-profesionales-rurales/"
+				},
+				{
+					"fuente": "https://elpais.com/sociedad/2025-04-19/todo-lo-que-su-medico-no-estudio-en-la-universidad-nos-forman-para-curar-enfermedades-no-para-atender-personas.html"
+				},
+				{
+					"fuente": "https://cadenaser.com/andalucia/2025/02/12/la-simulacion-clinica-se-consolida-como-herramienta-formativa-imprescindible-para-profesionales-sanitarios-ser-malaga/"
+				},
+				{
+					"fuente": "https://elpais.com/mexico/sociedad/2024-12-11/especialistas-de-la-salud-celebran-una-nueva-edicion-de-las-brigadas-urologicas-en-oaxaca.html"
+				}
+			],
+			"categories": [
+				{
+					"id": 59968,
+					"primary": true,
+					"name": "E-Learning",
+					"slug": "e-learning",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/e-learning/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59968",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1360,
+				"filter": "raw"
+			},
+			"reading_time": "5",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
 			"id": 150769,
 			"title": "Enfermería: MSK, a la vanguardia en capacitación online",
 			"slug": "msk-vanguardia-en-capacitacion-de-enfermeria",
