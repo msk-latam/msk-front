@@ -1,6 +1,7 @@
 'use client';
 
 import { Course, CoursesApiResponse } from '@/types/course'; // Import types
+import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'; // Added useRouter, usePathname
 import React, { useEffect, useState } from 'react'; // Added useRef, useCallback
 import CourseCardSkeleton from './CourseCardSkeleton'; // Import Skeleton
@@ -228,12 +229,12 @@ const StoreCourses: React.FC<StoreCoursesProps> = () => {
 												)}
 											</div>
 
-											<a
+											<Link
 												href={`/${lang}/tienda/${course.slug}`}
 												className='bg-[#191919] text-white px-4 py-2 rounded-full hover:bg-[#474b53] transition-colors'
 											>
 												Descubrir
-											</a>
+											</Link>
 										</div>
 									</div>
 								</div>
