@@ -1,3 +1,5 @@
+import UserDataStorage from '@/components/UserDataStorage';
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 import type { Metadata } from 'next';
 import { Inter, Raleway } from 'next/font/google';
 
@@ -30,5 +32,10 @@ export const metadata: Metadata = {
 };
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-	return <section className={`${inter.variable} ${raleway.variable} font-inter`}>{children}</section>;
+	return (
+		<UserProvider>
+			<UserDataStorage />
+			<section className={`${inter.variable} ${raleway.variable} font-inter`}>{children}</section>
+		</UserProvider>
+	);
 }

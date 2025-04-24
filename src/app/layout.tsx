@@ -44,12 +44,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang='es'>
 			<head>
-				<meta name="robots" content="noindex, nofollow" />
+				<meta name='robots' content='noindex, nofollow' />
 			</head>
-			<body className={`${inter.variable} ${raleway.variable} font-inter`}>
-				{children}
-			</body>
+			<body className={`${inter.variable} ${raleway.variable} font-inter`}>{children}</body>
 		</html>
 	);
 }
-

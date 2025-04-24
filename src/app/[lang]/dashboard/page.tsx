@@ -10,6 +10,7 @@ import LearningPlanCta from '@/modules/dashboard/components/LearningPlanCta';
 import MyCoursesSection from '@/modules/dashboard/components/MyCoursesSection';
 import { useEffect, useState } from 'react';
 
+import UserDataStorage from '@/components/UserDataStorage';
 import { UserData, getUserData, updateUserData } from '@/lib/localStorageService/userDataService';
 import InterestsEditModal from '@/modules/dashboard/components/InterestsEditModal';
 import ProfileEditModal from '@/modules/dashboard/components/ProfileEditModal';
@@ -65,6 +66,8 @@ export default function DashboardPage() {
 
 	return (
 		<>
+			<UserDataStorage />
+
 			<header
 				className='w-full h-[180px] sm:h-[579px] overflow-hidden m-0 p-0'
 				style={{

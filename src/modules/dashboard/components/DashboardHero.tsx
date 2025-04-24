@@ -184,16 +184,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 					{/* Profile Picture */}
 					<div className='relative w-[126px] h-[126px] mx-auto mb-6'>
 						<div className='w-full h-full overflow-hidden rounded-full border'>
-							<Image
-								src={data.profileImage || '/default-avatar.png'}
-								alt='Profile'
-								width={126}
-								height={126}
-								className='w-full h-full object-cover'
-								onError={(e) => {
-									e.currentTarget.src = '/default-avatar.png';
-								}}
-							/>
+							<Image src={data.profileImage} alt='Profile' width={126} height={126} className='w-full h-full object-cover' />
 						</div>
 						<div className='absolute bottom-0 right-0'>
 							<EditButton onClick={() => handleEditClick('profileImage')} filled />

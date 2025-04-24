@@ -79,27 +79,45 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 				body: JSON.stringify(formData),
 			});
 
-			const data: LoginApiResponse = await response.json(); // Assuming backend sends JSON even for errors like 401
+			const data: LoginApiResponse = await response.json();
 
 			if (response.ok) {
-				// Status 200-299
 				const { name, speciality, ...restData } = data;
 				const loginData = {
 					...restData, // Includes token, token_type
 					email: email,
 					user: { name, speciality },
+					firstName: '',
+					lastName: '',
+					specialty: speciality,
 				};
 
+				// 				{
+				//     "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiNTEyMWNiZDM4YTYyMzhmNjNjMzU0YTgxMTZkNDdhZjlhZjFmOGVhNTE4YmY3OTQ3YmI0MjZmODMxZDA0M2M5ZGZhMTk3MTQ4YmEyZjVmMDUiLCJpYXQiOjE3NDU1MDQ2OTcuNDMzOTA2MDc4MzM4NjIzMDQ2ODc1LCJuYmYiOjE3NDU1MDQ2OTcuNDMzOTA3OTg1Njg3MjU1ODU5Mzc1LCJleHAiOjE3NzcwNDA2OTcuNDMyMTQyOTcyOTQ2MTY2OTkyMTg3NSwic3ViIjoiMjkxMCIsInNjb3BlcyI6W119.zQvLr-QIjQEXAp328PyjoqLsrH22Jqfc6aKWrJ6SAU8MbB9DnSPLUWaHxQBp3fiw4tZfp7G6IOo6p7OfSBYp5efolgAr2dKiiW7c6KXYhcNkmQvJ71Ix_2WflkcZT0T5E65lMDdKSq4SKUx9P6WFU0xD35paBSVG28jwX0rz-mPRJxHHa2LRrPUNPFBwHlUtdsQ5F4nvDKDwCSD1mN14P3YzVKHRJRwc2jktXvr-Kt03wsAAfmvfzdqZAAIxL0_rOQ9LIsT2jpo564BHYHCiHoKluV7Xt7vITIFEXFT9Hyfpuv29QPPkF9kRtdEIcFanOk6b_dqSp4U08rq-5btDnT77AFwx1LM17F5Jx5W8B5yQxlrctqrIO_CkAuxXdM_YUnnXFElEJ6G08I05ua8VhhzmhcKdqhKDYzR8K1tpN_FFujmB7-wAzQ526bynXoJzEwCY022OtILZCY60pXQ_E4lslpLvp5jGcKciaJO8xuZipoB3PfWA6auuWGPaieKnzbW5EV3n9q4xvLdFot4l04BE5k7H7YHPDpr1Qox_-gRTH7ikQRBl56342RyaC9PKD9OLdYTJI2Dek2SemZnLBGuG2ng-pSY8o1FxPTcDVuW41xa1xK3_EwSy6t4HgO6lkh91dWWBXg7RYw0nx3n7gCUk_NRnHoJjji_tr1PBScE",
+				//     "token_type": "Bearer",
+				//     "expires_at": "2026-04-24T14:24:57.000000Z",
+				//     "name": "Eva Marmolejo",
+				//     "speciality": "Bioqu\u00edmica"
+				// }
+
+				/* guardar en localStorage */
+				/* login data name separarlo por espacio y guardarlo en firstName y lastName */
+				const nameParts = loginData.user.name.split(' ');
+				loginData.firstName = nameParts[0];
+				loginData.lastName = nameParts.slice(1).join(' ');
+
+				localStorage.setItem('userData', JSON.stringify(loginData));
+
+				/* access_token, token tyoe y expires_at guardarlo en  */
+
 				dispatch({ type: 'LOGIN', payload: loginData });
-				// TODO: Adjust redirection based on 'country' if needed, as per original code
-				router.push('/mi-perfil/'); // Simplified redirection for now
+				router.push('/dashboard/');
 			} else {
-				// Handle non-2xx responses (e.g., 401 Unauthorized, 422 Validation Error)
 				setLoginError(data.message || `Error: ${response.status} ${response.statusText}`);
 			}
 		} catch (error) {
 			console.error('Login failed:', error);
-			setLoginError('Ocurrió un error inesperado. Inténtalo de nuevo.'); // Generic error for network issues etc.
+			setLoginError('Ocurrió un error inesperado. Inténtalo de nuevo.');
 		} finally {
 			setOnRequest(false); // Reset loading state
 		}
