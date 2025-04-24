@@ -173,25 +173,38 @@ const StoreCourses: React.FC<StoreCoursesProps> = () => {
 							return (
 								<div key={course.id} className='border rounded-[30px] bg-white flex flex-col'>
 									<img
-										src={course.featured_image}
+										src={course.featured_images.medium}
 										alt={course.title}
 										className='w-full h-48 object-cover rounded-t-[30px]'
 									/>
 									<div className='p-4 flex flex-col h-full'>
-										<div className='flex flex-wrap gap-2 mb-2 text-xs'>
-											{course.categories
-												.sort((a) => (a.is_primary ? -1 : 1))
-												.slice(0, 2)
-												.map((cat) => (
-													<span
-														key={cat.term_id}
-														className={`px-2 py-1 rounded-full ${
-															cat.is_primary ? 'bg-blue-100 text-blue-800' : 'bg-orange-100 text-orange-800'
-														}`}
-													>
-														{cat.name}
-													</span>
-												))}
+										<div className='flex flex-wrap gap-1 mb-2 text-xs'>
+											{course.resource === 'downloadable' ? (
+												<>
+													<span className='px-2 py-1 rounded-full bg-green-100 text-green-800'>Guía profesional</span>
+													{course.categories
+														.filter((cat) => cat.is_primary)
+														.map((cat) => (
+															<span key={cat.term_id} className='px-2 py-1 rounded-full bg-blue-100 text-blue-800'>
+																{cat.name}
+															</span>
+														))}
+												</>
+											) : (
+												course.categories
+													.sort((a) => (a.is_primary ? -1 : 1)) // Sort primary category first
+													.slice(0, 2) // Limit to 2 categories for display
+													.map((cat) => (
+														<span
+															key={cat.term_id}
+															className={`px-2 py-1 rounded-full ${
+																cat.is_primary ? 'bg-blue-100 text-blue-800' : 'bg-orange-100 text-orange-800'
+															}`}
+														>
+															{cat.name}
+														</span>
+													))
+											)}
 										</div>
 										<h3 className='font-bold text-lg mb-1'>{course.title}</h3>
 										{typeof course.cedente === 'object' && !Array.isArray(course.cedente) && (
@@ -199,7 +212,7 @@ const StoreCourses: React.FC<StoreCoursesProps> = () => {
 										)}
 										<div className='flex justify-between items-center text-sm text-gray-500 mt-auto'>
 											<div>
-												{course.duration && (
+												{course.duration && course.duration !== '0' && (
 													<span className='flex items-center gap-1'>
 														<svg width='14' height='18' viewBox='0 0 14 18' fill='none' xmlns='http://www.w3.org/2000/svg'>
 															<path
