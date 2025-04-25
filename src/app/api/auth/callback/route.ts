@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
 
 const afterCallback = (req: NextRequest, session: Session) => {
 	// Log request information
-	// console.log('Auth callback session:', session);
+	console.log('Auth callback session:', session);
 
 	// Return the session unmodified
 	return session;
