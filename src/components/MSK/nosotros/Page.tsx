@@ -18,7 +18,7 @@ import { usePathname } from 'next/navigation';
 
 const SINGLE: SinglePageType = {
 	id: 'eae0212192f63287e0c212',
-	featuredImage: '/public/images/banners/nosotros.png',
+	// featuredImage: '/public/images/banners/nosotros.png',
 	title: 'Quiénes somos',
 	desc: 'Medical & Scientific Knowledge es una propuesta moderna que desafía a expandir las metas profesionales. Nuestra presencia en Latinoamérica y España promueve la difusión de un nuevo concepto en e-learning que transforma la experiencia de aprendizaje a distancia del personal de la salud hispanoparlante, con orientación hacia los resultados y el éxito profesional.',
 	date: 'May 20, 2021',
@@ -112,7 +112,7 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({ className = ''
 
 			{data && (
 				<div className=''>
-					<div className='relative mb-16 space-y-10  nc-SingleContent'>
+					<div className='relative mb-16 space-y-10 nc-SingleContent'>
 						<div className='w-full max-w-[50rem] mx-auto px-4 mt-5'>
 							<p className='font-lora  pb-2 pt-4 text-base sm:text-lg lg:text-xl text-[#392C35]'>
 								Medical & Scientific Knowledge es un grupo español con más de ocho años de trayectoria en la industria pharma
@@ -191,7 +191,7 @@ const PageNosotrosComponent: FC<PageSingleTemp3SidebarProps> = ({ className = ''
 			{/* transformar a componente */}
 
 			<div className=''>
-				<div className='grid grid-cols-1 gap-4 my-16  md:grid-cols-3'>
+				<div className='grid grid-cols-1 gap-4 my-16 md:grid-cols-3'>
 					<ContactForm isNosotros={true} />
 				</div>
 			</div>
