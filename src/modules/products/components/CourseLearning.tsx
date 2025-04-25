@@ -11,7 +11,7 @@ export default function CourseLearning({ slug }: CourseLearningProps) {
 
   // En caso de error o loading, mostramos un fallback
   if (loading) return <p className="p-5">Cargando contenido...</p>
-  if (error || !data) return <p className="p-5">No se pudo cargar el contenido.</p>
+  if (error || !data) return null
 
   const learning = data.map((item) => ({ text: item.msk_learning_content }))
 

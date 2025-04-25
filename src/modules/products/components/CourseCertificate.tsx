@@ -43,7 +43,7 @@ type Props = {
 export default function CourseCertificate({ slug }: Props) {
   const { data: hasCertificate, loading, error } = useCourseCertificate(slug)
 
-  if (loading || error || hasCertificate) return null //va !hasCertificate pero harcodeado para que se vea en QA
+  if (loading || error || !hasCertificate) return null //va !hasCertificate pero harcodeado para que se vea en QA
 
   return (
     <section className="bg-white text-center md:text-left w-full rounded-[38px] md:py-10 md:px-9 px-6 py-12">

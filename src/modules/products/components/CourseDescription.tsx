@@ -104,6 +104,10 @@ export default function CourseDescription({ slug }: CourseDescriptionProps) {
 	const description = rawDescription;
 	const title = data?.title ?? 'Descripción del curso';
 
+	// Si hay error o no hay descripción, devuelve null
+	if (error || !data?.content) return null;
+
+	
 	const displayDescription = isExpanded
 		? description
 		: description.length > MAX_LENGTH
@@ -113,14 +117,12 @@ export default function CourseDescription({ slug }: CourseDescriptionProps) {
 	return (
 		<section className='bg-white rounded-[38px] md:pt-7 md:pb-3'>
 			<h1 className='text-2xl md:text-[34px] font-raleway font-medium mb-6 text-[#1A1A1A]'>
-				{loading ? 'Cargando...' : error ? 'Error al cargar' : title}
+				{loading ? 'Cargando...' : title}
 			</h1>
 
 			<article className='text-[#1A1A1A] text-sm font-inter font-light text-[16px] leading-[161%] relative'>
 				{loading ? (
 					'Cargando descripción...'
-				) : error ? (
-					<p>{error}</p>
 				) : (
 					<>
 						<div
@@ -135,7 +137,7 @@ export default function CourseDescription({ slug }: CourseDescriptionProps) {
 				)}
 			</article>
 
-			{!loading && !error && description.length > MAX_LENGTH && (
+			{!loading && description.length > MAX_LENGTH && (
 				<motion.div
 					className='flex justify-center mt-2'
 					initial={{ opacity: 0 }}

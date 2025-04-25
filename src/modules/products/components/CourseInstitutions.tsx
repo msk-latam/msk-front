@@ -11,7 +11,7 @@ interface CourseInstitutionProps {
 export default function CourseInstitution({ slug }: CourseInstitutionProps) {
 	const { data: institutions, loading, error } = useCourseInstitutions(slug);
 
-	console.log('institutions', institutions);
+	if (!loading && !institutions) return null;
 
 	return (
 		<section className='md:py-3 text-left h-fit'>

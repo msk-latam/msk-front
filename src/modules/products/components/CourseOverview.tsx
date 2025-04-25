@@ -56,7 +56,9 @@ const features = [
 
 export default function CourseOverview({ slug }: CourseOverviewProps) {
 	const { data, loading, error } = useCourseOverview(slug);
-	console.log(data);
+	if (loading || error || !data || (!data.habilities?.length && !data.your_course_steps?.length && !data.with_this_course)) {
+		return null;
+	}
 	return (
 		<section className='py-6 max-w-5xl mx-auto'>
 			<h2 className='text-3xl font-medium md:text-[34px] ont-raleway mb-6 text-center md:text-left'>

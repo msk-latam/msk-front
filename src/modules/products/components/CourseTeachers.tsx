@@ -108,10 +108,7 @@ export default function CourseTeachers({ slug }: CourseTeachersProps) {
 
 	if (error || !data || data.length === 0) {
 		return (
-			<section className='bg-white rounded-2xl p-6 md:p-10'>
-				<h2 className='text-2xl font-semibold mb-6'>Equipo docente</h2>
-				<p>No hay docentes disponibles para este curso.</p>
-			</section>
+			null
 		);
 	}
 

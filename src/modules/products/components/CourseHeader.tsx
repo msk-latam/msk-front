@@ -11,9 +11,13 @@ interface CourseHeaderProps {
 
 export default function CourseHeader({ slug }: CourseHeaderProps) {
   const { data, loading, error } = useCourseHeader(slug)
-
-  if (loading) return null
-  if (error || !data) return <p className="text-red-500 text-center">Error al cargar el encabezado del curso</p>
+  if (error || !data || data.categories.length === 0) {
+    return (
+      <div className="px-4 md:px-10 lg:px-20 max-w-[1300px] mx-auto h-96 flex justify-center items-center text-white">
+        <h1 className="text-3xl sm:text-4xl font-bold text-center">Este curso actualmente no tiene informacion.</h1>
+      </div>
+    )
+  }
 
   const { title, has_certificate, categories } = data
 
