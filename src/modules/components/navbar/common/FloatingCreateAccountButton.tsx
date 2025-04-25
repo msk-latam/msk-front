@@ -1,6 +1,6 @@
 // components/navbar/FloatingCreateAccountButton.tsx
 import React from "react";
-import { BurgerButton } from "./common/BurguerButton"; // ajustá el path si hace falta
+import { BurgerButton } from "./BurguerButton"; // ajustá el path si hace falta
 
 interface Props {
   isOpen: boolean;
