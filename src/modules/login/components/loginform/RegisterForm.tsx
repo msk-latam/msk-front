@@ -9,9 +9,20 @@ type RegisterFormProps = {
 
 type SignUpApiPayload = {
 	email: string;
-	name: string;
+	first_name: string;
+	last_name: string;
 	password: string;
-	recaptcha_token: string;
+	country: string;
+	phone: string;
+	profession: string;
+	speciality: string;
+	Otra_profesion: string;
+	Otra_especialidad: string;
+	Career: string;
+	Year: string;
+	type: string;
+	identification: string;
+	Terms_And_Conditions: boolean;
 };
 
 type SignUpSuccessResponse = {
@@ -53,14 +64,22 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 		setError(null);
 
 		try {
-			const recaptchaToken = await executeRecaptcha('signup_form');
 			const formData: SignUpApiPayload = {
+				first_name: firstName,
+				last_name: lastName,
 				email: email,
-				name: `${firstName.trim()} ${lastName.trim()}`,
 				country: 'AR',
 				password: password,
-				converted_by: 'Sitio Web',
-				recaptcha_token: recaptchaToken,
+				phone: '-',
+				profession: '',
+				speciality: '',
+				Otra_profesion: '',
+				Otra_especialidad: '',
+				Career: '',
+				Year: '',
+				type: '',
+				identification: '',
+				Terms_And_Conditions: true,
 			};
 
 			const response = await fetch(API_SIGNUP_URL, {

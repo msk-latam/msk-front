@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 type LoginFormProps = {
@@ -26,7 +26,9 @@ type LoginApiPayload = {
 };
 
 // Placeholder for your actual API URL - replace with env variable ideally
-const API_SIGN_IN_URL = 'https://dev.msklatam.tech/msk-laravel/public/api/login';
+// const API_SIGN_IN_URL = 'https://dev.msklatam.tech/msk-laravel/public/api/login';
+// Usaremos nuestro endpoint interno
+const API_SIGN_IN_URL = '/api/auth/login-c?returnTo=es/dashboard';
 
 export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }: LoginFormProps) {
 	const router = useRouter();
@@ -37,6 +39,8 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 	const [shouldAskToCompleteProfile, setShouldAskToCompleteProfile] = useState(false);
 	const [onRequest, setOnRequest] = useState(false); // Loading state
 	const [loginError, setLoginError] = useState<string | null>(null); // Login error state
+	const params = useParams();
+	const lang = params.lang || 'es';
 
 	const executeRecaptcha = async (action: string): Promise<string> => {
 		console.warn('Using placeholder executeRecaptcha');
@@ -79,9 +83,15 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 				body: JSON.stringify(formData),
 			});
 
-			const data: LoginApiResponse = await response.json();
-
 			if (response.ok) {
+				// Ya no necesitamos procesar la respuesta del token aquí
+				// El endpoint /api/auth/login-c ya maneja la cookie
+				// Simplemente redirigimos
+
+				// localStorage.removeItem('userData'); // Limpiar si existía antes
+				// Ya no guardamos en localStorage
+
+				/*
 				const { name, speciality, ...restData } = data;
 				const loginData = {
 					...restData, // Includes token, token_type
@@ -92,28 +102,25 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 					specialty: speciality,
 				};
 
-				// 				{
-				//     "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiNTEyMWNiZDM4YTYyMzhmNjNjMzU0YTgxMTZkNDdhZjlhZjFmOGVhNTE4YmY3OTQ3YmI0MjZmODMxZDA0M2M5ZGZhMTk3MTQ4YmEyZjVmMDUiLCJpYXQiOjE3NDU1MDQ2OTcuNDMzOTA2MDc4MzM4NjIzMDQ2ODc1LCJuYmYiOjE3NDU1MDQ2OTcuNDMzOTA3OTg1Njg3MjU1ODU5Mzc1LCJleHAiOjE3NzcwNDA2OTcuNDMyMTQyOTcyOTQ2MTY2OTkyMTg3NSwic3ViIjoiMjkxMCIsInNjb3BlcyI6W119.zQvLr-QIjQEXAp328PyjoqLsrH22Jqfc6aKWrJ6SAU8MbB9DnSPLUWaHxQBp3fiw4tZfp7G6IOo6p7OfSBYp5efolgAr2dKiiW7c6KXYhcNkmQvJ71Ix_2WflkcZT0T5E65lMDdKSq4SKUx9P6WFU0xD35paBSVG28jwX0rz-mPRJxHHa2LRrPUNPFBwHlUtdsQ5F4nvDKDwCSD1mN14P3YzVKHRJRwc2jktXvr-Kt03wsAAfmvfzdqZAAIxL0_rOQ9LIsT2jpo564BHYHCiHoKluV7Xt7vITIFEXFT9Hyfpuv29QPPkF9kRtdEIcFanOk6b_dqSp4U08rq-5btDnT77AFwx1LM17F5Jx5W8B5yQxlrctqrIO_CkAuxXdM_YUnnXFElEJ6G08I05ua8VhhzmhcKdqhKDYzR8K1tpN_FFujmB7-wAzQ526bynXoJzEwCY022OtILZCY60pXQ_E4lslpLvp5jGcKciaJO8xuZipoB3PfWA6auuWGPaieKnzbW5EV3n9q4xvLdFot4l04BE5k7H7YHPDpr1Qox_-gRTH7ikQRBl56342RyaC9PKD9OLdYTJI2Dek2SemZnLBGuG2ng-pSY8o1FxPTcDVuW41xa1xK3_EwSy6t4HgO6lkh91dWWBXg7RYw0nx3n7gCUk_NRnHoJjji_tr1PBScE",
-				//     "token_type": "Bearer",
-				//     "expires_at": "2026-04-24T14:24:57.000000Z",
-				//     "name": "Eva Marmolejo",
-				//     "speciality": "Bioqu\u00edmica"
-				// }
-
-				/* guardar en localStorage */
-				/* login data name separarlo por espacio y guardarlo en firstName y lastName */
 				const nameParts = loginData.user.name.split(' ');
 				loginData.firstName = nameParts[0];
 				loginData.lastName = nameParts.slice(1).join(' ');
 
 				localStorage.setItem('userData', JSON.stringify(loginData));
 
-				/* access_token, token tyoe y expires_at guardarlo en  */
-
 				dispatch({ type: 'LOGIN', payload: loginData });
-				router.push('/dashboard/');
+				*/
+
+				router.push(`/${lang}/dashboard/`);
 			} else {
-				setLoginError(data.message || `Error: ${response.status} ${response.statusText}`);
+				// Intentar obtener el mensaje de error del cuerpo de la respuesta
+				try {
+					const errorData = await response.json();
+					setLoginError(errorData.message || `Error: ${response.status} ${response.statusText}`);
+				} catch (parseError) {
+					// Si el cuerpo no es JSON o está vacío, usar el statusText
+					setLoginError(`Error: ${response.status} ${response.statusText}`);
+				}
 			}
 		} catch (error) {
 			console.error('Login failed:', error);
