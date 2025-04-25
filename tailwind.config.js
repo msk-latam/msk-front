@@ -24,20 +24,25 @@ module.exports = {
 				inter: ['var(--font-inter)'],
 				raleway: ['var(--font-raleway)'],
 			}
-		}
+		},    screens: {
+			'md': '1024px',     
+		  },
 		
 	},
 
-	darkMode: 'class', // or 'media' or 'class',
+	darkMode: 'class', 
 	theme: {
 		container: {
 			center: true,
 			padding: {
-				DEFAULT: '4rem',
+				DEFAULT: '1rem',
+				md: '4rem',
 			},
 			screens: {
-				md: '1400px', // Change from 1536px to 1792px
-			},
+				'md': '1024px',     
+				'lg': '1280px',     
+				'xl': '1400px',     
+			  },
 		},
 		fontFamily: {
 			display: ['var(--font-display)', ...defaultTheme.fontFamily.sans],
