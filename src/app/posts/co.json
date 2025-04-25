@@ -7,6 +7,138 @@
 	"total_products": 262,
 	"posts": [
 		{
+			"id": 340935,
+			"title": "Precisión, prevención y desafíos en medicina genómica",
+			"slug": "medicina-genomica-precision-y-desafios",
+			"permalink": "https://wp.msklatam.com/nota/medicina/medicina-genomica-precision-y-desafios/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-medicina-genomica-precision-y-desafios-scaled-e1745500047106.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-medicina-genomica-precision-y-desafios-scaled-e1745500047106.jpg",
+				"1000",
+				"563",
+				""
+			],
+			"excerpt": "La integración del genoma humano en la práctica clínica está transformando la forma en que se diagnostican y tratan enfermedades. En este artículo, conocerás cómo la medicina genómica impulsa decisiones médicas más personalizadas, qué retos enfrenta hoy y por qué su desarrollo marca un punto de inflexión en la atención centrada en el paciente.",
+			"date": "Abril 24, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 340790,
+					"title": "Capacitación y especialización continua: la nueva ruta profesional",
+					"slug": "capacitacion-y-especializacion-continua-en-salud",
+					"link": "https://wp.msklatam.com/nota/e-learning/capacitacion-y-especializacion-continua-en-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-capacitacion-y-especializacion-continua-en-salud-1-scaled-e1745441536261.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 339497,
+					"title": "Terapias que están cambiando el tratamiento de la hemofilia",
+					"slug": "terapias-que-cambian-el-tratamiento-de-la-hemofilia",
+					"link": "https://wp.msklatam.com/nota/medicina/terapias-que-cambian-el-tratamiento-de-la-hemofilia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-terapias-que-cambian-el-tratamiento-de-la-hemofilia-scaled-e1744642655103.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 339351,
+					"title": "CRISPR: la herramienta que está reescribiendo la medicina",
+					"slug": "crispr-esta-reescribiendo-la-medicina",
+					"link": "https://wp.msklatam.com/nota/medicina/crispr-esta-reescribiendo-la-medicina/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-crispr-esta-reescribiendo-la-medicina-scaled-e1744393930660.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 339004,
+					"title": "Certificados digitales MSK para una profesión en evolución",
+					"slug": "certificados-digitales-msk-con-blockchain",
+					"link": "https://wp.msklatam.com/nota/e-learning/certificados-digitales-msk-con-blockchain/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-certificados-digitales-msk-con-blockchain-e1744295864869.png",
+					"category": "Actualidad"
+				},
+				{
+					"id": 338891,
+					"title": "El valor de la investigación en la práctica médica",
+					"slug": "valor-de-la-investigacion-en-la-practica-medica",
+					"link": "https://wp.msklatam.com/nota/medicina/valor-de-la-investigacion-en-la-practica-medica/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-valor-de-la-investigacion-en-la-practica-medica-scaled-e1744147518586.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Ayuso C. Retos actuales de la medicina genómica. An RANM. 2024;141(02): 142–145. DOI: http://dx.doi.org/10.32440/ar.2024.141.02.rev05"
+				},
+				{
+					"fuente": "Biever Celeste. . Nature. 31 de marzo de 2025. https://www.nature.com/articles/d41586-025-01004-3"
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1360,
+				"filter": "raw"
+			},
+			"reading_time": "7",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
 			"id": 340790,
 			"title": "Capacitación y especialización continua: la nueva ruta profesional",
 			"slug": "capacitacion-y-especializacion-continua-en-salud",
