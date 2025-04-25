@@ -76,7 +76,7 @@ const FooterCTA = () => {
 								</NcLink>
 							</li>
 							<li>
-								<NcLink href={addCountryCodeToUrl('certificacion')} className='font-light'>
+								<NcLink href={addCountryCodeToUrl('certificados-digitales')} className='font-light'>
 									Certificados digitales
 								</NcLink>
 							</li>
@@ -170,7 +170,7 @@ const FooterCTA = () => {
 								</NcLink>
 							</li>
 							<li>
-								<NcLink href={addCountryCodeToUrl('certificacion')} className='font-light'>
+								<NcLink href={addCountryCodeToUrl('certificados-digitales')} className='font-light'>
 									Certificados digitales
 								</NcLink>
 							</li>
