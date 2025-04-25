@@ -78,7 +78,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       <input
         type="search"
         placeholder={placeholder}
-        className={`bg-transparent w-full text-sm py-3.5 pl-4 pr-12 border-transparent focus:border-transparent focus:ring-0 focus:outline-none ${inputTextStyle}`}
+        className={`bg-transparent w-full text-sm py-3 pl-4 pr-12 border-transparent focus:border-transparent focus:ring-0 focus:outline-none ${inputTextStyle}`}
       />
       <button className="absolute right-1 bg-[#9200AD] p-3 rounded-full">
         <Search className="text-white w-4 h-4" />

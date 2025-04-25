@@ -1,3 +1,6 @@
+
+
+//dropdown
 // components/navbar/DropdownContent.tsx
 import React from "react";
 import ViewMain from "./views/ViewMain";
@@ -54,10 +57,10 @@ const DropdownContent: React.FC<Props> = ({
 
   // En desktop, usamos un contenedor con estilo diferente
   if (!isMobile) {
-    const bgClass = currentView === "institutions" ? "bg-[#1a1a1a]" : "bg-white";
+    const bgClass = currentView === "institutions" ? "bg-[#1a1a1a] shadow-lg" : "bg-transparent";
   
     return (
-      <div className={`relative ${bgClass} shadow-lg z-50 mx-auto p-5 rounded-b-3xl`}>
+      <div className={`relative ${bgClass} z-50 mx-auto pl-5 rounded-b-2xl max-w-4xl`}>
         {getContent()}
       </div>
     );
@@ -69,3 +72,5 @@ const DropdownContent: React.FC<Props> = ({
 };
 
 export default DropdownContent;
+
+//

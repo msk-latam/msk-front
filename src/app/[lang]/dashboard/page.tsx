@@ -75,7 +75,8 @@ export default function DashboardPage() {
                        linear-gradient(360deg, rgba(0, 0, 0, 0) -76.85%, rgba(0, 0, 0, 0.2) 113.39%)`,
 				}}
 			>
-				<Navbar />
+				<Navbar isDashboard />
+
 			</header>
 
 			<main className='bg-[#f3f4f6] flex justify-center px-0 sm:px-4 relative pt-0 pb-20 -mb-[100px] md:mb-0'>
