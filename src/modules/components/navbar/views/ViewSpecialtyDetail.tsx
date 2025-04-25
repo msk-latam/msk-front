@@ -90,6 +90,10 @@
 
 
 // components/navbar/views/ViewSpecialtyDetail.tsx
+
+
+
+// components/navbar/views/ViewSpecialtyDetail.tsx
 import React from "react";
 import { ArrowLeft, ChevronRight } from "react-feather";
 import courses from "../data/courses";
@@ -98,23 +102,32 @@ interface Props {
   selectedCategory: string | null;
   navigateTo: (view: string, category?: string | null) => void;
   isMobile?: boolean;
+  onBack?: () => void;
 }
 
-const ViewSpecialtyDetail: React.FC<Props> = ({ selectedCategory, navigateTo, isMobile = true }) => {
+const ViewSpecialtyDetail: React.FC<Props> = ({ selectedCategory, navigateTo, isMobile = true, onBack }) => {
   if (!isMobile) {
-    // Versión desktop - ahora vuelve directamente a discover
     return (
-      <div className="p-6 max-h-[80vh] overflow-auto">
-        <div className="flex items-center mb-4">
-          <button className="mr-3 text-gray-800" onClick={() => navigateTo("discover")}>
+      <div className="p-4 h-fit overflow-visible w-full bg-white rounded-b-2xl">
+        {/* <div className="flex items-center mb-4">
+          <button 
+            className="mr-3 text-gray-800" 
+            onClick={() => {
+              if (onBack) {
+                onBack();
+              } else {
+                navigateTo("specialty");
+              }
+            }}
+          >
             <ArrowLeft size={20} />
           </button>
           <h2 className="text-xl font-medium text-gray-800">{selectedCategory}</h2>
-        </div>
+        </div> */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {courses.map((course, index) => (
-            <div key={index} className="rounded-lg overflow-hidden shadow-md">
+        <div className="flex flex-col gap-4">
+        {courses.map((course, index) => (
+            <div key={index} className="rounded-[30px] w-64 overflow-hidden shadow-md">
               <div className="relative h-48 bg-gray-200">
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80"></div>
                 <img
@@ -131,16 +144,16 @@ const ViewSpecialtyDetail: React.FC<Props> = ({ selectedCategory, navigateTo, is
           ))}
         </div>
 
-        <button className="mt-4 flex justify-between items-center w-full py-3 px-4 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-800">
-          <span>Ver todos los cursos</span>
+        <button className="mt-4 flex justify-between items-center w-full py-3 px-4 bg-gray-100 hover:bg-gray-200 rounded-2xl text-gray-800">
+          <span className="whitespace-nowrap">Ver todos los cursos</span>
           <ChevronRight size={20} />
         </button>
       </div>
     );
   }
   
-  // Versión móvil - sin cambios
-  return (
+   // Versión móvil - sin cambios
+   return (
     <div className="bg-white rounded-t-3xl mt-4 h-full overflow-auto">
       <div className="flex flex-row justify-center items-center px-6 py-8">
         <button className="absolute left-5 top-10 rounded-full border border-black p-2 text-gray-800" onClick={() => navigateTo("specialty")}>
@@ -149,7 +162,7 @@ const ViewSpecialtyDetail: React.FC<Props> = ({ selectedCategory, navigateTo, is
         <h2 className="text-xl font-medium text-gray-800">{selectedCategory}</h2>
       </div>
 
-      <div className="px-6 py-4">
+      <div className="px-6 py-4 bg-white">
         {courses.map((course, index) => (
           <div key={index} className="mb-6 last:mb-0">
             <div className="relative rounded-lg overflow-hidden mb-2 h-48 bg-gray-300">
