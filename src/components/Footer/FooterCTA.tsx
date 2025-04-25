@@ -76,6 +76,11 @@ const FooterCTA = () => {
 								</NcLink>
 							</li>
 							<li>
+								<NcLink href={addCountryCodeToUrl('certificacion')} className='font-light'>
+									Certificados digitales
+								</NcLink>
+							</li>
+							<li>
 								<a href='https://ayuda.msklatam.com/' target='_blank'>
 									Centro de ayuda
 								</a>
@@ -162,6 +167,11 @@ const FooterCTA = () => {
 							<li>
 								<NcLink href={addCountryCodeToUrl('nosotros')} className='font-light'>
 									Quiénes somos
+								</NcLink>
+							</li>
+							<li>
+								<NcLink href={addCountryCodeToUrl('certificacion')} className='font-light'>
+									Certificados digitales
 								</NcLink>
 							</li>
 
