@@ -2,6 +2,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 interface AuthButtonsProps {
   isMainView: boolean;
@@ -18,14 +19,17 @@ const AuthButtons = ({
   isSpecialtyView,
   isSpecialtyDetailView,
 }: AuthButtonsProps) => {
+
+  const pathname = usePathname();
+  const lang = pathname.split('/')[1] || 'ar';
   return (
     <div className="flex items-center gap-3">
-      <Link href="/login?form=registerForm">
+      <Link href={`/${lang}/login?form=registerForm`}>
         <button className="bg-[#9200AD] text-white text-sm font-medium  rounded-[38px] px-6 py-3 whitespace-nowrap hover:bg-[#6d0082]">
           Crear cuenta
         </button>
       </Link>
-      <Link href="/login">
+      <Link href={`/${lang}/login`}>
         <button
           className={`text-sm font-medium whitespace-nowrap rounded-[38px] px-6 py-3 transition-colors duration-300 text-gray-800 border border-gray-500 hover:bg-gray-300${
             isMainView ||
