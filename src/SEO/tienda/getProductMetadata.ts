@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'msklatam.tech';
 const IS_PROD = SITE_URL.includes('msklatam.com') && !SITE_URL.includes('tech');
 
 const countries = {
