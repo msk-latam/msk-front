@@ -9,24 +9,21 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const lang = params.lang ?? 'ar';
 
-  const baseURL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const baseURL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000' || 'msklatam.tech';
 
-  // Evalúa si es un entorno productivo (no incluye "localhost" ni "tech")
-  const isProd =
-    baseURL.includes('msklatam.com') &&
-    !baseURL.includes('localhost') &&
-    !baseURL.includes('tech');
+  // Solo es producción si el dominio es .com
+  const isProd = baseURL.includes('msklatam.com');
 
-  const meta = getHomeMetadata(lang, isProd);
+  const metadata = getHomeMetadata(lang, isProd);
 
   return {
-    title: meta.title,
-    description: meta.description,
+    title: metadata.title,
+    description: metadata.description,
     alternates: {
-      canonical: meta.canonical,
-      languages: meta.hreflangs,
+      canonical: metadata.canonical,
+      languages: metadata.hreflangs, // ✅ viene del helper
     },
-    robots: `${meta.robots.index ? 'index' : 'noindex'}, ${meta.robots.follow ? 'follow' : 'nofollow'}`,
+    robots: `${metadata.robots.index ? 'index' : 'noindex'}, ${metadata.robots.follow ? 'follow' : 'nofollow'}`,
   };
 }
 

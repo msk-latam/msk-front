@@ -8,9 +8,11 @@ import { useState } from "react";
 import { ChevronDown } from "react-feather";
 import SearchBar from "./common/SearchBar";
 import DropdownContent from "./DropdownContent";
-import AuthButtons from "./common/AuthButtons";
+import AuthButtons from './common/AuthButtons'; // ✅ CORRECTO
 import UserButtons from "./common/UserButtons";
 import { usePathname } from "next/navigation";
+import { supportedLanguages } from '@/config/languages';
+
 
 type NavbarProps = {
 	isDashboard?: boolean;
@@ -26,6 +28,10 @@ type NavbarProps = {
     if (!isDiscoverOpen) setCurrentView("main");
   };
 
+ 
+
+
+
   const toggleInstitutions = () => {
     if (isDiscoverOpen && currentView === "institutions") {
       // Si ya está abierto en instituciones, lo cerramos
@@ -38,8 +44,10 @@ type NavbarProps = {
   };
 
   const pathname = usePathname();
-  const lang = pathname.split('/')[1] || 'ar';
-
+const firstSegment = pathname.split('/')[1];
+const lang = supportedLanguages.includes(firstSegment) ? firstSegment : 'ar';
+// ✅ Esta es la verdadera URL que deberías usar en el logo
+const logoHref = lang === 'ar' ? '/' : `/${lang}/`;
   const handleCreateAccount = () => {
     window.location.href = "/login";
   };
@@ -81,16 +89,16 @@ type NavbarProps = {
         <section className="hidden md:flex md:flex-row items-center pt-2 mt-6">
           <div className="flex items-top w-full max-w-[1300px] mx-auto pl-14 pr-28 z-50 relative">
             {/* Logo */}
-            <Link href="/home">
-              <Image
-                src="/images/msk-logo/logo.png"
-                alt="MSK"
-                priority
-                width={90}
-                height={90}
-                className="md:pt-3 w-[90px] h-auto"
-              />
-            </Link>
+            <Link href={logoHref}>
+  <Image
+    src="/images/msk-logo/logo.png"
+    alt="MSK"
+    priority
+    width={90}
+    height={90}
+    className="md:pt-3 w-[90px] h-auto"
+  />
+</Link>
 
             {/* Navegación central */}
             <div className="w-full">
