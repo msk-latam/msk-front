@@ -9,7 +9,16 @@ export function middleware(request: NextRequest) {
 
   const country = request.cookies.get('country')?.value || 'ar';
 
-  // 🔥 NUEVO: corregir /tienda/tienda en Argentina
+  // 🔥 Eliminar cualquier "home" o "ar" que aparezca en cualquier parte del path
+  if (segments.includes('home') || segments.includes('ar')) {
+    const newSegments = segments.filter(
+      (segment) => segment !== 'home' && segment !== 'ar'
+    );
+    const newPath = '/' + newSegments.join('/');
+    return NextResponse.redirect(new URL(newPath || '/', origin), 301);
+  }
+
+  // 🔥 Corregir duplicado /tienda/tienda solo en Argentina
   if (
     !supportedLanguages.includes(firstSegment) &&
     segments.length > 2 &&
@@ -39,21 +48,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL(newPath, origin), 301);
   }
 
-  // Si está en /{country}/
+  // Si está en /{country}/ (sin home explícito)
   if (
     supportedLanguages.includes(firstSegment) &&
     firstSegment !== 'ar' &&
     segments.length === 1
-  ) {
-    const newUrl = new URL(`/${firstSegment}/home`, request.url);
-    return NextResponse.rewrite(newUrl);
-  }
-
-  // Si es /{country}/home para países que NO son Argentina
-  if (
-    supportedLanguages.includes(firstSegment) &&
-    firstSegment !== 'ar' &&
-    secondSegment === 'home'
   ) {
     const newUrl = new URL(`/${firstSegment}/home`, request.url);
     return NextResponse.rewrite(newUrl);
