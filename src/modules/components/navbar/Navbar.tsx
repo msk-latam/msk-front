@@ -10,6 +10,7 @@ import SearchBar from "./common/SearchBar";
 import DropdownContent from "./DropdownContent";
 import AuthButtons from "./common/AuthButtons";
 import UserButtons from "./common/UserButtons";
+import { usePathname } from "next/navigation";
 
 type NavbarProps = {
 	isDashboard?: boolean;
@@ -35,6 +36,9 @@ type NavbarProps = {
       setCurrentView("institutions");
     }
   };
+
+  const pathname = usePathname();
+  const lang = pathname.split('/')[1] || 'ar';
 
   const handleCreateAccount = () => {
     window.location.href = "/login";

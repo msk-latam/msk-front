@@ -102,18 +102,17 @@ const Oportunidades = () => {
                 {cursosMapeados.slice(0, 6).map((curso, idx) => (
                   <div key={curso.id} className={idx === 0 || idx === 5 ? "col-span-3" : ""}>
                     <CursoCard
-                      {...curso}
-                      link={curso.link.replace(/^tienda\//, '')}
-                      variant={idx === 0 || idx === 5 ? "large" : "small"}
-                      className="h-full"
-                    />
+                    slug={""} {...curso}
+                    link={curso.link.replace(/^tienda\//, '')}
+                    variant={idx === 0 || idx === 5 ? "large" : "small"}
+                    className="h-full"                    />
                   </div>
                 ))}
               </div>
 
               <div className="grid gap-6 md:hidden">
                 {cursosMapeados.slice(0, 3).map((curso) => (
-                  <CursoCard key={curso.id} {...curso} link={curso.link.replace(/^tienda\//, '')} />
+                  <CursoCard slug={""} key={curso.id} {...curso} link={curso.link.replace(/^tienda\//, '')} />
                 ))}
               </div>
             </>

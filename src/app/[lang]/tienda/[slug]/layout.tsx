@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import { Inter, Raleway } from 'next/font/google';
 
 const inter = Inter({
@@ -16,18 +15,7 @@ const raleway = Raleway({
 	preload: true,
 });
 
-export const metadata: Metadata = {
-	title: 'Curso | MSK',
-	description: 'Tu panel de control en MSK para ver tus cursos y recursos recomendados',
-	icons: {
-		icon: [
-			{ url: '/isotipo.svg', type: 'image/svg+xml' },
-			{ url: '/icon-16x16.png', type: 'image/png', sizes: '16x16' },
-			{ url: '/icon-32x32.png', type: 'image/png', sizes: '32x32' },
-		],
-		apple: '/apple-icon.png',
-	},
-};
+// ❌ Eliminado el export const metadata (eso es lo que bloquea la metadata dinámica)
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
 	return <section className={`${inter.variable} ${raleway.variable} font-inter`}>{children}</section>;

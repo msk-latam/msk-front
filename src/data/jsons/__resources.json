@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "Curso",
+    "slug": "curso"
+  },
+  {
+    "id": 2,
+    "name": "Guías profesionales",
+    "slug": "guias-profesionales"
+  }
+]
