@@ -19,7 +19,7 @@ export function useCourseDescription(slug: string) {
 		})
 		.catch((err) => {
 		  console.error(err);
-		  setError(err.message || "Error fetching header data");
+		  setError(err.message || "Error fetching description data");
 		})
 		.finally(() => setLoading(false));
 	}, [slug]);
