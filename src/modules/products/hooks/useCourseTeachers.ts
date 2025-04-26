@@ -1,32 +1,27 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { CourseTeachersData } from '../types/types'; // Asegurate de que la ruta sea correcta
 
-const API_BASE = 'https://cms1.msklatam.com/wp-json/msk/v1/product';
+import { useEffect, useState } from 'react';
+import { CourseTeachersData } from '../types/types';
+import { getCourse } from '../service/courseService'
 
 export function useCourseTeachers(slug: string) {
-	const [data, setData] = useState<CourseTeachersData | null>(null);
+	const [data, setData] = useState<CourseTeachersData[]| null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
-
+  
 	useEffect(() => {
-		async function fetchTeachers() {
-			setLoading(true);
-			try {
-				const res = await axios.get(`${API_BASE}/${slug}`);
-				setData(res.data.sections.teaching_team);
-			} catch (err) {
-				console.error(err);
-				setError('Error fetching course overview content');
-			} finally {
-				setLoading(false);
-			}
-		}
-
-		if (slug) {
-			fetchTeachers();
-		}
+	  if (!slug) return;
+  
+	  getCourse(slug)
+		.then((courseData) => {
+		  // courseData es todo el objeto del curso
+		  const teachersData: CourseTeachersData[]= courseData.sections.teaching_team;
+		  setData(teachersData);
+		})
+		.catch((err) => {
+		  console.error(err);
+		  setError(err.message || "Error fetching teachers data");
+		})
+		.finally(() => setLoading(false));
 	}, [slug]);
-
 	return { data, loading, error };
 }

@@ -44,7 +44,7 @@ export interface CourseCategory {
 	slug: string;
   }
   
-  export interface Teacher {
+  export interface CourseTeachersData {
 	id: number | null;
 	name: string | null;
 	slug: string | null;
@@ -53,7 +53,6 @@ export interface CourseCategory {
 	link: string;
   }
   
-  export type CourseTeachersData = Teacher[];
   
   export interface Modules {
 	title: string;
