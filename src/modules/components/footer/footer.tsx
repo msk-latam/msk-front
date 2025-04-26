@@ -1,6 +1,13 @@
-'use client';
+"use client";
+
+import { usePathname } from 'next/navigation';
+
+  
 
 const Footer = () => {
+const pathname = usePathname();
+  const lang = pathname.split('/')[1] || 'ar'; // Detectar idioma de la URL actual
+  const buildFooterLink = (path: string) => `https://msklatam.tech/${lang}${path}`;
 	return (
 		<footer className='bg-black w-full md:px-6 py-10 pb-24 md:py-14 text-sm'>
 			<div className='overflow-visible max-w-[1600px] mx-auto md:px-4 flex flex-col-reverse md:flex-row justify-between items-start gap-10 md:gap-16 min-h-[400px] md:min-h-[250px]'>
@@ -137,42 +144,42 @@ const Footer = () => {
 				</div>
 
 				{/* BLOQUE DERECHO */}
-				<div className='w-full md:w-1/2 grid grid-cols-2 mx-auto gap-x-4 gap-y-2 md:px-0 px-9 font-inter text-sm text-[#AEB1B9] mt-30 md:mt-10'>
-					<div className='space-y-2'>
-						<a href='https://msklatam.com/contacto/' className='hover:underline block'>
-							Contacto
-						</a>
-						<a href='https://msklatam.com/bases-promocionales/' className='hover:underline block'>
-							Bases promocionales
-						</a>
-						<a href='https://msklatam.com/politica-de-privacidad/' className='hover:underline block'>
-							Política de privacidad
-						</a>
-						<a href='https://msklatam.com/politica-de-cookies/' className='hover:underline block'>
-							Política de cookies
-						</a>
-						<a href='https://msklatam.com/terminos-y-condiciones/' className='hover:underline block'>
-							Términos y condiciones
-						</a>
-					</div>
-					<div className='space-y-2'>
-						<a href='https://msklatam.com/mision/' className='hover:underline block'>
-							Nuestra misión
-						</a>
-						<a href='https://msklatam.com/nosotros/' className='hover:underline block'>
-							Quiénes somos
-						</a>
-						<a href='#' className='hover:underline block'>
-							Conviértete en partner
-						</a>
-						<a href='https://ayuda.msklatam.com/' className='hover:underline block'>
-							Centro de ayuda
-						</a>
-					</div>
-				</div>
-			</div>
-		</footer>
-	);
+				<div className="w-full md:w-1/2 grid grid-cols-2 mx-auto gap-x-4 gap-y-2 md:px-0 px-9 font-inter text-sm text-[#AEB1B9] mt-30 md:mt-10">
+          <div className="space-y-2">
+            <a href={buildFooterLink('/contacto/')} className="hover:underline block">
+              Contacto
+            </a>
+            <a href={buildFooterLink('/bases-promocionales/')} className="hover:underline block">
+              Bases promocionales
+            </a>
+            <a href={buildFooterLink('/politica-de-privacidad/')} className="hover:underline block">
+              Política de privacidad
+            </a>
+            <a href={buildFooterLink('/politica-de-cookies/')} className="hover:underline block">
+              Política de cookies
+            </a>
+            <a href={buildFooterLink('/terminos-y-condiciones/')} className="hover:underline block">
+              Términos y condiciones
+            </a>
+          </div>
+          <div className="space-y-2">
+            <a href={buildFooterLink('/mision/')} className="hover:underline block">
+              Nuestra misión
+            </a>
+            <a href={buildFooterLink('/nosotros/')} className="hover:underline block">
+              Quiénes somos
+            </a>
+            <a href={buildFooterLink('/conviertete-en-partner/')} className="hover:underline block">
+              Conviértete en partner
+            </a>
+            <a href={buildFooterLink('/ayuda/')} className="hover:underline block">
+              Centro de ayuda
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;
