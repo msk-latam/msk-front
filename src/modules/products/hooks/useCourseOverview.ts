@@ -14,9 +14,9 @@ export function useCourseOverview(slug: string) {
 		getCourse(slug)
 		  .then((courseData) => {
 				const overviewData: CourseOverviewData = {
-					habilities: courseData.data.sections?.habilities ?? [],
-					with_this_course: courseData.data.sections?.with_this_course ?? '',
-					your_course_steps: courseData.data.sections?.your_course_steps ?? [],
+					habilities: courseData.sections?.habilities ?? [],
+					with_this_course: courseData.sections?.with_this_course ?? '',
+					your_course_steps: courseData.sections?.your_course_steps ?? [],
 				};
 
 				setData(overviewData);
@@ -27,6 +27,6 @@ export function useCourseOverview(slug: string) {
 				  })
 				  .finally(() => setLoading(false));
 			  }, [slug]);
-			  
+			  console.log(data)
 	return { data, loading, error };
 }
