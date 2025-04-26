@@ -14,6 +14,8 @@ import SearchBar from './common/SearchBar';
 import UserButtons from './common/UserButtons';
 import DropdownContent from './DropdownContent';
 
+const supportedLanguages = ['en', 'ar']; // Add other supported languages here
+
 type NavbarProps = {
 	isDashboard?: boolean;
 };
