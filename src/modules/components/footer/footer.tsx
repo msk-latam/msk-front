@@ -2,17 +2,23 @@
 
 import { usePathname } from 'next/navigation';
 
-  
-
 const Footer = () => {
-	const pathname = usePathname();
-	const lang = pathname.split('/')[1] || 'ar'; // Detectar idioma de la URL actual
-	const isDemoMode = true; // ⚡ Cambiar a false cuando quieras pasar a producción
-	
-	const buildFooterLink = (path: string) => {
-	  const domain = isDemoMode ? "https://msklatam.tech" : "https://msklatam.com";
-	  return `${domain}/${lang}${path}`;
-	}; 
+  const pathname = usePathname();
+  const pathSegments = pathname.split('/').filter(Boolean);
+
+  const lang = pathSegments[0] && pathSegments[0].length === 2 ? pathSegments[0] : 'ar';
+
+  const isDemoMode = true; // Cambiar a false para producción
+
+  const buildFooterLink = (path: string) => {
+    const domain = isDemoMode ? "https://msklatam.tech" : "https://msklatam.com";
+
+    if (lang === 'ar') {
+      return `${domain}/${path.replace(/^\//, '')}`;
+    }
+    
+    return `${domain}/${lang}/${path.replace(/^\//, '')}`;
+  };
 	return (
 		<footer className='bg-black w-full md:px-6 py-10 pb-24 md:py-14 text-sm'>
 			<div className='overflow-visible max-w-[1600px] mx-auto md:px-4 flex flex-col-reverse md:flex-row justify-between items-start gap-10 md:gap-16 min-h-[400px] md:min-h-[250px]'>
