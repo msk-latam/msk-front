@@ -169,7 +169,7 @@ export default function CourseTestimonials() {
   return (
     <GradientBackground>
       <section className="text-white py-16 pl-6 pt-48 md:pt-60 flex md:block flex-col space-y-96 md:space-y-2">
-        <div className="max-w-screen-xl mx-auto text-left pr-6">
+        <div className="max-w-screen-xl mx-auto text-left pr-6 md:mb-0 ">
           <h2 className="text-[32px] md:text-[52px] font-raleway font-bold mb-4 leading-snug">
             Sé parte de nuestra comunidad <br className="hidden md:inline" />
             de profesionales
@@ -178,7 +178,7 @@ export default function CourseTestimonials() {
             ¡La próxima historia de éxito puede ser tuya!
           </p>
 
-          <div className="flex justify-start items-center gap-2 mb-32">
+          <div className="flex justify-start items-center gap-2 md:mb-32 mb-8">
             <div className="flex -space-x-2">
               {opinions.slice(0, 4).map((t, i) => (
                 <img

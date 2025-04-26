@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 
 const features = [
@@ -33,13 +35,22 @@ const features = [
 
 const CourseOverview: React.FC = () => {
   return (
-    <section className="max-w-5xl mx-auto">
-      <div className="grid gap-4 md:grid-cols-3">
+    <section className="max-w-5xl mx-auto ">
+      <div className="grid gap-6 md:grid-cols-3">
         {features.map((item, index) => (
-          <div key={index} className="rounded-[38px] py-6 px-5 shadow-sm bg-white">
-            <div className="flex font-raleway text-xl font-bold justify-start pl-2 mb-3">{item.icon}</div>
-            <h3 className="font-raleway font-bold text-md text-[#1A1A1A] mb-2 break-words w-full text-left">{item.title}</h3>
-            <p className="text-sm font-inter font-normal text-[#1A1A1A] text-left">{item.description}</p>
+          <div
+            key={index}
+            className="rounded-[38px] py-6 px-8 shadow-sm bg-white flex flex-col items-center text-center md:items-start md:text-left"
+          >
+            <div className="flex justify-center md:justify-start mb-4">
+              {item.icon}
+            </div>
+            <h3 className="font-raleway font-bold text-[18px] text-[#1A1A1A] mb-2 md:text-md">
+              {item.title}
+            </h3>
+            <p className="text-sm font-inter font-normal text-[#1A1A1A]">
+              {item.description}
+            </p>
           </div>
         ))}
       </div>
