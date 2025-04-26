@@ -24,6 +24,5 @@ export function useCourseHeader(slug: string) {
 		.finally(() => setLoading(false));
 	}, [slug]);
 
-console.log('aaaaAaaaaaa',data)
 	return { data, loading, error };
 }
