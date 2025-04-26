@@ -3,7 +3,7 @@
 
 import React from 'react';
 import { useCourseVideo } from '../hooks/useCourseVideo';
-import { CourseVideoData } from '../hooks/useCourseData';
+import { CourseVideoData } from '../types/types';
 
 interface CourseVideoProps {
   slug: string;

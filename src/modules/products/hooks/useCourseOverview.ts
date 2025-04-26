@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { CourseOverviewData } from './useCourseData'; // Asegurate de que la ruta sea correcta
+import { CourseOverviewData } from '../types/types'; // Asegurate de que la ruta sea correcta
 
 const API_BASE = 'https://cms1.msklatam.com/wp-json/msk/v1/product';
 

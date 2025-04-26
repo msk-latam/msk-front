@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { CourseCertificate } from './useCourseData';
+import { CourseCertificate } from '../types/types';
 
 export function useCourseCertificate(slug: string | number) {
 	const [data, setData] = useState<CourseCertificate | null>(null);

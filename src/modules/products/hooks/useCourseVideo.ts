@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { CourseVideoData } from './useCourseData';
+import { CourseVideoData } from '../types/types';
 const API_BASE = 'https://cms1.msklatam.com/wp-json/msk/v1/product';
 
 export function useCourseVideo(slug: string | number) {
