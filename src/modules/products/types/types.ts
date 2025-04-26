@@ -22,6 +22,7 @@ export interface CourseCategory {
 	title: string;
 	slug: string;
 	image: string;
+	description?: string; // 👈 agregás esto
   }
   
   export interface CourseCertificate {
