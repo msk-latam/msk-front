@@ -4,7 +4,7 @@ import { CourseInstitution } from '../types/types';
 import { getCourse } from '../service/courseService'
 
 export function useCourseInstitutions(slug: string) {
-	const [data, setData] = useState<CourseInstitution | null>(null);
+	const [data, setData] = useState<CourseInstitution[]| null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
   
@@ -14,7 +14,7 @@ export function useCourseInstitutions(slug: string) {
 	  getCourse(slug)
 		.then((courseData) => {
 		  // courseData es todo el objeto del curso
-		  const institutionsData: CourseInstitution = courseData.sections.institutions;
+		  const institutionsData: CourseInstitution[]= courseData.sections.institutions;
 		  setData(institutionsData);
 		})
 		.catch((err) => {
@@ -23,6 +23,5 @@ export function useCourseInstitutions(slug: string) {
 		})
 		.finally(() => setLoading(false));
 	}, [slug]);
-	
 	return { data, loading, error };
 }

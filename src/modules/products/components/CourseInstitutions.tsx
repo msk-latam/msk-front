@@ -8,10 +8,11 @@ interface CourseInstitutionProps {
 	slug: string;
 }
 
-export default function CourseInstitution({ slug }: CourseInstitutionProps) {
+export default function CourseInstitutions({ slug }: CourseInstitutionProps) {
 	const { data: institutions, loading, error } = useCourseInstitutions(slug);
 
 	if (!loading && !institutions) return null;
+	
 
 	return (
 		<section className='md:py-3 text-left h-fit'>
@@ -36,15 +37,15 @@ export default function CourseInstitution({ slug }: CourseInstitutionProps) {
 								height={80}
 								className='object-cover object-center mix-blend-multiply max-h-[80px]'
 							/>
-							{inst.description && (
+							{/* {inst.title && (
 								<div className='absolute bottom-2 right-2 group'>
 									<InfoIcon />
 									<div className='absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bottom-[calc(100%+8px)] left-1/2 transform -translate-x-1/2 bg-[#3B476C] text-white text-sm rounded-lg p-3 text-center pointer-events-none w-max max-w-[200px] z-10'>
-										{inst.description}
+										{inst.title}
 										<div className='absolute w-3 h-3 bg-[#3B476C] transform rotate-45 left-1/2 -translate-x-1/2 bottom-[-6px] z-[-1]'></div>
 									</div>
 								</div>
-							)}
+							)} */}
 						</div>
 					))}
 				</div>
