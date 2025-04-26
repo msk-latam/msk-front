@@ -14,8 +14,8 @@ export function useCourseInstitutions(slug: string) {
 	  getCourse(slug)
 		.then((courseData) => {
 		  // courseData es todo el objeto del curso
-		  const headerData: CourseInstitution = courseData.sections.institutions;
-		  setData(headerData);
+		  const institutionsData: CourseInstitution = courseData.sections.institutions;
+		  setData(institutionsData);
 		})
 		.catch((err) => {
 		  console.error(err);
