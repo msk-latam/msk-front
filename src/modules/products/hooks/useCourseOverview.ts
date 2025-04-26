@@ -1,39 +1,32 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { CourseOverviewData } from '../types/types'; // Asegurate de que la ruta sea correcta
 
-const API_BASE = 'https://cms1.msklatam.com/wp-json/msk/v1/product';
+import { useEffect, useState } from 'react';
+import { CourseOverviewData } from '../types/types';
+import { getCourse } from '../service/courseService'
 
 export function useCourseOverview(slug: string) {
 	const [data, setData] = useState<CourseOverviewData | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
-
+  
 	useEffect(() => {
-		async function fetchOverview() {
-			setLoading(true);
-			try {
-				const res = await axios.get(`${API_BASE}/${slug}?nocache=1`);
-
+		if (!slug) return;
+	
+		getCourse(slug)
+		  .then((courseData) => {
 				const overviewData: CourseOverviewData = {
-					habilities: res.data.sections?.habilities ?? [],
-					with_this_course: res.data.sections?.with_this_course ?? '',
-					your_course_steps: res.data.sections?.your_course_steps ?? [],
+					habilities: courseData.data.sections?.habilities ?? [],
+					with_this_course: courseData.data.sections?.with_this_course ?? '',
+					your_course_steps: courseData.data.sections?.your_course_steps ?? [],
 				};
 
 				setData(overviewData);
-			} catch (err) {
-				console.error(err);
-				setError('Error fetching course overview content');
-			} finally {
-				setLoading(false);
-			}
-		}
-
-		if (slug) {
-			fetchOverview();
-		}
-	}, [slug]);
-
+			})
+				.catch((err) => {
+					console.error(err);
+					setError(err.message || "Error fetching overview data");
+				  })
+				  .finally(() => setLoading(false));
+			  }, [slug]);
+			  
 	return { data, loading, error };
 }

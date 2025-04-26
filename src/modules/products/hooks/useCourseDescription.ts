@@ -14,8 +14,8 @@ export function useCourseDescription(slug: string) {
 	  getCourse(slug)
 		.then((courseData) => {
 		  // courseData es todo el objeto del curso
-		  const headerData: CourseDescription = courseData.sections.content;
-		  setData(headerData);
+		  const descriptionData: CourseDescription = courseData.sections.content;
+		  setData(descriptionData);
 		})
 		.catch((err) => {
 		  console.error(err);

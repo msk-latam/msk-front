@@ -8,6 +8,8 @@ interface CourseInstitutionProps {
   slug: string;
 }
 
+export default function CourseInstitutions({ slug }: CourseInstitutionProps) {
+	const { data: institutions, loading, error } = useCourseInstitutions(slug);
 export default function CourseInstitution({ slug }: CourseInstitutionProps) {
   const { data: institutions, loading, error } = useCourseInstitutions(slug);
 

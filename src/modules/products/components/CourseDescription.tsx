@@ -87,7 +87,7 @@ import { useState } from 'react';
 import { useCourseDescription } from '../hooks/useCourseDescription';
 
 interface CourseDescriptionProps {
-	slug: string | number;
+	slug: string;
 }
 
 export default function CourseDescription({ slug }: CourseDescriptionProps) {

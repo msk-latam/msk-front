@@ -3,7 +3,6 @@
 
 import React from 'react';
 import { useCourseVideo } from '../hooks/useCourseVideo';
-import { CourseVideoData } from '../types/types';
 
 interface CourseVideoProps {
   slug: string;
@@ -24,7 +23,7 @@ const CourseVideo: React.FC<CourseVideoProps> = ({ slug }) => {
         <source src={video} type="video/mp4" />
         Tu navegador no soporta la reproducción de video.
       </video>
-      <img src="/images/productpage/videomock.png" alt="mock" />
+      {/* <img src="/images/productpage/videomock.png" alt="mock" /> */}
       
     </div>
   );
