@@ -9,6 +9,8 @@ import ProfessionalCardMobile from "./ProfessionalCardMobile";
 import { useMasterclassSection } from "@/modules/home/hooks/useMasterclassSection";
 import { Professional } from "@/modules/home/types";
 import { professionals as mockProfessionals } from "./professionals";
+import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
+import { usePathname } from "next/navigation";
 
 const Masterclass = () => {
   const { data: fetchedProfessionals, link: masterclassLink, loading, error } = useMasterclassSection();
@@ -21,6 +23,9 @@ const Masterclass = () => {
     ...professionals,
     professionals[0],
   ];
+
+  const pathname = usePathname();
+  const lang = pathname.split('/')[1] || 'ar';
 
   const [current, setCurrent] = useState<number>(1); // empezamos desde el primero real
   const [withTransition, setWithTransition] = useState(true);
@@ -105,7 +110,8 @@ const Masterclass = () => {
             </div>
             <nav aria-label="Inscripción a Masterclass">
               <Link
-                href={masterclassLink || "#"}
+                //href={masterclassLink || "#"} // comentado hasta terminar demo. Version link desde la API
+                href={getLocalizedUrl(lang, '/tienda/medicina-intensiva-amir/')} // Version forzada para DEMO
                 className="bg-white  text-black px-6 py-3 rounded-full font-semibold text-sm md:text-base flex items-center gap-2 w-fit mx-auto md:mx-0 hover:scale-105 transition"
               >
                 Inscribite ahora

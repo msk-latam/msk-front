@@ -6,6 +6,8 @@ import HeroCarousel from "./HeroCarousel";
 import HeroHighlights from "./HeroHighlights";
 import { useHomeContent } from "@/modules/home/hooks/useHomeContent";
 import { HeroSlide } from "@/modules/home/types";
+import { usePathname } from 'next/navigation';
+import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
 
 const STATIC_HIGHLIGHTS = [
   "Cursos de medicina para expandir tus metas profesionales",
@@ -43,7 +45,8 @@ const Hero = () => {
     setPaused(true);
     setTimeout(() => setPaused(false), 8000);
   };
-
+  const pathname = usePathname();
+  const lang = pathname.split('/')[1] || 'ar';
   return (
     <div className="relative md:h-[800px] h-[600px] w-full bg-black text-white px-4 overflow-hidden pt-[150px]">
       {/* BACKGROUND CAROUSEL */}
@@ -98,7 +101,8 @@ const Hero = () => {
               </div>
 
               <Link
-                href={"https://msklatam.com/tienda/?recurso=curso"}
+                // href={"https://msklatam.com/tienda/?recurso=curso"}
+                href={getLocalizedUrl(lang, '/tienda?recurso=curso')}
                 className="mt-4 md:mt-20 md:mb-0 mx-6 md:mx-0 w-full md:w-auto bg-white text-black px-5 py-3 rounded-full text-[14px] hover:scale-105 transition flex justify-center text-center self-center gap-2 whitespace-nowrap"
               >
                 Comenzá tu experiencia

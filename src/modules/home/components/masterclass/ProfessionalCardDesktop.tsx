@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
+import { usePathname } from "next/navigation";
 
 interface Doctor {
   nombre: string;
@@ -18,6 +20,8 @@ interface Props {
   className?: string;
 }
 
+
+
 const ProfessionalCardDesktop = ({
   pro,
   current,
@@ -25,8 +29,12 @@ const ProfessionalCardDesktop = ({
   onPrev,
   onNext,
   className = "",
-}: Props) => (
+}: Props) => {
+  const pathname = usePathname();
+  const lang = pathname.split('/')[1] || 'ar';
+  return (
   <div
+  
     className={`hidden md:flex flex-col relative bg-white text-black rounded-[30px] w-[430px] h-[556px] py-5 px-6 gap-5 shadow-xl border border-gray-200 ${className}`}
   >
     {/* Header con navegación */}
@@ -51,6 +59,8 @@ const ProfessionalCardDesktop = ({
       </div>
     </div>
 
+    
+
     {/* Imagen del profesional */}
     <div className="relative w-full h-[360px] overflow-hidden rounded-xl">
       <Image
@@ -69,16 +79,35 @@ const ProfessionalCardDesktop = ({
       <p className="text-[24px] font-semibold text-black">{pro.nombre}</p>
     </div>
 
-    {/* Ver perfil */}
+    {/* Ver perfil*/} 
     <div className="flex justify-between items-center text-sm text-black mt-auto">
       <span className="text-sm">NUESTRO EQUIPO</span>
-      <Link href={pro.perfilUrl || "#"} target="_blank" rel="noopener noreferrer">
-        <button className="bg-[#1A1A1A] text-white px-6 py-3 rounded-full md:rounded-[38px] font-inter font-medium shadow-md hover:scale-105 transition text-sm w-full md:w-auto">
+      {/*<Link href={pro.perfilUrl || "#"} target="_blank" rel="noopener noreferrer">*/}
+      <Link href={getLocalizedUrl(lang, '/tienda/medicina-intensiva-amir/#equipo-docente')} >
+        {/*<button className="bg-[#1A1A1A] text-white px-6 py-3 rounded-full md:rounded-[38px] font-inter font-medium shadow-md hover:scale-105 transition text-sm w-full md:w-auto">
           Ver perfil
-        </button>
+        </button>*/}
+
+{/* DEMO TEMPORAL:
+// Este Button solo existe para scrollear hacia el equipo docente después de cargar los datos.*/}
+<button
+  onClick={() => {
+    const target = document.getElementById('equipo-docente');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  }}
+  className="bg-[#1A1A1A] text-white px-6 py-3 rounded-full md:rounded-[38px] font-inter font-medium shadow-md hover:scale-105 transition text-sm w-full md:w-auto"
+>
+  Ver perfil
+</button>
+
+
       </Link>
     </div>
   </div>
+  
 );
+}
 
 export default ProfessionalCardDesktop;
