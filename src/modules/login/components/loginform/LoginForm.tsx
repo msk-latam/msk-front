@@ -84,33 +84,6 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 			});
 
 			if (response.ok) {
-				// Ya no necesitamos procesar la respuesta del token aquí
-				// El endpoint /api/auth/login-c ya maneja la cookie
-				// Simplemente redirigimos
-
-				// localStorage.removeItem('userData'); // Limpiar si existía antes
-				// Ya no guardamos en localStorage
-
-				/*
-				const { name, speciality, ...restData } = data;
-				const loginData = {
-					...restData, // Includes token, token_type
-					email: email,
-					user: { name, speciality },
-					firstName: '',
-					lastName: '',
-					specialty: speciality,
-				};
-
-				const nameParts = loginData.user.name.split(' ');
-				loginData.firstName = nameParts[0];
-				loginData.lastName = nameParts.slice(1).join(' ');
-
-				localStorage.setItem('userData', JSON.stringify(loginData));
-
-				dispatch({ type: 'LOGIN', payload: loginData });
-				*/
-
 				router.push(`/${lang}/dashboard/`);
 			} else {
 				// Intentar obtener el mensaje de error del cuerpo de la respuesta

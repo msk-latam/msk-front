@@ -2,14 +2,16 @@
 import { auth0 } from '@/lib/auth0';
 import { Session } from '@auth0/nextjs-auth0/edge';
 import { cookies } from 'next/headers';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
 const afterCallback = async (req: NextRequest, session: Session) => {
 	// Log request information
-	// console.log('Auth callback session:', session);
+	//
+	// 	// console.log('Auth callback session:', session);
 
+	const res = new NextResponse();
 	console.log('Id token:', session.idToken);
 	try {
 		const response = await fetch('https://dev.msklatam.tech/msk-laravel/public/api/loginAuth0', {
@@ -41,6 +43,8 @@ const afterCallback = async (req: NextRequest, session: Session) => {
 				sameSite: 'lax', // Recommended for CSRF protection
 			});
 			console.log('Access token set in cookie.');
+
+			// return NextResponse.redirect(new URL('/dashboard', req.url));
 		} else {
 			console.warn('Access token not found in backend response.');
 		}
