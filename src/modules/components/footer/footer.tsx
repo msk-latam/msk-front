@@ -5,9 +5,14 @@ import { usePathname } from 'next/navigation';
   
 
 const Footer = () => {
-const pathname = usePathname();
-  const lang = pathname.split('/')[1] || 'ar'; // Detectar idioma de la URL actual
-  const buildFooterLink = (path: string) => `https://msklatam.tech/${lang}${path}`;
+	const pathname = usePathname();
+	const lang = pathname.split('/')[1] || 'ar'; // Detectar idioma de la URL actual
+	const isDemoMode = true; // ⚡ Cambiar a false cuando quieras pasar a producción
+	
+	const buildFooterLink = (path: string) => {
+	  const domain = isDemoMode ? "https://msklatam.tech" : "https://msklatam.com";
+	  return `${domain}/${lang}${path}`;
+	}; 
 	return (
 		<footer className='bg-black w-full md:px-6 py-10 pb-24 md:py-14 text-sm'>
 			<div className='overflow-visible max-w-[1600px] mx-auto md:px-4 flex flex-col-reverse md:flex-row justify-between items-start gap-10 md:gap-16 min-h-[400px] md:min-h-[250px]'>
@@ -143,8 +148,8 @@ const pathname = usePathname();
 					</div>
 				</div>
 
-				{/* BLOQUE DERECHO */}
-				<div className="w-full md:w-1/2 grid grid-cols-2 mx-auto gap-x-4 gap-y-2 md:px-0 px-9 font-inter text-sm text-[#AEB1B9] mt-30 md:mt-10">
+				 {/* BLOQUE DERECHO */}
+				 <div className="w-full md:w-1/2 grid grid-cols-2 mx-auto gap-x-4 gap-y-2 md:px-0 px-9 font-inter text-sm text-[#AEB1B9] mt-30 md:mt-10">
           <div className="space-y-2">
             <a href={buildFooterLink('/contacto/')} className="hover:underline block">
               Contacto
@@ -162,6 +167,7 @@ const pathname = usePathname();
               Términos y condiciones
             </a>
           </div>
+
           <div className="space-y-2">
             <a href={buildFooterLink('/mision/')} className="hover:underline block">
               Nuestra misión
@@ -177,6 +183,7 @@ const pathname = usePathname();
             </a>
           </div>
         </div>
+        
       </div>
     </footer>
   );
