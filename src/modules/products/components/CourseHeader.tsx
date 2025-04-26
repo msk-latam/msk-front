@@ -1,4 +1,3 @@
-
 'use client'
 import { ChevronRight } from "react-feather"
 import { RiHome6Line } from "react-icons/ri"
@@ -11,7 +10,16 @@ interface CourseHeaderProps {
 
 export default function CourseHeader({ slug }: CourseHeaderProps) {
   const { data, loading, error } = useCourseHeader(slug)
-  if (error || !data || data.categories.length === 0) {
+  
+  if (loading) {
+    return (
+      <div className="px-4 md:px-10 lg:px-20 max-w-[1300px] mx-auto h-96 flex justify-center items-center text-white">
+        <h1 className="text-3xl sm:text-4xl font-bold text-center">Cargando curso...</h1>
+      </div>
+    )
+  }
+  
+  if (error || !data) {
     return (
       <div className="px-4 md:px-10 lg:px-20 max-w-[1300px] mx-auto h-96 flex justify-center items-center text-white">
         <h1 className="text-3xl sm:text-4xl font-bold text-center">Este curso actualmente no tiene informacion.</h1>
@@ -21,7 +29,6 @@ export default function CourseHeader({ slug }: CourseHeaderProps) {
 
   const { title, has_certificate, categories } = data
 
-
   return (
     <div className="px-4 md:px-10 lg:px-20 overflow-visible max-w-[1300px] mx-auto h-96 flex md:flex-col md:justify-end md:items-start flex-row flex-wrap justify-center items-center text-white">
       <div className="text-sm text-white/80 md:mb-20 md:mt-0 my-20 w-full">
@@ -29,12 +36,12 @@ export default function CourseHeader({ slug }: CourseHeaderProps) {
           <Link href="/" className="my-auto shrink-0">
             <RiHome6Line className="text-white my-auto" />
           </Link>
-          <span className="shrink-0"><ChevronRight /></span>
-          <span className="truncate my-auto shrink-0">Tienda</span>
+          <span key="home-arrow" className="shrink-0"><ChevronRight /></span>
+          <span key="shop" className="truncate my-auto shrink-0">Tienda</span>
 
-          {categories.map((cat, index) => (
+          {categories.map((cat) => (
             <span key={cat.term_id} className="flex items-center">
-              <span className="shrink-0"><ChevronRight /></span>
+              <ChevronRight className="shrink-0" />
               <Link
                 href={`/categoria/${cat.slug}`}
                 className="truncate my-auto shrink-0 hover:underline"
@@ -44,8 +51,8 @@ export default function CourseHeader({ slug }: CourseHeaderProps) {
             </span>
           ))}
 
-          <span className="shrink-0"><ChevronRight /></span>
-          <span className="truncate text-white font-medium my-auto">{title}</span>
+          <span key="last-arrow" className="shrink-0"><ChevronRight /></span>
+          <span key="current-title" className="truncate text-white font-medium my-auto">{title}</span>
         </nav>
 
         <h1 className="text-3xl sm:text-4xl font-bold text-center md:text-left mt-5 mb-3">{title}</h1>

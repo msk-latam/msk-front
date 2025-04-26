@@ -1,4 +1,3 @@
-import api from '@/services/api';
 import { NextRequest, NextResponse } from 'next/server';
 import { supportedLanguages } from '@/config/languages';
 
@@ -6,53 +5,78 @@ export function middleware(request: NextRequest) {
   const { pathname, origin } = request.nextUrl;
   const segments = pathname.split('/').filter(Boolean);
   const firstSegment = segments[0];
+  const secondSegment = segments[1];
 
-  // ✅ Redirección: /ar => /
-  if (pathname.startsWith('/ar')) {
-    const newPath = pathname.replace(/^\/ar/, '');
+  const country = request.cookies.get('country')?.value || 'ar';
+
+  // 🔥 Eliminar cualquier "home" o "ar" que aparezca en cualquier parte del path
+  if (segments.includes('home') || segments.includes('ar')) {
+    const newSegments = segments.filter(
+      (segment) => segment !== 'home' && segment !== 'ar'
+    );
+    const newPath = '/' + newSegments.join('/');
     return NextResponse.redirect(new URL(newPath || '/', origin), 301);
   }
 
-  // ✅ Redirección: /mx/mx/... => /mx/...
-  if (segments.length > 1 && supportedLanguages.includes(firstSegment) && firstSegment === segments[1]) {
+  // 🔥 Corregir duplicado /tienda/tienda solo en Argentina
+  if (
+    !supportedLanguages.includes(firstSegment) &&
+    segments.length > 2 &&
+    segments[0] === 'tienda' &&
+    segments[1] === 'tienda'
+  ) {
     const newPath = '/' + segments.slice(1).join('/');
-    return NextResponse.redirect(new URL(newPath || '/', origin), 301);
+    return NextResponse.redirect(new URL(newPath, origin), 301);
   }
 
-  // ✅ Si la URL es de un país válido, continuar
+  // Si la ruta es "/", determinar el país
+  if (pathname === '/') {
+    if (country === 'ar') {
+      return NextResponse.rewrite(new URL('/ar/home', request.url));
+    } else {
+      return NextResponse.redirect(new URL(`/${country}/`, origin));
+    }
+  }
+
+  // Evitar duplicados tipo "/mx/mx/..."
+  if (
+    segments.length > 1 &&
+    supportedLanguages.includes(firstSegment) &&
+    firstSegment === segments[1]
+  ) {
+    const newPath = '/' + firstSegment + '/' + segments.slice(2).join('/');
+    return NextResponse.redirect(new URL(newPath, origin), 301);
+  }
+
+  // Si está en /{country}/ (sin home explícito)
+  if (
+    supportedLanguages.includes(firstSegment) &&
+    firstSegment !== 'ar' &&
+    segments.length === 1
+  ) {
+    const newUrl = new URL(`/${firstSegment}/home`, request.url);
+    return NextResponse.rewrite(newUrl);
+  }
+
+  // Si es Argentina y la URL empieza con /ar
+  if (firstSegment === 'ar') {
+    const newPath = '/' + segments.slice(1).join('/');
+    return NextResponse.rewrite(new URL(newPath || '/', request.url));
+  }
+
+  // Si no tiene prefijo, asumir Argentina
+  if (!supportedLanguages.includes(firstSegment)) {
+    return NextResponse.rewrite(new URL(`/ar${pathname}`, request.url));
+  }
+
+  // Si es un país válido, continuar normalmente
   if (supportedLanguages.includes(firstSegment)) {
     return NextResponse.next();
   }
 
-  // ✅ Si no tiene prefijo de idioma, continuar (puede ser la raíz argentina)
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/((?!api|static|.*\\..*|_next).*)'],
-};
-
-export const fetchUserData = async () => {
-  try {
-    const res = await api.getUserData();
-    if (!res.message) {
-      localStorage.setItem('user', JSON.stringify({
-        name: res.name,
-        speciality: res.contact.speciality,
-      }));
-      localStorage.removeItem('bypassRedirect');
-      return {
-        name: res.name,
-        speciality: res.contact.speciality,
-        profile: res.contact,
-      };
-    } else {
-      return null;
-    }
-  } catch (e) {
-    console.error({ e });
-    localStorage.removeItem('email');
-    localStorage.removeItem('user');
-    return null;
-  }
+  matcher: ['/((?!api|static|.*\\..*|_next|icons).*)'],
 };

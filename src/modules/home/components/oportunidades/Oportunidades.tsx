@@ -3,6 +3,7 @@ import CursoCard from "./cards/CursoCard";
 import { mapCursoWPToCursoCard } from "@/modules/home/types";
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
+import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
 
 const tabs = ["Novedades", "Recomendados", "Gratuitos"];
 
@@ -83,13 +84,14 @@ const Oportunidades = () => {
               ))}
             </nav>
 
-            <Link href={`/${lang}/tienda?recurso=curso`}>
-              <div className="hidden md:block">
-                <button className="px-6 py-2 bg-black text-white rounded-full font-medium hover:scale-105 transition">
-                  Ver todos →
-                </button>
-              </div>
-            </Link>
+            <Link href={getLocalizedUrl(lang, '/tienda?recurso=curso')}>
+
+  <div className="hidden md:block">
+    <button className="px-6 py-2 bg-black text-white rounded-full font-medium hover:scale-105 transition">
+      Ver todos →
+    </button>
+  </div>
+</Link>
           </div>
 
           {isEmpty ? (

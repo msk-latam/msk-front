@@ -1,14 +1,15 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-
+import { useEffect, usePathname, useRouter, useState } from 'react';
 import LoginForm from '@/modules/login/components/loginform/LoginForm';
 import RecoveryPassword from '@/modules/login/components/loginform/RecoveryPassword';
 import RecoveryPasswordSent from '@/modules/login/components/loginform/RecoveryPasswordSent';
 import RegisterForm from '@/modules/login/components/loginform/RegisterForm';
 
 export default function LoginRouterHandler() {
+	const router = useRouter();
+	const pathname = usePathname();
 	const searchParams = useSearchParams();
 	const formParam = searchParams.get('form');
 
@@ -17,17 +18,25 @@ export default function LoginRouterHandler() {
 	const [showRecoverySent, setShowRecoverySent] = useState(false);
 
 	useEffect(() => {
-		if (formParam === 'registerForm') {
-			setShowRegister(true);
-		} else {
-			setShowRegister(false);
-		}
+		setShowRegister(formParam === 'registerForm');
 	}, [formParam]);
+
+	const handleSwitchToRegister = () => {
+		const params = new URLSearchParams(searchParams.toString());
+		params.set('form', 'registerForm');
+		router.push(`${pathname}?${params.toString()}`);
+	};
+
+	const handleSwitchToLogin = () => {
+		const params = new URLSearchParams(searchParams.toString());
+		params.delete('form');
+		router.push(`${pathname}?${params.toString()}`);
+	};
 
 	return (
 		<>
 			{showRegister ? (
-				<RegisterForm onBack={() => setShowRegister(false)} />
+				<RegisterForm onBack={handleSwitchToLogin} />
 			) : showRecovery ? (
 				showRecoverySent ? (
 					<RecoveryPasswordSent
@@ -41,9 +50,9 @@ export default function LoginRouterHandler() {
 				)
 			) : (
 				<LoginForm
-					onCreateAccount={() => setShowRegister(true)}
+					onCreateAccount={handleSwitchToRegister}
 					onForgotPassword={() => setShowRecovery(true)}
-					onBack={() => setShowRegister(false)}
+					onBack={handleSwitchToLogin}
 				/>
 			)}
 		</>

@@ -86,85 +86,124 @@
 //   )
 // }
 
+
+
+
 'use client';
 
+import { useEffect } from 'react';
 import { useCourseTeachers } from '../hooks/useCourseTeachers';
 
 interface CourseTeachersProps {
-	slug: string;
+  slug: string;
 }
 
 export default function CourseTeachers({ slug }: CourseTeachersProps) {
-	const { data, loading, error } = useCourseTeachers(slug);
+  const { data, loading, error } = useCourseTeachers(slug);
 
-	if (loading) {
-		return (
-			<section className='bg-white rounded-2xl p-6 md:p-10'>
-				<h2 className='text-2xl font-semibold mb-6'>Equipo docente</h2>
-				<p>Cargando equipo docente...</p>
-			</section>
-		);
-	}
+  // DEMO TEMPORAL:
+  // Este useEffect solo existe para scrollear hacia el equipo docente después de cargar los datos.
+  // ⚠️ Quitar este useEffect cuando se elimine el comportamiento de scroll automático de demo.
+  useEffect(() => {
+    if (!loading && data?.length && typeof window !== "undefined") {
+      const hash = window.location.hash;
+      if (hash === "#equipo-docente") {
+        const el = document.getElementById('equipo-docente');
+        if (el) {
+          setTimeout(() => {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100); // Esperamos 100ms para asegurar render completo
+        }
+      }
+    }
+  }, [loading, data]);
 
-	if (error || !data || data.length === 0) {
-		return (
-			null
-		);
-	}
+  if (loading) {
+    return (
+      <section className='bg-white rounded-2xl p-6 md:p-10'>
+        <h2 className='text-2xl font-semibold mb-6'>Equipo docente</h2>
+        <p>Cargando equipo docente...</p>
+      </section>
+    );
+  }
 
-	return (
-		<section className='bg-white rounded-2xl p-6 md:p-10'>
-			<h2 className='text-2xl font-semibold mb-6'>Equipo docente</h2>
+  if (error || !data || data.length === 0) {
+    return null;
+  }
 
-			<div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-				{data.map((teacher, idx) => {
-					const name = teacher.name ?? 'Docente sin nombre';
-					const title = teacher.description ?? 'Sin descripción disponible';
-					const image =
-						typeof teacher.image === 'string' && teacher.image !== ''
-							? teacher.image
-							: 'https://wp.msklatam.com/wp-content/themes/oceano2/assets/media/user-default.png';
-					const bioLink = teacher.link || null;
+  return (
+    <>
+      {/* 
+        DEMO TEMPORAL: 
+        Se aplica scroll-behavior: smooth globalmente solo para facilitar navegación hacia el equipo docente. 
+        ⚠️ Quitar este <style> después de la demo.
+      */}
+      <style>{`
+        html {
+          scroll-behavior: smooth;
+        }
+      `}</style>
 
-					return (
-						<div key={idx} className='flex items-start gap-4'>
-							<img src={image} alt={name} className='w-24 h-24 rounded-xl object-cover' />
-							<div className='flex flex-col'>
-								<p className='font-medium font-inter text-gray-900'>{name}</p>
-								<p className='text-sm font-inter text-gray-600'>{title}</p>
-								{bioLink && (
-									<a
-										href={bioLink}
-										className='text-purple-600 text-sm mt-1 hover:underline'
-										target='_blank'
-										rel='noopener noreferrer'
-									>
-										Ver biografía
-									</a>
-								)}
-							</div>
-						</div>
-					);
-				})}
-			</div>
+      <section
+        className='bg-white rounded-2xl p-6 md:p-10'
+        /* 
+          DEMO TEMPORAL:
+          Se agrega id="equipo-docente" para poder hacer scroll automático desde el botón "Ver perfil".
+          ⚠️ Quitar este id condicional cuando se elimine el comportamiento de scroll automático de demo.
+        */
+        id={slug === 'medicina-intensiva-amir' ? 'equipo-docente' : undefined}
+      >
+        <h2 className='text-2xl font-semibold mb-6'>Equipo docente</h2>
 
-			{/* Paginación (visual) */}
-			{data.length > 4 && (
-				<div className='flex justify-center items-center gap-4 mt-10'>
-					<button className='w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 text-gray-600 hover:bg-gray-100'>
-						&lt;
-					</button>
-					<div className='flex items-center gap-3 text-sm text-gray-700 font-medium'>
-						<span className='text-black font-bold'>01</span>
-						<span>02</span>
-						<span>03</span>
-						<span>04</span>
-					</div>
-					<button className='w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 text-gray-600 hover:bg-gray-100'>
-						&gt;
-					</button>
-				</div>
-			)}
-		</section>
-	);
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+          {data.map((teacher, idx) => {
+            const name = teacher.name ?? 'Docente sin nombre';
+            const title = teacher.description ?? 'Sin descripción disponible';
+            const image =
+              typeof teacher.image === 'string' && teacher.image !== ''
+                ? teacher.image
+                : 'https://wp.msklatam.com/wp-content/themes/oceano2/assets/media/user-default.png';
+            const bioLink = teacher.link || null;
+
+            return (
+              <div key={idx} className='flex items-start gap-4'>
+                <img src={image} alt={name} className='w-24 h-24 rounded-xl object-cover' />
+                <div className='flex flex-col'>
+                  <p className='font-medium font-inter text-gray-900'>{name}</p>
+                  <p className='text-sm font-inter text-gray-600'>{title}</p>
+                  {bioLink && (
+                    <a
+                      href={bioLink}
+                      className='text-purple-600 text-sm mt-1 hover:underline'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      Ver biografía
+                    </a>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {data.length > 4 && (
+          <div className='flex justify-center items-center gap-4 mt-10'>
+            <button className='w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 text-gray-600 hover:bg-gray-100'>
+              &lt;
+            </button>
+            <div className='flex items-center gap-3 text-sm text-gray-700 font-medium'>
+              <span className='text-black font-bold'>01</span>
+              <span>02</span>
+              <span>03</span>
+              <span>04</span>
+            </div>
+            <button className='w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 text-gray-600 hover:bg-gray-100'>
+              &gt;
+            </button>
+          </div>
+        )}
+      </section>
+    </>
+  );
 }

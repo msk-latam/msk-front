@@ -7,9 +7,10 @@ type HeroHighlightsProps = {
   highlights: string[];
   onSelect: (index: number) => void;
   animationKey: number;
+  paused: boolean; // <- ✅ Agregado
 };
 
-const HeroHighlights = ({ currentSlide, highlights, onSelect, animationKey }: HeroHighlightsProps) => {
+const HeroHighlights = ({ currentSlide, highlights, onSelect, animationKey, paused }: HeroHighlightsProps) => {
   return (
     <div className="md:relative rounded-t-2xl md:-bottom-[40px] md:pb-0 md:px-6 absolute bottom-0 w-full h-40 md:h-auto portrait:-z-10 overflow-hidden">
       {/* MOBILE vertical scroll */}
@@ -29,8 +30,9 @@ const HeroHighlights = ({ currentSlide, highlights, onSelect, animationKey }: He
             >
               {i === 0 && (
                 <span
-                  key={`bar-${animationKey}`}
-                  className="absolute inset-0 bg-gray-500 opacity-30 z-0 animate-fill-x"
+                key={`bar-${animationKey}`}
+                className="absolute inset-0 bg-gray-500 opacity-30 z-0 animate-fill-x"
+                style={{ animationPlayState: paused ? 'paused' : 'running' }}
                 />
               )}
               <span className="relative z-10">{text}</span>
@@ -51,8 +53,9 @@ const HeroHighlights = ({ currentSlide, highlights, onSelect, animationKey }: He
           >
             {i === currentSlide && (
               <span
-                key={`bar-desktop-${animationKey}`}
-                className="absolute inset-0 bg-white opacity-10 z-0 animate-fill-x"
+              key={`bar-desktop-${animationKey}`}
+              className="absolute inset-0 bg-white opacity-10 z-0 animate-fill-x"
+              style={{ animationPlayState: paused ? 'paused' : 'running' }}
               />
             )}
             <span className="relative z-10">{text}</span>
@@ -74,7 +77,10 @@ const HeroHighlights = ({ currentSlide, highlights, onSelect, animationKey }: He
         .animate-fill-x {
           animation: fill-x 8s linear forwards;
           transform: scaleX(0);
+          
         }
+
+        
       `}</style>
     </div>
   );

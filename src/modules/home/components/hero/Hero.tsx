@@ -6,6 +6,9 @@ import HeroCarousel from "./HeroCarousel";
 import HeroHighlights from "./HeroHighlights";
 import { useHomeContent } from "@/modules/home/hooks/useHomeContent";
 import { HeroSlide } from "@/modules/home/types";
+import { usePathname } from 'next/navigation';
+import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
+import PlayPauseButton from "./PlayPauseButton"; // ✅ CORRECTO
 
 const STATIC_HIGHLIGHTS = [
   "Cursos de medicina para expandir tus metas profesionales",
@@ -44,8 +47,14 @@ const Hero = () => {
     setTimeout(() => setPaused(false), 8000);
   };
 
+  const pathname = usePathname();
+  const lang = pathname.split('/')[1] || 'ar';
+
   return (
     <div className="relative md:h-[800px] h-[600px] w-full bg-black text-white px-4 overflow-hidden pt-[150px]">
+      {/* BOTÓN PLAY/PAUSE */}
+      <PlayPauseButton paused={paused} onToggle={() => setPaused(prev => !prev)} />
+
       {/* BACKGROUND CAROUSEL */}
       <HeroCarousel
         slides={backgroundImages}
@@ -64,10 +73,9 @@ const Hero = () => {
               <div>
                 <h1 className="text-[2rem] md:text-5xl text-white leading-tight md:leading-tight md:min-w-full md:text-[60px] font-bold ">
                   <span className="block md:hidden leading-tight font-Raleway font-[700] ">
-                    {STATIC_HIGHLIGHTS[currentSlide] ===
-                    STATIC_HIGHLIGHTS[0] ? (
+                    {STATIC_HIGHLIGHTS[currentSlide] === STATIC_HIGHLIGHTS[0] ? (
                       <>
-                        Cursos de medicina para {" "}
+                        Cursos de medicina para{" "}
                         <span className="not-italic font-lora-italic md:text-[64px] text-[40px]">
                           expandir
                         </span>{" "}
@@ -78,9 +86,8 @@ const Hero = () => {
                     )}
                   </span>
                   <div className="md:mr-72">
-                    <span className="hidden md:inline ">
-                      {STATIC_HIGHLIGHTS[currentSlide] ===
-                      STATIC_HIGHLIGHTS[0] ? (
+                    <span className="hidden md:inline">
+                      {STATIC_HIGHLIGHTS[currentSlide] === STATIC_HIGHLIGHTS[0] ? (
                         <>
                           Cursos de medicina para
                           <br />
@@ -98,7 +105,7 @@ const Hero = () => {
               </div>
 
               <Link
-                href={"https://msklatam.com/tienda/?recurso=curso"}
+                href={getLocalizedUrl(lang, '/tienda?recurso=curso')}
                 className="mt-4 md:mt-20 md:mb-0 mx-6 md:mx-0 w-full md:w-auto bg-white text-black px-5 py-3 rounded-full text-[14px] hover:scale-105 transition flex justify-center text-center self-center gap-2 whitespace-nowrap"
               >
                 Comenzá tu experiencia
@@ -112,21 +119,19 @@ const Hero = () => {
                   strokeWidth="2"
                   className="mt-[4px] md:mt-[0.5px]"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M14 5l7 7-7 7M3 12h18"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7-7 7M3 12h18" />
                 </svg>
               </Link>
             </div>
           </div>
+
           {/* HIGHLIGHTS INTERACTIVO */}
           <HeroHighlights
             currentSlide={currentSlide}
             highlights={STATIC_HIGHLIGHTS}
             onSelect={handleSelect}
             animationKey={animationKey}
+            paused={paused}
           />
         </div>
       </div>

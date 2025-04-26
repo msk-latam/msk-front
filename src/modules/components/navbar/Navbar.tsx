@@ -40,8 +40,10 @@ const Navbar = ({ isDashboard = false }: NavbarProps) => {
 	};
 
 	const pathname = usePathname();
-	const lang = pathname.split('/')[1] || 'ar';
-
+	const firstSegment = pathname.split('/')[1];
+	const lang = supportedLanguages.includes(firstSegment) ? firstSegment : 'ar';
+	// ✅ Esta es la verdadera URL que deberías usar en el logo
+	const logoHref = lang === 'ar' ? '/' : `/${lang}/`;
 	const handleCreateAccount = () => {
 		window.location.href = '/login';
 	};
@@ -75,7 +77,7 @@ const Navbar = ({ isDashboard = false }: NavbarProps) => {
 				<section className='hidden md:flex md:flex-row items-center pt-2 mt-6'>
 					<div className='flex items-top w-full max-w-[1300px] mx-auto pl-14 pr-28 z-50 relative'>
 						{/* Logo */}
-						<Link href='/home'>
+						<Link href={logoHref}>
 							<Image
 								src='/images/msk-logo/logo.png'
 								alt='MSK'
