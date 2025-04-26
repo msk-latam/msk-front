@@ -9,20 +9,16 @@ interface CourseInstitutionProps {
 }
 
 export default function CourseInstitutions({ slug }: CourseInstitutionProps) {
-	const { data: institutions, loading, error } = useCourseInstitutions(slug);
-export default function CourseInstitution({ slug }: CourseInstitutionProps) {
   const { data: institutions, loading, error } = useCourseInstitutions(slug);
 
   if (!loading && !institutions) return null;
 
   return (
     <section className="md:py-3 text-left h-fit">
-      {/* TÍTULO corregido */}
       <h2 className="text-xl md:text-2xl text-[#1A1A1A] font-medium mb-6 w-fit">
         Estas instituciones respaldan tu aprendizaje y revalorizan tu perfil profesional
       </h2>
 
-      {/* Scroll horizontal en mobile */}
       <div className="overflow-x-auto md:overflow-visible scrollbar-none">
         <div className="flex gap-4 md:flex-row flex-wrap items-center justify-center px-2">
           {loading && <p>Cargando instituciones...</p>}
