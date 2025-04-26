@@ -56,7 +56,7 @@ export default function CourseTeachers({ slug }: CourseTeachersProps) {
       `}</style>
 
       <section
-        className="bg-white rounded-[38px] px-6 md:px-0 max-w-5xl mx-auto py-12 space-y-8"
+        className="bg-white rounded-[38px] px-6 md:px-0 max-w-5xl py-12 space-y-8"
         id={slug === 'medicina-intensiva-amir' ? 'equipo-docente' : undefined}
       >
         <h2 className="text-[24px] md:text-[32px] font-raleway font-bold text-[#1A1A1A] mb-6">
