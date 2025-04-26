@@ -1,7 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 type RegisterFormProps = {
 	onBack: () => void;
@@ -44,9 +45,23 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 	const [lastName, setLastName] = useState('');
 	const [password, setPassword] = useState('');
 	const [showPassword, setShowPassword] = useState(false);
+	const [phone, setPhone] = useState('');
+	const [areaCode, setAreaCode] = useState('+54');
 	const [submitted, setSubmitted] = useState(false);
 	const [onRequest, setOnRequest] = useState(false);
 	const [error, setError] = useState<string | null>(null);
+
+	const searchParams = useSearchParams();
+
+	useEffect(() => {
+		const emailParam = searchParams.get('email');
+		const firstNameParam = searchParams.get('firstName');
+		const lastNameParam = searchParams.get('lastName');
+
+		if (emailParam) setEmail(emailParam);
+		if (firstNameParam) setFirstName(firstNameParam);
+		if (lastNameParam) setLastName(lastNameParam);
+	}, [searchParams]);
 
 	const executeRecaptcha = async (action: string): Promise<string> => {
 		console.warn('Using placeholder executeRecaptcha');
@@ -54,7 +69,12 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 	};
 
 	const isValid =
-		email.trim() !== '' && firstName.trim() !== '' && lastName.trim() !== '' && password.trim() !== '' && !onRequest;
+		email.trim() !== '' &&
+		firstName.trim() !== '' &&
+		lastName.trim() !== '' &&
+		password.trim() !== '' &&
+		phone.trim() !== '' &&
+		!onRequest;
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -70,7 +90,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 				email: email,
 				country: 'AR',
 				password: password,
-				phone: '1',
+				phone: `${areaCode}${phone}`,
 				profession: '-',
 				speciality: '-',
 				Otra_profesion: '',
@@ -97,20 +117,20 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 				setSubmitted(true);
 			} else {
 				let errorMessages = 'Ocurrió un error al registrar la cuenta.';
-				if (resData.errors) {
-					errorMessages = Object.values(resData.errors)
-						.flat()
-						.map((msg: string) => {
-							if (msg.includes('El Email ya ha sido registrado')) {
+				if (!response.ok && 'errors' in resData && resData.errors) {
+					const errorValues = Object.values(resData.errors).flat();
+					errorMessages = errorValues
+						.map((msg: unknown) => {
+							if (typeof msg === 'string' && msg.includes('El Email ya ha sido registrado')) {
 								return (
 									msg +
 									' <a href="/login" class="font-bold cursor-pointer text-violet-custom hover:underline hover:text-violet-custom">Inicia sesión</a>'
 								);
 							}
-							return msg;
+							return String(msg);
 						})
 						.join('<br />');
-				} else if ('message' in resData && resData.message) {
+				} else if (!response.ok && 'message' in resData && resData.message) {
 					errorMessages = resData.message;
 				}
 				setError(errorMessages);
@@ -124,6 +144,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 	};
 
 	const handleSocialSignup = (connection: string) => {
+		sessionStorage.setItem('needsProfileCompletion', 'true');
 		window.location.href = `/api/auth/login?connection=${connection}`;
 	};
 
@@ -178,6 +199,27 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 						/>
 					</div>
 
+					<div>
+						<label className='block text-sm font-medium text-[#1A1A1A] text-left mb-1'>Teléfono</label>
+						<div className='flex gap-2 border rounded-2xl border-[#DBDDE2] px-3 py-2 focus-within:ring-4 focus-within:ring-[#F5E6F7]'>
+							<select
+								className='border-0 bg-transparent focus:ring-0 focus:outline-none text-[#1A1A1A] w-24'
+								defaultValue='+54'
+								onChange={(e) => setAreaCode(e.target.value)}
+							>
+								<option value='+54'>+54</option>
+								<option value='+52'>+52</option>
+								<option value='+57'>+57</option>
+							</select>
+							<input
+								type='tel'
+								placeholder='Ingresar teléfono'
+								value={phone}
+								onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
+								className='flex-1 bg-transparent border-0 focus:ring-0 focus:outline-none text-[#6E737C]'
+							/>
+						</div>
+					</div>
 					<div>
 						<label className='block text-sm font-medium text-[#1A1A1A] text-left'>Nombre/s</label>
 						<input
