@@ -174,8 +174,8 @@ export default function CourseTestimonials() {
             Sé parte de nuestra comunidad <br className="hidden md:inline" />
             de profesionales
           </h2>
-          <p className="text-base md:text-[32px] font-light mb-6">
-            ¡La próxima historia de éxito puede ser la tuya!
+          <p className="text-base md:text-[32px] font-raleway font-normal mb-6">
+            ¡La próxima historia de éxito puede ser tuya!
           </p>
 
           <div className="flex justify-start items-center gap-2 mb-32">
@@ -189,8 +189,8 @@ export default function CourseTestimonials() {
                 />
               ))}
             </div>
-            <div className=" text-white text-left">
-              <strong className="text-lg font-semibold">
+            <div className="text-white text-left">
+              <strong className="text-lg font-raleway font-bold">
                 +60.000 profesionales
               </strong>
               <br />
@@ -202,7 +202,7 @@ export default function CourseTestimonials() {
         </div>
 
         {/* Carrusel con botones superpuestos */}
-        <div className="max-w-screen-xl w-full mx-auto relative group">
+        <div className="moverflow-visible max-w-[1400px] mx-auto w-full mx-auto relative group">
           <div
             ref={carouselRef}
             className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory px-1 md:px-0 scrollbar-hide"
@@ -212,7 +212,7 @@ export default function CourseTestimonials() {
                 key={idx}
                 className="min-w-[85%] sm:min-w-[45%] md:min-w-[30%] snap-start 
                 bg-white/50 backdrop-blur-md text-white 
-                rounded-2xl p-6 shadow-md"
+                rounded-[30px] p-6 shadow-md"
               >
                 <div className="flex items-center gap-4 mb-4">
                   <img
@@ -220,10 +220,10 @@ export default function CourseTestimonials() {
                     alt={t.name}
                     className="w-10 h-10 rounded-full object-cover"
                   />
-                  <p className="font-semibold text-sm">{t.name}</p>
+                  <p className="font-inter font-normal text-sm">{t.name}</p>
                 </div>
-                <p className="text-sm text-white">{t.opinion}</p>
-                <div className="mt-4 text-right text-xs text-white">5/5 ★</div>
+                <p className="text-sm font-inter font-normal text-white">{t.opinion}</p>
+                <div className="mt-4 text-right text-sm text-white">5/5 ★</div>
               </div>
             ))}
           </div>
@@ -250,3 +250,4 @@ export default function CourseTestimonials() {
     </GradientBackground>
   );
 }
+

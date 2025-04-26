@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useCourseDescription } from '../hooks/useCourseDescription'
 
@@ -14,35 +14,62 @@ export default function CourseDescriptionClient({
   maxLength = 600,
 }: ClientDescriptionProps) {
   const [isExpanded, setIsExpanded] = useState(false)
-  const data = useCourseDescription(slug)
+  const { data, loading, error } = useCourseDescription(slug)
 
   const handleToggle = () => setIsExpanded(!isExpanded)
 
-  // Lógica para el contenido de la descripción
   const description = data?.content ?? ''
   const title = data?.title ?? 'Descripción del curso'
-  const displayDescription = isExpanded
-    ? description
-    : description.length > maxLength
-    ? description.slice(0, maxLength) + '...'
-    : description
+
+  if (loading) {
+    return (
+      <section className="bg-white rounded-[38px] md:pt-7 md:pb-3">
+        <h1 className="text-2xl md:text-[34px] font-raleway font-medium mb-6 text-[#1A1A1A]">
+          Cargando...
+        </h1>
+        <p className="text-[#1A1A1A] text-sm font-inter font-normal text-[16px] leading-[161%]">
+          Cargando descripción...
+        </p>
+      </section>
+    )
+  }
+
+  if (error || !description) {
+    return null
+  }
+
+  // Detectar donde hacer el salto de párrafo
+  const breakPhrase = 'En este curso de Medicina de urgencias te prepara'
+  const breakIndex = description.indexOf(breakPhrase)
+
+  let firstPart = description
+  let secondPart = ''
+
+  if (breakIndex !== -1) {
+    firstPart = description.substring(0, breakIndex + breakPhrase.length)
+    secondPart = description.substring(breakIndex + breakPhrase.length).trim()
+  }
+
+  // Controlar si se aplica truncado
+  const displayFirstPart = isExpanded
+    ? firstPart
+    : firstPart.length > maxLength
+    ? firstPart.slice(0, maxLength) + '...'
+    : firstPart
+
+  const displaySecondPart = isExpanded ? secondPart : ''
 
   return (
     <section className="bg-white rounded-[38px] md:pt-7 md:pb-3">
       <h1 className="text-2xl md:text-[34px] font-raleway font-medium mb-6 text-[#1A1A1A]">
-        {loading ? 'Cargando...' : error ? 'Error al cargar' : title}
+        {title}
       </h1>
 
-      <article className="text-[#1A1A1A] text-sm font-inter font-light text-[16px] leading-[161%] relative">
-        {loading ? (
-          "Cargando descripción..."
-        ) : error ? (
-          <p>{error}</p>
-        ) : (
-          <p className="m-0">{displayDescription}</p>
-        )}
+      <article className="text-[#1A1A1A] text-sm font-inter font-normal text-[16px] leading-[161%] relative">
+        <p className="m-0">{displayFirstPart}</p>
+        {displaySecondPart && <p className="mt-4">{displaySecondPart}</p>}
 
-        {description.length > maxLength && !isExpanded && (
+        {!isExpanded && description.length > maxLength && (
           <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
         )}
       </article>

@@ -12,27 +12,26 @@ interface CourseSupportFormProps {
 export default function CourseSupportForm(props: CourseSupportFormProps) {
   return (
     <div className="bg-white space-y-6">
-      <h3 className="text-lg font-semibold text-gray-900">
+      <h2 className="text-[24px] md:text-[32px] font-raleway font-bold text-[#1A1A1A]">
         ¿Necesitás ayuda para elegir tu curso?
-      </h3>
-      <p className="text-sm text-gray-600">
-        Nuestro equipo de especialistas en educación médica está listo para
-        asesorarte. No dudes en escribirnos.
+      </h2>
+      <p className="text-base font-raleway font-normal text-[#1A1A1A]">
+        Nuestro equipo de especialistas en educación médica está listo para asesorarte. No dudes en escribirnos.
       </p>
 
       <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <input
           type="text"
           placeholder="Ingresar nombre"
-          className="border rounded-[16px] focus:outline-none focus:ring-1 focus:ring-[#9200AD] focus:border-[#9200AD] px-3 py-2"
+          className="border border-[#DBDDE2] focus:outline-none focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] rounded-[16px] px-3 py-2"
         />
         <input
           type="text"
           placeholder="Ingresar apellido"
-          className="border rounded-[16px] focus:outline-none focus:ring-1 focus:ring-[#9200AD] focus:border-[#9200AD]  px-3 py-2"
+          className="border border-[#DBDDE2] focus:outline-none focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] rounded-[16px] px-3 py-2"
         />
 
-        <div className="flex gap-2 rounded-[16px] border border-gray-600 focus-within:outline-none focus-within:ring-1 focus-within:ring-[#9200AD] focus-within:border-[#9200AD] ">
+        <div className="flex gap-2 rounded-[16px] border border-[#DBDDE2] focus-within:outline-none focus-within:ring-4 focus-within:border-[#DBDDE2] focus-within:ring-[#F5E6F7]">
           <select className="text-gray-600 rounded-[16px] border-0 focus:outline-none focus:ring-0 px-3 py-2 w-20 gap-1">
             <option value="+54">+54</option>
             <option value="+52">+52</option>
@@ -46,40 +45,43 @@ export default function CourseSupportForm(props: CourseSupportFormProps) {
         <input
           type="email"
           placeholder="Ingresar email"
-          className="border rounded-[16px] focus:outline-none focus:ring-1 focus:ring-[#9200AD] focus:border-[#9200AD]  px-3 py-2"
+          className="border border-[#DBDDE2] focus:outline-none focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] rounded-[16px] px-3 py-2"
         />
 
-        <select className="text-gray-600 border rounded-[16px] focus:outline-none focus:ring-1 focus:ring-[#9200AD] focus:border-[#9200AD]  px-3 py-2">
+        <select className="text-gray-600 border border-[#DBDDE2] focus:outline-none focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] rounded-[16px] px-3 py-2">
           <option value="">Seleccionar profesión</option>
         </select>
-        <select className="text-gray-600 border rounded-[16px] focus:outline-none focus:ring-1 focus:ring-[#9200AD] focus:border-[#9200AD]  px-3 py-2">
+        <select className="text-gray-600 border border-[#DBDDE2] focus:outline-none focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] rounded-[16px] px-3 py-2">
           <option value="">Seleccionar especialidad</option>
         </select>
 
         <textarea
           placeholder="Mensaje"
-          className="border rounded-[16px] focus:outline-none focus:ring-1 focus:ring-[#9200AD] focus:border-[#9200AD]  px-3 py-2 col-span-1 md:col-span-2"
+          className="border border-[#DBDDE2] focus:outline-none focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] rounded-[16px] px-3 py-2 col-span-1 md:col-span-2"
           rows={4}
         ></textarea>
 
-        <div className="col-span-1 md:col-span-2 flex items-center gap-2">
-          <input
-            type="checkbox"
-            id="privacy"
-            className="accent-[#9200AD] border rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#9200AD] focus:border-[#9200AD] "
-          />
-          <label htmlFor="privacy" className="text-sm text-gray-600">
-            Acepto los{" "}
-            <a href="#" className="text-[#9200AD] underline">
-              términos y condiciones
-            </a>
-          </label>
-        </div>
+        {/* Checkbox y Botón en la misma línea en desktop */}
+        <div className="col-span-1 md:col-span-2 flex flex-col md:flex-row justify-between items-center gap-4 md:mt-4">
+          {/* Checkbox */}
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="privacy"
+              className="accent-[#9200AD] border rounded-[4px] focus:outline-none focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]"
+            />
+            <label htmlFor="privacy" className="text-sm font-raleway font-normal text-[#1A1A1A]">
+              Acepto las{" "}
+              <a href="https://msklatam.tech/politica-de-privacidad/" className="text-[#9200AD] underline">
+                condiciones de privacidad
+              </a>
+            </label>
+          </div>
 
-        <div className="col-span-1 md:col-span-2 text-right">
+          {/* Botón Enviar */}
           <button
             type="submit"
-            className="bg-[#9200AD] hover:bg-[#6b1679] text-white px-6 py-2 rounded-full flex md:flex-row md:place-self-end md:gap-1 w-full md:w-fit justify-center gap-2"
+            className="bg-[#9200AD] hover:bg-[#6b1679] text-white px-6 py-2 rounded-full flex items-center gap-2 w-full md:w-fit justify-center md:justify-end"
           >
             Enviar
             <svg

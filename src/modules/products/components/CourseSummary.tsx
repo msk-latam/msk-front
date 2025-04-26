@@ -1,82 +1,103 @@
 'use client';
+
 import Image from 'next/image';
 import { useCourseSummary } from '../hooks/useCourseSummary';
+import { Phone } from 'lucide-react'; // icono de teléfono
 
 interface CourseSummaryProps {
-	slug: string;
+  slug: string;
 }
 
 export default function CourseSummary({ slug }: CourseSummaryProps) {
-	const { data, loading, error } = useCourseSummary(slug);
+  const { data, loading, error } = useCourseSummary(slug);
 
-	const enrolledFormatted = data?.enrolled;
-	const modules = data?.modules;
-	const duration = data?.duration + ' horas estimadas';
-	const certification = data?.certification;
-	const max_installments = data?.max_installments;
-	const price = data?.price_installments
-		? new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(Number(data.price_installments))
-		: '';
-	const total_price = data?.total_price
-		? new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(Number(data.total_price))
-		: '';
+  const enrolledFormatted = data?.enrolled;
+  const modules = data?.modules;
+  const duration = data?.duration + ' horas estimadas';
+  const certification = data?.certification;
+  const max_installments = data?.max_installments;
+  const price = data?.price_installments
+    ? new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(Number(data.price_installments))
+    : '';
+  const total_price = data?.total_price
+    ? new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(Number(data.total_price))
+    : '';
 
-	const cedente = data?.cedente;
+  const cedente = data?.cedente;
 
-	return (
-		<div className='bg-white rounded-[38px] shadow p-6 md:p-8 sticky top-10 w-full'>
-			<Image
-				src={data?.featured_images.medium ?? ''}
-				alt='Curso'
-				className='rounded-xl w-full object-cover mb-6'
-				width={420}
-				height={300}
-			/>
+  return (
+    <div className="bg-white rounded-[38px] p-6 md:p-8 sticky top-10 w-full" style={{ backgroundColor: '#FFFFFF' }}>
+      <Image
+        src={data?.featured_images.medium ?? ''}
+        alt="Curso"
+        className="rounded-xl w-full object-cover mb-6"
+        width={420}
+        height={300}
+      />
 
-			<p className='text-[#3b476c] text-[20px] font-inter font-bold'>Total: {total_price} ARS</p>
-			<p className='font-inter text-base'>{max_installments} pagos de:</p>
-			<p className='text-2xl font-bold text-[#1a1a1a] mb-4'>{price}</p>
+      {/* Total y precio */}
+      <p className="text-[#1A1A1A] text-[20px] font-inter font-medium">Total: {total_price} ARS</p>
+      <p className="text-[#4F5D89] font-inter font-medium text-base">{max_installments} pagos de:</p>
+      <p className="text-2xl font-bold text-[#1A1A1A] mb-4">{price}</p>
 
-			<ul className='text-sm text-[#3b476c] space-y-3 mb-4'>
-				<li className='flex items-center gap-2'>
-					<img src='/icons/course/summary/world.svg' alt='' className='w-4 h-4' />
-					Modalidad 100% a distancia
-				</li>
-				<li className='flex items-center gap-2'>
-					<img src='/icons/course/summary/modules.svg' alt='' className='w-4 h-4' />
-					{modules} módulos actualizados
-				</li>
-				<li className='flex items-center gap-2'>
-					<img src='/icons/course/summary/hourglass.svg' alt='' className='w-4 h-4' />
-					{duration}
-				</li>
-				<li className='flex items-center gap-2'>
-					<img src='/icons/course/summary/person.svg' alt='' className='w-4 h-4' />
-					{enrolledFormatted} profesionales inscriptos
-				</li>
-				<li className='flex items-center gap-2'>
-					<img src='/icons/course/summary/download.svg' alt='' className='w-4 h-4' />
-					{certification ? 'Incluye material descargable' : 'Sin material adicional'}
-				</li>
-			</ul>
+      {/* Lista de items */}
+      <ul className="text-sm text-[#4F5D89] font-inter font-medium space-y-3 mb-6">
+        <li className="flex items-center gap-2">
+          <img src="/icons/course/summary/world.svg" alt="" className="w-4 h-4" />
+          Modalidad 100% a distancia
+        </li>
+        <li className="flex items-center gap-2">
+          <img src="/icons/course/summary/modules.svg" alt="" className="w-4 h-4" />
+          {modules} módulos actualizados
+        </li>
+        <li className="flex items-center gap-2">
+          <img src="/icons/course/summary/hourglass.svg" alt="" className="w-4 h-4" />
+          {duration}
+        </li>
+        <li className="flex items-center gap-2">
+          <img src="/icons/course/summary/person.svg" alt="" className="w-4 h-4" />
+          {enrolledFormatted} profesionales inscriptos
+        </li>
+        <li className="flex items-center gap-2">
+          <img src="/icons/course/summary/download.svg" alt="" className="w-4 h-4" />
+          {certification ? 'Incluye material descargable' : 'Sin material adicional'}
+        </li>
+      </ul>
 
-			<p className='text-xs text-gray-500 mb-2'>
-				Cedente
-				<br />
-				<strong className='text-[#3b476c] '>{cedente?.name}</strong>
-			</p>
+      {/* Cedente */}
+      {cedente && (
+        <>
+          <p className="text-xs text-[#4F5D89] font-inter font-medium mb-2">
+            Cedente
+            <br />
+            <strong className="text-[#4F5D89] font-inter font-medium">{cedente?.name}</strong>
+          </p>
 
-			<div className='flex items-center justify-center mb-4 w-full bg-[#F7F9FF] rounded-[30px] p-2'>
-				<Image src={cedente?.image ?? ''} alt='Certificado' className='h-20 mix-blend-multiply' width={80} height={80} />
-			</div>
+          {/* Card de la imagen */}
+          <div className="flex flex-col items-center justify-center mb-6 bg-[#F7F9FF] rounded-[30px] p-4 relative">
+            
+            <Image
+              src={cedente?.image ?? ''}
+              alt="Institución"
+              width={200}
+              height={80}
+              className="object-contain mix-blend-multiply max-h-[80px]"
+            />
+          </div>
+        </>
+      )}
 
-			<button className='bg-[#9200AD] hover:bg-[#6b1679] text-white w-full py-3 rounded-full font-medium transition'>
-				Inscribite ahora
-			</button>
+      {/* Botones CTA */}
+      <div className="space-y-3">
+        <button className="bg-[#9200AD] hover:bg-[#6b1679] text-white w-full py-3 rounded-full font-inter font-medium text-base transition">
+          Inscríbete ahora
+        </button>
 
-			<button className='w-full mt-2 py-3 text-sm text-[#9200AD] border hover:border-bg-[#6b1679] rounded-full'>
-				Contáctanos
-			</button>
-		</div>
-	);
+        <button className="w-full border border-gray-300 text-[#1A1A1A] hover:bg-gray-100 flex items-center justify-center py-3 rounded-full font-inter font-bold text-base gap-2 transition">
+          Contáctanos
+          <Phone size={16} />
+        </button>
+      </div>
+    </div>
+  );
 }

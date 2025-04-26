@@ -24,7 +24,7 @@ export default async function ProductPage({
   const structuredData = generateCourseStructuredData(course);
 
   return (
-    <main className="bg-white text-neutral-900">
+    <main className="bg-[#F3F4F6] text-neutral-900">
       <ProductPageComponent course={course} />
       <Script
         type="application/ld+json"
