@@ -3,7 +3,7 @@ import HomeIcon from '@/store/assets/icons/DocumentIcon';
 
 const StoreHeader = () => {
 	return (
-		<div className='flex flex-col items-center justify-center h-full text-white md:mt-8 overflow-visible px-4 max-w-[1600px] mx-auto'>
+		<div className='flex flex-col items-center justify-center h-full text-white md:mt-8 overflow-visible px-4 max-w-[1400px] mx-auto'>
 			{/* Breadcrumb */}
 			<div className='flex items-center self-start text-sm mb-4 ml-4 '>
 				<HomeIcon />
