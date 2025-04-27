@@ -1,0 +1,29 @@
+.fill-animation {
+    background: linear-gradient(
+      88.79deg,
+      rgb(146, 0, 173) -25.91%,
+      rgb(123, 140, 195) -0.1%,
+      rgb(112, 0, 132) 31.13%,
+      rgb(184, 20, 214) 58.59%,
+      rgb(59, 71, 108) 109.69%,
+      rgb(77, 0, 91) 177.81%,
+      rgb(146, 0, 173) 245.71%
+    ), 
+    linear-gradient(
+      360deg,
+      rgba(0, 0, 0, 0) -76.85%,
+      rgba(0, 0, 0, 0.2) 113.39%
+    );
+    background-size: 200% 100%;
+    animation: fillGradient 2s linear infinite forwards;
+  }
+  
+  @keyframes fillGradient {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  

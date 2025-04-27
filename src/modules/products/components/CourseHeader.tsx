@@ -9,6 +9,8 @@ interface CourseHeaderProps {
   slug: string;
 }
 
+
+
 export default function CourseHeader({ slug }: CourseHeaderProps) {
   const { data, loading, error } = useCourseHeader(slug);
 
@@ -42,8 +44,9 @@ export default function CourseHeader({ slug }: CourseHeaderProps) {
 
           {/* Tienda ahora es Link */}
           <Link href="/tienda" className="truncate my-auto shrink-0 hover:underline">
-            Tienda
-          </Link>
+  <span className="block md:hidden">...</span>
+  <span className="hidden md:block">Tienda</span>
+</Link>
 
           {categories.map((cat) => (
             <span key={cat.term_id} className="flex items-center">
@@ -63,7 +66,7 @@ export default function CourseHeader({ slug }: CourseHeaderProps) {
         </nav>
 
         {/* Título principal */}
-        <h1 className="md:text-[51px] sm:text-4xl text-white font-bold text-center md:text-left mt-5 mb-3">
+        <h1 className="md:text-[51px] text-3xl text-white font-bold text-center md:text-left mt-5 mb-3">
           {title}
         </h1>
 

@@ -1,9 +1,12 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import BlogCard from './BlogCard';
 import { ArrowRight } from 'lucide-react';
 import { useBlogContent } from '@/modules/home/hooks/useBlogContent';
 import type { BlogPost } from '@/modules/home/types';
 import Link from 'next/link';
+import BlogSectionSkeleton from '@/modules/home/skeletons/BlogSectionSkeleton'; // Importar Skeleton
 
 const CATEGORIES = ['Artículos', 'Guías profesionales', 'Infografías'] as const;
 type CategoryType = typeof CATEGORIES[number];
@@ -15,7 +18,6 @@ interface BlogAction {
   label: string;
   variant: ActionVariant;
 }
-
 
 const useMediaQuery = (query: string) => {
   const [matches, setMatches] = useState(false);
@@ -54,10 +56,10 @@ const BlogSection: React.FC = () => {
     }
   }, [activeTab, data]);
 
-  if (loading) return <LoadingState title={data?.title} />;
+  if (loading) return <BlogSectionSkeleton />; // 👈 Skeleton mientras carga
 
   if (filteredPosts.length === 0 && !loading)
-    return <EmptyState title={data?.title} subtitle={data?.subtitle} categories={CATEGORIES} activeTab={activeTab} setActiveTab={setActiveTab} />;
+    return <EmptyState categories={CATEGORIES} activeTab={activeTab} setActiveTab={setActiveTab} />;
 
   const postsToDisplay = filteredPosts.slice(0, isMobile ? 3 : 5);
 
@@ -117,8 +119,7 @@ const CategoryTabs: React.FC<{
       return (
         <button
           key={cat}
-          className={`md:px-4 md:py-2 px-5 py-3 rounded-full md:text-sm text-base font-medium flex-shrink-0 
-      transition-colors duration-300 ${
+          className={`md:px-4 md:py-2 px-5 py-3 rounded-full md:text-sm text-base font-medium flex-shrink-0 transition-colors duration-300 ${
             isActive
               ? 'bg-gray-100 border border-gray-200 font-medium text-black hover:text-[#6E737C]'
               : 'text-gray-700 hover:bg-gray-50 hover:text-[#6E737C]'
@@ -131,8 +132,6 @@ const CategoryTabs: React.FC<{
       );
     })}
   </nav>
-
-
 );
 
 const BlogButton: React.FC<{ className?: string }> = ({ className = '' }) => (
@@ -149,24 +148,11 @@ const BlogButton: React.FC<{ className?: string }> = ({ className = '' }) => (
   </div>
 );
 
-const LoadingState: React.FC<{ title?: string }> = ({ title }) => (
-  <section className="w-full  ">
-    <div className="text-center">
-      <h2 className="text-2xl md:text-3xl font-semibold">Blog</h2>
-      <p className="text-sm text-neutral-600" aria-live="polite">
-        Cargando contenido del blog...
-      </p>
-    </div>
-  </section>
-);
-
 const EmptyState: React.FC<{
-  title?: string;
-  subtitle?: string;
   categories: readonly CategoryType[];
   activeTab: CategoryType;
   setActiveTab: (tab: CategoryType) => void;
-}> = ({ title, subtitle, categories, activeTab, setActiveTab }) => (
+}> = ({ categories, activeTab, setActiveTab }) => (
   <section className="w-full ">
     <header className="mb-8">
       <h2 className="text-2xl md:text-3xl font-semibold text-black mb-1">Blog</h2>

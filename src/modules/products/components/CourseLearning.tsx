@@ -20,7 +20,7 @@ export default function CourseLearning({ slug }: CourseLearningProps) {
   return (
     <section className="bg-white p-5 md:px-0 md:py-3">
       {/* Título corregido */}
-      <h2 className="text-3xl font-medium md:text-[34px] mb-6 font-raleway text-[#1A1A1A]">
+      <h2 className="text-2xl text-center md:text-left font-medium md:text-[34px] mb-6 font-raleway text-[#1A1A1A]">
         Qué aprenderás
       </h2>
 

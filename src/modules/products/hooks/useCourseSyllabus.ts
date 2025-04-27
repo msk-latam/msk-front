@@ -1,38 +1,31 @@
 import { useEffect, useState } from 'react';
+import { CourseSyllabus } from '../types/types';
+import { getCourse } from '../service/courseService'
 
 export function useCourseSyllabus(slug: string) {
+	const [data, setData] = useState<CourseSyllabus | null>(null);
 	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState<null | string>(null);
-	const [syllabus, setSyllabus] = useState<null | {
-		hours: string;
-		fileUrl: string;
-		fileTitle: string;
-		modules: { title: string; content: string }[];
-	}>(null);
-
+	const [error, setError] = useState<string | null>(null);
+  
 	useEffect(() => {
-		async function fetchData() {
-			try {
-				const res = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/product/${slug}`);
-				const data = await res.json();
+		if (!slug) return;
+	
+		getCourse(slug)
+		  .then((courseData) => {
+				const syllabusData: CourseSyllabus = {
+					hours: courseData.sections?.study_plan?.hours ?? '',
+					study_plan_file: courseData.sections?.study_plan?.study_plan_file ?? '',
+					modules: courseData.sections?.study_plan.modules ?? [],
+				};
 
-				const studyPlan = data.sections.study_plan;
-
-				setSyllabus({
-					hours: studyPlan.hours,
-					fileUrl: studyPlan.study_plan_file?.url || '',
-					fileTitle: studyPlan.study_plan_file?.title || '',
-					modules: studyPlan.modules || [],
-				});
-			} catch (err) {
-				setError('Error al cargar el plan de estudios');
-			} finally {
-				setLoading(false);
-			}
-		}
-
-		fetchData();
-	}, [slug]);
-
-	return { loading, error, syllabus };
+				setData(syllabusData);
+			})
+				.catch((err) => {
+					console.error(err);
+					setError(err.message || "Error fetching overview data");
+				  })
+				  .finally(() => setLoading(false));
+			  }, [slug]);
+			  console.log(data)
+	return { data, loading, error };
 }

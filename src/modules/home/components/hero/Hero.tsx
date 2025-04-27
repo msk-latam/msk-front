@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -8,7 +8,8 @@ import { useHomeContent } from "@/modules/home/hooks/useHomeContent";
 import { HeroSlide } from "@/modules/home/types";
 import { usePathname } from 'next/navigation';
 import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
-import PlayPauseButton from "./PlayPauseButton"; // ✅ CORRECTO
+import PlayPauseButton from "./PlayPauseButton";
+import HeroSkeleton from "@/modules/home/skeletons/HeroSkeleton"; // 👈 Importar Skeleton
 
 const STATIC_HIGHLIGHTS = [
   "Cursos de medicina para expandir tus metas profesionales",
@@ -18,11 +19,9 @@ const STATIC_HIGHLIGHTS = [
 ];
 
 const Hero = () => {
-  const { data } = useHomeContent();
+  const { data, loading } = useHomeContent(); // 👈 Usar loading
   const slides: HeroSlide[] = data?.slides || [];
-  const backgroundImages = slides
-    .map((s) => s.background_image?.[0])
-    .filter(Boolean);
+  const backgroundImages = slides.map((s) => s.background_image?.[0]).filter(Boolean);
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [animationKey, setAnimationKey] = useState(0);
@@ -50,12 +49,12 @@ const Hero = () => {
   const pathname = usePathname();
   const lang = pathname.split('/')[1] || 'ar';
 
+  if (loading) return <HeroSkeleton />; // 👈 Mostrar Skeleton mientras carga
+
   return (
     <div className="relative md:h-[800px] h-[600px] w-full bg-black text-white px-4 overflow-hidden pt-[150px]">
-      {/* BOTÓN PLAY/PAUSE */}
       <PlayPauseButton paused={paused} onToggle={() => setPaused(prev => !prev)} />
 
-      {/* BACKGROUND CAROUSEL */}
       <HeroCarousel
         slides={backgroundImages}
         currentSlide={currentSlide}
@@ -125,7 +124,6 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* HIGHLIGHTS INTERACTIVO */}
           <HeroHighlights
             currentSlide={currentSlide}
             highlights={STATIC_HIGHLIGHTS}

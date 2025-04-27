@@ -65,7 +65,7 @@ export interface CourseCategory {
   
   export interface CourseSyllabus {
 	hours: string;
-	study_plan_file: string | false;
+	study_plan_file: string;
 	modules: Modules[];
   }
   

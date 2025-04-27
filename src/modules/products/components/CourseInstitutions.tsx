@@ -15,7 +15,7 @@ export default function CourseInstitutions({ slug }: CourseInstitutionProps) {
 
   return (
     <section className="md:py-3 text-left h-fit">
-      <h2 className="text-xl md:text-2xl text-[#1A1A1A] font-medium mb-6 w-fit">
+      <h2 className="text-xl md:text-left text-center md:text-2xl text-[#1A1A1A] font-medium mb-6 w-fit">
         Estas instituciones respaldan tu aprendizaje y revalorizan tu perfil profesional
       </h2>
 

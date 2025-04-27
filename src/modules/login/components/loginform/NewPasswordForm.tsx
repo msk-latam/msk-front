@@ -63,7 +63,7 @@ export default function NewPasswordForm() {
               Nueva contraseña
             </label>
             <div className="relative">
-              <input
+              <
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Ingresar nueva contraseña"
                 value={password}

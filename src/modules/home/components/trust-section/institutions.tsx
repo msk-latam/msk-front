@@ -1,15 +1,20 @@
-// components/Institutions.tsx
-"use client";
+'use client';
 
 import React from "react";
 import Image from "next/image";
 import { useInstitutions } from "@/modules/home/hooks/useInstitution";
+import InstitutionsSkeleton from "@/modules/home/skeletons/InstitutionsSkeleton"; // Importamos el skeleton
 
 const Institutions = () => {
   const { institutions, loading, error } = useInstitutions();
 
-  if (loading) return <div className="text-center">Cargando instituciones...</div>;
-  if (error) return <div className="text-center text-red-500">Error: {error}</div>;
+  if (loading) {
+    return <InstitutionsSkeleton />; // Mostramos Skeleton mientras carga
+  }
+
+  if (error) {
+    return <div className="text-center text-red-500">Error: {error}</div>;
+  }
 
   return (
     <section className="relative bg-white rounded-[40px] overflow-visible max-w-[1600px] mx-auto md:px-4 -mt-24 translate-y-[70px] z-10 py-10 px-5 md:px-10 md:gap-4 shadow-lg">
