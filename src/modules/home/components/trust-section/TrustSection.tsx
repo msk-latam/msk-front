@@ -4,12 +4,22 @@ import React, { useState } from 'react';
 import { useTrustSection } from '../../hooks/useTrustSection';
 import Institutions from './institutions';
 import { useSwipeable } from 'react-swipeable';
+import TrustSectionSkeleton from '@/modules/home/skeletons/TrustSectionSkeleton'; // Importamos el Skeleton
 
 const TrustSection = () => {
   const { data, loading, error } = useTrustSection();
 
-  if (loading) return <div>Loading Trust Section...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) {
+    return <TrustSectionSkeleton />; // Mostrar Skeleton mientras carga
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-[400px] bg-gray-100 text-red-500 font-semibold">
+        Error al cargar testimonios.
+      </div>
+    );
+  }
 
   const { title, subtitle, figures, opinions } = data!;
 
@@ -31,7 +41,7 @@ const TrustSection = () => {
     });
 
     return (
-      <div className="md:hidden w-full flex flex-col items-center   gap-4 overflow-x-hidden z-5">
+      <div className="md:hidden w-full flex flex-col items-center gap-4 overflow-x-hidden z-5">
         <div className="relative w-full overflow-hidden">
           <div
             {...handlers}
@@ -53,9 +63,8 @@ const TrustSection = () => {
                     {testimonial.name}
                   </p>
                 </div>
-
                 <div className="flex flex-col justify-between flex-grow">
-                  <p className="text-[18px] text-400 mb-4 min-h-[96px] leading-snug">
+                  <p className="text-[18px] font-normal mb-4 min-h-[96px] leading-snug">
                     {testimonial.opinion}
                   </p>
                   <p className="text-right text-sm font-medium flex items-center justify-end gap-1 text-black">
@@ -80,7 +89,7 @@ const TrustSection = () => {
           {subtitle}
         </p>
 
-        {/* Cifras */}
+        {/* Figures */}
         <div className="flex flex-col pr-5 md:pr-0 md:flex-row justify-between text-center mb-10 font-lora gap-6">
           {figures.map((figure, index) => (
             <div key={index}>
@@ -96,7 +105,7 @@ const TrustSection = () => {
           ))}
         </div>
 
-        {/* Opiniones Desktop */}
+        {/* Testimonials Desktop */}
         <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 h-full">
           {opinions.map((testimonial, index) => (
             <div
@@ -113,9 +122,8 @@ const TrustSection = () => {
                   {testimonial.name}
                 </p>
               </div>
-
               <div className="flex flex-col justify-between flex-grow">
-                <p className="text-lg font-[400] md:text-[17px]  text-neutral-700 mb-4 min-h-[96px] leading-snug">
+                <p className="text-lg font-[400] md:text-[17px] text-neutral-700 mb-4 min-h-[96px] leading-snug">
                   {testimonial.opinion}
                 </p>
                 <p className="text-right text-sm font-medium flex items-center justify-end gap-1 text-black">
@@ -126,7 +134,7 @@ const TrustSection = () => {
           ))}
         </div>
 
-        {/* Carrusel Mobile */}
+        {/* Testimonials Mobile */}
         <TestimonialsMobile testimonials={opinions} />
       </section>
 

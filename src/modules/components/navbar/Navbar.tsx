@@ -13,6 +13,7 @@ import AuthButtonsSkeleton from './common/AuthButtonsSkeleton';
 import SearchBar from './common/SearchBar';
 import UserButtons from './common/UserButtons';
 import DropdownContent from './DropdownContent';
+import NavbarSkeleton from '@/modules/home/skeletons/NavbarSkeleton';
 
 const supportedLanguages = ['en', 'ar']; // Add other supported languages here
 
@@ -76,6 +77,9 @@ const Navbar = ({ isDashboard = false }: NavbarProps) => {
 				</section>
 
 				{/* --- NAV DESKTOP --- */}
+				{isLoading ? (
+    <NavbarSkeleton /> // 👈 Muestra skeleton
+  ) : (
 				<section className='hidden md:flex md:flex-row items-center pt-2 mt-6'>
 					<div className='flex items-top w-full max-w-[1300px] mx-auto pl-14 pr-28 z-50 relative'>
 						{/* Logo */}
@@ -156,6 +160,7 @@ const Navbar = ({ isDashboard = false }: NavbarProps) => {
 						</div>
 					</div>
 				</section>
+				 )}
 			</nav>
 
 			{/* Contenido dinámico móvil */}

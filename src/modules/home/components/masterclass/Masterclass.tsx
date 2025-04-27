@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Image from "next/image";
 import Link from "next/link";
@@ -11,32 +11,21 @@ import { Professional } from "@/modules/home/types";
 import { professionals as mockProfessionals } from "./professionals";
 import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
 import { usePathname } from "next/navigation";
+import MasterclassSkeleton from "@/modules/home/skeletons/MasterclassSkeleton"; // Import Skeleton
 
 const Masterclass = () => {
   const { data: fetchedProfessionals, link: masterclassLink, loading, error } = useMasterclassSection();
   const usingMock = !fetchedProfessionals?.length;
   const professionals: Professional[] = usingMock ? mockProfessionals : fetchedProfessionals;
 
-  // Clonamos el último al principio y el primero al final
-  const extendedProfessionals = [
-    professionals[professionals.length - 1],
-    ...professionals,
-    professionals[0],
-  ];
-
   const pathname = usePathname();
   const lang = pathname.split('/')[1] || 'ar';
 
-  const [current, setCurrent] = useState<number>(1); // empezamos desde el primero real
+  const [current, setCurrent] = useState<number>(1);
   const [withTransition, setWithTransition] = useState(true);
 
-  const nextSlide = () => {
-    setCurrent((prev) => prev + 1);
-  };
-
-  const prevSlide = () => {
-    setCurrent((prev) => prev - 1);
-  };
+  const nextSlide = () => setCurrent((prev) => prev + 1);
+  const prevSlide = () => setCurrent((prev) => prev - 1);
 
   const handlers = useSwipeable({
     onSwipedLeft: nextSlide,
@@ -51,15 +40,19 @@ const Masterclass = () => {
   }, [professionals]);
 
   // Loop visual
+  const extendedProfessionals = [
+    professionals[professionals.length - 1],
+    ...professionals,
+    professionals[0],
+  ];
+
   useEffect(() => {
-    // salto del clon último → primero real
     if (current === extendedProfessionals.length - 1) {
       setTimeout(() => {
         setWithTransition(false);
         setCurrent(1);
       }, 300);
     }
-    // salto del clon primero → último real
     if (current === 0) {
       setTimeout(() => {
         setWithTransition(false);
@@ -68,16 +61,19 @@ const Masterclass = () => {
     }
   }, [current, extendedProfessionals.length]);
 
-  // restaurar transición después del salto
   useEffect(() => {
     if (!withTransition) {
       setTimeout(() => setWithTransition(true), 50);
     }
   }, [withTransition]);
+
   const cardWidth = 320;
-  const cardMarginRight = 16; // equivalente a Tailwind `mr-4`
+  const cardMarginRight = 16;
   const totalCardWidth = cardWidth + cardMarginRight;
-  
+
+  if (loading) return <MasterclassSkeleton />; // 👈 Mostrar Skeleton mientras carga
+  if (error) return null;
+
   return (
     <section
       aria-labelledby="masterclass-heading"
@@ -94,7 +90,7 @@ const Masterclass = () => {
 
       <main className="relative z-10 h-full md:h-screen overflow-visible max-w-[1600px] mx-auto md:px-4 w-full py-11 mt-8 md:py-0 md:mt-0 flex flex-col justify-center md:px-20 md:mb-10">
         <div className="h-full flex flex-col justify-center gap-10 md:flex-row md:items-center md:justify-between md:px-4">
-          {/* IZQUIERDA TEXTO */}
+          {/* Texto Desktop */}
           <header className="hidden md:flex flex-col gap-16 text-center md:text-left md:max-w-2xl md:order-1">
             <p className="border border-white rounded-full px-6 py-3 text-sm w-fit mx-auto md:mx-0 uppercase tracking-widest">
               Masterclass
@@ -110,9 +106,8 @@ const Masterclass = () => {
             </div>
             <nav aria-label="Inscripción a Masterclass">
               <Link
-                //href={masterclassLink || "#"} // comentado hasta terminar demo. Version link desde la API
-                href={getLocalizedUrl(lang, '/tienda/medicina-intensiva-amir/')} // Version forzada para DEMO
-                className="bg-white  text-black px-6 py-3 rounded-full font-semibold text-sm md:text-base flex items-center gap-2 w-fit mx-auto md:mx-0 hover:scale-105 transition"
+                href={getLocalizedUrl(lang, '/tienda/medicina-intensiva-amir/')}
+                className="bg-white text-black px-6 py-3 rounded-full font-semibold text-sm md:text-base flex items-center gap-2 w-fit mx-auto md:mx-0 hover:scale-105 transition"
               >
                 Inscribite ahora
                 <svg
@@ -134,7 +129,7 @@ const Masterclass = () => {
             </nav>
           </header>
 
-          {/* DERECHA CARD DESKTOP */}
+          {/* Card Desktop */}
           <article className="md:order-2">
             <ProfessionalCardDesktop
               pro={professionals[(current - 1 + professionals.length) % professionals.length]}
@@ -146,20 +141,19 @@ const Masterclass = () => {
           </article>
         </div>
 
-        {/* MOBILE */}
-        <section className="md:hidden w-full flex flex-col items-center pl-6 gap-6 overflow-x-hidden z-[1] ">
+        {/* Mobile */}
+        <section className="md:hidden w-full flex flex-col items-center pl-6 gap-6 overflow-x-hidden z-[1]">
           <h2 className="text-1xl border border-white rounded-full px-6 py-3 self-start uppercase tracking-widest">
             Masterclass
           </h2>
           <div className="relative w-full overflow-hidden">
             <div
               {...handlers}
-              className={`flex  ${withTransition ? "transition-transform duration-500 ease-in-out" : ""}`}
+              className={`flex ${withTransition ? "transition-transform duration-500 ease-in-out" : ""}`}
               style={{
                 transform: `translateX(-${current * totalCardWidth}px)`,
                 width: `${extendedProfessionals.length * totalCardWidth}px`,
               }}
-              
             >
               {extendedProfessionals.map((pro, i) => (
                 <ProfessionalCardMobile key={i} pro={pro} />

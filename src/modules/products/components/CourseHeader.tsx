@@ -9,6 +9,8 @@ interface CourseHeaderProps {
   slug: string;
 }
 
+
+
 export default function CourseHeader({ slug }: CourseHeaderProps) {
   const { data, loading, error } = useCourseHeader(slug);
 
