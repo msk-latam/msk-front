@@ -169,10 +169,10 @@ const StoreCourses: React.FC<StoreCoursesProps> = () => {
 				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
 					{courses.length > 0 ? (
 						courses.map((course) => {
-							const lang = pathname.split('/')[1] || 'ar'; // Obtener el idioma desde la ruta
+							const lang = pathname?.split('/')[1] || 'ar'; // Obtener el idioma desde la ruta
 
 							return (
-								<div key={course.id} className='border rounded-[30px] bg-white flex flex-col'>
+								<Link href={`${course.slug}`} key={course.id} className='border rounded-[30px] bg-white flex flex-col'>
 									<img
 										src={course.featured_images.medium}
 										alt={course.title}
@@ -230,14 +230,14 @@ const StoreCourses: React.FC<StoreCoursesProps> = () => {
 											</div>
 
 											<Link
-												href={`/${lang}/tienda/${course.slug}`}
+												href={`${course.slug}`}
 												className='bg-[#191919] text-white px-4 py-2 rounded-full hover:bg-[#474b53] transition-colors'
 											>
 												Descubrir
 											</Link>
 										</div>
 									</div>
-								</div>
+								</Link>
 							);
 						})
 					) : (
