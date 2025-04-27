@@ -56,6 +56,14 @@ export async function POST(request: NextRequest) {
 			sameSite: 'strict', // O 'lax' según necesidad
 		});
 
+		cookies().set('email', email, {
+			httpOnly: true,
+			secure: process.env.NODE_ENV === 'production',
+			maxAge: maxAge,
+			path: '/',
+			sameSite: 'strict', // O 'lax' según necesidad
+		});
+
 		// Podrías devolver solo éxito o algunos datos del usuario si la API los incluye
 		return NextResponse.json({ message: 'Login successful' });
 	} catch (error) {

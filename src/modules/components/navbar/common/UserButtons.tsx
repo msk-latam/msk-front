@@ -38,7 +38,7 @@ const UserButtons = () => {
 			>
 				Cerrar sesión
 			</button>
-			<Link href='/login?form=registerForm'>
+			<Link href='/dashboard'>
 				<button className='px-4 py-3.5'>
 					<FiUser className='scale-125' />
 				</button>

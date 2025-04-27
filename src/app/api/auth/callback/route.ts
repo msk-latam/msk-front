@@ -2,17 +2,11 @@
 import { auth0 } from '@/lib/auth0';
 import { Session } from '@auth0/nextjs-auth0/edge';
 import { cookies } from 'next/headers';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
 const afterCallback = async (req: NextRequest, session: Session) => {
-	// Log request information
-	//
-	// 	// console.log('Auth callback session:', session);
-
-	const res = new NextResponse();
-	console.log('Id token:', session.idToken);
 	try {
 		const response = await fetch('https://dev.msklatam.tech/msk-laravel/public/api/loginAuth0', {
 			method: 'POST',
@@ -30,8 +24,6 @@ const afterCallback = async (req: NextRequest, session: Session) => {
 
 		const data = await response.json();
 
-		console.log('Auth callback data:', data);
-
 		// Set the access token in cookies
 		if (data.access_token) {
 			const cookieStore = cookies();
@@ -42,6 +34,18 @@ const afterCallback = async (req: NextRequest, session: Session) => {
 				expires: expiresDate, // Set expiry based on API response
 				sameSite: 'lax', // Recommended for CSRF protection
 			});
+
+			cookieStore.set('email', session.user.email, {
+				path: '/', // Available on all paths
+				expires: expiresDate, // Set expiry based on API response
+				sameSite: 'lax', // Recommended for CSRF protection
+			});
+			cookieStore.set('picture', session.user?.picture, {
+				path: '/', // Available on all paths
+				expires: expiresDate, // Set expiry based on API response
+				sameSite: 'lax', // Recommended for CSRF protection
+			});
+
 			console.log('Access token set in cookie.');
 
 			// return NextResponse.redirect(new URL('/dashboard', req.url));

@@ -11,6 +11,7 @@ import MyCoursesSection from '@/modules/dashboard/components/MyCoursesSection';
 import { useEffect, useState } from 'react';
 
 import UserDataStorage from '@/components/UserDataStorage';
+import { useAuth } from '@/hooks/useAuth';
 import { UserData, getUserData, updateUserData } from '@/lib/localStorageService/userDataService';
 import InterestsEditModal from '@/modules/dashboard/components/InterestsEditModal';
 import ProfileEditModal from '@/modules/dashboard/components/ProfileEditModal';
@@ -21,6 +22,8 @@ export default function DashboardPage() {
 	const [showInterestsModal, setShowInterestsModal] = useState(false);
 	const [editTargetField, setEditTargetField] = useState<string | undefined>(undefined);
 	const [isLoading, setIsLoading] = useState(true);
+
+	const { user, isAuthenticated, loading } = useAuth();
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -76,7 +79,6 @@ export default function DashboardPage() {
 				}}
 			>
 				<Navbar isDashboard />
-
 			</header>
 
 			<main className='bg-[#f3f4f6] flex justify-center px-0 sm:px-4 relative pt-0 pb-20 -mb-[100px] md:mb-0'>

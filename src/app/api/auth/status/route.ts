@@ -9,9 +9,9 @@ export async function GET(request: NextRequest) {
 
 	if (token) {
 		// Cookie encontrada
-		return NextResponse.json({ isLoggedIn: true });
+		return NextResponse.json({ authenticated: true });
 	} else {
 		// Cookie no encontrada
-		return NextResponse.json({ isLoggedIn: false });
+		return NextResponse.json({ authenticated: false });
 	}
 }

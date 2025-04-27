@@ -1,7 +1,7 @@
 //navbar
 'use client';
 
-import { useAuthStatus } from '@/hooks/useAuthStatus';
+import { useSessionStatus } from '@/hooks/useSessionStatus';
 import { BurgerButton } from '@/modules/components/navbar/common/BurguerButton';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -42,8 +42,8 @@ const Navbar = ({ isDashboard = false }: NavbarProps) => {
 	};
 
 	const pathname = usePathname();
-	const firstSegment = pathname.split('/')[1];
-	const lang = supportedLanguages.includes(firstSegment) ? firstSegment : 'ar';
+	const firstSegment = pathname?.split('/')[1];
+	const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'ar';
 	// ✅ Esta es la verdadera URL que deberías usar en el logo
 	const logoHref = lang === 'ar' ? '/' : `/${lang}/`;
 	const handleCreateAccount = () => {
@@ -56,7 +56,7 @@ const Navbar = ({ isDashboard = false }: NavbarProps) => {
 	const isSpecialtyView = isDiscoverOpen && currentView === 'specialty';
 	const isSpecialtyDetailView = isDiscoverOpen && currentView === 'specialtyDetail';
 
-	const { isLoggedIn, isLoading } = useAuthStatus();
+	const { isAuthenticated, isLoading } = useSessionStatus();
 
 	return (
 		<header className='absolute left-0 w-full z-50'>
@@ -127,7 +127,7 @@ const Navbar = ({ isDashboard = false }: NavbarProps) => {
 								</div>
 								{isLoading ? (
 									<AuthButtonsSkeleton />
-								) : isLoggedIn ? (
+								) : isAuthenticated ? (
 									<UserButtons />
 								) : (
 									<AuthButtons
