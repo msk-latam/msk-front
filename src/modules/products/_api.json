@@ -1,208 +1,983 @@
 {
-    "id": 333437,
-    "title": "Iniciaci\u00f3n a la investigaci\u00f3n en enfermer\u00eda",
-    "slug": "iniciacion-investigacion-enfermeria",
-    "date": "2025-01-31T15:25:33+00:00",
-    "featured_image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/investigacionenfermeria-primaria.jpg",
-    "categories": [
-        {
-            "term_id": 1090,
-            "name": "Medicina general",
-            "slug": "medicina-general",
-            "is_primary": true
-        },
-        {
-            "term_id": 60095,
-            "name": "Endocrinolog\u00eda",
-            "slug": "endocrinologia",
-            "is_primary": false
-        },
-        {
-            "term_id": 1449,
-            "name": "Medicina familiar",
-            "slug": "medicina-familiar",
-            "is_primary": false
-        }
-    ],
-    "link": "https:\/\/msklatam.com\/curso\/iniciacion-investigacion-enfermeria",
+    "lang": "int",
     "sections": {
-        "header": {
-            "title": "Iniciaci\u00f3n a la investigaci\u00f3n en enfermer\u00eda",
-            "has_certificate": true,
-            "categories": [
-                {
-                    "term_id": 1090,
-                    "name": "Medicina general",
-                    "slug": "medicina-general",
-                    "is_primary": true
-                },
-                {
-                    "term_id": 60095,
-                    "name": "Endocrinolog\u00eda",
-                    "slug": "endocrinologia",
-                    "is_primary": false
-                },
-                {
-                    "term_id": 1449,
-                    "name": "Medicina familiar",
-                    "slug": "medicina-familiar",
-                    "is_primary": false
+        "specialities": [
+            {
+                "id": 60090,
+                "name": "Administraci\u00f3n y gesti\u00f3n",
+                "url": "\/tienda\/administracion-y-gestion",
+                "courses": [
+                    {
+                        "id": 270062,
+                        "name": "Error m\u00e9dico y gesti\u00f3n de riesgo aspectos \u00e9ticos y toma de decisiones",
+                        "url": "\/curso\/error-medico-y-gestion-de-riesgo-aspectos-eticos-y-toma-de-decisiones",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2023\/09\/foto-primaria-6.jpg"
+                    },
+                    {
+                        "id": 229522,
+                        "name": "Gesti\u00f3n para la administraci\u00f3n segura de f\u00e1rmacos",
+                        "url": "\/curso\/gestion-para-la-administracion-segura-de-farmacos",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2022\/09\/foto-primaria.jpg"
+                    },
+                    {
+                        "id": 228462,
+                        "name": "Formaci\u00f3n integral en seguridad y prevenci\u00f3n de riesgos",
+                        "url": "\/curso\/seguridad-y-prevencion-de-riesgos-para-profesionales-de-la-salud",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2022\/08\/foto-primaria-seguridad-y-gestion-enfermeria.jpg"
+                    },
+                    {
+                        "id": 227423,
+                        "name": "Curso superior de seguridad y prevenci\u00f3n de riesgos",
+                        "url": "\/curso\/seguridad-y-prevencion-de-riesgos",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2022\/08\/foto-primaria-seguridad-y-riesgos.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 60095,
+                "name": "Endocrinolog\u00eda",
+                "url": "\/tienda\/endocrinologia",
+                "courses": [
+                    {
+                        "id": 307225,
+                        "name": "Osteoporosis primaria: una alteraci\u00f3n del metabolismo \u00f3seo",
+                        "url": "\/curso\/osteoporosis-primaria-una-alteracion-del-metabolismo-oseo",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/05\/foto-primaria-1.jpg"
+                    },
+                    {
+                        "id": 307226,
+                        "name": "Osteoporosis primaria: una alteraci\u00f3n del metabolismo \u00f3seo",
+                        "url": "\/curso\/osteoporosis-primaria-una-alteracion-del-metabolismo-oseo",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/05\/foto-primaria-1.jpg"
+                    },
+                    {
+                        "id": 307227,
+                        "name": "Osteoporosis primaria: una alteraci\u00f3n del metabolismo \u00f3seo",
+                        "url": "\/curso\/osteoporosis-primaria-una-alteracion-del-metabolismo-oseo",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/05\/foto-primaria-1.jpg"
+                    },
+                    {
+                        "id": 307194,
+                        "name": "Osteoporosis primaria: una alteraci\u00f3n del metabolismo \u00f3seo",
+                        "url": "\/curso\/osteoporosis-primaria-una-alteracion-del-metabolismo-oseo",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/05\/foto-primaria-1.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 60097,
+                "name": "Nefrolog\u00eda",
+                "url": "\/tienda\/nefrologia",
+                "courses": [
+                    {
+                        "id": 312757,
+                        "name": "S\u00edndromes cl\u00ednicos en nefrolog\u00eda",
+                        "url": "\/curso\/sindromes-clinicos-en-nefrologia",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/07\/foto-primaria-2.jpg"
+                    },
+                    {
+                        "id": 312758,
+                        "name": "S\u00edndromes cl\u00ednicos en nefrolog\u00eda",
+                        "url": "\/curso\/sindromes-clinicos-en-nefrologia",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/07\/foto-primaria-2.jpg"
+                    },
+                    {
+                        "id": 312759,
+                        "name": "S\u00edndromes cl\u00ednicos en nefrolog\u00eda",
+                        "url": "\/curso\/sindromes-clinicos-en-nefrologia",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/07\/foto-primaria-2.jpg"
+                    },
+                    {
+                        "id": 312760,
+                        "name": "S\u00edndromes cl\u00ednicos en nefrolog\u00eda",
+                        "url": "\/curso\/sindromes-clinicos-en-nefrologia",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/07\/foto-primaria-2.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 60096,
+                "name": "Neumolog\u00eda",
+                "url": "\/tienda\/neumologia",
+                "courses": []
+            },
+            {
+                "id": 60094,
+                "name": "Neurolog\u00eda",
+                "url": "\/tienda\/neurologia",
+                "courses": []
+            },
+            {
+                "id": 60093,
+                "name": "Radiolog\u00eda e imagenolog\u00eda",
+                "url": "\/tienda\/radiologia",
+                "courses": [
+                    {
+                        "id": 309585,
+                        "name": "Ecograf\u00eda para guiar procedimientos intervencionistas",
+                        "url": "\/curso\/ecografia-para-guiar-procedimientos-intervencionistas",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/06\/foto-primaria-1.jpg"
+                    },
+                    {
+                        "id": 309586,
+                        "name": "Ecograf\u00eda para guiar procedimientos intervencionistas",
+                        "url": "\/curso\/ecografia-para-guiar-procedimientos-intervencionistas",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/06\/foto-primaria-1.jpg"
+                    },
+                    {
+                        "id": 309587,
+                        "name": "Ecograf\u00eda para guiar procedimientos intervencionistas",
+                        "url": "\/curso\/ecografia-para-guiar-procedimientos-intervencionistas",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/06\/foto-primaria-1.jpg"
+                    },
+                    {
+                        "id": 309588,
+                        "name": "Ecograf\u00eda para guiar procedimientos intervencionistas",
+                        "url": "\/curso\/ecografia-para-guiar-procedimientos-intervencionistas",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/06\/foto-primaria-1.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 60107,
+                "name": "Urologia",
+                "url": "\/tienda\/urologia",
+                "courses": [
+                    {
+                        "id": 317094,
+                        "name": "Diagn\u00f3stico de la incontinencia urinaria",
+                        "url": "\/curso\/diagnostico-de-la-incontinencia-urinaria",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/08\/foto-primaria-3.jpg"
+                    },
+                    {
+                        "id": 317095,
+                        "name": "Diagn\u00f3stico de la incontinencia urinaria",
+                        "url": "\/curso\/diagnostico-de-la-incontinencia-urinaria",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/08\/foto-primaria-3.jpg"
+                    },
+                    {
+                        "id": 317096,
+                        "name": "Diagn\u00f3stico de la incontinencia urinaria",
+                        "url": "\/curso\/diagnostico-de-la-incontinencia-urinaria",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/08\/foto-primaria-3.jpg"
+                    },
+                    {
+                        "id": 317097,
+                        "name": "Diagn\u00f3stico de la incontinencia urinaria",
+                        "url": "\/curso\/diagnostico-de-la-incontinencia-urinaria",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/08\/foto-primaria-3.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1089,
+                "name": "Anestesiolog\u00eda y dolor",
+                "url": "\/tienda\/anestesiologia-y-dolor",
+                "courses": [
+                    {
+                        "id": 266522,
+                        "name": "Monitorizaci\u00f3n del paciente bajo anestesia",
+                        "url": "\/curso\/monitorizacion-del-paciente-bajo-anestesia",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2023\/11\/foto-primaria-3.jpg"
+                    },
+                    {
+                        "id": 266523,
+                        "name": "Monitorizaci\u00f3n del paciente bajo anestesia",
+                        "url": "\/curso\/monitorizacion-del-paciente-bajo-anestesia",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2023\/11\/foto-primaria-3.jpg"
+                    },
+                    {
+                        "id": 266524,
+                        "name": "Monitorizaci\u00f3n del paciente bajo anestesia",
+                        "url": "\/curso\/monitorizacion-del-paciente-bajo-anestesia",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2023\/11\/foto-primaria-3.jpg"
+                    },
+                    {
+                        "id": 266525,
+                        "name": "Monitorizaci\u00f3n del paciente bajo anestesia",
+                        "url": "\/curso\/monitorizacion-del-paciente-bajo-anestesia",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2023\/11\/foto-primaria-3.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1100,
+                "name": "Cardiolog\u00eda",
+                "url": "\/tienda\/cardiologia",
+                "courses": [
+                    {
+                        "id": 324043,
+                        "name": "Curso superior de cardiolog\u00eda Tropos",
+                        "url": "\/curso\/cardiologia-tropos",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/10\/foto-primaria-2-1.jpg"
+                    },
+                    {
+                        "id": 324044,
+                        "name": "Curso superior de cardiolog\u00eda Tropos",
+                        "url": "\/curso\/cardiologia-tropos",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/10\/foto-primaria-2-1.jpg"
+                    },
+                    {
+                        "id": 324045,
+                        "name": "Curso superior de cardiolog\u00eda Tropos",
+                        "url": "\/curso\/cardiologia-tropos",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/10\/foto-primaria-2-1.jpg"
+                    },
+                    {
+                        "id": 324046,
+                        "name": "Curso superior de cardiolog\u00eda Tropos",
+                        "url": "\/curso\/cardiologia-tropos",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/10\/foto-primaria-2-1.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1096,
+                "name": "Cirug\u00eda",
+                "url": "\/tienda\/cirugia",
+                "courses": [
+                    {
+                        "id": 331752,
+                        "name": "Curso superior de cirug\u00eda general y del aparato digestivo AMIR",
+                        "url": "\/curso\/cirugia-general-y-del-aparato-digestivo-amir",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/cirugiageneraldigestivo-primaria.jpg"
+                    },
+                    {
+                        "id": 331753,
+                        "name": "Curso superior de cirug\u00eda general y del aparato digestivo AMIR",
+                        "url": "\/curso\/cirugia-general-y-del-aparato-digestivo-amir",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/cirugiageneraldigestivo-primaria.jpg"
+                    },
+                    {
+                        "id": 331754,
+                        "name": "Curso superior de cirug\u00eda general y del aparato digestivo AMIR",
+                        "url": "\/curso\/cirugia-general-y-del-aparato-digestivo-amir",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/cirugiageneraldigestivo-primaria.jpg"
+                    },
+                    {
+                        "id": 331755,
+                        "name": "Curso superior de cirug\u00eda general y del aparato digestivo AMIR",
+                        "url": "\/curso\/cirugia-general-y-del-aparato-digestivo-amir",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/cirugiageneraldigestivo-primaria.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1262,
+                "name": "Dermatolog\u00eda",
+                "url": "\/tienda\/dermatologia",
+                "courses": [
+                    {
+                        "id": 326907,
+                        "name": "Alopecia",
+                        "url": "\/curso\/alopecia",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/11\/alopecia-img-primaria.png"
+                    },
+                    {
+                        "id": 326908,
+                        "name": "Alopecia",
+                        "url": "\/curso\/alopecia",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/11\/alopecia-img-primaria.png"
+                    },
+                    {
+                        "id": 326909,
+                        "name": "Alopecia",
+                        "url": "\/curso\/alopecia",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/11\/alopecia-img-primaria.png"
+                    },
+                    {
+                        "id": 326910,
+                        "name": "Alopecia",
+                        "url": "\/curso\/alopecia",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/11\/alopecia-img-primaria.png"
+                    }
+                ]
+            },
+            {
+                "id": 1213,
+                "name": "Diabetes",
+                "url": "\/tienda\/diabetes",
+                "courses": [
+                    {
+                        "id": 318025,
+                        "name": "Fisiopatolog\u00eda de la diabetes tipo 2",
+                        "url": "\/curso\/fisiopatologia-de-la-diabetes-tipo-2",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/08\/foto-primaria-5.jpg"
+                    },
+                    {
+                        "id": 318077,
+                        "name": "Fisiopatolog\u00eda de la diabetes tipo 2",
+                        "url": "\/curso\/fisiopatologia-de-la-diabetes-tipo-2",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/08\/foto-primaria-5.jpg"
+                    },
+                    {
+                        "id": 318062,
+                        "name": "Fisiopatolog\u00eda de la diabetes tipo 2",
+                        "url": "\/curso\/fisiopatologia-de-la-diabetes-tipo-2",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/08\/foto-primaria-5.jpg"
+                    },
+                    {
+                        "id": 318078,
+                        "name": "Fisiopatolog\u00eda de la diabetes tipo 2",
+                        "url": "\/curso\/fisiopatologia-de-la-diabetes-tipo-2",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/08\/foto-primaria-5.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1091,
+                "name": "Emergentolog\u00eda",
+                "url": "\/tienda\/emergentologia",
+                "courses": [
+                    {
+                        "id": 323976,
+                        "name": "Urgencias toxicol\u00f3gicas, psiqui\u00e1tricas y neurol\u00f3gicas",
+                        "url": "\/curso\/urgencias-toxicologicas-psiquiatricas-y-neurologicas",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/10\/foto-primaria-1-1.jpg"
+                    },
+                    {
+                        "id": 324010,
+                        "name": "Urgencias toxicol\u00f3gicas, psiqui\u00e1tricas y neurol\u00f3gicas",
+                        "url": "\/curso\/urgencias-toxicologicas-psiquiatricas-y-neurologicas",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/10\/foto-primaria-1-1.jpg"
+                    },
+                    {
+                        "id": 323995,
+                        "name": "Urgencias toxicol\u00f3gicas, psiqui\u00e1tricas y neurol\u00f3gicas",
+                        "url": "\/curso\/urgencias-toxicologicas-psiquiatricas-y-neurologicas",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/10\/foto-primaria-1-1.jpg"
+                    },
+                    {
+                        "id": 324011,
+                        "name": "Urgencias toxicol\u00f3gicas, psiqui\u00e1tricas y neurol\u00f3gicas",
+                        "url": "\/curso\/urgencias-toxicologicas-psiquiatricas-y-neurologicas",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/10\/foto-primaria-1-1.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1293,
+                "name": "Gastroenterolog\u00eda",
+                "url": "\/tienda\/gastroenterologia",
+                "courses": [
+                    {
+                        "id": 331714,
+                        "name": "Curso superior de gastroenterolog\u00eda AMIR",
+                        "url": "\/curso\/gastroenterologia-digestivo-amir",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/gastroenterologiadigestivo-primaria.jpg"
+                    },
+                    {
+                        "id": 331715,
+                        "name": "Curso superior de gastroenterolog\u00eda AMIR",
+                        "url": "\/curso\/gastroenterologia-digestivo-amir",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/gastroenterologiadigestivo-primaria.jpg"
+                    },
+                    {
+                        "id": 331716,
+                        "name": "Curso superior de gastroenterolog\u00eda AMIR",
+                        "url": "\/curso\/gastroenterologia-digestivo-amir",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/gastroenterologiadigestivo-primaria.jpg"
+                    },
+                    {
+                        "id": 331717,
+                        "name": "Curso superior de gastroenterolog\u00eda AMIR",
+                        "url": "\/curso\/gastroenterologia-digestivo-amir",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/gastroenterologiadigestivo-primaria.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1127,
+                "name": "Geriatr\u00eda",
+                "url": "\/tienda\/geriatria",
+                "courses": [
+                    {
+                        "id": 252733,
+                        "name": "Infecciones frecuentes en el adulto mayor",
+                        "url": "\/curso\/infecciones-frecuentes-en-el-adulto-mayor",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2023\/04\/foto-primaria-1.jpg"
+                    },
+                    {
+                        "id": 252734,
+                        "name": "Infecciones frecuentes en el adulto mayor",
+                        "url": "\/curso\/infecciones-frecuentes-en-el-adulto-mayor",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2023\/04\/foto-primaria-1.jpg"
+                    },
+                    {
+                        "id": 252735,
+                        "name": "Infecciones frecuentes en el adulto mayor",
+                        "url": "\/curso\/infecciones-frecuentes-en-el-adulto-mayor",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2023\/04\/foto-primaria-1.jpg"
+                    },
+                    {
+                        "id": 252736,
+                        "name": "Infecciones frecuentes en el adulto mayor",
+                        "url": "\/curso\/infecciones-frecuentes-en-el-adulto-mayor",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2023\/04\/foto-primaria-1.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1121,
+                "name": "Ginecolog\u00eda",
+                "url": "\/tienda\/ginecologia",
+                "courses": [
+                    {
+                        "id": 270041,
+                        "name": "Sexualidad y rol social y familiar de la adulta joven",
+                        "url": "\/curso\/sexualidad-y-rol-social-y-familiar-de-la-adulta-joven",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2023\/11\/foto-primaria-37.jpg"
+                    },
+                    {
+                        "id": 295290,
+                        "name": "Sexualidad y rol social y familiar de la adulta joven",
+                        "url": "\/curso\/sexualidad-y-rol-social-y-familiar-de-la-adulta-joven",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2023\/09\/foto-primaria-5.jpg"
+                    },
+                    {
+                        "id": 296173,
+                        "name": "Sexualidad y rol social y familiar de la adulta joven",
+                        "url": "\/curso\/sexualidad-y-rol-social-y-familiar-de-la-adulta-joven",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2023\/09\/foto-primaria-5.jpg"
+                    },
+                    {
+                        "id": 296174,
+                        "name": "Sexualidad y rol social y familiar de la adulta joven",
+                        "url": "\/curso\/sexualidad-y-rol-social-y-familiar-de-la-adulta-joven",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2023\/09\/foto-primaria-5.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1094,
+                "name": "Infectolog\u00eda",
+                "url": "\/tienda\/infectologia",
+                "courses": [
+                    {
+                        "id": 244570,
+                        "name": "Acciones espec\u00edficas para la prevenci\u00f3n y control de las infecciones asociadas a la atenci\u00f3n sanitaria",
+                        "url": "\/curso\/acciones-especificas-para-la-prevencion-y-control-de-las-infecciones-asociadas-a-la-atencion-sanitaria",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2023\/01\/foto-primaria.jpg"
+                    },
+                    {
+                        "id": 267951,
+                        "name": "Infecciones asociadas con el cuidado de la salud",
+                        "url": "\/curso\/infecciones-asociadas-con-el-cuidado-de-la-salud",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2023\/11\/foto-primaria-25.jpg"
+                    },
+                    {
+                        "id": 267952,
+                        "name": "Infecciones asociadas con el cuidado de la salud",
+                        "url": "\/curso\/infecciones-asociadas-con-el-cuidado-de-la-salud",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2023\/11\/foto-primaria-25.jpg"
+                    },
+                    {
+                        "id": 267920,
+                        "name": "Infecciones asociadas con el cuidado de la salud",
+                        "url": "\/curso\/infecciones-asociadas-con-el-cuidado-de-la-salud",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2023\/11\/foto-primaria-25.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1456,
+                "name": "Ingl\u00e9s",
+                "url": "\/tienda\/ingles",
+                "courses": []
+            },
+            {
+                "id": 1112,
+                "name": "Kinesiolog\u00eda",
+                "url": "\/tienda\/kinesiologia",
+                "courses": []
+            },
+            {
+                "id": 1449,
+                "name": "Medicina familiar",
+                "url": "\/tienda\/medicina-familiar",
+                "courses": [
+                    {
+                        "id": 332326,
+                        "name": "Enfermer\u00eda de salud mental",
+                        "url": "\/curso\/enfermeria-de-salud-mental",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/saludmentalenfermeria-primaria-1.jpg"
+                    },
+                    {
+                        "id": 332290,
+                        "name": "Enfermer\u00eda de salud mental",
+                        "url": "\/curso\/enfermeria-de-salud-mental",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/saludmentalenfermeria-primaria-1.jpg"
+                    },
+                    {
+                        "id": 332327,
+                        "name": "Enfermer\u00eda de salud mental",
+                        "url": "\/curso\/enfermeria-de-salud-mental",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/saludmentalenfermeria-primaria-1.jpg"
+                    },
+                    {
+                        "id": 332311,
+                        "name": "Enfermer\u00eda de salud mental",
+                        "url": "\/curso\/enfermeria-de-salud-mental",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/saludmentalenfermeria-primaria-1.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1090,
+                "name": "Medicina general",
+                "url": "\/tienda\/medicina-general",
+                "courses": [
+                    {
+                        "id": 335158,
+                        "name": "Liderazgo transformacional en urgencias",
+                        "url": "\/curso\/liderazgo-transformacional-en-urgencias",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/04\/foto-primaria-1.jpg"
+                    },
+                    {
+                        "id": 335160,
+                        "name": "Liderazgo transformacional en urgencias",
+                        "url": "\/curso\/liderazgo-transformacional-en-urgencias",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/04\/foto-primaria-1.jpg"
+                    },
+                    {
+                        "id": 335162,
+                        "name": "Liderazgo transformacional en urgencias",
+                        "url": "\/curso\/liderazgo-transformacional-en-urgencias",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/04\/foto-primaria-1.jpg"
+                    },
+                    {
+                        "id": 335164,
+                        "name": "Liderazgo transformacional en urgencias",
+                        "url": "\/curso\/liderazgo-transformacional-en-urgencias",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/04\/foto-primaria-1.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1413,
+                "name": "Medicina intensiva",
+                "url": "\/tienda\/medicina-intensiva",
+                "courses": [
+                    {
+                        "id": 334428,
+                        "name": "Curso superior de medicina intensiva AMIR",
+                        "url": "\/curso\/medicina-intensiva-amir",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/medicinaintensivaamir-primaria.jpg"
+                    },
+                    {
+                        "id": 334429,
+                        "name": "Curso superior de medicina intensiva AMIR",
+                        "url": "\/curso\/medicina-intensiva-amir",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/medicinaintensivaamir-primaria.jpg"
+                    },
+                    {
+                        "id": 334430,
+                        "name": "Curso superior de medicina intensiva AMIR",
+                        "url": "\/curso\/medicina-intensiva-amir",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/medicinaintensivaamir-primaria.jpg"
+                    },
+                    {
+                        "id": 334431,
+                        "name": "Curso superior de medicina intensiva AMIR",
+                        "url": "\/curso\/medicina-intensiva-amir",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/medicinaintensivaamir-primaria.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1102,
+                "name": "Nutrici\u00f3n",
+                "url": "\/tienda\/nutricion",
+                "courses": [
+                    {
+                        "id": 303232,
+                        "name": "Curso superior de endocrinolog\u00eda y nutrici\u00f3n",
+                        "url": "\/curso\/endocrinologia-y-nutricion",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/04\/foto-primaria-5.jpg"
+                    },
+                    {
+                        "id": 303233,
+                        "name": "Curso superior de endocrinolog\u00eda y nutrici\u00f3n",
+                        "url": "\/curso\/endocrinologia-y-nutricion",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/04\/foto-primaria-5.jpg"
+                    },
+                    {
+                        "id": 303234,
+                        "name": "Curso superior de endocrinolog\u00eda y nutrici\u00f3n",
+                        "url": "\/curso\/endocrinologia-y-nutricion",
+                        "image": false
+                    },
+                    {
+                        "id": 303235,
+                        "name": "Curso superior de endocrinolog\u00eda y nutrici\u00f3n",
+                        "url": "\/curso\/endocrinologia-y-nutricion",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/04\/foto-primaria-5.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1251,
+                "name": "Obstetricia",
+                "url": "\/tienda\/obstetricia",
+                "courses": [
+                    {
+                        "id": 326883,
+                        "name": "Muerte fetal anteparto y duelo perinatal: teor\u00eda y pr\u00e1ctica",
+                        "url": "\/curso\/muerte-fetal-anteparto-y-duelo-perinatal-teoria-y-practica",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/11\/muertefetalydueloperinatal-prim.jpg"
+                    },
+                    {
+                        "id": 326884,
+                        "name": "Muerte fetal anteparto y duelo perinatal: teor\u00eda y pr\u00e1ctica",
+                        "url": "\/curso\/muerte-fetal-anteparto-y-duelo-perinatal-teoria-y-practica",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/11\/muertefetalydueloperinatal-prim.jpg"
+                    },
+                    {
+                        "id": 326885,
+                        "name": "Muerte fetal anteparto y duelo perinatal: teor\u00eda y pr\u00e1ctica",
+                        "url": "\/curso\/muerte-fetal-anteparto-y-duelo-perinatal-teoria-y-practica",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/11\/muertefetalydueloperinatal-prim.jpg"
+                    },
+                    {
+                        "id": 326886,
+                        "name": "Muerte fetal anteparto y duelo perinatal: teor\u00eda y pr\u00e1ctica",
+                        "url": "\/curso\/muerte-fetal-anteparto-y-duelo-perinatal-teoria-y-practica",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/11\/muertefetalydueloperinatal-prim.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1103,
+                "name": "Odontolog\u00eda",
+                "url": "\/tienda\/odontologia",
+                "courses": []
+            },
+            {
+                "id": 1318,
+                "name": "Oftalmolog\u00eda",
+                "url": "\/tienda\/oftalmologia",
+                "courses": [
+                    {
+                        "id": 331702,
+                        "name": "Curso superior de oftalmolog\u00eda AMIR",
+                        "url": "\/curso\/oftalmologia-amir",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/oftalmologia_primaria.jpg"
+                    },
+                    {
+                        "id": 331703,
+                        "name": "Curso superior de oftalmolog\u00eda AMIR",
+                        "url": "\/curso\/oftalmologia-amir",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/oftalmologia_primaria.jpg"
+                    },
+                    {
+                        "id": 331704,
+                        "name": "Curso superior de oftalmolog\u00eda AMIR",
+                        "url": "\/curso\/oftalmologia-amir",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/oftalmologia_primaria.jpg"
+                    },
+                    {
+                        "id": 331705,
+                        "name": "Curso superior de oftalmolog\u00eda AMIR",
+                        "url": "\/curso\/oftalmologia-amir",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/oftalmologia_primaria.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1105,
+                "name": "Oncolog\u00eda",
+                "url": "\/tienda\/oncologia",
+                "courses": [
+                    {
+                        "id": 304249,
+                        "name": "C\u00e1ncer de origen desconocido: abordaje diagn\u00f3stico y anatom\u00eda patol\u00f3gica",
+                        "url": "\/curso\/cancer-de-origen-desconocido-abordaje-diagnostico-y-anatomia-patologica",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/04\/foto-primaria-1.jpg"
+                    },
+                    {
+                        "id": 304250,
+                        "name": "C\u00e1ncer de origen desconocido: abordaje diagn\u00f3stico y anatom\u00eda patol\u00f3gica",
+                        "url": "\/curso\/cancer-de-origen-desconocido-abordaje-diagnostico-y-anatomia-patologica",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/04\/foto-primaria-1.jpg"
+                    },
+                    {
+                        "id": 304251,
+                        "name": "C\u00e1ncer de origen desconocido: abordaje diagn\u00f3stico y anatom\u00eda patol\u00f3gica",
+                        "url": "\/curso\/cancer-de-origen-desconocido-abordaje-diagnostico-y-anatomia-patologica",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/04\/foto-primaria-1.jpg"
+                    },
+                    {
+                        "id": 304252,
+                        "name": "C\u00e1ncer de origen desconocido: abordaje diagn\u00f3stico y anatom\u00eda patol\u00f3gica",
+                        "url": "\/curso\/cancer-de-origen-desconocido-abordaje-diagnostico-y-anatomia-patologica",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/04\/foto-primaria-1.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1104,
+                "name": "Psicolog\u00eda",
+                "url": "\/tienda\/psicologia",
+                "courses": [
+                    {
+                        "id": 332325,
+                        "name": "Enfermer\u00eda de salud mental",
+                        "url": "\/curso\/enfermeria-de-salud-mental",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/saludmentalenfermeria-primaria-1.jpg"
+                    },
+                    {
+                        "id": 332326,
+                        "name": "Enfermer\u00eda de salud mental",
+                        "url": "\/curso\/enfermeria-de-salud-mental",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/saludmentalenfermeria-primaria-1.jpg"
+                    },
+                    {
+                        "id": 332290,
+                        "name": "Enfermer\u00eda de salud mental",
+                        "url": "\/curso\/enfermeria-de-salud-mental",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/saludmentalenfermeria-primaria-1.jpg"
+                    },
+                    {
+                        "id": 332327,
+                        "name": "Enfermer\u00eda de salud mental",
+                        "url": "\/curso\/enfermeria-de-salud-mental",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/saludmentalenfermeria-primaria-1.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1412,
+                "name": "Psiquiatr\u00eda",
+                "url": "\/tienda\/psiquiatria",
+                "courses": [
+                    {
+                        "id": 335412,
+                        "name": "Trastorno del espectro autista en adultos: diagn\u00f3stico, tratamiento y apoyo",
+                        "url": "\/curso\/trastorno-del-espectro-autista-en-adultos-diagnostico-tratamiento-y-apoyo",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/04\/TEA-primaria.jpg"
+                    },
+                    {
+                        "id": 335444,
+                        "name": "Trastorno del espectro autista en adultos: diagn\u00f3stico, tratamiento y apoyo",
+                        "url": "\/curso\/trastorno-del-espectro-autista-en-adultos-diagnostico-tratamiento-y-apoyo",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/04\/TEA-primaria.jpg"
+                    },
+                    {
+                        "id": 335414,
+                        "name": "Trastorno del espectro autista en adultos: diagn\u00f3stico, tratamiento y apoyo",
+                        "url": "\/curso\/trastorno-del-espectro-autista-en-adultos-diagnostico-tratamiento-y-apoyo",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/04\/TEA-primaria.jpg"
+                    },
+                    {
+                        "id": 335416,
+                        "name": "Trastorno del espectro autista en adultos: diagn\u00f3stico, tratamiento y apoyo",
+                        "url": "\/curso\/trastorno-del-espectro-autista-en-adultos-diagnostico-tratamiento-y-apoyo",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/04\/TEA-primaria.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1106,
+                "name": "Pediatr\u00eda",
+                "url": "\/tienda\/pediatria",
+                "courses": [
+                    {
+                        "id": 333465,
+                        "name": "Cuidados y controles de enfermer\u00eda del ni\u00f1o y el adolescente",
+                        "url": "\/curso\/cuidados-y-controles-de-enfermeria-del-nino-y-el-adolescente",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/cuidadosenfermerianino-primaria.jpg"
+                    },
+                    {
+                        "id": 333466,
+                        "name": "Cuidados y controles de enfermer\u00eda del ni\u00f1o y el adolescente",
+                        "url": "\/curso\/cuidados-y-controles-de-enfermeria-del-nino-y-el-adolescente",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/cuidadosenfermerianino-primaria.jpg"
+                    },
+                    {
+                        "id": 333467,
+                        "name": "Cuidados y controles de enfermer\u00eda del ni\u00f1o y el adolescente",
+                        "url": "\/curso\/cuidados-y-controles-de-enfermeria-del-nino-y-el-adolescente",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/cuidadosenfermerianino-primaria.jpg"
+                    },
+                    {
+                        "id": 333468,
+                        "name": "Cuidados y controles de enfermer\u00eda del ni\u00f1o y el adolescente",
+                        "url": "\/curso\/cuidados-y-controles-de-enfermeria-del-nino-y-el-adolescente",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/cuidadosenfermerianino-primaria.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1211,
+                "name": "Hematolog\u00eda",
+                "url": "\/tienda\/hematologia",
+                "courses": [
+                    {
+                        "id": 324316,
+                        "name": "Introducci\u00f3n a las patolog\u00edas hematol\u00f3gicas en atenci\u00f3n primaria",
+                        "url": "\/curso\/introduccion-a-las-patologias-hematologicas-en-atencion-primaria",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/10\/foto-primaria-7.jpg"
+                    },
+                    {
+                        "id": 324317,
+                        "name": "Introducci\u00f3n a las patolog\u00edas hematol\u00f3gicas en atenci\u00f3n primaria",
+                        "url": "\/curso\/introduccion-a-las-patologias-hematologicas-en-atencion-primaria",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/10\/foto-primaria-7.jpg"
+                    },
+                    {
+                        "id": 324318,
+                        "name": "Introducci\u00f3n a las patolog\u00edas hematol\u00f3gicas en atenci\u00f3n primaria",
+                        "url": "\/curso\/introduccion-a-las-patologias-hematologicas-en-atencion-primaria",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/10\/foto-primaria-7.jpg"
+                    },
+                    {
+                        "id": 324319,
+                        "name": "Introducci\u00f3n a las patolog\u00edas hematol\u00f3gicas en atenci\u00f3n primaria",
+                        "url": "\/curso\/introduccion-a-las-patologias-hematologicas-en-atencion-primaria",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/10\/foto-primaria-7.jpg"
+                    }
+                ]
+            },
+            {
+                "id": 1117,
+                "name": "Medicina est\u00e9tica",
+                "url": "\/tienda\/medicina-estetica",
+                "courses": []
+            },
+            {
+                "id": 1448,
+                "name": "Traumatolog\u00eda",
+                "url": "\/tienda\/traumatologia",
+                "courses": [
+                    {
+                        "id": 323097,
+                        "name": "Curso superior de cirug\u00eda ortop\u00e9dica y traumatolog\u00eda",
+                        "url": "\/curso\/cirugia-ortopedica-y-traumatologia",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/10\/foto-primaria-4.jpg"
+                    },
+                    {
+                        "id": 323098,
+                        "name": "Curso superior de cirug\u00eda ortop\u00e9dica y traumatolog\u00eda",
+                        "url": "\/curso\/cirugia-ortopedica-y-traumatologia",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/10\/foto-primaria-4.jpg"
+                    },
+                    {
+                        "id": 323099,
+                        "name": "Curso superior de cirug\u00eda ortop\u00e9dica y traumatolog\u00eda",
+                        "url": "\/curso\/cirugia-ortopedica-y-traumatologia",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/10\/foto-primaria-4.jpg"
+                    },
+                    {
+                        "id": 323100,
+                        "name": "Curso superior de cirug\u00eda ortop\u00e9dica y traumatolog\u00eda",
+                        "url": "\/curso\/cirugia-ortopedica-y-traumatologia",
+                        "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/10\/foto-primaria-4.jpg"
+                    }
+                ]
+            }
+        ],
+        "que_ofrecemos": [
+            {
+                "link": {
+                    "title": "Cursos para personal m\u00e9dico",
+                    "url": "\/tienda\/?profesion=medicos&recurso=curso",
+                    "target": ""
                 }
-            ]
+            },
+            {
+                "link": {
+                    "title": "Cursos para enfermeria y otras profesiones",
+                    "url": "\/tienda\/?profesion=otra-profesion",
+                    "target": ""
+                }
+            }
+        ],
+        "recursos": [
+            {
+                "link": {
+                    "title": "Gu\u00edas profesionales",
+                    "url": "\/tienda\/?recurso=guias-profesionales",
+                    "target": ""
+                }
+            },
+            {
+                "link": {
+                    "title": "Blog",
+                    "url": "\/blog\/",
+                    "target": ""
+                }
+            }
+        ],
+        "universities": {
+            "background_image": [
+                "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/04\/universidades.webp",
+                630,
+                420,
+                false
+            ],
+            "link": ""
         },
-        "content": {
-            "title": "Qu\u00e9 es la investigaci\u00f3n en enfermer\u00eda",
-            "content": "La investigaci\u00f3n en enfermer\u00eda es una disciplina fundamental para el avance del conocimiento y la mejora de la pr\u00e1ctica cl\u00ednica. A trav\u00e9s del an\u00e1lisis de datos y la aplicaci\u00f3n del m\u00e9todo cient\u00edfico, se generan nuevas evidencias que permiten optimizar la atenci\u00f3n sanitaria, mejorar la toma de decisiones y garantizar un cuidado basado en la mejor informaci\u00f3n disponible.El curso de Iniciaci\u00f3n a la investigaci\u00f3n en enfermer\u00eda de MSK te brinda las herramientas necesarias para dise\u00f1ar y desarrollar proyectos de investigaci\u00f3n, interpretar datos estad\u00edsticos y aplicar metodolog\u00edas tanto cuantitativas como cualitativas. Adem\u00e1s, profundiza en la enfermer\u00eda basada en la evidencia, permiti\u00e9ndote adquirir un enfoque anal\u00edtico y cr\u00edtico para la toma de decisiones.Organizado en cinco temas, el curso de Iniciaci\u00f3n a la investigaci\u00f3n en enfermer\u00eda de MSK abarca desde los fundamentos de la investigaci\u00f3n hasta el an\u00e1lisis de datos y la \u00e9tica en la investigaci\u00f3n cient\u00edfica, a partir de materiales completamente actualizados."
-        },
-        "institutions": [
+        "partners": [
+            {
+                "id": 254526,
+                "title": "Tropos",
+                "slug": "tropos",
+                "date": "2023-08-07 23:12:56",
+                "featured_image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2023\/08\/cedentes_tropos.png"
+            },
+            {
+                "id": 210852,
+                "title": "Colegio de M\u00e9dicos de la Provincia de Buenos Aires - Distrito III",
+                "slug": "colegio-de-medicos-de-la-provincia-de-buenos-aires-distrito-iii-escuela-superior-de-ensenanza-medica",
+                "date": "2022-05-17 14:39:23",
+                "featured_image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2023\/08\/colmed_1x.webp"
+            },
+            {
+                "id": 230596,
+                "title": "ACC - American College of Cardiology",
+                "slug": "accsap-american-college-of-cardiology",
+                "date": "2022-09-23 15:52:02",
+                "featured_image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2022\/09\/acc_1x.webp"
+            },
             {
                 "id": 309920,
                 "title": "European University Gasteiz (EUNEIZ)",
                 "slug": "euneiz-european-university-gastei",
-                "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/06\/EUNEKZ.png"
-            },
-            {
-                "id": 293255,
-                "title": "MSK ANDROS OTEC",
-                "slug": "msk-andros-otec",
-                "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/01\/mskandros_otec_1x.webp"
+                "date": "2024-06-19 16:21:32",
+                "featured_image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/06\/EUNEKZ.png"
             },
             {
                 "id": 96956,
                 "title": "Asociaci\u00f3n de Facultades Ecuatorianas de Ciencias M\u00e9dicas y de la Salud",
                 "slug": "asociacion-de-facultades-ecuatorianas-de-ciencias-medicas-y-de-la-salud",
-                "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2021\/06\/afeme_1x.webp"
+                "date": "2021-06-07 17:50:54",
+                "featured_image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2021\/06\/afeme_1x.webp"
             },
             {
-                "id": 313571,
-                "title": "Universidad de Cuenca",
-                "slug": "universidad-de-cuenca",
-                "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/07\/ucuenca_1x.webp"
-            },
-            {
-                "id": 309785,
-                "title": "Asociaci\u00f3n Nacional de M\u00e9dicos Rurales del Ecuador (ANAMER)",
-                "slug": "asociacion-de-medicos-rurales-del-ecuador-anamer",
-                "image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2024\/06\/anamer_1x.webp"
+                "id": 211210,
+                "title": "Comit\u00e9 Normativo Nacional de Medicina General",
+                "slug": "comite-normativo-nacional-de-medicina-general",
+                "date": "2022-05-19 14:46:47",
+                "featured_image": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2022\/05\/conamege_1x.webp"
             }
         ],
-        "learning": [
-            {
-                "msk_learning_content": "Comprender el proceso cient\u00edfico aplicado al cuidado enfermero."
-            },
-            {
-                "msk_learning_content": "Formular preguntas de investigaci\u00f3n y dise\u00f1ar proyectos."
-            },
-            {
-                "msk_learning_content": "Interpretar resultados y aplicar la evidencia en la pr\u00e1ctica."
-            },
-            {
-                "msk_learning_content": "Desarrollar habilidades de lectura cr\u00edtica y escritura cient\u00edfica."
-            }
-        ],
-        "habilities": [
-            {
-                "id": 60403,
-                "name": "Lectura cr\u00edtica",
-                "slug": "lectura-critica"
-            },
-            {
-                "id": 60404,
-                "name": "Evidencia en cuidados",
-                "slug": "evidencia-en-cuidados"
-            },
-            {
-                "id": 60405,
-                "name": "Presentaci\u00f3n de trabajos",
-                "slug": "presentacion-de-trabajos"
-            },
-            {
-                "id": 60184,
-                "name": "Redacci\u00f3n cient\u00edfica",
-                "slug": "redaccion-cientifica"
-            },
-            {
-                "id": 60182,
-                "name": "Proyectos de investigaci\u00f3n",
-                "slug": "proyectos-de-investigacion"
-            }
-        ],
-        "with_this_course": "Con este curso, mejorar\u00e1s tu criterio cl\u00ednico y te convertir\u00e1s en referente en Investigaci\u00f3n cient\u00edfica",
-        "your_course_steps": [
-            {
-                "step": "Lectura de m\u00f3dulos teoricos."
-            },
-            {
-                "step": "Clases interactivas con mirada pr\u00e1ctica aplicada a casos cl\u00ednicos."
-            },
-            {
-                "step": "Autoevaluaci\u00f3n al finalizar cada m\u00f3dulo. "
-            },
-            {
-                "step": "Examen final."
-            }
-        ],
-        "teaching_team": [
-            {
-                "id": 335508,
-                "name": "Ana Isabel Parro Moreno",
-                "slug": "ana-isabel-parro-moreno",
-                "description": "Coordinadora del curso",
-                "image": false,
-                "link": "https:\/\/msklatam.com\/doctor\/ana-isabel-parro-moreno"
-            }
-        ],
-        "video": false,
-        "certificate": {
-            "has_certificate": true
+        "companies": {
+            "background_image": [
+                "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/04\/empresas.webp",
+                630,
+                420,
+                false
+            ],
+            "link": ""
         },
-        "study_plan": {
-            "hours": "50",
-            "study_plan_file": {
-                "ID": 334622,
-                "id": 334622,
-                "title": "Iniciaci\u00f3n a la investigaci\u00f3n en enfermer\u00eda",
-                "filename": "Iniciacion-a-la-investigacion-en-enfermeria.pdf",
-                "filesize": 4102376,
-                "url": "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/01\/Iniciacion-a-la-investigacion-en-enfermeria.pdf",
-                "link": "https:\/\/es.wp.msklatam.com\/?attachment_id=334622",
-                "alt": "",
-                "author": "102",
-                "description": "",
-                "caption": "",
-                "name": "iniciacion-a-la-investigacion-en-enfermeria-2",
-                "status": "inherit",
-                "uploaded_to": 333437,
-                "date": "2025-02-21 19: 33: 50",
-                "modified": "2025-02-21 19: 33: 50",
-                "menu_order": 0,
-                "mime_type": "application\/pdf",
-                "type": "application",
-                "subtype": "pdf",
-                "icon": "https:\/\/cms1.msklatam.com\/wp-includes\/images\/media\/document.png"
-            },
-            "modules": [
-                {
-                    "title": "Fundamentos de investigaci\u00f3n",
-                    "content": "Introducci\u00f3n a la investigaci\u00f3nDise\u00f1o de un proyecto de investigaci\u00f3nComponentes de un protocolo<\/li>Estructura de las publicaciones cient\u00edficas<\/li>\/ul>\/li>\u00c9tica de la investigaci\u00f3nPilares de la \u00e9tica de investigaci\u00f3n<\/li>\/ul>\/li>Contraste de hip\u00f3tesis<\/li>Errores en el contraste<\/li>\/ul>\/li>Estudios epidemiol\u00f3gicosMetodolog\u00eda cuantitativa de investigaci\u00f3n<\/li>Tipos de estudios epidemiol\u00f3gicosEstudios experimentales<\/li>Estudios observacionales<\/li>\/ul>\/li>Conceptos de prevalencia e incidencia<\/li>\/ul>\/li>Estudios sobre pruebas diagn\u00f3sticasLa prueba diagn\u00f3stica ideal: validez y precisi\u00f3n<\/li>Evaluaci\u00f3n de una prueba diagn\u00f3stica<\/li>\/ul>\/li>Fuentes de informaci\u00f3nTipos de documentos<\/li>\/ul>\/li>IndicadoresIndicadores demogr\u00e1ficos, socioecon\u00f3micos, del nivel de salud y medioambientales<\/li>Indicadores demogr\u00e1ficos<\/li>Indicadores socioecon\u00f3micos<\/li>Indicadores del nivel de salud<\/li>Indicadores medioambientales<\/li>\/ul>\/li>C\u00e1lculo de probabilidadesConcepto de probabilidad<\/li>Regla de Laplace<\/li>Regla de probabilidad total<\/li>Teorema de Bayes<\/li>Aplicaci\u00f3n al diagn\u00f3stico cl\u00ednico<\/li>\/ul>\/li>Otros conceptos importantesNiveles de poblaci\u00f3n<\/li>C\u00e1lculo de tama\u00f1o muestral<\/li>T\u00e9cnicas de muestreo"
-                },
-                {
-                    "title": "Tipos de estudios en investigaci\u00f3n cuantitativa",
-                    "content": "Tipos de estudios en investigaci\u00f3n cuantitativa\u00a0Estudios descriptivosEstudios transversales o de prevalencia<\/li>Estudios longitudinales<\/li>Estudios ecol\u00f3gicos<\/li>Estudios de casos<\/li>\/ul>\/li>Estudios anal\u00edticos observacionalesEstudios de casos y controles<\/li>Estudios de cohorte<\/li>\/ul>\/li>Estudios anal\u00edticos experimentalesEnsayos controlados<\/li>Estudios cuasiexperimentales<\/li>Limitaciones de los estudios experimentales<\/li>\/ul>\/li>Revisiones sistem\u00e1ticas y metaan\u00e1lisis<\/li>\/ul>\/li>Validez y fiabilidad de las medicionesCalidad de una prueba diagn\u00f3sticaUsos b\u00e1sicos de las pruebas diagn\u00f3sticas<\/li>\/ul>\/li>Evaluaci\u00f3n de una prueba diagn\u00f3sticaSelecci\u00f3n del patr\u00f3n de oro o gold standard<\/em><\/li>\/ul>\/li>Validez interna y validez externaValidez interna: sesgos y confusi\u00f3n<\/li>\/ul>\/li>\/ul>\/li>\/ul>"
-                },
-                {
-                    "title": "An\u00e1lisis de los datos en investigaci\u00f3n cuantitativa",
-                    "content": "Estad\u00edstica descriptiva y representaci\u00f3n de los datosEstad\u00edstica descriptivaConceptos b\u00e1sicos en estad\u00edstica descriptiva<\/li>\/ul>\/li>Representaci\u00f3n de los datosTabla de frecuencia. Variable cuantitativa discreta<\/li>Tabla de frecuencia. Variable cuantitativa continua<\/li>Otras representaciones gr\u00e1ficas importantes<\/li>\/ul>\/li>Tipos de distribuci\u00f3n y par\u00e1metros que la definenDistribuci\u00f3n normal est\u00e1ndar Inferencia estad\u00edsticaIntervalos de confianza<\/li>Contrastes de hip\u00f3tesisErrores en el contraste<\/li>\/ul>\/li>\/ul>\/li>Correlaci\u00f3n y regresi\u00f3nCorrelaci\u00f3n<\/li>Regresi\u00f3n<\/li>\/ul>\/li>Pruebas no param\u00e9tricasContrastes param\u00e9tricos y no param\u00e9tricos<\/li>\/ul>\/li>Introducci\u00f3n al an\u00e1lisis multivarianteRegresi\u00f3n lineal m\u00faltiple<\/li>Regresi\u00f3n log\u00edstica multivariante\u00bfC\u00f3mo se estudia la asociaci\u00f3n entre Y y x?"
-                },
-                {
-                    "title": "Fundamentos de investigaci\u00f3n cualitativa",
-                    "content": "Muestreo en investigaci\u00f3n cualitativaTipo de muestreo<\/li>Tama\u00f1o muestral<\/li>\/ul>\/li>Recolecci\u00f3n de datosT\u00e9cnicas observacionales en la recogida de datosObservaci\u00f3n en el trabajo de campo<\/li>Roles del investigador dentro de la observaci\u00f3n<\/li>Roles de los participantes dentro de la observaci\u00f3n<\/li>\/ul>\/li>T\u00e9cnicas conversacionales en la recogida de datosEntrevistas en profundidad<\/li>Grupos de discusi\u00f3n<\/li>Historias de vida<\/li>\/ul>\/li>\/ul>\/li>An\u00e1lisis de datosCaracter\u00edsticas del an\u00e1lisis de datos<\/li>Tipos de an\u00e1lisis de datos<\/li>Etapas en el an\u00e1lisis de datos<\/li>\/ul>\/li>Calidad en investigaci\u00f3n cualitativa<\/li>\u00c9tica en investigaci\u00f3n cualitativa<\/li>\/ul>"
-                },
-                {
-                    "title": "Enfermer\u00eda basada en la evidencia",
-                    "content": "Introducci\u00f3n a la enfermer\u00eda basada en la evidenciaNiveles de evidencia<\/li>Fuerza de la recomendaci\u00f3n<\/li>\/ul>\/li>B\u00fasqueda de evidencias cient\u00edficasBases de datos bibliogr\u00e1ficas<\/li>Fuentes documentales de evidenciaFuentes de informaci\u00f3n terciaria<\/li>\/ul>\/li>Revisi\u00f3n bibliogr\u00e1ficaAmpliaci\u00f3n sobre b\u00fasquedas bibliogr\u00e1ficas<\/li>\/ul>\/li>\/ul>\/li>Instrumentos de evidencia cient\u00edfica<\/li>Formulaci\u00f3n de preguntas y b\u00fasqueda de respuestas sobre la pr\u00e1ctica cl\u00ednica<\/li>Evaluaci\u00f3n y s\u00edntesis de los hallazgos de la revisi\u00f3n bibliogr\u00e1ficaDefinici\u00f3n de la calidad de la evidencia<\/li>Factores que determinan la calidad de la evidencia<\/li>S\u00edntesis de los hallazgos de la revisi\u00f3n bibliogr\u00e1fica<\/li>\/ul>\/li>Estructura metodol\u00f3gica de un trabajo cient\u00edfico y sus fasesEstructura metodol\u00f3gica de un trabajo cient\u00edfico<\/li>Fases de un trabajo cient\u00edficoFase conceptual<\/li>\/ul>\/li>\/ul>\/li>\/ul>"
-                }
-            ]
+        "alliances": {
+            "background_image": [
+                "https:\/\/cms1.msklatam.com\/wp-content\/uploads\/2025\/04\/universidades.webp",
+                630,
+                420,
+                false
+            ],
+            "link": ""
         }
     }
 }
