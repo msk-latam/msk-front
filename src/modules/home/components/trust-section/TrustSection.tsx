@@ -36,7 +36,7 @@ const TrustSection = () => {
           <div
             {...handlers}
             className="flex transition-transform duration-500 ease-in-out"
-            style={{ transform: `translateX(-${current * 370}px)` }}
+            style={{ transform: `translateX(-${current * 330}px)` }}
           >
             {testimonials.map((testimonial: any, index: number) => (
               <div

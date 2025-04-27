@@ -12,7 +12,7 @@ interface CourseOverviewProps {
 }
 
 const steps = [
-  { step: 'Inscribite', icon: '/icons/course/overview/step1.svg' },
+  { step: 'Inscríbite', icon: '/icons/course/overview/step1.svg' },
   { step: 'Aprende con material actualizado por expertos', icon: '/icons/course/overview/step2.svg' },
   { step: 'Obtén tu certificado', icon: '/icons/course/overview/step3.svg' },
   { step: 'Aplica lo aprendido a tu práctica y mejora tu futuro profesional', icon: '/icons/course/overview/step4.svg' },
@@ -75,14 +75,14 @@ export default function CourseOverview({ slug }: CourseOverviewProps) {
   return (
     <section className="py-6 max-w-5xl mx-auto">
       {/* Título principal */}
-      <h2 className="text-3xl font-medium md:text-[34px] text-[#1A1A1A] font-raleway mb-6 text-center md:text-left">
+      <h2 className="text-2xl whitespace-nowrap font-medium md:text-[34px] text-[#1A1A1A] font-raleway mb-6 text-center md:text-left">
         Desarróllate en lo importante
       </h2>
 
       {/* Habilidades (tags dinámicos) */}
-      <div className="flex flex-wrap gap-4 justify-start items-center mb-8">
+      <div className="flex flex-wrap gap-3 md:justify-start md:items-center justify-center items-center mb-8">
   {data?.habilities?.map((item, index) => (
-    <span key={index} className="bg-[#f7f9ff] text-[#29324f] text-sm font-inter font-normal px-4 py-2 rounded-full shadow-sm">
+    <span key={index} className="bg-[#f7f9ff] text-[#29324f] text-sm font-inter font-normal md:px-4 px-2 py-2 rounded-full shadow-sm">
       {item.name}
     </span>
   ))}
@@ -121,7 +121,7 @@ export default function CourseOverview({ slug }: CourseOverviewProps) {
 
       {/* Sección "Tu cursada paso a paso" */}
       <div className="bg-[#f7f9ff] rounded-[38px] p-6 mb-10">
-        <h3 className="pb-6 font-raleway text-[18px] font-medium md:text-left text-center">Tu cursada, paso a paso</h3>
+        <h3 className="pb-6 font-raleway text-[18px] font-medium text-left ">Tu cursada, paso a paso</h3>
         <div className="grid gap-6 md:grid-cols-2 text-sm text-[#29324f] text-left font-inter">
           {data?.your_course_steps.map((step, idx) => (
             <div key={idx} className="flex items-start gap-3">
@@ -140,7 +140,7 @@ export default function CourseOverview({ slug }: CourseOverviewProps) {
             <h3 className="font-raleway font-bold text-md text-[#1A1A1A] mb-2 break-words w-full text-left">
               {item.title}
             </h3>
-            <p className="text-sm font-inter font-normal text-[#1A1A1A] text-left">
+            <p className="text-sm font-inter font-normal text-[#1A1A1A] md:text-left text-center">
               {item.description}
             </p>
           </div>

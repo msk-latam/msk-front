@@ -72,9 +72,15 @@ export default function DownloadSyllabusModal({
 
   return (
     <div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4 !mt-0"
-      onMouseDown={handleBackdropClick}
-    >
+    className="fixed inset-0 bg-black/50 flex items-center justify-center z-[100] px-4 !mt-0"
+    onClick={(e) => {
+      if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+        onClose(); // Click fuera del modal => Cierra
+      } else {
+        e.stopPropagation(); // Click dentro del modal => NO cierra
+      }
+    }}
+  >
       <div
         ref={modalRef}
         className="relative bg-white rounded-2xl p-8 max-w-2xl w-full shadow-lg"
