@@ -135,7 +135,7 @@ const DropdownContent: React.FC<Props> = ({
   const getContentMobile = () => {
     switch (currentView) {
       case "main":
-        return <ViewMain navigateTo={navigateTo} isMobile />;
+        return <ViewMain navigateTo={navigateTo} isMobile onClose={onClose} />;
       case "discover":
         return <ViewDiscover navigateTo={navigateTo} isMobile />;
       case "specialty":
