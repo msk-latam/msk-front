@@ -6,7 +6,7 @@ import { MdOutlineTableRows } from 'react-icons/md';
 import { PiHourglassLowBold } from 'react-icons/pi';
 import { FaPlus, FaMinus } from 'react-icons/fa6';
 import { Download } from 'lucide-react';
-
+import DownloadSyllabusModal from './DownloadSyllabusModal';
 import { useCourseSyllabus } from '../hooks/useCourseSyllabus';
 
 interface CourseSyllabusProps {
@@ -15,10 +15,19 @@ interface CourseSyllabusProps {
 
 export default function CourseSyllabus({ slug }: CourseSyllabusProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { data, loading, error } = useCourseSyllabus(slug);
 
   const toggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
+  };
+
+  const handleDownloadClick = () => {
+    setIsModalOpen(true);
+  };
+  
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   if (loading) return null;
@@ -51,15 +60,13 @@ export default function CourseSyllabus({ slug }: CourseSyllabusProps) {
 
         {data.study_plan_file && (
           <div className="text-right w-full md:w-auto">
-            <a
-              href={data.study_plan_file}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={handleDownloadClick}
               className="md:w-[289px] w-full h-[52px] mt-2 md:py-[14px] md:px-[24px] px-5 text-sm text-black-600 border border-black-600 rounded-[38px] flex items-center justify-center gap-2 hover:bg-[#F5F5F5]"
             >
               Descargar plan de estudios
               <Download className="w-4 h-4" />
-            </a>
+            </button>
           </div>
         )}
       </div>
@@ -107,6 +114,14 @@ export default function CourseSyllabus({ slug }: CourseSyllabusProps) {
           </div>
         ))}
       </div>
+
+      {/* Modal - Ensure we're passing the correct handler */}
+      {isModalOpen && (
+        <DownloadSyllabusModal
+          fileUrl={data.study_plan_file}
+          onClose={handleCloseModal}
+        />
+      )}
     </section>
   );
 }

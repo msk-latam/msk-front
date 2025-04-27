@@ -25,7 +25,7 @@ module.exports = {
 				raleway: ['var(--font-raleway)'],
 			}
 		},    screens: {
-			'md': '1024px',     
+			'md': '1400px',     
 		  },
 		
 	},
@@ -35,13 +35,11 @@ module.exports = {
 		container: {
 			center: true,
 			padding: {
-				DEFAULT: '1rem',
-				md: '4rem',
+				DEFAULT:'4rem',
 			},
 			screens: {
-				'md': '1024px',     
-				'lg': '1280px',     
-				'xl': '1400px',     
+
+				'md': '1400px',   
 			  },
 		},
 		fontFamily: {
