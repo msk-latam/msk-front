@@ -1,3 +1,4 @@
+import Modal from '@/modules/dashboard/components/ui/Modal'; // Import Modal component
 import Accordion from '@/store/components/ui/Accordion'; // Assuming correct path alias
 import Checkbox from '@/store/components/ui/Checkbox'; // Assuming correct path alias
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -114,10 +115,10 @@ const FilterSection: React.FC<FilterSectionProps> = ({
 	);
 };
 
-const StoreFilters = () => {
+const StoreFilters = ({ isMobile = false, isModalOpen = false, onModalClose = () => {} }) => {
 	const router = useRouter();
 	const pathname = usePathname();
-	const searchParams = useSearchParams();
+	const searchParams = useSearchParams() || new URLSearchParams();
 
 	const [openIndices, setOpenIndices] = useState<Set<number>>(new Set([0, 1, 2, 3]));
 
@@ -138,13 +139,15 @@ const StoreFilters = () => {
 			duracion: new Set(),
 		};
 
-		searchParams.forEach((value, key) => {
-			if (key in initialFilters) {
-				const items = value.split(',');
-				// Values from URL are already in the correct format (e.g., 'administracion-y-gestion')
-				initialFilters[key] = new Set(items);
-			}
-		});
+		if (searchParams) {
+			searchParams.forEach((value, key) => {
+				if (key in initialFilters) {
+					const items = value.split(',');
+					// Values from URL are already in the correct format (e.g., 'administracion-y-gestion')
+					initialFilters[key] = new Set(items);
+				}
+			});
+		}
 
 		// Check if the initialized filters differ from the current state to avoid loops
 		let needsUpdate = false;
@@ -179,7 +182,7 @@ const StoreFilters = () => {
 
 	const createQueryString = useCallback(
 		(params: Record<string, string>) => {
-			const newSearchParams = new URLSearchParams(searchParams.toString());
+			const newSearchParams = new URLSearchParams(searchParams ? searchParams.toString() : '');
 
 			Object.entries(params).forEach(([key, value]) => {
 				if (value) {
@@ -221,8 +224,8 @@ const StoreFilters = () => {
 		console.log('Selected Filter Values:', nextFilters);
 	};
 
-	return (
-		<div className='md:col-span-1 md:row-span-3 order-1 md:order-1'>
+	const filtersContent = (
+		<>
 			<FilterSection
 				title='Especialidades'
 				options={especialidadesData} // Pass the new data structure
@@ -259,8 +262,20 @@ const StoreFilters = () => {
 				selectedOptions={selectedFilters.duracion} // Pass the Set of selected values
 				onOptionChange={(value) => handleOptionChange('duracion', value)} // Pass the value
 			/>
-		</div>
+		</>
 	);
+
+	// For mobile view, render as Modal component
+	if (isMobile) {
+		return (
+			<Modal isOpen={isModalOpen} onClose={onModalClose} title='Filtros' size='large'>
+				<div className='px-2'>{filtersContent}</div>
+			</Modal>
+		);
+	}
+
+	// For desktop view, render normally
+	return <div className='md:col-span-1 md:row-span-3 order-1 md:order-1'>{filtersContent}</div>;
 };
 
 export default StoreFilters;

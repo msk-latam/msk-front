@@ -27,9 +27,10 @@ function useDebounce<T>(value: T, delay: number): T {
 
 interface StoreCoursesProps {
 	// Props if any
+	onOpenFilters?: () => void; // Añadimos la prop para abrir el modal de filtros
 }
 
-const StoreCourses: React.FC<StoreCoursesProps> = () => {
+const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters }) => {
 	const router = useRouter(); // Added
 	const pathname = usePathname(); // Added
 	const searchParams = useSearchParams();
@@ -156,6 +157,7 @@ const StoreCourses: React.FC<StoreCoursesProps> = () => {
 				filterCount={totalSelectedOptionsCount}
 				searchTerm={searchTerm}
 				onSearchChange={handleSearchChange}
+				onOpenFilters={onOpenFilters}
 			/>
 			{isLoading ? (
 				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>

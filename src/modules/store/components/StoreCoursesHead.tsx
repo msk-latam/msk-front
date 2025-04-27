@@ -20,12 +20,14 @@ interface StoreCoursesHeadProps {
 	onSearchChange: (term: string) => void;
 	// sortKey: string;
 	// onSortChange: (key: string) => void;
+	onOpenFilters?: () => void; // Función para abrir el modal de filtros
 }
 
 const StoreCoursesHead: React.FC<StoreCoursesHeadProps> = ({
 	filterCount,
 	searchTerm,
 	onSearchChange,
+	onOpenFilters = () => {},
 	/*, ...other props */
 }) => {
 	// Mock sort options for now - move to parent or constants file if needed
@@ -39,14 +41,29 @@ const StoreCoursesHead: React.FC<StoreCoursesHeadProps> = ({
 	return (
 		<div className='flex flex-wrap items-center justify-between gap-4 mb-6 text-black dark:text-white'>
 			{/* Filter Button and Search */}
-			<div className='flex items-center gap-4 flex-grow sm:flex-grow-0'>
+			<div className='flex flex-col md:flex-row items-center gap-4 flex-grow sm:flex-grow-0'>
 				{/* Filter Button - Style to match image */}
-				<button className='px-5 py-2.5 border border-gray-300 rounded-full text-sm font-medium hover:bg-gray-100'>
-					Filtros {filterCount > 0 ? `(${filterCount})` : ''}
+				<button
+					onClick={onOpenFilters}
+					className='px-5 py-2.5 border border-gray-300 rounded-full text-sm font-medium hover:bg-gray-100 flex items-center justify-center w-full md:w-[142px]'
+				>
+					<span>Filtros {filterCount > 0 ? `(${filterCount})` : ''}</span>
+					<svg
+						className='md:hidden ml-2'
+						width='20'
+						height='20'
+						viewBox='0 0 24 24'
+						fill='none'
+						xmlns='http://www.w3.org/2000/svg'
+					>
+						<path d='M3 7H21' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' />
+						<path d='M6 12H18' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' />
+						<path d='M10 17H14' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' />
+					</svg>
 				</button>
 
 				{/* Search Input - Style to match image */}
-				<div className='relative flex-grow max-w-xs'>
+				<div className='relative flex-grow w-full md:max-w-xs'>
 					<input
 						type='text'
 						placeholder='Buscar'
@@ -61,7 +78,7 @@ const StoreCoursesHead: React.FC<StoreCoursesHeadProps> = ({
 			</div>
 
 			{/* Sort Dropdown - Style to match image */}
-			<div className='flex items-center gap-2'>
+			<div className='flex items-center gap-2 justify-between w-full md:w-auto'>
 				<span className='text-sm text-gray-500'>Ordenar por</span>
 				{/* Using standard select for now */}
 				<select
