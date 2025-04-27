@@ -137,7 +137,7 @@ const ViewDiscover: React.FC<Props> = ({ navigateTo, isMobile = true, onClose })
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const handleSelectView = (view: string) => {
-    setCurrentView(view);
+    setCurrentView(prevView => (prevView === view ? null : view));
     setSelectedCategory(null);
   };
 
@@ -184,7 +184,10 @@ const ViewDiscover: React.FC<Props> = ({ navigateTo, isMobile = true, onClose })
         </div>
 
         {/* Contenido derecho: solo si hay una vista seleccionada */}
-        <div className="col-span-2 overflow-auto">
+        <div
+  className="col-span-2 overflow-auto"
+  onClick={() => currentView && setCurrentView(null)}
+>
           {currentView ? (
             <DropdownContent
               currentView={currentView}
