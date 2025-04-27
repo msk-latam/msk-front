@@ -1,8 +1,7 @@
-// components/navbar/views/ViewSpecialty.tsx
-
-import React from "react";
+import React, { useState } from "react";
 import { ChevronRight, ChevronLeft } from "react-feather";
 import { useSpecialtyView } from "../hooks/useSpecialtyView";
+import ViewSpecialtyDetail from "./ViewSpecialtyDetail";
 
 interface Props {
   navigateTo: (view: string, category?: string | null) => void;
@@ -11,6 +10,8 @@ interface Props {
 
 const ViewSpecialty: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
   const { data, loading, error } = useSpecialtyView();
+  // New state to track the selected specialty in desktop mode
+  const [selectedSpecialtyId, setSelectedSpecialtyId] = useState<string | null>(null);
 
   const specialities = data?.specialities ?? [];
 
@@ -23,23 +24,55 @@ const ViewSpecialty: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
   }
 
   const handleSpecialtyClick = (specialty: any) => {
-    // Pass both the specialty ID and name when navigating
-    navigateTo("specialtyDetail", specialty.id.toString());
+    if (isMobile) {
+      // For mobile, navigate as before
+      navigateTo("specialtyDetail", specialty.id.toString());
+    } else {
+      // For desktop, just update the selected specialty ID
+      setSelectedSpecialtyId(specialty.id.toString());
+    }
+  };
+
+  // Handle going back to the specialty list (clearing selection)
+  const handleBackFromDetail = () => {
+    setSelectedSpecialtyId(null);
   };
 
   if (!isMobile) {
     return (
-      <div className="divide-y bg-white h-[80vh] overflow-auto rounded-b-2xl">
-        {specialities.map((specialty) => (
-          <button
-            key={specialty.id}
-            className="flex justify-between whitespace-nowrap items-center w-full py-3 px-4 hover:bg-gray-100 text-gray-800 gap-5"
-            onClick={() => handleSpecialtyClick(specialty)}
-          >
-            <span>{specialty.name}</span>
-            <ChevronRight size={20} />
-          </button>
-        ))}
+      <div className="grid grid-cols-4 h-fit overflow-visible  rounded-b-2xl">
+        {/* Left column - Specialty list */}
+        <div className="col-span-2 divide-y bg-white overflow-y-auto overflow-x-hidden h-[80vh] rounded-b-2xl">
+          {specialities.map((specialty) => (
+            <button
+              key={specialty.id}
+              className={`flex justify-between whitespace-nowrap items-center w-full py-3 px-4 hover:bg-gray-100 text-gray-800 gap-5 ${
+                selectedSpecialtyId === specialty.id.toString() ? "bg-gray-100" : ""
+              }`}
+              onClick={() => handleSpecialtyClick(specialty)}
+            >
+              <span>{specialty.name}</span>
+              <ChevronRight size={20} />
+            </button>
+          ))}
+        </div>
+
+        {/* Right column - Detail view */}
+        <div className="col-span-2 rounded-b-2xl">
+          {selectedSpecialtyId ? (
+            <ViewSpecialtyDetail
+              selectedCategory={selectedSpecialtyId}
+              navigateTo={navigateTo}
+              specialtyId={parseInt(selectedSpecialtyId, 10)}
+              isMobile={false}
+              onBack={handleBackFromDetail}
+            />
+          ) : (
+            <div className="flex items-center justify-center h-full text-gray-400">
+
+            </div>
+          )}
+        </div>
       </div>
     );
   }

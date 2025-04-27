@@ -97,7 +97,7 @@ const Navbar = ({ isDashboard = false }: NavbarProps) => {
 						{/* Navegación central */}
 						<div className='w-full'>
 							<nav
-								className={`flex items-center flex-grow justify-between py-1.5 px-4 ml-28 transition-colors duration-300 ${
+								className={`flex items-center flex-grow justify-between py-1.5 px-4 ml-14 transition-colors duration-300 ${
 									isMainView || isDiscoverView || isSpecialtyView || isSpecialtyDetailView
 										? 'bg-white rounded-full'
 										: isInstitutionsView
@@ -144,7 +144,7 @@ const Navbar = ({ isDashboard = false }: NavbarProps) => {
 								)}
 							</nav>
 							{isDiscoverOpen && (
-								<div className='w-full max-w-6xl pl-28 z-50 mx-auto'>
+								<div className='w-full max-w-6xl pl-20 pr-6 z-50 mx-auto'>
 									<DropdownContent
 										currentView={currentView}
 										selectedCategory={selectedCategory}
@@ -165,7 +165,7 @@ const Navbar = ({ isDashboard = false }: NavbarProps) => {
 
 			{/* Contenido dinámico móvil */}
 			{isDiscoverOpen && (
-				<div className='fixed inset-x-0 top-0 bottom-0 z-50 mt-16 md:hidden overflow-auto'>
+				<div className='fixed inset-x-0 top-0 bottom-0 z-50 mt-16 md:hidden overflow-visible'>
 					<DropdownContent
 						currentView={currentView}
 						selectedCategory={selectedCategory}

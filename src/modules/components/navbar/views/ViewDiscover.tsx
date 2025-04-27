@@ -120,7 +120,7 @@
 
 // export default ViewDiscover;
 import React, { useState } from "react";
-import { ChevronRight,X } from "react-feather";
+import { ChevronRight,ChevronLeft } from "react-feather";
 import { useDiscoverView } from "../hooks/useDiscoverView";
 import DropdownContent from "../DropdownContent";
 
@@ -155,9 +155,9 @@ const ViewDiscover: React.FC<Props> = ({ navigateTo, isMobile = true, onClose })
 
   if (!isMobile) {
     return (
-      <div className="grid grid-cols-3 h-[80vh] overflow-hidden rounded-b-2xl bg-white">
+      <div className="grid grid-cols-3  overflow-hidden rounded-b-2xl ">
         {/* Menú lateral izquierdo */}
-        <div className="col-span-1 border-r divide-y overflow-auto">
+        <div className="col-span-1 border-r divide-y overflow-auto bg-white h-fit rounded-b-2xl">
           <button
             className="flex justify-between items-center gap-2 text-gray-800 px-4 py-3 hover:bg-gray-100 font-medium w-full"
             onClick={() => handleSelectView("specialty")}
@@ -195,7 +195,7 @@ const ViewDiscover: React.FC<Props> = ({ navigateTo, isMobile = true, onClose })
             />
           ) : (
             <div className="flex items-center justify-center h-full text-gray-400">
-              Selecciona una opción
+              
             </div>
           )}
         </div>
@@ -207,10 +207,10 @@ const ViewDiscover: React.FC<Props> = ({ navigateTo, isMobile = true, onClose })
   return (
     <div className="bg-white rounded-t-3xl mt-4 px-6 py-6 flex flex-col h-full">
             <div className="flex flex-row justify-center items-center px-6 pt-1 pb-8">
-        <button className="absolute left-5 top-10 rounded-full border border-black p-2 text-gray-800" onClick={onClose}>
-          <X size={24} />
+        <button className="absolute left-5 top-10 rounded-full border border-black p-2 text-gray-800" onClick={() => navigateTo("main")}>
+          <ChevronLeft size={24} />
         </button>
-
+        <h2 className="text-xl font-medium text-gray-800">Descubre</h2>
       </div>
 
 

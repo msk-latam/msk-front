@@ -2,6 +2,7 @@
 import React from "react";
 import { ArrowLeft, ChevronRight } from "react-feather";
 import { useResourcesView } from "../hooks/useResourcesView";
+import Link from "next/link";
 
 interface Props {
   navigateTo: (view: string, category?: string | null) => void;
@@ -43,10 +44,11 @@ const ViewResources: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
           ))}
         </div>
 
-        <button className="mt-4 flex justify-between items-center w-full py-3 px-4 bg-gray-100 hover:bg-gray-200 rounded-2xl text-gray-800">
+        <Link
+      href="/tienda" className="mt-4 flex justify-between items-center w-full p-4 bg-gray-100 hover:bg-gray-200 rounded-2xl text-gray-800">
           <span className="whitespace-nowrap">Ver todos los cursos</span>
           <ChevronRight size={20} />
-        </button>
+          </Link>
       </div>
     );
   }

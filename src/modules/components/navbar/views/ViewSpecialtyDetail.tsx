@@ -90,6 +90,7 @@ import React from "react";
 import { ArrowLeft, ChevronRight } from "react-feather";
 import { useSpecialtyDetailView } from "../hooks/useSpecialtyDetailView";
 import { Course } from "../hooks/types";
+import Link from "next/link";
 
 interface Props {
   selectedCategory: string | null;
@@ -127,10 +128,10 @@ const ViewSpecialtyDetail: React.FC<Props> = ({
 
   if (!isMobile) {
     return (
-      <div className="p-4 h-fit overflow-visible w-full bg-white rounded-b-2xl">
+      <div className="p-4 h-fit overflow-auto w-full bg-white rounded-b-2xl">
         <div className="flex flex-col gap-4">
           {courses.map((course, index) => (
-            <div key={index} className="rounded-[30px] w-64 overflow-hidden shadow-md">
+            <div key={index} className="rounded-[30px] overflow-hidden shadow-md">
               <div className="relative h-48 bg-gray-200">
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80"></div>
                 <img
@@ -146,10 +147,11 @@ const ViewSpecialtyDetail: React.FC<Props> = ({
           ))}
         </div>
 
-        <button className="mt-4 flex justify-between items-center w-full py-3 px-4 bg-gray-100 hover:bg-gray-200 rounded-2xl text-gray-800">
+        <Link
+      href="/tienda" className="mt-4 flex justify-between items-center w-full p-4 bg-gray-100 hover:bg-gray-200 rounded-2xl text-gray-800">
           <span className="whitespace-nowrap">Ver todos los cursos</span>
           <ChevronRight size={20} />
-        </button>
+          </Link>
       </div>
     );
   }
@@ -187,7 +189,7 @@ const ViewSpecialtyDetail: React.FC<Props> = ({
           <div className="text-center py-8">No hay cursos disponibles para esta especialidad</div>
         )}
 
-        <button className="flex justify-between items-center w-full py-4 text-left text-gray-800">
+        <button className="flex justify-between items-center w-full py-4  text-left text-gray-800">
           <span>Ver todos los cursos</span>
           <ChevronRight size={20} />
         </button>
