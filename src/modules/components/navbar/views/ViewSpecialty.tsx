@@ -25,14 +25,13 @@ const ViewSpecialty: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
 
   const handleSpecialtyClick = (specialty: any) => {
     if (isMobile) {
-      // For mobile, navigate as before
       navigateTo("specialtyDetail", specialty.id.toString());
     } else {
-      // For desktop, just update the selected specialty ID
-      setSelectedSpecialtyId(specialty.id.toString());
+      setSelectedSpecialtyId(prevId =>
+        prevId === specialty.id.toString() ? null : specialty.id.toString()
+      );
     }
   };
-
   // Handle going back to the specialty list (clearing selection)
   const handleBackFromDetail = () => {
     setSelectedSpecialtyId(null);
