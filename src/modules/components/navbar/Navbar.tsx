@@ -5,7 +5,7 @@ import { useSessionStatus } from '@/hooks/useSessionStatus';
 import { BurgerButton } from '@/modules/components/navbar/common/BurguerButton';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+
 import { useState } from 'react';
 import { ChevronDown } from 'react-feather';
 import AuthButtons from './common/AuthButtons';
@@ -14,8 +14,11 @@ import SearchBar from './common/SearchBar';
 import UserButtons from './common/UserButtons';
 import DropdownContent from './DropdownContent';
 import NavbarSkeleton from '@/modules/home/skeletons/NavbarSkeleton';
+import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
+import { usePathname } from 'next/navigation';
+import { supportedLanguages } from '@/config/languages';
 
-const supportedLanguages = ['en', 'ar']; // Add other supported languages here
+
 
 type NavbarProps = {
 	isDashboard?: boolean;
@@ -25,6 +28,7 @@ const Navbar = ({ isDashboard = false }: NavbarProps) => {
 	const [isDiscoverOpen, setIsDiscoverOpen] = useState(false);
 	const [currentView, setCurrentView] = useState('main');
 	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+	
 
 	const toggleDiscover = () => {
 		setIsDiscoverOpen(!isDiscoverOpen);
@@ -43,13 +47,16 @@ const Navbar = ({ isDashboard = false }: NavbarProps) => {
 	};
 
 	const pathname = usePathname();
-	const firstSegment = pathname?.split('/')[1];
-	const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'ar';
+const firstSegment = pathname?.split('/')[1];
+const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'ar';
 	// ✅ Esta es la verdadera URL que deberías usar en el logo
 	const logoHref = lang === 'ar' ? '/' : `/${lang}/`;
+	
 	const handleCreateAccount = () => {
-		window.location.href = '/login';
-	};
+  const loginPath = lang === 'ar' ? '/login' : `/${lang}/login`;
+  window.location.href = loginPath;
+};
+
 
 	const isMainView = isDiscoverOpen && currentView === 'main';
 	const isDiscoverView = isDiscoverOpen && currentView === 'discover';
@@ -71,7 +78,7 @@ const Navbar = ({ isDashboard = false }: NavbarProps) => {
 					<BurgerButton isOpen={isDiscoverOpen} onClick={toggleDiscover} />
 
 					{/* Logo */}
-					<Link href='/home' className='m-auto pr-7 pb-1'>
+					<Link href={getLocalizedUrl(lang, '/home')} className='m-auto pr-7 pb-1'>
 						<Image src='/images/msk-logo/logo.png' alt='MSK' priority width={64} height={64} className='w-16 h-auto' />
 					</Link>
 				</section>
@@ -83,16 +90,16 @@ const Navbar = ({ isDashboard = false }: NavbarProps) => {
 				<section className='hidden md:flex md:flex-row items-center pt-2 mt-6'>
 					<div className='flex items-top w-full max-w-[1300px] mx-auto pl-14 pr-28 z-50 relative'>
 						{/* Logo */}
-						<Link href={logoHref}>
-							<Image
-								src='/images/msk-logo/logo.png'
-								alt='MSK'
-								priority
-								width={90}
-								height={90}
-								className='md:pt-3 w-[90px] h-auto'
-							/>
-						</Link>
+						<Link href={getLocalizedUrl(lang, '/home')}>
+  <Image
+    src='/images/msk-logo/logo.png'
+    alt='MSK'
+    priority
+    width={90}
+    height={90}
+    className='md:pt-3 w-[90px] h-auto'
+  />
+</Link>
 
 						{/* Navegación central */}
 						<div className='w-full'>

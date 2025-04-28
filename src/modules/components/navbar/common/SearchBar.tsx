@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Search } from "react-feather";
 import { useSpecialtyDetailView } from "../hooks/useSpecialtyDetailView"; // Ajustá la ruta si es necesario
+import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
+import { usePathname, useRouter } from 'next/navigation'; // para detectar el idioma
+import { supportedLanguages } from '@/config/languages'; // para validar
+
 
 interface SearchBarProps {
   placeholder: string;
@@ -24,6 +28,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const { data, loading, error } = useSpecialtyDetailView();
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredResults, setFilteredResults] = useState<typeof data>([]);
+  const router = useRouter();
+const pathname = usePathname();
+const firstSegment = pathname?.split('/')[1];
+const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'ar';
 
   const inputTextStyle =
     isMainView || isDiscoverView || isSpecialtyView || isSpecialtyDetailView
@@ -49,18 +57,17 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
   // Function to handle item click and redirect to store with filter
   const handleItemClick = (specialty: any) => {
-    // Convert specialty name to URL-friendly slug
     const specialtySlug = specialty.name
       .toLowerCase()
-      .replace(/\s+/g, '-')     // Replace spaces with hyphens
-      .normalize("NFD")          // Normalize accents
-      .replace(/[\u0300-\u036f]/g, "") // Remove diacritics
-      .replace(/[^a-z0-9-]/g, ''); // Remove any non-alphanumeric characters except hyphens
-    
-    // Redirect to store with specialty filter using window.location
-    window.location.href = `/tienda/?especialidades=${specialtySlug}`;
-    
-    // Clear the search term after selection
+      .replace(/\s+/g, '-')     
+      .normalize("NFD")          
+      .replace(/[\u0300-\u036f]/g, "") 
+      .replace(/[^a-z0-9-]/g, ''); 
+  
+    const storeUrl = `${getLocalizedUrl(lang, '/tienda')}?especialidades=${specialtySlug}`;
+  
+    router.push(storeUrl); // ✅ ahora navegación SPA
+  
     setSearchTerm("");
   };
 

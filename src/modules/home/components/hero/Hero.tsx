@@ -10,6 +10,7 @@ import { usePathname } from 'next/navigation';
 import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
 import PlayPauseButton from "./PlayPauseButton";
 import HeroSkeleton from "@/modules/home/skeletons/HeroSkeleton"; // 👈 Importar Skeleton
+import Head from 'next/head'; // 👈 Agregado para preload dinámico
 
 const STATIC_HIGHLIGHTS = [
   "Cursos de medicina para expandir tus metas profesionales",
@@ -49,17 +50,28 @@ const Hero = () => {
   const pathname = usePathname();
   const lang = pathname.split('/')[1] || 'ar';
 
-  if (loading) return <HeroSkeleton />; // 👈 Mostrar Skeleton mientras carga
+  if (loading) return <HeroSkeleton />; // 👈 Mostrar Skeleton si está cargando
 
-  return (
-    <div className="relative md:h-[800px] h-[600px] w-full bg-black text-white px-4 overflow-hidden pt-[150px]">
-      <PlayPauseButton paused={paused} onToggle={() => setPaused(prev => !prev)} />
+const firstHeroImage = backgroundImages[0]; // 👈 Definimos esto antes del return
 
-      <HeroCarousel
-        slides={backgroundImages}
-        currentSlide={currentSlide}
-        setCurrentSlide={setCurrentSlide}
-      />
+return (
+  <>
+    {/* 🚀 Inyectamos preload dinámico solo si existe imagen */}
+    {firstHeroImage && (
+      <Head>
+        <link rel="preload" as="image" href={firstHeroImage} />
+      </Head>
+    )}
+
+
+      <div className="relative md:h-[800px] h-[600px] w-full bg-black text-white px-4 overflow-hidden pt-[150px]">
+        <PlayPauseButton paused={paused} onToggle={() => setPaused(prev => !prev)} />
+
+        <HeroCarousel
+          slides={backgroundImages}
+          currentSlide={currentSlide}
+          setCurrentSlide={setCurrentSlide}
+        />
 
       <div className="absolute inset-0 z-10">
         <div className="px-5 py-3 md:mt-40 md:py-0 overflow-visible max-w-[1600px] md:px-6 mx-auto md:h-[71%] flex flex-col justify-center items-center md:justify-end text-center gap-0 md:items-start md:text-left md:gap-2">
@@ -134,6 +146,7 @@ const Hero = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

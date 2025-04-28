@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import PopUp from '@/modules/components/PopUp';
 import HomeContent from './HomeContent';
-import HomeSkeleton from './skeletons/HomeSkeleton'; // importamos tu HomeSkeleton
+import HomeSkeleton from './skeletons/HomeSkeleton';
 
 type Props = {
   lang: string;
@@ -14,11 +14,50 @@ export default function HomeWithPopUp({ lang }: Props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000); // Podés ajustar el tiempo a tu gusto
+    const hasLoadedHome = sessionStorage.getItem('homeLoaded');
 
-    return () => clearTimeout(timer);
+    if (hasLoadedHome) {
+      // Si ya había cargado en esta sesión
+      setLoading(false);
+    } else {
+      const images = Array.from(document.images);
+      let loadedImages = 0;
+      let timeout: NodeJS.Timeout;
+
+      const checkIfAllLoaded = () => {
+        loadedImages++;
+        if (loadedImages === images.length) {
+          finishLoading();
+        }
+      };
+
+      const finishLoading = () => {
+        clearTimeout(timeout);
+        sessionStorage.setItem('homeLoaded', 'true');
+        setLoading(false);
+      };
+
+      // Si no hay imágenes (caso extremo), terminar rápido
+      if (images.length === 0) {
+        finishLoading();
+      } else {
+        images.forEach((img) => {
+          if (img.complete) {
+            checkIfAllLoaded();
+          } else {
+            img.addEventListener('load', checkIfAllLoaded);
+            img.addEventListener('error', checkIfAllLoaded); // si falla una img también continuar
+          }
+        });
+
+        // Timeout de seguridad: máximo 5 segundos
+        timeout = setTimeout(() => {
+          finishLoading();
+        }, 5000);
+      }
+
+      return () => clearTimeout(timeout);
+    }
   }, []);
 
   if (loading) {

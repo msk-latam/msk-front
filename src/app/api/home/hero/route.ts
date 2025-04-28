@@ -1,16 +1,17 @@
-// app/api/hero/route.ts
 import { NextResponse } from "next/server";
+
+export const revalidate = 30; // ✅ Cachear durante 30 segundos
 
 export async function GET() {
   try {
     const res = await fetch("https://cms1.msklatam.com/wp-json/msk/v1/front/inicio?lang=int&nocache=1", {
-      next: { revalidate: 0 },
+      cache: "force-cache", // ✅ Cachear si es posible
+      next: { revalidate: 30 }, // ✅ Revalidate en 30 segundos
     });
     const json = await res.json();
 
     const hero = json?.sections?.hero;
 
-    // Reescribir el dominio de las imágenes de cada slide
     const fixedSlides = hero?.slides?.map((slide: any) => ({
       ...slide,
       background_image: [

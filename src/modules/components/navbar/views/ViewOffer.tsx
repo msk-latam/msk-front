@@ -4,6 +4,9 @@ import { ArrowLeft, ChevronRight, ChevronLeft} from "react-feather";
 import { useOfferView } from "../hooks/useOfferView";
 import Link from "next/link";
 import ViewOfferSkeleton from "../skeletons/ViewOfferSkeleton";
+import { usePathname } from 'next/navigation';
+import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
+import { supportedLanguages } from '@/config/languages';
 
 interface Props {
   navigateTo: (view: string, category?: string | null) => void;
@@ -14,6 +17,9 @@ interface Props {
 const ViewOffer: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
   // Pass the specialtyId to the hook
   const { data, loading, error } = useOfferView();
+  const pathname = usePathname();
+const firstSegment = pathname?.split('/')[1];
+const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'ar';
 
   if (loading) {
     return <ViewOfferSkeleton />;
@@ -33,25 +39,25 @@ const ViewOffer: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
     return (
       <div className="p-4 h-fit overflow-visible w-1/2 bg-white rounded-b-2xl">
         <div className="w-full rounded-b-2xl bg-white divide-y">
-          {data.offers.map((offer, index) => (
-            <Link
-              key={`offer-${index}`}
-              href={offer.link.url}
-            >
-              <button className="w-full flex justify-between items-center p-4 text-gray-800 hover:bg-gray-100 rounded-lg">
-                <span>{offer.link.title}</span>
-                <ChevronRight size={20} />
-              </button>
-            </Link>
-          ))}
+        {data.offers.map((offer, index) => (
+  <Link
+    key={`offer-${index}`}
+    href={getLocalizedUrl(lang, offer.link.url)}
+  >
+    <button className="w-full flex justify-between items-center p-4 text-gray-800 hover:bg-gray-100 rounded-lg">
+      <span>{offer.link.title}</span>
+      <ChevronRight size={20} />
+    </button>
+  </Link>
+))}
         </div>
 
-        <Link href="/tienda">
-          <button className="mt-4 flex justify-between items-center w-full p-4 bg-gray-100 hover:bg-gray-200 rounded-2xl text-gray-800">
-            <span className="whitespace-nowrap">Ver todos los cursos</span>
-            <ChevronRight size={20} />
-          </button>
-        </Link>
+        <Link href={getLocalizedUrl(lang, '/tienda')}>
+  <button className="mt-4 flex justify-between items-center w-full p-4 bg-gray-100 hover:bg-gray-200 rounded-2xl text-gray-800">
+    <span className="whitespace-nowrap">Ver todos los cursos</span>
+    <ChevronRight size={20} />
+  </button>
+</Link>
       </div>
     );
   }

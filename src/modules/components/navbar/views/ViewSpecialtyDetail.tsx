@@ -5,6 +5,9 @@ import { useSpecialtyDetailView } from "../hooks/useSpecialtyDetailView";
 import { Course } from "../hooks/types";
 import Link from "next/link";
 import ViewSpecialtyDetailSkeleton from "../skeletons/ViewSpecialtyDetailSkeleton"
+import { usePathname } from 'next/navigation';
+import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
+import { supportedLanguages } from '@/config/languages';
 
 interface Props {
   selectedCategory: string | null;
@@ -21,6 +24,9 @@ const ViewSpecialtyDetail: React.FC<Props> = ({
   isMobile = true, 
   onBack 
 }) => {
+  const pathname = usePathname();
+const firstSegment = pathname?.split('/')[1];
+const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'ar';
   const { selectedSpecialty, loading, error } = useSpecialtyDetailView(specialtyId);
 
   if (loading) {
@@ -46,7 +52,7 @@ const ViewSpecialtyDetail: React.FC<Props> = ({
             courses.map((course, index) => {
               const newUrl = course.url.replace('/curso', '/tienda');
               return (
-                <Link key={index} href={newUrl} className="block mb-6 last:mb-0">
+                <Link key={index} href={getLocalizedUrl(lang, newUrl)} className="block mb-6 last:mb-0">
                   <div className="relative rounded-[30px] overflow-hidden h-48 bg-gray-300 cursor-pointer">
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80"></div>
                     <img
@@ -66,8 +72,7 @@ const ViewSpecialtyDetail: React.FC<Props> = ({
           )}
         </div>
 
-        <Link
-          href="/tienda"
+        <Link href={getLocalizedUrl(lang, '/tienda')}
           className="mt-4 flex justify-between items-center w-full p-4 bg-gray-100 hover:bg-gray-200 rounded-2xl text-gray-800"
         >
           <span className="whitespace-nowrap">Ver todos los cursos</span>

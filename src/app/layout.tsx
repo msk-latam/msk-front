@@ -1,6 +1,7 @@
 // app/layout.tsx
 import { Inter, Raleway } from 'next/font/google';
 import './globals.css';
+import LoaderLayout from './LoaderLayout'; // Ajustá el path
 
 const inter = Inter({
 	subsets: ['latin'],
@@ -42,11 +43,14 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang='es'>
-			<head>
-				<meta name='robots' content='noindex, nofollow' />
-			</head>
-			<body className={`${inter.variable} ${raleway.variable} font-inter`}>{children}</body>
-		</html>
+	  <html lang='es'>
+		<head>
+		  <meta name='robots' content='noindex, nofollow' />
+		</head>
+		<body className={`${inter.variable} ${raleway.variable} font-inter`}>
+		  <LoaderLayout /> {/* 👈 Siempre activo */}
+		  {children}
+		</body>
+	  </html>
 	);
-}
+  }

@@ -8,7 +8,7 @@ export default function HomeSkeleton() {
     <div className="flex items-center justify-center h-screen bg-gray-100 opacity-20">
       <div className="flex flex-col items-center justify-center animate-pulse">
         <Image
-          src="isotipo.svg" // Ajustá el path si tu logo está en otra carpeta
+          src="/isotipo.svg" // Ajustá el path si tu logo está en otra carpeta
           alt="MSK Logo"
           width={100}
           height={100}
