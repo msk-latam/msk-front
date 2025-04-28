@@ -25,6 +25,5 @@ export function useSpecialtyDetailView(specialtyId?: number) {
   const selectedSpecialty = specialtyId 
     ? data.find(item => item.specialty.id === specialtyId) 
     : null;
-console.log(data,selectedSpecialty,'AAAAAAAAAAAAAAAAAAAADSKJFJDOFGJOJVDNLKDGJPGKJPIJ')
   return { data, selectedSpecialty, loading, error };
 }

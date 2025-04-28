@@ -21,6 +21,5 @@ export function useSpecialtyView() {
       })
       .finally(() => setLoading(false));
   }, []);
-console.log(data,'AAAAAAAAAAA')
   return { data, loading, error };
 }

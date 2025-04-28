@@ -21,6 +21,5 @@ export function useDiscoverView() {
       })
       .finally(() => setLoading(false));
   }, []);
-console.log(data,'aaaaaaaaaaaaaaaaaaaaaaaaaaa')
   return { data, loading, error };
 }

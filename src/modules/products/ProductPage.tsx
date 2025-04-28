@@ -22,7 +22,6 @@
 // export default function CoursePage() {
 //   // Obtener el parámetro `slug` usando useParams
 // //   const { slug } = useParams();
-// // console.log("aaaaaa",slug)
 //   // Asegurarse de que `slug` esté disponible antes de renderizar el componente
 //   // if (!slug) {
 //   //   return <div>Loading...</div>;
