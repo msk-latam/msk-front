@@ -1,8 +1,8 @@
 // src/modules/home/HomeContent.tsx
 import Hero from './components/hero/Hero';
-import Oportunidades from './components/oportunidades/Oportunidades';
-import Masterclass from './components/masterclass/Masterclass';
-import TrustSection from './components/trust-section/TrustSection';
+import OportunidadesLazy from './components/oportunidades/OportunidadesLazy';
+import MasterclassLazy from './components/masterclass/MasterclassLazy';
+import TrustSectionLazy from './components/trust-section/hooks/TrustSectionLazy';
 import Ofertas from './components/ofertas/Ofertas';
 import BlogIndex from './components/blog/BlogIndex';
 import PubliNotas from './components/publi-notas/PubliNotas';
@@ -22,9 +22,9 @@ type Props = {
       <Navbar />
       <Hero />
       <BotMaker />
-      <Oportunidades />
-      <Masterclass />
-      <TrustSection />
+      <OportunidadesLazy />
+      <MasterclassLazy />
+      <TrustSectionLazy />
       <Ofertas />
       <BlogIndex />
       <PubliNotas />
