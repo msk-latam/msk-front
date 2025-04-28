@@ -7,6 +7,141 @@
 	"total_products": 261,
 	"posts": [
 		{
+			"id": 341126,
+			"title": "Por qué la salud laboral es una deuda estructural en la región",
+			"slug": "salud-laboral-una-deuda-estructural",
+			"permalink": "https://wp.msklatam.com/nota/medicina/salud-laboral-una-deuda-estructural/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-salud-laboral-una-deuda-estructural-scaled-e1745600725761.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-salud-laboral-una-deuda-estructural-scaled-e1745600725761.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "Los accidentes laborales son apenas la parte visible de un problema profundo. En América Latina y el Caribe, las enfermedades ocupacionales, la informalidad laboral y la falta de políticas de prevención continúan poniendo en riesgo la vida de millones de personas trabajadoras. En este artículo, conocerás los desafíos actuales en salud ocupacional, las consecuencias tras la pandemia y por qué la seguridad en el trabajo debe ser hoy un derecho fundamental.",
+			"date": "Abril 27, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 340935,
+					"title": "Precisión, prevención y desafíos en medicina genómica",
+					"slug": "medicina-genomica-precision-y-desafios",
+					"link": "https://wp.msklatam.com/nota/medicina/medicina-genomica-precision-y-desafios/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-medicina-genomica-precision-y-desafios-scaled-e1745500047106.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 340790,
+					"title": "Capacitación y especialización continua: la nueva ruta profesional",
+					"slug": "capacitacion-y-especializacion-continua-en-salud",
+					"link": "https://wp.msklatam.com/nota/e-learning/capacitacion-y-especializacion-continua-en-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-capacitacion-y-especializacion-continua-en-salud-1-scaled-e1745441536261.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 339497,
+					"title": "Terapias que están cambiando el tratamiento de la hemofilia",
+					"slug": "terapias-que-cambian-el-tratamiento-de-la-hemofilia",
+					"link": "https://wp.msklatam.com/nota/medicina/terapias-que-cambian-el-tratamiento-de-la-hemofilia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-terapias-que-cambian-el-tratamiento-de-la-hemofilia-scaled-e1744642655103.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 339351,
+					"title": "CRISPR: la herramienta que está reescribiendo la medicina",
+					"slug": "crispr-esta-reescribiendo-la-medicina",
+					"link": "https://wp.msklatam.com/nota/medicina/crispr-esta-reescribiendo-la-medicina/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-crispr-esta-reescribiendo-la-medicina-scaled-e1744393930660.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 339004,
+					"title": "Certificados digitales MSK para una profesión en evolución",
+					"slug": "certificados-digitales-msk-con-blockchain",
+					"link": "https://wp.msklatam.com/nota/e-learning/certificados-digitales-msk-con-blockchain/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-certificados-digitales-msk-con-blockchain-e1744295864869.png",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Organización Internacional del Trabajo (OIT). "
+				},
+				{
+					"fuente": "Organización Internacional del Trabajo (OIT)."
+				},
+				{
+					"fuente": "Organización Panamericana de la Salud (OPS). "
+				}
+			],
+			"categories": [
+				{
+					"id": 59969,
+					"primary": true,
+					"name": "Medicina",
+					"slug": "medicina",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/medicina/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59969",
+			"tags": [],
+			"specialty": {
+				"term_id": 60177,
+				"name": "Medicina laboral",
+				"slug": "medicina-laboral",
+				"term_group": 0,
+				"term_taxonomy_id": 60177,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 3,
+				"filter": "raw"
+			},
+			"reading_time": "5",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
 			"id": 340935,
 			"title": "Precisión, prevención y desafíos en medicina genómica",
 			"slug": "medicina-genomica-precision-y-desafios",
