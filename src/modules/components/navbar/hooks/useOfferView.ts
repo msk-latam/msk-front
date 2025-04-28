@@ -20,6 +20,5 @@ export function useOfferView() {
       })
       .finally(() => setLoading(false));
   }, []);
-console.log(data,'dslfjsdofjjjAAAAAAAAAAAAAA1654651')
   return { data, loading, error };
 }
