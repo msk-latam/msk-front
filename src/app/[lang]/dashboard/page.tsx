@@ -1,45 +1,85 @@
 'use client';
 import '@/app/globals.css';
-import DashboardHero from '@/dashboard/components/DashboardHero';
-import HelpSection from '@/dashboard/components/HelpSection';
-import PromoBanner from '@/dashboard/components/PromoBanner';
 import Footer from '@/modules/components/footer/footer';
 import Navbar from '@/modules/components/navbar/Navbar';
 import NewsLetter from '@/modules/components/newsletter/NewsLetter';
+import { useState } from 'react';
+
+import { useProfile } from '@/hooks/useProfile';
+import { useSaveInterests } from '@/hooks/useSaveInterests';
+import { useSaveUserProfile } from '@/hooks/useSaveUserProfile';
+import DashboardHero from '@/modules/dashboard/components/DashboardHero';
+import HelpSection from '@/modules/dashboard/components/HelpSection';
+import InterestsEditModal from '@/modules/dashboard/components/InterestsEditModal';
 import LearningPlanCta from '@/modules/dashboard/components/LearningPlanCta';
 import MyCoursesSection from '@/modules/dashboard/components/MyCoursesSection';
-import { useEffect, useState } from 'react';
+import ProfileEditModal, { UserProfileData } from '@/modules/dashboard/components/ProfileEditModal';
+import PromoBanner from '@/modules/dashboard/components/PromoBanner';
 
-import UserDataStorage from '@/components/UserDataStorage';
-import { useAuth } from '@/hooks/useAuth';
-import { UserData, getUserData, updateUserData } from '@/lib/localStorageService/userDataService';
-import InterestsEditModal from '@/modules/dashboard/components/InterestsEditModal';
-import ProfileEditModal from '@/modules/dashboard/components/ProfileEditModal';
+// Define interest options here to help categorize initial data
+// (Ideally, share this structure with the modal)
+const especialidadOptions = [
+	'Administración y gestión',
+	'Anestesiología y dolor',
+	'Cardiología',
+	'Cirugía',
+	'Dermatología',
+	'Diabetes',
+	'Emergentología',
+	'Endocrinología',
+	'Gastroenterología',
+	'Geriatría',
+	'Ginecología',
+	'Hematología',
+	'Infectología',
+	'Medicina familiar',
+	'Medicina general',
+	'Medicina intensiva',
+	'Nefrología',
+	'Nutrición',
+	'Obstetricia',
+	'Oftalmología',
+	'Oncología',
+	'Pediatría',
+	'Psiquiatría',
+	'Radiología e imagenología',
+	'Traumatología',
+	'Urología',
+];
+const contenidoOptions = [
+	'Cursos',
+	'Guías profesionales',
+	'Artículos de blog',
+	'Infografías',
+	'Videografías',
+	'Tutoriales',
+	'Webinars',
+];
+
+// Define this interface outside the component function, perhaps near the top
+interface InterestPayload {
+	especialidadInteres: string[];
+	contenidoInteres: string[];
+	interesesAdicionales: string[];
+}
 
 export default function DashboardPage() {
-	const [userData, setUserData] = useState<UserData | null>(null);
 	const [showEditModal, setShowEditModal] = useState(false);
 	const [showInterestsModal, setShowInterestsModal] = useState(false);
 	const [editTargetField, setEditTargetField] = useState<string | undefined>(undefined);
-	const [isLoading, setIsLoading] = useState(true);
+	const [saveProfileError, setSaveProfileError] = useState<string | null>(null);
+	const [saveProfileSuccess, setSaveProfileSuccess] = useState<boolean>(false);
+	const [saveInterestsError, setSaveInterestsError] = useState<string | null>(null);
+	const [saveInterestsSuccess, setSaveInterestsSuccess] = useState<boolean>(false);
 
-	const { user, isAuthenticated, loading } = useAuth();
-
-	useEffect(() => {
-		const fetchData = async () => {
-			setIsLoading(true);
-			try {
-				// Simulate API delay for demo purposes
-				await new Promise((resolve) => setTimeout(resolve, 800));
-				const initialData = getUserData();
-				setUserData(initialData);
-			} finally {
-				setIsLoading(false);
-			}
-		};
-
-		fetchData();
-	}, []);
+	const { user, loading } = useProfile();
+	const { mutate: saveUserProfile, loading: isSaving } = useSaveUserProfile();
+	const {
+		mutate: saveInterests,
+		loading: isSavingInterests,
+		error: interestsError,
+		success: interestsSuccess,
+	} = useSaveInterests();
 
 	const handleEditProfile = (field?: string) => {
 		console.log('(Page) Edit profile triggered for field:', field || 'general');
@@ -51,28 +91,57 @@ export default function DashboardPage() {
 		}
 	};
 
-	const handleSaveProfile = (formData: Partial<UserData>) => {
+	const handleSaveProfile = async (formData: Partial<UserProfileData>) => {
 		console.log('(Page) Profile data to save:', formData);
-		const updatedData = updateUserData(formData);
-		setUserData(updatedData);
-		setShowEditModal(false);
-		setEditTargetField(undefined);
+		try {
+			await saveUserProfile(formData);
+			setShowEditModal(false);
+			setEditTargetField(undefined);
+			setSaveProfileSuccess(true);
+		} catch (error: any) {
+			console.error('Failed to save profile:', error);
+			setSaveProfileError(error.message || 'Error desconocido');
+		}
 	};
 
-	const handleSaveInterests = (updatedInterests: string[]) => {
-		console.log('(Page) Interests to save:', updatedInterests);
-		const updatedData = updateUserData({ interests: updatedInterests });
-		setUserData(updatedData);
-		setShowInterestsModal(false);
-		setEditTargetField(undefined);
+	const handleSaveInterests = async (interestData: InterestPayload) => {
+		if (!user || !user.crm_id) {
+			console.error('User or user CRM ID not found, cannot save interests.');
+			setSaveInterestsError('No se pudo encontrar el ID de usuario.');
+			return;
+		}
+
+		console.log('(Page) Interests data to save:', interestData);
+		setSaveInterestsError(null);
+		setSaveInterestsSuccess(false);
+
+		try {
+			console.log('(Page) Interests data to save:', user);
+			await saveInterests({
+				...interestData,
+				crm_id: user.crm_id,
+			});
+			setEditTargetField(undefined);
+			setSaveInterestsSuccess(true);
+		} catch (error: any) {
+			console.error('Failed to save interests:', error);
+			setSaveInterestsError(error.message || 'Error desconocido al guardar intereses');
+		}
 	};
+
+	// Calculate initial data for the Interests modal
+	const initialInterestData = user
+		? {
+				especialidadInteres: user.intereses?.filter((i) => especialidadOptions.includes(i)) || [],
+				contenidoInteres: user.intereses?.filter((i) => contenidoOptions.includes(i)) || [],
+				interesesAdicionales: user.interesesAdicionales || [],
+		  }
+		: {};
 
 	return (
 		<>
-			<UserDataStorage />
-
 			<header
-				className='w-full h-[180px] sm:h-[579px] overflow-hidden m-0 p-0'
+				className='w-full h-[180px] md:h-[579px] overflow-hidden m-0 p-0'
 				style={{
 					background: `linear-gradient(88.79deg, #9200AD -25.91%, #7B8CC3 -0.1%, #700084 31.13%, #B814D6 58.59%, #3B476C 109.69%, #4D005B 177.81%, #9200AD 245.71%),
                        linear-gradient(360deg, rgba(0, 0, 0, 0) -76.85%, rgba(0, 0, 0, 0.2) 113.39%)`,
@@ -83,10 +152,15 @@ export default function DashboardPage() {
 
 			<main className='bg-[#f3f4f6] flex justify-center px-0 sm:px-4 relative pt-0 pb-20 -mb-[100px] md:mb-0'>
 				<section className='w-full -mt-[40px] md:-mt-[420px] z-[10] relative overflow-visible max-w-[1600px] mx-auto md:px-4'>
-					<DashboardHero userData={userData} onEditProfile={handleEditProfile} isLoading={isLoading} />
-					{!isLoading && userData && (
+					<DashboardHero
+						userData={user}
+						onEditProfile={handleEditProfile}
+						isLoading={loading}
+						userEmail={user?.email ?? ''}
+					/>
+					{!loading && user && (
 						<>
-							<MyCoursesSection />
+							<MyCoursesSection courseData={user.coursesInProgress} userEmail={user.email} />
 							<LearningPlanCta />
 							<PromoBanner />
 							<HelpSection />
@@ -106,7 +180,10 @@ export default function DashboardPage() {
 						setEditTargetField(undefined);
 					}}
 					onSave={handleSaveProfile}
-					initialData={userData}
+					user={user}
+					isSaving={isSaving}
+					saveError={saveProfileError}
+					saveSuccess={saveProfileSuccess}
 				/>
 			)}
 
@@ -118,7 +195,10 @@ export default function DashboardPage() {
 						setEditTargetField(undefined);
 					}}
 					onSave={handleSaveInterests}
-					initialInterests={userData?.interests || []}
+					initialData={initialInterestData}
+					isSaving={isSavingInterests}
+					saveError={saveInterestsError}
+					saveSuccess={saveInterestsSuccess}
 				/>
 			)}
 		</>

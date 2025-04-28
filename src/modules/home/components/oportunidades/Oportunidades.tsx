@@ -19,16 +19,19 @@ const Oportunidades = () => {
   const lang = pathname.split('/')[1] || 'ar';
 
   useEffect(() => {
-    fetch("/api/home/oportunidades")
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchCursos = async () => {
+      try {
+        const res = await fetch("/api/home/oportunidades", { cache: "force-cache" });
+        const data = await res.json();
         setCursos(data);
-        setLoading(false); // 👈 Solo cuando trae bien los datos
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error(error);
-        setLoading(false); // 👈 También cerramos el loading en caso de error
-      });
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchCursos();
   }, []);
 
   const cursosActivos = cursos[activeTab.toLowerCase()] || [];

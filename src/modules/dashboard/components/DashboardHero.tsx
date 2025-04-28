@@ -1,127 +1,43 @@
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 // Import UserData type from the service
-import { UserData } from '@/lib/localStorageService/userDataService';
+// import { UserData } from '@/lib/localStorageService/userDataService';
 
 // Import SVG icon components
-import ArrowRightIcon from '@/dashboard/assets/icons/ArrowRightIcon';
 import DocumentIcon from '@/dashboard/assets/icons/DocumentIcon';
-import EditIcon from '@/dashboard/assets/icons/EditIcon';
 import PlusIcon from '@/dashboard/assets/icons/PlusIcon';
 import UserIcon from '@/dashboard/assets/icons/UserIcon';
 import AddButton from '@/dashboard/components/ui/AddButton';
-import CtaButton from '@/dashboard/components/ui/CtaButton';
 import EditButton from '@/dashboard/components/ui/EditButton';
-import dashboardMock from '@/modules/dashboard/data/dashboardMock.json'; // <-- Import mock data
+// import dashboardMock from '@/modules/dashboard/data/dashboardMock.json'; // <-- Import mock data
+import { useLmsNavigation } from '@/hooks/useLmsNavigation';
+import Link from 'next/link';
 import DashboardHeroSkeleton from './DashboardHeroSkeleton';
 import InvoicesModal from './InvoicesModal';
+import CtaButton from './ui/CtaButton';
 
-// Import only the type, not the functions
-
-// Define UserData type locally or import from service if exported
-// It's better to define it once in the service and export/import it
-interface UserDetail {
-	label: string;
-	value: string;
-	placeholder: string;
-}
-
-interface ProfileCompletion {
-	percentage: number;
-	message: string;
-	ctaText: string;
-	ctaLink: string;
-}
-
-// Re-defining UserData here temporarily if not imported
-interface UserDataForHero {
-	profileImage: string;
-	firstName?: string;
-	lastName?: string;
-	specialty: string;
-	email?: string;
-	phone?: string;
-	details: UserDetail[];
-	profileCompletion?: ProfileCompletion | null;
-	interests?: string[];
-	currentCourse: {
-		image: string;
-		label: string;
-		title: string;
-		progress: string;
-	};
-	// Adding a structure for the recommended course when profile is incomplete
-	recommendedCourse?: {
-		image: string;
-		label: string;
-		title: string;
-		buttonText: string;
-		buttonLink: string; // Link for the "Descubrir" button
-	};
-	recommendedResources: {
-		image: string;
-		title: string;
-		author: string;
-		tags: string[];
-		buttonText: string;
-		buttonLink: string;
-	}[];
-}
-
-// Define props for DashboardHero
+// // Define props for DashboardHero
 interface DashboardHeroProps {
-	userData: UserData | null;
+	userData: any; // <-- TODO: Change to UserData type
 	onEditProfile: (field?: string) => void;
 	isLoading?: boolean;
-	// Define a mock recommended course for the <50% state
-	recommendedCourseData?: UserDataForHero['recommendedCourse'];
+	userEmail: string;
 }
 
-// Map for icon components
-const IconMap: Record<string, React.FC> = {
-	EditIcon: EditIcon,
-	ArrowRight: ArrowRightIcon,
-	PlusIcon: PlusIcon,
-	DocumentIcon: DocumentIcon,
-	UserIcon: UserIcon,
-};
-
-// Example recommended course data (can be passed as prop or defined here)
 const defaultRecommendedCourse = {
 	image:
 		'https://images.ctfassets.net/cnu0m8re1exe/KARd6CSmh3yD656fzK3Kl/d46556b481191e9a679ed0e02388788f/doctor-and-patient.jpg?fm=jpg&fl=progressive&w=1140&h=700&fit=fill', // Use the image from the example
 	label: 'Recomendado para ti',
 	title: 'Curso de Endocrinología y Nutrición',
 	buttonText: 'Descubrir',
-	buttonLink: '#', // Replace with actual link
+	buttonLink: '/tienda/endocrinologia-y-nutricion/', // Replace with actual link
 };
 
-const DashboardHero: React.FC<DashboardHeroProps> = ({
-	userData,
-	onEditProfile,
-	isLoading = false,
-	recommendedCourseData = defaultRecommendedCourse, // Use default or passed prop
-}) => {
-	// Helper function to check if a field is empty
+const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, isLoading = false, userEmail }) => {
 	const isEmpty = (value: string | undefined | null) => !value || value.trim() === '';
-
-	// Add local loading state with delay to prevent flashing
-	const [showSkeleton, setShowSkeleton] = useState(true);
 	const [showInvoicesModal, setShowInvoicesModal] = useState(false);
+	const { navigateToLms, isLoading: isNavigating, error: navigationError } = useLmsNavigation();
 
-	useEffect(() => {
-		// If data is loaded, set a small delay before hiding skeleton
-		if (!isLoading && userData) {
-			const timer = setTimeout(() => {
-				setShowSkeleton(false);
-			}, 300);
-			return () => clearTimeout(timer);
-		} else {
-			setShowSkeleton(true);
-		}
-	}, [isLoading, userData]);
-
-	// Renamed handleEditProfile to call the prop
 	const handleEditClick = (field?: string) => {
 		// Map display labels/placeholders to actual UserData field names
 		const fieldNameMap: Record<string, string> = {
@@ -157,25 +73,11 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 		onEditProfile(actualFieldName);
 	};
 
-	// Show skeleton during loading
-	if (showSkeleton) {
+	if (isLoading) {
 		return <DashboardHeroSkeleton />;
 	}
-
-	// Show loading state or return null if data hasn't loaded yet (handled by parent now)
-	if (!userData) {
-		// Parent component handles loading state
-		return null; // Or potentially a minimal skeleton
-	}
-
-	// Use the userData prop directly
 	const data = userData;
-	// Use mock data for recommended resources for now
-	const recommendedResources = dashboardMock.recommendedResources;
-
-	// Determine if the profile is less than 50% complete
-	const isProfileIncomplete = (data.profileCompletion?.percentage ?? 100) < 50;
-
+	console.log(data, 'DATA');
 	return (
 		<>
 			<div className='grid grid-cols-1 md:grid-cols-[468px_1fr] lg:grid-cols-[468px_3fr_3fr] gap-5 '>
@@ -184,7 +86,24 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 					{/* Profile Picture */}
 					<div className='relative w-[126px] h-[126px] mx-auto mb-6'>
 						<div className='w-full h-full overflow-hidden rounded-full border'>
-							<Image src={data.profileImage} alt='Profile' width={126} height={126} className='w-full h-full object-cover' />
+							{data?.profileImage ? (
+								<Image
+									src={data?.profileImage}
+									alt='Profile'
+									width={126}
+									height={126}
+									className='w-full h-full object-cover'
+								/>
+							) : (
+								<div
+									className='relative inline-flex items-center justify-center overflow-hidden text-neutral-100 uppercase font-semibold rounded-full w-full h-full text-3xl'
+									style={{ backgroundColor: 'rgb(0, 209, 178)' }}
+								>
+									<span className='font-semibold text-white'>{`${data.name?.charAt(0) || ''}${
+										data.lastName?.charAt(0) || ''
+									}`}</span>
+								</div>
+							)}
 						</div>
 						<div className='absolute bottom-0 right-0'>
 							<EditButton onClick={() => handleEditClick('profileImage')} filled />
@@ -194,33 +113,22 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 					{/* User Info */}
 					<div className='mb-5 pb-4 border-b border-gray-100'>
 						<h2 className='text-3xl font-bold font-raleway text-center mb-4 leading-[110%]'>
-							{`${data.firstName || ''} ${data.lastName || ''}`.trim() || 'Nombre Apellido'}
+							{`${data?.name || ''} ${data?.lastName || ''}`.trim() || 'Nombre Apellido'}
 						</h2>
 
 						<div className='flex items-center justify-center'>
 							<div className='flex gap-1 items-center justify-center'>
 								<p
 									className={`font-inter font-medium text-lg leading-[24px] text-center flex items-center justify-center ${
-										!isEmpty(data.specialty) ? 'text-[#1A1A1A]' : 'text-[#4F5D89]'
+										!isEmpty(data?.speciality) ? 'text-[#1A1A1A]' : 'text-[#4F5D89]'
 									}`}
 								>
-									{(() => {
-										const specialtyLabels: Record<string, string> = {
-											cardiologia: 'Cardiología',
-											dermatologia: 'Dermatología',
-											endocrinologia: 'Endocrinología',
-											ginecologia: 'Ginecología',
-											nutricion: 'Nutrición',
-										};
-										return isEmpty(data.specialty)
-											? 'Completar especialidad'
-											: specialtyLabels[data.specialty as string] || data.specialty;
-									})()}
+									{isEmpty(data?.speciality) ? 'Completar especialidad' : data?.speciality}
 								</p>
-								{isEmpty(data.specialty) ? (
+								{isEmpty(data?.speciality) ? (
 									<AddButton onClick={() => handleEditClick('Completar especialidad')} />
 								) : (
-									<EditButton onClick={() => handleEditClick('specialty')} />
+									<EditButton onClick={() => handleEditClick('speciality')} />
 								)}
 							</div>
 						</div>
@@ -232,18 +140,12 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 						<div className='flex justify-between items-center mb-4 pb-4 border-b border-gray-100'>
 							<span
 								className={`font-inter font-medium text-base leading-[24px] ${
-									!data.profesion ? 'text-[#4F5D89]' : 'text-[#1A1A1A]'
+									!data?.profession ? 'text-[#4F5D89]' : 'text-[#1A1A1A]'
 								}`}
 							>
-								{data.profesion
-									? data.profesion === 'medico'
-										? 'Personal Médico'
-										: data.profesion === 'enfermero' || data.profesion === 'enfermera'
-										? 'Personal de Enfermería'
-										: data.profesion
-									: 'Completar profesión'}
+								{data?.profession || 'Completar profesión'}
 							</span>
-							{!data.profesion ? (
+							{!data?.profession ? (
 								<AddButton onClick={() => handleEditClick('Completar profesión')} />
 							) : (
 								<EditButton onClick={() => handleEditClick('profesion')} />
@@ -254,12 +156,12 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 						<div className='flex justify-between items-center mb-4 pb-4 border-b border-gray-100'>
 							<span
 								className={`font-inter font-medium text-base leading-[24px] ${
-									!data.email ? 'text-[#4F5D89]' : 'text-[#1A1A1A]'
+									!data?.email ? 'text-[#4F5D89]' : 'text-[#1A1A1A]'
 								}`}
 							>
-								{data.email || 'Completar email'}
+								{data?.email || 'Completar email'}
 							</span>
-							{!data.email ? (
+							{!data?.email ? (
 								<AddButton onClick={() => handleEditClick('Completar email')} />
 							) : (
 								<EditButton onClick={() => handleEditClick('email')} />
@@ -270,26 +172,12 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 						<div className='flex justify-between items-center mb-4 pb-4 border-b border-gray-100'>
 							<span
 								className={`font-inter font-medium text-base leading-[24px] ${
-									!data.country ? 'text-[#4F5D89]' : 'text-[#1A1A1A]'
+									!data?.country ? 'text-[#4F5D89]' : 'text-[#1A1A1A]'
 								}`}
 							>
-								{data.country
-									? data.country === 'ar'
-										? 'Argentina'
-										: data.country === 'es'
-										? 'España'
-										: data.country === 'fr'
-										? 'Francia'
-										: data.country === 'de'
-										? 'Alemania'
-										: data.country === 'it'
-										? 'Italia'
-										: data.country === 'pt'
-										? 'Portugal'
-										: data.country
-									: 'Completar país'}
+								{data?.country || 'Completar país'}
 							</span>
-							{!data.country ? (
+							{!data?.country ? (
 								<AddButton onClick={() => handleEditClick('Completar país')} />
 							) : (
 								<EditButton onClick={() => handleEditClick('country')} />
@@ -300,12 +188,12 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 						<div className='flex justify-between items-center mb-4 pb-4 border-b border-gray-100'>
 							<span
 								className={`font-inter font-medium text-base leading-[24px] ${
-									!data.phone ? 'text-[#4F5D89]' : 'text-[#1A1A1A]'
+									!data?.phone ? 'text-[#4F5D89]' : 'text-[#1A1A1A]'
 								}`}
 							>
-								{data.phone || 'Completar teléfono'}
+								{data?.phone || 'Completar teléfono'}
 							</span>
-							{!data.phone ? (
+							{!data?.phone ? (
 								<AddButton onClick={() => handleEditClick('Completar teléfono')} />
 							) : (
 								<EditButton onClick={() => handleEditClick('phone')} />
@@ -382,9 +270,9 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 				<div className='md:col-span-2 lg:col-span-2 bg-white rounded-[30px] p-[36px] order-3 md:order-3'>
 					<h3 className='font-raleway text-[34px] font-medium leading-[100%] mb-3 text-[#1A1A1A]'>Tus intereses</h3>
 
-					{data.interests && data.interests.length > 0 ? (
+					{data?.intereses && data?.intereses.length > 0 ? (
 						<div className='flex flex-wrap gap-2 mb-4 items-center'>
-							{data.interests.map((interest, index) => (
+							{data.intereses.map((interest: string, index: number) => (
 								<span
 									key={index}
 									className={`px-4 py-2 rounded-full text-base font-inter font-normal bg-[#F7F9FF] text-[#29324F]`}
@@ -418,12 +306,12 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 				{/* Mobile: 4th, Desktop: 2nd in 2nd Col */}
 				<div className='md:col-span-2 lg:col-span-2 rounded-[30px] overflow-hidden group order-4 md:order-2'>
 					{
-						isProfileIncomplete && recommendedCourseData ? (
+						!data.currentCourse ? (
 							// Variant 1: Profile < 50% (Not Started) - based on image
 							<div className='bg-cover bg-center h-[300px] rounded-[30px] relative flex flex-col justify-end p-[36px] text-white overflow-hidden'>
 								<div
 									className='absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 bg-cover bg-top'
-									style={{ backgroundImage: `url(${recommendedCourseData.image})` }}
+									style={{ backgroundImage: `url(${defaultRecommendedCourse.image})` }}
 								></div>
 								{/* Overlay gradient */}
 								<div
@@ -435,19 +323,19 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 									{/* Left side: Label and Title */}
 									<div className='flex flex-col items-start gap-4'>
 										<span className='bg-[#DFE6FF] text-[#29324F] font-inter font-normal text-sm md:text-base rounded-full px-3 py-1.5'>
-											{recommendedCourseData.label}
+											{defaultRecommendedCourse.label}
 										</span>
 										<h2 className='text-white font-raleway font-[700] text-[24px] md:text-[36px] leading-[26px] md:leading-[44px] max-w-[25ch]'>
-											{recommendedCourseData.title}
+											{defaultRecommendedCourse.title}
 										</h2>
 									</div>
 									{/* Right side: Button */}
 									<div className='w-auto mt-4 md:mt-0'>
 										<CtaButton
-											onClick={() => console.log('Navigate to:', recommendedCourseData.buttonLink)} // Replace with actual navigation
+											onClick={() => console.log('Navigate to:', defaultRecommendedCourse.buttonLink)} // Replace with actual navigation
 											showIcon={true}
 										>
-											{recommendedCourseData.buttonText}
+											{defaultRecommendedCourse.buttonText}
 										</CtaButton>
 									</div>
 								</div>
@@ -457,7 +345,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 							<div className='bg-cover bg-top h-[300px] rounded-[30px] relative flex flex-col justify-center p-[36px] text-white overflow-hidden'>
 								<div
 									className='absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 bg-cover bg-top'
-									style={{ backgroundImage: `url(${data.currentCourse.image})` }}
+									style={{ backgroundImage: `url(${data.currentCourse.image.high})` }}
 								></div>
 								{/* Overlay gradient */}
 								<div
@@ -469,7 +357,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 									{/* Group Label and Title */}
 									<div className='flex flex-col items-start gap-4'>
 										<span className='bg-[#DFE6FF] text-[#29324F] font-inter font-normal text-sm md:text-base rounded-full px-3 py-1.5'>
-											{data.currentCourse.label || 'Aprendizaje'}
+											Continúa tu aprendizaje
 										</span>
 										<h2 className='text-white font-raleway font-[700] text-[24px] md:text-[36px] leading-[26px] md:leading-[44px] max-w-[25ch]'>
 											{data.currentCourse.title}
@@ -477,8 +365,18 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 									</div>
 									{/* Button - Aligned below title on mobile, right on desktop */}
 									<div className='w-auto mt-4 md:mt-0'>
-										<CtaButton onClick={() => {}} showIcon={true}>
-											Continuar
+										<CtaButton
+											onClick={() => {
+												if (data.currentCourse.product_code && data.currentCourse.product_code_cedente && userEmail) {
+													navigateToLms(data.currentCourse.product_code, data.currentCourse.product_code_cedente, userEmail);
+												} else {
+													console.error('Missing data for LMS navigation:', data.currentCourse);
+												}
+											}}
+											showIcon={true}
+											isDisabled={isNavigating}
+										>
+											{isNavigating ? 'Cargando...' : 'Continuar'}
 										</CtaButton>
 									</div>
 								</div>
@@ -486,10 +384,10 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 								<div className='w-full h-[40px] bg-[#00000033] absolute bottom-0 left-0'>
 									<div
 										className='h-full bg-[#00000080] px-[36px] flex items-center justify-start transition-width duration-300 ease-in-out'
-										style={{ width: `${data.currentCourse.progress}` }}
+										style={{ width: `${data.currentCourse.completed_percentage}%` }}
 									>
 										<span className='text-white font-inter font-medium text-base leading-[24px] whitespace-nowrap'>
-											{data.currentCourse.progress} completado
+											{data.currentCourse.completed_percentage}% completado
 										</span>
 									</div>
 								</div>
@@ -499,23 +397,23 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 				</div>
 
 				{/* Recommended Resources Section - Mobile: 5th, Desktop: 5th in 2nd/3rd Col */}
-				{data.interests && data.interests.length > 0 ? (
-					// Use the imported mock data
-					recommendedResources && recommendedResources.length > 0 ? (
+				{data.intereses && data.intereses.length > 0 ? (
+					data.recommendedResourcesByInterests && data.recommendedResourcesByInterests.length > 0 ? (
 						<div className='md:col-span-2 lg:col-span-3 bg-white rounded-[30px] p-[36px] order-5 md:order-5'>
 							<h3 className='font-raleway text-[34px] font-medium leading-[100%] mb-6 text-[#1A1A1A]'>
 								Recursos recomendados para tí
 							</h3>
 							{/* Mobile: Carousel / Desktop: Grid */}
 							<div className='flex space-x-4 overflow-x-auto scroll-snap-x scroll-snap-mandatory md:grid md:grid-cols-2 md:gap-5 md:space-x-0 md:overflow-x-visible md:scroll-snap-none pb-4 -mb-4 scrollbar-hide '>
-								{recommendedResources.map((resource, index) => (
-									<div
+								{data.recommendedResourcesByInterests.map((resource: any, index: number) => (
+									<Link
+										href={`/tienda/${resource.slug}`}
 										key={index}
 										className='w-[90%] flex-shrink-0 scroll-snap-start md:w-auto md:flex-shrink bg-white rounded-[30px] overflow-hidden flex flex-col md:flex-row border border-[#DBDDE2] hover:shadow-md transition-shadow min-h-[280px]'
 									>
 										{/* Image Section */}
 										<div className='relative w-full md:w-[200px] h-[180px] md:h-auto flex-shrink-0 bg-gray-100'>
-											<Image src={resource.image} alt={resource.title} layout='fill' objectFit='cover' />
+											<Image src={resource.featured_images.medium} alt={resource.title} layout='fill' objectFit='cover' />
 										</div>
 
 										{/* Content Section */}
@@ -523,18 +421,20 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 											{/* Tags section - fixed height */}
 											<div className=' mb-2'>
 												<div className='flex flex-wrap gap-2'>
-													{resource.tags?.map((tag, tagIndex) => (
+													{resource.categories[0] && (
 														<span
-															key={tagIndex}
-															className={`px-3 py-1 rounded-full text-xs font-inter font-medium ${
-																tag === 'Nutrición' || tag === 'Endocrinología'
-																	? 'bg-[#DFE6FF] text-[#29324F]'
-																	: 'bg-[#FFF4D8] text-[#8E6E3B]'
+															className={`px-3 py-1 rounded-full text-xs font-inter font-medium bg-[#DFE6FF] text-[#29324F]
 															}`}
 														>
-															{tag}
+															{resource.categories[0].name}
 														</span>
-													))}
+													)}
+													<span
+														className={`px-3 py-1 rounded-full text-xs font-inter font-medium bg-[#FFF4D8] text-[#8E6E3B]
+															}`}
+													>
+														{resource.resource === 'course' ? 'Curso' : 'Guía'}
+													</span>
 												</div>
 											</div>
 
@@ -547,21 +447,15 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 
 											{/* Author section - fixed height */}
 											<div className='mb-4'>
-												<p className='font-inter text-sm text-[#4F5D89]'>{resource.author}</p>
+												<p className='font-inter text-sm text-[#4F5D89]'>{resource.cedente.name}</p>
 											</div>
 
 											{/* Button - positioned absolutely */}
 											<div className='absolute bottom-4 right-4'>
-												<CtaButton
-													onClick={() => {
-														console.log('Navigate to:', resource.buttonLink);
-													}}
-												>
-													{resource.buttonText}
-												</CtaButton>
+												<CtaButton onClick={() => {}}>Descubrir</CtaButton>
 											</div>
 										</div>
-									</div>
+									</Link>
 								))}
 							</div>
 						</div>
@@ -587,7 +481,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 			</div>
 
 			{/* Render the Invoices Modal */}
-			<InvoicesModal isOpen={showInvoicesModal} onClose={() => setShowInvoicesModal(false)} />
+			<InvoicesModal contracts={data.contracts} isOpen={showInvoicesModal} onClose={() => setShowInvoicesModal(false)} />
 		</>
 	);
 };

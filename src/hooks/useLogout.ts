@@ -1,10 +1,7 @@
 import { useParams, useRouter } from 'next/navigation';
-import useSWR, { mutate } from 'swr';
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+import { mutate } from 'swr';
 
 export function useLogout() {
-	const { data, error, isLoading } = useSWR('/api/auth/logout-c', fetcher);
 	const router = useRouter();
 	const params = useParams();
 	const lang = params?.lang || 'es';
@@ -27,8 +24,6 @@ export function useLogout() {
 	};
 
 	return {
-		loading: isLoading,
-		error,
 		logout,
 	};
 }

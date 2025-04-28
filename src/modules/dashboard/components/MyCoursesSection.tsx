@@ -3,7 +3,7 @@ import ArrowRightIcon from '@/dashboard/assets/icons/ArrowRightIcon';
 import CalendarIcon from '@/dashboard/assets/icons/CalendarIcon';
 import TrophyIcon from '@/dashboard/assets/icons/TrophyIcon';
 import CtaButton from '@/dashboard/components/ui/CtaButton';
-import userData from '@/dashboard/data/dashboardMock.json';
+import { useLmsNavigation } from '@/hooks/useLmsNavigation';
 import Image from 'next/image';
 import React, { useState } from 'react';
 
@@ -14,26 +14,58 @@ interface Course {
 	title: string;
 	expiryDate?: string;
 	qualification?: number;
-	statusType: 'progress' | 'inactive' | 'finished' | 'expired';
+	statusType: 'progress' | 'inactive' | 'finished' | 'expired' | 'Activo' | 'Finalizado' | 'Expirado';
+	statusText: string;
+	createdDate?: string;
+	isFavorite?: boolean;
+	product_code?: number;
+	product_code_cedente?: string;
 }
 
-const MyCoursesSection: React.FC = () => {
+const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = ({ courseData, userEmail }) => {
 	const [activeTab, setActiveTab] = useState('Todo');
 	const [sortBy, setSortBy] = useState('Más recientes');
 	const [currentPage, setCurrentPage] = useState(1);
 	const coursesPerPage = 4;
+	const { navigateToLms, isLoading: isNavigating, error: navigationError } = useLmsNavigation();
 
-	// TODO: Implement filtering based on activeTab
-	const filteredCourses = userData.myCourses;
+	// --- Filtering Logic ---
+	const filteredCourses = courseData.filter((course) => {
+		if (activeTab === 'Todo') {
+			return true; // Show all courses
+		}
+		if (activeTab === 'Cursos') {
+			// Adjust this condition based on how you define 'Cursos'
+			// For example, show only active or not finished courses
+			return course.statusType === 'Activo' || course.statusType === 'progress';
+		}
+		if (activeTab === 'Favoritos') {
+			// Assuming you have an 'isFavorite' property in your Course interface
+			return course.isFavorite === true;
+		}
+		return true; // Default case, should not happen with current tabs
+	});
 
-	// TODO: Implement sorting based on sortBy
-	const sortedCourses = filteredCourses;
+	// --- Sorting Logic ---
+	const sortedCourses = [...filteredCourses].sort((a, b) => {
+		switch (sortBy) {
+			case 'Más recientes':
+				// Assuming 'createdDate' exists and is in a sortable format (e.g., ISO string)
+				return new Date(b.createdDate || 0).getTime() - new Date(a.createdDate || 0).getTime();
+			case 'Más antiguos':
+				return new Date(a.createdDate || 0).getTime() - new Date(b.createdDate || 0).getTime();
+			case 'Alfabético':
+				return a.title.localeCompare(b.title);
+			default:
+				return 0;
+		}
+	});
 
-	// Pagination logic
+	// --- Pagination Logic ---
+	const totalPages = Math.ceil(sortedCourses.length / coursesPerPage);
 	const indexOfLastCourse = currentPage * coursesPerPage;
 	const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
 	const currentCourses = sortedCourses.slice(indexOfFirstCourse, indexOfLastCourse);
-	const totalPages = Math.ceil(sortedCourses.length / coursesPerPage);
 
 	const handleTabClick = (tab: string) => {
 		setActiveTab(tab);
@@ -49,9 +81,14 @@ const MyCoursesSection: React.FC = () => {
 
 	const getStatusStyles = (statusType: Course['statusType']) => {
 		switch (statusType) {
-			case 'progress':
+			case 'Activo':
 				return 'bg-[#FFEBF6] text-[#C42B8B]'; // Pink
+			case 'Finalizado':
+				return 'bg-[#DFE6FF] text-[#29324F]'; // Blue
+			case 'Expirado':
+				return 'bg-[#FFF4D8] text-[#8E6E3B]'; // Yellow
 			case 'inactive':
+				return 'bg-[#DFE6FF] text-[#29324F]'; // Blue
 			case 'finished':
 				return 'bg-[#DFE6FF] text-[#29324F]'; // Blue
 			case 'expired':
@@ -62,23 +99,35 @@ const MyCoursesSection: React.FC = () => {
 	};
 
 	const renderInfoLine = (course: Course) => {
-		if (course.expiryDate) {
+		if (course.expiryDate && course.statusType !== 'Expirado' && course.statusType !== 'Finalizado') {
+			const date = new Date(course.expiryDate);
+			const day = date.getDate().toString().padStart(2, '0');
+			const month = (date.getMonth() + 1).toString().padStart(2, '0');
+			const year = date.getFullYear();
+			const formattedDate = `${day}-${month}-${year}`;
 			return (
 				<div className='flex items-center gap-1.5 text-xs text-[#4F5D89] font-inter font-medium'>
 					<CalendarIcon />
-					<span>Fecha de Expiración: {course.expiryDate}</span>
+					<span>Fecha de Expiración: {formattedDate}</span>
 				</div>
 			);
 		}
-		if (course.qualification !== undefined) {
+		if (course.qualification !== undefined && course.statusType === 'Finalizado') {
 			return (
 				<div className='flex items-center gap-1.5 text-xs text-[#4F5D89] font-inter font-medium'>
 					<TrophyIcon />
 					<span>Calificación: {course.qualification}</span>
+					<a
+						href={`https://www.google.com`}
+						target='_blank'
+						rel='noopener noreferrer'
+						className='cursor-pointer text-[#9200AD] underline font-inter font-medium text-sm'
+					>
+						Ver certificado
+					</a>
 				</div>
 			);
 		}
-		return null;
 	};
 
 	const renderButtons = (course: Course) => {
@@ -86,23 +135,27 @@ const MyCoursesSection: React.FC = () => {
 			'bg-white text-[#1A1A1A] border border-[#DBDDE2]  px-6 py-3 rounded-full font-inter font-medium text-sm hover:bg-[#838790] transition whitespace-nowrap';
 
 		switch (course.statusType) {
-			case 'progress':
+			case 'Activo':
+			case 'Finalizado':
 				return (
 					<>
 						<button className={secondaryButtonClass}>Ir al foro</button>
-						<CtaButton onClick={() => {}}>Ir al curso</CtaButton>
+						<CtaButton
+							onClick={() => {
+								if (course.product_code && course.product_code_cedente && userEmail) {
+									navigateToLms(course.product_code, course.product_code_cedente, userEmail);
+								} else {
+									console.error('Missing data for LMS navigation:', course);
+								}
+							}}
+							isDisabled={isNavigating}
+						>
+							{isNavigating ? 'Cargando...' : 'Ir al curso'}
+						</CtaButton>
 					</>
 				);
-			case 'inactive':
-				return <CtaButton onClick={() => {}}>Activar</CtaButton>;
-			case 'finished':
-				return (
-					<>
-						<button className={secondaryButtonClass}>Ir al foro</button>
-						<CtaButton onClick={() => {}}>Ver certificado</CtaButton>
-					</>
-				);
-			case 'expired':
+
+			case 'Expirado':
 				return <CtaButton onClick={() => {}}>Reactivar</CtaButton>;
 			default:
 				return null;
@@ -171,7 +224,7 @@ const MyCoursesSection: React.FC = () => {
 										(course as Course).statusType,
 									)}`}
 								>
-									{course.status}
+									{course.statusText}
 								</span>
 								{/* Title */}
 								<h4 className='font-raleway font-bold text-base leading-tight text-[#1A1A1A] mb-2 min-h-[48px]'>
@@ -198,6 +251,7 @@ const MyCoursesSection: React.FC = () => {
 				</button>
 				<span className='font-inter text-sm'>
 					<span className='font-bold text-[#1A1A1A]'>{String(currentPage).padStart(2, '0')}</span>
+					<span className='text-[#4F5D89]'> / {String(totalPages).padStart(2, '0')}</span>
 				</span>
 				<button
 					onClick={() => paginate(currentPage + 1)}
@@ -207,6 +261,8 @@ const MyCoursesSection: React.FC = () => {
 					<ArrowRightIcon />
 				</button>
 			</div>
+
+			{navigationError && <p className='text-red-500 text-center mt-4'>{navigationError}</p>}
 		</div>
 	);
 };

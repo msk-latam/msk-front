@@ -10,22 +10,10 @@ interface Invoice {
 	downloadLink: string; // URL to download the invoice PDF
 }
 
-// --- Mock Data (Replace with actual data fetching) ---
-const mockInvoices: Invoice[] = [
-	{ id: '1', date: '20-05-25', amount: '146.145', currency: 'ARS', downloadLink: '#' },
-	{ id: '2', date: '20-05-25', amount: '146.145', currency: 'ARS', downloadLink: '#' },
-	{ id: '3', date: '20-05-25', amount: '146.145', currency: 'ARS', downloadLink: '#' },
-	{ id: '4', date: '20-05-25', amount: '146.145', currency: 'ARS', downloadLink: '#' },
-	{ id: '5', date: '20-05-25', amount: '146.145', currency: 'ARS', downloadLink: '#' },
-	{ id: '6', date: '20-05-25', amount: '146.145', currency: 'ARS', downloadLink: '#' },
-];
-// --- End Mock Data ---
-
 interface InvoicesModalProps {
 	isOpen: boolean;
 	onClose: () => void;
-	// In a real app, you'd pass the invoices as a prop
-	// invoices: Invoice[];
+	contracts: any;
 }
 
 // Simple Download Icon Component
@@ -41,11 +29,42 @@ const DownloadIcon: React.FC = () => (
 	</svg>
 );
 
-const InvoicesModal: React.FC<InvoicesModalProps> = ({ isOpen, onClose }) => {
+const InvoicesModal: React.FC<InvoicesModalProps> = ({ isOpen, onClose, contracts }) => {
 	if (!isOpen) return null;
 
-	// Use mock data for now
-	const invoices = mockInvoices;
+	const generateInvoice = (invoice: any) => {
+		if (invoice.status_payment === 'Activo') {
+			// Create invoice content as a string
+			const invoiceContent = JSON.stringify({
+				id: invoice.id,
+				date: invoice.Fecha_Cobro,
+				amount: invoice.Monto,
+				currency: invoice.currency,
+			});
+
+			// Generate the invoice and download it
+			const blob = new Blob([invoiceContent], { type: 'application/pdf' });
+			const url = URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = `Factura_${invoice.id}.pdf`;
+			a.click();
+
+			// Clean up by revoking the object URL
+			setTimeout(() => URL.revokeObjectURL(url), 100);
+		}
+	};
+
+	const formatPrice = (invoice: any) => {
+		const currency = invoice.currency; //MXN, COP, USD, ARS
+		const amount = invoice.Monto;
+		const formattedPrice = new Intl.NumberFormat('es-AR', {
+			style: 'currency',
+			currency: currency,
+		}).format(amount);
+
+		return formattedPrice;
+	};
 
 	return (
 		<Modal isOpen={isOpen} onClose={onClose} title='Mis facturas' size='large'>
@@ -59,29 +78,36 @@ const InvoicesModal: React.FC<InvoicesModalProps> = ({ isOpen, onClose }) => {
 
 				{/* Invoice Rows */}
 				<div className='space-y-1 border-l border-r border-b border-[#DFE6FF] bg-[#F7F9FF] rounded-b-lg'>
-					{invoices.map((invoice) => (
-						<div
-							key={invoice.id}
-							className='grid grid-cols-3 gap-4 px-4 py-3 border-b border-[#DFE6FF] last:border-b-0 items-center'
-						>
-							<div className='text-[#1A1A1A] text-left'>{invoice.date}</div>
-							<div className='text-[#1A1A1A] text-center'>
-								${invoice.amount} {invoice.currency}
-							</div>
-							<div className='text-right'>
-								<a
-									href={invoice.downloadLink}
-									download // Suggest downloading the file
-									className='inline-flex items-center gap-1 text-[#9200AD] font-medium hover:underline'
+					{contracts && contracts.length > 0 ? (
+						contracts
+							.filter((invoice: any) => invoice.Fecha_Cobro && invoice.status !== 'Borrador')
+							.sort((a: any, b: any) => new Date(b.Fecha_Cobro).getTime() - new Date(a.Fecha_Cobro).getTime())
+							.map((invoice: any) => (
+								<div
+									key={invoice.id}
+									className='grid grid-cols-3 gap-4 px-4 py-3 border-b border-[#DFE6FF] last:border-b-0 items-center'
 								>
-									Descargar
-									<span className='ml-1 h-4 w-4'>
-										<DownloadIcon />
-									</span>
-								</a>
-							</div>
+									<div className='text-[#1A1A1A] text-left'>{invoice.Fecha_Cobro}</div>
+									<div className='text-[#1A1A1A] text-center'>{formatPrice(invoice)}</div>
+									<div className='text-right'>
+										<button
+											className={`inline-flex items-center gap-1 text-[#9200AD] font-medium hover:underline`}
+											onClick={() => generateInvoice(invoice)}
+										>
+											Descargar
+											<span className='ml-1 h-4 w-4'>
+												<DownloadIcon />
+											</span>
+										</button>
+									</div>
+								</div>
+							))
+					) : (
+						<div className='flex flex-col items-center justify-center py-8 px-4 text-center'>
+							<p className='text-[#4F5D89] font-raleway font-medium mb-2'>No tienes facturas disponibles</p>
+							<p className='text-[#4F5D89] font-inter text-sm'>Las facturas aparecerán aquí cuando realices una compra</p>
 						</div>
-					))}
+					)}
 				</div>
 			</div>
 		</Modal>

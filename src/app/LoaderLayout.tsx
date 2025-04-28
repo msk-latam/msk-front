@@ -5,6 +5,8 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import '@/modules/home/skeletons/homeSkeleton.css';
 
+const noLoaderRoutes = ['/login', '/register', '/forgot-password']; // ⬅️ rutas que ignoramos
+
 export default function LoaderLayout() {
   const pathname = usePathname();
   const [loading, setLoading] = useState(false);
@@ -13,21 +15,25 @@ export default function LoaderLayout() {
     let timeout: NodeJS.Timeout;
 
     const handleLoad = () => {
-      // Si todo el contenido terminó de cargar, ocultamos el loader
       clearTimeout(timeout);
       setLoading(false);
     };
 
-    // Cuando cambia el pathname:
+    // Antes de mostrar loader, verificamos si estamos en ruta ignorada
+    const isIgnoredRoute = noLoaderRoutes.some(route => pathname.startsWith(route));
+    if (isIgnoredRoute) {
+      setLoading(false);
+      return;
+    }
+
+    // Si no es ruta ignorada:
     setLoading(true);
 
     if (document.readyState === 'complete') {
-      // Si ya está todo cargado, ocultamos rápido
       timeout = setTimeout(() => {
         handleLoad();
-      },2500); // pequeño delay para dar sensación de fluidez
+      }, 2000); // pequeño delay para fluidez
     } else {
-      // Esperar al evento real de carga
       window.addEventListener('load', handleLoad);
     }
 
