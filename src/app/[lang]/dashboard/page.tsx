@@ -5,6 +5,7 @@ import Navbar from '@/modules/components/navbar/Navbar';
 import NewsLetter from '@/modules/components/newsletter/NewsLetter';
 import { useState } from 'react';
 
+import { useLogout } from '@/hooks/useLogout';
 import { useProfile } from '@/hooks/useProfile';
 import { useSaveInterests } from '@/hooks/useSaveInterests';
 import { useSaveUserProfile } from '@/hooks/useSaveUserProfile';
@@ -64,6 +65,8 @@ interface InterestPayload {
 }
 
 export default function DashboardPage() {
+	const { logout } = useLogout();
+
 	const [showEditModal, setShowEditModal] = useState(false);
 	const [showInterestsModal, setShowInterestsModal] = useState(false);
 	const [editTargetField, setEditTargetField] = useState<string | undefined>(undefined);
@@ -73,6 +76,13 @@ export default function DashboardPage() {
 	const [saveInterestsSuccess, setSaveInterestsSuccess] = useState<boolean>(false);
 
 	const { user, loading } = useProfile();
+
+	// if (!user) {
+	// 	logout();
+	// }
+
+	/* si no esta user, cerrar sesion */
+
 	const { mutate: saveUserProfile, loading: isSaving } = useSaveUserProfile();
 	const {
 		mutate: saveInterests,
