@@ -5,7 +5,7 @@ export const revalidate = 30; // ✅ Cachear durante 30 segundos
 export async function GET() {
   try {
     const res = await fetch("https://cms1.msklatam.com/wp-json/msk/v1/front/inicio?lang=int&nocache=1", {
-      cache: "force-cache", // ✅ Cachear si es posible
+      
       next: { revalidate: 30 }, // ✅ Revalidate en 30 segundos
     });
     const json = await res.json();

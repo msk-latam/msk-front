@@ -73,7 +73,7 @@ return (
           setCurrentSlide={setCurrentSlide}
         />
 
-      <div className="absolute inset-0 z-10">
+      <div className="absolute inset-0  ">
         <div className="px-5 py-3 md:mt-40 md:py-0 overflow-visible max-w-[1600px] md:px-6 mx-auto md:h-[71%] flex flex-col justify-center items-center md:justify-end text-center gap-0 md:items-start md:text-left md:gap-2">
           <div className="md:px-6 flex flex-col justify-center items-center md:justify-end text-center gap-0 md:items-start md:text-left md:gap-2">
             <p className="mt-20 md:mt-0 border border-white rounded-full px-[18px] py-2 my-4 md:my-0 text-[14px] w-fit">
