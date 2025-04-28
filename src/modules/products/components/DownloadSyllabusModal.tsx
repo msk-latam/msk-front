@@ -72,7 +72,7 @@ export default function DownloadSyllabusModal({
 
   return (
     <div
-    className="fixed inset-0 bg-black/50 flex items-center justify-center z-[100] px-4 !mt-0"
+    className="fixed inset-0 bg-black/50 flex items-center justify-center z-[99] px-4 !mt-0"
     onClick={(e) => {
       if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
         onClose(); // Click fuera del modal => Cierra
