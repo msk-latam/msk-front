@@ -67,7 +67,7 @@ const Navbar = ({ isDashboard = false }: NavbarProps) => {
 			{/* Overlay fondo oscuro móvil */}
 			{isDiscoverOpen && <div className='fixed inset-0 bg-transparent z-50 md:hidden'></div>}
 
-			<nav className='relative bg-transparent'>
+			<nav className='relative bg-transparent z-10'>
 				{/* --- NAV MOBILE --- */}
 				<section className='flex justify-start items-center mt-2 py-5 px-6 md:hidden relative'>
 					{/* Botón hamburguesa */}
