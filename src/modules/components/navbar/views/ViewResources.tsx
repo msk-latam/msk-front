@@ -1,15 +1,15 @@
 
 import React from "react";
-import { ArrowLeft, ChevronRight } from "react-feather";
+import { ArrowLeft, ChevronRight, ChevronLeft } from "react-feather";
 import { useResourcesView } from "../hooks/useResourcesView";
 import Link from "next/link";
 import ViewResourcesSkeleton from "../skeletons/ViewResourcesSkeleton";
 
 interface Props {
+  navigateTo: (view: string, category?: string | null) => void;
   isMobile?: boolean;
 }
-
-const ViewResources: React.FC<Props> = ({ isMobile = true }) => {
+const ViewResources: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
   // Pass the specialtyId to the hook
   const { data, loading, error } = useResourcesView();
 
@@ -54,20 +54,16 @@ const ViewResources: React.FC<Props> = ({ isMobile = true }) => {
   return (
     <div className="bg-white rounded-t-3xl mt-4 h-full overflow-auto px-4">
       <div className="flex flex-row justify-center items-center px-6 py-8">
-        <Link href="/main">
-          <button className="absolute left-5 top-10 rounded-full border border-black p-2 text-gray-800">
-            <ArrowLeft size={24} />
-          </button>
-        </Link>
+        <button className="absolute left-5 top-10 rounded-full border border-black p-2 text-gray-800" onClick={() => navigateTo("discover")}>
+          <ChevronLeft size={24} />
+        </button>
         <h2 className="text-xl font-medium text-gray-800">Recursos</h2>
       </div>
       <div className="flex flex-col bg-gray-200 rounded-2xl">
         {data.resources.map((resource, index) => (
-          <Link key={`resource-${index}`} href={resource.link.url}>
-            <button className="flex justify-between items-center p-4 hover:bg-gray-300 text-gray-800">
+          <Link key={`resource-${index}`} href={resource.link.url} className="flex flex-row justify-between items-center p-4 hover:bg-gray-300 text-gray-800">
               <span>{resource.link.title}</span>
               <ChevronRight size={20} />
-            </button>
           </Link>
         ))}
       </div>

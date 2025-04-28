@@ -53,9 +53,9 @@ const DropdownContent: React.FC<Props> = ({
         // Return ViewSpecialty directly - it now handles its own child view
         return <ViewSpecialty navigateTo={navigateTo} isMobile={false} />;
       case "offer":
-        return <ViewOffer isMobile={false} />;
+        return <ViewOffer navigateTo={navigateTo} isMobile={false} />;
       case "resources":
-        return <ViewResources isMobile={false} />;
+        return <ViewResources navigateTo={navigateTo} isMobile={false} />;
       case "specialtyDetail":
         return (
           <ViewSpecialtyDetail
@@ -120,9 +120,9 @@ const DropdownContent: React.FC<Props> = ({
             case "institutions":
               return <ViewInstitutions navigateTo={navigateTo} isMobile={false} />;
             case "offer":
-              return <ViewOffer isMobile={false} />;
+              return <ViewOffer navigateTo={navigateTo} isMobile={false} />;
             case "resources":
-              return <ViewResources isMobile={false} />;
+              return <ViewResources navigateTo={navigateTo} isMobile={false} />;
             default:
               return null;
           }
@@ -152,9 +152,9 @@ const DropdownContent: React.FC<Props> = ({
       case "institutions":
         return <ViewInstitutions navigateTo={navigateTo} isMobile />;
       case "offer":
-        return <ViewOffer isMobile />;
+        return <ViewOffer navigateTo={navigateTo} isMobile />;
       case "resources":
-        return <ViewResources isMobile />;
+        return <ViewResources navigateTo={navigateTo} isMobile />;
       default:
         return null;
     }
