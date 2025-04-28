@@ -15,10 +15,14 @@ const ViewDiscover: React.FC<Props> = ({ navigateTo, isMobile = true, onClose })
   
   const [currentView, setCurrentView] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
   const handleSelectView = (view: string) => {
-    setCurrentView(view);
-    setSelectedCategory(null);
+    if (currentView === view) {
+      setCurrentView(null);
+      setSelectedCategory(null);
+    } else {
+      setCurrentView(view);
+      setSelectedCategory(null);
+    }
   };
 
   if (loading) {
