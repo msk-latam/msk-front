@@ -4,6 +4,7 @@ import { ArrowLeft, ChevronRight } from "react-feather";
 import { useSpecialtyDetailView } from "../hooks/useSpecialtyDetailView";
 import { Course } from "../hooks/types";
 import Link from "next/link";
+import ViewSpecialtyDetailSkeleton from "../skeletons/ViewSpecialtyDetailSkeleton"
 
 interface Props {
   selectedCategory: string | null;
@@ -23,7 +24,7 @@ const ViewSpecialtyDetail: React.FC<Props> = ({
   const { selectedSpecialty, loading, error } = useSpecialtyDetailView(specialtyId);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <ViewSpecialtyDetailSkeleton/>
   }
 
   if (error) {

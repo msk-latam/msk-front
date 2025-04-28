@@ -3,6 +3,7 @@ import React from "react";
 import { ArrowLeft, ChevronRight } from "react-feather";
 import { useResourcesView } from "../hooks/useResourcesView";
 import Link from "next/link";
+import ViewResourcesSkeleton from "../skeletons/ViewResourcesSkeleton";
 
 interface Props {
   navigateTo: (view: string, category?: string | null) => void;
@@ -13,7 +14,7 @@ const ViewResources: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
   const { data, loading, error } = useResourcesView();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <ViewResourcesSkeleton/>
   }
 
   if (error) {
@@ -21,7 +22,7 @@ const ViewResources: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
   }
 
   if (!data) {
-    return <div>Specialty not found</div>;
+    return <div>Resource not found</div>;
   }
 
   // Get the courses from the selected specialty
@@ -30,12 +31,12 @@ const ViewResources: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
 
   if (!isMobile) {
     return (
-      <div className="p-4 h-fit overflow-visible w-full bg-white rounded-b-2xl">
-        <div className="w-full rounded-b-2xl bg-white p-4">
+      <div className="p-4 h-fit overflow-visible w-fit bg-white rounded-b-2xl">
+        <div className="w-full rounded-b-2xl bg-white divide-y">
           {data.resources.map((resource, index) => (
             <button
               key={`resource-${index}`}
-              className="w-full flex justify-between items-center p-4 text-gray-800 hover:bg-gray-100 rounded-lg"
+              className="w-full flex justify-between items-center p-4 text-gray-800 whitespace-nowrap hover:bg-gray-100 rounded-lg"
               onClick={() => navigateTo("resource", resource.link.url)}
             >
               <span>{resource.link.title}</span>
@@ -58,7 +59,7 @@ const ViewResources: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
       <div className="flex flex-row justify-center items-center px-6 py-8">
         <button
           className="absolute left-5 top-10 rounded-full border border-black p-2 text-gray-800"
-          onClick={() => navigateTo("specialty")}
+          onClick={() => navigateTo("main")}
         >
           <ArrowLeft size={24} />
         </button>

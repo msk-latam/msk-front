@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Search, ChevronRight,X } from "react-feather";
 import SearchBar from "../common/SearchBar";
 import ViewDiscover from "./ViewDiscover";
+import ViewMainSkeleton from "../skeletons/ViewMainSkeleton";
 
 interface Props {
   navigateTo: (view: string, category?: string | null) => void;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 const ViewMain: React.FC<Props> = ({ navigateTo, isMobile = true, onClose }) => {
+  
   if (!isMobile) {
     // Versión desktop: mostramos directamente la vista "Descubre"
     return (

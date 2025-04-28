@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ChevronRight,ChevronLeft } from "react-feather";
 import { useDiscoverView } from "../hooks/useDiscoverView";
 import DropdownContent from "../DropdownContent";
+import ViewDiscoverSkeleton from '../skeletons/ViewDiscoverSkeleton'
 
 interface Props {
   navigateTo: (view: string, category?: string | null) => void;
@@ -21,7 +22,7 @@ const ViewDiscover: React.FC<Props> = ({ navigateTo, isMobile = true, onClose })
   };
 
   if (loading) {
-    return <div className="p-4 text-center">Loading...</div>;
+    return <ViewDiscoverSkeleton/>;
   }
 
   if (error) {

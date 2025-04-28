@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ChevronRight, ChevronLeft } from "react-feather";
 import { useSpecialtyView } from "../hooks/useSpecialtyView";
 import ViewSpecialtyDetail from "./ViewSpecialtyDetail";
+import ViewSpecialtySkeleton from "../skeletons/ViewSpecialtySkeleton";
 
 interface Props {
   navigateTo: (view: string, category?: string | null) => void;
@@ -16,7 +17,7 @@ const ViewSpecialty: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
   const specialities = data?.specialities ?? [];
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <ViewSpecialtySkeleton/>
   }
 
   if (error) {
