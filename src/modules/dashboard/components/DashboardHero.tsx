@@ -99,8 +99,8 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 									className='relative inline-flex items-center justify-center overflow-hidden text-neutral-100 uppercase font-semibold rounded-full w-full h-full text-3xl'
 									style={{ backgroundColor: 'rgb(0, 209, 178)' }}
 								>
-									<span className='font-semibold text-white'>{`${data.name?.charAt(0) || ''}${
-										data.lastName?.charAt(0) || ''
+									<span className='font-semibold text-white'>{`${data?.name?.charAt(0) || ''}${
+										data?.lastName?.charAt(0) || ''
 									}`}</span>
 								</div>
 							)}
