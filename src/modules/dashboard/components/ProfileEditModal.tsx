@@ -1,18 +1,70 @@
 import Modal from '@/modules/dashboard/components/ui/Modal';
 import React, { useEffect, useState } from 'react';
 // Import the new UI components
+import Link from 'next/link';
+// REMOVED: import { ClipLoader } from 'react-spinners'; // Import a spinner
 import Input from './ui/Input';
 import PasswordInput from './ui/PasswordInput';
 import PhoneInputWithCode, { findCodePrefix } from './ui/PhoneInputWithCode'; // Import the helper
 import Select from './ui/Select';
 // Import types from the service
-import { UserData, UserDetail } from '@/lib/localStorageService/userDataService';
+// REMOVED: import { UserData, UserDetail } from '@/lib/localStorageService/userDataService';
+
+// --- Define the new interface based on useProfile data ---
+interface ProfileCompletion {
+	percentage: number;
+	message: string;
+	ctaText: string;
+	ctaLink: string;
+}
+
+interface Contract {
+	id: number;
+	// ... other contract fields if needed
+}
+
+interface Course {
+	id: string | number;
+	title: string;
+	image?: string | { high?: string; medium?: string; low?: string }; // Allow for different image structures
+	// ... other course fields if needed
+}
+
+export interface UserProfileData {
+	profileCompletion?: ProfileCompletion;
+	name: string; // Was: name
+	lastName: string;
+	profession: string;
+	speciality: string; // Was: speciality
+	email: string;
+	country: string;
+	phone: string; // Raw phone string from API, e.g., +52619961317
+	contracts?: Contract[];
+	coursesInProgress?: Course[];
+	medicalCollegeName?: string | null; // Was: asosiacion
+	workplace?: string | null; // Was: placeOfWork
+	intereses?: string[];
+	interesesAdicionales?: string[];
+	currentCourse?: Course;
+	recommendedResourcesByInterests?: any[]; // Use a more specific type if available
+	// Fields needed by the form but potentially not in the API response yet
+	workArea?: string;
+	belongsToMedicalCollege?: boolean | null;
+	// Fields derived/used internally by the form
+	phoneCode?: string; // Parsed from phone
+	fullPhoneNumber?: string; // Value used by the PhoneInputWithCode component
+	asosiacion?: string;
+}
+// --- End New Interface ---
 
 interface ProfileEditModalProps {
 	isOpen: boolean;
 	onClose: () => void;
-	onSave: (updatedData: Partial<UserData>) => void;
-	initialData: UserData | null;
+	onSave: (updatedData: Partial<UserProfileData>) => Promise<void>; // Expecting a promise now
+	user: UserProfileData | null;
+	isSaving: boolean; // loading state from useSaveUserProfile
+	saveError: string | null; // error message from useSaveUserProfile
+	saveSuccess: boolean; // success state managed by parent
 }
 
 // --- Dummy Data for Selects (Replace with actual data source) ---
@@ -20,23 +72,44 @@ const professionOptions = [
 	{ value: 'medico', label: 'Médico/a' },
 	{ value: 'enfermero', label: 'Enfermero/a' },
 	{ value: 'farmaceutico', label: 'Farmacéutico/a' },
+	{ value: 'Licenciado de la salud', label: 'Licenciado de la salud' }, // Added from example
 	{ value: 'otro', label: 'Otro' },
 ];
 
 const specialtyOptions = [
+	{ value: 'administracion-y-gestion', label: 'Administración y gestión' },
+	{ value: 'anestesiologia-y-dolor', label: 'Anestesiología y dolor' },
 	{ value: 'cardiologia', label: 'Cardiología' },
 	{ value: 'dermatologia', label: 'Dermatología' },
+	{ value: 'diabetes', label: 'Diabetes' },
+	{ value: 'emergentologia', label: 'Emergentología' },
 	{ value: 'endocrinologia', label: 'Endocrinología' },
+	{ value: 'gastroenterologia', label: 'Gastroenterología' },
+	{ value: 'geriatria', label: 'Geriatría' },
 	{ value: 'ginecologia', label: 'Ginecología' },
+	{ value: 'hematologia', label: 'Hematología' },
+	{ value: 'infectologia', label: 'Infectología' },
+	{ value: 'medicina-familiar', label: 'Medicina familiar' },
+	{ value: 'medicina-general', label: 'Medicina general' },
+	{ value: 'medicina-intensiva', label: 'Medicina intensiva' },
+	{ value: 'medicina-laboral', label: 'Medicina laboral' },
+	{ value: 'nefrologia', label: 'Nefrología' },
 	{ value: 'nutricion', label: 'Nutrición' },
-	// Add all specialties from your service/config
+	{ value: 'oftalmologia', label: 'Oftalmología' },
+	{ value: 'oncologia', label: 'Oncología' },
+	{ value: 'pediatria', label: 'Pediatría' },
+	{ value: 'psiquiatria', label: 'Psiquiatría' },
+	{ value: 'radiologia-e-imagenologia', label: 'Radiología e imagenología' },
+	{ value: 'traumatologia', label: 'Traumatología' },
+	{ value: 'urologia', label: 'Urología' },
+	{ value: 'bioquimica', label: 'Bioquímica' },
 ];
 
 const countryOptions = [
-	{ value: 'ar', label: 'Argentina' },
-	{ value: 'mx', label: 'México' },
-	{ value: 'es', label: 'España' },
-	{ value: 'co', label: 'Colombia' },
+	{ value: 'argentina', label: 'Argentina' },
+	{ value: 'mexico', label: 'México' },
+	{ value: 'españa', label: 'España' },
+	{ value: 'colombia', label: 'Colombia' },
 	// Add more countries
 ];
 
@@ -47,45 +120,53 @@ const medicalCollegeOptions = [
 
 // --- End Dummy Data ---
 
-const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ isOpen, onClose, onSave, initialData }) => {
-	const [formData, setFormData] = useState<Partial<UserData>>({});
+const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
+	isOpen,
+	onClose,
+	onSave,
+	user,
+	isSaving, // Receive prop
+	saveError, // Receive prop
+	saveSuccess, // Receive prop
+}) => {
+	const [formData, setFormData] = useState<Partial<UserProfileData>>({});
 	const [password, setPassword] = useState<string>('');
 
 	useEffect(() => {
-		if (initialData) {
-			// Extract email from details array if it exists there
-			const initialEmail = initialData.details?.find((d: UserDetail) => d.label === 'Email')?.value || '';
-			// Construct the initial combined phone value
-			const initialPhoneCode = initialData.phoneCode || '+54';
-			const initialPhone = initialData.phone || '';
-			const combinedInitialPhone = `${initialPhoneCode}${initialPhone}`;
+		if (user) {
+			const parsedPhone = findCodePrefix(user.phone || '');
+			const initialPhoneCode = parsedPhone ? parsedPhone.code : '+54';
+			const initialPhone = parsedPhone ? parsedPhone.number : user.phone || '';
 
 			setFormData({
-				email: initialEmail,
-				firstName: initialData.firstName || '',
-				lastName: initialData.lastName || '',
-				country: initialData.country || '',
-				phoneCode: initialPhoneCode, // Keep separate phoneCode if needed elsewhere, otherwise could remove
-				phone: initialPhone, // Keep separate phone if needed elsewhere, otherwise could remove
-				profesion: initialData.profesion || '',
-				specialty: initialData.specialty || '',
-				workplace: initialData.workplace || '',
-				workArea: initialData.workArea || '',
-				belongsToMedicalCollege: initialData.belongsToMedicalCollege ?? null,
-				medicalCollegeName: initialData.medicalCollegeName || '',
-				fullPhoneNumber: combinedInitialPhone,
+				// Directly use interface fields matching form
+				email: user.email || '',
+				name: user.name || '',
+				lastName: user.lastName || '',
+				country: user.country || '',
+				phoneCode: initialPhoneCode,
+				phone: initialPhone, // Keep parsed number for potential internal use
+				fullPhoneNumber: user.phone || '', // Use raw phone for PhoneInput
+				profession: user.profession || '',
+				speciality: specialtyOptions.find((option) => option.label === user.speciality)?.value || '', // Search in array and assign value
+				workplace: user.workplace || '',
+				workArea: user.workArea || '',
+				belongsToMedicalCollege: user.medicalCollegeName ? true : user.medicalCollegeName === null ? null : false,
+				medicalCollegeName: user.medicalCollegeName || '',
+				asosiacion: user.asosiacion || '',
 			});
-			setPassword(''); // Always clear password field on open
+			setPassword('');
 		} else {
 			setFormData({});
 			setPassword('');
 		}
-	}, [initialData, isOpen]);
+	}, [user, isOpen]);
 
 	// Updated handler for combined phone input and other regular inputs
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { name, value } = e.target;
-		setFormData((prev: Partial<UserData>) => ({ ...prev, [name]: value }));
+		// Use the new interface for state update
+		setFormData((prev: Partial<UserProfileData>) => ({ ...prev, [name]: value }));
 	};
 
 	// Handler for password input
@@ -97,50 +178,78 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ isOpen, onClose, on
 	const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const { name, value } = e.target;
 		if (name === 'belongsToMedicalCollege') {
-			setFormData((prev: Partial<UserData>) => ({
+			// Use the new interface for state update
+			setFormData((prev: Partial<UserProfileData>) => ({
 				...prev,
 				[name]: value === 'yes' ? true : value === 'no' ? false : null,
 			}));
 		} else if (name === 'phoneCode') {
-			// This case might no longer be needed if PhoneInputWithCode handles it
-			// However, keeping it might be useful if you still store phoneCode separately
-			setFormData((prev: Partial<UserData>) => ({ ...prev, [name]: value }));
+			// Kept for potential direct code changes, ensure correct state type
+			setFormData((prev: Partial<UserProfileData>) => ({ ...prev, [name]: value }));
 		} else {
-			setFormData((prev: Partial<UserData>) => ({ ...prev, [name]: value }));
+			// Use the new interface for state update
+			setFormData((prev: Partial<UserProfileData>) => ({ ...prev, [name]: value }));
 		}
 	};
 
 	// Handler for the combined phone input component
 	const handleCombinedPhoneChange = (combinedValue: string) => {
-		// Option 1: Store only the combined value (requires UserData schema change)
-		// setFormData(prev => ({ ...prev, combinedPhone: combinedValue }));
-
-		// Option 2: Parse and store separately (if you keep phone/phoneCode in UserData)
 		const parsed = findCodePrefix(combinedValue);
 		const code = parsed ? parsed.code : formData.phoneCode || '+54'; // Use current/default if parse fails
 		const number = parsed ? parsed.number : combinedValue; // Assume number if parse fails
 
-		setFormData((prev) => ({
+		// Use the new interface for state update
+		setFormData((prev: Partial<UserProfileData>) => ({
 			...prev,
 			phoneCode: code, // This still updates the separate field
 			phone: number, // This still updates the separate field
-			// Add a new field to store the combined value directly
-			fullPhoneNumber: combinedValue,
+			fullPhoneNumber: combinedValue, // Update the combined field
 		}));
 	};
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		const dataToSave = { ...formData };
-		if (password) {
-			console.warn('Password field was changed - In a real app, this should be handled securely (e.g., hashed).');
-			// Password is not saved back to UserData state/localStorage in this example
-		}
+		const dataToSave: Partial<UserProfileData> = { ...formData };
+
+		// Password handling should occur within the onSave logic (in the API route or hook)
+		// if (password) {
+		//  dataToSave.password = password; // Example: Pass password if it was changed
+		//	console.warn('Password field was changed - Handled separately.');
+		// }
+
+		// Call onSave but don't close the modal here
 		onSave(dataToSave);
-		onClose(); // Close modal on save
+		// REMOVED: onClose();
 	};
 
-	if (!isOpen || !initialData) return null;
+	if (!isOpen || !user) return null; // Check against 'user' prop
+
+	// --- Button State Logic ---
+	let buttonContent: React.ReactNode = 'Guardar cambios';
+	let buttonDisabled = isSaving || saveSuccess;
+	let buttonClasses =
+		'px-8 py-3 w-full max-w-[500px] text-white font-medium rounded-full transition focus:outline-none focus:ring-2 focus:ring-offset-2 flex items-center justify-center'; // Added flex centering
+
+	if (isSaving) {
+		buttonContent = (
+			<>
+				{/* REMOVED: <ClipLoader color='#ffffff' size={20} speedMultiplier={0.7} /> */}
+				<span className='ml-2'>Guardando...</span>
+			</>
+		);
+		buttonClasses += ' bg-[#a9a9a9] cursor-not-allowed'; // Greyed out and disabled look
+	} else if (saveSuccess) {
+		buttonContent = 'Datos guardados';
+		buttonClasses += ' bg-green-500 cursor-not-allowed'; // Green success and disabled look
+	} else if (saveError) {
+		// Keep original button text on error, but it's enabled
+		buttonClasses += ' bg-[#9200AD] hover:bg-[#7a0092] focus:ring-[#9200AD]';
+		buttonDisabled = false; // Re-enable button on error
+	} else {
+		// Default state
+		buttonClasses += ' bg-[#9200AD] hover:bg-[#7a0092] focus:ring-[#9200AD]';
+	}
+	// --- End Button State Logic ---
 
 	return (
 		<Modal isOpen={isOpen} onClose={onClose} title='Mi cuenta' size='large'>
@@ -163,9 +272,9 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ isOpen, onClose, on
 					<Select
 						id='profession'
 						label='Profesión'
-						name='profesion'
+						name='profession' // Matches interface/state
 						options={professionOptions}
-						value={formData.profesion || ''}
+						value={formData.profession || ''} // Matches interface/state
 						onChange={handleSelectChange}
 						placeholder='Seleccionar profesión'
 					/>
@@ -174,8 +283,8 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ isOpen, onClose, on
 						id='firstName'
 						label='Nombre/s'
 						type='text'
-						name='firstName'
-						value={formData.firstName || ''}
+						name='name' // Matches interface/state
+						value={formData.name || ''} // Matches interface/state
 						onChange={handleChange}
 						placeholder='Ingresar nombre/s'
 						required
@@ -184,12 +293,13 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ isOpen, onClose, on
 					<Select
 						id='specialty'
 						label='Especialidad'
-						name='specialty'
+						name='speciality' // Corrected: use speciality
 						options={specialtyOptions}
-						value={formData.specialty || ''}
+						value={formData.speciality || ''} // Corrected: use specialty
 						onChange={handleSelectChange}
 						placeholder='Seleccionar especialidad'
 					/>
+
 					<Input
 						id='lastName'
 						label='Apellido/s'
@@ -205,8 +315,8 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ isOpen, onClose, on
 						id='workplace'
 						label='Lugar de trabajo'
 						type='text'
-						name='workplace'
-						value={formData.workplace || ''}
+						name='workplace' // Matches interface/state
+						value={formData.workplace || ''} // Matches interface/state
 						onChange={handleChange}
 						placeholder='Ingresar lugar de trabajo'
 						autoComplete='organization'
@@ -222,10 +332,10 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ isOpen, onClose, on
 							autoComplete='new-password'
 						/>
 						<span className='absolute top-0 right-0 mt-1.5 text-xs font-medium text-[#6E737C] '>
-							¿Necesitas cambiar tu contraseña? 
-							<a href='#' tabIndex={-1} className='text-[#9200AD]'>
+							¿Necesitas cambiar tu contraseña?&nbsp; {/* Use &nbsp; for non-breaking space */}
+							<Link href='/login' tabIndex={-1} className='text-[#9200AD]'>
 								Hazlo aquí
-							</a>
+							</Link>
 						</span>
 					</div>
 					<Input
@@ -233,7 +343,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ isOpen, onClose, on
 						label='Área de trabajo'
 						type='text'
 						name='workArea'
-						value={formData.workArea || ''}
+						value={formData.workArea || ''} // Use workArea
 						onChange={handleChange}
 						placeholder='Ingresar área de trabajo'
 					/>
@@ -253,9 +363,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ isOpen, onClose, on
 						label='¿Perteneces a un colegio médico, sociedad o similar?'
 						name='belongsToMedicalCollege'
 						options={medicalCollegeOptions}
-						value={
-							formData.belongsToMedicalCollege === true ? 'yes' : formData.belongsToMedicalCollege === false ? 'no' : ''
-						}
+						value={formData.asosiacion !== '' ? 'yes' : 'no'}
 						onChange={handleSelectChange}
 						placeholder='Seleccionar'
 					/>
@@ -263,8 +371,9 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ isOpen, onClose, on
 					<PhoneInputWithCode
 						id='phone'
 						label='Teléfono'
-						// Pass the combined value (or derive it)
-						value={formData.fullPhoneNumber || `${formData.phoneCode || '+54'}${formData.phone || ''}`} // Use fullPhoneNumber if available, otherwise reconstruct
+						// Use fullPhoneNumber which holds the combined value
+						value={formData.fullPhoneNumber || ''}
+						defaultCode={formData.phoneCode || '+54'}
 						onChange={handleCombinedPhoneChange} // Use the new handler
 						required
 					/>
@@ -273,20 +382,23 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ isOpen, onClose, on
 						id='medicalCollegeName'
 						label='¿Cuál?'
 						type='text'
-						name='medicalCollegeName'
-						value={formData.medicalCollegeName || ''}
+						name='medicalCollegeName' // Matches interface/state
+						value={formData.asosiacion || ''} // Matches interface/state
 						onChange={handleChange}
 						placeholder='Ingresar colegio médico, sociedad o similar'
 					/>
 				</div>
 
-				<div className='flex justify-center pt-6 mt-6'>
-					<button
-						type='submit'
-						className='px-8 py-3 w-[500px] bg-[#9200AD] text-white font-medium rounded-full hover:bg-[#7a0092] transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#9200AD]'
-					>
-						Guardar cambios
+				<div className='flex flex-col items-center pt-6 mt-6'>
+					{/* Use flex-col for button and error */}
+					{saveError &&
+						!isSaving && ( // Show error only if not currently saving
+							<p className='text-red-600 text-sm mt-2 text-center'>{saveError}</p>
+						)}
+					<button type='submit' className={buttonClasses} disabled={buttonDisabled}>
+						{buttonContent}
 					</button>
+					{/* Display Error Message */}
 				</div>
 			</form>
 		</Modal>

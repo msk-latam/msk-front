@@ -28,10 +28,10 @@ const Select: React.FC<SelectProps> = ({
 }) => {
 	// Base select classes - adjusted padding for arrow, remove default appearance
 	const baseClasses =
-		'w-full px-4 py-3 border border-gray-300 rounded-[16px] bg-white focus:outline-none focus:ring-1 focus:ring-[#9200AD] focus:border-[#9200AD] sm:text-sm appearance-none';
+		'w-full pl-4 pr-10 py-3 border border-gray-300 rounded-[16px] bg-white focus:outline-none focus:ring-1 focus:ring-[#9200AD] focus:border-[#9200AD] sm:text-sm appearance-none'; // Adjusted padding-right for arrow
 
 	// Add placeholder text color if no value is selected
-	const placeholderColor = !value ? 'text-gray-400' : 'text-gray-900';
+	const placeholderColor = value === undefined || value === null || value === '' ? 'text-gray-400' : 'text-gray-900';
 
 	// Add error state classes if error prop is provided
 	const errorClasses = error ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300';
@@ -53,6 +53,9 @@ const Select: React.FC<SelectProps> = ({
 		</svg>
 	);
 
+	// Determine the value to pass to the select, ensuring it's a string or number
+	const selectValue = value ?? '';
+
 	return (
 		<div className='w-full'>
 			<label htmlFor={id} className='block text-sm font-medium text-gray-700 mb-1.5'>
@@ -62,15 +65,17 @@ const Select: React.FC<SelectProps> = ({
 				<select
 					id={id}
 					className={`${baseClasses} ${placeholderColor} ${errorClasses} ${className}`}
-					value={value || ''} // Ensure value is controlled, default to empty string for placeholder
+					value={selectValue} // Use the nullish coalescing operator
 					{...props} // Spread other props like name, onChange, required
 				>
 					{/* Placeholder Option */}
 					{placeholder && (
-						<option value='' disabled hidden>
+						<option value='' disabled={selectValue !== ''} hidden={selectValue !== ''}>
 							{placeholder}
 						</option>
 					)}
+					{/* Ensure an empty option exists if no placeholder and value can be empty */}
+					{!placeholder && <option value='' disabled hidden></option>}
 
 					{/* Actual Options */}
 					{options.map((option) => (
