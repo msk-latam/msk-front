@@ -33,7 +33,7 @@ const features = [
   },
 ];
 
-const CourseOverview: React.FC = () => {
+const CourseCard: React.FC = () => {
   return (
     <section className="max-w-5xl mx-auto ">
       <div className="grid gap-6 md:grid-cols-3">
@@ -58,4 +58,4 @@ const CourseOverview: React.FC = () => {
   );
 };
 
-export default CourseOverview;
+export default CourseCard;

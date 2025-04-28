@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useCourseSummary } from '../hooks/useCourseSummary';
 import { Phone } from 'lucide-react'; // icono de teléfono
-
+import SkeletonCourseSummaryCard from '../skeletons/SkeletonCourseSummaryCard';
 interface CourseSummaryProps {
   slug: string;
 }
@@ -24,7 +24,9 @@ export default function CourseSummary({ slug }: CourseSummaryProps) {
     : '';
 
   const cedente = data?.cedente;
-
+  if (loading) {
+    return <SkeletonCourseSummaryCard />; // Usa el Skeleton cuando los datos están cargando
+  }
   return (
     <div className="bg-white rounded-[38px] p-6 md:p-8 sticky top-10 w-full" style={{ backgroundColor: '#FFFFFF' }}>
       <Image

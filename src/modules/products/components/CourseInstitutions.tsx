@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useCourseInstitutions } from '../hooks/useCourseInstitutions';
 import InfoIcon from './InfoIcon';
+import SkeletonCourseInstitutions from '../skeletons/SkeletonCourseInstitutions'; // Importa el Skeleton
 
 interface CourseInstitutionProps {
   slug: string;
@@ -13,6 +14,9 @@ export default function CourseInstitutions({ slug }: CourseInstitutionProps) {
 
   if (!loading && !institutions) return null;
 
+  // Mostrar Skeleton cuando los datos estén cargando
+  if (loading) return <SkeletonCourseInstitutions />;
+
   return (
     <section className="md:py-3 text-left h-fit">
       <h2 className="text-xl md:text-left text-center md:text-2xl text-[#1A1A1A] font-medium mb-6 w-fit">
@@ -21,7 +25,6 @@ export default function CourseInstitutions({ slug }: CourseInstitutionProps) {
 
       <div className="overflow-x-auto md:overflow-visible scrollbar-none">
         <div className="flex gap-4 md:flex-row flex-wrap items-center justify-center px-2">
-          {loading && <p>Cargando instituciones...</p>}
           {error && <p>{error}</p>}
           {institutions?.map((inst) => (
             <div

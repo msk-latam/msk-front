@@ -6,6 +6,7 @@ import { BiLike } from 'react-icons/bi';
 import { GoShieldCheck } from 'react-icons/go';
 import { PiCertificateLight } from 'react-icons/pi';
 import { useCourseOverview } from '../hooks/useCourseOverview';
+import SkeletonCourseOverview from '../skeletons/SkeletonCourseOverview'; // Importa el Skeleton
 
 interface CourseOverviewProps {
   slug: string;
@@ -38,38 +39,37 @@ const features = [
 
 // Función corregida y segura para bold dinámico
 function formatWithThisCourse(text: unknown) {
-	if (typeof text !== 'string') return '';
+  if (typeof text !== 'string') return '';
   
-	// 1. Eliminar etiquetas HTML
-	const cleanText = text.replace(/<[^>]*>?/gm, '').trim();
+  // 1. Eliminar etiquetas HTML
+  const cleanText = text.replace(/<[^>]*>?/gm, '').trim();
   
-	// 2. Encontrar el índice del segundo " en "
-	const enMatches = [...cleanText.matchAll(/\ben\b/gi)];
+  // 2. Encontrar el índice del segundo " en "
+  const enMatches = [...cleanText.matchAll(/\ben\b/gi)];
   
-	if (enMatches.length < 2) {
-	  return cleanText; // si no hay 2 "en", devuelvo normal
-	}
-  
-	const secondEnIndex = enMatches[1].index; // índice del segundo "en"
-	if (secondEnIndex === undefined) return cleanText;
-  
-	// 3. Cortar en la posición del segundo "en"
-	const beforeSecondEn = cleanText.substring(0, secondEnIndex + 3).trim(); // incluye "en "
-	const afterSecondEn = cleanText.substring(secondEnIndex + 3).trim(); // lo que va en bold
-  
-	return (
-	  <>
-		{beforeSecondEn} <strong>{afterSecondEn}</strong>
-	  </>
-	);
+  if (enMatches.length < 2) {
+    return cleanText; // si no hay 2 "en", devuelvo normal
   }
   
+  const secondEnIndex = enMatches[1].index; // índice del segundo "en"
+  if (secondEnIndex === undefined) return cleanText;
+  
+  // 3. Cortar en la posición del segundo "en"
+  const beforeSecondEn = cleanText.substring(0, secondEnIndex + 3).trim(); // incluye "en "
+  const afterSecondEn = cleanText.substring(secondEnIndex + 3).trim(); // lo que va en bold
+  
+  return (
+    <>
+      {beforeSecondEn} <strong>{afterSecondEn}</strong>
+    </>
+  );
+}
 
 export default function CourseOverview({ slug }: CourseOverviewProps) {
   const { data, loading, error } = useCourseOverview(slug);
 
   if (loading || error || !data || (!data.habilities?.length && !data.your_course_steps?.length && !data.with_this_course)) {
-    return null;
+    return <SkeletonCourseOverview />;
   }
 
   return (
@@ -81,12 +81,12 @@ export default function CourseOverview({ slug }: CourseOverviewProps) {
 
       {/* Habilidades (tags dinámicos) */}
       <div className="flex flex-wrap gap-3 md:justify-start md:items-center justify-center items-center mb-8">
-  {data?.habilities?.map((item, index) => (
-    <span key={index} className="bg-[#f7f9ff] text-[#29324f] text-sm font-inter font-normal md:px-4 px-2 py-2 rounded-full shadow-sm">
-      {item.name}
-    </span>
-  ))}
-</div>
+        {data?.habilities?.map((item, index) => (
+          <span key={index} className="bg-[#f7f9ff] text-[#29324f] text-sm font-inter font-normal md:px-4 px-2 py-2 rounded-full shadow-sm">
+            {item.name}
+          </span>
+        ))}
+      </div>
 
       {/* Texto "Con este curso..." */}
       <h3 className="pb-6 font-raleway font-semibold text-[#1A1A1A] text-[18px] md:text-2xl md:text-left text-center">

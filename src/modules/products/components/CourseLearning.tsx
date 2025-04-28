@@ -1,6 +1,7 @@
 'use client'
 
 import { useCourseLearning } from '../hooks/useCourseLearning'
+import SkeletonCourseLearning from '../skeletons/SkeletonCourseLearning' // Importa el Skeleton
 
 interface CourseLearningProps {
   slug: string
@@ -9,7 +10,7 @@ interface CourseLearningProps {
 export default function CourseLearning({ slug }: CourseLearningProps) {
   const { data, loading, error } = useCourseLearning(slug)
 
-  if (loading) return <p className="p-5">Cargando contenido...</p>
+  if (loading) return <SkeletonCourseLearning /> // Usa el Skeleton cuando esté cargando
   if (error || !data) return null
 
   const learning = data.map((item) => ({ text: item.msk_learning_content }))
@@ -19,7 +20,7 @@ export default function CourseLearning({ slug }: CourseLearningProps) {
 
   return (
     <section className="bg-white p-5 md:px-0 md:py-3">
-      {/* Título corregido */}
+      {/* Título */}
       <h2 className="text-2xl text-center md:text-left font-medium md:text-[34px] mb-6 font-raleway text-[#1A1A1A]">
         Qué aprenderás
       </h2>
@@ -29,7 +30,7 @@ export default function CourseLearning({ slug }: CourseLearningProps) {
           {leftColumn.map((item, idx) => (
             <div key={idx} className="flex items-start gap-3">
               <div className="mt-1">
-                {/* Nuevo icono de check violeta */}
+                {/* Icono de check violeta */}
                 <svg
                   className="w-5 h-5 text-[#9200AD]"
                   viewBox="0 0 24 24"
@@ -45,7 +46,6 @@ export default function CourseLearning({ slug }: CourseLearningProps) {
                   />
                 </svg>
               </div>
-              {/* Texto corregido */}
               <p className="text-[#1A1A1A] font-raleway font-medium text-base leading-relaxed">
                 {item.text}
               </p>
@@ -56,7 +56,7 @@ export default function CourseLearning({ slug }: CourseLearningProps) {
           {rightColumn.map((item, idx) => (
             <div key={idx} className="flex items-start gap-3">
               <div className="mt-1">
-                {/* Nuevo icono de check violeta */}
+                {/* Icono de check violeta */}
                 <svg
                   className="w-5 h-5 text-[#9200AD]"
                   viewBox="0 0 24 24"
@@ -72,7 +72,6 @@ export default function CourseLearning({ slug }: CourseLearningProps) {
                   />
                 </svg>
               </div>
-              {/* Texto corregido */}
               <p className="text-[#1A1A1A] font-raleway font-medium text-base leading-relaxed">
                 {item.text}
               </p>

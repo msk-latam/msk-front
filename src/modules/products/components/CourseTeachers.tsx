@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useCourseTeachers } from '../hooks/useCourseTeachers';
+import SkeletonCourseTeachers from '../skeletons/SkeletonCourseTeachers'; // Importa el Skeleton
 
 interface CourseTeachersProps {
   slug: string;
@@ -14,9 +15,9 @@ export default function CourseTeachers({ slug }: CourseTeachersProps) {
   const [page, setPage] = useState(0);
 
   useEffect(() => {
-    if (!loading && data?.length && typeof window !== "undefined") {
+    if (!loading && data?.length && typeof window !== 'undefined') {
       const hash = window.location.hash;
-      if (hash === "#equipo-docente") {
+      if (hash === '#equipo-docente') {
         const el = document.getElementById('equipo-docente');
         if (el) {
           setTimeout(() => {
@@ -28,14 +29,7 @@ export default function CourseTeachers({ slug }: CourseTeachersProps) {
   }, [loading, data]);
 
   if (loading) {
-    return (
-      <section className="bg-white rounded-[38px] px-6 md:px-0 max-w-5xl mx-auto py-12 space-y-8">
-        <h2 className="text-[24px] md:text-[32px] font-raleway font-bold text-[#1A1A1A] mb-6">
-          Equipo docente
-        </h2>
-        <p>Cargando equipo docente...</p>
-      </section>
-    );
+    return <SkeletonCourseTeachers />; // Usa el Skeleton cuando esté cargando
   }
 
   if (error || !data || data.length === 0) {
