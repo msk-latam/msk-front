@@ -19,6 +19,9 @@ export async function GET() {
 		return NextResponse.json({ user: null }, { status: 401 });
 	}
 
+	console.log('token', token);
+	console.log('email', email);
+
 	try {
 		// Primer fetch: perfil básico
 		const profileRes = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/profile/${email}`, {
@@ -28,12 +31,17 @@ export async function GET() {
 		if (!profileRes.ok) throw new Error('Error fetching profile');
 
 		const profileData = await profileRes.json();
-		const entityIdCrm = profileData.user.contact.entity_id_crm;
+
+		console.log('profileRes', profileData);
+
+		const entityIdCrm = profileData.user.contact?.entity_id_crm;
 
 		// Segundo fetch: contacto extendido
 		const contactoRes = await fetch(`https://api.msklatam.net/getContactoByID?id=${entityIdCrm}`, {
 			headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' },
 		});
+
+		console.log('contactoRes', contactoRes);
 
 		if (!contactoRes.ok) throw new Error('Error fetching contacto');
 
@@ -110,7 +118,7 @@ La barra de progreso tendrá encuenta las siguientes reglas para su llenado: Si 
 				return courseDate > latestDate ? course : latest;
 			}, null);
 
-			const courseToEnroll = profileCourses.find((profCourse: any) => profCourse.entity_id_crm == latestCourse.id);
+			const courseToEnroll = profileCourses.find((profCourse: any) => profCourse?.entity_id_crm == latestCourse.id);
 
 			const courseRes = await fetch(
 				`https://cms1.msklatam.com/wp-json/msk/v1/products?search=${latestCourse.Nombre_de_curso.name}`,
@@ -195,7 +203,7 @@ La barra de progreso tendrá encuenta las siguientes reglas para su llenado: Si 
 				course.image = await fetchCourseImage(course.Nombre_de_curso.name);
 			}
 
-			const courseToEnroll = profileCourses.find((profCourse: any) => profCourse.entity_id_crm == course.id);
+			const courseToEnroll = profileCourses.find((profCourse: any) => profCourse?.entity_id_crm == course.id);
 
 			course.product_code = courseToEnroll.Product_Code;
 			course.product_code_cedente = courseToEnroll.C_digo_de_Curso_Cedente;

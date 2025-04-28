@@ -202,7 +202,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 					</div>
 
 					{/* Profile Completion Progress */}
-					{data.profileCompletion && data.profileCompletion.percentage < 100 && (
+					{data?.profileCompletion && data?.profileCompletion?.percentage < 100 && (
 						<div className='mt-6 bg-[#F7F9FF] rounded-[30px] p-[36px]'>
 							<div className='relative h-8 w-full bg-blue-100 rounded-full overflow-hidden'>
 								<div
@@ -210,14 +210,14 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 									style={{ width: `${data.profileCompletion.percentage}%` }}
 								>
 									<span className='absolute px-3 py-1 rounded-full bg-[#9200AD] text-white text-base font-medium -translate-y-1/2  top-1/2 left-0 whitespace-nowrap'>
-										Tu perfil {data.profileCompletion.percentage}%
+										Tu perfil {data?.profileCompletion?.percentage}%
 									</span>
 								</div>
 							</div>
 							<div className='mt-4 text-center text-sm'>
-								<span className='text-[#4F5D89]'>{data.profileCompletion.message} </span>
+								<span className='text-[#4F5D89]'>{data?.profileCompletion?.message} </span>
 								<a
-									href={data.profileCompletion.ctaLink}
+									href={data?.profileCompletion?.ctaLink}
 									onClick={(e) => {
 										e.preventDefault();
 										handleEditClick();
