@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Search } from "react-feather";
-import { useSpecialtyDetailView } from "../hooks/useSpecialtyDetailView"; // Ajustá la ruta si es necesario
+import { useSpecialtyDetailView } from "../hooks/useSpecialtyDetailView";
 import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
-import { usePathname, useRouter } from 'next/navigation'; // para detectar el idioma
-import { supportedLanguages } from '@/config/languages'; // para validar
-
+import { usePathname, useRouter } from 'next/navigation';
+import { supportedLanguages } from '@/config/languages';
 
 interface SearchBarProps {
   placeholder: string;
@@ -25,13 +24,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
   isInstitutionsView = false,
   className = "",
 }) => {
-  const { data, loading, error } = useSpecialtyDetailView();
+  const { data, loading } = useSpecialtyDetailView();
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredResults, setFilteredResults] = useState<typeof data>([]);
+  const [filteredResults, setFilteredResults] = useState<any[]>([]);
   const router = useRouter();
-const pathname = usePathname();
-const firstSegment = pathname?.split('/')[1];
-const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'ar';
+  const pathname = usePathname();
+  const firstSegment = pathname?.split('/')[1];
+  const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'ar';
 
   const inputTextStyle =
     isMainView || isDiscoverView || isSpecialtyView || isSpecialtyDetailView
@@ -40,12 +39,14 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
       ? "text-[#838790] border-[#989ca4]"
       : "";
 
+  // 🔁 Buscar por nombre de curso
   useEffect(() => {
     if (searchTerm.trim() === "") {
       setFilteredResults([]);
     } else {
-      const filtered = data.filter(item =>
-        item.specialty.name.toLowerCase().includes(searchTerm.toLowerCase())
+      const allCourses = data.flatMap(item => item.courses);
+      const filtered = allCourses.filter(course =>
+        course.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setFilteredResults(filtered);
     }
@@ -55,19 +56,11 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
     setSearchTerm(e.target.value);
   };
 
-  // Function to handle item click and redirect to store with filter
-  const handleItemClick = (specialty: any) => {
-    const specialtySlug = specialty.name
-      .toLowerCase()
-      .replace(/\s+/g, '-')     
-      .normalize("NFD")          
-      .replace(/[\u0300-\u036f]/g, "") 
-      .replace(/[^a-z0-9-]/g, ''); 
-  
-    const storeUrl = `${getLocalizedUrl(lang, '/tienda')}?especialidades=${specialtySlug}`;
-  
-    router.push(storeUrl); // ✅ ahora navegación SPA
-  
+  // ✅ Redirige a /tienda/curso.url
+  const handleItemClick = (course: any) => {
+    const coursePath = course.url.replace(/^\/(course|curso)/, '');
+    const storeUrl = getLocalizedUrl(lang, `/tienda${coursePath}`);
+    router.push(storeUrl);
     setSearchTerm("");
   };
 
@@ -86,22 +79,20 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
         </button>
       </div>
 
-      {/* Lista de resultados */}
       {searchTerm && filteredResults.length > 0 && (
         <ul className="absolute z-10 w-full bg-white border mt-2 rounded-lg shadow-md max-h-60 overflow-y-auto">
-          {filteredResults.map((item) => (
+          {filteredResults.map((course) => (
             <li
-              key={item.specialty.id}
+              key={course.id}
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-              onClick={() => handleItemClick(item.specialty)}
+              onClick={() => handleItemClick(course)}
             >
-              {item.specialty.name}
+              {course.name}
             </li>
           ))}
         </ul>
       )}
 
-      {/* Mensaje si no hay resultados */}
       {searchTerm && !loading && filteredResults.length === 0 && (
         <div className="absolute z-10 w-full bg-white border mt-2 rounded-lg shadow-md p-4 text-gray-500">
           No se encontraron resultados.
