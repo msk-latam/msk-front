@@ -16,6 +16,11 @@ export async function GET() {
 	const profileImage = cookies().get('picture')?.value;
 
 	if (!token || !email) {
+		console.log('No token or email');
+		/* clear cookies */
+		cookies().delete('access_token');
+		cookies().delete('email');
+		cookies().delete('picture');
 		return NextResponse.json({ user: null }, { status: 401 });
 	}
 
@@ -222,6 +227,10 @@ La barra de progreso tendrá encuenta las siguientes reglas para su llenado: Si 
 		return NextResponse.json({ user });
 	} catch (error) {
 		console.error(error);
+		/* clear cookies */
+		cookies().delete('access_token');
+		cookies().delete('email');
+		cookies().delete('picture');
 		return NextResponse.json({ user: null }, { status: 500 });
 	}
 }

@@ -207,7 +207,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 							<div className='relative h-8 w-full bg-blue-100 rounded-full overflow-hidden'>
 								<div
 									className='absolute top-0 left-0 h-full rounded-full bg-[#9200AD] transition-width duration-300 ease-in-out'
-									style={{ width: `${data.profileCompletion.percentage}%` }}
+									style={{ width: `${data?.profileCompletion.percentage}%` }}
 								>
 									<span className='absolute px-3 py-1 rounded-full bg-[#9200AD] text-white text-base font-medium -translate-y-1/2  top-1/2 left-0 whitespace-nowrap'>
 										Tu perfil {data?.profileCompletion?.percentage}%
@@ -224,7 +224,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 									}}
 									className='text-[#9200AD] font-medium underline cursor-pointer'
 								>
-									{data.profileCompletion.ctaText}
+									{data?.profileCompletion.ctaText}
 								</a>
 							</div>
 						</div>
@@ -272,7 +272,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 
 					{data?.intereses && data?.intereses.length > 0 ? (
 						<div className='flex flex-wrap gap-2 mb-4 items-center'>
-							{data.intereses.map((interest: string, index: number) => (
+							{data?.intereses.map((interest: string, index: number) => (
 								<span
 									key={index}
 									className={`px-4 py-2 rounded-full text-base font-inter font-normal bg-[#F7F9FF] text-[#29324F]`}
@@ -306,7 +306,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 				{/* Mobile: 4th, Desktop: 2nd in 2nd Col */}
 				<div className='md:col-span-2 lg:col-span-2 rounded-[30px] overflow-hidden group order-4 md:order-2'>
 					{
-						!data.currentCourse ? (
+						!data?.currentCourse ? (
 							// Variant 1: Profile < 50% (Not Started) - based on image
 							<div className='bg-cover bg-center h-[300px] rounded-[30px] relative flex flex-col justify-end p-[36px] text-white overflow-hidden'>
 								<div
@@ -340,12 +340,12 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 									</div>
 								</div>
 							</div>
-						) : data.currentCourse ? (
+						) : data?.currentCourse ? (
 							// Variant 2: Profile >= 50% OR no recommendedCourseData available (Started/In Progress) - Original card
 							<div className='bg-cover bg-top h-[300px] rounded-[30px] relative flex flex-col justify-center p-[36px] text-white overflow-hidden'>
 								<div
 									className='absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 bg-cover bg-top'
-									style={{ backgroundImage: `url(${data.currentCourse.image.high})` }}
+									style={{ backgroundImage: `url(${data?.currentCourse.image.high})` }}
 								></div>
 								{/* Overlay gradient */}
 								<div
@@ -360,17 +360,21 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 											Continúa tu aprendizaje
 										</span>
 										<h2 className='text-white font-raleway font-[700] text-[24px] md:text-[36px] leading-[26px] md:leading-[44px] max-w-[25ch]'>
-											{data.currentCourse.title}
+											{data?.currentCourse.title}
 										</h2>
 									</div>
 									{/* Button - Aligned below title on mobile, right on desktop */}
 									<div className='w-auto mt-4 md:mt-0'>
 										<CtaButton
 											onClick={() => {
-												if (data.currentCourse.product_code && data.currentCourse.product_code_cedente && userEmail) {
-													navigateToLms(data.currentCourse.product_code, data.currentCourse.product_code_cedente, userEmail);
+												if (data?.currentCourse.product_code && data?.currentCourse.product_code_cedente && userEmail) {
+													navigateToLms(
+														data?.currentCourse.product_code,
+														data?.currentCourse.product_code_cedente,
+														userEmail,
+													);
 												} else {
-													console.error('Missing data for LMS navigation:', data.currentCourse);
+													console.error('Missing data for LMS navigation:', data?.currentCourse);
 												}
 											}}
 											showIcon={true}
@@ -384,10 +388,10 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 								<div className='w-full h-[40px] bg-[#00000033] absolute bottom-0 left-0'>
 									<div
 										className='h-full bg-[#00000080] px-[36px] flex items-center justify-start transition-width duration-300 ease-in-out'
-										style={{ width: `${data.currentCourse.completed_percentage}%` }}
+										style={{ width: `${data?.currentCourse.completed_percentage}%` }}
 									>
 										<span className='text-white font-inter font-medium text-base leading-[24px] whitespace-nowrap'>
-											{data.currentCourse.completed_percentage}% completado
+											{data?.currentCourse.completed_percentage}% completado
 										</span>
 									</div>
 								</div>
@@ -397,15 +401,15 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 				</div>
 
 				{/* Recommended Resources Section - Mobile: 5th, Desktop: 5th in 2nd/3rd Col */}
-				{data.intereses && data.intereses.length > 0 ? (
-					data.recommendedResourcesByInterests && data.recommendedResourcesByInterests.length > 0 ? (
+				{data?.intereses && data?.intereses.length > 0 ? (
+					data?.recommendedResourcesByInterests && data?.recommendedResourcesByInterests.length > 0 ? (
 						<div className='md:col-span-2 lg:col-span-3 bg-white rounded-[30px] p-[36px] order-5 md:order-5'>
 							<h3 className='font-raleway text-[34px] font-medium leading-[100%] mb-6 text-[#1A1A1A]'>
 								Recursos recomendados para tí
 							</h3>
 							{/* Mobile: Carousel / Desktop: Grid */}
 							<div className='flex space-x-4 overflow-x-auto scroll-snap-x scroll-snap-mandatory md:grid md:grid-cols-2 md:gap-5 md:space-x-0 md:overflow-x-visible md:scroll-snap-none pb-4 -mb-4 scrollbar-hide '>
-								{data.recommendedResourcesByInterests.map((resource: any, index: number) => (
+								{data?.recommendedResourcesByInterests.map((resource: any, index: number) => (
 									<Link
 										href={`/tienda/${resource.slug}`}
 										key={index}
@@ -481,7 +485,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 			</div>
 
 			{/* Render the Invoices Modal */}
-			<InvoicesModal contracts={data.contracts} isOpen={showInvoicesModal} onClose={() => setShowInvoicesModal(false)} />
+			<InvoicesModal contracts={data?.contracts} isOpen={showInvoicesModal} onClose={() => setShowInvoicesModal(false)} />
 		</>
 	);
 };
