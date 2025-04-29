@@ -129,17 +129,20 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 	saveError, // Receive prop
 	saveSuccess, // Receive prop
 }) => {
-	const [formData, setFormData] = useState<Partial<UserProfileData>>({});
+	const [formData, setFormData] = useState<Partial<any>>({});
 	const [password, setPassword] = useState<string>('');
 
 	useEffect(() => {
 		if (user) {
+			console.log('user', user);
+
 			const parsedPhone = findCodePrefix(user.phone || '');
 			const initialPhoneCode = parsedPhone ? parsedPhone.code : '+54';
 			const initialPhone = parsedPhone ? parsedPhone.number : user.phone || '';
 
 			setFormData({
 				// Directly use interface fields matching form
+				crm_id: user.crm_id || '',
 				email: user.email || '',
 				name: user.name || '',
 				lastName: user.lastName || '',

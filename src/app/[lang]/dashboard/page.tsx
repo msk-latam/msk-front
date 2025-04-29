@@ -14,7 +14,7 @@ import HelpSection from '@/modules/dashboard/components/HelpSection';
 import InterestsEditModal from '@/modules/dashboard/components/InterestsEditModal';
 import LearningPlanCta from '@/modules/dashboard/components/LearningPlanCta';
 import MyCoursesSection from '@/modules/dashboard/components/MyCoursesSection';
-import ProfileEditModal, { UserProfileData } from '@/modules/dashboard/components/ProfileEditModal';
+import ProfileEditModal from '@/modules/dashboard/components/ProfileEditModal';
 import PromoBanner from '@/modules/dashboard/components/PromoBanner';
 
 // Define interest options here to help categorize initial data
@@ -101,7 +101,7 @@ export default function DashboardPage() {
 		}
 	};
 
-	const handleSaveProfile = async (formData: Partial<UserProfileData>) => {
+	const handleSaveProfile = async (formData: any) => {
 		console.log('(Page) Profile data to save:', formData);
 		try {
 			await saveUserProfile(formData);
