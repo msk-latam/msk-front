@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { HeroSection } from "../types";
-import { getHeroSection } from "../service/home.service";
+import { getHeroSection } from "../service/hero.service";
 
 export const useHomeContent = () => {
   const [data, setData] = useState<HeroSection | null>(null);

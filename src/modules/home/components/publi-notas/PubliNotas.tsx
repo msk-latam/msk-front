@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import useMentions from '@/modules/home/hooks/useMentions';
+import {useMentions} from '@/modules/home/hooks/useMentions';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
 import MskNewsSectionSkeleton from '@/modules/home/skeletons/MskNewsSectionSkeleton'; // Import Skeleton

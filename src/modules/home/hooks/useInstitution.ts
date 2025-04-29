@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Institution } from "../types";
-import { getInstitutions } from "../service/institutions.service";
+import { getHomeData } from "../service/home.service"; 
 
 export function useInstitutions() {
   const [institutions, setInstitutions] = useState<Institution[]>([]);
@@ -10,19 +10,18 @@ export function useInstitutions() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await getInstitutions();
-        setInstitutions(data);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchData();
+    // Llamamos al servicio para obtener los datos de las instituciones
+    getHomeData()
+    .then((homeData) => {
+      // courseData es todo el objeto del curso
+      const instutionsData: Institution[] = homeData.sections.backups?.institutions ?? [];
+      setInstitutions(instutionsData);
+    })
+    .catch((err) => {
+      console.error(err);
+      setError(err.message || "Error fetching instutions data");
+    })
+    .finally(() => setLoading(false));
   }, []);
-
   return { institutions, loading, error };
 }

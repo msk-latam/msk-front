@@ -3,7 +3,7 @@
 export default function TrustSectionSkeleton() {
   return (
     <div className="relative w-full bg-gray-100 pt-24 pb-60 h-[1200px] md:h-[750px] z-9 md:px-4 animate-pulse">
-      <section className="relative bg-white rounded-[38px] md:p-[72px] md:px-[104px] translate-y-[20px] -mt-40 mb-16 z-9 py-10 pl-5 md:overflow-visible max-w-[1600px] mx-auto md:px-4 shadow-lg md:min-h-[500px] md:max-h-[750px] overflow-hidden">
+      <section className="relative bg-white rounded-[38px] md:p-[72px] md:px-[104px] translate-y-[20px] -mt-40 mb-16 z-9 py-10 pl-5 md:overflow-visible max-w-[1600px] mx-auto shadow-lg md:min-h-[500px] md:max-h-[750px] overflow-hidden">
         <div className="space-y-6">
           {/* Title */}
           <div className="h-8 bg-gray-300 rounded w-3/4 mx-auto md:mx-0 mb-4"></div>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import HeroCarousel from "./HeroCarousel";
 import HeroHighlights from "./HeroHighlights";
-import { useHomeContent } from "@/modules/home/hooks/useHomeContent";
+import { useHeroContent } from "@/modules/home/hooks/useHeroContent";
 import { HeroSlide } from "@/modules/home/types";
 import { usePathname } from 'next/navigation';
 import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
@@ -20,7 +20,7 @@ const STATIC_HIGHLIGHTS = [
 ];
 
 const Hero = () => {
-  const { data, loading } = useHomeContent(); // 👈 Usar loading
+  const { data, loading } = useHeroContent(); // 👈 Usar loading
   const slides: HeroSlide[] = data?.slides || [];
   const backgroundImages = slides.map((s) => s.background_image?.[0]).filter(Boolean);
 
