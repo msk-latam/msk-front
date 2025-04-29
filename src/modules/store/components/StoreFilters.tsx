@@ -89,7 +89,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
 	};
 
 	return (
-		<div className={`mb-4 bg-white rounded-[30px] p-[36px] ${className}`}>
+		<div className={`bg-white rounded-[30px] p-5 ${className}`}>
 			<Accordion
 				title={title}
 				isOpen={isOpen}
