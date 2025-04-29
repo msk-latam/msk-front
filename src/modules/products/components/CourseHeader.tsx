@@ -4,6 +4,9 @@ import { ChevronRight } from 'react-feather';
 import { RiHome6Line } from 'react-icons/ri';
 import { useCourseHeader } from '../hooks/useCourseHeader';
 import Link from 'next/link';
+import { useRouter, usePathname } from 'next/navigation'; // 👈 Agregamos
+import { getLocalizedUrl } from '@/utils/getLocalizedUrl'; // 👈 Agregamos
+import { supportedLanguages } from '@/config/languages'; // 👈 Agregamos
 import SkeletonCourseHeader from '../skeletons/SkeletonCourseHeader'; // Importa el Skeleton
 
 interface CourseHeaderProps {
@@ -12,9 +15,13 @@ interface CourseHeaderProps {
 
 export default function CourseHeader({ slug }: CourseHeaderProps) {
   const { data, loading, error } = useCourseHeader(slug);
+  const router = useRouter();
+  const pathname = usePathname();
+  const firstSegment = pathname?.split('/')[1];
+  const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'ar';
 
   if (loading) {
-    return <SkeletonCourseHeader />; // Usa el Skeleton cuando los datos están cargando
+    return <SkeletonCourseHeader />;
   }
 
   if (error || !data) {
@@ -26,6 +33,20 @@ export default function CourseHeader({ slug }: CourseHeaderProps) {
   }
 
   const { title, has_certificate, categories } = data;
+
+  // ✅ Función que maneja el click en categoría
+  const handleSpecialtyClick = (specialtyName: string) => {
+    const specialtySlug = specialtyName
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9-]/g, '');
+  
+    const storeUrl = `${getLocalizedUrl(lang, '/tienda')}?especialidades=${specialtySlug}`;
+    router.push(storeUrl);
+  };
+  
 
   return (
     <div className="px-4 overflow-visible max-w-[1600px] md:px-14 mx-auto h-96 flex md:flex-col md:justify-end md:items-start flex-row flex-wrap justify-center items-center text-white">
@@ -43,15 +64,16 @@ export default function CourseHeader({ slug }: CourseHeaderProps) {
             <span className="hidden md:block">Tienda</span>
           </Link>
 
-          {categories.map((cat) => (
-            <span key={cat.term_id} className="flex items-center">
+          {categories.map((spec) => (
+            <span key={spec.term_id} className="flex items-center">
               <span className="shrink-0"><ChevronRight /></span>
-              <Link
-                href={`/categoria/${cat.slug}`}
-                className="truncate my-auto shrink-0 hover:underline"
+              <button
+                type="button"
+                onClick={() => handleSpecialtyClick(spec.name)}
+                className="truncate my-auto shrink-0 hover:underline bg-transparent text-white border-0 p-0 m-0 cursor-pointer"
               >
-                {cat.name}
-              </Link>
+                {spec.name}
+              </button>
             </span>
           ))}
 
@@ -75,12 +97,13 @@ export default function CourseHeader({ slug }: CourseHeaderProps) {
 
         {/* Etiquetas de categorías */}
         <div className="flex flex-wrap items-center md:items-start justify-center md:justify-normal gap-2">
-          {categories.map((cat) => (
+          {categories.map((spec) => (
             <span
-              key={cat.term_id}
-              className="bg-black/20 text-white text-xs font-inter font-normal px-5 py-2 rounded-full"
+              key={spec.term_id}
+              className="bg-black/20 text-white text-xs font-inter font-normal px-5 py-2 rounded-full cursor-pointer hover:bg-black/30"
+              onClick={() => handleSpecialtyClick(spec.name)}
             >
-              {cat.name}
+              {spec.name}
             </span>
           ))}
         </div>
