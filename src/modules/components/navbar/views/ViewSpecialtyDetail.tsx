@@ -5,7 +5,7 @@ import { useSpecialtyDetailView } from "../hooks/useSpecialtyDetailView";
 import { Course } from "../hooks/types";
 import Link from "next/link";
 import ViewSpecialtyDetailSkeleton from "../skeletons/ViewSpecialtyDetailSkeleton"
-import { usePathname } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
 import { supportedLanguages } from '@/config/languages';
 
@@ -41,9 +41,21 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
     return <div>Specialty not found</div>;
   }
 
+  const router = useRouter();
   const courses: Course[] = selectedSpecialty.courses;
   const specialtyName = selectedSpecialty.specialty.name;
 
+      const specialtySlug = specialtyName
+        .toLowerCase()
+        .replace(/\s+/g, '-')     
+        .normalize("NFD")          
+        .replace(/[\u0300-\u036f]/g, "") 
+        .replace(/[^a-z0-9-]/g, ''); 
+    
+      const storeUrl = `${getLocalizedUrl(lang, '/tienda')}?especialidades=${specialtySlug}`;
+     // ✅ ahora navegación SPA
+
+console.log(specialtyName,'aaaaaa')
   if (!isMobile) {
     return (
       <div className="p-4 h-fit overflow-auto w-full bg-white rounded-b-2xl">
@@ -72,7 +84,7 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
           )}
         </div>
 
-        <Link href={getLocalizedUrl(lang, '/tienda')}
+        <Link href={getLocalizedUrl(lang, storeUrl)}
           className="mt-4 flex justify-between items-center w-full p-4 bg-gray-100 hover:bg-gray-200 rounded-2xl text-gray-800"
         >
           <span className="whitespace-nowrap">Ver todos los cursos</span>
@@ -119,7 +131,7 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
         )}
 
         <Link
-          href="/tienda"
+          href={storeUrl}
           className="flex justify-between items-center w-full py-4 text-left text-gray-800"
         >
           <span>Ver todos los cursos</span>
