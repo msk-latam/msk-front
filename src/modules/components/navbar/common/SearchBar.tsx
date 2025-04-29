@@ -63,18 +63,33 @@ const SearchBar: React.FC<SearchBarProps> = ({
     router.push(storeUrl);
     setSearchTerm("");
   };
-
+  const handleSearchRedirect = () => {
+    const trimmedSearch = searchTerm.trim();
+    if (trimmedSearch !== "") {
+      const query = encodeURIComponent(trimmedSearch);
+      const storeUrl = getLocalizedUrl(lang, `/tienda?search=${query}&page=1`);
+      router.push(storeUrl);
+      setSearchTerm("");
+    }
+  };
+  
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearchRedirect();
+    }
+  };
   return (
     <div className={`relative ${className}`}>
       <div className="rounded-full border border-[#DBDDE2]-100 overflow-hidden relative flex items-center">
         <input
           type="search"
           placeholder={placeholder}
-          value={searchTerm}
+          value={searchTerm}  
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           className={`bg-transparent w-full text-sm py-3 pl-4 pr-12 border-transparent focus:border-transparent focus:ring-0 focus:outline-none ${inputTextStyle}`}
         />
-        <button className="absolute right-1 bg-[#9200AD] p-3 rounded-full">
+        <button className="absolute right-1 bg-[#9200AD] p-3 rounded-full" onClick={handleSearchRedirect}>
           <Search className="text-white w-4 h-4" />
         </button>
       </div>
