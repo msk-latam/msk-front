@@ -1,0 +1,1264 @@
+{
+    "slug": "inicio",
+    "lang": "int",
+    "sections": {
+      "hero": {
+        "slides": [
+          {
+            "title": "Cursos de medicina para \u003Cem\u003Eexpandir\u003C/em\u003E tus metas profesionales\n",
+            "background_image": [
+              "https://cms1.msklatam.com/wp-content/uploads/2025/03/141dca55e38fb41075913db2ca09b65ddc61556d-scaled.webp",
+              2560, 1717, false],
+            "tag": "Cursos",
+            "cta": {
+              "title": "Comienza tu experiencia",
+              "url": "/tienda",
+              "target": ""
+            }
+          },
+          {
+            "title": "Cursos de medicina para \u003Cem\u003Eexpandir\u003C/em\u003E tus conocimientos\n",
+            "background_image": [
+              "https://cms1.msklatam.com/wp-content/uploads/2025/03/Rectangle-4-1-scaled.webp",
+              2560, 1147, false],
+            "tag": "Cursos",
+            "cta": {
+              "title": "Comienza tu viaje",
+              "url": "/tienda",
+              "target": ""
+            }
+          },
+          {
+            "title": "Cursos de medicina para \u003Cem\u003Eelevar\u003C/em\u003E tu carrera\n",
+            "background_image": [
+              "https://cms1.msklatam.com/wp-content/uploads/2025/03/jafar-ahmed-E285pJbC4uE-unsplash.webp",
+              1620, 1080, false],
+            "tag": "Cursos",
+            "cta": {
+              "title": "Comienza tu experiencia",
+              "url": "/tienda",
+              "target": ""
+            }
+          },
+          {
+            "title": "Cursos de medicina para \u003Cem\u003Eexpandir\u003C/em\u003E tu carrera\n",
+            "background_image": [
+              "https://cms1.msklatam.com/wp-content/uploads/2025/03/national-cancer-institute-6NMcUDG37Yc-unsplash.webp",
+              1626, 1080, false],
+            "tag": "Cursos",
+            "cta": {
+              "title": "Comienza tu experiencia",
+              "url": "/tienda",
+              "target": ""
+            }
+          }
+        ]
+      },
+      "courses": {
+        "title": "Te damos la bienvenida a Medical & Scientific Knowledge, el lugar ideal para estudiar medicina a distancia a través de nuestros cursos de actualización.",
+        "subtitle": "Encuentra cursos de medicina y cursos de enfermería sobre más de 20 especialidades",
+        "courses_news": [
+          {
+            "id": 66532,
+            "title": "Auditoría médica",
+            "slug": "auditoria-medica",
+            "date": "2020-06-02 14:18:05",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2020/06/foto-primaria-1.jpg",
+            "categories": [
+              {
+                "id": 60090,
+                "name": "Administración y gestión",
+                "slug": "administracion-y-gestion",
+                "is_primary": false
+              },
+              {
+                "id": 1090,
+                "name": "Medicina general",
+                "slug": "medicina-general",
+                "is_primary": false
+              }
+            ],
+            "professions": [],
+            "codes": [
+              {
+                "unique_code": "9005812",
+                "isbn": null
+              }
+            ],
+            "cedente": {
+              "id": null,
+              "title": null,
+              "name": null,
+              "slug": null,
+              "image": false
+            },
+            "duration": null,
+            "link": "/tienda/auditoria-medica"
+          },
+          {
+            "id": 53875,
+            "title": "Formación integral en medicina de urgencias para enfermeros",
+            "slug": "enfermeria-en-urgencias",
+            "date": "2020-04-09 22:34:28",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2020/04/9004702_fotoprimaria.jpg",
+            "categories": [
+              {
+                "id": 1091,
+                "name": "Emergentología",
+                "slug": "emergentologia",
+                "is_primary": false
+              }
+            ],
+            "professions": [],
+            "codes": [
+              {
+                "unique_code": "9005835",
+                "isbn": null
+              }
+            ],
+            "cedente": {
+              "id": null,
+              "title": null,
+              "name": null,
+              "slug": null,
+              "image": false
+            },
+            "duration": null,
+            "link": "/tienda/enfermeria-en-urgencias"
+          },
+          {
+            "id": 54412,
+            "title": "Formación integral en enfermería y cuidados intensivos neonatales",
+            "slug": "enfermeria-y-cuidados-intensivos-neonatales",
+            "date": "2020-04-09 22:35:32",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2020/04/fotoprimaria-1-3.jpg",
+            "categories": [
+              {
+                "id": 1413,
+                "name": "Medicina intensiva",
+                "slug": "medicina-intensiva",
+                "is_primary": false
+              }
+            ],
+            "professions": [],
+            "codes": [
+              {
+                "unique_code": "9005832",
+                "isbn": null
+              }
+            ],
+            "cedente": {
+              "id": null,
+              "title": null,
+              "name": null,
+              "slug": null,
+              "image": false
+            },
+            "duration": null,
+            "link": "/tienda/enfermeria-y-cuidados-intensivos-neonatales"
+          },
+          {
+            "id": 63640,
+            "title": "Formación integral en obstetricia",
+            "slug": "obstetricia-para-profesionales-de-la-salud",
+            "date": "2020-04-24 19:06:49",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg",
+            "categories": [
+              {
+                "id": 1251,
+                "name": "Obstetricia",
+                "slug": "obstetricia",
+                "is_primary": false
+              }
+            ],
+            "professions": [],
+            "codes": [
+              {
+                "unique_code": "9005822",
+                "isbn": null
+              }
+            ],
+            "cedente": {
+              "id": null,
+              "title": null,
+              "name": null,
+              "slug": null,
+              "image": false
+            },
+            "duration": null,
+            "link": "/tienda/obstetricia-para-profesionales-de-la-salud"
+          },
+          {
+            "id": 63236,
+            "title": "Curso superior de cardiología",
+            "slug": "cardiologia",
+            "date": "2020-04-23 16:10:43",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2020/07/foto-primaria-1-1.jpg",
+            "categories": [
+              {
+                "id": 1100,
+                "name": "Cardiología",
+                "slug": "cardiologia",
+                "is_primary": false
+              }
+            ],
+            "professions": [],
+            "codes": [
+              {
+                "unique_code": "9005815",
+                "isbn": null
+              }
+            ],
+            "cedente": {
+              "id": null,
+              "title": null,
+              "name": null,
+              "slug": null,
+              "image": false
+            },
+            "duration": null,
+            "link": "/tienda/cardiologia"
+          },
+          {
+            "id": 53877,
+            "title": "Curso superior de neonatología",
+            "slug": "neonatologia",
+            "date": "2020-04-09 22:34:28",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2020/04/9004703_fotoprimaria.jpg",
+            "categories": [
+              {
+                "id": 1106,
+                "name": "Pediatría",
+                "slug": "pediatria",
+                "is_primary": false
+              }
+            ],
+            "professions": [],
+            "codes": [
+              {
+                "unique_code": "9005827",
+                "isbn": null
+              }
+            ],
+            "cedente": {
+              "id": null,
+              "title": null,
+              "name": null,
+              "slug": null,
+              "image": false
+            },
+            "duration": null,
+            "link": "/tienda/neonatologia"
+          }
+        ],
+        "courses_recommended": [
+          {
+            "id": 87136,
+            "title": "Aféresis terapéutica en enfermedades hematológicas",
+            "slug": "aferesis-terapeutica-en-enfermedades-hematologicas",
+            "date": "2021-04-29 15:26:42",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2021/03/imagen-primaria.jpg",
+            "categories": [
+              {
+                "id": 1211,
+                "name": "Hematología",
+                "slug": "hematologia",
+                "is_primary": false
+              }
+            ],
+            "professions": [],
+            "codes": [
+              {
+                "unique_code": "G-00025",
+                "isbn": null
+              }
+            ],
+            "cedente": {
+              "id": null,
+              "title": null,
+              "name": null,
+              "slug": null,
+              "image": false
+            },
+            "duration": null,
+            "link": "/tienda/aferesis-terapeutica-en-enfermedades-hematologicas"
+          },
+          {
+            "id": 224831,
+            "title": "Alimentación en adultos y vegetarianismo",
+            "slug": "alimentacion-en-adultos-y-vegetarianismo",
+            "date": "2022-08-01 20:12:23",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2022/08/foto-primaria.jpg",
+            "categories": [
+              {
+                "id": 1102,
+                "name": "Nutrición",
+                "slug": "nutricion",
+                "is_primary": false
+              }
+            ],
+            "professions": [],
+            "codes": [
+              {
+                "unique_code": "G-00059",
+                "isbn": null
+              }
+            ],
+            "cedente": {
+              "id": null,
+              "title": null,
+              "name": null,
+              "slug": null,
+              "image": false
+            },
+            "duration": null,
+            "link": "/tienda/alimentacion-en-adultos-y-vegetarianismo"
+          },
+          {
+            "id": 326907,
+            "title": "Alopecia",
+            "slug": "alopecia",
+            "date": "2024-11-21 14:40:49",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2024/11/alopecia-img-primaria.png",
+            "categories": [
+              {
+                "id": 1262,
+                "name": "Dermatología",
+                "slug": "dermatologia",
+                "is_primary": false
+              },
+              {
+                "id": 1090,
+                "name": "Medicina general",
+                "slug": "medicina-general",
+                "is_primary": false
+              }
+            ],
+            "professions": [],
+            "codes": [
+              {
+                "unique_code": "9005873",
+                "isbn": null
+              }
+            ],
+            "cedente": {
+              "id": null,
+              "title": null,
+              "name": null,
+              "slug": null,
+              "image": false
+            },
+            "duration": null,
+            "link": "/tienda/alopecia"
+          },
+          {
+            "id": 119727,
+            "title": "Antiagregantes-anticoagulantes",
+            "slug": "antiagregantes-anticoagulantes",
+            "date": "2021-12-07 20:20:35",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2021/12/foto-primaria-6.jpg",
+            "categories": [
+              {
+                "id": 1100,
+                "name": "Cardiología",
+                "slug": "cardiologia",
+                "is_primary": false
+              }
+            ],
+            "professions": [],
+            "codes": [
+              {
+                "unique_code": "G-00088",
+                "isbn": null
+              }
+            ],
+            "cedente": {
+              "id": null,
+              "title": null,
+              "name": null,
+              "slug": null,
+              "image": false
+            },
+            "duration": null,
+            "link": "/tienda/antiagregantes-anticoagulantes"
+          },
+          {
+            "id": 119018,
+            "title": "Aplicación de la cirugía oncorreconstructiva en mujeres jóvenes con cáncer de mama para ganar autoestima",
+            "slug": "aplicacion-de-la-cirugia-oncorreconstructiva-en-mujeres-jovenes-con-cancer-de-mama-para-ganar-autoestima",
+            "date": "2021-12-03 21:31:24",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2021/12/foto-primaria-5.jpg",
+            "categories": [
+              {
+                "id": 1105,
+                "name": "Oncología",
+                "slug": "oncologia",
+                "is_primary": false
+              }
+            ],
+            "professions": [],
+            "codes": [
+              {
+                "unique_code": "G-00043",
+                "isbn": null
+              }
+            ],
+            "cedente": {
+              "id": null,
+              "title": null,
+              "name": null,
+              "slug": null,
+              "image": false
+            },
+            "duration": null,
+            "link": "/tienda/aplicacion-de-la-cirugia-oncorreconstructiva-en-mujeres-jovenes-con-cancer-de-mama-para-ganar-autoestima"
+          },
+          {
+            "id": 122106,
+            "title": "Aproximación al paciente con enfermedad reumática",
+            "slug": "aproximacion-al-paciente-con-enfermedad-reumatica",
+            "date": "2022-01-10 19:11:58",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2022/01/foto-primaria-2.jpg",
+            "categories": [
+              {
+                "id": 1090,
+                "name": "Medicina general",
+                "slug": "medicina-general",
+                "is_primary": false
+              }
+            ],
+            "professions": [],
+            "codes": [
+              {
+                "unique_code": "G-00045",
+                "isbn": null
+              }
+            ],
+            "cedente": {
+              "id": null,
+              "title": null,
+              "name": null,
+              "slug": null,
+              "image": false
+            },
+            "duration": null,
+            "link": "/tienda/aproximacion-al-paciente-con-enfermedad-reumatica"
+          }
+        ],
+        "courses_free": [
+          {
+            "id": 87514,
+            "title": "Avances recientes en la investigación de la esquizofrenia",
+            "slug": "avances-recientes-en-la-investigacion-de-la-esquizofrenia",
+            "date": "2021-03-26 19:45:28",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2021/03/foto-primaria-1.jpg",
+            "categories": [
+              {
+                "id": 1412,
+                "name": "Psiquiatría",
+                "slug": "psiquiatria",
+                "is_primary": false
+              }
+            ],
+            "professions": [],
+            "codes": [
+              {
+                "unique_code": "G-00024",
+                "isbn": null
+              }
+            ],
+            "cedente": {
+              "id": null,
+              "title": null,
+              "name": null,
+              "slug": null,
+              "image": false
+            },
+            "duration": null,
+            "link": "/tienda/avances-recientes-en-la-investigacion-de-la-esquizofrenia"
+          },
+          {
+            "id": 118411,
+            "title": "Burnout en el servicio de emergencias",
+            "slug": "burnout-en-el-servicio-de-emergencias",
+            "date": "2021-12-02 16:25:37",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2021/12/foto-primaria-2.jpg",
+            "categories": [
+              {
+                "id": 1091,
+                "name": "Emergentología",
+                "slug": "emergentologia",
+                "is_primary": false
+              }
+            ],
+            "professions": [],
+            "codes": [
+              {
+                "unique_code": "G-00007",
+                "isbn": null
+              }
+            ],
+            "cedente": {
+              "id": null,
+              "title": null,
+              "name": null,
+              "slug": null,
+              "image": false
+            },
+            "duration": null,
+            "link": "/tienda/burnout-en-el-servicio-de-emergencias"
+          },
+          {
+            "id": 114878,
+            "title": "Cáncer de cuello uterino. Carcinoma in situ",
+            "slug": "cancer-de-cuello-uterino-carcinoma-in-situ",
+            "date": "2021-10-28 20:18:22",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2021/09/foto-primaria-3.jpg",
+            "categories": [
+              {
+                "id": 1121,
+                "name": "Ginecología",
+                "slug": "ginecologia",
+                "is_primary": false
+              },
+              {
+                "id": 1105,
+                "name": "Oncología",
+                "slug": "oncologia",
+                "is_primary": false
+              }
+            ],
+            "professions": [],
+            "codes": [
+              {
+                "unique_code": "G-00040",
+                "isbn": null
+              }
+            ],
+            "cedente": {
+              "id": null,
+              "title": null,
+              "name": null,
+              "slug": null,
+              "image": false
+            },
+            "duration": null,
+            "link": "/tienda/cancer-de-cuello-uterino-carcinoma-in-situ"
+          },
+          {
+            "id": 304247,
+            "title": "Cáncer de origen desconocido: abordaje diagnóstico y anatomía patológica",
+            "slug": "cancer-de-origen-desconocido-abordaje-diagnostico-y-anatomia-patologica",
+            "date": "2024-04-12 17:30:04",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2024/04/foto-primaria-1.jpg",
+            "categories": [
+              {
+                "id": 1105,
+                "name": "Oncología",
+                "slug": "oncologia",
+                "is_primary": false
+              }
+            ],
+            "professions": [],
+            "codes": [
+              {
+                "unique_code": "G-00098",
+                "isbn": null
+              }
+            ],
+            "cedente": {
+              "id": null,
+              "title": null,
+              "name": null,
+              "slug": null,
+              "image": false
+            },
+            "duration": null,
+            "link": "/tienda/cancer-de-origen-desconocido-abordaje-diagnostico-y-anatomia-patologica"
+          },
+          {
+            "id": 104448,
+            "title": "Clasificación de las anemias",
+            "slug": "clasificacion-de-las-anemias",
+            "date": "2021-07-21 13:38:58",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2021/07/foto-primaria-1.jpg",
+            "categories": [
+              {
+                "id": 1211,
+                "name": "Hematología",
+                "slug": "hematologia",
+                "is_primary": false
+              }
+            ],
+            "professions": [],
+            "codes": [
+              {
+                "unique_code": "G-00031",
+                "isbn": null
+              }
+            ],
+            "cedente": {
+              "id": null,
+              "title": null,
+              "name": null,
+              "slug": null,
+              "image": false
+            },
+            "duration": null,
+            "link": "/tienda/clasificacion-de-las-anemias"
+          },
+          {
+            "id": 165061,
+            "title": "Curso superior de economía de la salud",
+            "slug": "economia-de-la-salud",
+            "date": "2022-02-24 16:54:31",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2022/02/img_primaria-2.jpg",
+            "categories": [
+              {
+                "id": 60090,
+                "name": "Administración y gestión",
+                "slug": "administracion-y-gestion",
+                "is_primary": false
+              },
+              {
+                "id": 1090,
+                "name": "Medicina general",
+                "slug": "medicina-general",
+                "is_primary": false
+              }
+            ],
+            "professions": [],
+            "codes": [
+              {
+                "unique_code": "9005818",
+                "isbn": null
+              }
+            ],
+            "cedente": {
+              "id": null,
+              "title": null,
+              "name": null,
+              "slug": null,
+              "image": false
+            },
+            "duration": null,
+            "link": "/tienda/economia-de-la-salud"
+          }
+        ]
+      },
+      "masterclass": {
+        "masterclases": [
+          {
+            "id": 335789,
+            "title": "Casos emblemáticos en gestión hospitalaria: análisis de decisiones complejas y sus aprendizajes",
+            "slug": "casos-emblematicos-en-gestion-hospitalaria-analisis-de-decisiones-complejas-y-sus-aprendizajes",
+            "description": "Junto con el Dr. Néstor Feldman, focalízate en la aplicación de herramientas clave en la administración de instituciones de salud",
+            "date": "2025-04-29 18:21:27",
+            "background_image": false,
+            "doctors": [
+              {
+                "id": 93899,
+                "name": "Dr. Nestor Luis Feldman",
+                "slug": "dr-nestor-luis-feldman",
+                "description": "Director del curso",
+                "image": "https://cms1.msklatam.com/wp-content/uploads/2021/05/Dr.-Nestor-Feldman.png",
+                "link": "https://msklatam.com/doctor/dr-nestor-luis-feldman"
+              }
+            ],
+            "link": {
+              "title": "Curso superior de administración y gestión hospitalaria",
+              "url": "https://cms1.msklatam.com/producto/administracion-y-gestion-hospitalaria/",
+              "target": ""
+            },
+            "tag": null
+          }
+        ]
+      },
+      "trustsection": {
+        "title": "Nos avala nuestra amplia trayectoria y experiencia",
+        "subtitle": "Acompañamos y ayudamos a todo el personal de la salud en el camino del crecimiento profesional",
+        "figures": [
+          {
+            "figure": "+11.000",
+            "text": "certificaciones otorgadas"
+          },
+          {
+            "figure": "+50",
+            "text": "capacitaciones disponibles"
+          },
+          {
+            "figure": "+200",
+            "text": "expertos colaborando"
+          }
+        ],
+        "opinions": [
+          {
+            "avatar": [
+              "https://cms1.msklatam.com/wp-content/uploads/2025/03/752ab2456e2c0c5721b886a0af25b9e6.webp",
+              50, 50, false],
+            "name": "JOSÉ INGACIO SREBOT",
+            "opinion": "Contenido académico excelente. La plataforma es muy amigable y la modalidad del curso es muy cómoda. Para recomendar."
+          },
+          {
+            "avatar": [
+              "https://cms1.msklatam.com/wp-content/uploads/2025/03/56193cfc44ffd2be8ce6658684aeb614.webp",
+              50, 50, false],
+            "name": "María Benítez",
+            "opinion": "Un contenido muy amplio me brindaron. Me ayuda mucho en mi labor. Gracias a mi asesora por acompañarme y estar cada vez que necesité algo."
+          },
+          {
+            "avatar": [
+              "https://cms1.msklatam.com/wp-content/uploads/2025/03/67450272425454b8f3968eca7573b86a.webp",
+              50, 50, false],
+            "name": "Agustina Orsi",
+            "opinion": "Hice el curso de Hematología y realmente fue muy bueno e interesante. Aprendí un montón. Súper recomendable!"
+          }
+        ]
+      },
+      "backups": {
+        "title": "Nos respaldan prestigiosas instituciones de todo el mundo con sus certificaciones",
+        "institutions": [
+          {
+            "id": 254526,
+            "title": "Tropos",
+            "slug": "tropos",
+            "description": "",
+            "image": "https://cms1.msklatam.com/wp-content/uploads/2023/08/cedentes_tropos.png"
+          },
+          {
+            "id": 210852,
+            "title": "Colegio de Médicos de la Provincia de Buenos Aires - Distrito III",
+            "slug": "colegio-de-medicos-de-la-provincia-de-buenos-aires-distrito-iii-escuela-superior-de-ensenanza-medica",
+            "description": "Certificación disponible en Argentina (solo médicos)",
+            "image": "https://cms1.msklatam.com/wp-content/uploads/2023/08/colmed_1x.webp"
+          },
+          {
+            "id": 230596,
+            "title": "ACC - American College of Cardiology",
+            "slug": "accsap-american-college-of-cardiology",
+            "description": "Aval internacional",
+            "image": "https://cms1.msklatam.com/wp-content/uploads/2022/09/acc_1x.webp"
+          },
+          {
+            "id": 309920,
+            "title": "European University Gasteiz (EUNEIZ)",
+            "slug": "euneiz-european-university-gastei",
+            "description": "Certificación internacional (solo médicos)",
+            "image": "https://cms1.msklatam.com/wp-content/uploads/2024/06/EUNEKZ.png"
+          },
+          {
+            "id": 96956,
+            "title": "Asociación de Facultades Ecuatorianas de Ciencias Médicas y de la Salud",
+            "slug": "asociacion-de-facultades-ecuatorianas-de-ciencias-medicas-y-de-la-salud",
+            "description": "Aval disponible en Ecuador",
+            "image": "https://cms1.msklatam.com/wp-content/uploads/2021/06/afeme_1x.webp"
+          },
+          {
+            "id": 97002,
+            "title": "Colegio de Nutricionistas de la Provincia de Buenos Aires",
+            "slug": "colegio-de-nutricionistas-de-la-provincia-de-buenos-aires",
+            "description": "Aval disponible en Argentina",
+            "image": "https://cms1.msklatam.com/wp-content/uploads/2021/06/aval_COLEGIO-DE-NUTRICIONISTAS-BA.png"
+          }
+        ]
+      },
+      "offers": {
+        "background_image": [
+          "https://cms1.msklatam.com/wp-content/uploads/2025/03/d90fefd336bcaa447214b9d7f7588f18.webp",
+          1440, 960, false],
+        "title": "\u003Cstrong\u003E¿Sos profesional de la salud?\u003C/strong\u003E\nLlevá tu carrera al siguiente nivel.\n",
+        "pre_text": "Disponible del 15 al 31 de enero",
+        "content": "\u003Cul\u003E\n\u003Cli\u003EAccedé a cursos diseñados por expertos para potenciar tus habilidades.\u003C/li\u003E\n\u003Cli\u003ECertificación incluida: Sumá valor a tu currículum y ganá confianza en cada paso.\u003C/li\u003E\n\u003C/ul\u003E\n",
+        "pre_cta_content": "\u003Cp\u003E\u003Cspan class=\"big\"\u003E+20\u003Cspan\u003E\u003Cbr /\u003E\n\u003Cspan class=\"small\"\u003E% off\u003C/span\u003E\u003Cbr /\u003E\n\u003Cstrong\u003Een tu inscripción\u003C/strong\u003E\u003C/p\u003E\n",
+        "cta": {
+          "title": "Reserva tu cupo ahora",
+          "url": "/inscripcion",
+          "target": ""
+        }
+      },
+      "blog": {
+        "title": "Blog",
+        "subtitle": "Recursos para informarte y aprender de distintas maneras",
+        "featured_blog_articles": [
+          {
+            "id": 334423,
+            "title": "Alto porcentaje de supervivencia en detección temprana del cáncer infantil",
+            "slug": "deteccion-temprana-en-cancer-infantil",
+            "date": "2025-02-21 19:45:27",
+            "categories": [
+              {
+                "id": 1540,
+                "name": "Actualidad",
+                "slug": "actualidad"
+              },
+              {
+                "id": 59969,
+                "name": "Medicina",
+                "slug": "medicina"
+              }
+            ],
+            "specialty": {
+              "id": 1,
+              "name": "Sin categorizar",
+              "slug": "sin-categorizar"
+            },
+            "author": "",
+            "time_to_read": "5",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2025/02/Foto-deteccion-temprana-en-cancer-infantil-scaled-e1740162838899.jpg",
+            "link": "https://msklatam.com/blog/deteccion-temprana-en-cancer-infantil"
+          },
+          {
+            "id": 230620,
+            "title": "Cómo actúa el liderazgo transformacional ante el síndrome de burnout",
+            "slug": "liderazgo-transformacional-ante-el-sindrome-de-burnout",
+            "date": "2025-02-20 09:45:19",
+            "categories": [
+              {
+                "id": 1540,
+                "name": "Actualidad",
+                "slug": "actualidad"
+              },
+              {
+                "id": 59969,
+                "name": "Medicina",
+                "slug": "medicina"
+              }
+            ],
+            "specialty": {
+              "id": 1,
+              "name": "Sin categorizar",
+              "slug": "sin-categorizar"
+            },
+            "author": "",
+            "time_to_read": "6",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2022/09/shutterstock_2265615125-scaled-e1740055547157.jpg",
+            "link": "https://msklatam.com/blog/liderazgo-transformacional-ante-el-sindrome-de-burnout"
+          },
+          {
+            "id": 247623,
+            "title": "Qué habilidades blandas requiere la medicina hoy",
+            "slug": "habilidades-blandas-medicina-hoy",
+            "date": "2025-02-18 14:50:30",
+            "categories": [
+              {
+                "id": 1540,
+                "name": "Actualidad",
+                "slug": "actualidad"
+              },
+              {
+                "id": 59969,
+                "name": "Medicina",
+                "slug": "medicina"
+              }
+            ],
+            "specialty": {
+              "id": 1,
+              "name": "Sin categorizar",
+              "slug": "sin-categorizar"
+            },
+            "author": "",
+            "time_to_read": "6",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2023/03/¿Que-habilidades-blandas-pediran-los-y-las-pacientes-del-futuro.jpg",
+            "link": "https://msklatam.com/blog/habilidades-blandas-medicina-hoy"
+          },
+          {
+            "id": 333810,
+            "title": "Enfermedad de Crohn: guía de aprendizaje médico",
+            "slug": "guia-de-aprendizaje-enfermedad-de-crohn",
+            "date": "2025-02-14 14:34:10",
+            "categories": [
+              {
+                "id": 59968,
+                "name": "E-Learning",
+                "slug": "e-learning"
+              },
+              {
+                "id": 59969,
+                "name": "Medicina",
+                "slug": "medicina"
+              }
+            ],
+            "specialty": {
+              "id": 1,
+              "name": "Sin categorizar",
+              "slug": "sin-categorizar"
+            },
+            "author": "",
+            "time_to_read": "8",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2025/02/Foto-guia-de-aprendizaje-enfermedad-de-crohn-scaled-e1739543624583.jpg",
+            "link": "https://msklatam.com/blog/guia-de-aprendizaje-enfermedad-de-crohn"
+          },
+          {
+            "id": 235584,
+            "title": "Liderazgo médico: su importancia y la preparación para desarrollarlo",
+            "slug": "liderazgo-medico-importancia-y-preparacion",
+            "date": "2025-02-13 09:29:13",
+            "categories": [
+              {
+                "id": 1540,
+                "name": "Actualidad",
+                "slug": "actualidad"
+              },
+              {
+                "id": 59969,
+                "name": "Medicina",
+                "slug": "medicina"
+              }
+            ],
+            "specialty": {
+              "id": 1,
+              "name": "Sin categorizar",
+              "slug": "sin-categorizar"
+            },
+            "author": "",
+            "time_to_read": "5",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2022/10/Liderazgo-medico-las-habilidades-clinicas-no-alcanzan-para-gestionar.jpg",
+            "link": "https://msklatam.com/blog/liderazgo-medico-importancia-y-preparacion"
+          }
+        ],
+        "featured_blog_guides": [
+          {
+            "id": 333526,
+            "title": "Actualidad de la equidad de género en el ámbito médico",
+            "slug": "actualidad-equidad-de-genero-en-medicina",
+            "date": "2025-02-11 13:32:33",
+            "categories": [
+              {
+                "id": 1540,
+                "name": "Actualidad",
+                "slug": "actualidad"
+              },
+              {
+                "id": 59969,
+                "name": "Medicina",
+                "slug": "medicina"
+              }
+            ],
+            "specialty": {
+              "id": 1,
+              "name": "Sin categorizar",
+              "slug": "sin-categorizar"
+            },
+            "author": "",
+            "time_to_read": "6",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2025/02/Foto-actualidad-equidad-de-genero-en-medicina-scaled-e1739280717491.jpg",
+            "link": "https://msklatam.com/blog/actualidad-equidad-de-genero-en-medicina"
+          },
+          {
+            "id": 333205,
+            "title": "¡Quiz MSK! 10 preguntas sobre oftalmología",
+            "slug": "quiz-msk-preguntas-sobre-oftalmologia",
+            "date": "2025-01-31 12:49:25",
+            "categories": [
+              {
+                "id": 59968,
+                "name": "E-Learning",
+                "slug": "e-learning"
+              },
+              {
+                "id": 59969,
+                "name": "Medicina",
+                "slug": "medicina"
+              }
+            ],
+            "specialty": {
+              "id": 1,
+              "name": "Sin categorizar",
+              "slug": "sin-categorizar"
+            },
+            "author": "",
+            "time_to_read": "4",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2025/01/Foto-quiz-msk-preguntas-sobre-oftalmologia.jpg",
+            "link": "https://msklatam.com/blog/quiz-msk-preguntas-sobre-oftalmologia"
+          },
+          {
+            "id": 332933,
+            "title": "Tipos de agua y su impacto en la salud: ¿mitos o realidad?",
+            "slug": "tipos-de-agua-mitos-y-realidades",
+            "date": "2025-01-31 12:30:27",
+            "categories": [
+              {
+                "id": 1540,
+                "name": "Actualidad",
+                "slug": "actualidad"
+              },
+              {
+                "id": 59969,
+                "name": "Medicina",
+                "slug": "medicina"
+              },
+              {
+                "id": 1711,
+                "name": "Opinion",
+                "slug": "opinion"
+              }
+            ],
+            "specialty": {
+              "id": 1,
+              "name": "Sin categorizar",
+              "slug": "sin-categorizar"
+            },
+            "author": "",
+            "time_to_read": "3",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2025/01/Foto-tipos-de-agua-mitos-y-realidades-scaled-e1738157524930.jpg",
+            "link": "https://msklatam.com/blog/tipos-de-agua-mitos-y-realidades"
+          },
+          {
+            "id": 333151,
+            "title": "Quiz MSK: ¿cuánto sabes de auditoría médica?",
+            "slug": "quiz-msk-auditoria-medica",
+            "date": "2025-01-30 12:51:26",
+            "categories": [
+              {
+                "id": 59968,
+                "name": "E-Learning",
+                "slug": "e-learning"
+              },
+              {
+                "id": 59969,
+                "name": "Medicina",
+                "slug": "medicina"
+              }
+            ],
+            "specialty": {
+              "id": 1,
+              "name": "Sin categorizar",
+              "slug": "sin-categorizar"
+            },
+            "author": "",
+            "time_to_read": "5",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2025/01/portada-quiz-auditoria.jpg",
+            "link": "https://msklatam.com/blog/quiz-msk-auditoria-medica"
+          },
+          {
+            "id": 332897,
+            "title": "Actualización sobre enfermedad de Kawasaki: diagnóstico y terapias clave",
+            "slug": "actualizacion-sobre-kawasaki-diagnostico-y-terapias",
+            "date": "2025-01-29 13:03:14",
+            "categories": [
+              {
+                "id": 1540,
+                "name": "Actualidad",
+                "slug": "actualidad"
+              },
+              {
+                "id": 59969,
+                "name": "Medicina",
+                "slug": "medicina"
+              }
+            ],
+            "specialty": {
+              "id": 1,
+              "name": "Sin categorizar",
+              "slug": "sin-categorizar"
+            },
+            "author": "",
+            "time_to_read": "6",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2025/01/Foto-actualizacion-sobre-kawasaki-diagnostico-y-terapias-scaled-e1738153748727.jpg",
+            "link": "https://msklatam.com/blog/actualizacion-sobre-kawasaki-diagnostico-y-terapias"
+          }
+        ],
+        "featured_blog_infographies": [
+          {
+            "id": 332771,
+            "title": "Innovaciones y desafíos en el tratamiento del Síndrome de Moebius",
+            "slug": "innovaciones-y-desafios-en-el-sindrome-de-moebius",
+            "date": "2025-01-28 13:22:01",
+            "categories": [
+              {
+                "id": 1540,
+                "name": "Actualidad",
+                "slug": "actualidad"
+              },
+              {
+                "id": 59969,
+                "name": "Medicina",
+                "slug": "medicina"
+              }
+            ],
+            "specialty": {
+              "id": 1,
+              "name": "Sin categorizar",
+              "slug": "sin-categorizar"
+            },
+            "author": "",
+            "time_to_read": "7",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2025/01/Foto-innovaciones-y-desafios-en-el-sindrome-de-moebius-scaled-e1738070462595.jpg",
+            "link": "https://msklatam.com/blog/innovaciones-y-desafios-en-el-sindrome-de-moebius"
+          },
+          {
+            "id": 332710,
+            "title": "IA: el futuro de la educación médica",
+            "slug": "ia-el-futuro-de-la-educacion-medica",
+            "date": "2025-01-24 14:31:40",
+            "categories": [
+              {
+                "id": 1540,
+                "name": "Actualidad",
+                "slug": "actualidad"
+              },
+              {
+                "id": 59968,
+                "name": "E-Learning",
+                "slug": "e-learning"
+              }
+            ],
+            "specialty": {
+              "id": 1,
+              "name": "Sin categorizar",
+              "slug": "sin-categorizar"
+            },
+            "author": "",
+            "time_to_read": "5",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2025/01/Foto-IA-el-futuro-de-la-educacion-medica-scaled-e1737729040163.jpg",
+            "link": "https://msklatam.com/blog/ia-el-futuro-de-la-educacion-medica"
+          },
+          {
+            "id": 332656,
+            "title": "Cómo fortalecer tu práctica en medicina interna",
+            "slug": "fortalecer-tu-practica-en-medicina-interna",
+            "date": "2025-01-24 13:12:59",
+            "categories": [
+              {
+                "id": 1540,
+                "name": "Actualidad",
+                "slug": "actualidad"
+              },
+              {
+                "id": 59968,
+                "name": "E-Learning",
+                "slug": "e-learning"
+              }
+            ],
+            "specialty": {
+              "id": 1,
+              "name": "Sin categorizar",
+              "slug": "sin-categorizar"
+            },
+            "author": "",
+            "time_to_read": "3",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2025/01/Foto-fortalecer-tu-practica-en-medicina-interna-scaled-e1737723350451.jpg",
+            "link": "https://msklatam.com/blog/fortalecer-tu-practica-en-medicina-interna"
+          },
+          {
+            "id": 332348,
+            "title": "Recursos esenciales para tu actualización en diabetes",
+            "slug": "recursos-esenciales-de-actualizacion-en-diabetes",
+            "date": "2025-01-16 12:36:40",
+            "categories": [
+              {
+                "id": 1540,
+                "name": "Actualidad",
+                "slug": "actualidad"
+              },
+              {
+                "id": 59968,
+                "name": "E-Learning",
+                "slug": "e-learning"
+              }
+            ],
+            "specialty": {
+              "id": 1,
+              "name": "Sin categorizar",
+              "slug": "sin-categorizar"
+            },
+            "author": "",
+            "time_to_read": "3",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2025/01/Foto-recursos-esenciales-de-actualizacion-en-diabetes-scaled-e1737030977896.jpg",
+            "link": "https://msklatam.com/blog/recursos-esenciales-de-actualizacion-en-diabetes"
+          },
+          {
+            "id": 331976,
+            "title": "Cirugía mayor ambulatoria: guía esencial de estudio",
+            "slug": "guia-cirugia-mayor-ambulatoria",
+            "date": "2025-01-14 14:02:49",
+            "categories": [
+              {
+                "id": 59968,
+                "name": "E-Learning",
+                "slug": "e-learning"
+              },
+              {
+                "id": 1611,
+                "name": "Enfermería",
+                "slug": "enfermeria"
+              }
+            ],
+            "specialty": {
+              "id": 1,
+              "name": "Sin categorizar",
+              "slug": "sin-categorizar"
+            },
+            "author": "",
+            "time_to_read": "",
+            "featured_image": "https://cms1.msklatam.com/wp-content/uploads/2025/01/Foto-guia-cirugia-mayor-ambulatoria-scaled-e1736863347456.jpg",
+            "link": "https://msklatam.com/blog/guia-cirugia-mayor-ambulatoria"
+          }
+        ]
+      },
+      "mentions": {
+        "title": "¿Qué dicen de MSK?",
+        "mentions": [
+          {
+            "title": "MSK Latam: conocé la plataforma que brinda cursos de medicina para profesionales",
+            "content": "facebook sharing buttontwitter sharing buttonemail sharing buttonwhatsapp sharing button\u003Cbr /\u003E\r\nEn un mundo dinámico y en constante evolución de la medicina, la formación continua es esencial para los profesionales de la salud. MSK Latam ha emergido como una plataforma líder en la educación a distancia, ofreciendo cursos de medicina diseñados para satisfacer las necesidades de actualización y especialización del personal médico, de enfermería y otros profesionales del sector.",
+            "date": "September 4, 2024",
+            "link": {
+              "title": "Leer",
+              "url": "https://www.infoblancosobrenegro.com/nota/104182/msk-latam-conoce-la-plataforma-que-brinda-cursos-de-medicina-para-profesionales/",
+              "target": "_blank"
+            }
+          },
+          {
+            "title": "La Revolución de la Capacitación Médica en Línea",
+            "content": "Con 60,000+ profesionales capacitados, MSK Latam ofrece cursos accesibles y certificaciones internacionales de excelencia.",
+            "date": "May 20, 2025",
+            "link": {
+              "title": "Leer",
+              "url": "https://www.infobae.com/",
+              "target": "_blank"
+            }
+          },
+          {
+            "title": "Cómo MSK Latam Está Cambiando el Futuro de la Salud en Latinoamérica",
+            "content": "MSK Latam democratiza el acceso al conocimiento médico, conectando expertos globales con profesionales de la salud.",
+            "date": "March 26, 2025",
+            "link": {
+              "title": "Leer",
+              "url": "https://www.clarin.com/",
+              "target": "_blank"
+            }
+          }
+        ]
+      },
+      "faqs": {
+        "title": "Preguntas frecuentes",
+        "questions": [
+          {
+            "question": "¿Cómo funciona MSK?",
+            "answer": "Dentro de nuestro sitio web encuentras capacitaciones de distintos niveles para actualizar tus conocimientos y herramientas para la práctica profesional. Accede compartiéndonos tus datos en los formularios de contacto y un agente académico se comunicará contigo para asesorarte sobre beneficios y llevar adelante la inscripción."
+          },
+          {
+            "question": "¿Qué tipo de certificaciones y avales ofrece?",
+            "answer": "Los cursos están certificados por instituciones de prestigio, como COLMED III y Universidad EUNEIZ. Una vez finalizada tu cursada, las certificaciones disponibles en cursos seleccionados serán un gran valor para tu currículum u hoja de vida."
+          },
+          {
+            "question": "¿Qué requisitos existen para recibir la certificación? ",
+            "answer": "• Haber abonado la totalidad del valor del curso.\u003Cbr /\u003E\r\n• Haber finalizado y aprobado la cursada.\u003Cbr /\u003E\r\n• Dependiendo de la certificación por la cual hayas optado y/o que esté asociada al curso realizado, se te solicitarán determinados documentos respaldatorios, escaneados frente y dorso, para su tramitación."
+          },
+          {
+            "question": "¿Cómo es la modalidad de evaluación? ",
+            "answer": "De acuerdo al curso realizado, el examen final podrá ser a través de una autoevaluación integradora o por medio de cuestionarios de casos prácticos.\u003Cbr /\u003E\r\n"
+          },
+          {
+            "question": "¿Qué tipo de soporte ofrece? ",
+            "answer": "Cuentas con acompañamiento permanente a lo largo de toda tu cursada. Nuestro Equipo de Asesoría Académica está siempre disponible para responder tus dudas y ayudarte a resolver cualquier inconveniente.\u003Cbr /\u003E\r\n"
+          },
+          {
+            "question": "¿Cómo se puede abonar la inscripción a un curso?",
+            "answer": "Con tarjeta de débito o en cuotas con tarjeta de crédito, a través de las plataformas Mercado Pago, LaPos Web o Payway, o mediante transferencia bancaria.\u003Cbr /\u003E\r\n"
+          }
+        ]
+      }
+    }
+  }

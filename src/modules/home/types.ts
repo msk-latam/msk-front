@@ -196,4 +196,13 @@ export interface OfferData {
   
   
   
-  
+export interface Mention {
+  title: string;
+  content: string;
+  date: string;
+  link: {
+    title: string;
+    url: string;
+    target: string;
+  };
+}

@@ -1,26 +1,27 @@
 // app/modules/home/hooks/useBlogContent.ts
 import { useEffect, useState } from "react";
 import { getHomeData } from "../service/home.service";  // Asegúrate que esta ruta sea correcta
-import { Faq } from "../types";
+import { HeroSection } from "../types";
 
-export const useFaqContent = () => {
-  const [data, setData] = useState<Faq[]>([]);
+export const useHeroContent = () => {
+  const [data, setData] = useState<HeroSection | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+	const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Llamamos al servicio para obtener los datos del faq
+    // Llamamos al servicio para obtener los datos del blog
     getHomeData()
     .then((homeData) => {
       // courseData es todo el objeto del curso
-      const faqData: Faq[] = homeData.sections.faqs?.questions ?? [];
-      setData(faqData);
+      const heroData: HeroSection = homeData.sections.hero;
+      setData(heroData);
     })
     .catch((err) => {
       console.error(err);
-      setError(err.message || "Error fetching faq data");
+      setError(err.message || "Error fetching blog data");
     })
     .finally(() => setLoading(false));
   }, []);
+  
   return { data, loading, error };
 }

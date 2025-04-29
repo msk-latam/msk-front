@@ -1,9 +1,6 @@
-// modules/home/services/home.service.ts
-
-import { HeroSection } from "../types";
-
-export const getHeroSection = async (): Promise<HeroSection> => {
-  const res = await fetch("/api/home/hero");
-  if (!res.ok) throw new Error("Error al cargar datos del hero");
-  return res.json();
-};
+export const getHomeData = async () => {
+    const res = await fetch(`/api/home`);
+    if (!res.ok) throw new Error('Failed to fetch home data');
+    return res.json();
+  };
+  

@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
-import useFaqs from '@/modules/home/hooks/useFaqs';
+import {useFaqContent} from '@/modules/home/hooks/useFaqs';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowDown, ArrowUp } from 'lucide-react';
 import FaqSectionSkeleton from '@/modules/home/skeletons/FAQSkeleton'; // 👈 Importamos Skeleton
 
 const FaqSection = () => {
-  const { data: faqItems, loading, error } = useFaqs();
+  const { data, loading, error } = useFaqContent();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggle = (index: number) => {
@@ -18,7 +18,7 @@ const FaqSection = () => {
     return <FaqSectionSkeleton />; // 👈 Mostrar Skeleton mientras carga
   }
 
-  if (error || !faqItems.length) {
+  if (error || !data.length) {
     return (
       <section className="w-full bg-gray-100 font-inter text-[#1A1A1A]">
         <div className="rounded-[40px] max-w-7xl mx-auto px-6 md:px-12 py-12">
@@ -39,7 +39,7 @@ const FaqSection = () => {
         </h2>
 
         <div className="divide-y divide-[#C4C7CD]">
-          {faqItems.map((item, index) => (
+          {data.map((item, index) => (
             <div key={index}>
               <button
                 onClick={() => toggle(index)}
