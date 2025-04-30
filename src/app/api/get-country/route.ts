@@ -111,37 +111,47 @@ export const runtime = 'edge';
 
 import { NextRequest, NextResponse } from 'next/server';
 
+const blockedCountries = ['br', 'fr'];
+
 export async function GET(req: NextRequest) {
 	try {
-		// ✅ Extraer IP real desde Cloudflare
-		let ip = req.headers.get('cf-connecting-ip') ||
-		         req.headers.get('x-forwarded-for')?.split(',')[0] ||
-		         '';
+		const cfCountry = req.headers.get('cf-ipcountry')?.toLowerCase();
+		const forwardedIp = req.headers.get('cf-connecting-ip') || req.headers.get('x-forwarded-for')?.split(',')[0];
+		const acceptLanguage = req.headers.get('accept-language') || '';
+		const userAgent = req.headers.get('user-agent') || '';
 
-		// Fallback en desarrollo o sin IP
-		if (
-			process.env.NODE_ENV === 'development' ||
-			ip === '::1' ||
-			ip === '127.0.0.1' ||
-			!ip
-		) {
-			ip = '190.191.228.34'; // 🇦🇷 IP argentina para testing
+		let ip = forwardedIp || '';
+		let country = cfCountry || '';
+
+		if (process.env.NODE_ENV === 'development' || ip === '::1' || ip === '127.0.0.1' || !ip) {
+			ip = '190.191.228.34'; // 🇦🇷
 		}
 
-		const geoRes = await fetch(`https://pro.ip-api.com/json/${ip}?fields=61439&key=OE5hxPrfwddjYYP`);
-		if (!geoRes.ok) throw new Error('Failed to fetch geo info');
+		if (!country && ip && !ip.startsWith('::')) {
+			const geoRes = await fetch(`https://pro.ip-api.com/json/${ip}?fields=61439&key=OE5hxPrfwddjYYP`);
+			if (geoRes.ok) {
+				const geo = await geoRes.json();
+				country = geo.countryCode?.toLowerCase() || '';
+			}
+		}
 
-		const geo = await geoRes.json();
+		if (!country && acceptLanguage) {
+			const langCountry = acceptLanguage.split(',')[0]; // es-419, etc.
+			const match = langCountry.match(/-([A-Z]{2})$/);
+			if (match) {
+				country = match[1].toLowerCase();
+			}
+		}
+
+		const blocked = blockedCountries.includes(country);
 
 		return NextResponse.json({
+			method: 'headers + ip + fallback',
 			ip,
-			country: geo.countryCode?.toLowerCase() || '',
-			name: geo.country || '',
-			headers: {
-				via: req.headers.get('via'),
-				userAgent: req.headers.get('user-agent'),
-				cfIP: req.headers.get('cf-connecting-ip'),
-			}
+			country,
+			blocked,
+			acceptLanguage,
+			userAgent,
 		});
 	} catch (error) {
 		console.error('❌ /api/get-country error:', error);
@@ -151,3 +161,4 @@ export async function GET(req: NextRequest) {
 		);
 	}
 }
+
