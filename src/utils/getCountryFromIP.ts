@@ -1,26 +1,10 @@
-// utils/getCountryFromIp.ts
-
 export async function getCountryFromIp() {
     try {
-      // Paso 1: Obtener IP pública
-      const ipResponse = await fetch('https://api.ipify.org?format=json');
-      const ipData = await ipResponse.json();
-      const ip = ipData.ip;
-  
-      // Paso 2: Obtener país por IP
-      const geoResponse = await fetch(`https://ipapi.co/${ip}/json/`);
-      const geoData = await geoResponse.json();
-      console.log('[DEBUG] IP Lookup result:', { ip, geoData });
-      // Paso 3: Devolver datos
-      return {
-        ip,
-        country: geoData.country?.toLowerCase(),
-        
-        name: geoData.country_name || '',
-        
-      };
+      const res = await fetch('/api/get-country');
+      if (!res.ok) throw new Error('Failed to fetch country info');
+      return await res.json();
     } catch (error) {
-      console.error('❌ Error en getCountryFromIp:', error);
+      console.error('❌ getCountryFromIp client-side error:', error);
       return { ip: '', country: '', name: '' };
     }
   }

@@ -50,7 +50,13 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 				console.log('[GEO]', geo);
 
 				if (geo.country && validCountries.includes(geo.country.toLowerCase())) {
-					currentCountry = geo.country.toLowerCase();
+					const ipCountry = geo.country.toLowerCase();
+					if (ipCountry !== fallbackCountry) {
+						setUserCountry(ipCountry);
+						setUrlCountry(fallbackCountry);
+						setShowBanner(true);
+					}
+					currentCountry = ipCountry;
 				}
 			} catch (err) {
 				console.warn('Could not determine geo country:', err);
@@ -62,6 +68,11 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 
 		fetchData();
 	}, [pathname]);
+
+	const handleSwitchCountry = () => {
+		const newUrl = window.location.pathname.replace(/^\/[^/]+/, `/${userCountry}`);
+		window.location.href = newUrl;
+	};
 
 	const countryNames: Record<string, string> = {
 		ar: 'Argentina',
@@ -90,6 +101,34 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 	return (
 		<CountryContext.Provider value={{ countryState, dispatch }}>
 			{loading ? <Loading /> : children}
+
+			{showBanner && (
+				<div
+					className={`fixed top-0 left-0 w-full bg-[#9200AD] text-white p-4 z-50 flex items-center justify-center transition-transform duration-300 ${
+						showBanner ? 'translate-y-0' : '-translate-y-full'
+					}`}
+				>
+					<p className='text-sm md:text-base'>
+						Estás visitando <strong>MSK {getCountryName(urlCountry)}</strong> desde{' '}
+						<strong>{getCountryName(userCountry)}</strong>. ¿Quieres cambiar de país?
+					</p>
+
+					<div className='ml-4 flex space-x-3'>
+						<button
+							onClick={handleSwitchCountry}
+							className='bg-white text-[#9200AD] px-3 py-1 rounded hover:bg-gray-200 transition'
+						>
+							Sí
+						</button>
+						<button
+							onClick={() => setShowBanner(false)}
+							className='bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition'
+						>
+							No
+						</button>
+					</div>
+				</div>
+			)}
 		</CountryContext.Provider>
 	);
 };
