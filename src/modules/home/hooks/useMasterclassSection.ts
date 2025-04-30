@@ -1,4 +1,3 @@
-// src/modules/home/hooks/useMasterclassSection.ts
 import { useEffect, useState } from 'react';
 import { getMasterClass } from '../service/masterclass.service';
 import {
@@ -9,7 +8,9 @@ import {
 
 export const useMasterclassSection = () => {
   const [data, setData] = useState<Professional[]>([]);
-  const [link, setLink] = useState<string | null>(null); // NUEVO
+  const [masterclass, setMasterclass] = useState<MasterclassAPIItem | null>(null);
+  const [link, setLink] = useState<string | null>(null);
+  const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -18,18 +19,19 @@ export const useMasterclassSection = () => {
       .then((res) => {
         const raw: MasterclassAPIItem[] = res?.masterclasses || [];
 
-        const parsed: Professional[] = raw.flatMap(mapMasterclassToProfessionals);
-        setData(parsed);
+        if (raw.length > 0) {
+          const item = raw[0];
+          const parsed = mapMasterclassToProfessionals(item); // ✅ AHORA sí existe "parsed"
 
-        // Tomamos el link de la primera masterclass
-        if (raw.length > 0 && raw[0].link) {
-          setLink(raw[0].link);
+          setMasterclass(item);
+          setData(parsed);
+          setLink(item.link?.url || null);
+          setBackgroundImage(item.background_image?.[0] || null);
         }
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, []);
 
-  return { data, link, loading, error };
+  return { data, masterclass, link, backgroundImage, loading, error };
 };
-

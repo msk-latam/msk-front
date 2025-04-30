@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 import ProfessionalCardDesktop from "./ProfessionalCardDesktop";
 import ProfessionalCardMobile from "./ProfessionalCardMobile";
-import { useMasterclassSection } from "@/modules/home/_hooks2/useMasterclassSection";
+import { useMasterclassSection } from "@/modules/home/hooks/useMasterclassSection";
 import { Professional } from "@/modules/home/types";
 import { professionals as mockProfessionals } from "./professionals";
 import { getLocalizedUrl } from '@/utils/getLocalizedUrl';

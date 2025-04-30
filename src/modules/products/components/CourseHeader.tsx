@@ -88,7 +88,7 @@ export default function CourseHeader({ slug, lang }: CourseHeaderProps) {
 				</nav>
 
 				{/* Título principal */}
-				<h1 className='md:text-[51px] text-3xl text-white font-bold text-center md:text-left mt-5 mb-3'>{title}</h1>
+				<h1 className='md:text-[51px]  text-3xl text-white font-bold text-center md:text-left mt-5 mb-3'>{title}</h1>
 
 				{/* Certificación */}
 				{has_certificate && (
