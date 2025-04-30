@@ -1,13 +1,7 @@
 'use client';
 
-import { CountryContext } from '@/context/country/CountryContext';
-import countryCurrencies from '@/data/_countryCurrencies.json';
-import countryInstallments from '@/data/_countryInstallments.json';
-import { getCountryFromUrl } from '@/utils/getCountryFromUrl';
 import { Phone } from 'lucide-react'; // icono de teléfono
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { useContext } from 'react';
 import { useCourseSummary } from '../hooks/useCourseSummary';
 import SkeletonCourseSummaryCard from '../skeletons/SkeletonCourseSummaryCard';
 
@@ -16,15 +10,8 @@ interface CourseSummaryProps {
 	lang: string;
 }
 
-export default function CourseSummary({ slug }: CourseSummaryProps) {
-	const pathname = usePathname();
-	const country = getCountryFromUrl(pathname);
-	const { countryState } = useContext(CountryContext);
-
-	const currency = (countryCurrencies as Record<string, string>)[country] || 'ARS';
-	const installmentsConfig = (countryInstallments as unknown as Record<string, { quotes: number }>)[country];
-
-	const { data, loading } = useCourseSummary(slug);
+export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
+	const { data, loading } = useCourseSummary(slug, lang);
 
 	const enrolledFormatted = data?.enrolled;
 	const modules = data?.modules;
