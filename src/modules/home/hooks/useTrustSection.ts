@@ -21,6 +21,5 @@ export const useTrustSection = () => {
     })
     .finally(() => setLoading(false));
   }, []);
-  console.log(data)
   return { data, loading, error };
 }

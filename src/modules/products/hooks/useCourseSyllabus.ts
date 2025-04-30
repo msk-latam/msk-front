@@ -14,7 +14,7 @@ export function useCourseSyllabus(slug: string, lang: string) {
 			.then((courseData) => {
 				const syllabusData: CourseSyllabus = {
 					hours: courseData.sections?.study_plan?.hours ?? '',
-					study_plan_file: courseData.sections?.study_plan?.study_plan_file ?? '',
+					study_plan_file: courseData.sections?.study_plan?.study_plan_file ?? [],
 					modules: courseData.sections?.study_plan.modules ?? [],
 				};
 

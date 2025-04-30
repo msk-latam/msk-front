@@ -1,12 +1,16 @@
 'use client';
+
 import React, { useEffect, useReducer, useState } from 'react';
 import { CountryContext } from './CountryContext';
 import { countryReducer } from './CountryReducer';
 import { CountryState } from '@/data/types';
 import { countries } from '@/data/countries';
-import api from '@/services/api';
+import { getCurrencyByCountry, getInstallmentsByCountry } from '@/utils/country';
 import Cookies from 'js-cookie';
 import { Loading } from '@/utils/Loading';
+import { getCountryFromUrl } from '@/utils/getCountryFromUrl';
+import { getCountryFromIp } from '@/utils/getCountryFromIP';
+import { usePathname } from 'next/navigation';
 
 interface Props {
 	children: React.ReactNode;
@@ -14,9 +18,16 @@ interface Props {
 
 export const CountryProvider: React.FC<Props> = ({ children }) => {
 	const initialState: CountryState = {
-		// country: Cookies.get('NEXT_LOCALE') || 'int',
 		country: '',
+		currency: 'USD',
+		installments: {
+			gateway: 'REBILL',
+			quotes: null,
+		},
+		error: '',
 	};
+
+	console.log(getCountryFromIp);
 
 	const [countryState, dispatch] = useReducer(countryReducer, initialState);
 	const [loading, setLoading] = useState(true);
@@ -24,69 +35,47 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 	const [userCountry, setUserCountry] = useState('');
 	const [urlCountry, setUrlCountry] = useState('');
 
+	const pathname = usePathname();
 	const validCountries = countries.map((item) => item.id);
 
 	useEffect(() => {
 		const fetchData = async () => {
+			setLoading(true);
+			const currentCountryFromUrl = getCountryFromUrl(pathname);
+			const fallbackCountry = validCountries.includes(currentCountryFromUrl) ? currentCountryFromUrl : 'ar';
+
+			let currentCountry = fallbackCountry;
+
 			try {
-				setLoading(true);
-				let currentCountry = await api.getCountryCode();
-				// let currentCountry = 'es';
-				// console.log(`🌍 País detectado por API: ${currentCountry}`);
+				const geo = await getCountryFromIp();
 
-				let currentPathName = window.location.pathname.split('/')[1];
-				// console.log(`📂 Pathname detectado: ${currentPathName}`);
+				console.log('[GEO]', geo);
 
-				if (currentPathName === 'mi' && window.location.pathname === '/mi-perfil') {
-					currentPathName = ''; // Tratar "mi" como "ar"
-				}
-
-				if (validCountries.includes(currentPathName)) {
-					// console.log(`✅ Pathname es un país válido: ${currentPathName}`);
-					if (currentCountry !== currentPathName) {
-						// console.log(`⚠️ Usuario en ${currentCountry}, viendo ${currentPathName}`);
-						setUserCountry(currentCountry);
-						setUrlCountry(currentPathName);
+				if (geo.country && validCountries.includes(geo.country.toLowerCase())) {
+					const ipCountry = geo.country.toLowerCase();
+					if (ipCountry !== fallbackCountry) {
+						setUserCountry(ipCountry);
+						setUrlCountry(fallbackCountry);
 						setShowBanner(true);
 					}
-					dispatch({ type: 'SET_COUNTRY', payload: { country: currentPathName } });
-					setLoading(false);
-					return;
+					currentCountry = ipCountry;
 				}
-
-				// Si el país detectado no es válido, usamos 'ar' por defecto
-				if (!validCountries.includes(currentPathName)) {
-					let newPath = `/${currentCountry}${window.location.pathname}${window.location.search}`;
-
-					// Si el país es 'ar' (cadena vacía), aseguramos que la URL tenga el hostname correcto
-					if (currentCountry === 'ar') {
-						newPath = `${window.location.origin}${window.location.pathname}${window.location.search}`;
-					}
-
-					// console.log(`🔄 Posible nueva URL: ${newPath}`);
-
-					if (window.location.href !== newPath) {
-						// console.log(`🚀 Redirigiendo a: ${newPath}`);
-						window.location.href = newPath;
-						return;
-					}
-				}
-
-				dispatch({ type: 'SET_COUNTRY', payload: { country: currentCountry } });
-				setLoading(false);
-			} catch (error) {
-				console.error(`❗ Error en fetchData: ${error}`);
-				setLoading(false);
+			} catch (err) {
+				console.warn('Could not determine geo country:', err);
 			}
+
+			dispatch({ type: 'SET_COUNTRY', payload: { country: currentCountry } });
+			setLoading(false);
 		};
 
 		fetchData();
-	}, []);
+	}, [pathname]);
 
 	const handleSwitchCountry = () => {
 		const newUrl = window.location.pathname.replace(/^\/[^/]+/, `/${userCountry}`);
 		window.location.href = newUrl;
 	};
+
 	const countryNames: Record<string, string> = {
 		ar: 'Argentina',
 		mx: 'México',
@@ -107,7 +96,6 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 		es: 'España',
 	};
 
-	// Función para obtener el nombre del país
 	const getCountryName = (code: string): string => {
 		return countryNames[code.toLowerCase()] || 'Internacional';
 	};
@@ -116,7 +104,6 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 		<CountryContext.Provider value={{ countryState, dispatch }}>
 			{loading ? <Loading /> : children}
 
-			{/* 🔥 Banner de cambio de país */}
 			{showBanner && (
 				<div
 					className={`fixed top-0 left-0 w-full bg-[#9200AD] text-white p-4 z-50 flex items-center justify-center transition-transform duration-300 ${

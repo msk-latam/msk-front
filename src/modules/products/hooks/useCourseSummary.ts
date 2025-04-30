@@ -6,7 +6,7 @@ interface CourseSummaryData {
 	regular_price: string;
 	total_price: string;
 	max_installments: string;
-	price_installments: number; // Assuming this might be a number, adjust if it's a string
+	price_installments: number;
 	featured_images: {
 		high: string;
 		medium: string;
@@ -33,7 +33,7 @@ export function useCourseSummary(slug: string, lang: string) {
 	const [error, setError] = useState<Error | null>(null);
 
 	useEffect(() => {
-		if (!slug) {
+		if (!slug || !country) {
 			setLoading(false);
 			return;
 		}
@@ -72,7 +72,7 @@ export function useCourseSummary(slug: string, lang: string) {
 		}
 
 		fetchData();
-	}, [slug]);
+	}, [slug, country]);
 
 	return { data, loading, error };
 }

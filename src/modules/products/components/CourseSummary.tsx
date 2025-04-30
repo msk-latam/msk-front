@@ -1,16 +1,30 @@
 'use client';
 
+import { CountryContext } from '@/context/country/CountryContext';
+import countryCurrencies from '@/data/_countryCurrencies.json';
+import countryInstallments from '@/data/_countryInstallments.json';
+import { getCountryFromUrl } from '@/utils/getCountryFromUrl';
 import { Phone } from 'lucide-react'; // icono de teléfono
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { useContext } from 'react';
 import { useCourseSummary } from '../hooks/useCourseSummary';
 import SkeletonCourseSummaryCard from '../skeletons/SkeletonCourseSummaryCard';
+
 interface CourseSummaryProps {
 	slug: string;
 	lang: string;
 }
 
-export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
-	const { data, loading, error } = useCourseSummary(slug, lang);
+export default function CourseSummary({ slug }: CourseSummaryProps) {
+	const pathname = usePathname();
+	const country = getCountryFromUrl(pathname);
+	const { countryState } = useContext(CountryContext);
+
+	const currency = (countryCurrencies as Record<string, string>)[country] || 'ARS';
+	const installmentsConfig = (countryInstallments as unknown as Record<string, { quotes: number }>)[country];
+
+	const { data, loading } = useCourseSummary(slug);
 
 	const enrolledFormatted = data?.enrolled;
 	const modules = data?.modules;
@@ -132,19 +146,16 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 				</li>
 			</ul>
 
-			{/* Cedente */}
 			{cedente && (
 				<>
 					<p className='text-xs text-[#4F5D89] font-inter font-medium mb-2'>
 						Cedente
 						<br />
-						<strong className='text-[#4F5D89] font-inter font-medium'>{cedente?.name}</strong>
+						<strong className='text-[#4F5D89] font-inter font-medium'>{cedente.name}</strong>
 					</p>
-
-					{/* Card de la imagen */}
 					<div className='flex flex-col items-center justify-center mb-6 bg-[#F7F9FF] rounded-[30px] p-4 relative'>
 						<Image
-							src={cedente?.image ?? ''}
+							src={cedente.image || '/images/fallback.jpg'}
 							alt='Institución'
 							width={200}
 							height={80}
