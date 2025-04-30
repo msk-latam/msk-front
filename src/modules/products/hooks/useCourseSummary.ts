@@ -33,7 +33,7 @@ export function useCourseSummary(slug: string, lang: string) {
 	const [error, setError] = useState<Error | null>(null);
 
 	useEffect(() => {
-		if (!slug || !country) {
+		if (!slug || !lang) {
 			setLoading(false);
 			return;
 		}
@@ -72,7 +72,7 @@ export function useCourseSummary(slug: string, lang: string) {
 		}
 
 		fetchData();
-	}, [slug, country]);
+	}, [slug, lang]);
 
 	return { data, loading, error };
 }
