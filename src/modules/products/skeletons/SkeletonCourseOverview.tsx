@@ -2,7 +2,7 @@
 
 export default function SkeletonCourseOverview() {
   return (
-    <section className="py-6 max-w-5xl mx-auto">
+    <section className="py-6 w-full mx-auto">
       {/* Título principal */}
       <div className="bg-gray-300 h-8 w-1/2 mx-auto mb-6 animate-pulse"></div>
 
@@ -20,7 +20,7 @@ export default function SkeletonCourseOverview() {
       <div className="bg-gray-300 h-6 w-1/2 mx-auto mb-6 animate-pulse"></div>
 
       {/* Paso a paso */}
-      <div className="flex flex-col md:flex-row md:flex-nowrap md:items-center md:justify-center md:gap-4 mb-10 w-full">
+      <div className="flex flex-col md:flex-row md:flex-wrap md:items-center md:justify-center md:gap-4 mb-10 w-full">
         {[...Array(4)].map((_, idx) => (
           <div key={idx} className="flex items-start md:items-center gap-3 text-left">
             <div className="flex flex-col items-center">
