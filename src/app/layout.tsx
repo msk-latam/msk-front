@@ -2,7 +2,8 @@
 import { Inter, Raleway } from 'next/font/google';
 import './globals.css';
 import LoaderLayout from './LoaderLayout'; // Ajustá el path
-import { CountryProvider } from '@/context/country/CountryProvider'; 
+import { CountryProvider } from '@/context/country/CountryProvider';
+import Script from 'next/script';
 
 const inter = Inter({
 	subsets: ['latin'],
@@ -44,16 +45,19 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-	  <html lang='es'>
-		<head>
-		  <meta name='robots' content='noindex, nofollow' />
-		</head>
-		<body className={`${inter.variable} ${raleway.variable} font-inter`}>
-		  <LoaderLayout /> {/* 👈 Siempre activo */}
-		  <CountryProvider> {/* 👈 Aquí envolvemos todo */}
+		<html lang='es'>
+			<head>
+				<meta name='robots' content='noindex, nofollow' />
+				<Script src='https://sdk.rebill.com/v3/rebill.js' defer />
+			</head>
+			<body className={`${inter.variable} ${raleway.variable} font-inter`}>
+				<LoaderLayout /> {/* 👈 Siempre activo */}
+				<CountryProvider>
+					{' '}
+					{/* 👈 Aquí envolvemos todo */}
 					{children}
 				</CountryProvider>
-		</body>
-	  </html>
+			</body>
+		</html>
 	);
-  }
+}

@@ -1,11 +1,11 @@
 import { API_URL, IP_API, NOTE_SPECIALITIES, baseUrl } from '@/data/api';
 import { countries } from '@/data/countries';
-import { setAllCourses, setLoadingBestSellers, setLoadingCourses, setStoreCourses } from '@/lib/allData';
 import { FetchSingleProduct, SignUp, UserProfile } from '@/data/types';
 import { BASE_URL, IS_PROD, SITE_URL } from '@/contains/constants';
 import { BodyNewPassword } from '@/components/MSK/PageNewPassword';
 import { notFound } from 'next/navigation';
 import { getJSONByCountry } from '@/app/products';
+import { setAllCourses, setLoadingBestSellers, setLoadingCourses, setStoreCourses } from '@/lib/allData';
 
 let validCountries = countries.map((item) => item.id);
 
@@ -676,6 +676,7 @@ class ApiSSRService {
 			}
 
 			const data = await response.json();
+			console.log(data);
 
 			// Modificar el slug según el nombre de la profesión
 			data.map((profession: any) => {
