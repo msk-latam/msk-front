@@ -1,4 +1,4 @@
-import { CommentType } from '@/components/CommentCard/CommentCard';
+
 import { ReactNode } from 'react';
 
 //  ######  CustomLink  ######## //
@@ -739,7 +739,7 @@ export interface PageFilter {
 	total: number;
 }
 
-export interface SinglePageType extends PostDataType {
+{/*export interface SinglePageType extends PostDataType {
 	tags: TaxonomyType[];
 	content: string | ReactNode;
 	comments?: CommentType[];
@@ -763,7 +763,7 @@ export interface SinglePageType extends PostDataType {
 			url: string;
 		};
 	};
-}
+//*/}
 
 export interface JsonIdentificationsMapping {
 	[key: string]: Array<{
@@ -891,3 +891,19 @@ export interface WpProfession {
 	title: string;
 	name: string;
 }
+
+export interface CountryInstallments {
+	gateway: string;
+	quotes: number | null;
+  }
+  
+  export interface CountryState {
+	country: string;
+	currency: string;
+	installments: CountryInstallments;
+	error?: string;
+  }
+  
+  export type CountryAction =
+	| { type: 'SET_COUNTRY'; payload: { country: string } }
+	| { type: 'SET_ERROR'; payload: string };

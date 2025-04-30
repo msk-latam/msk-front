@@ -1,16 +1,20 @@
-'use client'
+'use client';
 
-import Image from 'next/image'
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { getCountryFromUrl } from '@/utils/getCountryFromUrl';
+import countryCurrencies from '@/data/_countryCurrencies.json';
+import countryInstallments from '@/data/_countryInstallments.json';
 
 interface CourseSummaryProps {
-  price: string
-  totalPrice: string
-  modules: number
-  hours: number
-  enrolled: number
-  image: string
-  certificationEntity: string
-  onEnroll: () => void
+  price: string;
+  totalPrice: string;
+  modules: number;
+  hours: number;
+  enrolled: number;
+  image: string;
+  certificationEntity: string;
+  onEnroll: () => void;
 }
 
 export default function CourseSummaryCard({
@@ -21,12 +25,25 @@ export default function CourseSummaryCard({
   enrolled,
   image,
   certificationEntity,
-  onEnroll
+  onEnroll,
 }: CourseSummaryProps) {
+  const pathname = usePathname();
+  const country = getCountryFromUrl(pathname);
+  const currency = (countryCurrencies as Record<string, string>)[country] || 'ARS';
+  const installments = (countryInstallments as unknown as Record<string, { quotes: number }>)[country];
+
+  const formatter = new Intl.NumberFormat('es', {
+    style: 'currency',
+    currency,
+  });
+
+  const totalFormatted = formatter.format(Number(totalPrice) || 0);
+  const installmentFormatted = formatter.format((Number(totalPrice) || 0) / (installments?.quotes || 1));
+
   return (
     <aside className="bg-white rounded-[38px] shadow p-6 w-full space-y-4">
       <Image
-        src={image}
+        src={image || '/images/fallback.jpg'}
         alt="Imagen del curso"
         width={400}
         height={250}
@@ -34,8 +51,11 @@ export default function CourseSummaryCard({
       />
 
       <div className="text-sm text-gray-600">
-        <p className="line-through">Total: {totalPrice}</p>
-        <p className="text-2xl font-bold text-purple-700">${price} ARS</p>
+        <p className="line-through">Total: {totalFormatted}</p>
+        <p className="text-2xl font-bold text-purple-700">
+          {installments?.quotes || 1} pagos de:<br />
+          {installmentFormatted}
+        </p>
       </div>
 
       <ul className="text-sm text-gray-700 space-y-3">
@@ -53,7 +73,7 @@ export default function CourseSummaryCard({
         </li>
         <li className="flex items-center gap-2">
           <img src="/icons/course/summary/person.svg" alt="" className="w-4 h-4" />
-          {enrolled.toLocaleString()} profesionales inscriptos
+          {(enrolled || 0).toLocaleString()} profesionales inscriptos
         </li>
         <li className="flex items-center gap-2">
           <img src="/icons/course/summary/download.svg" alt="" className="w-4 h-4" />
@@ -83,5 +103,5 @@ export default function CourseSummaryCard({
         </button>
       </div>
     </aside>
-  )
+  );
 }

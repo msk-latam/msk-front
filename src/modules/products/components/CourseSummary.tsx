@@ -2,47 +2,69 @@
 
 import Image from 'next/image';
 import { useCourseSummary } from '../hooks/useCourseSummary';
-import { Phone } from 'lucide-react'; // icono de teléfono
+import { Phone } from 'lucide-react';
 import SkeletonCourseSummaryCard from '../skeletons/SkeletonCourseSummaryCard';
+import { usePathname } from 'next/navigation';
+import { getCountryFromUrl } from '@/utils/getCountryFromUrl';
+import countryCurrencies from '@/data/_countryCurrencies.json';
+import countryInstallments from '@/data/_countryInstallments.json';
+import { useContext } from 'react';
+import { CountryContext } from '@/context/country/CountryContext';
+
 interface CourseSummaryProps {
   slug: string;
 }
 
 export default function CourseSummary({ slug }: CourseSummaryProps) {
-  const { data, loading, error } = useCourseSummary(slug);
+  const pathname = usePathname();
+  const country = getCountryFromUrl(pathname);
+  const { countryState } = useContext(CountryContext);
+  const countryByIP = countryState.country;
 
-  const enrolledFormatted = data?.enrolled;
-  const modules = data?.modules;
-  const duration = data?.duration + ' horas estimadas';
+  console.log('[COUNTRY DEBUG]', {
+    fromUrl: country,
+    fromIP: countryByIP,
+  });
+
+  const currency = (countryCurrencies as Record<string, string>)[country] || 'ARS';
+  const installmentsConfig = (countryInstallments as unknown as Record<string, { quotes: number }>)[country];
+
+  const { data, loading } = useCourseSummary(slug);
+
+  const enrolledFormatted = data?.enrolled?.toLocaleString() || '0';
+  const modules = data?.modules || 0;
+  const duration = data?.duration ? `${data.duration} horas estimadas` : '0 horas estimadas';
   const certification = data?.certification;
-  const max_installments = data?.max_installments;
-  const price = data?.price_installments
-    ? new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(Number(data.price_installments))
-    : '';
-  const total_price = data?.total_price
-    ? new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(Number(data.total_price))
-    : '';
+  const max_installments = data?.max_installments || installmentsConfig?.quotes || 1;
 
+  const totalPrice = Number(data?.total_price || 0);
+  const priceInstallments = Number(data?.price_installments || totalPrice / max_installments);
+
+  const formatter = new Intl.NumberFormat('es', {
+    style: 'currency',
+    currency,
+  });
+
+  const price = formatter.format(priceInstallments);
+  const total_price = formatter.format(totalPrice);
   const cedente = data?.cedente;
-  if (loading) {
-    return <SkeletonCourseSummaryCard />; // Usa el Skeleton cuando los datos están cargando
-  }
+
+  if (loading) return <SkeletonCourseSummaryCard />;
+
   return (
-    <div className="bg-white rounded-[38px] p-6 md:p-8 sticky top-10 w-full" style={{ backgroundColor: '#FFFFFF' }}>
+    <div className="bg-white rounded-[38px] p-6 md:p-8 sticky top-10 w-full">
       <Image
-        src={data?.featured_images.medium ?? ''}
+        src={data?.featured_images.medium || '/images/fallback.jpg'}
         alt="Curso"
         className="rounded-xl w-full object-cover mb-6"
         width={420}
         height={300}
       />
 
-      {/* Total y precio */}
-      <p className="text-[#1A1A1A] text-[20px] font-inter font-medium">Total: {total_price} ARS</p>
+      <p className="text-[#1A1A1A] text-[20px] font-inter font-medium">Total: {total_price}</p>
       <p className="text-[#4F5D89] font-inter font-medium text-base">{max_installments} pagos de:</p>
       <p className="text-2xl font-bold text-[#1A1A1A] mb-4">{price}</p>
 
-      {/* Lista de items */}
       <ul className="text-sm text-[#4F5D89] font-inter font-medium space-y-3 mb-6">
         <li className="flex items-center gap-2">
           <img src="/icons/course/summary/world.svg" alt="" className="w-4 h-4" />
@@ -66,20 +88,15 @@ export default function CourseSummary({ slug }: CourseSummaryProps) {
         </li>
       </ul>
 
-      {/* Cedente */}
       {cedente && (
         <>
           <p className="text-xs text-[#4F5D89] font-inter font-medium mb-2">
-            Cedente
-            <br />
-            <strong className="text-[#4F5D89] font-inter font-medium">{cedente?.name}</strong>
+            Cedente<br />
+            <strong className="text-[#4F5D89] font-inter font-medium">{cedente.name}</strong>
           </p>
-
-          {/* Card de la imagen */}
           <div className="flex flex-col items-center justify-center mb-6 bg-[#F7F9FF] rounded-[30px] p-4 relative">
-            
             <Image
-              src={cedente?.image ?? ''}
+              src={cedente.image || '/images/fallback.jpg'}
               alt="Institución"
               width={200}
               height={80}
@@ -89,7 +106,6 @@ export default function CourseSummary({ slug }: CourseSummaryProps) {
         </>
       )}
 
-      {/* Botones CTA */}
       <div className="space-y-3">
         <button className="bg-[#9200AD] hover:bg-[#6b1679] text-white w-full py-3 rounded-full font-inter font-medium text-base transition">
           Inscríbete ahora

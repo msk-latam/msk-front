@@ -16,9 +16,10 @@ export default async function ProductPage({
 }: {
   params: { lang: string; slug: string };
 }) {
-  const res = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/product/${params.slug}`, {
-    cache: 'no-cache',
-  });
+  const res = await fetch(
+    `https://cms1.msklatam.com/wp-json/msk/v1/product/${params.slug}?country=${params.lang}`,
+    { cache: 'no-cache' }
+  );
 
   const course = await res.json();
   const structuredData = generateCourseStructuredData(course);

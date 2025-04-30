@@ -173,7 +173,7 @@ export default function ProductPageComponent({ course }: ProductPageComponentPro
 
 						{/* Columna derecha */}
 						<aside className='w-full md:w-1/3 relative z-[8] -mt-20'>
-							<CourseSummary slug={slug} />
+							<CourseSummary slug={slug}  />
 						</aside>
 					</div>
 
