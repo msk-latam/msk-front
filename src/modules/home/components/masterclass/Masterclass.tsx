@@ -6,15 +6,16 @@ import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 import ProfessionalCardDesktop from "./ProfessionalCardDesktop";
 import ProfessionalCardMobile from "./ProfessionalCardMobile";
-import { useMasterclassSection } from "@/modules/home/hooks/useMasterclassSection";
+import { useMasterclassSection } from "@/modules/home/_hooks2/useMasterclassSection";
 import { Professional } from "@/modules/home/types";
 import { professionals as mockProfessionals } from "./professionals";
 import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
 import { usePathname } from "next/navigation";
-import MasterclassSkeleton from "@/modules/home/skeletons/MasterclassSkeleton"; // Import Skeleton
+import MasterclassSkeleton from "@/modules/home/skeletons/MasterclassSkeleton";
 
 const Masterclass = () => {
-  const { data: fetchedProfessionals, link: masterclassLink, loading, error } = useMasterclassSection();
+  const { data: fetchedProfessionals, link: masterclassLink, backgroundImage, loading, error } = useMasterclassSection();
+
   const usingMock = !fetchedProfessionals?.length;
   const professionals: Professional[] = usingMock ? mockProfessionals : fetchedProfessionals;
 
@@ -33,13 +34,11 @@ const Masterclass = () => {
     trackMouse: true,
   });
 
-  // Autoplay
   useEffect(() => {
     const interval = setInterval(nextSlide, 6000);
     return () => clearInterval(interval);
   }, [professionals]);
 
-  // Loop visual
   const extendedProfessionals = [
     professionals[professionals.length - 1],
     ...professionals,
@@ -71,22 +70,25 @@ const Masterclass = () => {
   const cardMarginRight = 16;
   const totalCardWidth = cardWidth + cardMarginRight;
 
-  if (loading) return <MasterclassSkeleton />; // 👈 Mostrar Skeleton mientras carga
-  if (error) return null;
+  if (loading) return <MasterclassSkeleton />;
+  if (error || professionals.length === 0) return null;
+
+  const mainPro = professionals[0];
 
   return (
     <section
       aria-labelledby="masterclass-heading"
       className="relative -translate-y-0 w-full min-h-screen flex items-center justify-center text-white z-5 font-raleway"
     >
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-[1] md:hidden" />
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-[1] md:hidden " />
       <Image
-        src="/images/masterclass/main-masterclass.png"
-        alt="Fondo sección Masterclass"
-        fill
-        className="object-cover object-center blur-3xl md:blur-none absolute inset-0 z-[1]"
-        priority
-      />
+  src={backgroundImage || "/images/masterclass/main-masterclass.png"}
+  alt="Fondo sección Masterclass"
+  fill
+  className="object-cover object-center blur-3xl md:blur-none absolute inset-0 z-[1] brightness-75"
+  priority
+/>
+
 
       <main className="relative z-10 h-full md:h-screen overflow-visible max-w-[1600px] mx-auto md:px-4 w-full py-11 mt-8 md:py-0 md:mt-0 flex flex-col justify-center md:px-20 md:mb-10">
         <div className="h-full flex flex-col justify-center gap-10 md:flex-row md:items-center md:justify-between md:px-4">
@@ -97,16 +99,16 @@ const Masterclass = () => {
             </p>
             <div className="flex flex-col md:gap-6">
               <h1 id="masterclass-heading" className="text-3xl md:text-[4rem] font-bold leading-tight text-white">
-                El arte de escuchar los latidos
+                {mainPro.nombre || "Masterclass destacada"}
               </h1>
               <p className="text-sm md:text-lg opacity-80">
-                Aprende de la excelencia con esta masterclass a cargo del <br className="hidden md:block" />
-                <strong>Dr. Ottenhof</strong>, nuestro referente mundial en Cardiología.
+                {mainPro.especialidad || "Especialidad no disponible"}
               </p>
             </div>
             <nav aria-label="Inscripción a Masterclass">
               <Link
                 href={getLocalizedUrl(lang, '/tienda/medicina-intensiva-amir/')}
+                // href={getLocalizedUrl(lang, new URL(masterclassLink ?? '#').pathname)} // ← usar esto para link dinámico
                 className="bg-white text-black px-6 py-3 rounded-full font-semibold text-sm md:text-base flex items-center gap-2 w-fit mx-auto md:mx-0 hover:scale-105 transition"
               >
                 Inscribite ahora

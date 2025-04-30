@@ -55,7 +55,7 @@ export interface Doctor {
   name: string;
   specialty?: string;
   image?: string; // URL de foto
-  link: string; // ✅ Agregar esto
+  link: string;
 }
 
 export interface Professional {
@@ -63,17 +63,28 @@ export interface Professional {
   especialidad: string;
   imagenDesktop: string;
   imagenMobile: string;
-  perfilUrl: string; // 👈 esto es clave
+  perfilUrl: string;
+}
+
+export interface MasterclassLink {
+  title: string;
+  url: string;
+  target?: string;
 }
 
 export interface MasterclassAPIItem {
+  id: number;
   title: string;
+  slug: string;
   description: string;
+  date: string;
   background_image: [string, number, number, boolean];
-  link: string;
+  link: MasterclassLink;
   doctors?: Doctor[];
+  tags?: string[] | null;
 }
-  
+
+// Mapper para transformar MasterclassAPIItem en Professional[]
 export const mapMasterclassToProfessionals = (mc: MasterclassAPIItem): Professional[] => {
   if (!mc.doctors || mc.doctors.length === 0) {
     return [{
@@ -81,18 +92,19 @@ export const mapMasterclassToProfessionals = (mc: MasterclassAPIItem): Professio
       especialidad: "Cardiólogo",
       imagenDesktop: mc.background_image?.[0] || "/images/masterclass/fallback-desktop.jpg",
       imagenMobile: mc.background_image?.[0] || "/images/masterclass/fallback-mobile.jpg",
-      perfilUrl: mc.link || "#",
+      perfilUrl: mc.link?.url || "#",
     }];
   }
 
   return mc.doctors.map((doctor) => ({
     nombre: doctor.name,
     especialidad: doctor.specialty?.trim() || "Cardiólogo",
-    imagenDesktop: doctor.image || mc.background_image?.[0] || "/images/masterclass/fallback-desktop.jpg",
-    imagenMobile: doctor.image || mc.background_image?.[0] || "/images/masterclass/fallback-mobile.jpg",
-    perfilUrl: doctor.link  || "#", // ✅ usa el link del profesional, y si no, el de la masterclass como backup
+    imagenDesktop: doctor.image || "/images/masterclass/fallback-desktop.jpg",
+    imagenMobile: doctor.image || "/images/masterclass/fallback-mobile.jpg",
+    perfilUrl: doctor.link || mc.link?.url || "#",
   }));
 };
+
 
 
 
