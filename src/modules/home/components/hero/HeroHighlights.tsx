@@ -1,38 +1,62 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 type HeroHighlightsProps = {
   currentSlide: number;
   highlights: string[];
   onSelect: (index: number) => void;
   animationKey: number;
-  paused: boolean; // <- ✅ Agregado
+  paused: boolean;
 };
 
 const HeroHighlights = ({ currentSlide, highlights, onSelect, animationKey, paused }: HeroHighlightsProps) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      const totalItems = highlights.length;
+      const itemHeight = 80; // px (ajustar según tu botón)
+      const offset = currentSlide * itemHeight;
+
+      // Si estamos en el final de la lista, reseteamos
+      if (currentSlide >= totalItems) {
+        // Reinicia suave
+        scrollRef.current.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      } else {
+        scrollRef.current.scrollTo({
+          top: offset,
+          behavior: 'smooth',
+        });
+      }
+    }
+  }, [currentSlide, highlights.length]);
+
+  // Renderizamos la lista duplicada para un loop infinito
+  const doubledHighlights = [...highlights];
+
   return (
     <div className="md:relative rounded-t-2xl md:-bottom-[40px] md:pb-0 md:px-6 absolute bottom-0 w-full h-40 md:h-auto z-10 overflow-hidden">
+      
       {/* MOBILE vertical scroll */}
-      <div className="md:hidden h-full overflow-y-auto max-h-[160px]">
-
-        <div
-          className="flex flex-col transition-transform duration-500 ease-in-out"
-          style={{ transform: `translateY(0px)` }}
-        >
-          {highlights.slice(currentSlide).concat(highlights.slice(0, currentSlide)).slice(0, 2).map((text, i) => (
+      <div ref={scrollRef} className="md:hidden overflow-y-scroll max-h-[160px] h-[160px] scroll-smooth">
+        <div className="flex flex-col">
+          {doubledHighlights.map((text, i) => (
             <button
               key={`mobile-${animationKey}-${i}`}
-              onClick={() => onSelect((currentSlide + i) % highlights.length)}
-              className={`relative overflow-hidden w-full min-h-10 p-4 flex items-start justify-between text-left text-m transition-all duration-300 shrink-0 ${
-                i === 0 ? "bg-white text-black shadow-md" : "bg-[#F4F4F4] text-gray-500"
+              onClick={() => onSelect(i % highlights.length)}
+              className={`relative overflow-hidden w-full min-h-10 h-20 p-4 flex items-start justify-between text-left text-m transition-all duration-300 shrink-0 ${
+                (i % highlights.length) === currentSlide ? "bg-white text-black shadow-md" : "bg-[#F4F4F4] text-gray-500"
               }`}
             >
-              {i === 0 && (
+              {(i % highlights.length) === currentSlide && (
                 <span
-                key={`bar-${animationKey}`}
-                className="absolute inset-0 bg-gray-500 opacity-30 z-0 animate-fill-x"
-                style={{ animationPlayState: paused ? 'paused' : 'running' }}
+                  key={`bar-${animationKey}`}
+                  className="absolute inset-0 bg-gray-500 opacity-30 z-0 animate-fill-x"
+                  style={{ animationPlayState: paused ? 'paused' : 'running' }}
                 />
               )}
               <span className="relative z-10">{text}</span>
@@ -53,9 +77,9 @@ const HeroHighlights = ({ currentSlide, highlights, onSelect, animationKey, paus
           >
             {i === currentSlide && (
               <span
-              key={`bar-desktop-${animationKey}`}
-              className="absolute inset-0 bg-white opacity-10 z-0 animate-fill-x"
-              style={{ animationPlayState: paused ? 'paused' : 'running' }}
+                key={`bar-desktop-${animationKey}`}
+                className="absolute inset-0 bg-white opacity-10 z-0 animate-fill-x"
+                style={{ animationPlayState: paused ? 'paused' : 'running' }}
               />
             )}
             <span className="relative z-10">{text}</span>
@@ -77,10 +101,7 @@ const HeroHighlights = ({ currentSlide, highlights, onSelect, animationKey, paus
         .animate-fill-x {
           animation: fill-x 8s linear forwards;
           transform: scaleX(0);
-          
         }
-
-        
       `}</style>
     </div>
   );
