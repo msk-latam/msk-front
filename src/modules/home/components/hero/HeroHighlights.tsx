@@ -66,7 +66,7 @@ const HeroHighlights = ({ currentSlide, highlights, onSelect, animationKey, paus
       </div>
 
       {/* DESKTOP horizontal */}
-      <div className="hidden md:flex rounded-t-xl w-fit md:max-w-full flex-row md:gap-[2px] overflow-x-hidden justify-start items-center gap-0 md:no-scrollbar">
+      <div className="hidden md:flex rounded-t-xl md:w-auto w-fit md:max-w-full flex-row md:gap-[2px] overflow-x-hidden justify-start items-center gap-0 md:no-scrollbar">
         {highlights.map((text, i) => (
           <button
             key={`desktop-${animationKey}-${i}`}
