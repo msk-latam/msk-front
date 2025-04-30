@@ -1,4 +1,5 @@
 "use client";
+import { forwardRef, HTMLAttributes } from "react";
 
 interface CourseSupportFormProps {
   name?: string;
@@ -8,10 +9,9 @@ interface CourseSupportFormProps {
   specialty?: string;
   message?: string;
 }
-
 export default function CourseSupportForm(props: CourseSupportFormProps) {
   return (
-    <div className="bg-white space-y-6">
+    <div id="course-support-form" className="bg-white space-y-6">
       <h2 className="text-[24px] md:text-[32px] font-raleway font-bold text-[#1A1A1A]">
         ¿Necesitás ayuda para elegir tu curso?
       </h2>
