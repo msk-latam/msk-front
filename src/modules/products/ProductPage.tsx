@@ -117,9 +117,10 @@ import Inscription from './components/Inscription';
 
 interface ProductPageComponentProps {
 	course: any; // idealmente tipalo bien, pero `any` funciona por ahora
+	lang: string;
 }
 
-export default function ProductPageComponent({ course }: ProductPageComponentProps) {
+export default function ProductPageComponent({ course, lang }: ProductPageComponentProps) {
 	{
 		const params = useParams();
 		const slug = params?.slug as string;
@@ -139,7 +140,7 @@ export default function ProductPageComponent({ course }: ProductPageComponentPro
 					}}
 				>
 					<Navbar />
-					<CourseHeader slug={slug} />
+					<CourseHeader slug={slug} lang={lang} />
 				</div>
 
 				{/* CONTENIDO PRINCIPAL */}
@@ -148,20 +149,20 @@ export default function ProductPageComponent({ course }: ProductPageComponentPro
 						{/* Columna izquierda */}
 						<div className='w-full md:w-2/3 space-y-6 z-[9]'>
 							<div className='w-full bg-white rounded-[38px] flex flex-col relative z-[9] md:-mt-20 px-5 pt-9 pb-3 md:px-9 gap-6 md:gap-0'>
-								<CourseDescription slug={slug} />
-								<CourseInstitutions slug={slug} />
-								<CourseLearning slug={slug} />
-								<CourseOverview slug={slug} />
-								<CourseTeachers slug={slug} />
+								<CourseDescription slug={slug} lang={lang} />
+								<CourseInstitutions slug={slug} lang={lang} />
+								<CourseLearning slug={slug} lang={lang} />
+								<CourseOverview slug={slug} lang={lang} />
+								<CourseTeachers slug={slug} lang={lang} />
 							</div>
 							<div className=''>
-								<CourseVideo slug={slug} />
+								<CourseVideo slug={slug} lang={lang} />
 							</div>
 							<div className=''>
-								<CourseCertificate slug={slug} />
+								<CourseCertificate slug={slug} lang={lang} />
 							</div>
 							<div className=''>
-								<CourseSyllabus slug={slug} />
+								<CourseSyllabus slug={slug} lang={lang} />
 							</div>
 							<div className='w-full'>
 								<CourseCards />
@@ -173,7 +174,7 @@ export default function ProductPageComponent({ course }: ProductPageComponentPro
 
 						{/* Columna derecha */}
 						<aside className='w-full md:w-1/3 relative z-[8] -mt-20'>
-							<CourseSummary slug={slug} />
+							<CourseSummary slug={slug} lang={lang} />
 						</aside>
 					</div>
 

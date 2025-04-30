@@ -7,11 +7,12 @@ import CourseDescriptionSkeleton from '../skeletons/CourseDescriptionSkeleton'; 
 
 interface CourseDescriptionProps {
 	slug: string;
+	lang: string;
 }
 
-export default function CourseDescription({ slug }: CourseDescriptionProps) {
+export default function CourseDescription({ slug, lang }: CourseDescriptionProps) {
 	const [isExpanded, setIsExpanded] = useState(false);
-	const { data, loading, error } = useCourseDescription(slug);
+	const { data, loading, error } = useCourseDescription(slug, lang);
 
 	const MAX_LENGTH = 600;
 
@@ -39,9 +40,7 @@ export default function CourseDescription({ slug }: CourseDescriptionProps) {
 
 	return (
 		<section className='bg-white rounded-[38px] md:pt-7 md:pb-3'>
-			<h1 className='text-2xl md:text-[34px] font-raleway font-medium mb-6 text-[#1A1A1A]'>
-				{title}
-			</h1>
+			<h1 className='text-2xl md:text-[34px] font-raleway font-medium mb-6 text-[#1A1A1A]'>{title}</h1>
 
 			<article className='text-[#1A1A1A] text-sm font-inter font-light text-[16px] leading-[161%] relative'>
 				<div

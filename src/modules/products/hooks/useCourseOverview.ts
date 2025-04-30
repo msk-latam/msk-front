@@ -1,18 +1,17 @@
-
 import { useEffect, useState } from 'react';
+import { getCourse } from '../service/courseService';
 import { CourseOverviewData } from '../types/types';
-import { getCourse } from '../service/courseService'
 
-export function useCourseOverview(slug: string) {
+export function useCourseOverview(slug: string, lang: string) {
 	const [data, setData] = useState<CourseOverviewData | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
-  
+
 	useEffect(() => {
 		if (!slug) return;
-	
-		getCourse(slug)
-		  .then((courseData) => {
+
+		getCourse(slug, lang)
+			.then((courseData) => {
 				const overviewData: CourseOverviewData = {
 					habilities: courseData.sections?.habilities ?? [],
 					with_this_course: courseData.sections?.with_this_course ?? '',
@@ -21,12 +20,12 @@ export function useCourseOverview(slug: string) {
 
 				setData(overviewData);
 			})
-				.catch((err) => {
-					console.error(err);
-					setError(err.message || "Error fetching overview data");
-				  })
-				  .finally(() => setLoading(false));
-			  }, [slug]);
-			  console.log(data)
+			.catch((err) => {
+				console.error(err);
+				setError(err.message || 'Error fetching overview data');
+			})
+			.finally(() => setLoading(false));
+	}, [slug, lang]);
+	console.log(data);
 	return { data, loading, error };
 }

@@ -7,10 +7,11 @@ import InfoIcon from './InfoIcon';
 
 interface CourseInstitutionProps {
 	slug: string;
+	lang: string;
 }
 
-export default function CourseInstitutions({ slug }: CourseInstitutionProps) {
-	const { data: institutions, loading, error } = useCourseInstitutions(slug);
+export default function CourseInstitutions({ slug, lang }: CourseInstitutionProps) {
+	const { data: institutions, loading, error } = useCourseInstitutions(slug, lang);
 
 	if (!loading && !institutions) return null;
 

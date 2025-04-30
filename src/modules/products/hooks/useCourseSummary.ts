@@ -27,7 +27,7 @@ interface CourseSummaryData {
 
 const API_BASE = 'https://cms1.msklatam.com/wp-json/msk/v1/product';
 
-export function useCourseSummary(slug: string) {
+export function useCourseSummary(slug: string, lang: string) {
 	const [data, setData] = useState<CourseSummaryData | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<Error | null>(null);
@@ -42,7 +42,7 @@ export function useCourseSummary(slug: string) {
 			setLoading(true);
 			setError(null);
 			try {
-				const response = await fetch(`${API_BASE}/${slug}?nocache=1`);
+				const response = await fetch(`${API_BASE}/${slug}?nocache=1&lang=${lang}`);
 				if (!response.ok) {
 					throw new Error(`HTTP error! status: ${response.status}`);
 				}
