@@ -64,6 +64,7 @@ export interface Professional {
   imagenDesktop: string;
   imagenMobile: string;
   perfilUrl: string;
+  duration?: string; // ← duración opcional
 }
 
 export interface MasterclassLink {
@@ -86,10 +87,12 @@ export interface MasterclassAPIItem {
 
 // Mapper para transformar MasterclassAPIItem en Professional[]
 export const mapMasterclassToProfessionals = (mc: MasterclassAPIItem): Professional[] => {
+  const descripcionGlobal = mc.description?.trim() || "Descripción no disponible";
+
   if (!mc.doctors || mc.doctors.length === 0) {
     return [{
       nombre: mc.title,
-      especialidad: "Cardiólogo",
+      especialidad: descripcionGlobal,
       imagenDesktop: mc.background_image?.[0] || "/images/masterclass/fallback-desktop.jpg",
       imagenMobile: mc.background_image?.[0] || "/images/masterclass/fallback-mobile.jpg",
       perfilUrl: mc.link?.url || "#",

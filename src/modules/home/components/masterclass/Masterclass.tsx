@@ -14,7 +14,7 @@ import { usePathname } from "next/navigation";
 import MasterclassSkeleton from "@/modules/home/skeletons/MasterclassSkeleton";
 
 const Masterclass = () => {
-  const { data: fetchedProfessionals, link: masterclassLink, backgroundImage, loading, error } = useMasterclassSection();
+  const { data: fetchedProfessionals, masterclass, link: masterclassLink, backgroundImage, loading, error } = useMasterclassSection();
 
   const usingMock = !fetchedProfessionals?.length;
   const professionals: Professional[] = usingMock ? mockProfessionals : fetchedProfessionals;
@@ -98,12 +98,12 @@ const Masterclass = () => {
               Masterclass
             </p>
             <div className="flex flex-col md:gap-6">
-              <h1 id="masterclass-heading" className="text-3xl md:text-[4rem] font-bold leading-tight text-white">
-                {mainPro.nombre || "Masterclass destacada"}
-              </h1>
-              <p className="text-sm md:text-lg opacity-80">
-                {mainPro.especialidad || "Especialidad no disponible"}
-              </p>
+            <h1 id="masterclass-heading" className="text-3xl md:text-[4rem] font-bold leading-tight text-white">
+  {masterclass?.title || "Masterclass destacada"}
+</h1>
+<p className="text-sm md:text-lg opacity-80">
+  {masterclass?.description || "Descripción no disponible"}
+</p>
             </div>
             <nav aria-label="Inscripción a Masterclass">
               <Link
@@ -143,29 +143,39 @@ const Masterclass = () => {
           </article>
         </div>
 
-        {/* Mobile */}
-        <section className="md:hidden w-full flex flex-col items-center pl-6 gap-6 overflow-x-hidden z-[1]">
-          <h2 className="text-1xl border border-white rounded-full px-6 py-3 self-start uppercase tracking-widest">
-            Masterclass
-          </h2>
-          <div className="relative w-full overflow-hidden">
-            <div
-              {...handlers}
-              className={`flex ${withTransition ? "transition-transform duration-500 ease-in-out" : ""}`}
-              style={{
-                transform: `translateX(-${current * totalCardWidth}px)`,
-                width: `${extendedProfessionals.length * totalCardWidth}px`,
-              }}
-            >
-              {extendedProfessionals.map((pro, i) => (
-                <ProfessionalCardMobile key={i} pro={pro} />
-              ))}
-            </div>
+                {/* Mobile */}
+                {professionals.length === 1 ? (
+          <div className="md:hidden w-full flex flex-col items-center pl-6 gap-6 z-[1]">
+            <h2 className="text-1xl border border-white rounded-full px-6 py-3 self-start uppercase tracking-widest">
+              Masterclass
+            </h2>
+            <ProfessionalCardMobile pro={professionals[0]} />
           </div>
-        </section>
+        ) : (
+          <section className="md:hidden w-full flex flex-col items-center pl-6 gap-6 overflow-x-hidden z-[1]">
+            <h2 className="text-1xl border border-white rounded-full px-6 py-3 self-start uppercase tracking-widest">
+              Masterclass
+            </h2>
+            <div className="relative w-full overflow-hidden">
+              <div
+                {...handlers}
+                className={`flex ${withTransition ? "transition-transform duration-500 ease-in-out" : ""}`}
+                style={{
+                  transform: `translateX(-${current * totalCardWidth}px)`,
+                  width: `${extendedProfessionals.length * totalCardWidth}px`,
+                }}
+              >
+                {extendedProfessionals.map((pro, i) => (
+                  <ProfessionalCardMobile key={i} pro={pro} />
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
       </main>
     </section>
   );
 };
 
 export default Masterclass;
+
