@@ -4,6 +4,7 @@ import { Phone } from "lucide-react"; // icono de teléfono
 import Image from "next/image";
 import { useCourseSummary } from "../hooks/useCourseSummary";
 import SkeletonCourseSummaryCard from "../skeletons/SkeletonCourseSummaryCard";
+import { useRouter } from "next/navigation";
 
 interface CourseSummaryProps {
   slug: string;
@@ -12,6 +13,7 @@ interface CourseSummaryProps {
 
 export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
   const { data, loading } = useCourseSummary(slug, lang);
+  const router = useRouter();
 
   const enrolledFormatted = data?.enrolled;
   const modules = data?.modules;
@@ -183,7 +185,7 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 
       {/* Botones CTA */}
       <div className="space-y-3">
-        <button className="bg-[#9200AD] hover:bg-[#6b1679] text-white w-full py-3 rounded-full font-inter font-medium text-base transition">
+        <button className="bg-[#9200AD] hover:bg-[#6b1679] text-white w-full py-3 rounded-full font-inter font-medium text-base transition" onClick={() => router.push(`/checkout/${slug}`)}>
           Inscríbete ahora
         </button>
         <a href="#course-support-form" className="block">

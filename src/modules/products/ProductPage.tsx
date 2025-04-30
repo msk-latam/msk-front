@@ -182,7 +182,7 @@ export default function ProductPageComponent({ course, lang }: ProductPageCompon
 					<div className='w-full z-[5]'>
 						<CourseTestimonials />
 					</div>
-					<Inscription />
+					<Inscription slug={slug} lang={lang}  />
 				</main>
 
 				<Footer />

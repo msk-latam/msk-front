@@ -55,7 +55,6 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
       const storeUrl = `${getLocalizedUrl(lang, '/tienda')}?especialidades=${specialtySlug}`;
      // ✅ ahora navegación SPA
 
-console.log(specialtyName,'aaaaaa')
   if (!isMobile) {
     return (
       <div className="p-4 h-fit overflow-auto w-full bg-white rounded-b-2xl">
