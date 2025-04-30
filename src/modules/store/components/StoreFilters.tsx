@@ -50,7 +50,7 @@ const profesionData: FilterOption[] = [
 ];
 
 const duracionData: FilterOption[] = [
-	{ value: 'hasta-300', label: 'Hasta 300 horas' },
+	{ value: 'hasta-100', label: 'Hasta 100 horas' },
 	{ value: '100-300', label: 'De 100 a 300 horas' },
 	{ value: 'mas-300', label: 'Más de 300 horas' },
 ];
