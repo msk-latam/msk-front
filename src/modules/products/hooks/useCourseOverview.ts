@@ -27,6 +27,5 @@ export function useCourseOverview(slug: string) {
 				  })
 				  .finally(() => setLoading(false));
 			  }, [slug]);
-			  console.log(data)
 	return { data, loading, error };
 }
