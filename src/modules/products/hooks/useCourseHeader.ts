@@ -1,28 +1,27 @@
-
 import { useEffect, useState } from 'react';
-import { CourseSectionHeader } from '../types/types';
 import { getCourse } from '../service/courseService';
+import { CourseSectionHeader } from '../types/types';
 
-export function useCourseHeader(slug: string) {
+export function useCourseHeader(slug: string, lang: string) {
 	const [data, setData] = useState<CourseSectionHeader | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
-  
+
 	useEffect(() => {
-	  if (!slug) return;
-  
-	  getCourse(slug)
-		.then((courseData) => {
-		  // courseData es todo el objeto del curso
-		  const headerData: CourseSectionHeader = courseData.sections.header;
-		  setData(headerData);
-		})
-		.catch((err) => {
-		  console.error(err);
-		  setError(err.message || "Error fetching header data");
-		})
-		.finally(() => setLoading(false));
-	}, [slug]);
+		if (!slug) return;
+
+		getCourse(slug, lang)
+			.then((courseData) => {
+				// courseData es todo el objeto del curso
+				const headerData: CourseSectionHeader = courseData.sections.header;
+				setData(headerData);
+			})
+			.catch((err) => {
+				console.error(err);
+				setError(err.message || 'Error fetching header data');
+			})
+			.finally(() => setLoading(false));
+	}, [slug, lang]);
 
 	return { data, loading, error };
 }

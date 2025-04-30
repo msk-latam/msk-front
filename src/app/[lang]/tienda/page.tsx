@@ -12,7 +12,8 @@ import StoreHeader from '@/store/components/StoreHeader';
 import { Suspense, useState } from 'react';
 /* store components */
 
-export default function TiendaPage() {
+export default function TiendaPage({ params }: { params: { lang: string } }) {
+	const lang = params.lang;
 	const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
 	return (
@@ -49,7 +50,7 @@ export default function TiendaPage() {
 						</Suspense>
 
 						<Suspense fallback={<StoreCoursesSkeleton />}>
-							<StoreCourses onOpenFilters={() => setIsFilterModalOpen(true)} />
+							<StoreCourses onOpenFilters={() => setIsFilterModalOpen(true)} lang={lang} />
 						</Suspense>
 					</div>
 				</section>

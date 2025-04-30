@@ -28,9 +28,10 @@ function useDebounce<T>(value: T, delay: number): T {
 interface StoreCoursesProps {
 	// Props if any
 	onOpenFilters?: () => void; // Añadimos la prop para abrir el modal de filtros
+	lang: string;
 }
 
-const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters }) => {
+const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 	const router = useRouter(); // Added
 	const pathname = usePathname(); // Added
 	const searchParams = useSearchParams();
@@ -47,7 +48,7 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters }) => {
 
 	// Calculate the total count of selected filter *options*
 	let totalSelectedOptionsCount = 0;
-	searchParams.forEach((value, key) => {
+	searchParams?.forEach((value, key) => {
 		// Exclude 'search' and pagination params from filter count
 		if (filterKeys.includes(key)) {
 			const selectedOptions = value.split(',').filter(Boolean); // Filter out empty strings if value is empty
@@ -57,18 +58,18 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters }) => {
 
 	// Effect to initialize searchTerm from URL on mount
 	useEffect(() => {
-		setSearchTerm(searchParams.get('search') || '');
+		setSearchTerm(searchParams?.get('search') || '');
 	}, []); // Run only once on mount
 
 	// Effect to update URL when debounced search term changes
 	useEffect(() => {
-		const current = new URLSearchParams(searchParams.toString());
+		const current = new URLSearchParams(searchParams?.toString());
 		const currentSearch = current.get('search');
 
 		// Update URL only if debounced term is different from current URL search param
 		// or if it's empty and the param exists
 		if (debouncedSearchTerm !== (currentSearch || '')) {
-			const params = new URLSearchParams(searchParams.toString());
+			const params = new URLSearchParams(searchParams?.toString());
 			if (debouncedSearchTerm) {
 				params.set('search', debouncedSearchTerm);
 			} else {
@@ -86,10 +87,10 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters }) => {
 			setError(null);
 			try {
 				// Construct the API URL with search parameters
-				const params = new URLSearchParams(searchParams.toString()); // Use current searchParams
+				const params = new URLSearchParams(searchParams?.toString()); // Use current searchParams
 
 				// Ensure required params are set (might be redundant if already in searchParams)
-				params.set('lang', params.get('lang') || 'int');
+				params.set('lang', lang || 'int');
 				params.set('page', params.get('page') || '1');
 				params.set('per_page', params.get('per_page') || '12');
 

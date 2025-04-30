@@ -26,9 +26,9 @@ const Institutions = () => {
         {institutions.map((institution, idx) => (
           <div
             key={institution.id}
-            className="bg-[#F7F9FF] rounded-[30px] md:px-10 md:p-6 p-6 flex justify-center items-center hover:scale-105 transition"
+            className="bg-[#F7F9FF] rounded-[30px] md:px-9 md:p-6 p-6 flex justify-center items-center hover:scale-105 transition"
           >
-            <div className="flex items-center justify-center w-[100px] h-[100px] bg-transparent">
+            <div className="flex items-center justify-center w-32 h-20 bg-transparent">
   <Image
     src={institution.image}
     alt={institution.title}

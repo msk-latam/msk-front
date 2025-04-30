@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { CourseCertificate } from '../types/types';
 
-export function useCourseCertificate(slug: string | number) {
+export function useCourseCertificate(slug: string | number, lang: string) {
 	const [data, setData] = useState<CourseCertificate | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
@@ -11,7 +11,7 @@ export function useCourseCertificate(slug: string | number) {
 		const fetchData = async () => {
 			setLoading(true);
 			try {
-				const res = await axios.get(`https://cms1.msklatam.com/wp-json/msk/v1/product/${slug}`);
+				const res = await axios.get(`https://cms1.msklatam.com/wp-json/msk/v1/product/${slug}?lang=${lang}`);
 				setData(res.data.sections.has_certificate);
 			} catch (err) {
 				setError('Error al cargar el encabezado del curso');
@@ -22,7 +22,7 @@ export function useCourseCertificate(slug: string | number) {
 		};
 
 		fetchData();
-	}, [slug]);
+	}, [slug, lang]);
 
 	return { data, loading, error };
 }
