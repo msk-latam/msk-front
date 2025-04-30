@@ -1,11 +1,17 @@
 export async function getCountryFromIp() {
-    try {
-      const res = await fetch('/api/get-country');
-      if (!res.ok) throw new Error('Failed to fetch country info');
-      return await res.json();
-    } catch (error) {
-      console.error('❌ getCountryFromIp client-side error:', error);
-      return { ip: '', country: '', name: '' };
-    }
-  }
-  
+	try {
+		const res = await fetch('/api/get-country');
+		const data = await res.json();
+
+		if (data.blocked) {
+			console.warn('🌍 Usuario de país bloqueado:', data.country);
+			// Podés redirigir o mostrar contenido específico
+			window.location.href = '/intl'; // o mostrar un banner especial
+		}
+
+		return data;
+	} catch (error) {
+		console.error('❌ getCountryFromIp error:', error);
+		return { ip: '', country: '', name: '', blocked: true };
+	}
+}
