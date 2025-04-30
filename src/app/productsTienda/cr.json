@@ -5,6 +5,293 @@
 	},
 	"products": [
 		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 339711,
+			"related_tag": "",
+			"father_id": 339668,
+			"slug": "avances-en-el-estudio-de-la-microbiota",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "cr",
+			"language_name": "Costa Rica",
+			"product_code": 9005898,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Avances en el estudio de la microbiota",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/microbiota-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/04/microbiota-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/04/microbiota-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/04/microbiota-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				},
+				{
+					"term_id": 1293,
+					"name": "Gastroenterología",
+					"slug": "gastroenterologia"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				},
+				{
+					"term_id": 1102,
+					"name": "Nutrición",
+					"slug": "nutricion"
+				}
+			],
+			"professions": [
+				{
+					"title": "Enfermeros / Auxiliares",
+					"name": "enfermeros-auxiliares"
+				},
+				{
+					"title": "Otra Profesión",
+					"name": "otra-profesion"
+				},
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "200",
+			"permalink": "https://cr.wp.msklatam.com/producto/avances-en-el-estudio-de-la-microbiota/",
+			"temario": "https://cr.wp.msklatam.com/wp-content/uploads/2025/04/Avances-en-el-estudio-de-la-microbiota.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 254526,
+					"post_author": "2",
+					"post_date": "2023-08-07 23:12:56",
+					"post_date_gmt": "2023-08-07 23:12:56",
+					"post_content": "",
+					"post_title": "Tropos",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "tropos",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2023-08-22 20:17:07",
+					"post_modified_gmt": "2023-08-22 20:17:07",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=254526",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/cedentes_tropos.png"
+				}
+			],
+			"cantidad_modulos": 15,
+			"why_course": "<p>El estudio de la microbiota humana se ha consolidado como un campo interdisciplinario clave en la medicina moderna, integrando áreas como la biología molecular, la nutrición, la inmunología y la farmacología. La función de la microbiota va más allá de la digestión, dado que influye en el sistema inmune, la protección contra patógenos y el metabolismo. A medida que avanzan las investigaciones, se ha demostrado que la alteración de la microbiota está relacionada con diversas patologías, desde enfermedades metabólicas hasta neurodegenerativas.</p> <p>Con el curso de Avances en el estudio de la microbiota de MSK conocerás los desarrollos científicos más relevantes en el campo de la microbiota. Profundizarás en la composición de la microbiota, sus funciones esenciales y su implicación en enfermedades, así como las metodologías más actuales empleadas para su estudio, como las técnicas ómicas y los análisis bioinformáticos.</p> <p>Organizado en 15 módulos, el curso abarca desde los conceptos básicos de la microbiota hasta su relación con enfermedades metabólicas, cardiovasculares, respiratorias y neurodegenerativas. Además, se abordan las estrategias de intervención, incluyendo el uso de probióticos y el trasplante de microbiota fecal.</p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-84-0",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "179.089",
+			"total_price": "179.089",
+			"max_installments": "12",
+			"price_installments": "14.924",
+			"created_at": "2025-04-14 17:04:57"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 339652,
+			"related_tag": "",
+			"father_id": 339537,
+			"slug": "anestesiologia-y-reanimacion-amir",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "cr",
+			"language_name": "Costa Rica",
+			"product_code": 9005897,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Curso superior de anestesiología y reanimación AMIR",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/anestesioamir-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/04/anestesioamir-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/04/anestesioamir-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/04/anestesioamir-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1089,
+					"name": "Anestesiología y dolor",
+					"slug": "anestesiologia-y-dolor"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": null,
+			"permalink": "https://cr.wp.msklatam.com/producto/anestesiologia-y-reanimacion-amir/",
+			"temario": "https://cr.wp.msklatam.com/wp-content/uploads/2025/04/Anestesiologia-y-reanimacion-AMIR-1.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 331572,
+					"post_author": "102",
+					"post_date": "2025-01-09 20:13:07",
+					"post_date_gmt": "2025-01-09 20:13:07",
+					"post_content": "",
+					"post_title": "AMIR",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "amir",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2025-01-10 18:57:34",
+					"post_modified_gmt": "2025-01-10 18:57:34",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=331572",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2025/01/cedente_amir.png"
+				}
+			],
+			"cantidad_modulos": 4,
+			"why_course": "<p>La anestesiología es una especialidad médica centrada en la administración de anestesia y el manejo del dolor en procedimientos quirúrgicos y médicos. Comprende una amplia gama de técnicas y fármacos que permiten la sedación, el alivio del dolor y el mantenimiento de funciones vitales en cirugías o tratamientos invasivos. El especialista en anestesiología se encarga de vigilar las condiciones del paciente y ajustar la anestesia, según sea necesario, y tiene un rol clave en el control del dolor postoperatorio y en situaciones críticas que requieren soporte vital.</p> <p>Este curso de Anestesiología y reanimación AMIR disponible en MSK ofrece una capacitación integral, desde fundamentos básicos hasta técnicas complejas para el manejo de la anestesia en pacientes de riesgo y la reanimación en situaciones críticas.</p> <p>Organizado en 64 temas, divididos en cuatro módulos, el curso de Anestesiología y reanimación AMIR cubre tópicos como la fisiología cardiorrespiratoria, los agentes anestésicos, las anestesias regionales y generales, la reanimación en pacientes con comorbilidades y situaciones complejas, entre otros.</p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-83-3",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "480.605",
+			"total_price": "480.605",
+			"max_installments": "12",
+			"price_installments": "40.050",
+			"created_at": "2025-04-14 15:04:13"
+		},
+		{
+			"meta_titulo": null,
+			"meta_descripcion": null,
+			"title_contenido": null,
+			"id": 339768,
+			"related_tag": "",
+			"father_id": 339725,
+			"slug": "ginecologia-social",
+			"is_presale_product": false,
+			"father_post_type": "course",
+			"language_code": "cr",
+			"language_name": "Costa Rica",
+			"product_code": 9005895,
+			"featured_product_text": "",
+			"is_test_product": false,
+			"title": "Curso superior de ginecología social",
+			"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/ginecosocial-primaria.jpg",
+			"thumbnail": {
+				"high": "https://wp.msklatam.com/wp-content/uploads/2025/04/ginecosocial-secundaria.jpg",
+				"medium": "https://wp.msklatam.com/wp-content/uploads/2025/04/ginecosocial-secundaria.jpg",
+				"low": "https://wp.msklatam.com/wp-content/uploads/2025/04/ginecosocial-secundaria-150x150.jpg"
+			},
+			"categories": [
+				{
+					"term_id": 1121,
+					"name": "Ginecología",
+					"slug": "ginecologia"
+				},
+				{
+					"term_id": 1449,
+					"name": "Medicina familiar",
+					"slug": "medicina-familiar"
+				},
+				{
+					"term_id": 1090,
+					"name": "Medicina general",
+					"slug": "medicina-general"
+				}
+			],
+			"professions": [
+				{
+					"title": "Médicos",
+					"name": "medicos"
+				}
+			],
+			"duration": "250",
+			"permalink": "https://cr.wp.msklatam.com/producto/ginecologia-social/",
+			"temario": "https://cr.wp.msklatam.com/wp-content/uploads/2025/04/Ginecologia-social.pdf",
+			"lista_de_cedentes": [
+				{
+					"ID": 210852,
+					"post_author": "34",
+					"post_date": "2022-05-17 14:39:23",
+					"post_date_gmt": "2022-05-17 14:39:23",
+					"post_content": "",
+					"post_title": "Colegio de Médicos de la Provincia de Buenos Aires - Distrito III",
+					"post_excerpt": "",
+					"post_status": "publish",
+					"comment_status": "closed",
+					"ping_status": "closed",
+					"post_password": "",
+					"post_name": "colegio-de-medicos-de-la-provincia-de-buenos-aires-distrito-iii-escuela-superior-de-ensenanza-medica",
+					"to_ping": "",
+					"pinged": "",
+					"post_modified": "2024-09-18 12:55:07",
+					"post_modified_gmt": "2024-09-18 12:55:07",
+					"post_content_filtered": "",
+					"post_parent": 0,
+					"guid": "https://wp.msklatam.com/?post_type=aval&#038;p=210852",
+					"menu_order": 0,
+					"post_type": "aval",
+					"post_mime_type": "",
+					"comment_count": "0",
+					"filter": "raw",
+					"imagen": "https://wp.msklatam.com/wp-content/uploads/2023/08/colmed_1x.webp"
+				}
+			],
+			"cantidad_modulos": 7,
+			"why_course": "<p>La ginecología social aborda la salud de la mujer desde una perspectiva integral, considerando no solo los aspectos médicos, sino también los factores sociales, culturales y psicológicos que influyen en su bienestar. Se enfoca en la identificación de las problemáticas sociales que afectan a la mujer, como desigualdades de género, violencia, condiciones laborales y situaciones provenientes del contexto familiar y cultural. Esta formación busca mejorar la calidad de vida de la mujer en todas las etapas de su vida, desde la niñez hasta la senectud.</p> <p>El curso de Ginecología social de MSK te proporciona las herramientas necesarias para abordar aquellas problemáticas que puedan surgir en la consulta ginecológica, así como también las necesidades psicosociales de las pacientes. También aprenderás a evaluar las condiciones de salud de la mujer en función de su entorno social y cultural, mejorando la calidad de atención y respondiendo a sus necesidades de manera integral.</p> <p>Estructurado en siete módulos, este curso aborda la atención ginecológica con un enfoque social a lo largo de las etapas de la vida, incluyendo temas relevantes como identidad de género, laboralidad y salud en la mujer, sexualidad en la vejez, violencia de género, entre otros temas, integrando el contexto sociocultural de cada paciente. </p> ",
+			"is_new": true,
+			"nac_schools": null,
+			"int_schools": null,
+			"isbn": "978-84-19989-91-8",
+			"purchase_option": "catalogo",
+			"diploma": null,
+			"is_free": false,
+			"sale_price": "0",
+			"regular_price": "214.906",
+			"total_price": "214.906",
+			"max_installments": "12",
+			"price_installments": "17.908",
+			"created_at": "2025-04-14 17:04:16"
+		},
+		{
 			"id": 339118,
 			"related_tag": "",
 			"father_id": 339058,
