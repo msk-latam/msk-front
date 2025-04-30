@@ -63,21 +63,22 @@ export default function CourseHeader({ slug, lang }: CourseHeaderProps) {
 						<span className='block md:hidden'>...</span>
 						<span className='hidden md:block'>Tienda</span>
 					</Link>
-
-					{categories.map((spec) => (
-						<span key={spec.term_id} className='flex items-center'>
-							<span className='shrink-0'>
-								<ChevronRight />
+					{categories
+						.filter((spec) => spec.is_primary)
+						.map((spec) => (
+							<span key={spec.term_id} className='flex items-center'>
+								<span className='shrink-0'>
+									<ChevronRight />
+								</span>
+								<button
+									type='button'
+									onClick={() => handleSpecialtyClick(spec.name)}
+									className='truncate my-auto shrink-0 hover:underline bg-transparent text-white border-0 p-0 m-0 cursor-pointer'
+								>
+									{spec.name}
+								</button>
 							</span>
-							<button
-								type='button'
-								onClick={() => handleSpecialtyClick(spec.name)}
-								className='truncate my-auto shrink-0 hover:underline bg-transparent text-white border-0 p-0 m-0 cursor-pointer'
-							>
-								{spec.name}
-							</button>
-						</span>
-					))}
+						))}
 
 					{/* Último: el título del curso en bold */}
 					<span className='shrink-0'>
