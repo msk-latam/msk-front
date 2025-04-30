@@ -27,8 +27,6 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 		error: '',
 	};
 
-	console.log(getCountryFromIp);
-
 	const [countryState, dispatch] = useReducer(countryReducer, initialState);
 	const [loading, setLoading] = useState(true);
 	const [showBanner, setShowBanner] = useState(false);
@@ -46,18 +44,29 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 
 			let currentCountry = fallbackCountry;
 
+			const storedDismissed = Cookies.get('dismissed_country_banner');
+			const previousIpCountry = Cookies.get('ip_country');
+
 			try {
 				const geo = await getCountryFromIp();
-
 				console.log('[GEO]', geo);
 
-				if (geo.country && validCountries.includes(geo.country.toLowerCase())) {
+				if (typeof geo.country === 'string' && validCountries.includes(geo.country.toLowerCase())) {
 					const ipCountry = geo.country.toLowerCase();
-					if (ipCountry !== fallbackCountry) {
+
+					// Si el país por IP cambió, se resetea la cookie para volver a mostrar el banner
+					if (previousIpCountry && previousIpCountry !== ipCountry) {
+						Cookies.remove('dismissed_country_banner');
+					}
+
+					Cookies.set('ip_country', ipCountry, { expires: 7 });
+
+					if (ipCountry !== fallbackCountry && storedDismissed !== 'true') {
 						setUserCountry(ipCountry);
 						setUrlCountry(fallbackCountry);
 						setShowBanner(true);
 					}
+
 					currentCountry = ipCountry;
 				}
 			} catch (err) {
@@ -106,7 +115,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 
 			{showBanner && (
 				<div
-					className={`fixed top-0 left-0 w-full bg-[#9200AD] text-white p-4 z-50 flex items-center justify-center transition-transform duration-300 ${
+					className={`fixed top-0 left-0 w-full bg-[#9200AD] text-white p-4 z-[9999] flex items-center justify-center transition-transform duration-300 ${
 						showBanner ? 'translate-y-0' : '-translate-y-full'
 					}`}
 				>
@@ -123,7 +132,10 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 							Sí
 						</button>
 						<button
-							onClick={() => setShowBanner(false)}
+							onClick={() => {
+								Cookies.set('dismissed_country_banner', 'true', { expires: 7 });
+								setShowBanner(false);
+							}}
 							className='bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition'
 						>
 							No
