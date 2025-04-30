@@ -19,12 +19,9 @@ export default function CourseSummary({ slug }: CourseSummaryProps) {
   const pathname = usePathname();
   const country = getCountryFromUrl(pathname);
   const { countryState } = useContext(CountryContext);
-  const countryByIP = countryState.country;
+ 
 
-  console.log('[COUNTRY DEBUG]', {
-    fromUrl: country,
-    fromIP: countryByIP,
-  });
+  
 
   const currency = (countryCurrencies as Record<string, string>)[country] || 'ARS';
   const installmentsConfig = (countryInstallments as unknown as Record<string, { quotes: number }>)[country];
