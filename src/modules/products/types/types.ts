@@ -54,20 +54,36 @@ export interface CourseCategory {
   }
   
   
+  export interface StudyPlanFile {
+	ID: number;
+	title: string;
+	filename: string;
+	url: string;
+	link: string;
+	filesize: number;
+  }
+  
   export interface Modules {
 	title: string;
-	content: string;
+	content: string; // Este contenido viene en HTML crudo
   }
+  
+
+  export interface CourseSyllabus {
+	hours: string;
+	study_plan_file: StudyPlanFile; // este será el link (url)
+	modules: {
+	  title: string;
+	  content: string;
+	}[];
+  }
+
+  
   
   export interface Steps {
 	step: string;
   }
   
-  export interface CourseSyllabus {
-	hours: string;
-	study_plan_file: string;
-	modules: Modules[];
-  }
   
   export interface CourseOverviewData {
 	habilities: CourseHability[];

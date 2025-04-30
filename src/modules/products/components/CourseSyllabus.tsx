@@ -17,7 +17,7 @@ export default function CourseSyllabus({ slug }: CourseSyllabusProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data, loading, error } = useCourseSyllabus(slug);
-
+  
   const toggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
@@ -118,7 +118,7 @@ export default function CourseSyllabus({ slug }: CourseSyllabusProps) {
       {/* Modal - Ensure we're passing the correct handler */}
       {isModalOpen && (
         <DownloadSyllabusModal
-          fileUrl={data.study_plan_file}
+          fileUrl={data.study_plan_file.url}
           onClose={handleCloseModal}
         />
       )}

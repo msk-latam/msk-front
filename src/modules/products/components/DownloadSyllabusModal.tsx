@@ -60,13 +60,21 @@ export default function DownloadSyllabusModal({
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+  
     if (!formData.acceptTerms) {
       alert("Debes aceptar las condiciones de privacidad.");
       return;
     }
-    window.open(fileUrl, "_blank");
+  
+    try {
+      window.open(fileUrl, '_blank'); // redirige al PDF
+    } catch (error) {
+      console.error("Error al redirigir al archivo:", error);
+      alert("Hubo un problema al acceder al archivo.");
+    }
+  
     onClose();
   };
 
@@ -303,7 +311,7 @@ export default function DownloadSyllabusModal({
 
           <button
             type="submit"
-            className="w-full py-2 mt-4 text-white bg-[#F5E6F7] rounded-xl hover:bg-[#dbbad7]"
+            className="w-full py-2 mt-4 text-white bg-[#9200ad] rounded-xl hover:bg-[#a84db4]"
           >
             Descargar temario
           </button>
