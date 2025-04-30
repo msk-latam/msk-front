@@ -62,8 +62,8 @@ const Footer = () => {
 						</defs>
 					</svg>
 
-					<p className='md:text-[20px] text-sm font-inter leading-tight max-w-xs md:max-w-none'>
-						Una propuesta moderna que desafía <br /> a expandir las metas profesionales
+					<p className='md:text-[20px] text-sm font-inter font-normal leading-tight max-w-xs md:max-w-none'>
+						Una propuesta moderna que desafía a expandir las metas profesionales
 					</p>
 					<p className='md:text-[20px] text-sm font-inter text-white'>© 2025 • Medical&Scientific Knowledge S.L.</p>
 
