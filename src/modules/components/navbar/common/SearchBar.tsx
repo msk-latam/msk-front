@@ -60,16 +60,21 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const handleItemClick = (course: any) => {
     const coursePath = course.url.replace(/^\/(course|curso)/, '');
     const storeUrl = getLocalizedUrl(lang, `/tienda${coursePath}`);
-    router.push(storeUrl);
+    // Use window.location.href for consistent navigation across all pages
+    window.location.href = storeUrl;
     setSearchTerm("");
   };
+  
   const handleSearchRedirect = () => {
     const trimmedSearch = searchTerm.trim();
     if (trimmedSearch !== "") {
       const query = encodeURIComponent(trimmedSearch);
-      const storeUrl = getLocalizedUrl(lang, `/tienda?search=${query}&page=1`);
-      router.push(storeUrl);
-      setSearchTerm("");
+      // Fix: Ensure the search query is properly included in the URL using absolute path
+      const searchPath = `/tienda?page=1&search=${query}`;
+      const storeUrl = getLocalizedUrl(lang, searchPath);
+      console.log('Redirecting to:', storeUrl);
+      // Make sure we're using the complete URL
+      window.location.href = storeUrl;
     }
   };
   
@@ -78,6 +83,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
       handleSearchRedirect();
     }
   };
+
+  const uniqueResults = Array.from(
+    new Map(filteredResults.map(item => [`${item.id}-${item.name}`, item])).values()
+  );
+  
   return (
     <div className={`relative ${className}`}>
       <div className="rounded-full border border-[#DBDDE2]-100 overflow-hidden relative flex items-center">
@@ -89,16 +99,20 @@ const SearchBar: React.FC<SearchBarProps> = ({
           onKeyDown={handleKeyDown}
           className={`bg-transparent w-full text-sm py-3 pl-4 pr-12 border-transparent focus:border-transparent focus:ring-0 focus:outline-none ${inputTextStyle}`}
         />
-        <button className="absolute right-1 bg-[#9200AD] p-3 rounded-full" onClick={handleSearchRedirect}>
+        <button 
+          className="absolute right-1 bg-[#9200AD] p-3 rounded-full" 
+          onClick={handleSearchRedirect}
+          type="button"
+        >
           <Search className="text-white w-4 h-4" />
         </button>
       </div>
 
       {searchTerm && filteredResults.length > 0 && (
         <ul className="absolute z-10 w-full bg-white border mt-2 rounded-lg shadow-md max-h-60 overflow-y-auto">
-          {filteredResults.map((course) => (
+          {uniqueResults.map(course => (
             <li
-              key={course.id}
+              key={`${course.id}-${course.name}`}
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
               onClick={() => handleItemClick(course)}
             >
