@@ -81,9 +81,19 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 	}, [pathname]);
 
 	const handleSwitchCountry = () => {
-		const newUrl = window.location.pathname.replace(/^\/[^/]+/, `/${userCountry}`);
-		window.location.href = newUrl;
-	};
+	const path = window.location.pathname;
+	const segments = path.split('/').filter(Boolean); // elimina vacíos
+
+	const validCountries = countries.map((item) => item.id);
+	const hasValidPrefix = validCountries.includes(segments[0]);
+
+	// si tiene prefijo válido, lo sacamos
+	const restOfPath = hasValidPrefix ? segments.slice(1).join('/') : segments.join('/');
+	const newUrl = `/${userCountry}${restOfPath ? '/' + restOfPath : ''}${window.location.search}`;
+
+	window.location.href = newUrl;
+};
+
 
 	const countryNames: Record<string, string> = {
 		ar: 'Argentina',
