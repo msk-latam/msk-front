@@ -27,6 +27,8 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 		error: '',
 	};
 
+	console.log(getCountryFromIp);
+
 	const [countryState, dispatch] = useReducer(countryReducer, initialState);
 	const [loading, setLoading] = useState(true);
 	const [showBanner, setShowBanner] = useState(false);

@@ -3,8 +3,9 @@ import { NextResponse } from 'next/server';
 export async function GET() {
   try {
     const ipRes = await fetch('https://api.ipify.org?format=json');
-    const { ip } = await ipRes.json();
-
+    const ipData = await ipRes.json();
+    const ip = ipData.ip;
+    console.log(ip)
     const geoRes = await fetch(`https://ipapi.co/${ip}/json/`);
     const geo = await geoRes.json();
 
