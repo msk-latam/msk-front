@@ -2,6 +2,7 @@
 import { Inter, Raleway } from 'next/font/google';
 import './globals.css';
 import LoaderLayout from './LoaderLayout'; // Ajustá el path
+import { CountryProvider } from '@/context/country/CountryProvider'; 
 
 const inter = Inter({
 	subsets: ['latin'],
@@ -49,7 +50,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		</head>
 		<body className={`${inter.variable} ${raleway.variable} font-inter`}>
 		  <LoaderLayout /> {/* 👈 Siempre activo */}
-		  {children}
+		  <CountryProvider> {/* 👈 Aquí envolvemos todo */}
+					{children}
+				</CountryProvider>
 		</body>
 	  </html>
 	);
