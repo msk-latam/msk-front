@@ -20,7 +20,13 @@ if (!process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY) {
 const stripePublicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY;
 const stripePromise = loadStripe(stripePublicKey);
 const CheckoutContent: React.FC<CheckoutContentProps> = ({ product, country }) => {
-	const { activeStep, subStep, paymentType } = useCheckout();
+	const {
+		activeStep, //cambiar de valor para testear a 1, 2 o 3
+		subStep,
+		paymentType,
+	} = useCheckout();
+
+	//const activeStep = 0;
 
 	if (activeStep === 2) {
 		if (subStep === 0) {
