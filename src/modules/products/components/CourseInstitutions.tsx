@@ -24,12 +24,12 @@ export default function CourseInstitutions({ slug }: CourseInstitutionProps) {
 			</h2>
 
 			<div className='overflow-x-auto md:overflow-visible scrollbar-none'>
-				<div className='flex gap-4 md:flex-row flex-wrap items-center justify-center px-2'>
+				<div className='flex md:gap-3 gap-4 md:flex-row flex-wrap items-center justify-center md:px-0 px-2'>
 					{error && <p>{error}</p>}
 					{institutions?.map((inst) => (
 						<div
 							key={inst.id}
-							className='bg-[#f7f9ff] rounded-[30px] p-7 h-32 flex items-center justify-center md:w-1/4 relative'
+							className='bg-[#f7f9ff] rounded-[30px] p-7 h-32 flex items-center justify-center md:w-[23%] relative'
 						>
 							<Image
 								src={inst.image}
