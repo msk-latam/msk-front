@@ -113,18 +113,19 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
 	try {
-		// ✅ 1. Acceso a los headers
-		const forwarded = req.headers.get('x-forwarded-for');
-		let ip = forwarded?.split(',')[0] || '';
+		// ✅ Extraer IP real desde Cloudflare
+		let ip = req.headers.get('cf-connecting-ip') ||
+		         req.headers.get('x-forwarded-for')?.split(',')[0] ||
+		         '';
 
-		// ✅ 2. Si estamos en desarrollo o la IP es localhost, usamos IP de Argentina
+		// Fallback en desarrollo o sin IP
 		if (
 			process.env.NODE_ENV === 'development' ||
 			ip === '::1' ||
 			ip === '127.0.0.1' ||
-			ip === ''
+			!ip
 		) {
-			ip = '190.191.228.34'; // 🇦🇷 IP pública argentina (fibertel)
+			ip = '190.191.228.34'; // 🇦🇷 IP argentina para testing
 		}
 
 		const geoRes = await fetch(`https://pro.ip-api.com/json/${ip}?fields=61439&key=OE5hxPrfwddjYYP`);
@@ -132,23 +133,21 @@ export async function GET(req: NextRequest) {
 
 		const geo = await geoRes.json();
 
-		// También podés acceder a estos headers si querés
-		const userAgent = req.headers.get('user-agent');
-		const acceptLanguage = req.headers.get('accept-language');
-		const referer = req.headers.get('referer');
-
 		return NextResponse.json({
 			ip,
 			country: geo.countryCode?.toLowerCase() || '',
 			name: geo.country || '',
 			headers: {
-				userAgent,
-				acceptLanguage,
-				referer,
+				via: req.headers.get('via'),
+				userAgent: req.headers.get('user-agent'),
+				cfIP: req.headers.get('cf-connecting-ip'),
 			}
 		});
 	} catch (error) {
 		console.error('❌ /api/get-country error:', error);
-		return NextResponse.json({ ip: '', country: '', name: '', blocked: true }, { status: 500 });
+		return NextResponse.json(
+			{ ip: '', country: '', name: '', blocked: true },
+			{ status: 500 }
+		);
 	}
 }
