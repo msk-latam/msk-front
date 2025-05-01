@@ -5,11 +5,13 @@ import { useState, useEffect, useRef } from "react";
 interface DownloadSyllabusModalProps {
   fileUrl: string;
   onClose: () => void;
+  slug: string;
 }
 
 export default function DownloadSyllabusModal({
   fileUrl,
   onClose,
+  slug
 }: DownloadSyllabusModalProps) {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
@@ -63,32 +65,64 @@ export default function DownloadSyllabusModal({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
   
-    if (!formData.acceptTerms) {
+    const { name, email, acceptTerms } = formData;
+  
+    if (!name.trim() || !email.trim()) {
+      alert("Por favor, completá tu nombre y correo electrónico.");
+      return;
+    }
+  
+    if (!acceptTerms) {
       alert("Debes aceptar las condiciones de privacidad.");
       return;
     }
   
     try {
-      window.open(fileUrl, '_blank'); // redirige al PDF
+      // Utilizamos fetch para obtener el archivo como blob
+      fetch(fileUrl)
+        .then(response => response.blob())
+        .then(blob => {
+          // Crear una URL de objeto para el blob
+          const blobUrl = window.URL.createObjectURL(blob);
+          
+          // Configurar el enlace para la descarga
+          const link = document.createElement("a");
+          link.href = blobUrl;
+          link.download = `${slug}.pdf`; // Nombre del archivo para la descarga
+          
+          // Disparar clic programáticamente
+          document.body.appendChild(link);
+          link.click();
+          
+          // Limpiar
+          setTimeout(() => {
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(blobUrl); // Liberar la URL del objeto
+            onClose(); // Cerrar el modal
+          }, 100);
+        })
+        .catch(error => {
+          console.error("Error descargando el archivo:", error);
+          alert("Hubo un problema al descargar el archivo.");
+        });
     } catch (error) {
-      console.error("Error al redirigir al archivo:", error);
-      alert("Hubo un problema al acceder al archivo.");
+      console.error("Error al intentar descargar el archivo:", error);
+      alert("Hubo un problema al descargar el archivo.");
     }
-  
-    onClose();
   };
+  
 
   return (
     <div
-    className="fixed inset-0 bg-black/50 flex items-center justify-center z-[99] px-4 !mt-0"
-    onClick={(e) => {
-      if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-        onClose(); // Click fuera del modal => Cierra
-      } else {
-        e.stopPropagation(); // Click dentro del modal => NO cierra
-      }
-    }}
-  >
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-[99] px-4 !mt-0"
+      onClick={(e) => {
+        if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+          onClose(); // Click fuera del modal => Cierra
+        } else {
+          e.stopPropagation(); // Click dentro del modal => NO cierra
+        }
+      }}
+    >
       <div
         ref={modalRef}
         className="relative bg-white rounded-2xl p-8 max-w-2xl w-full shadow-lg"
@@ -275,7 +309,7 @@ export default function DownloadSyllabusModal({
               <option>Radiología</option>
               <option>Reumatología</option>
               <option>Urología</option>
-              </select>
+            </select>
           </div>
 
           {/* Message */}
