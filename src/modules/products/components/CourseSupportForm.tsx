@@ -1,5 +1,6 @@
 "use client";
-import { forwardRef, HTMLAttributes } from "react";
+import { useState } from "react";
+import CountrySelect from '@/modules/login/components/hooks/CountrySelect';
 
 interface CourseSupportFormProps {
   name?: string;
@@ -9,7 +10,11 @@ interface CourseSupportFormProps {
   specialty?: string;
   message?: string;
 }
+
 export default function CourseSupportForm(props: CourseSupportFormProps) {
+  const [phone, setPhone] = useState("");
+  const [areaCode, setAreaCode] = useState("+54");
+
   return (
     <div id="course-support-form" className="bg-white space-y-6">
       <h2 className="text-[24px] md:text-[32px] font-raleway font-bold text-[#1A1A1A]">
@@ -31,17 +36,19 @@ export default function CourseSupportForm(props: CourseSupportFormProps) {
           className="border border-[#DBDDE2] focus:outline-none focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] rounded-[16px] px-3 py-2"
         />
 
-        <div className="flex gap-2 rounded-[16px] border border-[#DBDDE2] focus-within:outline-none focus-within:ring-4 focus-within:border-[#DBDDE2] focus-within:ring-[#F5E6F7]">
-          <select className="text-gray-600 rounded-[16px] border-0 focus:outline-none focus:ring-0 px-3 py-2 w-20 gap-1">
-            <option value="+54">+54</option>
-            <option value="+52">+52</option>
-          </select>
+        <div className="flex gap-2 rounded-[16px] border border-[#DBDDE2] focus-within:outline-none focus-within:ring-4 focus-within:border-[#DBDDE2] focus-within:ring-[#F5E6F7] px-3 py-0 items-center">
+          <div className="w-[40px] flex items-center">
+            <CountrySelect onChange={(code) => setAreaCode(code)} />
+          </div>
           <input
             type="tel"
             placeholder="Ingresar teléfono"
-            className="rounded-[16px] border-0 focus:outline-none focus:ring-0 px-3 py-2 w-full"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
+            className="rounded-[16px] border-0 focus:outline-none focus:ring-0 w-full text-[#6E737C]"
           />
         </div>
+
         <input
           type="email"
           placeholder="Ingresar email"
