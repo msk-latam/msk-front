@@ -374,7 +374,7 @@ const SignupForm: FC<SignupFormProps> = ({ productName = '', isEbook = false, su
 											</ButtonPrimary>
 										</div>
 										<p
-											className='text-red-500 font-bold'
+											className='text-[#f5006d] font-bold'
 											style={{
 												visibility: formError ? 'visible' : 'hidden',
 											}}

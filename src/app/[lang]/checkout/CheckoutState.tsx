@@ -75,7 +75,7 @@ const CheckoutState: React.FC = () => {
 
 	const PaymentStatusCard: React.FC<{ status: keyof typeof paymentStatusCard }> = ({ status }) => {
 		if (!paymentStatusCard[status]) {
-			return <p className='text-red-500'>Error: Estado de pago desconocido.</p>;
+			return <p className='text-[#f5006d]'>Error: Estado de pago desconocido.</p>;
 		}
 
 		const { title, message, color, buttons } = paymentStatusCard[status];
@@ -97,12 +97,12 @@ const CheckoutState: React.FC = () => {
 						{message}
 					</p>
 				</div>
-				<div className='flex justify-end gap-4 mt-8'>
+				<div className='fixed gap-4 bottom-10 left-1/4'>
 					{buttons.map((button, index) => (
 						<button
 							key={index}
 							onClick={button.action}
-							className='px-12 py-3 font-semibold text-white transition-colors duration-300 rounded-sm focus:outline-none'
+							className='px-12 py-3 font-semibold text-white transition-colors duration-300 rounded-[38px] hover:bg-[#B814D6] focus:outline-none'
 							style={{
 								backgroundColor: button.color,
 								color: button.textColor || 'white',
@@ -119,7 +119,7 @@ const CheckoutState: React.FC = () => {
 
 	return (
 		<>
-			<h2 className='flex items-center text-[#392C35] text-2xl font-semibold my-8'>
+			<h2 className='flex items-center text-[#1A1A1A] text-2xl font-medium my-8 font-raleway'>
 				<span className='flex items-center justify-center w-5 h-5 mr-2 border rounded-full border-[#392C35] bg-white !text-sm'>
 					3
 				</span>

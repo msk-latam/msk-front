@@ -262,7 +262,7 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 				</button>
 			</div>
 
-			{navigationError && <p className='text-red-500 text-center mt-4'>{navigationError}</p>}
+			{navigationError && <p className='text-[#f5006d] text-center mt-4'>{navigationError}</p>}
 		</div>
 	);
 };

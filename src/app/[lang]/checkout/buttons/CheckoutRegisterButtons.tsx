@@ -35,7 +35,7 @@ const CheckoutRegisterButtons: React.FC<CheckoutButtonsProps> = ({
 						checked={formData.privacyPolicy}
 						onChange={handleChange}
 						onBlur={handleBlur}
-						className='w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500'
+						className='w-4 h-4 text-[#9200AD]  border-gray-300 rounded focus:ring-[#9200AD] '
 					/>
 					<label htmlFor='privacyPolicy' className='ml-2 text-sm font-medium text-gray-700'>
 						Acepto las{' '}
@@ -52,11 +52,11 @@ const CheckoutRegisterButtons: React.FC<CheckoutButtonsProps> = ({
 						</a>
 					</label>
 				</div>
-				{touched.privacyPolicy && errors.privacyPolicy && <p className='text-sm text-red-500'>{errors.privacyPolicy}</p>}
+				{touched.privacyPolicy && errors.privacyPolicy && <p className='text-sm text-[#f5006d]'>{errors.privacyPolicy}</p>}
 			</div>
 			<button
 				type='button'
-				className={`w-full sm:w-auto px-12 py-3 font-bold rounded-sm focus:outline-none focus:ring-2 !mt-6 lg:!mt-0 flex items-center justify-center space-x-2 ${
+				className={`w-full sm:w-auto px-12 py-3 font-bold rounded-[38px] focus:outline-none focus:ring-2 !mt-6 lg:!mt-0 flex items-center justify-center space-x-2 ${
 					isFormValid ? 'bg-[#9200AD] text-white' : 'bg-gray-400 text-gray-600 cursor-not-allowed'
 				}`}
 				onClick={handleNextStep}

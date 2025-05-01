@@ -545,7 +545,7 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 						<p
 							className={
 								updateStatusMessage.type == 'error'
-									? 'text-red-500 text-center md:col-span-2'
+									? 'text-[#f5006d] text-center md:col-span-2'
 									: 'text-green-500 text-center md:col-span-2'
 							}
 						>

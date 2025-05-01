@@ -38,7 +38,7 @@ const CardDetailsForm: React.FC<Props> = ({ formData, handleChange, handleBlur, 
 			{/* Fila para el nombre y número de tarjeta */}
 			<div className='flex flex-col gap-4 md:grid md:grid-cols-2'>
 				<div>
-					<label htmlFor='cardholderName' className='block text-sm font-medium text-[#6474A6]'>
+					<label htmlFor='cardholderName' className='block text-sm font-medium text-[#1A1A1A]'>
 						Nombre y apellido del titular
 					</label>
 					<input
@@ -49,15 +49,15 @@ const CardDetailsForm: React.FC<Props> = ({ formData, handleChange, handleBlur, 
 						onChange={handleChange}
 						onBlur={handleBlur}
 						placeholder='Ingrese nombre y apellido del titular'
-						className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+						className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 					/>
 					{touched.cardholderName && errors.cardholderName && (
-						<p className='text-red-500 text-sm'>{errors.cardholderName}</p>
+						<p className='text-[#f5006d] text-sm'>{errors.cardholderName}</p>
 					)}
 				</div>
 
 				<div>
-					<label htmlFor='cardNumber' className='block text-sm font-medium text-[#6474A6]'>
+					<label htmlFor='cardNumber' className='block text-sm font-medium text-[#1A1A1A]'>
 						Número de tarjeta
 					</label>
 					<input
@@ -68,16 +68,16 @@ const CardDetailsForm: React.FC<Props> = ({ formData, handleChange, handleBlur, 
 						onChange={handleChange}
 						onBlur={handleBlur}
 						placeholder='Ingrese número de tarjeta'
-						className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+						className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 					/>
-					{touched.cardNumber && errors.cardNumber && <p className='text-red-500 text-sm'>{errors.cardNumber}</p>}
+					{touched.cardNumber && errors.cardNumber && <p className='text-[#f5006d] text-sm'>{errors.cardNumber}</p>}
 				</div>
 			</div>
 
 			{/* Fila para la fecha de vencimiento y CVV */}
 			<div className='flex flex-col gap-4 md:grid md:grid-cols-2'>
 				<div className='flex flex-col'>
-					<label htmlFor='expiryDate' className='block text-sm font-medium text-[#6474A6]'>
+					<label htmlFor='expiryDate' className='block text-sm font-medium text-[#1A1A1A]'>
 						Fecha de vencimiento (MM/AAAA)
 					</label>
 					<div className='flex gap-2 mt-2'>
@@ -90,9 +90,9 @@ const CardDetailsForm: React.FC<Props> = ({ formData, handleChange, handleBlur, 
 							onChange={handleChange}
 							onBlur={handleBlur}
 							placeholder='MM'
-							className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+							className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 						/>
-						{touched.expiryMonth && errors.expiryMonth && <p className='text-red-500 text-sm'>{errors.expiryMonth}</p>}
+						{touched.expiryMonth && errors.expiryMonth && <p className='text-[#f5006d] text-sm'>{errors.expiryMonth}</p>}
 						<span className='text-[#6474A6] flex items-center'>/</span>
 						<input
 							id='expiryYear'
@@ -103,14 +103,14 @@ const CardDetailsForm: React.FC<Props> = ({ formData, handleChange, handleBlur, 
 							onChange={handleChange}
 							onBlur={handleBlur}
 							placeholder='AAAA'
-							className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+							className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 						/>
-						{touched.expiryYear && errors.expiryYear && <p className='text-red-500 text-sm'>{errors.expiryYear}</p>}
+						{touched.expiryYear && errors.expiryYear && <p className='text-[#f5006d] text-sm'>{errors.expiryYear}</p>}
 					</div>
 				</div>
 
 				<div>
-					<label htmlFor='cvv' className='block text-sm font-medium text-[#6474A6]'>
+					<label htmlFor='cvv' className='block text-sm font-medium text-[#1A1A1A]'>
 						Código de seguridad (CVV)
 					</label>
 					<input
@@ -122,9 +122,9 @@ const CardDetailsForm: React.FC<Props> = ({ formData, handleChange, handleBlur, 
 						onBlur={handleBlur}
 						placeholder='CVV'
 						maxLength={4}
-						className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+						className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 					/>
-					{touched.cvv && errors.cvv && <p className='text-red-500 text-sm'>{errors.cvv}</p>}
+					{touched.cvv && errors.cvv && <p className='text-[#f5006d] text-sm'>{errors.cvv}</p>}
 				</div>
 			</div>
 		</div>

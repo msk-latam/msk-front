@@ -859,7 +859,7 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 	return (
 		<form className='grid grid-cols-1 gap-4 md:grid-cols-2'>
 			<div>
-				<label htmlFor='firstName' className='block text-sm font-medium text-[#6474A6]'>
+				<label htmlFor='firstName' className='block text-sm font-medium text-[#1A1A1A]'>
 					Nombre
 				</label>
 				<input
@@ -869,12 +869,12 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 					onChange={handleChange}
 					onBlur={handleBlur}
 					placeholder='Ingresar Nombre'
-					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 				/>
-				{touched.firstName && errors.firstName && <p className='text-sm text-red-500'>{errors.firstName}</p>}
+				{touched.firstName && errors.firstName && <p className='text-sm text-[#f5006d]'>{errors.firstName}</p>}
 			</div>
 			<div>
-				<label htmlFor='lastName' className='block text-sm font-medium text-[#6474A6]'>
+				<label htmlFor='lastName' className='block text-sm font-medium text-[#1A1A1A]'>
 					Apellido
 				</label>
 				<input
@@ -884,12 +884,12 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 					onChange={handleChange}
 					onBlur={handleBlur}
 					placeholder='Ingresar Apellido'
-					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 				/>
-				{touched.lastName && errors.lastName && <p className='text-sm text-red-500'>{errors.lastName}</p>}
+				{touched.lastName && errors.lastName && <p className='text-sm text-[#f5006d]'>{errors.lastName}</p>}
 			</div>
 			<div>
-				<label htmlFor='email' className='block text-sm font-medium text-[#6474A6]'>
+				<label htmlFor='email' className='block text-sm font-medium text-[#1A1A1A]'>
 					Correo electrónico
 				</label>
 				<input
@@ -899,12 +899,12 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 					onChange={handleChange}
 					onBlur={handleBlur}
 					placeholder='Ingresar Correo'
-					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 				/>
-				{touched.email && errors.email && <p className='text-sm text-red-500'>{errors.email}</p>}
+				{touched.email && errors.email && <p className='text-sm text-[#f5006d]'>{errors.email}</p>}
 			</div>
 			<div>
-				<label htmlFor='phone' className='block text-sm font-medium text-[#6474A6]'>
+				<label htmlFor='phone' className='block text-sm font-medium text-[#1A1A1A]'>
 					Teléfono
 				</label>
 				<input
@@ -914,12 +914,12 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 					onChange={handleChange}
 					onBlur={handleBlur}
 					placeholder='Ingresar Teléfono'
-					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 				/>
-				{touched.phone && errors.phone && <p className='text-sm text-red-500'>{errors.phone}</p>}
+				{touched.phone && errors.phone && <p className='text-sm text-[#f5006d]'>{errors.phone}</p>}
 			</div>
 			<div>
-				<label htmlFor='birthday' className='block text-sm font-medium text-[#6474A6]'>
+				<label htmlFor='birthday' className='block text-sm font-medium text-[#1A1A1A]'>
 					Fecha de nacimiento
 				</label>
 				<input
@@ -933,12 +933,12 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 					// onChange={handleChange}
 					onBlur={handleBlur}
 					placeholder='seleccione una fecha'
-					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 				/>
-				{touched.birthday && errors.birthday && <p className='text-sm text-red-500'>{errors.birthday}</p>}
+				{touched.birthday && errors.birthday && <p className='text-sm text-[#f5006d]'>{errors.birthday}</p>}
 			</div>
 			<div>
-				<label htmlFor='profession' className='block text-sm font-medium text-[#6474A6]'>
+				<label htmlFor='profession' className='block text-sm font-medium text-[#1A1A1A]'>
 					Profesión
 				</label>
 				<select
@@ -946,7 +946,7 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 					value={formData.profession}
 					onChange={handleProfessionChange}
 					onBlur={handleBlur}
-					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 				>
 					<option value=''>Seleccione una profesión</option>
 					{professions.map((profession: any) => (
@@ -955,11 +955,11 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 						</option>
 					))}
 				</select>
-				{touched.profession && errors.profession && <p className='text-sm text-red-500'>{errors.profession}</p>}
+				{touched.profession && errors.profession && <p className='text-sm text-[#f5006d]'>{errors.profession}</p>}
 			</div>
 
 			<div>
-				<label htmlFor='specialty' className='block text-sm font-medium text-[#6474A6]'>
+				<label htmlFor='specialty' className='block text-sm font-medium text-[#1A1A1A]'>
 					Especialidad
 				</label>
 				<select
@@ -967,7 +967,7 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 					value={formData.specialty}
 					onChange={handleChange}
 					onBlur={handleBlur}
-					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 				>
 					<option value=''>Seleccione una especialidad</option>
 					{filteredSpecialties.map((specialty: any) => (
@@ -976,7 +976,7 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 						</option>
 					))}
 				</select>
-				{touched.specialty && errors.specialty && <p className='text-sm text-red-500'>{errors.specialty}</p>}
+				{touched.specialty && errors.specialty && <p className='text-sm text-[#f5006d]'>{errors.specialty}</p>}
 			</div>
 		</form>
 	);

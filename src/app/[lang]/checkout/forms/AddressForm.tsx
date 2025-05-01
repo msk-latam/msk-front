@@ -50,7 +50,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 		<div className='grid grid-cols-2 gap-4'>
 			{/* País */}
 			<div>
-				<label htmlFor='country' className='block text-sm font-medium text-[#6474A6]'>
+				<label htmlFor='country' className='block text-sm font-medium text-[#1A1A1A]'>
 					País
 				</label>
 				<select
@@ -59,7 +59,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					value={(formData.country && formData.country.length > 2 ? formData.country : countryName) || 'Argentina'}
 					onChange={(e) => handleChange2(e)}
 					onBlur={handleBlur}
-					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 				>
 					<option value='' disabled>
 						Seleccione un país
@@ -70,10 +70,10 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 						</option>
 					))}
 				</select>
-				{touched.country && errors.country && <p className='mt-1 text-sm text-red-500'>{errors.country}</p>}
+				{touched.country && errors.country && <p className='mt-1 text-sm text-[#f5006d]'>{errors.country}</p>}
 			</div>
 			{/* <div>
-				<label htmlFor='country' className='block text-sm font-medium text-[#6474A6]'>
+				<label htmlFor='country' className='block text-sm font-medium text-[#1A1A1A]'>
 					País
 				</label>
 				<input
@@ -85,14 +85,14 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					onBlur={handleBlur}
 					// disabled
 					placeholder='Ingrese país'
-					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 				/>
-				{touched.country && errors.country && <p className='mt-1 text-sm text-red-500'>{errors.country}</p>}
+				{touched.country && errors.country && <p className='mt-1 text-sm text-[#f5006d]'>{errors.country}</p>}
 			</div> */}
 
 			{/* Estado */}
 			<div>
-				<label htmlFor='state' className='block text-sm font-medium text-[#6474A6]'>
+				<label htmlFor='state' className='block text-sm font-medium text-[#1A1A1A]'>
 					{countryName === 'Chile' ? 'Provincia' : 'Estado'}
 					{/* {formData.country === 'Chile' ? 'Provincia' : 'Estado'} */}
 				</label>
@@ -103,7 +103,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 						value={formData.state}
 						onChange={handleChange2}
 						onBlur={handleBlur}
-						className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+						className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 					>
 						<option value='' disabled>
 							Seleccione una provincia
@@ -115,12 +115,12 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 						))}
 					</select>
 				)}
-				{touched.state && errors.state && <p className='mt-1 text-sm text-red-500'>{errors.state}</p>}
+				{touched.state && errors.state && <p className='mt-1 text-sm text-[#f5006d]'>{errors.state}</p>}
 			</div>
 
 			{/* Ciudad */}
 			<div>
-				<label htmlFor='city' className='block text-sm font-medium text-[#6474A6]'>
+				<label htmlFor='city' className='block text-sm font-medium text-[#1A1A1A]'>
 					Ciudad
 				</label>
 				<input
@@ -132,15 +132,15 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					onChange={handleChange2}
 					onBlur={handleBlur}
 					placeholder='Ingrese ciudad'
-					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 				/>
-				{touched.city && errors.city && <p className='mt-1 text-sm text-red-500'>{errors.city}</p>}
+				{touched.city && errors.city && <p className='mt-1 text-sm text-[#f5006d]'>{errors.city}</p>}
 			</div>
 
 			<div>
 				{/* Código postal */}
 				<div>
-					<label htmlFor='postal_code' className='block text-sm font-medium text-[#6474A6]'>
+					<label htmlFor='postal_code' className='block text-sm font-medium text-[#1A1A1A]'>
 						Código postal
 					</label>
 					<input
@@ -152,14 +152,14 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 						onChange={handleChange2}
 						onBlur={handleBlur}
 						placeholder='Ingrese código postal'
-						className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+						className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 					/>
-					{touched.postal_code && errors.postal_code && <p className='mt-1 text-sm text-red-500'>{errors.postal_code}</p>}
+					{touched.postal_code && errors.postal_code && <p className='mt-1 text-sm text-[#f5006d]'>{errors.postal_code}</p>}
 				</div>
 			</div>
 			{/* Dirección */}
 			<div className='col-span-2'>
-				<label htmlFor='address' className='block text-sm font-medium text-[#6474A6]'>
+				<label htmlFor='address' className='block text-sm font-medium text-[#1A1A1A]'>
 					Dirección
 				</label>
 				<input
@@ -170,9 +170,9 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 					onChange={handleChange2}
 					onBlur={handleBlur}
 					placeholder='Ingrese dirección'
-					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 				/>
-				{touched.address && errors.address && <p className='mt-1 text-sm text-red-500'>{errors.address}</p>}
+				{touched.address && errors.address && <p className='mt-1 text-sm text-[#f5006d]'>{errors.address}</p>}
 			</div>
 		</div>
 	);

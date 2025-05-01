@@ -125,7 +125,7 @@ const DocumentDetailsForm: React.FC<DocumentDetailsFormProps> = ({
 		<div className='grid grid-cols-2 gap-4'>
 			{/* Tipo de documento */}
 			<div>
-				<label htmlFor='type_doc' className='block text-sm font-medium text-[#6474A6]'>
+				<label htmlFor='type_doc' className='block text-sm font-medium text-[#1A1A1A]'>
 					Tipo de documento
 				</label>
 				<select
@@ -134,7 +134,7 @@ const DocumentDetailsForm: React.FC<DocumentDetailsFormProps> = ({
 					value={formData.type_doc}
 					onChange={handleChange2}
 					onBlur={handleBlur}
-					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 				>
 					<option value='' disabled>
 						Seleccione tipo de documento
@@ -145,12 +145,12 @@ const DocumentDetailsForm: React.FC<DocumentDetailsFormProps> = ({
 						</option>
 					))}
 				</select>
-				{touched.type_doc && errors.type_doc && <p className='mt-1 text-sm text-red-500'>{errors.type_doc}</p>}
+				{touched.type_doc && errors.type_doc && <p className='mt-1 text-sm text-[#f5006d]'>{errors.type_doc}</p>}
 			</div>
 
 			{/* Número de documento */}
 			<div>
-				<label htmlFor='identification' className='block text-sm font-medium text-[#6474A6]'>
+				<label htmlFor='identification' className='block text-sm font-medium text-[#1A1A1A]'>
 					Número de documento
 				</label>
 				<input
@@ -161,10 +161,10 @@ const DocumentDetailsForm: React.FC<DocumentDetailsFormProps> = ({
 					onChange={handleChange2}
 					onBlur={handleBlur}
 					placeholder='Ingrese número de documento'
-					className='mt-1 block w-full border-transparent py-3 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
+					className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 				/>
 				{touched.identification && errors.identification && (
-					<p className='mt-1 text-sm text-red-500'>{errors.identification}</p>
+					<p className='mt-1 text-sm text-[#f5006d]'>{errors.identification}</p>
 				)}
 			</div>
 		</div>

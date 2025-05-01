@@ -15,7 +15,7 @@ const TrustSection = () => {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center h-[400px] bg-gray-100 text-red-500 font-semibold">
+      <div className="flex items-center justify-center h-[400px] bg-gray-100 text-[#f5006d] font-semibold">
         Error al cargar testimonios.
       </div>
     );

@@ -14,7 +14,7 @@ import {
 	getCountryCompleteName,
 	getCRMUser,
 	updateCRMUser,
-} from '../[lang]/checkout/utils/utils';
+} from '../../src/app/[lang]/checkout/utils/utils';
 import { validatePaymentField } from './validators/paymentValidator';
 
 const CheckoutRegisterTest = ({ product, country }: any) => {
