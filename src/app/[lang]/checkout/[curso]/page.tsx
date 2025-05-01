@@ -20,7 +20,7 @@ const CursoCheckout: FC<Props> = async ({ params }) => {
 			<div className='flex flex-col min-h-screen bg-[#f3f4f6]'>
 				<div>
 					<CheckoutMSKHeader />
-					<div className='overflow-visible max-w-[1400px] mx-auto -translate-y-5 bg-white h-full pb-10 rounded-[30px]'>
+					<div className='overflow-visible max-w-[1400px] mx-auto -translate-y-12 bg-white h-full pb-10 rounded-[30px]'>
 					<CheckoutHeader />
 						<div className='flex flex-col gap-6 md:flex-row md:px-16'>
 						<div className='flex-1 md:p-0 p-5'>

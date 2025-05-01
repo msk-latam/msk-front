@@ -1,6 +1,8 @@
 'use client';
 import { FaArrowRight } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
+import Link from 'next/link';
+import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
 
 interface CourseSummaryProps {
   slug: string;
@@ -47,12 +49,13 @@ export default function Inscription({ slug, lang }: CourseSummaryProps) {
 				</div>
 
 				{/* Botón CTA */}
-				<button					
+
+        <Link href={getLocalizedUrl(lang, `/checkout/${slug}`)}  				
 					className='mt-4 md:w-auto w-full justify-center font-inter text-base whitespace-nowrap md:mt-0 bg-[#9200ad] hover:bg-[#7A008E] text-white px-6 py-3 rounded-full flex items-center gap-2 transition-colors'
-					onClick={() => router.push(`/checkout/${slug}`)}>
+					onClick={() => router.push(`${lang}/checkout/${slug}`)}>
 					Inscríbete ahora
 					<FaArrowRight className="text-white" />
-				</button>
+				</Link>
 			</div>
 		</div>
 	);
