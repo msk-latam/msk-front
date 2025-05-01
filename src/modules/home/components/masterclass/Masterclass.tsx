@@ -96,9 +96,11 @@ const Masterclass = () => {
 				<div className='h-full flex flex-col justify-center gap-10 md:flex-row md:items-center md:justify-between md:px-4'>
 					{/* Texto Desktop */}
 					<header className='hidden md:flex flex-col gap-16 text-center md:text-left md:max-w-2xl md:order-1'>
-						<p className='border border-white rounded-full px-6 py-3 text-sm w-fit mx-auto md:mx-0 uppercase tracking-widest'>
-							Masterclass
-						</p>
+						{masterclass?.tags?.[0] && (
+							<p className='border border-white rounded-full px-6 py-3 text-sm w-fit mx-auto md:mx-0 uppercase tracking-widest'>
+								{masterclass?.tags[0]}
+							</p>
+						)}
 						<div className='flex flex-col md:gap-6'>
 							<h1 id='masterclass-heading' className=' md:text-[3rem] font-bold leading-tight text-white'>
 								{masterclass?.title || 'Masterclass destacada'}
@@ -107,8 +109,7 @@ const Masterclass = () => {
 						</div>
 						<nav aria-label='Inscripción a Masterclass'>
 							<Link
-								href={getLocalizedUrl(lang, '/tienda/medicina-intensiva-amir/')}
-								// href={getLocalizedUrl(lang, new URL(masterclassLink ?? '#').pathname)} // ← usar esto para link dinámico
+								href={getLocalizedUrl(lang, new URL(masterclassLink ?? '#').pathname.replace('/producto/', '/tienda/'))}
 								className='bg-white text-black px-6 py-3 rounded-full font-semibold text-sm md:text-base flex items-center gap-2 w-fit mx-auto md:mx-0 hover:scale-105 transition'
 							>
 								Inscribite ahora
@@ -140,16 +141,20 @@ const Masterclass = () => {
 				{/* Mobile */}
 				{professionals.length === 1 ? (
 					<div className='md:hidden w-full flex flex-col items-center pl-6 gap-6 z-[1]'>
-						<h2 className='text-1xl border border-white rounded-full px-6 py-3 self-start uppercase tracking-widest'>
-							Masterclass
-						</h2>
+						{masterclass?.tags?.[0] && (
+							<h2 className='text-1xl border border-white rounded-full px-6 py-3 self-start uppercase tracking-widest'>
+								{masterclass.tags[0]}
+							</h2>
+						)}
 						<ProfessionalCardMobile pro={professionals[0]} />
 					</div>
 				) : (
 					<section className='md:hidden w-full flex flex-col items-center pl-6 gap-6 overflow-x-hidden z-[1]'>
-						<h2 className='text-1xl border border-white rounded-full px-6 py-3 self-start uppercase tracking-widest'>
-							Masterclass
-						</h2>
+						{masterclass?.tags?.[0] && (
+							<p className='border border-white rounded-full px-6 py-3 text-sm w-fit mx-auto md:mx-0 uppercase tracking-widest'>
+								{masterclass?.tags[0]}
+							</p>
+						)}
 						<div className='relative w-full overflow-hidden'>
 							<div
 								{...handlers}

@@ -23,13 +23,16 @@ const validationSchema = Yup.object().shape({
 		.matches(/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s'-]+$/, 'Solo se permiten letras, espacios, guiones y apóstrofes.')
 		.max(20, 'Máximo 20 caracteres')
 		.required('El apellido es obligatorio'),
-	password: Yup.string()
-		.required('La contraseña es obligatoria')
-		.test('len', 'Debe tener al menos 8 caracteres', (val) => (val?.length ?? 0) >= 8)
-		.test('upper', 'Debe incluir una letra mayúscula', (val) => /[A-Z]/.test(val || ''))
-		.test('lower', 'Debe incluir una letra minúscula', (val) => /[a-z]/.test(val || ''))
-		.test('digit', 'Debe incluir un número', (val) => /[0-9]/.test(val || ''))
-		.test('special', 'Debe incluir un carácter especial', (val) => /[!@#$%^&*(),.?":{}|<>]/.test(val || '')),
+
+	//Se comenta porque el CRM ahora genera la contraseña automáticamente
+	// password: Yup.string()
+	// 	.required('La contraseña es obligatoria')
+	// 	.test('len', 'Debe tener al menos 8 caracteres', (val) => (val?.length ?? 0) >= 8)
+	// 	.test('upper', 'Debe incluir una letra mayúscula', (val) => /[A-Z]/.test(val || ''))
+	// 	.test('lower', 'Debe incluir una letra minúscula', (val) => /[a-z]/.test(val || ''))
+	// 	.test('digit', 'Debe incluir un número', (val) => /[0-9]/.test(val || ''))
+	// 	.test('special', 'Debe incluir un carácter especial', (val) => /[!@#$%^&*(),.?":{}|<>]/.test(val || '')),
+
 	phone: Yup.string().min(7, 'Número inválido').max(20, 'Máximo 20 caracteres').required('El teléfono es obligatorio'),
 });
 
@@ -57,7 +60,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 		resolver: yupResolver(validationSchema),
 	});
 
-	const passwordValue = watch('password');
+	//const passwordValue = watch('password');
 
 	useEffect(() => {
 		const email = searchParams.get('email');
@@ -133,8 +136,9 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 	};
 
 	// componente visual de sugerencias en tiempo real para la contraseña
-	const passwordHints = [
-		{
+	//const passwordHints = [
+	{
+		/*	{
 			label: 'Debe tener al menos 8 caracteres',
 			valid: passwordValue?.length >= 8,
 		},
@@ -154,7 +158,8 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 			label: 'Debe incluir un carácter especial',
 			valid: /[!@#$%^&*(),.?":{}|<>]/.test(passwordValue || ''),
 		},
-	];
+	];*/
+	}
 
 	if (submitted) {
 		return (
@@ -248,51 +253,48 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 						{errors.last_name && <p className='text-red-500 text-xs mt-1'>{errors.last_name.message}</p>}
 					</div>
 
-					<div className='w-full max-w-md mx-auto'>
-						<form onSubmit={handleSubmit(onSubmit)} className='space-y-6'>
-							{/* Campo contraseña */}
-							<div>
-								<label className='block text-sm font-medium text-[#1A1A1A] text-left'>Contraseña</label>
-								<div className='relative'>
-									<input
-										type={showPassword ? 'text' : 'password'}
-										{...register('password')}
-										placeholder='Ingresar contraseña'
-										className='mt-1 w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 pr-10 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]'
-									/>
-									<button
-										type='button'
-										onClick={() => setShowPassword(!showPassword)}
-										className='absolute right-3 top-1/2 -translate-y-1/2'
-									>
-										<Image
-											src={showPassword ? '/icons/eye-off.svg' : '/icons/eye.svg'}
-											alt='Mostrar/Ocultar'
-											width={20}
-											height={20}
-										/>
-									</button>
-								</div>
-								{errors.password && <p className='text-red-500 text-xs mt-1'>{errors.password.message}</p>}
+					{/* ✅ Contraseña eliminada temporalmente porque el CRM la genera automáticamente por email */}
+					{/* 
+<div>
+	<label className='block text-sm font-medium text-[#1A1A1A] text-left'>Contraseña</label>
+	<div className='relative'>
+		<input
+			type={showPassword ? 'text' : 'password'}
+			{...register('password')}
+			placeholder='Ingresar contraseña'
+			className='mt-1 w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 pr-10 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]'
+		/>
+		<button
+			type='button'
+			onClick={() => setShowPassword(!showPassword)}
+			className='absolute right-3 top-1/2 -translate-y-1/2'
+		>
+			<Image
+				src={showPassword ? '/icons/eye-off.svg' : '/icons/eye.svg'}
+				alt='Mostrar/Ocultar'
+				width={20}
+				height={20}
+			/>
+		</button>
+	</div>
+	{errors.password && <p className='text-red-500 text-xs mt-1'>{errors.password.message}</p>}
 
-								{/* Lista de validaciones visuales */}
-								<ul className='text-sm mt-3 space-y-2'>
-									{passwordHints.map((hint, index) => (
-										<li key={index} className='flex items-center gap-2'>
-											<div
-												className={`w-5 h-5 flex items-center justify-center rounded-full border-2 ${
-													hint.valid ? 'bg-green-500 border-green-500 text-white' : 'bg-white border-gray-300 text-gray-400'
-												}`}
-											>
-												{hint.valid && <Check size={16} />}
-											</div>
-											<span className={hint.valid ? 'text-green-600' : 'text-gray-400'}>{hint.label}</span>
-										</li>
-									))}
-								</ul>
-							</div>
-						</form>
-					</div>
+	<ul className='text-sm mt-3 space-y-2'>
+		{passwordHints.map((hint, index) => (
+			<li key={index} className='flex items-center gap-2'>
+				<div
+					className={`w-5 h-5 flex items-center justify-center rounded-full border-2 ${
+						hint.valid ? 'bg-green-500 border-green-500 text-white' : 'bg-white border-gray-300 text-gray-400'
+					}`}
+				>
+					{hint.valid && <Check size={16} />}
+				</div>
+				<span className={hint.valid ? 'text-green-600' : 'text-gray-400'}>{hint.label}</span>
+			</li>
+		))}
+	</ul>
+</div>
+*/}
 
 					<button
 						type='submit'
