@@ -160,18 +160,18 @@ export interface Figure {
 	figure: string;
 }
 
-export interface Opinion {
-	avatar: [string, number, number, boolean]; // URL de la imagen, tamaño en px, tamaño en px, si la imagen está optimizada
+export interface Review {
+	picture: string; // URL de la imagen, tamaño en px, tamaño en px, si la imagen está optimizada
 	name: string;
-	opinion: string;
-	rating: string;
+	review: string;
+	stars: string;
 }
 
 export interface TrustSection {
 	title: string;
 	subtitle: string;
 	figures: Figure[];
-	opinions: Opinion[];
+	reviews: Review[];
 }
 
 // INSTITUTION SECTION
