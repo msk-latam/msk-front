@@ -4,94 +4,80 @@ import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import CountrySelect from '../hooks/CountrySelect';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+import { Check } from 'lucide-react';
+
+const API_SIGNUP_URL = 'https://dev.msklatam.tech/msk-laravel/public/api/signup';
+
+const validationSchema = Yup.object().shape({
+	email: Yup.string().email('El correo no es válido').required('El correo es obligatorio'),
+
+	first_name: Yup.string()
+		.matches(/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s'-]+$/, 'Solo se permiten letras, espacios, guiones y apóstrofes.')
+		.max(10, 'Máximo 20 caracteres')
+		.required('El nombre es obligatorio'),
+
+	last_name: Yup.string()
+		.matches(/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s'-]+$/, 'Solo se permiten letras, espacios, guiones y apóstrofes.')
+		.max(20, 'Máximo 20 caracteres')
+		.required('El apellido es obligatorio'),
+	password: Yup.string()
+		.required('La contraseña es obligatoria')
+		.test('len', 'Debe tener al menos 8 caracteres', (val) => (val?.length ?? 0) >= 8)
+		.test('upper', 'Debe incluir una letra mayúscula', (val) => /[A-Z]/.test(val || ''))
+		.test('lower', 'Debe incluir una letra minúscula', (val) => /[a-z]/.test(val || ''))
+		.test('digit', 'Debe incluir un número', (val) => /[0-9]/.test(val || ''))
+		.test('special', 'Debe incluir un carácter especial', (val) => /[!@#$%^&*(),.?":{}|<>]/.test(val || '')),
+	phone: Yup.string().min(7, 'Número inválido').max(20, 'Máximo 20 caracteres').required('El teléfono es obligatorio'),
+});
 
 type RegisterFormProps = {
 	onBack: () => void;
 };
 
-type SignUpApiPayload = {
-	email: string;
-	first_name: string;
-	last_name: string;
-	password: string;
-	country: string;
-	phone: string;
-	profession: string;
-	speciality: string;
-	Otra_profesion: string;
-	Otra_especialidad: string;
-	Career: string;
-	Year: string;
-	type: string;
-	identification: string;
-	Terms_And_Conditions: boolean;
-};
-
-type SignUpSuccessResponse = {
-	access_token: string;
-};
-
-type SignUpErrorResponse = {
-	message?: string;
-	errors?: {
-		[key: string]: string[];
-	};
-};
-
-const API_SIGNUP_URL = 'https://dev.msklatam.tech/msk-laravel/public/api/signup';
-
 export default function RegisterForm({ onBack }: RegisterFormProps) {
-	const [email, setEmail] = useState('');
-	const [firstName, setFirstName] = useState('');
-	const [lastName, setLastName] = useState('');
-	const [password, setPassword] = useState('');
-	const [showPassword, setShowPassword] = useState(false);
-	const [phone, setPhone] = useState('');
-	const [areaCode, setAreaCode] = useState('+54');
+	const searchParams = useSearchParams();
 	const [submitted, setSubmitted] = useState(false);
 	const [onRequest, setOnRequest] = useState(false);
+	const [areaCode, setAreaCode] = useState('+54');
 	const [error, setError] = useState<string | null>(null);
+	let errorMessages: string = '...';
+	const [showPassword, setShowPassword] = useState(false);
 
-	const searchParams = useSearchParams();
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, isValid },
+		setValue,
+		watch,
+	} = useForm({
+		mode: 'onChange',
+		resolver: yupResolver(validationSchema),
+	});
+
+	const passwordValue = watch('password');
 
 	useEffect(() => {
-		const emailParam = searchParams.get('email');
-		const firstNameParam = searchParams.get('firstName');
-		const lastNameParam = searchParams.get('lastName');
+		const email = searchParams.get('email');
+		const firstName = searchParams.get('firstName');
+		const lastName = searchParams.get('lastName');
 
-		if (emailParam) setEmail(emailParam);
-		if (firstNameParam) setFirstName(firstNameParam);
-		if (lastNameParam) setLastName(lastNameParam);
-	}, [searchParams]);
+		if (email) setValue('email', email);
+		if (firstName) setValue('first_name', firstName);
+		if (lastName) setValue('last_name', lastName);
+	}, [searchParams, setValue]);
 
-	const executeRecaptcha = async (action: string): Promise<string> => {
-		console.warn('Using placeholder executeRecaptcha');
-		return 'dummy-recaptcha-token';
-	};
-
-	const isValid =
-		email.trim() !== '' &&
-		firstName.trim() !== '' &&
-		lastName.trim() !== '' &&
-		password.trim() !== '' &&
-		phone.trim() !== '' &&
-		!onRequest;
-
-	const handleSubmit = async (e: React.FormEvent) => {
-		e.preventDefault();
-		if (!isValid || !executeRecaptcha) return;
-
+	const onSubmit = async (data: { phone: any }) => {
 		setOnRequest(true);
 		setError(null);
 
 		try {
-			const formData: SignUpApiPayload = {
-				first_name: firstName,
-				last_name: lastName,
-				email: email,
+			const payload = {
+				...data,
 				country: 'AR',
-				password: password,
-				phone: `${areaCode}${phone}`,
+				phone: `${areaCode}${data.phone}`,
 				profession: '-',
 				speciality: '-',
 				Otra_profesion: '',
@@ -109,29 +95,26 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 					'Content-Type': 'application/json',
 					Accept: 'application/json',
 				},
-				body: JSON.stringify(formData),
+				body: JSON.stringify(payload),
 			});
 
-			const resData: SignUpSuccessResponse | SignUpErrorResponse = await response.json();
+			const resData = await response.json();
 
 			if (response.ok && 'access_token' in resData) {
 				setSubmitted(true);
 			} else {
-				let errorMessages = 'Ocurrió un error al registrar la cuenta.';
-				if (!response.ok && 'errors' in resData && resData.errors) {
+				let errorMessages: string = 'Ocurrió un error al registrar la cuenta.';
+				if (resData.errors) {
 					const errorValues = Object.values(resData.errors).flat();
 					errorMessages = errorValues
-						.map((msg: unknown) => {
+						.map((msg) => {
 							if (typeof msg === 'string' && msg.includes('El Email ya ha sido registrado')) {
-								return (
-									msg +
-									' <a href="/login" class="font-bold cursor-pointer text-violet-custom hover:underline hover:text-violet-custom">Inicia sesión</a>'
-								);
+								return `${msg} <a href=\"/login\" class=\"font-bold cursor-pointer text-violet-custom hover:underline hover:text-violet-custom\">Inicia sesión</a>`;
 							}
 							return String(msg);
 						})
 						.join('<br />');
-				} else if (!response.ok && 'message' in resData && resData.message) {
+				} else if (resData.message) {
 					errorMessages = resData.message;
 				}
 				setError(errorMessages);
@@ -148,6 +131,30 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 		sessionStorage.setItem('needsProfileCompletion', 'true');
 		window.location.href = `/api/auth/login?connection=${connection}`;
 	};
+
+	// componente visual de sugerencias en tiempo real para la contraseña
+	const passwordHints = [
+		{
+			label: 'Debe tener al menos 8 caracteres',
+			valid: passwordValue?.length >= 8,
+		},
+		{
+			label: 'Debe incluir una letra mayúscula',
+			valid: /[A-Z]/.test(passwordValue || ''),
+		},
+		{
+			label: 'Debe incluir una letra minúscula',
+			valid: /[a-z]/.test(passwordValue || ''),
+		},
+		{
+			label: 'Debe incluir un número',
+			valid: /[0-9]/.test(passwordValue || ''),
+		},
+		{
+			label: 'Debe incluir un carácter especial',
+			valid: /[!@#$%^&*(),.?":{}|<>]/.test(passwordValue || ''),
+		},
+	];
 
 	if (submitted) {
 		return (
@@ -187,93 +194,105 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 					</p>
 				</div>
 
-				<form className='max-w-md mx-auto space-y-6 font-inter' onSubmit={handleSubmit}>
+				<form className='max-w-md mx-auto space-y-6 font-inter' onSubmit={handleSubmit(onSubmit)}>
 					<div>
 						<label className='block text-sm font-medium text-[#1A1A1A] text-left'>E-mail</label>
 						<input
 							type='email'
+							maxLength={50}
+							{...register('email')}
 							placeholder='Ingresar e-mail'
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							required
 							className='mt-1 w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]'
 						/>
+						{errors.email && <p className='text-red-500 text-xs mt-1'>{errors.email.message}</p>}
 					</div>
 
 					<div>
-  <label className='block text-sm font-medium text-[#1A1A1A] text-left mb-1'>Teléfono</label>
-  <div className='flex gap-2 border rounded-2xl border-[#DBDDE2] px-3 py-2 focus-within:ring-4 focus-within:ring-[#F5E6F7]'>
-    <div className='w-18'>
-	<CountrySelect onChange={(code) => setAreaCode(code)} />
+						<label className='block text-sm font-medium text-[#1A1A1A] text-left mb-1'>Teléfono</label>
+						<div className='flex gap-2 border rounded-2xl border-[#DBDDE2] px-3 py-2 focus-within:ring-4 focus-within:ring-[#F5E6F7]'>
+							<div className='w-18'>
+								<CountrySelect onChange={(code) => setAreaCode(code)} />
+							</div>
+							<input
+								type='tel'
+								maxLength={20}
+								{...register('phone')}
+								placeholder='Ingresar teléfono'
+								className='flex-1 bg-transparent border-0 focus:ring-0 focus:outline-none text-[#6E737C]'
+							/>
+						</div>
+						{errors.phone && <p className='text-red-500 text-xs mt-1'>{errors.phone.message}</p>}
+					</div>
 
-    </div>
-    <input
-      type='tel'
-      placeholder='Ingresar teléfono'
-      value={phone}
-      onChange={(e) => setPhone(e.target.value.replace(/\\D/g, ''))}
-      className='flex-1 bg-transparent border-0 focus:ring-0 focus:outline-none text-[#6E737C]'
-    />
-  </div>
-</div>
 					<div>
 						<label className='block text-sm font-medium text-[#1A1A1A] text-left'>Nombre/s</label>
 						<input
 							type='text'
+							maxLength={20}
+							{...register('first_name')}
 							placeholder='Ingresar nombre/s'
-							value={firstName}
-							onChange={(e) => setFirstName(e.target.value)}
-							required
 							className='mt-1 w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]'
 						/>
+						{errors.first_name && <p className='text-red-500 text-xs mt-1'>{errors.first_name.message}</p>}
 					</div>
 
 					<div>
 						<label className='block text-sm font-medium text-[#1A1A1A] text-left'>Apellido/s</label>
 						<input
 							type='text'
+							maxLength={20}
+							{...register('last_name')}
 							placeholder='Ingresar apellido/s'
-							value={lastName}
-							onChange={(e) => setLastName(e.target.value)}
-							required
 							className='mt-1 w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]'
 						/>
+						{errors.last_name && <p className='text-red-500 text-xs mt-1'>{errors.last_name.message}</p>}
 					</div>
 
-					<div>
-						<label className='block text-sm font-medium text-[#1A1A1A] text-left'>Contraseña</label>
-						<div className='relative'>
-							<input
-								type={showPassword ? 'text' : 'password'}
-								placeholder='Ingresar contraseña'
-								value={password}
-								onChange={(e) => setPassword(e.target.value)}
-								required
-								className='mt-1 w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 pr-10 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]'
-							/>
-							<button
-								type='button'
-								onClick={() => setShowPassword(!showPassword)}
-								className='absolute right-3 top-[50%] translate-y-[-50%]'
-							>
-								<Image
-									src={showPassword ? '/icons/eye-off.svg' : '/icons/eye.svg'}
-									alt='Mostrar/Ocultar'
-									width={20}
-									height={20}
-									className='opacity-70'
-								/>
-							</button>
-						</div>
-					</div>
+					<div className='w-full max-w-md mx-auto'>
+						<form onSubmit={handleSubmit(onSubmit)} className='space-y-6'>
+							{/* Campo contraseña */}
+							<div>
+								<label className='block text-sm font-medium text-[#1A1A1A] text-left'>Contraseña</label>
+								<div className='relative'>
+									<input
+										type={showPassword ? 'text' : 'password'}
+										{...register('password')}
+										placeholder='Ingresar contraseña'
+										className='mt-1 w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 pr-10 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]'
+									/>
+									<button
+										type='button'
+										onClick={() => setShowPassword(!showPassword)}
+										className='absolute right-3 top-1/2 -translate-y-1/2'
+									>
+										<Image
+											src={showPassword ? '/icons/eye-off.svg' : '/icons/eye.svg'}
+											alt='Mostrar/Ocultar'
+											width={20}
+											height={20}
+										/>
+									</button>
+								</div>
+								{errors.password && <p className='text-red-500 text-xs mt-1'>{errors.password.message}</p>}
 
-					{error && (
-						<div
-							className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md relative text-sm'
-							role='alert'
-							dangerouslySetInnerHTML={{ __html: error }}
-						/>
-					)}
+								{/* Lista de validaciones visuales */}
+								<ul className='text-sm mt-3 space-y-2'>
+									{passwordHints.map((hint, index) => (
+										<li key={index} className='flex items-center gap-2'>
+											<div
+												className={`w-5 h-5 flex items-center justify-center rounded-full border-2 ${
+													hint.valid ? 'bg-green-500 border-green-500 text-white' : 'bg-white border-gray-300 text-gray-400'
+												}`}
+											>
+												{hint.valid && <Check size={16} />}
+											</div>
+											<span className={hint.valid ? 'text-green-600' : 'text-gray-400'}>{hint.label}</span>
+										</li>
+									))}
+								</ul>
+							</div>
+						</form>
+					</div>
 
 					<button
 						type='submit'
