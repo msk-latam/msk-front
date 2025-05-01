@@ -4,6 +4,7 @@ import './globals.css';
 import LoaderLayout from './LoaderLayout'; // Ajustá el path
 import { CountryProvider } from '@/context/country/CountryProvider';
 import Script from 'next/script';
+import LanguageCookieUpdater from '@/utils/LanguageCookieUpdater';
 
 const inter = Inter({
 	subsets: ['latin'],
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				<CountryProvider>
 					{' '}
 					{/* 👈 Aquí envolvemos todo */}
+					<LanguageCookieUpdater />
 					{children}
 				</CountryProvider>
 			</body>

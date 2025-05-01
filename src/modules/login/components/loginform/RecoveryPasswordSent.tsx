@@ -1,59 +1,33 @@
-// 'use client'
-
-// type RecoveryPasswordSentProps = {
-//   onContinue?: () => void
-// }
-
-// export default function RecoveryPasswordSent({ onContinue }: RecoveryPasswordSentProps) {
-//   return (
-//     <div className="w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:mb-24 py-10 z-[10] relative overflow-visible max-w-[1600px] h-screen md:h-full flex md:items-center justify-center">
-//       <section
-//         className="w-full max-w-[1632px] relative z-[1] mx-auto px-4 py-6 sm:py-12 text-center"
-//         style={{ fontFamily: 'Raleway, sans-serif' }}
-//       >
-//         <div className="flex justify-center">
-//           <div className="rounded-full w-44 mx-auto h-auto p-6">
-//             <img src="/images/emails/email-icon.svg" alt="Correo enviado" />
-//           </div>
-//         </div>
-
-//         <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-6 md:mb-2">Correo enviado</h2>
-//         <p className="text-sm text-gray-600 max-w-md mx-auto">
-//           Revisa tu bandeja de entrada, spam o correos no deseados y sigue los pasos detallados.
-//         </p>
-
-//         {onContinue && (
-//           <button
-//             onClick={onContinue}
-//             className="mt-6 bg-purple-700 hover:bg-purple-800 text-white py-2 px-6 rounded-[20px]"
-//           >
-//             Continuar
-//           </button>
-//         )}
-//       </section>
-//     </div>
-//   )
-// }
-
 'use client';
 
-import { useState } from 'react';
-import { usePathname } from 'next/navigation';
-import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
-import { supportedLanguages } from '@/config/languages';
-
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
-export default function NewPasswordForm() {
-	const pathname = usePathname();
-	const pathParts = pathname.split('/');
-	const lang = supportedLanguages.includes(pathParts[1]) ? pathParts[1] : 'ar';
+import { supportedLanguages } from '@/config/languages';
 
-	const handleRedirect = () => {
-		window.location.href = getLocalizedUrl(lang, '/login');
-	};
+export default function NewPasswordForm() {
+	useEffect(() => {
+		const pathname = window.location.pathname;
+		const search = window.location.search;
+		const pathParts = pathname.split('/').filter(Boolean);
+
+		const hasLang = supportedLanguages.includes(pathParts[0]);
+
+		if (!hasLang) {
+			const country =
+				document.cookie
+					.split('; ')
+					.find((row) => row.startsWith('country='))
+					?.split('=')[1] || 'ar';
+
+			const newLang = supportedLanguages.includes(country) ? country : 'ar';
+			const newPath = `/${newLang}${pathname}${search}`;
+
+			window.location.replace(newPath);
+		}
+	}, []);
 
 	const validationSchema = Yup.object().shape({
 		password: Yup.string()
@@ -95,11 +69,11 @@ export default function NewPasswordForm() {
 				<section className='w-full max-w-[1632px] absolute top-0 z-[1] mx-auto px-4 py-6 sm:py-12 md:mt-20 mt-28 text-center'>
 					<h2 className='text-2xl sm:text-3xl font-semibold text-gray-900 md:mb-6 mb-2'>¡Listo!</h2>
 					<p className='text-sm text-gray-600 max-w-md mx-auto mb-4'>
-						Ya confirmaste tu e-mail. En breve recibirás un correo con tus credenciales de{' '}
+						Ya confirmaste tu e-mail. En breve podrás iniciar sesión con tu nueva contraseña en{' '}
 						<strong>Medical & Scientific Knowledge</strong>.
 					</p>
 					<button
-						onClick={handleRedirect}
+						onClick={() => (window.location.href = '/login')}
 						className='mt-6 bg-[#9200ad] hover:bg-purple-800 text-white py-3 px-6 rounded-full'
 					>
 						Seguir navegando
@@ -114,7 +88,7 @@ export default function NewPasswordForm() {
 			<section className='w-full max-w-[1632px] absolute md:top-0 z-[1] mx-auto px-4 md:py-12'>
 				<div className='text-center mt-16 mb-6'>
 					<h1 className='text-2xl md:text-3xl md:pb-6 mb-2 font-semibold text-gray-900'>Cambiar contraseña</h1>
-					<p className='text-base md:text[18px] text-gray-500'>Elige una nueva clave para iniciar sesión</p>
+					<p className='text-base md:text-[18px] text-gray-500'>Elige una nueva clave para iniciar sesión</p>
 				</div>
 
 				<form
@@ -166,11 +140,12 @@ export default function NewPasswordForm() {
 								onClick={() => setShowPassword(!showPassword)}
 								className='absolute right-3 top-3 p-1 text-gray-500'
 							>
-								{showPassword ? (
-									<img src='/icons/eye-off.svg' alt='Ocultar contraseña' width={20} height={20} />
-								) : (
-									<img src='/icons/eye.svg' alt='Mostrar contraseña' width={20} height={20} />
-								)}
+								<img
+									src={showPassword ? '/icons/eye-off.svg' : '/icons/eye.svg'}
+									alt={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+									width={20}
+									height={20}
+								/>
 							</button>
 						</div>
 						{errors.password && <p className='text-red-500 text-sm mt-2'>{errors.password.message}</p>}

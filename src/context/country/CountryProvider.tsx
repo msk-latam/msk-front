@@ -7,7 +7,7 @@ import { CountryState } from '@/data/types';
 import { countries } from '@/data/countries';
 import { getCurrencyByCountry, getInstallmentsByCountry } from '@/utils/country';
 import Cookies from 'js-cookie';
-import { Loading } from '@/utils/Loading';
+
 import { getCountryFromUrl } from '@/utils/getCountryFromUrl';
 import { getCountryFromIp } from '@/utils/getCountryFromIP';
 import { usePathname } from 'next/navigation';
@@ -81,19 +81,18 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 	}, [pathname]);
 
 	const handleSwitchCountry = () => {
-	const path = window.location.pathname;
-	const segments = path.split('/').filter(Boolean); // elimina vacíos
+		const path = window.location.pathname;
+		const segments = path.split('/').filter(Boolean); // elimina vacíos
 
-	const validCountries = countries.map((item) => item.id);
-	const hasValidPrefix = validCountries.includes(segments[0]);
+		const validCountries = countries.map((item) => item.id);
+		const hasValidPrefix = validCountries.includes(segments[0]);
 
-	// si tiene prefijo válido, lo sacamos
-	const restOfPath = hasValidPrefix ? segments.slice(1).join('/') : segments.join('/');
-	const newUrl = `/${userCountry}${restOfPath ? '/' + restOfPath : ''}${window.location.search}`;
+		// si tiene prefijo válido, lo sacamos
+		const restOfPath = hasValidPrefix ? segments.slice(1).join('/') : segments.join('/');
+		const newUrl = `/${userCountry}${restOfPath ? '/' + restOfPath : ''}${window.location.search}`;
 
-	window.location.href = newUrl;
-};
-
+		window.location.href = newUrl;
+	};
 
 	const countryNames: Record<string, string> = {
 		ar: 'Argentina',
@@ -121,7 +120,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 
 	return (
 		<CountryContext.Provider value={{ countryState, dispatch }}>
-			{loading ? <Loading /> : children}
+			{children}
 
 			{showBanner && (
 				<div
