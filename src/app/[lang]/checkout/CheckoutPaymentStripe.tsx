@@ -196,9 +196,9 @@ const CheckoutStripe = ({ product, country }: any) => {
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className='w-full max-w-lg p-6 mx-auto bg-white border border-gray-200 shadow-xl rounded-xl'
+			className='w-full max-w-lg p-6 mx-auto bg-white border border-gray-300 shadow-xl rounded-3xl'
 		>
-			<h2 className='mb-4 text-xl font-semibold text-center text-gray-700'>Finalizar Pago</h2>
+			<h2 className='mb-4 text-2xl font-raleway font-semibold text-center text-[#1a1a1a]'>Finalizar Pago</h2>
 
 			<div className='p-4 border border-gray-300 rounded-lg bg-gray-50'>
 				<CardElement
@@ -214,9 +214,10 @@ const CheckoutStripe = ({ product, country }: any) => {
 				/>
 			</div>
 
+
 			<button
 				type='submit'
-				className='flex items-center justify-center w-full py-3 mt-6 font-semibold text-white transition-all duration-300 bg-blue-600 rounded-lg hover:bg-blue-700'
+				className='flex items-center justify-center w-full py-3 mt-6 font-semibold text-white transition-all duration-300 bg-[#9200AD] rounded-[38px] hover:bg-[#B814D6]'
 				disabled={isLoading}
 			>
 				{isLoading ? (
@@ -241,7 +242,7 @@ const CheckoutPaymentStripe = ({ product, country }: any) => {
 		}
 	};
 	return (
-		<div className='mt-24'>
+		<div className='fixed gap-4 bottom-10 left-1/4'>
 			<CheckoutStripe product={product} country={country} />
 			<StepButtons
 				isDisabled={isSubmitting}
@@ -255,3 +256,69 @@ const CheckoutPaymentStripe = ({ product, country }: any) => {
 };
 
 export default CheckoutPaymentStripe;
+
+// 'use client';
+// import StepButtons from './buttons/CheckoutPaymentButtons';
+// import { CardElement } from '@stripe/react-stripe-js';
+// import { useCheckout } from './CheckoutContext';
+
+// const CheckoutStripe = () => {
+// 	return (
+// 		<form
+// 			onSubmit={(e) => e.preventDefault()}
+// 			className='w-full max-w-lg p-6 mx-auto bg-white border border-gray-300 shadow-xl rounded-3xl'
+// 		>
+// 			<h2 className='mb-4 text-2xl font-raleway font-semibold text-center text-[#1a1a1a]'>Finalizar Pago</h2>
+
+// 			<div className='p-4 border border-gray-300 rounded-lg bg-gray-50'>
+// 				<CardElement
+// 					options={{
+// 						style: {
+// 							base: {
+// 								fontSize: '18px',
+// 								color: '#333',
+// 								'::placeholder': { color: '#a0aec0' },
+// 							},
+// 						},
+// 					}}
+// 				/>
+// 			</div>
+
+// 			<button
+// 				type='submit'
+// 				className='flex items-center justify-center w-full py-3 mt-6 font-semibold text-white transition-all duration-300 bg-[#9200AD] rounded-[38px] hover:bg-[#B814D6]'
+// 			>
+// 				Pagar
+// 			</button>
+// 		</form>
+// 	);
+// };
+
+// const CheckoutPaymentStripe = () => {
+// 	const { subStep, setSubStep, activeStep, setActiveStep, setPaymentType } = useCheckout();
+
+// 	const handlePreviousStep = () => {
+// 		if (subStep > 0) {
+// 			setSubStep(subStep - 1);
+// 			setActiveStep(activeStep - 1);
+// 			setPaymentType(null);
+// 		} else if (activeStep > 1) {
+// 			setActiveStep(activeStep - 1);
+// 		}
+// 	};
+
+// 	return (
+// 		<div className='mt-16 flex flex-col justify-between'>
+// 			<CheckoutStripe />
+// 			<StepButtons
+// 				isDisabled={false}
+// 				isFormValid={true}
+// 				isSubmitting={false}
+// 				handlePreviousStep={handlePreviousStep}
+// 				handleSubmit={() => console.log('Submit fake')}
+// 			/>
+// 		</div>
+// 	);
+// };
+
+// export default CheckoutPaymentStripe;

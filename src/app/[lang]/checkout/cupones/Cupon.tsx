@@ -70,12 +70,12 @@ const Cupon: React.FC = () => {
 					placeholder='Ingresa tu código'
 					value={couponCode}
 					onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
-					className='border p-2 rounded-l w-full focus:ring focus:ring-[#9200AD]'
+					className='border rounded-l-2xl w-full border-gray-300 p-2 focus:ring-1 focus:border-[#DBDDE2] text-[#6e737c] py-2.5 px-3.5focus:ring focus:ring-[#9200AD]'
 					disabled={isLoading}
 				/>
 				<button
 					onClick={handleApplyCoupon}
-					className={`bg-[#9200AD] text-white px-4 rounded-r hover:bg-[#FF5D5E] transition flex items-center justify-center ${
+					className={`bg-[#9200AD] text-white px-4 rounded-r-2xl hover:bg-[#FF5D5E] focus:ring-1 focus:border-[#FF5D5E] transition flex items-center justify-center ${
 						isLoading || !couponCode.trim() ? 'opacity-50 cursor-not-allowed' : ''
 					}`}
 					disabled={isLoading || !couponCode.trim()}
@@ -97,7 +97,7 @@ const Cupon: React.FC = () => {
 			</div>
 
 			{/* Mensaje de error */}
-			{error && <p className='text-red-500 text-sm mt-2'>{error}</p>}
+			{error && <p className='text-[#f5006d] text-sm mt-2'>{error}</p>}
 
 			{/* Mensaje de cupón aplicado */}
 			{appliedCoupon && (

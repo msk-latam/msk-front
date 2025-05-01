@@ -11,7 +11,7 @@ export interface LogoProps {
 }
 
 const Logo: React.FC<LogoProps> = ({
-	img = '/images/msk-logo.svg',
+	img = '/images/msk-logo/logo.png',
 	isOnBlog,
 	imgLight = '/images/logo-light.png',
 	target,

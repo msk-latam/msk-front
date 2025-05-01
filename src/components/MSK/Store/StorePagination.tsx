@@ -69,8 +69,8 @@ const StorePagination: FC<Props> = ({ totalPages, onPageChange, currentPage, url
 								<li
 									className={
 										currentPage == page
-											? 'text-red-500 font-bold pointer'
-											: 'text-black-600 cursor-pointer hover:text-red-500'
+											? 'text-[#f5006d] font-bold pointer'
+											: 'text-black-600 cursor-pointer hover:text-[#f5006d]'
 									}
 									key={`page_${page}`}
 									onClick={() => onPageChange(page)}

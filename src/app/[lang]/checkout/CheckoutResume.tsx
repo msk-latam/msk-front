@@ -73,7 +73,7 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 	const installmentValueWithDiscount = totalWithDiscount / 12;
 
 	return (
-		<div className='p-6 mt-24 bg-white border border-gray-300 rounded-lg'>
+		<div className='p-5 mt-16 bg-white border border-gray-300 rounded-3xl'>
 			<h2 className='text-2xl font-semibold text-[#392C35]'>Resumen de inscripción</h2>
 
 			<div className='mt-4'>

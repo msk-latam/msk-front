@@ -16,13 +16,13 @@ const StepButtons: React.FC<StepButtonsProps> = ({
 	isDisabled = false,
 }) => {
 	return (
-		<div className='my-6 gap-4 flex flex-col md:flex-row justify-end'>
+		<div className='md:mt-24 mt-5 flex flex-col md:flex-row justify-start'>
 			<button
 				type='button'
-				className={`px-12 py-3 font-bold rounded-md transition focus:outline-none focus:ring-2 ${
+				className={`px-12 py-3 font-bold rounded-[38px] transition focus:outline-none focus:ring-2 ${
 					isDisabled
 						? 'bg-gray-400 text-gray-600 border border-gray-400 cursor-not-allowed'
-						: 'text-[#9200AD] border border-[#9200AD] bg-transparent'
+						: 'text-white transition-all duration-300 bg-[#9200AD] rounded-[38px] hover:bg-[#B814D6]'
 				}`}
 				onClick={handlePreviousStep}
 				disabled={isDisabled}

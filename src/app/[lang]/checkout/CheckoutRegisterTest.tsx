@@ -292,14 +292,14 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 
 	return (
 		<>
-			<h2 className='flex items-center text-[#392C35] text-2xl font-semibold my-8'>
+			<h2 className='flex items-center text-[#1A1A1A] text-2xl mb-8 font-raleway font-medium'>
 				<span className='flex items-center justify-center w-5 h-5 mr-2 border rounded-full border-[#392C35] bg-white !text-sm'>
 					1
 				</span>
 				Crear cuenta
 			</h2>
 
-			<div className='p-6 bg-white border border-gray-300 rounded-lg'>
+			<div className='p-6 bg-white border border-gray-300 rounded-3xl'>
 				<UserForm
 					handleBlur={handleBlur}
 					handleChange={handleChange}
@@ -331,7 +331,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 				</div>
 			</div>
 			<div className='items-center justify-center block lg:flex lg:justify-between'>
-				<p className='my-6 font-bold text-red-500'> {error}</p>
+				<p className='my-6 font-bold text-[#f5006d]'> {error}</p>
 				<CheckoutRegisterButtons
 					formData={formDataUser}
 					errors={errors}

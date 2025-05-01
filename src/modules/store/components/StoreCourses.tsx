@@ -167,7 +167,7 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 					))}
 				</div>
 			) : error ? (
-				<p className='text-red-500'>{error}</p> // Show error message
+				<p className='text-[#f5006d]'>{error}</p> // Show error message
 			) : (
 				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
 					{courses.length > 0 ? (

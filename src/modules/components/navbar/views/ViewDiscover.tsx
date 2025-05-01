@@ -30,7 +30,7 @@ const ViewDiscover: React.FC<Props> = ({ navigateTo, isMobile = true, onClose })
   }
 
   if (error) {
-    return <div className="p-4 text-center text-red-500">Error: {error}</div>;
+    return <div className="p-4 text-center text-[#f5006d]">Error: {error}</div>;
   }
 
   if (!data) {

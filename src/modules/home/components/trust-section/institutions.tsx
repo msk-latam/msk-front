@@ -13,7 +13,7 @@ const Institutions = () => {
   }
 
   if (error) {
-    return <div className="text-center text-red-500">Error: {error}</div>;
+    return <div className="text-center text-[#f5006d]">Error: {error}</div>;
   }
 
   return (

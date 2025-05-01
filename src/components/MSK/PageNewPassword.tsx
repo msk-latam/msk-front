@@ -89,7 +89,7 @@ const PageNewPassword: FC<PageNewPasswordProps> = ({ className = '' }) => {
               Iniciar sesión
             </NcLink>
           </span> */}
-					<p className='text-red-500 text-center'>{error}</p>
+					<p className='text-[#f5006d] text-center'>{error}</p>
 				</div>
 			</LayoutPage>
 		</div>
