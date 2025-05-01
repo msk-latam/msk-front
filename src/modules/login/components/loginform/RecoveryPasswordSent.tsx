@@ -103,12 +103,6 @@ export default function NewPasswordForm() {
 					<p className='text-sm text-gray-600 max-w-md mx-auto'>
 						Revisa tu bandeja de entrada, spam o correos no deseados y sigue los pasos detallados.
 					</p>
-					<button
-						onClick={() => setEmailSent(false)}
-						className='mt-6 bg-[#9200ad] hover:bg-purple-800 text-white py-3 px-6 rounded-full'
-					>
-						Continuar
-					</button>
 				</section>
 			</div>
 		);
