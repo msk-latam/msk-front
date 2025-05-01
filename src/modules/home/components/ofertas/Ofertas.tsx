@@ -1,11 +1,10 @@
 'use client';
 
-import React from 'react';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
 import { useOffers } from '@/modules/home/hooks/useOffer';
 import OffersSkeleton from '@/modules/home/skeletons/OfertasSkeleton'; // 👈 Importamos el Skeleton
+import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 const stripHtml = (html: string) => {
 	if (!html) return '';
@@ -15,7 +14,7 @@ const stripHtml = (html: string) => {
 // Componente de descuento y botón
 const DiscountAndButton = ({ offer, discountNumber, descLine1, descLine2 }: any) => {
 	const pathname = usePathname();
-	const lang = pathname.split('/')[1] || 'ar';
+	const lang = pathname?.split('/')[1] || 'ar';
 
 	return (
 		<div className='flex flex-col md:items-end md:flex-row gap-4 mt-6 md:mt-0 w-full md:w-auto md:text-right'>

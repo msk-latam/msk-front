@@ -1,11 +1,17 @@
 import CtaButton from '@/dashboard/components/ui/CtaButton';
-import userData from '@/dashboard/data/dashboardMock.json';
+import { useOffers } from '@/modules/home/hooks/useOffer';
+import router from 'next/router';
 import React from 'react';
 
 const PromoBanner: React.FC = () => {
-	const { promoBanner } = userData;
+	const { data: offer, loading, error } = useOffers();
 
-	if (!promoBanner) return null;
+	if (!offer) return null;
+
+	const content = offer.content.replace(
+		/<ul>/g,
+		'<ul class="list-disc list-outside ml-5 mb-8 space-y-3 md:space-y-4 font-inter text-base md:text-xl max-w-[500px]">',
+	);
 
 	return (
 		<div className='relative md:rounded-[30px] overflow-hidden -z-10 -mt-4 md:mt-5 text-white min-h-[450px] md:min-h-[350px] flex flex-col'>
@@ -13,7 +19,7 @@ const PromoBanner: React.FC = () => {
 			<div
 				className='absolute inset-0 z-0 bg-cover bg-center'
 				style={{
-					backgroundImage: `url(${promoBanner.backgroundImage})`,
+					backgroundImage: `url(${offer.background_image?.[0]})`,
 				}}
 			></div>
 
@@ -30,17 +36,13 @@ const PromoBanner: React.FC = () => {
 			<div className='relative z-20 flex flex-col flex-grow p-6 mt-40 md:mt-0 md:p-12 justify-between'>
 				{/* Top Text Content */}
 				<div>
-					<p className='text-base md:text-lg font-inter font-normal mb-4 md:mb-8'>{promoBanner.availability}</p>
-					<h2 className='text-3xl md:text-5xl font-raleway flex flex-col gap-2 md:gap-4 mb-6 md:mb-8'>
-						<span className='font-bold'>{promoBanner.title}</span>
-						<span className='font-medium'>{promoBanner.subtitle}</span>
-					</h2>
+					<p className='text-base md:text-lg font-inter font-normal mb-4 md:mb-8'>{offer.pre_text}</p>
+					<h2
+						className='text-3xl md:text-5xl font-raleway flex flex-col gap-2 md:gap-4 mb-6 md:mb-8'
+						dangerouslySetInnerHTML={{ __html: offer.title }}
+					/>
 
-					<ul className='list-disc list-outside ml-5 mb-8 space-y-3 md:space-y-4 font-inter text-base md:text-xl max-w-[500px]'>
-						{promoBanner.features.map((feature, index) => (
-							<li key={index}>{feature}</li>
-						))}
-					</ul>
+					<div className='max-w-[500px]' dangerouslySetInnerHTML={{ __html: content }} />
 				</div>
 
 				{/* Discount and Button Section - Flow on Mobile, Absolute on Desktop */}
@@ -48,7 +50,7 @@ const PromoBanner: React.FC = () => {
 					{/* Discount - Centered Text on Mobile */}
 					<div className='flex items-end gap-2 text-center md:text-right'>
 						<span className='text-6xl md:text-[78.49px] font-inter font-bold leading-none md:leading-[100%] tracking-tighter md:tracking-[-13%]'>
-							{promoBanner.discount.percentage}
+							20%
 						</span>
 						<div className='flex flex-col items-center md:items-start gap-1 md:gap-2'>
 							<span className='font-inter font-extralight text-4xl md:text-[47.42px] leading-none md:leading-[100%]'>%</span>
@@ -56,18 +58,17 @@ const PromoBanner: React.FC = () => {
 								OFF
 							</span>
 						</div>
-						<span className='text-xl md:text-[26.16px] font-inter font-extrabold leading-tight md:leading-[90%] tracking-[-2.5%] opacity-90 whitespace-pre-line text-center md:text-start'>
-							{promoBanner.discount.description}
+						<span className='text-xl md:text-[26.16px] font-inter font-extrabold leading-tight md:leading-[90%] tracking-[-2.5%] opacity-90 whitespace-pre-line text-center md:text-start max-w-[160px]'>
+							en tu inscripción
 						</span>
 					</div>
 					{/* Button - Full width on mobile? No, keep original size but centered below discount */}
 					<div className='w-full flex justify-center md:w-auto mb-10 md:mb-0'>
 						<CtaButton
-							// onClick={() => router.push(promoBanner.buttonLink)} // Add routing later
-							onClick={() => {}}
+							onClick={() => router.push(offer.cta.url)} // Add routing later
 							showIcon={true}
 						>
-							{promoBanner.buttonText}
+							{offer.cta.title}
 						</CtaButton>
 					</div>
 				</div>
