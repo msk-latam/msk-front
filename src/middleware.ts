@@ -65,6 +65,15 @@ export function middleware(request: NextRequest) {
 	if (!supportedLanguages.includes(firstSegment)) {
 		return NextResponse.rewrite(new URL(`/ar${pathname}`, request.url));
 	}
+	// 🔁 Redirige /change-pass/?token=... a /[lang]/login?form=change-pass&token=...
+	if (pathname === '/change-pass' && request.nextUrl.searchParams.has('token')) {
+		const token = request.nextUrl.searchParams.get('token');
+		const country = request.cookies.get('country')?.value || 'ar';
+		const newUrl = new URL(`/${country}/login`, origin);
+		newUrl.searchParams.set('form', 'change-pass');
+		newUrl.searchParams.set('token', token!);
+		return NextResponse.redirect(newUrl);
+	}
 
 	// Todo lo demás OK
 	return NextResponse.next();

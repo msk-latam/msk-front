@@ -19,8 +19,13 @@ export default function LoginRouterHandler() {
 	useEffect(() => {
 		if (formParam === 'registerForm') {
 			setShowRegister(true);
+		} else if (formParam === 'change-pass') {
+			setShowRecoverySent(true);
+			setShowRecovery(false); // ✅ importante: no muestres el formulario de email
 		} else {
 			setShowRegister(false);
+			setShowRecovery(false);
+			setShowRecoverySent(false);
 		}
 	}, [formParam]);
 

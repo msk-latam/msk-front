@@ -78,7 +78,6 @@ export default function NewPasswordForm() {
 	const password = watch('password') || '';
 	const [showPassword, setShowPassword] = useState(false);
 	const [submitted, setSubmitted] = useState(false);
-	const [emailSent, setEmailSent] = useState(true);
 
 	const passwordHints = [
 		{ label: 'Debe tener al menos 8 caracteres', valid: password.length >= 8 },
@@ -89,24 +88,6 @@ export default function NewPasswordForm() {
 	];
 
 	const isPasswordValid = passwordHints.every((hint) => hint.valid);
-
-	if (emailSent) {
-		return (
-			<div className='w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:mb-24 py-10 z-[10] relative overflow-visible max-w-[1600px] h-screen md:h-full flex md:items-center justify-center'>
-				<section className='w-full max-w-[1632px] relative z-[1] mx-auto px-4 py-6 sm:py-12 text-center'>
-					<div className='flex justify-center w-full animate-pulse'>
-						<div className='w-44 mx-auto h-auto p-6'>
-							<img src='/images/emails/email-icon.svg' alt='Correo enviado' />
-						</div>
-					</div>
-					<h2 className='text-2xl sm:text-3xl font-semibold text-gray-900 mb-6 md:mb-2'>Correo enviado</h2>
-					<p className='text-sm text-gray-600 max-w-md mx-auto'>
-						Revisa tu bandeja de entrada, spam o correos no deseados y sigue los pasos detallados.
-					</p>
-				</section>
-			</div>
-		);
-	}
 
 	if (submitted) {
 		return (
@@ -136,7 +117,41 @@ export default function NewPasswordForm() {
 					<p className='text-base md:text[18px] text-gray-500'>Elige una nueva clave para iniciar sesión</p>
 				</div>
 
-				<form onSubmit={handleSubmit(() => setSubmitted(true))} className='max-w-md mx-auto space-y-5'>
+				<form
+					onSubmit={handleSubmit(async ({ password }) => {
+						const urlParams = new URLSearchParams(window.location.search);
+						const token = urlParams.get('token');
+
+						if (!token) {
+							alert('Token inválido.');
+							return;
+						}
+
+						try {
+							const res = await fetch('https://laravel-api.msklatam.com/msk-laravel/public/api/newPassword', {
+								method: 'POST',
+								headers: {
+									'Content-Type': 'application/json',
+								},
+								body: JSON.stringify({
+									password,
+									validator: token,
+								}),
+							});
+
+							if (res.ok) {
+								setSubmitted(true);
+							} else {
+								const data = await res.json();
+								alert(data.message || 'Ocurrió un error al cambiar la contraseña.');
+							}
+						} catch (err) {
+							console.error(err);
+							alert('Error de red. Intenta nuevamente.');
+						}
+					})}
+					className='max-w-md mx-auto space-y-5'
+				>
 					<div>
 						<label className='block text-sm font-medium text-[#1a1a1a] text-left pl-2 mb-2'>Nueva contraseña</label>
 						<div className='relative'>
