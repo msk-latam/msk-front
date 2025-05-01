@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Search } from "react-feather";
 import { useSpecialtyDetailView } from "../hooks/useSpecialtyDetailView";
 import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
@@ -27,6 +27,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const { data, loading } = useSpecialtyDetailView();
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredResults, setFilteredResults] = useState<any[]>([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+  
   const router = useRouter();
   const pathname = usePathname();
   const firstSegment = pathname?.split('/')[1];
@@ -43,17 +46,44 @@ const SearchBar: React.FC<SearchBarProps> = ({
   useEffect(() => {
     if (searchTerm.trim() === "") {
       setFilteredResults([]);
+      setIsDropdownOpen(false);
     } else {
       const allCourses = data.flatMap(item => item.courses);
       const filtered = allCourses.filter(course =>
         course.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setFilteredResults(filtered);
+      setIsDropdownOpen(true);
     }
   }, [searchTerm, data]);
 
+  // Event listener para cerrar el dropdown al hacer clic fuera
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    // Añadir event listener cuando el dropdown está abierto
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    // Cleanup function para remover el event listener
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
+  };
+
+  const handleInputFocus = () => {
+    if (searchTerm.trim() !== "" && filteredResults.length > 0) {
+      setIsDropdownOpen(true);
+    }
   };
 
   // ✅ Redirige a /tienda/curso.url
@@ -63,6 +93,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     // Use window.location.href for consistent navigation across all pages
     window.location.href = storeUrl;
     setSearchTerm("");
+    setIsDropdownOpen(false);
   };
   
   const handleSearchRedirect = () => {
@@ -89,13 +120,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
   );
   
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative ${className}`} ref={searchContainerRef}>
       <div className="rounded-full border border-[#DBDDE2]-100 overflow-hidden relative flex items-center">
         <input
           type="search"
           placeholder={placeholder}
           value={searchTerm}  
           onChange={handleInputChange}
+          onFocus={handleInputFocus}
           onKeyDown={handleKeyDown}
           className={`bg-transparent w-full text-sm py-3 pl-4 pr-12 border-transparent focus:border-transparent focus:ring-0 focus:outline-none ${inputTextStyle}`}
         />
@@ -108,7 +140,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         </button>
       </div>
 
-      {searchTerm && filteredResults.length > 0 && (
+      {isDropdownOpen && searchTerm && filteredResults.length > 0 && (
         <ul className="absolute z-10 w-full bg-white border mt-2 rounded-lg shadow-md max-h-60 overflow-y-auto">
           {uniqueResults.map(course => (
             <li
@@ -122,7 +154,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         </ul>
       )}
 
-      {searchTerm && !loading && filteredResults.length === 0 && (
+      {isDropdownOpen && searchTerm && !loading && filteredResults.length === 0 && (
         <div className="absolute z-10 w-full bg-white border mt-2 rounded-lg shadow-md p-4 text-gray-500">
           No se encontraron resultados.
         </div>
