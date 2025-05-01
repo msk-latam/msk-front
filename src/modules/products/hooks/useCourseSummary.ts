@@ -7,6 +7,8 @@ interface CourseSummaryData {
 	total_price: string;
 	max_installments: string;
 	price_installments: number;
+	currency: string;
+	currency_code: string;
 	featured_images: {
 		high: string;
 		medium: string;
@@ -61,6 +63,8 @@ export function useCourseSummary(slug: string, lang: string) {
 					modules: result.modules,
 					certification: true,
 					cedente: result.cedente,
+					currency: result.prices.currency,
+					currency_code: result.prices.currency_code,
 				};
 
 				setData(setResutl || null);
