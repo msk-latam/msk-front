@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import TrustSectionSkeleton from '@/modules/home/skeletons/TrustSectionSkeleton'; // Importamos el Skeleton
+import { useState } from 'react';
+import { useSwipeable } from 'react-swipeable';
 import { useTrustSection } from '../../hooks/useTrustSection';
 import Institutions from './institutions';
-import { useSwipeable } from 'react-swipeable';
-import TrustSectionSkeleton from '@/modules/home/skeletons/TrustSectionSkeleton'; // Importamos el Skeleton
 
 const TrustSection = () => {
   const { data, loading, error } = useTrustSection();
@@ -55,7 +55,7 @@ const TrustSection = () => {
               >
                 <div className="flex items-center gap-4 mb-4">
                   <img
-                    src={testimonial.avatar[0]}
+                    src={testimonial.picture}
                     alt={testimonial.name}
                     className="w-10 h-10 rounded-full object-cover border border-white shadow"
                   />
@@ -64,11 +64,10 @@ const TrustSection = () => {
                   </p>
                 </div>
                 <div className="flex flex-col justify-between flex-grow">
-                  <p className="text-[18px] font-normal mb-4 min-h-[96px] leading-snug">
-                    {testimonial.opinion}
+                  <p className="text-[18px] font-normal mb-4 min-h-[96px] leading-snug" dangerouslySetInnerHTML={{ __html: testimonial.review }}>
                   </p>
                   <p className="text-right text-sm font-medium flex items-center justify-end gap-1 text-black">
-                    5/5 <span className="text-black text-base">★</span>
+                    {testimonial.stars}/5 <span className="text-black text-base">★</span>
                   </p>
                 </div>
               </div>
