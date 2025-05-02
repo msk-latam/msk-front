@@ -17,10 +17,10 @@ const DiscountAndButton = ({ offer, discountNumber, descLine1, descLine2 }: any)
 	const lang = pathname?.split('/')[1] || 'ar';
 
 	return (
-		<div className='flex flex-col md:items-end md:flex-row gap-4 mt-6 md:mt-0 w-full md:w-auto md:text-right'>
-			<div className='flex items-end gap-2 text-left md:text-right w-full md:w-auto'>
+		<div className='flex flex-col md:items-end md:flex-row gap-4 mt-6 md:mt-4 w-full md:w-auto md:text-right'>
+			<div className='md:hidden flex items-end gap-2 text-left md:text-right w-full md:w-auto'>
 				<span className='text-6xl md:text-[78.49px] font-inter font-bold leading-none tracking-tighter'>
-					+{discountNumber}
+					{discountNumber}
 				</span>
 				<div className='flex flex-col items-center md:items-start gap-1'>
 					<span className='font-inter font-extralight text-4xl md:text-[47.42px] leading-none'>%</span>
@@ -36,10 +36,10 @@ const DiscountAndButton = ({ offer, discountNumber, descLine1, descLine2 }: any)
 			</div>
 
 			<a
-				href={getLocalizedUrl(lang, '/tienda?recurso=curso')}
+				href={getLocalizedUrl(lang, offer.cta?.url)}
 				className='bg-[#1A1A1A] text-white px-6 md:mt-4 py-3 rounded-full font-inter font-medium shadow-md hover:bg-gray-800 transition text-sm w-full md:w-auto flex flex-row gap-2 justify-center items-center'
 			>
-				<p className='my-auto'>{offer.cta?.title || 'Reservá tu cupo ahora'}</p>
+				<p className='my-auto'>{offer.cta?.title || ''}</p>
 				<svg width='25' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'>
 					<path
 						d='M5.21582 12H19.2158M19.2158 12L12.2158 5M19.2158 12L12.2158 19'
@@ -131,6 +131,22 @@ const Ofertas = () => {
 								</li>
 							))}
 					</ul>
+					<div className='flex items-end gap-2 text-left md:text-right w-full md:w-auto'>
+						<span className='text-6xl md:text-[78.49px] font-inter font-bold leading-none tracking-tighter'>
+							{discountNumber}
+						</span>
+						<div className='flex flex-col items-center md:items-start gap-1'>
+							<span className='font-inter font-extralight text-4xl md:text-[47.42px] leading-none'>%</span>
+							<span className='text-sm md:text-[19.62px] font-inter font-light leading-none whitespace-pre-line'>OFF</span>
+						</div>
+						{(descLine1 || descLine2) && (
+							<span className='text-xl md:text-[26.16px] font-inter font-extrabold leading-tight opacity-90 whitespace-pre-line text-left md:text-start'>
+								<span>en tu</span>
+								<br />
+								<span>inscripción</span>
+							</span>
+						)}
+					</div>
 				</div>
 
 				{/* Texto Mobile */}
@@ -158,7 +174,7 @@ const Ofertas = () => {
 				</div>
 
 				{/* Botón Desktop */}
-				<div className='hidden md:block md:absolute md:bottom-12 md:right-12 md:translate-y-[-80px] md:translate-x-[20px]'>
+				<div className='hidden md:block md:absolute md:bottom-12 md:right-12 md:mt-20 md:translate-y-[-30px] md:translate-x-[20px]'>
 					<DiscountAndButton offer={offer} discountNumber={discountNumber} descLine1={descLine1} descLine2={descLine2} />
 				</div>
 			</div>
