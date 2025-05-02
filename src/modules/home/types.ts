@@ -87,15 +87,15 @@ export interface MasterclassAPIItem {
 
 // Mapper para transformar MasterclassAPIItem en Professional[]
 export const mapMasterclassToProfessionals = (mc: MasterclassAPIItem): Professional[] => {
-	const descripcionGlobal = mc.description?.trim() || 'Descripción no disponible';
+	const descripcionGlobal = mc.description?.trim() || '';
 
 	if (!mc.doctors || mc.doctors.length === 0) {
 		return [
 			{
 				nombre: mc.title,
 				especialidad: descripcionGlobal,
-				imagenDesktop: mc.background_image?.[0] || '/images/masterclass/fallback-desktop.jpg',
-				imagenMobile: mc.background_image?.[0] || '/images/masterclass/fallback-mobile.jpg',
+				imagenDesktop: mc.background_image?.[0] || '',
+				imagenMobile: mc.background_image?.[0] || '',
 				perfilUrl: mc.link?.url || '#',
 			},
 		];
@@ -103,9 +103,9 @@ export const mapMasterclassToProfessionals = (mc: MasterclassAPIItem): Professio
 
 	return mc.doctors.map((doctor) => ({
 		nombre: doctor.name,
-		especialidad: doctor.specialty?.trim() || 'Cardiólogo',
-		imagenDesktop: doctor.image || '/images/masterclass/fallback-desktop.jpg',
-		imagenMobile: doctor.image || '/images/masterclass/fallback-mobile.jpg',
+		especialidad: doctor.specialty?.trim() || '',
+		imagenDesktop: doctor.image || '',
+		imagenMobile: doctor.image || '',
 		perfilUrl: doctor.link || mc.link?.url || '#',
 	}));
 };

@@ -54,7 +54,7 @@ const ProfessionalCardMobile = ({ pro }: { pro: Professional }) => {
 
 				{/* Tiempo estimado si se agrega al tipo más adelante */}
 				{/* <h1 className="text-[14px] font-Raleway font-500 mt-2">1 hora 7 minutos</h1> */}
-				<h1 className='text-[14px] font-Raleway font-500 mt-2'>{pro.duration || '1 hora 7 minutos'}</h1>
+				<h1 className='text-[14px] font-Raleway font-500 mt-2'>{pro.duration || ''}</h1>
 			</div>
 		</Link>
 	);
