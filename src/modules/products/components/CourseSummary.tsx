@@ -50,6 +50,8 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 	if (loading) {
 		return <SkeletonCourseSummaryCard />; // Usa el Skeleton cuando los datos están cargando
 	}
+
+	const isSpanishVersion = lang?.toLowerCase().startsWith('es');
 	return (
 		<div className='bg-white rounded-[38px] p-6 md:p-8 sticky top-10 w-full' style={{ backgroundColor: '#FFFFFF' }}>
 			<Image
@@ -117,11 +119,13 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 
 			{/* Botones CTA */}
 			<div className='space-y-3'>
-				<Link href={getLocalizedUrl(lang, `/checkout/${slug}`)}>
-					<button className='bg-[#9200AD] hover:bg-[#6b1679] text-white w-full py-3 rounded-full font-inter font-medium text-base transition'>
-						Inscríbete ahora
-					</button>
-				</Link>
+				{!isSpanishVersion && (
+					<Link href={getLocalizedUrl(lang, `/checkout/${slug}`)}>
+						<button className='bg-[#9200AD] hover:bg-[#6b1679] text-white w-full py-3 rounded-full font-inter font-medium text-base transition'>
+							Inscríbete ahora
+						</button>
+					</Link>
+				)}
 				<a href='#course-support-form' className='block'>
 					<button className='w-full border border-gray-300 text-[#1A1A1A] hover:bg-gray-100 flex items-center justify-center py-3 rounded-full font-inter font-bold text-base gap-2 transition'>
 						Contáctanos
