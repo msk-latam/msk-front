@@ -1,10 +1,11 @@
-// app/layout.tsx
 import { Inter, Raleway } from 'next/font/google';
 import './globals.css';
-import LoaderLayout from './LoaderLayout'; // Ajustá el path
+import LoaderLayout from './LoaderLayout';
 import { CountryProvider } from '@/context/country/CountryProvider';
 import Script from 'next/script';
 import LanguageCookieUpdater from '@/utils/LanguageCookieUpdater';
+import GoogleCaptchaWrapper from '@/context/google/Recaptcha';
+import UTMProvider from '@/context/utm/UTMProvider'; // ✅ Añadí este
 
 const inter = Inter({
 	subsets: ['latin'],
@@ -21,26 +22,11 @@ const raleway = Raleway({
 	weight: ['400', '500', '600', '700'],
 });
 
-const ralewayItalic = Raleway({
-	subsets: ['latin'],
-	style: 'italic',
-	variable: '--font-lora-italic',
-	weight: ['400', '500', '600', '700'],
-});
-
-const interItalic = Inter({
-	subsets: ['latin'],
-	style: 'italic',
-	variable: '--font-lora-italic',
-	weight: ['400', '500', '600', '700'],
-});
-
 export const metadata = {
 	title: 'MSK',
 	description: 'Cursos de medicina online para toda Latinoamérica',
 	icons: {
-		icon: '/isotipo.svg', // o '/favicon.ico'
-		// apple: '/apple-touch-icon.png' // opcional
+		icon: '/isotipo.svg',
 	},
 };
 
@@ -52,13 +38,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				<Script src='https://sdk.rebill.com/v3/rebill.js' defer />
 			</head>
 			<body className={`${inter.variable} ${raleway.variable} font-inter`}>
-				<LoaderLayout /> {/* 👈 Siempre activo */}
-				<CountryProvider>
-					{' '}
-					{/* 👈 Aquí envolvemos todo */}
-					<LanguageCookieUpdater />
-					{children}
-				</CountryProvider>
+				<LoaderLayout />
+				<GoogleCaptchaWrapper>
+					<CountryProvider>
+						<UTMProvider>
+							{' '}
+							{/* ✅ UTM context para utm_state */}
+							<LanguageCookieUpdater />
+							{children}
+						</UTMProvider>
+					</CountryProvider>
+				</GoogleCaptchaWrapper>
 			</body>
 		</html>
 	);
