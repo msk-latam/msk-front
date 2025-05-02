@@ -32,6 +32,9 @@ export default function DownloadSyllabusModal({ fileUrl, onClose, slug }: Downlo
 		acceptTerms: false,
 	});
 
+	const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+	const [errorMessage, setErrorMessage] = useState('');
+
 	const countryName = getCountryNameByCode(formData.areaCode);
 	useEffect(() => {
 		const handleEscKey = (event: KeyboardEvent) => {
@@ -61,9 +64,20 @@ export default function DownloadSyllabusModal({ fileUrl, onClose, slug }: Downlo
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
+		setStatus('loading');
+		setErrorMessage('');
+
 		const { name, lastName, email, phone, areaCode, message, acceptTerms } = formData;
-		if (!name.trim() || !email.trim()) return alert('Por favor, completá tu nombre y correo electrónico.');
-		if (!acceptTerms) return alert('Debes aceptar las condiciones de privacidad.');
+		if (!name.trim() || !email.trim()) {
+			setStatus('error');
+			setErrorMessage('Por favor, completá tu nombre y correo electrónico.');
+			return;
+		}
+		if (!acceptTerms) {
+			setStatus('error');
+			setErrorMessage('Debes aceptar las condiciones de privacidad.');
+			return;
+		}
 
 		const body = {
 			First_Name: name,
@@ -98,8 +112,9 @@ export default function DownloadSyllabusModal({ fileUrl, onClose, slug }: Downlo
 			const result = await response.json();
 
 			if (!response.ok || !Array.isArray(result.data) || result.data[0]?.code !== 'SUCCESS') {
-				console.warn('Error en respuesta del CRM:', result);
-				return alert('No se pudo completar el registro. Intenta nuevamente.');
+				setStatus('error');
+				setErrorMessage('No se pudo completar el registro. Intenta nuevamente.');
+				return;
 			}
 
 			// ✅ Si se registró el lead correctamente, descargar el PDF
@@ -113,14 +128,24 @@ export default function DownloadSyllabusModal({ fileUrl, onClose, slug }: Downlo
 			link.download = `${slug}.pdf`;
 			document.body.appendChild(link);
 			link.click();
+			setStatus('success');
+			setErrorMessage('');
+
+			// Esperar 2 segundos para que el usuario vea el mensaje
 			setTimeout(() => {
+				const link = document.createElement('a');
+				link.href = blobUrl;
+				link.download = `${slug}.pdf`;
+				document.body.appendChild(link);
+				link.click();
 				document.body.removeChild(link);
 				window.URL.revokeObjectURL(blobUrl);
 				onClose();
-			}, 100);
+			}, 2000);
 		} catch (error) {
 			console.error('Error general:', error);
-			alert('Hubo un problema al procesar tu solicitud. Intenta nuevamente.');
+			setStatus('error');
+			setErrorMessage('Hubo un problema al procesar tu solicitud. Intenta nuevamente.');
 		}
 	};
 
@@ -381,6 +406,20 @@ export default function DownloadSyllabusModal({ fileUrl, onClose, slug }: Downlo
 						Descargar temario
 					</button>
 				</form>
+
+				{status === 'loading' && (
+					<div className='mt-4 text-sm text-blue-600 bg-blue-100 rounded-lg p-3 text-center'>Procesando tu solicitud...</div>
+				)}
+
+				{status === 'success' && (
+					<div className='mt-4 text-sm text-green-600 bg-green-100 rounded-lg p-3 text-center'>
+						¡Temario descargado con éxito!
+					</div>
+				)}
+
+				{status === 'error' && (
+					<div className='mt-4 text-sm text-red-600 bg-red-100 rounded-lg p-3 text-center'>{errorMessage}</div>
+				)}
 			</div>
 		</div>
 	);

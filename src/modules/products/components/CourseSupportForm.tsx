@@ -29,6 +29,8 @@ export default function CourseSupportForm() {
 	});
 
 	const { executeRecaptcha } = useGoogleReCaptcha();
+	const [formSent, setFormSent] = useState(false);
+	const [formError, setFormError] = useState('');
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 		const { name, value, type } = e.target;
@@ -43,7 +45,9 @@ export default function CourseSupportForm() {
 		e.preventDefault();
 
 		if (!formData.name || !formData.email || !formData.acceptTerms) {
-			return alert('Por favor, completá los campos obligatorios.');
+			setFormError('Por favor, completá los campos obligatorios.');
+			setFormSent(false);
+			return;
 		}
 
 		const country = getCountryNameByCode(formData.areaCode);
@@ -112,7 +116,9 @@ export default function CourseSupportForm() {
 
 		if (!body.recaptcha_token) {
 			console.error('reCAPTCHA token inválido');
-			return alert('Error al validar reCAPTCHA. Intenta nuevamente.');
+			setFormError('Error al validar reCAPTCHA. Intenta nuevamente.');
+			setFormSent(false);
+			return;
 		}
 
 		try {
@@ -140,7 +146,8 @@ export default function CourseSupportForm() {
 				return alert('No se pudo enviar el formulario. Intenta nuevamente.');
 			}
 
-			alert('¡Gracias! En breve un asesor se comunicará con vos.');
+			setFormSent(true);
+			setFormError('');
 
 			setFormData({
 				name: '',
@@ -157,7 +164,8 @@ export default function CourseSupportForm() {
 			});
 		} catch (error) {
 			console.error('Error general:', error);
-			alert('Hubo un error al enviar el formulario.');
+			setFormError('Hubo un error al enviar el formulario.');
+			setFormSent(false);
 		}
 	};
 
@@ -301,6 +309,14 @@ export default function CourseSupportForm() {
 					</button>
 				</div>
 			</form>
+
+			{formSent && (
+				<div className='text-green-700 bg-green-100 px-4 py-2 rounded-md mt-4'>
+					¡Gracias! En breve un asesor se comunicará con vos.
+				</div>
+			)}
+
+			{formError && <div className='text-red-700 bg-red-100 px-4 py-2 rounded-md mt-4'>{formError}</div>}
 		</div>
 	);
 }
