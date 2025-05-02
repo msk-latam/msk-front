@@ -6,9 +6,11 @@ import Image from "next/image";
 interface Props {
   navigateTo: (view: string, category?: string | null) => void;
   isMobile?: boolean;
+  
+  onClose?: () => void;
 }
 
-const ViewInstitutions: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
+const ViewInstitutions: React.FC<Props> = ({ navigateTo, isMobile = true,onClose }) => {
   if (!isMobile) {
     // Versión desktop
     return (

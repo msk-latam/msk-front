@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ViewMain from "./views/ViewMain";
 import ViewDiscover from "./views/ViewDiscover";
 import ViewSpecialty from "./views/ViewSpecialty";
@@ -26,6 +26,7 @@ const DropdownContent: React.FC<Props> = ({
 }) => {
   const [discoverChildView, setDiscoverChildView] = useState<string | null>(null);
   const [discoverSelectedCategory, setDiscoverSelectedCategory] = useState<string | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const navigateTo = (view: string, category: string | null = null) => {
     if (currentView === "discover" && !isMobile) {
@@ -44,6 +45,30 @@ const DropdownContent: React.FC<Props> = ({
     if (!category) return 0;
     return parseInt(category, 10) || 0;
   };
+
+  // Add click outside handler for desktop view
+  useEffect(() => {
+    if (isMobile) return; // Only apply this for desktop view
+    
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        // Click was outside dropdown - close it
+        if (typeof onClose === 'function') {
+          // Call the onClose function from parent to properly close the entire dropdown
+          onClose();
+        }
+        // Don't navigate to any view - just let onClose handle it
+      }
+    };
+
+    // Add the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    
+    // Clean up the event listener
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMobile, onClose]);
 
   const renderChildView = () => {
     if (!discoverChildView) return null;
@@ -76,10 +101,14 @@ const DropdownContent: React.FC<Props> = ({
 
     if (currentView === "discover") {
       return (
-        <div className={`grid grid-cols-3 gap-4 ${bgClass} overflow-hidden`}>
+        <div ref={dropdownRef} className={`grid grid-cols-3 gap-4 ${bgClass} overflow-hidden`}>
           {/* Left column (ViewDiscover) */}
           <div className="col-span-1 bg-white rounded-b-2xl">
-            <ViewDiscover navigateTo={navigateTo} isMobile={false} />
+            <ViewDiscover 
+              navigateTo={navigateTo} 
+              isMobile={false} 
+              onClose={onClose}
+            />
           </div>
 
           {/* Right column (Child view if exists) */}
@@ -95,19 +124,23 @@ const DropdownContent: React.FC<Props> = ({
     } else if (currentView === "specialty") {
       // Return ViewSpecialty directly - it now handles its own child view
       return (
-        <div className={`${bgClass} overflow-hidden w-full`}>
-          <ViewSpecialty navigateTo={navigateTo} isMobile={false} />
+        <div ref={dropdownRef} className={`${bgClass} overflow-hidden w-full`}>
+          <ViewSpecialty 
+            navigateTo={navigateTo} 
+            isMobile={false} 
+            onClose={onClose}
+          />
         </div>
       );
     }
 
     // Other views
     return (
-      <div className={`${bgClass} overflow-hidden`}>
+      <div ref={dropdownRef} className={`${bgClass} overflow-hidden`}>
         {(() => {
           switch (currentView) {
             case "main":
-              return <ViewMain navigateTo={navigateTo} isMobile={false} />;
+              return <ViewMain navigateTo={navigateTo} isMobile={false} onClose={onClose} />;
             case "specialtyDetail":
               return (
                 <ViewSpecialtyDetail
@@ -115,14 +148,15 @@ const DropdownContent: React.FC<Props> = ({
                   navigateTo={navigateTo}
                   specialtyId={getSpecialtyId(selectedCategory)}
                   isMobile={false}
+                  onClose={onClose}
                 />
               );
             case "institutions":
-              return <ViewInstitutions navigateTo={navigateTo} isMobile={false} />;
+              return <ViewInstitutions navigateTo={navigateTo} isMobile={false} onClose={onClose} />;
             case "offer":
-              return <ViewOffer navigateTo={navigateTo} isMobile={false} />;
+              return <ViewOffer navigateTo={navigateTo} isMobile={false} onClose={onClose} />;
             case "resources":
-              return <ViewResources navigateTo={navigateTo} isMobile={false} />;
+              return <ViewResources navigateTo={navigateTo} isMobile={false} onClose={onClose} />;
             default:
               return null;
           }
@@ -131,15 +165,15 @@ const DropdownContent: React.FC<Props> = ({
     );
   }
 
-  // Mobile layout (unchanged)
+  // Mobile layout
   const getContentMobile = () => {
     switch (currentView) {
       case "main":
         return <ViewMain navigateTo={navigateTo} isMobile onClose={onClose} />;
       case "discover":
-        return <ViewDiscover navigateTo={navigateTo} isMobile />;
+        return <ViewDiscover navigateTo={navigateTo} isMobile onClose={onClose} />;
       case "specialty":
-        return <ViewSpecialty navigateTo={navigateTo} isMobile />;
+        return <ViewSpecialty navigateTo={navigateTo} isMobile onClose={onClose} />;
       case "specialtyDetail":
         return (
           <ViewSpecialtyDetail
@@ -147,19 +181,21 @@ const DropdownContent: React.FC<Props> = ({
             navigateTo={navigateTo}
             specialtyId={getSpecialtyId(selectedCategory)}
             isMobile
+            onClose={onClose}
           />
         );
       case "institutions":
-        return <ViewInstitutions navigateTo={navigateTo} isMobile />;
+        return <ViewInstitutions navigateTo={navigateTo} isMobile onClose={onClose} />;
       case "offer":
-        return <ViewOffer navigateTo={navigateTo} isMobile />;
+        return <ViewOffer navigateTo={navigateTo} isMobile onClose={onClose} />;
       case "resources":
-        return <ViewResources navigateTo={navigateTo} isMobile />;
+        return <ViewResources navigateTo={navigateTo} isMobile onClose={onClose} />;
       default:
         return null;
     }
   };
 
+  // For mobile, we don't need the ref as we're handling the back button manually
   return getContentMobile();
 };
 

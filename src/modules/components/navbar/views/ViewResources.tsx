@@ -7,8 +7,9 @@ import ViewResourcesSkeleton from "../skeletons/ViewResourcesSkeleton";
 interface Props {
   navigateTo: (view: string, category?: string | null) => void;
   isMobile?: boolean;
+  onClose?: () => void;
 }
-const ViewResources: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
+const ViewResources: React.FC<Props> = ({ navigateTo, isMobile = true, onClose }) => {
   // Pass the specialtyId to the hook
   const { data, loading, error } = useResourcesView();
 

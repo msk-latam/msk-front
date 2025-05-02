@@ -7,9 +7,10 @@ import ViewSpecialtySkeleton from "../skeletons/ViewSpecialtySkeleton";
 interface Props {
   navigateTo: (view: string, category?: string | null) => void;
   isMobile?: boolean;
+  onClose?: () => void;
 }
 
-const ViewSpecialty: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
+const ViewSpecialty: React.FC<Props> = ({ navigateTo, isMobile = true,onClose }) => {
   const { data, loading, error } = useSpecialtyView();
   // New state to track the selected specialty in desktop mode
   const [selectedSpecialtyId, setSelectedSpecialtyId] = useState<string | null>(null);
