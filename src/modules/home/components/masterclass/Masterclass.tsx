@@ -109,7 +109,8 @@ const Masterclass = () => {
 						</div>
 						<nav aria-label='Inscripción a Masterclass'>
 							<Link
-								href={getLocalizedUrl(lang, new URL(masterclassLink ?? '#').pathname.replace('/producto/', '/tienda/'))}
+								//href={getLocalizedUrl(lang, new URL(masterclassLink ?? '#').pathname.replace('/producto/', '/tienda/'))}
+								href={getLocalizedUrl(lang, masterclassLink || '')}
 								className='bg-white text-black px-6 py-3 rounded-full font-semibold text-sm md:text-base flex items-center gap-2 w-fit mx-auto md:mx-0 hover:scale-105 transition'
 							>
 								Inscribite ahora

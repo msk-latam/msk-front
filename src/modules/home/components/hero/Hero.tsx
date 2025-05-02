@@ -48,14 +48,9 @@ const Hero = () => {
 
 	const current = slides[currentSlide];
 	const firstHeroImage = backgroundImages[0];
-	console.log('CTA title:', JSON.stringify(current.cta?.title));
-	const normalize = (str?: string) =>
-		str
-			?.trim()
-			.toLowerCase()
-			.normalize('NFD')
-			.replace(/[\u0300-\u036f]/g, '');
-
+	{
+		console.log('CTA URL:', current.cta?.url);
+	}
 	return (
 		<>
 			{firstHeroImage && (
@@ -92,10 +87,7 @@ const Hero = () => {
 								{/* Botón CTA */}
 								<div className='w-full md:w-auto flex justify-center md:justify-end md:pt-[2.5rem]'>
 									<Link
-										href={getLocalizedUrl(
-											lang,
-											normalize(current.cta?.title) === 'registrate ahora' ? '/login' : current.cta?.url || '/tienda',
-										)}
+										href={getLocalizedUrl(lang, current.cta?.url || '')}
 										className='bg-white text-black px-5 py-3 rounded-full text-[14px] hover:scale-105 transition flex items-center gap-2'
 									>
 										{current.cta?.title || 'Comenzá tu experiencia'}
