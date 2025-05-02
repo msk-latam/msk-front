@@ -23,6 +23,7 @@ interface DashboardHeroProps {
 	onEditProfile: (field?: string) => void;
 	isLoading?: boolean;
 	userEmail: string;
+	onOpenCompleteProfileModal: () => void;
 }
 
 const defaultRecommendedCourse = {
@@ -34,7 +35,13 @@ const defaultRecommendedCourse = {
 	buttonLink: '/tienda/endocrinologia-y-nutricion/', // Replace with actual link
 };
 
-const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, isLoading = false, userEmail }) => {
+const DashboardHero: React.FC<DashboardHeroProps> = ({
+	userData,
+	onEditProfile,
+	isLoading = false,
+	userEmail,
+	onOpenCompleteProfileModal,
+}) => {
 	const isEmpty = (value: string | undefined | null) => !value || value.trim() === '';
 	const { interests, updateInterests, isLoading: isInterestsLoading } = useInterests();
 	const [showInvoicesModal, setShowInvoicesModal] = useState(false);
@@ -216,16 +223,15 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 							</div>
 							<div className='mt-4 text-center text-sm'>
 								<span className='text-[#4F5D89]'>{data?.profileCompletion?.message} </span>
-								<a
-									href={data?.profileCompletion?.ctaLink}
+								<button
 									onClick={(e) => {
 										e.preventDefault();
-										handleEditClick();
+										onOpenCompleteProfileModal();
 									}}
 									className='text-[#9200AD] font-medium underline cursor-pointer'
 								>
 									{data?.profileCompletion.ctaText}
-								</a>
+								</button>
 							</div>
 						</div>
 					)}
