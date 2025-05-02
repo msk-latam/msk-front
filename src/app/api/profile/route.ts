@@ -104,26 +104,20 @@ export async function GET() {
 			if (!user.coursesInProgress || user.coursesInProgress.length === 0) {
 				return null;
 			}
-			console.log('Paso 1');
 			const activeCourses = user.coursesInProgress.filter((course: any) => course.Fecha_finalizaci_n === null);
 			if (activeCourses.length === 0) {
 				return null;
 			}
-			console.log('Paso 2');
-			const latestCourse = activeCourses.reduce((latest: any, course: any) => {
-				const latestDate = latest ? new Date(latest.Fecha_de_ltima_sesi_n).getTime() : 0;
-				const courseDate = new Date(course.Fecha_de_ltima_sesi_n).getTime();
-				return courseDate > latestDate ? course : latest;
-			}, null);
-			console.log('Paso 3');
-			// console.log('latestCourse', latestCourse);
-			// console.log('profileCourses', profileCourses);
-			// const courseToEnroll = profileCourses.find((profCourse: any) => profCourse?.entity_id_crm == latestCourse?.id);
 
-			// if (!courseToEnroll) {
-			// 	return null;
-			// }
-			console.log('Paso 4');
+			const latestCourse =
+				activeCourses.length === 1
+					? activeCourses[0]
+					: activeCourses.reduce((latest: any, course: any) => {
+							const latestDate = latest ? new Date(latest.Fecha_de_ltima_sesi_n).getTime() : 0;
+							const courseDate = new Date(course.Fecha_de_ltima_sesi_n).getTime();
+							return courseDate > latestDate ? course : latest;
+					  }, null);
+
 			const courseRes = await fetch(
 				`https://cms1.msklatam.com/wp-json/msk/v1/products?search=${latestCourse.Nombre_de_curso.name}`,
 				{
