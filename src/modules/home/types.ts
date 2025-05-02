@@ -35,19 +35,29 @@ export type CursoCardProps = {
 	inscriptos: number;
 	certificado: string;
 	imagen: string;
-	link: string; // <-- nuevo
+	link: string;
+};
+
+export type OportunidadesResponse = {
+	courses: {
+		title: string;
+		subtitle: string;
+	};
+	novedades: CursoWP[];
+	recomendados: CursoWP[];
+	gratuitos: CursoWP[];
 };
 
 export const mapCursoWPToCursoCard = (curso: CursoWP): CursoCardProps => ({
 	id: curso.id,
-	categoria: curso.categories?.[0]?.name || 'General', // Si `categories` está vacío, se usa "General".
+	categoria: curso.categories?.[0]?.name || 'General',
 	titulo: curso.title,
-	temas: Math.floor(Math.random() * 10 + 5), // Mock para cantidad de temas
-	horas: parseInt(curso.duration || '12'), // Si la duración está vacía, se asume 12 horas.
-	inscriptos: Math.floor(Math.random() * 10000 + 1000), // Mock para inscriptos
-	certificado: 'Incluido', // Valor por defecto
-	imagen: curso.featured_image || '/images/curso-placeholder.jpg', // Si no hay imagen, usa la imagen placeholder
-	link: curso.link, // ← Agregado
+	temas: Math.floor(Math.random() * 10 + 5),
+	horas: parseInt(curso.duration || '12'),
+	inscriptos: Math.floor(Math.random() * 10000 + 1000),
+	certificado: 'Incluido',
+	imagen: curso.featured_image || '',
+	link: curso.link,
 });
 
 // MASTERCLASS SECTION

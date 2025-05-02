@@ -12,15 +12,15 @@ const stripHtml = (html: string) => {
 };
 
 // Componente de descuento y botón
-const DiscountAndButton = ({ offer, discountNumber, descLine1, descLine2 }: any) => {
+const DiscountAndButton = ({ offer, content, discountNumber, descLine1, descLine2 }: any) => {
 	const pathname = usePathname();
 	const lang = pathname?.split('/')[1] || 'ar';
 
 	return (
-		<div className='flex flex-col md:items-end md:flex-row gap-4 mt-6 md:mt-0 w-full md:w-auto md:text-right'>
-			<div className='flex items-end gap-2 text-left md:text-right w-full md:w-auto'>
+		<div className='flex flex-col md:items-end md:flex-row gap-4 mt-6 md:mt-4 w-full md:w-auto md:text-right'>
+			<div className='md:hidden flex items-end gap-2 text-left md:text-right w-full md:w-auto'>
 				<span className='text-6xl md:text-[78.49px] font-inter font-bold leading-none tracking-tighter'>
-					+{discountNumber}
+					{discountNumber}
 				</span>
 				<div className='flex flex-col items-center md:items-start gap-1'>
 					<span className='font-inter font-extralight text-4xl md:text-[47.42px] leading-none'>%</span>
@@ -36,10 +36,10 @@ const DiscountAndButton = ({ offer, discountNumber, descLine1, descLine2 }: any)
 			</div>
 
 			<a
-				href={getLocalizedUrl(lang, '/tienda?recurso=curso')}
+				href={getLocalizedUrl(lang, offer.cta?.url)}
 				className='bg-[#1A1A1A] text-white px-6 md:mt-4 py-3 rounded-full font-inter font-medium shadow-md hover:bg-gray-800 transition text-sm w-full md:w-auto flex flex-row gap-2 justify-center items-center'
 			>
-				<p className='my-auto'>{offer.cta?.title || 'Reservá tu cupo ahora'}</p>
+				<p className='my-auto'>{offer.cta?.title || ''}</p>
 				<svg width='25' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'>
 					<path
 						d='M5.21582 12H19.2158M19.2158 12L12.2158 5M19.2158 12L12.2158 19'
@@ -115,22 +115,31 @@ const Ofertas = () => {
 
 			{/* Contenido */}
 			<div className='relative z-10 w-full overflow-visible max-w-[1600px] mx-auto md:px-4 px-5 py-16 flex flex-col md:flex-row items-center md:items-end md:justify-between justify-end gap-5'>
-				<div className='text-left text-white max-w-xl font-raleway hidden md:block mt-20'>
-					<p className='text-base mb-4 font-inter font-normal translate-y-[-190px]'>{stripHtml(offer.pre_text)}</p>
-					<h2 className='text-5xl leading-none font-raleway translate-y-[-150px]'>
-						<span className='whitespace-nowrap font-bold'>{firstTitlePart}</span>{' '}
-						<span className='font-medium text-[45px] whitespace-nowrap'>{secondTitlePart}</span>
-					</h2>
-					<ul className='text-2xl mt-6 space-y-10 leading-snug list-disc list-outside ml-4 translate-y-[-120px]'>
-						{stripHtml(offer.content || '')
-							.split(/\n|\r|\r\n/)
-							.filter((line) => line.trim() !== '')
-							.map((line, idx) => (
-								<li key={idx} className='whitespace-pre-line'>
-									{line}
-								</li>
-							))}
-					</ul>
+				<div className='text-left text-white max-w-xl  font-raleway hidden md:block mt-0 leading-[100px]'>
+					<div>
+						<p className='text-base md:text-lg font-raleway mb-4 md:mb-20 font-regular   '>{offer.pre_text}</p>
+
+						<h2
+							className='text-3xl md:text-5xl font-raleway flex flex-col gap-2 md:gap-4 mb-6 md:mb-32 line-height: 1rem; whitespace-nowrap'
+							dangerouslySetInnerHTML={{ __html: offer.title }}
+						/>
+
+						<div
+							className='max-w-[500px] md:-mt-20 font-raleway font-semibold md:text-[25px] md: whitespace-nowrap '
+							dangerouslySetInnerHTML={{ __html: offer.content }}
+						/>
+					</div>
+					<div className='flex items-end gap-2 text-left md:text-right w-full md:w-auto'>
+						<span className='text-6xl md:text-[78.49px] font-inter font-bold leading-none tracking-tighter'>
+							{discountNumber}
+						</span>
+						<div className='flex flex-col items-center md:items-start gap-1'>
+							<span className='font-inter font-extralight text-4xl md:text-[40.42px] leading-none'>{descLine1}</span>
+						</div>
+						<span className='text-xl md:text-[26.16px] md:mt-10 font-inter font-extrabold leading-tight opacity-90  text-left md:text-start whitespace-nowrap'>
+							{descLine2}
+						</span>
+					</div>
 				</div>
 
 				{/* Texto Mobile */}
@@ -158,7 +167,7 @@ const Ofertas = () => {
 				</div>
 
 				{/* Botón Desktop */}
-				<div className='hidden md:block md:absolute md:bottom-12 md:right-12 md:translate-y-[-80px] md:translate-x-[20px]'>
+				<div className='hidden md:block md:absolute md:bottom-12 md:right-12 md:mt-20 md:translate-y-[-10px] md:translate-x-[20px]'>
 					<DiscountAndButton offer={offer} discountNumber={discountNumber} descLine1={descLine1} descLine2={descLine2} />
 				</div>
 			</div>
