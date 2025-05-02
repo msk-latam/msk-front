@@ -134,16 +134,11 @@ const Ofertas = () => {
 							{discountNumber}
 						</span>
 						<div className='flex flex-col items-center md:items-start gap-1'>
-							<span className='font-inter font-extralight text-4xl md:text-[47.42px] leading-none'>%</span>
-							<span className='text-sm md:text-[19.62px] font-inter font-light leading-none whitespace-pre-line'>OFF</span>
+							<span className='font-inter font-extralight text-4xl md:text-[40.42px] leading-none'>{descLine1}</span>
 						</div>
-						{(descLine1 || descLine2) && (
-							<span className='text-xl md:text-[26.16px] font-inter font-extrabold leading-tight opacity-90 whitespace-pre-line text-left md:text-start'>
-								<span>en tu</span>
-								<br />
-								<span>inscripción</span>
-							</span>
-						)}
+						<span className='text-xl md:text-[26.16px] md:mt-10 font-inter font-extrabold leading-tight opacity-90  text-left md:text-start whitespace-nowrap'>
+							{descLine2}
+						</span>
 					</div>
 				</div>
 
@@ -172,7 +167,7 @@ const Ofertas = () => {
 				</div>
 
 				{/* Botón Desktop */}
-				<div className='hidden md:block md:absolute md:bottom-12 md:right-12 md:mt-20 md:translate-y-[-30px] md:translate-x-[20px]'>
+				<div className='hidden md:block md:absolute md:bottom-12 md:right-12 md:mt-20 md:translate-y-[-10px] md:translate-x-[20px]'>
 					<DiscountAndButton offer={offer} discountNumber={discountNumber} descLine1={descLine1} descLine2={descLine2} />
 				</div>
 			</div>
