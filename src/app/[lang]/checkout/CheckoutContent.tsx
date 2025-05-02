@@ -9,6 +9,7 @@ import CheckoutPaymentStripe from './CheckoutPaymentStripe';
 import { rebillCountries } from './utils/utils';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import CheckoutPaymentMercadoPago from './CheckoutPaymentMercadoPago';
 interface CheckoutContentProps {
 	product: any;
 	country: string;
@@ -27,12 +28,16 @@ const CheckoutContent: React.FC<CheckoutContentProps> = ({ product, country }) =
 	} = useCheckout();
 
 	//const activeStep = 0;
+	console.log(country);
 
 	if (activeStep === 2) {
 		if (subStep === 0) {
 			return <PaymentTypeSelection />;
 		}
 		if (subStep === 1) {
+			if (country === 'ar') {
+				return <CheckoutPaymentMercadoPago product={product} country={country} />;
+			}
 			return rebillCountries.includes(country) ? (
 				<CheckoutPaymentTest product={product} country={country} />
 			) : (

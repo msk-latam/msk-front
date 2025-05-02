@@ -257,7 +257,7 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 	console.log(isSubmitting);
 
 	return (
-		<div className='mt-24'>
+		<div className='mt-16'>
 			<CheckoutRebill country={country} formData={rebillForm} />
 			<StepButtons
 				isDisabled={isSubmitting}
