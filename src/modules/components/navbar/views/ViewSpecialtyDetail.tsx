@@ -15,6 +15,7 @@ interface Props {
   specialtyId: number;
   isMobile?: boolean;
   onBack?: () => void;
+  onClose?: () => void;
 }
 
 const ViewSpecialtyDetail: React.FC<Props> = ({ 
@@ -22,7 +23,8 @@ const ViewSpecialtyDetail: React.FC<Props> = ({
   navigateTo, 
   specialtyId, 
   isMobile = true, 
-  onBack 
+  onBack,
+  onClose
 }) => {
   const pathname = usePathname();
 const firstSegment = pathname?.split('/')[1];

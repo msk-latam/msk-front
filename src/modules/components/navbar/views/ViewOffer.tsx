@@ -11,9 +11,10 @@ import { supportedLanguages } from '@/config/languages';
 interface Props {
   navigateTo: (view: string, category?: string | null) => void;
   isMobile?: boolean;
+  onClose?: () => void;
 }
 
-const ViewOffer: React.FC<Props> = ({ navigateTo, isMobile = true }) => {
+const ViewOffer: React.FC<Props> = ({ navigateTo, isMobile = true,onClose }) => {
   // Pass the specialtyId to the hook
   const { data, loading, error } = useOfferView();
   const pathname = usePathname();
