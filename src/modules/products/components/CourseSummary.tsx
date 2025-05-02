@@ -22,25 +22,29 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 	const duration = data?.duration + ' horas estimadas';
 	const certification = data?.certification;
 	const max_installments = data?.max_installments;
+	const showPrice = lang.toLowerCase() !== 'es';
 
-	const price = data?.price_installments
-		? new Intl.NumberFormat(data?.currency_code, {
-				style: 'currency',
-				currency: data?.currency,
-				maximumFractionDigits: 0,
-		  })
-				.format(Number(data.price_installments))
-				.replace(',', '.')
-		: '';
-	const total_price = data?.total_price
-		? new Intl.NumberFormat(data?.currency_code, {
-				style: 'currency',
-				currency: data?.currency,
-				maximumFractionDigits: 0,
-		  })
-				.format(Number(data.total_price))
-				.replace(',', '.')
-		: '';
+	const price =
+		showPrice && data?.price_installments && data?.currency_code && data?.currency
+			? new Intl.NumberFormat(data.currency_code, {
+					style: 'currency',
+					currency: data.currency,
+					maximumFractionDigits: 0,
+			  })
+					.format(Number(data.price_installments))
+					.replace(',', '.')
+			: '';
+
+	const total_price =
+		showPrice && data?.total_price && data?.currency_code && data?.currency
+			? new Intl.NumberFormat(data.currency_code, {
+					style: 'currency',
+					currency: data.currency,
+					maximumFractionDigits: 0,
+			  })
+					.format(Number(data.total_price))
+					.replace(',', '.')
+			: '';
 
 	const cedente = data?.cedente;
 	if (loading) {
@@ -56,7 +60,7 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 				height={300}
 			/>
 			{/* Total y precio */}
-			{data?.total_price && Number(data.total_price) > 0 && (
+			{showPrice && data?.total_price && Number(data.total_price) > 0 && (
 				<>
 					<p className='text-[#1A1A1A] text-[20px] font-inter font-medium'>
 						Total: {total_price} {data?.currency}
