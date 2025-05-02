@@ -216,7 +216,10 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 		useCheckout();
 	const { state } = useContext(AuthContext);
 
-	const transactionAmount = Number(product.total_price.replace(/,/g, '').replace('.', ''));
+	// const transactionAmount = Number(product.total_price.replace(/,/g, '').replace('.', ''));
+	const transactionAmount = Number(product.total_price.replace(/[^\d]/g, ''));
+
+	console.log(transactionAmount, 'testing');
 	const currency = currencies[country] || 'USD';
 
 	const discountValue = Number(appliedCoupon?.value) || 0;
