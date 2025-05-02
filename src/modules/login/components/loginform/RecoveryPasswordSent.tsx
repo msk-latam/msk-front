@@ -6,14 +6,26 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
 import { supportedLanguages } from '@/config/languages';
+import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
+import { useParams } from 'next/navigation';
 
 export default function NewPasswordForm() {
+	const params = useParams();
+	const lang = typeof params.lang === 'string' ? params.lang : 'es';
+
 	useEffect(() => {
 		const pathname = window.location.pathname;
 		const search = window.location.search;
 		const pathParts = pathname.split('/').filter(Boolean);
 
 		const hasLang = supportedLanguages.includes(pathParts[0]);
+
+		// ✅ Solo correr si estamos en el flujo de recuperación
+		const inRecoveryFlow = document.cookie.includes('recovery_flow_active=true');
+		if (!inRecoveryFlow) {
+			console.log('[LanguageCookieUpdater] No estamos en flujo de recuperación → no se setea cookie de idioma');
+			return;
+		}
 
 		if (!hasLang) {
 			const country =
@@ -22,16 +34,19 @@ export default function NewPasswordForm() {
 					.find((row) => row.startsWith('country='))
 					?.split('=')[1] || 'ar';
 
-			// ⚠️ Si es AR y estamos en /change-pass, NO redirigir
 			if (country === 'ar' && pathname.startsWith('/change-pass')) {
 				return;
 			}
 
-			// Si no es AR, redirigir a /[lang]/change-pass
 			const newLang = supportedLanguages.includes(country) ? country : 'ar';
 			const newPath = `/${newLang}${pathname}${search}`;
 			window.location.replace(newPath);
 		}
+	}, []);
+
+	useEffect(() => {
+		// Desactiva recovery_flow_active al entrar al formulario de nueva contraseña
+		document.cookie = 'recovery_flow_active=; Max-Age=0; path=/';
 	}, []);
 
 	const validationSchema = Yup.object().shape({
@@ -78,7 +93,11 @@ export default function NewPasswordForm() {
 						<strong>Medical & Scientific Knowledge</strong>.
 					</p>
 					<button
-						onClick={() => (window.location.href = '/login')}
+						onClick={() => {
+							document.cookie = 'recovery_flow_active=; Max-Age=0; path=/';
+							document.cookie = 'country=; Max-Age=0; path=/';
+							window.location.href = getLocalizedUrl(lang, '/tienda');
+						}}
 						className='mt-6 bg-[#9200ad] hover:bg-purple-800 text-white py-3 px-6 rounded-full'
 					>
 						Seguir navegando

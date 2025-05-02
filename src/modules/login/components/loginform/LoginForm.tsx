@@ -1,5 +1,6 @@
 'use client';
 
+import { supportedLanguages } from '@/config/languages';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -178,7 +179,20 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 							<label htmlFor='password' className='block text-[#1A1A1A] font-medium text-left'>
 								Contraseña
 							</label>
-							<button type='button' onClick={onForgotPassword} className='text-[#9200AD]'>
+							<button
+								type='button'
+								onClick={() => {
+									const pathLang = window.location.pathname.split('/').filter(Boolean)[0];
+									const lang = supportedLanguages.includes(pathLang) ? pathLang : 'ar';
+
+									document.cookie = 'recovery_flow_active=true; path=/; max-age=600';
+									document.cookie = `country=${lang}; path=/; max-age=60`;
+
+									console.log('[LoginForm] Activando flujo de recuperación con lang:', lang);
+									onForgotPassword();
+								}}
+								className='text-[#9200AD]'
+							>
 								¿Olvidaste tu contraseña?
 							</button>
 						</div>
