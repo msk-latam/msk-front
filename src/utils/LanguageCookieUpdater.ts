@@ -10,29 +10,24 @@ export default function LanguageCookieUpdater() {
 		const pathParts = pathname.split('/').filter(Boolean);
 		const langFromUrl = supportedLanguages.includes(pathParts[0]) ? pathParts[0] : null;
 
-		// 1️⃣ Si tiene prefijo en URL, actualizar cookie y salir
+		// 1. Si la URL ya tiene prefijo, actualizamos la cookie con ese idioma
 		if (langFromUrl) {
-			document.cookie = `country=${langFromUrl}; path=/; max-age=31536000`;
+			document.cookie = `country=${langFromUrl}; path=/; max-age=0`;
 			return;
 		}
 
-		// 2️⃣ Obtener valor actual de cookie
-		const currentCookie =
+		// 2. Si NO tiene prefijo, usamos la cookie para redirigir
+		const cookieLang =
 			document.cookie
 				.split('; ')
 				.find((row) => row.startsWith('country='))
 				?.split('=')[1] || 'ar';
-
-		// 3️⃣ Si la cookie es 'ar', no hacer nada (Argentina no usa prefijo)
-		if (currentCookie === 'ar') return;
-
-		// 4️⃣ EXCEPCIONES: rutas sin prefijo que deben ser válidas para AR
-		const allowedUnprefixedPaths = ['/change-pass', '/login', '/register'];
-		if (allowedUnprefixedPaths.includes(pathname)) return;
-
-		// 5️⃣ Redirigir a URL con prefijo si no está permitido sin él
-		const newPath = `/${currentCookie}${pathname}${search}`;
-		window.location.replace(newPath);
+		console.log(cookieLang);
+		// Si la cookie no es 'ar', redirigir agregando el prefijo
+		if (cookieLang !== 'ar') {
+			const newPath = `/${cookieLang}${pathname}${search}`;
+			window.location.replace(newPath);
+		}
 	}, []);
 
 	return null;

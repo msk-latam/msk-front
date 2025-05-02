@@ -22,9 +22,14 @@ export default function NewPasswordForm() {
 					.find((row) => row.startsWith('country='))
 					?.split('=')[1] || 'ar';
 
+			// ⚠️ Si es AR y estamos en /change-pass, NO redirigir
+			if (country === 'ar' && pathname.startsWith('/change-pass')) {
+				return;
+			}
+
+			// Si no es AR, redirigir a /[lang]/change-pass
 			const newLang = supportedLanguages.includes(country) ? country : 'ar';
 			const newPath = `/${newLang}${pathname}${search}`;
-
 			window.location.replace(newPath);
 		}
 	}, []);
