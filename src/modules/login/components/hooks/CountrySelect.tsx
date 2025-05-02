@@ -1,6 +1,6 @@
 import PhoneInput, { CountryData } from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { CountryContext } from '@/context/country/CountryContext';
 import { usePathname } from 'next/navigation';
 import { countries } from '@/data/countries';
@@ -14,10 +14,23 @@ export default function CountrySelect({ onChange, allCountries = false }: Countr
 	const { countryState } = useContext(CountryContext);
 	const pathname = usePathname();
 
+	const [isMobile, setIsMobile] = useState(false);
+
 	const validCountries = countries.map((c) => c.id);
 	const pathSegments = pathname.split('/').filter(Boolean);
 	const countryFromUrl = pathSegments[0]?.toLowerCase();
 	const defaultCountry = validCountries.includes(countryFromUrl) ? countryFromUrl : countryState?.country || 'ar';
+
+	useEffect(() => {
+		// Verificar si el dispositivo es mobile
+		const checkMobile = () => {
+			setIsMobile(window.innerWidth <= 768);
+		};
+		checkMobile();
+
+		window.addEventListener('resize', checkMobile);
+		return () => window.removeEventListener('resize', checkMobile);
+	}, []);
 
 	useEffect(() => {
 		const style = document.createElement('style');
@@ -52,7 +65,7 @@ export default function CountrySelect({ onChange, allCountries = false }: Countr
 		<div className='flex items-center h-full pl-2'>
 			<PhoneInput
 				country={defaultCountry}
-				value={''} // No input control needed
+				value={''}
 				onChange={(_: string, data: CountryData | {} | null) => {
 					if (data && typeof data === 'object' && 'dialCode' in data) {
 						onChange(`+${(data as CountryData).dialCode}`);
@@ -233,7 +246,35 @@ export default function CountrySelect({ onChange, allCountries = false }: Countr
 					justifyContent: 'flex-start',
 					border: 'none',
 				}}
-				dropdownStyle={{ zIndex: 9999 }}
+				dropdownStyle={
+					isMobile
+						? {
+								zIndex: 9999,
+								position: 'absolute',
+								left: '500%',
+								top: '30%',
+								transform: 'translateX(-50%)',
+								maxHeight: '60vh',
+								overflowY: 'auto',
+								backgroundColor: 'white',
+								boxShadow: '0 2px 10px rgba(0,0,0,0.15)',
+								borderRadius: '8px',
+								minWidth: '280px',
+								overflowX: 'hidden',
+						  }
+						: {
+								zIndex: 9999,
+								position: 'absolute',
+								left: '40px', // Ajusta este valor según el padding que uses
+								top: '40px',
+								backgroundColor: 'white',
+								boxShadow: '0 2px 10px rgba(0,0,0,0.15)',
+								borderRadius: '8px',
+								minWidth: '280px',
+								maxHeight: '300px',
+								overflowY: 'auto',
+						  }
+				}
 			/>
 		</div>
 	);
