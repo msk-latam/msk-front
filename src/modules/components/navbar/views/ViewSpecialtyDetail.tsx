@@ -96,10 +96,10 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
   }
 
   return (
-    <div className="bg-white rounded-t-3xl mt-4 h-full overflow-auto">
-      <div className="flex flex-row justify-center items-center px-6 py-8">
-        <button 
-          className="absolute left-5 top-10 rounded-full border border-black p-2 text-gray-800" 
+    <div className="bg-white rounded-t-3xl mt-4 h-full overflow-auto pb-5">
+    <div className="relative flex justify-center items-center px-6 w-full py-8">
+      <button 
+        className="absolute left-6 top-1/2 -translate-y-1/2 rounded-full border border-black p-2 text-gray-800" 
           onClick={() => navigateTo("specialty")}
         >
           <ArrowLeft size={24} />
@@ -112,7 +112,7 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
           courses.map((course, index) => {
             const newUrl = course.url.replace('/curso', '/tienda');
             return (
-              <Link key={index} href={newUrl} className="block mb-6 last:mb-0">
+              <Link key={index} href={newUrl} className="block mb-6 last:mb-0" onClick={onClose}>
                 <div className="relative rounded-[30px] overflow-hidden h-48 bg-gray-300 cursor-pointer">
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80"></div>
                   <img
@@ -131,11 +131,10 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
           <div className="text-center py-8">No hay cursos disponibles para esta especialidad</div>
         )}
 
-        <Link
-          href={storeUrl}
-          className="flex justify-between items-center w-full py-4 text-left text-gray-800"
-        >
-          <span>Ver todos los cursos</span>
+<Link href={getLocalizedUrl(lang, storeUrl) }
+          className="mt-4 flex justify-between items-center w-full p-4 bg-gray-100 hover:bg-gray-200 rounded-2xl text-gray-800"
+          onClick={onClose}>
+          <span className="whitespace-nowrap" >Ver todos los cursos</span>
           <ChevronRight size={20} />
         </Link>
       </div>

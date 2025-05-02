@@ -216,7 +216,10 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 		useCheckout();
 	const { state } = useContext(AuthContext);
 
-	const transactionAmount = Number(product.total_price.replace(/,/g, '').replace('.', ''));
+	// const transactionAmount = Number(product.total_price.replace(/,/g, '').replace('.', ''));
+	const transactionAmount = Number(product.total_price.replace(/[^\d]/g, ''));
+
+	console.log(transactionAmount, 'testing');
 	const currency = currencies[country] || 'USD';
 
 	const discountValue = Number(appliedCoupon?.value) || 0;
@@ -257,7 +260,7 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 	console.log(isSubmitting);
 
 	return (
-		<div className='mt-24'>
+		<div className='mt-16'>
 			<CheckoutRebill country={country} formData={rebillForm} />
 			<StepButtons
 				isDisabled={isSubmitting}

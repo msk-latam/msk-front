@@ -43,7 +43,7 @@ const ViewResources: React.FC<Props> = ({ navigateTo, isMobile = true, onClose }
           ))}
         </div>
 
-        <Link href="/tienda">
+        <Link href="/tienda" >
           <button className="flex justify-between items-center w-full p-4 bg-gray-100 hover:bg-gray-200 rounded-2xl text-gray-800">
             <span className="whitespace-nowrap">Ver todos los cursos</span>
             <ChevronRight size={20} />
@@ -70,6 +70,7 @@ const ViewResources: React.FC<Props> = ({ navigateTo, isMobile = true, onClose }
             key={`resource-${index}`}
             href={resource.link.url}
             className="flex flex-row justify-between items-center p-4 hover:bg-gray-300 text-gray-800"
+            onClick={onClose}
           >
             <span>{resource.link.title}</span>
             <ChevronRight size={20} />

@@ -10,7 +10,7 @@ import { supportedLanguages } from '@/config/languages';
 import NavbarSkeleton from '@/modules/home/skeletons/NavbarSkeleton';
 import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ChevronDown } from 'react-feather';
 import AuthButtons from './common/AuthButtons';
 import AuthButtonsSkeleton from './common/AuthButtonsSkeleton';
@@ -48,19 +48,29 @@ const Navbar = ({ isDashboard = false }: NavbarProps) => {
 	const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'ar';
 	// ✅ Esta es la verdadera URL que deberías usar en el logo
 	const logoHref = lang === 'ar' ? '/' : `/${lang}/`;
-
+	
+	const isAnyViewOpen = isDiscoverOpen && currentView !== ''; 
+	
 	const handleCreateAccount = () => {
 		const loginPath = lang === 'ar' ? '/login' : `/${lang}/login`;
 		window.location.href = loginPath;
 	};
-
+	
 	const isMainView = isDiscoverOpen && currentView === 'main';
 	const isDiscoverView = isDiscoverOpen && currentView === 'discover';
 	const isInstitutionsView = isDiscoverOpen && currentView === 'institutions';
 	const isSpecialtyView = isDiscoverOpen && currentView === 'specialty';
 	const isSpecialtyDetailView = isDiscoverOpen && currentView === 'specialtyDetail';
-
+	
 	const { isAuthenticated, isLoading } = useSessionStatus();
+	
+	useEffect(() => {
+		// Cada vez que cambia la ruta, cerramos el menú móvil
+		setIsDiscoverOpen(false);
+		setCurrentView('');
+		setSelectedCategory(null);
+	}, [pathname]);
+	console.log('isAnyViewOpen', isAnyViewOpen, 'currentView', currentView, 'isDiscoverOpen', isDiscoverOpen);
 
 	return (
 		<header className='absolute left-0 w-full'>
@@ -71,7 +81,7 @@ const Navbar = ({ isDashboard = false }: NavbarProps) => {
 				{/* --- NAV MOBILE --- */}
 				<section className='flex justify-start items-center mt-2 py-5 px-6 md:hidden relative'>
 					{/* Botón hamburguesa */}
-					<BurgerButton isOpen={isDiscoverOpen} onClick={toggleDiscover} />
+					<BurgerButton isOpen={isAnyViewOpen} onClick={toggleDiscover} />
 
 					{/* Logo */}
 					<Link href={getLocalizedUrl(lang, '/home')} className='m-auto pr-7 pb-1'>
@@ -167,18 +177,24 @@ const Navbar = ({ isDashboard = false }: NavbarProps) => {
 			</nav>
 
 			{/* Contenido dinámico móvil */}
-			{isDiscoverOpen && (
-				<div className='fixed inset-x-0 top-0 bottom-0 z-50 mt-16 md:hidden overflow-visible'>
-					<DropdownContent
-						currentView={currentView}
-						selectedCategory={selectedCategory}
-						setCurrentView={setCurrentView}
-						setSelectedCategory={setSelectedCategory}
-						isMobile={true}
-						onClose={toggleDiscover}
-					/>
-				</div>
-			)}
+{currentView && (
+  <div className="fixed inset-x-0 top-0 bottom-0 z-50 mt-16 md:hidden overflow-visible">
+    <DropdownContent
+      currentView={currentView}
+      selectedCategory={selectedCategory}
+      setCurrentView={setCurrentView}
+      setSelectedCategory={setSelectedCategory}
+	  isMobile={true}
+	  onClose={() => {
+		setIsDiscoverOpen(false);
+		setCurrentView('');
+		setSelectedCategory(null);
+	  }}
+	/>
+  </div>
+)}
+
+
 		</header>
 	);
 };

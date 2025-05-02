@@ -214,7 +214,6 @@ const CheckoutStripe = ({ product, country }: any) => {
 				/>
 			</div>
 
-
 			<button
 				type='submit'
 				className='flex items-center justify-center w-full py-3 mt-6 font-semibold text-white transition-all duration-300 bg-[#9200AD] rounded-[38px] hover:bg-[#B814D6]'
@@ -242,8 +241,10 @@ const CheckoutPaymentStripe = ({ product, country }: any) => {
 		}
 	};
 	return (
-		<div className='fixed gap-4 bottom-10 left-1/4'>
-			<CheckoutStripe product={product} country={country} />
+		<div className=' sm:space-y-28 sm:flex sm:flex-col'>
+			<div className='transform translate-y-16'>
+				<CheckoutStripe product={product} country={country} />
+			</div>
 			<StepButtons
 				isDisabled={isSubmitting}
 				isFormValid={true}
@@ -308,7 +309,7 @@ export default CheckoutPaymentStripe;
 // 	};
 
 // 	return (
-// 		<div className='mt-16 flex flex-col justify-between'>
+// 		<div className='flex flex-col justify-between mt-16'>
 // 			<CheckoutStripe />
 // 			<StepButtons
 // 				isDisabled={false}

@@ -81,7 +81,7 @@ const CheckoutState: React.FC = () => {
 		const { title, message, color, buttons } = paymentStatusCard[status];
 
 		return (
-			<>
+			<div className='mt-16 space-y-20'>
 				<div
 					className='p-6 border rounded-lg'
 					style={{
@@ -97,7 +97,7 @@ const CheckoutState: React.FC = () => {
 						{message}
 					</p>
 				</div>
-				<div className='fixed gap-4 bottom-10 left-1/4'>
+				<div className='flex justify-end gap-6'>
 					{buttons.map((button, index) => (
 						<button
 							key={index}
@@ -113,18 +113,12 @@ const CheckoutState: React.FC = () => {
 						</button>
 					))}
 				</div>
-			</>
+			</div>
 		);
 	};
 
 	return (
 		<>
-			<h2 className='flex items-center text-[#1A1A1A] text-2xl font-medium my-8 font-raleway'>
-				<span className='flex items-center justify-center w-5 h-5 mr-2 border rounded-full border-[#392C35] bg-white !text-sm'>
-					3
-				</span>
-				Estado de inscripción
-			</h2>
 			{/* Mostrar la tarjeta de estado de pago */}
 			{paymentStatus ? (
 				<PaymentStatusCard status={paymentStatus as keyof typeof paymentStatusCard} />
