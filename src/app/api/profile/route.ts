@@ -8,6 +8,9 @@ interface CurrentCourseType {
 	title: any;
 	crm_id: any;
 	completed_percentage: any;
+	product_code: any;
+	product_code_cedente: any;
+	resource: any;
 }
 
 export async function GET() {
@@ -53,15 +56,9 @@ export async function GET() {
 			ctaLink: '/dashboard/profile',
 		};
 
-		/* To Do
-Anotación importante
-Description
-La barra de progreso tendrá encuenta las siguientes reglas para su llenado: Si solo hizo registro simple: 25%
-- Si completó hasta profesión, especialidad, país y teléfono: 50%
-- Si completó hasta institución y área de trabajo: 75%
-- Si avanzó hasta intereses, como la única opción es guardar: la barra (100%) se elimina y pasamos al perfil completo. */
+		// console.log('contactoData', contactoData);
+		// console.log('profileData', profileData);
 
-		// Armo el DTO (objeto limpio final)
 		const user = {
 			profileCompletion: profileCompletion,
 			profileImage: profileImage || isNull,
@@ -79,8 +76,9 @@ La barra de progreso tendrá encuenta las siguientes reglas para su llenado: Si 
 			intereses: contactoData.contacto.Temas_de_interes,
 			interesesAdicionales: contactoData.contacto.Intereses_adicionales,
 			currentCourse: null as CurrentCourseType | null,
-			recommendedResourcesByInterests: [] as any[],
+			recommendedResourcesByIA: [] as any[],
 			crm_id: profileData.user?.contact?.entity_id_crm || contactoData.contacto.id,
+			courseRecommendations: contactoData.contacto.Recomendador_web?.split(',') || [],
 			// podes agregar mas campos si necesitás
 		};
 
@@ -134,11 +132,12 @@ La barra de progreso tendrá encuenta las siguientes reglas para su llenado: Si 
 			const latestCourseData = {
 				product_code: courseToEnroll.Product_Code,
 				product_code_cedente: courseToEnroll.C_digo_de_Curso_Cedente,
-				id: courseData.data[0].id,
-				image: courseData.data[0].featured_images,
-				title: courseData.data[0].title,
-				crm_id: latestCourse.Nombre_de_curso.id,
+				id: courseData.data[0]?.id,
+				image: courseData.data[0]?.featured_images,
+				title: courseData.data[0]?.title,
+				crm_id: latestCourse.Nombre_de_curso?.id,
 				completed_percentage: parseInt(latestCourse.Avance.toString().replace(',', '.')),
+				resource: courseData.data[0]?.resource,
 			};
 
 			return latestCourseData;
@@ -148,24 +147,19 @@ La barra de progreso tendrá encuenta las siguientes reglas para su llenado: Si 
 			const recommendedResources: any[] = [];
 
 			/* si no tiene intereses, no devuelve nada */
-			if (!user.intereses || user.intereses.length === 0) {
+			if (!user.courseRecommendations || user.courseRecommendations.length === 0) {
 				return recommendedResources;
 			}
 
 			/* si tiene intereses, devuelve los recursos recomendados. Para esto vamos a usar la API de CMS */
 			/* solo necesito 4 cursos, asi que si tiene mas de 4 intereses, usar los primeros 4 */
-			const interestsToUse = user.intereses.slice(0, 4);
-			for (const interest of interestsToUse) {
-				const slugifiedInterest = interest.toLowerCase().replace(/ /g, '-');
-				const resourceRes = await fetch(
-					`https://cms1.msklatam.com/wp-json/msk/v1/products?lang=int&specialty=${slugifiedInterest}&resource=course`,
-					{
-						headers: { Accept: 'application/json' },
-						next: { revalidate: 3600 * 7 }, // Cache for 7 hours
-					},
-				);
+			for (const course of user.courseRecommendations) {
+				const resourceRes = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/product/${course}`, {
+					headers: { Accept: 'application/json' },
+					next: { revalidate: 3600 * 7 }, // Cache for 7 hours
+				});
 				const resourceData = await resourceRes.json();
-				recommendedResources.push(resourceData.data[0]);
+				recommendedResources.push(resourceData);
 			}
 			return recommendedResources;
 		};
@@ -223,7 +217,7 @@ La barra de progreso tendrá encuenta las siguientes reglas para su llenado: Si 
 
 		user.profileCompletion.percentage = calculateProfileCompletion();
 		user.currentCourse = await getCurrentCourse();
-		user.recommendedResourcesByInterests = await getRecommendedResourcesByInterests();
+		user.recommendedResourcesByIA = await getRecommendedResourcesByInterests();
 		return NextResponse.json({ user });
 	} catch (error) {
 		console.error(error);

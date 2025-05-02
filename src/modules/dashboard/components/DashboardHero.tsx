@@ -10,6 +10,7 @@ import UserIcon from '@/dashboard/assets/icons/UserIcon';
 import AddButton from '@/dashboard/components/ui/AddButton';
 import EditButton from '@/dashboard/components/ui/EditButton';
 // import dashboardMock from '@/modules/dashboard/data/dashboardMock.json'; // <-- Import mock data
+import useInterests from '@/hooks/useinterests';
 import { useLmsNavigation } from '@/hooks/useLmsNavigation';
 import Link from 'next/link';
 import DashboardHeroSkeleton from './DashboardHeroSkeleton';
@@ -35,6 +36,7 @@ const defaultRecommendedCourse = {
 
 const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, isLoading = false, userEmail }) => {
 	const isEmpty = (value: string | undefined | null) => !value || value.trim() === '';
+	const { interests, updateInterests, isLoading: isInterestsLoading } = useInterests();
 	const [showInvoicesModal, setShowInvoicesModal] = useState(false);
 	const { navigateToLms, isLoading: isNavigating, error: navigationError } = useLmsNavigation();
 
@@ -61,7 +63,6 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 			'Área de trabajo': 'workArea',
 			'Ingresar área de trabajo': 'workArea',
 			'Completar área de trabajo': 'workArea',
-			Intereses: 'interests',
 			profileImage: 'profileImage',
 			profesion: 'profesion',
 			country: 'country',
@@ -77,7 +78,6 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 		return <DashboardHeroSkeleton />;
 	}
 	const data = userData;
-	console.log(data, 'DATA');
 	return (
 		<>
 			<div className='grid grid-cols-1 md:grid-cols-[468px_1fr] lg:grid-cols-[468px_3fr_3fr] gap-5 '>
@@ -270,9 +270,9 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 				<div className='md:col-span-2 lg:col-span-2 bg-white rounded-[30px] p-[36px] order-3 md:order-3'>
 					<h3 className='font-raleway text-[34px] font-medium leading-[100%] mb-3 text-[#1A1A1A]'>Tus intereses</h3>
 
-					{data?.intereses && data?.intereses.length > 0 ? (
+					{interests && interests?.specialty_interests?.length > 0 ? (
 						<div className='flex flex-wrap gap-2 mb-4 items-center'>
-							{data?.intereses.map((interest: string, index: number) => (
+							{interests?.specialty_interests?.map((interest: string, index: number) => (
 								<span
 									key={index}
 									className={`px-4 py-2 rounded-full text-base font-inter font-normal bg-[#F7F9FF] text-[#29324F]`}
@@ -345,7 +345,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 							<div className='bg-cover bg-top h-[300px] rounded-[30px] relative flex flex-col justify-center p-[36px] text-white overflow-hidden'>
 								<div
 									className='absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 bg-cover bg-top'
-									style={{ backgroundImage: `url(${data?.currentCourse.image.high})` }}
+									style={{ backgroundImage: `url(${data?.currentCourse?.image?.high})` }}
 								></div>
 								{/* Overlay gradient */}
 								<div
@@ -401,80 +401,83 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ userData, onEditProfile, 
 				</div>
 
 				{/* Recommended Resources Section - Mobile: 5th, Desktop: 5th in 2nd/3rd Col */}
-				{data?.intereses && data?.intereses.length > 0 ? (
-					data?.recommendedResourcesByInterests && data?.recommendedResourcesByInterests.length > 0 ? (
-						<div className='md:col-span-2 lg:col-span-3 bg-white rounded-[30px] p-[36px] order-5 md:order-5'>
-							<h3 className='font-raleway text-[34px] font-medium leading-[100%] mb-6 text-[#1A1A1A]'>
-								Recursos recomendados para tí
-							</h3>
-							{/* Mobile: Carousel / Desktop: Grid */}
-							<div className='flex space-x-4 overflow-x-auto scroll-snap-x scroll-snap-mandatory md:grid md:grid-cols-2 md:gap-5 md:space-x-0 md:overflow-x-visible md:scroll-snap-none pb-4 -mb-4 scrollbar-hide '>
-								{data?.recommendedResourcesByInterests.map((resource: any, index: number) => (
-									<Link
-										href={`/tienda/${resource.slug}`}
-										key={index}
-										className='w-[90%] flex-shrink-0 scroll-snap-start md:w-auto md:flex-shrink bg-white rounded-[30px] overflow-hidden flex flex-col md:flex-row border border-[#DBDDE2] hover:shadow-md transition-shadow min-h-[280px]'
-									>
-										{/* Image Section */}
-										<div className='relative w-full md:w-[200px] h-[180px] md:h-auto flex-shrink-0 bg-gray-100'>
-											<Image src={resource.featured_images.medium} alt={resource.title} layout='fill' objectFit='cover' />
-										</div>
+				{data?.recommendedResourcesByIA && data?.recommendedResourcesByIA.length > 0 ? (
+					<div className='md:col-span-2 lg:col-span-3 bg-white rounded-[30px] p-[36px] order-5 md:order-5'>
+						<h3 className='font-raleway text-[34px] font-medium leading-[100%] mb-6 text-[#1A1A1A]'>
+							Recursos recomendados para tí
+						</h3>
+						{/* Mobile: Carousel / Desktop: Grid */}
+						<div className='flex space-x-4 overflow-x-auto scroll-snap-x scroll-snap-mandatory md:grid md:grid-cols-2 md:gap-5 md:space-x-0 md:overflow-x-visible md:scroll-snap-none pb-4 -mb-4 scrollbar-hide '>
+							{data?.recommendedResourcesByIA.map((resource: any, index: number) => (
+								<Link
+									href={`/tienda/${resource.slug}`}
+									key={index}
+									className='w-[90%] flex-shrink-0 scroll-snap-start md:w-auto md:flex-shrink bg-white rounded-[30px] overflow-hidden flex flex-col md:flex-row border border-[#DBDDE2] hover:shadow-md transition-shadow min-h-[280px]'
+								>
+									{/* Image Section */}
+									<div className='relative w-full md:w-[200px] h-[180px] md:h-auto flex-shrink-0 bg-gray-100'>
+										<Image src={resource.featured_images.medium} alt={resource.title} layout='fill' objectFit='cover' />
+									</div>
 
-										{/* Content Section */}
-										<div className='px-4 py-6 grid grid-rows-[auto_1fr_1fr_1fr] h-full relative w-full'>
-											{/* Tags section - fixed height */}
-											<div className=' mb-2'>
-												<div className='flex flex-wrap gap-2'>
-													{resource.categories[0] && (
-														<span
-															className={`px-3 py-1 rounded-full text-xs font-inter font-medium bg-[#DFE6FF] text-[#29324F]
-															}`}
-														>
-															{resource.categories[0].name}
-														</span>
-													)}
+									{/* Content Section */}
+									<div className='px-4 py-6 grid grid-rows-[auto_1fr_1fr_1fr] h-full relative w-full'>
+										{/* Tags section - fixed height */}
+										<div className=' mb-2'>
+											<div className='flex flex-wrap gap-2'>
+												{resource?.categories?.length > 0 && (
 													<span
-														className={`px-3 py-1 rounded-full text-xs font-inter font-medium bg-[#FFF4D8] text-[#8E6E3B]
+														className={`px-3 py-1 rounded-full text-xs font-inter font-medium bg-[#DFE6FF] text-[#29324F]
 															}`}
 													>
-														{resource.resource === 'course' ? 'Curso' : 'Guía'}
+														{resource?.categories[0]?.name}
 													</span>
-												</div>
-											</div>
-
-											{/* Title section - fixed height with ellipsis if needed */}
-											<div className='mb-2'>
-												<h4 className='font-raleway font-bold text-xl leading-tight text-[#1A1A1A] line-clamp-2'>
-													{resource.title}
-												</h4>
-											</div>
-
-											{/* Author section - fixed height */}
-											<div className='mb-4'>
-												<p className='font-inter text-sm text-[#4F5D89]'>{resource.cedente.name}</p>
-											</div>
-
-											{/* Button - positioned absolutely */}
-											<div className='absolute bottom-4 right-4'>
-												<CtaButton onClick={() => {}}>Descubrir</CtaButton>
+												)}
+												<span
+													className={`px-3 py-1 rounded-full text-xs font-inter font-medium bg-[#FFF4D8] text-[#8E6E3B]
+															}`}
+												>
+													{resource?.resource === 'course' ? 'Curso' : 'Guía'}
+												</span>
 											</div>
 										</div>
-									</Link>
-								))}
-							</div>
+
+										{/* Title section - fixed height with ellipsis if needed */}
+										<div className='mb-2'>
+											<h4 className='font-raleway font-bold text-xl leading-tight text-[#1A1A1A] line-clamp-2'>
+												{resource?.title}
+											</h4>
+										</div>
+
+										{/* Author section - fixed height */}
+										<div className='mb-4'>
+											<p className='font-inter text-sm text-[#4F5D89]'>{resource?.cedente?.name}</p>
+										</div>
+
+										{/* Button - positioned absolutely */}
+										<div className='absolute bottom-4 right-4'>
+											<CtaButton onClick={() => {}}>Descubrir</CtaButton>
+										</div>
+									</div>
+								</Link>
+							))}
 						</div>
-					) : (
-						// Optional: Show a different message if interests exist but no resources yet
-						<div className='md:col-span-2 lg:col-span-3 bg-white rounded-[30px] p-[36px] order-5 md:order-5'>
-							<h3 className='font-raleway text-[34px] font-medium leading-[100%] mb-6 text-[#1A1A1A]'>
-								Recursos recomendados para tí
-							</h3>
-							<p className='text-[#4F5D89] font-inter text-center'>
-								Estamos buscando los mejores recursos para tus intereses...
-							</p>
-						</div>
-					)
+					</div>
+				) : // Optional: Show a different message if interests exist but no resources yet
+				interests &&
+				  (interests.specialty_interests?.length > 0 ||
+						interests.content_interests?.length > 0 ||
+						interests.other_interests?.length > 0) ? (
+					// Case 2: No resources yet, but interests exist -> Show "Searching..."
+					<div className='md:col-span-2 lg:col-span-3 bg-white rounded-[30px] p-[36px] order-5 md:order-5'>
+						<h3 className='font-raleway text-[34px] font-medium leading-[100%] mb-6 text-[#1A1A1A]'>
+							Recursos recomendados para tí
+						</h3>
+						<p className='text-[#4F5D89] font-inter text-center'>
+							Estamos buscando los mejores recursos para tus intereses...
+						</p>
+					</div>
 				) : (
+					// Case 3: No resources and no interests -> Show "Complete interests"
 					<div className='md:col-span-2 lg:col-span-3 bg-white rounded-[30px] p-[36px] order-5 md:order-5'>
 						<h3 className='font-raleway text-[34px] font-medium leading-[100%] mb-6 text-[#1A1A1A]'>
 							Recursos recomendados para tí

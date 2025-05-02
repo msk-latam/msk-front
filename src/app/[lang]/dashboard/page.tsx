@@ -5,10 +5,11 @@ import Navbar from '@/modules/components/navbar/Navbar';
 import NewsLetter from '@/modules/components/newsletter/NewsLetter';
 import { useState } from 'react';
 
+import useInterests from '@/hooks/useinterests';
 import { useLogout } from '@/hooks/useLogout';
 import { useProfile } from '@/hooks/useProfile';
-import { useSaveInterests } from '@/hooks/useSaveInterests';
 import { useSaveUserProfile } from '@/hooks/useSaveUserProfile';
+import CompleteProfilePromptModal from '@/modules/dashboard/components/CompleteProfilePromptModal';
 import DashboardHero from '@/modules/dashboard/components/DashboardHero';
 import HelpSection from '@/modules/dashboard/components/HelpSection';
 import InterestsEditModal from '@/modules/dashboard/components/InterestsEditModal';
@@ -16,6 +17,12 @@ import LearningPlanCta from '@/modules/dashboard/components/LearningPlanCta';
 import MyCoursesSection from '@/modules/dashboard/components/MyCoursesSection';
 import ProfileEditModal from '@/modules/dashboard/components/ProfileEditModal';
 import PromoBanner from '@/modules/dashboard/components/PromoBanner';
+
+interface InterestPayload {
+	specialty_interests: string[];
+	content_interests: string[];
+	other_interests: string[];
+}
 
 // Define interest options here to help categorize initial data
 // (Ideally, share this structure with the modal)
@@ -58,14 +65,10 @@ const contenidoOptions = [
 ];
 
 // Define this interface outside the component function, perhaps near the top
-interface InterestPayload {
-	especialidadInteres: string[];
-	contenidoInteres: string[];
-	interesesAdicionales: string[];
-}
 
 export default function DashboardPage() {
 	const { logout } = useLogout();
+	const { interests, updateInterests, isLoading: isInterestsLoading } = useInterests();
 
 	const [showEditModal, setShowEditModal] = useState(false);
 	const [showInterestsModal, setShowInterestsModal] = useState(false);
@@ -74,29 +77,47 @@ export default function DashboardPage() {
 	const [saveProfileSuccess, setSaveProfileSuccess] = useState<boolean>(false);
 	const [saveInterestsError, setSaveInterestsError] = useState<string | null>(null);
 	const [saveInterestsSuccess, setSaveInterestsSuccess] = useState<boolean>(false);
+	const [showProfilePromptModal, setShowProfilePromptModal] = useState(false);
 
 	const { user, loading } = useProfile();
-
-	// if (!user) {
-	// 	logout();
-	// }
-
-	/* si no esta user, cerrar sesion */
-
 	const { mutate: saveUserProfile, loading: isSaving } = useSaveUserProfile();
-	const {
-		mutate: saveInterests,
-		loading: isSavingInterests,
-		error: interestsError,
-		success: interestsSuccess,
-	} = useSaveInterests();
 
 	const handleEditProfile = (field?: string) => {
 		console.log('(Page) Edit profile triggered for field:', field || 'general');
 		setEditTargetField(field);
-		if (field === 'interests') {
+
+		// Check if the profile seems incomplete (specifically check interests here)
+		const isProfileIncomplete =
+			interests && // Ensure interests object exists before checking properties
+			!interests.specialty_interests?.length &&
+			!interests.content_interests?.length;
+
+		// Log the check
+		console.log(`(Page) Checking if profile is incomplete: ${isProfileIncomplete}`, interests);
+
+		if (isProfileIncomplete) {
+			// If incomplete, show the prompt modal first
+			console.log('(Page) Profile incomplete, showing prompt modal.');
+			setShowProfilePromptModal(true);
+		} else {
+			// Otherwise, open the relevant edit modal directly
+			console.log('(Page) Profile complete or check failed, opening edit modal directly for field:', field);
+			if (field === 'interests') {
+				setShowInterestsModal(true);
+			} else {
+				setShowEditModal(true); // Show general profile modal if field is undefined or not 'interests'
+			}
+		}
+	};
+
+	const handleCompleteProfileNow = () => {
+		setShowProfilePromptModal(false); // Close the prompt
+		// Open the correct edit modal based on the stored target field
+		console.log('(Page) Proceeding from prompt to edit modal for field:', editTargetField);
+		if (editTargetField === 'interests') {
 			setShowInterestsModal(true);
 		} else {
+			// Default to the general profile edit modal
 			setShowEditModal(true);
 		}
 	};
@@ -115,22 +136,13 @@ export default function DashboardPage() {
 	};
 
 	const handleSaveInterests = async (interestData: InterestPayload) => {
-		if (!user || !user.crm_id) {
-			console.error('User or user CRM ID not found, cannot save interests.');
-			setSaveInterestsError('No se pudo encontrar el ID de usuario.');
-			return;
-		}
-
 		console.log('(Page) Interests data to save:', interestData);
 		setSaveInterestsError(null);
 		setSaveInterestsSuccess(false);
 
 		try {
 			console.log('(Page) Interests data to save:', user);
-			await saveInterests({
-				...interestData,
-				crm_id: user.crm_id,
-			});
+			await updateInterests(interestData);
 			setEditTargetField(undefined);
 			setSaveInterestsSuccess(true);
 		} catch (error: any) {
@@ -140,13 +152,6 @@ export default function DashboardPage() {
 	};
 
 	// Calculate initial data for the Interests modal
-	const initialInterestData = user
-		? {
-				especialidadInteres: user.intereses?.filter((i) => especialidadOptions.includes(i)) || [],
-				contenidoInteres: user.intereses?.filter((i) => contenidoOptions.includes(i)) || [],
-				interesesAdicionales: user.interesesAdicionales || [],
-		  }
-		: {};
 
 	return (
 		<>
@@ -182,6 +187,17 @@ export default function DashboardPage() {
 			<NewsLetter />
 			<Footer />
 
+			<CompleteProfilePromptModal
+				isOpen={showProfilePromptModal}
+				onClose={() => {
+					setShowProfilePromptModal(false);
+					// Clear the target field if the prompt is closed without proceeding
+					setEditTargetField(undefined);
+					console.log('(Page) Profile prompt modal closed.');
+				}}
+				onCompleteNow={handleCompleteProfileNow}
+			/>
+
 			{showEditModal && (
 				<ProfileEditModal
 					isOpen={showEditModal}
@@ -205,8 +221,14 @@ export default function DashboardPage() {
 						setEditTargetField(undefined);
 					}}
 					onSave={handleSaveInterests}
-					initialData={initialInterestData}
-					isSaving={isSavingInterests}
+					initialData={
+						interests ?? {
+							specialty_interests: [],
+							content_interests: [],
+							other_interests: [],
+						}
+					}
+					isSaving={isInterestsLoading}
 					saveError={saveInterestsError}
 					saveSuccess={saveInterestsSuccess}
 				/>

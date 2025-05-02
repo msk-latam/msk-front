@@ -1,18 +1,17 @@
 import Modal from '@/modules/dashboard/components/ui/Modal';
 import React, { useEffect, useState } from 'react';
 
-// Define the payload structure expected by the API hook
-interface InterestPayload {
-	especialidadInteres: string[];
-	contenidoInteres: string[];
-	interesesAdicionales: string[];
-}
-
 // Define the structure for available interests (can be fetched later)
 interface InterestCategory {
 	title: string;
 	options: string[];
 	multiSelect: boolean; // True for tags, false for checkboxes (if needed, but looks like multi-select everywhere)
+}
+
+interface InterestPayload {
+	specialty_interests: string[];
+	content_interests: string[];
+	other_interests: string[];
 }
 
 const interestData: InterestCategory[] = [
@@ -101,12 +100,10 @@ const InterestsEditModal: React.FC<InterestsEditModalProps> = ({
 		if (isOpen && initialData) {
 			// Initialize based on provided initialData, filtering ensures only valid options are set
 			setSelectedEspecialidades(
-				new Set((initialData.especialidadInteres || []).filter((opt) => especialidadOptions.includes(opt))),
+				new Set((initialData.specialty_interests || []).filter((opt) => especialidadOptions.includes(opt))),
 			);
-			setSelectedContenido(new Set((initialData.contenidoInteres || []).filter((opt) => contenidoOptions.includes(opt))));
-			setSelectedAdicionales(
-				new Set((initialData.interesesAdicionales || []).filter((opt) => adicionalesOptions.includes(opt))),
-			);
+			setSelectedContenido(new Set((initialData.content_interests || []).filter((opt) => contenidoOptions.includes(opt))));
+			setSelectedAdicionales(new Set((initialData.other_interests || []).filter((opt) => adicionalesOptions.includes(opt))));
 		} else if (!isOpen) {
 			// Reset on close
 			setSelectedEspecialidades(new Set());
@@ -142,9 +139,9 @@ const InterestsEditModal: React.FC<InterestsEditModalProps> = ({
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		const payload: InterestPayload = {
-			especialidadInteres: Array.from(selectedEspecialidades),
-			contenidoInteres: Array.from(selectedContenido),
-			interesesAdicionales: Array.from(selectedAdicionales),
+			specialty_interests: Array.from(selectedEspecialidades),
+			content_interests: Array.from(selectedContenido),
+			other_interests: Array.from(selectedAdicionales),
 		};
 		onSave(payload);
 	};
