@@ -52,7 +52,7 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
 ))}
         </div>
 
-        <Link href={getLocalizedUrl(lang, '/tienda')}>
+        <Link href={getLocalizedUrl(lang, '/tienda')}  >
   <button className="mt-4 flex justify-between items-center w-full p-4 bg-gray-100 hover:bg-gray-200 rounded-2xl text-gray-800">
     <span className="whitespace-nowrap">Ver todos los cursos</span>
     <ChevronRight size={20} />
@@ -78,7 +78,8 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
           <Link
             key={`offer-${index}`}
             href={offer.link.url}
-            className="flex flex-row justify-between items-center p-4 hover:bg-gray-300 text-gray-800"
+            className="flex flex-row justify-between items-center p-4 hover:bg-gray-300 text-gray-800" 
+            onClick={onClose}
           >
             <span>{offer.link.title}</span>
             <ChevronRight size={20} />

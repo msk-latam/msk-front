@@ -65,7 +65,7 @@ const ViewMain: React.FC<Props> = ({ navigateTo, isMobile = true, onClose }) => 
         </button> */}
         </div>
         <Link href="/login">
-  <button className="w-full flex justify-between rounded-2xl bg-gray-200 items-center p-4 hover:bg-gray-300 text-gray-800">
+  <button onClick={onClose} className="w-full flex justify-between rounded-2xl bg-gray-200 items-center p-4 hover:bg-gray-300 text-gray-800">
     <span>Iniciar sesión</span>
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +86,7 @@ const ViewMain: React.FC<Props> = ({ navigateTo, isMobile = true, onClose }) => 
 </Link>
 <Link href="/login">
 
-<button className="rounded-2xl bg-gray-200 w-full flex justify-between items-center p-4 hover:bg-gray-300 text-gray-800">
+<button onClick={onClose} className="rounded-2xl bg-gray-200 w-full flex justify-between items-center p-4 hover:bg-gray-300 text-gray-800">
         Crear Cuenta
         <span>
           <svg

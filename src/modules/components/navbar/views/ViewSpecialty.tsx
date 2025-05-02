@@ -79,13 +79,16 @@ const ViewSpecialty: React.FC<Props> = ({ navigateTo, isMobile = true,onClose })
   }
 
   return (
-    <div className="bg-white rounded-t-3xl mt-4 h-fit">
-      <div className="flex flex-row justify-center items-center px-6 py-8">
-        <button className="absolute left-5 top-10 rounded-full border border-black p-2 text-gray-800" onClick={() => navigateTo("discover")}>
-          <ChevronLeft size={24} />
-        </button>
-        <h2 className="text-xl font-medium text-gray-800">Descubre</h2>
-      </div>
+<div className="bg-white rounded-t-3xl overflow-auto mt-4 h-screen pb-20">
+  <div className="relative flex justify-center items-center px-6 w-full py-8">
+    <button 
+      className="absolute left-6 top-1/2 -translate-y-1/2 rounded-full border border-black p-2 text-gray-800" 
+      onClick={() => navigateTo("discover")}
+    >
+      <ChevronLeft size={24} />
+    </button>
+    <h2 className="text-xl font-medium text-gray-800">Descubre</h2>
+  </div>
 
       <div className="divide-y">
         {specialities.map((specialty) => (

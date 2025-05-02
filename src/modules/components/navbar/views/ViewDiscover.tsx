@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { ChevronLeft } from "react-feather";
+import { ChevronLeft, ChevronRight } from "react-feather";
 import { useDiscoverView } from "../hooks/useDiscoverView";
 import ViewDiscoverSkeleton from '../skeletons/ViewDiscoverSkeleton';
 import DiscoverMenu from "./DiscoverMenu";
@@ -80,7 +80,7 @@ const ViewDiscover: React.FC<Props> = ({ navigateTo, isMobile = true, onClose })
 
   // Mobile view
   return (
-    <div ref={dropdownRef} className="bg-white rounded-t-3xl mt-4 px-6 py-6 flex flex-col h-full">
+    <div className="bg-white rounded-t-3xl mt-4 px-6 py-6 flex flex-col h-full">
       <div className="flex flex-row justify-center items-center px-6 pt-1 pb-8">
         <button 
           className="absolute left-5 top-10 rounded-full border border-black p-2 text-gray-800" 
@@ -97,21 +97,21 @@ const ViewDiscover: React.FC<Props> = ({ navigateTo, isMobile = true, onClose })
             onClick={() => navigateTo("specialty", "Especialidades")}
           >
             <span>Especialidades</span>
-            <ChevronLeft size={20} />
+            <ChevronRight size={20} />
           </button>
           <button
             className="flex justify-between items-center px-6 py-4 w-full hover:bg-gray-100 text-gray-800"
             onClick={() => navigateTo("offer", "Qué ofrecemos")}
           >
             <span>Qué ofrecemos</span>
-            <ChevronLeft size={20} />
+            <ChevronRight size={20} />
           </button>
           <button
             className="flex justify-between items-center px-6 py-4 w-full hover:bg-gray-100 text-gray-800"
             onClick={() => navigateTo("resources", "Recursos")}
           >
             <span>Recursos</span>
-            <ChevronLeft size={20} />
+            <ChevronRight size={20} />
           </button>
         </div>
       </div>
