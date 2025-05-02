@@ -35,19 +35,29 @@ export type CursoCardProps = {
 	inscriptos: number;
 	certificado: string;
 	imagen: string;
-	link: string; // <-- nuevo
+	link: string;
+};
+
+export type OportunidadesResponse = {
+	courses: {
+		title: string;
+		subtitle: string;
+	};
+	novedades: CursoWP[];
+	recomendados: CursoWP[];
+	gratuitos: CursoWP[];
 };
 
 export const mapCursoWPToCursoCard = (curso: CursoWP): CursoCardProps => ({
 	id: curso.id,
-	categoria: curso.categories?.[0]?.name || 'General', // Si `categories` está vacío, se usa "General".
+	categoria: curso.categories?.[0]?.name || 'General',
 	titulo: curso.title,
-	temas: Math.floor(Math.random() * 10 + 5), // Mock para cantidad de temas
-	horas: parseInt(curso.duration || '12'), // Si la duración está vacía, se asume 12 horas.
-	inscriptos: Math.floor(Math.random() * 10000 + 1000), // Mock para inscriptos
-	certificado: 'Incluido', // Valor por defecto
-	imagen: curso.featured_image || '/images/curso-placeholder.jpg', // Si no hay imagen, usa la imagen placeholder
-	link: curso.link, // ← Agregado
+	temas: Math.floor(Math.random() * 10 + 5),
+	horas: parseInt(curso.duration || '12'),
+	inscriptos: Math.floor(Math.random() * 10000 + 1000),
+	certificado: 'Incluido',
+	imagen: curso.featured_image || '',
+	link: curso.link,
 });
 
 // MASTERCLASS SECTION
@@ -87,15 +97,15 @@ export interface MasterclassAPIItem {
 
 // Mapper para transformar MasterclassAPIItem en Professional[]
 export const mapMasterclassToProfessionals = (mc: MasterclassAPIItem): Professional[] => {
-	const descripcionGlobal = mc.description?.trim() || 'Descripción no disponible';
+	const descripcionGlobal = mc.description?.trim() || '';
 
 	if (!mc.doctors || mc.doctors.length === 0) {
 		return [
 			{
 				nombre: mc.title,
 				especialidad: descripcionGlobal,
-				imagenDesktop: mc.background_image?.[0] || '/images/masterclass/fallback-desktop.jpg',
-				imagenMobile: mc.background_image?.[0] || '/images/masterclass/fallback-mobile.jpg',
+				imagenDesktop: mc.background_image?.[0] || '',
+				imagenMobile: mc.background_image?.[0] || '',
 				perfilUrl: mc.link?.url || '#',
 			},
 		];
@@ -103,9 +113,9 @@ export const mapMasterclassToProfessionals = (mc: MasterclassAPIItem): Professio
 
 	return mc.doctors.map((doctor) => ({
 		nombre: doctor.name,
-		especialidad: doctor.specialty?.trim() || 'Cardiólogo',
-		imagenDesktop: doctor.image || '/images/masterclass/fallback-desktop.jpg',
-		imagenMobile: doctor.image || '/images/masterclass/fallback-mobile.jpg',
+		especialidad: doctor.specialty?.trim() || '',
+		imagenDesktop: doctor.image || '',
+		imagenMobile: doctor.image || '',
 		perfilUrl: doctor.link || mc.link?.url || '#',
 	}));
 };

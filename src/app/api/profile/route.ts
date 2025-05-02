@@ -108,13 +108,15 @@ export async function GET() {
 			if (activeCourses.length === 0) {
 				return null;
 			}
-			const latestCourse = activeCourses.reduce((latest: any, course: any) => {
-				const latestDate = latest ? new Date(latest.Fecha_de_ltima_sesi_n).getTime() : 0;
-				const courseDate = new Date(course.Fecha_de_ltima_sesi_n).getTime();
-				return courseDate > latestDate ? course : latest;
-			}, null);
 
-			const courseToEnroll = profileCourses.find((profCourse: any) => profCourse?.entity_id_crm == latestCourse.id);
+			const latestCourse =
+				activeCourses.length === 1
+					? activeCourses[0]
+					: activeCourses.reduce((latest: any, course: any) => {
+							const latestDate = latest ? new Date(latest.Fecha_de_ltima_sesi_n).getTime() : 0;
+							const courseDate = new Date(course.Fecha_de_ltima_sesi_n).getTime();
+							return courseDate > latestDate ? course : latest;
+					  }, null);
 
 			const courseRes = await fetch(
 				`https://cms1.msklatam.com/wp-json/msk/v1/products?search=${latestCourse.Nombre_de_curso.name}`,
@@ -130,13 +132,13 @@ export async function GET() {
 			}
 
 			const latestCourseData = {
-				product_code: courseToEnroll.Product_Code,
-				product_code_cedente: courseToEnroll.C_digo_de_Curso_Cedente,
+				product_code: latestCourse?.product_code,
+				product_code_cedente: latestCourse?.product_code_cedente,
 				id: courseData.data[0]?.id,
 				image: courseData.data[0]?.featured_images,
 				title: courseData.data[0]?.title,
-				crm_id: latestCourse.Nombre_de_curso?.id,
-				completed_percentage: parseInt(latestCourse.Avance.toString().replace(',', '.')),
+				crm_id: latestCourse?.Nombre_de_curso?.id,
+				completed_percentage: parseInt(latestCourse.Avance?.toString().replace(',', '.')),
 				resource: courseData.data[0]?.resource,
 			};
 
@@ -190,30 +192,34 @@ export async function GET() {
 			}
 		};
 
-		user.coursesInProgress.forEach(async (course: any) => {
-			if (course.Nombre_de_curso && course.Nombre_de_curso.name) {
-				course.image = await fetchCourseImage(course.Nombre_de_curso.name);
-			}
+		// Process courses in parallel and wait for all to complete
+		user.coursesInProgress = await Promise.all(
+			user.coursesInProgress.map(async (course: any) => {
+				if (course.Nombre_de_curso && course.Nombre_de_curso.name) {
+					course.image = await fetchCourseImage(course.Nombre_de_curso.name);
+				} else {
+					course.image = null;
+				}
 
-			const courseToEnroll = profileCourses.find((profCourse: any) => profCourse?.entity_id_crm == course.id);
+				const courseToEnroll = profileCourses.find((profCourse: any) => profCourse?.entity_id_crm == course.id) || null;
 
-			course.product_code = courseToEnroll.Product_Code;
-			course.product_code_cedente = courseToEnroll.C_digo_de_Curso_Cedente;
-			course.id = course.Nombre_de_curso.id;
-			course.status = course.Estado_cursada === 'Finalizado' ? 'finished' : 'progress';
-			course.title = course.Nombre_de_curso.name;
-			course.expiryDate = course.Fecha_de_expiraci_n;
-			course.qualification = course.Nota_final;
-			course.statusType = course.Estado_cursada;
-			course.statusText =
-				course.Estado_cursada === 'Finalizado'
-					? 'Finalizado'
-					: course.Estado_cursada === 'Expirado'
-					? 'Expirado'
-					: course.Estado_cursada === 'Activo'
-					? `${parseInt(course.Avance.toString().replace(',', '.')) ?? 0}% completado`
-					: `${parseInt(course.Avance.toString().replace(',', '.')) ?? 0}% completado`;
-		});
+				course.product_code = courseToEnroll?.Product_Code || null;
+				course.product_code_cedente = courseToEnroll?.C_digo_de_Curso_Cedente || null;
+				course.id = course.Nombre_de_curso.id;
+				course.status = course.Estado_cursada === 'Finalizado' ? 'finished' : 'progress';
+				course.title = course.Nombre_de_curso.name;
+				course.expiryDate = course?.Fecha_de_expiraci_n || course?.Fecha_limite_de_Enrolamiento;
+				course.qualification = course.Nota_final;
+				course.statusType = course.Estado_cursada;
+				course.statusText = course.Estado_cursada;
+
+				if (course.Estado_cursada === 'Activo') {
+					course.statusText = `${parseInt(course.Avance?.toString()?.replace(',', '.')) || 0}% completado`;
+				}
+
+				return course; // Return the modified course object for Promise.all
+			}),
+		);
 
 		user.profileCompletion.percentage = calculateProfileCompletion();
 		user.currentCourse = await getCurrentCourse();
