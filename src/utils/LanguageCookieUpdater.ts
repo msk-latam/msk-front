@@ -12,7 +12,7 @@ export default function LanguageCookieUpdater() {
 
 		// 1. Si la URL ya tiene prefijo, actualizamos la cookie con ese idioma
 		if (langFromUrl) {
-			document.cookie = `country=${langFromUrl}; path=/; max-age=0`;
+			document.cookie = `country=${langFromUrl}; path=/; max-age=3600`;
 			return;
 		}
 
