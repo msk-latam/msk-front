@@ -2,19 +2,22 @@
 
 import { useState } from 'react';
 import NewsletterLinks from './NewsletterLinks';
+import NewsLetterForm from './NewsLetterForm'; // Asegúrate de importar el componente del segundo formulario
 
 const Newsletter = () => {
 	const [email, setEmail] = useState('');
 	const [submitted, setSubmitted] = useState(false);
+	const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del segundo formulario
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		setSubmitted(true);
+		setShowModal(true); // Mostrar el segundo formulario al enviar el primer formulario
 		setTimeout(() => setSubmitted(false), 3000);
 	};
 
 	return (
-		<div  className='newsletter w-full px-4 md:px-12 flex flex-col items-center z-10 justify-center bg-[#1A1A1A] text-white'>
+		<div className='newsletter w-full px-4 md:px-12 flex flex-col items-center z-10 justify-center bg-[#1A1A1A] text-white'>
 			<div className=' bg-[#35383E] w-full -mt-8 md:-mt-14 p-6 md:py-6 md:px-12 md:rounded-[38px] rounded-[38px] z-[5] md:z-[1] flex flex-col md:flex-row justify-between gap-4 md:gap-8 overflow-visible max-w-[1600px] mx-auto'>
 				{/* Título */}
 				<div className='md:w-[200px] shrink-0'>
@@ -43,7 +46,7 @@ const Newsletter = () => {
 						placeholder='Ingresar e-mail'
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
-						className='w-full md:w-[478px] h-[52px] md:h-[64px] px-4 py-2 text-black md:rounded-full rounded-[16px] focus:ring-0 border md:border-0 font-inter md:text-sm text-[16px]'
+						className='w-full md:w-[478px] h-[52px] md:h-[64px] px-4 py-2 text-black md:rounded-full rounded-[16px] bg-white focus:ring-0 border md:border-0 font-inter md:text-sm text-[16px]'
 						required
 					/>
 					<button
@@ -67,6 +70,13 @@ const Newsletter = () => {
 			</div>
 
 			<NewsletterLinks />
+
+			{/* Mostrar el modal si showModal es true */}
+			{showModal && (
+				<NewsLetterForm
+				onClose={() => setShowModal(false)}
+				/>
+			)}
 		</div>
 	);
 };
