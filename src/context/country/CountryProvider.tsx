@@ -39,35 +39,47 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			setLoading(true);
-			const currentCountryFromUrl = getCountryFromUrl(pathname);
-			const fallbackCountry = validCountries.includes(currentCountryFromUrl) ? currentCountryFromUrl : 'ar';
 
+			const geo = await getCountryFromIp();
+			const geoCountry = geo?.country?.toLowerCase() || 'ar';
+			const path = window.location.pathname;
+			const urlCountryFromPath = getCountryFromUrl(path);
+			const hasValidUrlPrefix = validCountries.includes(urlCountryFromPath);
+			const alreadyRedirected = Cookies.get('initial_geo_redirect_done');
+
+			if (
+				path === '/' &&
+				geoCountry !== 'ar' &&
+				!hasValidUrlPrefix &&
+				!alreadyRedirected &&
+				validCountries.includes(geoCountry)
+			) {
+				Cookies.set('initial_geo_redirect_done', 'true', { expires: 7 });
+				Cookies.set('country', geoCountry, { path: '/', expires: 365 });
+				window.location.href = `/${geoCountry}/home`;
+				return;
+			}
+
+			const fallbackCountry = validCountries.includes(urlCountryFromPath) ? urlCountryFromPath : 'ar';
 			let currentCountry = fallbackCountry;
-
 			const storedDismissed = Cookies.get('dismissed_country_banner');
 			const previousIpCountry = Cookies.get('ip_country');
 
 			try {
-				const geo = await getCountryFromIp();
-				console.log('[GEO]', geo);
-
-				if (typeof geo.country === 'string' && validCountries.includes(geo.country.toLowerCase())) {
-					const ipCountry = geo.country.toLowerCase();
-
-					// Si el país por IP cambió, se resetea la cookie para volver a mostrar el banner
-					if (previousIpCountry && previousIpCountry !== ipCountry) {
+				if (typeof geoCountry === 'string' && validCountries.includes(geoCountry)) {
+					if (previousIpCountry && previousIpCountry !== geoCountry) {
 						Cookies.remove('dismissed_country_banner');
 					}
 
-					Cookies.set('ip_country', ipCountry, { expires: 7 });
+					Cookies.set('ip_country', geoCountry, { expires: 7 });
 
-					if (ipCountry !== fallbackCountry && storedDismissed !== 'true') {
-						setUserCountry(ipCountry);
+					if (geoCountry !== fallbackCountry && storedDismissed !== 'true') {
+						setUserCountry(geoCountry);
 						setUrlCountry(fallbackCountry);
 						setShowBanner(true);
 					}
 
-					currentCountry = ipCountry;
+					currentCountry = geoCountry;
 				}
 			} catch (err) {
 				console.warn('Could not determine geo country:', err);
@@ -82,15 +94,11 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 
 	const handleSwitchCountry = () => {
 		const path = window.location.pathname;
-		const segments = path.split('/').filter(Boolean); // elimina vacíos
-
-		const validCountries = countries.map((item) => item.id);
+		const segments = path.split('/').filter(Boolean);
 		const hasValidPrefix = validCountries.includes(segments[0]);
-
-		// si tiene prefijo válido, lo sacamos
 		const restOfPath = hasValidPrefix ? segments.slice(1).join('/') : segments.join('/');
 		const newUrl = `/${userCountry}${restOfPath ? '/' + restOfPath : ''}${window.location.search}`;
-
+		Cookies.set('country', userCountry, { path: '/', expires: 365 }); // ⬅️ Actualiza también aquí la cookie
 		window.location.href = newUrl;
 	};
 

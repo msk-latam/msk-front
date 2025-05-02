@@ -9,19 +9,35 @@ export default function LanguageCookieUpdater() {
 		const search = window.location.search;
 		const pathParts = pathname.split('/').filter(Boolean);
 		const langFromUrl = supportedLanguages.includes(pathParts[0]) ? pathParts[0] : null;
+		const hasToken = search.includes('token=');
 
-		console.log('[LanguageCookieUpdater] pathname:', pathname);
-		console.log('[LanguageCookieUpdater] lang from URL:', langFromUrl);
+		const cookieLang = document.cookie
+			.split('; ')
+			.find((row) => row.startsWith('country='))
+			?.split('=')[1];
 
-		// ✅ Si la URL tiene prefijo válido como /mx, /cl, etc.
+		// ⚠️ Excepción: si está en cambio de contraseña, no redirigir ni tocar cookie
+		if (pathname.includes('/change-pass') && hasToken) {
+			console.log('[LanguageCookieUpdater] Cambio de contraseña → no redirige ni cambia cookie');
+			return;
+		}
+
+		// ✅ Si tiene prefijo válido → actualiza cookie
 		if (langFromUrl) {
-			document.cookie = `country=${langFromUrl}; path=/; max-age=0`; // Guardar cookie por 1 año
+			document.cookie = `country=${langFromUrl}; path=/; max-age=31536000`;
 			console.log(`[LanguageCookieUpdater] Cookie actualizada a: ${langFromUrl}`);
 			return;
 		}
 
-		// ✅ Si NO tiene prefijo, asumimos Argentina → no tocamos la cookie ni redireccionamos
-		console.log('[LanguageCookieUpdater] No hay prefijo, se asume AR. No se modifica la cookie.');
+		// ✅ Si NO tiene prefijo y hay cookie → eliminarla (se asume AR)
+		if (cookieLang && supportedLanguages.includes(cookieLang)) {
+			document.cookie = 'country=; path=/; max-age=0';
+			console.log('[LanguageCookieUpdater] Sin prefijo → cookie eliminada porque se asume AR');
+			return;
+		}
+
+		// 🟢 Caso final: sin prefijo y sin cookie → no hacer nada
+		console.log('[LanguageCookieUpdater] No hay prefijo ni cookie → OK como Argentina');
 	}, []);
 
 	return null;
