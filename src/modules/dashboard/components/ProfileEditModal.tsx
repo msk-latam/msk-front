@@ -7,6 +7,9 @@ import Input from './ui/Input';
 import PasswordInput from './ui/PasswordInput';
 import PhoneInputWithCode, { findCodePrefix } from './ui/PhoneInputWithCode'; // Import the helper
 import Select from './ui/Select';
+import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
+import { usePathname } from 'next/navigation';
+import { supportedLanguages } from '@/config/languages';
 // Import types from the service
 // REMOVED: import { UserData, UserDetail } from '@/lib/localStorageService/userDataService';
 
@@ -177,6 +180,10 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 		setPassword(e.target.value);
 	};
 
+	const pathname = usePathname();
+	const lang = pathname.split('/')[1] || 'ar';
+	const targetPath = lang === 'ar' ? '/login?form=change-pass' : `/${lang}/login?form=change-pass`;
+
 	// Handler for most select inputs (excluding phone code which is handled internally now)
 	const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const { name, value } = e.target;
@@ -336,9 +343,19 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 						/>
 						<span className='absolute top-0 right-0 mt-1.5 text-xs font-medium text-[#6E737C] '>
 							¿Necesitas cambiar tu contraseña?&nbsp; {/* Use &nbsp; for non-breaking space */}
-							<Link href='/login' tabIndex={-1} className='text-[#9200AD]'>
+							<button
+								type='button'
+								onClick={() => {
+									document.cookie = 'recovery_flow_active=true; path=/; max-age=600';
+									document.cookie = `country=${lang}; path=/; max-age=60`;
+
+									console.log(`[Hazlo aquí] Cookies activadas: recovery_flow_active=true, country=${lang}`);
+									window.location.href = targetPath;
+								}}
+								className='text-[#9200AD] underline hover:text-[#700084] transition'
+							>
 								Hazlo aquí
-							</Link>
+							</button>
 						</span>
 					</div>
 					<Input

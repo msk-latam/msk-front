@@ -73,7 +73,9 @@ export default function CourseTeachers({ slug, lang }: CourseTeachersProps) {
 								<div className='flex flex-col'>
 									<p className='font-raleway font-semibold text-[#1A1A1A]'>{name}</p>
 									<p className='text-sm font-inter font-normal text-[#5A5F67]'>{title}</p>
-									{bioLink && (
+
+									{/* Comentado temporalmente por falta de datos */}
+									{/*{bioLink && (
 										<a
 											href={bioLink}
 											className='text-[#9200AD] text-sm mt-1 hover:underline'
@@ -82,7 +84,7 @@ export default function CourseTeachers({ slug, lang }: CourseTeachersProps) {
 										>
 											Ver biografía
 										</a>
-									)}
+									)}*/}
 								</div>
 							</div>
 						);
@@ -106,7 +108,9 @@ export default function CourseTeachers({ slug, lang }: CourseTeachersProps) {
 								<div className='flex flex-col'>
 									<p className='font-raleway font-semibold text-[#1A1A1A]'>{name}</p>
 									<p className='text-sm font-inter font-normal text-[#5A5F67]'>{title}</p>
-									{bioLink && (
+
+									{/* Comentado temporalmente por falta de datos */}
+									{/*{bioLink && (
 										<a
 											href={bioLink}
 											className='text-[#9200AD] text-sm mt-1 hover:underline'
@@ -115,7 +119,7 @@ export default function CourseTeachers({ slug, lang }: CourseTeachersProps) {
 										>
 											Ver biografía
 										</a>
-									)}
+									)}*/}
 								</div>
 							</div>
 						);

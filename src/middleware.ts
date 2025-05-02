@@ -15,6 +15,25 @@ export function middleware(request: NextRequest) {
 
 	const countryCookie = request.cookies.get('country')?.value || 'ar';
 
+	// ⚠️ Excepción: si es el login con form=change-pass, no redirigir al dashboard
+	if (pathname.includes('/login') && request.nextUrl.searchParams.get('form') === 'change-pass') {
+		return NextResponse.next(); // ✅ permite continuar en login sin forzar redirección
+	}
+
+	// 👉 Rewrite invisible para login sin prefijo (Argentina)
+	// 👉 Rewrite invisible si accede a /login sin prefijo (Argentina)
+	if (pathname.includes('/login') && request.nextUrl.searchParams.get('form') === 'change-pass') {
+		// Detectar si ya es /ar/login (no rehacer rewrite si ya lo es)
+		if (pathname.startsWith('/ar/')) {
+			return NextResponse.next();
+		}
+
+		// Rewrite invisible a /ar/login pero sin cambiar la URL visible
+		const rewriteUrl = new URL('/ar/login', request.url);
+		rewriteUrl.searchParams.set('form', 'change-pass');
+		return NextResponse.rewrite(rewriteUrl);
+	}
+
 	/* --- Authentication --- */
 	if (protectedPaths.some((path) => pathname.startsWith(path))) {
 		if (!isAuthenticated) {
