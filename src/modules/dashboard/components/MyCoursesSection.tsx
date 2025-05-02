@@ -7,6 +7,41 @@ import { useLmsNavigation } from '@/hooks/useLmsNavigation';
 import Image from 'next/image';
 import React, { useState } from 'react';
 
+// Simple SVG placeholders for icons - replace with actual icons later
+const LightningIcon = () => (
+	<svg width='20' height='23' viewBox='0 0 20 23' fill='none' xmlns='http://www.w3.org/2000/svg'>
+		<path
+			d='M10.9662 1.33008L2.05963 12.0179C1.71082 12.4365 1.53641 12.6458 1.53375 12.8225C1.53143 12.9762 1.5999 13.1224 1.71943 13.219C1.85692 13.3301 2.12935 13.3301 2.6742 13.3301H9.96617L8.96617 21.3301L17.8727 10.6422C18.2215 10.2237 18.3959 10.0144 18.3986 9.83762C18.4009 9.68396 18.3324 9.53777 18.2129 9.44118C18.0754 9.33008 17.803 9.33008 17.2581 9.33008H9.96617L10.9662 1.33008Z'
+			stroke='#9200AD'
+			strokeWidth='1.5'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		/>
+	</svg>
+);
+const LightningFastIcon = () => (
+	<svg width='23' height='21' viewBox='0 0 23 21' fill='none' xmlns='http://www.w3.org/2000/svg'>
+		<path
+			d='M8.63281 15.8301H3.13281M6.13281 10.3301H1.63281M8.63281 4.83008H3.63281M16.6328 1.33008L10.0364 10.5651C9.74441 10.9738 9.59843 11.1782 9.60475 11.3486C9.61025 11.497 9.68139 11.6352 9.79891 11.7259C9.93389 11.8301 10.1851 11.8301 10.6874 11.8301H15.6328L14.6328 19.3301L21.2292 10.0951C21.5212 9.68632 21.6672 9.48195 21.6609 9.31155C21.6554 9.1632 21.5842 9.02496 21.4667 8.93426C21.3317 8.83008 21.0806 8.83008 20.5783 8.83008H15.6328L16.6328 1.33008Z'
+			stroke='#9200AD'
+			strokeWidth='1.5'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		/>
+	</svg>
+);
+const RocketIcon = () => (
+	<svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
+		<path
+			d='M10.2996 14.3303L7.29956 11.3303M10.2996 14.3303C11.6964 13.7991 13.0364 13.129 14.2996 12.3303M10.2996 14.3303V19.3303C10.2996 19.3303 13.3296 18.7803 14.2996 17.3303C15.3796 15.7103 14.2996 12.3303 14.2996 12.3303M7.29956 11.3303C7.83171 9.94976 8.50176 8.62639 9.29956 7.38033C10.4647 5.51731 12.0872 3.98337 14.0126 2.92442C15.9379 1.86546 18.1022 1.3167 20.2996 1.33033C20.2996 4.05033 19.5196 8.83033 14.2996 12.3303M7.29956 11.3303H2.29956C2.29956 11.3303 2.84956 8.30033 4.29956 7.33033C5.91956 6.25033 9.29956 7.33033 9.29956 7.33033M2.79956 15.8303C1.29956 17.0903 0.799561 20.8303 0.799561 20.8303C0.799561 20.8303 4.53956 20.3303 5.79956 18.8303C6.50956 17.9903 6.49956 16.7003 5.70956 15.9203C5.32087 15.5493 4.80885 15.335 4.27179 15.3184C3.73472 15.3017 3.21044 15.4841 2.79956 15.8303Z'
+			stroke='#9200AD'
+			stroke-width='1.5'
+			stroke-linecap='round'
+			stroke-linejoin='round'
+		/>
+	</svg>
+);
+
 interface Course {
 	id: number;
 	image: string;
@@ -14,7 +49,7 @@ interface Course {
 	title: string;
 	expiryDate?: string;
 	qualification?: number;
-	statusType: 'progress' | 'inactive' | 'finished' | 'expired' | 'Activo' | 'Finalizado' | 'Expirado';
+	statusType: 'progress' | 'inactive' | 'finished' | 'expired' | 'Activo' | 'Finalizado' | 'Expirado' | 'Sin enrolar';
 	statusText: string;
 	createdDate?: string;
 	isFavorite?: boolean;
@@ -26,8 +61,71 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 	const [activeTab, setActiveTab] = useState('Todo');
 	const [sortBy, setSortBy] = useState('Más recientes');
 	const [currentPage, setCurrentPage] = useState(1);
+	const [selectedPlan, setSelectedPlan] = useState('Regular');
 	const coursesPerPage = 4;
 	const { navigateToLms, isLoading: isNavigating, error: navigationError } = useLmsNavigation();
+
+	// --- Conditional Rendering for No Courses ---
+	if (!courseData || courseData.length === 0) {
+		return (
+			<div className='bg-white rounded-[30px] p-[36px] mt-5 flex  gap-8 items-center'>
+				{/* Left Side: Text and Button */}
+				<div className='flex flex-col gap-4 max-w-[500px]'>
+					<h2 className='font-raleway text-[34px] font-medium leading-tight text-[#1A1A1A]'>
+						Arma tu plan de aprendizaje gratuito
+					</h2>
+					<p className='text-[##6E737C] font-inter text-base font-normal'>
+						Capacítate a tu manera y toma el control de tu desarrollo académico
+					</p>
+					<button className='bg-[#f3f4f6] text-[#989CA4] px-6 py-3 rounded-full font-inter font-medium text-sm hover:bg-[#e2e3e5] transition self-start'>
+						Descubrir plan de aprendizaje
+					</button>
+				</div>
+
+				{/* Right Side: Plan Selection */}
+				<div className='bg-[#F7F8FC] rounded-[20px] p-6 flex flex-col gap-4 w-full'>
+					<h3 className='text-[#1A1A1A] font-raleway font-semibold text-xl text-center'>
+						¿Qué plan quieres llevar adelante?
+					</h3>
+					<div className='flex flex-col md:flex-row gap-4 justify-center items-center w-full'>
+						{/* Plan Option: Tranquilo */}
+						<button
+							className={`flex flex-col items-center gap-2 p-6 rounded-[38px] border ${
+								selectedPlan === 'Tranquilo' ? 'border-[#93A6E0] bg-[#DFE6FF]' : 'border-[#DBDDE2] bg-white'
+							} hover:border-[#93A6E0] transition w-full`}
+							onClick={() => setSelectedPlan('Tranquilo')}
+						>
+							<LightningIcon />
+							<span className='font-inter font-semibold text-[#1A1A1A]'>Tranquilo</span>
+							<span className='font-inter text-sm text-[#4F5D89]'>30 minutos semanales</span>
+						</button>
+						{/* Plan Option: Regular */}
+						<button
+							className={`flex flex-col items-center gap-2 p-6 rounded-[38px] border ${
+								selectedPlan === 'Regular' ? 'border-[#93A6E0] bg-[#DFE6FF]' : 'border-[#DBDDE2] bg-white'
+							} hover:border-[#93A6E0] transition w-full`}
+							onClick={() => setSelectedPlan('Regular')}
+						>
+							<LightningFastIcon />
+							<span className='font-inter font-semibold text-[#1A1A1A]'>Regular</span>
+							<span className='font-inter text-sm text-[#4F5D89]'>60 minutos semanales</span>
+						</button>
+						{/* Plan Option: Intensivo */}
+						<button
+							className={`flex flex-col items-center gap-2 p-6 rounded-[38px] border ${
+								selectedPlan === 'Intensivo' ? 'border-[#93A6E0] bg-[#DFE6FF]' : 'border-[#DBDDE2] bg-white'
+							} hover:border-[#93A6E0] transition w-full`}
+							onClick={() => setSelectedPlan('Intensivo')}
+						>
+							<RocketIcon />
+							<span className='font-inter font-semibold text-[#1A1A1A]'>Intensivo</span>
+							<span className='font-inter text-sm text-[#4F5D89]'>+120 minutos semanales</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		);
+	}
 
 	// --- Filtering Logic ---
 	const filteredCourses = courseData.filter((course) => {
@@ -99,7 +197,12 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 	};
 
 	const renderInfoLine = (course: Course) => {
-		if (course.expiryDate && course.statusType !== 'Expirado' && course.statusType !== 'Finalizado') {
+		if (
+			course.expiryDate &&
+			course.statusType !== 'Expirado' &&
+			course.statusType !== 'Finalizado' &&
+			course.statusType !== 'Sin enrolar'
+		) {
 			const date = new Date(course.expiryDate);
 			const day = date.getDate().toString().padStart(2, '0');
 			const month = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -137,6 +240,7 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 		switch (course.statusType) {
 			case 'Activo':
 			case 'Finalizado':
+			case 'Sin enrolar':
 				return (
 					<>
 						<button className={secondaryButtonClass}>Ir al foro</button>

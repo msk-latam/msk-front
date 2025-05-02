@@ -77,47 +77,39 @@ export default function DashboardPage() {
 	const [saveProfileSuccess, setSaveProfileSuccess] = useState<boolean>(false);
 	const [saveInterestsError, setSaveInterestsError] = useState<string | null>(null);
 	const [saveInterestsSuccess, setSaveInterestsSuccess] = useState<boolean>(false);
-	const [showProfilePromptModal, setShowProfilePromptModal] = useState(false);
+	const [showCompleteProfileModal, setShowCompleteProfileModal] = useState(false);
 
-	const { user, loading } = useProfile();
+	const { user, loading: userDataLoading } = useProfile();
 	const { mutate: saveUserProfile, loading: isSaving } = useSaveUserProfile();
 
 	const handleEditProfile = (field?: string) => {
 		console.log('(Page) Edit profile triggered for field:', field || 'general');
 		setEditTargetField(field);
 
-		// Check if the profile seems incomplete (specifically check interests here)
-		const isProfileIncomplete =
-			interests && // Ensure interests object exists before checking properties
-			!interests.specialty_interests?.length &&
-			!interests.content_interests?.length;
-
-		// Log the check
-		console.log(`(Page) Checking if profile is incomplete: ${isProfileIncomplete}`, interests);
-
-		if (isProfileIncomplete) {
-			// If incomplete, show the prompt modal first
-			console.log('(Page) Profile incomplete, showing prompt modal.');
-			setShowProfilePromptModal(true);
+		if (field === 'interests') {
+			setShowInterestsModal(true);
 		} else {
-			// Otherwise, open the relevant edit modal directly
-			console.log('(Page) Profile complete or check failed, opening edit modal directly for field:', field);
-			if (field === 'interests') {
-				setShowInterestsModal(true);
-			} else {
-				setShowEditModal(true); // Show general profile modal if field is undefined or not 'interests'
-			}
+			setShowEditModal(true);
 		}
 	};
 
+	const handleOpenCompleteProfileModal = () => {
+		console.log('(Page) Opening complete profile prompt modal.');
+		setShowCompleteProfileModal(true);
+	};
+
+	const handleCloseCompleteProfileModal = () => {
+		setShowCompleteProfileModal(false);
+		setEditTargetField(undefined);
+		console.log('(Page) Profile prompt modal closed.');
+	};
+
 	const handleCompleteProfileNow = () => {
-		setShowProfilePromptModal(false); // Close the prompt
-		// Open the correct edit modal based on the stored target field
+		handleCloseCompleteProfileModal();
 		console.log('(Page) Proceeding from prompt to edit modal for field:', editTargetField);
 		if (editTargetField === 'interests') {
 			setShowInterestsModal(true);
 		} else {
-			// Default to the general profile edit modal
 			setShowEditModal(true);
 		}
 	};
@@ -170,10 +162,11 @@ export default function DashboardPage() {
 					<DashboardHero
 						userData={user}
 						onEditProfile={handleEditProfile}
-						isLoading={loading}
+						isLoading={userDataLoading}
 						userEmail={user?.email ?? ''}
+						onOpenCompleteProfileModal={handleOpenCompleteProfileModal}
 					/>
-					{!loading && user && (
+					{!userDataLoading && user && (
 						<>
 							<MyCoursesSection courseData={user.coursesInProgress} userEmail={user.email} />
 							<LearningPlanCta />
@@ -188,13 +181,8 @@ export default function DashboardPage() {
 			<Footer />
 
 			<CompleteProfilePromptModal
-				isOpen={showProfilePromptModal}
-				onClose={() => {
-					setShowProfilePromptModal(false);
-					// Clear the target field if the prompt is closed without proceeding
-					setEditTargetField(undefined);
-					console.log('(Page) Profile prompt modal closed.');
-				}}
+				isOpen={showCompleteProfileModal}
+				onClose={handleCloseCompleteProfileModal}
 				onCompleteNow={handleCompleteProfileNow}
 			/>
 
