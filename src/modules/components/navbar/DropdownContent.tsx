@@ -48,27 +48,33 @@ const DropdownContent: React.FC<Props> = ({
 
   // Add click outside handler for desktop view
   useEffect(() => {
-    if (isMobile) return; // Only apply this for desktop view
-    
+    if (isMobile) return;
+  
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        // Click was outside dropdown - close it
         if (typeof onClose === 'function') {
-          // Call the onClose function from parent to properly close the entire dropdown
           onClose();
         }
-        // Don't navigate to any view - just let onClose handle it
       }
     };
-
-    // Add the event listener
+  
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        if (typeof onClose === 'function') {
+          onClose();
+        }
+      }
+    };
+  
     document.addEventListener("mousedown", handleClickOutside);
-    
-    // Clean up the event listener
+    document.addEventListener("keydown", handleKeyDown);
+  
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [isMobile, onClose]);
+  
 
   const renderChildView = () => {
     if (!discoverChildView) return null;
