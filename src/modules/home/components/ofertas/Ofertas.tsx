@@ -12,7 +12,7 @@ const stripHtml = (html: string) => {
 };
 
 // Componente de descuento y botón
-const DiscountAndButton = ({ offer, discountNumber, descLine1, descLine2 }: any) => {
+const DiscountAndButton = ({ offer, content, discountNumber, descLine1, descLine2 }: any) => {
 	const pathname = usePathname();
 	const lang = pathname?.split('/')[1] || 'ar';
 
@@ -115,22 +115,20 @@ const Ofertas = () => {
 
 			{/* Contenido */}
 			<div className='relative z-10 w-full overflow-visible max-w-[1600px] mx-auto md:px-4 px-5 py-16 flex flex-col md:flex-row items-center md:items-end md:justify-between justify-end gap-5'>
-				<div className='text-left text-white max-w-xl font-raleway hidden md:block mt-20'>
-					<p className='text-base mb-4 font-inter font-normal translate-y-[-190px]'>{stripHtml(offer.pre_text)}</p>
-					<h2 className='text-5xl leading-none font-raleway translate-y-[-150px]'>
-						<span className='whitespace-nowrap font-bold'>{firstTitlePart}</span>{' '}
-						<span className='font-medium text-[45px] whitespace-nowrap'>{secondTitlePart}</span>
-					</h2>
-					<ul className='text-2xl mt-6 space-y-10 leading-snug list-disc list-outside ml-4 translate-y-[-120px]'>
-						{stripHtml(offer.content || '')
-							.split(/\n|\r|\r\n/)
-							.filter((line) => line.trim() !== '')
-							.map((line, idx) => (
-								<li key={idx} className='whitespace-pre-line'>
-									{line}
-								</li>
-							))}
-					</ul>
+				<div className='text-left text-white max-w-xl  font-raleway hidden md:block mt-0 leading-[100px]'>
+					<div>
+						<p className='text-base md:text-lg font-raleway mb-4 md:mb-20 font-regular   '>{offer.pre_text}</p>
+
+						<h2
+							className='text-3xl md:text-5xl font-raleway flex flex-col gap-2 md:gap-4 mb-6 md:mb-32 line-height: 1rem; whitespace-nowrap'
+							dangerouslySetInnerHTML={{ __html: offer.title }}
+						/>
+
+						<div
+							className='max-w-[500px] md:-mt-20 font-raleway font-semibold md:text-[25px] md: whitespace-nowrap '
+							dangerouslySetInnerHTML={{ __html: offer.content }}
+						/>
+					</div>
 					<div className='flex items-end gap-2 text-left md:text-right w-full md:w-auto'>
 						<span className='text-6xl md:text-[78.49px] font-inter font-bold leading-none tracking-tighter'>
 							{discountNumber}
