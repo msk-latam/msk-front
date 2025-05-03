@@ -26,7 +26,7 @@ export const useSaveInterests = (): UseSaveInterestsResult => {
 
 		try {
 			const response = await fetch('/api/save-interests', {
-				method: 'POST',
+				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
 				},
