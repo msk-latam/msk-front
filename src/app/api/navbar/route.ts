@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export async function GET(req: Request) {
 
     try {
-        const res = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/navbar?lang=int`, {
+        const res = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/navbar?lang=null`, {
             next: { revalidate: 30 },
         });
         const data = await res.json();
