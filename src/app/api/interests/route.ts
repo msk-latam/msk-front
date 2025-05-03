@@ -30,6 +30,7 @@ export async function PUT(request: NextRequest) {
 
 	const response = await fetch(`${process.env.NEXT_PUBLIC_PUBLIC_URL}/api/customer/interests/${email}`, {
 		method: 'PUT',
+		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(body),
 	});
 
