@@ -121,9 +121,15 @@ const FooterLinksSection: React.FC = ({ params }: any) => {
 					const base = getUrl();
 
 					// Si la URL pertenece a "msklatam.com", reemplazarla por la base correcta
-					if (url.startsWith('https://msklatam.com/')) {
-						url = url.replace('https://msklatam.com/', '/'); // Convertimos a una ruta relativa
+					// if (url.startsWith('https://msklatam.com/')) {
+					// 	url = url.replace('https://msklatam.com/', '/'); // Convertimos a una ruta relativa
+					// }
+
+					// Si la URL tiene tech
+					if (base.indexOf('.tech')>-1) {
+						url = url.replace('.com', '.tech'); // Convertimos en ruta de tech.
 					}
+
 
 					// Si la URL ya es absoluta (http o https de otro dominio), no modificarla
 					if (url.startsWith('http://') || url.startsWith('https://')) {
