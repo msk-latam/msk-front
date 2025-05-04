@@ -165,7 +165,10 @@ export async function GET() {
 					next: { revalidate: 3600 * 7 }, // Cache for 7 hours
 				});
 				const resourceData = await resourceRes.json();
-				recommendedResources.push(resourceData);
+				
+				if(resourceData.id!=null){
+					recommendedResources.push(resourceData);
+				}
 			}
 			return recommendedResources;
 		};
