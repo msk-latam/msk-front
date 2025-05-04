@@ -117,7 +117,11 @@ export async function GET() {
 							const courseDate = new Date(course.Fecha_de_ltima_sesi_n).getTime();
 							return courseDate > latestDate ? course : latest;
 					  }, null);
-
+			
+			if(!latestCourse){
+				return null;
+			}
+			
 			const courseRes = await fetch(
 				`https://cms1.msklatam.com/wp-json/msk/v1/products?search=${latestCourse.Nombre_de_curso.name}`,
 				{
