@@ -97,6 +97,7 @@ const InterestsEditModal: React.FC<InterestsEditModalProps> = ({
 	const adicionalesOptions = interestData.find((cat) => cat.title === '¿Qué te trae a MSK hoy?')?.options || [];
 
 	useEffect(() => {
+
 		if (isOpen && initialData) {
 			// Initialize based on provided initialData, filtering ensures only valid options are set
 			setSelectedEspecialidades(

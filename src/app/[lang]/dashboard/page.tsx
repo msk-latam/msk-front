@@ -137,6 +137,9 @@ export default function DashboardPage() {
 			await updateInterests(interestData);
 			setEditTargetField(undefined);
 			setSaveInterestsSuccess(true);
+			setTimeout(function(){
+				setSaveInterestsSuccess(false);
+			})
 		} catch (error: any) {
 			console.error('Failed to save interests:', error);
 			setSaveInterestsError(error.message || 'Error desconocido al guardar intereses');
