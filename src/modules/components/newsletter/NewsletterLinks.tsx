@@ -21,7 +21,7 @@ const NewsletterLinks = () => {
 
         {/* Columna 1 */}
         <div className="max-w-[250px]">
-          <h4 className="text-[18px] font-bold mb-4">Cursos más elegidos</h4>\
+          <h4 className="text-[18px] font-bold mb-4">Cursos más elegidos</h4>
           <ul className="space-y-4 md:font-normal font-[8px] md:whitespace-nowrap opacity-80">
             {
               data?.sections?.cursos_mas_elegidos.map((s)=>{
@@ -43,12 +43,18 @@ const NewsletterLinks = () => {
         <div className="max-w-[250px]">
           <h4 className="text-[18px] font-bold mb-4">Cursos más buscados</h4>
           <ul className="space-y-4 font-normal md:whitespace-nowrap opacity-80">
+          {
+              data?.sections?.cursos_mas_buscados.map((s)=>{
+                  return <li><a href={s.url} className="hover:underline">{s.title}</a></li>
+            })
+          }
+            {/*             
             <li><a href={buildCourseLink("/tienda/medicina-interna/")} className="hover:underline">Curso medicina interna</a></li>
             <li><a href={buildCourseLink("/tienda/hematologia-y-hemoterapia/")} className="hover:underline">Curso superior de hematología y hemoterapia</a></li>
             <li><a href={buildCourseLink("/tienda/neurologia/")} className="hover:underline">Curso superior de neurología</a></li>
             <li><a href={buildCourseLink("/tienda/auditoria-medica/")} className="hover:underline">Auditoría médica</a></li>
             <li><a href={buildCourseLink("/tienda/terapia-intensiva/")} className="hover:underline">Curso superior de terapia intensiva</a></li>
-            <li><a href={buildCourseLink("/tienda/administracion-y-gestion-hospitalaria/")} className="hover:underline">Curso superior de administración y gestión hospitalaria</a></li>
+            <li><a href={buildCourseLink("/tienda/administracion-y-gestion-hospitalaria/")} className="hover:underline">Curso superior de administración y gestión hospitalaria</a></li> */}
           </ul>
         </div>
 
@@ -57,11 +63,11 @@ const NewsletterLinks = () => {
           <h4 className="text-[18px] font-bold mb-4">Especialidades</h4>
           <ul className="space-y-4 font-normal md:whitespace-nowrap opacity-80">
             {/* Todo va a la tienda. No hay redireccion de especialidad */}
-            <li><a href={buildCourseLink("/tienda/")} className="hover:underline">Medicina general</a></li>
-            <li><a href={buildCourseLink("/tienda/")} className="hover:underline">Medicina familiar</a></li>
-            <li><a href={buildCourseLink("/tienda/")} className="hover:underline">Cardiología</a></li>
-            <li><a href={buildCourseLink("/tienda/")} className="hover:underline">Traumatología</a></li>
-            <li><a href={buildCourseLink("/tienda/")} className="hover:underline">Pediatría</a></li>
+            <li><a href={buildCourseLink("/tienda/?especialidades=medicina-general")} className="hover:underline">Medicina general</a></li>
+            <li><a href={buildCourseLink("/tienda/?especialidades=medicina-familiar")} className="hover:underline">Medicina familiar</a></li>
+            <li><a href={buildCourseLink("/tienda/?especialidades=cardiologia")} className="hover:underline">Cardiología</a></li>
+            <li><a href={buildCourseLink("/tienda/?especialidades=traumatologia")} className="hover:underline">Traumatología</a></li>
+            <li><a href={buildCourseLink("/tienda/?especialidades=pediatria")} className="hover:underline">Pediatría</a></li>
           </ul>
         </div>
 
@@ -69,12 +75,17 @@ const NewsletterLinks = () => {
         <div className="max-w-[250px]">
           <h4 className="text-[18px] font-bold mb-4">Contenidos destacados</h4>
           <ul className="space-y-4 font-normal md:whitespace-nowrap opacity-80">
-            <li><a href={buildCourseLink("/tienda/que-es-el-sibo-y-por-que-se-requiere-cautela-al-tratarlo/")} className="hover:underline">Qué es el SIBO y cómo tratarlo correctamente</a></li>
+          {
+              data?.sections?.contenidos_destacados.map((s)=>{
+                  return <li><a href={s.url} className="hover:underline">{s.title}</a></li>
+            })
+          }
+            {/* <li><a href={buildCourseLink("/tienda/que-es-el-sibo-y-por-que-se-requiere-cautela-al-tratarlo/")} className="hover:underline">Qué es el SIBO y cómo tratarlo correctamente</a></li>
             <li><a href={buildCourseLink("/tienda/como-identificar-autismo-en-adultos/")} className="hover:underline">Cómo identificar el autismo en adultos</a></li>
             <li><a href={buildCourseLink("/tienda/diagnostico-del-shock-en-urgencias/")} className="hover:underline">Diagnóstico del shock en urgencias</a></li>
             <li><a href={buildCourseLink("/tienda/abordaje-diagnostico-del-dolor-abdominal-agudo/")} className="hover:underline">Abordaje diagnóstico del dolor abdominal agudo</a></li>
             <li><a href="https://youtu.be/iWecSpkw8Eo?si=Dk3dmUrcjf4H9RTT" className="hover:underline">Dolor oncológico y fármaco genómica</a></li>
-            <li><a href="https://youtu.be/rYNsJbntGSw?si=T_dNhjTHU9xrM2V1" className="hover:underline">3 novedades para mantener tus conocimientos <br />actualizados</a></li>
+            <li><a href="https://youtu.be/rYNsJbntGSw?si=T_dNhjTHU9xrM2V1" className="hover:underline">3 novedades para mantener tus conocimientos <br />actualizados</a></li> */}
           </ul>
         </div>
       </div>
