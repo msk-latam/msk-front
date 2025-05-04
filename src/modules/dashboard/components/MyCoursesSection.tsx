@@ -361,6 +361,7 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 				<button
 					onClick={() => paginate(currentPage + 1)}
 					disabled={currentPage === totalPages}
+					style={{ visibility: totalPages ? 'visible' : 'hidden' }}
 					className='w-8 h-8 flex items-center justify-center rounded-full border border-[#DBDDE2] text-[#4F5D89] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition'
 				>
 					<ArrowRightIcon />
