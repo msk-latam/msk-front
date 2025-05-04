@@ -345,7 +345,7 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 			</div>
 
 			{/* Pagination - Hidden on Mobile */}
-			<div className='flex justify-center items-center gap-4 mt-6'>
+			<div className='flex justify-center items-center gap-4 mt-6' style={{ display: totalPages ? 'block' : 'none' }}>
 				<button
 					onClick={() => paginate(currentPage - 1)}
 					disabled={currentPage === 1}
