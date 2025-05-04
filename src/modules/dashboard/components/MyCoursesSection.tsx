@@ -345,15 +345,16 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 			</div>
 
 			{/* Pagination - Hidden on Mobile */}
-			<div className='flex justify-center items-center gap-4 mt-6' style={{ display: totalPages ? 'block' : 'none' }}>
+			<div className='flex justify-center items-center gap-4 mt-6'>
 				<button
 					onClick={() => paginate(currentPage - 1)}
 					disabled={currentPage === 1}
+					style={{ visibility: totalPages ? 'visible' : 'hidden' }}
 					className='w-8 h-8 flex items-center justify-center rounded-full border border-[#DBDDE2] text-[#4F5D89] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition'
 				>
 					<ArrowLeftIcon />
 				</button>
-				<span className='font-inter text-sm'>
+				<span className='font-inter text-sm' style={{ visibility: totalPages ? 'visible' : 'hidden' }}>
 					<span className='font-bold text-[#1A1A1A]'>{String(currentPage).padStart(2, '0')}</span>
 					<span className='text-[#4F5D89]'> / {String(totalPages).padStart(2, '0')}</span>
 				</span>
