@@ -1,11 +1,13 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import useFooter from '@/hooks/useFooter';
 
 const NewsletterLinks = () => {
   const pathname = usePathname();
   const lang = pathname.split('/')[1] || 'ar'; // Detectar idioma
   const isDemoMode = true; // ⚡ Habilitar .tech en modo demo
+  const { data } = useFooter('int');
 
   // Función para construir el dominio correcto
   const buildDomain = () => (isDemoMode ? "https://msklatam.tech" : "https://msklatam.com");
@@ -19,15 +21,22 @@ const NewsletterLinks = () => {
 
         {/* Columna 1 */}
         <div className="max-w-[250px]">
-          <h4 className="text-[18px] font-bold mb-4">Cursos más elegidos</h4>
+          <h4 className="text-[18px] font-bold mb-4">Cursos más elegidos</h4>\
           <ul className="space-y-4 md:font-normal font-[8px] md:whitespace-nowrap opacity-80">
+            {
+              data?.sections?.cursos_mas_elegidos.map((s)=>{
+                  return <li><a href={s.url} className="hover:underline">{s.title}</a></li>
+            })
+          }
+          </ul>
+          {/* <ul className="space-y-4 md:font-normal font-[8px] md:whitespace-nowrap opacity-80">
             <li><a href={buildCourseLink("/tienda/medicina-de-urgencias/")} className="hover:underline">Curso superior de medicina de urgencias</a></li>
             <li><a href={buildCourseLink("/tienda/medicina-familiar-y-comunitaria/")} className="hover:underline">Curso superior de medicina familiar</a></li>
             <li><a href={buildCourseLink("/tienda/medicina-estetica-facial/")} className="hover:underline">Curso medicina estética facial</a></li>
             <li><a href={buildCourseLink("/tienda/accsap/")} className="hover:underline">ACCSAP. Programa de Actualización en <span className="hidden md:block"><br /></span>Cardiología Clínica</a></li>
             <li><a href={buildCourseLink("/tienda/endocrinologia-y-nutricion/")} className="hover:underline">Curso superior de endocrinología y nutrición</a></li>
             <li><a href={buildCourseLink("/tienda/experto-en-diabetes/")} className="hover:underline">Experto en diabetes</a></li>
-          </ul>
+          </ul> */}
         </div>
 
         {/* Columna 2 */}
