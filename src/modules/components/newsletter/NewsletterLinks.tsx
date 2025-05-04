@@ -5,7 +5,7 @@ import useFooter from '@/hooks/useFooter';
 
 const NewsletterLinks = () => {
   const pathname = usePathname();
-  const lang = pathname.split('/')[1] || 'ar'; // Detectar idioma
+  const lang = pathname.split('/')[1] || ''; // Detectar idioma
   const isDemoMode = true; // ⚡ Habilitar .tech en modo demo
   const { data } = useFooter('int');
 
