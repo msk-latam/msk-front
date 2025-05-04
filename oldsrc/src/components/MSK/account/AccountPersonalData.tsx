@@ -237,7 +237,8 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 						if (typeof setUser === 'function') {
 							setUser(userDataDB);
 						}
-						setFormSubmitted(true);
+						// setFormSubmitted(true);
+						//Quitar color verde?
 
 						const continueTrialAccess = localStorage.getItem('continueTrialAccess');
 						if (typeof continueTrialAccess === 'string') {
