@@ -31,7 +31,7 @@ const NewsletterLinks = () => {
           <ul className="space-y-4 md:font-normal font-[8px] md:whitespace-nowrap opacity-80">
             {
               data?.sections?.cursos_mas_elegidos.map((s)=>{
-                  return <li><a href={s.url} className="hover:underline">{s.title}</a></li>
+                  return <li><a href={urlFormat(s.url)} className="hover:underline">{s.title}</a></li>
             })
           }
           </ul>
@@ -83,7 +83,7 @@ const NewsletterLinks = () => {
           <ul className="space-y-4 font-normal md:whitespace-nowrap opacity-80">
           {
               data?.sections?.contenidos_destacados.map((s)=>{
-                  return <li><a href={s.url} className="hover:underline">{s.title}</a></li>
+                  return <li><a href={urlFormat(s.url)} className="hover:underline">{s.title}</a></li>
             })
           }
             {/* <li><a href={buildCourseLink("/tienda/que-es-el-sibo-y-por-que-se-requiere-cautela-al-tratarlo/")} className="hover:underline">Qué es el SIBO y cómo tratarlo correctamente</a></li>
