@@ -22,7 +22,7 @@ const Oportunidades = () => {
 	useEffect(() => {
 		const fetchCursos = async () => {
 			try {
-				const res = await fetch(`/api/home/oportunidades?lang=${lang}`, { cache: 'no-store' });
+				const res = await fetch(`/api/home/oportunidades?lang=${lang}&nocache=1`, { cache: 'no-store' });
 				const data = await res.json();
 
 				setInfoCursos({
