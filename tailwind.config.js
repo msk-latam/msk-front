@@ -18,23 +18,30 @@ function customColors(cssVar) {
 module.exports = {
 	content: ['./src/**/*.{js,jsx,ts,tsx}', './app/**/*.{js,jsx,ts,tsx}'],
 
-	darkMode: 'class',
+	theme: {
+		extend: {
+			fontFamily: {
+				inter: ['var(--font-inter)'],
+				raleway: ['var(--font-raleway)'],
+			}
+		},    screens: {
+			'md': '1400px',     
+		  },
+		
+	},
 
+	darkMode: 'class', 
 	theme: {
 		container: {
 			center: true,
 			padding: {
-				DEFAULT: '4rem',
+				DEFAULT:'4rem',
 			},
 			screens: {
-				'md': '1400px',
-			},
-		},
 
-		screens: {
-			'md': '1400px',
+				'md': '1400px',   
+			  },
 		},
-
 		fontFamily: {
 			display: ['var(--font-display)', ...defaultTheme.fontFamily.sans],
 			body: ['var(--font-body)', ...defaultTheme.fontFamily.sans],
@@ -44,7 +51,7 @@ module.exports = {
 		extend: {
 			colors: {
 				translucent: {
-					blue: 'rgba(173, 216, 230, 0.5)',
+					blue: 'rgba(173, 216, 230, 0.5)', // Light Blue
 				},
 				primary: {
 					50: customColors('--c-primary-50'),
@@ -107,24 +114,15 @@ module.exports = {
 				inter: ['var(--font-inter)', 'sans-serif'],
 				raleway: ['var(--font-raleway)', 'sans-serif'],
 			},
-			keyframes: {
-				scroll: {
-					'0%': { transform: 'translateX(0%)' },
-					'100%': { transform: 'translateX(-50%)' },
-				},
-			},
-			animation: {
-				'scroll-carousel': 'scroll 30s linear infinite',
-			},
 		},
 	},
-
 	variants: {
 		extend: {
-			animation: ['motion-safe'],
+			animation: {
+				'spin-slow': 'spin 3s linear infinite',
+			},
 		},
 	},
-
 	plugins: [
 		require('@tailwindcss/typography'),
 		require('@tailwindcss/forms'),
