@@ -2,16 +2,22 @@
 
 import { usePathname } from "next/navigation";
 import useFooter from '@/hooks/useFooter';
-
+import { urlFormat } from '@/utils/urlFormat';
 const NewsletterLinks = () => {
   const pathname = usePathname();
-  const lang = pathname.split('/')[1] || ''; // Detectar idioma
+  let lang = pathname.split('/')[1] || 'int'; // Detectar idioma
+  if(lang.length>2){
+    lang = "int";
+  }
+  if(lang.length==0){
+    lang = "int";
+  }
   const isDemoMode = true; // ⚡ Habilitar .tech en modo demo
-  const { data } = useFooter('int');
+  const { data } = useFooter(lang);
 
   // Función para construir el dominio correcto
   const buildDomain = () => (isDemoMode ? "https://msklatam.tech" : "https://msklatam.com");
-
+  const replaceUrl = (url:string) => (url.replace('https://msklatam.com',`${buildDomain()}/${lang}}`));
   // Función para construir la URL final agregando idioma
   const buildCourseLink = (path: string) => `${buildDomain()}/${lang}${path}`;
 
@@ -45,7 +51,7 @@ const NewsletterLinks = () => {
           <ul className="space-y-4 font-normal md:whitespace-nowrap opacity-80">
           {
               data?.sections?.cursos_mas_buscados.map((s)=>{
-                  return <li><a href={s.url} className="hover:underline">{s.title}</a></li>
+                  return <li><a href={urlFormat(s.url)} className="hover:underline">{s.title}</a></li>
             })
           }
             {/*             
@@ -63,11 +69,11 @@ const NewsletterLinks = () => {
           <h4 className="text-[18px] font-bold mb-4">Especialidades</h4>
           <ul className="space-y-4 font-normal md:whitespace-nowrap opacity-80">
             {/* Todo va a la tienda. No hay redireccion de especialidad */}
-            <li><a href={buildCourseLink("/tienda/?especialidades=medicina-general")} className="hover:underline">Medicina general</a></li>
-            <li><a href={buildCourseLink("/tienda/?especialidades=medicina-familiar")} className="hover:underline">Medicina familiar</a></li>
-            <li><a href={buildCourseLink("/tienda/?especialidades=cardiologia")} className="hover:underline">Cardiología</a></li>
-            <li><a href={buildCourseLink("/tienda/?especialidades=traumatologia")} className="hover:underline">Traumatología</a></li>
-            <li><a href={buildCourseLink("/tienda/?especialidades=pediatria")} className="hover:underline">Pediatría</a></li>
+            <li><a href={urlFormat("/tienda/?especialidades=medicina-general")} className="hover:underline">Medicina general</a></li>
+            <li><a href={urlFormat("/tienda/?especialidades=medicina-familiar")} className="hover:underline">Medicina familiar</a></li>
+            <li><a href={urlFormat("/tienda/?especialidades=cardiologia")} className="hover:underline">Cardiología</a></li>
+            <li><a href={urlFormat("/tienda/?especialidades=traumatologia")} className="hover:underline">Traumatología</a></li>
+            <li><a href={urlFormat("/tienda/?especialidades=pediatria")} className="hover:underline">Pediatría</a></li>
           </ul>
         </div>
 
