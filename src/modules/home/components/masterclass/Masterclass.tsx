@@ -131,6 +131,7 @@ const Masterclass = () => {
 					<article className='md:order-2'>
 						<ProfessionalCardDesktop
 							pro={professionals[(current - 1 + professionals.length) % professionals.length]}
+							masterClassLink = {masterclassLink?masterclassLink:''}
 							current={(current - 1 + professionals.length) % professionals.length}
 							total={professionals.length}
 							onNext={nextSlide}
