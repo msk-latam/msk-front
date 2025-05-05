@@ -173,9 +173,10 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 					{courses.length > 0 ? (
 						courses.map((course) => {
 							const lang = pathname?.split('/')[1] || 'ar'; // Obtener el idioma desde la ruta
+							const courseUrl = `/${lang}/curso/${course.slug}`;
 
 							return (
-								<Link href={`${course.slug}`} key={course.id} className='border rounded-[30px] bg-white flex flex-col'>
+								<Link href={courseUrl} key={course.id} className='border rounded-[30px] bg-white flex flex-col'>
 									<img
 										src={course.featured_images.medium}
 										alt={course.title}
@@ -233,7 +234,7 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 											</div>
 
 											<Link
-												href={`${course.slug}`}
+												href={courseUrl}
 												className='bg-[#191919] text-white px-4 py-2 rounded-full hover:bg-[#474b53] transition-colors'
 											>
 												Descubrir

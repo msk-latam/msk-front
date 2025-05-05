@@ -8,7 +8,7 @@ export async function GET(request: Request) {
 		const lang = url.searchParams.get('lang') || 'int';
 
 		const res = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/front/inicio?lang=${lang}`, {
-			next: { revalidate: 30 },
+			next: { revalidate: 0 },
 		});
 
 		if (!res.ok) throw new Error('Error al obtener los cursos');

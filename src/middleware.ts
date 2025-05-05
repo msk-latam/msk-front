@@ -14,10 +14,18 @@ export function middleware(request: NextRequest) {
 	const country = request.cookies.get('country')?.value || 'ar';
 
 	const countryCookie = request.cookies.get('country')?.value || 'ar';
+	const match = pathname.match(/^\/tienda\/curso\/(.+)/);
 
 	// ⚠️ Excepción: si es el login con form=change-pass, no redirigir al dashboard
 	if (pathname.includes('/login') && request.nextUrl.searchParams.get('form') === 'change-pass') {
 		return NextResponse.next(); // ✅ permite continuar en login sin forzar redirección
+	}
+
+	if (match) {
+		const slug = match[1];
+		const newUrl = request.nextUrl.clone();
+		newUrl.pathname = `/curso/${slug}`;
+		return NextResponse.redirect(newUrl);
 	}
 
 	// 👉 Rewrite invisible para login sin prefijo (Argentina)
@@ -54,6 +62,16 @@ export function middleware(request: NextRequest) {
 		segments.length > 2 &&
 		segments[0] === 'tienda' &&
 		segments[1] === 'tienda'
+	) {
+		const newPath = '/' + segments.slice(1).join('/');
+		return NextResponse.redirect(new URL(newPath, origin));
+	}
+
+	if (
+		!supportedLanguages.includes(firstSegment) &&
+		segments.length > 2 &&
+		segments[0] === 'curso' &&
+		segments[1] === 'curso'
 	) {
 		const newPath = '/' + segments.slice(1).join('/');
 		return NextResponse.redirect(new URL(newPath, origin));
