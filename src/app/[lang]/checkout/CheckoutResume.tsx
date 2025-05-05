@@ -146,8 +146,6 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 	};
 
 	const installmentNumber = installments[country].quotes;
-
-	console.log(installmentNumber);
 	const installmentValueWithDiscount = totalWithDiscount / installmentNumber;
 
 	return (
