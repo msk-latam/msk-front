@@ -85,7 +85,7 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
           )}
         </div>
 
-        <Link href={getLocalizedUrl(lang, storeUrl)}
+        <Link href={storeUrl}
           className="mt-4 flex justify-between items-center w-full p-4 bg-gray-100 hover:bg-gray-200 rounded-2xl text-gray-800"
         >
           <span className="whitespace-nowrap">Ver todos los cursos</span>
@@ -131,7 +131,7 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
           <div className="text-center py-8">No hay cursos disponibles para esta especialidad</div>
         )}
 
-<Link href={getLocalizedUrl(lang, storeUrl) }
+<Link href={storeUrl}
           className="mt-4 flex justify-between items-center w-full p-4 bg-gray-100 hover:bg-gray-200 rounded-2xl text-gray-800"
           onClick={onClose}>
           <span className="whitespace-nowrap" >Ver todos los cursos</span>
