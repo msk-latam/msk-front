@@ -4,6 +4,7 @@ import { useSpecialtyDetailView } from '../hooks/useSpecialtyDetailView';
 import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
 import { usePathname, useRouter } from 'next/navigation';
 import { supportedLanguages } from '@/config/languages';
+import { urlFormat } from '@/utils/urlFormat';
 
 interface SearchBarProps {
 	placeholder: string;
@@ -87,9 +88,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
 	// ✅ Redirige a /tienda/curso.url
 	const handleItemClick = (course: any) => {
 		const coursePath = course.url.replace(/^\/(course|curso)/, '');
-		const storeUrl = getLocalizedUrl(lang, `/tienda${coursePath}`);
+		const storeUrl = getLocalizedUrl(lang, `/curso${coursePath}`);
 		// Use window.location.href for consistent navigation across all pages
-		window.location.href = storeUrl;
+		
+		window.location.href = urlFormat(course.url);
 		setSearchTerm('');
 		setIsDropdownOpen(false);
 	};
