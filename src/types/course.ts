@@ -16,6 +16,7 @@ export interface CourseCodes {
 }
 
 export interface Course {
+	[x: string]: any;
 	id: number;
 	title: string;
 	slug: string;

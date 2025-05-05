@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getNavbar } from '../service/navbar.service';
-import {
-	APIResponse,
-	SpecialtyDetailViewModel,
-	toSpecialtyDetailViewModel,
-} from './types';
+import { APIResponse, SpecialtyDetailViewModel, toSpecialtyDetailViewModel } from './types';
 
 export function useSpecialtyDetailView(specialtyId?: number) {
 	const [data, setData] = useState<SpecialtyDetailViewModel[]>([]);
@@ -19,8 +15,7 @@ export function useSpecialtyDetailView(specialtyId?: number) {
 				// Filtrar cursos duplicados por URL dentro de cada specialty
 				const filteredData = rawData.map((specialty) => {
 					const uniqueCourses = specialty.courses.filter(
-						(course, index, self) =>
-							index === self.findIndex((c) => c.url === course.url)
+						(course, index, self) => index === self.findIndex((c) => c.url === course.url),
 					);
 					return {
 						...specialty,
@@ -37,13 +32,10 @@ export function useSpecialtyDetailView(specialtyId?: number) {
 			.finally(() => setLoading(false));
 	}, []);
 
-	const selectedSpecialty = specialtyId
-		? data.find((item) => item.specialty.id === specialtyId)
-		: null;
+	const selectedSpecialty = specialtyId ? data.find((item) => item.specialty.id === specialtyId) : null;
 
 	return { data, selectedSpecialty, loading, error };
 }
-
 
 // import { useEffect, useState } from 'react';
 // import { getNavbar } from '../service/navbar.service';

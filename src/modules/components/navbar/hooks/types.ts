@@ -4,37 +4,38 @@
 
 // Base types for common structures
 export interface Link {
-  title: string;
-  url: string;
-  target: string;
+	title: string;
+	url: string;
+	target: string;
 }
 
 export interface LinkItem {
-  link: Link;
+	link: Link;
 }
 
 export interface Course {
-  id: number;
-  name: string;
-  url: string;
-  image: string;
+	[x: string]: string;
+
+	name: string;
+	url: string;
+	image: string;
 }
 
 export interface Specialty {
-  id: number;
-  name: string;
-  url: string;
-  courses: Course[];
+	id: number;
+	name: string;
+	url: string;
+	courses: Course[];
 }
 
 // Main API response type
 export interface APIResponse {
-  lang: string;
-  sections: {
-    specialities: Specialty[];
-    que_ofrecemos: LinkItem[];
-    recursos: LinkItem[];
-  };
+	lang: string;
+	sections: {
+		specialities: Specialty[];
+		que_ofrecemos: LinkItem[];
+		recursos: LinkItem[];
+	};
 }
 
 // Types for specific views
@@ -44,9 +45,9 @@ export interface APIResponse {
  * Consumes the complete sections array
  */
 export interface DiscoverViewModel {
-  specialities: Specialty[];
-  que_ofrecemos: LinkItem[];
-  recursos: LinkItem[];
+	specialities: Specialty[];
+	que_ofrecemos: LinkItem[];
+	recursos: LinkItem[];
 }
 
 /**
@@ -54,7 +55,7 @@ export interface DiscoverViewModel {
  * Consumes the specialities array
  */
 export interface SpecialtyViewModel {
-  specialities: Specialty[];
+	specialities: Specialty[];
 }
 
 /**
@@ -62,8 +63,8 @@ export interface SpecialtyViewModel {
  * Consumes the courses array of a specific specialty
  */
 export interface SpecialtyDetailViewModel {
-  specialty: Specialty;
-  courses: Course[];
+	specialty: Specialty;
+	courses: Course[];
 }
 
 /**
@@ -71,7 +72,7 @@ export interface SpecialtyDetailViewModel {
  * Consumes the que_ofrecemos array
  */
 export interface OfferViewModel {
-  offers: LinkItem[];
+	offers: LinkItem[];
 }
 
 /**
@@ -79,7 +80,7 @@ export interface OfferViewModel {
  * Consumes the recursos array
  */
 export interface ResourcesViewModel {
-  resources: LinkItem[];
+	resources: LinkItem[];
 }
 
 // Helper functions to transform API response into view models
@@ -88,48 +89,48 @@ export interface ResourcesViewModel {
  * Transforms the API response into the Discover View model
  */
 export function toDiscoverViewModel(response: APIResponse): DiscoverViewModel {
-  return {
-    specialities: response.sections.specialities,
-    que_ofrecemos: response.sections.que_ofrecemos,
-    recursos: response.sections.recursos
-  };
+	return {
+		specialities: response.sections.specialities,
+		que_ofrecemos: response.sections.que_ofrecemos,
+		recursos: response.sections.recursos,
+	};
 }
 
 /**
  * Transforms the API response into the Specialty View model
  */
 export function toSpecialtyViewModel(response: APIResponse): SpecialtyViewModel {
-  return {
-    specialities: response.sections.specialities
-  };
+	return {
+		specialities: response.sections.specialities,
+	};
 }
 
 /**
  * Transforms the API response into the Specialty Detail View model for a specific specialty
  */
 export function toSpecialtyDetailViewModel(response: APIResponse): SpecialtyDetailViewModel[] {
-  return response.sections.specialities.map(specialty => {
-    return {
-      specialty,
-      courses: specialty.courses
-    };
-  });
+	return response.sections.specialities.map((specialty) => {
+		return {
+			specialty,
+			courses: specialty.courses,
+		};
+	});
 }
 
 /**
  * Transforms the API response into the Offer View model
  */
 export function toOfferViewModel(response: APIResponse): OfferViewModel {
-  return {
-    offers: response.sections.que_ofrecemos
-  };
+	return {
+		offers: response.sections.que_ofrecemos,
+	};
 }
 
 /**
  * Transforms the API response into the Resources View model
  */
 export function toResourcesViewModel(response: APIResponse): ResourcesViewModel {
-  return {
-    resources: response.sections.recursos
-  };
+	return {
+		resources: response.sections.recursos,
+	};
 }

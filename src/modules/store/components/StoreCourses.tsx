@@ -134,6 +134,16 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 				}
 				const data: CoursesApiResponse = await response.json();
 				setCourses(data.data);
+				const filteredCourses = Object.values(
+					data.data.reduce((acc, course) => {
+						// Si ya hay un curso con ese `father_id`, no lo sobrescribas
+						if (!acc[course.father_id]) {
+							acc[course.father_id] = course;
+						}
+						return acc;
+					}, {} as Record<number, Course>),
+				);
+				setCourses(filteredCourses);
 				setTotalCourses(data.meta.total);
 				setTotalPages(data.meta.pages);
 				setCurrentPage(data.meta.page);
