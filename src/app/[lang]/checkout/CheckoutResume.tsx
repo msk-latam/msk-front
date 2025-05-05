@@ -70,7 +70,85 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 
 	const totalWithDiscount = Math.max(total - discount, 0); // Asegura que no sea negativo
 
-	const installmentValueWithDiscount = totalWithDiscount / 12;
+	const installments: any = {
+		cl: {
+			gateway: 'REBILL',
+			quotes: 8,
+		},
+		ar: {
+			gateway: 'MP',
+			quotes: 6,
+		},
+		ec: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		es: {
+			gateway: 'REBILL',
+			quotes: null,
+		},
+		int: {
+			gateway: 'REBILL',
+			quotes: null,
+		},
+		ve: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		mx: {
+			gateway: 'REBILL',
+			quotes: 12,
+		},
+		bo: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		co: {
+			gateway: 'REBILL',
+			quotes: 12,
+		},
+		cr: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		sv: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		gt: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		hn: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		ni: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		pa: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		py: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		pe: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		uy: {
+			gateway: 'REBILL',
+			quotes: 12,
+		},
+	};
+
+	const installmentNumber = installments[country].quotes;
+
+	console.log(installmentNumber);
+	const installmentValueWithDiscount = totalWithDiscount / installmentNumber;
 
 	return (
 		<div className='p-6 mt-24 bg-white border border-gray-300 rounded-lg'>
@@ -107,7 +185,7 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 				<span className='text-3xl font-bold text-[#392C35]'>{`${currency} $${formatPesoArgentino(totalWithDiscount)}`}</span>
 
 				<p className='mt-2 text-sm text-[#6474A6]'>
-					{`12 pagos de `}
+					{`${installmentNumber} pagos de `}
 					<span className='font-bold'>{`${currency} $${formatPesoArgentino(installmentValueWithDiscount)}`}</span>
 				</p>
 			</div>
