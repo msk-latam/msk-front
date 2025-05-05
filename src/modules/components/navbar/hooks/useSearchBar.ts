@@ -6,7 +6,6 @@ export function useSpecialtyDetailView(specialtyId?: number) {
 	const [data, setData] = useState<SpecialtyDetailViewModel[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
-
 	useEffect(() => {
 		getNavbar()
 			.then((navbarData: APIResponse) => {
