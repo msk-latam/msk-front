@@ -3,7 +3,7 @@
 import { useLogout } from '@/hooks/useLogout';
 import Link from 'next/link';
 import { FiBell, FiUser } from 'react-icons/fi';
-
+import { urlFormat } from '@/utils/urlFormat';
 const UserButtons = () => {
 	const { logout } = useLogout();
 
@@ -15,7 +15,7 @@ const UserButtons = () => {
 			>
 				Cerrar sesión
 			</button>
-			<Link href='/dashboard'>
+			<Link href={urlFormat('/dashboard')}>
 				<button className='px-4 py-3.5'>
 					<FiUser className='scale-125' />
 				</button>
