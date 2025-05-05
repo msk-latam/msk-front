@@ -39,7 +39,7 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
     return (
       <div className="p-4 h-fit overflow-visible w-fit bg-white rounded-b-2xl">
         <div className="w-full rounded-b-2xl bg-white divide-y">
-        {data.offers.map((offer, index) => (
+        {data.offers?.map((offer, index) => (
   <Link
     key={`offer-${index}`}
     href={getLocalizedUrl(lang, offer.link.url)}
@@ -74,7 +74,7 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
         <h2 className="text-xl font-medium text-gray-800">Que ofrecemos</h2>
       </div>
       <div className="flex flex-col bg-gray-200 rounded-2xl">
-        {data.offers.map((offer, index) => (
+        {data.offers?.map((offer, index) => (
           <Link
             key={`offer-${index}`}
             href={offer.link.url}

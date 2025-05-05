@@ -1,6 +1,6 @@
 export const getNavbar = async () => {
   let lang = "ar";
-  if(window){
+  if(window!=null){
     const { pathname } = window.location;
     const langMatch = pathname.match(/^\/([^/]+)\//);
      lang = langMatch && langMatch[1].length <= 2 ? langMatch[1] : "ar";
