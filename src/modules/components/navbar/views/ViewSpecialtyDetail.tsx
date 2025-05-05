@@ -8,7 +8,7 @@ import ViewSpecialtyDetailSkeleton from "../skeletons/ViewSpecialtyDetailSkeleto
 import { useRouter, usePathname } from 'next/navigation';
 import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
 import { supportedLanguages } from '@/config/languages';
-
+import { urlFormat } from '@/utils/urlFormat';
 interface Props {
   selectedCategory: string | null;
   navigateTo: (view: string, category?: string | null) => void;
@@ -54,7 +54,7 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
         .replace(/[\u0300-\u036f]/g, "") 
         .replace(/[^a-z0-9-]/g, ''); 
     
-      const storeUrl = `${getLocalizedUrl(lang, '/tienda')}?especialidades=${specialtySlug}`;
+      const storeUrl = urlFormat(`/tienda?especialidades=${specialtySlug}`);
      // ✅ ahora navegación SPA
 
   if (!isMobile) {
@@ -63,7 +63,7 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
         <div className="flex flex-col">
           {courses.length > 0 ? (
             courses.map((course, index) => {
-              const newUrl = course.url.replace('/curso', '/tienda');
+              const newUrl = course.url.replace('/curso', '/curso');
               return (
                 <Link key={index} href={getLocalizedUrl(lang, newUrl)} className="block mb-6 last:mb-0">
                   <div className="relative rounded-[30px] overflow-hidden h-48 bg-gray-300 cursor-pointer">
@@ -110,7 +110,7 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
       <div className="px-6 py-4 bg-white">
         {courses.length > 0 ? (
           courses.map((course, index) => {
-            const newUrl = course.url.replace('/curso', '/tienda');
+            const newUrl = course.url.replace('/curso', '/curso');
             return (
               <Link key={index} href={newUrl} className="block mb-6 last:mb-0" onClick={onClose}>
                 <div className="relative rounded-[30px] overflow-hidden h-48 bg-gray-300 cursor-pointer">
