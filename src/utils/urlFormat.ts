@@ -4,7 +4,7 @@
 export function urlFormat(inputUrl:any) {
   const { hostname, pathname, origin } = window.location;
 
-  const isAllowedHost = hostname.includes('msklatam') || hostname === 'localhost';
+  const isAllowedHost = inputUrl.includes('msklatam') || inputUrl === 'localhost';
   if (!isAllowedHost) return inputUrl;
 
   const langMatch = pathname.match(/^\/([^/]+)\//);
