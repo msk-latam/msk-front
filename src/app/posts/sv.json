@@ -7,6 +7,153 @@
 	"total_products": 260,
 	"posts": [
 		{
+			"id": 339149,
+			"title": "Cómo elige aprender hoy el personal de salud",
+			"slug": "como-aprende-el-personal-de-salud",
+			"permalink": "https://wp.msklatam.com/nota/e-learning/como-aprende-el-personal-de-salud/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-como-aprende-el-personal-de-salud-scaled-e1744319158197.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-como-aprende-el-personal-de-salud-scaled-e1744319158197.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "La forma en que médicos, enfermeros y otros profesionales acceden al conocimiento ha cambiado. En este artículo, exploramos las preferencias actuales en educación continua y las herramientas que hoy marcan la diferencia en el desarrollo profesional.",
+			"date": "Mayo 3, 2025",
+			"author": {
+				"id": 273557,
+				"name": "Gonzalo Busquets",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2024/01/foto-cv-blurred.png"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 273557,
+					"name": "Gonzalo Busquets",
+					"description": "Periodista. Especialista en comunicación regional para el segmento e-learning y salud.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2024/01/foto-cv-blurred.png"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 341126,
+					"title": "Por qué la salud laboral es una deuda estructural en la región",
+					"slug": "salud-laboral-una-deuda-estructural",
+					"link": "https://wp.msklatam.com/nota/medicina/salud-laboral-una-deuda-estructural/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-salud-laboral-una-deuda-estructural-scaled-e1745600725761.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 340935,
+					"title": "Precisión, prevención y desafíos en medicina genómica",
+					"slug": "medicina-genomica-precision-y-desafios",
+					"link": "https://wp.msklatam.com/nota/medicina/medicina-genomica-precision-y-desafios/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-medicina-genomica-precision-y-desafios-scaled-e1745500047106.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 340790,
+					"title": "Capacitación y especialización continua: la nueva ruta profesional",
+					"slug": "capacitacion-y-especializacion-continua-en-salud",
+					"link": "https://wp.msklatam.com/nota/e-learning/capacitacion-y-especializacion-continua-en-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-capacitacion-y-especializacion-continua-en-salud-1-scaled-e1745441536261.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 339497,
+					"title": "Terapias que están cambiando el tratamiento de la hemofilia",
+					"slug": "terapias-que-cambian-el-tratamiento-de-la-hemofilia",
+					"link": "https://wp.msklatam.com/nota/medicina/terapias-que-cambian-el-tratamiento-de-la-hemofilia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-terapias-que-cambian-el-tratamiento-de-la-hemofilia-scaled-e1744642655103.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 339351,
+					"title": "CRISPR: la herramienta que está reescribiendo la medicina",
+					"slug": "crispr-esta-reescribiendo-la-medicina",
+					"link": "https://wp.msklatam.com/nota/medicina/crispr-esta-reescribiendo-la-medicina/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-crispr-esta-reescribiendo-la-medicina-scaled-e1744393930660.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Al Shmanee M, Issa M, Alkholy H, Alnaqbi A, Awadallah A, Hassan H, Hussein A. Medical Students' Preferences of Study Resources: Physical vs Digital Resources. Cureus. 2024 Mar 14;16(3):e56196. doi: 10.7759/cureus.56196. PMID: 38618352; PMCID: PMC11016158."
+				},
+				{
+					"fuente": "Mueller MR, Croghan IT, Schroeder DR, Bhuiyan MN, Ganesh R, Mohabbat AB, Nanda S, Wight EC, Blomberg DL, Bonnes SL. Physician preferences for Online and In-person continuing medical education: a cross-sectional study. BMC Med Educ. 2024 Oct 14;24(1):1142. doi: 10.1186/s12909-024-06046-1. PMID: 39402550; PMCID: PMC11476101."
+				},
+				{
+					"fuente": "Mannan M, Afzal A, Hafeez U, Akbar R, Tahir R. Innovative Approaches to Continuing Medical Education. Cureus. 2024 Nov 27;16(11):e74638. doi: 10.7759/cureus.74638. PMID: 39624528; PMCID: PMC11611415."
+				},
+				{
+					"fuente": "Finn E, Ayres F, Goldberg S, Hortsch M. Brave new E-world: Medical students' preferences for and usage of electronic learning resources during two different phases of their education. FASEB Bioadv. 2022 Jan 17;4(5):298-308. doi: 10.1096/fba.2021-00124. PMID: 35520393; PMCID: PMC9065580."
+				},
+				{
+					"fuente": "Ranabhat, S.K., Kunjukrishnan, M.L., Dubey, M. et al. Exploring the usage of learning resources by medical students in the basic science stage and their effect on academic performance. BMC Med Educ 24, 543 (2024). https://doi.org/10.1186/s12909-024-05511-1"
+				},
+				{
+					"fuente": "Jameel, T., Gazzaz, Z.J., Baig, M. et al. Medical students’ preferences towards learning resources and their study habits at King Abdulaziz University, Jeddah, Saudi Arabia. BMC Res Notes 12, 30 (2019). https://doi.org/10.1186/s13104-019-4052-3"
+				},
+				{
+					"fuente": "https://msklatam.com/blog/como-destacar-en-tu-practica-con-capacitacion-medica-continua/"
+				}
+			],
+			"categories": [
+				{
+					"id": 59968,
+					"primary": true,
+					"name": "E-Learning",
+					"slug": "e-learning",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/e-learning/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59968",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1360,
+				"filter": "raw"
+			},
+			"reading_time": "5",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
 			"id": 341126,
 			"title": "Por qué la salud laboral es una deuda estructural en la región",
 			"slug": "salud-laboral-una-deuda-estructural",
