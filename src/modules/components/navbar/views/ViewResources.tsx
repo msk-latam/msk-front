@@ -31,7 +31,7 @@ const ViewResources: React.FC<Props> = ({ navigateTo, isMobile = true, onClose }
     return (
       <div className="h-fit p-4 overflow-visible w-fit bg-white rounded-b-2xl">
         <div className="w-full rounded-b-2xl bg-white divide-y">
-          {data.resources.map((resource, index) => (
+          {data.resources?.map((resource, index) => (
             <Link
               key={`resource-${index}`}
               href={resource.link.url}
@@ -65,7 +65,7 @@ const ViewResources: React.FC<Props> = ({ navigateTo, isMobile = true, onClose }
         <h2 className="text-xl font-medium text-gray-800">Recursos</h2>
       </div>
       <div className="flex flex-col bg-gray-200 rounded-2xl">
-        {data.resources.map((resource, index) => (
+        {data.resources?.map((resource, index) => (
           <Link
             key={`resource-${index}`}
             href={resource.link.url}
