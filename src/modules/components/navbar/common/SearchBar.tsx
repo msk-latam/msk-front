@@ -90,7 +90,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 		const coursePath = course.url.replace(/^\/(course|curso)/, '');
 		const storeUrl = getLocalizedUrl(lang, `/curso${coursePath}`);
 		// Use window.location.href for consistent navigation across all pages
-		
+
 		window.location.href = urlFormat(course.url);
 		setSearchTerm('');
 		setIsDropdownOpen(false);
@@ -101,7 +101,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
 		if (trimmedSearch !== '') {
 			const query = encodeURIComponent(trimmedSearch);
 			// Fix: Ensure the search query is properly included in the URL using absolute path
-			const searchPath = `/tienda?page=1&search=${query}`;
+			// Modificado tienda por curso
+			const searchPath = `/curso?page=1&search=${query}`;
 			const storeUrl = getLocalizedUrl(lang, searchPath);
 			console.log('Redirecting to:', storeUrl);
 			// Make sure we're using the complete URL
