@@ -223,6 +223,7 @@ export const createContractCRM = async (
 	currency: any,
 	countryCompleteName: any,
 	paymentType: 'rebill' | 'mercadopago' | 'stripe',
+	closingSource: string = 'Consulta directa',
 ) => {
 	try {
 		const paymentConfig = paymentOptions[paymentType] || paymentOptions.mercadopago;
@@ -255,7 +256,7 @@ export const createContractCRM = async (
 			Monto_de_cada_pago_restantes: Math.ceil(transactionAmount / paymentConfig.totalPayments),
 			Canal_por_el_que_se_cerro_la_venta: 'Web',
 			channel_sale: 'Web',
-			Fuente_de_cierre_venta: 'Consulta directa',
+			Fuente_de_cierre_venta: closingSource,
 		};
 
 		const response = await fetch(`${ENDPOINT_CRM}/api/zoho/sales_order/create_contract`, {

@@ -17,6 +17,17 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 	const { data, loading } = useCourseSummary(slug, lang);
 	const router = useRouter();
 
+	console.log(data);
+
+	const isFree = data
+		? [data.regular_price, data.sale_price, data.total_price].every((price) => {
+				const num = parseFloat(price);
+				return price === '' || isNaN(num) || num === 0;
+		  })
+		: false;
+
+	console.log(isFree);
+
 	const enrolledFormatted = data?.enrolled;
 	const modules = data?.modules;
 	const duration = data?.duration + ' horas estimadas';
@@ -57,7 +68,7 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 			<Image
 				src={data?.featured_images.medium ?? ''}
 				alt='Curso'
-				className='rounded-xl w-full object-cover mb-6'
+				className='object-cover w-full mb-6 rounded-xl'
 				width={420}
 				height={300}
 			/>
@@ -120,12 +131,21 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 			{/* Botones CTA */}
 			<div className='space-y-3'>
 				{!isSpanishVersion && (
-					<Link href={getLocalizedUrl(lang, `/checkout/${slug}`)}>
+					<Link
+						href={isFree ? getLocalizedUrl(lang, `/login/?form=registerForm`) : getLocalizedUrl(lang, `/checkout/${slug}`)}
+						onClick={() => {
+							if (isFree) {
+								localStorage.setItem('redirectAfterLogin', window.location.pathname);
+								console.log('Guardando redirect y enviando a crear cuenta');
+							}
+						}}
+					>
 						<button className='bg-[#9200AD] hover:bg-[#6b1679] text-white w-full py-3 rounded-full font-inter font-medium text-base transition'>
 							Inscríbete ahora
 						</button>
 					</Link>
 				)}
+
 				<a href='#course-support-form' className='block'>
 					<button className='w-full border border-gray-300 text-[#1A1A1A] hover:bg-gray-100 flex items-center justify-center py-3 rounded-full font-inter font-bold text-base gap-2 transition'>
 						Contáctanos
