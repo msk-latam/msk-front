@@ -125,6 +125,10 @@ export default function DashboardPage() {
 			setShowEditModal(false);
 			setEditTargetField(undefined);
 			setSaveProfileSuccess(true);
+			setTimeout(function(){
+				setSaveProfileError(null);
+				setSaveProfileSuccess(false);
+			},3000)
 		} catch (error: any) {
 			console.error('Failed to save profile:', error);
 			setSaveProfileError(error.message || 'Error desconocido');
