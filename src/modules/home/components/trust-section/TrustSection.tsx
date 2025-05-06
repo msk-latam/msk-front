@@ -102,7 +102,7 @@ const TrustSection = () => {
 
 				{/* Testimonials Desktop */}
 				<div className='hidden md:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 h-full'>
-					{reviews.map((testimonial, index) => (
+					{reviews?.map((testimonial, index) => (
 						<div
 							key={index}
 							className='bg-[#f9fafe] p-6 rounded-2xl shadow-sm flex flex-col justify-between h-[260px] transition-opacity duration-700 ease-in-out'
