@@ -19,9 +19,6 @@ function enforceUserCountryPrefix(request: NextRequest) {
 let needsProfileCompletionBoolean: boolean | null = null;
 
 export function middleware(request: NextRequest) {
-	const accessToken = request.cookies.get('access_token');
-	const isAuthenticated = Boolean(accessToken);
-	const protectedPaths = ['/dashboard'];
 	const cookieStore = cookies();
 
 	if (needsProfileCompletionBoolean === null) {
