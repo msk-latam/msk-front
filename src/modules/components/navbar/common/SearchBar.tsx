@@ -102,11 +102,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
 			const query = encodeURIComponent(trimmedSearch);
 			// Fix: Ensure the search query is properly included in the URL using absolute path
 			// Modificado tienda por curso
-			const searchPath = `/curso?page=1&search=${query}`;
-			const storeUrl = getLocalizedUrl(lang, searchPath);
-			console.log('Redirecting to:', storeUrl);
+			const searchPath = `/tienda?page=1&search=${query}`;
+			// const storeUrl = getLocalizedUrl(lang, searchPath);
+			// console.log('Redirecting to:', storeUrl);
 			// Make sure we're using the complete URL
-			window.location.href = storeUrl;
+			window.location.href = urlFormat(searchPath);
 		}
 	};
 
