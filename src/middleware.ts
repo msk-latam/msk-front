@@ -1,4 +1,5 @@
 import { supportedLanguages } from '@/config/languages';
+import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
 function enforceUserCountryPrefix(request: NextRequest) {
@@ -15,8 +16,24 @@ function enforceUserCountryPrefix(request: NextRequest) {
 
 	return null;
 }
+let needsProfileCompletionBoolean: boolean | null = null;
 
 export function middleware(request: NextRequest) {
+	const cookieStore = cookies();
+
+	if (needsProfileCompletionBoolean === null) {
+		if (cookieStore.get('needsProfileCompletion')?.value != null) {
+			needsProfileCompletionBoolean = cookieStore.get('needsProfileCompletion')?.value === 'true';
+		}
+	}
+
+	if (needsProfileCompletionBoolean) {
+		needsProfileCompletionBoolean = false;
+		return NextResponse.redirect(new URL('/completar-perfil', request.url));
+	} else {
+		needsProfileCompletionBoolean = null;
+	}
+
 	const { pathname, origin } = request.nextUrl;
 	const segments = pathname.split('/').filter(Boolean);
 	const firstSegment = segments[0];
