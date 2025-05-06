@@ -38,7 +38,7 @@ const CursoCard = ({
   const lang = pathname.split("/")[1] || "ar";
 
   // Asegura que no empiece con "/"
-  const slug = link.startsWith("/") ? link.slice(1) : link;
+  const slug = link?.startsWith("/") ? link.slice(1) : link;
 
   const href = `/${lang}/${slug}`;
 
