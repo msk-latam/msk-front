@@ -3,7 +3,15 @@
 import { Institution } from "../types";
 
 export async function getInstitutions(): Promise<Institution[]> {
-  const res = await fetch("https://cms1.msklatam.com/wp-json/msk/v1/front/inicio?lang=int&nocache=1", {
+
+  let lang = "ar";
+  if(window!=null){
+    const { pathname } = window.location;
+    const langMatch = pathname.match(/^\/([^/]+)\//);
+     lang = langMatch && langMatch[1].length <= 2 ? langMatch[1] : "ar";
+  }
+
+  const res = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/front/inicio?lang=${lang}&nocache=1`, {
     next: { revalidate: 3600 },
   });
 
