@@ -2,6 +2,9 @@ import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { useInstitutions } from "@/modules/home/hooks/useInstitution";
 import InstitutionsSkeleton from "@/modules/home/skeletons/InstitutionsSkeleton";
+import BrandSlider from "./BrandSlider";
+import { usePathname } from "next/navigation";
+import { count } from "console";
 
 const Institutions = () => {
   const { institutions, loading, error } = useInstitutions();
@@ -104,14 +107,16 @@ const Institutions = () => {
     ...institutions,
     ...institutions,
   ];
+  const pathname = usePathname();
+  const country = pathname ? pathname.split("/")[1] || "ar" : "ar";
 
   return (
     <section className="relative bg-white rounded-[40px] overflow-visible max-w-[1600px] mx-auto md:px-[104px] -mt-24 translate-y-[70px] z-10 py-10 px-5 md:gap-4 shadow-lg select-none">
-      <h2 className="text-center md:text-left font-raleway font-[500] md:text-[27px] md:ml-24 text-[22px] mb-7">
+       <h2 className="text-center md:text-left font-raleway font-[500] md:text-[27px] md:ml-24 text-[22px] mb-7">
         Nos respaldan prestigiosas instituciones de todo el mundo con sus
         certificaciones
       </h2>
-
+{/*
       <div
         className={`overflow-x-auto scrollbar-hide w-full ${
           isDragging ? "cursor-grabbing" : "cursor-grab"
@@ -149,7 +154,8 @@ const Institutions = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
+      <BrandSlider country={country}/>
     </section>
   );
 };

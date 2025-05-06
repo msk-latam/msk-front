@@ -59,7 +59,7 @@ export default function CourseHeader({ slug, lang }: CourseHeaderProps) {
 					</span>
 
 					{/* Tienda ahora es Link */}
-					<Link href='/tienda' className='truncate my-auto shrink-0 hover:underline'>
+					<Link href={getLocalizedUrl(lang, '/tienda')} className='truncate my-auto shrink-0 hover:underline'>
 						<span className='block md:hidden'>...</span>
 						<span className='hidden md:block'>Tienda</span>
 					</Link>

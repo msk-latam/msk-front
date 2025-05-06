@@ -59,7 +59,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, size = 'medium
 						{title && <h2 className='text-2xl font-medium text-center flex-grow'>{title}</h2>}
 						<button
 							onClick={onClose}
-							className='p-2 rounded-full hover:bg-gray-100 transition-colors absolute right-4 top-4'
+							className='p-2 rounded-full  border border-[#DBDDE2] hover:bg-gray-100 transition-colors absolute right-4 top-4'
 							aria-label='Close'
 						>
 							<svg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'>
