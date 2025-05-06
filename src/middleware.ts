@@ -5,9 +5,11 @@ function enforceUserCountryPrefix(request: NextRequest) {
 	const cookieCountry = request.cookies.get('msk-country')?.value;
 	const pathCountry = request.nextUrl.pathname.split('/')[1];
 
-	if (cookieCountry && supportedLanguages.includes(cookieCountry) && pathCountry !== cookieCountry) {
+	const isValidPrefix = supportedLanguages.includes(pathCountry);
+
+	if (!isValidPrefix && cookieCountry && supportedLanguages.includes(cookieCountry)) {
 		const newUrl = request.nextUrl.clone();
-		newUrl.pathname = newUrl.pathname.replace(`/${pathCountry}`, `/${cookieCountry}`);
+		newUrl.pathname = `/${cookieCountry}${request.nextUrl.pathname}`;
 		return NextResponse.redirect(newUrl);
 	}
 
@@ -48,7 +50,7 @@ export function middleware(request: NextRequest) {
 		return NextResponse.redirect(newUrl);
 	}
 
-	// 🌐 Country prefix enforcement
+	// 🌐 Country prefix enforcement (only if missing)
 	const countryRedirect = enforceUserCountryPrefix(request);
 	if (countryRedirect) return countryRedirect;
 
@@ -71,7 +73,7 @@ export function middleware(request: NextRequest) {
 	if (pathname === '/') {
 		return country === 'ar'
 			? NextResponse.rewrite(new URL('/ar/home', request.url))
-			: NextResponse.redirect(new URL(`/${country}/`, origin));
+			: NextResponse.redirect(new URL(`/${country}/home`, origin));
 	}
 
 	// 🏠 Redirect /mx → /mx/home (rewrite invisible)
