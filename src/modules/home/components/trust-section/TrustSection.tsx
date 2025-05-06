@@ -48,7 +48,7 @@ const TrustSection = () => {
 						className='flex transition-transform duration-500 ease-in-out'
 						style={{ transform: `translateX(-${current * 330}px)` }}
 					>
-						{testimonials.map((testimonial: any, index: number) => (
+						{testimonials?.map((testimonial: any, index: number) => (
 							<div
 								key={index}
 								className='min-w-80 max-w-[320px] bg-[#f7f9ff] p-6 rounded-2xl shadow-sm flex flex-col justify-between h-[260px] mx-1'
