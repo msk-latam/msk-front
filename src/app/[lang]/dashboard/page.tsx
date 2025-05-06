@@ -140,7 +140,7 @@ export default function DashboardPage() {
 			setTimeout(function(){
 				setSaveInterestsError(null);
 				setSaveInterestsSuccess(false);
-			},2000)
+			},3000)
 		} catch (error: any) {
 			console.error('Failed to save interests:', error);
 			setSaveInterestsError(error.message || 'Error desconocido al guardar intereses');
