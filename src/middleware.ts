@@ -1,10 +1,26 @@
 import { supportedLanguages } from '@/config/languages';
+import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+let needsProfileCompletionBoolean: boolean | null = null;
 
 export function middleware(request: NextRequest) {
 	const accessToken = request.cookies.get('access_token');
 	const isAuthenticated = Boolean(accessToken);
 	const protectedPaths = ['/dashboard'];
+	const cookieStore = cookies();
+
+	if (needsProfileCompletionBoolean === null) {
+		if (cookieStore.get('needsProfileCompletion')?.value != null) {
+			needsProfileCompletionBoolean = cookieStore.get('needsProfileCompletion')?.value === 'true';
+		}
+	}
+
+	if (needsProfileCompletionBoolean) {
+		needsProfileCompletionBoolean = false;
+		return NextResponse.redirect(new URL('/completar-perfil', request.url));
+	} else {
+		needsProfileCompletionBoolean = null;
+	}
 
 	const { pathname, origin } = request.nextUrl;
 	const segments = pathname.split('/').filter(Boolean);

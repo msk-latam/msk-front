@@ -7,6 +7,9 @@ import { NextRequest } from 'next/server';
 export const dynamic = 'force-dynamic';
 
 const afterCallback = async (req: NextRequest, session: Session) => {
+	console.log('afterCallback received session.user:', JSON.stringify(session?.user, null, 2));
+	const cookieStore = cookies();
+
 	try {
 		const response = await fetch('https://dev.msklatam.tech/msk-laravel/public/api/loginAuth0', {
 			method: 'POST',
@@ -14,50 +17,61 @@ const afterCallback = async (req: NextRequest, session: Session) => {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({ auth0_token: session.idToken }),
+			cache: 'no-store', // Disable caching to prevent the 2MB cache limit error
 		});
 
 		if (!response.ok) {
 			console.error('Failed to fetch token from backend:', response.status, await response.text());
-			// Handle error appropriately, maybe redirect to an error page or return the session unmodified
+			cookieStore.set('needsProfileCompletion', 'true', {
+				path: '/',
+				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
+				sameSite: 'lax',
+			});
 			return session;
 		}
 
 		const data = await response.json();
 
-		// Set the access token in cookies
+		console.log('data', data);
+
 		if (data.access_token) {
-			const cookieStore = cookies();
 			const expiresDate = data.expires_at ? new Date(data.expires_at) : undefined;
 
 			cookieStore.set('access_token', data.access_token, {
-				path: '/', // Available on all paths
-				expires: expiresDate, // Set expiry based on API response
-				sameSite: 'lax', // Recommended for CSRF protection
+				path: '/',
+				expires: expiresDate,
+				sameSite: 'lax',
 			});
 
 			cookieStore.set('email', session.user.email, {
-				path: '/', // Available on all paths
-				expires: expiresDate, // Set expiry based on API response
-				sameSite: 'lax', // Recommended for CSRF protection
+				path: '/',
+				expires: expiresDate,
+				sameSite: 'lax',
 			});
 			cookieStore.set('picture', session.user?.picture, {
-				path: '/', // Available on all paths
-				expires: expiresDate, // Set expiry based on API response
-				sameSite: 'lax', // Recommended for CSRF protection
+				path: '/',
+				expires: expiresDate,
+				sameSite: 'lax',
 			});
 
 			console.log('Access token set in cookie.');
-
-			// return NextResponse.redirect(new URL('/dashboard', req.url));
 		} else {
 			console.warn('Access token not found in backend response.');
+			cookieStore.set('needsProfileCompletion', 'true', {
+				path: '/',
+				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
+				sameSite: 'lax',
+			});
 		}
 	} catch (error) {
 		console.error('Error during afterCallback processing:', error);
-		// Handle fetch or JSON parsing errors
+		cookieStore.set('needsProfileCompletion', 'true', {
+			path: '/',
+			expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
+			sameSite: 'lax',
+		});
 	}
 
-	// Return the session unmodified as required by handleCallback
 	return session;
 };
 
