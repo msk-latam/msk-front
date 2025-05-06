@@ -92,7 +92,7 @@ const Masterclass = () => {
 				priority
 			/>
 
-			<main className='relative z-10 h-full md:h-screen overflow-visible max-w-[1600px] mx-auto md:px-4 w-full py-11 mt-8 md:py-0 md:mt-0 flex flex-col justify-center md:px-20 md:mb-10'>
+			<main className='relative z-10 h-full md:h-screen overflow-visible max-w-[1600px] mx-auto md:px-4 w-full py-11 mt-8 md:py-0 md:mt-0 flex flex-col justify-center md:mb-10'>
 				<div className='h-full flex flex-col justify-center gap-10 md:flex-row md:items-center md:justify-between md:px-4'>
 					{/* Texto Desktop */}
 					<header className='hidden md:flex flex-col gap-16 text-center md:text-left md:max-w-2xl md:order-1'>
