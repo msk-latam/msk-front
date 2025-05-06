@@ -56,7 +56,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, size = 'medium
 				>
 					{/* Header with close button */}
 					<div className='flex justify-between items-center mb-4'>
-						{title && <h2 className='text-xl font-medium text-center flex-grow'>{title}</h2>}
+						{title && <h2 className='text-2xl font-medium text-center flex-grow'>{title}</h2>}
 						<button
 							onClick={onClose}
 							className='p-2 rounded-full hover:bg-gray-100 transition-colors absolute right-4 top-4'
@@ -75,7 +75,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, size = 'medium
 					</div>
 
 					{/* Modal content wrapper for scrolling */}
-					<div className='overflow-y-auto max-h-[calc(90vh-8rem)] pr-2'>{children}</div>
+					<div className='overflow-y-auto scrollbar-none max-h-[calc(90vh-8rem)]'>{children}</div>
 				</div>
 			</div>
 		</div>

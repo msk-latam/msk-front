@@ -283,32 +283,14 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Mi cuenta" size="large">
-      <div className="text-center text-sm text-gray-600 mb-6 mt-2">
+      <div className="text-center text-base md:text-lg text-gray-600 mb-6 mt-2">
         Gestiona todo lo relacionado con tus datos personales
-      </div>
+      </div>{" "}
+      <h3 className="text-lg md:text-2xl  text-center font-medium mb-2">
+        Datos profesionales
+      </h3>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 p-1">
-          <Input
-            id="email"
-            label="E-mail"
-            type="email"
-            name="email"
-            value={formData.email || ""}
-            onChange={handleChange}
-            placeholder="Ingresar e-mail"
-            required
-            autoComplete="email"
-          />
-          <Select
-            id="profession"
-            label="Profesión"
-            name="profession" // Matches interface/state
-            options={professionOptions}
-            value={formData.profession || ""} // Matches interface/state
-            onChange={handleSelectChange}
-            placeholder="Seleccionar profesión"
-          />
-
           <Input
             id="firstName"
             label="Nombre/s"
@@ -320,16 +302,6 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
             required
             autoComplete="given-name"
           />
-          <Select
-            id="specialty"
-            label="Especialidad"
-            name="speciality" // Corrected: use speciality
-            options={specialtyOptions}
-            value={formData.speciality || ""} // Corrected: use specialty
-            onChange={handleSelectChange}
-            placeholder="Seleccionar especialidad"
-          />
-
           <Input
             id="lastName"
             label="Apellido/s"
@@ -341,15 +313,16 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
             required
             autoComplete="family-name"
           />
-          <Input
-            id="workplace"
-            label="Lugar de trabajo"
-            type="text"
-            name="workplace" // Matches interface/state
-            value={formData.workplace || ""} // Matches interface/state
-            onChange={handleChange}
-            placeholder="Ingresar lugar de trabajo"
-            autoComplete="organization"
+          <Select
+            id="country"
+            label="País"
+            name="country"
+            options={countryOptions}
+            value={formData.country || ""}
+            onChange={handleSelectChange}
+            placeholder="Seleccionar país"
+            required
+            autoComplete="country-name"
           />
           <div className="relative">
             <PasswordInput
@@ -361,7 +334,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
               placeholder="Ingresar contraseña"
               autoComplete="new-password"
             />
-            <span className="absolute top-0 right-0 mt-1.5 text-xs font-medium text-[#6E737C] ">
+            <span className="md:absolute top-0 right-0 relative mt-1.5 text-xs font-medium text-[#6E737C] ">
               ¿Necesitas cambiar tu contraseña?&nbsp;{" "}
               {/* Use &nbsp; for non-breaking space */}
               <button
@@ -383,35 +356,16 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
             </span>
           </div>
           <Input
-            id="workArea"
-            label="Área de trabajo"
-            type="text"
-            name="workArea"
-            value={formData.workArea || ""} // Use workArea
+            id="email"
+            label="E-mail"
+            type="email"
+            name="email"
+            value={formData.email || ""}
             onChange={handleChange}
-            placeholder="Ingresar área de trabajo"
-          />
-          <Select
-            id="country"
-            label="País"
-            name="country"
-            options={countryOptions}
-            value={formData.country || ""}
-            onChange={handleSelectChange}
-            placeholder="Seleccionar país"
+            placeholder="Ingresar e-mail"
             required
-            autoComplete="country-name"
+            autoComplete="email"
           />
-          <Select
-            id="belongsToMedicalCollege"
-            label="¿Perteneces a un colegio médico, sociedad o similar?"
-            name="belongsToMedicalCollege"
-            options={medicalCollegeOptions}
-            value={formData.asosiacion !== "" ? "yes" : "no"}
-            onChange={handleSelectChange}
-            placeholder="Seleccionar"
-          />
-
           <PhoneInputWithCode
             id="phone"
             label="Teléfono"
@@ -421,84 +375,143 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
             onChange={handleCombinedPhoneChange} // Use the new handler
             required
           />
-
-          <Input
-            id="medicalCollegeName"
-            label="¿Cuál?"
-            type="text"
-            name="medicalCollegeName" // Matches interface/state
-            value={formData.asosiacion || ""} // Matches interface/state
-            onChange={handleChange}
-            placeholder="Ingresar colegio médico, sociedad o similar"
-          />
         </div>
 
         <div className="mt-6">
-          <h3 className="text-lg  text-center font-semibold mb-2">
-            Datos de facturación
+          <h3 className="text-lg md:text-2xl  text-center font-medium mb-2">
+            Datos profesionales
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 p-1">
-            <Input
-              id="billingEmail"
-              label="E-mail de facturación"
-              type="email"
-              name="billingEmail"
-              value={formData.billingEmail || ""}
-              onChange={handleChange}
-              placeholder="Ingresar e-mail de facturación"
+            <Select
+              id="profession"
+              label="Profesión"
+              name="profession" // Matches interface/state
+              options={professionOptions}
+              value={formData.profession || ""} // Matches interface/state
+              onChange={handleSelectChange}
+              placeholder="Seleccionar profesión"
             />
+
+            <Select
+              id="specialty"
+              label="Especialidad"
+              name="speciality" // Corrected: use speciality
+              options={specialtyOptions}
+              value={formData.speciality || ""} // Corrected: use specialty
+              onChange={handleSelectChange}
+              placeholder="Seleccionar especialidad"
+            />
+
             <Input
-              id="billingName"
-              label="Razón social"
+              id="workplace"
+              label="Lugar de trabajo"
               type="text"
-              name="billingName"
-              value={formData.billingName || ""}
+              name="workplace" // Matches interface/state
+              value={formData.workplace || ""} // Matches interface/state
               onChange={handleChange}
-              placeholder="Ingresar razón social"
+              placeholder="Ingresar lugar de trabajo"
+              autoComplete="organization"
             />
-            <PhoneInputWithCode
-              id="billingPhone"
-              label="Teléfono de facturación"
-              value={formData.billingPhone || ""}
-              defaultCode={formData.billingPhoneCode || "+54"}
-              onChange={(phone) => {
-                setFormData((prev) => ({ ...prev, billingPhone: phone }));
-              }}
+            <Input
+              id="workArea"
+              label="Área de trabajo"
+              type="text"
+              name="workArea"
+              value={formData.workArea || ""} // Use workArea
+              onChange={handleChange}
+              placeholder="Ingresar área de trabajo"
             />
             <Select
-              id="documentType"
-              label="Tipo de documento"
-              name="documentType"
-              options={[
-                { label: "DNI", value: "dni" },
-                { label: "CUIT", value: "cuit" },
-                { label: "Pasaporte", value: "pasaporte" },
-              ]}
-              value={formData.documentType || ""}
+              id="belongsToMedicalCollege"
+              label="¿Perteneces a un colegio médico, sociedad o similar?"
+              name="belongsToMedicalCollege"
+              options={medicalCollegeOptions}
+              value={formData.asosiacion !== "" ? "yes" : "no"}
               onChange={handleSelectChange}
               placeholder="Seleccionar"
             />
+
             <Input
-              id="documentNumber"
-              label="Identificación"
+              id="medicalCollegeName"
+              label="¿Cuál?"
               type="text"
-              name="documentNumber"
-              value={formData.documentNumber || ""}
+              name="medicalCollegeName" // Matches interface/state
+              value={formData.asosiacion || ""} // Matches interface/state
               onChange={handleChange}
-              placeholder="Ingresar identificación"
+              placeholder="Ingresar colegio médico, sociedad o similar"
             />
-            <Select
-              id="requiresInvoice"
-              label="¿Requiere factura fiscal?"
-              name="requiresInvoice"
-              options={[
-                { label: "Sí", value: "yes" },
-                { label: "No", value: "no" },
-              ]}
-              value={formData.requiresInvoice || ""}
-              onChange={handleSelectChange}
-              placeholder="Seleccionar"
-            />
+          </div>
+          <div className="mt-6">
+            <h3 className="text-lg md:text-2xl text-center font-medium mb-2">
+              Datos de facturación
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 p-1">
+              <Input
+                id="billingEmail"
+                label="E-mail de facturación"
+                type="email"
+                name="billingEmail"
+                value={formData.billingEmail || ""}
+                onChange={handleChange}
+                placeholder="Ingresar e-mail de facturación"
+              />
+              <Input
+                id="billingName"
+                label="Razón social"
+                type="text"
+                name="billingName"
+                value={formData.billingName || ""}
+                onChange={handleChange}
+                placeholder="Ingresar razón social"
+              />
+              <div className="grid grid-cols-1 grid-rows-2 gap-x-6 gap-y-4 p-1">
+                <PhoneInputWithCode
+                  id="billingPhone"
+                  label="Teléfono de facturación"
+                  value={formData.billingPhone || ""}
+                  defaultCode={formData.billingPhoneCode || "+54"}
+                  onChange={(phone) => {
+                    setFormData((prev) => ({ ...prev, billingPhone: phone }));
+                  }}
+                />
+                <Select
+                  id="requiresInvoice"
+                  label="¿Requiere factura fiscal?"
+                  name="requiresInvoice"
+                  options={[
+                    { label: "Sí", value: "yes" },
+                    { label: "No", value: "no" },
+                  ]}
+                  value={formData.requiresInvoice || ""}
+                  onChange={handleSelectChange}
+                  placeholder="Seleccionar"
+                />
+              </div>
+              <div className="grid grid-cols-1 grid-rows-2 gap-x-6 gap-y-4 p-1">
+                <Select
+                  id="documentType"
+                  label="Tipo de documento"
+                  name="documentType"
+                  options={[
+                    { label: "DNI", value: "dni" },
+                    { label: "CUIT", value: "cuit" },
+                    { label: "Pasaporte", value: "pasaporte" },
+                  ]}
+                  value={formData.documentType || ""}
+                  onChange={handleSelectChange}
+                  placeholder="Seleccionar"
+                />
+                <Input
+                  id="documentNumber"
+                  label="Identificación"
+                  type="text"
+                  name="documentNumber"
+                  value={formData.documentNumber || ""}
+                  onChange={handleChange}
+                  placeholder="Ingresar identificación"
+                />
+              </div>
+            </div>
           </div>
         </div>
         <div className="flex flex-col items-center pt-6 mt-6">
