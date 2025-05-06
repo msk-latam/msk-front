@@ -44,7 +44,7 @@ const HelpSection: React.FC = () => {
 						}
 					}
 					return (
-						<Link key={index} href={card.link} passHref legacyBehavior>
+						<Link key={index} href={nro_wa} passHref legacyBehavior>
 							<a className='bg-white rounded-[30px] p-8 flex flex-col items-center text-center border border-[#DBDDE2] transition-all cursor-pointer hover:bg-[#DBDDE2'>
 								{IconComponent && (
 									<span className='text-[#9200AD]'>
