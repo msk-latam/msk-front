@@ -1,17 +1,14 @@
 import Modal from "@/modules/dashboard/components/ui/Modal";
 import React, { useEffect, useState } from "react";
-// Import the new UI components
-// REMOVED: import { ClipLoader } from 'react-spinners'; // Import a spinner
 import { usePathname } from "next/navigation";
 import Input from "./ui/Input";
 import PasswordInput from "./ui/PasswordInput";
-import PhoneInputWithCode, { findCodePrefix } from "./ui/PhoneInputWithCode"; // Import the helper
+import PhoneInputWithCode, { findCodePrefix } from "./ui/PhoneInputWithCode";
 import Select from "./ui/Select";
 import FileInput from "./ui/FileInput";
-// Import types from the service
-// REMOVED: import { UserData, UserDetail } from '@/lib/localStorageService/userDataService';
+import { professions } from "@/data/professions";
+import { specialtiesGroup } from "@/data/specialties";
 
-// --- Define the new interface based on useProfile data ---
 interface ProfileCompletion {
   percentage: number;
   message: string;
@@ -21,55 +18,47 @@ interface ProfileCompletion {
 
 interface Contract {
   id: number;
-  // ... other contract fields if needed
 }
 
 interface Course {
   id: string | number;
   title: string;
-  image?: string | { high?: string; medium?: string; low?: string }; // Allow for different image structures
-  // ... other course fields if needed
+  image?: string | { high?: string; medium?: string; low?: string };
 }
 
 export interface UserProfileData {
   profileCompletion?: ProfileCompletion;
-  name: string; // Was: name
+  name: string;
   lastName: string;
   profession: string;
-  speciality: string; // Was: speciality
+  speciality: string;
   email: string;
   country: string;
-  phone: string; // Raw phone string from API, e.g., +52619961317
+  phone: string;
   contracts?: Contract[];
   coursesInProgress?: Course[];
-  medicalCollegeName?: string | null; // Was: asosiacion
-  workplace?: string | null; // Was: placeOfWork
+  medicalCollegeName?: string | null;
+  workplace?: string | null;
   intereses?: string[];
   interesesAdicionales?: string[];
   currentCourse?: Course;
-  recommendedResourcesByInterests?: any[]; // Use a more specific type if available
-  // Fields needed by the form but potentially not in the API response yet
+  recommendedResourcesByInterests?: any[];
   workArea?: string;
   belongsToMedicalCollege?: boolean | null;
-  // Fields derived/used internally by the form
-  phoneCode?: string; // Parsed from phone
-  fullPhoneNumber?: string; // Value used by the PhoneInputWithCode component
+  phoneCode?: string;
+  fullPhoneNumber?: string;
   asosiacion?: string;
-  crm_id?: string; // Added crm_id as it was used in useEffect
-
-  // Fields for billing and document information from the form
+  crm_id?: string;
   billingEmail?: string;
-  billingName?: string; // Razón social
+  billingName?: string;
   billingPhone?: string;
-  billingPhoneCode?: string; // If you have a separate code for billing phone
-  requiresInvoice?: string; // 'yes' or 'no' from select
+  billingPhoneCode?: string;
+  requiresInvoice?: string;
   documentType?: string;
   documentNumber?: string;
-  taxRegime?: string; // Added, as it's in the API payload example
+  taxRegime?: string;
   file?: File;
-  // Add any other fields that are part of the form's state but not yet in this interface
 }
-// --- End New Interface ---
 
 interface ProfileEditModalProps {
   isOpen: boolean;
@@ -77,50 +66,12 @@ interface ProfileEditModalProps {
   onSave: (
     updatedData: Partial<UserProfileData>,
     password?: string
-  ) => Promise<void>; // Expecting a promise now, and optional password
+  ) => Promise<void>;
   user: UserProfileData | null;
-  isSaving: boolean; // loading state from useSaveUserProfile
-  saveError: string | null; // error message from useSaveUserProfile
-  saveSuccess: boolean; // success state managed by parent
+  isSaving: boolean;
+  saveError: string | null;
+  saveSuccess: boolean;
 }
-
-// --- Dummy Data for Selects (Replace with actual data source) ---
-const professionOptions = [
-  { value: "medico", label: "Médico/a" },
-  { value: "enfermero", label: "Enfermero/a" },
-  { value: "farmaceutico", label: "Farmacéutico/a" },
-  { value: "Licenciado de la salud", label: "Licenciado de la salud" }, // Added from example
-  { value: "otro", label: "Otro" },
-];
-
-const specialtyOptions = [
-  { value: "administracion-y-gestion", label: "Administración y gestión" },
-  { value: "anestesiologia-y-dolor", label: "Anestesiología y dolor" },
-  { value: "cardiologia", label: "Cardiología" },
-  { value: "dermatologia", label: "Dermatología" },
-  { value: "diabetes", label: "Diabetes" },
-  { value: "emergentologia", label: "Emergentología" },
-  { value: "endocrinologia", label: "Endocrinología" },
-  { value: "gastroenterologia", label: "Gastroenterología" },
-  { value: "geriatria", label: "Geriatría" },
-  { value: "ginecologia", label: "Ginecología" },
-  { value: "hematologia", label: "Hematología" },
-  { value: "infectologia", label: "Infectología" },
-  { value: "medicina-familiar", label: "Medicina familiar" },
-  { value: "medicina-general", label: "Medicina general" },
-  { value: "medicina-intensiva", label: "Medicina intensiva" },
-  { value: "medicina-laboral", label: "Medicina laboral" },
-  { value: "nefrologia", label: "Nefrología" },
-  { value: "nutricion", label: "Nutrición" },
-  { value: "oftalmologia", label: "Oftalmología" },
-  { value: "oncologia", label: "Oncología" },
-  { value: "pediatria", label: "Pediatría" },
-  { value: "psiquiatria", label: "Psiquiatría" },
-  { value: "radiologia-e-imagenologia", label: "Radiología e imagenología" },
-  { value: "traumatologia", label: "Traumatología" },
-  { value: "urologia", label: "Urología" },
-  { value: "bioquimica", label: "Bioquímica" },
-];
 
 const countryOptions = [
   { value: "ar", label: "Argentina" },
@@ -147,42 +98,38 @@ const medicalCollegeOptions = [
   { value: "no", label: "No" },
 ];
 
-// --- End Dummy Data ---
-
 const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
   isOpen,
   onClose,
   onSave,
   user,
-  isSaving, // Receive prop
-  saveError, // Receive prop
-  saveSuccess, // Receive prop
+  isSaving,
+  saveError,
+  saveSuccess,
 }) => {
   const [formData, setFormData] = useState<Partial<any>>({});
   const [password, setPassword] = useState<string>("");
+  const [selectedProfessionId, setSelectedProfessionId] = useState<number | null>(null);
 
   useEffect(() => {
     if (user) {
-      console.log("user", user);
-
       const parsedPhone = findCodePrefix(user.phone || "");
       const initialPhoneCode = parsedPhone ? parsedPhone.code : "+54";
       const initialPhone = parsedPhone ? parsedPhone.number : user.phone || "";
 
+      const selectedProfession = professions.find((p) => p.name === user.profession);
+
       setFormData({
-        // Directly use interface fields matching form
         crm_id: user.crm_id || "",
         email: user.email || "",
         name: user.name || "",
         lastName: user.lastName || "",
         country: user.country || "",
         phoneCode: initialPhoneCode,
-        phone: initialPhone, // Keep parsed number for potential internal use
-        fullPhoneNumber: user.phone || "", // Use raw phone for PhoneInput
+        phone: initialPhone,
+        fullPhoneNumber: user.phone || "",
         profession: user.profession || "",
-        speciality:
-          specialtyOptions.find((option) => option.label === user.speciality)
-            ?.value || "", // Search in array and assign value
+        speciality: user.speciality || "",
         workplace: user.workplace || "",
         workArea: user.workArea || "",
         belongsToMedicalCollege: user.medicalCollegeName
@@ -193,61 +140,66 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
         medicalCollegeName: user.medicalCollegeName || "",
         asosiacion: user.asosiacion || "",
       });
+
+      setSelectedProfessionId(selectedProfession?.id || null);
       setPassword("");
     } else {
       setFormData({});
       setPassword("");
+      setSelectedProfessionId(null);
     }
   }, [user, isOpen]);
 
-  // Updated handler for combined phone input and other regular inputs
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    // Use the new interface for state update
     setFormData((prev: Partial<UserProfileData>) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-  // Handler for password input
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
 
   const pathname = usePathname();
-  // Add a null check for pathname before splitting
   const lang = pathname ? pathname.split("/")[1] || "ar" : "ar";
   const targetPath =
     lang === "ar"
       ? "/login?form=change-pass"
       : `/${lang}/login?form=change-pass`;
 
-  // Handler for most select inputs (excluding phone code which is handled internally now)
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     if (name === "belongsToMedicalCollege") {
-      // Use the new interface for state update
       setFormData((prev: Partial<UserProfileData>) => ({
         ...prev,
         [name]: value === "yes" ? true : value === "no" ? false : null,
       }));
     } else if (name === "phoneCode") {
-      // Kept for potential direct code changes, ensure correct state type
       setFormData((prev: Partial<UserProfileData>) => ({
         ...prev,
         [name]: value,
       }));
+    } else if (name === "profession") {
+      const selected = professions.find((p) => p.name === value);
+      setSelectedProfessionId(selected?.id || null);
+      setFormData((prev) => ({ ...prev, profession: value, speciality: "" }));
     } else {
-      // Use the new interface for state update
       setFormData((prev: Partial<UserProfileData>) => ({
         ...prev,
         [name]: value,
       }));
     }
   };
+
+  const filteredSpecialties =
+    selectedProfessionId && specialtiesGroup[selectedProfessionId]
+      ? specialtiesGroup[selectedProfessionId].slice().sort((a, b) => a.name.localeCompare(b.name))
+      : [];
+
 
   // Handler for the combined phone input component
   const handleCombinedPhoneChange = (combinedValue: string) => {
@@ -403,25 +355,25 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
             Datos profesionales
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 p-1">
-            <Select
-              id="profession"
-              label="Profesión"
-              name="profession" // Matches interface/state
-              options={professionOptions}
-              value={formData.profession || ""} // Matches interface/state
-              onChange={handleSelectChange}
-              placeholder="Seleccionar profesión"
-            />
+		  <Select
+      id="profession"
+      label="Profesión"
+      name="profession"
+      options={professions.map((p) => ({ label: p.name, value: p.name }))}
+      value={formData.profession || ""}
+      onChange={handleSelectChange}
+      placeholder="Seleccionar profesión"
+    />
 
-            <Select
-              id="specialty"
-              label="Especialidad"
-              name="speciality" // Corrected: use speciality
-              options={specialtyOptions}
-              value={formData.speciality || ""} // Corrected: use specialty
-              onChange={handleSelectChange}
-              placeholder="Seleccionar especialidad"
-            />
+<Select
+  id="specialty"
+  label="Especialidad"
+  name="speciality"
+  options={filteredSpecialties.map((s) => ({ label: s.name, value: s.name }))}
+  value={formData.speciality || ""}
+  onChange={handleSelectChange}
+  placeholder="Seleccionar especialidad"
+/>
 
             <Input
               id="workplace"
