@@ -81,6 +81,10 @@ export default function DashboardPage() {
 
 	const { user, loading: userDataLoading } = useProfile();
 	const { mutate: saveUserProfile, loading: isSaving } = useSaveUserProfile();
+	const [reload, setReload] = useState(false);
+	const handleReload = () => {
+		setReload(prev => !prev);  // Esto cambiará el valor de 'reload' y hará que el hook se ejecute de nuevo
+	  };
 
 	const handleEditProfile = (field?: string) => {
 		console.log('(Page) Edit profile triggered for field:', field || 'general');
@@ -137,6 +141,7 @@ export default function DashboardPage() {
 			await updateInterests(interestData);
 			setEditTargetField(undefined);
 			setSaveInterestsSuccess(true);
+			handleReload();
 			setTimeout(function(){
 				setSaveInterestsError(null);
 				setSaveInterestsSuccess(false);
