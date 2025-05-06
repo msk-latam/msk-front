@@ -57,6 +57,11 @@ export interface UserProfileData {
   phoneCode?: string; // Parsed from phone
   fullPhoneNumber?: string; // Value used by the PhoneInputWithCode component
   asosiacion?: string;
+  identification:string,
+  document_type:string,
+  billing_email:string,
+  billing_name:string,
+  billing_phone:string,
 }
 // --- End New Interface ---
 
@@ -145,7 +150,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 
       setFormData({
         // Directly use interface fields matching form
-        crm_id: user.crm_id || "",
+        // crm_id: user.crm_id || "",
         email: user.email || "",
         name: user.name || "",
         lastName: user.lastName || "",
@@ -166,6 +171,11 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
           : false,
         medicalCollegeName: user.medicalCollegeName || "",
         asosiacion: user.asosiacion || "",
+        documentNumber:user.identification,
+        documentType:user.document_type,
+        billingEmail:user.billing_email,
+        billingName:user.billing_name,
+        billingPhone:user.billing_phone
       });
       setPassword("");
     } else {
