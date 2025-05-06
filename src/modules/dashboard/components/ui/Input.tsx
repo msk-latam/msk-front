@@ -26,7 +26,7 @@ const Input: React.FC<InputProps> = ({
 
 	return (
 		<div className='w-full'>
-			<label htmlFor={id} className='block text-sm font-medium text-gray-700 mb-1.5'>
+			<label htmlFor={id} className='block text-sm font-medium text-[#1a1a1a] mb-1.5'>
 				{label}
 			</label>
 			<input
