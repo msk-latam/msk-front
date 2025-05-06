@@ -133,6 +133,62 @@ export async function GET() {
 
 		const customerData: CustomerApiResponse = await customerRes.json();
 
+		// Fetch additional contact information for course recommendations
+		let courseRecommendationsList: string[] = [];
+		if (customerData.entity_id_crm) {
+			try {
+				const contactoRes = await fetch(`https://api.msklatam.net/getContactoByID?id=${customerData.entity_id_crm}`, {
+					headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' },
+					next: { revalidate: 3600 * 1 }, // Cache for 1 hour, adjust as needed
+				});
+
+				if (contactoRes.ok) {
+					const contactoData = await contactoRes.json();
+					const rawRecommendations = contactoData?.contacto?.Recomendador_web;
+					if (typeof rawRecommendations === 'string') {
+						courseRecommendationsList = rawRecommendations
+							.split(',')
+							.map((item: string) => item.trim())
+							.filter((item: string) => item);
+					}
+				} else {
+					console.warn(`Failed to fetch contacto data for ${customerData.entity_id_crm}: ${contactoRes.status}`);
+				}
+			} catch (error) {
+				console.error(`Error fetching contacto data for ${customerData.entity_id_crm}:`, error);
+			}
+		}
+
+		// Fetch full details for recommended courses
+		let detailedRecommendedCourses: any[] = [];
+		if (courseRecommendationsList.length > 0) {
+			detailedRecommendedCourses = await Promise.all(
+				courseRecommendationsList.slice(0, 4).map(async (courseIdentifier: string) => {
+					try {
+						const resourceRes = await fetch(
+							`https://cms1.msklatam.com/wp-json/msk/v1/product/${encodeURIComponent(courseIdentifier)}`,
+							{
+								headers: { Accept: 'application/json' },
+								next: { revalidate: 3600 * 7 }, // Cache for 7 hours
+							},
+						);
+						if (resourceRes.ok) {
+							const resourceData = await resourceRes.json();
+							if (resourceData && resourceData.id != null) {
+								return resourceData;
+							}
+						} else {
+							console.warn(`Failed to fetch product details for ${courseIdentifier}: ${resourceRes.status}`);
+						}
+					} catch (error) {
+						console.error(`Error fetching product details for ${courseIdentifier}:`, error);
+					}
+					return null; // Return null for failed fetches or invalid data
+				}),
+			);
+			detailedRecommendedCourses = detailedRecommendedCourses.filter((course) => course !== null); // Filter out nulls
+		}
+
 		const fetchCourseImage = async (courseName: string) => {
 			try {
 				const imageRes = await fetch(
@@ -244,11 +300,11 @@ export async function GET() {
 		};
 
 		// This function is kept for structure but will return empty as `courseRecommendations` source is removed.
-		const getRecommendedResourcesByInterests = async (
-			_courseRecommendations: string[], // This will be an empty array
-		): Promise<any[]> => {
-			return [];
-		};
+		// const getRecommendedResourcesByInterests = async (
+		// 	_courseRecommendations: string[], // This will be an empty array
+		// ): Promise<any[]> => {
+		// 	return [];
+		// };
 
 		// Process courses in parallel and wait for all to complete
 		const processedCoursesInProgress = await Promise.all(
@@ -281,7 +337,7 @@ export async function GET() {
 		);
 
 		const currentCourseData = await getCurrentCourse(customerData.course_progress);
-		const recommendedResourcesData = await getRecommendedResourcesByInterests([]); // Will be empty
+		// const recommendedResourcesData = await getRecommendedResourcesByInterests([]); // Will be empty
 
 		let combinedInterests: string[] = [];
 		if (customerData.interests) {
@@ -330,9 +386,9 @@ export async function GET() {
 			intereses: combinedInterests,
 			interesesAdicionales: null, // Data not available in new API
 			currentCourse: currentCourseData,
-			recommendedResourcesByIA: recommendedResourcesData,
+			recommendedResourcesByIA: detailedRecommendedCourses, // Use the fetched detailed recommendations
 			crm_id: customerData.entity_id_crm, // Main CRM ID for the contact
-			courseRecommendations: [], // Source (Recomendador_web) not in new API
+			courseRecommendations: detailedRecommendedCourses, // Update with fetched detailed recommendations
 		};
 
 		return NextResponse.json({ user });
