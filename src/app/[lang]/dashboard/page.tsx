@@ -122,7 +122,7 @@ export default function DashboardPage() {
 		console.log('(Page) Profile data to save:', formData);
 		try {
 			await saveUserProfile(formData);
-			setShowEditModal(false);
+			// setShowEditModal(false);
 			setEditTargetField(undefined);
 			setSaveProfileSuccess(true);
 			setTimeout(function(){
