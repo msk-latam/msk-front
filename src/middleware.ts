@@ -1,26 +1,46 @@
 import { supportedLanguages } from '@/config/languages';
 import { NextRequest, NextResponse } from 'next/server';
 
-export function middleware(request: NextRequest) {
-	const accessToken = request.cookies.get('access_token');
-	const isAuthenticated = Boolean(accessToken);
-	const protectedPaths = ['/dashboard'];
+function enforceUserCountryPrefix(request: NextRequest) {
+	const cookieCountry = request.cookies.get('msk-country')?.value;
+	const pathCountry = request.nextUrl.pathname.split('/')[1];
 
+	if (cookieCountry && supportedLanguages.includes(cookieCountry) && pathCountry !== cookieCountry) {
+		const newUrl = request.nextUrl.clone();
+		newUrl.pathname = newUrl.pathname.replace(`/${pathCountry}`, `/${cookieCountry}`);
+		return NextResponse.redirect(newUrl);
+	}
+
+	return null;
+}
+
+export function middleware(request: NextRequest) {
 	const { pathname, origin } = request.nextUrl;
 	const segments = pathname.split('/').filter(Boolean);
 	const firstSegment = segments[0];
 	const secondSegment = segments[1];
+	const country = request.cookies.get('msk-country')?.value || 'ar';
 
-	const country = request.cookies.get('country')?.value || 'ar';
-
-	const countryCookie = request.cookies.get('country')?.value || 'ar';
-	const match = pathname.match(/^\/tienda\/curso\/(.+)/);
-
-	// ⚠️ Excepción: si es el login con form=change-pass, no redirigir al dashboard
-	if (pathname.includes('/login') && request.nextUrl.searchParams.get('form') === 'change-pass') {
-		return NextResponse.next(); // ✅ permite continuar en login sin forzar redirección
+	// 🔒 Protected routes
+	const accessToken = request.cookies.get('access_token');
+	const isAuthenticated = Boolean(accessToken);
+	const protectedPaths = ['/dashboard'];
+	if (protectedPaths.some((path) => pathname.startsWith(path)) && !isAuthenticated) {
+		return NextResponse.redirect(new URL('/login', request.url));
 	}
 
+	// 🚫 Allow change-pass login only
+	if (pathname.includes('/login') && request.nextUrl.searchParams.get('form') === 'change-pass') {
+		if (!pathname.startsWith('/ar/')) {
+			const rewriteUrl = new URL('/ar/login', request.url);
+			rewriteUrl.searchParams.set('form', 'change-pass');
+			return NextResponse.rewrite(rewriteUrl);
+		}
+		return NextResponse.next();
+	}
+
+	// 🔁 Redirect for /tienda/curso/[slug] → /curso/[slug]
+	const match = pathname.match(/^\/tienda\/curso\/(.+)/);
 	if (match) {
 		const slug = match[1];
 		const newUrl = request.nextUrl.clone();
@@ -28,113 +48,58 @@ export function middleware(request: NextRequest) {
 		return NextResponse.redirect(newUrl);
 	}
 
-	// 👉 Rewrite invisible para login sin prefijo (Argentina)
-	// 👉 Rewrite invisible si accede a /login sin prefijo (Argentina)
-	if (pathname.includes('/login') && request.nextUrl.searchParams.get('form') === 'change-pass') {
-		// Detectar si ya es /ar/login (no rehacer rewrite si ya lo es)
-		if (pathname.startsWith('/ar/')) {
-			return NextResponse.next();
-		}
+	// 🌐 Country prefix enforcement
+	const countryRedirect = enforceUserCountryPrefix(request);
+	if (countryRedirect) return countryRedirect;
 
-		// Rewrite invisible a /ar/login pero sin cambiar la URL visible
-		const rewriteUrl = new URL('/ar/login', request.url);
-		rewriteUrl.searchParams.set('form', 'change-pass');
-		return NextResponse.rewrite(rewriteUrl);
-	}
-
-	/* --- Authentication --- */
-	if (protectedPaths.some((path) => pathname.startsWith(path))) {
-		if (!isAuthenticated) {
-			const loginUrl = new URL('/login', request.url);
-			return NextResponse.redirect(loginUrl);
-		}
-	}
-
-	/* --- Limpieza de rutas --- */
+	// 🧼 Cleanup duplicated /home or /ar segments
 	if (segments.includes('home') || segments.includes('ar')) {
-		const newSegments = segments.filter((segment) => segment !== 'home' && segment !== 'ar');
-		const newPath = '/' + newSegments.join('/');
-		return NextResponse.redirect(new URL(newPath || '/', origin));
+		const cleanedSegments = segments.filter((s) => s !== 'home' && s !== 'ar');
+		return NextResponse.redirect(new URL(`/${cleanedSegments.join('/') || ''}`, origin));
 	}
 
+	// 🧼 Cleanup /tienda/tienda and /curso/curso
 	if (
 		!supportedLanguages.includes(firstSegment) &&
-		segments.length > 2 &&
-		segments[0] === 'tienda' &&
-		segments[1] === 'tienda'
+		((segments[0] === 'tienda' && segments[1] === 'tienda') || (segments[0] === 'curso' && segments[1] === 'curso'))
 	) {
 		const newPath = '/' + segments.slice(1).join('/');
 		return NextResponse.redirect(new URL(newPath, origin));
 	}
 
-	if (
-		!supportedLanguages.includes(firstSegment) &&
-		segments.length > 2 &&
-		segments[0] === 'curso' &&
-		segments[1] === 'curso'
-	) {
-		const newPath = '/' + segments.slice(1).join('/');
-		return NextResponse.redirect(new URL(newPath, origin));
-	}
-
-	/* --- HOME inicial --- */
+	// 🏠 Homepage logic
 	if (pathname === '/') {
-		if (country === 'ar') {
-			// ⚡ Rewrite invisible a /ar/home
-			return NextResponse.rewrite(new URL('/ar/home', request.url));
-		} else {
-			// ⚡ Redirect visible a /mx/
-			return NextResponse.redirect(new URL(`/${country}/`, origin));
-		}
+		return country === 'ar'
+			? NextResponse.rewrite(new URL('/ar/home', request.url))
+			: NextResponse.redirect(new URL(`/${country}/`, origin));
 	}
 
-	// Si pide /mx/ exactamente (sin home)
+	// 🏠 Redirect /mx → /mx/home (rewrite invisible)
 	if (supportedLanguages.includes(firstSegment) && segments.length === 1) {
 		const newUrl = new URL(`/${firstSegment}/home`, request.url);
 		return NextResponse.rewrite(newUrl);
 	}
 
-	// Si duplicó /mx/mx
+	// 🧼 Cleanup duplicated country prefix /mx/mx
 	if (segments.length > 1 && supportedLanguages.includes(firstSegment) && firstSegment === secondSegment) {
 		const newPath = '/' + firstSegment + '/' + segments.slice(2).join('/');
 		return NextResponse.redirect(new URL(newPath, origin));
 	}
 
-	// Si no tiene prefijo, asumir Argentina (pero ya estamos en root)
-	if (!supportedLanguages.includes(firstSegment)) {
-		return NextResponse.rewrite(new URL(`/ar${pathname}`, request.url));
-	}
-	// 🔁 Redirige /change-pass/?token=... a /[lang]/login?form=change-pass&token=...
-	/* --- Cambio de contraseña sin prefijo --- */
+	// 🔁 /change-pass without prefix
 	if (pathname === '/change-pass' && request.nextUrl.searchParams.has('token')) {
 		const token = request.nextUrl.searchParams.get('token');
-		const redirectCountry = supportedLanguages.includes(countryCookie) ? countryCookie : 'ar';
-		const newUrl = new URL(`/${redirectCountry}/login`, origin);
+		const newUrl = new URL(`/${country}/login`, origin);
 		newUrl.searchParams.set('form', 'change-pass');
 		newUrl.searchParams.set('token', token!);
 		return NextResponse.redirect(newUrl);
 	}
 
-	// 👇 REDIRECCIÓN AUTOMÁTICA DESDE /
-	if (pathname === '/') {
-		if (countryCookie === 'ar') {
-			return NextResponse.rewrite(new URL('/ar/home', request.url)); // invisible
-		} else {
-			return NextResponse.redirect(new URL(`/${countryCookie}/home`, origin)); // visible
-		}
-	}
-
-	// ⚠️ Si no tiene prefijo de país y no es home, redirige usando la cookie
+	// 🧼 Add default prefix if missing
 	if (!supportedLanguages.includes(firstSegment)) {
 		return NextResponse.rewrite(new URL(`/ar${pathname}`, request.url));
 	}
 
-	// 🧼 Duplicados o rutas mal formadas
-	if (segments.length > 1 && supportedLanguages.includes(firstSegment) && firstSegment === secondSegment) {
-		const newPath = '/' + firstSegment + '/' + segments.slice(2).join('/');
-		return NextResponse.redirect(new URL(newPath, origin));
-	}
-	// Todo lo demás OK
 	return NextResponse.next();
 }
 
