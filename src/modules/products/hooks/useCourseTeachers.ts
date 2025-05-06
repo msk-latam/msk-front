@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getCourse } from '../service/courseService';
-import { CourseTeachersData } from '../types/types';
+import { CourseTeachersData, ContentData } from '../types/types';
 
 export function useCourseTeachers(slug: string, lang: string) {
 	const [data, setData] = useState<CourseTeachersData[] | null>(null);
@@ -11,10 +11,11 @@ export function useCourseTeachers(slug: string, lang: string) {
 		if (!slug) return;
 
 		getCourse(slug, lang)
-			.then((courseData) => {
-				// courseData es todo el objeto del curso
-				const teachersData: CourseTeachersData[] = courseData.sections.teaching_team;
-				setData(teachersData);
+			.then((contentData: ContentData) => {
+				const teachers = contentData.resource === 'course'
+					? contentData.sections?.teaching_team ?? []
+					: [];
+				setData(teachers);
 			})
 			.catch((err) => {
 				console.error(err);
@@ -22,5 +23,6 @@ export function useCourseTeachers(slug: string, lang: string) {
 			})
 			.finally(() => setLoading(false));
 	}, [slug, lang]);
+
 	return { data, loading, error };
 }

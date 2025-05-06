@@ -31,8 +31,10 @@ export default function CourseHeader({ slug, lang }: CourseHeaderProps) {
 		);
 	}
 
-	const { title, has_certificate, categories } = data;
-
+	const title = data.title;
+	const has_certificate = 'has_certificate' in data ? data.has_certificate : false;
+	const categories = 'categories' in data ? data.categories : [];
+	
 	// ✅ Función que maneja el click en categoría
 	const handleSpecialtyClick = (specialtyName: string) => {
 		const specialtySlug = specialtyName

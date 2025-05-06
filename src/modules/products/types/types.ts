@@ -118,4 +118,60 @@ export interface CourseCategory {
 	  study_plan: CourseSyllabus;
 	};
   }
-  
+  export interface BaseContentData {
+	id: number;
+	father_id: number;
+	resource: 'course' | 'downloadable'; // discriminador
+	title: string;
+	slug: string;
+	excerpt: string;
+	date: string;
+	featured_images: {
+		high: string;
+		medium: string;
+		low: string;
+	};
+	prices: {
+		is_free: boolean;
+		sale_price: string;
+		regular_price: string;
+		total_price: string;
+		max_installments: string;
+		price_installments: number;
+		currency: string | null;
+		currency_code: string | null;
+	};
+	codes: {
+		unique_code: string;
+		isbn: string;
+	}[];
+	link: string;
+}
+
+export interface CourseData extends BaseContentData {
+	resource: 'course';
+	cedente: CourseInstitution;
+	duration: string;
+	enrolments: number;
+	modules: number;
+	sections: {
+		header: CourseSectionHeader;
+		content: CourseDescription;
+		institutions: CourseInstitution[];
+		learning: CourseLearning[];
+		habilities: CourseHability[];
+		with_this_course: string;
+		teaching_team: CourseTeachersData[];
+		your_course_steps: Steps[];
+		video: CourseVideoData;
+		certificate: CourseCertificate;
+		study_plan: CourseSyllabus;
+	};
+}
+
+export interface DownloadableData extends BaseContentData {
+	resource: 'downloadable';
+	// Podés agregar más campos específicos si aparecen en la API
+}
+
+export type ContentData = CourseData | DownloadableData;

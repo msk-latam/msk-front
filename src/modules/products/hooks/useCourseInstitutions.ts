@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getCourse } from '../service/courseService';
-import { CourseInstitution } from '../types/types';
+import { CourseInstitution, ContentData } from '../types/types';
 
 export function useCourseInstitutions(slug: string, lang: string) {
 	const [data, setData] = useState<CourseInstitution[] | null>(null);
@@ -11,10 +11,11 @@ export function useCourseInstitutions(slug: string, lang: string) {
 		if (!slug) return;
 
 		getCourse(slug, lang)
-			.then((courseData) => {
-				// courseData es todo el objeto del curso
-				const institutionsData: CourseInstitution[] = courseData.sections.institutions;
-				setData(institutionsData);
+			.then((contentData: ContentData) => {
+				const institutions = contentData.resource === 'course'
+					? contentData.sections?.institutions ?? []
+					: [];
+				setData(institutions);
 			})
 			.catch((err) => {
 				console.error(err);
@@ -22,5 +23,6 @@ export function useCourseInstitutions(slug: string, lang: string) {
 			})
 			.finally(() => setLoading(false));
 	}, [slug, lang]);
+
 	return { data, loading, error };
 }

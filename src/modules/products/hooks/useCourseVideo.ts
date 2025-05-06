@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getCourse } from '../service/courseService';
-import { CourseVideoData } from '../types/types';
+import { CourseVideoData, ContentData } from '../types/types';
 
 export function useCourseVideo(slug: string, lang: string) {
 	const [data, setData] = useState<CourseVideoData | null>(null);
@@ -11,10 +11,11 @@ export function useCourseVideo(slug: string, lang: string) {
 		if (!slug) return;
 
 		getCourse(slug, lang)
-			.then((courseData) => {
-				// courseData es todo el objeto del curso
-				const videoData: CourseVideoData = courseData.sections.video;
-				setData(videoData);
+			.then((contentData: ContentData) => {
+				const video = contentData.resource === 'course'
+					? contentData.sections?.video ?? null
+					: null;
+				setData(video);
 			})
 			.catch((err) => {
 				console.error(err);

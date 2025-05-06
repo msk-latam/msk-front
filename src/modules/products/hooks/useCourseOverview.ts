@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getCourse } from '../service/courseService';
-import { CourseOverviewData } from '../types/types';
+import { CourseOverviewData, ContentData } from '../types/types';
 
 export function useCourseOverview(slug: string, lang: string) {
 	const [data, setData] = useState<CourseOverviewData | null>(null);
@@ -11,13 +11,21 @@ export function useCourseOverview(slug: string, lang: string) {
 		if (!slug) return;
 
 		getCourse(slug, lang)
-			.then((courseData) => {
-				const overviewData: CourseOverviewData = {
-					habilities: courseData.sections?.habilities ?? [],
-					with_this_course: courseData.sections?.with_this_course ?? '',
-					your_course_steps: courseData.sections?.your_course_steps ?? [],
-				};
+			.then((contentData: ContentData) => {
+				if (contentData.resource !== 'course') {
+					setData({
+						habilities: [],
+						with_this_course: '',
+						your_course_steps: [],
+					});
+					return;
+				}
 
+				const overviewData: CourseOverviewData = {
+					habilities: contentData.sections?.habilities ?? [],
+					with_this_course: contentData.sections?.with_this_course ?? '',
+					your_course_steps: contentData.sections?.your_course_steps ?? [],
+				};
 				setData(overviewData);
 			})
 			.catch((err) => {
@@ -26,6 +34,6 @@ export function useCourseOverview(slug: string, lang: string) {
 			})
 			.finally(() => setLoading(false));
 	}, [slug, lang]);
-	console.log(data);
+
 	return { data, loading, error };
 }

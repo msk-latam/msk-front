@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getCourse } from '../service/courseService';
-import { CourseDescription } from '../types/types';
+import { CourseDescription, ContentData } from '../types/types';
 
 export function useCourseDescription(slug: string, lang: string) {
 	const [data, setData] = useState<CourseDescription | null>(null);
@@ -11,10 +11,11 @@ export function useCourseDescription(slug: string, lang: string) {
 		if (!slug) return;
 
 		getCourse(slug, lang)
-			.then((courseData) => {
-				// courseData es todo el objeto del curso
-				const descriptionData: CourseDescription = courseData.sections.content;
-				setData(descriptionData);
+			.then((contentData: ContentData) => {
+				const description = contentData.resource === 'course'
+					? contentData.sections?.content ?? null
+					: null;
+				setData(description);
 			})
 			.catch((err) => {
 				console.error(err);

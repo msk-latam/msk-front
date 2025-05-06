@@ -13,7 +13,7 @@ export async function GET(req: Request, { params }: { params: { slug: string } }
 
 	try {
 		const res = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/product/${slug}?lang=${lang}`, {
-			next: { revalidate: 30 },
+			next: { revalidate: 0 },
 		});
 		const data = await res.json();
 		return NextResponse.json(data);
