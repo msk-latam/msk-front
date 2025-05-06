@@ -64,7 +64,7 @@ const Institutions = () => {
     if (!scrollEl) return;
 
     let frame: number;
-    const scrollSpeed = 1.5; // velocidad ajustable
+    const scrollSpeed = 0.8; // velocidad ajustable
 
     const autoScroll = () => {
       if (!scrollEl) return;
