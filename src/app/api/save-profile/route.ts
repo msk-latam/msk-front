@@ -21,7 +21,7 @@ export async function PUT(request: NextRequest) {
 				Authorization: `Bearer ${token}`,
 			},
 			// SEND THE TRANSFORMED PAYLOAD
-			body: JSON.stringify(request.body),
+			body: request.body,
 		});
 
 		const responseData = await response.json().catch(() => ({})); // Try to parse JSON, default to empty object if fails
