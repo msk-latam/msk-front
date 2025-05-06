@@ -5,16 +5,19 @@ import Navbar from '@/modules/components/navbar/Navbar';
 import NewsLetter from '@/modules/components/newsletter/NewsLetter';
 import { useState } from 'react';
 
+import type { UpdateCustomerPayload } from '@/hooks/useCustomer';
+import { useCustomer } from '@/hooks/useCustomer';
 import useInterests from '@/hooks/useinterests';
 import { useLogout } from '@/hooks/useLogout';
 import { useProfile } from '@/hooks/useProfile';
-import { useSaveUserProfile } from '@/hooks/useSaveUserProfile';
+
 import CompleteProfilePromptModal from '@/modules/dashboard/components/CompleteProfilePromptModal';
 import DashboardHero from '@/modules/dashboard/components/DashboardHero';
 import HelpSection from '@/modules/dashboard/components/HelpSection';
 import InterestsEditModal from '@/modules/dashboard/components/InterestsEditModal';
 import LearningPlanCta from '@/modules/dashboard/components/LearningPlanCta';
 import MyCoursesSection from '@/modules/dashboard/components/MyCoursesSection';
+import type { UserProfileData } from '@/modules/dashboard/components/ProfileEditModal';
 import ProfileEditModal from '@/modules/dashboard/components/ProfileEditModal';
 import PromoBanner from '@/modules/dashboard/components/PromoBanner';
 
@@ -79,8 +82,8 @@ export default function DashboardPage() {
 	const [saveInterestsSuccess, setSaveInterestsSuccess] = useState<boolean>(false);
 	const [showCompleteProfileModal, setShowCompleteProfileModal] = useState(false);
 
-	const { user, loading: userDataLoading } = useProfile();
-	const { mutate: saveUserProfile, loading: isSaving } = useSaveUserProfile();
+	const { user, loading: userDataLoading, mutate: mutateProfile } = useProfile();
+	const { mutate: updateCustomerProfile, loading: isSavingProfile, error: saveProfileErrorFromHook } = useCustomer();
 	const [reload, setReload] = useState(false);
 	const handleReload = () => {
 		setReload((prev) => !prev); // Esto cambiará el valor de 'reload' y hará que el hook se ejecute de nuevo
@@ -118,20 +121,63 @@ export default function DashboardPage() {
 		}
 	};
 
-	const handleSaveProfile = async (formData: any) => {
-		console.log('(Page) Profile data to save:', formData);
+	const handleSaveProfile = async (formDataFromModal: Partial<UserProfileData>, password?: string) => {
+		console.log('(Page) Profile data to save:', formDataFromModal, 'Password changed:', !!password);
+		setSaveProfileError(null);
+		setSaveProfileSuccess(false);
+
+		// Map formDataFromModal to UpdateCustomerPayload
+		const payload: UpdateCustomerPayload = {
+			name: formDataFromModal.name,
+			surname: formDataFromModal.lastName,
+			country: formDataFromModal.country,
+			phone: formDataFromModal.fullPhoneNumber || formDataFromModal.phone,
+			profession: formDataFromModal.profession,
+			specialty: formDataFromModal.speciality,
+			workplace: formDataFromModal.workplace ?? undefined,
+			school_associate: formDataFromModal.belongsToMedicalCollege ?? undefined,
+			school_name: formDataFromModal.medicalCollegeName ?? undefined,
+			document_type: formDataFromModal.documentType,
+			identification: formDataFromModal.documentNumber,
+			company_name: formDataFromModal.billingName,
+			invoice_required:
+				formDataFromModal.requiresInvoice === 'yes' ? true : formDataFromModal.requiresInvoice === 'no' ? false : undefined,
+			billing_email: formDataFromModal.billingEmail,
+			billing_phone: formDataFromModal.billingPhone,
+		};
+
+		if (password) {
+			payload.password = password;
+		}
+
+		// Filter out undefined values to send a cleaner payload
+		const cleanedPayload = Object.entries(payload).reduce((acc, [key, value]) => {
+			if (value !== undefined) {
+				acc[key as keyof UpdateCustomerPayload] = value;
+			}
+			return acc;
+		}, {} as Partial<UpdateCustomerPayload>);
+
 		try {
-			await saveUserProfile(formData);
-			// setShowEditModal(false);
+			console.log('(Page) Sending to API:', cleanedPayload);
+			await updateCustomerProfile(cleanedPayload as UpdateCustomerPayload); // Call mutate from useCustomer
+			// setShowEditModal(false); // Keep modal open to show success/error
 			setEditTargetField(undefined);
 			setSaveProfileSuccess(true);
-			setTimeout(function(){
-				setSaveProfileError(null);
+			mutateProfile(); // Re-fetch profile data via SWR
+			setTimeout(() => {
+				setSaveProfileError(null); // Clear error on success timeout as well
 				setSaveProfileSuccess(false);
-			},3000)
+				// setShowEditModal(false); // Optionally close modal after success message duration
+			}, 3000);
 		} catch (error: any) {
 			console.error('Failed to save profile:', error);
-			setSaveProfileError(error.message || 'Error desconocido');
+			setSaveProfileError(error.message || 'Error desconocido al guardar perfil');
+			// Keep success as false or reset it
+			setSaveProfileSuccess(false);
+			setTimeout(() => {
+				setSaveProfileError(null);
+			}, 5000); // Keep error message longer
 		}
 	};
 
@@ -141,11 +187,11 @@ export default function DashboardPage() {
 		setSaveInterestsSuccess(false);
 
 		try {
-			console.log('(Page) Interests data to save:', user);
+			console.log('(Page) Interests data to save user context:', user); // Corrected log
 			await updateInterests(interestData);
 			setEditTargetField(undefined);
 			setSaveInterestsSuccess(true);
-			handleReload();
+			handleReload(); // This seems to be for interests, profile mutate is separate
 			setTimeout(function () {
 				setSaveInterestsError(null);
 				setSaveInterestsSuccess(false);
@@ -207,10 +253,12 @@ export default function DashboardPage() {
 					onClose={() => {
 						setShowEditModal(false);
 						setEditTargetField(undefined);
+						setSaveProfileError(null); // Clear error on modal close
+						setSaveProfileSuccess(false); // Clear success on modal close
 					}}
 					onSave={handleSaveProfile}
 					user={user}
-					isSaving={isSaving}
+					isSaving={isSavingProfile}
 					saveError={saveProfileError}
 					saveSuccess={saveProfileSuccess}
 				/>
