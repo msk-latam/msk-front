@@ -41,6 +41,8 @@ const HelpSection: React.FC = () => {
 							if(!nro_wa){
 								nro_wa=nros["int"];
 							}
+						}else{
+							nro_wa=nros["ar"]
 						}
 					}
 					return (
