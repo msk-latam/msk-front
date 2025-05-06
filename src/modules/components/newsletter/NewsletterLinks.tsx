@@ -5,13 +5,14 @@ import useFooter from '@/hooks/useFooter';
 import { urlFormat } from '@/utils/urlFormat';
 const NewsletterLinks = () => {
   const pathname = usePathname();
-  let lang = pathname.split('/')[1] || 'int'; // Detectar idioma
-  if(lang.length>2){
-    lang = "int";
+  let lang = "ar";
+  
+  if(window!=null){
+    const { pathname } = window.location;
+    const langMatch = pathname.match(/^\/([^/]+)\//);
+     lang = langMatch && langMatch[1].length <= 2 ? langMatch[1] : "ar";
   }
-  if(lang.length==0){
-    lang = "int";
-  }
+
   const isDemoMode = true; // ⚡ Habilitar .tech en modo demo
   const { data } = useFooter(lang);
 

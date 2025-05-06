@@ -86,7 +86,7 @@ const TrustSection = () => {
 
 				{/* Figures */}
 				<div className='flex flex-col pr-5 md:pr-0 md:flex-row justify-between text-center mb-10 font-lora gap-6'>
-					{figures.map((figure, index) => (
+					{figures?.map((figure, index) => (
 						<div key={index}>
 							<p className='text-[34px] md:text-[38px] md:text-start md:font-[500] font-[Lora]'>{figure.figure}</p>
 							<p className='text-sm font-[500] font-raleway'>
