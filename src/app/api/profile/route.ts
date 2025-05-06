@@ -29,7 +29,7 @@ export async function GET() {
 
 	try {
 		// Primer fetch: perfil básico
-		const profileRes = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/profile/${email}`, {
+		const profileRes = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/customer/${email}`, {
 			headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' },
 		});
 
@@ -37,7 +37,7 @@ export async function GET() {
 
 		const profileData = await profileRes.json();
 
-		const entityIdCrm = profileData.user.contact?.entity_id_crm;
+		const entityIdCrm = profileData?.entity_id_crm;
 
 		// Segundo fetch: contacto extendido
 		const contactoRes = await fetch(`https://api.msklatam.net/getContactoByID?id=${entityIdCrm}`, {
@@ -47,6 +47,7 @@ export async function GET() {
 		if (!contactoRes.ok) throw new Error('Error fetching contacto');
 
 		const contactoData = await contactoRes.json();
+		// const contactoData = profileData;
 
 		/* calcular el porcentaje de perfil */
 		const profileCompletion = {
@@ -62,14 +63,14 @@ export async function GET() {
 		const user = {
 			profileCompletion: profileCompletion,
 			profileImage: profileImage || isNull,
-			name: profileData.user.contact.name,
-			lastName: profileData.user.contact.last_name,
-			profession: profileData.user.contact.profession,
-			speciality: profileData.user.contact.speciality,
-			email: profileData.user.contact.email,
-			country: profileData.user.contact.country,
-			phone: profileData.user.contact.phone,
-			contracts: profileData.user.contact.contracts,
+			name: profileData.name,
+			lastName: profileData.last_name,
+			profession: profileData.profession,
+			speciality: profileData.speciality,
+			email: profileData.email,
+			country: profileData.country,
+			phone: profileData.phone,
+			contracts: profileData.contracts,
 			coursesInProgress: contactoData.contacto.Formulario_de_cursada,
 			asosiacion: contactoData.contacto.Colegio_Sociedad_o_Federaci_n[0],
 			placeOfWork: contactoData.contacto.Lugar_de_trabajo,
