@@ -16,10 +16,10 @@ interface CurrentCourseType {
 interface CustomerApiResponse {
 	id: number;
 	entity_id_crm: string;
-	name: string;
+	first_name: string;
 	last_name: string;
 	profession: string | null;
-	speciality: string | null;
+	specialty: string | null;
 	user_id: number;
 	fiscal_regime: string | null;
 	phone: string | null;
@@ -362,7 +362,7 @@ export async function GET() {
 			profileCompletion: {
 				percentage: calculateProfileCompletion(
 					customerData.profession,
-					customerData.speciality,
+					customerData.specialty,
 					customerData.country,
 					customerData.phone,
 					customerData.interests,
@@ -372,10 +372,10 @@ export async function GET() {
 				ctaLink: '/dashboard/profile',
 			},
 			profileImage: profileImage || null,
-			name: customerData.name,
+			name: customerData.first_name,
 			lastName: customerData.last_name,
 			profession: customerData.profession,
-			speciality: customerData.speciality,
+			speciality: customerData.specialty,
 			email: customerData.email, // Using email from the new API as authoritative
 			country: customerData.country,
 			phone: customerData.phone,

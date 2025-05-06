@@ -59,13 +59,7 @@ export async function PUT(request: NextRequest) {
 		if (!apiResponse.ok) {
 			const errorBody = await apiResponse.text();
 			console.error('Error updating customer data:', apiResponse.status, errorBody);
-			// Optionally, clear cookies if the update fails due to auth issues,
-			// though for PUT, it might be better to let the user retry or understand the specific error.
-			// if (apiResponse.status === 401 || apiResponse.status === 403) {
-			//   cookies().delete('access_token');
-			//   cookies().delete('email');
-			//   cookies().delete('picture');
-			// }
+
 			return NextResponse.json(
 				{ message: `Failed to update customer data: ${apiResponse.status}`, error: errorBody },
 				{ status: apiResponse.status },
@@ -76,10 +70,6 @@ export async function PUT(request: NextRequest) {
 		return NextResponse.json(data, { status: apiResponse.status });
 	} catch (error) {
 		console.error('Error in customer PUT route:', error);
-		// Consider if cookies should be cleared on such an internal server error.
-		// cookies().delete('access_token');
-		// cookies().delete('email');
-		// cookies().delete('picture');
 		return NextResponse.json(
 			{ message: 'An unexpected error occurred.', error: error instanceof Error ? error.message : String(error) },
 			{ status: 500 },
