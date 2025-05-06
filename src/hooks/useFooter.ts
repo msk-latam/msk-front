@@ -33,7 +33,7 @@ const useFooter = (lang: string) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://cms1.msklatam.com/wp-json/msk/v1/footer?lang=${lang}`
+          `https://cms1.msklatam.com/wp-json/msk/v1/footer?lang=${lang}&nocache=1`
         );
         setData(response.data);
       } catch (err) {
