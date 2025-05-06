@@ -31,8 +31,9 @@ const HelpSection: React.FC = () => {
 			<div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
 				{helpSection.cards.map((card, index) => {
 					const IconComponent = iconMap[card.iconName];
-					let nro_wa = nros["int"];
+					let link = card.link;
 					if(index==1){
+						let nro_wa = nros["int"];
 						const { pathname } = window.location;
 						const langMatch = pathname.match(/^\/([^/]+)\//);
 						const code = langMatch && langMatch[1].length <= 2 ? langMatch[1] : "";
@@ -44,10 +45,11 @@ const HelpSection: React.FC = () => {
 						}else{
 							nro_wa=nros["ar"]
 						}
+						link =nro_wa;
 					}
 					return (
-						<Link target="_blank" key={index} href={nro_wa} passHref legacyBehavior>
-							<a className='bg-white rounded-[30px] p-8 flex flex-col items-center text-center border border-[#DBDDE2] transition-all cursor-pointer hover:bg-[#DBDDE2'>
+						<Link  key={index} href={link} passHref legacyBehavior>
+							<a target="_blank" className='bg-white rounded-[30px] p-8 flex flex-col items-center text-center border border-[#DBDDE2] transition-all cursor-pointer hover:bg-[#DBDDE2'>
 								{IconComponent && (
 									<span className='text-[#9200AD]'>
 										<IconComponent />
