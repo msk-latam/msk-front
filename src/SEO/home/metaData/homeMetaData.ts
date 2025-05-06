@@ -50,7 +50,10 @@ export function getHomeMetadata(lang: string = 'ar', host?: string) {
 
 	return {
 		title: 'Cursos de medicina para expandir tus metas profesionales | MSK',
-		description: 'Una propuesta moderna para expandir tus metas profesionales',
+		//description: 'Una propuesta moderna para expandir tus metas profesionales',
+		//Cambiada la descripcion para mejora de SEO en home
+		description:
+			'Una propuesta moderna para expandir tus metas profesionales, fórmate en cursos a distancia. Aprovecha descuentos exclusivos y becas',
 		canonical: hreflangUrls[`es-${lang}`] || siteUrl,
 		hreflangs: hreflangUrls,
 		robots: isProd ? { index: true, follow: true } : { index: false, follow: false },
