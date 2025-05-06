@@ -22,11 +22,12 @@ const countries = {
 };
 
 function getBaseUrlFromHost(host?: string): string {
-	if (!host) return 'https://msklatam.com'; // Fallback por seguridad
+	if (!host) return 'https://msklatam.com'; // fallback
 
 	if (host.includes('.tech')) return 'https://msklatam.tech';
 	if (host.includes('.com')) return 'https://msklatam.com';
-	return 'https://msklatam.tech'; // Default
+
+	return 'https://msklatam.tech';
 }
 
 export async function getProductMetadata(lang: string, slug: string): Promise<Metadata> {
@@ -37,9 +38,9 @@ export async function getProductMetadata(lang: string, slug: string): Promise<Me
 
 	const host = headers().get('host') || '';
 	const baseUrl = getBaseUrlFromHost(host);
-	const isProd = baseUrl.includes('.com');
+	const isProd = host.includes('msklatam.com') && !host.includes('.tech'); // ✅ Solo .com es prod
 
-	const canonical = `${baseUrl}${lang === 'ar' ? '' : `/${lang}`}/curso//${slug}`;
+	const canonical = `${baseUrl}${lang === 'ar' ? '' : `/${lang}`}/curso/${slug}`;
 
 	const hreflangs = Object.fromEntries(
 		Object.keys(countries).map((code) => [`es-${code}`, `${baseUrl}${code === 'ar' ? '' : `/${code}`}/curso/${slug}`]),
@@ -50,7 +51,7 @@ export async function getProductMetadata(lang: string, slug: string): Promise<Me
 		description: course.sections?.with_this_course ?? course.description ?? 'Curso de medicina disponible en MSK.',
 		alternates: {
 			canonical,
-			languages: hreflangs, // siempre presentes, no condicional
+			languages: hreflangs,
 		},
 		robots: isProd ? 'index, follow' : 'noindex, nofollow',
 	};
