@@ -10,7 +10,7 @@ import UserIcon from '@/dashboard/assets/icons/UserIcon';
 import AddButton from '@/dashboard/components/ui/AddButton';
 import EditButton from '@/dashboard/components/ui/EditButton';
 // import dashboardMock from '@/modules/dashboard/data/dashboardMock.json'; // <-- Import mock data
-import useInterests from '@/hooks/useinterests';
+import { type Interests } from '@/hooks/useinterests'; // Changed: Import Interests type
 import { useLmsNavigation } from '@/hooks/useLmsNavigation';
 import Link from 'next/link';
 import DashboardHeroSkeleton from './DashboardHeroSkeleton';
@@ -21,9 +21,11 @@ import CtaButton from './ui/CtaButton';
 interface DashboardHeroProps {
 	userData: any; // <-- TODO: Change to UserData type
 	onEditProfile: (field?: string) => void;
-	isLoading?: boolean;
+	isLoading?: boolean; // For userData loading
 	userEmail: string;
 	onOpenCompleteProfileModal: () => void;
+	interests: Interests | null; // Changed: Added interests prop
+	isInterestsLoading: boolean; // Changed: Added isInterestsLoading prop
 }
 
 const defaultRecommendedCourse = {
@@ -41,9 +43,10 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 	isLoading = false,
 	userEmail,
 	onOpenCompleteProfileModal,
+	interests,
+	isInterestsLoading,
 }) => {
 	const isEmpty = (value: string | undefined | null) => !value || value.trim() === '';
-	const { interests, updateInterests, isLoading: isInterestsLoading } = useInterests();
 	const [showInvoicesModal, setShowInvoicesModal] = useState(false);
 	const { navigateToLms, isLoading: isNavigating, error: navigationError } = useLmsNavigation();
 
@@ -276,7 +279,9 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 				<div className='md:col-span-2 lg:col-span-2 bg-white rounded-[30px] p-[36px] order-3 md:order-3'>
 					<h3 className='font-raleway text-[34px] font-medium leading-[100%] mb-3 text-[#1A1A1A]'>Tus intereses</h3>
 
-					{interests && interests?.specialty_interests?.length > 0 ? (
+					{isInterestsLoading ? (
+						<p className='text-center text-[#4F5D89] py-5'>Cargando intereses...</p>
+					) : interests && interests?.specialty_interests?.length > 0 ? (
 						<div className='flex flex-wrap gap-2 mb-4 items-center'>
 							{interests?.specialty_interests?.map((interest: string, index: number) => (
 								<span
@@ -469,7 +474,14 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 						</div>
 					</div>
 				) : // Optional: Show a different message if interests exist but no resources yet
-				interests &&
+				isInterestsLoading ? (
+					<div className='md:col-span-2 lg:col-span-3 bg-white rounded-[30px] p-[36px] order-5 md:order-5'>
+						<h3 className='font-raleway text-[34px] font-medium leading-[100%] mb-6 text-[#1A1A1A]'>
+							Recursos recomendados para tí
+						</h3>
+						<p className='text-[#4F5D89] font-inter text-center'>Cargando recomendaciones...</p>
+					</div>
+				) : interests &&
 				  (interests.specialty_interests?.length > 0 ||
 						interests.content_interests?.length > 0 ||
 						interests.other_interests?.length > 0) ? (

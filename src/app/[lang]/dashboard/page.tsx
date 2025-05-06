@@ -83,8 +83,8 @@ export default function DashboardPage() {
 	const { mutate: saveUserProfile, loading: isSaving } = useSaveUserProfile();
 	const [reload, setReload] = useState(false);
 	const handleReload = () => {
-		setReload(prev => !prev);  // Esto cambiará el valor de 'reload' y hará que el hook se ejecute de nuevo
-	  };
+		setReload((prev) => !prev); // Esto cambiará el valor de 'reload' y hará que el hook se ejecute de nuevo
+	};
 
 	const handleEditProfile = (field?: string) => {
 		console.log('(Page) Edit profile triggered for field:', field || 'general');
@@ -142,10 +142,10 @@ export default function DashboardPage() {
 			setEditTargetField(undefined);
 			setSaveInterestsSuccess(true);
 			handleReload();
-			setTimeout(function(){
+			setTimeout(function () {
 				setSaveInterestsError(null);
 				setSaveInterestsSuccess(false);
-			},3000)
+			}, 3000);
 		} catch (error: any) {
 			console.error('Failed to save interests:', error);
 			setSaveInterestsError(error.message || 'Error desconocido al guardar intereses');
@@ -174,6 +174,8 @@ export default function DashboardPage() {
 						isLoading={userDataLoading}
 						userEmail={user?.email ?? ''}
 						onOpenCompleteProfileModal={handleOpenCompleteProfileModal}
+						interests={interests}
+						isInterestsLoading={isInterestsLoading}
 					/>
 					{!userDataLoading && user && (
 						<>

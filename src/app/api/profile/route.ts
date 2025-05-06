@@ -1,16 +1,103 @@
-import { isNull } from 'lodash';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 interface CurrentCourseType {
-	id: any;
+	id: any; // CMS ID of the course
 	image: any;
 	title: any;
-	crm_id: any;
+	crm_id: any; // CRM ID of the course (e.g., product_code or similar unique course identifier from CRM/LMS)
 	completed_percentage: any;
 	product_code: any;
 	product_code_cedente: any;
 	resource: any;
+}
+
+// Define new interfaces for the API response
+interface CustomerApiResponse {
+	id: number;
+	entity_id_crm: string;
+	name: string;
+	last_name: string;
+	profession: string | null;
+	speciality: string | null;
+	user_id: number;
+	fiscal_regime: string | null;
+	phone: string | null;
+	email: string;
+	sex: string | null;
+	date_of_birth: string | null;
+	country: string | null;
+	postal_code: string | null;
+	address: string | null;
+	created_at: string;
+	updated_at: string;
+	validate: string;
+	other_profession: string | null;
+	other_speciality: string | null;
+	state: string | null;
+	career: string | null;
+	year: string | null;
+	type_doc: string | null;
+	identification: string | null;
+	interests: {
+		specialty_interests: string[] | null;
+		content_interests: string[] | null;
+		other_interests: string[] | null;
+	} | null;
+	contracts: Contract[];
+	course_progress: CourseProgress[];
+}
+
+interface Contract {
+	id: number;
+	contact_id: number;
+	installments: any | null;
+	entity_id_crm: string;
+	so_crm: string;
+	status: string;
+	status_payment: string;
+	country: string;
+	currency: string;
+	Comprobante_Factura: any | null;
+	Fecha_Cobro: string | null;
+	Monto: string | null;
+	products: Product[];
+}
+
+interface Product {
+	id: number;
+	contract_id: number;
+	contract_entity_id: string;
+	entity_id_crm: string;
+	quantity: number;
+	product_code: number | string;
+	price: string;
+	discount: string;
+	created_at: string;
+	updated_at: string;
+}
+
+interface CourseProgress {
+	course_name: string;
+	product_code: number | string;
+	score: string | null;
+	end_date: string | null;
+	advance: string;
+	certification: string | null;
+	contract_status: string;
+	deadline_enroll: string | null;
+	diploma: string | null;
+	enroll: string | null;
+	enroll_platform: string;
+	enroll_status: string; // "Activo", "Finalizado", "Expirado"
+	expiration_date: string | null;
+	field_status: string | null;
+	last_session_date: string | null;
+	shop_date: string | null;
+	transferor_course_code: string | null;
+	entity_id_crm: string; // CRM ID of the course_progress record
+	parent_id: string;
+	created_time: string;
 }
 
 export async function GET() {
@@ -20,7 +107,6 @@ export async function GET() {
 
 	if (!token || !email) {
 		console.log('No token or email');
-		/* clear cookies */
 		cookies().delete('access_token');
 		cookies().delete('email');
 		cookies().delete('picture');
@@ -28,154 +114,27 @@ export async function GET() {
 	}
 
 	try {
-		// Primer fetch: perfil básico
-		const profileRes = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/profile/${email}`, {
+		const customerRes = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/customer/${email}`, {
 			headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' },
 		});
 
-		if (!profileRes.ok) throw new Error('Error fetching profile');
-
-		const profileData = await profileRes.json();
-
-		const entityIdCrm = profileData.user.contact?.entity_id_crm;
-
-		// Segundo fetch: contacto extendido
-		const contactoRes = await fetch(`https://api.msklatam.net/getContactoByID?id=${entityIdCrm}`, {
-			headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' },
-		});
-
-		if (!contactoRes.ok) throw new Error('Error fetching contacto');
-
-		const contactoData = await contactoRes.json();
-
-		/* calcular el porcentaje de perfil */
-		const profileCompletion = {
-			percentage: 25,
-			message: '¿Por qué completar tu perfil?',
-			ctaText: 'Entérate aquí',
-			ctaLink: '/dashboard/profile',
-		};
-
-		// console.log('contactoData', contactoData);
-		// console.log('profileData', profileData);
-
-		const user = {
-			profileCompletion: profileCompletion,
-			profileImage: profileImage || isNull,
-			name: profileData.user.contact.name,
-			lastName: profileData.user.contact.last_name,
-			profession: profileData.user.contact.profession,
-			speciality: profileData.user.contact.speciality,
-			email: profileData.user.contact.email,
-			country: profileData.user.contact.country,
-			phone: profileData.user.contact.phone,
-			contracts: profileData.user.contact.contracts,
-			coursesInProgress: contactoData.contacto.Formulario_de_cursada,
-			asosiacion: contactoData.contacto.Colegio_Sociedad_o_Federaci_n[0],
-			placeOfWork: contactoData.contacto.Lugar_de_trabajo,
-			intereses: contactoData.contacto.Temas_de_interes,
-			interesesAdicionales: contactoData.contacto.Intereses_adicionales,
-			currentCourse: null as CurrentCourseType | null,
-			recommendedResourcesByIA: [] as any[],
-			crm_id: profileData.user?.contact?.entity_id_crm || contactoData.contacto.id,
-			courseRecommendations: contactoData.contacto.Recomendador_web?.split(',') || [],
-			// podes agregar mas campos si necesitás
-		};
-
-		const profileCourses = profileData.user.contact.courses_progress;
-
-		// Calculate profile completion percentage based on filled fields
-		const calculateProfileCompletion = () => {
-			let percentage = 25; // Base percentage for simple registration
-			if (user.profession && user.speciality && user.country && user.phone) {
-				percentage += 25;
-			}
-			// Note: area of work is missing from server data
-			if (user.placeOfWork) {
-				percentage += 25;
-			}
-			if (user.intereses) {
-				percentage += 25;
-			}
-			return percentage;
-		};
-
-		const getCurrentCourse = async () => {
-			if (!user.coursesInProgress || user.coursesInProgress.length === 0) {
-				return null;
-			}
-			const activeCourses = user.coursesInProgress.filter((course: any) => course.Fecha_finalizaci_n === null);
-			if (activeCourses.length === 0) {
-				return null;
-			}
-
-			const latestCourse =
-				activeCourses.length === 1
-					? activeCourses[0]
-					: activeCourses.reduce((latest: any, course: any) => {
-							const latestDate = latest ? new Date(latest.Fecha_de_ltima_sesi_n).getTime() : 0;
-							const courseDate = new Date(course.Fecha_de_ltima_sesi_n).getTime();
-							return courseDate > latestDate ? course : latest;
-					  }, null);
-			
-			if(!latestCourse){
-				return null;
-			}
-			
-			const courseRes = await fetch(
-				`https://cms1.msklatam.com/wp-json/msk/v1/products?search=${latestCourse.Nombre_de_curso.name}`,
-				{
-					headers: { Accept: 'application/json' },
-				},
+		if (!customerRes.ok) {
+			const errorBody = await customerRes.text();
+			console.error('Error fetching customer data:', customerRes.status, errorBody);
+			// Clear cookies on critical API failure to force re-login
+			cookies().delete('access_token');
+			cookies().delete('email');
+			cookies().delete('picture');
+			return NextResponse.json(
+				{ user: null, error: `Failed to fetch customer data: ${customerRes.status}` },
+				{ status: customerRes.status },
 			);
+		}
 
-			const courseData = await courseRes.json();
-
-			if (courseData.data.length === 0) {
-				return null;
-			}
-
-			const latestCourseData = {
-				product_code: latestCourse?.product_code,
-				product_code_cedente: latestCourse?.product_code_cedente,
-				id: courseData.data[0]?.id,
-				image: courseData.data[0]?.featured_images,
-				title: courseData.data[0]?.title,
-				crm_id: latestCourse?.Nombre_de_curso?.id,
-				completed_percentage: parseInt(latestCourse.Avance?.toString().replace(',', '.')),
-				resource: courseData.data[0]?.resource,
-			};
-
-			return latestCourseData;
-		};
-
-		const getRecommendedResourcesByInterests = async () => {
-			const recommendedResources: any[] = [];
-
-			/* si no tiene intereses, no devuelve nada */
-			if (!user.courseRecommendations || user.courseRecommendations.length === 0) {
-				return recommendedResources;
-			}
-
-			/* si tiene intereses, devuelve los recursos recomendados. Para esto vamos a usar la API de CMS */
-			/* solo necesito 4 cursos, asi que si tiene mas de 4 intereses, usar los primeros 4 */
-			for (const course of user.courseRecommendations) {
-				const resourceRes = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/product/${course}`, {
-					headers: { Accept: 'application/json' },
-					next: { revalidate: 3600 * 7 }, // Cache for 7 hours
-				});
-				const resourceData = await resourceRes.json();
-				
-				if(resourceData.id!=null){
-					recommendedResources.push(resourceData);
-				}
-			}
-			return recommendedResources;
-		};
+		const customerData: CustomerApiResponse = await customerRes.json();
 
 		const fetchCourseImage = async (courseName: string) => {
 			try {
-				// Use cache to reduce API calls
 				const imageRes = await fetch(
 					`https://cms1.msklatam.com/wp-json/msk/v1/course-image?name=${encodeURIComponent(courseName)}`,
 					{
@@ -185,13 +144,10 @@ export async function GET() {
 				);
 
 				if (!imageRes.ok) {
-					console.error(`Failed to fetch image for course: ${courseName}`);
+					console.error(`Failed to fetch image for course: ${courseName}, status: ${imageRes.status}`);
 					return null;
 				}
-
-				// Parse the response and clean the URL
 				const imageData = await imageRes.text();
-				// Remove the surrounding quotes that are coming in the response
 				return imageData.trim().replace(/^"|"$/g, '');
 			} catch (error) {
 				console.error(`Error fetching image for course: ${courseName}`, error);
@@ -199,45 +155,193 @@ export async function GET() {
 			}
 		};
 
+		const calculateProfileCompletion = (
+			userProf: string | null | undefined,
+			userSpec: string | null | undefined,
+			userCountry: string | null | undefined,
+			userPhone: string | null | undefined,
+			apiInterests: CustomerApiResponse['interests'] | undefined,
+		) => {
+			let percentage = 25; // Base percentage for simple registration
+			if (userProf && userSpec && userCountry && userPhone) {
+				percentage += 25;
+			}
+
+			const hasInterests =
+				apiInterests &&
+				(apiInterests.specialty_interests?.length ||
+					apiInterests.content_interests?.length ||
+					apiInterests.other_interests?.length);
+			if (hasInterests) {
+				percentage += 25;
+			}
+			return percentage;
+		};
+
+		const getCurrentCourse = async (rawCourseProgress: CourseProgress[] | undefined): Promise<CurrentCourseType | null> => {
+			if (!rawCourseProgress || rawCourseProgress.length === 0) {
+				return null;
+			}
+
+			const activeProgressList = rawCourseProgress.filter(
+				(course: CourseProgress) => course.end_date === null && course.enroll_status === 'Activo',
+			);
+
+			if (activeProgressList.length === 0) {
+				return null;
+			}
+
+			const latestCourseProgress =
+				activeProgressList.length === 1
+					? activeProgressList[0]
+					: activeProgressList.reduce((latest: CourseProgress, current: CourseProgress) => {
+							const latestDate = latest.last_session_date ? new Date(latest.last_session_date).getTime() : 0;
+							const currentDate = current.last_session_date ? new Date(current.last_session_date).getTime() : 0;
+							return currentDate > latestDate ? current : latest;
+					  });
+
+			if (!latestCourseProgress) {
+				// Should be unreachable if activeProgressList has items
+				return null;
+			}
+
+			try {
+				const courseCmsRes = await fetch(
+					`https://cms1.msklatam.com/wp-json/msk/v1/products?search=${encodeURIComponent(latestCourseProgress.course_name)}`,
+					{
+						headers: { Accept: 'application/json' },
+						next: { revalidate: 3600 * 7 },
+					},
+				);
+
+				if (!courseCmsRes.ok) {
+					console.error(`CMS fetch failed for current course ${latestCourseProgress.course_name}: ${courseCmsRes.status}`);
+					return null;
+				}
+				const courseCmsData = await courseCmsRes.json();
+
+				if (!courseCmsData || !courseCmsData.data || courseCmsData.data.length === 0) {
+					console.warn(`No CMS data found for current course: ${latestCourseProgress.course_name}`);
+					return null;
+				}
+
+				const cmsCourseDetail = courseCmsData.data[0];
+
+				return {
+					product_code: latestCourseProgress.product_code,
+					product_code_cedente: latestCourseProgress.transferor_course_code,
+					id: cmsCourseDetail?.id, // CMS ID
+					image: cmsCourseDetail?.featured_images,
+					title: cmsCourseDetail?.title || latestCourseProgress.course_name,
+					crm_id: latestCourseProgress.product_code, // Using product_code as CRM identifier for the course
+					completed_percentage: parseFloat(latestCourseProgress.advance?.replace(',', '.')) || 0,
+					resource: cmsCourseDetail?.resource,
+				};
+			} catch (cmsError) {
+				console.error(`Error fetching CMS details for current course ${latestCourseProgress.course_name}:`, cmsError);
+				return null;
+			}
+		};
+
+		// This function is kept for structure but will return empty as `courseRecommendations` source is removed.
+		const getRecommendedResourcesByInterests = async (
+			_courseRecommendations: string[], // This will be an empty array
+		): Promise<any[]> => {
+			return [];
+		};
+
 		// Process courses in parallel and wait for all to complete
-		user.coursesInProgress = await Promise.all(
-			user.coursesInProgress.map(async (course: any) => {
-				if (course.Nombre_de_curso && course.Nombre_de_curso.name) {
-					course.image = await fetchCourseImage(course.Nombre_de_curso.name);
-				} else {
-					course.image = null;
+		const processedCoursesInProgress = await Promise.all(
+			(customerData.course_progress || []).map(async (cp: CourseProgress) => {
+				const advanceNumeric = parseFloat(cp.advance?.replace(',', '.')) || 0;
+				let statusText = cp.enroll_status;
+				if (cp.enroll_status === 'Activo') {
+					statusText = `${advanceNumeric}% completado`;
 				}
 
-				const courseToEnroll = profileCourses.find((profCourse: any) => profCourse?.entity_id_crm == course.id) || null;
-
-				course.product_code = courseToEnroll?.Product_Code || null;
-				course.product_code_cedente = courseToEnroll?.C_digo_de_Curso_Cedente || null;
-				course.id = course.Nombre_de_curso.id;
-				course.status = course.Estado_cursada === 'Finalizado' ? 'finished' : 'progress';
-				course.title = course.Nombre_de_curso.name;
-				course.expiryDate = course?.Fecha_de_expiraci_n || course?.Fecha_limite_de_Enrolamiento;
-				course.qualification = course.Nota_final;
-				course.statusType = course.Estado_cursada;
-				course.statusText = course.Estado_cursada;
-
-				if (course.Estado_cursada === 'Activo') {
-					course.statusText = `${parseInt(course.Avance?.toString()?.replace(',', '.')) || 0}% completado`;
-				}
-
-				return course; // Return the modified course object for Promise.all
+				return {
+					image: await fetchCourseImage(cp.course_name),
+					product_code: cp.product_code,
+					product_code_cedente: cp.transferor_course_code,
+					id: cp.entity_id_crm, // Using the CRM ID of the progress record itself
+					status: cp.end_date != null || cp.enroll_status === 'Finalizado' ? 'finished' : 'progress',
+					title: cp.course_name,
+					expiryDate: cp.expiration_date || cp.deadline_enroll,
+					qualification: cp.score,
+					statusType: cp.enroll_status,
+					statusText: statusText,
+					// Keep original data if frontend needs it, or for debugging
+					_original_advance: cp.advance,
+					_original_entity_id_crm: cp.entity_id_crm,
+					_original_enroll_status: cp.enroll_status,
+					_original_last_session_date: cp.last_session_date,
+					_original_end_date: cp.end_date,
+				};
 			}),
 		);
 
-		user.profileCompletion.percentage = calculateProfileCompletion();
-		user.currentCourse = await getCurrentCourse();
-		user.recommendedResourcesByIA = await getRecommendedResourcesByInterests();
+		const currentCourseData = await getCurrentCourse(customerData.course_progress);
+		const recommendedResourcesData = await getRecommendedResourcesByInterests([]); // Will be empty
+
+		let combinedInterests: string[] = [];
+		if (customerData.interests) {
+			if (customerData.interests.specialty_interests) {
+				combinedInterests = combinedInterests.concat(
+					customerData.interests.specialty_interests.filter((i) => i !== null) as string[],
+				);
+			}
+			if (customerData.interests.content_interests) {
+				combinedInterests = combinedInterests.concat(
+					customerData.interests.content_interests.filter((i) => i !== null) as string[],
+				);
+			}
+			if (customerData.interests.other_interests) {
+				combinedInterests = combinedInterests.concat(
+					customerData.interests.other_interests.filter((i) => i !== null) as string[],
+				);
+			}
+		}
+
+		const user = {
+			profileCompletion: {
+				percentage: calculateProfileCompletion(
+					customerData.profession,
+					customerData.speciality,
+					customerData.country,
+					customerData.phone,
+					customerData.interests,
+				),
+				message: '¿Por qué completar tu perfil?',
+				ctaText: 'Entérate aquí',
+				ctaLink: '/dashboard/profile',
+			},
+			profileImage: profileImage || null,
+			name: customerData.name,
+			lastName: customerData.last_name,
+			profession: customerData.profession,
+			speciality: customerData.speciality,
+			email: customerData.email, // Using email from the new API as authoritative
+			country: customerData.country,
+			phone: customerData.phone,
+			contracts: customerData.contracts || [],
+			coursesInProgress: processedCoursesInProgress,
+			asosiacion: null, // Data for 'asosiacion' (e.g., Colegio_Sociedad_o_Federaci_n) not in new API
+			placeOfWork: null, // Data for 'placeOfWork' (e.g., Lugar_de_trabajo) not in new API
+			intereses: combinedInterests,
+			interesesAdicionales: null, // Data not available in new API
+			currentCourse: currentCourseData,
+			recommendedResourcesByIA: recommendedResourcesData,
+			crm_id: customerData.entity_id_crm, // Main CRM ID for the contact
+			courseRecommendations: [], // Source (Recomendador_web) not in new API
+		};
+
 		return NextResponse.json({ user });
 	} catch (error) {
-		console.error(error);
-		/* clear cookies */
+		console.error('Error in profile GET route:', error);
+		// Ensure cookies are cleared on unhandled errors during profile fetch process as well
 		cookies().delete('access_token');
 		cookies().delete('email');
 		cookies().delete('picture');
-		return NextResponse.json({ user: null }, { status: 500 });
+		return NextResponse.json({ user: null, error: error instanceof Error ? error.message : String(error) }, { status: 500 });
 	}
 }
