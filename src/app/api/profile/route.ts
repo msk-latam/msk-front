@@ -37,7 +37,7 @@ export async function GET() {
 
 		const profileData = await profileRes.json();
 
-		const entityIdCrm = profileData?.entity_id_crm;
+		const entityIdCrm = profileData.entity_id_crm;
 
 		// Segundo fetch: contacto extendido
 		const contactoRes = await fetch(`https://api.msklatam.net/getContactoByID?id=${entityIdCrm}`, {
