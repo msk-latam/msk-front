@@ -39,10 +39,10 @@ export async function getProductMetadata(lang: string, slug: string): Promise<Me
 	const baseUrl = getBaseUrlFromHost(host);
 	const isProd = baseUrl.includes('.com');
 
-	const canonical = `${baseUrl}${lang === 'ar' ? '' : `/${lang}`}/tienda/${slug}`;
+	const canonical = `${baseUrl}${lang === 'ar' ? '' : `/${lang}`}/curso//${slug}`;
 
 	const hreflangs = Object.fromEntries(
-		Object.keys(countries).map((code) => [`es-${code}`, `${baseUrl}${code === 'ar' ? '' : `/${code}`}/tienda/${slug}`]),
+		Object.keys(countries).map((code) => [`es-${code}`, `${baseUrl}${code === 'ar' ? '' : `/${code}`}/curso/${slug}`]),
 	);
 
 	return {
