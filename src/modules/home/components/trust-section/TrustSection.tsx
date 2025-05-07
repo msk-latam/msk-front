@@ -79,7 +79,7 @@ const TrustSection = () => {
 	};
 
 	return (
-		<div className='relative w-full bg-gray-100 pt-24 pb-60 h-[1200px] md:h-[750px] z-9 md:px-4'>
+		<div className='relative w-full bg-gray-100 pt-24 md:h-[750px] z-9 md:px-4'>
 			<section className='relative bg-white rounded-[38px] md:p-[72px] md:px-[104px] translate-y-[20px] -mt-40 mb-16 z-9 py-10 pl-5 md:overflow-visible max-w-[1600px] mx-auto shadow-lg md:min-h-[500px] md:max-h-[750px] overflow-hidden'>
 				<h2 className='text-center pr-5 md:pr-0 md:text-left text-2xl md:text-[34px] mb-4'>{title}</h2>
 				<p className='text-center pr-5 md:pr-0 md:text-left text-sm font-inter text-neutral-600 mb-10'>{subtitle}</p>
