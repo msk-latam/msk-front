@@ -84,9 +84,9 @@ const Ofertas = () => {
 	const [firstTitlePart, secondTitlePart] = getSplitTitle();
 
 	return (
-		<section className='relative w-full md:h-[993px] md:px-4 mt-[120px] min-h-screen flex items-end md:items-center justify-center text-white font-raleway'>
+		<section className='relative w-full md:h-[993px] md:px-4 md:mt-[120px] min-h-screen flex items-end md:items-center justify-center md:translate-y-5  -translate-y-24 text-white font-raleway'>
 			{/* Imagen de fondo Mobile */}
-			<div className='absolute inset-0 z-0 block lg:hidden translate-y-[80px]'>
+			<div className='absolute inset-0 z-0 block lg:hidden '>
 				<Image
 					src={offer.background_image?.[0]}
 					alt='Oferta Salud Mobile'
