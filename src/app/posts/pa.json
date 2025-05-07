@@ -7,6 +7,130 @@
 	"total_products": 261,
 	"posts": [
 		{
+			"id": 340023,
+			"title": "Disertaciones MSK: entre el conocimiento y la práctica médica",
+			"slug": "disertaciones-msk-para-la-practica-medica",
+			"permalink": "https://wp.msklatam.com/nota/e-learning/disertaciones-msk-para-la-practica-medica/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-disertaciones-msk-para-la-practica-medica-scaled-e1744837642339.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-disertaciones-msk-para-la-practica-medica-scaled-e1744837642339.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "A través de una serie de disertaciones presenciales en instituciones de salud, la Dra. Alma Medrano, directora médica de MSK, promueve espacios de educación médica continua. En esta entrevista, comparte los objetivos, el impacto institucional y el rol estratégico de quienes impulsan la capacitación en sus equipos de salud.",
+			"date": "Mayo 6, 2025",
+			"author": {
+				"id": 273557,
+				"name": "Gonzalo Busquets",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2024/01/foto-cv-blurred.png"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 273557,
+					"name": "Gonzalo Busquets",
+					"description": "Periodista. Especialista en comunicación regional para el segmento e-learning y salud.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2024/01/foto-cv-blurred.png"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 339149,
+					"title": "Cómo elige aprender hoy el personal de salud",
+					"slug": "como-aprende-el-personal-de-salud",
+					"link": "https://wp.msklatam.com/nota/e-learning/como-aprende-el-personal-de-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-como-aprende-el-personal-de-salud-scaled-e1744319158197.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 341126,
+					"title": "Por qué la salud laboral es una deuda estructural en la región",
+					"slug": "salud-laboral-una-deuda-estructural",
+					"link": "https://wp.msklatam.com/nota/medicina/salud-laboral-una-deuda-estructural/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-salud-laboral-una-deuda-estructural-scaled-e1745600725761.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 340935,
+					"title": "Precisión, prevención y desafíos en medicina genómica",
+					"slug": "medicina-genomica-precision-y-desafios",
+					"link": "https://wp.msklatam.com/nota/medicina/medicina-genomica-precision-y-desafios/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-medicina-genomica-precision-y-desafios-scaled-e1745500047106.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 340790,
+					"title": "Capacitación y especialización continua: la nueva ruta profesional",
+					"slug": "capacitacion-y-especializacion-continua-en-salud",
+					"link": "https://wp.msklatam.com/nota/e-learning/capacitacion-y-especializacion-continua-en-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-capacitacion-y-especializacion-continua-en-salud-1-scaled-e1745441536261.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 339497,
+					"title": "Terapias que están cambiando el tratamiento de la hemofilia",
+					"slug": "terapias-que-cambian-el-tratamiento-de-la-hemofilia",
+					"link": "https://wp.msklatam.com/nota/medicina/terapias-que-cambian-el-tratamiento-de-la-hemofilia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-terapias-que-cambian-el-tratamiento-de-la-hemofilia-scaled-e1744642655103.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"categories": [
+				{
+					"id": 59968,
+					"primary": true,
+					"name": "E-Learning",
+					"slug": "e-learning",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/e-learning/"
+				},
+				{
+					"id": 1544,
+					"name": "Entrevistas",
+					"slug": "entrevistas",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/entrevistas/"
+				}
+			],
+			"primary_category": "59968",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1360,
+				"filter": "raw"
+			},
+			"reading_time": "5",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
 			"id": 339149,
 			"title": "Cómo elige aprender hoy el personal de salud",
 			"slug": "como-aprende-el-personal-de-salud",
