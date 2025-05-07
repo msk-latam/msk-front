@@ -17,6 +17,7 @@ function enforceUserCountryPrefix(request: NextRequest) {
 	return null;
 }
 let needsProfileCompletionBoolean: boolean | null = null;
+let redirectToDashboard: boolean | null = null;
 
 export function middleware(request: NextRequest) {
 	const cookieStore = cookies();
@@ -25,6 +26,19 @@ export function middleware(request: NextRequest) {
 		if (cookieStore.get('needsProfileCompletion')?.value != null) {
 			needsProfileCompletionBoolean = cookieStore.get('needsProfileCompletion')?.value === 'true';
 		}
+	}
+
+	if (redirectToDashboard === null) {
+		if (cookieStore.get('redirectToDashboard')?.value != null) {
+			redirectToDashboard = cookieStore.get('redirectToDashboard')?.value === 'true';
+		}
+	}
+
+	if (redirectToDashboard) {
+		redirectToDashboard = false;
+		return NextResponse.redirect(new URL('/dashboard', request.url));
+	} else {
+		redirectToDashboard = null;
 	}
 
 	if (needsProfileCompletionBoolean) {

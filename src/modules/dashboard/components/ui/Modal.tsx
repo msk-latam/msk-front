@@ -4,7 +4,7 @@ interface ModalProps {
 	isOpen: boolean;
 	onClose: () => void;
 	children: React.ReactNode;
-	size?: 'small' | 'medium' | 'large';
+	size?: 'small' | 'medium' | 'large' | 'x-large';
 	title?: string;
 }
 
@@ -41,6 +41,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, size = 'medium
 		small: 'max-w-md',
 		medium: 'max-w-2xl',
 		large: 'max-w-4xl',
+		'x-large': 'max-w-6xl',
 	};
 
 	return (

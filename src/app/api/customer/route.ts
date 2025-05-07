@@ -5,11 +5,12 @@ interface UpdateCustomerPayload {
 	document_type?: string;
 	identification?: string;
 	company_name?: string;
-	name?: string;
-	surname?: string;
+	first_name?: string;
+	last_name?: string;
 	country?: string;
 	gender?: string;
 	password?: string;
+	career?: string;
 	phone?: string;
 	profession?: string;
 	specialty?: string;
@@ -23,13 +24,17 @@ interface UpdateCustomerPayload {
 	billing_email?: string;
 	billing_phone?: string;
 	tax_regime?: string;
+	interests?: {
+		specialty_interests: string[] | null;
+		content_interests: string[] | null;
+		other_interests: string[] | null;
+	};
 }
 
 export async function PUT(request: NextRequest) {
-	const token = cookies().get('access_token')?.value;
 	const email = cookies().get('email')?.value;
 
-	if (!token || !email) {
+	if (!email) {
 		console.log('No token or email provided for customer update.');
 		cookies().delete('access_token');
 		cookies().delete('email');
@@ -46,10 +51,12 @@ export async function PUT(request: NextRequest) {
 	}
 
 	try {
+		console.log('email', email);
+		console.log('requestBody', requestBody);
+
 		const apiResponse = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/customer/${email}`, {
 			method: 'PUT',
 			headers: {
-				Authorization: `Bearer ${token}`,
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
 			},

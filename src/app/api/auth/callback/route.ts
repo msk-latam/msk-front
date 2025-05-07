@@ -22,6 +22,26 @@ const afterCallback = async (req: NextRequest, session: Session) => {
 
 		if (!response.ok) {
 			console.error('Failed to fetch token from backend:', response.status, await response.text());
+			cookieStore.set('first_name', session.user.given_name, {
+				path: '/',
+				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
+				sameSite: 'lax',
+			});
+			cookieStore.set('last_name', session.user.family_name, {
+				path: '/',
+				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
+				sameSite: 'lax',
+			});
+			cookieStore.set('email', session.user.email, {
+				path: '/',
+				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
+				sameSite: 'lax',
+			});
+			cookieStore.set('picture', session.user.picture, {
+				path: '/',
+				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
+				sameSite: 'lax',
+			});
 			cookieStore.set('needsProfileCompletion', 'true', {
 				path: '/',
 				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
@@ -51,6 +71,11 @@ const afterCallback = async (req: NextRequest, session: Session) => {
 			cookieStore.set('picture', session.user?.picture, {
 				path: '/',
 				expires: expiresDate,
+				sameSite: 'lax',
+			});
+			cookieStore.set('redirectToDashboard', 'true', {
+				path: '/',
+				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
 				sameSite: 'lax',
 			});
 

@@ -128,8 +128,8 @@ export default function DashboardPage() {
 
 		// Map formDataFromModal to UpdateCustomerPayload
 		const payload: UpdateCustomerPayload = {
-			name: formDataFromModal.name,
-			surname: formDataFromModal.lastName,
+			first_name: formDataFromModal.name,
+			last_name: formDataFromModal.lastName,
 			country: formDataFromModal.country,
 			phone: formDataFromModal.fullPhoneNumber || formDataFromModal.phone,
 			profession: formDataFromModal.profession,

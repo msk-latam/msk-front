@@ -68,62 +68,63 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 	// --- Conditional Rendering for No Courses ---
 	if (!courseData || courseData.length === 0) {
 		return (
-			<div className='bg-white rounded-[30px] p-[36px] mt-5 flex  gap-8 items-center'>
-				{/* Left Side: Text and Button */}
-				<div className='flex flex-col gap-4 max-w-[500px]'>
-					<h2 className='font-raleway text-[34px] font-medium leading-tight text-[#1A1A1A]'>
-						Arma tu plan de aprendizaje gratuito
-					</h2>
-					<p className='text-[##6E737C] font-inter text-base font-normal'>
-						Capacítate a tu manera y toma el control de tu desarrollo académico
-					</p>
-					<button className='bg-[#f3f4f6] text-[#989CA4] px-6 py-3 rounded-full font-inter font-medium text-sm hover:bg-[#e2e3e5] transition self-start'>
-						Descubrir plan de aprendizaje
-					</button>
-				</div>
+			<></>
+			// <div className='bg-white rounded-[30px] p-[36px] mt-5 flex  gap-8 items-center'>
+			// 	{/* Left Side: Text and Button */}
+			// 	<div className='flex flex-col gap-4 max-w-[500px]'>
+			// 		<h2 className='font-raleway text-[34px] font-medium leading-tight text-[#1A1A1A]'>
+			// 			Arma tu plan de aprendizaje gratuito
+			// 		</h2>
+			// 		<p className='text-[##6E737C] font-inter text-base font-normal'>
+			// 			Capacítate a tu manera y toma el control de tu desarrollo académico
+			// 		</p>
+			// 		<button className='bg-[#f3f4f6] text-[#989CA4] px-6 py-3 rounded-full font-inter font-medium text-sm hover:bg-[#e2e3e5] transition self-start'>
+			// 			Descubrir plan de aprendizaje
+			// 		</button>
+			// 	</div>
 
-				{/* Right Side: Plan Selection */}
-				<div className='bg-[#F7F8FC] rounded-[20px] p-6 flex flex-col gap-4 w-full'>
-					<h3 className='text-[#1A1A1A] font-raleway font-semibold text-xl text-center'>
-						¿Qué plan quieres llevar adelante?
-					</h3>
-					<div className='flex flex-col md:flex-row gap-4 justify-center items-center w-full'>
-						{/* Plan Option: Tranquilo */}
-						<button
-							className={`flex flex-col items-center gap-2 p-6 rounded-[38px] border ${
-								selectedPlan === 'Tranquilo' ? 'border-[#93A6E0] bg-[#DFE6FF]' : 'border-[#DBDDE2] bg-white'
-							} hover:border-[#93A6E0] transition w-full`}
-							onClick={() => setSelectedPlan('Tranquilo')}
-						>
-							<LightningIcon />
-							<span className='font-inter font-semibold text-[#1A1A1A]'>Tranquilo</span>
-							<span className='font-inter text-sm text-[#4F5D89]'>30 minutos semanales</span>
-						</button>
-						{/* Plan Option: Regular */}
-						<button
-							className={`flex flex-col items-center gap-2 p-6 rounded-[38px] border ${
-								selectedPlan === 'Regular' ? 'border-[#93A6E0] bg-[#DFE6FF]' : 'border-[#DBDDE2] bg-white'
-							} hover:border-[#93A6E0] transition w-full`}
-							onClick={() => setSelectedPlan('Regular')}
-						>
-							<LightningFastIcon />
-							<span className='font-inter font-semibold text-[#1A1A1A]'>Regular</span>
-							<span className='font-inter text-sm text-[#4F5D89]'>60 minutos semanales</span>
-						</button>
-						{/* Plan Option: Intensivo */}
-						<button
-							className={`flex flex-col items-center gap-2 p-6 rounded-[38px] border ${
-								selectedPlan === 'Intensivo' ? 'border-[#93A6E0] bg-[#DFE6FF]' : 'border-[#DBDDE2] bg-white'
-							} hover:border-[#93A6E0] transition w-full`}
-							onClick={() => setSelectedPlan('Intensivo')}
-						>
-							<RocketIcon />
-							<span className='font-inter font-semibold text-[#1A1A1A]'>Intensivo</span>
-							<span className='font-inter text-sm text-[#4F5D89]'>+120 minutos semanales</span>
-						</button>
-					</div>
-				</div>
-			</div>
+			// 	{/* Right Side: Plan Selection */}
+			// 	<div className='bg-[#F7F8FC] rounded-[20px] p-6 flex flex-col gap-4 w-full'>
+			// 		<h3 className='text-[#1A1A1A] font-raleway font-semibold text-xl text-center'>
+			// 			¿Qué plan quieres llevar adelante?
+			// 		</h3>
+			// 		<div className='flex flex-col md:flex-row gap-4 justify-center items-center w-full'>
+			// 			{/* Plan Option: Tranquilo */}
+			// 			<button
+			// 				className={`flex flex-col items-center gap-2 p-6 rounded-[38px] border ${
+			// 					selectedPlan === 'Tranquilo' ? 'border-[#93A6E0] bg-[#DFE6FF]' : 'border-[#DBDDE2] bg-white'
+			// 				} hover:border-[#93A6E0] transition w-full`}
+			// 				onClick={() => setSelectedPlan('Tranquilo')}
+			// 			>
+			// 				<LightningIcon />
+			// 				<span className='font-inter font-semibold text-[#1A1A1A]'>Tranquilo</span>
+			// 				<span className='font-inter text-sm text-[#4F5D89]'>30 minutos semanales</span>
+			// 			</button>
+			// 			{/* Plan Option: Regular */}
+			// 			<button
+			// 				className={`flex flex-col items-center gap-2 p-6 rounded-[38px] border ${
+			// 					selectedPlan === 'Regular' ? 'border-[#93A6E0] bg-[#DFE6FF]' : 'border-[#DBDDE2] bg-white'
+			// 				} hover:border-[#93A6E0] transition w-full`}
+			// 				onClick={() => setSelectedPlan('Regular')}
+			// 			>
+			// 				<LightningFastIcon />
+			// 				<span className='font-inter font-semibold text-[#1A1A1A]'>Regular</span>
+			// 				<span className='font-inter text-sm text-[#4F5D89]'>60 minutos semanales</span>
+			// 			</button>
+			// 			{/* Plan Option: Intensivo */}
+			// 			<button
+			// 				className={`flex flex-col items-center gap-2 p-6 rounded-[38px] border ${
+			// 					selectedPlan === 'Intensivo' ? 'border-[#93A6E0] bg-[#DFE6FF]' : 'border-[#DBDDE2] bg-white'
+			// 				} hover:border-[#93A6E0] transition w-full`}
+			// 				onClick={() => setSelectedPlan('Intensivo')}
+			// 			>
+			// 				<RocketIcon />
+			// 				<span className='font-inter font-semibold text-[#1A1A1A]'>Intensivo</span>
+			// 				<span className='font-inter text-sm text-[#4F5D89]'>+120 minutos semanales</span>
+			// 			</button>
+			// 		</div>
+			// 	</div>
+			// </div>
 		);
 	}
 

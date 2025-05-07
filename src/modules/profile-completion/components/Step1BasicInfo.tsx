@@ -5,6 +5,7 @@ import { professions } from '@/data/professions';
 import { specialtiesGroup } from '@/data/specialties';
 import { years } from '@/data/years';
 import Input from '@/modules/dashboard/components/ui/Input';
+import PhoneInputWithCode from '@/modules/dashboard/components/ui/PhoneInputWithCode';
 import Select from '@/modules/dashboard/components/ui/Select';
 import { useState } from 'react';
 import ProgressIndicator from './ProgressIndicator';
@@ -12,7 +13,9 @@ import ProgressIndicator from './ProgressIndicator';
 interface Step1BasicInfoProps {
 	data: {
 		profession?: string;
+		otherProfession?: string;
 		specialty?: string;
+		otherSpecialty?: string;
 		country?: string;
 		phone?: string;
 		year?: string;
@@ -26,12 +29,13 @@ interface Step1BasicInfoProps {
 
 export default function Step1BasicInfo({ data, onNext, onSkip, onBack, onUpdate }: Step1BasicInfoProps) {
 	const [profession, setProfession] = useState(data.profession || '');
-	const [otherProfession, setOtherProfession] = useState('');
+	const [otherProfession, setOtherProfession] = useState(data.otherProfession || '');
 	const [specialty, setSpecialty] = useState(data.specialty || '');
 	const [country, setCountry] = useState(data.country || '');
 	const [phone, setPhone] = useState(data.phone || '');
 	const [year, setYear] = useState(data.year || '');
 	const [career, setCareer] = useState(data.career || '');
+	const [otherSpecialty, setOtherSpecialty] = useState(data.otherSpecialty || '');
 
 	const professionId = professions.find((p) => p.name === profession)?.id;
 
@@ -125,53 +129,58 @@ export default function Step1BasicInfo({ data, onNext, onSkip, onBack, onUpdate 
 					placeholder='Seleccionar especialidad'
 				/>
 
+				{/* si selecciona "otra especialidad" */}
+				{specialty === 'Otra Especialidad' && (
+					<Input
+						id='specialty'
+						type='text'
+						name='specialty'
+						value={otherSpecialty || ''}
+						onChange={(e) => setOtherSpecialty(e.target.value)}
+						placeholder='Ingresar especialidad'
+						required
+						autoComplete='specialty'
+					/>
+				)}
 				{/* País */}
 				<Select
 					id='country'
 					label='País'
 					name='country'
-					options={countries.map((p) => ({ label: p.name, value: p.id }))}
+					options={countries.map((p) => ({ label: p.name, value: p.name }))}
 					placeholder='Seleccionar país'
 					value={country}
 					onChange={(e) => setCountry(e.target.value)}
 				/>
 
 				{/* Teléfono */}
-				{/* <PhoneInputWithCode
+				<PhoneInputWithCode
 					id='phone'
 					label='Teléfono'
 					// Use fullPhoneNumber which holds the combined value
 					value={phone}
 					defaultCode={'+54'}
-					onChange={(e) => setPhone(e.target.value)} // Use the new handler
+					onChange={(value) => setPhone(value)} // Correctly use the direct string value
 					required
-				/> */}
-				{/* <div>
-					<label className='block text-sm font-medium text-[#1A1A1A] text-left mb-1'>Teléfono</label>
-					<div className='flex gap-2 border rounded-2xl border-[#DBDDE2] px-3 py-2 focus-within:ring-4 focus-within:ring-[#F5E6F7]'>
-						<select
-							className='border-0 bg-transparent focus:ring-0 focus:outline-none text-[#1A1A1A] w-24'
-							defaultValue='+54'
-						>
-							<option value='+54'>+54</option>
-							<option value='+52'>+52</option>
-							<option value='+57'>+57</option>
-						</select>
-						<input
-							type='tel'
-							placeholder='Ingresar teléfono'
-							value={phone}
-							onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
-							className='flex-1 bg-transparent border-0 focus:ring-0 focus:outline-none text-[#6E737C]'
-						/>
-					</div>
-				</div> */}
+				/>
 
 				{/* CTA: Siguiente */}
 				<button
 					type='button'
 					disabled={!isValid}
-					onClick={onNext}
+					onClick={() => {
+						onUpdate({
+							profession,
+							otherProfession,
+							specialty,
+							otherSpecialty,
+							country,
+							phone,
+							year,
+							career,
+						});
+						onNext();
+					}}
 					className={`w-full text-white py-3 px-4 rounded-[38px] font-inter font-medium transition ${
 						isValid ? 'bg-[#9200AD] hover:bg-[#700084]' : 'bg-[#989CA4] cursor-not-allowed'
 					}`}

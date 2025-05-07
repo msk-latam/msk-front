@@ -105,6 +105,9 @@ export async function GET() {
 	const email = cookies().get('email')?.value;
 	const profileImage = cookies().get('picture')?.value;
 
+	/* remove redirectToDashboard cookie */
+	cookies().delete('redirectToDashboard');
+
 	if (!token || !email) {
 		console.log('No token or email');
 		cookies().delete('access_token');
