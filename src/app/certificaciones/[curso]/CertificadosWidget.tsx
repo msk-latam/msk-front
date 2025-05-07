@@ -33,9 +33,10 @@ const detectCountry = (title: string, description: string): string => {
 interface CertificadosWidgetProps {
 	product: FetchSingleProduct;
 	country: string;
+	allProducts?: any;
 }
 
-const CertificadosWidget: React.FC<CertificadosWidgetProps> = ({ product, country }) => {
+const CertificadosWidget: React.FC<CertificadosWidgetProps> = ({ product, country, allProducts }) => {
 	// Agrupar los avales por país
 	const groupedByCountry = product.avales.reduce<Record<string, typeof product.avales>>((acc, aval) => {
 		const country = detectCountry(decodeHtmlEntities(aval.title), decodeHtmlEntities(aval.description));
@@ -54,38 +55,12 @@ const CertificadosWidget: React.FC<CertificadosWidgetProps> = ({ product, countr
 			avales: avales.sort((a, b) => decodeHtmlEntities(a.title).localeCompare(decodeHtmlEntities(b.title))),
 		}));
 
-	const courses = localStorage.getItem('all-courses');
-	if (!courses) {
-		// console.log('No hay cursos en el localStorage');
-		return; // Salir si no hay datos
-	}
-
-	let parsedCourses;
-	try {
-		// Parsear el string de courses
-		const parsedData = JSON.parse(courses);
-		// console.log(parsedData);
-
-		// Verificar que existe la clave 'value' y que es un array
-		if (!parsedData.value || !Array.isArray(parsedData.value)) {
-			// console.log('No se encontraron cursos en la clave "value" o no es un array', parsedData);
-			return; // Salir si no se encuentra el array en 'value'
-		}
-
-		parsedCourses = parsedData.value;
-		// console.log(parsedCourses);
-	} catch (error) {
-		console.error('Error al parsear los cursos:', error);
-		return; // Salir si no se puede parsear
-	}
-
-	// Filtrar los cursos donde father_post_type no sea "downloadable"
-	const filteredCourses = parsedCourses.filter(
-		(course: any) =>
-			course.father_post_type !== 'downloadable' && course.regular_price !== '0' && course.cantidad_modulos !== 0,
-	);
-
-	// console.log(filteredCourses);
+	const filteredCourses =
+		allProducts &&
+		allProducts.products.filter(
+			(course: any) =>
+				course.father_post_type !== 'downloadable' && course.regular_price !== '0' && course.cantidad_modulos !== 0,
+		);
 
 	const linksCursos = filteredCourses.map((course: any) => `https://msklatam.com/curso/${course.slug}`);
 	const precioCursos = filteredCourses.map((course: any) => `Precio Total ${course.regular_price}`);
@@ -163,7 +138,7 @@ const CertificadosWidget: React.FC<CertificadosWidgetProps> = ({ product, countr
 				{sortedCountries.map(({ country, avales }) => (
 					<div key={country} className='py-4'>
 						<h2 className='font-bold text-lg text-[#6474A6] !font-inter'>{country.toUpperCase()}</h2>
-						<ul className='list-disc ml-6'>
+						<ul className='ml-6 list-disc'>
 							{avales.map((aval) => (
 								<li key={aval.id} className='py-2'>
 									<h3 className='font-semibold !font-inter text-[#575757] text-base'>{decodeHtmlEntities(aval.title)}</h3>
