@@ -194,22 +194,23 @@ export interface Institution {
 
 // Offers SECTION
 
+// Offers SECTION
+
 export interface OfferCTA {
 	title: string;
 	url: string;
 	target: string;
 }
 
-export interface OfferData {
-	background_image: string[];
-	pre_text: string;
-	title: string;
-	content: string;
-	pre_cta_content: string;
-	cta: {
-		title: string;
-		url: string;
-	};
+export interface PromoData {
+	[x: string]: any;
+	background_image: string; // Ya no es un array, es un solo string
+	disponibilidad: string;
+	titulo: string;
+	contenido: string;
+	numero_de_porcentaje: string;
+	texto_descuento: string;
+	cta: OfferCTA;
 }
 
 export interface Mention {

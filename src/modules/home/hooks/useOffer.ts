@@ -1,27 +1,26 @@
-
-import { useEffect, useState } from "react";
-import { getHomeData } from "../service/home.service";  // Asegúrate que esta ruta sea correcta
-import { OfferData } from "../types";
+import { useEffect, useState } from 'react';
+import { PromoData } from '../types';
 
 export const useOffers = () => {
-  const [data, setData] = useState<OfferData | null>(null);
-  const [loading, setLoading] = useState(true);
+	const [data, setData] = useState<PromoData | null>(null);
+	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    // Llamamos al servicio para obtener los datos del blog
-    getHomeData()
-    .then((homeData) => {
-      // courseData es todo el objeto del curso
-      const offerData: OfferData = homeData.sections.offers;
-      setData(offerData);
-    })
-    .catch((err) => {
-      console.error(err);
-      setError(err.message || "Error fetching offer data");
-    })
-    .finally(() => setLoading(false));
-  }, []);
-  
-  return { data, loading, error };
-}
+	useEffect(() => {
+		const fetchOffers = async () => {
+			try {
+				const res = await fetch('https://cms1.msklatam.com/wp-json/msk/v1/promos');
+				if (!res.ok) throw new Error(`Error al obtener promociones: ${res.statusText}`);
+				const json: PromoData = await res.json();
+				setData(json);
+			} catch (err: any) {
+				setError(err.message);
+			} finally {
+				setLoading(false);
+			}
+		};
+		fetchOffers();
+	}, []);
+
+	return { data, loading, error };
+};

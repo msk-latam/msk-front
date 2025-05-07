@@ -132,6 +132,11 @@ export function middleware(request: NextRequest) {
 	if (!supportedLanguages.includes(firstSegment)) {
 		return NextResponse.rewrite(new URL(`/ar${pathname}`, request.url));
 	}
+	// 🚀 **Regla Nueva:** Si es Argentina y estamos en `/dashboard`, eliminar ese prefijo
+	if (country === 'ar' && pathname.startsWith('/dashboard')) {
+		const newUrl = new URL(`${origin}${pathname.replace('/dashboard', '')}`);
+		return NextResponse.redirect(newUrl);
+	}
 
 	return NextResponse.next();
 }
