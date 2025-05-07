@@ -4,7 +4,7 @@ import React from 'react';
 // Extends standard HTML input attributes
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	id: string; // Make id required for label association
-	label: string;
+	label?: string;
 	// Add any other custom props if needed, e.g., error messages
 	error?: string;
 }
@@ -26,9 +26,11 @@ const Input: React.FC<InputProps> = ({
 
 	return (
 		<div className='w-full'>
-			<label htmlFor={id} className='block text-sm font-medium text-[#1a1a1a] mb-1.5'>
-				{label}
-			</label>
+			{label && (
+				<label htmlFor={id} className='block text-sm font-medium text-[#1a1a1a] mb-1.5'>
+					{label}
+				</label>
+			)}
 			<input
 				type={type}
 				id={id}

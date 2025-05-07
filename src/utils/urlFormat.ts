@@ -27,7 +27,7 @@ export function urlFormat(inputUrl: any) {
 		const parsed = new URL(inputUrl);
 		urlPath = parsed.pathname;
 	} catch (e) {
-		urlPath = inputUrl.startsWith('/') ? inputUrl : `/${inputUrl}`;
+		urlPath = inputUrl?.startsWith('/') ? inputUrl : `/${inputUrl}`;
 	}
 
 	const finalUrl = new URL(urlPath.replace(/^\/+/, ''), baseUrl);
