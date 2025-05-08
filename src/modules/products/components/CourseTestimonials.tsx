@@ -2,12 +2,18 @@
 
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useRef } from 'react';
-import { useTrustSection } from '../../home/hooks/useTrustSection';
+import { useCourseReviews } from '../hooks/useCourseReviews';
+import { ReviewItem } from '../types/types';
 import GradientBackground from './GradientBackground';
 
-export default function CourseTestimonials() {
+interface CourseTestimonialsProps {
+	slug: string;
+	lang: string;
+}
+
+export default function CourseTestimonials({ slug, lang }: CourseTestimonialsProps) {
 	const carouselRef = useRef<HTMLDivElement>(null);
-	const { data, loading, error } = useTrustSection();
+	const { data, loading, error } = useCourseReviews(slug, lang);
 
 	const scroll = (direction: 'left' | 'right') => {
 		if (carouselRef.current) {
@@ -21,8 +27,6 @@ export default function CourseTestimonials() {
 
 	if (loading) return <div className='text-white text-center py-16'>Cargando testimonios...</div>;
 	if (error || !data) return <div className='text-white text-center py-16'>Error cargando los datos</div>;
-
-	const { title, subtitle, figures, reviews } = data;
 
 	return (
 		<GradientBackground>
@@ -38,7 +42,7 @@ export default function CourseTestimonials() {
 
 					<div className='flex justify-start items-center gap-2 md:mb-32 mb-8'>
 						<div className='flex -space-x-2'>
-							{reviews.slice(0, 4).map((t, i) => (
+							{data?.slice(0, 3).map((t: ReviewItem, i: number) => (
 								<img
 									key={i}
 									src={t.picture}
@@ -61,7 +65,7 @@ export default function CourseTestimonials() {
 						ref={carouselRef}
 						className='flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory px-1 md:px-0 scrollbar-hide'
 					>
-						{reviews.map((t, idx) => (
+						{data?.map((t: ReviewItem, idx: number) => (
 							<div
 								key={idx}
 								className='min-w-[85%] sm:min-w-[45%] md:min-w-[30%] snap-start

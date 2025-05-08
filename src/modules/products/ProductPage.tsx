@@ -180,9 +180,9 @@ export default function ProductPageComponent({ course, lang }: ProductPageCompon
 
 					{/* Testimonios */}
 					<div className='w-full z-[5]'>
-						<CourseTestimonials />
+						<CourseTestimonials slug={slug} lang={lang} />
 					</div>
-					<Inscription slug={slug} lang={lang}  />
+					<Inscription slug={slug} lang={lang} />
 				</main>
 
 				<Footer />
