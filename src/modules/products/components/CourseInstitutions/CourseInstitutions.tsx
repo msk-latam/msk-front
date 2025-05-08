@@ -1,8 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { useCourseInstitutions } from '../hooks/useCourseInstitutions';
-import SkeletonCourseInstitutions from '../skeletons/SkeletonCourseInstitutions'; // Importa el Skeleton
+import { useCourseInstitutions } from '../../hooks/useCourseInstitutions';
+import SkeletonCourseInstitutions from '../../skeletons/SkeletonCourseInstitutions'; // Importa el Skeleton
 import InfoIcon from './InfoIcon';
 
 interface CourseInstitutionProps {
