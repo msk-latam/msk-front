@@ -9,6 +9,7 @@ import { countries } from "@/data/countries";
 import { professions } from "@/data/professions";
 import { specialtiesGroup } from "@/data/specialties";
 import { years } from "@/data/years";
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 interface Specialty {
   id: number;
@@ -34,6 +35,8 @@ export default function DownloadSyllabusModal({
     );
     return countryCode ? getName(countryCode) ?? "" : "";
   };
+  
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [profession, setProfession] = useState("");
   const [specialty, setSpecialty] = useState("");
   const [career, setCareer] = useState("");
@@ -149,106 +152,87 @@ export default function DownloadSyllabusModal({
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    setStatus("loading");
-    setErrorMessage("");
-
-    const { name, lastName, email, phone, areaCode, message, acceptTerms } =
-      formData;
-    if (!name.trim() || !email.trim()) {
-      setStatus("error");
-      setErrorMessage("Por favor, completá tu nombre y correo electrónico.");
-      return;
-    }
-    if (!acceptTerms) {
-      setStatus("error");
-      setErrorMessage("Debes aceptar las condiciones de privacidad.");
-      return;
-    }
-
-    const body = {
-      First_Name: name,
-      Last_Name: lastName,
-      Email: email,
-      Phone: `${areaCode}${phone}`,
-      Description: message,
-      Profesion: profession,
-      Especialidad: specialty,
-      Otra_profesion:
-        profession === "Otra Profesión" ? formData.profession : "",
-      Otra_especialidad:
-        specialty === "Otra Especialidad" ? formData.speciality : "",
-      Pais: countryName, // ← ahora sí
-      Terms_And_Conditions: true,
-      URL_ORIGEN: window.location.href,
-      Cursos_consultados: slug,
-      leadSource: "Descarga de temario",
-    };
-
-    try {
-      const response = await fetch(
-        `${
-          process.env.NEXT_PUBLIC_URL || process.env.NEXT_PUBLIC_PUBLIC_URL
-        }/api/crm/CreateLeadHomeContactUs`,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        }
-      );
-
-      const result = await response.json();
-
-      if (
-        !response.ok ||
-        !Array.isArray(result.data) ||
-        result.data[0]?.code !== "SUCCESS"
-      ) {
-        setStatus("error");
-        setErrorMessage(
-          "No se pudo completar el registro. Intenta nuevamente."
-        );
-        return;
-      }
-
-      // ✅ Si se registró el lead correctamente, descargar el PDF
-      const pdfResponse = await fetch(fileUrl);
-      if (!pdfResponse.ok) throw new Error("No se pudo descargar el archivo.");
-
-      const blob = await pdfResponse.blob();
-      const blobUrl = window.URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = blobUrl;
-      link.download = `${slug}.pdf`;
-      document.body.appendChild(link);
-      link.click();
-      setStatus("success");
-      setErrorMessage("");
-
-      // Esperar 2 segundos para que el usuario vea el mensaje
-      setTimeout(() => {
-        const link = document.createElement("a");
-        link.href = blobUrl;
-        link.download = `${slug}.pdf`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(blobUrl);
-        onClose();
-      }, 2000);
-    } catch (error) {
-      console.error("Error general:", error);
-      setStatus("error");
-      setErrorMessage(
-        "Hubo un problema al procesar tu solicitud. Intenta nuevamente."
-      );
-    }
+	e.preventDefault();
+  
+	setStatus("loading");
+	setErrorMessage("");
+  
+	const utmState = {
+	  utm_source: sessionStorage.getItem('utm_source') || '',
+	  utm_medium: sessionStorage.getItem('utm_medium') || '',
+	  utm_campaign: sessionStorage.getItem('utm_campaign') || '',
+	  utm_content: sessionStorage.getItem('utm_content') || '',
+	};
+  
+	if (!executeRecaptcha) {
+	  console.error("reCAPTCHA no está disponible.");
+	  setStatus("error");
+	  setErrorMessage("Error al validar reCAPTCHA. Intenta nuevamente.");
+	  return;
+	}
+  
+	const recaptchaToken = await executeRecaptcha('syllabus_form');
+  
+	if (!recaptchaToken) {
+	  console.error("reCAPTCHA no se pudo inicializar correctamente.");
+	  setStatus("error");
+	  setErrorMessage("Error al validar reCAPTCHA. Intenta nuevamente.");
+	  return;
+	}
+  
+	const body = {
+	  First_Name: formData.name,
+	  Last_Name: formData.lastName,
+	  Email: formData.email,
+	  Phone: `${formData.areaCode}${formData.phone}`,
+	  Description: formData.message,
+	  Profesion: profession,
+	  Especialidad: specialty,
+	  Otra_profesion: profession === "Otra Profesión" ? otherProfession : "",
+	  Otra_especialidad: specialty === "Otra Especialidad" ? otherSpecialty : "",
+	  Pais: getCountryNameByCode(formData.areaCode),
+	  Terms_And_Conditions: formData.acceptTerms,
+	  URL_ORIGEN: window.location.href,
+	  Cursos_consultados: slug,
+	  leadSource: "Descarga de temario",
+	  recaptcha_token: recaptchaToken,
+	  utm_source: utmState.utm_source,
+	  utm_medium: utmState.utm_medium,
+	  utm_campaign: utmState.utm_campaign,
+	  utm_content: utmState.utm_content
+	};
+  
+	try {
+	  const response = await fetch(
+		`${process.env.NEXT_PUBLIC_URL || process.env.NEXT_PUBLIC_PUBLIC_URL}/api/crm/CreateLeadHomeContactUs`,
+		{
+		  method: "POST",
+		  headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		  },
+		  body: JSON.stringify(body),
+		}
+	  );
+  
+	  const result = await response.json();
+  
+	  if (!response.ok || !Array.isArray(result.data) || result.data[0]?.code !== "SUCCESS") {
+		setStatus("error");
+		setErrorMessage("No se pudo completar el registro. Intenta nuevamente.");
+		return;
+	  }
+  
+	  setStatus("success");
+	  setErrorMessage("");
+  
+	} catch (error) {
+	  console.error("Error general:", error);
+	  setStatus("error");
+	  setErrorMessage("Hubo un problema al procesar tu solicitud. Intenta nuevamente.");
+	}
   };
-
+  
   return (
     <div
       className="fixed inset-0 bg-black/50 flex items-center justify-center z-[99] px-4 !mt-0"
