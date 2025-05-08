@@ -225,24 +225,34 @@ export async function GET() {
 		};
 
 		const calculateProfileCompletion = (
-			userProf: string | null | undefined,
-			userSpec: string | null | undefined,
-			userCountry: string | null | undefined,
-			userPhone: string | null | undefined,
+			profession: string | null | undefined,
+			specialty: string | null | undefined,
+			country: string | null | undefined,
+			phone: string | null | undefined,
+			workplace: string | null | undefined,
+			workArea: string | null | undefined,
 			apiInterests: CustomerApiResponse['interests'] | undefined,
 		) => {
 			let percentage = 25; // Base percentage for simple registration
-			if (userProf && userSpec && userCountry && userPhone) {
-				percentage += 25;
-			}
 
-			const hasInterests =
-				apiInterests &&
-				(apiInterests.specialty_interests?.length ||
-					apiInterests.content_interests?.length ||
-					apiInterests.other_interests?.length);
-			if (hasInterests) {
-				percentage += 25;
+			// Rule 2: Profession, specialty, country, and phone completed
+			if (profession && specialty && country && phone) {
+				percentage = 50;
+
+				// Rule 3: Institution (workplace) and work area completed (cumulative)
+				if (workplace && workArea) {
+					percentage = 75;
+
+					// Rule 4: Interests completed (cumulative)
+					const hasInterests =
+						apiInterests &&
+						(apiInterests.specialty_interests?.length ||
+							apiInterests.content_interests?.length ||
+							apiInterests.other_interests?.length);
+					if (hasInterests) {
+						percentage = 100;
+					}
+				}
 			}
 			return percentage;
 		};
@@ -378,6 +388,8 @@ export async function GET() {
 					customerData.specialty,
 					customerData.country,
 					customerData.phone,
+					customerData.workplace,
+					customerData.work_area,
 					customerData.interests,
 				),
 
