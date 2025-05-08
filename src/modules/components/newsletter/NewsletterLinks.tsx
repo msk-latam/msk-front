@@ -23,13 +23,13 @@ const NewsletterLinks = () => {
   const buildCourseLink = (path: string) => `${buildDomain()}/${lang}${path}`;
 
   return (
-    <div className="w-full overflow-visible max-w-[1600px] mx-auto md:px-4 py-10 px-5 md:px-0 md:py-16 text-white font-inter translate-x-[-10px] ">
+    <div className="w-full overflow-visible max-w-[1600px] mx-auto md:px-4 py-10 px-5 md:py-16 text-white font-inter translate-x-[-10px] ">
       <div className="w-full overflow-visible max-w-[1600px] mx-auto md:px-4 grid grid-cols-1 md:grid-cols-4 gap-y-10 md:gap-x-6 text-[14px] ">
 
         {/* Columna 1 */}
         <div className="max-w-[250px]">
           <h4 className="text-[18px] font-bold mb-4">Cursos más elegidos</h4>
-          <ul className="space-y-4 md:font-normal font-[8px] md:whitespace-nowrap opacity-80">
+          <ul className="space-y-4 md:font-normal font-[8px] opacity-80">
             {
               data?.sections?.cursos_mas_elegidos.map((s)=>{
                   return <li><a href={urlFormat(s.url)} className="hover:underline">{s.title}</a></li>
