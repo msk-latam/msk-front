@@ -18,9 +18,11 @@ interface Specialty {
 
 interface NewsLetterFormProps {
   onClose: () => void;
+  initialEmail: string;
 }
 
-export default function NewsLetterForm({ onClose }: NewsLetterFormProps) {
+export default function NewsLetterForm({ onClose, initialEmail }: NewsLetterFormProps) {
+
   const modalRef = useRef<HTMLDivElement | null>(null);
   const { executeRecaptcha } = useGoogleReCaptcha();
 
@@ -34,7 +36,7 @@ export default function NewsLetterForm({ onClose }: NewsLetterFormProps) {
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
-    email: "",
+    email: initialEmail || "",
     phone: "",
     areaCode: "+54",
     profession: "",
@@ -42,7 +44,9 @@ export default function NewsLetterForm({ onClose }: NewsLetterFormProps) {
     message: "",
     acceptTerms: false,
   });
-  
+  useEffect(() => {
+    setFormData((prev) => ({ ...prev, email: initialEmail }));
+  }, [initialEmail]);
   const [otherProfession, setOtherProfession] = useState<string>("");
 	const [otherSpecialty, setOtherSpecialty] = useState<string>("");
   const [filteredSpecialties, setFilteredSpecialties] = useState<
