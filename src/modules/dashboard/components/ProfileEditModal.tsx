@@ -3,6 +3,7 @@ import { countries } from '@/data/countries';
 import { professions } from '@/data/professions';
 import { specialtiesGroup } from '@/data/specialties';
 import { years } from '@/data/years';
+import { documents } from '@/data/documents';
 import Modal from '@/modules/dashboard/components/ui/Modal';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -84,95 +85,95 @@ const medicalCollegeOptions = [
 	{ value: 'no', label: 'No' },
 ];
 
-const documentsByCountry: any = {
-	ar: [
-		{ value: 'DNI', label: 'DNI' },
-		{ value: 'CUIT', label: 'CUIT' },
-		{ value: 'CUIL', label: 'CUIL' },
-		{ value: 'CDI', label: 'CDI' },
-		{ value: 'LE', label: 'Libreta de enrolamiento' },
-		{ value: 'LC', label: 'Libreta cívica' },
-		{ value: 'Pasaporte', label: 'Pasaporte' },
-	],
-	bo: [
-		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
-		{ value: 'Pasaporte', label: 'Pasaporte' },
-	],
-	cl: [
-		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
-		{ value: 'RUT', label: 'RUT' },
-		{ value: 'Pasaporte', label: 'Pasaporte' },
-	],
-	co: [
-		{ value: 'Cédula de ciudadanía', label: 'Cédula de ciudadanía' },
-		{ value: 'Cédula de extranjero', label: 'Cédula de extranjero' },
-		{ value: 'NIT', label: 'NIT' },
-		{ value: 'Pasaporte', label: 'Pasaporte' },
-	],
-	cr: [
-		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
-		{ value: 'Pasaporte', label: 'Pasaporte' },
-	],
-	ec: [
-		{ value: '04 - RUC', label: 'RUC' },
-		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
-		{ value: '06 - PASAPORTE', label: 'Pasaporte' },
-	],
-	sv: [
-		{ value: 'DUI', label: 'DUI' },
-		{ value: 'Pasaporte', label: 'Pasaporte' },
-	],
-	es: [
-		{ value: 'DNI', label: 'DNI' },
-		{ value: 'Pasaporte', label: 'Pasaporte' },
-		{ value: 'TIE', label: 'TIE' },
-		{ value: 'NIE', label: 'NIE' },
-	],
-	gt: [
-		{ value: 'DNI', label: 'DNI' },
-		{ value: 'Pasaporte', label: 'Pasaporte' },
-	],
-	hn: [
-		{ value: 'DNI', label: 'DNI' },
-		{ value: 'Pasaporte', label: 'Pasaporte' },
-	],
-	mx: [
-		{ value: 'RFC', label: 'RFC' },
-		{ value: 'Pasaporte', label: 'Pasaporte' },
-	],
-	ni: [
-		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
-		{ value: 'Pasaporte', label: 'Pasaporte' },
-	],
-	pa: [
-		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
-		{ value: 'Pasaporte', label: 'Pasaporte' },
-	],
-	py: [
-		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
-		{ value: 'Pasaporte', label: 'Pasaporte' },
-	],
-	pe: [
-		{ value: 'DNI', label: 'DNI' },
-		{ value: 'Pasaporte', label: 'Pasaporte' },
-		{ value: 'Cédula de extranjero', label: 'Cédula de extranjero' },
-		{ value: 'CURP', label: 'CURP' },
-		{ value: 'RUC', label: 'RUC' },
-	],
-	do: [
-		{ value: 'DNI', label: 'DNI' },
-		{ value: 'Pasaporte', label: 'Pasaporte' },
-	],
-	uy: [
-		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
-		{ value: 'Pasaporte', label: 'Pasaporte' },
-		{ value: 'RUT', label: 'RUT' },
-	],
-	ve: [
-		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
-		{ value: 'Pasaporte', label: 'Pasaporte' },
-	],
-};
+// const documentsByCountry: any = {
+// 	ar: [
+// 		{ value: 'DNI', label: 'DNI' },
+// 		{ value: 'CUIT', label: 'CUIT' },
+// 		{ value: 'CUIL', label: 'CUIL' },
+// 		{ value: 'CDI', label: 'CDI' },
+// 		{ value: 'LE', label: 'Libreta de enrolamiento' },
+// 		{ value: 'LC', label: 'Libreta cívica' },
+// 		{ value: 'Pasaporte', label: 'Pasaporte' },
+// 	],
+// 	bo: [
+// 		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
+// 		{ value: 'Pasaporte', label: 'Pasaporte' },
+// 	],
+// 	cl: [
+// 		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
+// 		{ value: 'RUT', label: 'RUT' },
+// 		{ value: 'Pasaporte', label: 'Pasaporte' },
+// 	],
+// 	co: [
+// 		{ value: 'Cédula de ciudadanía', label: 'Cédula de ciudadanía' },
+// 		{ value: 'Cédula de extranjero', label: 'Cédula de extranjero' },
+// 		{ value: 'NIT', label: 'NIT' },
+// 		{ value: 'Pasaporte', label: 'Pasaporte' },
+// 	],
+// 	cr: [
+// 		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
+// 		{ value: 'Pasaporte', label: 'Pasaporte' },
+// 	],
+// 	ec: [
+// 		{ value: '04 - RUC', label: 'RUC' },
+// 		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
+// 		{ value: '06 - PASAPORTE', label: 'Pasaporte' },
+// 	],
+// 	sv: [
+// 		{ value: 'DUI', label: 'DUI' },
+// 		{ value: 'Pasaporte', label: 'Pasaporte' },
+// 	],
+// 	es: [
+// 		{ value: 'DNI', label: 'DNI' },
+// 		{ value: 'Pasaporte', label: 'Pasaporte' },
+// 		{ value: 'TIE', label: 'TIE' },
+// 		{ value: 'NIE', label: 'NIE' },
+// 	],
+// 	gt: [
+// 		{ value: 'DNI', label: 'DNI' },
+// 		{ value: 'Pasaporte', label: 'Pasaporte' },
+// 	],
+// 	hn: [
+// 		{ value: 'DNI', label: 'DNI' },
+// 		{ value: 'Pasaporte', label: 'Pasaporte' },
+// 	],
+// 	mx: [
+// 		{ value: 'RFC', label: 'RFC' },
+// 		{ value: 'Pasaporte', label: 'Pasaporte' },
+// 	],
+// 	ni: [
+// 		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
+// 		{ value: 'Pasaporte', label: 'Pasaporte' },
+// 	],
+// 	pa: [
+// 		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
+// 		{ value: 'Pasaporte', label: 'Pasaporte' },
+// 	],
+// 	py: [
+// 		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
+// 		{ value: 'Pasaporte', label: 'Pasaporte' },
+// 	],
+// 	pe: [
+// 		{ value: 'DNI', label: 'DNI' },
+// 		{ value: 'Pasaporte', label: 'Pasaporte' },
+// 		{ value: 'Cédula de extranjero', label: 'Cédula de extranjero' },
+// 		{ value: 'CURP', label: 'CURP' },
+// 		{ value: 'RUC', label: 'RUC' },
+// 	],
+// 	do: [
+// 		{ value: 'DNI', label: 'DNI' },
+// 		{ value: 'Pasaporte', label: 'Pasaporte' },
+// 	],
+// 	uy: [
+// 		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
+// 		{ value: 'Pasaporte', label: 'Pasaporte' },
+// 		{ value: 'RUT', label: 'RUT' },
+// 	],
+// 	ve: [
+// 		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
+// 		{ value: 'Pasaporte', label: 'Pasaporte' },
+// 	],
+// };
 
 const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 	isOpen,
@@ -267,7 +268,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 
 	const selectedCountryObject = countries.find((c) => c.name === formData.country);
 	const selectedCountryCode = selectedCountryObject ? selectedCountryObject.id.toLowerCase() : undefined;
-	const documentTypes = selectedCountryCode ? documentsByCountry[selectedCountryCode] || [] : [];
+	const documentTypes = selectedCountryCode ? documents[selectedCountryCode] || [] : [];
 
 	const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const { name, value } = e.target;
@@ -458,6 +459,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 							{formData.profession === 'Otra profesión' && (
 								<Input
 									id='profession'
+								label='Profesión'
 									type='text'
 									name='otherProfession'
 									value={formData.otherProfession || ''}
@@ -506,6 +508,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 							{formData.speciality === 'Otra Especialidad' && (
 								<Input
 									id='specialty'
+								label='Especialidad'
 									type='text'
 									name='otherSpecialty'
 									value={formData.otherSpecialty || ''}

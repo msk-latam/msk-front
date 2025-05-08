@@ -154,11 +154,11 @@ const PhoneInputWithCode: React.FC<PhoneInputWithCodeProps> = ({
 	const currentSelectValue = countryOptions.find((option) => option.value === internalCode);
 
 	return (
-		<div className='grid grid-cols-[auto_1fr] items-end'>
 			<div className='flex flex-col '>
 				<label htmlFor={`${id}-code`} className='block text-sm font-medium text-[#1a1a1a] mb-1.5'>
 					{label}
 				</label>
+		<div className='flex flex-row items-end'>
 				<SelectAsReactSelect
 					{...({} as SelectProps<CountryOptionType, false>)}
 					id={`${id}-code`}
@@ -211,7 +211,6 @@ const PhoneInputWithCode: React.FC<PhoneInputWithCodeProps> = ({
 					}}
 					classNamePrefix='react-select'
 				/>
-			</div>
 			<Input
 				id={id}
 				label=' '
@@ -224,6 +223,7 @@ const PhoneInputWithCode: React.FC<PhoneInputWithCodeProps> = ({
 				required={required}
 				className='mb-0 border-l-0 rounded-l-none w-full'
 			/>
+			</div>
 		</div>
 	);
 };
