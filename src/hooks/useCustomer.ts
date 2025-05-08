@@ -2,9 +2,7 @@ import { useState } from 'react';
 
 // Export this interface
 export interface UpdateCustomerPayload {
-	document_type?: string;
 	identification?: string;
-	company_name?: string;
 	first_name?: string;
 	last_name?: string;
 	country?: string;
@@ -15,14 +13,16 @@ export interface UpdateCustomerPayload {
 	profession?: string;
 	specialty?: string;
 	workplace?: string;
+	work_area?: string;
 	school_associate?: boolean;
 	school_name?: string;
 	canton_place?: string;
 	parish_place?: string;
 	income_source?: string;
-	invoice_required?: boolean;
+	company_name?: string;
 	billing_email?: string;
 	billing_phone?: string;
+	invoice_required?: number;
 	tax_regime?: string;
 	interests?: {
 		specialty_interests: string[] | null;
@@ -81,19 +81,35 @@ export function useCustomer(action: 'update' | 'create' = 'update'): UseCustomer
 			}
 
 			/* Save interest  in api/interests */
-			const interestsResponse = await fetch('/api/interests', {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(payload.interests),
-			});
+			if (payload.interests && Object.keys(payload.interests).length > 0) {
+				const interestsResponse = await fetch('/api/interests', {
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(payload.interests),
+				});
 
-			const interestsResponseData = await interestsResponse.json();
+				// Check if the response from /api/interests is OK before trying to parse JSON
+				if (!interestsResponse.ok) {
+					let errorMessage = `Failed to update interests: ${interestsResponse.status}`;
+					try {
+						const errorData = await interestsResponse.json();
+						errorMessage = errorData.message || errorMessage;
+					} catch (e) {
+						// If parsing error data fails, use the status text or default message
+						errorMessage = interestsResponse.statusText || errorMessage;
+					}
+					throw new Error(errorMessage);
+				}
 
-			if (!interestsResponse.ok) {
-				const errorMessage = interestsResponseData.message || `Failed to update interests: ${interestsResponse.status}`;
-				throw new Error(errorMessage);
+				// Only parse JSON if the response was ok and content is expected
+				if (interestsResponse.headers.get('Content-Length') !== '0') {
+					const interestsResponseData = await interestsResponse.json();
+					// Process interestsResponseData if needed, though it's not explicitly used later in this function
+				}
+			} else {
+				console.log('No interest data to update, skipping /api/interests call.');
 			}
 
 			setData(responseData);

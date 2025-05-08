@@ -134,16 +134,17 @@ export default function DashboardPage() {
 			phone: formDataFromModal.fullPhoneNumber || formDataFromModal.phone,
 			profession: formDataFromModal.profession,
 			specialty: formDataFromModal.speciality,
+			career: formDataFromModal.career,
 			workplace: formDataFromModal.workplace ?? undefined,
+			work_area: formDataFromModal.workArea ?? undefined,
 			school_associate: formDataFromModal.belongsToMedicalCollege ?? undefined,
 			school_name: formDataFromModal.medicalCollegeName ?? undefined,
-			document_type: formDataFromModal.documentType,
 			identification: formDataFromModal.documentNumber,
-			company_name: formDataFromModal.billingName,
+			company_name: formDataFromModal.company_name,
 			invoice_required:
-				formDataFromModal.requiresInvoice === 'yes' ? true : formDataFromModal.requiresInvoice === 'no' ? false : undefined,
+				formDataFromModal.requiresInvoice === 'yes' ? 1 : formDataFromModal.requiresInvoice === 'no' ? 0 : undefined,
 			billing_email: formDataFromModal.billingEmail,
-			billing_phone: formDataFromModal.billingPhone,
+			billing_phone: formDataFromModal.fullBillingPhoneNumber,
 		};
 
 		if (password) {

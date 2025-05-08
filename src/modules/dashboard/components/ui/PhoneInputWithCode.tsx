@@ -222,7 +222,7 @@ const PhoneInputWithCode: React.FC<PhoneInputWithCodeProps> = ({
 				placeholder='Ingresar teléfono'
 				autoComplete='tel-national'
 				required={required}
-				className='mb-0 border-l-0 rounded-l-none'
+				className='mb-0 border-l-0 rounded-l-none w-full'
 			/>
 		</div>
 	);

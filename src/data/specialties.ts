@@ -422,7 +422,7 @@ export const specialtiesGroup: Record<string, { id: number; name: string }[]> = 
 		},
 		{
 			id: 55,
-			name: 'Otra carrera o licenciatura',
+			name: 'Otra Especialidad',
 		},
 		{
 			id: 80,
@@ -544,7 +544,7 @@ export const specialtiesGroup: Record<string, { id: number; name: string }[]> = 
 		},
 		{
 			id: 44,
-			name: 'Otras especialidades',
+			name: 'Otra Especialidad',
 		},
 	],
 	'5': [
@@ -650,7 +650,7 @@ export const specialtiesGroup: Record<string, { id: number; name: string }[]> = 
 		},
 		{
 			id: 44,
-			name: 'Otras especialidades',
+			name: 'Otra Especialidad',
 		},
 	],
 	'6': [
@@ -744,7 +744,7 @@ export const specialtiesGroup: Record<string, { id: number; name: string }[]> = 
 		},
 		{
 			id: 5,
-			name: 'Otra',
+			name: 'Otra Especialidad',
 		},
 	],
 	'9': [

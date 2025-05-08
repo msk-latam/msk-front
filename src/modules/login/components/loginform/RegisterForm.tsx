@@ -188,23 +188,6 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 						required
 					/>
 
-					{/* <div>
-						<label className='block text-sm font-medium text-[#1A1A1A] text-left mb-1'>Teléfono</label>
-						<div className='flex gap-2 border rounded-2xl border-[#DBDDE2] px-3 py-2 focus-within:ring-4 focus-within:ring-[#F5E6F7]'>
-							<div className='w-18'>
-								<CountrySelect onChange={(code) => setAreaCode(code)} />
-							</div>
-							<input
-								type='tel'
-								maxLength={20}
-								{...register('phone')}
-								placeholder='Ingresar teléfono'
-								className='flex-1 bg-transparent border-0 focus:ring-0 focus:outline-none text-[#6E737C]'
-							/>
-						</div>
-						{errors.phone && <p className='text-red-500 text-xs mt-1'>{errors.phone.message}</p>}
-					</div> */}
-
 					<div>
 						<label className='block text-sm font-medium text-[#1A1A1A] text-left'>Nombre/s</label>
 						<input

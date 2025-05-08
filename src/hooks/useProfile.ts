@@ -10,7 +10,7 @@ const fetcher = async (url: string) => {
 		const error = new Error(`An error occurred while fetching the data. Status: ${res.status}`);
 		// You could potentially still attach info if needed, but requires proper typing
 		// try { (error as any).info = await res.json(); } catch { (error as any).info = await res.text(); }
-		(error as any).status = res.status; // Use type assertion if needed, or omit
+		(error as any).status = res.status; // Use type assert|ion if needed, or omit
 		throw error;
 	}
 

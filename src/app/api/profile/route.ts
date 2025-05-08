@@ -16,10 +16,17 @@ interface CurrentCourseType {
 interface CustomerApiResponse {
 	id: number;
 	entity_id_crm: string;
+	school_name: string | null;
+	school_associate: boolean | null;
+	canton_place: string | null;
+	parish_place: string | null;
+	identification?: string;
 	first_name: string;
 	last_name: string;
 	profession: string | null;
 	specialty: string | null;
+	workplace: string | null;
+	work_area: string | null;
 	user_id: number;
 	fiscal_regime: string | null;
 	phone: string | null;
@@ -37,8 +44,11 @@ interface CustomerApiResponse {
 	state: string | null;
 	career: string | null;
 	year: string | null;
+	company_name: string | null;
 	type_doc: string | null;
-	identification: string | null;
+	billing_email: string | null;
+	billing_phone: string | null;
+	invoice_required: number | null;
 	interests: {
 		specialty_interests: string[] | null;
 		content_interests: string[] | null;
@@ -370,22 +380,35 @@ export async function GET() {
 					customerData.phone,
 					customerData.interests,
 				),
+
 				message: '¿Por qué completar tu perfil?',
 				ctaText: 'Entérate aquí',
 				ctaLink: '/dashboard/profile',
 			},
 			profileImage: profileImage || null,
+			identification: customerData.identification,
 			name: customerData.first_name,
 			lastName: customerData.last_name,
 			profession: customerData.profession,
 			speciality: customerData.specialty,
+			workplace: customerData.workplace,
+			workArea: customerData.work_area,
+			schoolName: customerData.school_name,
+			schoolAssociate: customerData.school_associate,
+			cantonPlace: customerData.canton_place,
+			parishPlace: customerData.parish_place,
 			email: customerData.email, // Using email from the new API as authoritative
 			country: customerData.country,
 			phone: customerData.phone,
 			contracts: customerData.contracts || [],
 			coursesInProgress: processedCoursesInProgress,
-			asosiacion: null, // Data for 'asosiacion' (e.g., Colegio_Sociedad_o_Federaci_n) not in new API
-			placeOfWork: null, // Data for 'placeOfWork' (e.g., Lugar_de_trabajo) not in new API
+			company_name: customerData.company_name,
+			documentType: customerData.type_doc,
+			documentNumber: customerData.identification,
+			taxRegime: customerData.fiscal_regime,
+			invoiceRequired: customerData.invoice_required,
+			billingEmail: customerData.billing_email,
+			billingPhone: customerData.billing_phone || '',
 			intereses: combinedInterests,
 			interesesAdicionales: null, // Data not available in new API
 			currentCourse: currentCourseData,
