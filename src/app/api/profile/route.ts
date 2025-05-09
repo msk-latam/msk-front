@@ -409,8 +409,7 @@ export async function GET(request: NextRequest) {
 			crm_id: customerData.entity_id_crm, // Main CRM ID for the contact
 			courseRecommendations: detailedRecommendedCourses, // Update with fetched detailed recommendations
 		};
-
-		// Helper to parse school_name
+		// Helper to parse school_name and name
 		let finalSchoolName = customerData.school_name;
 		if (
 			typeof customerData.school_name === 'string' &&
@@ -428,6 +427,11 @@ export async function GET(request: NextRequest) {
 			}
 		}
 		user.school_name = finalSchoolName;
+
+		// Remove brackets from name if present
+		if (typeof user.name === 'string' && user.name.includes('[') && user.name.includes(']')) {
+			user.name = user.name.replace(/[\[\]"]/g, '');
+		}
 
 		return NextResponse.json({ user });
 	} catch (error) {

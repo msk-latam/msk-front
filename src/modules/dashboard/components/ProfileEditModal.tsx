@@ -7,7 +7,6 @@ import { years } from '@/data/years';
 import Modal from '@/modules/dashboard/components/ui/Modal';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import FileInput from './ui/FileInput';
 import Input from './ui/Input';
 import PasswordInput from './ui/PasswordInput';
 import PhoneInputWithCode, { findCodePrefix } from './ui/PhoneInputWithCode';
@@ -546,7 +545,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 								placeholder='Seleccionar'
 							/>
 
-							<FileInput
+							{/* <FileInput
 								id='file'
 								label='Constancia de la situación fiscal'
 								name='file'
@@ -557,7 +556,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 										file,
 									}));
 								}}
-							/>
+							/> */}
 						</div>
 					</div>
 				</div>
