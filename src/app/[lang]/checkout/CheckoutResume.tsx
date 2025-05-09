@@ -3,6 +3,7 @@
 import React from 'react';
 import { useCheckout } from './CheckoutContext';
 import Cupon from './cupones/Cupon';
+import Certificaciones from './certificaciones/Certificaciones';
 interface CheckoutResumeProps {
 	product: any;
 	country: string;
@@ -10,7 +11,7 @@ interface CheckoutResumeProps {
 
 const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => {
 	const { ficha, total_price } = product;
-	const { paymentType, appliedCoupon, activeStep } = useCheckout();
+	const { paymentType, appliedCoupon, activeStep, certifications } = useCheckout();
 
 	const currencies: any = {
 		cl: 'CLP',
@@ -40,7 +41,9 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 	];
 
 	// Normaliza el número eliminando puntos y lo convierte a entero
-	const parseNumber = (value: string): number => parseInt(value.replace(/\./g, ''), 10);
+	const parseNumber = (value: string): number => {
+		return parseInt(value.replace(/\D/g, ''), 10);
+	};
 
 	// Formatea un número en el estilo de Estados Unidos
 	const formatNumber = (value: number): string =>
@@ -58,8 +61,9 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 		}).format(value);
 	};
 
-	// Procesa el precio total
-	const total = parseNumber(total_price);
+	const certificationsTotal = certifications.reduce((acc, cert) => acc + cert.price, 0);
+	console.log(certificationsTotal);
+	const total = parseNumber(total_price) + certificationsTotal;
 	const installmentValue = Math.floor(total / 12);
 	const discount =
 		appliedCoupon && appliedCoupon.discountType === 'percentage'
@@ -70,7 +74,84 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 
 	const totalWithDiscount = Math.max(total - discount, 0); // Asegura que no sea negativo
 
-	const installmentValueWithDiscount = totalWithDiscount / 12;
+	const installments: any = {
+		cl: {
+			gateway: 'REBILL',
+			quotes: 8,
+		},
+		ar: {
+			gateway: 'MP',
+			quotes: 6,
+		},
+		ec: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		es: {
+			gateway: 'REBILL',
+			quotes: null,
+		},
+		int: {
+			gateway: 'REBILL',
+			quotes: null,
+		},
+		ve: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		mx: {
+			gateway: 'REBILL',
+			quotes: 12,
+		},
+		bo: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		co: {
+			gateway: 'REBILL',
+			quotes: 12,
+		},
+		cr: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		sv: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		gt: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		hn: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		ni: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		pa: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		py: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		pe: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		uy: {
+			gateway: 'REBILL',
+			quotes: 12,
+		},
+	};
+
+	const installmentNumber = installments[country].quotes;
+	console.log(installmentNumber);
+	const installmentValueWithDiscount = totalWithDiscount / installmentNumber;
 
 	return (
 		<div className='p-5 mt-16 bg-white border border-gray-300 rounded-3xl'>
@@ -97,6 +178,7 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 					</div>
 				</div>
 			)}
+			<Certificaciones country={country} />
 
 			{activeStep <= 1 && <Cupon />}
 
@@ -107,7 +189,7 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 				<span className='text-3xl font-bold text-[#392C35]'>{`${currency} $${formatPesoArgentino(totalWithDiscount)}`}</span>
 
 				<p className='mt-2 text-sm text-[#6474A6]'>
-					{`12 pagos de `}
+					{`${installmentNumber} pagos de `}
 					<span className='font-bold'>{`${currency} $${formatPesoArgentino(installmentValueWithDiscount)}`}</span>
 				</p>
 			</div>

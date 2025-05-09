@@ -21,6 +21,11 @@ interface Coupon {
 	value: number;
 	expirationDate: string;
 }
+export interface Certification {
+	name: string;
+	price: number;
+	product_code: number;
+}
 
 interface CheckoutContextType {
 	activeStep: number;
@@ -39,6 +44,8 @@ interface CheckoutContextType {
 	setUser: (user: User | null) => void;
 	appliedCoupon: Coupon | null;
 	setAppliedCoupon: (coupon: Coupon | null) => void;
+	certifications: Certification[];
+	setCertifications: (certs: Certification[]) => void;
 	product?: any;
 	country?: any;
 }
@@ -58,6 +65,7 @@ export const CheckoutProvider: React.FC<{ children: ReactNode; product?: any; co
 	const [paymentStatus, setPaymentStatus] = useState<'approved' | 'pending' | 'rejected'>('pending');
 	const [user, setUser] = useState<User | null>(null);
 	const [appliedCoupon, setAppliedCoupon] = useState<Coupon | null>(null);
+	const [certifications, setCertifications] = useState<Certification[]>([]);
 	const router = useRouter();
 
 	const completeStep = (step: number) => {
@@ -93,6 +101,8 @@ export const CheckoutProvider: React.FC<{ children: ReactNode; product?: any; co
 				appliedCoupon,
 				setAppliedCoupon,
 				product,
+				certifications,
+				setCertifications,
 			}}
 		>
 			<RecoilRoot>{children}</RecoilRoot>

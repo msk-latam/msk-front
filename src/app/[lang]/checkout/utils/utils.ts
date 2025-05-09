@@ -1,3 +1,4 @@
+import { Certification } from '../CheckoutContext';
 import { ENDPOINT_CRM, ENDPOINT_GATEWAY } from '../rebill/rebillEndpoints';
 export const tokenGATEWAY = process.env.NEXT_PUBLIC_GATEWAY_BACKEND_TOKEN;
 export const tokenCRM = process.env.NEXT_PUBLIC_CRM_BACKEND_TOKEN;
@@ -223,28 +224,47 @@ export const createContractCRM = async (
 	currency: any,
 	countryCompleteName: any,
 	paymentType: 'rebill' | 'mercadopago' | 'stripe',
+	certification?: Certification[],
 ) => {
 	try {
-		const paymentConfig = paymentOptions[paymentType] || paymentOptions.mercadopago;
+		let paymentConfig = { ...(paymentOptions[paymentType] || paymentOptions.mercadopago) };
 
+		// Caso especial: Chile con Rebill (CLP)
+		if (paymentType === 'rebill' && currency === 'CLP') {
+			paymentConfig.totalPayments = 8;
+			paymentConfig.remainingPayments = 7;
+		}
+		const mainProduct = {
+			code: product.ficha.product_code,
+			quantity: 1,
+			price: transactionAmount,
+			total: transactionAmount,
+			net_total: transactionAmount,
+			total_after_discount: transactionAmount,
+			list_price: transactionAmount,
+		};
+
+		const certificationProducts =
+			certification?.map((cert) => ({
+				code: cert.product_code,
+				quantity: 1,
+				price: cert.price,
+				total: cert.price,
+				net_total: cert.price,
+				total_after_discount: cert.price,
+				list_price: cert.price,
+			})) || [];
+
+		const totalCertifications = certification?.reduce((acc, cert) => acc + cert.price, 0) || 0;
+		const total = transactionAmount + totalCertifications;
 		const contractData = {
 			customer_id,
-			products: [
-				{
-					code: product.ficha.product_code,
-					quantity: 1,
-					price: transactionAmount,
-					total: transactionAmount,
-					net_total: transactionAmount,
-					total_after_discount: transactionAmount,
-					list_price: transactionAmount,
-				},
-			],
+			products: [mainProduct, ...certificationProducts],
 			status: 'borrador',
 			currency,
 			country: countryCompleteName,
-			sub_total: transactionAmount,
-			grand_total: transactionAmount,
+			sub_total: total,
+			grand_total: total,
 			payment: paymentConfig.payment,
 			paymentMethod: paymentConfig.paymentMethod,
 			Modo_de_pago: paymentConfig.paymentMethod,
@@ -252,7 +272,7 @@ export const createContractCRM = async (
 			Fecha_de_primer_cobro: new Date().toISOString().split('T')[0],
 			Seleccione_total_de_pagos_recurrentes: paymentConfig.totalPayments.toString(),
 			Cantidad_de_pagos_recurrentes_restantes: paymentConfig.remainingPayments.toString(),
-			Monto_de_cada_pago_restantes: Math.ceil(transactionAmount / paymentConfig.totalPayments),
+			Monto_de_cada_pago_restantes: parseFloat((total / paymentConfig.totalPayments).toFixed(2)),
 			Canal_por_el_que_se_cerro_la_venta: 'Web',
 			channel_sale: 'Web',
 			Fuente_de_cierre_venta: 'Consulta directa',
@@ -281,15 +301,21 @@ export const updateContractCRM = async (
 	paymentType: 'rebill' | 'mercadopago' | 'stripe',
 	discount: any,
 	cuponCode?: any,
+	certification?: Certification[],
 ) => {
 	const paymentConfig = paymentOptions[paymentType] || paymentOptions.mercadopago;
+	const totalCertifications = certification?.reduce((acc, cert) => acc + cert.price, 0) || 0;
+	const total = transactionAmountWithDescount + totalCertifications;
+	console.log(transactionAmountWithDescount);
+	console.log(total);
+	console.log(parseFloat((total / paymentConfig.totalPayments).toFixed(2)));
 	try {
 		const contractData = {
 			status: 'Confirmado',
 			Estado_de_cobro: 'Activo',
 			stripe_subscription_id: subscription_id,
 			mp_subscription_id: subscription_id,
-			Monto_de_cada_pago_restantes: parseFloat((transactionAmountWithDescount / paymentConfig.totalPayments).toFixed(2)),
+			Monto_de_cada_pago_restantes: parseFloat((total / paymentConfig.totalPayments).toFixed(2)),
 			discount: discount,
 			Cup_n_aplicado: cuponCode,
 		};
@@ -315,8 +341,10 @@ export const createPaymentRebill = async (
 	currency: string,
 	cardId: string,
 	country: string | undefined,
+	certifications?: Certification[],
 ) => {
-	console.log(amount, 'desde utils');
+	const certificationsTotal = certifications?.reduce((sum, cert) => sum + cert.price, 0) || 0;
+	const finalAmount = amount + certificationsTotal;
 	try {
 		const response = await fetch(`${ENDPOINT_GATEWAY}/api/rebill/${country}/checkout/new`, {
 			method: 'POST',
@@ -327,7 +355,7 @@ export const createPaymentRebill = async (
 			body: JSON.stringify({
 				email,
 				contract_id: contractId,
-				amount: parseFloat((amount / 12).toFixed(2)),
+				amount: parseFloat((finalAmount / 12).toFixed(2)),
 				currency,
 				recurrence: 1,
 				card_id: cardId,
