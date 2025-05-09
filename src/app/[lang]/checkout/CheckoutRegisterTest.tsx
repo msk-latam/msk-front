@@ -24,7 +24,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 	const { state } = useContext(AuthContext);
 	const [rebillId, setRebillId] = useRecoilState(rebillIdState);
 
-	const { activeStep, setActiveStep, completeStep, setUser, user } = useCheckout();
+	const { activeStep, setActiveStep, completeStep, setUser, user, certifications } = useCheckout();
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
 	const [success, setSuccess] = useState(false);
@@ -192,6 +192,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 				currency,
 				countryCompleteName,
 				paymentProcessor,
+				certifications,
 			);
 			const contract_id = createContractResponse.data[0].details.id;
 

@@ -30,6 +30,7 @@ const CheckoutStripe = ({ product, country }: any) => {
 		setPaymentStatus,
 		isSubmitting,
 		appliedCoupon,
+		certifications,
 	} = useCheckout();
 	const currency = currencies[country] || 'USD';
 	const currentCountry = countryToName[country];
@@ -37,7 +38,12 @@ const CheckoutStripe = ({ product, country }: any) => {
 	const elements = useElements();
 	const [isLoading, setIsLoading] = useState(false);
 
-	const transactionAmount = Number(product.total_price.replace(/,/g, '').replace('.', ''));
+	const certificationsTotal = certifications?.reduce((sum, cert) => sum + cert.price, 0) || 0;
+
+	const productBaseAmount = Number(product.total_price.replace(/,/g, '').replace('.', ''));
+
+	// Monto total incluyendo certificaciones
+	const transactionAmount = productBaseAmount + certificationsTotal;
 
 	const discount =
 		appliedCoupon && appliedCoupon.discountType === 'percentage'
@@ -170,6 +176,7 @@ const CheckoutStripe = ({ product, country }: any) => {
 					'stripe',
 					discount,
 					appliedCoupon?.code ?? null,
+					certifications,
 				);
 
 				if (subStep === 0) {
