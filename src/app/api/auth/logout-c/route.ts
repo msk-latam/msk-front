@@ -8,6 +8,8 @@ export async function POST(request: NextRequest) {
 		cookieStore.delete('access_token');
 		cookieStore.delete('email');
 		cookieStore.delete('picture');
+		cookieStore.delete('first_name');
+		cookieStore.delete('last_name');
 
 		console.log('Access token cookie cleared');
 		return NextResponse.json({ message: 'Logout successful' });

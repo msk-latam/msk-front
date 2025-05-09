@@ -11,7 +11,13 @@ export async function GET(request: NextRequest) {
 		// Cookie encontrada
 		return NextResponse.json({ authenticated: true });
 	} else {
-		// Cookie no encontrada
+		/* clear cookies */
+		cookieStore.delete('access_token');
+		cookieStore.delete('email');
+		cookieStore.delete('picture');
+		cookieStore.delete('first_name');
+		cookieStore.delete('last_name');
+
 		return NextResponse.json({ authenticated: false });
 	}
 }

@@ -62,6 +62,14 @@ export function middleware(request: NextRequest) {
 		return NextResponse.redirect(new URL('/login', request.url));
 	}
 
+	// Redirect to dashboard if authenticated and trying to access login
+	if (isAuthenticated && pathname.includes('/login') && request.nextUrl.searchParams.get('form') !== 'change-pass') {
+		return NextResponse.redirect(new URL('/dashboard', request.url));
+	}
+	if (isAuthenticated && pathname.includes('/completar-perfil')) {
+		return NextResponse.redirect(new URL('/dashboard', request.url));
+	}
+
 	// 🚫 Allow change-pass login only
 	if (pathname.includes('/login') && request.nextUrl.searchParams.get('form') === 'change-pass') {
 		if (!pathname.startsWith('/ar/')) {
