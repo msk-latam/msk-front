@@ -25,13 +25,13 @@ export default function CourseTestimonials({ slug, lang }: CourseTestimonialsPro
 		}
 	};
 
-	if (loading) return <div className='text-white text-center py-16'>Cargando testimonios...</div>;
-	if (error || !data) return <div className='text-white text-center py-16'>Error cargando los datos</div>;
+	if (loading) return <div className='py-16 text-center text-white'>Cargando testimonios...</div>;
+	if (error || !data) return <div className='py-16 text-center text-white'>Error cargando los datos</div>;
 
 	return (
 		<GradientBackground>
-			<section className='text-white py-16 pl-6 pt-48 md:pt-60 flex md:block flex-col space-y-96 md:space-y-2'>
-				<div className='max-w-screen-xl mx-auto text-left pr-6 md:mb-0 '>
+			<section className='flex flex-col py-16 pt-48 pl-6 text-white md:pt-60 md:block space-y-96 md:space-y-2'>
+				<div className='max-w-screen-xl pr-6 mx-auto text-left md:mb-0 '>
 					<h2 className='text-[32px] md:text-[52px] font-raleway font-bold mb-4 leading-snug'>
 						Sé parte de nuestra comunidad <br className='hidden md:inline' />
 						de profesionales
@@ -40,19 +40,19 @@ export default function CourseTestimonials({ slug, lang }: CourseTestimonialsPro
 						¡La próxima historia de éxito puede ser tuya!
 					</p>
 
-					<div className='flex justify-start items-center gap-2 md:mb-32 mb-8'>
+					<div className='flex items-center justify-start gap-2 mb-8 md:mb-32'>
 						<div className='flex -space-x-2'>
 							{data?.slice(0, 3).map((t: ReviewItem, i: number) => (
 								<img
 									key={i}
 									src={t.picture}
 									alt={`User ${i}`}
-									className='w-8 h-8 rounded-full border-2 border-white object-cover'
+									className='object-cover w-8 h-8 border-2 border-white rounded-full'
 								/>
 							))}
 						</div>
-						<div className='text-white text-left'>
-							<strong className='text-lg font-raleway font-bold'>+60.000 profesionales</strong>
+						<div className='text-left text-white'>
+							<strong className='text-lg font-bold font-raleway'>+18.000 profesionales</strong>
 							<br />
 							<p className='text-base font-raleway font-extralight'>ya se capacitaron con nosotros</p>
 						</div>
@@ -63,7 +63,7 @@ export default function CourseTestimonials({ slug, lang }: CourseTestimonialsPro
 				<div className='moverflow-visible max-w-[1400px] mx-auto w-full relative group'>
 					<div
 						ref={carouselRef}
-						className='flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory px-1 md:px-0 scrollbar-hide'
+						className='flex gap-6 px-1 overflow-x-auto scroll-smooth snap-x snap-mandatory md:px-0 scrollbar-hide'
 					>
 						{data?.map((t: ReviewItem, idx: number) => (
 							<div
@@ -73,11 +73,11 @@ export default function CourseTestimonials({ slug, lang }: CourseTestimonialsPro
                 rounded-[30px] p-6 shadow-md'
 							>
 								<div className='flex items-center gap-4 mb-4'>
-									<img src={t.picture} alt={t.name} className='w-10 h-10 rounded-full object-cover' />
-									<p className='font-inter font-normal text-sm'>{t.name}</p>
+									<img src={t.picture} alt={t.name} className='object-cover w-10 h-10 rounded-full' />
+									<p className='text-sm font-normal font-inter'>{t.name}</p>
 								</div>
-								<p className='text-sm font-inter font-normal text-white' dangerouslySetInnerHTML={{ __html: t.review }} />
-								<div className='mt-4 text-right text-sm text-white'>{t.stars}/5 ★</div>
+								<p className='text-sm font-normal text-white font-inter' dangerouslySetInnerHTML={{ __html: t.review }} />
+								<div className='mt-4 text-sm text-right text-white'>{t.stars}/5 ★</div>
 							</div>
 						))}
 					</div>
@@ -85,17 +85,13 @@ export default function CourseTestimonials({ slug, lang }: CourseTestimonialsPro
 					{/* Botones - aparecen al hacer hover sobre el grupo */}
 					<button
 						onClick={() => scroll('left')}
-						className='hidden md:flex absolute -left-14 top-1/2 -translate-y-1/2
-              z-10 border border-white rounded-full p-2 shadow
-               text-white hover:scale-105 '
+						className='absolute z-10 hidden p-2 text-white -translate-y-1/2 border border-white rounded-full shadow md:flex -left-14 top-1/2 hover:scale-105 '
 					>
 						<ChevronLeft className='w-5 h-5' />
 					</button>
 					<button
 						onClick={() => scroll('right')}
-						className='hidden md:flex absolute -right-14 top-1/2 -translate-y-1/2
-              z-10 border border-white rounded-full p-2 shadow
-              text-white hover:scale-105'
+						className='absolute z-10 hidden p-2 text-white -translate-y-1/2 border border-white rounded-full shadow md:flex -right-14 top-1/2 hover:scale-105'
 					>
 						<ChevronRight className='w-5 h-5' />
 					</button>

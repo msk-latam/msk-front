@@ -42,13 +42,13 @@ export default function CourseHeader({ slug, lang }: CourseHeaderProps) {
 			.replace(/[\u0300-\u036f]/g, '')
 			.replace(/[^a-z0-9-]/g, '');
 
-		const storeUrl = `${getLocalizedUrl(lang, '/tienda')}?especialidades=${specialtySlug}`;
+		const storeUrl = `${getLocalizedUrl(lang, '/tienda')}/${specialtySlug}`;
 		router.push(storeUrl);
 	};
 
 	return (
-		<div className='px-4 overflow-visible max-w-[1600px] md:px-14 mx-auto h-96 flex md:flex-col md:justify-end md:items-start flex-row flex-wrap justify-center items-center text-white'>
-			<div className='text-sm text-white md:mb-20 md:mt-0 my-20 w-full'>
+		<div className='px-4 overflow-visible max-w-[1600px] md:px-14 mx-auto min-h-96 h-fit flex md:flex-col md:justify-end md:items-start flex-row flex-wrap justify-center items-center text-white'>
+			<div className='text-sm text-white md:mb-14 md:mt-0 mt-20 mb-16 w-full h-fit'>
 				{/* Breadcrumbs */}
 				<nav className='flex overflow-hidden whitespace-nowrap text-ellipsis text-sm max-w-full gap-1 font-raleway font-medium mb-4'>
 					<Link href='/' className='my-auto shrink-0'>
@@ -88,7 +88,7 @@ export default function CourseHeader({ slug, lang }: CourseHeaderProps) {
 				</nav>
 
 				{/* Título principal */}
-				<h1 className='md:text-[51px]  text-3xl text-white font-bold text-center md:text-left mt-5 mb-3'>{title}</h1>
+				<h1 className='md:text-[51px] leading-none text-3xl text-white font-bold text-center md:text-left mt-5 mb-3'>{title}</h1>
 
 				{/* Certificación */}
 				{has_certificate && (

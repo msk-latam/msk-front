@@ -1,17 +1,29 @@
+'use client';
+
 import Image from 'next/image';
 import { ChevronDown, ChevronRight } from 'react-feather';
 import React from 'react';
 
-interface Step {
-	step: string;
-	icon: string;
-}
-
 interface Props {
-	steps: Step[];
+	isDownloadable: boolean;
 }
 
-export default function StepByStep({ steps }: Props) {
+export default function StepByStep({ isDownloadable }: Props) {
+	const steps =
+		isDownloadable
+			? [
+					{ step: 'Descárgala', icon: '/icons/course/summary/download.svg' },
+					{ step: 'Aprende con material actualizado por expertos', icon: '/icons/course/overview/step2.svg' },
+					{ step: 'Aplica los conocimientos en tu práctica', icon: '/icons/course/overview/step4.svg' },
+					{ step: 'Accede a más contenidos en tu cuenta de MSK', icon: '/icons/course/overview/access.svg' },
+			  ]
+			: [
+					{ step: 'Inscríbite', icon: '/icons/course/overview/step1.svg' },
+					{ step: 'Aprende con material actualizado por expertos', icon: '/icons/course/overview/step2.svg' },
+					{ step: 'Obtén tu certificado', icon: '/icons/course/overview/step3.svg' },
+					{ step: 'Aplica lo aprendido a tu práctica y mejora tu futuro profesional', icon: '/icons/course/overview/step4.svg' },
+			  ];
+
 	return (
 		<div className='flex flex-col md:flex-row md:flex-nowrap md:items-center md:justify-center md:gap-4 mb-10 w-full'>
 			{steps.map((item, idx) => (

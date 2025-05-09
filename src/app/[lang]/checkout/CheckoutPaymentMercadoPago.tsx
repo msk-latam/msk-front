@@ -26,6 +26,7 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 		isSubmitting,
 		user,
 		appliedCoupon,
+		certifications,
 	} = useCheckout();
 
 	const [formData, setFormData] = useState({
@@ -137,11 +138,37 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 	// Aplica el descuento asegurando que no haya valores negativos
 	const transactionAmountWithDiscount = Math.max(transactionAmount - discount, 0);
 	const regularPriceWithDiscount = Math.max(regularPriceFixed - discount, 0);
+	const certificationTotal = certifications?.reduce((acc, cert) => acc + cert.price, 0) || 0;
+	const finalTransactionAmount = transactionAmountWithDiscount + certificationTotal;
 
 	const mapFormDataToRequest = (formData: any) => {
+		const certificationItems =
+			certifications?.map((cert) => ({
+				code: cert.product_code,
+				quantity: 1,
+				price: cert.price,
+				total: cert.price,
+				net_total: cert.price,
+				total_after_discount: cert.price,
+				list_price: cert.price,
+			})) || [];
+
+		const allItems = [
+			{
+				code: product.ficha.product_code,
+				quantity: 1,
+				price: regularPriceWithDiscount,
+				total: regularPriceWithDiscount,
+				net_total: regularPriceWithDiscount,
+				total_after_discount: regularPriceWithDiscount,
+				list_price: regularPriceWithDiscount,
+			},
+			...certificationItems,
+		];
+		const subTotal = regularPriceWithDiscount + (certifications?.reduce((acc, cert) => acc + cert.price, 0) || 0);
 		return {
 			// transaction_amount: 1000,
-			transaction_amount: transactionAmountWithDiscount,
+			transaction_amount: finalTransactionAmount,
 			installments: 6,
 			description: 'Pago de contrato MSK',
 			payer: {
@@ -193,8 +220,8 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 				],
 				currency,
 				country: formData.country,
-				sub_total: regularPriceWithDiscount,
-				grand_total: transactionAmountWithDiscount,
+				sub_total: subTotal,
+				grand_total: finalTransactionAmount,
 				// sub_total: 1000,
 				// grand_total: 1000,
 			},
@@ -222,6 +249,7 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 					'mercadopago',
 					discount,
 					appliedCoupon?.code ?? null,
+					certifications,
 				);
 
 				if (subStep === 0) {

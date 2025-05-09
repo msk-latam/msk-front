@@ -24,7 +24,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 	const { state } = useContext(AuthContext);
 	const [rebillId, setRebillId] = useRecoilState(rebillIdState);
 
-	const { activeStep, setActiveStep, completeStep, setUser, user } = useCheckout();
+	const { activeStep, setActiveStep, completeStep, setUser, user, certifications } = useCheckout();
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
 	const [success, setSuccess] = useState(false);
@@ -157,7 +157,9 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 	const totalPrice = product.total_price;
 	const transactionAmount = parseInt(totalPrice.replace(/[\.,]/g, ''), 10);
 	const regularPrice = product.regular_price;
-	const paymentProcessor = rebillCountries.includes(country) ? 'rebill' : 'stripe';
+	const paymentProcessor = country === 'ar' ? 'mercadopago' : rebillCountries.includes(country) ? 'rebill' : 'stripe';
+
+	console.log(country);
 
 	const handleNextStep = async () => {
 		if (!isFormValid) {
@@ -183,8 +185,6 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 				await updateCRMUser(formDataUser, formData, customer_id);
 			}
 
-			const paymentProcessor = rebillCountries.includes(country) ? 'rebill' : 'stripe';
-
 			const createContractResponse = await createContractCRM(
 				customer_id,
 				product,
@@ -192,6 +192,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 				currency,
 				countryCompleteName,
 				paymentProcessor,
+				certifications,
 			);
 			const contract_id = createContractResponse.data[0].details.id;
 

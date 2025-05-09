@@ -150,9 +150,10 @@
 // 			</div>
 // 		</section>
 // 	);
-// }
+// }'use client';
+'use client';
 
-
+import { useEffect, useRef } from 'react';
 import { BiLike } from 'react-icons/bi';
 import { GoShieldCheck } from 'react-icons/go';
 import { PiCertificateLight } from 'react-icons/pi';
@@ -164,12 +165,12 @@ import StepByStep from './StepByStep';
 import CourseSteps from './CourseSteps';
 import InfoCards from './InfoCards';
 
-const steps = [
-	{ step: 'Inscríbite', icon: '/icons/course/overview/step1.svg' },
-	{ step: 'Aprende con material actualizado por expertos', icon: '/icons/course/overview/step2.svg' },
-	{ step: 'Obtén tu certificado', icon: '/icons/course/overview/step3.svg' },
-	{ step: 'Aplica lo aprendido a tu práctica y mejora tu futuro profesional', icon: '/icons/course/overview/step4.svg' },
-];
+// const steps = [
+// 	{ step: 'Inscríbite', icon: '/icons/course/overview/step1.svg' },
+// 	{ step: 'Aprende con material actualizado por expertos', icon: '/icons/course/overview/step2.svg' },
+// 	{ step: 'Obtén tu certificado', icon: '/icons/course/overview/step3.svg' },
+// 	{ step: 'Aplica lo aprendido a tu práctica y mejora tu futuro profesional', icon: '/icons/course/overview/step4.svg' },
+// ];
 
 const features = [
 	{
@@ -180,14 +181,12 @@ const features = [
 	{
 		icon: <BiLike className='text-[#9200AD] w-5 h-5' />,
 		title: 'El 97% recomienda este curso',
-		description:
-			'Este curso ha sido altamente valorado por profesionales de la salud por su calidad y aplicabilidad práctica.',
+		description: 'Este curso ha sido altamente valorado por profesionales de la salud por su calidad y aplicabilidad práctica.',
 	},
 	{
 		icon: <GoShieldCheck className='text-[#9200AD] w-5 h-5' />,
 		title: 'Compromiso de satisfacción',
-		description:
-			'Si no deseas continuar con tu cursada dentro de los primeros 30 días, te devolvemos el 100% de tu inversión.',
+		description: 'Si no deseas continuar con tu cursada dentro de los primeros 30 días, te devolvemos el 100% de tu inversión.',
 	},
 ];
 
@@ -198,28 +197,59 @@ function formatWithThisCourse(text: unknown) {
 	if (enMatches.length < 2) return cleanText;
 	const secondEnIndex = enMatches[1].index;
 	if (secondEnIndex === undefined) return cleanText;
-	const beforeSecondEn = cleanText.substring(0, secondEnIndex + 3).trim();
-	const afterSecondEn = cleanText.substring(secondEnIndex + 3).trim();
+	const before = cleanText.substring(0, secondEnIndex + 3).trim();
+	const after = cleanText.substring(secondEnIndex + 3).trim();
 	return (
 		<>
-			{beforeSecondEn} <strong>{afterSecondEn}</strong>
+			{before} <strong>{after}</strong>
 		</>
 	);
 }
 
-export default function CourseOverview({ slug, lang }: { slug: string; lang: string }) {
-	const { data, loading, error } = useCourseOverview(slug, lang);
+interface CourseOverviewProps {
+	slug: string;
+	lang: string;
+	onHideEmpty?: () => void;
+	isDownloadable: boolean;
+}
 
-	if (loading || error || !data || (!data.habilities?.length && !data.your_course_steps?.length && !data.with_this_course)) {
-		return <SkeletonCourseOverview />;
-	}
+export default function CourseOverview({ slug, lang, onHideEmpty, isDownloadable }: CourseOverviewProps) {
+	const { data, loading, error } = useCourseOverview(slug, lang);
+	const hasNotified = useRef(false);
+
+	const hasHabilities = Array.isArray(data?.habilities) && data.habilities.length > 0;
+	const hasWithThisCourse =
+		(Array.isArray(data?.with_this_course) && data.with_this_course.length > 0) ||
+		(typeof data?.with_this_course === 'string' && data.with_this_course.trim() !== '');
+	const hasCourseSteps = Array.isArray(data?.your_course_steps) && data.your_course_steps.length > 0;
+
+	const isEmptyDynamicContent = !hasHabilities && !hasWithThisCourse && !hasCourseSteps;
+
+	useEffect(() => {
+		if (!hasNotified.current && !loading && (error || !data || isEmptyDynamicContent)) {
+			onHideEmpty?.();
+			hasNotified.current = true;
+		}
+	}, [loading, error, data, isEmptyDynamicContent, onHideEmpty]);
+
+	if (loading) return <SkeletonCourseOverview />;
+	if (error || !data || isEmptyDynamicContent) return null;
+
+	const formattedWithThis = hasWithThisCourse
+		? formatWithThisCourse(
+				Array.isArray(data.with_this_course)
+					? data.with_this_course.join(' ')
+					: data.with_this_course
+		  )
+		: null;
+console.log('CourseOverview render: shouldHide', isEmptyDynamicContent);
 
 	return (
 		<section className='py-6 max-w-5xl mx-auto'>
-			<CourseHabilities habilities={data.habilities} />
-			<WithThisCourse formattedContent={formatWithThisCourse(data?.with_this_course)} />
-			<StepByStep steps={steps} />
-			<CourseSteps steps={data.your_course_steps} />
+			{hasHabilities && <CourseHabilities habilities={data.habilities} />}
+			{hasWithThisCourse && <WithThisCourse formattedContent={formattedWithThis} />}
+			<StepByStep isDownloadable={isDownloadable} />
+			{hasCourseSteps && <CourseSteps steps={data.your_course_steps} />}
 			<InfoCards features={features} />
 		</section>
 	);

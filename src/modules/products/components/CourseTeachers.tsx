@@ -1,20 +1,22 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useRef } from 'react';
 import { useCourseTeachers } from '../hooks/useCourseTeachers';
-import SkeletonCourseTeachers from '../skeletons/SkeletonCourseTeachers'; // Importa el Skeleton
+import SkeletonCourseTeachers from '../skeletons/SkeletonCourseTeachers';
 
 interface CourseTeachersProps {
 	slug: string;
 	lang: string;
+	onHideEmpty?: () => void;
 }
 
 const ITEMS_PER_PAGE = 4;
 
-export default function CourseTeachers({ slug, lang }: CourseTeachersProps) {
+export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeachersProps) {
 	const { data, loading, error } = useCourseTeachers(slug, lang);
 	const [page, setPage] = useState(0);
 
+	// Scroll automático al equipo docente si el hash lo indica
 	useEffect(() => {
 		if (!loading && data?.length && typeof window !== 'undefined') {
 			const hash = window.location.hash;
@@ -29,13 +31,18 @@ export default function CourseTeachers({ slug, lang }: CourseTeachersProps) {
 		}
 	}, [loading, data]);
 
-	if (loading) {
-		return <SkeletonCourseTeachers />; // Usa el Skeleton cuando esté cargando
-	}
+	const hasNotified = useRef(false);
 
-	if (error || !data || data.length === 0) {
-		return null;
-	}
+	const isEmpty = !data || data.length === 0;
+
+	useEffect(() => {
+		if (!hasNotified.current && !loading && (error || isEmpty)) {
+			onHideEmpty?.();
+			hasNotified.current = true;
+		}
+	}, [loading, error, isEmpty, onHideEmpty]);
+	if (loading) return <SkeletonCourseTeachers />;
+	if (error || !data || data.length === 0) return null;
 
 	const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
 	const start = page * ITEMS_PER_PAGE;
@@ -45,10 +52,10 @@ export default function CourseTeachers({ slug, lang }: CourseTeachersProps) {
 	return (
 		<>
 			<style>{`
-        html {
-          scroll-behavior: smooth;
-        }
-      `}</style>
+				html {
+					scroll-behavior: smooth;
+				}
+			`}</style>
 
 			<section
 				className='bg-white rounded-[38px] px-6 md:px-0 max-w-5xl py-12 space-y-8'
@@ -56,7 +63,7 @@ export default function CourseTeachers({ slug, lang }: CourseTeachersProps) {
 			>
 				<h2 className='text-[24px] md:text-[32px] font-raleway font-bold text-[#1A1A1A] mb-6'>Equipo docente</h2>
 
-				{/* Mobile - SOLO aplicar paginación */}
+				{/* Mobile: paginado */}
 				<div className='block md:hidden space-y-6'>
 					{currentData.map((teacher, idx) => {
 						const name = teacher.name ?? 'Docente sin nombre';
@@ -65,7 +72,6 @@ export default function CourseTeachers({ slug, lang }: CourseTeachersProps) {
 							typeof teacher.image === 'string' && teacher.image !== ''
 								? teacher.image
 								: 'https://wp.msklatam.com/wp-content/themes/oceano2/assets/media/user-default.png';
-						const bioLink = teacher.link || null;
 
 						return (
 							<div key={idx} className='flex items-start gap-4'>
@@ -73,25 +79,13 @@ export default function CourseTeachers({ slug, lang }: CourseTeachersProps) {
 								<div className='flex flex-col'>
 									<p className='font-raleway font-semibold text-[#1A1A1A]'>{name}</p>
 									<p className='text-sm font-inter font-normal text-[#5A5F67]'>{title}</p>
-
-									{/* Comentado temporalmente por falta de datos */}
-									{/*{bioLink && (
-										<a
-											href={bioLink}
-											className='text-[#9200AD] text-sm mt-1 hover:underline'
-											target='_blank'
-											rel='noopener noreferrer'
-										>
-											Ver biografía
-										</a>
-									)}*/}
 								</div>
 							</div>
 						);
 					})}
 				</div>
 
-				{/* Desktop - NORMAL grid de 2 columnas sin paginacion */}
+				{/* Desktop: grid completo */}
 				<div className='hidden md:grid md:grid-cols-2 gap-8'>
 					{data.map((teacher, idx) => {
 						const name = teacher.name ?? 'Docente sin nombre';
@@ -100,7 +94,6 @@ export default function CourseTeachers({ slug, lang }: CourseTeachersProps) {
 							typeof teacher.image === 'string' && teacher.image !== ''
 								? teacher.image
 								: 'https://wp.msklatam.com/wp-content/themes/oceano2/assets/media/user-default.png';
-						const bioLink = teacher.link || null;
 
 						return (
 							<div key={idx} className='flex items-start gap-4'>
@@ -108,25 +101,13 @@ export default function CourseTeachers({ slug, lang }: CourseTeachersProps) {
 								<div className='flex flex-col'>
 									<p className='font-raleway font-semibold text-[#1A1A1A]'>{name}</p>
 									<p className='text-sm font-inter font-normal text-[#5A5F67]'>{title}</p>
-
-									{/* Comentado temporalmente por falta de datos */}
-									{/*{bioLink && (
-										<a
-											href={bioLink}
-											className='text-[#9200AD] text-sm mt-1 hover:underline'
-											target='_blank'
-											rel='noopener noreferrer'
-										>
-											Ver biografía
-										</a>
-									)}*/}
 								</div>
 							</div>
 						);
 					})}
 				</div>
 
-				{/* Solo mostrar paginación en MOBILE */}
+				{/* Paginación en mobile */}
 				{totalPages > 1 && (
 					<div className='flex justify-center items-center gap-6 mt-10 md:hidden'>
 						<button
