@@ -62,6 +62,7 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 	const [sortBy, setSortBy] = useState('Más recientes');
 	const [currentPage, setCurrentPage] = useState(1);
 	const [selectedPlan, setSelectedPlan] = useState('Regular');
+	const [navigatingCourseId, setNavigatingCourseId] = useState<number | null>(null);
 	const coursesPerPage = 4;
 	const { navigateToLms, isLoading: isNavigating, error: navigationError } = useLmsNavigation();
 
@@ -246,16 +247,27 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 					<>
 						<button className={secondaryButtonClass}>Ir al foro</button>
 						<CtaButton
-							onClick={() => {
+							onClick={async () => {
 								if (course.product_code && course.product_code_cedente && userEmail) {
-									navigateToLms(course.product_code, course.product_code_cedente, userEmail);
+									setNavigatingCourseId(course.product_code);
+									try {
+										await navigateToLms(course.product_code, course.product_code_cedente, userEmail);
+									} catch (error) {
+										console.error('LMS navigation failed for course:', course.product_code, error);
+									} finally {
+										setNavigatingCourseId(null);
+									}
 								} else {
 									console.error('Missing data for LMS navigation:', course);
 								}
 							}}
-							isDisabled={isNavigating}
+							isDisabled={navigatingCourseId === course.product_code}
 						>
-							{isNavigating ? 'Cargando...' : 'Ir al curso'}
+							{navigatingCourseId === course.product_code
+								? 'Cargando...'
+								: course.statusType === 'Sin enrolar'
+								? 'Activar'
+								: 'Ir al curso'}
 						</CtaButton>
 					</>
 				);
