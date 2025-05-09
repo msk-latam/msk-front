@@ -54,6 +54,11 @@ const CheckoutStripe = ({ product, country }: any) => {
 
 	const transactionAmountWithDiscount = Math.max(transactionAmount - discount, 0);
 
+	console.log(certificationsTotal);
+	console.log(productBaseAmount);
+	console.log(transactionAmount);
+	console.log(transactionAmountWithDiscount);
+
 	const [formData, setFormData] = useState({
 		quote_amount: parseFloat((transactionAmountWithDiscount / 12).toFixed(2)),
 		total_contract_amount: parseFloat(transactionAmountWithDiscount.toFixed(2)),
