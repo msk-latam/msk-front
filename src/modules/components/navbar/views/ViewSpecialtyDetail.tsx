@@ -54,8 +54,7 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
         .replace(/[\u0300-\u036f]/g, "") 
         .replace(/[^a-z0-9-]/g, ''); 
     
-      const storeUrl = urlFormat(`/tienda?especialidades=${specialtySlug}`);
-     // ✅ ahora navegación SPA
+      const storeUrl = urlFormat(`/tienda/${specialtySlug}`);
 
   if (!isMobile) {
     return (
