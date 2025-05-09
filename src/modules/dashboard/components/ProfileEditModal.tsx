@@ -1,9 +1,9 @@
 import { careerOptions } from '@/data/careers';
 import { countries } from '@/data/countries';
+import { documents } from '@/data/documents';
 import { professions } from '@/data/professions';
 import { specialtiesGroup } from '@/data/specialties';
 import { years } from '@/data/years';
-import { documents } from '@/data/documents';
 import Modal from '@/modules/dashboard/components/ui/Modal';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -45,7 +45,7 @@ export interface UserProfileData {
 	phone: string;
 	contracts?: Contract[];
 	coursesInProgress?: Course[];
-	medicalCollegeName?: string | null;
+	school_name?: string | null;
 	workplace?: string | null;
 	intereses?: string[];
 	interesesAdicionales?: string[];
@@ -63,8 +63,8 @@ export interface UserProfileData {
 	billingPhone?: string;
 	billingPhoneCode?: string;
 	fullBillingPhoneNumber?: string;
-	requiresInvoice?: string;
-	documentType?: string;
+	invoice_required?: string;
+	document_type?: string;
 	documentNumber?: string;
 	taxRegime?: string;
 	file?: File;
@@ -85,96 +85,6 @@ const medicalCollegeOptions = [
 	{ value: 'no', label: 'No' },
 ];
 
-// const documentsByCountry: any = {
-// 	ar: [
-// 		{ value: 'DNI', label: 'DNI' },
-// 		{ value: 'CUIT', label: 'CUIT' },
-// 		{ value: 'CUIL', label: 'CUIL' },
-// 		{ value: 'CDI', label: 'CDI' },
-// 		{ value: 'LE', label: 'Libreta de enrolamiento' },
-// 		{ value: 'LC', label: 'Libreta cívica' },
-// 		{ value: 'Pasaporte', label: 'Pasaporte' },
-// 	],
-// 	bo: [
-// 		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
-// 		{ value: 'Pasaporte', label: 'Pasaporte' },
-// 	],
-// 	cl: [
-// 		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
-// 		{ value: 'RUT', label: 'RUT' },
-// 		{ value: 'Pasaporte', label: 'Pasaporte' },
-// 	],
-// 	co: [
-// 		{ value: 'Cédula de ciudadanía', label: 'Cédula de ciudadanía' },
-// 		{ value: 'Cédula de extranjero', label: 'Cédula de extranjero' },
-// 		{ value: 'NIT', label: 'NIT' },
-// 		{ value: 'Pasaporte', label: 'Pasaporte' },
-// 	],
-// 	cr: [
-// 		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
-// 		{ value: 'Pasaporte', label: 'Pasaporte' },
-// 	],
-// 	ec: [
-// 		{ value: '04 - RUC', label: 'RUC' },
-// 		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
-// 		{ value: '06 - PASAPORTE', label: 'Pasaporte' },
-// 	],
-// 	sv: [
-// 		{ value: 'DUI', label: 'DUI' },
-// 		{ value: 'Pasaporte', label: 'Pasaporte' },
-// 	],
-// 	es: [
-// 		{ value: 'DNI', label: 'DNI' },
-// 		{ value: 'Pasaporte', label: 'Pasaporte' },
-// 		{ value: 'TIE', label: 'TIE' },
-// 		{ value: 'NIE', label: 'NIE' },
-// 	],
-// 	gt: [
-// 		{ value: 'DNI', label: 'DNI' },
-// 		{ value: 'Pasaporte', label: 'Pasaporte' },
-// 	],
-// 	hn: [
-// 		{ value: 'DNI', label: 'DNI' },
-// 		{ value: 'Pasaporte', label: 'Pasaporte' },
-// 	],
-// 	mx: [
-// 		{ value: 'RFC', label: 'RFC' },
-// 		{ value: 'Pasaporte', label: 'Pasaporte' },
-// 	],
-// 	ni: [
-// 		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
-// 		{ value: 'Pasaporte', label: 'Pasaporte' },
-// 	],
-// 	pa: [
-// 		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
-// 		{ value: 'Pasaporte', label: 'Pasaporte' },
-// 	],
-// 	py: [
-// 		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
-// 		{ value: 'Pasaporte', label: 'Pasaporte' },
-// 	],
-// 	pe: [
-// 		{ value: 'DNI', label: 'DNI' },
-// 		{ value: 'Pasaporte', label: 'Pasaporte' },
-// 		{ value: 'Cédula de extranjero', label: 'Cédula de extranjero' },
-// 		{ value: 'CURP', label: 'CURP' },
-// 		{ value: 'RUC', label: 'RUC' },
-// 	],
-// 	do: [
-// 		{ value: 'DNI', label: 'DNI' },
-// 		{ value: 'Pasaporte', label: 'Pasaporte' },
-// 	],
-// 	uy: [
-// 		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
-// 		{ value: 'Pasaporte', label: 'Pasaporte' },
-// 		{ value: 'RUT', label: 'RUT' },
-// 	],
-// 	ve: [
-// 		{ value: '05 - CÉDULA', label: 'Cédula de identidad' },
-// 		{ value: 'Pasaporte', label: 'Pasaporte' },
-// 	],
-// };
-
 const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 	isOpen,
 	onClose,
@@ -190,8 +100,6 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 	const [initialSnapshot, setInitialSnapshot] = useState<Partial<UserProfileData>>({});
 
 	useEffect(() => {
-		console.log('(ProfileEditModal useEffect) User prop received:', JSON.stringify(user, null, 2));
-		console.log('(ProfileEditModal useEffect) isOpen state:', isOpen);
 		if (user) {
 			const parsedPhone = findCodePrefix(user.phone || '');
 			const initialPhoneCode = parsedPhone ? parsedPhone.code : '+54';
@@ -219,8 +127,8 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 				speciality: user.speciality || '',
 				workplace: user.workplace || '',
 				workArea: user.workArea || '',
-				belongsToMedicalCollege: user.medicalCollegeName ? true : user.medicalCollegeName === null ? null : false,
-				medicalCollegeName: user.medicalCollegeName || '',
+				belongsToMedicalCollege: user.school_name ? true : user.school_name === null ? null : false,
+				school_name: user.school_name || '',
 				asosiacion: user.asosiacion || '',
 				otherProfession: user.otherProfession || '',
 				otherSpecialty: user.otherSpecialty || '',
@@ -231,8 +139,8 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 				billingPhone: initialBillingPhone,
 				billingPhoneCode: initialBillingPhoneCode,
 				fullBillingPhoneNumber: initialFullBillingPhoneNumber,
-				requiresInvoice: user.requiresInvoice || '',
-				documentType: user.documentType || '',
+				invoice_required: user.invoice_required || '',
+				document_type: (user as any).document_type || user.document_type || '',
 				documentNumber: user.documentNumber || '',
 				taxRegime: user.taxRegime || '',
 			};
@@ -412,7 +320,6 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 									document.cookie = 'recovery_flow_active=true; path=/; max-age=600';
 									document.cookie = `country=${lang}; path=/; max-age=60`;
 
-									console.log(`[Hazlo aquí] Cookies activadas: recovery_flow_active=true, country=${lang}`);
 									window.location.href = targetPath;
 								}}
 								className='text-[#9200AD] underline hover:text-[#700084] transition'
@@ -459,7 +366,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 							{formData.profession === 'Otra profesión' && (
 								<Input
 									id='profession'
-								label='Profesión'
+									label='Profesión'
 									type='text'
 									name='otherProfession'
 									value={formData.otherProfession || ''}
@@ -508,7 +415,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 							{formData.speciality === 'Otra Especialidad' && (
 								<Input
 									id='specialty'
-								label='Especialidad'
+									label='Especialidad'
 									type='text'
 									name='otherSpecialty'
 									value={formData.otherSpecialty || ''}
@@ -552,11 +459,11 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 						/>
 
 						<Input
-							id='medicalCollegeName'
+							id='school_name'
 							label='¿Cuál?'
 							type='text'
-							name='medicalCollegeName'
-							value={formData.medicalCollegeName || ''}
+							name='school_name'
+							value={formData.school_name || ''}
 							onChange={handleChange}
 							placeholder='Ingresar colegio médico, sociedad o similar'
 						/>
@@ -565,14 +472,14 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 						<h3 className='text-lg md:text-2xl text-center font-medium mb-2'>Datos de facturación</h3>
 						<div className='grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 p-1'>
 							<Select
-								id='requiresInvoice'
+								id='invoice_required'
 								label='¿Requiere factura fiscal?'
-								name='requiresInvoice'
+								name='invoice_required'
 								options={[
 									{ label: 'Sí', value: 'yes' },
 									{ label: 'No', value: 'no' },
 								]}
-								value={formData.requiresInvoice || ''}
+								value={formData.invoice_required}
 								onChange={handleSelectChange}
 								placeholder='Seleccionar'
 							/>
@@ -616,7 +523,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 								label='Tipo de identificación'
 								name='documentType'
 								options={documentTypes}
-								value={formData.documentType || ''}
+								value={formData.document_type || ''}
 								onChange={handleSelectChange}
 								placeholder='Seleccionar'
 							/>
@@ -630,11 +537,11 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 								placeholder='Ingresar Número de Identificación'
 							/>
 							<Select
-								id='documentType'
+								id='taxRegime'
 								label='Regimen fiscal'
-								name='documentType'
+								name='taxRegime'
 								options={[]}
-								value={formData.documentType || ''}
+								value={formData.taxRegime || ''}
 								onChange={handleSelectChange}
 								placeholder='Seleccionar'
 							/>

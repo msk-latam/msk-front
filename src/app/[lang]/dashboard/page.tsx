@@ -138,11 +138,12 @@ export default function DashboardPage() {
 			workplace: formDataFromModal.workplace ?? undefined,
 			work_area: formDataFromModal.workArea ?? undefined,
 			school_associate: formDataFromModal.belongsToMedicalCollege ?? undefined,
-			school_name: formDataFromModal.medicalCollegeName ?? undefined,
+			school_name: formDataFromModal.school_name ?? undefined,
 			identification: formDataFromModal.documentNumber,
+			document_type: formDataFromModal.document_type,
 			company_name: formDataFromModal.company_name,
 			invoice_required:
-				formDataFromModal.requiresInvoice === 'yes' ? 1 : formDataFromModal.requiresInvoice === 'no' ? 0 : undefined,
+				formDataFromModal.invoice_required === 'yes' ? 1 : formDataFromModal.invoice_required === 'no' ? 0 : undefined,
 			billing_email: formDataFromModal.billingEmail,
 			billing_phone: formDataFromModal.fullBillingPhoneNumber,
 		};

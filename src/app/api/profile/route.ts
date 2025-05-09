@@ -40,12 +40,13 @@ interface CustomerApiResponse {
 	updated_at: string;
 	validate: string;
 	other_profession: string | null;
+	tax_regime: string | null;
 	other_speciality: string | null;
 	state: string | null;
 	career: string | null;
 	year: string | null;
 	company_name: string | null;
-	type_doc: string | null;
+	document_type: string | null;
 	billing_email: string | null;
 	billing_phone: string | null;
 	invoice_required: number | null;
@@ -405,7 +406,7 @@ export async function GET() {
 			speciality: customerData.specialty,
 			workplace: customerData.workplace,
 			workArea: customerData.work_area,
-			schoolName: customerData.school_name,
+			school_name: customerData.school_name,
 			schoolAssociate: customerData.school_associate,
 			cantonPlace: customerData.canton_place,
 			parishPlace: customerData.parish_place,
@@ -415,10 +416,11 @@ export async function GET() {
 			contracts: customerData.contracts || [],
 			coursesInProgress: processedCoursesInProgress,
 			company_name: customerData.company_name,
-			documentType: customerData.type_doc,
+			document_type: customerData.document_type,
 			documentNumber: customerData.identification,
-			taxRegime: customerData.fiscal_regime,
-			invoiceRequired: customerData.invoice_required,
+			taxRegime: customerData.tax_regime,
+
+			invoice_required: customerData.invoice_required,
 			billingEmail: customerData.billing_email,
 			billingPhone: customerData.billing_phone || '',
 			intereses: combinedInterests,
@@ -428,6 +430,25 @@ export async function GET() {
 			crm_id: customerData.entity_id_crm, // Main CRM ID for the contact
 			courseRecommendations: detailedRecommendedCourses, // Update with fetched detailed recommendations
 		};
+
+		// Helper to parse school_name
+		let finalSchoolName = customerData.school_name;
+		if (
+			typeof customerData.school_name === 'string' &&
+			customerData.school_name.startsWith('[') &&
+			customerData.school_name.endsWith('"]')
+		) {
+			try {
+				const parsedArray = JSON.parse(customerData.school_name);
+				if (Array.isArray(parsedArray) && parsedArray.length > 0) {
+					finalSchoolName = parsedArray[0];
+				}
+			} catch (e) {
+				console.error('Error parsing school_name:', e);
+				// Keep original value if parsing fails
+			}
+		}
+		user.school_name = finalSchoolName;
 
 		return NextResponse.json({ user });
 	} catch (error) {

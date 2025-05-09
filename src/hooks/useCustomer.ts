@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 // Export this interface
 export interface UpdateCustomerPayload {
+	document_type?: string;
 	identification?: string;
 	first_name?: string;
 	last_name?: string;
