@@ -23,8 +23,8 @@ export interface UpdateCustomerPayload {
 	company_name?: string;
 	billing_email?: string;
 	billing_phone?: string;
-	invoice_required?: number;
 	tax_regime?: string;
+	invoice_required?: number;
 	interests?: {
 		specialty_interests: string[] | null;
 		content_interests: string[] | null;

@@ -65,7 +65,7 @@ export interface UserProfileData {
 	invoice_required?: string;
 	document_type?: string;
 	documentNumber?: string;
-	taxRegime?: string;
+	tax_regime?: string;
 	file?: File;
 }
 
@@ -93,10 +93,43 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 	saveError,
 	saveSuccess,
 }) => {
+	console.log('ProfileEditModal received user prop:', JSON.stringify(user, null, 2));
+
 	const [formData, setFormData] = useState<Partial<any>>({});
 	const [password, setPassword] = useState<string>('');
 	const [selectedProfessionId, setSelectedProfessionId] = useState<number | null>(null);
 	const [initialSnapshot, setInitialSnapshot] = useState<Partial<UserProfileData>>({});
+
+	const regimenFiscalMexico = [
+		{
+			value: '601 General de Ley Personas Morales',
+			label: 'General de Ley Personas Morales',
+		},
+		{
+			value: '603 Personas Morales con Fines no Lucrativos',
+			label: 'Personas Morales con Fines no Lucrativos',
+		},
+		{
+			value: '605 Sueldos y salarios e ingresos asimilados a salarios',
+			label: 'Sueldos y salarios e ingresos asimilados a salarios',
+		},
+		{
+			value: '612 Personas físicas con actividades empresariales y profesionales',
+			label: 'Personas físicas con actividades empresariales y profesionales',
+		},
+		{
+			value: '616 Sin obligaciones fiscales',
+			label: 'Sin obligaciones fiscales',
+		},
+		{
+			value: '621 Régimen de Incorporación Fiscal',
+			label: 'Régimen de Incorporación Fiscal',
+		},
+		{
+			value: '626 Régimen simplificado de confianza',
+			label: 'Régimen simplificado de confianza',
+		},
+	];
 
 	useEffect(() => {
 		if (user) {
@@ -127,7 +160,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 				workplace: user.workplace || '',
 				workArea: user.workArea || '',
 				belongsToMedicalCollege: user.school_name ? true : user.school_name === null ? null : false,
-				school_name: user.school_name || '',
+				school_name: user.school_name === '[]' ? '' : user.school_name || '',
 				asosiacion: user.asosiacion || '',
 				otherProfession: user.otherProfession || '',
 				otherSpecialty: user.otherSpecialty || '',
@@ -141,7 +174,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 				invoice_required: user.invoice_required || '',
 				document_type: (user as any).document_type || user.document_type || '',
 				documentNumber: user.documentNumber || '',
-				taxRegime: user.taxRegime || '',
+				tax_regime: user.tax_regime || '',
 			};
 
 			setFormData(initialData);
@@ -535,15 +568,17 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 								onChange={handleChange}
 								placeholder='Ingresar Número de Identificación'
 							/>
-							<Select
-								id='taxRegime'
-								label='Regimen fiscal'
-								name='taxRegime'
-								options={[]}
-								value={formData.taxRegime || ''}
-								onChange={handleSelectChange}
-								placeholder='Seleccionar'
-							/>
+							{formData.country === 'México' && (
+								<Select
+									id='tax_regime'
+									label='Regimen fiscal'
+									name='tax_regime'
+									options={regimenFiscalMexico}
+									value={formData.tax_regime || ''}
+									onChange={handleSelectChange}
+									placeholder='Seleccionar'
+								/>
+							)}
 
 							{/* <FileInput
 								id='file'

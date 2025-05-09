@@ -146,6 +146,7 @@ export default function DashboardPage() {
 				formDataFromModal.invoice_required === 'yes' ? 1 : formDataFromModal.invoice_required === 'no' ? 0 : undefined,
 			billing_email: formDataFromModal.billingEmail,
 			billing_phone: formDataFromModal.fullBillingPhoneNumber,
+			tax_regime: formDataFromModal.tax_regime,
 		};
 
 		if (password) {

@@ -49,11 +49,33 @@ export function useSignup(): UseSignupReturn {
 			if (!response.ok) {
 				let errorMessage = 'Ocurrió un error al registrar la cuenta.';
 
-				if (data.errors) {
-					const errorValues = Object.values(data.errors).flat();
-					errorMessage = errorValues.map(String).join(', ');
-				} else if (data.message) {
-					errorMessage = data.message;
+				let specificErrorMessageFromErrors: string | null = null;
+
+				if (data.errors && typeof data.errors === 'object' && Object.keys(data.errors).length > 0) {
+					const messages: string[] = [];
+					for (const key in data.errors) {
+						if (Object.prototype.hasOwnProperty.call(data.errors, key)) {
+							const errorValue = data.errors[key];
+							if (Array.isArray(errorValue)) {
+								errorValue.forEach((msg) => {
+									if (typeof msg === 'string' && msg.trim() !== '') {
+										messages.push(msg.trim());
+									}
+								});
+							} else if (typeof errorValue === 'string' && errorValue.trim() !== '') {
+								messages.push(errorValue.trim());
+							}
+						}
+					}
+					if (messages.length > 0) {
+						specificErrorMessageFromErrors = messages.join(', ');
+					}
+				}
+
+				if (specificErrorMessageFromErrors) {
+					errorMessage = specificErrorMessageFromErrors;
+				} else if (data.message && typeof data.message === 'string' && data.message.trim() !== '') {
+					errorMessage = data.message.trim();
 				}
 
 				setError(errorMessage);

@@ -397,7 +397,7 @@ export async function GET(request: NextRequest) {
 			company_name: customerData.company_name,
 			document_type: customerData.document_type,
 			documentNumber: customerData.identification,
-			taxRegime: customerData.tax_regime,
+			tax_regime: customerData.tax_regime,
 
 			invoice_required: customerData.invoice_required,
 			billingEmail: customerData.billing_email,
@@ -427,11 +427,6 @@ export async function GET(request: NextRequest) {
 			}
 		}
 		user.school_name = finalSchoolName;
-
-		// Remove brackets from name if present
-		if (typeof user.name === 'string' && user.name.includes('[') && user.name.includes(']')) {
-			user.name = user.name.replace(/[\[\]"]/g, '');
-		}
 
 		return NextResponse.json({ user });
 	} catch (error) {

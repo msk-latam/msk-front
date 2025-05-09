@@ -42,13 +42,24 @@ export async function POST(request: NextRequest) {
 		});
 
 		if (!apiResponse.ok) {
-			const errorBody = await apiResponse.text();
-			console.error('Error updating signup:', apiResponse.status, errorBody);
-
-			return NextResponse.json(
-				{ message: `Failed to update signup: ${apiResponse.status}`, error: errorBody },
-				{ status: apiResponse.status },
-			);
+			// Try to parse the error response from the backend as JSON
+			try {
+				const errorData = await apiResponse.json();
+				console.error('Error from backend API:', apiResponse.status, errorData);
+				// Forward the structured error from the backend
+				return NextResponse.json(errorData, { status: apiResponse.status });
+			} catch (e) {
+				// If parsing fails, it means the error response was not JSON or was empty
+				const errorBodyText = await apiResponse.text(); // Read as text for logging/fallback
+				console.error('Non-JSON error from backend API:', apiResponse.status, errorBodyText);
+				return NextResponse.json(
+					{
+						message: `Failed to update signup. Backend responded with status: ${apiResponse.status}`,
+						details: errorBodyText,
+					},
+					{ status: apiResponse.status },
+				);
+			}
 		}
 
 		const data = await apiResponse.json();

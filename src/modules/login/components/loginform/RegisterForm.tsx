@@ -14,7 +14,7 @@ const validationSchema = Yup.object().shape({
 
 	first_name: Yup.string()
 		.matches(/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s'-]+$/, 'Solo se permiten letras, espacios, guiones y apóstrofes.')
-		.max(10, 'Máximo 20 caracteres')
+		.max(20, 'Máximo 20 caracteres')
 		.required('El nombre es obligatorio'),
 
 	last_name: Yup.string()
@@ -42,9 +42,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 	const { signup, loading: signupLoading, error: signupError, success: signupSuccess } = useSignup();
 	const searchParams = useSearchParams();
 	const [submitted, setSubmitted] = useState(false);
-	const [onRequest, setOnRequest] = useState(false);
 	const [areaCode, setAreaCode] = useState('+54');
-	const [error, setError] = useState<string | null>(null);
 	const [phone, setPhone] = useState<string>('');
 	let errorMessages: string = '...';
 	const [showPassword, setShowPassword] = useState(false);
@@ -72,10 +70,14 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 		if (lastName) setValue('last_name', lastName);
 	}, [searchParams, setValue]);
 
-	const onSubmit = async (data: { phone: string; email: string; first_name: string; last_name: string }) => {
-		setOnRequest(true);
-		setError(null);
+	// Effect to handle signup success
+	useEffect(() => {
+		if (signupSuccess) {
+			setSubmitted(true);
+		}
+	}, [signupSuccess, setSubmitted]);
 
+	const onSubmit = async (data: { phone: string; email: string; first_name: string; last_name: string }) => {
 		const payload = {
 			...data,
 			country: 'AR',
@@ -94,7 +96,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 			identification: '',
 		};
 
-		signup(payload);
+		await signup(payload);
 	};
 
 	const handleSocialSignup = (connection: string) => {
@@ -260,13 +262,15 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 
 					<button
 						type='submit'
-						disabled={!isValid}
+						disabled={!isValid || signupLoading}
 						className={`w-full text-white py-3 px-4 rounded-[38px] font-inter font-medium transition ${
-							isValid ? 'bg-[#9200AD] hover:bg-[#700084]' : 'bg-[#989CA4] cursor-not-allowed'
-						} ${onRequest ? 'opacity-75 cursor-wait' : ''}`}
+							isValid && !signupLoading ? 'bg-[#9200AD] hover:bg-[#700084]' : 'bg-[#989CA4] cursor-not-allowed'
+						} ${signupLoading ? 'opacity-75 cursor-wait' : ''}`}
 					>
-						{onRequest ? 'Creando...' : 'Crear'}
+						{signupLoading ? 'Creando...' : 'Crear'}
 					</button>
+
+					{signupError && <p className='text-red-400 text-lg mt-2 text-center'>{signupError}</p>}
 
 					<p className='text-xs text-center text-[#6E737C] font-inter'>
 						Al registrarte, aceptás las{' '}
