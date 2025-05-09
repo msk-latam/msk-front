@@ -421,7 +421,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 						<div className='flex space-x-4 overflow-x-auto scroll-snap-x scroll-snap-mandatory md:grid md:grid-cols-2 md:gap-5 md:space-x-0 md:overflow-x-visible md:scroll-snap-none pb-4 -mb-4 scrollbar-hide '>
 							{data?.recommendedResourcesByIA.map((resource: any, index: number) => (
 								<Link
-									href={`/tienda/${resource.slug}`}
+									href={`/curso/${resource.slug}`}
 									key={index}
 									className='w-[90%] flex-shrink-0 scroll-snap-start md:w-auto md:flex-shrink bg-white rounded-[30px] overflow-hidden flex flex-col md:flex-row border border-[#DBDDE2] hover:shadow-md transition-shadow min-h-[280px]'
 								>
