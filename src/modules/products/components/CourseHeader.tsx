@@ -42,7 +42,7 @@ export default function CourseHeader({ slug, lang }: CourseHeaderProps) {
 			.replace(/[\u0300-\u036f]/g, '')
 			.replace(/[^a-z0-9-]/g, '');
 
-		const storeUrl = `${getLocalizedUrl(lang, '/tienda')}?especialidades=${specialtySlug}`;
+		const storeUrl = `${getLocalizedUrl(lang, '/tienda')}/${specialtySlug}`;
 		router.push(storeUrl);
 	};
 
