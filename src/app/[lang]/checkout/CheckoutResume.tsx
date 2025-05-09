@@ -3,6 +3,7 @@
 import React from 'react';
 import { useCheckout } from './CheckoutContext';
 import Cupon from './cupones/Cupon';
+import Certificaciones from './certificaciones/Certificaciones';
 interface CheckoutResumeProps {
 	product: any;
 	country: string;
@@ -97,6 +98,7 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 					</div>
 				</div>
 			)}
+			<Certificaciones country={country} />
 
 			{activeStep <= 1 && <Cupon />}
 
