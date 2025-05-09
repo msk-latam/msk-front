@@ -138,12 +138,38 @@ export default function DownloadSyllabusModal({ fileUrl, onClose, slug }: Downlo
 		setStatus('loading');
 		setErrorMessage('');
 
+		// Validar campos obligatorios
+		if (
+			!formData.name ||
+			!formData.lastName ||
+			!formData.email ||
+			!formData.phone ||
+			!formData.acceptTerms ||
+			!profession ||
+			(profession !== 'Estudiante' && !specialty) ||
+			(profession === 'Otra profesión' && !otherProfession) ||
+			(specialty === 'Otra Especialidad' && !otherSpecialty) ||
+			(profession === 'Estudiante' && (!career || !year))
+		) {
+			setStatus('error');
+			setErrorMessage('Por favor, completá todos los campos obligatorios.');
+			return;
+		}
+
 		const utmState = {
 			utm_source: sessionStorage.getItem('utm_source') || '',
 			utm_medium: sessionStorage.getItem('utm_medium') || '',
 			utm_campaign: sessionStorage.getItem('utm_campaign') || '',
 			utm_content: sessionStorage.getItem('utm_content') || '',
 		};
+
+		console.log('UTMs detectados:', utmState);
+
+		if (!formData.acceptTerms) {
+			setStatus('error');
+			setErrorMessage('Debes aceptar los términos y condiciones para continuar.');
+			return;
+		}
 
 		if (!executeRecaptcha) {
 			console.error('reCAPTCHA no está disponible.');
