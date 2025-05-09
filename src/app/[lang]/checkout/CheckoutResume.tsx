@@ -11,7 +11,7 @@ interface CheckoutResumeProps {
 
 const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => {
 	const { ficha, total_price } = product;
-	const { paymentType, appliedCoupon, activeStep } = useCheckout();
+	const { paymentType, appliedCoupon, activeStep, certifications } = useCheckout();
 
 	const currencies: any = {
 		cl: 'CLP',
@@ -59,8 +59,9 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 		}).format(value);
 	};
 
-	// Procesa el precio total
-	const total = parseNumber(total_price);
+	const certificationsTotal = certifications.reduce((acc, cert) => acc + cert.price, 0);
+	console.log(certificationsTotal);
+	const total = parseNumber(total_price) + certificationsTotal;
 	const installmentValue = Math.floor(total / 12);
 	const discount =
 		appliedCoupon && appliedCoupon.discountType === 'percentage'
@@ -71,7 +72,83 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 
 	const totalWithDiscount = Math.max(total - discount, 0); // Asegura que no sea negativo
 
-	const installmentValueWithDiscount = totalWithDiscount / 12;
+	const installments: any = {
+		cl: {
+			gateway: 'REBILL',
+			quotes: 8,
+		},
+		ar: {
+			gateway: 'MP',
+			quotes: 6,
+		},
+		ec: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		es: {
+			gateway: 'REBILL',
+			quotes: null,
+		},
+		int: {
+			gateway: 'REBILL',
+			quotes: null,
+		},
+		ve: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		mx: {
+			gateway: 'REBILL',
+			quotes: 12,
+		},
+		bo: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		co: {
+			gateway: 'REBILL',
+			quotes: 12,
+		},
+		cr: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		sv: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		gt: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		hn: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		ni: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		pa: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		py: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		pe: {
+			gateway: 'ST',
+			quotes: 12,
+		},
+		uy: {
+			gateway: 'REBILL',
+			quotes: 12,
+		},
+	};
+
+	const installmentNumber = installments[country].quotes;
+	const installmentValueWithDiscount = totalWithDiscount / installmentNumber;
 
 	return (
 		<div className='p-5 mt-16 bg-white border border-gray-300 rounded-3xl'>
