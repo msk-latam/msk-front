@@ -117,7 +117,7 @@ export default function CourseSyllabus({ slug, lang }: CourseSyllabusProps) {
 			</div>
 
 			{/* Modal - Ensure we're passing the correct handler */}
-			{isModalOpen && <DownloadSyllabusModal slug={slug}  fileUrl={data.study_plan_file.url} onClose={handleCloseModal} />}
+			{isModalOpen && <DownloadSyllabusModal slug={slug}  fileUrl={data.study_plan_file.url} onClose={handleCloseModal} isDownloadable={false} />}
 		</section>
 	);
 }

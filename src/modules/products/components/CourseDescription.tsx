@@ -1,42 +1,51 @@
 'use client';
 
+import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
 import { useCourseDescription } from '../hooks/useCourseDescription';
-import CourseDescriptionSkeleton from '../skeletons/CourseDescriptionSkeleton'; // Importa el componente Skeleton
+import CourseDescriptionSkeleton from '../skeletons/CourseDescriptionSkeleton';
 
 interface CourseDescriptionProps {
 	slug: string;
 	lang: string;
+	onHideEmpty?: () => void;
 }
 
-export default function CourseDescription({ slug, lang }: CourseDescriptionProps) {
+export default function CourseDescription({ slug, lang, onHideEmpty }: CourseDescriptionProps) {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const { data, loading, error } = useCourseDescription(slug, lang);
 
 	const MAX_LENGTH = 600;
 
-	const handleToggle = () => {
-		setIsExpanded(!isExpanded);
-	};
+const hasNotified = useRef(false);
+
+useEffect(() => {
+	if (!hasNotified.current && !loading && (error || !data?.content)) {
+		onHideEmpty?.();
+		hasNotified.current = true;
+	}
+}, [loading, error, data?.content, onHideEmpty]);
+
 	if (loading) {
 		return <CourseDescriptionSkeleton />;
 	}
 
-	const rawDescription = data?.content ?? '';
-	const description = rawDescription;
-	const title = data?.title ?? 'Descripción del curso';
+	if (error || !data?.content) {
+		return null;
+	}
 
-	// Si hay error o no hay descripción, devuelve null
-	if (error || !data?.content) return null;
+	const description = data.content;
+	const title = data.title ?? 'Descripción del curso';
 
 	const displayDescription = isExpanded
 		? description
 		: description.length > MAX_LENGTH
-		? description.slice(0, MAX_LENGTH) + '...'
-		: description;
+			? description.slice(0, MAX_LENGTH) + '...'
+			: description;
 
-	// Reemplaza la lógica de "loading" con el Skeleton cuando los datos están cargando
+	const handleToggle = () => {
+		setIsExpanded((prev) => !prev);
+	};
 
 	return (
 		<section className='bg-white rounded-[38px] md:pt-7 md:pb-3'>

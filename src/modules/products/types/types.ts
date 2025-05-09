@@ -103,6 +103,7 @@ export interface CourseData {
 	id: number;
 	title: string;
 	slug: string;
+	resource: string;
 	date: string;
 	excerpt: string;
 	featured_images: {
