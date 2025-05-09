@@ -1,3 +1,4 @@
+import { getCurrentLang } from '@/utils/getCurrentLang';
 import { useRouter } from 'next/navigation';
 import useSWR from 'swr';
 
@@ -19,8 +20,9 @@ const fetcher = async (url: string) => {
 
 export function useProfile() {
 	const router = useRouter();
+	const lang = getCurrentLang();
 
-	const { data, error, isLoading, mutate } = useSWR('/api/profile', fetcher, {
+	const { data, error, isLoading, mutate } = useSWR('/api/profile?lang=' + lang, fetcher, {
 		shouldRetryOnError: false, // Keep this to prevent retries on error
 		onError: (err) => {
 			console.error('Failed to fetch profile, redirecting to login:', err);

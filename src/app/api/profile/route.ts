@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 interface CurrentCourseType {
 	id: any; // CMS ID of the course
@@ -23,6 +23,7 @@ interface CustomerApiResponse {
 	identification?: string;
 	first_name: string;
 	last_name: string;
+	web_recommender: string | null;
 	profession: string | null;
 	specialty: string | null;
 	workplace: string | null;
@@ -111,10 +112,11 @@ interface CourseProgress {
 	created_time: string;
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
 	const token = cookies().get('access_token')?.value;
 	const email = cookies().get('email')?.value;
 	const profileImage = cookies().get('picture')?.value;
+	const lang = request.nextUrl.searchParams.get('lang') || 'ar';
 
 	/* remove redirectToDashboard cookie */
 	cookies().delete('redirectToDashboard');
@@ -148,39 +150,16 @@ export async function GET() {
 		const customerData: CustomerApiResponse = await customerRes.json();
 
 		// Fetch additional contact information for course recommendations
-		let courseRecommendationsList: string[] = [];
-		if (customerData.entity_id_crm) {
-			try {
-				const contactoRes = await fetch(`https://api.msklatam.net/getContactoByID?id=${customerData.entity_id_crm}`, {
-					headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' },
-					next: { revalidate: 3600 * 1 }, // Cache for 1 hour, adjust as needed
-				});
-
-				if (contactoRes.ok) {
-					const contactoData = await contactoRes.json();
-					const rawRecommendations = contactoData?.contacto?.Recomendador_web;
-					if (typeof rawRecommendations === 'string') {
-						courseRecommendationsList = rawRecommendations
-							.split(',')
-							.map((item: string) => item.trim())
-							.filter((item: string) => item);
-					}
-				} else {
-					console.warn(`Failed to fetch contacto data for ${customerData.entity_id_crm}: ${contactoRes.status}`);
-				}
-			} catch (error) {
-				console.error(`Error fetching contacto data for ${customerData.entity_id_crm}:`, error);
-			}
-		}
 
 		// Fetch full details for recommended courses
+		const courseRecommendationsList = customerData.web_recommender?.split(',').map((item: string) => item.trim());
 		let detailedRecommendedCourses: any[] = [];
-		if (courseRecommendationsList.length > 0) {
+		if (courseRecommendationsList && courseRecommendationsList.length > 0) {
 			detailedRecommendedCourses = await Promise.all(
 				courseRecommendationsList.slice(0, 4).map(async (courseIdentifier: string) => {
 					try {
 						const resourceRes = await fetch(
-							`https://cms1.msklatam.com/wp-json/msk/v1/product/${encodeURIComponent(courseIdentifier)}`,
+							`https://cms1.msklatam.com/wp-json/msk/v1/product/${encodeURIComponent(courseIdentifier)}?lang=${lang}`,
 							{
 								headers: { Accept: 'application/json' },
 								next: { revalidate: 3600 * 7 }, // Cache for 7 hours
