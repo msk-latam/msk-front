@@ -205,7 +205,7 @@ const isDownloadable = metadata?.resource === 'downloadable';
                   }
                 />
 
-                <CourseOverview
+                <CourseOverview isDownloadable={isDownloadable}
                   slug={slug}
                   lang={lang}
                   onHideEmpty={() =>

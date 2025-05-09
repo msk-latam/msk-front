@@ -165,12 +165,12 @@ import StepByStep from './StepByStep';
 import CourseSteps from './CourseSteps';
 import InfoCards from './InfoCards';
 
-const steps = [
-	{ step: 'Inscríbite', icon: '/icons/course/overview/step1.svg' },
-	{ step: 'Aprende con material actualizado por expertos', icon: '/icons/course/overview/step2.svg' },
-	{ step: 'Obtén tu certificado', icon: '/icons/course/overview/step3.svg' },
-	{ step: 'Aplica lo aprendido a tu práctica y mejora tu futuro profesional', icon: '/icons/course/overview/step4.svg' },
-];
+// const steps = [
+// 	{ step: 'Inscríbite', icon: '/icons/course/overview/step1.svg' },
+// 	{ step: 'Aprende con material actualizado por expertos', icon: '/icons/course/overview/step2.svg' },
+// 	{ step: 'Obtén tu certificado', icon: '/icons/course/overview/step3.svg' },
+// 	{ step: 'Aplica lo aprendido a tu práctica y mejora tu futuro profesional', icon: '/icons/course/overview/step4.svg' },
+// ];
 
 const features = [
 	{
@@ -210,9 +210,10 @@ interface CourseOverviewProps {
 	slug: string;
 	lang: string;
 	onHideEmpty?: () => void;
+	isDownloadable: boolean;
 }
 
-export default function CourseOverview({ slug, lang, onHideEmpty }: CourseOverviewProps) {
+export default function CourseOverview({ slug, lang, onHideEmpty, isDownloadable }: CourseOverviewProps) {
 	const { data, loading, error } = useCourseOverview(slug, lang);
 	const hasNotified = useRef(false);
 
@@ -247,7 +248,7 @@ console.log('CourseOverview render: shouldHide', isEmptyDynamicContent);
 		<section className='py-6 max-w-5xl mx-auto'>
 			{hasHabilities && <CourseHabilities habilities={data.habilities} />}
 			{hasWithThisCourse && <WithThisCourse formattedContent={formattedWithThis} />}
-			<StepByStep steps={steps} />
+			<StepByStep isDownloadable={isDownloadable} />
 			{hasCourseSteps && <CourseSteps steps={data.your_course_steps} />}
 			<InfoCards features={features} />
 		</section>
