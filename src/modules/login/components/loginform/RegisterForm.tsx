@@ -184,7 +184,10 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 						label='Teléfono'
 						value={phone}
 						defaultCode={'+54'}
-						onChange={(value) => setPhone(value)} // Correctly use the direct string value
+						onChange={(value) => {
+							setPhone(value);
+							setValue('phone', value, { shouldValidate: true });
+						}}
 						required
 					/>
 
