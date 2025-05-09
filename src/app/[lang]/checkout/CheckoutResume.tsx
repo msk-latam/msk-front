@@ -41,7 +41,9 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 	];
 
 	// Normaliza el número eliminando puntos y lo convierte a entero
-	const parseNumber = (value: string): number => parseInt(value.replace(/\./g, ''), 10);
+	const parseNumber = (value: string): number => {
+		return parseInt(value.replace(/\D/g, ''), 10);
+	};
 
 	// Formatea un número en el estilo de Estados Unidos
 	const formatNumber = (value: number): string =>
@@ -148,6 +150,7 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 	};
 
 	const installmentNumber = installments[country].quotes;
+	console.log(installmentNumber);
 	const installmentValueWithDiscount = totalWithDiscount / installmentNumber;
 
 	return (
@@ -186,7 +189,7 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 				<span className='text-3xl font-bold text-[#392C35]'>{`${currency} $${formatPesoArgentino(totalWithDiscount)}`}</span>
 
 				<p className='mt-2 text-sm text-[#6474A6]'>
-					{`12 pagos de `}
+					{`${installmentNumber} pagos de `}
 					<span className='font-bold'>{`${currency} $${formatPesoArgentino(installmentValueWithDiscount)}`}</span>
 				</p>
 			</div>

@@ -43,7 +43,7 @@ const CheckoutStripe = ({ product, country }: any) => {
 	const productBaseAmount = Number(product.total_price.replace(/,/g, '').replace('.', ''));
 
 	// Monto total incluyendo certificaciones
-	const transactionAmount = productBaseAmount + certificationsTotal;
+	const transactionAmount = productBaseAmount;
 
 	const discount =
 		appliedCoupon && appliedCoupon.discountType === 'percentage'
@@ -59,9 +59,13 @@ const CheckoutStripe = ({ product, country }: any) => {
 	console.log(transactionAmount);
 	console.log(transactionAmountWithDiscount);
 
+	const total = transactionAmountWithDiscount + certificationsTotal;
+
+	console.log(total);
+
 	const [formData, setFormData] = useState({
-		quote_amount: parseFloat((transactionAmountWithDiscount / 12).toFixed(2)),
-		total_contract_amount: parseFloat(transactionAmountWithDiscount.toFixed(2)),
+		quote_amount: parseFloat((total / 12).toFixed(2)),
+		total_contract_amount: parseFloat(total.toFixed(2)),
 		currency: currency,
 		quotes: 12,
 		contract_id: user.contract_id,
@@ -76,17 +80,17 @@ const CheckoutStripe = ({ product, country }: any) => {
 		product: {
 			name: product.ficha.title,
 			product_code: product.ficha.product_code,
-			amount: parseFloat(transactionAmountWithDiscount.toFixed(2)),
+			amount: parseFloat(total.toFixed(2)),
 		},
 	});
 	useEffect(() => {
 		setFormData((prev) => ({
 			...prev,
-			quote_amount: parseFloat((transactionAmountWithDiscount / 12).toFixed(2)),
-			total_contract_amount: parseFloat(transactionAmountWithDiscount.toFixed(2)),
+			quote_amount: parseFloat((total / 12).toFixed(2)),
+			total_contract_amount: parseFloat(total.toFixed(2)),
 			product: {
 				...prev.product,
-				amount: parseFloat(transactionAmountWithDiscount.toFixed(2)),
+				amount: parseFloat(total.toFixed(2)),
 			},
 		}));
 	}, [transactionAmountWithDiscount, currency]);
@@ -253,7 +257,7 @@ const CheckoutPaymentStripe = ({ product, country }: any) => {
 		}
 	};
 	return (
-		<div className=' sm:space-y-28 sm:flex sm:flex-col'>
+		<div className='space-y-20 sm:space-y-28 sm:flex sm:flex-col'>
 			<div className='transform translate-y-16'>
 				<CheckoutStripe product={product} country={country} />
 			</div>

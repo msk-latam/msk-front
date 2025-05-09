@@ -157,7 +157,9 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 	const totalPrice = product.total_price;
 	const transactionAmount = parseInt(totalPrice.replace(/[\.,]/g, ''), 10);
 	const regularPrice = product.regular_price;
-	const paymentProcessor = rebillCountries.includes(country) ? 'rebill' : 'stripe';
+	const paymentProcessor = country === 'ar' ? 'mercadopago' : rebillCountries.includes(country) ? 'rebill' : 'stripe';
+
+	console.log(country);
 
 	const handleNextStep = async () => {
 		if (!isFormValid) {
@@ -182,8 +184,6 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 			if (firstResponse.code === 'DUPLICATE_DATA') {
 				await updateCRMUser(formDataUser, formData, customer_id);
 			}
-
-			const paymentProcessor = rebillCountries.includes(country) ? 'rebill' : 'stripe';
 
 			const createContractResponse = await createContractCRM(
 				customer_id,

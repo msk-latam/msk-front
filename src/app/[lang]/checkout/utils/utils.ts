@@ -227,7 +227,13 @@ export const createContractCRM = async (
 	certification?: Certification[],
 ) => {
 	try {
-		const paymentConfig = paymentOptions[paymentType] || paymentOptions.mercadopago;
+		let paymentConfig = { ...(paymentOptions[paymentType] || paymentOptions.mercadopago) };
+
+		// Caso especial: Chile con Rebill (CLP)
+		if (paymentType === 'rebill' && currency === 'CLP') {
+			paymentConfig.totalPayments = 8;
+			paymentConfig.remainingPayments = 7;
+		}
 		const mainProduct = {
 			code: product.ficha.product_code,
 			quantity: 1,
@@ -300,6 +306,9 @@ export const updateContractCRM = async (
 	const paymentConfig = paymentOptions[paymentType] || paymentOptions.mercadopago;
 	const totalCertifications = certification?.reduce((acc, cert) => acc + cert.price, 0) || 0;
 	const total = transactionAmountWithDescount + totalCertifications;
+	console.log(transactionAmountWithDescount);
+	console.log(total);
+	console.log(parseFloat((total / paymentConfig.totalPayments).toFixed(2)));
 	try {
 		const contractData = {
 			status: 'Confirmado',
