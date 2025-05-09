@@ -136,9 +136,7 @@ export default function CourseSupportForm() {
 		}
 
 		try {
-			const endpoint = `${
-				process.env.NEXT_PUBLIC_URL || process.env.NEXT_PUBLIC_PUBLIC_URL
-			}/api/crm/CreateLeadHomeContactUs`;
+			const endpoint = `https://dev.msklatam.tech/msk-laravel/public/api/crm/CreateLeadHomeContactUs`;
 			console.log('Enviando a:', endpoint);
 			console.log('Payload:', body);
 			const token = await executeRecaptcha('contact_form');
