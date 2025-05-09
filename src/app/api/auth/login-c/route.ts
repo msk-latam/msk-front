@@ -5,6 +5,13 @@ export async function POST(request: NextRequest) {
 	try {
 		const { email, password } = await request.json();
 
+		//limpiar cookies para evitar que se guarde el email
+		cookies().delete('email');
+		cookies().delete('first_name');
+		cookies().delete('last_name');
+		cookies().delete('access_token');
+		cookies().delete('picture');
+
 		const apiSignInUrl = 'https://dev.msklatam.tech/msk-laravel/public/api/login';
 
 		if (!apiSignInUrl) {
