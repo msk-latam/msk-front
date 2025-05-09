@@ -94,7 +94,11 @@ const InvoicesModal: React.FC<InvoicesModalProps> = ({ isOpen, onClose, contract
 										) : (
 											<button
 												className={`inline-flex items-center gap-1 text-[#9200AD] font-medium hover:underline`}
-												onClick={() => generateInvoice(invoice)}
+												onClick={() => {
+													if (invoice.Comprobante_Factura) {
+														window.open(invoice.Comprobante_Factura, '_blank');
+													}
+												}}
 											>
 												Descargar
 												<span className='ml-1 h-4 w-4'>

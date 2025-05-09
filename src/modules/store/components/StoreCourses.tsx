@@ -9,7 +9,7 @@ import Pagination from './Pagination'; // Import Pagination
 import StoreCoursesHead from './StoreCoursesHead';
 
 // Define your filter keys if you need to be specific
-const filterKeys = ['especialidades', 'recurso', 'profesion', 'duracion'];
+const filterKeys = ['especialidad', 'recurso', 'profesion', 'duracion'];
 
 // Debounce hook utility (can be moved to a utils file)
 function useDebounce<T>(value: T, delay: number): T {
@@ -95,9 +95,9 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 				params.set('per_page', params.get('per_page') || '12');
 
 				// API parameter mapping - use the params directly from searchParams
-				if (params.has('especialidades')) {
-					params.set('specialty', params.get('especialidades') || '');
-					params.delete('especialidades'); // Remove original key if needed by API
+				if (params.has('especialidad')) {
+					params.set('specialty', params.get('especialidad') || '');
+					params.delete('especialidad'); // Remove original key if needed by API
 				}
 				if (params.has('profesion')) {
 					params.set('profession', params.get('profesion') || '');

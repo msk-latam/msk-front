@@ -124,7 +124,7 @@ const StoreFilters = ({ isMobile = false, isModalOpen = false, onModalClose = ()
 
 	// selectedFilters still holds Sets of string values
 	const [selectedFilters, setSelectedFilters] = useState<Record<string, Set<string>>>({
-		especialidades: new Set(),
+		especialidad: new Set(),
 		recurso: new Set(),
 		profesion: new Set(),
 		duracion: new Set(),
@@ -133,7 +133,7 @@ const StoreFilters = ({ isMobile = false, isModalOpen = false, onModalClose = ()
 	// Effect to initialize filters from URL on mount and when searchParams change
 	useEffect(() => {
 		const initialFilters: Record<string, Set<string>> = {
-			especialidades: new Set(),
+			especialidad: new Set(),
 			recurso: new Set(),
 			profesion: new Set(),
 			duracion: new Set(),
@@ -232,8 +232,8 @@ const StoreFilters = ({ isMobile = false, isModalOpen = false, onModalClose = ()
 				openIndices={openIndices}
 				sectionIndex={0}
 				onToggle={handleToggleAccordion}
-				selectedOptions={selectedFilters.especialidades} // Pass the Set of selected values
-				onOptionChange={(value) => handleOptionChange('especialidades', value)} // Pass the value
+				selectedOptions={selectedFilters.especialidad} // Pass the Set of selected values
+				onOptionChange={(value) => handleOptionChange('especialidad', value)} // Pass the value
 			/>
 			<FilterSection
 				title='Recurso'
