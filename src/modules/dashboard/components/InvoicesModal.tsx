@@ -1,15 +1,6 @@
 import Modal from '@/modules/dashboard/components/ui/Modal';
 import React from 'react';
 
-// Define the structure for invoice data
-interface Invoice {
-	id: string; // Unique identifier
-	date: string; // Format like DD-MM-YY
-	amount: string; // Format like $XXX.XXX
-	currency: string; // e.g., ARS, USD
-	downloadLink: string; // URL to download the invoice PDF
-}
-
 interface InvoicesModalProps {
 	isOpen: boolean;
 	onClose: () => void;
@@ -21,7 +12,7 @@ const DownloadIcon: React.FC = () => (
 	<svg viewBox='0 0 20 21' fill='none' xmlns='http://www.w3.org/2000/svg'>
 		<path
 			d='M19.1328 13.5703V14.7703C19.1328 16.4505 19.1328 17.2905 18.8058 17.9323C18.5182 18.4968 18.0593 18.9557 17.4948 19.2433C16.853 19.5703 16.013 19.5703 14.3328 19.5703H5.93281C4.25265 19.5703 3.41258 19.5703 2.77084 19.2433C2.20635 18.9557 1.74741 18.4968 1.45979 17.9323C1.13281 17.2905 1.13281 16.4505 1.13281 14.7703V13.5703M15.1328 8.57031L10.1328 13.5703M10.1328 13.5703L5.13281 8.57031M10.1328 13.5703V1.57031'
-			stroke='#9200AD'
+			stroke='currentColor'
 			strokeWidth='1.5'
 			strokeLinecap='round'
 			strokeLinejoin='round'
@@ -90,15 +81,27 @@ const InvoicesModal: React.FC<InvoicesModalProps> = ({ isOpen, onClose, contract
 									<div className='text-[#1A1A1A] text-left'>{invoice.Fecha_Cobro}</div>
 									<div className='text-[#1A1A1A] text-center'>{formatPrice(invoice)}</div>
 									<div className='text-right'>
-										<button
-											className={`inline-flex items-center gap-1 text-[#9200AD] font-medium hover:underline`}
-											onClick={() => generateInvoice(invoice)}
-										>
-											Descargar
-											<span className='ml-1 h-4 w-4'>
-												<DownloadIcon />
-											</span>
-										</button>
+										{invoice.Comprobante_Factura === null ? (
+											<button
+												className={`inline-flex items-center gap-1 text-gray-400 font-medium cursor-not-allowed`}
+												disabled
+											>
+												Descargar
+												<span className='ml-1 h-4 w-4'>
+													<DownloadIcon />
+												</span>
+											</button>
+										) : (
+											<button
+												className={`inline-flex items-center gap-1 text-[#9200AD] font-medium hover:underline`}
+												onClick={() => generateInvoice(invoice)}
+											>
+												Descargar
+												<span className='ml-1 h-4 w-4'>
+													<DownloadIcon />
+												</span>
+											</button>
+										)}
 									</div>
 								</div>
 							))
