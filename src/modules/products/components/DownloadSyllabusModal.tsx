@@ -184,14 +184,17 @@ export default function DownloadSyllabusModal({ fileUrl, onClose, slug }: Downlo
 		};
 
 		try {
-			const response = await fetch('https://dev.msklatam.tech/msk-laravel/public/api/crm/CreateLeadHomeContactUs', {
-				method: 'POST',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_URL || process.env.NEXT_PUBLIC_PUBLIC_URL}/api/crm/CreateLeadHomeContactUs`,
+				{
+					method: 'POST',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(body),
 				},
-				body: JSON.stringify(body),
-			});
+			);
 
 			const result = await response.json();
 
@@ -203,6 +206,14 @@ export default function DownloadSyllabusModal({ fileUrl, onClose, slug }: Downlo
 
 			setStatus('success');
 			setErrorMessage('');
+
+			// Disparar la descarga del temario
+			const link = document.createElement('a');
+			link.href = fileUrl;
+			link.download = ''; // opcional: podés poner un nombre de archivo si querés
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
 		} catch (error) {
 			console.error('Error general:', error);
 			setStatus('error');
