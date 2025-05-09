@@ -5,15 +5,15 @@ import { getCountries, getCountryCallingCode } from 'react-phone-number-input';
 import { getName } from 'country-list';
 import CountrySelect from '@/modules/login/components/hooks/CountrySelect';
 import { useState } from 'react';
-import { careerOptions } from "@/data/careers";
-import { professions } from "@/data/professions";
-import { specialtiesGroup } from "@/data/specialties";
-import { years } from "@/data/years";
+import { careerOptions } from '@/data/careers';
+import { professions } from '@/data/professions';
+import { specialtiesGroup } from '@/data/specialties';
+import { years } from '@/data/years';
 
 interface Specialty {
 	id: number;
 	name: string;
-  }
+}
 const getCountryNameByCode = (dialCode: string): string => {
 	const countryCode = getCountries().find((code) => `+${getCountryCallingCode(code)}` === dialCode);
 	return countryCode ? getName(countryCode) ?? '' : '';
@@ -37,19 +37,15 @@ export default function CourseSupportForm() {
 	const { executeRecaptcha } = useGoogleReCaptcha();
 	const [formSent, setFormSent] = useState(false);
 	const [formError, setFormError] = useState('');
-	const [profession, setProfession] = useState("");
-	const [specialty, setSpecialty] = useState("");
-	const [career, setCareer] = useState("");
-	const [year, setYear] = useState("");
-  
-	const [otherProfession, setOtherProfession] = useState<string>("");
-	const [otherSpecialty, setOtherSpecialty] = useState<string>("");
-    const [filteredSpecialties, setFilteredSpecialties] = useState<
-	  Array<Specialty>
-	>([]);
-	const professionId = professions.find(
-	  (p) => p.name === formData.profession
-	)?.id;
+	const [profession, setProfession] = useState('');
+	const [specialty, setSpecialty] = useState('');
+	const [career, setCareer] = useState('');
+	const [year, setYear] = useState('');
+
+	const [otherProfession, setOtherProfession] = useState<string>('');
+	const [otherSpecialty, setOtherSpecialty] = useState<string>('');
+	const [filteredSpecialties, setFilteredSpecialties] = useState<Array<Specialty>>([]);
+	const professionId = professions.find((p) => p.name === formData.profession)?.id;
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 		const { name, value, type } = e.target;
 		const isCheckbox = type === 'checkbox';
@@ -140,9 +136,7 @@ export default function CourseSupportForm() {
 		}
 
 		try {
-			const endpoint = `${
-				process.env.NEXT_PUBLIC_URL || process.env.NEXT_PUBLIC_PUBLIC_URL
-			}/api/crm/CreateLeadHomeContactUs`;
+			const endpoint = 'https://dev.msklatam.tech/msk-laravel/public/api/crm/CreateLeadHomeContactUs';
 			console.log('Enviando a:', endpoint);
 			console.log('Payload:', body);
 			const token = await executeRecaptcha('contact_form');
@@ -186,43 +180,43 @@ export default function CourseSupportForm() {
 			setFormSent(false);
 		}
 	};
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-	const { name, value } = e.target;
+	const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const { name, value } = e.target;
 
-	if (name === "profession") {
-	  setProfession(value);
-	  const selected = professions.find((p) => p.name === value);
-	  const selectedId = selected ? selected.id : null;
+		if (name === 'profession') {
+			setProfession(value);
+			const selected = professions.find((p) => p.name === value);
+			const selectedId = selected ? selected.id : null;
 
-	  if (selectedId) {
-		const sortedSpecialties: Specialty[] =
-		  specialtiesGroup[selectedId]
-			?.slice()
-			.sort((a, b) => a.name.localeCompare(b.name))
-			.map((s) => ({ id: s.id, name: s.name })) || [];
-		setFilteredSpecialties(sortedSpecialties);
-	  } else {
-		setFilteredSpecialties([]);
-	  }
+			if (selectedId) {
+				const sortedSpecialties: Specialty[] =
+					specialtiesGroup[selectedId]
+						?.slice()
+						.sort((a, b) => a.name.localeCompare(b.name))
+						.map((s) => ({ id: s.id, name: s.name })) || [];
+				setFilteredSpecialties(sortedSpecialties);
+			} else {
+				setFilteredSpecialties([]);
+			}
 
-	  if (value === "Estudiante") {
-		setCareer("");
-		setYear("");
-		setSpecialty("");
-	  }
-	} else if (name === "career") {
-	  setCareer(value);
-	} else if (name === "year") {
-	  setYear(value);
-	} else if (name === "speciality") {
-	  setSpecialty(value);
-	}
+			if (value === 'Estudiante') {
+				setCareer('');
+				setYear('');
+				setSpecialty('');
+			}
+		} else if (name === 'career') {
+			setCareer(value);
+		} else if (name === 'year') {
+			setYear(value);
+		} else if (name === 'speciality') {
+			setSpecialty(value);
+		}
 
-	setFormData((prev) => ({
-	  ...prev,
-	  [name]: value,
-	}));
-  };
+		setFormData((prev) => ({
+			...prev,
+			[name]: value,
+		}));
+	};
 	return (
 		<div className='bg-white space-y-6' id='course-support-form'>
 			<h2 className='text-[24px] md:text-[32px] font-raleway font-bold text-[#1A1A1A]'>
@@ -272,111 +266,108 @@ export default function CourseSupportForm() {
 				/>
 
 				{/* Profesión */}
-				<div className="flex flex-col gap-4 w-full">
-            <select
-              name="profession"
-              value={profession}
-              onChange={handleSelectChange}
-              className="w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]"
-            >
-              <option value="">Seleccionar profesión</option>
-              {professions.map((p) => (
-                <option key={p.id} value={p.name}>
-                  {p.name}
-                </option>
-              ))}
-            </select>
+				<div className='flex flex-col gap-4 w-full'>
+					<select
+						name='profession'
+						value={profession}
+						onChange={handleSelectChange}
+						className='w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]'
+					>
+						<option value=''>Seleccionar profesión</option>
+						{professions.map((p) => (
+							<option key={p.id} value={p.name}>
+								{p.name}
+							</option>
+						))}
+					</select>
 
-            {profession === "Otra profesión" && (
-              <input
-                type="text"
-                name="otherProfession"
-                value={otherProfession}
-                onChange={(e) => {
-                  setOtherProfession(e.target.value);
-                  setFormData((prev) => ({
-                    ...prev,
-                    otherProfession: e.target.value,
-                  }));
-                }}
-                placeholder="Ingresar otra profesión"
-                className="w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]"
-              />
-            )}
-			</div>
-			
-			<div>
-            {profession !== "Estudiante" && (
-              <div className="flex flex-col gap-4 w-full">
-                <select
-                  name="speciality"
-                  value={specialty}
-                  onChange={handleSelectChange}
-                  className="w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]"
-                >
-                  <option value="">Seleccionar especialidad</option>
-                  {filteredSpecialties.map((s) => (
-                    <option key={s.id} value={s.name}>
-                      {s.name}
-                    </option>
-                  ))}
-                </select>
-
-                {specialty === "Otra Especialidad" && (
-                  <input
-                    type="text"
-                    name="otherSpecialty"
-                    value={otherSpecialty}
-                    onChange={(e) => {
-                      setOtherSpecialty(e.target.value);
-                      setFormData((prev) => ({
-                        ...prev,
-                        otherSpecialty: e.target.value,
-                      }));
-                    }}
-                    placeholder="Ingresar otra especialidad"
-                    className="w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]"
-                  />
-                )}
+					{profession === 'Otra profesión' && (
+						<input
+							type='text'
+							name='otherProfession'
+							value={otherProfession}
+							onChange={(e) => {
+								setOtherProfession(e.target.value);
+								setFormData((prev) => ({
+									...prev,
+									otherProfession: e.target.value,
+								}));
+							}}
+							placeholder='Ingresar otra profesión'
+							className='w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]'
+						/>
+					)}
 				</div>
-            )}
-            {profession === "Estudiante" && (
-				
-				<div className="flex flex-col md:flex-row gap-4 w-full">
-                <select
-                  name="career"
-                  value={career}
-                  onChange={handleSelectChange}
-                  className="w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]"
-                >
-                  <option value="">Seleccionar carrera</option>
-                  {careerOptions.map((c) => (
-                    <option key={c.value} value={c.value}>
-                      {c.label}
-                    </option>
-                  ))}
-                </select>
 
-                <select
-                  name="year"
-                  value={year}
-                  onChange={handleSelectChange}
-                  className="w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]"
-                >
-                  <option value="">Seleccionar año</option>
-                  {years.map((y) => (
-                    <option key={y.value} value={y.value}>
-                      {y.label}
-                    </option>
-                  ))}
-                </select>
+				<div>
+					{profession !== 'Estudiante' && (
+						<div className='flex flex-col gap-4 w-full'>
+							<select
+								name='speciality'
+								value={specialty}
+								onChange={handleSelectChange}
+								className='w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]'
+							>
+								<option value=''>Seleccionar especialidad</option>
+								{filteredSpecialties.map((s) => (
+									<option key={s.id} value={s.name}>
+										{s.name}
+									</option>
+								))}
+							</select>
 
-                <input type="hidden" name="speciality" value={specialty} />
-              </div>
-            )}
+							{specialty === 'Otra Especialidad' && (
+								<input
+									type='text'
+									name='otherSpecialty'
+									value={otherSpecialty}
+									onChange={(e) => {
+										setOtherSpecialty(e.target.value);
+										setFormData((prev) => ({
+											...prev,
+											otherSpecialty: e.target.value,
+										}));
+									}}
+									placeholder='Ingresar otra especialidad'
+									className='w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]'
+								/>
+							)}
+						</div>
+					)}
+					{profession === 'Estudiante' && (
+						<div className='flex flex-col md:flex-row gap-4 w-full'>
+							<select
+								name='career'
+								value={career}
+								onChange={handleSelectChange}
+								className='w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]'
+							>
+								<option value=''>Seleccionar carrera</option>
+								{careerOptions.map((c) => (
+									<option key={c.value} value={c.value}>
+										{c.label}
+									</option>
+								))}
+							</select>
 
+							<select
+								name='year'
+								value={year}
+								onChange={handleSelectChange}
+								className='w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]'
+							>
+								<option value=''>Seleccionar año</option>
+								{years.map((y) => (
+									<option key={y.value} value={y.value}>
+										{y.label}
+									</option>
+								))}
+							</select>
 
-          </div>
+							<input type='hidden' name='speciality' value={specialty} />
+						</div>
+					)}
+				</div>
 
 				<textarea
 					name='message'

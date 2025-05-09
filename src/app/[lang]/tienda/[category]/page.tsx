@@ -1,5 +1,15 @@
-import TiendaLayout from './TiendaLayout';
+// app/[lang]/tienda/[category]/page.tsx
+import { generateCategoryMetadata } from '@/SEO/tienda/categoryMetadata';
+import CategoryLayout from './CategoryLayout';
 
-export default function TiendaCategoryPage({ params }: { params: { lang: string; category: string } }) {
-	return <TiendaLayout lang={params.lang} category={params.category} />;
+interface Props {
+	params: { category: string; lang: string };
+}
+
+export const generateMetadata = ({ params }: Props) => {
+	return generateCategoryMetadata({ category: params.category, lang: params.lang });
+};
+
+export default function CategoryPage({ params }: Props) {
+	return <CategoryLayout category={params.category} lang={params.lang} />;
 }
