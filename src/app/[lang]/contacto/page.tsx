@@ -28,7 +28,10 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
 			>
 				<Navbar />
 			</header>
-			<div className={``} data-nc-id='PageDashboard'>
+			<div
+				className='px-10 py-4 -mt-20 transform translate-y-10 bg-white border mx-52 rounded-3xl'
+				data-nc-id='PageDashboard'
+			>
 				<ContactForm hideHeader />
 			</div>
 

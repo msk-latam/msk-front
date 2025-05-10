@@ -52,7 +52,11 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 	isNosotros,
 }) => {
 	const { state: dataState } = useContext(DataContext);
-	const { allProfessions, allSpecialties, allSpecialtiesGroups } = dataState;
+	const {
+		// allProfessions,
+		allSpecialties,
+		//   allSpecialtiesGroups
+	} = dataState;
 	const { countryState } = useContext(CountryContext);
 	const [defaultCountry, setDefaultCountry] = useState<CountryCode>('' as CountryCode);
 	const pathname = usePathname();
@@ -83,6 +87,838 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 	const { executeRecaptcha } = useGoogleReCaptcha();
 	const [urlOrigen, setUrlOrigen] = useState<string>(typeof window !== 'undefined' ? window.location.href : '');
 	const router = useRouter();
+	const allSpecialtiesGroups: any = {
+		'1': [
+			{
+				id: 1,
+				name: 'Alergia e inmunología',
+			},
+			{
+				id: 2,
+				name: 'Anatomía patológica',
+			},
+			{
+				id: 3,
+				name: 'Coloproctología',
+			},
+			{
+				id: 4,
+				name: 'Flebología y linfología',
+			},
+			{
+				id: 5,
+				name: 'Hepatología',
+			},
+			{
+				id: 6,
+				name: 'Mastología',
+			},
+			{
+				id: 7,
+				name: 'Medicina de la industria farmaceútica',
+			},
+			{
+				id: 8,
+				name: 'Medicina del trabajo / ocupacional',
+			},
+			{
+				id: 9,
+				name: 'Medicina estética',
+			},
+			{
+				id: 10,
+				name: 'Medicina física y rehabilitación',
+			},
+			{
+				id: 11,
+				name: 'Medicina legal',
+			},
+			{
+				id: 12,
+				name: 'Medicina paliativa y dolor',
+			},
+			{
+				id: 13,
+				name: 'Medicina reproductiva y fertilidad',
+			},
+			{
+				id: 14,
+				name: 'Neumonología',
+			},
+			{
+				id: 15,
+				name: 'Reumatología',
+			},
+			{
+				id: 16,
+				name: 'Toxicología',
+			},
+			{
+				id: 17,
+				name: 'Trasplante',
+			},
+			{
+				id: 18,
+				name: 'Urología',
+			},
+			{
+				id: 73,
+				name: 'Auditoría y administración sanitaria',
+			},
+			{
+				id: 74,
+				name: 'Diabetes',
+			},
+			{
+				id: 75,
+				name: 'Generalista',
+			},
+			{
+				id: 76,
+				name: 'Medicina del deporte',
+			},
+			{
+				id: 77,
+				name: 'Medicina familiar y comunitaria',
+			},
+			{
+				id: 78,
+				name: 'Medicina intensiva',
+			},
+			{
+				id: 79,
+				name: 'Medicina interna / clínica',
+			},
+			{
+				id: 80,
+				name: 'Nutrición',
+			},
+			{
+				id: 81,
+				name: 'Traumatología y ortopedia',
+			},
+			{
+				id: 82,
+				name: 'Anestesiología',
+			},
+			{
+				id: 84,
+				name: 'Cardiología',
+			},
+			{
+				id: 85,
+				name: 'Cirugía',
+			},
+			{
+				id: 87,
+				name: 'Dermatología',
+			},
+			{
+				id: 88,
+				name: 'Emergentología',
+			},
+			{
+				id: 89,
+				name: 'Endocrinología',
+			},
+			{
+				id: 90,
+				name: 'Gastroenterología',
+			},
+			{
+				id: 93,
+				name: 'Ginecología',
+			},
+			{
+				id: 94,
+				name: 'Hematología',
+			},
+			{
+				id: 95,
+				name: 'Infectología',
+			},
+			{
+				id: 97,
+				name: 'Nefrología',
+			},
+			{
+				id: 98,
+				name: 'Neonatología',
+			},
+			{
+				id: 99,
+				name: 'Neurología',
+			},
+			{
+				id: 101,
+				name: 'Obstetricia',
+			},
+			{
+				id: 102,
+				name: 'Obstetricia y Ginecología',
+			},
+			{
+				id: 104,
+				name: 'Oftalmología',
+			},
+			{
+				id: 105,
+				name: 'Oncología',
+			},
+			{
+				id: 107,
+				name: 'Otorrinolaringología',
+			},
+			{
+				id: 108,
+				name: 'Pediatría',
+			},
+			{
+				id: 109,
+				name: 'Psiquiatría',
+			},
+		],
+		'2': [
+			{
+				id: 1,
+				name: 'Alergia e inmunología',
+			},
+			{
+				id: 2,
+				name: 'Anatomía patológica',
+			},
+			{
+				id: 3,
+				name: 'Coloproctología',
+			},
+			{
+				id: 4,
+				name: 'Flebología y linfología',
+			},
+			{
+				id: 5,
+				name: 'Hepatología',
+			},
+			{
+				id: 6,
+				name: 'Mastología',
+			},
+			{
+				id: 7,
+				name: 'Medicina de la industria farmaceútica',
+			},
+			{
+				id: 8,
+				name: 'Medicina del trabajo / ocupacional',
+			},
+			{
+				id: 9,
+				name: 'Medicina estética',
+			},
+			{
+				id: 10,
+				name: 'Medicina física y rehabilitación',
+			},
+			{
+				id: 11,
+				name: 'Medicina legal',
+			},
+			{
+				id: 12,
+				name: 'Medicina paliativa y dolor',
+			},
+			{
+				id: 13,
+				name: 'Medicina reproductiva y fertilidad',
+			},
+			{
+				id: 14,
+				name: 'Neumonología',
+			},
+			{
+				id: 15,
+				name: 'Reumatología',
+			},
+			{
+				id: 16,
+				name: 'Toxicología',
+			},
+			{
+				id: 17,
+				name: 'Trasplante',
+			},
+			{
+				id: 18,
+				name: 'Urología',
+			},
+			{
+				id: 73,
+				name: 'Auditoría y administración sanitaria',
+			},
+			{
+				id: 74,
+				name: 'Diabetes',
+			},
+			{
+				id: 75,
+				name: 'Generalista',
+			},
+			{
+				id: 76,
+				name: 'Medicina del deporte',
+			},
+			{
+				id: 77,
+				name: 'Medicina familiar y comunitaria',
+			},
+			{
+				id: 78,
+				name: 'Medicina intensiva',
+			},
+			{
+				id: 79,
+				name: 'Medicina interna / clínica',
+			},
+			{
+				id: 80,
+				name: 'Nutrición',
+			},
+			{
+				id: 81,
+				name: 'Traumatología y ortopedia',
+			},
+			{
+				id: 82,
+				name: 'Anestesiología',
+			},
+			{
+				id: 84,
+				name: 'Cardiología',
+			},
+			{
+				id: 85,
+				name: 'Cirugía',
+			},
+			{
+				id: 87,
+				name: 'Dermatología',
+			},
+			{
+				id: 88,
+				name: 'Emergentología',
+			},
+			{
+				id: 89,
+				name: 'Endocrinología',
+			},
+			{
+				id: 90,
+				name: 'Gastroenterología',
+			},
+			{
+				id: 93,
+				name: 'Ginecología',
+			},
+			{
+				id: 94,
+				name: 'Hematología',
+			},
+			{
+				id: 95,
+				name: 'Infectología',
+			},
+			{
+				id: 97,
+				name: 'Nefrología',
+			},
+			{
+				id: 98,
+				name: 'Neonatología',
+			},
+			{
+				id: 99,
+				name: 'Neurología',
+			},
+			{
+				id: 101,
+				name: 'Obstetricia',
+			},
+			{
+				id: 102,
+				name: 'Obstetricia y Ginecología',
+			},
+			{
+				id: 104,
+				name: 'Oftalmología',
+			},
+			{
+				id: 105,
+				name: 'Oncología',
+			},
+			{
+				id: 107,
+				name: 'Otorrinolaringología',
+			},
+			{
+				id: 108,
+				name: 'Pediatría',
+			},
+			{
+				id: 109,
+				name: 'Psiquiatría',
+			},
+		],
+		'3': [
+			{
+				id: 45,
+				name: 'Producción de bioimágenes',
+			},
+			{
+				id: 46,
+				name: 'Bioquímica',
+			},
+			{
+				id: 47,
+				name: 'Psicología',
+			},
+			{
+				id: 48,
+				name: 'Farmacia',
+			},
+			{
+				id: 49,
+				name: 'Instrumentación quirúrgica',
+			},
+			{
+				id: 50,
+				name: 'Kinesiología y fisiatría',
+			},
+			{
+				id: 51,
+				name: 'Óptica',
+			},
+			{
+				id: 52,
+				name: 'Osteopatía',
+			},
+			{
+				id: 53,
+				name: 'Podología',
+			},
+			{
+				id: 54,
+				name: 'Terapia ocupacional',
+			},
+			{
+				id: 55,
+				name: 'Otra carrera o licenciatura',
+			},
+			{
+				id: 80,
+				name: 'Nutrición',
+			},
+			{
+				id: 101,
+				name: 'Obstetricia',
+			},
+			{
+				id: 103,
+				name: 'Odontología',
+			},
+			{
+				id: 110,
+				name: 'Radiología',
+			},
+		],
+		'4': [
+			{
+				id: 19,
+				name: 'Enfermería familiar y comunitaria',
+			},
+			{
+				id: 20,
+				name: 'Enfermería en administración y gestión sanitaria',
+			},
+			{
+				id: 21,
+				name: 'Enfermería en análisis clínicos',
+			},
+			{
+				id: 22,
+				name: 'Enfermería en cardiología y UCO',
+			},
+			{
+				id: 23,
+				name: 'Enfermería en cuidados intensivos de adultos',
+			},
+			{
+				id: 24,
+				name: 'Enfermería en cuidados intensivos pediátricos y neonatales',
+			},
+			{
+				id: 25,
+				name: 'Enfermería en cuidados paliativos y dolor',
+			},
+			{
+				id: 26,
+				name: 'Enfermería en emergencias y atención primaria',
+			},
+			{
+				id: 27,
+				name: 'Enfermería en internación domiciliaria',
+			},
+			{
+				id: 28,
+				name: 'Enfermería en internación general',
+			},
+			{
+				id: 29,
+				name: 'Enfermería en investigación',
+			},
+			{
+				id: 30,
+				name: 'Enfermería en lactancia y puerperio',
+			},
+			{
+				id: 31,
+				name: 'Enfermería en reproducción asistida',
+			},
+			{
+				id: 32,
+				name: 'Enfermería en salud mental',
+			},
+			{
+				id: 33,
+				name: 'Enfermería en unidades de trasplantes',
+			},
+			{
+				id: 34,
+				name: 'Enfermería escolar',
+			},
+			{
+				id: 35,
+				name: 'Enfermería geriátrica y gerontológica',
+			},
+			{
+				id: 36,
+				name: 'Enfermería hematológica',
+			},
+			{
+				id: 37,
+				name: 'Enfermería nefrológica y diálisis',
+			},
+			{
+				id: 38,
+				name: 'Enfermería neonatal',
+			},
+			{
+				id: 39,
+				name: 'Enfermería obstétrica y ginecológica',
+			},
+			{
+				id: 40,
+				name: 'Enfermería oncológica',
+			},
+			{
+				id: 41,
+				name: 'Enfermería pediátrica',
+			},
+			{
+				id: 42,
+				name: 'Enfermería quirúrgica',
+			},
+			{
+				id: 43,
+				name: 'Enfermería radiológica',
+			},
+			{
+				id: 44,
+				name: 'Otras especialidades',
+			},
+		],
+		'5': [
+			{
+				id: 19,
+				name: 'Enfermería familiar y comunitaria',
+			},
+			{
+				id: 20,
+				name: 'Enfermería en administración y gestión sanitaria',
+			},
+			{
+				id: 21,
+				name: 'Enfermería en análisis clínicos',
+			},
+			{
+				id: 22,
+				name: 'Enfermería en cardiología y UCO',
+			},
+			{
+				id: 23,
+				name: 'Enfermería en cuidados intensivos de adultos',
+			},
+			{
+				id: 24,
+				name: 'Enfermería en cuidados intensivos pediátricos y neonatales',
+			},
+			{
+				id: 25,
+				name: 'Enfermería en cuidados paliativos y dolor',
+			},
+			{
+				id: 26,
+				name: 'Enfermería en emergencias y atención primaria',
+			},
+			{
+				id: 27,
+				name: 'Enfermería en internación domiciliaria',
+			},
+			{
+				id: 28,
+				name: 'Enfermería en internación general',
+			},
+			{
+				id: 29,
+				name: 'Enfermería en investigación',
+			},
+			{
+				id: 30,
+				name: 'Enfermería en lactancia y puerperio',
+			},
+			{
+				id: 31,
+				name: 'Enfermería en reproducción asistida',
+			},
+			{
+				id: 32,
+				name: 'Enfermería en salud mental',
+			},
+			{
+				id: 33,
+				name: 'Enfermería en unidades de trasplantes',
+			},
+			{
+				id: 34,
+				name: 'Enfermería escolar',
+			},
+			{
+				id: 35,
+				name: 'Enfermería geriátrica y gerontológica',
+			},
+			{
+				id: 36,
+				name: 'Enfermería hematológica',
+			},
+			{
+				id: 37,
+				name: 'Enfermería nefrológica y diálisis',
+			},
+			{
+				id: 38,
+				name: 'Enfermería neonatal',
+			},
+			{
+				id: 39,
+				name: 'Enfermería obstétrica y ginecológica',
+			},
+			{
+				id: 40,
+				name: 'Enfermería oncológica',
+			},
+			{
+				id: 41,
+				name: 'Enfermería pediátrica',
+			},
+			{
+				id: 42,
+				name: 'Enfermería quirúrgica',
+			},
+			{
+				id: 43,
+				name: 'Enfermería radiológica',
+			},
+			{
+				id: 44,
+				name: 'Otras especialidades',
+			},
+		],
+		'6': [
+			{
+				id: 70,
+				name: 'Policía',
+			},
+			{
+				id: 71,
+				name: 'Bombero',
+			},
+			{
+				id: 72,
+				name: 'Guardavidas / Rescatista',
+			},
+		],
+		'7': [
+			{
+				id: 56,
+				name: 'Tecnicatura en laboratorio clínico',
+			},
+			{
+				id: 57,
+				name: 'Tecnicatura en radiología e imágenes diagnósticas',
+			},
+			{
+				id: 58,
+				name: 'Tecnicatura en atención de adicciones',
+			},
+			{
+				id: 59,
+				name: 'Tecnicatura en optometría',
+			},
+			{
+				id: 60,
+				name: 'Tecnicatura en hemoterapia e inmunohematología',
+			},
+			{
+				id: 61,
+				name: 'Tecnicatura en partería profesional con enfoque intercultural',
+			},
+			{
+				id: 62,
+				name: 'Tecnicatura en visita médica',
+			},
+			{
+				id: 63,
+				name: 'Tecnicatura en cuidados geriátricos',
+			},
+			{
+				id: 64,
+				name: 'Tecnicatura en tecnología en ciencias del esteticismo',
+			},
+			{
+				id: 65,
+				name: 'Tecnicatura en ciencia y tecnología de alimentos',
+			},
+			{
+				id: 66,
+				name: 'Tecnicatura en prácticas cardiológicas',
+			},
+			{
+				id: 67,
+				name: 'Tecnicatura en esterilización',
+			},
+			{
+				id: 68,
+				name: 'Tecnicatura en asistencia dental',
+			},
+			{
+				id: 69,
+				name: 'Tecnicatura en cosmetología',
+			},
+		],
+		'8': [
+			{
+				id: 1,
+				name: 'Medicina',
+			},
+			{
+				id: 2,
+				name: 'Enfermería',
+			},
+			{
+				id: 3,
+				name: 'Lic. en salud',
+			},
+			{
+				id: 4,
+				name: 'Técnico en salud',
+			},
+			{
+				id: 5,
+				name: 'Otra',
+			},
+		],
+		'9': [
+			{
+				id: 94,
+				name: 'Hematología',
+			},
+			{
+				id: 104,
+				name: 'Oftalmología',
+			},
+			{
+				id: 107,
+				name: 'Otorrinolaringología',
+			},
+			{
+				id: 111,
+				name: 'Bioanálisis Clínico-molecular',
+			},
+			{
+				id: 112,
+				name: 'Medicina Transfusional',
+			},
+			{
+				id: 113,
+				name: 'Imagenología',
+			},
+			{
+				id: 114,
+				name: 'Radioterapia',
+			},
+			{
+				id: 115,
+				name: 'Física Médica',
+			},
+			{
+				id: 116,
+				name: 'Morfofisiopatología y Citodiagnóstico',
+			},
+		],
+		'10': [],
+	};
+
+	const allProfessions = [
+		{
+			id: 1,
+			name: 'Personal médico',
+		},
+		{
+			id: 2,
+			name: 'Residente',
+		},
+		{
+			id: 3,
+			name: 'Licenciado en salud',
+		},
+		{
+			id: 4,
+			name: 'Personal de enfermería',
+		},
+		{
+			id: 5,
+			name: 'Auxiliar de enfermería',
+		},
+		{
+			id: 6,
+			name: 'Fuerza pública',
+		},
+		{
+			id: 7,
+			name: 'Técnico universitario',
+		},
+		{
+			id: 8,
+			name: 'Estudiante',
+		},
+		{
+			id: 9,
+			name: 'Tecnología médica',
+		},
+		{
+			id: 10,
+			name: 'Otra profesión',
+		},
+	];
 	useEffect(() => {
 		setProfessions(allProfessions);
 		setSpecialties(allSpecialties);
@@ -315,8 +1151,8 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 	return (
 		<>
 			<div className='col-span-3 ' id='contactanos'>
-				<div className='contact-area-wrapper'>
-					<div className='contact-form'>
+				<div className=''>
+					<div className=''>
 						<FormikProvider value={formik}>
 							<Form onSubmit={formik.handleSubmit} action='/leads' className='' autoComplete='off' ref={formRef}>
 								<input type='hidden' name='Cursos_consultados' id='Cursos_consultados' value={productName} />
@@ -328,7 +1164,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 								<input type='hidden' name='leadSource' id='leadSource' value={isEbook ? 'Descarga ebook' : ''} />
 
 								{hideContactPreference ? null : (
-									<div className={`section-title mb-30`}>
+									<div className={` mb-30`}>
 										{hideHeader ? null : (
 											<h4 className='font-medium text-violet-dark text-[36px] mb-1' style={{ maxWidth: '800px' }}>
 												{isNosotros
@@ -341,7 +1177,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 
 										{!isEbook && (
 											<div className='flex flex-wrap gap-6 mt-2 mb-6 preferences'>
-												<p className='w-full talk-through md:w-auto'>Quiero hablar por</p>
+												<p className='w-full md:w-auto'>Quiero hablar por</p>
 												<div className='grid grid-cols-1 gap-4 mt-1 md:grid-cols-3'>
 													<Checkbox
 														inputClass='contact-radio-input'
@@ -368,9 +1204,9 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 								)}
 
 								<div className={`grid md:grid-cols-1  gap-4 ${hideSideInfo ? 'lg:grid-cols-2' : 'lg:grid-cols-3'}`}>
-									<div className='grid grid-cols-1 col-span-2 gap-4 md:grid-cols-2'>
+									<div className='grid w-full grid-cols-1 col-span-2 gap-4 md:grid-cols-2'>
 										<div className='col-span-2 col-xl-6 md:col-span-1'>
-											<div className='contact-from-input'>
+											<div className='rounded-xl'>
 												<ErrorMessage name='First_Name' component='span' className='error' />
 												<Field type='text' name='First_Name' placeholder='Ingresar nombre' />
 											</div>
@@ -410,8 +1246,8 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 											</div>
 										</div>
 
-										<div className='col-span-2 col-xl-6 md:col-span-1'>
-											<div className='contact-select'>
+										<div className='w-full col-span-2 col-xl-6 md:col-span-1'>
+											<div className=''>
 												<ErrorMessage name='Profesion' component='span' className='error' />
 												<Field
 													as='select'
@@ -540,10 +1376,10 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 											</div>
 
 											<div className='mt-2 col-xl-2'>
-												<div className='cont-btn'>
+												<div className=''>
 													<button
 														type='submit'
-														className='cont-btn disabled:bg-grey-disabled'
+														className='px-6 py-3 rounded-full bg-[#9200AD] text-white'
 														disabled={isSubmitDisabled || onRequest}
 													>
 														{onRequest ? 'Enviando ...' : submitText}
