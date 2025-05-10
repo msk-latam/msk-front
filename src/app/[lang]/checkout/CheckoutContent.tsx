@@ -28,7 +28,6 @@ const CheckoutContent: React.FC<CheckoutContentProps> = ({ product, country }) =
 	} = useCheckout();
 
 	//const activeStep = 0;
-	console.log(country);
 
 	if (activeStep === 2) {
 		if (subStep === 0) {

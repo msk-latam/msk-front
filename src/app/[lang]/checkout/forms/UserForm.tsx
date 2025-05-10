@@ -862,7 +862,6 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 		},
 	];
 
-	console.log(professions);
 	useEffect(() => {
 		const fetchUser = async () => {
 			const user = await getCRMUser(state?.email);

@@ -62,7 +62,6 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 	};
 
 	const certificationsTotal = certifications.reduce((acc, cert) => acc + cert.price, 0);
-	console.log(certificationsTotal);
 	const total = parseNumber(total_price) + certificationsTotal;
 	const installmentValue = Math.floor(total / 12);
 	const discount =
@@ -150,7 +149,6 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 	};
 
 	const installmentNumber = installments[country].quotes;
-	console.log(installmentNumber);
 	const installmentValueWithDiscount = totalWithDiscount / installmentNumber;
 
 	return (

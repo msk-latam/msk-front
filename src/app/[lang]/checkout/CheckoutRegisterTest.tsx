@@ -19,8 +19,11 @@ import AddressForm from './forms/AddressForm';
 import DocumentDetailsForm from './forms/DocumentDetailsForm';
 import UserForm from './forms/UserForm';
 import { validatePaymentField } from './validators/paymentValidator';
+import { useProfile } from '@/hooks/useProfile';
 
 const CheckoutRegisterTest = ({ product, country }: any) => {
+	const { user: userProfile } = useProfile();
+
 	const { state } = useContext(AuthContext);
 	const [rebillId, setRebillId] = useRecoilState(rebillIdState);
 
@@ -159,8 +162,6 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 	const regularPrice = product.regular_price;
 	const paymentProcessor = country === 'ar' ? 'mercadopago' : rebillCountries.includes(country) ? 'rebill' : 'stripe';
 
-	console.log(country);
-
 	const handleNextStep = async () => {
 		if (!isFormValid) {
 			setTouched((prevTouched) => Object.keys(formDataUser).reduce((acc, key) => ({ ...acc, [key]: true }), prevTouched));
@@ -236,12 +237,13 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 		setErrors(newErrors);
 		setTouched(newTouched);
 	};
+	console.log(userProfile);
 	useEffect(() => {
-		if (state?.user && state.user.name) {
+		if (userProfile && userProfile.email) {
 			const fetchUser = async () => {
 				try {
 					setLoadingUser(true);
-					const user = await getCRMUser(state?.email);
+					const user = await getCRMUser(userProfile.email);
 					console.log(user);
 					console.log('pais de usuario', user.Pais);
 					if (user) {
@@ -278,9 +280,9 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 
 			fetchUser();
 		}
-	}, [state?.user]);
+	}, [userProfile]);
 
-	console.log(formData.state);
+	console.log(state);
 
 	if (loadingUser) {
 		return (
