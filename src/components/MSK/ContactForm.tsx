@@ -4,7 +4,6 @@ import ContactSidebar from './ContactSidebar';
 import 'react-phone-number-input/style.css';
 import PhoneInput, { parsePhoneNumber } from 'react-phone-number-input';
 import { Newsletter, Profession, Specialty } from '@/data/types';
-import Radio from '@/components/Radio/Radio';
 import { getName } from 'country-list';
 import { CountryContext } from '@/context/country/CountryContext';
 import { CountryCode } from 'libphonenumber-js/types';
@@ -17,8 +16,9 @@ import api from '@/services/api';
 import NcLink from '../NcLink/NcLink';
 import { usePathname, useRouter } from 'next/navigation';
 import { isFormValid } from '@/components/Footer/Newsletter';
-import ShowErrorMessage from '@/components/ShowErrorMessage';
-import Checkbox from '../Checkbox/Checkbox';
+// import Checkbox from '../Checkbox/Checkbox';
+import ShowErrorMessage from '../ShowErrorMessage';
+import Checkbox from '@/modules/store/components/ui/Checkbox';
 
 interface ContactFormProps {
 	hideHeader?: boolean;
@@ -340,9 +340,9 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 										)}
 
 										{!isEbook && (
-											<div className='flex flex-wrap gap-6 preferences mt-2 mb-6'>
-												<p className='talk-through w-full md:w-auto'>Quiero hablar por</p>
-												<div className='mt-1 grid grid-cols-1 md:grid-cols-3 gap-4'>
+											<div className='flex flex-wrap gap-6 mt-2 mb-6 preferences'>
+												<p className='w-full talk-through md:w-auto'>Quiero hablar por</p>
+												<div className='grid grid-cols-1 gap-4 mt-1 md:grid-cols-3'>
 													<Checkbox
 														inputClass='contact-radio-input'
 														name='Preferencia_de_contactaci_n_phone'
@@ -368,27 +368,27 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 								)}
 
 								<div className={`grid md:grid-cols-1  gap-4 ${hideSideInfo ? 'lg:grid-cols-2' : 'lg:grid-cols-3'}`}>
-									<div className='grid grid-cols-1 md:grid-cols-2 col-span-2 gap-4'>
-										<div className='col-xl-6 col-span-2 md:col-span-1'>
+									<div className='grid grid-cols-1 col-span-2 gap-4 md:grid-cols-2'>
+										<div className='col-span-2 col-xl-6 md:col-span-1'>
 											<div className='contact-from-input'>
 												<ErrorMessage name='First_Name' component='span' className='error' />
 												<Field type='text' name='First_Name' placeholder='Ingresar nombre' />
 											</div>
 										</div>
-										<div className='col-xl-6 col-span-2 md:col-span-1'>
+										<div className='col-span-2 col-xl-6 md:col-span-1'>
 											<div className='contact-from-input'>
 												<ErrorMessage className='error' name='Last_Name' component='span' />
 												<Field type='text' name='Last_Name' placeholder='Ingresar apellido' />
 											</div>
 										</div>
-										<div className='col-xl-6 col-span-2 md:col-span-1'>
+										<div className='col-span-2 col-xl-6 md:col-span-1'>
 											<div className='contact-from-input'>
 												<ErrorMessage name='Email' component='span' className='error' />
 												<Field type='email' name='Email' placeholder='Ingresar e-mail' />
 											</div>
 										</div>
 
-										<div className='col-xl-6 col-span-2 md:col-span-1'>
+										<div className='col-span-2 col-xl-6 md:col-span-1'>
 											<div className='contact-from-input intl-input phone-contact-input-select'>
 												<Field name='Phone'>
 													{({ field, form, meta }: any) => (
@@ -410,7 +410,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 											</div>
 										</div>
 
-										<div className='col-xl-6 col-span-2 md:col-span-1'>
+										<div className='col-span-2 col-xl-6 md:col-span-1'>
 											<div className='contact-select'>
 												<ErrorMessage name='Profesion' component='span' className='error' />
 												<Field
@@ -433,7 +433,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 											</div>
 
 											{showInputProfession && (
-												<div className='contact-from-input my-4'>
+												<div className='my-4 contact-from-input'>
 													<ErrorMessage name='Otra_profesion' component='span' className='error' />
 													<Field type='text' name='Otra_profesion' placeholder='Ingresar profesion' />
 												</div>
@@ -441,8 +441,8 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 										</div>
 
 										{studentInputs ? (
-											<div className='col-xl-12 flex gap-2'>
-												<div className='contact-select w-1/2'>
+											<div className='flex gap-2 col-xl-12'>
+												<div className='w-1/2 contact-select'>
 													<ErrorMessage name='year' component='span' className='error' />
 													<Field as='select' name='year'>
 														<option defaultValue=''>Año</option>
@@ -453,7 +453,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 														))}
 													</Field>
 												</div>
-												<div className='contact-select w-full'>
+												<div className='w-full contact-select'>
 													<ErrorMessage name='career' component='span' className='error' />
 													<Field as='select' name='career' onChange={handleOptionCareerChange} value={selectedCareer}>
 														<option defaultValue=''>Seleccionar carrera</option>
@@ -493,7 +493,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 														</Field>
 													</div>
 													{showInputSpecialties && (
-														<div className='contact-from-input my-4'>
+														<div className='my-4 contact-from-input'>
 															<Field type='text' name='Otra_especialidad' placeholder='Ingresar especialidad' />
 															<ErrorMessage name='Otra_especialidad' component='div' className='error' />
 														</div>
@@ -503,7 +503,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 										)}
 										<div className='col-span-2'>
 											{!isEbook && (
-												<div className='col-xl-12 mt-4'>
+												<div className='mt-4 col-xl-12'>
 													<div className='contact-from-input'>
 														<ErrorMessage name='Description' component='span' className='error' />
 														<Field as='textarea' id='Description' name='Description' placeholder='Mensaje' />
@@ -511,7 +511,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 												</div>
 											)}
 
-											<div className='flex flex-wrap gap-1 mt-2 mb-4 justify-center sm:justify-start'>
+											<div className='flex flex-wrap justify-center gap-1 mt-2 mb-4 sm:justify-start'>
 												<div className='contact-checkbox'>
 													<ErrorMessage name='Terms_And_Conditions' component='div' className='error' />
 													<div className='flex gap-2 center'>
@@ -519,7 +519,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 															type='checkbox'
 															name='Terms_And_Conditions'
 															checked={formik.values.Terms_And_Conditions}
-															className='hidden-checkbox mt-1'
+															className='mt-1 hidden-checkbox'
 														/>
 														<label>
 															Acepto las{' '}
@@ -530,7 +530,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 																		: `${window.location.origin}/${country}/politica-de-privacidad`
 																}
 																target='_blank'
-																className='text-primary underline'
+																className='underline text-primary'
 															>
 																condiciones de privacidad
 															</NcLink>
@@ -539,7 +539,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 												</div>
 											</div>
 
-											<div className='col-xl-2 mt-2'>
+											<div className='mt-2 col-xl-2'>
 												<div className='cont-btn'>
 													<button
 														type='submit'
