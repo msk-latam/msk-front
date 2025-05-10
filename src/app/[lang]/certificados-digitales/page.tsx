@@ -78,11 +78,107 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 
 	// Display values, use placeholders if loading or error
 	const displayTitle = loading || error ? initialPageData.title : pageData?.post_title || 'Título no disponible';
-	const displayContent = loading
-		? '<p>Cargando contenido...</p>'
-		: error
-		? `<p>Error al cargar el contenido: ${error}</p>`
-		: pageData?.post_content || '<p>Contenido no disponible.</p>';
+	// const displayContent = loading
+	// 	? '<p>Cargando contenido...</p>'
+	// 	: error
+	// 	? `<p>Error al cargar el contenido: ${error}</p>`
+	// 	: pageData?.post_content || '<p>Contenido no disponible.</p>';
+
+	const displayContent = `
+        <i>
+<strong>
+Un nuevo estándar en la validación académica
+</strong>
+</i>
+<br />
+<br />
+
+En MSK, creemos que una capacitación de calidad no termina al finalizar un curso. También se expresa en cómo se acredita ese conocimiento. Por eso, a partir de 2025, sumamos un nuevo atributo que potencia tu experiencia académica: <strong>
+certificados digitales con tecnología blockchain.
+</strong> 
+<br />
+<br />
+
+Este avance marca un diferencial en nuestra propuesta institucional, alineada con los principios de innovación, accesibilidad y excelencia que nos definen. Conoce más 
+<a href="/nosotros" target="_blank" rel="noopener noreferrer">
+sobre nosotros</a>
+ y 
+ <a href="/mision" target="_blank" rel="noopener noreferrer">
+ nuestra misión educativa.</a>
+<br />
+
+<h3>
+Qué es la tecnología blockchain y por qué la usamos
+</h3>
+
+<br />
+
+Blockchain es una tecnología de registro digital que permite almacenar datos de forma segura, inviolable y transparente. Cada certificado emitido con esta tecnología puede verificarse online y no puede ser modificado ni falsificado.
+<br />
+<br />
+
+Esto garantiza la validez internacional de tu capacitación y te permite compartir tus logros de manera confiable con instituciones, empleadores y redes profesionales como LinkedIn.
+<br />
+<h3>
+Qué incluye tu certificado digital
+</h3>
+<ul style="list-style: disc; padding-left: 1.5rem;">
+    <li>• Nombre y apellido</li>
+    <li>• Título del curso aprobado</li>
+    <li>• Fecha de finalización</li>
+    <li>• Instituciones que avalan la capacitación</li>
+    <li>• Código QR de validación</li>
+  </ul>
+<br />
+
+<div>
+    <img src="/public/webp-images/misc/certification.png" alt="Certificación" style="width: 100%; " />
+  </div>
+
+Mira un cerificado digital modelo. <a href="https://app.certika.co/certificate/OTgyMTg=" target="_blank" rel="noopener noreferrer">Haz click aquí.</a>
+<br />
+<h3>
+Cómo obtener tu certificado digital
+</h3>
+<br />
+
+
+Para acceder a tu certificado digital de MSK con tecnología blockchain, necesitas cumplir <strong>
+tres requisitos:
+</strong>
+<br />
+<br />
+<ol>
+<li><strong>
+1. Finalizar la cursada
+</strong>
+ del programa elegido.</li>
+<li><strong>
+2. Aprobar todas las evaluaciones obligatorias
+</strong>
+ establecidas para obtener el certificado.</li>
+<li><strong>
+3. Haber abonado el 100% del valor total
+</strong>
+ de la capacitación.</li>
+</ol>
+
+<br />
+
+Una vez cumplidos, recibirás tu certificado digital por correo, listo para descargar, imprimir o compartir en línea.
+<br />
+<br />
+
+Accede a estos artículos del Centro de ayuda para más información.
+<br />
+ <a href="https://ayuda.msklatam.com/portal/es/kb/articles/mi-certificado-con-tecnologia-blockchain" target="_blank" rel="noopener noreferrer">
+Mi certificado con tecnología blockchain</a>
+ | <a href="https://ayuda.msklatam.com/portal/es/kb/articles/obtener-mi-certificado" target="_blank" rel="noopener noreferrer">
+ Obtener mi certificado</a>
+<br />
+<br />
+
+`;
 
 	return (
 		<>
