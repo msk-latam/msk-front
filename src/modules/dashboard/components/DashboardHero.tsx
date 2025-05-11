@@ -28,14 +28,14 @@ interface DashboardHeroProps {
 	isInterestsLoading: boolean; // Changed: Added isInterestsLoading prop
 }
 
-const defaultRecommendedCourse = {
-	image:
-		'https://images.ctfassets.net/cnu0m8re1exe/KARd6CSmh3yD656fzK3Kl/d46556b481191e9a679ed0e02388788f/doctor-and-patient.jpg?fm=jpg&fl=progressive&w=1140&h=700&fit=fill', // Use the image from the example
-	label: 'Recomendado para ti',
-	title: 'Curso de Endocrinología y Nutrición',
-	buttonText: 'Descubrir',
-	buttonLink: '/tienda/endocrinologia-y-nutricion/', // Replace with actual link
-};
+// const defaultRecommendedCourse = {
+// 	image:
+// 		'https://images.ctfassets.net/cnu0m8re1exe/KARd6CSmh3yD656fzK3Kl/d46556b481191e9a679ed0e02388788f/doctor-and-patient.jpg?fm=jpg&fl=progressive&w=1140&h=700&fit=fill', // Use the image from the example
+// 	label: 'Recomendado para ti',
+// 	title: 'Curso de Endocrinología y Nutrición',
+// 	buttonText: 'Descubrir',
+// 	buttonLink: '/tienda/endocrinologia-y-nutricion/', // Replace with actual link
+// };
 
 const DashboardHero: React.FC<DashboardHeroProps> = ({
 	userData,
@@ -313,102 +313,80 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 					)}
 				</div>
 
+				{/* const defaultRecommendedCourse = {
+	image:
+		'https://images.ctfassets.net/cnu0m8re1exe/KARd6CSmh3yD656fzK3Kl/d46556b481191e9a679ed0e02388788f/doctor-and-patient.jpg?fm=jpg&fl=progressive&w=1140&h=700&fit=fill', // Use the image from the example
+	label: 'Recomendado para ti',
+	title: 'Curso de Endocrinología y Nutrición',
+	buttonText: 'Descubrir',
+	buttonLink: '/tienda/endocrinologia-y-nutricion/', // Replace with actual link
+}; */}
+
 				{/* Course Section - Conditionally Rendered */}
 				{/* Mobile: 4th, Desktop: 2nd in 2nd Col */}
 				<div className='md:col-span-2 lg:col-span-2 rounded-[30px] overflow-hidden group order-4 md:order-2'>
-					{
-						!data?.currentCourse ? (
-							// Variant 1: Profile < 50% (Not Started) - based on image
-							<div className='bg-cover bg-center h-[300px] rounded-[30px] relative flex flex-col justify-end p-[36px] text-white overflow-hidden'>
+					<div className='bg-cover bg-top h-[300px] rounded-[30px] relative flex flex-col justify-center p-[36px] text-white overflow-hidden'>
+						<div
+							className='absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 bg-cover bg-center'
+							style={{ backgroundImage: `url(${data?.currentCourse?.image})` }}
+						></div>
+						{/* Overlay gradient */}
+						<div
+							className='absolute inset-0'
+							style={{ background: 'linear-gradient(90deg, rgba(0, 0, 0, 0.54) 38.02%, rgba(0, 0, 0, 0.09) 87.34%)' }}
+						></div>
+						{/* Course Content: Title, Label, Button */}
+						<div className='relative z-10 flex flex-col items-start gap-4 md:flex-row md:justify-between md:items-center'>
+							{/* Group Label and Title */}
+							<div className='flex flex-col items-start gap-4'>
+								<span className='bg-[#DFE6FF] text-[#29324F] font-inter font-normal text-sm md:text-base rounded-full px-3 py-1.5'>
+									{data?.currentCourse.completed_percentage === null ? 'Recomendado para ti' : 'Continúa tu aprendizaje'}
+								</span>
+								<h2 className='text-white font-raleway font-[700] text-[24px] md:text-[36px] leading-[26px] md:leading-[44px] max-w-[25ch]'>
+									{data?.currentCourse.title}
+								</h2>
+							</div>
+							{/* Button - Aligned below title on mobile, right on desktop */}
+
+							<div className='w-auto mt-4 md:mt-0'>
+								<CtaButton
+									onClick={() => {
+										if (data?.currentCourse.completed_percentage === null) {
+											const currentPath = window.location.pathname;
+											const langMatch = currentPath.match(/^\/([^\/]+)\/dashboard/);
+											const lang = langMatch ? langMatch[1] : '';
+											window.location.href = lang ? `/${lang}/${data?.currentCourse.link}` : `/${data?.currentCourse.link}`;
+										} else if (data?.currentCourse.product_code && data?.currentCourse.product_code_cedente && userEmail) {
+											navigateToLms(data?.currentCourse.product_code, data?.currentCourse.product_code_cedente, userEmail);
+										} else {
+											console.error('Missing data for LMS navigation:', data?.currentCourse);
+										}
+									}}
+									showIcon={true}
+									isDisabled={isNavigating}
+								>
+									{isNavigating
+										? 'Cargando...'
+										: data?.currentCourse.completed_percentage === null
+										? 'Descubrir'
+										: 'Continuar'}
+								</CtaButton>
+							</div>
+						</div>
+						{/* Progress Bar */}
+						{data?.currentCourse.completed_percentage !== null && (
+							<div className='w-full h-[40px] bg-[#00000033] absolute bottom-0 left-0'>
 								<div
-									className='absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 bg-cover bg-top'
-									style={{ backgroundImage: `url(${defaultRecommendedCourse.image})` }}
-								></div>
-								{/* Overlay gradient */}
-								<div
-									className='absolute inset-0'
-									style={{ background: 'linear-gradient(90deg, rgba(0, 0, 0, 0.54) 38.02%, rgba(0, 0, 0, 0.09) 87.34%)' }}
-								></div>
-								{/* Content */}
-								<div className='relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4'>
-									{/* Left side: Label and Title */}
-									<div className='flex flex-col items-start gap-4'>
-										<span className='bg-[#DFE6FF] text-[#29324F] font-inter font-normal text-sm md:text-base rounded-full px-3 py-1.5'>
-											{defaultRecommendedCourse.label}
-										</span>
-										<h2 className='text-white font-raleway font-[700] text-[24px] md:text-[36px] leading-[26px] md:leading-[44px] max-w-[25ch]'>
-											{defaultRecommendedCourse.title}
-										</h2>
-									</div>
-									{/* Right side: Button */}
-									<div className='w-auto mt-4 md:mt-0'>
-										<CtaButton
-											onClick={() => console.log('Navigate to:', defaultRecommendedCourse.buttonLink)} // Replace with actual navigation
-											showIcon={true}
-										>
-											{defaultRecommendedCourse.buttonText}
-										</CtaButton>
-									</div>
+									className='h-full bg-[#00000080] px-[36px] flex items-center justify-start transition-width duration-300 ease-in-out'
+									style={{ width: `${data?.currentCourse.completed_percentage}%` }}
+								>
+									<span className='text-white font-inter font-medium text-base leading-[24px] whitespace-nowrap'>
+										{data?.currentCourse.completed_percentage}% completado
+									</span>
 								</div>
 							</div>
-						) : data?.currentCourse ? (
-							// Variant 2: Profile >= 50% OR no recommendedCourseData available (Started/In Progress) - Original card
-							<div className='bg-cover bg-top h-[300px] rounded-[30px] relative flex flex-col justify-center p-[36px] text-white overflow-hidden'>
-								<div
-									className='absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 bg-cover bg-center'
-									style={{ backgroundImage: `url(${data?.currentCourse?.image})` }}
-								></div>
-								{/* Overlay gradient */}
-								<div
-									className='absolute inset-0'
-									style={{ background: 'linear-gradient(90deg, rgba(0, 0, 0, 0.54) 38.02%, rgba(0, 0, 0, 0.09) 87.34%)' }}
-								></div>
-								{/* Course Content: Title, Label, Button */}
-								<div className='relative z-10 flex flex-col items-start gap-4 md:flex-row md:justify-between md:items-center'>
-									{/* Group Label and Title */}
-									<div className='flex flex-col items-start gap-4'>
-										<span className='bg-[#DFE6FF] text-[#29324F] font-inter font-normal text-sm md:text-base rounded-full px-3 py-1.5'>
-											Continúa tu aprendizaje
-										</span>
-										<h2 className='text-white font-raleway font-[700] text-[24px] md:text-[36px] leading-[26px] md:leading-[44px] max-w-[25ch]'>
-											{data?.currentCourse.title}
-										</h2>
-									</div>
-									{/* Button - Aligned below title on mobile, right on desktop */}
-									<div className='w-auto mt-4 md:mt-0'>
-										<CtaButton
-											onClick={() => {
-												if (data?.currentCourse.product_code && data?.currentCourse.product_code_cedente && userEmail) {
-													navigateToLms(
-														data?.currentCourse.product_code,
-														data?.currentCourse.product_code_cedente,
-														userEmail,
-													);
-												} else {
-													console.error('Missing data for LMS navigation:', data?.currentCourse);
-												}
-											}}
-											showIcon={true}
-											isDisabled={isNavigating}
-										>
-											{isNavigating ? 'Cargando...' : 'Continuar'}
-										</CtaButton>
-									</div>
-								</div>
-								{/* Progress Bar */}
-								<div className='w-full h-[40px] bg-[#00000033] absolute bottom-0 left-0'>
-									<div
-										className='h-full bg-[#00000080] px-[36px] flex items-center justify-start transition-width duration-300 ease-in-out'
-										style={{ width: `${data?.currentCourse.completed_percentage}%` }}
-									>
-										<span className='text-white font-inter font-medium text-base leading-[24px] whitespace-nowrap'>
-											{data?.currentCourse.completed_percentage}% completado
-										</span>
-									</div>
-								</div>
-							</div>
-						) : null /* Optional: Render nothing if profile >= 50% and no currentCourse */
-					}
+						)}
+					</div>
 				</div>
 
 				{/* Recommended Resources Section - Mobile: 5th, Desktop: 5th in 2nd/3rd Col */}

@@ -10,6 +10,7 @@ interface CurrentCourseType {
 	product_code: any;
 	product_code_cedente: any;
 	resource: any;
+	link?: any;
 }
 
 // Define new interfaces for the API response
@@ -236,7 +237,41 @@ export async function GET(request: NextRequest) {
 
 		const getCurrentCourse = async (rawCourseProgress: CourseProgress[] | undefined): Promise<CurrentCourseType | null> => {
 			if (!rawCourseProgress || rawCourseProgress.length === 0) {
-				return null;
+				// Fetch the latest course from products endpoint if no courses in progress
+				try {
+					/* https://cms1.msklatam.com/wp-json/msk/v1/products?lang=ar&page=1&per_page=1&nocache=1 */
+					const productsResponse = await fetch(
+						`https://cms1.msklatam.com/wp-json/msk/v1/products?lang=${lang}&page=1&per_page=1&nocache=1`,
+						{
+							headers: { Accept: 'application/json' },
+							next: { revalidate: 3600 * 7 },
+						},
+					);
+
+					if (!productsResponse.ok) {
+						console.error(`Failed to fetch latest product: ${productsResponse.status}`);
+						return null;
+					}
+
+					const products = await productsResponse.json();
+					if (!products || products.length === 0) return null;
+
+					const latestProduct = products.data[0];
+					return {
+						product_code: latestProduct.product_code || '',
+						product_code_cedente: '',
+						id: latestProduct.id,
+						image: latestProduct.featured_images.high,
+						title: latestProduct.title,
+						crm_id: latestProduct.product_code || '',
+						completed_percentage: null,
+						resource: latestProduct.resource,
+						link: latestProduct.link,
+					};
+				} catch (error) {
+					console.error('Error fetching latest product:', error);
+					return null;
+				}
 			}
 
 			const activeProgressList = rawCourseProgress.filter(
@@ -244,7 +279,37 @@ export async function GET(request: NextRequest) {
 			);
 
 			if (activeProgressList.length === 0) {
-				return null;
+				// Fetch the latest course from products endpoint if no active courses
+				try {
+					const productsResponse = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/products?lang=${lang}&limit=1`, {
+						headers: { Accept: 'application/json' },
+						next: { revalidate: 3600 * 7 },
+					});
+
+					if (!productsResponse.ok) {
+						console.error(`Failed to fetch latest product: ${productsResponse.status}`);
+						return null;
+					}
+
+					const products = await productsResponse.json();
+					if (!products || products.length === 0) return null;
+
+					const latestProduct = products[0];
+
+					return {
+						product_code: latestProduct.product_code || '',
+						product_code_cedente: '',
+						id: latestProduct.id,
+						image: latestProduct.image,
+						title: latestProduct.title,
+						crm_id: latestProduct.product_code || '',
+						completed_percentage: 0,
+						resource: latestProduct.resource,
+					};
+				} catch (error) {
+					console.error('Error fetching latest product:', error);
+					return null;
+				}
 			}
 
 			const latestCourseProgress =
