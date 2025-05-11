@@ -211,27 +211,34 @@ export async function GET(request: NextRequest) {
 			workArea: string | null | undefined,
 			apiInterests: CustomerApiResponse['interests'] | undefined,
 		) => {
-			let percentage = 25; // Base percentage for simple registration
+			// Base percentage for simple registration
+			let percentage = 25;
 
-			// Rule 2: Profession, specialty, country, and phone completed
-			if (profession && specialty && country && phone) {
+			// Check for interests
+			const hasInterests =
+				apiInterests &&
+				(apiInterests.specialty_interests?.length ||
+					apiInterests.content_interests?.length ||
+					apiInterests.other_interests?.length);
+
+			// Check for basic profile data
+			const hasBasicProfile = profession && specialty && country && phone;
+
+			// Check for complete profile data
+			const hasCompleteProfile = hasBasicProfile && workplace && workArea;
+
+			// Calculate percentage based on completion levels
+			if (hasCompleteProfile && hasInterests) {
+				// Complete profile with interests
+				percentage = 100;
+			} else if (hasCompleteProfile) {
+				// Complete profile without interests
+				percentage = 75;
+			} else if (hasBasicProfile || hasInterests) {
+				// Either basic profile or interests completed
 				percentage = 50;
-
-				// Rule 3: Institution (workplace) and work area completed (cumulative)
-				if (workplace && workArea) {
-					percentage = 75;
-
-					// Rule 4: Interests completed (cumulative)
-					const hasInterests =
-						apiInterests &&
-						(apiInterests.specialty_interests?.length ||
-							apiInterests.content_interests?.length ||
-							apiInterests.other_interests?.length);
-					if (hasInterests) {
-						percentage = 100;
-					}
-				}
 			}
+
 			return percentage;
 		};
 

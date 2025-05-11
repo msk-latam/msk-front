@@ -78,9 +78,13 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 	}, [signupSuccess, setSubmitted]);
 
 	const onSubmit = async (data: { phone: string; email: string; first_name: string; last_name: string }) => {
+		const currentPath = window.location.pathname;
+		const langMatch = currentPath.match(/^\/([^\/]+)\/login/);
+		const lang = langMatch ? langMatch[1] : '';
+
 		const payload = {
 			...data,
-			country: 'AR',
+			country: lang || 'AR',
 			phone: `${data.phone}`,
 			Terms_And_Conditions: true,
 			email: data.email,
