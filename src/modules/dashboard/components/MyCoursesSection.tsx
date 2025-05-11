@@ -55,6 +55,7 @@ interface Course {
 	isFavorite?: boolean;
 	product_code?: number;
 	product_code_cedente?: string;
+	link_al_foro?: string;
 }
 
 const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = ({ courseData, userEmail }) => {
@@ -245,7 +246,13 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 			case 'Sin enrolar':
 				return (
 					<>
-						<button className={secondaryButtonClass}>Ir al foro</button>
+						<button
+							className={`${secondaryButtonClass} ${!course?.link_al_foro ? 'opacity-50 cursor-not-allowed' : ''}`}
+							onClick={() => course?.link_al_foro && window.open(course.link_al_foro, '_blank')}
+							disabled={!course?.link_al_foro}
+						>
+							Ir al foro
+						</button>
 						<CtaButton
 							onClick={async () => {
 								if (course.product_code && course.product_code_cedente && userEmail) {

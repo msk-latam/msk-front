@@ -355,8 +355,8 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 							// Variant 2: Profile >= 50% OR no recommendedCourseData available (Started/In Progress) - Original card
 							<div className='bg-cover bg-top h-[300px] rounded-[30px] relative flex flex-col justify-center p-[36px] text-white overflow-hidden'>
 								<div
-									className='absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 bg-cover bg-top'
-									style={{ backgroundImage: `url(${data?.currentCourse?.image?.high})` }}
+									className='absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 bg-cover bg-center'
+									style={{ backgroundImage: `url(${data?.currentCourse?.image})` }}
 								></div>
 								{/* Overlay gradient */}
 								<div

@@ -182,26 +182,23 @@ export async function GET(request: NextRequest) {
 			detailedRecommendedCourses = detailedRecommendedCourses.filter((course) => course !== null); // Filter out nulls
 		}
 
-		const fetchCourseImage = async (courseName: string) => {
-			try {
-				const imageRes = await fetch(
-					`https://cms1.msklatam.com/wp-json/msk/v1/course-image?name=${encodeURIComponent(courseName)}`,
-					{
-						headers: { Accept: 'application/json' },
-						next: { revalidate: 3600 * 7 }, // Cache for 7 hours
-					},
-				);
+		const fetchCourseData = async (courseCode: string | number, courseName: string, lang: string) => {
+			const courseCmsData = await fetch(
+				`https://cms1.msklatam.com/wp-json/msk/v1/course-data/${encodeURIComponent(
+					courseCode,
+				)}?lang=${lang}&name=${encodeURIComponent(courseName)}`,
+				{
+					headers: { Accept: 'application/json' },
+					next: { revalidate: 3600 * 7 },
+				},
+			);
 
-				if (!imageRes.ok) {
-					console.error(`Failed to fetch image for course: ${courseName}, status: ${imageRes.status}`);
-					return null;
-				}
-				const imageData = await imageRes.text();
-				return imageData.trim().replace(/^"|"$/g, '');
-			} catch (error) {
-				console.error(`Error fetching image for course: ${courseName}`, error);
+			if (!courseCmsData.ok) {
+				console.error(`CMS fetch failed for course ${courseCode} - ${courseName}: ${courseCmsData.status}`);
 				return null;
 			}
+			const courseCmsDataJson = await courseCmsData.json();
+			return courseCmsDataJson;
 		};
 
 		const calculateProfileCompletion = (
@@ -260,38 +257,26 @@ export async function GET(request: NextRequest) {
 					  });
 
 			if (!latestCourseProgress) {
-				// Should be unreachable if activeProgressList has items
 				return null;
 			}
 
 			try {
-				const courseCmsRes = await fetch(
-					`https://cms1.msklatam.com/wp-json/msk/v1/products?search=${encodeURIComponent(latestCourseProgress.course_name)}`,
-					{
-						headers: { Accept: 'application/json' },
-						next: { revalidate: 3600 * 7 },
-					},
+				const cmsCourseDetail = await fetchCourseData(
+					latestCourseProgress.product_code,
+					latestCourseProgress.course_name,
+					lang,
 				);
 
-				if (!courseCmsRes.ok) {
-					console.error(`CMS fetch failed for current course ${latestCourseProgress.course_name}: ${courseCmsRes.status}`);
+				if (!cmsCourseDetail) {
 					return null;
 				}
-				const courseCmsData = await courseCmsRes.json();
-
-				if (!courseCmsData || !courseCmsData.data || courseCmsData.data.length === 0) {
-					console.warn(`No CMS data found for current course: ${latestCourseProgress.course_name}`);
-					return null;
-				}
-
-				const cmsCourseDetail = courseCmsData.data[0];
 
 				return {
 					product_code: latestCourseProgress.product_code,
 					product_code_cedente: latestCourseProgress.transferor_course_code,
 					id: cmsCourseDetail?.id, // CMS ID
-					image: cmsCourseDetail?.featured_images,
-					title: cmsCourseDetail?.title || latestCourseProgress.course_name,
+					image: cmsCourseDetail?.image,
+					title: cmsCourseDetail?.title,
 					crm_id: latestCourseProgress.product_code, // Using product_code as CRM identifier for the course
 					completed_percentage: parseFloat(latestCourseProgress.advance?.replace(',', '.')) || 0,
 					resource: cmsCourseDetail?.resource,
@@ -302,13 +287,6 @@ export async function GET(request: NextRequest) {
 			}
 		};
 
-		// This function is kept for structure but will return empty as `courseRecommendations` source is removed.
-		// const getRecommendedResourcesByInterests = async (
-		// 	_courseRecommendations: string[], // This will be an empty array
-		// ): Promise<any[]> => {
-		// 	return [];
-		// };
-
 		// Process courses in parallel and wait for all to complete
 		const processedCoursesInProgress = await Promise.all(
 			(customerData.course_progress || []).map(async (cp: CourseProgress) => {
@@ -318,17 +296,21 @@ export async function GET(request: NextRequest) {
 					statusText = `${advanceNumeric}% completado`;
 				}
 
+				const courseCmsData = await fetchCourseData(cp.product_code, cp.course_name, lang);
+
 				return {
-					image: await fetchCourseImage(cp.course_name),
+					image: courseCmsData?.image,
 					product_code: cp.product_code,
 					product_code_cedente: cp.transferor_course_code,
+					product_id: courseCmsData?.id,
 					id: cp.entity_id_crm, // Using the CRM ID of the progress record itself
 					status: cp.end_date != null || cp.enroll_status === 'Finalizado' ? 'finished' : 'progress',
-					title: cp.course_name,
+					title: courseCmsData?.title,
 					expiryDate: cp.expiration_date || cp.deadline_enroll,
 					qualification: cp.score,
 					statusType: cp.enroll_status,
 					statusText: statusText,
+					link_al_foro: courseCmsData?.link_al_foro,
 					// Keep original data if frontend needs it, or for debugging
 					_original_advance: cp.advance,
 					_original_entity_id_crm: cp.entity_id_crm,
