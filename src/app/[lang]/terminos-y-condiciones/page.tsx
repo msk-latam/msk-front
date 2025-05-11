@@ -95,7 +95,7 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 				}}
 			>
 				<Navbar />
-				<GenericHeader title={displayTitle} description={initialPageData.description} />
+				<GenericHeader title={'Términos y condiciones'} description={initialPageData.description} />
 			</header>
 
 			<main className='bg-[#f3f4f6] flex justify-center px-0 sm:px-4 relative pt-0 pb-20  md:mb-0'>
