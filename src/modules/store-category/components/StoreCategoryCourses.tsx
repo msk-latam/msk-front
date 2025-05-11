@@ -1,12 +1,12 @@
 'use client';
 
+import CourseCardSkeleton from '@/modules/store/components/CourseCardSkeleton'; // Import Skeleton
+import Pagination from '@/modules/store/components/Pagination'; // Import Pagination
+import StoreCoursesHead from '@/modules/store/components/StoreCoursesHead';
 import { Course, CoursesApiResponse } from '@/types/course'; // Import types
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'; // Added useRouter, usePathname
 import React, { useEffect, useState } from 'react'; // Added useRef, useCallback
-import CourseCardSkeleton from '@/modules/store/components/CourseCardSkeleton'; // Import Skeleton
-import Pagination from '@/modules/store/components/Pagination'; // Import Pagination
-import StoreCoursesHead from '@/modules/store/components/StoreCoursesHead';
 
 // Define your filter keys if you need to be specific
 const filterKeys = ['especialidades', 'recurso', 'profesion', 'duracion'];
@@ -188,7 +188,7 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 							return (
 								<Link href={courseUrl} key={course.id} className='border rounded-[30px] bg-white flex flex-col'>
 									<img
-										src={course.featured_images.medium}
+										src={course.featured_images.high}
 										alt={course.title}
 										className='w-full h-48 object-cover rounded-t-[30px]'
 									/>

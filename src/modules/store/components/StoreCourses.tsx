@@ -188,7 +188,7 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 							return (
 								<Link href={courseUrl} key={course.id} className='border rounded-[30px] bg-white flex flex-col'>
 									<img
-										src={course.featured_images.medium}
+										src={course.featured_images.high}
 										alt={course.title}
 										className='w-full h-48 object-cover rounded-t-[30px]'
 									/>

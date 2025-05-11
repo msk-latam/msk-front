@@ -27,6 +27,7 @@ export interface Course {
 		medium: string;
 		large: string;
 		full: string;
+		high: string;
 	};
 	prices: {
 		is_free: boolean;
