@@ -142,8 +142,7 @@ export default function DashboardPage() {
 			identification: formDataFromModal.documentNumber,
 			document_type: formDataFromModal.document_type,
 			company_name: formDataFromModal.company_name,
-			invoice_required:
-				formDataFromModal.invoice_required === 'yes' ? 1 : formDataFromModal.invoice_required === 'no' ? 0 : undefined,
+			invoice_required: formDataFromModal.invoice_required ? parseInt(formDataFromModal.invoice_required as string, 10) : 0,
 			billing_email: formDataFromModal.billingEmail,
 			billing_phone: formDataFromModal.fullBillingPhoneNumber,
 			tax_regime: formDataFromModal.tax_regime,

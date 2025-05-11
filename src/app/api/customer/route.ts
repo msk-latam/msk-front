@@ -20,7 +20,7 @@ interface UpdateCustomerPayload {
 	canton_place?: string;
 	parish_place?: string;
 	income_source?: string;
-	invoice_required?: boolean;
+	invoice_required?: number;
 	billing_email?: string;
 	billing_phone?: string;
 	tax_regime?: string;

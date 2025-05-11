@@ -508,8 +508,9 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 								label='¿Requiere factura fiscal?'
 								name='invoice_required'
 								options={[
-									{ label: 'Sí', value: 'yes' },
-									{ label: 'No', value: 'no' },
+									{ label: 'No requiere', value: 0 },
+									{ label: 'Factura fiscal personal', value: 1 },
+									{ label: 'Factura fiscal para tercero', value: 2 },
 								]}
 								value={formData.invoice_required}
 								onChange={handleSelectChange}
