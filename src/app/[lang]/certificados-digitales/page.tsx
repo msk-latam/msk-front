@@ -86,7 +86,7 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 
 	const displayContent = `
         <i>
-<strong>
+<strong style="font-size: 30px">
 Un nuevo estándar en la validación académica
 </strong>
 </i>
@@ -100,17 +100,19 @@ certificados digitales con tecnología blockchain.
 <br />
 
 Este avance marca un diferencial en nuestra propuesta institucional, alineada con los principios de innovación, accesibilidad y excelencia que nos definen. Conoce más 
-<a href="/nosotros" target="_blank" rel="noopener noreferrer">
+<a href="/nosotros" target="_blank" rel="noopener noreferrer" style="color: #9200AD;"
+>
 sobre nosotros</a>
  y 
- <a href="/mision" target="_blank" rel="noopener noreferrer">
+ <a href="/mision" target="_blank" rel="noopener noreferrer" style="color: #9200AD;">
  nuestra misión educativa.</a>
-<br />
 
-<h3>
+ <br /><br />
+
+<h3 style="font-size: 30px">
 Qué es la tecnología blockchain y por qué la usamos
 </h3>
-
+<br />
 <br />
 
 Blockchain es una tecnología de registro digital que permite almacenar datos de forma segura, inviolable y transparente. Cada certificado emitido con esta tecnología puede verificarse online y no puede ser modificado ni falsificado.
@@ -119,27 +121,31 @@ Blockchain es una tecnología de registro digital que permite almacenar datos de
 
 Esto garantiza la validez internacional de tu capacitación y te permite compartir tus logros de manera confiable con instituciones, empleadores y redes profesionales como LinkedIn.
 <br />
-<h3>
+<br />
+<h3 style="font-size: 30px">
 Qué incluye tu certificado digital
 </h3>
+<br />
 <ul style="list-style: disc; padding-left: 1.5rem;">
-    <li>• Nombre y apellido</li>
-    <li>• Título del curso aprobado</li>
-    <li>• Fecha de finalización</li>
-    <li>• Instituciones que avalan la capacitación</li>
-    <li>• Código QR de validación</li>
+    <li>Nombre y apellido</li>
+    <li>Título del curso aprobado</li>
+    <li>Fecha de finalización</li>
+    <li>Instituciones que avalan la capacitación</li>
+    <li>Código QR de validación</li>
   </ul>
 <br />
 
 <div>
-    <img src="/public/webp-images/misc/certification.png" alt="Certificación" style="width: 100%; " />
+    <img src="/misc/certification.png" alt="Certificación" style="width: 100%; " />
   </div>
-
-Mira un cerificado digital modelo. <a href="https://app.certika.co/certificate/OTgyMTg=" target="_blank" rel="noopener noreferrer">Haz click aquí.</a>
 <br />
-<h3>
+Mira un cerificado digital modelo. <a href="https://app.certika.co/certificate/OTgyMTg=" target="_blank" rel="noopener noreferrer" style="color: #9200AD;">Haz click aquí.</a>
+<br />
+<br />
+<h3 style="font-size: 30px">
 Cómo obtener tu certificado digital
 </h3>
+<br />
 <br />
 
 
@@ -171,9 +177,9 @@ Una vez cumplidos, recibirás tu certificado digital por correo, listo para desc
 
 Accede a estos artículos del Centro de ayuda para más información.
 <br />
- <a href="https://ayuda.msklatam.com/portal/es/kb/articles/mi-certificado-con-tecnologia-blockchain" target="_blank" rel="noopener noreferrer">
+ <a href="https://ayuda.msklatam.com/portal/es/kb/articles/mi-certificado-con-tecnologia-blockchain" target="_blank" rel="noopener noreferrer" style="color: #9200AD;">
 Mi certificado con tecnología blockchain</a>
- | <a href="https://ayuda.msklatam.com/portal/es/kb/articles/obtener-mi-certificado" target="_blank" rel="noopener noreferrer">
+ | <a href="https://ayuda.msklatam.com/portal/es/kb/articles/obtener-mi-certificado" target="_blank" rel="noopener noreferrer" style="color: #9200AD;">
  Obtener mi certificado</a>
 <br />
 <br />
@@ -198,7 +204,7 @@ Mi certificado con tecnología blockchain</a>
 				<section className='w-full -mt-[40px] z-[10] relative overflow-visible max-w-[1400px] mx-auto'>
 					<div className='mb-4 bg-white rounded-[30px] p-[36px]'>
 						{/* Render the HTML content from the API */}
-						<div className='whitespace-pre-line ' dangerouslySetInnerHTML={{ __html: displayContent }} />
+						<div className='space-y-5 text-xl' dangerouslySetInnerHTML={{ __html: displayContent }} />
 					</div>
 				</section>
 			</main>
