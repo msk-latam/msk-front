@@ -340,10 +340,10 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 							{/* Group Label and Title */}
 							<div className='flex flex-col items-start gap-4'>
 								<span className='bg-[#DFE6FF] text-[#29324F] font-inter font-normal text-sm md:text-base rounded-full px-3 py-1.5'>
-									{data?.currentCourse.completed_percentage === null ? 'Recomendado para ti' : 'Continúa tu aprendizaje'}
+									{data?.currentCourse?.completed_percentage === null ? 'Recomendado para ti' : 'Continúa tu aprendizaje'}
 								</span>
 								<h2 className='text-white font-raleway font-[700] text-[24px] md:text-[36px] leading-[26px] md:leading-[44px] max-w-[25ch]'>
-									{data?.currentCourse.title}
+									{data?.currentCourse?.title}
 								</h2>
 							</div>
 							{/* Button - Aligned below title on mobile, right on desktop */}
@@ -351,13 +351,15 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 							<div className='w-auto mt-4 md:mt-0'>
 								<CtaButton
 									onClick={() => {
-										if (data?.currentCourse.completed_percentage === null) {
+										if (data?.currentCourse?.completed_percentage === null) {
 											const currentPath = window.location.pathname;
 											const langMatch = currentPath.match(/^\/([^\/]+)\/dashboard/);
 											const lang = langMatch ? langMatch[1] : '';
-											window.location.href = lang ? `/${lang}/${data?.currentCourse.link}` : `/${data?.currentCourse.link}`;
-										} else if (data?.currentCourse.product_code && data?.currentCourse.product_code_cedente && userEmail) {
-											navigateToLms(data?.currentCourse.product_code, data?.currentCourse.product_code_cedente, userEmail);
+											window.location.href = lang
+												? `/${lang}/${data?.currentCourse?.link}`
+												: `/${data?.currentCourse?.link}`;
+										} else if (data?.currentCourse?.product_code && data?.currentCourse?.product_code_cedente && userEmail) {
+											navigateToLms(data?.currentCourse?.product_code, data?.currentCourse?.product_code_cedente, userEmail);
 										} else {
 											console.error('Missing data for LMS navigation:', data?.currentCourse);
 										}
@@ -367,21 +369,21 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 								>
 									{isNavigating
 										? 'Cargando...'
-										: data?.currentCourse.completed_percentage === null
+										: data?.currentCourse?.completed_percentage === null
 										? 'Descubrir'
 										: 'Continuar'}
 								</CtaButton>
 							</div>
 						</div>
 						{/* Progress Bar */}
-						{data?.currentCourse.completed_percentage !== null && (
+						{data?.currentCourse?.completed_percentage !== null && (
 							<div className='w-full h-[40px] bg-[#00000033] absolute bottom-0 left-0'>
 								<div
 									className='h-full bg-[#00000080] px-[36px] flex items-center justify-start transition-width duration-300 ease-in-out'
-									style={{ width: `${data?.currentCourse.completed_percentage}%` }}
+									style={{ width: `${data?.currentCourse?.completed_percentage}%` }}
 								>
 									<span className='text-white font-inter font-medium text-base leading-[24px] whitespace-nowrap'>
-										{data?.currentCourse.completed_percentage}% completado
+										{data?.currentCourse?.completed_percentage}% completado
 									</span>
 								</div>
 							</div>

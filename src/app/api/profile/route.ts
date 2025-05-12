@@ -246,6 +246,8 @@ export async function GET(request: NextRequest) {
 		const getCurrentCourse = async (rawCourseProgress: CourseProgress[] | undefined): Promise<CurrentCourseType | null> => {
 			if (!rawCourseProgress || rawCourseProgress.length === 0) {
 				// Fetch the latest course from products endpoint if no courses in progress
+				console.log('Fetching latest course from products endpoint');
+
 				try {
 					/* https://cms1.msklatam.com/wp-json/msk/v1/products?lang=ar&page=1&per_page=1&nocache=1 */
 					const productsResponse = await fetch(
@@ -281,10 +283,18 @@ export async function GET(request: NextRequest) {
 					return null;
 				}
 			}
+			console.log('Fetching current course');
+			console.log(rawCourseProgress);
 
+			// Filter for active courses - courses with null end_date and 'Activo' status
+			// Also include courses with 'Sin enrolar' status as they appear in the sample data
 			const activeProgressList = rawCourseProgress.filter(
-				(course: CourseProgress) => course.end_date === null && course.enroll_status === 'Activo',
+				(course: CourseProgress) =>
+					course.end_date === null && (course.enroll_status === 'Activo' || course.enroll_status === 'Sin enrolar'),
 			);
+
+			console.log('Active progress list');
+			console.log(activeProgressList);
 
 			if (activeProgressList.length === 0) {
 				// Fetch the latest course from products endpoint if no active courses
