@@ -50,6 +50,34 @@ export async function PUT(request: NextRequest) {
 		return NextResponse.json({ message: 'Invalid request body.' }, { status: 400 });
 	}
 
+	// if (requestBody.invoice_required !== undefined) {
+	// 	let numericValue: number | undefined = undefined;
+	// 	if (typeof requestBody.invoice_required === 'string') {
+	// 		const parsedValue = parseInt(requestBody.invoice_required, 10);
+	// 		if (!isNaN(parsedValue)) {
+	// 			numericValue = parsedValue;
+	// 		} else {
+	// 			console.error('Invalid string value for invoice_required:', requestBody.invoice_required);
+	// 			return NextResponse.json({ message: 'Invalid value for invoice_required. Must be 0, 1, or 2.' }, { status: 400 });
+	// 		}
+	// 	} else if (typeof requestBody.invoice_required === 'number') {
+	// 		numericValue = requestBody.invoice_required;
+	// 	} else {
+	// 		console.error('Invalid type for invoice_required:', typeof requestBody.invoice_required);
+	// 		return NextResponse.json({ message: 'Invalid type for invoice_required. Must be a number.' }, { status: 400 });
+	// 	}
+
+	// 	// Temporary workaround: Convert invoice_required to boolean before sending to backend
+	// 	if (numericValue === 0) {
+	// 		(requestBody as any).invoice_required = false;
+	// 	} else if (numericValue === 1 || numericValue === 2) {
+	// 		(requestBody as any).invoice_required = true;
+	// 	} else {
+	// 		// Keep the original number if it's not 0, 1, or 2 (though unlikely based on frontend)
+	// 		requestBody.invoice_required = numericValue;
+	// 	}
+	// }
+
 	try {
 		console.log('email', email);
 		console.log('requestBody', requestBody);

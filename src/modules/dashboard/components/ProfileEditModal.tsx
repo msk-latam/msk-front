@@ -552,9 +552,9 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 								placeholder='Ingresar razón social'
 							/>
 							<Select
-								id='documentType'
+								id='document_type'
 								label='Tipo de identificación'
-								name='documentType'
+								name='document_type'
 								options={documentTypes}
 								value={formData.document_type || ''}
 								onChange={handleSelectChange}
