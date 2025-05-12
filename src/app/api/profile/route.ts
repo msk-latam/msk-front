@@ -264,7 +264,11 @@ export async function GET(request: NextRequest) {
 					const products = await productsResponse.json();
 					if (!products || products.length === 0) return null;
 
-					const latestProduct = products.data[0];
+					let latestProduct = products.data[0];
+
+					if(!latestProduct)
+						return null;
+
 					return {
 						product_code: latestProduct.product_code || '',
 						product_code_cedente: '',
