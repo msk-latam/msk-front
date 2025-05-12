@@ -212,6 +212,8 @@ export async function GET(request: NextRequest) {
 			workArea: string | null | undefined,
 			apiInterests: CustomerApiResponse['interests'] | undefined,
 		) => {
+			console.log('Calculating profile completion');
+			console.log(profession, specialty, country, phone, workplace, workArea, apiInterests);
 			// Base percentage for simple registration
 			let percentage = 25;
 
@@ -255,7 +257,7 @@ export async function GET(request: NextRequest) {
 						{
 							headers: { Accept: 'application/json' },
 							// next: { revalidate: 3600 * 7 },
-							 cache: 'no-store'
+							cache: 'no-store',
 						},
 					);
 
@@ -269,8 +271,7 @@ export async function GET(request: NextRequest) {
 
 					let latestProduct = products.data[0];
 
-					if(!latestProduct)
-						latestProduct = {};
+					if (!latestProduct) latestProduct = {};
 
 					return {
 						product_code: latestProduct?.product_code || '',
@@ -283,7 +284,6 @@ export async function GET(request: NextRequest) {
 						resource: latestProduct.resource,
 						link: latestProduct.link,
 					};
-
 				} catch (error) {
 					console.error('Error fetching latest product:', error);
 					return null;
@@ -312,16 +312,16 @@ export async function GET(request: NextRequest) {
 
 					if (!productsResponse.ok) {
 						console.error(`Failed to fetch latest product: ${productsResponse.status}`);
-						return  {
-								product_code: "",
-								product_code_cedente: "",
-								id: "", // CMS ID
-								image: "",
-								title: "Curso 0",
-								crm_id: "", // Using product_code as CRM identifier for the course
-								completed_percentage: 0,
-								resource: "",
-							};
+						return {
+							product_code: '',
+							product_code_cedente: '',
+							id: '', // CMS ID
+							image: '',
+							title: 'Curso 0',
+							crm_id: '', // Using product_code as CRM identifier for the course
+							completed_percentage: 0,
+							resource: '',
+						};
 					}
 
 					const products = await productsResponse.json();
@@ -355,15 +355,15 @@ export async function GET(request: NextRequest) {
 					  });
 
 			if (!latestCourseProgress) {
-				return  {
-					product_code: "",
-					product_code_cedente: "",
-					id: "", // CMS ID
-					image: "",
-					title: "Curso 2",
-					crm_id: "", // Using product_code as CRM identifier for the course
+				return {
+					product_code: '',
+					product_code_cedente: '',
+					id: '', // CMS ID
+					image: '',
+					title: 'Curso 2',
+					crm_id: '', // Using product_code as CRM identifier for the course
 					completed_percentage: 0,
-					resource: "",
+					resource: '',
 				};
 			}
 
@@ -376,15 +376,15 @@ export async function GET(request: NextRequest) {
 
 				if (!cmsCourseDetail) {
 					return {
-					product_code: "",
-					product_code_cedente: "",
-					id: "", // CMS ID
-					image: "",
-					title: "Curso 3",
-					crm_id: "", // Using product_code as CRM identifier for the course
-					completed_percentage: 0,
-					resource: "",
-				};
+						product_code: '',
+						product_code_cedente: '',
+						id: '', // CMS ID
+						image: '',
+						title: 'Curso 3',
+						crm_id: '', // Using product_code as CRM identifier for the course
+						completed_percentage: 0,
+						resource: '',
+					};
 				}
 
 				return {
@@ -457,6 +457,40 @@ export async function GET(request: NextRequest) {
 					customerData.interests.other_interests.filter((i) => i !== null) as string[],
 				);
 			}
+		}
+
+		/* por ultimo, obtener los intereses adicionales de la api/interests */
+		const interestsResponse = await fetch(`${process.env.NEXT_PUBLIC_PUBLIC_URL}/api/customer/interests/${email}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+
+		let additionalInterests = [];
+		if (interestsResponse.ok) {
+			if (interestsResponse.headers.get('Content-Length') !== '0') {
+				const interestsData = await interestsResponse.json();
+				additionalInterests = interestsData;
+			}
+		} else {
+			console.error(`Failed to fetch interests: ${interestsResponse.status}`);
+		}
+
+		/*  Comparar los intereses adicionales con los intereses del usuario, si tienen los mismos, no hacer nada, si no tienen los mismos, agregar los intereses adicionales al usuario */
+		console.log('additionalInterests', additionalInterests);
+		console.log('customerData', customerData.interests);
+		if (additionalInterests && customerData) {
+			if (!customerData.interests) {
+				customerData.interests = {
+					specialty_interests: null,
+					content_interests: null,
+					other_interests: null,
+				};
+			}
+			customerData.interests.other_interests = additionalInterests.other_interests;
+			customerData.interests.content_interests = additionalInterests.content_interests;
+			customerData.interests.specialty_interests = additionalInterests.specialty_interests;
 		}
 
 		const user = {
