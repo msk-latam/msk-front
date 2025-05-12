@@ -19,7 +19,7 @@ const IP_API = `${API_BACKEND_LARAVEL}/getCountryByIP`;
 let COUNTRY: string | null = "";
 let isProductionEnv: boolean = false;
 
-if (typeof window !== "undefined") {
+if (typeof window != "undefined" && window) {
   COUNTRY = localStorage.getItem("country");
   isProductionEnv = window.location.hostname === "msklatam.com";
 }

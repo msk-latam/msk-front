@@ -6,6 +6,9 @@ export function urlFormat(inputUrl: any) {
 	if(!inputUrl)
 		return "#";
 
+	if(!window)
+		return inputUrl;
+	
 	const { pathname, origin } = window.location;
 
 	const isRelative = !/^(http|https):\/\//i.test(inputUrl);
