@@ -29,7 +29,7 @@ const CheckoutState: React.FC = () => {
 			buttons: [
 				{
 					label: 'Ir a mis cursos',
-					action: () => window.open('/mi-perfil', '_blank'),
+					action: () => open('/mi-perfil', '_blank'),
 					color: '#9200AD',
 				},
 			],
@@ -53,7 +53,7 @@ const CheckoutState: React.FC = () => {
 			buttons: [
 				{
 					label: 'Ir al centro de ayuda',
-					action: () => window.open('https://ayuda.msklatam.com/', '_blank'),
+					action: () => open('https://ayuda.msklatam.com/', '_blank'),
 					color: 'transparent',
 					textColor: '#9200AD',
 				},
