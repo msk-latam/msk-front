@@ -275,7 +275,7 @@ const StoreFilters = ({ isMobile = false, isModalOpen = false, onModalClose = ()
 	}
 
 	// For desktop view, render normally
-	return <div className='md:col-span-1 md:row-span-3 order-1 md:order-1'>{filtersContent}</div>;
+	return <div className='md:col-span-1 md:row-span-3 order-1 md:order-1 space-y-4'>{filtersContent}</div>;
 };
 
 export default StoreFilters;

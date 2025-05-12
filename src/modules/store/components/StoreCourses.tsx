@@ -46,6 +46,9 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 	const [searchTerm, setSearchTerm] = useState<string>('');
 	const debouncedSearchTerm = useDebounce(searchTerm, 500); // 500ms debounce
 
+	// State for sorting - default to 'novedades'
+	const [sortKey, setSortKey] = useState<string>('novedades');
+
 	// Calculate the total count of selected filter *options*
 	let totalSelectedOptionsCount = 0;
 	searchParams?.forEach((value, key) => {
@@ -56,9 +59,19 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 		}
 	});
 
-	// Effect to initialize searchTerm from URL on mount
+	// Effect to initialize searchTerm from URL on mount and sortKey from localStorage
 	useEffect(() => {
 		setSearchTerm(searchParams?.get('search') || '');
+		// Initialize sortKey from localStorage only on the client side
+		if (typeof window !== 'undefined') {
+			const storedSortKey = localStorage.getItem('storeSortKey');
+			if (storedSortKey) {
+				setSortKey(storedSortKey);
+			} else {
+				// If nothing in localStorage, explicitly set to 'novedades' (matching useState default)
+				setSortKey('novedades');
+			}
+		}
 	}, []); // Run only once on mount
 
 	// Effect to update URL when debounced search term changes
@@ -66,8 +79,6 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 		const current = new URLSearchParams(searchParams?.toString());
 		const currentSearch = current.get('search');
 
-		// Update URL only if debounced term is different from current URL search param
-		// or if it's empty and the param exists
 		if (debouncedSearchTerm !== (currentSearch || '')) {
 			const params = new URLSearchParams(searchParams?.toString());
 			if (debouncedSearchTerm) {
@@ -75,8 +86,7 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 			} else {
 				params.delete('search');
 			}
-			// Reset page to 1 when search term changes
-			params.set('page', '1');
+			params.set('page', '1'); // Reset page when search term changes
 			router.push(`${pathname}?${params.toString()}`, { scroll: false });
 		}
 	}, [debouncedSearchTerm, searchParams, pathname, router]);
@@ -122,6 +132,26 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 				}
 				// NOTE: The 'search' parameter is already in `params` because the previous useEffect updated the URL
 
+				// Add sorting parameters based on sortKey state
+				params.delete('sort'); // Ensure no 'sort' param from URL is used
+				params.delete('orderby'); // Clear previous orderby
+				params.delete('order'); // Clear previous order
+
+				if (sortKey === 'precio-asc') {
+					params.set('orderby', 'price');
+					params.set('order', 'asc');
+				} else if (sortKey === 'precio-desc') {
+					params.set('orderby', 'price');
+					params.set('order', 'desc');
+				} else if (sortKey === 'novedades') {
+					// 'novedades' is the default and maps to newest items using 'newly'
+					params.set('orderby', 'newly');
+					// The 'order' parameter is typically not needed when orderby='newly'
+					// params.delete('order'); // Ensure order is not set if newly implies it
+				}
+				// If sortKey is 'relevancia' (or any other value not explicitly handled),
+				// no orderby/order parameters are set, relying on the API's default sorting.
+
 				const page = params.get('page') || '1';
 				setCurrentPage(parseInt(page, 10));
 
@@ -156,10 +186,23 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 		};
 
 		fetchCourses();
-	}, [searchParams]); // Re-fetch ONLY when searchParams change
+	}, [searchParams, lang, sortKey, router, pathname]); // Re-fetch when searchParams, lang, or sortKey change
 
 	const handleSearchChange = (term: string) => {
 		setSearchTerm(term);
+	};
+
+	const handleSortChange = (newSortKey: string) => {
+		setSortKey(newSortKey);
+		if (typeof window !== 'undefined') {
+			localStorage.setItem('storeSortKey', newSortKey);
+		}
+		// Reset page to 1 when sort order changes, and trigger re-fetch via searchParams update
+		const params = new URLSearchParams(searchParams?.toString());
+		params.set('page', '1');
+		// Ensure the 'sort' param is not in the URL we push to
+		params.delete('sort');
+		router.push(`${pathname}?${params.toString()}`, { scroll: false });
 	};
 
 	return (
@@ -169,6 +212,8 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 				searchTerm={searchTerm}
 				onSearchChange={handleSearchChange}
 				onOpenFilters={onOpenFilters}
+				sortKey={sortKey}
+				onSortChange={handleSortChange}
 			/>
 			{isLoading ? (
 				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
