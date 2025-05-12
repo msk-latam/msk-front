@@ -7,6 +7,144 @@
 	"total_products": 262,
 	"posts": [
 		{
+			"id": 340114,
+			"title": "El impacto de la inteligencia artificial en la enfermería",
+			"slug": "impacto-de-la-inteligencia-artificial-en-enfermeria",
+			"permalink": "https://wp.msklatam.com/nota/enfermeria/impacto-de-la-inteligencia-artificial-en-enfermeria/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-impacto-de-la-inteligencia-artificial-en-enfermeria-scaled-e1744907902528.png",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-impacto-de-la-inteligencia-artificial-en-enfermeria-scaled-e1744907902528.png",
+				"1000",
+				"679",
+				""
+			],
+			"excerpt": "El uso de inteligencia artificial en enfermería está transformando la atención sanitaria. Automatización de tareas, apoyo al diagnóstico, personalización de cuidados y nuevas formas de aprendizaje son solo algunas de sus aplicaciones. Este artículo explora los avances, beneficios y desafíos que implica su implementación, tanto en la práctica asistencial como en la gestión, la educación y el futuro del rol enfermero.",
+			"date": "Mayo 11, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 339799,
+					"title": "¿Puede la inteligencia artificial permitir una atención médica más humana?",
+					"slug": "ia-atencion-medica-mas-humana",
+					"link": "https://wp.msklatam.com/nota/medicina/ia-atencion-medica-mas-humana/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-ia-atencion-medica-mas-humana-scaled-e1744661669205.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 339149,
+					"title": "Cómo elige aprender hoy el personal de salud",
+					"slug": "como-aprende-el-personal-de-salud",
+					"link": "https://wp.msklatam.com/nota/e-learning/como-aprende-el-personal-de-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-como-aprende-el-personal-de-salud-scaled-e1744319158197.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 341126,
+					"title": "Por qué la salud laboral es una deuda estructural en la región",
+					"slug": "salud-laboral-una-deuda-estructural",
+					"link": "https://wp.msklatam.com/nota/medicina/salud-laboral-una-deuda-estructural/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-salud-laboral-una-deuda-estructural-scaled-e1745600725761.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 340935,
+					"title": "Precisión, prevención y desafíos en medicina genómica",
+					"slug": "medicina-genomica-precision-y-desafios",
+					"link": "https://wp.msklatam.com/nota/medicina/medicina-genomica-precision-y-desafios/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-medicina-genomica-precision-y-desafios-scaled-e1745500047106.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 340790,
+					"title": "Capacitación y especialización continua: la nueva ruta profesional",
+					"slug": "capacitacion-y-especializacion-continua-en-salud",
+					"link": "https://wp.msklatam.com/nota/e-learning/capacitacion-y-especializacion-continua-en-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-capacitacion-y-especializacion-continua-en-salud-1-scaled-e1745441536261.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				},
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Miguel Angel Mayer, “Inteligencia artificial en atención primaria: un escenario de oportunidades y desafíos”, Atención Primaria, Volume 55, Issue 11, 2023, 102744, ISSN 0212-6567, https://doi.org/10.1016/j.aprim.2023.102744."
+				},
+				{
+					"fuente": "Patricia Torres Peñalosa et al., “El impacto de la inteligencia artificial en la práctica enfermera”, Revista Sanitaria de Investigación, ISSN: 2660-7085, 14 de febrero de 2025."
+				},
+				{
+					"fuente": "Sandra Pérez Calahorra et al, “El impacto transformador de la inteligencia artificial en la enfermería: mejorando la atención y personalizando los cuidados”, Revista Sanitaria de Investigación, ISSN: 2660-7085, 04 de agosto de 2023."
+				},
+				{
+					"fuente": "Marianela Mejías, Yeisy Coronado y Ana Peralta (2022), “Inteligencia artificial en el campo de la enfermería. Implicaciones en la asistencia, administración y educación”, Salud, Ciencia y Tecnología. 2. 88. 10.56294/saludcyt202288."
+				}
+			],
+			"categories": [
+				{
+					"id": 1611,
+					"primary": true,
+					"name": "Enfermería",
+					"slug": "enfermeria",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/enfermeria/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "1611",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1359,
+				"filter": "raw"
+			},
+			"reading_time": "12",
+			"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/"
+		},
+		{
 			"id": 339799,
 			"title": "¿Puede la inteligencia artificial permitir una atención médica más humana?",
 			"slug": "ia-atencion-medica-mas-humana",
