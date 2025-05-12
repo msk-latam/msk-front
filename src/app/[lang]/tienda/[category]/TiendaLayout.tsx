@@ -31,7 +31,7 @@ export default function TiendaLayout({ lang, category = null }: { lang: string; 
 			</header>
 
 			<main className='bg-[#f3f4f6] flex justify-center px-0 sm:px-4 relative pt-0 pb-20 md:mb-0'>
-				<section className='w-full -mt-[40px] z-[10] relative overflow-visible max-w-[1400px] mx-auto'>
+				<section className='w-full -mt-[40px] z-[10] relative overflow-visible max-w-[1600px] mx-auto md:px-4'>
 					<div className='grid grid-cols-1 md:grid-cols-[333px_1fr] gap-5'>
 						{/* Desktop filters */}
 						<div className='hidden md:block'>
