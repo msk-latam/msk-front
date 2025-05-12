@@ -127,6 +127,8 @@ export async function GET(request: NextRequest) {
 		cookies().delete('access_token');
 		cookies().delete('email');
 		cookies().delete('picture');
+		cookies().delete('needsProfileCompletion');
+		cookies().delete('redirectToDashboard');
 		return NextResponse.json({ user: null }, { status: 401 });
 	}
 
@@ -142,6 +144,8 @@ export async function GET(request: NextRequest) {
 			cookies().delete('access_token');
 			cookies().delete('email');
 			cookies().delete('picture');
+			cookies().delete('needsProfileCompletion');
+			cookies().delete('redirectToDashboard');
 			return NextResponse.json(
 				{ user: null, error: `Failed to fetch customer data: ${customerRes.status}` },
 				{ status: customerRes.status },

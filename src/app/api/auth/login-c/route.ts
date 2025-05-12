@@ -28,12 +28,9 @@ export async function POST(request: NextRequest) {
 			body: JSON.stringify({ email, password }),
 		});
 
-		console.log('response', response);
-
 		const data = await response.json();
 
 		if (!response.ok) {
-			console.log('data', data);
 			// Forward the error from the backend API
 			return NextResponse.json({ message: data.message || 'Authentication failed' }, { status: response.status });
 		}
@@ -43,6 +40,43 @@ export async function POST(request: NextRequest) {
 		if (!access_token || typeof expires_at !== 'string') {
 			console.error('Invalid response structure from API (expected string expires_at):', data);
 			return NextResponse.json({ message: 'Invalid response from authentication server' }, { status: 500 });
+		}
+
+		/* llamar a la api de customer, si retorna platform_user en 0, llevar a completar perfil */
+
+		const customerResponse = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/customer/${email}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+			},
+		});
+
+		const customerData = await customerResponse.json();
+		// console.log('customerData', customerData);
+
+		// si el usuario tiene un perfil completo pero aun asi llega plaform_user en 0, poner plataforma_user en 1 y actualizarlo por post
+
+		/* si tiene country, profession !== a -,  specialty !== a -, workplace en null,  work_area en null . Poner */
+
+		// const updateCustomerResponse = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/customer/${email}`, {
+		// 	method: 'PUT',
+		// 	headers: {
+		// 		'Content-Type': 'application/json',
+		// 		Accept: 'application/json',
+		// 	},
+		// 	body: JSON.stringify({ platform_user: 1 }),
+		// });
+
+		// const updateCustomerData = await updateCustomerResponse.json();
+		// console.log('updateCustomerData', updateCustomerData);
+
+		if (customerData.platform_user === 0) {
+			cookies().set('needsProfileCompletion', 'true', {
+				path: '/',
+				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
+				sameSite: 'lax',
+			});
 		}
 
 		const expiresDate = new Date(expires_at);

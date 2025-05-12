@@ -8,7 +8,7 @@ const NewsletterLinks = () => {
 	let lang = 'ar';
 
 	if (typeof window !== 'undefined') {
-		const langMatch = pathname.match(/^\/([^/]+)\//);
+		const langMatch = pathname?.match(/^\/([^/]+)\//);
 		lang = langMatch && langMatch[1].length <= 2 ? langMatch[1] : 'ar';
 	}
 
@@ -28,46 +28,27 @@ const NewsletterLinks = () => {
 				<div className='max-w-[250px]'>
 					<h4 className='text-[18px] font-bold mb-4'>Cursos más elegidos</h4>
 					<ul className='space-y-4 md:font-normal font-[8px] opacity-80'>
-						{data?.sections?.cursos_mas_elegidos.map((s) => {
-							return (
-								<li>
-									<a href={urlFormat(s.url)} className='hover:underline'>
-										{s.title}
-									</a>
-								</li>
-							);
-						})}
+						{data?.sections?.cursos_mas_elegidos.map((s, index) => (
+							<li key={`curso-elegido-${index}`}>
+								<a href={urlFormat(s.url)} className='hover:underline'>
+									{s.title}
+								</a>
+							</li>
+						))}
 					</ul>
-					{/* <ul className="space-y-4 md:font-normal font-[8px] md:whitespace-nowrap opacity-80">
-            <li><a href={buildCourseLink("/tienda/medicina-de-urgencias/")} className="hover:underline">Curso superior de medicina de urgencias</a></li>
-            <li><a href={buildCourseLink("/tienda/medicina-familiar-y-comunitaria/")} className="hover:underline">Curso superior de medicina familiar</a></li>
-            <li><a href={buildCourseLink("/tienda/medicina-estetica-facial/")} className="hover:underline">Curso medicina estética facial</a></li>
-            <li><a href={buildCourseLink("/tienda/accsap/")} className="hover:underline">ACCSAP. Programa de Actualización en <span className="hidden md:block"><br /></span>Cardiología Clínica</a></li>
-            <li><a href={buildCourseLink("/tienda/endocrinologia-y-nutricion/")} className="hover:underline">Curso superior de endocrinología y nutrición</a></li>
-            <li><a href={buildCourseLink("/tienda/experto-en-diabetes/")} className="hover:underline">Experto en diabetes</a></li>
-          </ul> */}
 				</div>
 
 				{/* Columna 2 */}
 				<div className='max-w-[250px]'>
 					<h4 className='text-[18px] font-bold mb-4'>Cursos más buscados</h4>
 					<ul className='space-y-4 font-normal md:whitespace-nowrap opacity-80'>
-						{data?.sections?.cursos_mas_buscados.map((s) => {
-							return (
-								<li>
-									<a href={urlFormat(s.url)} className='hover:underline'>
-										{s.title}
-									</a>
-								</li>
-							);
-						})}
-						{/*
-            <li><a href={buildCourseLink("/tienda/medicina-interna/")} className="hover:underline">Curso medicina interna</a></li>
-            <li><a href={buildCourseLink("/tienda/hematologia-y-hemoterapia/")} className="hover:underline">Curso superior de hematología y hemoterapia</a></li>
-            <li><a href={buildCourseLink("/tienda/neurologia/")} className="hover:underline">Curso superior de neurología</a></li>
-            <li><a href={buildCourseLink("/tienda/auditoria-medica/")} className="hover:underline">Auditoría médica</a></li>
-            <li><a href={buildCourseLink("/tienda/terapia-intensiva/")} className="hover:underline">Curso superior de terapia intensiva</a></li>
-            <li><a href={buildCourseLink("/tienda/administracion-y-gestion-hospitalaria/")} className="hover:underline">Curso superior de administración y gestión hospitalaria</a></li> */}
+						{data?.sections?.cursos_mas_buscados.map((s, index) => (
+							<li key={`curso-buscado-${index}`}>
+								<a href={urlFormat(s.url)} className='hover:underline'>
+									{s.title}
+								</a>
+							</li>
+						))}
 					</ul>
 				</div>
 
@@ -76,28 +57,28 @@ const NewsletterLinks = () => {
 					<h4 className='text-[18px] font-bold mb-4'>Especialidades</h4>
 					<ul className='space-y-4 font-normal md:whitespace-nowrap opacity-80'>
 						{/* Todo va a la tienda. No hay redireccion de especialidad */}
-						<li>
-							<a href={urlFormat('/tienda/?especialidades=medicina-general')} className='hover:underline'>
+						<li key='especialidad-1'>
+							<a href='/tienda/?especialidad=medicina-general' className='hover:underline'>
 								Medicina general
 							</a>
 						</li>
-						<li>
-							<a href={urlFormat('/tienda/?especialidades=medicina-familiar')} className='hover:underline'>
+						<li key='especialidad-2'>
+							<a href='/tienda/?especialidad=medicina-familiar' className='hover:underline'>
 								Medicina familiar
 							</a>
 						</li>
-						<li>
-							<a href={urlFormat('/tienda/?especialidades=cardiologia')} className='hover:underline'>
+						<li key='especialidad-3'>
+							<a href='/tienda/?especialidad=cardiologia' className='hover:underline'>
 								Cardiología
 							</a>
 						</li>
-						<li>
-							<a href={urlFormat('/tienda/?especialidades=traumatologia')} className='hover:underline'>
+						<li key='especialidad-4'>
+							<a href='/tienda/?especialidad=traumatologia' className='hover:underline'>
 								Traumatología
 							</a>
 						</li>
-						<li>
-							<a href={urlFormat('/tienda/?especialidades=pediatria')} className='hover:underline'>
+						<li key='especialidad-5'>
+							<a href='/tienda/?especialidad=pediatria' className='hover:underline'>
 								Pediatría
 							</a>
 						</li>
@@ -108,9 +89,9 @@ const NewsletterLinks = () => {
 				<div className='max-w-[250px]'>
 					<h4 className='text-[18px] font-bold mb-4'>Contenidos destacados</h4>
 					<ul className='space-y-4 font-normal md:whitespace-nowrap opacity-80'>
-						{data?.sections?.contenidos_destacados.map((s) => {
+						{data?.sections?.contenidos_destacados.map((s, index) => {
 							return (
-								<li>
+								<li key={`contenido-destacado-${index}`}>
 									<a href={urlFormat(s.url)} className='hover:underline'>
 										{s.title}
 									</a>

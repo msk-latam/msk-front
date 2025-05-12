@@ -8,7 +8,7 @@ import Newsletter from '@/modules/components/newsletter/NewsLetter';
 import ProfileCompletionWrapper from '@/modules/profile-completion/ProfileCompletionWrapper';
 import { useEffect, useState } from 'react';
 /* eliminar cookie needsProfileCompletion */
-export default function LoginPage() {
+export default function CompletarPerfilPage() {
 	const { deleteCookie } = useCompleteProfile();
 
 	useEffect(() => {

@@ -7,7 +7,6 @@ import { NextRequest } from 'next/server';
 export const dynamic = 'force-dynamic';
 
 const afterCallback = async (req: NextRequest, session: Session) => {
-	console.log('afterCallback received session.user:', JSON.stringify(session?.user, null, 2));
 	const cookieStore = cookies();
 
 	try {
@@ -52,7 +51,15 @@ const afterCallback = async (req: NextRequest, session: Session) => {
 
 		const data = await response.json();
 
-		console.log('data', data);
+		const customerResponse = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/customer/${session.user.email}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+			},
+		});
+
+		const customerData = await customerResponse.json();
 
 		if (data.access_token) {
 			const expiresDate = data.expires_at ? new Date(data.expires_at) : undefined;
@@ -73,13 +80,20 @@ const afterCallback = async (req: NextRequest, session: Session) => {
 				expires: expiresDate,
 				sameSite: 'lax',
 			});
-			cookieStore.set('redirectToDashboard', 'true', {
-				path: '/',
-				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
-				sameSite: 'lax',
-			});
 
-			console.log('Access token set in cookie.');
+			if (customerData.platform_user === 0) {
+				cookieStore.set('needsProfileCompletion', 'true', {
+					path: '/',
+					expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
+					sameSite: 'lax',
+				});
+			} else {
+				cookieStore.set('redirectToDashboard', 'true', {
+					path: '/',
+					expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
+					sameSite: 'lax',
+				});
+			}
 		} else {
 			console.warn('Access token not found in backend response.');
 			cookieStore.set('needsProfileCompletion', 'true', {

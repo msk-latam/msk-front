@@ -1,5 +1,4 @@
 import { supportedLanguages } from '@/config/languages';
-import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
 function enforceUserCountryPrefix(request: NextRequest) {
@@ -16,69 +15,68 @@ function enforceUserCountryPrefix(request: NextRequest) {
 
 	return null;
 }
-let needsProfileCompletionBoolean: boolean | null = null;
-let redirectToDashboard: boolean | null = null;
 
 export function middleware(request: NextRequest) {
-	const cookieStore = cookies();
-
-	if (needsProfileCompletionBoolean === null) {
-		if (cookieStore.get('needsProfileCompletion')?.value != null) {
-			needsProfileCompletionBoolean = cookieStore.get('needsProfileCompletion')?.value === 'true';
-		}
-	}
-
-	if (redirectToDashboard === null) {
-		if (cookieStore.get('redirectToDashboard')?.value != null) {
-			redirectToDashboard = cookieStore.get('redirectToDashboard')?.value === 'true';
-		}
-	}
-
-	if (redirectToDashboard) {
-		redirectToDashboard = false;
-		return NextResponse.redirect(new URL('/dashboard', request.url));
-	} else {
-		redirectToDashboard = null;
-	}
-
-	if (needsProfileCompletionBoolean) {
-		needsProfileCompletionBoolean = false;
-		return NextResponse.redirect(new URL('/completar-perfil', request.url));
-	} else {
-		needsProfileCompletionBoolean = null;
-	}
-
 	const { pathname, origin } = request.nextUrl;
-	const segments = pathname.split('/').filter(Boolean);
-	const firstSegment = segments[0];
-	const secondSegment = segments[1];
-	const country = request.cookies.get('msk-country')?.value || 'ar';
+	const cookies = request.cookies;
 
-	// 🔒 Protected routes
-	const accessToken = request.cookies.get('access_token');
+	const needsProfileCompletion = cookies.get('needsProfileCompletion')?.value === 'true';
+	const redirectToDashboardCookie = cookies.get('redirectToDashboard')?.value === 'true';
+	const accessToken = cookies.get('access_token');
 	const isAuthenticated = Boolean(accessToken);
+	const country = cookies.get('msk-country')?.value || 'ar';
+
+	// --- Priority Redirects based on Cookies ---
+
+	// 1. Redirect to dashboard if flag is set (and clear the flag)
+	if (redirectToDashboardCookie) {
+		const response = NextResponse.redirect(new URL('/dashboard', request.url));
+		response.cookies.delete('redirectToDashboard'); // Clear the cookie
+		return response;
+	}
+
+	// 2. Redirect to complete profile if flag is set (and clear the flag)
+	// Only redirect if *not* already on the complete profile page to avoid loops.
+	if (needsProfileCompletion && !pathname.includes('/completar-perfil')) {
+		const response = NextResponse.redirect(new URL('/completar-perfil', request.url));
+		// DO NOT clear the cookie here. It should be cleared upon successful profile completion.
+		// response.cookies.delete('needsProfileCompletion');
+		return response;
+	}
+
+	// --- Authentication-based Redirects ---
+
+	// 3. Protect specific routes
 	const protectedPaths = ['/dashboard'];
 	if (protectedPaths.some((path) => pathname.startsWith(path)) && !isAuthenticated) {
 		return NextResponse.redirect(new URL('/login', request.url));
 	}
 
-	// Redirect to dashboard if authenticated and trying to access login
-	if (isAuthenticated && pathname.includes('/login') && request.nextUrl.searchParams.get('form') !== 'change-pass') {
-		return NextResponse.redirect(new URL('/dashboard', request.url));
-	}
-	if (isAuthenticated && pathname.includes('/completar-perfil')) {
-		return NextResponse.redirect(new URL('/dashboard', request.url));
+	// 4. Redirect authenticated users away from login/signup pages
+	//    Exception: Allow access to /completar-perfil if needsProfileCompletion is true.
+	const isOnLoginPage = pathname.includes('/login') && request.nextUrl.searchParams.get('form') !== 'change-pass';
+	const isOnCompleteProfilePage = pathname.includes('/completar-perfil');
+
+	if (isAuthenticated) {
+		if (isOnLoginPage) {
+			return NextResponse.redirect(new URL('/dashboard', request.url));
+		}
+		// If authenticated and on complete profile page, and the redirectToDashboard cookie is NOT set,
+		// we allow staying on this page. The redirect to dashboard after profile completion
+		// should be handled by the redirectToDashboardCookie logic above.
+		// So, we remove the check that relied on !needsProfileCompletion.
+		/*
+		if (isOnCompleteProfilePage && !needsProfileCompletion) {
+			return NextResponse.redirect(new URL('/dashboard', request.url));
+		}
+		*/
 	}
 
-	// 🚫 Allow change-pass login only
-	if (pathname.includes('/login') && request.nextUrl.searchParams.get('form') === 'change-pass') {
-		if (!pathname.startsWith('/ar/')) {
-			const rewriteUrl = new URL('/ar/login', request.url);
-			rewriteUrl.searchParams.set('form', 'change-pass');
-			return NextResponse.rewrite(rewriteUrl);
-		}
-		return NextResponse.next();
-	}
+	// --- Other Redirects/Rewrites (Existing Logic - Moved Down) ---
+
+	const segments = pathname.split('/').filter(Boolean);
+	const firstSegment = segments[0];
+	const secondSegment = segments[1];
 
 	// 🔁 Redirect for /tienda/curso/[slug] → /curso/[slug]
 	const match = pathname.match(/^\/tienda\/curso\/(.+)/);

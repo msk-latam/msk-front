@@ -12,6 +12,8 @@ export async function GET(request: NextRequest) {
 	cookieStore.delete('picture');
 	cookieStore.delete('first_name');
 	cookieStore.delete('last_name');
+	cookieStore.delete('redirectToDashboard');
+	cookieStore.delete('needsProfileCompletion');
 
 	return auth0.handleLogout();
 }

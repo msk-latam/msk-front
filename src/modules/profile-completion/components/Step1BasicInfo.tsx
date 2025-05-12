@@ -7,7 +7,7 @@ import { years } from '@/data/years';
 import Input from '@/modules/dashboard/components/ui/Input';
 import PhoneInputWithCode from '@/modules/dashboard/components/ui/PhoneInputWithCode';
 import Select from '@/modules/dashboard/components/ui/Select';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProgressIndicator from './ProgressIndicator';
 
 interface Step1BasicInfoProps {
@@ -37,6 +37,47 @@ export default function Step1BasicInfo({ data, onNext, onSkip, onBack, onUpdate 
 	const [career, setCareer] = useState(data.career || '');
 	const [otherSpecialty, setOtherSpecialty] = useState(data.otherSpecialty || '');
 
+	useEffect(() => {
+		setProfession(data.profession || '');
+	}, [data.profession]);
+
+	useEffect(() => {
+		setOtherProfession(data.otherProfession || '');
+	}, [data.otherProfession]);
+
+	useEffect(() => {
+		// Reset specialty if profession changes and specialty belongs to the old profession
+		const currentProfessionId = professions.find((p) => p.name === data.profession)?.id;
+		const specialtyExistsInCurrentProfession =
+			currentProfessionId && specialtiesGroup[currentProfessionId]?.some((s) => s.name === data.specialty);
+
+		if (data.specialty && !specialtyExistsInCurrentProfession) {
+			setSpecialty(''); // Clear specialty if it doesn't belong to the new profession
+		} else {
+			setSpecialty(data.specialty || '');
+		}
+	}, [data.specialty, data.profession]); // Depend on profession as well
+
+	useEffect(() => {
+		setOtherSpecialty(data.otherSpecialty || '');
+	}, [data.otherSpecialty]);
+
+	useEffect(() => {
+		setCountry(data.country || '');
+	}, [data.country]);
+
+	useEffect(() => {
+		setPhone(data.phone || '');
+	}, [data.phone]);
+
+	useEffect(() => {
+		setYear(data.year || '');
+	}, [data.year]);
+
+	useEffect(() => {
+		setCareer(data.career || '');
+	}, [data.career]);
+
 	const professionId = professions.find((p) => p.name === profession)?.id;
 
 	const filteredSpecialties =
@@ -48,6 +89,7 @@ export default function Step1BasicInfo({ data, onNext, onSkip, onBack, onUpdate 
 
 	return (
 		<section className='w-full max-w-[1632px] h-fit relative z-8 mx-auto px-6 pt-[84px] md:pb-28 mb-16 md:py-16 md:px-9 font-inter'>
+			<pre>{JSON.stringify(data, null, 2)}</pre>
 			{/* Botón volver */}
 			<button
 				onClick={onBack}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useCustomer } from '@/hooks/useCustomer';
+import { useProfile } from '@/hooks/useProfile';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -31,23 +32,27 @@ type FormDataType = {
 
 export default function ProfileCompletionWrapper() {
 	const [step, setStep] = useState(1);
+
+	/* obtener la data del user desde customer para completar el perfil */
+	const { user, loading: userDataLoading, mutate: mutateProfile } = useProfile();
+
 	const [formData, setFormData] = useState<FormDataType>({
-		profession: '',
-		otherProfession: '',
-		specialty: '',
-		otherSpecialty: '',
-		country: '',
-		phone: '',
-		year: '',
-		career: '',
-		workplace: '',
-		workArea: '',
-		isMemberOfAssociation: false,
-		associationName: '',
+		profession: user?.profession || '',
+		otherProfession: user?.other_profession || '',
+		specialty: user?.specialty || '',
+		otherSpecialty: user?.other_specialty || '',
+		country: user?.country || '',
+		phone: user?.phone || '',
+		year: user?.year || '',
+		career: user?.career || '',
+		workplace: user?.workplace || '',
+		workArea: user?.work_area || '',
+		isMemberOfAssociation: user?.school_associate || false,
+		associationName: user?.school_name || '',
 		interests: {
-			specialty_interests: [],
-			content_interests: [],
-			other_interests: [],
+			specialty_interests: user?.specialty_interests || [],
+			content_interests: user?.content_interests || [],
+			other_interests: user?.other_interests || [],
 		},
 	});
 
@@ -61,14 +66,38 @@ export default function ProfileCompletionWrapper() {
 		}
 	}, [router]);
 
+	// Update formData when user data is loaded
+	useEffect(() => {
+		if (user) {
+			setFormData({
+				profession: user?.profession || '',
+				otherProfession: '',
+				specialty: user?.speciality || '',
+				otherSpecialty: '',
+				country: user?.country || '',
+				phone: user?.phone || '',
+				year: user?.year || '',
+				career: user?.career || '',
+				workplace: user?.workplace || '',
+				workArea: user?.workArea || '',
+				isMemberOfAssociation: user?.school_associate || false,
+				associationName: user?.school_name || '',
+				interests: {
+					specialty_interests: user?.specialty_interests || [],
+					content_interests: user?.content_interests || [],
+					other_interests: user?.other_interests || [],
+				},
+			});
+		}
+	}, [user]);
+
 	// const nextStep = () => setStep((prev) => prev + 1);
 	const nextStep = () => {
 		setStep((prev) => prev + 1);
 	};
 	const prevStep = () => setStep((prev) => prev - 1);
 	const skipProfile = () => {
-		// Redirige o marca como completo sin llenar
-		console.log('Perfil omitido');
+		router.push('/dashboard');
 	};
 
 	const updateFormData = (newData: Partial<FormDataType>) => {
@@ -92,6 +121,43 @@ export default function ProfileCompletionWrapper() {
 			});
 		}
 	};
+
+	if (userDataLoading) {
+		// Skeleton based on Step1BasicInfo
+		return (
+			<section className='w-full bg-white md:rounded-3xl rounded-t-3xl  shadow-md -mt-[40px] md:-mt-20 md:mx-20 z-[1] relative overflow-visible max-w-[1600px] animate-pulse'>
+				<div className='w-full max-w-[1632px] h-fit relative z-8 mx-auto px-6 pt-[84px] md:pb-28 mb-16 md:py-16 md:px-9 font-inter'>
+					{/* Skeleton for Back Button */}
+					<div className='md:top-10 md:left-8 top-5 left-5 absolute w-10 h-10 rounded-full bg-gray-200'></div>
+
+					{/* Skeleton for Title and Progress */}
+					<div className='text-center mb-6 z-[1]'>
+						<div className='h-8 bg-gray-200 rounded w-3/4 mx-auto mb-5'></div>
+						<div className='flex justify-center items-center space-x-2'>
+							<div className='w-16 h-2 bg-gray-300 rounded-full'></div>
+							<div className='w-16 h-2 bg-gray-200 rounded-full'></div>
+							<div className='w-16 h-2 bg-gray-200 rounded-full'></div>
+							<div className='w-16 h-2 bg-gray-200 rounded-full'></div>
+						</div>
+					</div>
+
+					{/* Skeleton for Form */}
+					<div className='max-w-md mx-auto space-y-6 font-inter'>
+						{[...Array(4)].map((_, i) => (
+							<div key={i} className='space-y-2'>
+								<div className='h-4 bg-gray-200 rounded w-1/4'></div>
+								<div className='h-10 bg-gray-200 rounded'></div>
+							</div>
+						))}
+
+						{/* Skeleton for Buttons */}
+						<div className='h-12 bg-gray-300 rounded-[38px] w-full mt-6'></div>
+						<div className='h-12 bg-gray-200 border border-gray-300 rounded-[38px] w-full mt-2'></div>
+					</div>
+				</div>
+			</section>
+		);
+	}
 
 	return (
 		<div className='w-full bg-white md:rounded-3xl rounded-t-3xl  shadow-md -mt-[40px] md:-mt-20 md:mx-20 z-[1] relative overflow-visible max-w-[1600px]'>
