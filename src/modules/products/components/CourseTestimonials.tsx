@@ -68,7 +68,7 @@ export default function CourseTestimonials({ slug, lang }: CourseTestimonialsPro
 						{data?.map((t: ReviewItem, idx: number) => (
 							<div
 								key={idx}
-								className='min-w-[85%] sm:min-w-[45%] md:min-w-[30%] snap-start
+								className='min-w-[85%] sm:min-w-[45%] md:min-w-[calc((100%-theme(spacing.12))/3)] snap-start
                 bg-white/50 backdrop-blur-md text-white
                 rounded-[30px] p-6 shadow-md'
 							>
