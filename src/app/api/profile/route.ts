@@ -212,8 +212,6 @@ export async function GET(request: NextRequest) {
 			workArea: string | null | undefined,
 			apiInterests: CustomerApiResponse['interests'] | undefined,
 		) => {
-			console.log('Calculating profile completion');
-			console.log(profession, specialty, country, phone, workplace, workArea, apiInterests);
 			// Base percentage for simple registration
 			let percentage = 25;
 
@@ -248,7 +246,6 @@ export async function GET(request: NextRequest) {
 		const getCurrentCourse = async (rawCourseProgress: CourseProgress[] | undefined): Promise<CurrentCourseType | null> => {
 			if (!rawCourseProgress || rawCourseProgress.length === 0) {
 				// Fetch the latest course from products endpoint if no courses in progress
-				console.log('Fetching latest course from products endpoint');
 
 				try {
 					/* https://cms1.msklatam.com/wp-json/msk/v1/products?lang=ar&page=1&per_page=1&nocache=1 */
@@ -289,18 +286,11 @@ export async function GET(request: NextRequest) {
 					return null;
 				}
 			}
-			console.log('Fetching current course');
-			console.log(rawCourseProgress);
-
-			// Filter for active courses - courses with null end_date and 'Activo' status
 			// Also include courses with 'Sin enrolar' status as they appear in the sample data
 			const activeProgressList = rawCourseProgress.filter(
 				(course: CourseProgress) =>
 					course.end_date === null && (course.enroll_status === 'Activo' || course.enroll_status === 'Sin enrolar'),
 			);
-
-			console.log('Active progress list');
-			console.log(activeProgressList);
 
 			if (activeProgressList.length === 0) {
 				// Fetch the latest course from products endpoint if no active courses
@@ -478,8 +468,6 @@ export async function GET(request: NextRequest) {
 		}
 
 		/*  Comparar los intereses adicionales con los intereses del usuario, si tienen los mismos, no hacer nada, si no tienen los mismos, agregar los intereses adicionales al usuario */
-		console.log('additionalInterests', additionalInterests);
-		console.log('customerData', customerData.interests);
 		if (additionalInterests && customerData) {
 			if (!customerData.interests) {
 				customerData.interests = {
