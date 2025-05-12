@@ -252,7 +252,8 @@ export async function GET(request: NextRequest) {
 						`https://cms1.msklatam.com/wp-json/msk/v1/products?lang=${lang}&page=1&per_page=1&nocache=1`,
 						{
 							headers: { Accept: 'application/json' },
-							next: { revalidate: 3600 * 7 },
+							// next: { revalidate: 3600 * 7 },
+							 cache: 'no-store'
 						},
 					);
 
@@ -270,16 +271,17 @@ export async function GET(request: NextRequest) {
 						latestProduct = {};
 
 					return {
-						product_code: latestProduct.product_code || '',
+						product_code: latestProduct?.product_code || '',
 						product_code_cedente: '',
 						id: latestProduct.id,
-						image: latestProduct.featured_images.high,
-						title: latestProduct.title,
-						crm_id: latestProduct.product_code || '',
+						image: latestProduct?.featured_images?.high,
+						title: latestProduct?.title || '',
+						crm_id: latestProduct?.product_code || '',
 						completed_percentage: null,
 						resource: latestProduct.resource,
 						link: latestProduct.link,
 					};
+
 				} catch (error) {
 					console.error('Error fetching latest product:', error);
 					return null;
@@ -300,7 +302,16 @@ export async function GET(request: NextRequest) {
 
 					if (!productsResponse.ok) {
 						console.error(`Failed to fetch latest product: ${productsResponse.status}`);
-						return null;
+						return  {
+								product_code: "",
+								product_code_cedente: "",
+								id: "", // CMS ID
+								image: "",
+								title: "Curso 0",
+								crm_id: "", // Using product_code as CRM identifier for the course
+								completed_percentage: 0,
+								resource: "",
+							};
 					}
 
 					const products = await productsResponse.json();
@@ -334,7 +345,16 @@ export async function GET(request: NextRequest) {
 					  });
 
 			if (!latestCourseProgress) {
-				return null;
+				return  {
+					product_code: "",
+					product_code_cedente: "",
+					id: "", // CMS ID
+					image: "",
+					title: "Curso 2",
+					crm_id: "", // Using product_code as CRM identifier for the course
+					completed_percentage: 0,
+					resource: "",
+				};
 			}
 
 			try {
@@ -345,7 +365,16 @@ export async function GET(request: NextRequest) {
 				);
 
 				if (!cmsCourseDetail) {
-					return null;
+					return {
+					product_code: "",
+					product_code_cedente: "",
+					id: "", // CMS ID
+					image: "",
+					title: "Curso 3",
+					crm_id: "", // Using product_code as CRM identifier for the course
+					completed_percentage: 0,
+					resource: "",
+				};
 				}
 
 				return {
