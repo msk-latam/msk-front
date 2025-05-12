@@ -196,9 +196,9 @@ export default function DashboardPage() {
 		try {
 			console.log('(Page) Interests data to save user context:', user); // Corrected log
 			await updateInterests(interestData);
+			mutateProfile(); // Re-fetch profile data to update completion percentage
 			setEditTargetField(undefined);
 			setSaveInterestsSuccess(true);
-			handleReload(); // This seems to be for interests, profile mutate is separate
 			setTimeout(function () {
 				setSaveInterestsError(null);
 				setSaveInterestsSuccess(false);
