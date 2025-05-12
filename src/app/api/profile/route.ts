@@ -160,10 +160,11 @@ export async function GET(request: NextRequest) {
 				courseRecommendationsList.slice(0, 4).map(async (courseIdentifier: string) => {
 					try {
 						const resourceRes = await fetch(
-							`https://cms1.msklatam.com/wp-json/msk/v1/product/${encodeURIComponent(courseIdentifier)}?lang=${lang}`,
+							`https://cms1.msklatam.com/wp-json/msk/v1/product/${encodeURIComponent(
+								courseIdentifier,
+							)}?lang=${lang}&nocache=1`,
 							{
 								headers: { Accept: 'application/json' },
-								next: { revalidate: 3600 * 7 }, // Cache for 7 hours
 							},
 						);
 						if (resourceRes.ok) {
