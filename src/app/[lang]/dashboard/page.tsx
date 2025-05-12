@@ -162,24 +162,26 @@ export default function DashboardPage() {
 
 		try {
 			console.log('(Page) Sending to API:', cleanedPayload);
-			await updateCustomerProfile(cleanedPayload as UpdateCustomerPayload); // Call mutate from useCustomer
-			// setShowEditModal(false); // Keep modal open to show success/error
+			await updateCustomerProfile(cleanedPayload as UpdateCustomerPayload); // API call to save data
+
 			setEditTargetField(undefined);
 			setSaveProfileSuccess(true);
+
+			// This is the call to re-fetch profile data and update the UI
 			mutateProfile(); // Re-fetch profile data via SWR
+
 			setTimeout(() => {
-				setSaveProfileError(null); // Clear error on success timeout as well
+				setSaveProfileError(null);
 				setSaveProfileSuccess(false);
 				// setShowEditModal(false); // Optionally close modal after success message duration
 			}, 3000);
 		} catch (error: any) {
 			console.error('Failed to save profile:', error);
 			setSaveProfileError(error.message || 'Error desconocido al guardar perfil');
-			// Keep success as false or reset it
 			setSaveProfileSuccess(false);
 			setTimeout(() => {
 				setSaveProfileError(null);
-			}, 5000); // Keep error message longer
+			}, 5000);
 		}
 	};
 
