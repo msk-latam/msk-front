@@ -89,7 +89,6 @@ export default function Step1BasicInfo({ data, onNext, onSkip, onBack, onUpdate 
 
 	return (
 		<section className='w-full max-w-[1632px] h-fit relative z-8 mx-auto px-6 pt-[84px] md:pb-28 mb-16 md:py-16 md:px-9 font-inter'>
-			<pre>{JSON.stringify(data, null, 2)}</pre>
 			{/* Botón volver */}
 			<button
 				onClick={onBack}
