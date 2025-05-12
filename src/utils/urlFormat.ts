@@ -1,7 +1,7 @@
 'use client';
 
 export function urlFormat(inputUrl: any) {
-	if (typeof window === 'undefined') return inputUrl; // 👈 prevención en SSR
+	if (typeof window == 'undefined') return inputUrl; // 👈 prevención en SSR
 	
 	if(!inputUrl)
 		return "#";
