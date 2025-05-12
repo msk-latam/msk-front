@@ -923,7 +923,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 		setProfessions(allProfessions);
 		setSpecialties(allSpecialties);
 		setSpecialtiesGroup(allSpecialtiesGroups);
-	}, [allProfessions, allSpecialties]);
+	}, [allSpecialties]);
 
 	const handleReCaptchaVerify = useCallback(async () => {
 		if (!executeRecaptcha) {
@@ -1101,7 +1101,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 
 								if (!isDownload) {
 									setTimeout(() => {
-										changeRoute(routeChange);
+										// changeRoute(routeChange);
 									}, 100);
 								} else if (updateFormSent) {
 									updateFormSent(true, body);
@@ -1112,7 +1112,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 						} else {
 							if (!isDownload) {
 								setTimeout(() => {
-									changeRoute(routeChange);
+									// changeRoute(routeChange);
 								}, 100);
 							} else if (updateFormSent) {
 								updateFormSent(true, body);
@@ -1179,24 +1179,23 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 											<div className='flex flex-wrap gap-6 mt-2 mb-6 preferences'>
 												<p className='w-full md:w-auto'>Quiero hablar por</p>
 												<div className='grid grid-cols-1 gap-4 mt-1 md:grid-cols-3'>
-													<Checkbox
-														inputClass='contact-radio-input'
-														name='Preferencia_de_contactaci_n_phone'
-														label='Teléfono'
-														onChange={() => handleContactPreferenceChange('phone')}
-													/>
-													<Checkbox
-														inputClass='contact-radio-input'
-														name='Preferencia_de_contactaci_n_whatsapp'
-														label='WhatsApp'
-														onChange={() => handleContactPreferenceChange('whatsapp')}
-													/>
-													<Checkbox
-														inputClass='contact-radio-input'
-														name='Preferencia_de_contactaci_n_email'
-														label='E-mail'
-														onChange={() => handleContactPreferenceChange('email')}
-													/>
+													{[
+														{ value: 'phone', label: 'Teléfono' },
+														{ value: 'whatsapp', label: 'WhatsApp' },
+														{ value: 'email', label: 'E-mail' },
+													].map((option) => (
+														<label key={option.value} className='flex items-center gap-2 cursor-pointer'>
+															<input
+																type='radio'
+																name='Preferencia_de_contactaci_n'
+																value={option.value}
+																checked={formik.values.Preferencia_de_contactaci_n === option.value}
+																onChange={() => handleContactPreferenceChange(option.value)}
+																className='accent-[#9200AD] text-[#9200AD] ring-[#9200AD] w-5 h-5'
+															/>
+															<span className='text-sm'>{option.label}</span>
+														</label>
+													))}
 												</div>
 											</div>
 										)}
@@ -1208,19 +1207,19 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 										<div className='col-span-2 col-xl-6 md:col-span-1'>
 											<div className='rounded-xl'>
 												<ErrorMessage name='First_Name' component='span' className='error' />
-												<Field type='text' name='First_Name' placeholder='Ingresar nombre' />
+												<Field className='w-full' type='text' name='First_Name' placeholder='Ingresar nombre' />
 											</div>
 										</div>
 										<div className='col-span-2 col-xl-6 md:col-span-1'>
 											<div className='contact-from-input'>
 												<ErrorMessage className='error' name='Last_Name' component='span' />
-												<Field type='text' name='Last_Name' placeholder='Ingresar apellido' />
+												<Field className='w-full' type='text' name='Last_Name' placeholder='Ingresar apellido' />
 											</div>
 										</div>
 										<div className='col-span-2 col-xl-6 md:col-span-1'>
 											<div className='contact-from-input'>
 												<ErrorMessage name='Email' component='span' className='error' />
-												<Field type='email' name='Email' placeholder='Ingresar e-mail' />
+												<Field className='w-full' type='email' name='Email' placeholder='Ingresar e-mail' />
 											</div>
 										</div>
 
@@ -1250,6 +1249,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 											<div className=''>
 												<ErrorMessage name='Profesion' component='span' className='error' />
 												<Field
+													className='w-full'
 													as='select'
 													name='Profesion'
 													onChange={handleOptionProfessionChange}
@@ -1271,7 +1271,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 											{showInputProfession && (
 												<div className='my-4 contact-from-input'>
 													<ErrorMessage name='Otra_profesion' component='span' className='error' />
-													<Field type='text' name='Otra_profesion' placeholder='Ingresar profesion' />
+													<Field className='w-full' type='text' name='Otra_profesion' placeholder='Ingresar profesion' />
 												</div>
 											)}
 										</div>
@@ -1280,7 +1280,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 											<div className='flex gap-2 col-xl-12'>
 												<div className='w-1/2 contact-select'>
 													<ErrorMessage name='year' component='span' className='error' />
-													<Field as='select' name='year'>
+													<Field as='select' name='year' className='w-full'>
 														<option defaultValue=''>Año</option>
 														{optionsArray.map((y) => (
 															<option key={`st_year_${y}`} defaultValue={y}>
@@ -1291,7 +1291,13 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 												</div>
 												<div className='w-full contact-select'>
 													<ErrorMessage name='career' component='span' className='error' />
-													<Field as='select' name='career' onChange={handleOptionCareerChange} value={selectedCareer}>
+													<Field
+														className='w-full'
+														as='select'
+														name='career'
+														onChange={handleOptionCareerChange}
+														value={selectedCareer}
+													>
 														<option defaultValue=''>Seleccionar carrera</option>
 														{currentGroup.map((s: any) => (
 															<option key={`st_carrer_${s.id}`} defaultValue={s.name}>
@@ -1307,6 +1313,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 													<div className='contact-select'>
 														<ErrorMessage name='Especialidad' component='span' className='error' />
 														<Field
+															className='w-full'
 															as='select'
 															name='Especialidad'
 															onChange={handleOptionSpecialtyChange}
@@ -1330,7 +1337,12 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 													</div>
 													{showInputSpecialties && (
 														<div className='my-4 contact-from-input'>
-															<Field type='text' name='Otra_especialidad' placeholder='Ingresar especialidad' />
+															<Field
+																className='w-full'
+																type='text'
+																name='Otra_especialidad'
+																placeholder='Ingresar especialidad'
+															/>
 															<ErrorMessage name='Otra_especialidad' component='div' className='error' />
 														</div>
 													)}
@@ -1342,7 +1354,13 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 												<div className='mt-4 col-xl-12'>
 													<div className='contact-from-input'>
 														<ErrorMessage name='Description' component='span' className='error' />
-														<Field as='textarea' id='Description' name='Description' placeholder='Mensaje' />
+														<Field
+															className='w-full'
+															as='textarea'
+															id='Description'
+															name='Description'
+															placeholder='Mensaje'
+														/>
 													</div>
 												</div>
 											)}
