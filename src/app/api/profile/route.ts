@@ -11,6 +11,7 @@ interface CurrentCourseType {
 	product_code_cedente: any;
 	resource: any;
 	link?: any;
+	status: string;
 }
 
 // Define new interfaces for the API response
@@ -284,6 +285,7 @@ export async function GET(request: NextRequest) {
 						completed_percentage: null,
 						resource: latestProduct.resource,
 						link: latestProduct.link,
+						status: '',
 					};
 				} catch (error) {
 					console.error('Error fetching latest product:', error);
@@ -315,6 +317,7 @@ export async function GET(request: NextRequest) {
 							crm_id: '', // Using product_code as CRM identifier for the course
 							completed_percentage: 0,
 							resource: '',
+							status: '',
 						};
 					}
 
@@ -332,6 +335,7 @@ export async function GET(request: NextRequest) {
 						crm_id: latestProduct.product_code || '',
 						completed_percentage: 0,
 						resource: latestProduct.resource,
+						status: '',
 					};
 				} catch (error) {
 					console.error('Error fetching latest product:', error);
@@ -358,6 +362,7 @@ export async function GET(request: NextRequest) {
 					crm_id: '', // Using product_code as CRM identifier for the course
 					completed_percentage: 0,
 					resource: '',
+					status: '',
 				};
 			}
 
@@ -378,6 +383,7 @@ export async function GET(request: NextRequest) {
 						crm_id: '', // Using product_code as CRM identifier for the course
 						completed_percentage: 0,
 						resource: '',
+						status: '',
 					};
 				}
 
@@ -390,6 +396,7 @@ export async function GET(request: NextRequest) {
 					crm_id: latestCourseProgress.product_code, // Using product_code as CRM identifier for the course
 					completed_percentage: parseFloat(latestCourseProgress.advance?.replace(',', '.')) || 0,
 					resource: cmsCourseDetail?.resource,
+					status: latestCourseProgress.enroll_status,
 				};
 			} catch (cmsError) {
 				console.error(`Error fetching CMS details for current course ${latestCourseProgress.course_name}:`, cmsError);

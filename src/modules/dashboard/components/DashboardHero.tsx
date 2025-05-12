@@ -12,11 +12,11 @@ import EditButton from '@/dashboard/components/ui/EditButton';
 // import dashboardMock from '@/modules/dashboard/data/dashboardMock.json'; // <-- Import mock data
 import { type Interests } from '@/hooks/useinterests'; // Changed: Import Interests type
 import { useLmsNavigation } from '@/hooks/useLmsNavigation';
+import { urlFormat } from '@/utils/urlFormat';
 import Link from 'next/link';
 import DashboardHeroSkeleton from './DashboardHeroSkeleton';
 import InvoicesModal from './InvoicesModal';
 import CtaButton from './ui/CtaButton';
-import { urlFormat } from '@/utils/urlFormat';
 
 // // Define props for DashboardHero
 interface DashboardHeroProps {
@@ -314,15 +314,6 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 					)}
 				</div>
 
-				{/* const defaultRecommendedCourse = {
-	image:
-		'https://images.ctfassets.net/cnu0m8re1exe/KARd6CSmh3yD656fzK3Kl/d46556b481191e9a679ed0e02388788f/doctor-and-patient.jpg?fm=jpg&fl=progressive&w=1140&h=700&fit=fill', // Use the image from the example
-	label: 'Recomendado para ti',
-	title: 'Curso de Endocrinología y Nutrición',
-	buttonText: 'Descubrir',
-	buttonLink: '/tienda/endocrinologia-y-nutricion/', // Replace with actual link
-}; */}
-
 				{/* Course Section - Conditionally Rendered */}
 				{/* Mobile: 4th, Desktop: 2nd in 2nd Col */}
 				<div className='md:col-span-2 lg:col-span-2 rounded-[30px] overflow-hidden group order-4 md:order-2'>
@@ -372,6 +363,8 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 										? 'Cargando...'
 										: data?.currentCourse?.completed_percentage === null
 										? 'Descubrir'
+										: data?.currentCourse?.status === 'Sin enrolar'
+										? 'Activar'
 										: 'Continuar'}
 								</CtaButton>
 							</div>
