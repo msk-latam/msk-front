@@ -23,29 +23,6 @@ const DownloadIcon: React.FC = () => (
 const InvoicesModal: React.FC<InvoicesModalProps> = ({ isOpen, onClose, contracts }) => {
 	if (!isOpen) return null;
 
-	const generateInvoice = (invoice: any) => {
-		if (invoice.status_payment === 'Activo') {
-			// Create invoice content as a string
-			const invoiceContent = JSON.stringify({
-				id: invoice.id,
-				date: invoice.Fecha_Cobro,
-				amount: invoice.Monto,
-				currency: invoice.currency,
-			});
-
-			// Generate the invoice and download it
-			const blob = new Blob([invoiceContent], { type: 'application/pdf' });
-			const url = URL.createObjectURL(blob);
-			const a = document.createElement('a');
-			a.href = url;
-			a.download = `Factura_${invoice.id}.pdf`;
-			a.click();
-
-			// Clean up by revoking the object URL
-			setTimeout(() => URL.revokeObjectURL(url), 100);
-		}
-	};
-
 	const formatPrice = (invoice: any) => {
 		const currency = invoice.currency; //MXN, COP, USD, ARS
 		const amount = invoice.Monto;
@@ -71,14 +48,22 @@ const InvoicesModal: React.FC<InvoicesModalProps> = ({ isOpen, onClose, contract
 				<div className='space-y-1 border-l border-r border-b border-[#DFE6FF] bg-[#F7F9FF] rounded-b-lg'>
 					{contracts && contracts.length > 0 ? (
 						contracts
-							.filter((invoice: any) => invoice.Fecha_Cobro && invoice.status !== 'Borrador')
+							.filter((invoice: any) => invoice.Fecha_Cobro && invoice.status === 'Contrato Efectivo')
 							.sort((a: any, b: any) => new Date(b.Fecha_Cobro).getTime() - new Date(a.Fecha_Cobro).getTime())
 							.map((invoice: any) => (
 								<div
 									key={invoice.id}
 									className='grid grid-cols-3 gap-4 px-4 py-3 border-b border-[#DFE6FF] last:border-b-0 items-center'
 								>
-									<div className='text-[#1A1A1A] text-left'>{invoice.Fecha_Cobro}</div>
+									<div className='text-[#1A1A1A] text-left'>
+										{new Date(invoice.Fecha_Cobro)
+											.toLocaleDateString('es-ES', {
+												day: '2-digit',
+												month: '2-digit',
+												year: 'numeric',
+											})
+											.replace(/\//g, '-')}
+									</div>
 									<div className='text-[#1A1A1A] text-center'>{formatPrice(invoice)}</div>
 									<div className='text-right'>
 										{invoice.Comprobante_Factura === null ? (
