@@ -267,7 +267,7 @@ export async function GET(request: NextRequest) {
 					let latestProduct = products.data[0];
 
 					if(!latestProduct)
-						return null;
+						latestProduct = {};
 
 					return {
 						product_code: latestProduct.product_code || '',
