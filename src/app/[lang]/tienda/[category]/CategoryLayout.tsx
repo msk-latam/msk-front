@@ -28,7 +28,7 @@ export default function CategoryLayout({ category, lang }: { category: string; l
 			</header>
 			<StoreProvider>
 				<BotMaker />
-				<Tienda category={category} country={lang} />
+				<Tienda category={category} country={lang} lang={lang} />
 				<FAQ />
 				<NewsLetter />
 				<Footer />
