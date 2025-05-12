@@ -97,7 +97,6 @@ const InterestsEditModal: React.FC<InterestsEditModalProps> = ({
 	const adicionalesOptions = interestData.find((cat) => cat.title === '¿Qué te trae a MSK hoy?')?.options || [];
 
 	useEffect(() => {
-
 		if (isOpen && initialData) {
 			// Initialize based on provided initialData, filtering ensures only valid options are set
 			setSelectedEspecialidades(
@@ -197,7 +196,7 @@ const InterestsEditModal: React.FC<InterestsEditModalProps> = ({
 							<div
 								className={`w-full gap-2 ml-1 ${
 									category.title === '¿Qué te trae a MSK hoy?'
-										? 'grid grid-cols-1 md:grid-cols-2'
+										? 'grid grid-cols-1 md:grid-cols-2 px-2'
 										: 'flex flex-wrap items-center justify-center'
 								}`}
 							>
