@@ -99,12 +99,8 @@ export default function ProfileCompletionWrapper() {
 	const skipProfile = () => {
 		const currentPath = window.location.pathname;
 		const langMatch = currentPath.match(/^\/([^\/]+)\/completar-perfil/);
-		const lang = langMatch ? langMatch[1] : '';
+		const lang = langMatch ? langMatch[1] : 'ar';
 
-		/* const response =
-			country === 'ar'
-				? NextResponse.redirect(new URL('/dashboard', request.url))
-				: NextResponse.redirect(new URL(`/${country}/dashboard`, request.url)); */
 		lang === 'ar' ? router.push('/dashboard') : router.push(`/${lang}/dashboard`);
 	};
 
