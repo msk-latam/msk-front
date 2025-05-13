@@ -176,22 +176,25 @@ const Navbar = ({ isDashboard = false }: NavbarProps) => {
 			</nav>
 
 			{/* Contenido dinámico móvil */}
-			{currentView && (
-				<div className='fixed inset-x-0 top-0 bottom-0 z-50 mt-16 md:hidden overflow-visible'>
-					<DropdownContent
-						currentView={currentView}
-						selectedCategory={selectedCategory}
-						setCurrentView={setCurrentView}
-						setSelectedCategory={setSelectedCategory}
-						isMobile={true}
-						onClose={() => {
-							setIsDiscoverOpen(false);
-							setCurrentView('');
-							setSelectedCategory(null);
-						}}
-					/>
-				</div>
-			)}
+{currentView && (
+	<div className='fixed inset-x-0 top-0 bottom-0 z-50 mt-16 md:hidden overflow-visible'>
+		<DropdownContent
+			currentView={currentView}
+			selectedCategory={selectedCategory}
+			setCurrentView={setCurrentView}
+			setSelectedCategory={setSelectedCategory}
+			isMobile={true}
+			isAuthenticated={isAuthenticated}
+			isLoading={isLoading}
+			onClose={() => {
+				setIsDiscoverOpen(false);
+				setCurrentView('');
+				setSelectedCategory(null);
+			}}
+		/>
+	</div>
+)}
+
 		</header>
 	);
 };
