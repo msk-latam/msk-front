@@ -424,7 +424,7 @@ export default function CourseSupportForm({ slug, lang }: any) {
 
 			{formSent && (
 				<div className='px-4 py-2 mt-4 text-green-700 bg-green-100 rounded-md'>
-					¡Gracias! En breve un asesor se comunicará con vos.
+					¡Gracias! En breve un asesor se pondrá en contacto contigo.
 				</div>
 			)}
 
