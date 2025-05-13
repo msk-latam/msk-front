@@ -24,6 +24,7 @@ type LoginApiResponse = {
 type LoginApiPayload = {
 	email: string;
 	password: string; // Assuming backend expects 'contrasenia' based on typical Spanish naming, adjust if needed
+	lang: string;
 };
 
 // Placeholder for your actual API URL - replace with env variable ideally
@@ -68,14 +69,19 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 		setOnRequest(true);
 		setLoginError(null); // Clear previous errors
 
+		const currentPath = window.location.pathname;
+		const langMatch = currentPath.match(/^\/([^\/]+)\/login/);
+		const lang = langMatch ? langMatch[1] : '';
+
 		try {
 			const recaptchaToken = await executeRecaptcha('login');
 			const formData: LoginApiPayload = {
 				email: email,
 				password: password, // Ensure backend expects 'contrasenia'
+				lang: lang,
 			};
 
-			const response = await fetch(API_SIGN_IN_URL, {
+			const response = await fetch(`${API_SIGN_IN_URL}&lang=${lang}`, {
 				method: 'POST',
 				headers: {
 					Accept: 'application/json',

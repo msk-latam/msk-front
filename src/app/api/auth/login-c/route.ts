@@ -3,7 +3,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
 	try {
-		const { email, password } = await request.json();
+		const { email, password, lang } = await request.json();
 
 		//limpiar cookies para evitar que se guarde el email
 		cookies().delete('email');
@@ -11,6 +11,14 @@ export async function POST(request: NextRequest) {
 		cookies().delete('last_name');
 		cookies().delete('access_token');
 		cookies().delete('picture');
+
+		if (lang) {
+			cookies().set('msk-country', lang, {
+				path: '/',
+				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
+				sameSite: 'lax',
+			});
+		}
 
 		const apiSignInUrl = 'https://dev.msklatam.tech/msk-laravel/public/api/login';
 
@@ -53,23 +61,6 @@ export async function POST(request: NextRequest) {
 		});
 
 		const customerData = await customerResponse.json();
-		// console.log('customerData', customerData);
-
-		// si el usuario tiene un perfil completo pero aun asi llega plaform_user en 0, poner plataforma_user en 1 y actualizarlo por post
-
-		/* si tiene country, profession !== a -,  specialty !== a -, workplace en null,  work_area en null . Poner */
-
-		// const updateCustomerResponse = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/customer/${email}`, {
-		// 	method: 'PUT',
-		// 	headers: {
-		// 		'Content-Type': 'application/json',
-		// 		Accept: 'application/json',
-		// 	},
-		// 	body: JSON.stringify({ platform_user: 1 }),
-		// });
-
-		// const updateCustomerData = await updateCustomerResponse.json();
-		// console.log('updateCustomerData', updateCustomerData);
 
 		if (customerData.platform_user === 0) {
 			cookies().set('needsProfileCompletion', 'true', {
