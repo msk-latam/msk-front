@@ -26,9 +26,7 @@ export function middleware(request: NextRequest) {
 
 	const accessToken = cookies.get('access_token');
 	const isAuthenticated = Boolean(accessToken);
-	const country = (cookies.get('msk-country')?.value || 'ar').replace(/[^a-z]/g, '');
-	console.log('country', country);
-	// --- Priority Redirects based on Cookies ---
+	const country = (cookies.get('msk-country')?.value || 'ar').replace(/[^a-z]/g, '') || 'ar';
 
 	// 1. Redirect to dashboard if flag is set (and clear the flag)
 	if (redirectToDashboardCookie) {
