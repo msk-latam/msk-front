@@ -170,6 +170,7 @@ export async function GET(request: NextRequest) {
 							)}?lang=${lang}&nocache=1`,
 							{
 								headers: { Accept: 'application/json' },
+								next: { revalidate: 3600 * 7 },
 							},
 						);
 						if (resourceRes.ok) {
@@ -196,7 +197,9 @@ export async function GET(request: NextRequest) {
 				)}?lang=${lang}&name=${encodeURIComponent(courseName)}`,
 				{
 					headers: { Accept: 'application/json' },
-					next: { revalidate: 3600 * 7 },
+					next: { revalidate: 3600 * 7 }
+					// cache: 'no-store',
+
 				},
 			);
 
@@ -258,8 +261,8 @@ export async function GET(request: NextRequest) {
 						`https://cms1.msklatam.com/wp-json/msk/v1/products?lang=${lang}&page=1&per_page=1&nocache=1`,
 						{
 							headers: { Accept: 'application/json' },
-							// next: { revalidate: 3600 * 7 },
-							cache: 'no-store',
+							next: { revalidate: 3600 * 7 },
+							// cache: 'no-store',
 						},
 					);
 
