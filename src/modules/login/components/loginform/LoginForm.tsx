@@ -30,7 +30,7 @@ type LoginApiPayload = {
 // Placeholder for your actual API URL - replace with env variable ideally
 // const API_SIGN_IN_URL = 'https://dev.msklatam.tech/msk-laravel/public/api/login';
 // Usaremos nuestro endpoint interno
-const API_SIGN_IN_URL = '/api/auth/login-c?returnTo=es/dashboard';
+const API_SIGN_IN_URL = '/api/auth/login-c';
 
 export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }: LoginFormProps) {
 	const router = useRouter();
@@ -81,7 +81,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 				lang: lang,
 			};
 
-			const response = await fetch(`${API_SIGN_IN_URL}&lang=${lang}`, {
+			const response = await fetch(`${API_SIGN_IN_URL}?lang=${lang}`, {
 				method: 'POST',
 				headers: {
 					Accept: 'application/json',
@@ -91,7 +91,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 			});
 
 			if (response.ok) {
-				router.push(`/${lang}/dashboard/`);
+				router.push(`${lang}/dashboard/`);
 			} else {
 				// Intentar obtener el mensaje de error del cuerpo de la respuesta
 				try {

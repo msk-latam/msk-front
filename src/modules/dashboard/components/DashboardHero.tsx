@@ -17,7 +17,7 @@ import Link from 'next/link';
 import DashboardHeroSkeleton from './DashboardHeroSkeleton';
 import InvoicesModal from './InvoicesModal';
 import CtaButton from './ui/CtaButton';
-
+// import { goToEnroll, goToLMS } from '@/lib/account';
 // // Define props for DashboardHero
 interface DashboardHeroProps {
 	userData: any; // <-- TODO: Change to UserData type
