@@ -41,7 +41,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 	const [onRequest, setOnRequest] = useState(false); // Loading state
 	const [loginError, setLoginError] = useState<string | null>(null); // Login error state
 	const params = useParams();
-	const lang = params.lang || 'es';
+	const lang = params?.lang || 'es';
 
 	const executeRecaptcha = async (action: string): Promise<string> => {
 		console.warn('Using placeholder executeRecaptcha');
@@ -110,8 +110,11 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 	};
 
 	const handleSocialLogin = (connection: string) => {
+		const currentPath = window.location.pathname;
+		const langMatch = currentPath.match(/^\/([^\/]+)\/login/);
+		const lang = langMatch ? langMatch[1] : '';
 		console.log('Redirecting to Auth0 login endpoint for connection:', connection);
-		window.location.href = `/api/auth/login?connection=${connection}`;
+		window.location.href = `/api/auth/login?connection=${connection}&lang=${lang}}`;
 	};
 
 	return (

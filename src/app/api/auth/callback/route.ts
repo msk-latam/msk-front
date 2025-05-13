@@ -6,8 +6,62 @@ import { NextRequest } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
+interface SignupPayload {
+	email: string;
+	first_name: string;
+	last_name: string;
+	phone: string;
+	country: string;
+	profession: string;
+	speciality: string;
+	Otra_profesion: string;
+	Otra_especialidad: string;
+	Career: string;
+	Year: string;
+	type: string;
+	identification: string;
+	Terms_And_Conditions: boolean;
+}
+
+const signup = async (email: string, first_name: string, last_name: string, lang: string) => {
+	const requestBody: SignupPayload = {
+		email: email,
+		first_name: first_name,
+		last_name: last_name,
+		country: lang || 'AR',
+		phone: '1',
+		Terms_And_Conditions: true,
+		profession: '-',
+		speciality: '-',
+		Otra_profesion: '',
+		Otra_especialidad: '',
+		Career: '',
+		Year: '',
+		type: '',
+		identification: '',
+	};
+
+	const response = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/signup`, {
+		method: 'POST',
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(requestBody),
+	});
+	return response.json();
+};
+
 const afterCallback = async (req: NextRequest, session: Session) => {
 	const cookieStore = cookies();
+
+	const needsSignup = cookieStore.get('needsSignup');
+	const lang = cookieStore.get('msk-country');
+
+	if (needsSignup) {
+		cookieStore.delete('needsSignup');
+		await signup(session.user.email, session.user.given_name, session.user.family_name, lang?.value || 'AR');
+	}
 
 	try {
 		const response = await fetch('https://dev.msklatam.tech/msk-laravel/public/api/loginAuth0', {
@@ -41,11 +95,12 @@ const afterCallback = async (req: NextRequest, session: Session) => {
 				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
 				sameSite: 'lax',
 			});
-			cookieStore.set('needsProfileCompletion', 'true', {
+			cookieStore.set('mustSignup', 'true', {
 				path: '/',
 				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
 				sameSite: 'lax',
 			});
+
 			return session;
 		}
 
@@ -96,7 +151,7 @@ const afterCallback = async (req: NextRequest, session: Session) => {
 			}
 		} else {
 			console.warn('Access token not found in backend response.');
-			cookieStore.set('needsProfileCompletion', 'true', {
+			cookieStore.set('mustSignup', 'true', {
 				path: '/',
 				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
 				sameSite: 'lax',
@@ -104,7 +159,7 @@ const afterCallback = async (req: NextRequest, session: Session) => {
 		}
 	} catch (error) {
 		console.error('Error during afterCallback processing:', error);
-		cookieStore.set('needsProfileCompletion', 'true', {
+		cookieStore.set('mustSignup', 'true', {
 			path: '/',
 			expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
 			sameSite: 'lax',

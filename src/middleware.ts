@@ -22,23 +22,48 @@ export function middleware(request: NextRequest) {
 
 	const needsProfileCompletion = cookies.get('needsProfileCompletion')?.value === 'true';
 	const redirectToDashboardCookie = cookies.get('redirectToDashboard')?.value === 'true';
+	const mustSignup = cookies.get('mustSignup')?.value === 'true';
+
 	const accessToken = cookies.get('access_token');
 	const isAuthenticated = Boolean(accessToken);
-	const country = cookies.get('msk-country')?.value || 'ar';
+	const country = (cookies.get('msk-country')?.value || 'ar').replace(/[^a-z]/g, '');
 
 	// --- Priority Redirects based on Cookies ---
 
 	// 1. Redirect to dashboard if flag is set (and clear the flag)
 	if (redirectToDashboardCookie) {
-		const response = NextResponse.redirect(new URL('/dashboard', request.url));
+		const response =
+			country === 'ar'
+				? NextResponse.redirect(new URL('/dashboard', request.url))
+				: NextResponse.redirect(new URL(`/${country}/dashboard`, request.url));
 		response.cookies.delete('redirectToDashboard'); // Clear the cookie
+		return response;
+	}
+
+	// NEW: Redirect to signup if mustSignup flag is set
+	if (mustSignup) {
+		/* eliminar cookie */
+		cookies.delete('mustSignup');
+		const targetUrl = new URL('/login', request.url);
+		targetUrl.searchParams.set('form', 'registerForm');
+
+		const response =
+			country === 'ar'
+				? NextResponse.redirect(targetUrl)
+				: NextResponse.redirect(new URL(`/${country}${targetUrl.pathname}${targetUrl.search}`, request.url));
+		response.cookies.delete('mustSignup'); // Clear the cookie
 		return response;
 	}
 
 	// 2. Redirect to complete profile if flag is set (and clear the flag)
 	// Only redirect if *not* already on the complete profile page to avoid loops.
 	if (needsProfileCompletion && !pathname.includes('/completar-perfil')) {
-		const response = NextResponse.redirect(new URL('/completar-perfil', request.url));
+		/* eliminar cookie */
+		cookies.delete('needsProfileCompletion');
+		const response =
+			country === 'ar'
+				? NextResponse.redirect(new URL('/completar-perfil', request.url))
+				: NextResponse.redirect(new URL(`/${country}/completar-perfil`, request.url));
 		// DO NOT clear the cookie here. It should be cleared upon successful profile completion.
 		// response.cookies.delete('needsProfileCompletion');
 		return response;

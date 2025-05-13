@@ -82,6 +82,8 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 		const langMatch = currentPath.match(/^\/([^\/]+)\/login/);
 		const lang = langMatch ? langMatch[1] : '';
 
+		console.log('lang', lang);
+
 		const payload = {
 			...data,
 			country: lang || 'AR',
@@ -104,8 +106,11 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 	};
 
 	const handleSocialSignup = (connection: string) => {
+			const currentPath = window.location.pathname;
+			const langMatch = currentPath.match(/^\/([^\/]+)\/login/);
+			const lang = langMatch ? langMatch[1] : '';
 		sessionStorage.setItem('needsProfileCompletion', 'true');
-		window.location.href = `/api/auth/login?connection=${connection}`;
+		window.location.href = `/api/auth/login?connection=${connection}&signup=true&lang=${lang}`;
 	};
 
 	// componente visual de sugerencias en tiempo real para la contraseña

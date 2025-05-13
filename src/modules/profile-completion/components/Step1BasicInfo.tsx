@@ -63,7 +63,12 @@ export default function Step1BasicInfo({ data, onNext, onSkip, onBack, onUpdate 
 	}, [data.otherSpecialty]);
 
 	useEffect(() => {
-		setCountry(data.country || '');
+		const countryValue = data.country || '';
+		// Find country by code (case-insensitive) or by name (case-insensitive)
+		const foundCountry = countries.find(
+			(c) => c.id.toLowerCase() === countryValue.toLowerCase() || c.name.toLowerCase() === countryValue.toLowerCase(),
+		);
+		setCountry(foundCountry ? foundCountry.name : '');
 	}, [data.country]);
 
 	useEffect(() => {

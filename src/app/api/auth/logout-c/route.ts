@@ -12,6 +12,7 @@ export async function POST(request: NextRequest) {
 		cookieStore.delete('last_name');
 		cookieStore.delete('redirectToDashboard');
 		cookieStore.delete('needsProfileCompletion');
+		cookieStore.delete('mustSignup');
 
 		console.log('Access token cookie cleared');
 		return NextResponse.json({ message: 'Logout successful' });
