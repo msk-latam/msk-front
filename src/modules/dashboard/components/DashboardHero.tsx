@@ -11,13 +11,12 @@ import AddButton from '@/dashboard/components/ui/AddButton';
 import EditButton from '@/dashboard/components/ui/EditButton';
 // import dashboardMock from '@/modules/dashboard/data/dashboardMock.json'; // <-- Import mock data
 import { type Interests } from '@/hooks/useinterests'; // Changed: Import Interests type
-import { useLmsNavigation } from '@/hooks/useLmsNavigation';
 import { urlFormat } from '@/utils/urlFormat';
 import Link from 'next/link';
+import { goToEnroll, goToLMS } from '../../../lib/account';
 import DashboardHeroSkeleton from './DashboardHeroSkeleton';
 import InvoicesModal from './InvoicesModal';
 import CtaButton from './ui/CtaButton';
-// import { goToEnroll, goToLMS } from '@/lib/account';
 // // Define props for DashboardHero
 interface DashboardHeroProps {
 	userData: any; // <-- TODO: Change to UserData type
@@ -28,15 +27,6 @@ interface DashboardHeroProps {
 	interests: Interests | null; // Changed: Added interests prop
 	isInterestsLoading: boolean; // Changed: Added isInterestsLoading prop
 }
-
-// const defaultRecommendedCourse = {
-// 	image:
-// 		'https://images.ctfassets.net/cnu0m8re1exe/KARd6CSmh3yD656fzK3Kl/d46556b481191e9a679ed0e02388788f/doctor-and-patient.jpg?fm=jpg&fl=progressive&w=1140&h=700&fit=fill', // Use the image from the example
-// 	label: 'Recomendado para ti',
-// 	title: 'Curso de Endocrinología y Nutrición',
-// 	buttonText: 'Descubrir',
-// 	buttonLink: '/tienda/endocrinologia-y-nutricion/', // Replace with actual link
-// };
 
 const DashboardHero: React.FC<DashboardHeroProps> = ({
 	userData,
@@ -49,7 +39,63 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 }) => {
 	const isEmpty = (value: string | undefined | null) => !value || value.trim() === '';
 	const [showInvoicesModal, setShowInvoicesModal] = useState(false);
-	const { navigateToLms, isLoading: isNavigating, error: navigationError } = useLmsNavigation();
+	const [isNavigating, setIsNavigating] = useState(false);
+	// const { navigateToLms, isLoading: isNavigating, error: navigationError } = useLmsNavigation();
+
+	// Initialize internalCurrentCourse state
+	const [internalCurrentCourse, setInternalCurrentCourse] = React.useState(userData?.currentCourse);
+
+	// Effect to sync internalCurrentCourse with userData.currentCourse prop
+	React.useEffect(() => {
+		setInternalCurrentCourse(userData?.currentCourse);
+	}, [userData?.currentCourse]);
+
+	// Definitions for isProductActive and isProductNotEnrolled
+	const isProductActive = (status: string) => {
+		return status !== 'Baja' && status !== 'Trial suspendido';
+	};
+
+	const isProductNotEnrolled = (status: string) => {
+		return status === 'Sin enrolar';
+	};
+
+	const handleProductAction = async (
+		productCode: string,
+		productCodeCedente: string,
+		userEmailAddress: string, // Renamed from userEmail to avoid conflict with prop
+		currentCourseStatus: string,
+	) => {
+		const validStatuses = ['Listo para enrolar', 'Sin enrolar', 'Activo', 'Finalizado'];
+		if (isProductActive(currentCourseStatus) && validStatuses.includes(currentCourseStatus)) {
+			setIsNavigating(true);
+			try {
+				if (isProductNotEnrolled(currentCourseStatus)) {
+					const enrollResponse = await goToEnroll(Number(productCode), userEmailAddress);
+					console.log('responseGoToEnroll', enrollResponse);
+
+					if (enrollResponse?.data?.[0]?.status === 'success') {
+						setInternalCurrentCourse((prevCourse: any) => {
+							if (!prevCourse) return null;
+							return { ...prevCourse, status: 'Activo' };
+						});
+						// UI will update, then navigate to LMS
+						await goToLMS(Number(productCode), productCodeCedente, userEmailAddress);
+					} else {
+						console.error('Enrollment failed or status not success:', enrollResponse);
+						// Optionally, display a user-facing error message here
+					}
+				} else {
+					// Course is already active or in a state to directly go to LMS
+					await goToLMS(Number(productCode), productCodeCedente, userEmailAddress);
+				}
+			} catch (error) {
+				console.error('Error in product action:', error);
+				// Optionally, display a user-facing error message here
+			} finally {
+				setIsNavigating(false);
+			}
+		}
+	};
 
 	const handleEditClick = (field?: string) => {
 		// Map display labels/placeholders to actual UserData field names
@@ -320,7 +366,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 					<div className='bg-cover bg-top h-[300px] rounded-[30px] relative flex flex-col justify-center p-[36px] text-white overflow-hidden'>
 						<div
 							className='absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 bg-cover bg-center'
-							style={{ backgroundImage: `url(${data?.currentCourse?.image})` }}
+							style={{ backgroundImage: `url(${internalCurrentCourse?.image})` }}
 						></div>
 						{/* Overlay gradient */}
 						<div
@@ -332,10 +378,10 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 							{/* Group Label and Title */}
 							<div className='flex flex-col items-start gap-4'>
 								<span className='bg-[#DFE6FF] text-[#29324F] font-inter font-normal text-sm md:text-base rounded-full px-3 py-1.5'>
-									{data?.currentCourse?.completed_percentage === null ? 'Recomendado para ti' : 'Continúa tu aprendizaje'}
+									{internalCurrentCourse?.completed_percentage === null ? 'Recomendado para ti' : 'Continúa tu aprendizaje'}
 								</span>
 								<h2 className='text-white font-raleway font-[700] text-[24px] md:text-[36px] leading-[26px] md:leading-[44px] max-w-[25ch]'>
-									{data?.currentCourse?.title}
+									{internalCurrentCourse?.title}
 								</h2>
 							</div>
 							{/* Button - Aligned below title on mobile, right on desktop */}
@@ -343,17 +389,27 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 							<div className='w-auto mt-4 md:mt-0'>
 								<CtaButton
 									onClick={() => {
-										if (data?.currentCourse?.completed_percentage === null) {
+										if (internalCurrentCourse?.completed_percentage === null) {
 											const currentPath = window.location.pathname;
 											const langMatch = currentPath.match(/^\/([^\/]+)\/dashboard/);
 											const lang = langMatch ? langMatch[1] : '';
 											window.location.href = lang
-												? `/${lang}/${data?.currentCourse?.link}`
-												: `/${data?.currentCourse?.link}`;
-										} else if (data?.currentCourse?.product_code && data?.currentCourse?.product_code_cedente && userEmail) {
-											navigateToLms(data?.currentCourse?.product_code, data?.currentCourse?.product_code_cedente, userEmail);
+												? `/${lang}/${internalCurrentCourse?.link}`
+												: `/${internalCurrentCourse?.link}`;
+										} else if (
+											internalCurrentCourse?.product_code &&
+											internalCurrentCourse?.product_code_cedente &&
+											userEmail &&
+											internalCurrentCourse?.status
+										) {
+											handleProductAction(
+												internalCurrentCourse.product_code,
+												internalCurrentCourse.product_code_cedente,
+												userEmail,
+												internalCurrentCourse.status,
+											);
 										} else {
-											console.error('Missing data for LMS navigation:', data?.currentCourse);
+											console.error('Missing data for LMS navigation:', internalCurrentCourse);
 										}
 									}}
 									showIcon={true}
@@ -361,23 +417,23 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 								>
 									{isNavigating
 										? 'Cargando...'
-										: data?.currentCourse?.completed_percentage === null
+										: internalCurrentCourse?.completed_percentage === null
 										? 'Descubrir'
-										: data?.currentCourse?.status === 'Sin enrolar'
+										: internalCurrentCourse?.status === 'Sin enrolar'
 										? 'Activar'
 										: 'Continuar'}
 								</CtaButton>
 							</div>
 						</div>
 						{/* Progress Bar */}
-						{data?.currentCourse?.completed_percentage !== null && (
+						{internalCurrentCourse?.completed_percentage !== null && (
 							<div className='w-full h-[40px] bg-[#00000033] absolute bottom-0 left-0'>
 								<div
 									className='h-full bg-[#00000080] px-[36px] flex items-center justify-start transition-width duration-300 ease-in-out'
-									style={{ width: `${data?.currentCourse?.completed_percentage}%` }}
+									style={{ width: `${internalCurrentCourse?.completed_percentage}%` }}
 								>
 									<span className='text-white font-inter font-medium text-base leading-[24px] whitespace-nowrap'>
-										{data?.currentCourse?.completed_percentage}% completado
+										{internalCurrentCourse?.completed_percentage}% completado
 									</span>
 								</div>
 							</div>

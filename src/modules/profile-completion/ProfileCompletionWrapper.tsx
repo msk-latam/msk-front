@@ -100,7 +100,8 @@ export default function ProfileCompletionWrapper() {
 		const currentPath = window.location.pathname;
 		const langMatch = currentPath.match(/^\/([^\/]+)\/completar-perfil/);
 		const lang = langMatch ? langMatch[1] : 'ar';
-
+		console.log('lang', lang);
+		console.log('currentPath', currentPath);
 		lang === 'ar' ? router.push('/dashboard') : router.push(`/${lang}/dashboard`);
 	};
 

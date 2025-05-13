@@ -12,6 +12,7 @@ interface CurrentCourseType {
 	resource: any;
 	link?: any;
 	status: string;
+	ov?: string;
 }
 
 // Define new interfaces for the API response
@@ -197,9 +198,8 @@ export async function GET(request: NextRequest) {
 				)}?lang=${lang}&name=${encodeURIComponent(courseName)}`,
 				{
 					headers: { Accept: 'application/json' },
-					next: { revalidate: 3600 * 7 }
+					next: { revalidate: 3600 * 7 },
 					// cache: 'no-store',
-
 				},
 			);
 
@@ -289,6 +289,7 @@ export async function GET(request: NextRequest) {
 						resource: latestProduct.resource,
 						link: latestProduct.link,
 						status: '',
+						ov: '',
 					};
 				} catch (error) {
 					console.error('Error fetching latest product:', error);
@@ -321,6 +322,7 @@ export async function GET(request: NextRequest) {
 							completed_percentage: 0,
 							resource: '',
 							status: '',
+							ov: '',
 						};
 					}
 
@@ -339,6 +341,7 @@ export async function GET(request: NextRequest) {
 						completed_percentage: 0,
 						resource: latestProduct.resource,
 						status: '',
+						ov: '',
 					};
 				} catch (error) {
 					console.error('Error fetching latest product:', error);
@@ -366,6 +369,7 @@ export async function GET(request: NextRequest) {
 					completed_percentage: 0,
 					resource: '',
 					status: '',
+					ov: '',
 				};
 			}
 
@@ -387,6 +391,7 @@ export async function GET(request: NextRequest) {
 						completed_percentage: 0,
 						resource: '',
 						status: '',
+						ov: '',
 					};
 				}
 
@@ -400,6 +405,7 @@ export async function GET(request: NextRequest) {
 					completed_percentage: parseFloat(latestCourseProgress.advance?.replace(',', '.')) || 0,
 					resource: cmsCourseDetail?.resource,
 					status: latestCourseProgress.enroll_status,
+					ov: cmsCourseDetail?.contract_status,
 				};
 			} catch (cmsError) {
 				console.error(`Error fetching CMS details for current course ${latestCourseProgress.course_name}:`, cmsError);
