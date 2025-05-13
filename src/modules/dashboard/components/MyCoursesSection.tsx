@@ -6,6 +6,7 @@ import CtaButton from '@/dashboard/components/ui/CtaButton';
 import { useLmsNavigation } from '@/hooks/useLmsNavigation';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import { goToEnroll } from '../../../lib/account';
 
 // Simple SVG placeholders for icons - replace with actual icons later
 const LightningIcon = () => (
@@ -49,7 +50,16 @@ interface Course {
 	title: string;
 	expiryDate?: string;
 	qualification?: number;
-	statusType: 'progress' | 'inactive' | 'finished' | 'expired' | 'Activo' | 'Finalizado' | 'Expirado' | 'Sin enrolar';
+	statusType:
+		| 'progress'
+		| 'inactive'
+		| 'finished'
+		| 'expired'
+		| 'Activo'
+		| 'Finalizado'
+		| 'Expirado'
+		| 'Sin enrolar'
+		| 'Listo para enrolar';
 	statusText: string;
 	createdDate?: string;
 	isFavorite?: boolean;
@@ -199,6 +209,37 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 		}
 	};
 
+	const handleCourseAction = async (course: Course) => {
+		if (course.product_code && course.product_code_cedente && userEmail) {
+			setNavigatingCourseId(course.product_code);
+			try {
+				if (course.statusType === 'Sin enrolar') {
+					const enrollResponse = await goToEnroll(Number(course.product_code), userEmail);
+					console.log('Enroll response for MyCoursesSection:', enrollResponse); // For debugging
+
+					if (enrollResponse?.data?.[0]?.status === 'success') {
+						// Enrollment successful, now navigate to LMS
+						await navigateToLms(course.product_code, course.product_code_cedente, userEmail);
+					} else {
+						console.error('Enrollment failed in MyCoursesSection:', enrollResponse);
+						// TODO: Optionally, set an error state here to inform the user,
+						// similar to navigationError but for enrollment failures.
+					}
+				} else {
+					// For 'Activo', 'Finalizado', and other statuses that go directly to LMS
+					await navigateToLms(course.product_code, course.product_code_cedente, userEmail);
+				}
+			} catch (error) {
+				console.error('LMS navigation or enrollment failed for course in MyCoursesSection:', course.product_code, error);
+				// Errors from navigateToLms will be caught by the useLmsNavigation hook's error state (navigationError)
+			} finally {
+				setNavigatingCourseId(null);
+			}
+		} else {
+			console.error('Missing data for LMS navigation/enrollment in MyCoursesSection:', course);
+		}
+	};
+
 	const renderInfoLine = (course: Course) => {
 		if (
 			course.expiryDate &&
@@ -244,6 +285,7 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 			case 'Activo':
 			case 'Finalizado':
 			case 'Sin enrolar':
+			case 'Listo para enrolar':
 				return (
 					<>
 						<button
@@ -255,23 +297,7 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 							Ir al foro
 						</button>
 
-						<CtaButton
-							onClick={async () => {
-								if (course.product_code && course.product_code_cedente && userEmail) {
-									setNavigatingCourseId(course.product_code);
-									try {
-										await navigateToLms(course.product_code, course.product_code_cedente, userEmail);
-									} catch (error) {
-										console.error('LMS navigation failed for course:', course.product_code, error);
-									} finally {
-										setNavigatingCourseId(null);
-									}
-								} else {
-									console.error('Missing data for LMS navigation:', course);
-								}
-							}}
-							isDisabled={navigatingCourseId === course.product_code}
-						>
+						<CtaButton onClick={() => handleCourseAction(course)} isDisabled={navigatingCourseId === course.product_code}>
 							{navigatingCourseId === course.product_code
 								? 'Cargando...'
 								: course.statusType === 'Sin enrolar'
