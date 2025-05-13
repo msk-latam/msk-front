@@ -154,12 +154,13 @@ case "main":
   return (
     <ViewMain
       navigateTo={navigateTo}
-      isMobile
+      isMobile={isMobile} // ✅ Pasa correctamente el valor real
       onClose={onClose}
       isAuthenticated={isAuthenticated ?? false}
       isLoading={isLoading ?? false}
     />
   );
+
 
             case "specialtyDetail":
               return (
