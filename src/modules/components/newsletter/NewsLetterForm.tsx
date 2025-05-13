@@ -157,8 +157,8 @@ export default function NewsLetterForm({ onClose, initialEmail }: NewsLetterForm
 				Otra_especialidad: specialty === 'Otra Especialidad' ? formData.speciality : '',
 				Pais: countryName,
 				Terms_And_Conditions: true,
-				URL_ORIGEN: window.location.href,
-				leadSource: 'Formulario de contacto',
+				URL_ORIGEN: window.location.href.slice(0, 255),
+				leadSource: 'Suscriptor newsletter',
 				recaptcha_token,
 				Cursos_consultados: [],
 				utm_source: utmState.utm_source,
@@ -206,12 +206,12 @@ export default function NewsLetterForm({ onClose, initialEmail }: NewsLetterForm
 				animate={{ opacity: 1, y: 0 }}
 				exit={{ opacity: 0, y: -20 }}
 				transition={{ duration: 0.3 }}
-				className='relative bg-white rounded-2xl p-8 max-w-2xl w-full shadow-lg'
+				className='relative w-full max-w-2xl p-8 bg-white shadow-lg rounded-2xl'
 			>
 				<button
 					onClick={onClose}
 					type='button'
-					className='absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-2xl'
+					className='absolute text-2xl text-gray-600 top-2 right-2 hover:text-gray-900'
 					aria-label='Cerrar'
 				>
 					×
@@ -422,7 +422,7 @@ export default function NewsLetterForm({ onClose, initialEmail }: NewsLetterForm
 					) : (
 						<motion.div
 							key='success'
-							className='text-center space-y-4 py-6 px-4'
+							className='px-4 py-6 space-y-4 text-center'
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							exit={{ opacity: 0 }}

@@ -4,11 +4,12 @@ import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { getCountries, getCountryCallingCode } from 'react-phone-number-input';
 import { getName } from 'country-list';
 import CountrySelect from '@/modules/login/components/hooks/CountrySelect';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { careerOptions } from '@/data/careers';
 import { professions } from '@/data/professions';
 import { specialtiesGroup } from '@/data/specialties';
 import { years } from '@/data/years';
+import { getCourse } from '../service/courseService';
 
 interface Specialty {
 	id: number;
@@ -19,7 +20,7 @@ const getCountryNameByCode = (dialCode: string): string => {
 	return countryCode ? getName(countryCode) ?? '' : '';
 };
 
-export default function CourseSupportForm() {
+export default function CourseSupportForm({ slug, lang }: any) {
 	const [formData, setFormData] = useState({
 		name: '',
 		lastName: '',
@@ -33,6 +34,21 @@ export default function CourseSupportForm() {
 		message: '',
 		acceptTerms: false,
 	});
+	const [course, setCourse] = useState(null);
+
+	useEffect(() => {
+		const fetchCourse = async () => {
+			try {
+				const data = await getCourse(slug, lang);
+				console.log(data);
+				setCourse(data);
+			} catch (error) {
+				console.error('Error fetching course:', error);
+			}
+		};
+
+		fetchCourse();
+	}, [slug, lang]);
 
 	const { executeRecaptcha } = useGoogleReCaptcha();
 	const [formSent, setFormSent] = useState(false);
@@ -115,10 +131,10 @@ export default function CourseSupportForm() {
 			Terms_And_Conditions: true,
 			year: '',
 			career: '',
-			URL_ORIGEN: urlOrigen,
-			leadSource: 'Formulario de soporte de cursos',
-			Ebook_consultado: null,
-			Cursos_consultados: null,
+			URL_ORIGEN: urlOrigen.slice(0, 255),
+			leadSource: 'Solicitud de contacto',
+			Ebook_consultado: course?.resource === 'downloadable' ? course.title : null,
+			Cursos_consultados: course?.resource === 'course' ? course.title : null,
 			...utmState,
 		};
 
@@ -208,7 +224,7 @@ export default function CourseSupportForm() {
 			setCareer(value);
 		} else if (name === 'year') {
 			setYear(value);
-		} else if (name === 'speciality') {
+		} else if (name === 'specialty') {
 			setSpecialty(value);
 		}
 
@@ -226,7 +242,7 @@ export default function CourseSupportForm() {
 				Nuestro equipo de especialistas en educación médica está listo para asesorarte. No dudes en escribirnos.
 			</p>
 
-			<form className='grid grid-cols-1 md:grid-cols-2 gap-4' onSubmit={handleSubmit}>
+			<form className='grid grid-cols-1 gap-4 md:grid-cols-2' onSubmit={handleSubmit}>
 				<input
 					name='name'
 					value={formData.name}
@@ -266,7 +282,7 @@ export default function CourseSupportForm() {
 				/>
 
 				{/* Profesión */}
-				<div className='flex flex-col gap-4 w-full'>
+				<div className='flex flex-col w-full gap-4'>
 					<select
 						name='profession'
 						value={profession}
@@ -301,9 +317,9 @@ export default function CourseSupportForm() {
 
 				<div>
 					{profession !== 'Estudiante' && (
-						<div className='flex flex-col gap-4 w-full'>
+						<div className='flex flex-col w-full gap-4'>
 							<select
-								name='speciality'
+								name='specialty'
 								value={specialty}
 								onChange={handleSelectChange}
 								className='w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]'
@@ -335,7 +351,7 @@ export default function CourseSupportForm() {
 						</div>
 					)}
 					{profession === 'Estudiante' && (
-						<div className='flex flex-col md:flex-row gap-4 w-full'>
+						<div className='flex flex-col w-full gap-4 md:flex-row'>
 							<select
 								name='career'
 								value={career}
@@ -364,7 +380,7 @@ export default function CourseSupportForm() {
 								))}
 							</select>
 
-							<input type='hidden' name='speciality' value={specialty} />
+							<input type='hidden' name='specialty' value={specialty} />
 						</div>
 					)}
 				</div>
@@ -379,7 +395,7 @@ export default function CourseSupportForm() {
 				/>
 
 				{/* Checkbox + Botón */}
-				<div className='col-span-1 md:col-span-2 flex flex-col md:flex-row justify-between items-center gap-4 md:mt-4'>
+				<div className='flex flex-col items-center justify-between col-span-1 gap-4 md:col-span-2 md:flex-row md:mt-4'>
 					<div className='flex items-center gap-2'>
 						<input
 							type='checkbox'
@@ -407,12 +423,12 @@ export default function CourseSupportForm() {
 			</form>
 
 			{formSent && (
-				<div className='text-green-700 bg-green-100 px-4 py-2 rounded-md mt-4'>
+				<div className='px-4 py-2 mt-4 text-green-700 bg-green-100 rounded-md'>
 					¡Gracias! En breve un asesor se comunicará con vos.
 				</div>
 			)}
 
-			{formError && <div className='text-red-700 bg-red-100 px-4 py-2 rounded-md mt-4'>{formError}</div>}
+			{formError && <div className='px-4 py-2 mt-4 text-red-700 bg-red-100 rounded-md'>{formError}</div>}
 		</div>
 	);
 }
