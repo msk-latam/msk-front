@@ -1176,7 +1176,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 										)}
 
 										{!isEbook && (
-											<div className='flex flex-wrap gap-6 mt-2 mb-6 preferences'>
+											<div className='flex flex-wrap gap-6 mt-6 mb-6 preferences'>
 												<p className='w-full md:w-auto'>Quiero hablar por</p>
 												<div className='grid grid-cols-1 gap-4 mt-1 md:grid-cols-3'>
 													{[
@@ -1206,30 +1206,47 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 									<div className='grid w-full grid-cols-1 col-span-2 gap-4 md:grid-cols-2'>
 										<div className='col-span-2 col-xl-6 md:col-span-1'>
 											<div className='rounded-xl'>
-												<ErrorMessage name='First_Name' component='span' className='error' />
-												<Field className='w-full' type='text' name='First_Name' placeholder='Ingresar nombre' />
+												<ErrorMessage name='First_Name' component='span' className='text-red-500' />
+												<Field
+													className='w-full text-[#374151] bg-[#f8f8f9] border-none py-6'
+													type='text'
+													name='First_Name'
+													placeholder='Ingresar nombre'
+												/>
 											</div>
 										</div>
 										<div className='col-span-2 col-xl-6 md:col-span-1'>
 											<div className='contact-from-input'>
-												<ErrorMessage className='error' name='Last_Name' component='span' />
-												<Field className='w-full' type='text' name='Last_Name' placeholder='Ingresar apellido' />
+												<ErrorMessage className='text-red-500' name='Last_Name' component='span' />
+												<Field
+													className='w-full  text-[#374151] bg-[#f8f8f9] border-none py-6'
+													type='text'
+													name='Last_Name'
+													placeholder='Ingresar apellido'
+												/>
 											</div>
 										</div>
 										<div className='col-span-2 col-xl-6 md:col-span-1'>
 											<div className='contact-from-input'>
-												<ErrorMessage name='Email' component='span' className='error' />
-												<Field className='w-full' type='email' name='Email' placeholder='Ingresar e-mail' />
+												<ErrorMessage name='Email' component='span' className='text-red-500' />
+												<Field
+													className='w-full  text-[#374151] bg-[#f8f8f9] border-none py-6'
+													type='email'
+													name='Email'
+													placeholder='Ingresar e-mail'
+												/>
 											</div>
 										</div>
 
-										<div className='col-span-2 col-xl-6 md:col-span-1'>
-											<div className='contact-from-input intl-input phone-contact-input-select'>
-												<Field name='Phone'>
+										<div className='col-span-2 border-none col-xl-6 md:col-span-1'>
+											<div className='border-none contact-from-input intl-input phone-contact-input-select'>
+												<Field name='Phone' className=' text-[#374151] bg-[#f8f8f9] !border-none py-6'>
 													{({ field, form, meta }: any) => (
-														<div className='contact-from-input intl-input phone-contact-input-select'>
-															<ErrorMessage name='Phone' component='span' className='error' />
+														<div className='border-none contact-from-input intl-input phone-contact-input-select'>
+															<ErrorMessage name='Phone' component='span' className='text-red-500' />
 															<PhoneInput
+																style={{ borderStyle: 'none' }}
+																className=' text-[#374151] bg-[#f8f8f9] !border-none py-6 '
 																name='Phone'
 																id='Phone'
 																placeholder='Ingresar número telefónico'
@@ -1247,9 +1264,9 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 
 										<div className='w-full col-span-2 col-xl-6 md:col-span-1'>
 											<div className=''>
-												<ErrorMessage name='Profesion' component='span' className='error' />
+												<ErrorMessage name='Profesion' component='span' className='text-red-500' />
 												<Field
-													className='w-full'
+													className='w-full  text-[#374151] bg-[#f8f8f9] border-none py-6'
 													as='select'
 													name='Profesion'
 													onChange={handleOptionProfessionChange}
@@ -1270,8 +1287,13 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 
 											{showInputProfession && (
 												<div className='my-4 contact-from-input'>
-													<ErrorMessage name='Otra_profesion' component='span' className='error' />
-													<Field className='w-full' type='text' name='Otra_profesion' placeholder='Ingresar profesion' />
+													<ErrorMessage name='Otra_profesion' component='span' className='text-red-500' />
+													<Field
+														className='w-full  text-[#374151] bg-[#f8f8f9] border-none py-6'
+														type='text'
+														name='Otra_profesion'
+														placeholder='Ingresar profesion'
+													/>
 												</div>
 											)}
 										</div>
@@ -1279,8 +1301,8 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 										{studentInputs ? (
 											<div className='flex gap-2 col-xl-12'>
 												<div className='w-1/2 contact-select'>
-													<ErrorMessage name='year' component='span' className='error' />
-													<Field as='select' name='year' className='w-full'>
+													<ErrorMessage name='year' component='span' className='text-red-500' />
+													<Field as='select' name='year' className='w-full  text-[#374151] bg-[#f8f8f9] border-none py-6'>
 														<option defaultValue=''>Año</option>
 														{optionsArray.map((y) => (
 															<option key={`st_year_${y}`} defaultValue={y}>
@@ -1290,9 +1312,9 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 													</Field>
 												</div>
 												<div className='w-full contact-select'>
-													<ErrorMessage name='career' component='span' className='error' />
+													<ErrorMessage name='career' component='span' className='text-red-500' />
 													<Field
-														className='w-full'
+														className='w-full  text-[#374151] bg-[#f8f8f9] border-none py-6'
 														as='select'
 														name='career'
 														onChange={handleOptionCareerChange}
@@ -1311,9 +1333,9 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 											<>
 												<div className={`col-xl-6 col-span-2 sm:col-span-1`}>
 													<div className='contact-select'>
-														<ErrorMessage name='Especialidad' component='span' className='error' />
+														<ErrorMessage name='Especialidad' component='span' className='text-red-500' />
 														<Field
-															className='w-full'
+															className='w-full  text-[#374151] bg-[#f8f8f9] border-none py-6'
 															as='select'
 															name='Especialidad'
 															onChange={handleOptionSpecialtyChange}
@@ -1338,12 +1360,12 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 													{showInputSpecialties && (
 														<div className='my-4 contact-from-input'>
 															<Field
-																className='w-full'
+																className='w-full text-[#374151] bg-[#f8f8f9] border-none py-6'
 																type='text'
 																name='Otra_especialidad'
 																placeholder='Ingresar especialidad'
 															/>
-															<ErrorMessage name='Otra_especialidad' component='div' className='error' />
+															<ErrorMessage name='Otra_especialidad' component='div' className='text-red-500' />
 														</div>
 													)}
 												</div>
@@ -1353,9 +1375,9 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 											{!isEbook && (
 												<div className='mt-4 col-xl-12'>
 													<div className='contact-from-input'>
-														<ErrorMessage name='Description' component='span' className='error' />
+														<ErrorMessage name='Description' component='span' className='text-red-500' />
 														<Field
-															className='w-full'
+															className='w-full text-[#374151] bg-[#f8f8f9] border-none py-6'
 															as='textarea'
 															id='Description'
 															name='Description'
@@ -1367,7 +1389,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 
 											<div className='flex flex-wrap justify-center gap-1 mt-2 mb-4 sm:justify-start'>
 												<div className='contact-checkbox'>
-													<ErrorMessage name='Terms_And_Conditions' component='div' className='error' />
+													<ErrorMessage name='Terms_And_Conditions' component='div' className='text-red-500' />
 													<div className='flex gap-2 center'>
 														<Field
 															type='checkbox'

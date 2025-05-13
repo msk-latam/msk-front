@@ -1,14 +1,18 @@
 'use client';
 import { CountryContext } from '@/context/country/CountryContext';
+import { usePathname } from 'next/navigation';
 import React, { useContext, useEffect } from 'react';
 
 const ContactSidebar = () => {
 	const { countryState } = useContext(CountryContext);
 	const [phone, setPhone] = React.useState<string | null>(null);
 	const [secondaryPhone, setSecondaryPhone] = React.useState<string | null>(null);
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? match[1] : '';
 	useEffect(() => {
-		if (countryState.country) {
-			switch (countryState.country) {
+		if (country) {
+			switch (country) {
 				case 'ec':
 					setPhone('(+593) 2-401-6114');
 					setSecondaryPhone(null);
@@ -30,19 +34,22 @@ const ContactSidebar = () => {
 					setSecondaryPhone(null);
 					break;
 			}
+		} else {
+			setPhone('0800-220-6334');
+			setSecondaryPhone('011-5263-0582');
 		}
-	}, [countryState.country]);
+	}, [country]);
 
 	return (
 		<div className='sidebar-widget-wrapper'>
 			<div className='support-contact mb-30'>
-				<div className='support-contact-inner'>
+				<div className='flex flex-col gap-4 support-contact-inner'>
 					{phone && (
 						<div className='flex gap-2'>
 							{/* <div className='support-icon'>
 								<img src='/images/icons/phone.svg' alt='' width='20' />
 							</div> */}
-							<div className='flex gap-2'>
+							<div className='flex flex-col gap-2'>
 								<span>Teléfono</span>
 								<p>{phone}</p>
 								{secondaryPhone && <p>{secondaryPhone}</p>}
@@ -63,7 +70,7 @@ const ContactSidebar = () => {
 						<div className='support-icon'>
 							<img src='/images/icons/email.svg' alt='' width='20' />
 						</div>
-						<div className='flex gap-2'>
+						<div className='flex flex-col gap-2'>
 							<span>E-mail</span>
 							<a href='mailto:hola@msklatam.com'>hola@msklatam.com</a>
 						</div>
