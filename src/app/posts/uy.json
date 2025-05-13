@@ -7,6 +7,147 @@
 	"total_products": 260,
 	"posts": [
 		{
+			"id": 253555,
+			"title": "Capacitación en salud: una inversión que transforma",
+			"slug": "capacitacion-en-salud-una-inversion-que-transforma",
+			"permalink": "https://wp.msklatam.com/nota/e-learning/capacitacion-en-salud-una-inversion-que-transforma/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2023/09/Foto-capacitacion-en-salud-una-inversion-que-transforma-scaled-e1745327819157.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2023/09/Foto-capacitacion-en-salud-una-inversion-que-transforma-scaled-e1745327819157.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "En un entorno clínico en constante cambio, la capacitación profesional ya no es solo una opción: es una necesidad estratégica. En este artículo explorarás cómo el aprendizaje continuo, como motor de desarrollo y competitividad, impacta en la calidad del cuidado, mejora la productividad institucional y fortalece el compromiso de los equipos de salud.",
+			"date": "Mayo 12, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				},
+				{
+					"id": 254588,
+					"name": "Verónica Martínez Moreira",
+					"description": "Licenciada en Ciencias de la Comunicación por la Universidad de Buenos Aires. Desde hace años escribo en medios digitales sobre diversas temáticas como ciencia, salud, tecnología y educación.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/IMG_20230706_184120622-scaled.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 340114,
+					"title": "El impacto de la inteligencia artificial en la enfermería",
+					"slug": "impacto-de-la-inteligencia-artificial-en-enfermeria",
+					"link": "https://wp.msklatam.com/nota/enfermeria/impacto-de-la-inteligencia-artificial-en-enfermeria/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-impacto-de-la-inteligencia-artificial-en-enfermeria-scaled-e1744907902528.png",
+					"category": "Actualidad"
+				},
+				{
+					"id": 339799,
+					"title": "¿Puede la inteligencia artificial permitir una atención médica más humana?",
+					"slug": "ia-atencion-medica-mas-humana",
+					"link": "https://wp.msklatam.com/nota/medicina/ia-atencion-medica-mas-humana/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-ia-atencion-medica-mas-humana-scaled-e1744661669205.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 339149,
+					"title": "Cómo elige aprender hoy el personal de salud",
+					"slug": "como-aprende-el-personal-de-salud",
+					"link": "https://wp.msklatam.com/nota/e-learning/como-aprende-el-personal-de-salud/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-como-aprende-el-personal-de-salud-scaled-e1744319158197.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 341126,
+					"title": "Por qué la salud laboral es una deuda estructural en la región",
+					"slug": "salud-laboral-una-deuda-estructural",
+					"link": "https://wp.msklatam.com/nota/medicina/salud-laboral-una-deuda-estructural/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-salud-laboral-una-deuda-estructural-scaled-e1745600725761.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 340935,
+					"title": "Precisión, prevención y desafíos en medicina genómica",
+					"slug": "medicina-genomica-precision-y-desafios",
+					"link": "https://wp.msklatam.com/nota/medicina/medicina-genomica-precision-y-desafios/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-medicina-genomica-precision-y-desafios-scaled-e1745500047106.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Vera Carrasco Oscar. La importancia de la educación médica continua en los profesionales de la salud. Cuad. - Hosp. Clín. [Internet]. 2023 Jun [citado 2025 Abr 22] ; 64( 1 ): 9-11. Disponible en: http://www.scielo.org.bo/scielo.php?script=sci_arttext&pid=S1652-67762023000100001&lng=es."
+				},
+				{
+					"fuente": "Parra, Carlos & Rodríguez-Fonseca, Fernando. (2015). La capacitación y su efecto en la calidad dentro de las organizaciones. REVISTA DE INVESTIGACIÓN, DESARROLLO E INNOVACIÓN. 6. 131. 10.19053/20278306.4602. "
+				},
+				{
+					"fuente": "https://www.ibm.com/mx-es/topics/training-development"
+				}
+			],
+			"categories": [
+				{
+					"id": 59968,
+					"primary": true,
+					"name": "E-Learning",
+					"slug": "e-learning",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/e-learning/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "59968",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1359,
+				"filter": "raw"
+			},
+			"reading_time": "6",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
 			"id": 340114,
 			"title": "El impacto de la inteligencia artificial en la enfermería",
 			"slug": "impacto-de-la-inteligencia-artificial-en-enfermeria",
