@@ -196,7 +196,9 @@ export async function GET(request: NextRequest) {
 				)}?lang=${lang}&name=${encodeURIComponent(courseName)}`,
 				{
 					headers: { Accept: 'application/json' },
-					next: { revalidate: 3600 * 7 },
+					// next: { revalidate: 3600 * 7 },
+					cache: 'no-store',
+
 				},
 			);
 
