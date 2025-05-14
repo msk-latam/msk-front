@@ -62,7 +62,7 @@ export interface UserProfileData {
 	billingPhone?: string;
 	billingPhoneCode?: string;
 	fullBillingPhoneNumber?: string;
-	invoice_required?: string;
+	invoice_required?: number;
 	document_type?: string;
 	documentNumber?: string;
 	tax_regime?: string;
@@ -171,7 +171,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 				billingPhone: initialBillingPhone,
 				billingPhoneCode: initialBillingPhoneCode,
 				fullBillingPhoneNumber: initialFullBillingPhoneNumber,
-				invoice_required: user.invoice_required || '',
+				invoice_required: user.invoice_required || 0,
 				document_type: (user as any).document_type || user.document_type || '',
 				documentNumber: user.documentNumber || '',
 				tax_regime: user.tax_regime || '',
@@ -398,7 +398,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 							{formData.profession === 'Otra profesión' && (
 								<Input
 									id='profession'
-									label='Profesión'
+									label='Otra profesión'
 									type='text'
 									name='otherProfession'
 									value={formData.otherProfession || ''}

@@ -97,12 +97,12 @@ export default function ProfileCompletionWrapper() {
 	};
 	const prevStep = () => setStep((prev) => prev - 1);
 	const skipProfile = () => {
-		const currentPath = window.location.pathname;
-		const langMatch = currentPath.match(/^\/([^\/]+)\/completar-perfil/);
-		const lang = langMatch ? langMatch[1] : 'ar';
-		console.log('lang', lang);
-		console.log('currentPath', currentPath);
-		lang === 'ar' ? router.push('/dashboard') : router.push(`/${lang}/dashboard`);
+		// Delete needsProfileCompletion cookie
+		Cookies.remove('needsProfileCompletion');
+		// Set redirectToDashboard cookie
+		Cookies.set('redirectToDashboard', 'true');
+		// Let middleware handle the redirection
+		router.refresh();
 	};
 
 	const updateFormData = (newData: Partial<FormDataType>) => {

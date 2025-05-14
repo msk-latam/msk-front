@@ -289,7 +289,7 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 				return (
 					<>
 						<button
-							style={{ display: course?.link_al_foro ? '' : 'none' }}
+							style={{ display: course?.link_al_foro ? 'block' : 'none' }}
 							className={`${secondaryButtonClass} ${!course?.link_al_foro ? 'opacity-50 cursor-not-allowed' : ''}`}
 							onClick={() => course?.link_al_foro && window.open(course.link_al_foro, '_blank')}
 							disabled={!course?.link_al_foro}
