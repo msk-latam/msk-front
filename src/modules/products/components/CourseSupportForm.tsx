@@ -486,15 +486,15 @@ export default function CourseSupportForm({ slug, lang }: any) {
       )}
 	  {showSuccessModal && (
   <div className="fixed inset-0 bg-black/50 z-[99] flex items-center justify-center px-4">
-    <div className="bg-white rounded-2xl p-6 max-w-md w-full text-center shadow-lg">
-      <h2 className="text-2xl font-bold mb-2">Listo!</h2>
-	  <h3 className="text-lg font-bold mb-2">Gracias por interesarte en Medical & Scientific Knowledge</h3>
+    <div className="bg-white rounded-2xl p-20 max-w-4xl w-full text-center shadow-lg">
+      <h2 className="text-5xl font-bold mb-5">¡Listo!</h2>
+	  <h3 className="text-2xl font-bold mb-3">Gracias por interesarte en Medical & Scientific Knowledge</h3>
       <p className="text-gray-700 mb-4">
         Un agente académico te estará contactando a la brevedad. Mientras, te invitamos a visitar nuestro blog con información, opiniones, entrevistas y recursos de aprendizaje en múltiples formatos.
       </p>
       <button
         onClick={() => setShowSuccessModal(false)}
-        className="bg-[#9200AD] hover:bg-[#6b1679] text-white px-5 py-2 rounded-full"
+        className="bg-[#9200AD] hover:bg-[#6b1679] text-white px-6 py-3 rounded-full"
       >
         Cerrar
       </button>
