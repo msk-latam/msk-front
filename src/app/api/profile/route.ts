@@ -465,8 +465,6 @@ export async function GET(request: NextRequest) {
 			};
 		});
 
-		console.log(processedCoursesInProgress);
-
 		const currentCourseData = await getCurrentCourse(customerData.course_progress);
 		// const recommendedResourcesData = await getRecommendedResourcesByInterests([]); // Will be empty
 
@@ -558,10 +556,10 @@ export async function GET(request: NextRequest) {
 			document_type: customerData.document_type,
 			documentNumber: customerData.identification,
 			tax_regime: customerData.tax_regime,
-
 			invoice_required: customerData.invoice_required,
 			billingEmail: customerData.billing_email,
 			billingPhone: customerData.billing_phone || '',
+			interests: customerData.interests,
 			intereses: combinedInterests,
 			interesesAdicionales: null, // Data not available in new API
 			currentCourse: currentCourseData,
@@ -569,6 +567,7 @@ export async function GET(request: NextRequest) {
 			crm_id: customerData.entity_id_crm, // Main CRM ID for the contact
 			courseRecommendations: detailedRecommendedCourses, // Update with fetched detailed recommendations
 		};
+
 		// Helper to parse school_name and name
 		let finalSchoolName = customerData.school_name;
 		if (
