@@ -34,7 +34,7 @@ const CheckoutState: React.FC = () => {
 					label: 'Ir a mis cursos',
 					action: () =>
 						window.open(
-							country === '' ? `${window.location.origin}/mi-perfil/` : `${window.location.origin}/${country}/mi-perfil/`,
+							country === '' ? `${window.location.origin}/dashboard` : `${window.location.origin}/${country}/dashboard`,
 							'_blank',
 						),
 					color: '#9200AD',

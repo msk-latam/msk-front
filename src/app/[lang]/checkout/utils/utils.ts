@@ -224,8 +224,10 @@ export const createContractCRM = async (
 	currency: any,
 	countryCompleteName: any,
 	paymentType: 'rebill' | 'mercadopago' | 'stripe',
+	certification: Certification[],
 	closingSource: string = 'Consulta directa',
 ) => {
+	console.log(product);
 	try {
 		let paymentConfig = { ...(paymentOptions[paymentType] || paymentOptions.mercadopago) };
 
@@ -235,7 +237,8 @@ export const createContractCRM = async (
 			paymentConfig.remainingPayments = 7;
 		}
 		const mainProduct = {
-			code: product.ficha.product_code,
+			code: product.codes[0].unique_code,
+			// code: product.ficha.product_code,
 			quantity: 1,
 			price: transactionAmount,
 			total: transactionAmount,

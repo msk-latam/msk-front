@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCourseSummary } from '../hooks/useCourseSummary';
 import SkeletonCourseSummaryCard from '../skeletons/SkeletonCourseSummaryCard';
+import { useProfile } from '@/hooks/useProfile';
 
 interface CourseSummaryProps {
 	slug: string;
@@ -16,8 +17,9 @@ interface CourseSummaryProps {
 export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 	const { data, loading } = useCourseSummary(slug, lang);
 	const router = useRouter();
+	const { user } = useProfile();
 
-	console.log(data);
+	console.log(user);
 
 	const isFree = data
 		? [data.regular_price, data.sale_price, data.total_price].every((price) => {
@@ -25,8 +27,6 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 				return price === '' || isNaN(num) || num === 0;
 		  })
 		: false;
-
-	console.log(isFree);
 
 	const enrolledFormatted = data?.enrolled;
 	const modules = data?.modules;
@@ -132,7 +132,7 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 			<div className='space-y-3'>
 				{!isSpanishVersion && (
 					<Link
-						href={isFree ? getLocalizedUrl(lang, `/login/?form=registerForm`) : getLocalizedUrl(lang, `/checkout/${slug}`)}
+						href={isFree && !user ? getLocalizedUrl(lang, `/checkout/${slug}`) : getLocalizedUrl(lang, `/checkout/${slug}`)}
 						onClick={() => {
 							if (isFree) {
 								localStorage.setItem('redirectAfterLogin', window.location.pathname);
@@ -141,7 +141,7 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 						}}
 					>
 						<button className='bg-[#9200AD] hover:bg-[#6b1679] text-white w-full py-3 rounded-full font-inter font-medium text-base transition'>
-							Inscríbete ahora
+							{user ? 'Inscríbete ahora' : 'Regístrate o inicia sesión'}
 						</button>
 					</Link>
 				)}

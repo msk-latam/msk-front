@@ -74,12 +74,6 @@ export const CheckoutProvider: React.FC<{ children: ReactNode; product?: any; co
 		}
 	};
 
-	useEffect(() => {
-		if (product?.total_price === '0') {
-			router.push(`/${country}/tienda`);
-		}
-	}, [product?.total_price, router]);
-
 	return (
 		<CheckoutContext.Provider
 			value={{
