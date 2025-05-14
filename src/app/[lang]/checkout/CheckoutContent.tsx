@@ -10,6 +10,7 @@ import { rebillCountries } from './utils/utils';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import CheckoutPaymentMercadoPago from './CheckoutPaymentMercadoPago';
+import { useEffect } from 'react';
 interface CheckoutContentProps {
 	product: any;
 	country: string;
@@ -21,13 +22,15 @@ if (!process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY) {
 const stripePublicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY;
 const stripePromise = loadStripe(stripePublicKey);
 const CheckoutContent: React.FC<CheckoutContentProps> = ({ product, country }) => {
-	const {
-		activeStep, //cambiar de valor para testear a 1, 2 o 3
-		subStep,
-		paymentType,
-	} = useCheckout();
+	const { activeStep, setActiveStep, subStep, paymentType, setPaymentStatus } = useCheckout();
 
-	//const activeStep = 0;
+	useEffect(() => {
+		const isFree = product.prices.total_price === '0' || product.prices.total_price === '0';
+		if (isFree && activeStep === 2) {
+			setActiveStep(3);
+			setPaymentStatus('approved');
+		}
+	}, [product.prices.total_price, activeStep, setActiveStep]);
 
 	if (activeStep === 2) {
 		if (subStep === 0) {

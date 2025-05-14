@@ -3,72 +3,70 @@
 import React, { useEffect, useState } from 'react';
 import { Certification, useCheckout } from '../CheckoutContext';
 import { getJSONByCountry } from '@/app/products';
+import ssr from '@/services/ssr';
 
 const Certificaciones = ({ product, country }: any) => {
 	const { certifications, setCertifications } = useCheckout();
 	const [certificados, setCertificados] = useState<any[]>([]);
 
+	console.log(product);
+
 	const certificationsByCountry: Record<string, string[]> = {
 		ar: [
-			'EUNEIZ FARO',
-			'UDIMA',
-			'EUNEIZ',
-			'SAXUM',
-			'EUNEIZ APOSTILLADA',
-			'CMSC - Consejo Médico de la Provincia de Santa Cruz',
-			'Universidad Católica San Antonio de Murcia (UCAM)',
+			'euneiz-faro',
+			'udima',
+			'saxum',
+			'euneiz-apostillada',
+			'cmsc-consejo-medico-de-la-provincia-de-santa-cruz',
+			'universidad-catolica-san-antonio-de-murcia-ucam',
 		],
-		cl: [
-			'EUNEIZ FARO',
-			'UDIMA',
-			'EUNEIZ',
-			'SAXUM',
-			'EUNEIZ APOSTILLADA',
-			'Universidad Católica San Antonio de Murcia (UCAM)',
-		],
+		cl: ['euneiz-faro', 'udima', 'saxum', 'euneiz-apostillada', 'universidad-catolica-san-antonio-de-murcia-ucam'],
 		ec: [
-			'EUNEIZ FARO',
-			'UDIMA',
-			'EUNEIZ',
-			'SAXUM',
-			'EUNEIZ APOSTILLADA',
-			'AFEME/CUENCA',
-			'Universidad Católica San Antonio de Murcia (UCAM)',
+			'euneiz-faro',
+			'udima',
+			'saxum',
+			'euneiz-apostillada',
+			'afeme-cuenca',
+			'universidad-catolica-san-antonio-de-murcia-ucam',
 		],
-		mx: [
-			'EUNEIZ FARO',
-			'UDIMA',
-			'EUNEIZ',
-			'SAXUM',
-			'EUNEIZ APOSTILLADA',
-			'Universidad Católica San Antonio de Murcia (UCAM)',
-		],
-		pe: ['EUNEIZ FARO', 'SPMI', 'Universidad Católica San Antonio de Murcia (UCAM)'],
-		co: ['EUNEIZ FARO', 'FMC', 'Universidad Católica San Antonio de Murcia (UCAM)'],
-		cr: ['EUNEIZ FARO', 'Universidad Católica San Antonio de Murcia (UCAM)'],
-		sv: ['EUNEIZ FARO', 'Universidad Católica San Antonio de Murcia (UCAM)'],
-		gt: ['EUNEIZ FARO', 'Universidad Católica San Antonio de Murcia (UCAM)'],
-		hn: ['EUNEIZ FARO', 'Universidad Católica San Antonio de Murcia (UCAM)'],
-		ni: ['EUNEIZ FARO', 'Universidad Católica San Antonio de Murcia (UCAM)'],
-		pa: ['EUNEIZ FARO', 'Universidad Católica San Antonio de Murcia (UCAM)'],
-		py: ['EUNEIZ FARO', 'Universidad Católica San Antonio de Murcia (UCAM)'],
-		uy: ['EUNEIZ FARO', 'Universidad Católica San Antonio de Murcia (UCAM)'],
+		mx: ['euneiz-faro', 'udima', 'SAXUM', 'euneiz-apostillada', 'universidad-catolica-san-antonio-de-murcia-ucam'],
+		pe: ['euneiz-faro', 'spmi', 'universidad-catolica-san-antonio-de-murcia-ucam'],
+		co: ['euneiz-faro', 'fmc', 'universidad-catolica-san-antonio-de-murcia-ucam'],
+		cr: ['euneiz-faro', 'universidad-catolica-san-antonio-de-murcia-ucam'],
+		sv: ['euneiz-faro', 'universidad-catolica-san-antonio-de-murcia-ucam'],
+		gt: ['euneiz-faro', 'universidad-catolica-san-antonio-de-murcia-ucam'],
+		hn: ['euneiz-faro', 'universidad-catolica-san-antonio-de-murcia-ucam'],
+		ni: ['euneiz-faro', 'universidad-catolica-san-antonio-de-murcia-ucam'],
+		pa: ['euneiz-faro', 'universidad-catolica-san-antonio-de-murcia-ucam'],
+		py: ['euneiz-faro', 'universidad-catolica-san-antonio-de-murcia-ucam'],
+		uy: ['euneiz-faro', 'universidad-catolica-san-antonio-de-murcia-ucam'],
 	};
 
 	useEffect(() => {
 		const fetchCertificados = async () => {
 			try {
-				const data = await getJSONByCountry(country);
-				const allProducts = data.products || [];
+				const titles = certificationsByCountry[country] || [];
+				const normalizedCountry = country === 'ar' ? 'arg' : country;
 
-				const validTitles = certificationsByCountry[country] || [];
+				const requests = titles.map((title) =>
+					ssr.getSingleProductCMS(title, normalizedCountry).catch((err) => {
+						console.error(`Error al obtener certificado para: ${title}`, err);
+						return null; // Evita que toda la promesa falle
+					}),
+				);
 
-				const filtered = allProducts.filter((product: any) => validTitles.includes(product.title));
+				const results = await Promise.all(requests);
 
-				setCertificados(filtered);
+				console.log(results);
+
+				// Filtrás los nulls o falsos
+				const certificados = results.filter(Boolean).map((result) => result.product);
+
+				console.log(certificados);
+
+				setCertificados(certificados);
 			} catch (error) {
 				console.error('Error al obtener certificados:', error);
-			} finally {
 			}
 		};
 
@@ -79,8 +77,8 @@ const Certificaciones = ({ product, country }: any) => {
 
 	const certificaciones: Certification[] = certificados.map((cert) => ({
 		name: cert.title,
-		price: Number(cert.total_price.replace(/[^\d]/g, '')),
-		product_code: cert.product_code,
+		price: Number(cert.prices.total_price.replace(/[^\d]/g, '')),
+		product_code: cert.codes[0].unique_code,
 	}));
 
 	const isSelected = (cert: Certification) => {
