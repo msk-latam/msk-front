@@ -141,7 +141,13 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 						}}
 					>
 						<button className='bg-[#9200AD] hover:bg-[#6b1679] text-white w-full py-3 rounded-full font-inter font-medium text-base transition'>
-							{user ? 'Inscríbete ahora' : 'Regístrate o inicia sesión'}
+							{user
+								? isFree
+									? 'Inscríbete gratis ahora'
+									: 'Inscríbete ahora'
+								: isFree
+								? 'Regístrate o inicia sesión para inscribirte'
+								: 'Inscríbete ahora'}
 						</button>
 					</Link>
 				)}

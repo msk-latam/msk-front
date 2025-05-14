@@ -25,7 +25,7 @@ const CheckoutContent: React.FC<CheckoutContentProps> = ({ product, country }) =
 	const { activeStep, setActiveStep, subStep, paymentType, setPaymentStatus } = useCheckout();
 
 	useEffect(() => {
-		const isFree = product.prices.total_price === '0' || product.prices.total_price === '0';
+		const isFree = product.prices.total_price === '0' || product.prices.total_price === '';
 		if (isFree && activeStep === 2) {
 			setActiveStep(3);
 			setPaymentStatus('approved');
