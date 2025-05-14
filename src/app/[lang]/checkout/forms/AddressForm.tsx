@@ -47,7 +47,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 	);
 
 	return (
-		<div className='grid grid-cols-2 gap-4'>
+		<div className='md:grid md:grid-cols-2 flex flex-col gap-4'>
 			{/* País */}
 			<div>
 				<label htmlFor='country' className='block text-sm font-medium text-[#1A1A1A]'>
@@ -93,7 +93,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ formData, handleChange, handl
 			{/* Estado */}
 			<div>
 				<label htmlFor='state' className='block text-sm font-medium text-[#1A1A1A]'>
-					{countryName === 'Chile' ? 'Provincia' : 'Estado'}
+					{countryName === 'Chile' ? 'Estado' : 'Provincia'}
 					{/* {formData.country === 'Chile' ? 'Provincia' : 'Estado'} */}
 				</label>
 				{formData.country && (
