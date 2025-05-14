@@ -56,32 +56,13 @@ const NewsletterLinks = () => {
 				<div className='max-w-[250px] md:translate-x-[60px]'>
 					<h4 className='text-[18px] font-bold mb-4'>Especialidades</h4>
 					<ul className='space-y-4 font-normal md:whitespace-nowrap opacity-80'>
-						{/* Todo va a la tienda. No hay redireccion de especialidad */}
-						<li key='especialidad-1'>
-							<a href='/tienda/?especialidad=medicina-general' className='hover:underline'>
-								Medicina general
-							</a>
-						</li>
-						<li key='especialidad-2'>
-							<a href='/tienda/?especialidad=medicina-familiar' className='hover:underline'>
-								Medicina familiar
-							</a>
-						</li>
-						<li key='especialidad-3'>
-							<a href='/tienda/?especialidad=cardiologia' className='hover:underline'>
-								Cardiología
-							</a>
-						</li>
-						<li key='especialidad-4'>
-							<a href='/tienda/?especialidad=traumatologia' className='hover:underline'>
-								Traumatología
-							</a>
-						</li>
-						<li key='especialidad-5'>
-							<a href='/tienda/?especialidad=pediatria' className='hover:underline'>
-								Pediatría
-							</a>
-						</li>
+						{data?.sections?.especialidades?.map((speciality: any, index: number) => (
+							<li key={`especialidad-${index}`}>
+								<a href={urlFormat(speciality.url_especialidad)} className='hover:underline'>
+									{speciality.especialidad}
+								</a>
+							</li>
+						))}
 					</ul>
 				</div>
 
