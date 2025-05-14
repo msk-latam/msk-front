@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export async function GET(req: Request, { params }: { params: { slug: string } }) {
 	const { slug } = params;
 	const { searchParams } = new URL(req.url);
-	const lang = searchParams.get('lang');
+	let lang = searchParams.get('lang');
 
 	console.log(slug, lang);
 
@@ -11,8 +11,12 @@ export async function GET(req: Request, { params }: { params: { slug: string } }
 		return NextResponse.json({ message: 'El parámetro "lang" es requerido' }, { status: 400 });
 	}
 
+	if(lang=="int"){
+		lang="ar";
+	}
+
 	try {
-		const res = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/product/${slug}?lang=${lang}`, {
+		const res = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/product/${slug}?lang=${lang}&nocache=1`, {
 			next: { revalidate: 30 },
 		});
 		const data = await res.json();

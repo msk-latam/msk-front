@@ -12,6 +12,16 @@ const iconMap: Record<string, React.FC> = {
 
 const HelpSection: React.FC = () => {
 	const { helpSection } = userData;
+	
+	let nros = {
+			"ar":"http://wa.me/5491152170771",				
+			"mx":"http://wa.me/5215590586200",				
+			"ec":"http://wa.me/593993957801",				
+			"cl":"http://wa.me/56224875300",				
+			"co":"http://wa.me/5753161349",
+			"int":"http://wa.me/5753161349"				
+	}
+
 
 	if (!helpSection) return null;
 
@@ -21,9 +31,25 @@ const HelpSection: React.FC = () => {
 			<div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
 				{helpSection.cards.map((card, index) => {
 					const IconComponent = iconMap[card.iconName];
+					let link = card.link;
+					if(index==1){
+						let nro_wa = nros["int"];
+						const { pathname } = window.location;
+						const langMatch = pathname.match(/^\/([^/]+)\//);
+						const code = langMatch && langMatch[1].length <= 2 ? langMatch[1] : "";
+						if(code){
+							nro_wa=nros[`${code as keyof typeof nros}`];
+							if(!nro_wa){
+								nro_wa=nros["int"];
+							}
+						}else{
+							nro_wa=nros["ar"]
+						}
+						link =nro_wa;
+					}
 					return (
-						<Link key={index} href={card.link} passHref legacyBehavior>
-							<a className='bg-white rounded-[30px] p-8 flex flex-col items-center text-center border border-[#DBDDE2] transition-all cursor-pointer hover:bg-[#DBDDE2'>
+						<Link  key={index} href={link} passHref legacyBehavior>
+							<a target="_blank" className='bg-white rounded-[30px] p-8 flex flex-col items-center text-center border border-[#DBDDE2] transition-all cursor-pointer hover:bg-[#DBDDE2'>
 								{IconComponent && (
 									<span className='text-[#9200AD]'>
 										<IconComponent />

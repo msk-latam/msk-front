@@ -3,7 +3,7 @@
 import { usePopUp } from '@/hooks/usePopUp';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-
+import { urlFormat } from '@/utils/urlFormat';
 const PopUp = ({ onClose }: { onClose: () => void }) => {
 	const [isDesktop, setIsDesktop] = useState(false);
 	const { popUp } = usePopUp();
@@ -31,7 +31,7 @@ const PopUp = ({ onClose }: { onClose: () => void }) => {
 		popUp && (
 			<section className='fixed top-0 left-0 w-full h-12 bg-[#FFE5EC] p-3 z-[999] flex flex-row text-[#1A1A1A] justify-center   items-center gap-4'>
 				<p className='text-sm' dangerouslySetInnerHTML={{ __html: popUp?.text }} />
-				<Link href={popUp?.link?.url} className='flex items-center text-sm font-semibold underline'>
+				<Link href={urlFormat(popUp?.link?.url)} className='flex items-center text-sm font-semibold underline'>
 					{popUp?.link?.title}
 					<svg width='20' height='20' viewBox='0 0 25 24' fill='none' xmlns='http://www.w3.org/2000/svg' className='ml-1'>
 						<path d='M9.5 18L15.5 12L9.5 6' stroke='black' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />

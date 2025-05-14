@@ -144,7 +144,7 @@
 			"description": "en tu\n inscripción"
 		},
 		"buttonText": "Reserva tu cupo ahora",
-		"buttonLink": "#"
+		"buttonLink": "/tienda"
 	},
 	"helpSection": {
 		"title": "¿Tienes alguna duda?",
@@ -153,7 +153,7 @@
 				"iconName": "QuestionIcon",
 				"title": "Visita el Centro de ayuda",
 				"description": "Encuentra artículos con información útil o envíanos tu consulta",
-				"link": "#"
+				"link": "https://ayuda.msklatam.com/portal/es/home"
 			},
 			{
 				"iconName": "ChatIcon",

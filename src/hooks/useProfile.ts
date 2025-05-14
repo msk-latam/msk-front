@@ -1,3 +1,4 @@
+import { getCurrentLang } from '@/utils/getCurrentLang';
 import { useRouter } from 'next/navigation';
 import useSWR from 'swr';
 
@@ -10,7 +11,7 @@ const fetcher = async (url: string) => {
 		const error = new Error(`An error occurred while fetching the data. Status: ${res.status}`);
 		// You could potentially still attach info if needed, but requires proper typing
 		// try { (error as any).info = await res.json(); } catch { (error as any).info = await res.text(); }
-		(error as any).status = res.status; // Use type assertion if needed, or omit
+		(error as any).status = res.status; // Use type assert|ion if needed, or omit
 		throw error;
 	}
 
@@ -19,13 +20,14 @@ const fetcher = async (url: string) => {
 
 export function useProfile() {
 	const router = useRouter();
+	const lang = getCurrentLang();
 
-	const { data, error, isLoading, mutate } = useSWR('/api/profile', fetcher, {
+	const { data, error, isLoading, mutate } = useSWR('/api/profile?lang=' + lang, fetcher, {
 		shouldRetryOnError: false, // Keep this to prevent retries on error
 		onError: (err) => {
 			console.error('Failed to fetch profile, redirecting to login:', err);
 			// Redirect to login on ANY fetch error
-			router.push('/login');
+			// router.push('/login');
 		},
 	});
 

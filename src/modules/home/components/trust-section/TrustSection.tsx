@@ -48,7 +48,7 @@ const TrustSection = () => {
 						className='flex transition-transform duration-500 ease-in-out'
 						style={{ transform: `translateX(-${current * 330}px)` }}
 					>
-						{testimonials.map((testimonial: any, index: number) => (
+						{testimonials?.map((testimonial: any, index: number) => (
 							<div
 								key={index}
 								className='min-w-80 max-w-[320px] bg-[#f7f9ff] p-6 rounded-2xl shadow-sm flex flex-col justify-between h-[260px] mx-1'
@@ -79,14 +79,14 @@ const TrustSection = () => {
 	};
 
 	return (
-		<div className='relative w-full bg-gray-100 pt-24 pb-60 h-[1200px] md:h-[750px] z-9 md:px-4'>
+		<div className='relative w-full bg-gray-100 pt-24 md:h-[750px] z-9 md:px-4'>
 			<section className='relative bg-white rounded-[38px] md:p-[72px] md:px-[104px] translate-y-[20px] -mt-40 mb-16 z-9 py-10 pl-5 md:overflow-visible max-w-[1600px] mx-auto shadow-lg md:min-h-[500px] md:max-h-[750px] overflow-hidden'>
 				<h2 className='text-center pr-5 md:pr-0 md:text-left text-2xl md:text-[34px] mb-4'>{title}</h2>
 				<p className='text-center pr-5 md:pr-0 md:text-left text-sm font-inter text-neutral-600 mb-10'>{subtitle}</p>
 
 				{/* Figures */}
 				<div className='flex flex-col pr-5 md:pr-0 md:flex-row justify-between text-center mb-10 font-lora gap-6'>
-					{figures.map((figure, index) => (
+					{figures?.map((figure, index) => (
 						<div key={index}>
 							<p className='text-[34px] md:text-[38px] md:text-start md:font-[500] font-[Lora]'>{figure.figure}</p>
 							<p className='text-sm font-[500] font-raleway'>
@@ -102,7 +102,7 @@ const TrustSection = () => {
 
 				{/* Testimonials Desktop */}
 				<div className='hidden md:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 h-full'>
-					{reviews.map((testimonial, index) => (
+					{reviews?.map((testimonial, index) => (
 						<div
 							key={index}
 							className='bg-[#f9fafe] p-6 rounded-2xl shadow-sm flex flex-col justify-between h-[260px] transition-opacity duration-700 ease-in-out'

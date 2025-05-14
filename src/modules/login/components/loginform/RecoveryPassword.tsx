@@ -1,5 +1,6 @@
 'use client';
 
+import { useSessionStatus } from '@/hooks/useSessionStatus';
 import { useState } from 'react';
 
 type RecoveryPasswordProps = {
@@ -8,6 +9,7 @@ type RecoveryPasswordProps = {
 };
 
 export default function RecoveryPassword({ onBack, onSent }: RecoveryPasswordProps) {
+	const { isAuthenticated } = useSessionStatus();
 	const [email, setEmail] = useState('');
 	const isValid = email.trim() !== '';
 	const [emailSent, setEmailSent] = useState(false);
@@ -55,16 +57,18 @@ export default function RecoveryPassword({ onBack, onSent }: RecoveryPasswordPro
 	return (
 		<div className='w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:p-0 md:mb-20 z-[10] overflow-visible max-w-[1600px] mx-auto md:px-4 h-full min-h-96'>
 			{/* 🔙 Botón de volver */}
-			<div className='relative md:top-10 md:left-8 top-5 left-5 z-10'>
-				<button
-					onClick={onBack}
-					className='w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100 transition'
-				>
-					<svg width='6' height='12' viewBox='0 0 6 12' fill='none' xmlns='http://www.w3.org/2000/svg'>
-						<path d='M5 1L1 6L5 11' stroke='#1F2937' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
-					</svg>
-				</button>
-			</div>
+			{!isAuthenticated && (
+				<div className='relative md:top-10 md:left-8 top-5 left-5 z-10'>
+					<button
+						onClick={onBack}
+						className='w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100 transition'
+					>
+						<svg width='6' height='12' viewBox='0 0 6 12' fill='none' xmlns='http://www.w3.org/2000/svg'>
+							<path d='M5 1L1 6L5 11' stroke='#1F2937' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
+						</svg>
+					</button>
+				</div>
+			)}
 
 			<section className='w-full max-w-[1632px] h-fit relative z-8 mx-auto px-6 pt-[84px] pb-28 md:py-16 md:px-9'>
 				{/* 🧾 Título */}
@@ -108,12 +112,14 @@ export default function RecoveryPassword({ onBack, onSent }: RecoveryPasswordPro
 					</button>
 				</form>
 
-				<p className='text-center text-base font-inter text-gray-500 mt-4 mb-24'>
-					Volver a{' '}
-					<button type='button' onClick={onBack} className='text-[#9200AD] font-medium underline'>
-						iniciar sesión
-					</button>
-				</p>
+				{!isAuthenticated && (
+					<p className='text-center text-base font-inter text-gray-500 mt-4 mb-24'>
+						Volver a{' '}
+						<button type='button' onClick={onBack} className='text-[#9200AD] font-medium underline'>
+							iniciar sesión
+						</button>
+					</p>
+				)}
 			</section>
 		</div>
 	);

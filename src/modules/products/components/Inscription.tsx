@@ -50,10 +50,10 @@ export default function Inscription({ slug, lang }: CourseSummaryProps) {
 
 				{/* Botón CTA */}
 
-        <Link href={getLocalizedUrl(lang, `/checkout/${slug}`)}  				
+        <Link href={getLocalizedUrl(lang, lang=="es"?`/curso/${slug}/#course-support-form`:`/checkout/${slug}`)}  				
 					className='mt-4 md:w-auto w-full justify-center font-inter text-base whitespace-nowrap md:mt-0 bg-[#9200ad] hover:bg-[#7A008E] text-white px-6 py-3 rounded-full flex items-center gap-2 transition-colors'
 					onClick={() => router.push(`${lang}/checkout/${slug}`)}>
-					Inscríbete ahora
+					{lang=="es"?"Contáctanos":"Inscríbete ahora"}
 					<FaArrowRight className="text-white" />
 				</Link>
 			</div>

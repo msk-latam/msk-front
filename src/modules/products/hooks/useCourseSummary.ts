@@ -14,6 +14,7 @@ interface CourseSummaryData {
 		medium: string;
 		low: string;
 	};
+	files: string;
 	duration: string;
 	enrolled: number;
 	modules: number;
@@ -50,7 +51,7 @@ export function useCourseSummary(slug: string, lang: string) {
 				}
 				const result = await response.json();
 				// Assuming the prices data is nested under a 'prices' key
-				const setResutl = {
+				const setResult = {
 					featured_images: result.featured_images,
 					is_free: result.prices.is_free,
 					sale_price: result.prices.sale_price,
@@ -65,9 +66,10 @@ export function useCourseSummary(slug: string, lang: string) {
 					cedente: result.cedente,
 					currency: result.prices.currency,
 					currency_code: result.prices.currency_code,
+					files:result.files,
 				};
 
-				setData(setResutl || null);
+				setData(setResult || null);
 			} catch (e) {
 				setError(e instanceof Error ? e : new Error('An unknown error occurred'));
 			} finally {

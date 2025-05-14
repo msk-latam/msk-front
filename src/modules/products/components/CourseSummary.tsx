@@ -66,7 +66,7 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 	return (
 		<div className='bg-white rounded-[38px] p-6 md:p-8 sticky top-10 w-full' style={{ backgroundColor: '#FFFFFF' }}>
 			<Image
-				src={data?.featured_images.medium ?? ''}
+				src={data?.featured_images.high ?? ''}
 				alt='Curso'
 				className='object-cover w-full mb-6 rounded-xl'
 				width={420}

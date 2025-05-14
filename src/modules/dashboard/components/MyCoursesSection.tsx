@@ -6,6 +6,7 @@ import CtaButton from '@/dashboard/components/ui/CtaButton';
 import { useLmsNavigation } from '@/hooks/useLmsNavigation';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import { goToEnroll } from '../../../lib/account';
 
 // Simple SVG placeholders for icons - replace with actual icons later
 const LightningIcon = () => (
@@ -49,12 +50,22 @@ interface Course {
 	title: string;
 	expiryDate?: string;
 	qualification?: number;
-	statusType: 'progress' | 'inactive' | 'finished' | 'expired' | 'Activo' | 'Finalizado' | 'Expirado' | 'Sin enrolar';
+	statusType:
+		| 'progress'
+		| 'inactive'
+		| 'finished'
+		| 'expired'
+		| 'Activo'
+		| 'Finalizado'
+		| 'Expirado'
+		| 'Sin enrolar'
+		| 'Listo para enrolar';
 	statusText: string;
 	createdDate?: string;
 	isFavorite?: boolean;
 	product_code?: number;
 	product_code_cedente?: string;
+	link_al_foro?: string;
 }
 
 const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = ({ courseData, userEmail }) => {
@@ -62,68 +73,70 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 	const [sortBy, setSortBy] = useState('Más recientes');
 	const [currentPage, setCurrentPage] = useState(1);
 	const [selectedPlan, setSelectedPlan] = useState('Regular');
+	const [navigatingCourseId, setNavigatingCourseId] = useState<number | null>(null);
 	const coursesPerPage = 4;
 	const { navigateToLms, isLoading: isNavigating, error: navigationError } = useLmsNavigation();
 
 	// --- Conditional Rendering for No Courses ---
 	if (!courseData || courseData.length === 0) {
 		return (
-			<div className='bg-white rounded-[30px] p-[36px] mt-5 flex  gap-8 items-center'>
-				{/* Left Side: Text and Button */}
-				<div className='flex flex-col gap-4 max-w-[500px]'>
-					<h2 className='font-raleway text-[34px] font-medium leading-tight text-[#1A1A1A]'>
-						Arma tu plan de aprendizaje gratuito
-					</h2>
-					<p className='text-[##6E737C] font-inter text-base font-normal'>
-						Capacítate a tu manera y toma el control de tu desarrollo académico
-					</p>
-					<button className='bg-[#f3f4f6] text-[#989CA4] px-6 py-3 rounded-full font-inter font-medium text-sm hover:bg-[#e2e3e5] transition self-start'>
-						Descubrir plan de aprendizaje
-					</button>
-				</div>
+			<></>
+			// <div className='bg-white rounded-[30px] p-[36px] mt-5 flex  gap-8 items-center'>
+			// 	{/* Left Side: Text and Button */}
+			// 	<div className='flex flex-col gap-4 max-w-[500px]'>
+			// 		<h2 className='font-raleway text-[34px] font-medium leading-tight text-[#1A1A1A]'>
+			// 			Arma tu plan de aprendizaje gratuito
+			// 		</h2>
+			// 		<p className='text-[##6E737C] font-inter text-base font-normal'>
+			// 			Capacítate a tu manera y toma el control de tu desarrollo académico
+			// 		</p>
+			// 		<button className='bg-[#f3f4f6] text-[#989CA4] px-6 py-3 rounded-full font-inter font-medium text-sm hover:bg-[#e2e3e5] transition self-start'>
+			// 			Descubrir plan de aprendizaje
+			// 		</button>
+			// 	</div>
 
-				{/* Right Side: Plan Selection */}
-				<div className='bg-[#F7F8FC] rounded-[20px] p-6 flex flex-col gap-4 w-full'>
-					<h3 className='text-[#1A1A1A] font-raleway font-semibold text-xl text-center'>
-						¿Qué plan quieres llevar adelante?
-					</h3>
-					<div className='flex flex-col md:flex-row gap-4 justify-center items-center w-full'>
-						{/* Plan Option: Tranquilo */}
-						<button
-							className={`flex flex-col items-center gap-2 p-6 rounded-[38px] border ${
-								selectedPlan === 'Tranquilo' ? 'border-[#93A6E0] bg-[#DFE6FF]' : 'border-[#DBDDE2] bg-white'
-							} hover:border-[#93A6E0] transition w-full`}
-							onClick={() => setSelectedPlan('Tranquilo')}
-						>
-							<LightningIcon />
-							<span className='font-inter font-semibold text-[#1A1A1A]'>Tranquilo</span>
-							<span className='font-inter text-sm text-[#4F5D89]'>30 minutos semanales</span>
-						</button>
-						{/* Plan Option: Regular */}
-						<button
-							className={`flex flex-col items-center gap-2 p-6 rounded-[38px] border ${
-								selectedPlan === 'Regular' ? 'border-[#93A6E0] bg-[#DFE6FF]' : 'border-[#DBDDE2] bg-white'
-							} hover:border-[#93A6E0] transition w-full`}
-							onClick={() => setSelectedPlan('Regular')}
-						>
-							<LightningFastIcon />
-							<span className='font-inter font-semibold text-[#1A1A1A]'>Regular</span>
-							<span className='font-inter text-sm text-[#4F5D89]'>60 minutos semanales</span>
-						</button>
-						{/* Plan Option: Intensivo */}
-						<button
-							className={`flex flex-col items-center gap-2 p-6 rounded-[38px] border ${
-								selectedPlan === 'Intensivo' ? 'border-[#93A6E0] bg-[#DFE6FF]' : 'border-[#DBDDE2] bg-white'
-							} hover:border-[#93A6E0] transition w-full`}
-							onClick={() => setSelectedPlan('Intensivo')}
-						>
-							<RocketIcon />
-							<span className='font-inter font-semibold text-[#1A1A1A]'>Intensivo</span>
-							<span className='font-inter text-sm text-[#4F5D89]'>+120 minutos semanales</span>
-						</button>
-					</div>
-				</div>
-			</div>
+			// 	{/* Right Side: Plan Selection */}
+			// 	<div className='bg-[#F7F8FC] rounded-[20px] p-6 flex flex-col gap-4 w-full'>
+			// 		<h3 className='text-[#1A1A1A] font-raleway font-semibold text-xl text-center'>
+			// 			¿Qué plan quieres llevar adelante?
+			// 		</h3>
+			// 		<div className='flex flex-col md:flex-row gap-4 justify-center items-center w-full'>
+			// 			{/* Plan Option: Tranquilo */}
+			// 			<button
+			// 				className={`flex flex-col items-center gap-2 p-6 rounded-[38px] border ${
+			// 					selectedPlan === 'Tranquilo' ? 'border-[#93A6E0] bg-[#DFE6FF]' : 'border-[#DBDDE2] bg-white'
+			// 				} hover:border-[#93A6E0] transition w-full`}
+			// 				onClick={() => setSelectedPlan('Tranquilo')}
+			// 			>
+			// 				<LightningIcon />
+			// 				<span className='font-inter font-semibold text-[#1A1A1A]'>Tranquilo</span>
+			// 				<span className='font-inter text-sm text-[#4F5D89]'>30 minutos semanales</span>
+			// 			</button>
+			// 			{/* Plan Option: Regular */}
+			// 			<button
+			// 				className={`flex flex-col items-center gap-2 p-6 rounded-[38px] border ${
+			// 					selectedPlan === 'Regular' ? 'border-[#93A6E0] bg-[#DFE6FF]' : 'border-[#DBDDE2] bg-white'
+			// 				} hover:border-[#93A6E0] transition w-full`}
+			// 				onClick={() => setSelectedPlan('Regular')}
+			// 			>
+			// 				<LightningFastIcon />
+			// 				<span className='font-inter font-semibold text-[#1A1A1A]'>Regular</span>
+			// 				<span className='font-inter text-sm text-[#4F5D89]'>60 minutos semanales</span>
+			// 			</button>
+			// 			{/* Plan Option: Intensivo */}
+			// 			<button
+			// 				className={`flex flex-col items-center gap-2 p-6 rounded-[38px] border ${
+			// 					selectedPlan === 'Intensivo' ? 'border-[#93A6E0] bg-[#DFE6FF]' : 'border-[#DBDDE2] bg-white'
+			// 				} hover:border-[#93A6E0] transition w-full`}
+			// 				onClick={() => setSelectedPlan('Intensivo')}
+			// 			>
+			// 				<RocketIcon />
+			// 				<span className='font-inter font-semibold text-[#1A1A1A]'>Intensivo</span>
+			// 				<span className='font-inter text-sm text-[#4F5D89]'>+120 minutos semanales</span>
+			// 			</button>
+			// 		</div>
+			// 	</div>
+			// </div>
 		);
 	}
 
@@ -196,6 +209,37 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 		}
 	};
 
+	const handleCourseAction = async (course: Course) => {
+		if (course.product_code && course.product_code_cedente && userEmail) {
+			setNavigatingCourseId(course.product_code);
+			try {
+				if (course.statusType === 'Sin enrolar') {
+					const enrollResponse = await goToEnroll(Number(course.product_code), userEmail);
+					console.log('Enroll response for MyCoursesSection:', enrollResponse); // For debugging
+
+					if (enrollResponse?.data?.[0]?.status === 'success') {
+						// Enrollment successful, now navigate to LMS
+						await navigateToLms(course.product_code, course.product_code_cedente, userEmail);
+					} else {
+						console.error('Enrollment failed in MyCoursesSection:', enrollResponse);
+						// TODO: Optionally, set an error state here to inform the user,
+						// similar to navigationError but for enrollment failures.
+					}
+				} else {
+					// For 'Activo', 'Finalizado', and other statuses that go directly to LMS
+					await navigateToLms(course.product_code, course.product_code_cedente, userEmail);
+				}
+			} catch (error) {
+				console.error('LMS navigation or enrollment failed for course in MyCoursesSection:', course.product_code, error);
+				// Errors from navigateToLms will be caught by the useLmsNavigation hook's error state (navigationError)
+			} finally {
+				setNavigatingCourseId(null);
+			}
+		} else {
+			console.error('Missing data for LMS navigation/enrollment in MyCoursesSection:', course);
+		}
+	};
+
 	const renderInfoLine = (course: Course) => {
 		if (
 			course.expiryDate &&
@@ -241,20 +285,24 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 			case 'Activo':
 			case 'Finalizado':
 			case 'Sin enrolar':
+			case 'Listo para enrolar':
 				return (
 					<>
-						<button className={secondaryButtonClass}>Ir al foro</button>
-						<CtaButton
-							onClick={() => {
-								if (course.product_code && course.product_code_cedente && userEmail) {
-									navigateToLms(course.product_code, course.product_code_cedente, userEmail);
-								} else {
-									console.error('Missing data for LMS navigation:', course);
-								}
-							}}
-							isDisabled={isNavigating}
+						<button
+							style={{ display: course?.link_al_foro ? '' : 'none' }}
+							className={`${secondaryButtonClass} ${!course?.link_al_foro ? 'opacity-50 cursor-not-allowed' : ''}`}
+							onClick={() => course?.link_al_foro && window.open(course.link_al_foro, '_blank')}
+							disabled={!course?.link_al_foro}
 						>
-							{isNavigating ? 'Cargando...' : 'Ir al curso'}
+							Ir al foro
+						</button>
+
+						<CtaButton onClick={() => handleCourseAction(course)} isDisabled={navigatingCourseId === course.product_code}>
+							{navigatingCourseId === course.product_code
+								? 'Cargando...'
+								: course.statusType === 'Sin enrolar'
+								? 'Activar'
+								: 'Ir al curso'}
 						</CtaButton>
 					</>
 				);
@@ -349,17 +397,19 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 				<button
 					onClick={() => paginate(currentPage - 1)}
 					disabled={currentPage === 1}
+					style={{ visibility: totalPages ? 'visible' : 'hidden' }}
 					className='w-8 h-8 flex items-center justify-center rounded-full border border-[#DBDDE2] text-[#4F5D89] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition'
 				>
 					<ArrowLeftIcon />
 				</button>
-				<span className='font-inter text-sm'>
+				<span className='font-inter text-sm' style={{ visibility: totalPages ? 'visible' : 'hidden' }}>
 					<span className='font-bold text-[#1A1A1A]'>{String(currentPage).padStart(2, '0')}</span>
 					<span className='text-[#4F5D89]'> / {String(totalPages).padStart(2, '0')}</span>
 				</span>
 				<button
 					onClick={() => paginate(currentPage + 1)}
 					disabled={currentPage === totalPages}
+					style={{ visibility: totalPages ? 'visible' : 'hidden' }}
 					className='w-8 h-8 flex items-center justify-center rounded-full border border-[#DBDDE2] text-[#4F5D89] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 transition'
 				>
 					<ArrowRightIcon />

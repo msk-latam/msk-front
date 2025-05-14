@@ -1,21 +1,28 @@
+import phoneCode from '@/data/phoneCode'; // Import phoneCode
 import React, { useCallback, useEffect, useState } from 'react';
+import SelectAsReactSelect, {
+	components,
+	type MenuListProps,
+	type Props as SelectProps,
+	type SingleValue,
+	type SingleValueProps,
+} from 'react-select'; // Renamed import and added SingleValue
 import Input from './Input'; // Assuming Input is in the same directory
-import Select from './Select'; // Assuming Select is in the same directory
 
-// --- Country Code Options (Consider moving to a shared constants file) ---
-const phoneCodeOptions = [
-	{ value: '+54', label: 'AR (+54)' },
-	{ value: '+52', label: 'MX (+52)' },
-	{ value: '+34', label: 'ES (+34)' },
-	{ value: '+57', label: 'CO (+57)' },
-	{ value: '+1', label: 'US (+1)' },
-	// Add more relevant country codes
-];
+// --- Transformed Country Code Options ---
+const countryOptions = phoneCode.map((item) => ({
+	value: item.code,
+	label: item.name, // react-select uses this for searching
+	code: item.code,
+	flag: item.flag,
+	name: item.name, // Keep original name for display
+}));
 
 // Helper to find the longest matching prefix - EXPORTED
 export const findCodePrefix = (value: string): { code: string; number: string } | null => {
-	for (const option of phoneCodeOptions.sort((a, b) => b.value.length - a.value.length)) {
-		// Check longer codes first
+	// Sort by code string length, longest first, to handle cases like +1, +1-234
+	const sortedOptions = [...countryOptions].sort((a, b) => b.value.length - a.value.length);
+	for (const option of sortedOptions) {
 		if (value.startsWith(option.value)) {
 			return { code: option.value, number: value.substring(option.value.length) };
 		}
@@ -52,7 +59,7 @@ const PhoneInputWithCode: React.FC<PhoneInputWithCodeProps> = ({
 		} else {
 			// If no prefix matches, assume the value is just the number
 			// and use the default code (or the last used code if appropriate)
-			setInternalCode((prevCode) => (phoneCodeOptions.some((o) => o.value === prevCode) ? prevCode : defaultCode));
+			setInternalCode((prevCode) => (countryOptions.some((o) => o.value === prevCode) ? prevCode : defaultCode));
 			setInternalNumber(value); // Treat the whole value as the number part
 		}
 	}, [value, defaultCode]);
@@ -64,10 +71,15 @@ const PhoneInputWithCode: React.FC<PhoneInputWithCodeProps> = ({
 		[onChange],
 	);
 
-	const handleCodeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		const newCode = e.target.value;
-		setInternalCode(newCode);
-		triggerOnChange(newCode, internalNumber);
+	// Type for react-select option
+	type CountryOptionType = (typeof countryOptions)[0];
+
+	const handleCodeChangeReactSelect = (selectedOption: SingleValue<CountryOptionType>) => {
+		if (selectedOption) {
+			const newCode = selectedOption.value;
+			setInternalCode(newCode);
+			triggerOnChange(newCode, internalNumber);
+		}
 	};
 
 	const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,31 +90,140 @@ const PhoneInputWithCode: React.FC<PhoneInputWithCodeProps> = ({
 		triggerOnChange(internalCode, filteredNumber);
 	};
 
+	const formatOptionLabel = ({ flag, name, code }: CountryOptionType) => (
+		<div style={{ display: 'flex', alignItems: 'center' }}>
+			<img src={flag} alt={name} style={{ width: '20px', marginRight: '8px' }} />
+			<span>
+				{name} ({code})
+			</span>
+		</div>
+	);
+
+	// Custom component for displaying the selected value
+	const CustomSingleValue = (props: SingleValueProps<CountryOptionType>) => (
+		<components.SingleValue {...props}>
+			{props.data.code} {/* Display only the code */}
+		</components.SingleValue>
+	);
+
+	// Custom MenuList component with a search input at the top
+	const CustomMenuList = (props: MenuListProps<CountryOptionType, false>) => {
+		const { children, selectProps } = props;
+		const { onInputChange, inputValue } = selectProps as SelectProps<CountryOptionType, false>;
+
+		return (
+			<components.MenuList {...props}>
+				<div
+					style={{
+						position: 'sticky',
+						top: 0,
+						zIndex: 10,
+						backgroundColor: 'white',
+						padding: '8px 12px',
+						borderBottom: '1px solid #eee',
+					}}
+				>
+					<input
+						type='text'
+						placeholder='Buscar país o código...'
+						value={inputValue || ''}
+						onChange={(e) => {
+							if (onInputChange) {
+								onInputChange(e.target.value, { action: 'input-change', prevInputValue: inputValue || '' });
+							}
+						}}
+						onClick={(e) => e.stopPropagation()}
+						style={{
+							width: '100%',
+							boxSizing: 'border-box',
+							paddingTop: '4px',
+							paddingBottom: '4px',
+							paddingLeft: '8px',
+							paddingRight: '8px',
+							border: '1px solid #D1D5DB',
+							borderRadius: '16px',
+						}}
+						autoFocus
+					/>
+				</div>
+				{children}
+			</components.MenuList>
+		);
+	};
+
+	const currentSelectValue = countryOptions.find((option) => option.value === internalCode);
+
 	return (
-		<div className='grid grid-cols-[auto_1fr]  items-end'>
-			<Select
-				id={`${id}-code`}
-				label={label} // Label on the code part
-				name={`${id}-code`} // Unique name for the select element
-				options={phoneCodeOptions}
-				value={internalCode}
-				onChange={handleCodeChange}
-				placeholder='Código'
-				required={required}
-				className='mb-0 mr-2 border-r-0 rounded-r-none' // Adjust as needed
-			/>
+			<div className='flex flex-col '>
+				<label htmlFor={`${id}-code`} className='block text-sm font-medium text-[#1a1a1a] mb-1.5'>
+					{label}
+				</label>
+		<div className='flex flex-row items-end'>
+				<SelectAsReactSelect
+					{...({} as SelectProps<CountryOptionType, false>)}
+					id={`${id}-code`}
+					name={`${id}-code`}
+					options={countryOptions}
+					value={currentSelectValue}
+					onChange={handleCodeChangeReactSelect}
+					formatOptionLabel={formatOptionLabel}
+					components={{
+						Input: () => null,
+						MenuList: CustomMenuList,
+						SingleValue: CustomSingleValue,
+						IndicatorSeparator: () => null,
+					}}
+					placeholder='Código'
+					required={required}
+					styles={{
+						control: (base, state) => ({
+							...base,
+							width: '130px',
+							borderTopRightRadius: 0,
+							borderBottomRightRadius: 0,
+							paddingTop: '4px',
+							paddingBottom: '4px',
+							paddingLeft: '8px',
+							paddingRight: '8px',
+							borderColor: state.isFocused ? '#9200AD' : '#d1d5db',
+							borderRadius: '16px',
+							boxShadow: state.isFocused ? '0 0 0 1px #9200AD' : 'none',
+							'&:hover': {
+								borderColor: state.isFocused ? '#9200AD' : '#9CA3AF',
+							},
+						}),
+						input: (base) => ({
+							...base,
+							borderTopRightRadius: 0,
+							borderBottomRightRadius: 0,
+						}),
+						menu: (base) => ({
+							...base,
+							width: '350px', // Set a wider width for the dropdown menu
+							zIndex: 20, // Ensure menu appears above other elements if necessary
+						}),
+						placeholder: (base) => ({
+							...base,
+						}),
+						singleValue: (base) => ({
+							...base,
+						}),
+					}}
+					classNamePrefix='react-select'
+				/>
 			<Input
-				id={id} // Main ID for the phone number input
-				label=' ' // Empty label to align visually
+				id={id}
+				label=' '
 				type='tel'
-				name={id} // Unique name for the input element
+				name={id}
 				value={internalNumber}
 				onChange={handleNumberChange}
 				placeholder='Ingresar teléfono'
 				autoComplete='tel-national'
 				required={required}
-				className='mb-0 border-l-0 rounded-l-none' // Adjust as needed
+				className='mb-0 border-l-0 rounded-l-none w-full'
 			/>
+			</div>
 		</div>
 	);
 };

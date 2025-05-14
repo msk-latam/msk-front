@@ -62,6 +62,7 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 		setPaymentStatus,
 		isSubmitting,
 		appliedCoupon,
+		certifications,
 	} = useCheckout();
 	const rebillId = useRecoilValue(rebillIdState);
 	const variables = selectCountryKey(country);
@@ -151,6 +152,7 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 				formData.currency,
 				e.card.id,
 				country,
+				certifications,
 			);
 
 			if (data.invoice && data.failedTransaction === null && data.invoice.paidBags?.[0]?.payment?.status === 'SUCCEEDED') {
@@ -164,6 +166,7 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 					'rebill',
 					discountAmount,
 					appliedCoupon?.code ?? null,
+					certifications,
 				);
 
 				advanceStep();

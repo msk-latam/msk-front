@@ -11,11 +11,11 @@ type Props = {
 export default function CourseCertificate({ slug, lang }: Props) {
 	const { data: hasCertificate, loading, error } = useCourseCertificate(slug, lang);
 
-	if (loading || error) {
+	if (loading ) {
 		return <SkeletonLoader />; // Show skeleton loader when loading or error
 	}
 
-	if (!hasCertificate) {
+	if (!hasCertificate|| error) {
 		return null; // harcodeado para QA
 	}
 

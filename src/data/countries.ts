@@ -1,31 +1,63 @@
 export const countries = [
 	{
-		id: 'mx',
-		name: 'México',
-	},
-	{
-		id: 'jp',
-		name: 'Japón',
-	},
-	{
 		id: 'ar',
 		name: 'Argentina',
+	},
+	{
+		id: 'bo',
+		name: 'Bolivia',
 	},
 	{
 		id: 'cl',
 		name: 'Chile',
 	},
 	{
-		id: 'ec',
-		name: 'Ecuador',
-	},
-	{
 		id: 'co',
 		name: 'Colombia',
 	},
 	{
-		id: 'bo',
-		name: 'Bolivia',
+		id: 'cr',
+		name: 'Costa Rica',
+	},
+	{
+		id: 'ec',
+		name: 'Ecuador',
+	},
+	{
+		id: 'sv',
+		name: 'El Salvador',
+	},
+	{
+		id: 'es',
+		name: 'España',
+	},
+	{
+		id: 'gt',
+		name: 'Guatemala',
+	},
+	{
+		id: 'hn',
+		name: 'Honduras',
+	},
+	{
+		id: 'mx',
+		name: 'México',
+	},
+	{
+		id: 'ni',
+		name: 'Nicaragua',
+	},
+	{
+		id: 'pa',
+		name: 'Panamá',
+	},
+	{
+		id: 'py',
+		name: 'Paraguay',
+	},
+	{
+		id: 'pe',
+		name: 'Perú',
 	},
 	{
 		id: 'uy',
@@ -34,41 +66,5 @@ export const countries = [
 	{
 		id: 've',
 		name: 'Venezuela',
-	},
-	{
-		id: 'es',
-		name: 'España',
-	},
-	{
-		id: 'hn',
-		name: 'Honduras',
-	},
-	{
-		id: 'cr',
-		name: 'Costa Rica',
-	},
-	{
-		id: 'pa',
-		name: 'Panama',
-	},
-	{
-		id: 'pe',
-		name: 'Peru',
-	},
-	{
-		id: 'ni',
-		name: 'Nicaragua',
-	},
-	{
-		id: 'gt',
-		name: 'Guatemala',
-	},
-	{
-		id: 'sv',
-		name: 'El Salvador',
-	},
-	{
-		id: 'py',
-		name: 'Paraguay',
 	},
 ];

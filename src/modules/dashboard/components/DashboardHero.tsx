@@ -10,30 +10,23 @@ import UserIcon from '@/dashboard/assets/icons/UserIcon';
 import AddButton from '@/dashboard/components/ui/AddButton';
 import EditButton from '@/dashboard/components/ui/EditButton';
 // import dashboardMock from '@/modules/dashboard/data/dashboardMock.json'; // <-- Import mock data
-import useInterests from '@/hooks/useinterests';
-import { useLmsNavigation } from '@/hooks/useLmsNavigation';
+import { type Interests } from '@/hooks/useinterests'; // Changed: Import Interests type
+import { urlFormat } from '@/utils/urlFormat';
 import Link from 'next/link';
+import { goToEnroll, goToLMS } from '../../../lib/account';
 import DashboardHeroSkeleton from './DashboardHeroSkeleton';
 import InvoicesModal from './InvoicesModal';
 import CtaButton from './ui/CtaButton';
-
 // // Define props for DashboardHero
 interface DashboardHeroProps {
 	userData: any; // <-- TODO: Change to UserData type
 	onEditProfile: (field?: string) => void;
-	isLoading?: boolean;
+	isLoading?: boolean; // For userData loading
 	userEmail: string;
 	onOpenCompleteProfileModal: () => void;
+	interests: Interests | null; // Changed: Added interests prop
+	isInterestsLoading: boolean; // Changed: Added isInterestsLoading prop
 }
-
-const defaultRecommendedCourse = {
-	image:
-		'https://images.ctfassets.net/cnu0m8re1exe/KARd6CSmh3yD656fzK3Kl/d46556b481191e9a679ed0e02388788f/doctor-and-patient.jpg?fm=jpg&fl=progressive&w=1140&h=700&fit=fill', // Use the image from the example
-	label: 'Recomendado para ti',
-	title: 'Curso de Endocrinología y Nutrición',
-	buttonText: 'Descubrir',
-	buttonLink: '/tienda/endocrinologia-y-nutricion/', // Replace with actual link
-};
 
 const DashboardHero: React.FC<DashboardHeroProps> = ({
 	userData,
@@ -41,11 +34,68 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 	isLoading = false,
 	userEmail,
 	onOpenCompleteProfileModal,
+	interests,
+	isInterestsLoading,
 }) => {
 	const isEmpty = (value: string | undefined | null) => !value || value.trim() === '';
-	const { interests, updateInterests, isLoading: isInterestsLoading } = useInterests();
 	const [showInvoicesModal, setShowInvoicesModal] = useState(false);
-	const { navigateToLms, isLoading: isNavigating, error: navigationError } = useLmsNavigation();
+	const [isNavigating, setIsNavigating] = useState(false);
+	// const { navigateToLms, isLoading: isNavigating, error: navigationError } = useLmsNavigation();
+
+	// Initialize internalCurrentCourse state
+	const [internalCurrentCourse, setInternalCurrentCourse] = React.useState(userData?.currentCourse);
+
+	// Effect to sync internalCurrentCourse with userData.currentCourse prop
+	React.useEffect(() => {
+		setInternalCurrentCourse(userData?.currentCourse);
+	}, [userData?.currentCourse]);
+
+	// Definitions for isProductActive and isProductNotEnrolled
+	const isProductActive = (status: string) => {
+		return status !== 'Baja' && status !== 'Trial suspendido';
+	};
+
+	const isProductNotEnrolled = (status: string) => {
+		return status === 'Sin enrolar';
+	};
+
+	const handleProductAction = async (
+		productCode: string,
+		productCodeCedente: string,
+		userEmailAddress: string, // Renamed from userEmail to avoid conflict with prop
+		currentCourseStatus: string,
+	) => {
+		const validStatuses = ['Listo para enrolar', 'Sin enrolar', 'Activo', 'Finalizado'];
+		if (isProductActive(currentCourseStatus) && validStatuses.includes(currentCourseStatus)) {
+			setIsNavigating(true);
+			try {
+				if (isProductNotEnrolled(currentCourseStatus)) {
+					const enrollResponse = await goToEnroll(Number(productCode), userEmailAddress);
+					console.log('responseGoToEnroll', enrollResponse);
+
+					if (enrollResponse?.data?.[0]?.status === 'success') {
+						setInternalCurrentCourse((prevCourse: any) => {
+							if (!prevCourse) return null;
+							return { ...prevCourse, status: 'Activo' };
+						});
+						// UI will update, then navigate to LMS
+						await goToLMS(Number(productCode), productCodeCedente, userEmailAddress);
+					} else {
+						console.error('Enrollment failed or status not success:', enrollResponse);
+						// Optionally, display a user-facing error message here
+					}
+				} else {
+					// Course is already active or in a state to directly go to LMS
+					await goToLMS(Number(productCode), productCodeCedente, userEmailAddress);
+				}
+			} catch (error) {
+				console.error('Error in product action:', error);
+				// Optionally, display a user-facing error message here
+			} finally {
+				setIsNavigating(false);
+			}
+		}
+	};
 
 	const handleEditClick = (field?: string) => {
 		// Map display labels/placeholders to actual UserData field names
@@ -276,7 +326,9 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 				<div className='md:col-span-2 lg:col-span-2 bg-white rounded-[30px] p-[36px] order-3 md:order-3'>
 					<h3 className='font-raleway text-[34px] font-medium leading-[100%] mb-3 text-[#1A1A1A]'>Tus intereses</h3>
 
-					{interests && interests?.specialty_interests?.length > 0 ? (
+					{isInterestsLoading ? (
+						<p className='text-center text-[#4F5D89] py-5'>Cargando intereses...</p>
+					) : interests && interests?.specialty_interests?.length > 0 ? (
 						<div className='flex flex-wrap gap-2 mb-4 items-center'>
 							{interests?.specialty_interests?.map((interest: string, index: number) => (
 								<span
@@ -311,99 +363,82 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 				{/* Course Section - Conditionally Rendered */}
 				{/* Mobile: 4th, Desktop: 2nd in 2nd Col */}
 				<div className='md:col-span-2 lg:col-span-2 rounded-[30px] overflow-hidden group order-4 md:order-2'>
-					{
-						!data?.currentCourse ? (
-							// Variant 1: Profile < 50% (Not Started) - based on image
-							<div className='bg-cover bg-center h-[300px] rounded-[30px] relative flex flex-col justify-end p-[36px] text-white overflow-hidden'>
+					<div className='bg-cover bg-top h-[300px] rounded-[30px] relative flex flex-col justify-center p-[36px] text-white overflow-hidden'>
+						<div
+							className='absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 bg-cover bg-center'
+							style={{ backgroundImage: `url(${internalCurrentCourse?.image})` }}
+						></div>
+						{/* Overlay gradient */}
+						<div
+							className='absolute inset-0'
+							style={{ background: 'linear-gradient(90deg, rgba(0, 0, 0, 0.54) 38.02%, rgba(0, 0, 0, 0.09) 87.34%)' }}
+						></div>
+						{/* Course Content: Title, Label, Button */}
+						<div className='relative z-10 flex flex-col items-start gap-4 md:flex-row md:justify-between md:items-center'>
+							{/* Group Label and Title */}
+							<div className='flex flex-col items-start gap-4'>
+								<span className='bg-[#DFE6FF] text-[#29324F] font-inter font-normal text-sm md:text-base rounded-full px-3 py-1.5'>
+									{internalCurrentCourse?.completed_percentage === null ? 'Recomendado para ti' : 'Continúa tu aprendizaje'}
+								</span>
+								<h2 className='text-white font-raleway font-[700] text-[24px] md:text-[36px] leading-[26px] md:leading-[44px] max-w-[25ch]'>
+									{internalCurrentCourse?.title}
+								</h2>
+							</div>
+							{/* Button - Aligned below title on mobile, right on desktop */}
+
+							<div className='w-auto mt-4 md:mt-0'>
+								<CtaButton
+									onClick={() => {
+										if (internalCurrentCourse?.completed_percentage === null) {
+											const currentPath = window.location.pathname;
+											const langMatch = currentPath.match(/^\/([^\/]+)\/dashboard/);
+											const lang = langMatch ? langMatch[1] : '';
+											window.location.href = lang
+												? `/${lang}/${internalCurrentCourse?.link}`
+												: `/${internalCurrentCourse?.link}`;
+										} else if (
+											internalCurrentCourse?.product_code &&
+											internalCurrentCourse?.product_code_cedente &&
+											userEmail &&
+											internalCurrentCourse?.status
+										) {
+											handleProductAction(
+												internalCurrentCourse.product_code,
+												internalCurrentCourse.product_code_cedente,
+												userEmail,
+												internalCurrentCourse.status,
+											);
+										} else {
+											console.error('Missing data for LMS navigation:', internalCurrentCourse);
+										}
+									}}
+									showIcon={true}
+									isDisabled={isNavigating}
+								>
+									{isNavigating
+										? 'Cargando...'
+										: internalCurrentCourse?.completed_percentage === null
+										? 'Descubrir'
+										: internalCurrentCourse?.status === 'Sin enrolar'
+										? 'Activar'
+										: 'Continuar'}
+								</CtaButton>
+							</div>
+						</div>
+						{/* Progress Bar */}
+						{internalCurrentCourse?.completed_percentage !== null && (
+							<div className='w-full h-[40px] bg-[#00000033] absolute bottom-0 left-0'>
 								<div
-									className='absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 bg-cover bg-top'
-									style={{ backgroundImage: `url(${defaultRecommendedCourse.image})` }}
-								></div>
-								{/* Overlay gradient */}
-								<div
-									className='absolute inset-0'
-									style={{ background: 'linear-gradient(90deg, rgba(0, 0, 0, 0.54) 38.02%, rgba(0, 0, 0, 0.09) 87.34%)' }}
-								></div>
-								{/* Content */}
-								<div className='relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4'>
-									{/* Left side: Label and Title */}
-									<div className='flex flex-col items-start gap-4'>
-										<span className='bg-[#DFE6FF] text-[#29324F] font-inter font-normal text-sm md:text-base rounded-full px-3 py-1.5'>
-											{defaultRecommendedCourse.label}
-										</span>
-										<h2 className='text-white font-raleway font-[700] text-[24px] md:text-[36px] leading-[26px] md:leading-[44px] max-w-[25ch]'>
-											{defaultRecommendedCourse.title}
-										</h2>
-									</div>
-									{/* Right side: Button */}
-									<div className='w-auto mt-4 md:mt-0'>
-										<CtaButton
-											onClick={() => console.log('Navigate to:', defaultRecommendedCourse.buttonLink)} // Replace with actual navigation
-											showIcon={true}
-										>
-											{defaultRecommendedCourse.buttonText}
-										</CtaButton>
-									</div>
+									className='h-full bg-[#00000080] px-[36px] flex items-center justify-start transition-width duration-300 ease-in-out'
+									style={{ width: `${internalCurrentCourse?.completed_percentage}%` }}
+								>
+									<span className='text-white font-inter font-medium text-base leading-[24px] whitespace-nowrap'>
+										{internalCurrentCourse?.completed_percentage}% completado
+									</span>
 								</div>
 							</div>
-						) : data?.currentCourse ? (
-							// Variant 2: Profile >= 50% OR no recommendedCourseData available (Started/In Progress) - Original card
-							<div className='bg-cover bg-top h-[300px] rounded-[30px] relative flex flex-col justify-center p-[36px] text-white overflow-hidden'>
-								<div
-									className='absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 bg-cover bg-top'
-									style={{ backgroundImage: `url(${data?.currentCourse?.image?.high})` }}
-								></div>
-								{/* Overlay gradient */}
-								<div
-									className='absolute inset-0'
-									style={{ background: 'linear-gradient(90deg, rgba(0, 0, 0, 0.54) 38.02%, rgba(0, 0, 0, 0.09) 87.34%)' }}
-								></div>
-								{/* Course Content: Title, Label, Button */}
-								<div className='relative z-10 flex flex-col items-start gap-4 md:flex-row md:justify-between md:items-center'>
-									{/* Group Label and Title */}
-									<div className='flex flex-col items-start gap-4'>
-										<span className='bg-[#DFE6FF] text-[#29324F] font-inter font-normal text-sm md:text-base rounded-full px-3 py-1.5'>
-											Continúa tu aprendizaje
-										</span>
-										<h2 className='text-white font-raleway font-[700] text-[24px] md:text-[36px] leading-[26px] md:leading-[44px] max-w-[25ch]'>
-											{data?.currentCourse.title}
-										</h2>
-									</div>
-									{/* Button - Aligned below title on mobile, right on desktop */}
-									<div className='w-auto mt-4 md:mt-0'>
-										<CtaButton
-											onClick={() => {
-												if (data?.currentCourse.product_code && data?.currentCourse.product_code_cedente && userEmail) {
-													navigateToLms(
-														data?.currentCourse.product_code,
-														data?.currentCourse.product_code_cedente,
-														userEmail,
-													);
-												} else {
-													console.error('Missing data for LMS navigation:', data?.currentCourse);
-												}
-											}}
-											showIcon={true}
-											isDisabled={isNavigating}
-										>
-											{isNavigating ? 'Cargando...' : 'Continuar'}
-										</CtaButton>
-									</div>
-								</div>
-								{/* Progress Bar */}
-								<div className='w-full h-[40px] bg-[#00000033] absolute bottom-0 left-0'>
-									<div
-										className='h-full bg-[#00000080] px-[36px] flex items-center justify-start transition-width duration-300 ease-in-out'
-										style={{ width: `${data?.currentCourse.completed_percentage}%` }}
-									>
-										<span className='text-white font-inter font-medium text-base leading-[24px] whitespace-nowrap'>
-											{data?.currentCourse.completed_percentage}% completado
-										</span>
-									</div>
-								</div>
-							</div>
-						) : null /* Optional: Render nothing if profile >= 50% and no currentCourse */
-					}
+						)}
+					</div>
 				</div>
 
 				{/* Recommended Resources Section - Mobile: 5th, Desktop: 5th in 2nd/3rd Col */}
@@ -416,13 +451,13 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 						<div className='flex space-x-4 overflow-x-auto scroll-snap-x scroll-snap-mandatory md:grid md:grid-cols-2 md:gap-5 md:space-x-0 md:overflow-x-visible md:scroll-snap-none pb-4 -mb-4 scrollbar-hide '>
 							{data?.recommendedResourcesByIA.map((resource: any, index: number) => (
 								<Link
-									href={`/tienda/${resource.slug}`}
+									href={urlFormat(`/curso/${resource.slug}`)}
 									key={index}
 									className='w-[90%] flex-shrink-0 scroll-snap-start md:w-auto md:flex-shrink bg-white rounded-[30px] overflow-hidden flex flex-col md:flex-row border border-[#DBDDE2] hover:shadow-md transition-shadow min-h-[280px]'
 								>
 									{/* Image Section */}
 									<div className='relative w-full md:w-[200px] h-[180px] md:h-auto flex-shrink-0 bg-gray-100'>
-										<Image src={resource.featured_images.medium} alt={resource.title} layout='fill' objectFit='cover' />
+										<Image src={resource.featured_images.high} alt={resource.title} layout='fill' objectFit='cover' />
 									</div>
 
 									{/* Content Section */}
@@ -469,7 +504,14 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 						</div>
 					</div>
 				) : // Optional: Show a different message if interests exist but no resources yet
-				interests &&
+				isInterestsLoading ? (
+					<div className='md:col-span-2 lg:col-span-3 bg-white rounded-[30px] p-[36px] order-5 md:order-5'>
+						<h3 className='font-raleway text-[34px] font-medium leading-[100%] mb-6 text-[#1A1A1A]'>
+							Recursos recomendados para tí
+						</h3>
+						<p className='text-[#4F5D89] font-inter text-center'>Cargando recomendaciones...</p>
+					</div>
+				) : interests &&
 				  (interests.specialty_interests?.length > 0 ||
 						interests.content_interests?.length > 0 ||
 						interests.other_interests?.length > 0) ? (

@@ -96,7 +96,7 @@ const StoreSideBar: FC<Props> = ({ onChangeSpecialty, onChangeProfession, onChan
 					</h3>
 					{resourceVisible && (
 						<ul>
-							{resources.map((resource, index) => {
+							{resources?.map((resource, index) => {
 								return (
 									<li key={`res_${index}`}>
 										<div className='course-sidebar-list'>

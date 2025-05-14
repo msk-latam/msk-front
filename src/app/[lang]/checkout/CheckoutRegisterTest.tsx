@@ -19,12 +19,15 @@ import AddressForm from './forms/AddressForm';
 import DocumentDetailsForm from './forms/DocumentDetailsForm';
 import UserForm from './forms/UserForm';
 import { validatePaymentField } from './validators/paymentValidator';
+import { useProfile } from '@/hooks/useProfile';
 
 const CheckoutRegisterTest = ({ product, country }: any) => {
+	const { user: userProfile } = useProfile();
+
 	const { state } = useContext(AuthContext);
 	const [rebillId, setRebillId] = useRecoilState(rebillIdState);
 
-	const { activeStep, setActiveStep, completeStep, setUser, user } = useCheckout();
+	const { activeStep, setActiveStep, completeStep, setUser, user, certifications } = useCheckout();
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
 	const [success, setSuccess] = useState(false);
@@ -157,7 +160,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 	const totalPrice = product.total_price;
 	const transactionAmount = parseInt(totalPrice.replace(/[\.,]/g, ''), 10);
 	const regularPrice = product.regular_price;
-	const paymentProcessor = rebillCountries.includes(country) ? 'rebill' : 'stripe';
+	const paymentProcessor = country === 'ar' ? 'mercadopago' : rebillCountries.includes(country) ? 'rebill' : 'stripe';
 
 	const handleNextStep = async () => {
 		if (!isFormValid) {
@@ -183,8 +186,6 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 				await updateCRMUser(formDataUser, formData, customer_id);
 			}
 
-			const paymentProcessor = rebillCountries.includes(country) ? 'rebill' : 'stripe';
-
 			const createContractResponse = await createContractCRM(
 				customer_id,
 				product,
@@ -192,6 +193,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 				currency,
 				countryCompleteName,
 				paymentProcessor,
+				certifications,
 			);
 			const contract_id = createContractResponse.data[0].details.id;
 
@@ -235,12 +237,13 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 		setErrors(newErrors);
 		setTouched(newTouched);
 	};
+	console.log(userProfile);
 	useEffect(() => {
-		if (state?.user && state.user.name) {
+		if (userProfile && userProfile.email) {
 			const fetchUser = async () => {
 				try {
 					setLoadingUser(true);
-					const user = await getCRMUser(state?.email);
+					const user = await getCRMUser(userProfile.email);
 					console.log(user);
 					console.log('pais de usuario', user.Pais);
 					if (user) {
@@ -277,9 +280,9 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 
 			fetchUser();
 		}
-	}, [state?.user]);
+	}, [userProfile]);
 
-	console.log(formData.state);
+	console.log(state);
 
 	if (loadingUser) {
 		return (

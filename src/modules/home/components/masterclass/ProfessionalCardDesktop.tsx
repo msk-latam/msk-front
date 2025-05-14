@@ -13,6 +13,7 @@ interface Doctor {
 
 interface Props {
 	pro: Doctor;
+	masterClassLink:string;
 	current: number;
 	total: number;
 	onPrev: () => void;
@@ -20,7 +21,7 @@ interface Props {
 	className?: string;
 }
 
-const ProfessionalCardDesktop = ({ pro, current, total, onPrev, onNext, className = '' }: Props) => {
+const ProfessionalCardDesktop = ({ pro,masterClassLink ,current, total, onPrev, onNext, className = '' }: Props) => {
 	const pathname = usePathname();
 	const lang = pathname.split('/')[1] || 'ar';
 	return (
@@ -58,7 +59,7 @@ const ProfessionalCardDesktop = ({ pro, current, total, onPrev, onNext, classNam
 			<div className='flex justify-between items-center text-sm text-black mt-auto'>
 				<span className='text-sm'>NUESTRO EQUIPO</span>
 				{/*<Link href={pro.perfilUrl || "#"} target="_blank" rel="noopener noreferrer">*/}
-				<Link href={getLocalizedUrl(lang, '/tienda/administracion-y-gestion-hospitalaria/#equipo-docente')}>
+				<Link href={getLocalizedUrl(lang, masterClassLink+'#equipo-docente')}>
 					{/*<button className="bg-[#1A1A1A] text-white px-6 py-3 rounded-full md:rounded-[38px] font-inter font-medium shadow-md hover:scale-105 transition text-sm w-full md:w-auto">
           Ver perfil
         </button>*/}

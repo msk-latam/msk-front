@@ -59,6 +59,7 @@ const useInterests = (): UseInterestsReturn => {
 
 				const updatedInterests: Interests = await response.json();
 				setInterests(updatedInterests); // Update local state with response from server
+				fetchInterests(); // Refetch interests to update UI
 			} catch (e) {
 				setError(e instanceof Error ? e : new Error('Failed to update interests'));
 				console.error('Failed to update interests:', e);
@@ -74,3 +75,5 @@ const useInterests = (): UseInterestsReturn => {
 };
 
 export default useInterests;
+
+export type { Interests };

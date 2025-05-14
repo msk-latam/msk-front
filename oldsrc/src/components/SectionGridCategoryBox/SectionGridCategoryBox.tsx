@@ -9,7 +9,7 @@ import { DEMO_CATEGORIES } from '@/data/taxonomies';
 import { Specialty, TaxonomyType } from '@/data/types';
 import React, { useEffect, useRef, useState } from 'react';
 import NcLink from '../NcLink/NcLink';
-import SpecialtiesModal from '@/app/[lang]/tienda/[category]/SpecialtiesModal';
+import SpecialtiesModal from '@/modules/store-category/components/SpecialtiesModal';
 
 export interface SectionGridCategoryBoxProps {
 	categories?: TaxonomyType[] | Specialty[];

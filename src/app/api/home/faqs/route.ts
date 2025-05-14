@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request:Request) {
+  const url = new URL(request.url);
+  const lang = url.searchParams.get('lang') || 'int';
   try {
-    const res = await fetch("https://cms1.msklatam.com/wp-json/msk/v1/front/inicio?lang=int&nocache=1", {
+    const res = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/front/inicio?lang=${lang}&nocache=1`, {
       next: { revalidate: 30 },
     });
     const json = await res.json();

@@ -9,7 +9,7 @@ import Pagination from './Pagination'; // Import Pagination
 import StoreCoursesHead from './StoreCoursesHead';
 
 // Define your filter keys if you need to be specific
-const filterKeys = ['especialidades', 'recurso', 'profesion', 'duracion'];
+const filterKeys = ['especialidad', 'recurso', 'profesion', 'duracion'];
 
 // Debounce hook utility (can be moved to a utils file)
 function useDebounce<T>(value: T, delay: number): T {
@@ -46,6 +46,9 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 	const [searchTerm, setSearchTerm] = useState<string>('');
 	const debouncedSearchTerm = useDebounce(searchTerm, 500); // 500ms debounce
 
+	// State for sorting - default to 'novedades'
+	const [sortKey, setSortKey] = useState<string>('novedades');
+
 	// Calculate the total count of selected filter *options*
 	let totalSelectedOptionsCount = 0;
 	searchParams?.forEach((value, key) => {
@@ -56,9 +59,19 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 		}
 	});
 
-	// Effect to initialize searchTerm from URL on mount
+	// Effect to initialize searchTerm from URL on mount and sortKey from localStorage
 	useEffect(() => {
 		setSearchTerm(searchParams?.get('search') || '');
+		// Initialize sortKey from localStorage only on the client side
+		if (typeof window !== 'undefined') {
+			const storedSortKey = localStorage.getItem('storeSortKey');
+			if (storedSortKey) {
+				setSortKey(storedSortKey);
+			} else {
+				// If nothing in localStorage, explicitly set to 'novedades' (matching useState default)
+				setSortKey('novedades');
+			}
+		}
 	}, []); // Run only once on mount
 
 	// Effect to update URL when debounced search term changes
@@ -66,8 +79,6 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 		const current = new URLSearchParams(searchParams?.toString());
 		const currentSearch = current.get('search');
 
-		// Update URL only if debounced term is different from current URL search param
-		// or if it's empty and the param exists
 		if (debouncedSearchTerm !== (currentSearch || '')) {
 			const params = new URLSearchParams(searchParams?.toString());
 			if (debouncedSearchTerm) {
@@ -75,8 +86,7 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 			} else {
 				params.delete('search');
 			}
-			// Reset page to 1 when search term changes
-			params.set('page', '1');
+			params.set('page', '1'); // Reset page when search term changes
 			router.push(`${pathname}?${params.toString()}`, { scroll: false });
 		}
 	}, [debouncedSearchTerm, searchParams, pathname, router]);
@@ -95,9 +105,9 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 				params.set('per_page', params.get('per_page') || '12');
 
 				// API parameter mapping - use the params directly from searchParams
-				if (params.has('especialidades')) {
-					params.set('specialty', params.get('especialidades') || '');
-					params.delete('especialidades'); // Remove original key if needed by API
+				if (params.has('especialidad')) {
+					params.set('specialty', params.get('especialidad') || '');
+					params.delete('especialidad'); // Remove original key if needed by API
 				}
 				if (params.has('profesion')) {
 					params.set('profession', params.get('profesion') || '');
@@ -122,6 +132,26 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 				}
 				// NOTE: The 'search' parameter is already in `params` because the previous useEffect updated the URL
 
+				// Add sorting parameters based on sortKey state
+				params.delete('sort'); // Ensure no 'sort' param from URL is used
+				params.delete('orderby'); // Clear previous orderby
+				params.delete('order'); // Clear previous order
+
+				if (sortKey === 'precio-asc') {
+					params.set('orderby', 'price');
+					params.set('order', 'asc');
+				} else if (sortKey === 'precio-desc') {
+					params.set('orderby', 'price');
+					params.set('order', 'desc');
+				} else if (sortKey === 'novedades') {
+					// 'novedades' is the default and maps to newest items using 'newly'
+					params.set('orderby', 'newly');
+					// The 'order' parameter is typically not needed when orderby='newly'
+					// params.delete('order'); // Ensure order is not set if newly implies it
+				}
+				// If sortKey is 'relevancia' (or any other value not explicitly handled),
+				// no orderby/order parameters are set, relying on the API's default sorting.
+
 				const page = params.get('page') || '1';
 				setCurrentPage(parseInt(page, 10));
 
@@ -134,6 +164,16 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 				}
 				const data: CoursesApiResponse = await response.json();
 				setCourses(data.data);
+				const filteredCourses = Object.values(
+					data.data.reduce((acc, course) => {
+						// Si ya hay un curso con ese `father_id`, no lo sobrescribas
+						if (!acc[course.father_id]) {
+							acc[course.father_id] = course;
+						}
+						return acc;
+					}, {} as Record<number, Course>),
+				);
+				setCourses(filteredCourses);
 				setTotalCourses(data.meta.total);
 				setTotalPages(data.meta.pages);
 				setCurrentPage(data.meta.page);
@@ -146,10 +186,23 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 		};
 
 		fetchCourses();
-	}, [searchParams]); // Re-fetch ONLY when searchParams change
+	}, [searchParams, lang, sortKey, router, pathname]); // Re-fetch when searchParams, lang, or sortKey change
 
 	const handleSearchChange = (term: string) => {
 		setSearchTerm(term);
+	};
+
+	const handleSortChange = (newSortKey: string) => {
+		setSortKey(newSortKey);
+		if (typeof window !== 'undefined') {
+			localStorage.setItem('storeSortKey', newSortKey);
+		}
+		// Reset page to 1 when sort order changes, and trigger re-fetch via searchParams update
+		const params = new URLSearchParams(searchParams?.toString());
+		params.set('page', '1');
+		// Ensure the 'sort' param is not in the URL we push to
+		params.delete('sort');
+		router.push(`${pathname}?${params.toString()}`, { scroll: false });
 	};
 
 	return (
@@ -159,6 +212,8 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 				searchTerm={searchTerm}
 				onSearchChange={handleSearchChange}
 				onOpenFilters={onOpenFilters}
+				sortKey={sortKey}
+				onSortChange={handleSortChange}
 			/>
 			{isLoading ? (
 				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
@@ -173,11 +228,12 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 					{courses.length > 0 ? (
 						courses.map((course) => {
 							const lang = pathname?.split('/')[1] || 'ar'; // Obtener el idioma desde la ruta
+							const courseUrl = `/${lang}/curso/${course.slug}`;
 
 							return (
-								<Link href={`${course.slug}`} key={course.id} className='border rounded-[30px] bg-white flex flex-col'>
+								<Link href={courseUrl} key={course.id} className='border rounded-[30px] bg-white flex flex-col'>
 									<img
-										src={course.featured_images.medium}
+										src={course.featured_images.high}
 										alt={course.title}
 										className='w-full h-48 object-cover rounded-t-[30px]'
 									/>
@@ -233,7 +289,7 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 											</div>
 
 											<Link
-												href={`${course.slug}`}
+												href={courseUrl}
 												className='bg-[#191919] text-white px-4 py-2 rounded-full hover:bg-[#474b53] transition-colors'
 											>
 												Descubrir

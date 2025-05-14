@@ -239,6 +239,7 @@ const DashboardEditProfile: FC<Props> = ({ user, setUser }) => {
 						}
 						setFormSubmitted(true);
 
+
 						const continueTrialAccess = localStorage.getItem('continueTrialAccess');
 						if (typeof continueTrialAccess === 'string') {
 							localStorage.removeItem('continueTrialAccess');

@@ -60,8 +60,7 @@ const mapArgToInternal = (args: any) => {
 
 // This function now sends data TO our internal API route
 async function updateProfileInternal(url: string, { arg }: UpdateProfileArg) {
-	console.log('LA CONCHA DE SU MADRE ESCRIBANIAS DEL ORTO');
-	console.log('updateProfileInternal', arg);
+
 
 	const parsedData = mapArgToInternal(arg);
 

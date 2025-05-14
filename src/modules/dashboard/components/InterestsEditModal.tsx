@@ -196,7 +196,7 @@ const InterestsEditModal: React.FC<InterestsEditModalProps> = ({
 							<div
 								className={`w-full gap-2 ml-1 ${
 									category.title === '¿Qué te trae a MSK hoy?'
-										? 'grid grid-cols-1 md:grid-cols-2'
+										? 'grid grid-cols-1 md:grid-cols-2 px-2'
 										: 'flex flex-wrap items-center justify-center'
 								}`}
 							>

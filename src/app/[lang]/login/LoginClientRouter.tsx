@@ -1,11 +1,11 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
-import { useEffect, usePathname, useRouter, useState } from 'react';
 import LoginForm from '@/modules/login/components/loginform/LoginForm';
 import RecoveryPassword from '@/modules/login/components/loginform/RecoveryPassword';
 import RecoveryPasswordSent from '@/modules/login/components/loginform/RecoveryPasswordSent';
 import RegisterForm from '@/modules/login/components/loginform/RegisterForm';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, usePathname, useRouter, useState } from 'react';
 
 export default function LoginRouterHandler() {
 	const router = useRouter();
@@ -22,13 +22,13 @@ export default function LoginRouterHandler() {
 	}, [formParam]);
 
 	const handleSwitchToRegister = () => {
-		const params = new URLSearchParams(searchParams.toString());
+		const params = new URLSearchParams(searchParams?.toString() || '');
 		params.set('form', 'registerForm');
 		router.push(`${pathname}?${params.toString()}`);
 	};
 
 	const handleSwitchToLogin = () => {
-		const params = new URLSearchParams(searchParams.toString());
+		const params = new URLSearchParams(searchParams?.toString() || '');
 		params.delete('form');
 		router.push(`${pathname}?${params.toString()}`);
 	};

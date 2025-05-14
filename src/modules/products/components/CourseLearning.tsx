@@ -1,18 +1,30 @@
 'use client';
 
+import { useEffect,useRef } from 'react';
 import { useCourseLearning } from '../hooks/useCourseLearning';
-import SkeletonCourseLearning from '../skeletons/SkeletonCourseLearning'; // Importa el Skeleton
+import SkeletonCourseLearning from '../skeletons/SkeletonCourseLearning';
 
 interface CourseLearningProps {
 	slug: string;
 	lang: string;
+	onHideEmpty?: () => void;
 }
 
-export default function CourseLearning({ slug, lang }: CourseLearningProps) {
+export default function CourseLearning({ slug, lang, onHideEmpty }: CourseLearningProps) {
 	const { data, loading, error } = useCourseLearning(slug, lang);
 
-	if (loading) return <SkeletonCourseLearning />; // Usa el Skeleton cuando esté cargando
-	if (error || !data) return null;
+	const hasNotified = useRef(false);
+
+	const isEmpty = !data || !data ||  data.length === 0;
+
+	useEffect(() => {
+		if (!hasNotified.current && !loading && (error || isEmpty)) {
+			onHideEmpty?.();
+			hasNotified.current = true;
+		}
+	}, [loading, error, isEmpty, onHideEmpty]);
+	if (loading) return <SkeletonCourseLearning />;
+	if (error || !data || data.length === 0) return null;
 
 	const learning = data.map((item) => ({ text: item.msk_learning_content }));
 
@@ -21,7 +33,6 @@ export default function CourseLearning({ slug, lang }: CourseLearningProps) {
 
 	return (
 		<section className='bg-white p-5 md:px-0 md:py-3'>
-			{/* Título */}
 			<h2 className='text-2xl text-center md:text-left font-medium md:text-[34px] mb-6 font-raleway text-[#1A1A1A]'>
 				Qué aprenderás
 			</h2>
@@ -31,7 +42,6 @@ export default function CourseLearning({ slug, lang }: CourseLearningProps) {
 					{leftColumn.map((item, idx) => (
 						<div key={idx} className='flex items-start gap-3'>
 							<div className='mt-1'>
-								{/* Icono de check violeta */}
 								<svg className='w-5 h-5 text-[#9200AD]' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
 									<path
 										d='M5 13l4 4L19 7'
@@ -50,7 +60,6 @@ export default function CourseLearning({ slug, lang }: CourseLearningProps) {
 					{rightColumn.map((item, idx) => (
 						<div key={idx} className='flex items-start gap-3'>
 							<div className='mt-1'>
-								{/* Icono de check violeta */}
 								<svg className='w-5 h-5 text-[#9200AD]' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
 									<path
 										d='M5 13l4 4L19 7'

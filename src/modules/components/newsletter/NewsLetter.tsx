@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import NewsletterLinks from './NewsletterLinks';
 import NewsLetterForm from './NewsLetterForm'; // Asegúrate de importar el componente del segundo formulario
+import NewsletterLinks from './NewsletterLinks';
 
 const Newsletter = () => {
 	const [email, setEmail] = useState('');
@@ -30,7 +30,7 @@ const Newsletter = () => {
 
 				{/* Descripción */}
 				<div className='mx-auto text-[16px] md:text-[18px] text-white text-left md:flex-1 font-inter font-medium leading-snug shadow-sm md:translate-y-[10px]'>
-					Recibe consejos y oportunidades para tu desarrollo <br  /> profesional en salud
+					Recibe consejos y oportunidades para tu desarrollo <br /> profesional en salud
 				</div>
 
 				<div className='hidden md:block w-[1px] h-[70px] bg-[#5A5F67] ml-6' />
@@ -72,11 +72,7 @@ const Newsletter = () => {
 			<NewsletterLinks />
 
 			{/* Mostrar el modal si showModal es true */}
-			{showModal && (
-				<NewsLetterForm
-				onClose={() => setShowModal(false)}
-				/>
-			)}
+			{showModal && <NewsLetterForm onClose={() => setShowModal(false)} initialEmail={email} />}
 		</div>
 	);
 };

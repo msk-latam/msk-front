@@ -26,6 +26,5 @@ export function useCourseSyllabus(slug: string, lang: string) {
 			})
 			.finally(() => setLoading(false));
 	}, [slug, lang]);
-	console.log(data);
 	return { data, loading, error };
 }

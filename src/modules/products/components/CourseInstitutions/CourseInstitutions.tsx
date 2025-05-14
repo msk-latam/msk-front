@@ -1,22 +1,30 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { useCourseInstitutions } from '../hooks/useCourseInstitutions';
-import SkeletonCourseInstitutions from '../skeletons/SkeletonCourseInstitutions'; // Importa el Skeleton
+import { useCourseInstitutions } from '../../hooks/useCourseInstitutions';
+import SkeletonCourseInstitutions from '../../skeletons/SkeletonCourseInstitutions';
 import InfoIcon from './InfoIcon';
 
 interface CourseInstitutionProps {
 	slug: string;
 	lang: string;
+	onHideEmpty?: () => void;
 }
 
-export default function CourseInstitutions({ slug, lang }: CourseInstitutionProps) {
+export default function CourseInstitutions({ slug, lang, onHideEmpty }: CourseInstitutionProps) {
 	const { data: institutions, loading, error } = useCourseInstitutions(slug, lang);
+	const hasNotified = useRef(false);
 
-	if (!loading && !institutions) return null;
+	useEffect(() => {
+		if (!hasNotified.current && !loading && (!institutions || institutions.length === 0)) {
+			onHideEmpty?.();
+			hasNotified.current = true;
+		}
+	}, [loading, institutions, onHideEmpty]);
 
-	// Mostrar Skeleton cuando los datos estén cargando
 	if (loading) return <SkeletonCourseInstitutions />;
+	if (!institutions || institutions.length === 0) return null;
 
 	return (
 		<section className='md:py-3 text-left h-fit'>
@@ -27,7 +35,7 @@ export default function CourseInstitutions({ slug, lang }: CourseInstitutionProp
 			<div className='overflow-x-auto md:overflow-visible scrollbar-none'>
 				<div className='flex md:gap-3 gap-4 md:flex-row flex-wrap items-center justify-center md:px-0 px-2'>
 					{error && <p>{error}</p>}
-					{institutions?.map((inst) => (
+					{institutions.map((inst) => (
 						<div
 							key={inst.id}
 							className='bg-[#f7f9ff] rounded-[30px] p-7 h-32 flex items-center justify-center md:w-[23%] relative'

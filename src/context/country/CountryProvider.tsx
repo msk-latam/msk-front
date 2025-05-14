@@ -5,12 +5,10 @@ import { CountryContext } from './CountryContext';
 import { countryReducer } from './CountryReducer';
 import { CountryState } from '@/data/types';
 import { countries } from '@/data/countries';
-import { getCurrencyByCountry, getInstallmentsByCountry } from '@/utils/country';
 import Cookies from 'js-cookie';
 
 import { getCountryFromUrl } from '@/utils/getCountryFromUrl';
 import { getCountryFromIp } from '@/utils/getCountryFromIP';
-import { usePathname } from 'next/navigation';
 
 interface Props {
 	children: React.ReactNode;
@@ -28,18 +26,19 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 	};
 
 	const [countryState, dispatch] = useReducer(countryReducer, initialState);
-	const [loading, setLoading] = useState(true);
 	const [showBanner, setShowBanner] = useState(false);
 	const [userCountry, setUserCountry] = useState('');
 	const [urlCountry, setUrlCountry] = useState('');
 
-	const pathname = usePathname();
 	const validCountries = countries.map((item) => item.id);
+
+	function isFirstLoad(): boolean {
+		const [entry] = performance.getEntriesByType('navigation');
+		return (entry as PerformanceNavigationTiming)?.type === 'reload';
+	}
 
 	useEffect(() => {
 		const fetchData = async () => {
-			setLoading(true);
-
 			const geo = await getCountryFromIp();
 			const geoCountry = geo?.country?.toLowerCase() || 'ar';
 			const path = window.location.pathname;
@@ -47,6 +46,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 			const hasValidUrlPrefix = validCountries.includes(urlCountryFromPath);
 			const alreadyRedirected = Cookies.get('initial_geo_redirect_done');
 
+			// Redirección inicial automática si entra por `/`
 			if (
 				path === '/' &&
 				geoCountry !== 'ar' &&
@@ -60,23 +60,31 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 				return;
 			}
 
-			const fallbackCountry = validCountries.includes(urlCountryFromPath) ? urlCountryFromPath : 'ar';
+			const fallbackCountry = hasValidUrlPrefix ? urlCountryFromPath : 'ar';
 			let currentCountry = fallbackCountry;
-			const storedDismissed = Cookies.get('dismissed_country_banner');
+
+			let storedDismissed = null;
+			if (typeof window !== 'undefined') {
+				storedDismissed = sessionStorage.getItem('dismissed_banner_this_session');
+			}
+
 			const previousIpCountry = Cookies.get('ip_country');
 
 			try {
 				if (typeof geoCountry === 'string' && validCountries.includes(geoCountry)) {
 					if (previousIpCountry && previousIpCountry !== geoCountry) {
-						Cookies.remove('dismissed_country_banner');
+						Cookies.remove('dismissed_banner_this_session');
 					}
 
 					Cookies.set('ip_country', geoCountry, { expires: 7 });
 
-					if (geoCountry !== fallbackCountry && storedDismissed !== 'true') {
-						setUserCountry(geoCountry);
-						setUrlCountry(fallbackCountry);
-						setShowBanner(true);
+					if (geoCountry !== fallbackCountry) {
+						const isReload = isFirstLoad();
+						if (isReload || !storedDismissed) {
+							setUserCountry(geoCountry);
+							setUrlCountry(fallbackCountry);
+							setShowBanner(true);
+						}
 					}
 
 					currentCountry = geoCountry;
@@ -86,11 +94,10 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 			}
 
 			dispatch({ type: 'SET_COUNTRY', payload: { country: currentCountry } });
-			setLoading(false);
 		};
 
-		fetchData();
-	}, [pathname]);
+		fetchData(); // ✅ Solo se ejecuta una vez
+	}, []); // ⬅️ IMPORTANTE: sin pathname como dependencia
 
 	const handleSwitchCountry = () => {
 		const path = window.location.pathname;
@@ -98,7 +105,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 		const hasValidPrefix = validCountries.includes(segments[0]);
 		const restOfPath = hasValidPrefix ? segments.slice(1).join('/') : segments.join('/');
 		const newUrl = `/${userCountry}${restOfPath ? '/' + restOfPath : ''}${window.location.search}`;
-		Cookies.set('country', userCountry, { path: '/', expires: 365 }); // ⬅️ Actualiza también aquí la cookie
+		Cookies.set('country', userCountry, { path: '/', expires: 365 });
 		window.location.href = newUrl;
 	};
 
@@ -150,7 +157,7 @@ export const CountryProvider: React.FC<Props> = ({ children }) => {
 						</button>
 						<button
 							onClick={() => {
-								Cookies.set('dismissed_country_banner', 'true', { expires: 7 });
+								sessionStorage.setItem('dismissed_banner_this_session', 'true');
 								setShowBanner(false);
 							}}
 							className='bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition'

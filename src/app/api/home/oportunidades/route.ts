@@ -1,47 +1,52 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 
-export const revalidate = 30; // ✅ Cachear 30 segundos
+export const revalidate = 30;
+export const dynamic = 'force-dynamic';
 
-export async function GET() {
-  try {
-    const res = await fetch("https://cms1.msklatam.com/wp-json/msk/v1/front/inicio?lang=int&nocache=1", {
-      
-      next: { revalidate: 30 }, // ✅ actualizar cada 30 segundos
-    });
+export async function GET(request: Request) {
+	try {
+		const url = new URL(request.url);
+		const lang = url.searchParams.get('lang') || 'int';
 
-    if (!res.ok) {
-      throw new Error("Error al obtener los cursos");
-    }
+		const res = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/front/inicio?lang=${lang}&nocache=1`, {
+			next: { revalidate: 0 },
+		});
 
-    const json = await res.json();
-    const secciones = json?.sections?.courses || {};
+		if (!res.ok) throw new Error('Error al obtener los cursos');
 
-    // Arreglamos las imágenes
-    const fixImageUrls = (courses: any[] = []) => {
-      return courses.map((course: any) => ({
-        ...course,
-        featured_image:
-          typeof course.featured_image === "string"
-            ? course.featured_image.replace("https://es.wp.msklatam.com", "https://cms1.msklatam.com")
-            : "/images/curso-placeholder.jpg", // fallback si falta imagen
-      }));
-    };
+		const json = await res.json();
+		const coursesSection = json?.sections?.courses || {};
 
-    const novedades = fixImageUrls(secciones.courses_news || []);
-    const recomendados = fixImageUrls(secciones.courses_recommended || []);
-    const gratuitos = fixImageUrls(secciones.courses_free || []);
+		const fixImageUrls = (courses: any[] = []) =>
+			courses.map((course: any) => ({
+				...course,
+				featured_image:
+					typeof course.featured_image === 'string'
+						? course.featured_image.replace('https://es.wp.msklatam.com', 'https://cms1.msklatam.com')
+						: '/images/curso-placeholder.jpg',
+			}));
 
-    return NextResponse.json({
-      novedades,
-      recomendados,
-      gratuitos,
-    });
-  } catch (error) {
-    console.error("Error al obtener los cursos de Oportunidades:", error);
-    return NextResponse.json({
-      novedades: [],
-      recomendados: [],
-      gratuitos: [],
-    });
-  }
+		const title = coursesSection.title || '';
+		const subtitle = coursesSection.subtitle || '';
+		const novedades = fixImageUrls(coursesSection.courses_news || []);
+		const recomendados = fixImageUrls(coursesSection.courses_recommended || []);
+		const gratuitos = fixImageUrls(coursesSection.courses_free || []);
+
+		return NextResponse.json({
+			title,
+			subtitle,
+			novedades,
+			recomendados,
+			gratuitos,
+		});
+	} catch (error) {
+		console.error('Error al obtener los cursos de Oportunidades:', error);
+		return NextResponse.json({
+			title: '',
+			subtitle: '',
+			novedades: [],
+			recomendados: [],
+			gratuitos: [],
+		});
+	}
 }

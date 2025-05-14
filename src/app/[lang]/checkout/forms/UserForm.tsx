@@ -2,6 +2,7 @@ import { DataContext } from '@/context/data/DataContext';
 import { AuthContext } from '@/context/user/AuthContext';
 import React, { useContext, useEffect, useState } from 'react';
 import { getCRMUser } from '../utils/utils';
+import { useProfile } from '@/hooks/useProfile';
 
 interface UserFormProps {
 	formData: {
@@ -21,6 +22,7 @@ interface UserFormProps {
 }
 
 const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleChange, handleBlur }) => {
+	const { user: userProfile } = useProfile();
 	const { state } = useContext(AuthContext);
 	const {
 		state: {
@@ -826,24 +828,51 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 		},
 		{
 			id: 2,
-			name: 'Personal de enfermería y auxiliares',
+			name: 'Residente',
 		},
 		{
 			id: 3,
+			name: 'Licenciado en salud',
+		},
+		{
+			id: 4,
+			name: 'Personal de enfermería',
+		},
+		{
+			id: 5,
+			name: 'Auxiliar de enfermería',
+		},
+		{
+			id: 6,
+			name: 'Fuerza pública',
+		},
+		{
+			id: 7,
+			name: 'Técnico universitario',
+		},
+		{
+			id: 8,
+			name: 'Estudiante',
+		},
+		{
+			id: 9,
+			name: 'Tecnología médica',
+		},
+		{
+			id: 10,
 			name: 'Otra profesión',
 		},
 	];
 
-	console.log(professions);
 	useEffect(() => {
 		const fetchUser = async () => {
-			const user = await getCRMUser(state?.email);
+			const user = await getCRMUser(userProfile?.email);
 			const profIndex = professions.findIndex((prof: any) => prof.name === user?.Profesi_n);
 			console.log(profIndex);
 			setSelectedProfessionIndex(profIndex + 1);
 		};
 		fetchUser();
-	}, [state?.user]);
+	}, [userProfile]);
 	const [selectedProfessionIndex, setSelectedProfessionIndex] = useState<number | null>(null);
 
 	const handleProfessionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

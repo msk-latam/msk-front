@@ -1,22 +1,20 @@
 'use client';
 
+import { useSignup } from '@/hooks/useSignup';
+import PhoneInputWithCode from '@/modules/dashboard/components/ui/PhoneInputWithCode';
+import { yupResolver } from '@hookform/resolvers/yup';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import CountrySelect from '../hooks/CountrySelect';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { Check } from 'lucide-react';
-
-const API_SIGNUP_URL = 'https://dev.msklatam.tech/msk-laravel/public/api/signup';
 
 const validationSchema = Yup.object().shape({
 	email: Yup.string().email('El correo no es válido').required('El correo es obligatorio'),
 
 	first_name: Yup.string()
 		.matches(/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s'-]+$/, 'Solo se permiten letras, espacios, guiones y apóstrofes.')
-		.max(10, 'Máximo 20 caracteres')
+		.max(20, 'Máximo 20 caracteres')
 		.required('El nombre es obligatorio'),
 
 	last_name: Yup.string()
@@ -41,11 +39,11 @@ type RegisterFormProps = {
 };
 
 export default function RegisterForm({ onBack }: RegisterFormProps) {
+	const { signup, loading: signupLoading, error: signupError, success: signupSuccess } = useSignup();
 	const searchParams = useSearchParams();
 	const [submitted, setSubmitted] = useState(false);
-	const [onRequest, setOnRequest] = useState(false);
 	const [areaCode, setAreaCode] = useState('+54');
-	const [error, setError] = useState<string | null>(null);
+	const [phone, setPhone] = useState<string>('');
 	let errorMessages: string = '...';
 	const [showPassword, setShowPassword] = useState(false);
 
@@ -63,76 +61,56 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 	//const passwordValue = watch('password');
 
 	useEffect(() => {
-		const email = searchParams.get('email');
-		const firstName = searchParams.get('firstName');
-		const lastName = searchParams.get('lastName');
+		const email = searchParams?.get('email');
+		const firstName = searchParams?.get('firstName');
+		const lastName = searchParams?.get('lastName');
 
 		if (email) setValue('email', email);
 		if (firstName) setValue('first_name', firstName);
 		if (lastName) setValue('last_name', lastName);
 	}, [searchParams, setValue]);
 
-	const onSubmit = async (data: { phone: any }) => {
-		setOnRequest(true);
-		setError(null);
-
-		try {
-			const payload = {
-				...data,
-				country: 'AR',
-				phone: `${areaCode}${data.phone}`,
-				profession: '-',
-				speciality: '-',
-				Otra_profesion: '',
-				Otra_especialidad: '',
-				Career: '',
-				Year: '',
-				type: '',
-				identification: '',
-				Terms_And_Conditions: true,
-			};
-
-			const response = await fetch(API_SIGNUP_URL, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Accept: 'application/json',
-				},
-				body: JSON.stringify(payload),
-			});
-
-			const resData = await response.json();
-
-			if (response.ok && 'access_token' in resData) {
-				setSubmitted(true);
-			} else {
-				let errorMessages: string = 'Ocurrió un error al registrar la cuenta.';
-				if (resData.errors) {
-					const errorValues = Object.values(resData.errors).flat();
-					errorMessages = errorValues
-						.map((msg) => {
-							if (typeof msg === 'string' && msg.includes('El Email ya ha sido registrado')) {
-								return `${msg} <a href=\"/login\" class=\"font-bold cursor-pointer text-violet-custom hover:underline hover:text-violet-custom\">Inicia sesión</a>`;
-							}
-							return String(msg);
-						})
-						.join('<br />');
-				} else if (resData.message) {
-					errorMessages = resData.message;
-				}
-				setError(errorMessages);
-			}
-		} catch (err) {
-			console.error('Error during sign up:', err);
-			setError('No se pudo conectar con el servidor. Inténtalo de nuevo.');
-		} finally {
-			setOnRequest(false);
+	// Effect to handle signup success
+	useEffect(() => {
+		if (signupSuccess) {
+			setSubmitted(true);
 		}
+	}, [signupSuccess, setSubmitted]);
+
+	const onSubmit = async (data: { phone: string; email: string; first_name: string; last_name: string }) => {
+		const currentPath = window.location.pathname;
+		const langMatch = currentPath.match(/^\/([^\/]+)\/login/);
+		const lang = langMatch ? langMatch[1] : '';
+
+		console.log('lang', lang);
+
+		const payload = {
+			...data,
+			country: lang || 'AR',
+			phone: `${data.phone}`,
+			Terms_And_Conditions: true,
+			email: data.email,
+			first_name: data.first_name,
+			last_name: data.last_name,
+			profession: '-',
+			speciality: '-',
+			Otra_profesion: '',
+			Otra_especialidad: '',
+			Career: '',
+			Year: '',
+			type: '',
+			identification: '',
+		};
+
+		await signup(payload);
 	};
 
 	const handleSocialSignup = (connection: string) => {
+			const currentPath = window.location.pathname;
+			const langMatch = currentPath.match(/^\/([^\/]+)\/login/);
+			const lang = langMatch ? langMatch[1] : '';
 		sessionStorage.setItem('needsProfileCompletion', 'true');
-		window.location.href = `/api/auth/login?connection=${connection}`;
+		window.location.href = `/api/auth/login?connection=${connection}&signup=true&lang=${lang}`;
 	};
 
 	// componente visual de sugerencias en tiempo real para la contraseña
@@ -212,22 +190,17 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 						{errors.email && <p className='text-red-500 text-xs mt-1'>{errors.email.message}</p>}
 					</div>
 
-					<div>
-						<label className='block text-sm font-medium text-[#1A1A1A] text-left mb-1'>Teléfono</label>
-						<div className='flex gap-2 border rounded-2xl border-[#DBDDE2] px-3 py-2 focus-within:ring-4 focus-within:ring-[#F5E6F7]'>
-							<div className='w-18'>
-								<CountrySelect onChange={(code) => setAreaCode(code)} />
-							</div>
-							<input
-								type='tel'
-								maxLength={20}
-								{...register('phone')}
-								placeholder='Ingresar teléfono'
-								className='flex-1 bg-transparent border-0 focus:ring-0 focus:outline-none text-[#6E737C]'
-							/>
-						</div>
-						{errors.phone && <p className='text-red-500 text-xs mt-1'>{errors.phone.message}</p>}
-					</div>
+					<PhoneInputWithCode
+						id='phone'
+						label='Teléfono'
+						value={phone}
+						defaultCode={'+54'}
+						onChange={(value) => {
+							setPhone(value);
+							setValue('phone', value, { shouldValidate: true });
+						}}
+						required
+					/>
 
 					<div>
 						<label className='block text-sm font-medium text-[#1A1A1A] text-left'>Nombre/s</label>
@@ -254,7 +227,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 					</div>
 
 					{/* ✅ Contraseña eliminada temporalmente porque el CRM la genera automáticamente por email */}
-					{/* 
+					{/*
 <div>
 	<label className='block text-sm font-medium text-[#1A1A1A] text-left'>Contraseña</label>
 	<div className='relative'>
@@ -298,13 +271,15 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 
 					<button
 						type='submit'
-						disabled={!isValid}
+						disabled={!isValid || signupLoading}
 						className={`w-full text-white py-3 px-4 rounded-[38px] font-inter font-medium transition ${
-							isValid ? 'bg-[#9200AD] hover:bg-[#700084]' : 'bg-[#989CA4] cursor-not-allowed'
-						} ${onRequest ? 'opacity-75 cursor-wait' : ''}`}
+							isValid && !signupLoading ? 'bg-[#9200AD] hover:bg-[#700084]' : 'bg-[#989CA4] cursor-not-allowed'
+						} ${signupLoading ? 'opacity-75 cursor-wait' : ''}`}
 					>
-						{onRequest ? 'Creando...' : 'Crear'}
+						{signupLoading ? 'Creando...' : 'Crear'}
 					</button>
+
+					{signupError && <p className='text-red-400 text-lg mt-2 text-center'>{signupError}</p>}
 
 					<p className='text-xs text-center text-[#6E737C] font-inter'>
 						Al registrarte, aceptás las{' '}

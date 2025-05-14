@@ -16,6 +16,7 @@ export interface CourseCodes {
 }
 
 export interface Course {
+	[x: string]: any;
 	id: number;
 	title: string;
 	slug: string;
@@ -26,6 +27,7 @@ export interface Course {
 		medium: string;
 		large: string;
 		full: string;
+		high: string;
 	};
 	prices: {
 		is_free: boolean;

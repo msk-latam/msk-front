@@ -1,19 +1,17 @@
+import { careerOptions } from '@/data/careers';
+import { countries } from '@/data/countries';
+import { documents } from '@/data/documents';
+import { professions } from '@/data/professions';
+import { specialtiesGroup } from '@/data/specialties';
+import { years } from '@/data/years';
 import Modal from '@/modules/dashboard/components/ui/Modal';
+import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-// Import the new UI components
-import Link from 'next/link';
-// REMOVED: import { ClipLoader } from 'react-spinners'; // Import a spinner
 import Input from './ui/Input';
 import PasswordInput from './ui/PasswordInput';
-import PhoneInputWithCode, { findCodePrefix } from './ui/PhoneInputWithCode'; // Import the helper
+import PhoneInputWithCode, { findCodePrefix } from './ui/PhoneInputWithCode';
 import Select from './ui/Select';
-import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
-import { usePathname } from 'next/navigation';
-import { supportedLanguages } from '@/config/languages';
-// Import types from the service
-// REMOVED: import { UserData, UserDetail } from '@/lib/localStorageService/userDataService';
 
-// --- Define the new interface based on useProfile data ---
 interface ProfileCompletion {
 	percentage: number;
 	message: string;
@@ -23,293 +21,299 @@ interface ProfileCompletion {
 
 interface Contract {
 	id: number;
-	// ... other contract fields if needed
 }
 
 interface Course {
 	id: string | number;
 	title: string;
-	image?: string | { high?: string; medium?: string; low?: string }; // Allow for different image structures
-	// ... other course fields if needed
+	image?: string | { high?: string; medium?: string; low?: string };
 }
 
 export interface UserProfileData {
 	profileCompletion?: ProfileCompletion;
-	name: string; // Was: name
+	name: string;
 	lastName: string;
 	profession: string;
-	speciality: string; // Was: speciality
+	otherProfession?: string;
+	speciality: string;
+	otherSpecialty?: string;
+	career?: string;
+	year?: string;
 	email: string;
 	country: string;
-	phone: string; // Raw phone string from API, e.g., +52619961317
+	phone: string;
 	contracts?: Contract[];
 	coursesInProgress?: Course[];
-	medicalCollegeName?: string | null; // Was: asosiacion
-	workplace?: string | null; // Was: placeOfWork
+	school_name?: string | null;
+	workplace?: string | null;
 	intereses?: string[];
 	interesesAdicionales?: string[];
 	currentCourse?: Course;
-	recommendedResourcesByInterests?: any[]; // Use a more specific type if available
-	// Fields needed by the form but potentially not in the API response yet
+	recommendedResourcesByInterests?: any[];
 	workArea?: string;
 	belongsToMedicalCollege?: boolean | null;
-	// Fields derived/used internally by the form
-	phoneCode?: string; // Parsed from phone
-	fullPhoneNumber?: string; // Value used by the PhoneInputWithCode component
+	phoneCode?: string;
+	fullPhoneNumber?: string;
 	asosiacion?: string;
+	crm_id?: string;
+	billingEmail?: string;
+	billingName?: string;
+	company_name?: string;
+	billingPhone?: string;
+	billingPhoneCode?: string;
+	fullBillingPhoneNumber?: string;
+	invoice_required?: string;
+	document_type?: string;
+	documentNumber?: string;
+	tax_regime?: string;
+	file?: File;
 }
-// --- End New Interface ---
 
 interface ProfileEditModalProps {
 	isOpen: boolean;
 	onClose: () => void;
-	onSave: (updatedData: Partial<UserProfileData>) => Promise<void>; // Expecting a promise now
+	onSave: (updatedData: Partial<UserProfileData>, password?: string) => Promise<void>;
 	user: UserProfileData | null;
-	isSaving: boolean; // loading state from useSaveUserProfile
-	saveError: string | null; // error message from useSaveUserProfile
-	saveSuccess: boolean; // success state managed by parent
+	isSaving: boolean;
+	saveError: string | null;
+	saveSuccess: boolean;
 }
-
-// --- Dummy Data for Selects (Replace with actual data source) ---
-const professionOptions = [
-	{ value: 'medico', label: 'Médico/a' },
-	{ value: 'enfermero', label: 'Enfermero/a' },
-	{ value: 'farmaceutico', label: 'Farmacéutico/a' },
-	{ value: 'Licenciado de la salud', label: 'Licenciado de la salud' }, // Added from example
-	{ value: 'otro', label: 'Otro' },
-];
-
-const specialtyOptions = [
-	{ value: 'administracion-y-gestion', label: 'Administración y gestión' },
-	{ value: 'anestesiologia-y-dolor', label: 'Anestesiología y dolor' },
-	{ value: 'cardiologia', label: 'Cardiología' },
-	{ value: 'dermatologia', label: 'Dermatología' },
-	{ value: 'diabetes', label: 'Diabetes' },
-	{ value: 'emergentologia', label: 'Emergentología' },
-	{ value: 'endocrinologia', label: 'Endocrinología' },
-	{ value: 'gastroenterologia', label: 'Gastroenterología' },
-	{ value: 'geriatria', label: 'Geriatría' },
-	{ value: 'ginecologia', label: 'Ginecología' },
-	{ value: 'hematologia', label: 'Hematología' },
-	{ value: 'infectologia', label: 'Infectología' },
-	{ value: 'medicina-familiar', label: 'Medicina familiar' },
-	{ value: 'medicina-general', label: 'Medicina general' },
-	{ value: 'medicina-intensiva', label: 'Medicina intensiva' },
-	{ value: 'medicina-laboral', label: 'Medicina laboral' },
-	{ value: 'nefrologia', label: 'Nefrología' },
-	{ value: 'nutricion', label: 'Nutrición' },
-	{ value: 'oftalmologia', label: 'Oftalmología' },
-	{ value: 'oncologia', label: 'Oncología' },
-	{ value: 'pediatria', label: 'Pediatría' },
-	{ value: 'psiquiatria', label: 'Psiquiatría' },
-	{ value: 'radiologia-e-imagenologia', label: 'Radiología e imagenología' },
-	{ value: 'traumatologia', label: 'Traumatología' },
-	{ value: 'urologia', label: 'Urología' },
-	{ value: 'bioquimica', label: 'Bioquímica' },
-];
-
-const countryOptions = [
-	{ value: 'argentina', label: 'Argentina' },
-	{ value: 'mexico', label: 'México' },
-	{ value: 'españa', label: 'España' },
-	{ value: 'colombia', label: 'Colombia' },
-	// Add more countries
-];
 
 const medicalCollegeOptions = [
 	{ value: 'yes', label: 'Sí' },
 	{ value: 'no', label: 'No' },
 ];
 
-// --- End Dummy Data ---
-
 const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 	isOpen,
 	onClose,
 	onSave,
 	user,
-	isSaving, // Receive prop
-	saveError, // Receive prop
-	saveSuccess, // Receive prop
+	isSaving,
+	saveError,
+	saveSuccess,
 }) => {
+	console.log('ProfileEditModal received user prop:', JSON.stringify(user, null, 2));
+
 	const [formData, setFormData] = useState<Partial<any>>({});
 	const [password, setPassword] = useState<string>('');
+	const [selectedProfessionId, setSelectedProfessionId] = useState<number | null>(null);
+	const [initialSnapshot, setInitialSnapshot] = useState<Partial<UserProfileData>>({});
+
+	const regimenFiscalMexico = [
+		{
+			value: '601 General de Ley Personas Morales',
+			label: 'General de Ley Personas Morales',
+		},
+		{
+			value: '603 Personas Morales con Fines no Lucrativos',
+			label: 'Personas Morales con Fines no Lucrativos',
+		},
+		{
+			value: '605 Sueldos y salarios e ingresos asimilados a salarios',
+			label: 'Sueldos y salarios e ingresos asimilados a salarios',
+		},
+		{
+			value: '612 Personas físicas con actividades empresariales y profesionales',
+			label: 'Personas físicas con actividades empresariales y profesionales',
+		},
+		{
+			value: '616 Sin obligaciones fiscales',
+			label: 'Sin obligaciones fiscales',
+		},
+		{
+			value: '621 Régimen de Incorporación Fiscal',
+			label: 'Régimen de Incorporación Fiscal',
+		},
+		{
+			value: '626 Régimen simplificado de confianza',
+			label: 'Régimen simplificado de confianza',
+		},
+	];
 
 	useEffect(() => {
 		if (user) {
-			console.log('user', user);
-
 			const parsedPhone = findCodePrefix(user.phone || '');
 			const initialPhoneCode = parsedPhone ? parsedPhone.code : '+54';
 			const initialPhone = parsedPhone ? parsedPhone.number : user.phone || '';
 
-			setFormData({
-				// Directly use interface fields matching form
+			const rawBillingPhone = user.billingPhone || '';
+			const parsedBillingPhone = findCodePrefix(rawBillingPhone);
+
+			const initialBillingPhoneCode = parsedBillingPhone ? parsedBillingPhone.code : rawBillingPhone === '' ? '+54' : '';
+			const initialBillingPhone = parsedBillingPhone ? parsedBillingPhone.number : rawBillingPhone;
+			const initialFullBillingPhoneNumber = rawBillingPhone;
+
+			const selectedProfession = professions.find((p) => p.name === user.profession);
+
+			const initialData = {
 				crm_id: user.crm_id || '',
 				email: user.email || '',
 				name: user.name || '',
 				lastName: user.lastName || '',
 				country: user.country || '',
 				phoneCode: initialPhoneCode,
-				phone: initialPhone, // Keep parsed number for potential internal use
-				fullPhoneNumber: user.phone || '', // Use raw phone for PhoneInput
+				phone: initialPhone,
+				fullPhoneNumber: user.phone || '',
 				profession: user.profession || '',
-				speciality: specialtyOptions.find((option) => option.label === user.speciality)?.value || '', // Search in array and assign value
+				speciality: user.speciality || '',
 				workplace: user.workplace || '',
 				workArea: user.workArea || '',
-				belongsToMedicalCollege: user.medicalCollegeName ? true : user.medicalCollegeName === null ? null : false,
-				medicalCollegeName: user.medicalCollegeName || '',
+				belongsToMedicalCollege: user.school_name ? true : user.school_name === null ? null : false,
+				school_name: user.school_name === '[]' ? '' : user.school_name || '',
 				asosiacion: user.asosiacion || '',
-			});
+				otherProfession: user.otherProfession || '',
+				otherSpecialty: user.otherSpecialty || '',
+				year: user.year || '',
+				career: user.career || '',
+				billingEmail: user.billingEmail || '',
+				company_name: user.company_name || '',
+				billingPhone: initialBillingPhone,
+				billingPhoneCode: initialBillingPhoneCode,
+				fullBillingPhoneNumber: initialFullBillingPhoneNumber,
+				invoice_required: user.invoice_required || '',
+				document_type: (user as any).document_type || user.document_type || '',
+				documentNumber: user.documentNumber || '',
+				tax_regime: user.tax_regime || '',
+			};
+
+			setFormData(initialData);
+			setInitialSnapshot(initialData);
+
+			setSelectedProfessionId(selectedProfession?.id || null);
 			setPassword('');
 		} else {
 			setFormData({});
+			setInitialSnapshot({});
 			setPassword('');
+			setSelectedProfessionId(null);
 		}
 	}, [user, isOpen]);
 
-	// Updated handler for combined phone input and other regular inputs
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { name, value } = e.target;
-		// Use the new interface for state update
-		setFormData((prev: Partial<UserProfileData>) => ({ ...prev, [name]: value }));
+		setFormData((prev: Partial<UserProfileData>) => ({
+			...prev,
+			[name]: value,
+		}));
 	};
 
-	// Handler for password input
 	const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setPassword(e.target.value);
 	};
 
 	const pathname = usePathname();
-	const lang = pathname.split('/')[1] || 'ar';
+	const lang = pathname ? pathname.split('/')[1] || 'ar' : 'ar';
 	const targetPath = lang === 'ar' ? '/login?form=change-pass' : `/${lang}/login?form=change-pass`;
 
-	// Handler for most select inputs (excluding phone code which is handled internally now)
+	const selectedCountryObject = countries.find((c) => c.name === formData.country);
+	const selectedCountryCode = selectedCountryObject ? selectedCountryObject.id.toLowerCase() : undefined;
+	const documentTypes = selectedCountryCode ? documents[selectedCountryCode] || [] : [];
+
 	const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const { name, value } = e.target;
 		if (name === 'belongsToMedicalCollege') {
-			// Use the new interface for state update
 			setFormData((prev: Partial<UserProfileData>) => ({
 				...prev,
 				[name]: value === 'yes' ? true : value === 'no' ? false : null,
 			}));
 		} else if (name === 'phoneCode') {
-			// Kept for potential direct code changes, ensure correct state type
-			setFormData((prev: Partial<UserProfileData>) => ({ ...prev, [name]: value }));
+			setFormData((prev: Partial<UserProfileData>) => ({
+				...prev,
+				[name]: value,
+			}));
+		} else if (name === 'profession') {
+			const selected = professions.find((p) => p.name === value);
+			setSelectedProfessionId(selected?.id || null);
+			setFormData((prev) => ({ ...prev, profession: value, speciality: '' }));
 		} else {
-			// Use the new interface for state update
-			setFormData((prev: Partial<UserProfileData>) => ({ ...prev, [name]: value }));
+			setFormData((prev: Partial<UserProfileData>) => ({
+				...prev,
+				[name]: value,
+			}));
 		}
 	};
 
-	// Handler for the combined phone input component
+	const professionId = professions.find((p) => p.name === formData.profession)?.id;
+
+	const filteredSpecialties =
+		professionId && specialtiesGroup[professionId]
+			? specialtiesGroup[professionId].slice().sort((a, b) => a.name.localeCompare(b.name))
+			: [];
+
 	const handleCombinedPhoneChange = (combinedValue: string) => {
 		const parsed = findCodePrefix(combinedValue);
-		const code = parsed ? parsed.code : formData.phoneCode || '+54'; // Use current/default if parse fails
-		const number = parsed ? parsed.number : combinedValue; // Assume number if parse fails
+		const code = parsed ? parsed.code : formData.phoneCode || '+54';
+		const number = parsed ? parsed.number : combinedValue;
 
-		// Use the new interface for state update
 		setFormData((prev: Partial<UserProfileData>) => ({
 			...prev,
-			phoneCode: code, // This still updates the separate field
-			phone: number, // This still updates the separate field
-			fullPhoneNumber: combinedValue, // Update the combined field
+			phoneCode: code,
+			phone: number,
+			fullPhoneNumber: combinedValue,
 		}));
 	};
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		const dataToSave: Partial<UserProfileData> = { ...formData };
+		const changedData: Partial<UserProfileData> = {};
 
-		// Password handling should occur within the onSave logic (in the API route or hook)
-		// if (password) {
-		//  dataToSave.password = password; // Example: Pass password if it was changed
-		//	console.warn('Password field was changed - Handled separately.');
-		// }
+		(Object.keys(formData) as Array<keyof UserProfileData>).forEach((key) => {
+			if (key !== 'file' && key in initialSnapshot && formData[key] !== initialSnapshot[key]) {
+				changedData[key] = formData[key];
+			}
+		});
 
-		// Call onSave but don't close the modal here
-		onSave(dataToSave);
-		// REMOVED: onClose();
+		if (formData.file) {
+			changedData.file = formData.file;
+		}
+
+		onSave(changedData, password || undefined);
 	};
 
-	if (!isOpen || !user) return null; // Check against 'user' prop
+	if (!isOpen || !user) return null;
 
-	// --- Button State Logic ---
 	let buttonContent: React.ReactNode = 'Guardar cambios';
 	let buttonDisabled = isSaving || saveSuccess;
 	let buttonClasses =
-		'px-8 py-3 w-full max-w-[500px] text-white font-medium rounded-full transition focus:outline-none focus:ring-2 focus:ring-offset-2 flex items-center justify-center'; // Added flex centering
+		'px-8 py-3 w-full max-w-[500px] text-white font-medium rounded-full transition focus:outline-none focus:ring-2 focus:ring-offset-2 flex items-center justify-center';
 
 	if (isSaving) {
 		buttonContent = (
 			<>
-				{/* REMOVED: <ClipLoader color='#ffffff' size={20} speedMultiplier={0.7} /> */}
 				<span className='ml-2'>Guardando...</span>
 			</>
 		);
-		buttonClasses += ' bg-[#a9a9a9] cursor-not-allowed'; // Greyed out and disabled look
+		buttonClasses += ' bg-[#a9a9a9] cursor-not-allowed';
 	} else if (saveSuccess) {
 		buttonContent = 'Datos guardados';
-		buttonClasses += ' bg-green-500 cursor-not-allowed'; // Green success and disabled look
+		buttonClasses += ' bg-green-500 cursor-not-allowed';
 	} else if (saveError) {
-		// Keep original button text on error, but it's enabled
 		buttonClasses += ' bg-[#9200AD] hover:bg-[#7a0092] focus:ring-[#9200AD]';
-		buttonDisabled = false; // Re-enable button on error
+		buttonDisabled = false;
 	} else {
-		// Default state
 		buttonClasses += ' bg-[#9200AD] hover:bg-[#7a0092] focus:ring-[#9200AD]';
 	}
-	// --- End Button State Logic ---
 
 	return (
 		<Modal isOpen={isOpen} onClose={onClose} title='Mi cuenta' size='large'>
-			<div className='text-center text-sm text-gray-600 mb-6 mt-2'>
+			<div className='text-center text-base md:text-lg text-[#6E737C] mb-6 mt-2'>
 				Gestiona todo lo relacionado con tus datos personales
-			</div>
-			<form onSubmit={handleSubmit} className='space-y-4'>
+			</div>{' '}
+			<h3 className='text-lg md:text-2xl  text-center font-medium mb-2'>Datos personales</h3>
+			<form onSubmit={handleSubmit} className='space-y-4 text-[#1a1a1a]'>
 				<div className='grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 p-1'>
-					<Input
-						id='email'
-						label='E-mail'
-						type='email'
-						name='email'
-						value={formData.email || ''}
-						onChange={handleChange}
-						placeholder='Ingresar e-mail'
-						required
-						autoComplete='email'
-					/>
-					<Select
-						id='profession'
-						label='Profesión'
-						name='profession' // Matches interface/state
-						options={professionOptions}
-						value={formData.profession || ''} // Matches interface/state
-						onChange={handleSelectChange}
-						placeholder='Seleccionar profesión'
-					/>
-
 					<Input
 						id='firstName'
 						label='Nombre/s'
 						type='text'
-						name='name' // Matches interface/state
-						value={formData.name || ''} // Matches interface/state
+						name='name'
+						value={formData.name || ''}
 						onChange={handleChange}
 						placeholder='Ingresar nombre/s'
 						required
 						autoComplete='given-name'
 					/>
-					<Select
-						id='specialty'
-						label='Especialidad'
-						name='speciality' // Corrected: use speciality
-						options={specialtyOptions}
-						value={formData.speciality || ''} // Corrected: use specialty
-						onChange={handleSelectChange}
-						placeholder='Seleccionar especialidad'
-					/>
-
 					<Input
 						id='lastName'
 						label='Apellido/s'
@@ -321,15 +325,14 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 						required
 						autoComplete='family-name'
 					/>
-					<Input
-						id='workplace'
-						label='Lugar de trabajo'
-						type='text'
-						name='workplace' // Matches interface/state
-						value={formData.workplace || ''} // Matches interface/state
-						onChange={handleChange}
-						placeholder='Ingresar lugar de trabajo'
-						autoComplete='organization'
+					<Select
+						id='country'
+						label='País'
+						name='country'
+						options={countries.map((p) => ({ label: p.name, value: p.name }))}
+						placeholder='Seleccionar país'
+						value={formData.country || ''}
+						onChange={handleSelectChange}
 					/>
 					<div className='relative'>
 						<PasswordInput
@@ -341,15 +344,14 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 							placeholder='Ingresar contraseña'
 							autoComplete='new-password'
 						/>
-						<span className='absolute top-0 right-0 mt-1.5 text-xs font-medium text-[#6E737C] '>
-							¿Necesitas cambiar tu contraseña?&nbsp; {/* Use &nbsp; for non-breaking space */}
+						<span className='md:absolute top-0 right-0 relative mt-1.5 text-xs font-medium text-[#6E737C] '>
+							¿Necesitas cambiar tu contraseña?&nbsp;
 							<button
 								type='button'
 								onClick={() => {
 									document.cookie = 'recovery_flow_active=true; path=/; max-age=600';
 									document.cookie = `country=${lang}; path=/; max-age=60`;
 
-									console.log(`[Hazlo aquí] Cookies activadas: recovery_flow_active=true, country=${lang}`);
 									window.location.href = targetPath;
 								}}
 								className='text-[#9200AD] underline hover:text-[#700084] transition'
@@ -359,66 +361,246 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 						</span>
 					</div>
 					<Input
-						id='workArea'
-						label='Área de trabajo'
-						type='text'
-						name='workArea'
-						value={formData.workArea || ''} // Use workArea
+						id='email'
+						label='E-mail'
+						type='email'
+						name='email'
+						value={formData.email || ''}
 						onChange={handleChange}
-						placeholder='Ingresar área de trabajo'
-					/>
-					<Select
-						id='country'
-						label='País'
-						name='country'
-						options={countryOptions}
-						value={formData.country || ''}
-						onChange={handleSelectChange}
-						placeholder='Seleccionar país'
+						placeholder='Ingresar e-mail'
 						required
-						autoComplete='country-name'
+						autoComplete='email'
 					/>
-					<Select
-						id='belongsToMedicalCollege'
-						label='¿Perteneces a un colegio médico, sociedad o similar?'
-						name='belongsToMedicalCollege'
-						options={medicalCollegeOptions}
-						value={formData.asosiacion !== '' ? 'yes' : 'no'}
-						onChange={handleSelectChange}
-						placeholder='Seleccionar'
-					/>
-
 					<PhoneInputWithCode
 						id='phone'
 						label='Teléfono'
-						// Use fullPhoneNumber which holds the combined value
 						value={formData.fullPhoneNumber || ''}
 						defaultCode={formData.phoneCode || '+54'}
-						onChange={handleCombinedPhoneChange} // Use the new handler
+						onChange={handleCombinedPhoneChange}
 						required
-					/>
-
-					<Input
-						id='medicalCollegeName'
-						label='¿Cuál?'
-						type='text'
-						name='medicalCollegeName' // Matches interface/state
-						value={formData.asosiacion || ''} // Matches interface/state
-						onChange={handleChange}
-						placeholder='Ingresar colegio médico, sociedad o similar'
 					/>
 				</div>
 
-				<div className='flex flex-col items-center pt-6 mt-6'>
-					{/* Use flex-col for button and error */}
-					{saveError &&
-						!isSaving && ( // Show error only if not currently saving
-							<p className='text-red-600 text-sm mt-2 text-center'>{saveError}</p>
+				<div className='mt-6'>
+					<h3 className='text-lg md:text-2xl  text-center font-medium mb-2'>Datos profesionales</h3>
+					<div className='grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 p-1'>
+						<div className='flex flex-col gap-2'>
+							<Select
+								id='profession'
+								label='Profesión'
+								name='profession'
+								options={professions.map((p) => ({ label: p.name, value: p.name }))}
+								value={formData.profession || ''}
+								onChange={handleSelectChange}
+								placeholder='Seleccionar profesión'
+							/>
+
+							{formData.profession === 'Otra profesión' && (
+								<Input
+									id='profession'
+									label='Profesión'
+									type='text'
+									name='otherProfession'
+									value={formData.otherProfession || ''}
+									onChange={handleChange}
+									placeholder='Ingresar profesión'
+									required
+									autoComplete='profession'
+								/>
+							)}
+						</div>
+
+						{formData.profession === 'Estudiante' && (
+							<div className='grid grid-cols-[1fr_2fr] gap-4'>
+								<Select
+									id='year'
+									label='Año'
+									name='year'
+									options={years.map((p) => ({ label: p.label, value: p.value }))}
+									placeholder='Seleccionar año'
+									value={formData.year || ''}
+									onChange={(e) => setFormData((prev) => ({ ...prev, year: e.target.value }))}
+								/>
+								<Select
+									id='career'
+									label='Carrera'
+									name='career'
+									options={careerOptions.map((p) => ({ label: p.label, value: p.value }))}
+									placeholder='Seleccionar carrera'
+									value={formData.career || ''}
+									onChange={(e) => setFormData((prev) => ({ ...prev, career: e.target.value }))}
+								/>
+							</div>
 						)}
+
+						<div className='flex flex-col gap-2'>
+							<Select
+								id='specialty'
+								label='Especialidad'
+								name='speciality'
+								options={filteredSpecialties.map((s) => ({ label: s.name, value: s.name }))}
+								value={formData.speciality || ''}
+								onChange={(e) => setFormData((prev) => ({ ...prev, speciality: e.target.value }))}
+								placeholder='Seleccionar especialidad'
+							/>
+
+							{formData.speciality === 'Otra Especialidad' && (
+								<Input
+									id='specialty'
+									label='Especialidad'
+									type='text'
+									name='otherSpecialty'
+									value={formData.otherSpecialty || ''}
+									onChange={handleChange}
+									placeholder='Ingresar especialidad'
+									required
+									autoComplete='specialty'
+								/>
+							)}
+						</div>
+
+						<Input
+							id='workplace'
+							label='Lugar de trabajo'
+							type='text'
+							name='workplace'
+							value={formData.workplace || ''}
+							onChange={handleChange}
+							placeholder='Ingresar lugar de trabajo'
+							autoComplete='organization'
+						/>
+						<Input
+							id='workArea'
+							label='Área de trabajo'
+							type='text'
+							name='workArea'
+							value={formData.workArea || ''}
+							onChange={handleChange}
+							placeholder='Ingresar área de trabajo'
+						/>
+						<Select
+							id='belongsToMedicalCollege'
+							label='¿Perteneces a un colegio médico, sociedad o similar?'
+							name='belongsToMedicalCollege'
+							options={medicalCollegeOptions}
+							value={
+								formData.belongsToMedicalCollege === true ? 'yes' : formData.belongsToMedicalCollege === false ? 'no' : ''
+							}
+							onChange={handleSelectChange}
+							placeholder='Seleccionar'
+						/>
+
+						<Input
+							id='school_name'
+							label='¿Cuál?'
+							type='text'
+							name='school_name'
+							value={formData.school_name || ''}
+							onChange={handleChange}
+							placeholder='Ingresar colegio médico, sociedad o similar'
+						/>
+					</div>
+					<div className='mt-6'>
+						<h3 className='text-lg md:text-2xl text-center font-medium mb-2'>Datos de facturación</h3>
+						<div className='grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 p-1'>
+							<Select
+								id='invoice_required'
+								label='¿Requiere factura fiscal?'
+								name='invoice_required'
+								options={[
+									{ label: 'No requiere', value: 0 },
+									{ label: 'Factura fiscal personal', value: 1 },
+									{ label: 'Factura fiscal para tercero', value: 2 },
+								]}
+								value={formData.invoice_required}
+								onChange={handleSelectChange}
+								placeholder='Seleccionar'
+							/>
+							<Input
+								id='billingEmail'
+								label='E-mail de facturación'
+								type='email'
+								name='billingEmail'
+								value={formData.billingEmail || ''}
+								onChange={handleChange}
+								placeholder='Ingresar e-mail de facturación'
+							/>
+							<PhoneInputWithCode
+								id='billingPhone'
+								label='Teléfono de facturación'
+								value={formData.fullBillingPhoneNumber || ''}
+								defaultCode={formData.billingPhoneCode || '+54'}
+								onChange={(combinedValue) => {
+									const parsed = findCodePrefix(combinedValue);
+									const code = parsed ? parsed.code : formData.billingPhoneCode || '+54';
+									const number = parsed ? parsed.number : combinedValue;
+									setFormData((prev) => ({
+										...prev,
+										billingPhoneCode: code,
+										billingPhone: number,
+										fullBillingPhoneNumber: combinedValue,
+									}));
+								}}
+							/>
+							<Input
+								id='billingName'
+								label='Razón social'
+								type='text'
+								name='company_name'
+								value={formData.company_name || ''}
+								onChange={handleChange}
+								placeholder='Ingresar razón social'
+							/>
+							<Select
+								id='document_type'
+								label='Tipo de identificación'
+								name='document_type'
+								options={documentTypes}
+								value={formData.document_type || ''}
+								onChange={handleSelectChange}
+								placeholder='Seleccionar'
+							/>
+							<Input
+								id='documentNumber'
+								label='Número de Identificación'
+								type='text'
+								name='documentNumber'
+								value={formData.documentNumber || ''}
+								onChange={handleChange}
+								placeholder='Ingresar Número de Identificación'
+							/>
+							{formData.country === 'México' && (
+								<Select
+									id='tax_regime'
+									label='Regimen fiscal'
+									name='tax_regime'
+									options={regimenFiscalMexico}
+									value={formData.tax_regime || ''}
+									onChange={handleSelectChange}
+									placeholder='Seleccionar'
+								/>
+							)}
+
+							{/* <FileInput
+								id='file'
+								label='Constancia de la situación fiscal'
+								name='file'
+								onChange={(e) => {
+									const file = (e.target as HTMLInputElement).files?.[0] || null;
+									setFormData((prev) => ({
+										...prev,
+										file,
+									}));
+								}}
+							/> */}
+						</div>
+					</div>
+				</div>
+				<div className='flex flex-col items-center pt-6 mt-6'>
+					{saveError && !isSaving && <p className='text-red-600 text-sm mt-2 text-center'>{saveError}</p>}
 					<button type='submit' className={buttonClasses} disabled={buttonDisabled}>
 						{buttonContent}
 					</button>
-					{/* Display Error Message */}
 				</div>
 			</form>
 		</Modal>
