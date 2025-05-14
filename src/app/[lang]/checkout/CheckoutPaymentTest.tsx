@@ -220,7 +220,7 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 	const { state } = useContext(AuthContext);
 
 	// const transactionAmount = Number(product.total_price.replace(/,/g, '').replace('.', ''));
-	const transactionAmount = Number(product.total_price.replace(/[^\d]/g, ''));
+	const transactionAmount = Number(product.prices.total_price.replace(/[^\d]/g, ''));
 
 	console.log(transactionAmount, 'testing');
 	const currency = currencies[country] || 'USD';
@@ -240,7 +240,7 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 		discount: parseFloat(discount.toFixed(2)),
 		amount: transactionAmountWithDiscount,
 		currency,
-		productName: product.ficha.title,
+		productName: product.title,
 		customerData: {
 			email: user?.email || state?.profile?.email || '',
 			firstName: user?.firstName || state?.profile?.name || '',

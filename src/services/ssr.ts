@@ -550,7 +550,7 @@ class ApiSSRService {
 	}
 	async getSingleProductCMS(slug: string, country: string) {
 		try {
-			const response = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/product/${slug}?lang=${country}`);
+			const response = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/product/${slug}?lang=${country}&nocache=1`);
 
 			if (!response.ok) {
 				throw new Error(`Failed to fetch single product. HTTP status ${response.status}`);
