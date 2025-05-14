@@ -120,6 +120,7 @@ export default function ProfileCompletionWrapper() {
 				specialty: completeDataForMutation.speciality || completeDataForMutation.otherSpecialty,
 				career: completeDataForMutation.career,
 				workplace: completeDataForMutation.workplace,
+				work_area: completeDataForMutation.workArea,
 				school_associate: completeDataForMutation.isMemberOfAssociation,
 				school_name: completeDataForMutation.associationName,
 				interests: completeDataForMutation.interests, // This will correctly use the new interests
