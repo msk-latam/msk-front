@@ -157,11 +157,16 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 	const currency = currencies[country] || 'USD';
 	const countryCompleteName = getCountryCompleteName(country);
 
-	const totalPrice = product.total_price;
-	const transactionAmount = parseInt(totalPrice.replace(/[\.,]/g, ''), 10);
+	const totalPrice = product.prices.total_price;
+	console.log(totalPrice);
+	const cleanedPrice = totalPrice && totalPrice.trim() !== '' ? totalPrice.replace(/[\.,]/g, '') : '0';
+
+	const transactionAmount = parseInt(cleanedPrice, 10);
 	const regularPrice = product.regular_price;
 	const paymentProcessor = country === 'ar' ? 'mercadopago' : rebillCountries.includes(country) ? 'rebill' : 'stripe';
+	const isFree = totalPrice === 0 || totalPrice === '0';
 
+	const closingSource = isFree ? 'Obsequio' : undefined;
 	const handleNextStep = async () => {
 		if (!isFormValid) {
 			setTouched((prevTouched) => Object.keys(formDataUser).reduce((acc, key) => ({ ...acc, [key]: true }), prevTouched));
@@ -194,6 +199,7 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 				countryCompleteName,
 				paymentProcessor,
 				certifications,
+				closingSource,
 			);
 			const contract_id = createContractResponse.data[0].details.id;
 

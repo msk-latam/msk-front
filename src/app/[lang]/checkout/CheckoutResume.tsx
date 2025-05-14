@@ -35,10 +35,12 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 
 	const items: any[] = [
 		{
-			description: ficha.title,
-			price: total_price,
+			description: product.title,
+			price: product.prices.total_price,
 		},
 	];
+
+	console.log(product.prices.total_price);
 
 	// Normaliza el número eliminando puntos y lo convierte a entero
 	const parseNumber = (value: string): number => {
@@ -61,8 +63,13 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 		}).format(value);
 	};
 
+	const cleanedPrice =
+		product.prices.total_price && product.prices.total_price.trim() !== ''
+			? product.prices.total_price.replace(/[\.,]/g, '')
+			: '0';
+
 	const certificationsTotal = certifications.reduce((acc, cert) => acc + cert.price, 0);
-	const total = parseNumber(total_price) + certificationsTotal;
+	const total = parseNumber(cleanedPrice) + certificationsTotal;
 	const installmentValue = Math.floor(total / 12);
 	const discount =
 		appliedCoupon && appliedCoupon.discountType === 'percentage'
@@ -176,7 +183,7 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 					</div>
 				</div>
 			)}
-			<Certificaciones country={country} />
+			<Certificaciones country={country} product={product} />
 
 			{activeStep <= 1 && <Cupon />}
 

@@ -14,7 +14,7 @@ interface Step1BasicInfoProps {
 	data: {
 		profession?: string;
 		otherProfession?: string;
-		specialty?: string;
+		speciality?: string;
 		otherSpecialty?: string;
 		country?: string;
 		phone?: string;
@@ -30,7 +30,7 @@ interface Step1BasicInfoProps {
 export default function Step1BasicInfo({ data, onNext, onSkip, onBack, onUpdate }: Step1BasicInfoProps) {
 	const [profession, setProfession] = useState(data.profession || '');
 	const [otherProfession, setOtherProfession] = useState(data.otherProfession || '');
-	const [specialty, setSpecialty] = useState(data.specialty || '');
+	const [speciality, setSpecialty] = useState(data.speciality || '');
 	const [country, setCountry] = useState(data.country || '');
 	const [phone, setPhone] = useState(data.phone || '');
 	const [year, setYear] = useState(data.year || '');
@@ -49,14 +49,14 @@ export default function Step1BasicInfo({ data, onNext, onSkip, onBack, onUpdate 
 		// Reset specialty if profession changes and specialty belongs to the old profession
 		const currentProfessionId = professions.find((p) => p.name === data.profession)?.id;
 		const specialtyExistsInCurrentProfession =
-			currentProfessionId && specialtiesGroup[currentProfessionId]?.some((s) => s.name === data.specialty);
+			currentProfessionId && specialtiesGroup[currentProfessionId]?.some((s) => s.name === data.speciality);
 
-		if (data.specialty && !specialtyExistsInCurrentProfession) {
+		if (data.speciality && !specialtyExistsInCurrentProfession) {
 			setSpecialty(''); // Clear specialty if it doesn't belong to the new profession
 		} else {
-			setSpecialty(data.specialty || '');
+			setSpecialty(data.speciality || '');
 		}
-	}, [data.specialty, data.profession]); // Depend on profession as well
+	}, [data.speciality, data.profession]); // Depend on profession as well
 
 	useEffect(() => {
 		setOtherSpecialty(data.otherSpecialty || '');
@@ -90,7 +90,7 @@ export default function Step1BasicInfo({ data, onNext, onSkip, onBack, onUpdate 
 			? specialtiesGroup[professionId].slice().sort((a, b) => a.name.localeCompare(b.name))
 			: [];
 
-	const isValid = profession && specialty && country && phone;
+	const isValid = profession && speciality && country && phone;
 
 	return (
 		<section className='w-full max-w-[1632px] h-fit relative z-8 mx-auto px-6 pt-[84px] md:pb-28 mb-16 md:py-16 md:px-9 font-inter'>
@@ -170,13 +170,13 @@ export default function Step1BasicInfo({ data, onNext, onSkip, onBack, onUpdate 
 					label='Especialidad'
 					name='speciality'
 					options={filteredSpecialties.map((s) => ({ label: s.name, value: s.name }))}
-					value={specialty || ''}
+					value={speciality || ''}
 					onChange={(e) => setSpecialty(e.target.value)}
 					placeholder='Seleccionar especialidad'
 				/>
 
 				{/* si selecciona "otra especialidad" */}
-				{specialty === 'Otra Especialidad' && (
+				{speciality === 'Otra Especialidad' && (
 					<Input
 						id='specialty'
 						type='text'
@@ -218,7 +218,7 @@ export default function Step1BasicInfo({ data, onNext, onSkip, onBack, onUpdate 
 						onUpdate({
 							profession,
 							otherProfession,
-							specialty,
+							speciality,
 							otherSpecialty,
 							country,
 							phone,

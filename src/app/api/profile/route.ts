@@ -12,6 +12,7 @@ interface CurrentCourseType {
 	resource: any;
 	link?: any;
 	status: string;
+	ov?: string;
 }
 
 // Define new interfaces for the API response
@@ -197,9 +198,8 @@ export async function GET(request: NextRequest) {
 				)}?lang=${lang}&name=${encodeURIComponent(courseName)}`,
 				{
 					headers: { Accept: 'application/json' },
-					next: { revalidate: 3600 * 7 }
+					next: { revalidate: 3600 * 7 },
 					// cache: 'no-store',
-
 				},
 			);
 
@@ -289,6 +289,7 @@ export async function GET(request: NextRequest) {
 						resource: latestProduct.resource,
 						link: latestProduct.link,
 						status: '',
+						ov: '',
 					};
 				} catch (error) {
 					console.error('Error fetching latest product:', error);
@@ -321,6 +322,7 @@ export async function GET(request: NextRequest) {
 							completed_percentage: 0,
 							resource: '',
 							status: '',
+							ov: '',
 						};
 					}
 
@@ -339,6 +341,7 @@ export async function GET(request: NextRequest) {
 						completed_percentage: 0,
 						resource: latestProduct.resource,
 						status: '',
+						ov: '',
 					};
 				} catch (error) {
 					console.error('Error fetching latest product:', error);
@@ -366,6 +369,7 @@ export async function GET(request: NextRequest) {
 					completed_percentage: 0,
 					resource: '',
 					status: '',
+					ov: '',
 				};
 			}
 
@@ -387,6 +391,7 @@ export async function GET(request: NextRequest) {
 						completed_percentage: 0,
 						resource: '',
 						status: '',
+						ov: '',
 					};
 				}
 
@@ -400,6 +405,7 @@ export async function GET(request: NextRequest) {
 					completed_percentage: parseFloat(latestCourseProgress.advance?.replace(',', '.')) || 0,
 					resource: cmsCourseDetail?.resource,
 					status: latestCourseProgress.enroll_status,
+					ov: cmsCourseDetail?.contract_status,
 				};
 			} catch (cmsError) {
 				console.error(`Error fetching CMS details for current course ${latestCourseProgress.course_name}:`, cmsError);
@@ -407,39 +413,57 @@ export async function GET(request: NextRequest) {
 			}
 		};
 
-		// Process courses in parallel and wait for all to complete
-		const processedCoursesInProgress = await Promise.all(
-			(customerData.course_progress || []).map(async (cp: CourseProgress) => {
-				const advanceNumeric = parseFloat(cp.advance?.replace(',', '.')) || 0;
-				let statusText = cp.enroll_status;
-				if (cp.enroll_status === 'Activo') {
-					statusText = `${advanceNumeric}% completado`;
-				}
+		// Prepare course data for batch API call
+		const courseIds = (customerData.course_progress || []).map((cp) => cp.product_code).join(',');
+		const courseNames = (customerData.course_progress || []).map((cp) => cp.course_name).join(',');
 
-				const courseCmsData = await fetchCourseData(cp.product_code, cp.course_name, lang);
-
-				return {
-					image: courseCmsData?.image,
-					product_code: cp.product_code,
-					product_code_cedente: cp.transferor_course_code,
-					product_id: courseCmsData?.id,
-					id: cp.entity_id_crm, // Using the CRM ID of the progress record itself
-					status: cp.end_date != null || cp.enroll_status === 'Finalizado' ? 'finished' : 'progress',
-					title: courseCmsData?.title,
-					expiryDate: cp.expiration_date || cp.deadline_enroll,
-					qualification: cp.score,
-					statusType: cp.enroll_status,
-					statusText: statusText,
-					link_al_foro: courseCmsData?.link_al_foro,
-					// Keep original data if frontend needs it, or for debugging
-					_original_advance: cp.advance,
-					_original_entity_id_crm: cp.entity_id_crm,
-					_original_enroll_status: cp.enroll_status,
-					_original_last_session_date: cp.last_session_date,
-					_original_end_date: cp.end_date,
-				};
-			}),
+		const allCoursesResponse = await fetch(
+			`https://cms1.msklatam.com/wp-json/msk/v1/all-course-data?ids=${encodeURIComponent(
+				courseIds,
+			)}&names=${encodeURIComponent(courseNames)}&lang=${lang}&nocache=${Date.now()}`,
+			{
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				next: { revalidate: 3600 * 7 },
+			},
 		);
+
+		const allCoursesData = await allCoursesResponse.json();
+
+		// Process courses with the batch-fetched data
+		const processedCoursesInProgress = (customerData.course_progress || []).map((cp: CourseProgress) => {
+			const advanceNumeric = parseFloat(cp.advance?.replace(',', '.')) || 0;
+			let statusText = cp.enroll_status;
+			if (cp.enroll_status === 'Activo') {
+				statusText = `${advanceNumeric}% completado`;
+			}
+
+			const courseCmsData = allCoursesData.find((course: any) => course.product_code == cp.product_code);
+
+			return {
+				image: courseCmsData?.image,
+				product_code: cp.product_code,
+				product_code_cedente: cp.transferor_course_code,
+				product_id: courseCmsData?.id,
+				id: cp.entity_id_crm, // Using the CRM ID of the progress record itself
+				status: cp.end_date != null || cp.enroll_status === 'Finalizado' ? 'finished' : 'progress',
+				title: courseCmsData?.title,
+				expiryDate: cp.expiration_date || cp.deadline_enroll,
+				qualification: cp.score,
+				statusType: cp.enroll_status,
+				statusText: statusText,
+				link_al_foro: courseCmsData?.link_al_foro,
+				resource: courseCmsData?.resource,
+				// Keep original data if frontend needs it, or for debugging
+				_original_advance: cp.advance,
+				_original_entity_id_crm: cp.entity_id_crm,
+				_original_enroll_status: cp.enroll_status,
+				_original_last_session_date: cp.last_session_date,
+				_original_end_date: cp.end_date,
+			};
+		});
 
 		const currentCourseData = await getCurrentCourse(customerData.course_progress);
 		// const recommendedResourcesData = await getRecommendedResourcesByInterests([]); // Will be empty
@@ -532,10 +556,10 @@ export async function GET(request: NextRequest) {
 			document_type: customerData.document_type,
 			documentNumber: customerData.identification,
 			tax_regime: customerData.tax_regime,
-
 			invoice_required: customerData.invoice_required,
 			billingEmail: customerData.billing_email,
 			billingPhone: customerData.billing_phone || '',
+			interests: customerData.interests,
 			intereses: combinedInterests,
 			interesesAdicionales: null, // Data not available in new API
 			currentCourse: currentCourseData,
@@ -543,6 +567,7 @@ export async function GET(request: NextRequest) {
 			crm_id: customerData.entity_id_crm, // Main CRM ID for the contact
 			courseRecommendations: detailedRecommendedCourses, // Update with fetched detailed recommendations
 		};
+
 		// Helper to parse school_name and name
 		let finalSchoolName = customerData.school_name;
 		if (

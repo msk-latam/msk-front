@@ -16,7 +16,7 @@ interface Step2ProfessionalProps {
 export default function Step2Professional({ data, onNext, onBack, onSkip, onUpdate }: Step2ProfessionalProps) {
 	const [workplace, setWorkplace] = useState(data.workplace || '');
 	const [workArea, setWorkArea] = useState(data.workArea || '');
-	const [medicalAssociation, setMedicalAssociation] = useState(data.medicalAssociation || '');
+	const [medicalAssociation, setMedicalAssociation] = useState(data.associationName ? 'sí' : data.medicalAssociation || '');
 	const [associationName, setAssociationName] = useState(data.associationName || '');
 
 	const isValid = workplace && workArea && medicalAssociation && (medicalAssociation !== 'sí' || associationName);
