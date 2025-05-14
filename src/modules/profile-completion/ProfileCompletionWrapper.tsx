@@ -13,7 +13,7 @@ import Step4Recommendations from './components/Step4Recommendations';
 type FormDataType = {
 	profession?: string;
 	otherProfession?: string;
-	specialty?: string;
+	speciality?: string;
 	otherSpecialty?: string;
 	country?: string;
 	phone?: string;
@@ -39,7 +39,7 @@ export default function ProfileCompletionWrapper() {
 	const [formData, setFormData] = useState<FormDataType>({
 		profession: user?.profession || '',
 		otherProfession: user?.other_profession || '',
-		specialty: user?.specialty || '',
+		speciality: user?.speciality || '',
 		otherSpecialty: user?.other_specialty || '',
 		country: user?.country || '',
 		phone: user?.phone || '',
@@ -50,9 +50,9 @@ export default function ProfileCompletionWrapper() {
 		isMemberOfAssociation: user?.school_associate || false,
 		associationName: user?.school_name || '',
 		interests: {
-			specialty_interests: user?.specialty_interests || [],
-			content_interests: user?.content_interests || [],
-			other_interests: user?.other_interests || [],
+			specialty_interests: user?.interests?.specialty_interests || [],
+			content_interests: user?.interests?.content_interests || [],
+			other_interests: user?.interests?.other_interests || [],
 		},
 	});
 
@@ -72,7 +72,7 @@ export default function ProfileCompletionWrapper() {
 			setFormData({
 				profession: user?.profession || '',
 				otherProfession: '',
-				specialty: user?.speciality || '',
+				speciality: user?.speciality || '',
 				otherSpecialty: '',
 				country: user?.country || '',
 				phone: user?.phone || '',
@@ -83,9 +83,9 @@ export default function ProfileCompletionWrapper() {
 				isMemberOfAssociation: user?.school_associate || false,
 				associationName: user?.school_name || '',
 				interests: {
-					specialty_interests: user?.specialty_interests || [],
-					content_interests: user?.content_interests || [],
-					other_interests: user?.other_interests || [],
+					specialty_interests: user?.interests?.specialty_interests || [],
+					content_interests: user?.interests?.content_interests || [],
+					other_interests: user?.interests?.other_interests || [],
 				},
 			});
 		}
@@ -117,7 +117,7 @@ export default function ProfileCompletionWrapper() {
 				country: completeDataForMutation.country,
 				phone: completeDataForMutation.phone,
 				profession: completeDataForMutation.profession || completeDataForMutation.otherProfession,
-				specialty: completeDataForMutation.specialty || completeDataForMutation.otherSpecialty,
+				specialty: completeDataForMutation.speciality || completeDataForMutation.otherSpecialty,
 				career: completeDataForMutation.career,
 				workplace: completeDataForMutation.workplace,
 				school_associate: completeDataForMutation.isMemberOfAssociation,
@@ -180,6 +180,7 @@ export default function ProfileCompletionWrapper() {
 					}}
 				/>
 			)}
+
 			{step === 3 && <Step3Interests data={formData} onNext={nextStep} onBack={prevStep} onUpdate={updateFormData} />}
 			{step === 4 && <Step4Recommendations onBack={prevStep} />}
 		</div>

@@ -62,9 +62,9 @@ const reasons = [
 ];
 
 export default function Step3Interests({ onNext, onBack, onUpdate, data }: Step3InterestsProps) {
-	const [selectedReasons, setSelectedReasons] = useState<string[]>(data.reasons || []);
-	const [selectedSpecialities, setSelectedSpecialities] = useState<string[]>(data.specialities || []);
-	const [selectedContents, setSelectedContents] = useState<string[]>(data.contents || []);
+	const [selectedReasons, setSelectedReasons] = useState<string[]>(data.interests?.other_interests || []);
+	const [selectedSpecialities, setSelectedSpecialities] = useState<string[]>(data.interests?.specialty_interests || []);
+	const [selectedContents, setSelectedContents] = useState<string[]>(data.interests?.content_interests || []);
 	const [showStep4, setShowStep4] = useState(false);
 
 	const router = useRouter();
