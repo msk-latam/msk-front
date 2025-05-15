@@ -1,161 +1,226 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Search } from 'react-feather';
-import { useSpecialtyDetailView } from '../hooks/useSpecialtyDetailView';
-import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
-import { usePathname, useRouter } from 'next/navigation';
-import { supportedLanguages } from '@/config/languages';
-import { urlFormat } from '@/utils/urlFormat';
+"use client";
+
+import React, { useState, useEffect, useRef } from "react";
+import { Search } from "react-feather";
+import { useAllCourses } from "../hooks/useAllCourses";
+import { useDebounce } from "../hooks/useDebounce";
+import { getLocalizedUrl } from "@/utils/getLocalizedUrl";
+import { usePathname, useRouter } from "next/navigation";
+import { supportedLanguages } from "@/config/languages";
+import { urlFormat } from "@/utils/urlFormat";
 
 interface SearchBarProps {
-	placeholder: string;
-	isMainView?: boolean;
-	isDiscoverView?: boolean;
-	isSpecialtyView?: boolean;
-	isSpecialtyDetailView?: boolean;
-	isInstitutionsView?: boolean;
-	className?: string;
+  placeholder: string;
+  isMainView?: boolean;
+  isDiscoverView?: boolean;
+  isSpecialtyView?: boolean;
+  isSpecialtyDetailView?: boolean;
+  isInstitutionsView?: boolean;
+  className?: string;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
-	placeholder,
-	isMainView = false,
-	isDiscoverView = false,
-	isSpecialtyView = false,
-	isSpecialtyDetailView = false,
-	isInstitutionsView = false,
-	className = '',
+  placeholder,
+  isMainView = false,
+  isDiscoverView = false,
+  isSpecialtyView = false,
+  isSpecialtyDetailView = false,
+  isInstitutionsView = false,
+  className = "",
 }) => {
-	const { data, loading } = useSpecialtyDetailView();
-	const [searchTerm, setSearchTerm] = useState('');
-	const [filteredResults, setFilteredResults] = useState<any[]>([]);
-	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-	const searchContainerRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const router = useRouter();
 
-	const router = useRouter();
-	const pathname = usePathname();
-	const firstSegment = pathname?.split('/')[1];
-	const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'ar';
+  const firstSegment = pathname?.split("/")[1];
+  const lang = supportedLanguages.includes(firstSegment ?? "")
+    ? firstSegment
+    : "ar";
 
-	const inputTextStyle =
-		isMainView || isDiscoverView || isSpecialtyView || isSpecialtyDetailView
-			? ''
-			: isInstitutionsView
-			? 'text-[#838790] border-[#989ca4]'
-			: '';
+  const { courses, loading, error, fetchCourses } = useAllCourses(lang);
 
-	// 🔁 Buscar por nombre de curso
-	useEffect(() => {
-		if (searchTerm.trim() === '') {
-			setFilteredResults([]);
-			setIsDropdownOpen(false);
-		} else {
-			const allCourses = data.flatMap((item) => item.courses);
-			const filtered = allCourses.filter((course) => course.name.toLowerCase().includes(searchTerm.toLowerCase()));
-			setFilteredResults(filtered);
-			setIsDropdownOpen(true);
-		}
-	}, [searchTerm, data]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
+  const [filteredResults, setFilteredResults] = useState<any[]>([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
 
-	// Event listener para cerrar el dropdown al hacer clic fuera
-	useEffect(() => {
-		const handleClickOutside = (event: MouseEvent) => {
-			if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
-				setIsDropdownOpen(false);
-			}
-		};
+  const inputTextStyle =
+    isMainView || isDiscoverView || isSpecialtyView || isSpecialtyDetailView
+      ? ""
+      : isInstitutionsView
+      ? "text-[#838790] border-[#989ca4]"
+      : "";
 
-		// Añadir event listener cuando el dropdown está abierto
-		if (isDropdownOpen) {
-			document.addEventListener('mousedown', handleClickOutside);
-		}
+  useEffect(() => {
+    const trimmed = debouncedSearchTerm.trim();
 
-		// Cleanup function para remover el event listener
-		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
-		};
-	}, [isDropdownOpen]);
+    if (trimmed === "") {
+      setFilteredResults([]);
+      setIsDropdownOpen(false);
+      return;
+    }
 
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setSearchTerm(e.target.value);
-	};
+    if (loading) {
+      setIsDropdownOpen(true); // Mostrar spinner mientras carga
+      return;
+    }
 
-	const handleInputFocus = () => {
-		if (searchTerm.trim() !== '' && filteredResults.length > 0) {
-			setIsDropdownOpen(true);
-		}
-	};
+    if (courses.length === 0) {
+      setFilteredResults([]);
+      setIsDropdownOpen(true); // Mostrar spinner o mensaje vacío si cargó sin resultados
+      return;
+    }
 
-	// ✅ Redirige a /tienda/curso.url
-	const handleItemClick = (course: any) => {
-		const coursePath = course.url.replace(/^\/(course|curso)/, '');
-		const storeUrl = getLocalizedUrl(lang, `/curso${coursePath}`);
-		// Use window.location.href for consistent navigation across all pages
+    const filtered = courses.filter(
+      (course) =>
+        typeof course.title === "string" &&
+        course.title.toLowerCase().includes(trimmed.toLowerCase())
+    );
 
-		window.location.href = urlFormat(course.url);
-		setSearchTerm('');
-		setIsDropdownOpen(false);
-	};
+    setFilteredResults(filtered);
+    setIsDropdownOpen(true);
+  }, [debouncedSearchTerm, courses, loading]);
 
-	const handleSearchRedirect = () => {
-		const trimmedSearch = searchTerm.trim();
-		if (trimmedSearch !== '') {
-			const query = encodeURIComponent(trimmedSearch);
-			// Fix: Ensure the search query is properly included in the URL using absolute path
-			// Modificado tienda por curso
-			const searchPath = `/tienda?page=1&search=${query}`;
-			// const storeUrl = getLocalizedUrl(lang, searchPath);
-			// console.log('Redirecting to:', storeUrl);
-			// Make sure we're using the complete URL
-			window.location.href = urlFormat(searchPath);
-		}
-	};
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
 
-	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-		if (e.key === 'Enter') {
-			handleSearchRedirect();
-		}
-	};
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
 
-	const uniqueResults = Array.from(new Map(filteredResults.map((item) => [`${item.id}-${item.name}`, item])).values());
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
-	return (
-		<div className={`relative ${className}`} ref={searchContainerRef}>
-			<div className='rounded-full border border-[#DBDDE2]-100 overflow-hidden relative flex items-center'>
-				<input
-					type='search'
-					placeholder={placeholder}
-					value={searchTerm}
-					onChange={handleInputChange}
-					onFocus={handleInputFocus}
-					onKeyDown={handleKeyDown}
-					className={`bg-transparent w-full text-sm py-3 pl-4 pr-12 border-transparent focus:border-transparent focus:ring-0 focus:outline-none ${inputTextStyle}`}
-				/>
-				<button className='absolute right-1 bg-[#9200AD] p-3 rounded-full' onClick={handleSearchRedirect} type='button'>
-					<Search className='text-white w-4 h-4' />
-				</button>
-			</div>
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
 
-			{isDropdownOpen && searchTerm && filteredResults.length > 0 && (
-				<ul className='absolute z-10 w-full bg-white border mt-2 rounded-lg shadow-md max-h-60 overflow-y-auto'>
-					{uniqueResults.map((course) => (
-						<li
-							key={`${course.id}-${course.name}`}
-							className='px-4 py-2 hover:bg-gray-100 cursor-pointer'
-							onClick={() => handleItemClick(course)}
-						>
-							{course.name}
-						</li>
-					))}
-				</ul>
-			)}
+  const handleInputFocus = () => {
+    if (courses.length === 0 && !loading) {
+      fetchCourses(); // 👈 solo busca si aún no cargó
+    }
 
-			{isDropdownOpen && searchTerm && !loading && filteredResults.length === 0 && (
-				<div className='absolute z-10 w-full bg-white border mt-2 rounded-lg shadow-md p-4 text-gray-500'>
-					No se encontraron resultados.
-				</div>
-			)}
-		</div>
-	);
+    if (searchTerm.trim() !== "" && filteredResults.length > 0) {
+      setIsDropdownOpen(true);
+    }
+  };
+
+  const handleItemClick = (course: any) => {
+    const coursePath = course.url.replace(/^\/(course|curso)/, "");
+    const storeUrl = getLocalizedUrl(lang, `/curso${coursePath}`);
+
+    window.location.href = urlFormat(course.url);
+    setSearchTerm("");
+    setIsDropdownOpen(false);
+  };
+
+  const handleSearchRedirect = () => {
+    const trimmedSearch = searchTerm.trim();
+    if (trimmedSearch !== "") {
+      const query = encodeURIComponent(trimmedSearch);
+      const searchPath = `/tienda?page=1&search=${query}`;
+      window.location.href = urlFormat(searchPath);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearchRedirect();
+    }
+  };
+
+  const uniqueResults = Array.from(
+    new Map(
+      filteredResults.map((item) => [`${item.id}-${item.title}`, item])
+    ).values()
+  );
+
+  return (
+    <div className={`relative ${className}`} ref={searchContainerRef}>
+      <div className="rounded-full border border-[#DBDDE2]-100 overflow-hidden relative flex items-center">
+        <input
+          type="search"
+          placeholder={placeholder}
+          value={searchTerm}
+          onChange={handleInputChange}
+          onFocus={handleInputFocus}
+          onKeyDown={handleKeyDown}
+          className={`bg-transparent w-full text-sm py-3 pl-4 pr-12 border-transparent focus:border-transparent focus:ring-0 focus:outline-none ${inputTextStyle}`}
+        />
+        <button
+          className="absolute right-1 bg-[#9200AD] p-3 rounded-full"
+          onClick={handleSearchRedirect}
+          type="button"
+        >
+          <Search className="text-white w-4 h-4" />
+        </button>
+      </div>
+
+      {isDropdownOpen && searchTerm && (
+        <div className="absolute z-10 w-full bg-white border mt-2 rounded-lg shadow-md max-h-60 overflow-y-auto">
+          {loading ? (
+            <div className="p-4 text-gray-500 flex items-center justify-center">
+              <svg
+                className="animate-spin h-5 w-5 mr-2 text-[#9200AD]"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                />
+              </svg>
+              Buscando cursos...
+            </div>
+          ) : uniqueResults.length > 0 ? (
+            <ul>
+              {uniqueResults.map((course) => (
+                <li
+                  key={`${course.id}-${course.title}`}
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => handleItemClick(course)}
+                >
+                  {course.title}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="p-4 text-gray-500">
+              No se encontraron resultados.
+            </div>
+          )}
+        </div>
+      )}
+
+      {isDropdownOpen &&
+        searchTerm &&
+        !loading &&
+        filteredResults.length === 0 && (
+          <div className="absolute z-10 w-full bg-white border mt-2 rounded-lg shadow-md p-4 text-gray-500">
+            No se encontraron resultados.
+          </div>
+        )}
+    </div>
+  );
 };
 
 export default SearchBar;
