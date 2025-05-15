@@ -288,6 +288,7 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 			case 'Listo para enrolar':
 				return (
 					<>
+						<pre>{JSON.stringify(course, null, 2)}</pre>
 						<button
 							style={{ display: course?.link_al_foro ? 'block' : 'none' }}
 							className={`${secondaryButtonClass} ${!course?.link_al_foro ? 'opacity-50 cursor-not-allowed' : ''}`}
