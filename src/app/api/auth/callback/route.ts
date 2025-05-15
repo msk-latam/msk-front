@@ -56,11 +56,11 @@ const afterCallback = async (req: NextRequest, session: Session) => {
 	const cookieStore = cookies();
 
 	const needsSignup = cookieStore.get('needsSignup');
-	const lang = cookieStore.get('msk-country');
+	const lang = cookieStore.get('msk-country')?.value.replace(/[^a-z]/gi, '') || 'AR';
 
 	if (needsSignup) {
 		cookieStore.delete('needsSignup');
-		await signup(session.user.email, session.user.given_name, session.user.family_name, lang?.value || 'AR');
+		await signup(session.user.email, session.user.given_name, session.user.family_name, lang);
 	}
 
 	try {
