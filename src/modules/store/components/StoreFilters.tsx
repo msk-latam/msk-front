@@ -40,6 +40,7 @@ const especialidadesData: FilterOption[] = [
 
 const recursoData: FilterOption[] = [
 	{ value: 'curso', label: 'Curso' },
+	{ value: 'curso-gratuito', label: 'Curso gratuito' },
 	{ value: 'guias-profesionales', label: 'Guías profesionales' },
 ];
 
@@ -275,7 +276,7 @@ const StoreFilters = ({ isMobile = false, isModalOpen = false, onModalClose = ()
 	}
 
 	// For desktop view, render normally
-	return <div className='md:col-span-1 md:row-span-3 order-1 md:order-1 space-y-4'>{filtersContent}</div>;
+	return <div className='order-1 space-y-4 md:col-span-1 md:row-span-3 md:order-1'>{filtersContent}</div>;
 };
 
 export default StoreFilters;

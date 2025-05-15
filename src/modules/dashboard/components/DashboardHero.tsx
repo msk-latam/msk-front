@@ -135,6 +135,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 		return <DashboardHeroSkeleton />;
 	}
 	const data = userData;
+	console.log(data);
 	return (
 		<>
 			<div className='grid grid-cols-1 md:grid-cols-[468px_1fr] lg:grid-cols-[468px_3fr_3fr] gap-5 '>
@@ -142,18 +143,18 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 				<div className='md:col-span-1 md:row-span-3 bg-white rounded-[30px] p-[36px] order-1 md:order-1'>
 					{/* Profile Picture */}
 					<div className='relative w-[126px] h-[126px] mx-auto mb-6'>
-						<div className='w-full h-full overflow-hidden rounded-full border'>
+						<div className='w-full h-full overflow-hidden border rounded-full'>
 							{data?.profileImage ? (
 								<Image
 									src={data?.profileImage}
 									alt='Profile'
 									width={126}
 									height={126}
-									className='w-full h-full object-cover'
+									className='object-cover w-full h-full'
 								/>
 							) : (
 								<div
-									className='relative inline-flex items-center justify-center overflow-hidden text-neutral-100 uppercase font-semibold rounded-full w-full h-full text-3xl'
+									className='relative inline-flex items-center justify-center w-full h-full overflow-hidden text-3xl font-semibold uppercase rounded-full text-neutral-100'
 									style={{ backgroundColor: 'rgb(0, 209, 178)' }}
 								>
 									<span className='font-semibold text-white'>{`${data?.name?.charAt(0) || ''}${
@@ -168,13 +169,13 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 					</div>
 
 					{/* User Info */}
-					<div className='mb-5 pb-4 border-b border-gray-100'>
+					<div className='pb-4 mb-5 border-b border-gray-100'>
 						<h2 className='text-3xl font-bold font-raleway text-center mb-4 leading-[110%]'>
 							{`${data?.name || ''} ${data?.lastName || ''}`.trim() || 'Nombre Apellido'}
 						</h2>
 
 						<div className='flex items-center justify-center'>
-							<div className='flex gap-1 items-center justify-center'>
+							<div className='flex items-center justify-center gap-1'>
 								<p
 									className={`font-inter font-medium text-lg leading-[24px] text-center flex items-center justify-center ${
 										!isEmpty(data?.speciality) ? 'text-[#1A1A1A]' : 'text-[#4F5D89]'
@@ -194,7 +195,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 					{/* User Details Section */}
 					<div className='space-y-4'>
 						{/* Profession */}
-						<div className='flex justify-between items-center mb-4 pb-4 border-b border-gray-100'>
+						<div className='flex items-center justify-between pb-4 mb-4 border-b border-gray-100'>
 							<span
 								className={`font-inter font-medium text-base leading-[24px] ${
 									!data?.profession ? 'text-[#4F5D89]' : 'text-[#1A1A1A]'
@@ -210,7 +211,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 						</div>
 
 						{/* Email */}
-						<div className='flex justify-between items-center mb-4 pb-4 border-b border-gray-100'>
+						<div className='flex items-center justify-between pb-4 mb-4 border-b border-gray-100'>
 							<span
 								className={`font-inter font-medium text-base leading-[24px] ${
 									!data?.email ? 'text-[#4F5D89]' : 'text-[#1A1A1A]'
@@ -226,7 +227,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 						</div>
 
 						{/* Country */}
-						<div className='flex justify-between items-center mb-4 pb-4 border-b border-gray-100'>
+						<div className='flex items-center justify-between pb-4 mb-4 border-b border-gray-100'>
 							<span
 								className={`font-inter font-medium text-base leading-[24px] ${
 									!data?.country ? 'text-[#4F5D89]' : 'text-[#1A1A1A]'
@@ -242,7 +243,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 						</div>
 
 						{/* Phone */}
-						<div className='flex justify-between items-center mb-4 pb-4 border-b border-gray-100'>
+						<div className='flex items-center justify-between pb-4 mb-4 border-b border-gray-100'>
 							<span
 								className={`font-inter font-medium text-base leading-[24px] ${
 									!data?.phone ? 'text-[#4F5D89]' : 'text-[#1A1A1A]'
@@ -261,7 +262,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 					{/* Profile Completion Progress */}
 					{data?.profileCompletion && data?.profileCompletion?.percentage < 100 && (
 						<div className='mt-6 bg-[#F7F9FF] rounded-[30px] p-[36px]'>
-							<div className='relative h-8 w-full bg-blue-100 rounded-full overflow-hidden'>
+							<div className='relative w-full h-8 overflow-hidden bg-blue-100 rounded-full'>
 								<div
 									className='absolute top-0 left-0 h-full rounded-full bg-[#9200AD] transition-width duration-300 ease-in-out'
 									style={{ width: `${data?.profileCompletion.percentage}%` }}
@@ -271,7 +272,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 									</span>
 								</div>
 							</div>
-							<div className='mt-4 text-center text-sm'>
+							<div className='mt-4 text-sm text-center'>
 								<span className='text-[#4F5D89]'>{data?.profileCompletion?.message} </span>
 								<button
 									onClick={(e) => {
@@ -288,7 +289,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 				</div>
 
 				{/* Action Cards Section - Mobile: 2nd, Desktop: 4th in 2nd Col */}
-				<div className='md:col-span-2 lg:col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-5 order-2 md:order-4'>
+				<div className='grid order-2 grid-cols-1 gap-5 md:col-span-2 lg:col-span-2 lg:grid-cols-2 md:order-4'>
 					{/* Mis facturas */}
 					<button
 						className='bg-white text-left flex items-center justify-start border border-[#DBDDE2] rounded-[30px] p-[36px] hover:shadow-md transition-shadow'
@@ -329,7 +330,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 					{isInterestsLoading ? (
 						<p className='text-center text-[#4F5D89] py-5'>Cargando intereses...</p>
 					) : interests && interests?.specialty_interests?.length > 0 ? (
-						<div className='flex flex-wrap gap-2 mb-4 items-center'>
+						<div className='flex flex-wrap items-center gap-2 mb-4'>
 							{interests?.specialty_interests?.map((interest: string, index: number) => (
 								<span
 									key={index}
@@ -365,8 +366,8 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 				<div className='md:col-span-2 lg:col-span-2 rounded-[30px] overflow-hidden group order-4 md:order-2'>
 					<div className='bg-cover bg-top h-[300px] rounded-[30px] relative flex flex-col justify-center p-[36px] text-white overflow-hidden'>
 						<div
-							className='absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105 bg-cover bg-center'
-							style={{ backgroundImage: `url(${internalCurrentCourse?.image})` }}
+							className='absolute inset-0 w-full h-full transition-transform duration-500 bg-center bg-cover group-hover:scale-105'
+							style={{ backgroundImage: `url(${data?.currentCourse?.image})` }}
 						></div>
 						{/* Overlay gradient */}
 						<div
@@ -448,7 +449,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 							Recursos recomendados para tí
 						</h3>
 						{/* Mobile: Carousel / Desktop: Grid */}
-						<div className='flex space-x-4 overflow-x-auto scroll-snap-x scroll-snap-mandatory md:grid md:grid-cols-2 md:gap-5 md:space-x-0 md:overflow-x-visible md:scroll-snap-none pb-4 -mb-4 scrollbar-hide '>
+						<div className='flex pb-4 -mb-4 space-x-4 overflow-x-auto scroll-snap-x scroll-snap-mandatory md:grid md:grid-cols-2 md:gap-5 md:space-x-0 md:overflow-x-visible md:scroll-snap-none scrollbar-hide '>
 							{data?.recommendedResourcesByIA.map((resource: any, index: number) => (
 								<Link
 									href={urlFormat(`/curso/${resource.slug}`)}
@@ -463,7 +464,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 									{/* Content Section */}
 									<div className='px-4 py-6 grid grid-rows-[auto_1fr_1fr_1fr] h-full relative w-full'>
 										{/* Tags section - fixed height */}
-										<div className=' mb-2'>
+										<div className='mb-2 '>
 											<div className='flex flex-wrap gap-2'>
 												{resource?.categories?.length > 0 && (
 													<span
@@ -474,10 +475,19 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 													</span>
 												)}
 												<span
-													className={`px-3 py-1 rounded-full text-xs font-inter font-medium bg-[#FFF4D8] text-[#8E6E3B]
-															}`}
+													className={`px-3 py-1 rounded-full  font-inter font-medium
+    ${
+			resource?.resource === 'course' && resource.prices?.total_price === '0'
+				? 'bg-green-100 text-green-700'
+				: 'bg-[#FFF4D8] text-[#8E6E3B]'
+		}
+  `}
 												>
-													{resource?.resource === 'course' ? 'Curso' : 'Guía'}
+													{resource?.resource === 'course'
+														? resource.prices?.total_price === '0'
+															? 'Curso Gratuito'
+															: 'Curso'
+														: 'Guía'}
 												</span>
 											</div>
 										</div>
