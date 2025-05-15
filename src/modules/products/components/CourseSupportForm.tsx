@@ -259,6 +259,25 @@ export default function CourseSupportForm({ slug, lang }: any) {
       [name]: value,
     }));
   };
+
+  const isFormValid = () => {
+    return (
+      formData.name.trim() !== "" &&
+      formData.lastName.trim() !== "" &&
+      formData.email.trim() !== "" &&
+      formData.phone.trim() !== "" &&
+      formData.acceptTerms &&
+      formData.profession.trim() !== "" &&
+      (formData.profession !== "Otra profesión" ||
+        formData.otherProfession.trim() !== "") &&
+      (formData.profession === "Estudiante"
+        ? career.trim() !== "" && year.trim() !== ""
+        : formData.specialty.trim() !== "" &&
+          (formData.specialty !== "Otra Especialidad" ||
+            formData.otherSpecialty.trim() !== ""))
+    );
+  };
+
   return (
     <div
       className="w-full bg-white rounded-[38px] md:py-16 md:px-9 px-6 py-9 z-[9] space-y-6"
@@ -463,10 +482,14 @@ export default function CourseSupportForm({ slug, lang }: any) {
 
           <button
             type="submit"
-            disabled={submitted}
-            className={`bg-[#9200AD] text-white px-6 py-2 rounded-full flex items-center gap-2 w-full md:w-fit justify-center md:justify-end ${
-              submitted ? "opacity-50 cursor-not-allowed" : "hover:bg-[#6b1679]"
-            }`}
+            disabled={submitted || !isFormValid()}
+            className={`px-6 py-2 rounded-full flex items-center gap-2 w-full md:w-fit justify-center md:justify-end transition-colors duration-200
+    ${
+      submitted || !isFormValid()
+        ? "bg-gray-300 text-white opacity-60 cursor-not-allowed"
+        : "bg-[#9200AD] text-white hover:bg-[#6b1679]"
+    }
+  `}
           >
             {submitted ? "Enviando..." : "Enviar"}
           </button>
@@ -484,24 +507,27 @@ export default function CourseSupportForm({ slug, lang }: any) {
           {formError}
         </div>
       )}
-	  {showSuccessModal && (
-  <div className="fixed inset-0 bg-black/50 z-[99] flex items-center justify-center px-4">
-    <div className="bg-white rounded-2xl p-20 max-w-4xl w-full text-center shadow-lg">
-      <h2 className="text-5xl font-bold mb-5">¡Listo!</h2>
-	  <h3 className="text-2xl font-bold mb-3">Gracias por interesarte en Medical & Scientific Knowledge</h3>
-      <p className="text-gray-700 mb-4">
-        Un agente académico te estará contactando a la brevedad. Mientras, te invitamos a visitar nuestro blog con información, opiniones, entrevistas y recursos de aprendizaje en múltiples formatos.
-      </p>
-      <button
-        onClick={() => setShowSuccessModal(false)}
-        className="bg-[#9200AD] hover:bg-[#6b1679] text-white px-6 py-3 rounded-full"
-      >
-        Cerrar
-      </button>
-    </div>
-  </div>
-)}
-
+      {showSuccessModal && (
+        <div className="fixed inset-0 bg-black/50 z-[99] flex items-center justify-center px-4">
+          <div className="bg-white rounded-2xl p-20 max-w-4xl w-full text-center shadow-lg">
+            <h2 className="text-5xl font-bold mb-5">¡Listo!</h2>
+            <h3 className="text-2xl font-bold mb-3">
+              Gracias por interesarte en Medical & Scientific Knowledge
+            </h3>
+            <p className="text-gray-700 mb-4">
+              Un agente académico te estará contactando a la brevedad. Mientras,
+              te invitamos a visitar nuestro blog con información, opiniones,
+              entrevistas y recursos de aprendizaje en múltiples formatos.
+            </p>
+            <button
+              onClick={() => setShowSuccessModal(false)}
+              className="bg-[#9200AD] hover:bg-[#6b1679] text-white px-6 py-3 rounded-full"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
