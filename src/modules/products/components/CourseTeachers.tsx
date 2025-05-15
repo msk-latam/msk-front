@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState,useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useCourseTeachers } from '../hooks/useCourseTeachers';
 import SkeletonCourseTeachers from '../skeletons/SkeletonCourseTeachers';
 
@@ -61,7 +61,9 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 				className='bg-white rounded-[38px] px-6 md:px-0 max-w-5xl py-12 space-y-8'
 				id={slug === 'administracion-y-gestion-hospitalaria' ? 'equipo-docente' : undefined}
 			>
-				<h2 className='text-[24px] md:text-[32px] font-raleway font-bold text-[#1A1A1A] mb-6'>Equipo docente</h2>
+				<h2 className='text-[24px] md:text-[32px] font-raleway md:text-left text-center text-[#1A1A1A] mb-6'>
+					Equipo docente
+				</h2>
 
 				{/* Mobile: paginado */}
 				<div className='block md:hidden space-y-6'>
@@ -87,7 +89,7 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 
 				{/* Desktop: grid completo */}
 				<div className='hidden md:grid md:grid-cols-2 gap-8'>
-					{data.map((teacher, idx) => {
+					{currentData.map((teacher, idx) => {
 						const name = teacher.name ?? 'Docente sin nombre';
 						const title = teacher.description ?? 'Sin descripción disponible';
 						const image =
@@ -107,9 +109,9 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 					})}
 				</div>
 
-				{/* Paginación en mobile */}
+				{/* Paginación para todas las vistas */}
 				{totalPages > 1 && (
-					<div className='flex justify-center items-center gap-6 mt-10 md:hidden'>
+					<div className='flex justify-center items-center gap-6 mt-10'>
 						<button
 							onClick={() => setPage((prev) => Math.max(prev - 1, 0))}
 							disabled={page === 0}
