@@ -47,12 +47,12 @@ const phoneCode = [
 		flag: '/images/country_flags/Antarctica.png',
 		name: 'Antarctica',
 	},
-	{
-		code: '+1-268',
-		label: 'AG (+1-268)',
-		flag: '/images/country_flags/Antigua_And_Barbuda.png',
-		name: 'Antigua and Barbuda',
-	},
+	// {
+	// 	code: '+1-268',
+	// 	label: 'AG (+1-268)',
+	// 	flag: '/images/country_flags/Antigua_And_Barbuda.png',
+	// 	name: 'Antigua and Barbuda',
+	// },
 	{
 		code: '+54',
 		label: 'AR (+54)',
@@ -155,12 +155,12 @@ const phoneCode = [
 		flag: '/images/country_flags/Bolivia.png',
 		name: 'Bolivia',
 	},
-	{
-		code: '+387',
-		label: 'BA (+387)',
-		flag: '/images/country_flags/Bosnia_And_Herzegovina.png',
-		name: 'Bosnia and Herzegovina',
-	},
+	// {
+	// 	code: '+387',
+	// 	label: 'BA (+387)',
+	// 	flag: '/images/country_flags/Bosnia_And_Herzegovina.png',
+	// 	name: 'Bosnia and Herzegovina',
+	// },
 	{
 		code: '+267',
 		label: 'BW (+267)',
@@ -293,18 +293,18 @@ const phoneCode = [
 		flag: '/images/country_flags/Comoros.png',
 		name: 'Comoros',
 	},
-	{
-		code: '+242',
-		label: 'CG (+242)',
-		flag: '/images/country_flags/Republic_Of_The_Congo.png',
-		name: 'Republic of the Congo',
-	},
-	{
-		code: '+243',
-		label: 'CD (+243)',
-		flag: '/images/country_flags/Democratic_Republic_Of_The_Congo.png',
-		name: 'Democratic Republic of the Congo',
-	},
+	// {
+	// 	code: '+242',
+	// 	label: 'CG (+242)',
+	// 	flag: '/images/country_flags/Republic_Of_The_Congo.png',
+	// 	name: 'Republic of the Congo',
+	// },
+	// {
+	// 	code: '+243',
+	// 	label: 'CD (+243)',
+	// 	flag: '/images/country_flags/Democratic_Republic_Of_The_Congo.png',
+	// 	name: 'Democratic Republic of the Congo',
+	// },
 	{
 		code: '+682',
 		label: 'CK (+682)',
@@ -605,12 +605,12 @@ const phoneCode = [
 		flag: '/images/country_flags/Ireland.png',
 		name: 'Ireland',
 	},
-	{
-		code: '+44-1624',
-		label: 'IM (+44-1624)',
-		flag: '/images/country_flags/Isle_Of_Man.png',
-		name: 'Isle of Man',
-	},
+	// {
+	// 	code: '+44-1624',
+	// 	label: 'IM (+44-1624)',
+	// 	flag: '/images/country_flags/Isle_Of_Man.png',
+	// 	name: 'Isle of Man',
+	// },
 	{
 		code: '+972',
 		label: 'IL (+972)',
@@ -893,12 +893,12 @@ const phoneCode = [
 		flag: '/images/country_flags/Netherlands.png',
 		name: 'Netherlands',
 	},
-	{
-		code: '+599',
-		label: 'AN (+599)',
-		flag: '/images/country_flags/Netherlands_Antilles.png',
-		name: 'Netherlands Antilles',
-	},
+	// {
+	// 	code: '+599',
+	// 	label: 'AN (+599)',
+	// 	flag: '/images/country_flags/Netherlands_Antilles.png',
+	// 	name: 'Netherlands Antilles',
+	// },
 	{
 		code: '+687',
 		label: 'NC (+687)',
