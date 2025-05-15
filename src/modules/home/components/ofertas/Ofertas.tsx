@@ -56,8 +56,8 @@ const DiscountAndButton = ({ offer, content, discountNumber, descLine1, descLine
 	);
 };
 
-const Ofertas = () => {
-	const { data: offer, loading, error } = useOffers();
+const Ofertas = ({ lang }: { lang: string }) => {
+	const { data: offer, loading, error } = useOffers(lang);
 
 	if (loading) return <OffersSkeleton />; // 👈 Mostrar Skeleton mientras carga
 	if (error || !offer) return null;
@@ -124,7 +124,7 @@ const Ofertas = () => {
 			<div className='relative z-10 w-full overflow-visible max-w-[1600px] mx-auto md:px-4 px-5 py-16 flex flex-col md:flex-row items-center md:items-end md:justify-between justify-end gap-5'>
 				<div className='text-left text-white max-w-xl  font-raleway hidden md:block mt-0 leading-[100px]'>
 					<div>
-						<p className='text-base md:text-lg font-raleway mb-4 md:mb-20 font-regular   '>{offer.disponibilidad}</p>
+						<p className='text-base md:text-lg font-raleway mb-4 md:mb-20 font-regular'>{offer.disponibilidad}</p>
 
 						<h2
 							className='text-3xl md:text-5xl font-raleway flex flex-col gap-2 md:gap-4 mb-6 md:mb-32 line-height: 1rem; whitespace-nowrap'
