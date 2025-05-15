@@ -73,7 +73,7 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 				height={300}
 			/>
 			{/* Total y precio */}
-			{isFree && <p className='px-6 py-3 my-6 text-green-700 bg-green-100 rounded-full w-fit'>Curso gratuito</p>}
+			{isFree && <p className='px-4 py-2 my-6 text-[#6474A6] bg-[#DFE6FF] rounded-full w-fit'>Curso gratuito</p>}
 			{showPrice && data?.total_price && Number(data.total_price) > 0 && (
 				<>
 					<p className='text-[#1A1A1A] text-[20px] font-inter font-medium'>

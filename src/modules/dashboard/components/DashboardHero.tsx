@@ -478,7 +478,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 													className={`px-3 py-1 rounded-full  font-inter font-medium
     ${
 			resource?.resource === 'course' && resource.prices?.total_price === '0'
-				? 'bg-green-100 text-green-700'
+				? 'text-[#6474A6] bg-[#DFE6FF]'
 				: 'bg-[#FFF4D8] text-[#8E6E3B]'
 		}
   `}

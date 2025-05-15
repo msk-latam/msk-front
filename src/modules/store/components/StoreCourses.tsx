@@ -271,7 +271,7 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 														</span>
 													))
 											)}
-											{isFree && <p className='px-2 py-1 text-green-700 bg-green-100 rounded-full'>Curso gratuito</p>}
+											{isFree && <p className='px-2 py-1 text-[#6474A6] bg-[#DFE6FF] rounded-full'>Curso gratuito</p>}
 										</div>
 										<h3 className='mb-1 text-lg font-bold'>{course.title}</h3>
 										{typeof course.cedente === 'object' && !Array.isArray(course.cedente) && (

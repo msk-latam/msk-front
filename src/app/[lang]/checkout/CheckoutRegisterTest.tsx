@@ -164,9 +164,13 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 	const transactionAmount = parseInt(cleanedPrice, 10);
 	const regularPrice = product.regular_price;
 	const paymentProcessor = country === 'ar' ? 'mercadopago' : rebillCountries.includes(country) ? 'rebill' : 'stripe';
-	const isFree = totalPrice === 0 || totalPrice === '0';
+	const isFree = totalPrice === 0 || totalPrice === '0' || totalPrice === '';
 
-	const closingSource = isFree ? 'Obsequio' : undefined;
+	const closingSource = isFree
+		? certifications && certifications.length > 0
+			? 'Obsequio + Certificación'
+			: 'Obsequio'
+		: undefined;
 	const handleNextStep = async () => {
 		if (!isFormValid) {
 			setTouched((prevTouched) => Object.keys(formDataUser).reduce((acc, key) => ({ ...acc, [key]: true }), prevTouched));

@@ -6,7 +6,7 @@ import { getJSONByCountry } from '@/app/products';
 import ssr from '@/services/ssr';
 
 const Certificaciones = ({ product, country }: any) => {
-	const { certifications, setCertifications } = useCheckout();
+	const { certifications, setCertifications, activeStep } = useCheckout();
 	const [certificados, setCertificados] = useState<any[]>([]);
 
 	console.log(product);
@@ -123,29 +123,38 @@ const Certificaciones = ({ product, country }: any) => {
 	};
 	const currency = currencies[country] || 'USD';
 
+	const isFree = product.prices.total_price === '0' || product.prices.total_price === '';
+
 	return (
 		<div>
-			<h2 className='mb-4 text-lg font-semibold'>Certificaciones</h2>
-			<ul className='space-y-3'>
-				{certificaciones.map((cert: any) => (
-					<li key={cert.name} className='flex items-center justify-between'>
-						<label className='flex items-center gap-3'>
-							<input
-								type='checkbox'
-								checked={isSelected(cert)}
-								onChange={() => toggleCertification(cert)}
-								className='w-4 h-4 text-[#9200AD] border-[#9200AD] focus:ring-[#9200AD]'
-							/>
-							<span className='text-sm text-[#392C35] w-[200px]'>{cert.name}</span>
-						</label>
-						<span className='text-sm text-[#6474A6] text-right'>{`${currency} $${formatPesoArgentino(cert.price)}`}</span>
-					</li>
-				))}
-			</ul>
-			<div className='flex justify-between mt-4'>
-				<p>Total Certificaciones</p>
-				<span>{`${currency} $${formatPesoArgentino(certificationsTotal)}`}</span>
-			</div>
+			{!isFree && (
+				<>
+					<h2 className='mb-4 text-lg font-semibold'>Certificaciones</h2>
+					<ul className='space-y-3'>
+						{activeStep !== 3 &&
+							certificaciones.map((cert: any) => (
+								<li key={cert.name} className='flex items-center justify-between'>
+									<label className='flex items-center gap-3'>
+										<input
+											type='checkbox'
+											checked={isSelected(cert)}
+											onChange={() => toggleCertification(cert)}
+											className='w-4 h-4 text-[#9200AD] border-[#9200AD] focus:ring-[#9200AD]'
+										/>
+										<span className='text-sm text-[#392C35] w-[200px]'>{cert.name}</span>
+									</label>
+									<span className='text-sm text-[#6474A6] text-right'>{`${currency} $${formatPesoArgentino(
+										cert.price,
+									)}`}</span>
+								</li>
+							))}
+					</ul>
+					<div className='flex justify-between mt-4'>
+						<p>Total Certificaciones</p>
+						<span>{`${currency} $${formatPesoArgentino(certificationsTotal)}`}</span>
+					</div>
+				</>
+			)}
 		</div>
 	);
 };

@@ -277,6 +277,7 @@ export const createContractCRM = async (
 			Cantidad_de_pagos_recurrentes_restantes: paymentConfig.remainingPayments.toString(),
 			Monto_de_cada_pago_restantes: parseFloat((total / paymentConfig.totalPayments).toFixed(2)),
 			Canal_por_el_que_se_cerro_la_venta: 'Web',
+			Licencia_enviada: false,
 			channel_sale: 'Web',
 			Fuente_de_cierre_venta: closingSource,
 		};
