@@ -893,12 +893,12 @@ const phoneCode = [
 		flag: '/images/country_flags/Netherlands.png',
 		name: 'Netherlands',
 	},
-	{
-		code: '+599',
-		label: 'AN (+599)',
-		flag: '/images/country_flags/Netherlands_Antilles.png',
-		name: 'Netherlands Antilles',
-	},
+	// {
+	// 	code: '+599',
+	// 	label: 'AN (+599)',
+	// 	flag: '/images/country_flags/Netherlands_Antilles.png',
+	// 	name: 'Netherlands Antilles',
+	// },
 	{
 		code: '+687',
 		label: 'NC (+687)',
