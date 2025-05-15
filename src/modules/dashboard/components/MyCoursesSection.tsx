@@ -52,6 +52,8 @@ interface Course {
 	qualification?: number;
 	statusType:
 		| 'progress'
+		| 'drop'
+		| 'Cancelado'
 		| 'inactive'
 		| 'finished'
 		| 'expired'
@@ -148,7 +150,12 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 		if (activeTab === 'Cursos') {
 			// Adjust this condition based on how you define 'Cursos'
 			// For example, show only active or not finished courses
-			return course.statusType === 'Activo' || course.statusType === 'progress';
+			return (
+				course.statusType === 'Activo' ||
+				course.statusType === 'progress' ||
+				course.statusType === 'drop' ||
+				course.statusType === 'Cancelado'
+			);
 		}
 		if (activeTab === 'Favoritos') {
 			// Assuming you have an 'isFavorite' property in your Course interface
@@ -196,6 +203,8 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 				return 'bg-[#FFEBF6] text-[#C42B8B]'; // Pink
 			case 'Finalizado':
 				return 'bg-[#DFE6FF] text-[#29324F]'; // Blue
+			case 'Cancelado':
+				return 'bg-[#FFEBF6] text-[#C42B8B]'; // red
 			case 'Expirado':
 				return 'bg-[#FFF4D8] text-[#8E6E3B]'; // Yellow
 			case 'inactive':
@@ -245,7 +254,9 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 			course.expiryDate &&
 			course.statusType !== 'Expirado' &&
 			course.statusType !== 'Finalizado' &&
-			course.statusType !== 'Sin enrolar'
+			course.statusType !== 'Sin enrolar' &&
+			course.statusType !== 'Cancelado' &&
+			course.statusType !== 'drop'
 		) {
 			const date = new Date(course.expiryDate);
 			const day = date.getDate().toString().padStart(2, '0');
@@ -306,8 +317,9 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 						</CtaButton>
 					</>
 				);
-
+			case 'drop':
 			case 'Expirado':
+			case 'Cancelado':
 				return <CtaButton onClick={() => {}}>Reactivar</CtaButton>;
 			default:
 				return null;
@@ -376,7 +388,7 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 										(course as Course).statusType,
 									)}`}
 								>
-									{course.statusText}
+									{course.status === 'Cancelado' ? 'Cancelado' : course.statusText}
 								</span>
 								{/* Title */}
 								<h4 className='font-raleway font-bold text-base leading-tight text-[#1A1A1A] mb-2 min-h-[48px]'>

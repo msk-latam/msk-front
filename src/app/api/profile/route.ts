@@ -435,20 +435,36 @@ export async function GET(request: NextRequest) {
 		// Process courses with the batch-fetched data
 		const processedCoursesInProgress = (customerData.course_progress || []).map((cp: CourseProgress) => {
 			const advanceNumeric = parseFloat(cp.advance?.replace(',', '.')) || 0;
-			let statusText = cp.enroll_status;
-			if (cp.enroll_status === 'Activo') {
-				statusText = `${advanceNumeric}% completado`;
-			}
+			const statusText = (() => {
+				switch (cp.enroll_status) {
+					case 'Activo':
+						return `${advanceNumeric}% completado`;
+					case 'Baja':
+						return 'Cancelado';
+					default:
+						return cp.enroll_status;
+				}
+			})();
 
 			const courseCmsData = allCoursesData.find((course: any) => course.product_code == cp.product_code);
+
+			if (cp?.course_name?.includes('comunitaria')) {
+				console.log('cp', cp);
+				console.log('courseCmsData', courseCmsData);
+			}
 
 			return {
 				image: courseCmsData?.image,
 				product_code: cp.product_code,
 				product_code_cedente: cp.transferor_course_code,
 				product_id: courseCmsData?.id,
+				father_post_id: courseCmsData?.father_post_id,
 				id: cp.entity_id_crm, // Using the CRM ID of the progress record itself
-				status: cp.end_date != null || cp.enroll_status === 'Finalizado' ? 'finished' : 'progress',
+				status: (() => {
+					if (cp.contract_status === 'Baja') return 'Cancelado';
+					if (cp.end_date != null || cp.enroll_status === 'Finalizado') return 'finished';
+					return 'progress';
+				})(),
 				title: courseCmsData?.title,
 				expiryDate: cp.expiration_date || cp.deadline_enroll,
 				qualification: cp.score,
@@ -458,6 +474,7 @@ export async function GET(request: NextRequest) {
 				resource: courseCmsData?.resource,
 				// Keep original data if frontend needs it, or for debugging
 				_original_advance: cp.advance,
+				_original_contract_status: cp.contract_status,
 				_original_entity_id_crm: cp.entity_id_crm,
 				_original_enroll_status: cp.enroll_status,
 				_original_last_session_date: cp.last_session_date,
