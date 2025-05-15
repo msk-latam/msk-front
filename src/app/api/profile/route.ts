@@ -448,11 +448,6 @@ export async function GET(request: NextRequest) {
 
 			const courseCmsData = allCoursesData.find((course: any) => course.product_code == cp.product_code);
 
-			if (cp?.course_name?.includes('comunitaria')) {
-				console.log('cp', cp);
-				console.log('courseCmsData', courseCmsData);
-			}
-
 			return {
 				image: courseCmsData?.image,
 				product_code: cp.product_code,
