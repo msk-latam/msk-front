@@ -8,6 +8,7 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
+import CountrySelect from '../hooks/CountrySelect';
 
 const validationSchema = Yup.object().shape({
 	email: Yup.string().email('El correo no es válido').required('El correo es obligatorio'),
@@ -83,10 +84,32 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 		const lang = langMatch ? langMatch[1] : '';
 
 		console.log('lang', lang);
+		const countryMapping: any = {
+			ar: 'Argentina',
+			bo: 'Bolivia',
+			br: 'Brasil',
+			cl: 'Chile',
+			co: 'Colombia',
+			cr: 'Costa Rica',
+			cu: 'Cuba',
+			do: 'República Dominicana',
+			ec: 'Ecuador',
+			sv: 'El Salvador',
+			gt: 'Guatemala',
+			hn: 'Honduras',
+			mx: 'México',
+			ni: 'Nicaragua',
+			pa: 'Panamá',
+			py: 'Paraguay',
+			pe: 'Perú',
+			pr: 'Puerto Rico',
+			uy: 'Uruguay',
+			ve: 'Venezuela',
+		};
 
 		const payload = {
 			...data,
-			country: lang || 'AR',
+			country: countryMapping[lang] || countryMapping['ar'],
 			phone: `${data.phone}`,
 			Terms_And_Conditions: true,
 			email: data.email,
@@ -106,9 +129,9 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 	};
 
 	const handleSocialSignup = (connection: string) => {
-			const currentPath = window.location.pathname;
-			const langMatch = currentPath.match(/^\/([^\/]+)\/login/);
-			const lang = langMatch ? langMatch[1] : '';
+		const currentPath = window.location.pathname;
+		const langMatch = currentPath.match(/^\/([^\/]+)\/login/);
+		const lang = langMatch ? langMatch[1] : '';
 		sessionStorage.setItem('needsProfileCompletion', 'true');
 		window.location.href = `/api/auth/login?connection=${connection}&signup=true&lang=${lang}`;
 	};
@@ -142,9 +165,9 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 	if (submitted) {
 		return (
 			<div className='w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 p-4 md:mb-20 z-[10] relative overflow-visible max-w-[1600px] mx-auto md:px-4 h-screen md:h-auto'>
-				<div className='text-center py-20'>
+				<div className='py-20 text-center'>
 					<div className='flex justify-center w-full animate-pulse'>
-						<div className='w-44 mx-auto h-auto p-6'>
+						<div className='h-auto p-6 mx-auto w-44'>
 							<img src='/images/emails/email-icon.svg' alt='Correo enviado' />
 						</div>
 					</div>
@@ -162,7 +185,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 		<div className='w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:p-0 md:mb-20 z-[10] relative overflow-visible mx-auto'>
 			<button
 				onClick={onBack}
-				className='md:top-10 md:left-8 top-5 left-5 flex z-10 items-center justify-center w-10 h-10 rounded-full border border-gray-300 hover:bg-gray-100 transition absolute'
+				className='absolute z-10 flex items-center justify-center w-10 h-10 transition border border-gray-300 rounded-full md:top-10 md:left-8 top-5 left-5 hover:bg-gray-100'
 			>
 				<svg width='6' height='12' viewBox='0 0 6 12' fill='none' xmlns='http://www.w3.org/2000/svg'>
 					<path d='M5 1L1 6L5 11' stroke='#1F2937' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
@@ -170,7 +193,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 			</button>
 
 			<section className='w-full max-w-[1632px] h-fit relative z-8 mx-auto px-6 pt-[84px] pb-28 md:py-16 md:px-9'>
-				<div className='text-center mb-6'>
+				<div className='mb-6 text-center'>
 					<h1 className='md:text-[34px] text-2xl md:mb-6 mb-2 text-[#1A1A1A] font-medium font-raleway'>Crear cuenta</h1>
 					<p className='text-base md:text-[18px] text-[#6E737C] mt-1 font-inter'>
 						Regístrate y disfruta al máximo de nuestra propuesta académica
@@ -187,7 +210,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 							placeholder='Ingresar e-mail'
 							className='mt-1 w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]'
 						/>
-						{errors.email && <p className='text-red-500 text-xs mt-1'>{errors.email.message}</p>}
+						{errors.email && <p className='mt-1 text-xs text-red-500'>{errors.email.message}</p>}
 					</div>
 
 					<PhoneInputWithCode
@@ -201,6 +224,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 						}}
 						required
 					/>
+					{/* <CountrySelect onChange={(code) => setFormData((prev) => ({ ...prev, areaCode: code }))} /> */}
 
 					<div>
 						<label className='block text-sm font-medium text-[#1A1A1A] text-left'>Nombre/s</label>
@@ -211,7 +235,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 							placeholder='Ingresar nombre/s'
 							className='mt-1 w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]'
 						/>
-						{errors.first_name && <p className='text-red-500 text-xs mt-1'>{errors.first_name.message}</p>}
+						{errors.first_name && <p className='mt-1 text-xs text-red-500'>{errors.first_name.message}</p>}
 					</div>
 
 					<div>
@@ -223,7 +247,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 							placeholder='Ingresar apellido/s'
 							className='mt-1 w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]'
 						/>
-						{errors.last_name && <p className='text-red-500 text-xs mt-1'>{errors.last_name.message}</p>}
+						{errors.last_name && <p className='mt-1 text-xs text-red-500'>{errors.last_name.message}</p>}
 					</div>
 
 					{/* ✅ Contraseña eliminada temporalmente porque el CRM la genera automáticamente por email */}
@@ -240,7 +264,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 		<button
 			type='button'
 			onClick={() => setShowPassword(!showPassword)}
-			className='absolute right-3 top-1/2 -translate-y-1/2'
+			className='absolute -translate-y-1/2 right-3 top-1/2'
 		>
 			<Image
 				src={showPassword ? '/icons/eye-off.svg' : '/icons/eye.svg'}
@@ -250,9 +274,9 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 			/>
 		</button>
 	</div>
-	{errors.password && <p className='text-red-500 text-xs mt-1'>{errors.password.message}</p>}
+	{errors.password && <p className='mt-1 text-xs text-red-500'>{errors.password.message}</p>}
 
-	<ul className='text-sm mt-3 space-y-2'>
+	<ul className='mt-3 space-y-2 text-sm'>
 		{passwordHints.map((hint, index) => (
 			<li key={index} className='flex items-center gap-2'>
 				<div
@@ -279,7 +303,7 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 						{signupLoading ? 'Creando...' : 'Crear'}
 					</button>
 
-					{signupError && <p className='text-red-400 text-lg mt-2 text-center'>{signupError}</p>}
+					{signupError && <p className='mt-2 text-lg text-center text-red-400'>{signupError}</p>}
 
 					<p className='text-xs text-center text-[#6E737C] font-inter'>
 						Al registrarte, aceptás las{' '}

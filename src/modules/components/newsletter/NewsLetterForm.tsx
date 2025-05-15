@@ -10,6 +10,7 @@ import { careerOptions } from '@/data/careers';
 import { professions } from '@/data/professions';
 import { specialtiesGroup } from '@/data/specialties';
 import { years } from '@/data/years';
+import { usePathname } from 'next/navigation';
 
 interface Specialty {
 	id: number;
@@ -49,13 +50,35 @@ export default function NewsLetterForm({ onClose, initialEmail }: NewsLetterForm
 	const [otherProfession, setOtherProfession] = useState<string>('');
 	const [otherSpecialty, setOtherSpecialty] = useState<string>('');
 	const [filteredSpecialties, setFilteredSpecialties] = useState<Array<Specialty>>([]);
-	const professionId = professions.find((p) => p.name === formData.profession)?.id;
-	const getCountryNameByCode = (dialCode: string): string => {
-		const countryCode = getCountries().find((code) => `+${getCountryCallingCode(code)}` === dialCode);
-		return countryCode ? getName(countryCode) ?? '' : '';
+
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : 'ar';
+
+	const countryMapping: any = {
+		ar: 'Argentina',
+		bo: 'Bolivia',
+		br: 'Brasil',
+		cl: 'Chile',
+		co: 'Colombia',
+		cr: 'Costa Rica',
+		cu: 'Cuba',
+		do: 'República Dominicana',
+		ec: 'Ecuador',
+		sv: 'El Salvador',
+		gt: 'Guatemala',
+		hn: 'Honduras',
+		mx: 'México',
+		ni: 'Nicaragua',
+		pa: 'Panamá',
+		py: 'Paraguay',
+		pe: 'Perú',
+		pr: 'Puerto Rico',
+		uy: 'Uruguay',
+		ve: 'Venezuela',
 	};
 
-	const countryName = getCountryNameByCode(formData.areaCode);
+	const countryComplete = countryMapping[country];
 
 	useEffect(() => {
 		const handleEscKey = (event: KeyboardEvent) => {
@@ -155,7 +178,7 @@ export default function NewsLetterForm({ onClose, initialEmail }: NewsLetterForm
 				Especialidad: specialty,
 				Otra_profesion: profession === 'Otra Profesión' ? formData.profession : '',
 				Otra_especialidad: specialty === 'Otra Especialidad' ? formData.speciality : '',
-				Pais: countryName,
+				Pais: countryComplete,
 				Terms_And_Conditions: true,
 				URL_ORIGEN: window.location.href.slice(0, 255),
 				leadSource: 'Suscriptor newsletter',
