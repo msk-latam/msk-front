@@ -37,18 +37,18 @@ export default function ProfileCompletionWrapper() {
 	const { user, loading: userDataLoading, mutate: mutateProfile } = useProfile();
 
 	const [formData, setFormData] = useState<FormDataType>({
-		profession: user?.profession || '',
+		profession: user?.profession == '-' ? '' : user?.profession || '',
 		otherProfession: user?.other_profession || '',
-		speciality: user?.speciality || '',
+		speciality: user?.speciality == '-' ? '' : user?.speciality || '',
 		otherSpecialty: user?.other_specialty || '',
 		country: user?.country || '',
-		phone: user?.phone || '',
+		phone: user?.phone == '1' ? '' : user?.phone || '',
 		year: user?.year || '',
 		career: user?.career || '',
 		workplace: user?.workplace || '',
 		workArea: user?.work_area || '',
 		isMemberOfAssociation: user?.school_associate || false,
-		associationName: user?.school_name || '',
+		associationName: user?.school_name == '[]' ? '' : user?.school_name || '',
 		interests: {
 			specialty_interests: user?.interests?.specialty_interests || [],
 			content_interests: user?.interests?.content_interests || [],
@@ -70,18 +70,18 @@ export default function ProfileCompletionWrapper() {
 	useEffect(() => {
 		if (user) {
 			setFormData({
-				profession: user?.profession || '',
+				profession: user?.profession == '-' ? '' : user?.profession || '',
 				otherProfession: '',
-				speciality: user?.speciality || '',
+				speciality: user?.speciality == '-' ? '' : user?.speciality || '',
 				otherSpecialty: '',
 				country: user?.country || '',
-				phone: user?.phone || '',
+				phone: user?.phone == '1' ? '' : user?.phone || '',
 				year: user?.year || '',
 				career: user?.career || '',
 				workplace: user?.workplace || '',
 				workArea: user?.workArea || '',
 				isMemberOfAssociation: user?.school_associate || false,
-				associationName: user?.school_name || '',
+				associationName: user?.school_name == '[]' ? '' : user?.school_name || '',
 				interests: {
 					specialty_interests: user?.interests?.specialty_interests || [],
 					content_interests: user?.interests?.content_interests || [],
