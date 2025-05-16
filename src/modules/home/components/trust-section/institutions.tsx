@@ -1,122 +1,117 @@
-import React, { useRef, useState, useEffect } from "react";
-import Image from "next/image";
-import { useInstitutions } from "@/modules/home/hooks/useInstitution";
-import InstitutionsSkeleton from "@/modules/home/skeletons/InstitutionsSkeleton";
-import BrandSlider from "./BrandSlider";
-import { usePathname } from "next/navigation";
-import { count } from "console";
+import { useInstitutions } from '@/modules/home/hooks/useInstitution';
+import InstitutionsSkeleton from '@/modules/home/skeletons/InstitutionsSkeleton';
+import { usePathname } from 'next/navigation';
+import BrandSlider from './BrandSlider';
 
 const Institutions = () => {
-  const { institutions, loading, error } = useInstitutions();
+	const { institutions, loading, error } = useInstitutions();
 
-  // const scrollRef = useRef<HTMLDivElement>(null);
-  // const [isDragging, setIsDragging] = useState(false);
-  // const [startX, setStartX] = useState(0);
-  // const [scrollLeft, setScrollLeft] = useState(0);
-  // const [isHovered, setIsHovered] = useState(false);
-  // // Estado para controlar la dirección del scroll
-  // const [scrollDirection, setScrollDirection] = useState(1); // 1 = derecha, -1 = izquierda
+	// const scrollRef = useRef<HTMLDivElement>(null);
+	// const [isDragging, setIsDragging] = useState(false);
+	// const [startX, setStartX] = useState(0);
+	// const [scrollLeft, setScrollLeft] = useState(0);
+	// const [isHovered, setIsHovered] = useState(false);
+	// // Estado para controlar la dirección del scroll
+	// const [scrollDirection, setScrollDirection] = useState(1); // 1 = derecha, -1 = izquierda
 
-  // const handleMouseDown = (e: React.MouseEvent) => {
-  //   setIsDragging(true);
-  //   setStartX(e.pageX - (scrollRef.current?.offsetLeft || 0));
-  //   setScrollLeft(scrollRef.current?.scrollLeft || 0);
-  // };
+	// const handleMouseDown = (e: React.MouseEvent) => {
+	//   setIsDragging(true);
+	//   setStartX(e.pageX - (scrollRef.current?.offsetLeft || 0));
+	//   setScrollLeft(scrollRef.current?.scrollLeft || 0);
+	// };
 
-  // const handleMouseLeave = () => setIsDragging(false);
-  // const handleMouseUp = () => setIsDragging(false);
+	// const handleMouseLeave = () => setIsDragging(false);
+	// const handleMouseUp = () => setIsDragging(false);
 
-  // const handleMouseMove = (e: React.MouseEvent) => {
-  //   if (!isDragging || !scrollRef.current) return;
-  //   e.preventDefault();
-  //   const x = e.pageX - scrollRef.current.offsetLeft;
-  //   const walk = (x - startX) * 1.5;
-  //   scrollRef.current.scrollLeft = scrollLeft - walk;
-  // };
+	// const handleMouseMove = (e: React.MouseEvent) => {
+	//   if (!isDragging || !scrollRef.current) return;
+	//   e.preventDefault();
+	//   const x = e.pageX - scrollRef.current.offsetLeft;
+	//   const walk = (x - startX) * 1.5;
+	//   scrollRef.current.scrollLeft = scrollLeft - walk;
+	// };
 
-  // const handleTouchStart = (e: React.TouchEvent) => {
-  //   setIsDragging(true);
-  //   setStartX(e.touches[0].pageX - (scrollRef.current?.offsetLeft || 0));
-  //   setScrollLeft(scrollRef.current?.scrollLeft || 0);
-  // };
+	// const handleTouchStart = (e: React.TouchEvent) => {
+	//   setIsDragging(true);
+	//   setStartX(e.touches[0].pageX - (scrollRef.current?.offsetLeft || 0));
+	//   setScrollLeft(scrollRef.current?.scrollLeft || 0);
+	// };
 
-  // const handleTouchMove = (e: React.TouchEvent) => {
-  //   if (!isDragging || !scrollRef.current) return;
-  //   const x = e.touches[0].pageX - scrollRef.current.offsetLeft;
-  //   const walk = (x - startX) * 1.5;
-  //   scrollRef.current.scrollLeft = scrollLeft - walk;
-  // };
+	// const handleTouchMove = (e: React.TouchEvent) => {
+	//   if (!isDragging || !scrollRef.current) return;
+	//   const x = e.touches[0].pageX - scrollRef.current.offsetLeft;
+	//   const walk = (x - startX) * 1.5;
+	//   scrollRef.current.scrollLeft = scrollLeft - walk;
+	// };
 
-  // const handleTouchEnd = () => setIsDragging(false);
+	// const handleTouchEnd = () => setIsDragging(false);
 
-  // // 🔁 Inicializar scroll en el centro
-  // useEffect(() => {
-  //   const scrollEl = scrollRef.current;
-  //   if (!scrollEl) return;
+	// // 🔁 Inicializar scroll en el centro
+	// useEffect(() => {
+	//   const scrollEl = scrollRef.current;
+	//   if (!scrollEl) return;
 
-  //   const handleInitialScroll = () => {
-  //     scrollEl.scrollLeft = scrollEl.scrollWidth / 3;
-  //   };
+	//   const handleInitialScroll = () => {
+	//     scrollEl.scrollLeft = scrollEl.scrollWidth / 3;
+	//   };
 
-  //   handleInitialScroll();
-  // }, []);
+	//   handleInitialScroll();
+	// }, []);
 
-  // // 🚗 Scroll automático con efecto ida y vuelta
-  // useEffect(() => {
-  //   const scrollEl = scrollRef.current;
-  //   if (!scrollEl) return;
+	// // 🚗 Scroll automático con efecto ida y vuelta
+	// useEffect(() => {
+	//   const scrollEl = scrollRef.current;
+	//   if (!scrollEl) return;
 
-  //   let frame: number;
-  //   const scrollSpeed = 0.4; // velocidad ajustable
+	//   let frame: number;
+	//   const scrollSpeed = 0.4; // velocidad ajustable
 
-  //   const autoScroll = () => {
-  //     if (!scrollEl) return;
+	//   const autoScroll = () => {
+	//     if (!scrollEl) return;
 
-  //     if (!isDragging && !isHovered) {
-  //       // Añadir velocidad con dirección
-  //       scrollEl.scrollLeft += scrollSpeed * scrollDirection;
+	//     if (!isDragging && !isHovered) {
+	//       // Añadir velocidad con dirección
+	//       scrollEl.scrollLeft += scrollSpeed * scrollDirection;
 
-  //       const scrollWidth = scrollEl.scrollWidth;
-  //       const scrollLeft = scrollEl.scrollLeft;
-  //       const visibleWidth = scrollEl.offsetWidth;
+	//       const scrollWidth = scrollEl.scrollWidth;
+	//       const scrollLeft = scrollEl.scrollLeft;
+	//       const visibleWidth = scrollEl.offsetWidth;
 
-  //       // Si llega al final, cambiar dirección a izquierda
-  //       if (scrollLeft + visibleWidth >= scrollWidth - 10) {
-  //         setScrollDirection(-1);
-  //       }
-  //       // Si llega al inicio, cambiar dirección a derecha
-  //       else if (scrollLeft <= 10) {
-  //         setScrollDirection(1);
-  //       }
-  //     }
+	//       // Si llega al final, cambiar dirección a izquierda
+	//       if (scrollLeft + visibleWidth >= scrollWidth - 10) {
+	//         setScrollDirection(-1);
+	//       }
+	//       // Si llega al inicio, cambiar dirección a derecha
+	//       else if (scrollLeft <= 10) {
+	//         setScrollDirection(1);
+	//       }
+	//     }
 
-  //     frame = requestAnimationFrame(autoScroll);
-  //   };
+	//     frame = requestAnimationFrame(autoScroll);
+	//   };
 
-  //   frame = requestAnimationFrame(autoScroll);
+	//   frame = requestAnimationFrame(autoScroll);
 
-  //   return () => cancelAnimationFrame(frame);
-  // }, [isDragging, isHovered, scrollDirection]);
-  // const loopedInstitutions = [
-  //   ...institutions,
-  //   ...institutions,
-  //   ...institutions,
-  // ];
-  
-  if (loading) return <InstitutionsSkeleton />;
-  if (error)
-    return <div className="text-center text-[#f5006d]">Error: {error}</div>;
+	//   return () => cancelAnimationFrame(frame);
+	// }, [isDragging, isHovered, scrollDirection]);
+	// const loopedInstitutions = [
+	//   ...institutions,
+	//   ...institutions,
+	//   ...institutions,
+	// ];
 
-  const pathname = usePathname();
-  const country = pathname ? pathname.split("/")[1] || "ar" : "ar";
+	const pathname = usePathname();
+	const country = pathname ? pathname.split('/')[1] || 'ar' : 'ar';
 
-  return (
-    <section className="relative bg-white h-fit rounded-[40px] overflow-visible max-w-[1600px] mx-auto md:px-[104px] z-10 py-10 px-5 md:gap-4 shadow-lg select-none mb-10">
-      <h2 className="text-center md:text-left font-raleway font-[500] md:text-[27px] text-[22px] mb-7">
-         Nos respaldan prestigiosas instituciones de todo el mundo con sus
-        certificaciones
-      </h2>
-{/*
+	if (loading) return <InstitutionsSkeleton />;
+	if (error) return <div className='text-center text-[#f5006d]'>Error: {error}</div>;
+
+	return (
+		<section className='relative bg-white h-fit rounded-[40px] overflow-visible max-w-[1600px] mx-auto md:px-[104px] z-10 py-10 px-5 md:gap-4 shadow-lg select-none mb-10'>
+			<h2 className='text-center md:text-left font-raleway font-[500] md:text-[27px] text-[22px] mb-7'>
+				Nos respaldan prestigiosas instituciones de todo el mundo con sus certificaciones
+			</h2>
+			{/*
       <div
         className={`overflow-x-auto scrollbar-hide w-full ${
           isDragging ? "cursor-grabbing" : "cursor-grab"
@@ -155,9 +150,9 @@ const Institutions = () => {
           ))}
         </div>
       </div> */}
-      <BrandSlider country={country}/>
-    </section>
-  );
+			<BrandSlider country={country} />
+		</section>
+	);
 };
 
 export default Institutions;
