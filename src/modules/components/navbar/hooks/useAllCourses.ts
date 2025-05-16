@@ -14,7 +14,7 @@ export const useAllCourses = (lang: string) => {
 		try {
 			const params = new URLSearchParams({
 				page: '1',
-				per_page: '300',
+				per_page: '50',
 				orderby: 'newly',
 				lang: lang || 'int',
 			});
