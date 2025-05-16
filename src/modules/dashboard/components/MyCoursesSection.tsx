@@ -68,6 +68,7 @@ interface Course {
 	product_code?: number;
 	product_code_cedente?: string;
 	link_al_foro?: string;
+	certificate_url?: string;
 }
 
 const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = ({ courseData, userEmail }) => {
@@ -276,7 +277,7 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 					<TrophyIcon />
 					<span>Calificación: {course.qualification}</span>
 					<a
-						href={`https://www.google.com`}
+						href={course.certificate_url}
 						target='_blank'
 						rel='noopener noreferrer'
 						className='cursor-pointer text-[#9200AD] underline font-inter font-medium text-sm'
@@ -320,7 +321,15 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 			case 'drop':
 			case 'Expirado':
 			case 'Cancelado':
-				return <CtaButton onClick={() => {}}>Reactivar</CtaButton>;
+				return (
+					<CtaButton
+						onClick={() =>
+							window.open('https://ayuda.msklatam.com/portal/es/kb/articles/reactivar-tu-curso-expirado', '_blank')
+						}
+					>
+						Reactivar
+					</CtaButton>
+				);
 			default:
 				return null;
 		}

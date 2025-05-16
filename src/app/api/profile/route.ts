@@ -113,6 +113,7 @@ interface CourseProgress {
 	entity_id_crm: string; // CRM ID of the course_progress record
 	parent_id: string;
 	created_time: string;
+	certificate_url: string | null;
 }
 
 export async function GET(request: NextRequest) {
@@ -439,7 +440,12 @@ export async function GET(request: NextRequest) {
 		// Process courses with the batch-fetched data
 		const processedCoursesInProgress = (customerData.course_progress || []).map((cp: CourseProgress) => {
 			const advanceNumeric = parseFloat(cp.advance?.replace(',', '.')) || 0;
+
+			// Consider a course as finished when advance is 100 and a score exists
+			const isFinalizado = advanceNumeric === 100 && cp.score != null && cp.score !== '';
+
 			const statusText = (() => {
+				if (isFinalizado) return 'Finalizado';
 				switch (cp.enroll_status) {
 					case 'Activo':
 						return `${advanceNumeric}% completado`;
@@ -461,16 +467,17 @@ export async function GET(request: NextRequest) {
 				id: cp.entity_id_crm, // Using the CRM ID of the progress record itself
 				status: (() => {
 					if (cp.contract_status === 'Baja') return 'Cancelado';
-					if (cp.end_date != null || cp.enroll_status === 'Finalizado') return 'finished';
+					if (isFinalizado || cp.end_date != null || cp.enroll_status === 'Finalizado') return 'finished';
 					return 'progress';
 				})(),
 				title: courseCmsData?.title,
 				expiryDate: cp.expiration_date || cp.deadline_enroll,
 				qualification: cp.score,
-				statusType: cp.enroll_status,
+				statusType: isFinalizado ? 'Finalizado' : cp.enroll_status,
 				statusText: statusText,
 				link_al_foro: courseCmsData?.link_al_foro,
 				resource: courseCmsData?.resource,
+				certificate_url: cp?.certificate_url,
 				// Keep original data if frontend needs it, or for debugging
 				_original_advance: cp.advance,
 				_original_contract_status: cp.contract_status,
