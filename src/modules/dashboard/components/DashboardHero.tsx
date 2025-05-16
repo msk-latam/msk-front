@@ -466,23 +466,12 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 										{/* Tags section - fixed height */}
 										<div className='mb-2 '>
 											<div className='flex flex-wrap gap-2'>
-												{resource?.categories?.length > 0 && (
-													<span
-														className={`px-3 py-1 rounded-full text-xs font-inter font-medium bg-[#DFE6FF] text-[#29324F]
-															}`}
-													>
-														{resource?.categories[0]?.name}
+												{resource?.sections?.header?.categories?.length > 0 && (
+													<span className={`px-3 py-1 rounded-full  font-inter font-medium bg-[#DFE6FF] text-[#29324F]`}>
+														{resource?.sections?.header?.categories?.find((cat: any) => cat.is_primary)?.name}
 													</span>
 												)}
-												<span
-													className={`px-3 py-1 rounded-full  font-inter font-medium
-    ${
-			resource?.resource === 'course' && resource.prices?.total_price === '0'
-				? 'text-[#6474A6] bg-[#DFE6FF]'
-				: 'bg-[#FFF4D8] text-[#8E6E3B]'
-		}
-  `}
-												>
+												<span className={`px-3 py-1 rounded-full  font-inter font-medium bg-[#FFF4D8] text-[#8E6E3B]`}>
 													{resource?.resource === 'course'
 														? resource.prices?.total_price === '0'
 															? 'Curso Gratuito'

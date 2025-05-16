@@ -127,9 +127,10 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 					} else if (recursoValue === 'guias-profesionales') {
 						translatedValue = 'downloadable';
 					} else if (recursoValue === 'curso-gratuito') {
-						translatedValue = 'isFree';
+						params.set('filter', 'is-free');
+					} else {
+						params.set('resource', translatedValue);
 					}
-					params.set('resource', translatedValue);
 					params.delete('recurso'); // Remove original key
 				}
 				// NOTE: The 'search' parameter is already in `params` because the previous useEffect updated the URL

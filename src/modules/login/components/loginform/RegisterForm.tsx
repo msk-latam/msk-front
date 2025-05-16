@@ -8,7 +8,6 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
-import CountrySelect from '../hooks/CountrySelect';
 
 const validationSchema = Yup.object().shape({
 	email: Yup.string().email('El correo no es válido').required('El correo es obligatorio'),
@@ -307,11 +306,11 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 
 					<p className='text-xs text-center text-[#6E737C] font-inter'>
 						Al registrarte, aceptás las{' '}
-						<a href='#' className='text-[#9200AD] font-medium underline'>
+						<a href='/politica-de-privacidad/' className='text-[#9200AD] font-medium underline'>
 							condiciones de privacidad
 						</a>{' '}
 						y los{' '}
-						<a href='#' className='text-[#9200AD] font-medium underline'>
+						<a href='/terminos-y-condiciones/' className='text-[#9200AD] font-medium underline'>
 							términos y condiciones
 						</a>
 					</p>

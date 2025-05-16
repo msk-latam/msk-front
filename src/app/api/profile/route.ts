@@ -113,6 +113,7 @@ interface CourseProgress {
 	entity_id_crm: string; // CRM ID of the course_progress record
 	parent_id: string;
 	created_time: string;
+	certificate_url: string | null;
 }
 
 export async function GET(request: NextRequest) {
@@ -162,6 +163,7 @@ export async function GET(request: NextRequest) {
 		const courseRecommendationsList = customerData.web_recommender?.split(',').map((item: string) => item.trim());
 		let detailedRecommendedCourses: any[] = [];
 		if (courseRecommendationsList && courseRecommendationsList.length > 0) {
+			console.log('courseRecommendationsList', courseRecommendationsList);
 			detailedRecommendedCourses = await Promise.all(
 				courseRecommendationsList.slice(0, 4).map(async (courseIdentifier: string) => {
 					try {
@@ -174,8 +176,10 @@ export async function GET(request: NextRequest) {
 								next: { revalidate: 3600 * 7 },
 							},
 						);
+
 						if (resourceRes.ok) {
 							const resourceData = await resourceRes.json();
+							console.log('resourceData', resourceData);
 							if (resourceData && resourceData.id != null) {
 								return resourceData;
 							}
@@ -271,10 +275,17 @@ export async function GET(request: NextRequest) {
 						return null;
 					}
 
-					const products = await productsResponse.json();
-					if (!products || products.length === 0) return null;
+					let products: any = null;
+					try {
+						products = await productsResponse.json();
+					} catch (jsonErr) {
+						console.error('Empty or invalid JSON from CMS products endpoint (per_page):', jsonErr);
+						return null;
+					}
 
-					let latestProduct = products.data[0];
+					if (!products || (Array.isArray(products) && products.length === 0)) return null;
+
+					let latestProduct = products?.data ? products.data[0] : Array.isArray(products) ? products[0] : null;
 
 					if (!latestProduct) latestProduct = {};
 
@@ -326,10 +337,17 @@ export async function GET(request: NextRequest) {
 						};
 					}
 
-					const products = await productsResponse.json();
-					if (!products || products.length === 0) return null;
+					let products: any = null;
+					try {
+						products = await productsResponse.json();
+					} catch (jsonErr) {
+						console.error('Empty or invalid JSON from CMS products endpoint (limit):', jsonErr);
+						return null;
+					}
 
-					const latestProduct = products[0];
+					if (!products || (Array.isArray(products) && products.length === 0)) return null;
+
+					const latestProduct = Array.isArray(products) ? products[0] : products?.data ? products.data[0] : null;
 
 					return {
 						product_code: latestProduct.product_code || '',
@@ -435,7 +453,12 @@ export async function GET(request: NextRequest) {
 		// Process courses with the batch-fetched data
 		const processedCoursesInProgress = (customerData.course_progress || []).map((cp: CourseProgress) => {
 			const advanceNumeric = parseFloat(cp.advance?.replace(',', '.')) || 0;
+
+			// Consider a course as finished when advance is 100 and a score exists
+			const isFinalizado = advanceNumeric === 100 && cp.score != null && cp.score !== '';
+
 			const statusText = (() => {
+				if (isFinalizado) return 'Finalizado';
 				switch (cp.enroll_status) {
 					case 'Activo':
 						return `${advanceNumeric}% completado`;
@@ -457,16 +480,17 @@ export async function GET(request: NextRequest) {
 				id: cp.entity_id_crm, // Using the CRM ID of the progress record itself
 				status: (() => {
 					if (cp.contract_status === 'Baja') return 'Cancelado';
-					if (cp.end_date != null || cp.enroll_status === 'Finalizado') return 'finished';
+					if (isFinalizado || cp.end_date != null || cp.enroll_status === 'Finalizado') return 'finished';
 					return 'progress';
 				})(),
 				title: courseCmsData?.title,
 				expiryDate: cp.expiration_date || cp.deadline_enroll,
 				qualification: cp.score,
-				statusType: cp.enroll_status,
+				statusType: isFinalizado ? 'Finalizado' : cp.enroll_status,
 				statusText: statusText,
 				link_al_foro: courseCmsData?.link_al_foro,
 				resource: courseCmsData?.resource,
+				certificate_url: cp?.certificate_url,
 				// Keep original data if frontend needs it, or for debugging
 				_original_advance: cp.advance,
 				_original_contract_status: cp.contract_status,
@@ -530,6 +554,8 @@ export async function GET(request: NextRequest) {
 			customerData.interests.content_interests = additionalInterests.content_interests;
 			customerData.interests.specialty_interests = additionalInterests.specialty_interests;
 		}
+
+		console.log('customerData', detailedRecommendedCourses);
 
 		const user = {
 			profileCompletion: {
