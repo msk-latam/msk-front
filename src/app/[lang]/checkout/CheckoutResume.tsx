@@ -161,7 +161,7 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 	const isFree = product.prices.total_price === '0' || product.prices.total_price === '';
 
 	return (
-		<div className='p-5 mt-16 bg-white border border-gray-300 rounded-3xl'>
+		<div className='p-5 mt-16 space-y-5 bg-white border border-gray-300 rounded-3xl'>
 			<h2 className='text-2xl font-semibold text-[#392C35]'>Resumen de inscripción</h2>
 
 			<div className='mt-4'>
@@ -172,7 +172,9 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 						<div className='text-sm text-[#392C35]'>{item.description}</div>
 
 						{/* Precio del artículo */}
-						<div className='text-sm text-[#6474A6] text-right'>{`${currency} $${item.price ? item.price : 0}`}</div>
+						<div className='text-sm text-[#6474A6] text-right'>{`${currency} $${
+							item.price ? formatPesoArgentino(item.price) : 0
+						}`}</div>
 					</div>
 				))}
 			</div>

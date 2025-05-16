@@ -125,6 +125,12 @@ const Certificaciones = ({ product, country }: any) => {
 
 	const isFree = product.prices.total_price === '0' || product.prices.total_price === '';
 
+	const decodeHtml = (htmlString: string) => {
+		const txt = document.createElement('textarea');
+		txt.innerHTML = htmlString;
+		return txt.value;
+	};
+
 	return (
 		<div>
 			{!isFree && (
@@ -141,7 +147,7 @@ const Certificaciones = ({ product, country }: any) => {
 											onChange={() => toggleCertification(cert)}
 											className='w-4 h-4 text-[#9200AD] border-[#9200AD] focus:ring-[#9200AD]'
 										/>
-										<span className='text-sm text-[#392C35] w-[200px]'>{cert.name}</span>
+										<span className='text-sm text-[#392C35] w-[200px]'>{decodeHtml(cert.name)}</span>
 									</label>
 									<span className='text-sm text-[#6474A6] text-right'>{`${currency} $${formatPesoArgentino(
 										cert.price,
