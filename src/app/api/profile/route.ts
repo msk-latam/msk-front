@@ -486,7 +486,11 @@ export async function GET(request: NextRequest) {
 				title: courseCmsData?.title,
 				expiryDate: cp.expiration_date || cp.deadline_enroll,
 				qualification: cp.score,
-				statusType: isFinalizado ? 'Finalizado' : cp.enroll_status,
+				statusType: (() => {
+					// Ensure the visual status matches the logical status
+					if (cp.contract_status === 'Baja') return 'Cancelado';
+					return isFinalizado ? 'Finalizado' : cp.enroll_status;
+				})(),
 				statusText: statusText,
 				link_al_foro: courseCmsData?.link_al_foro,
 				resource: courseCmsData?.resource,

@@ -203,7 +203,9 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 	const getStatusStyles = (statusType: Course['statusType']) => {
 		switch (statusType) {
 			case 'Activo':
-				return 'bg-[#FFEBF6] text-[#C42B8B]'; // Pink
+				return 'bg-[#FFEBF6] text-[#9200AD]'; // Purple for active progress
+			case 'progress':
+				return 'bg-[#FFEBF6] text-[#9200AD]'; // Purple for explicit progress
 			case 'Finalizado':
 				return 'bg-[#DFE6FF] text-[#29324F]'; // Blue
 			case 'Cancelado':
