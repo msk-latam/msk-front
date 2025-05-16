@@ -111,8 +111,8 @@ const Institutions = () => {
   const country = pathname ? pathname.split("/")[1] || "ar" : "ar";
 
   return (
-    <section className="relative bg-white h-fit rounded-[40px] overflow-visible max-w-[1600px] mx-auto md:px-[104px] z-10 py-10 px-5 md:gap-4 shadow-lg select-none mb-10">
-      <h2 className="text-center md:text-left font-raleway font-[500] md:text-[27px] text-[22px] mb-7">
+    <section className="relative bg-white h-fit rounded-[40px] overflow-visible max-w-[1600px] mx-auto md:px-[104px] z-10 pt-10 pb-6 md:gap-4 shadow-lg select-none mb-10">
+      <h2 className="text-center md:text-left font-raleway font-[500] md:text-[27px] text-[22px] px-5 mb-7">
          Nos respaldan prestigiosas instituciones de todo el mundo con sus
         certificaciones
       </h2>
