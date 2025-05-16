@@ -271,15 +271,21 @@ export async function GET(request: NextRequest) {
 					);
 
 					if (!productsResponse.ok) {
-						0;
 						console.error(`Failed to fetch latest product: ${productsResponse.status}`);
 						return null;
 					}
 
-					const products = await productsResponse.json();
-					if (!products || products.length === 0) return null;
+					let products: any = null;
+					try {
+						products = await productsResponse.json();
+					} catch (jsonErr) {
+						console.error('Empty or invalid JSON from CMS products endpoint (per_page):', jsonErr);
+						return null;
+					}
 
-					let latestProduct = products.data[0];
+					if (!products || (Array.isArray(products) && products.length === 0)) return null;
+
+					let latestProduct = products?.data ? products.data[0] : Array.isArray(products) ? products[0] : null;
 
 					if (!latestProduct) latestProduct = {};
 
@@ -331,10 +337,17 @@ export async function GET(request: NextRequest) {
 						};
 					}
 
-					const products = await productsResponse.json();
-					if (!products || products.length === 0) return null;
+					let products: any = null;
+					try {
+						products = await productsResponse.json();
+					} catch (jsonErr) {
+						console.error('Empty or invalid JSON from CMS products endpoint (limit):', jsonErr);
+						return null;
+					}
 
-					const latestProduct = products[0];
+					if (!products || (Array.isArray(products) && products.length === 0)) return null;
+
+					const latestProduct = Array.isArray(products) ? products[0] : products?.data ? products.data[0] : null;
 
 					return {
 						product_code: latestProduct.product_code || '',

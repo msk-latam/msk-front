@@ -53,6 +53,8 @@ interface Course {
 	statusType:
 		| 'progress'
 		| 'drop'
+		| 'baja'
+		| 'Baja'
 		| 'Cancelado'
 		| 'inactive'
 		| 'finished'
@@ -256,8 +258,7 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 			course.statusType !== 'Expirado' &&
 			course.statusType !== 'Finalizado' &&
 			course.statusType !== 'Sin enrolar' &&
-			course.statusType !== 'Cancelado' &&
-			course.statusType !== 'drop'
+			course.statusType !== 'Cancelado'
 		) {
 			const date = new Date(course.expiryDate);
 			const day = date.getDate().toString().padStart(2, '0');
@@ -276,14 +277,16 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 				<div className='flex items-center gap-1.5 text-xs text-[#4F5D89] font-inter font-medium'>
 					<TrophyIcon />
 					<span>Calificación: {course.qualification}</span>
-					<a
-						href={course.certificate_url}
-						target='_blank'
-						rel='noopener noreferrer'
-						className='cursor-pointer text-[#9200AD] underline font-inter font-medium text-sm'
-					>
-						Ver certificado
-					</a>
+					{course.certificate_url && (
+						<a
+							href={course.certificate_url}
+							target='_blank'
+							rel='noopener noreferrer'
+							className='cursor-pointer text-[#9200AD] underline font-inter font-medium text-sm'
+						>
+							Ver certificado
+						</a>
+					)}
 				</div>
 			);
 		}
@@ -293,6 +296,19 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 		const secondaryButtonClass =
 			'bg-white text-[#1A1A1A] border border-[#DBDDE2]  px-6 py-3 rounded-full font-inter font-medium text-sm hover:bg-[#838790] transition whitespace-nowrap';
 
+		// Always show Reactivar for Cancelado status irrespective of statusType
+		if (course.status === 'Cancelado') {
+			return (
+				<CtaButton
+					onClick={() =>
+						window.open('https://ayuda.msklatam.com/portal/es/kb/articles/reactivar-tu-curso-expirado', '_blank')
+					}
+				>
+					Reactivar
+				</CtaButton>
+			);
+		}
+
 		switch (course.statusType) {
 			case 'Activo':
 			case 'Finalizado':
@@ -300,14 +316,17 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 			case 'Listo para enrolar':
 				return (
 					<>
-						<button
-							style={{ display: course?.link_al_foro ? 'block' : 'none' }}
-							className={`${secondaryButtonClass} ${!course?.link_al_foro ? 'opacity-50 cursor-not-allowed' : ''}`}
-							onClick={() => course?.link_al_foro && window.open(course.link_al_foro, '_blank')}
-							disabled={!course?.link_al_foro}
-						>
-							Ir al foro
-						</button>
+						{/* Hide forum button when course is Cancelado */}
+						{course.status !== 'Cancelado' && (
+							<button
+								style={{ display: course?.link_al_foro ? 'block' : 'none' }}
+								className={`${secondaryButtonClass} ${!course?.link_al_foro ? 'opacity-50 cursor-not-allowed' : ''}`}
+								onClick={() => course?.link_al_foro && window.open(course.link_al_foro, '_blank')}
+								disabled={!course?.link_al_foro}
+							>
+								Ir al foro
+							</button>
+						)}
 
 						<CtaButton onClick={() => handleCourseAction(course)} isDisabled={navigatingCourseId === course.product_code}>
 							{navigatingCourseId === course.product_code
@@ -321,6 +340,7 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 			case 'drop':
 			case 'Expirado':
 			case 'Cancelado':
+			case 'baja':
 				return (
 					<CtaButton
 						onClick={() =>
