@@ -24,6 +24,10 @@ export type CursoWP = {
 	duration: string | null;
 	categories: { name: string }[];
 	cedente: any[];
+	topics?: number;
+	hours?: number;
+	enrolled?: number;
+	certificate?: string;
 };
 
 export type CursoCardProps = {
@@ -48,14 +52,14 @@ export type OportunidadesResponse = {
 	gratuitos: CursoWP[];
 };
 
-export const mapCursoWPToCursoCard = (curso: CursoWP): CursoCardProps => ({
+export const mapCursoWPToCursoCard = (curso: any): CursoCardProps => ({
 	id: curso.id,
 	categoria: curso.categories?.[0]?.name || 'General',
 	titulo: curso.title,
-	temas: Math.floor(Math.random() * 10 + 5),
-	horas: parseInt(curso.duration || '12'),
-	inscriptos: Math.floor(Math.random() * 10000 + 1000),
-	certificado: 'Incluido',
+	temas: curso.themes ?? 0, // asegurate que este sea el nombre correcto
+	horas: curso.hours ?? parseInt(curso.duration || '0'),
+	inscriptos: curso.inscriptions ?? 0,
+	certificado: curso.certificate === true ? 'Certificación incluida' : '',
 	imagen: curso.featured_image || '',
 	link: curso.link,
 });
