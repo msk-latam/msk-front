@@ -3,11 +3,11 @@
 import { supportedLanguages } from '@/config/languages';
 import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
 import { urlFormat } from '@/utils/urlFormat';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 import { Search } from 'react-feather';
-import { useAllCourses } from '../hooks/useAllCourses';
 import { useDebounce } from '../hooks/useDebounce';
+import { useSearchCourses } from '../hooks/useSearchCourses';
 
 interface SearchBarProps {
 	placeholder: string;
@@ -29,16 +29,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
 	className = '',
 }) => {
 	const pathname = usePathname();
-	const router = useRouter();
 
 	const firstSegment = pathname?.split('/')[1];
-	const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'ar';
-
-	const { courses, loading, error, fetchCourses } = useAllCourses(lang);
+	const lang: string = firstSegment && supportedLanguages.includes(firstSegment) ? firstSegment : 'ar';
 
 	const [searchTerm, setSearchTerm] = useState('');
 	const debouncedSearchTerm = useDebounce(searchTerm, 300);
-	const [filteredResults, setFilteredResults] = useState<any[]>([]);
+	const { courses, loading } = useSearchCourses(lang, debouncedSearchTerm);
+
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const searchContainerRef = useRef<HTMLDivElement>(null);
 
@@ -53,29 +51,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
 		const trimmed = debouncedSearchTerm.trim();
 
 		if (trimmed === '') {
-			setFilteredResults([]);
 			setIsDropdownOpen(false);
 			return;
 		}
 
-		if (loading) {
-			setIsDropdownOpen(true); // Mostrar spinner mientras carga
-			return;
-		}
-
-		if (courses.length === 0) {
-			setFilteredResults([]);
-			setIsDropdownOpen(true); // Mostrar spinner o mensaje vacío si cargó sin resultados
-			return;
-		}
-
-		const filtered = courses.filter(
-			(course) => typeof course.title === 'string' && course.title.toLowerCase().includes(trimmed.toLowerCase()),
-		);
-
-		setFilteredResults(filtered);
+		// Show the dropdown whenever there is a search term (spinner or results will be handled below)
 		setIsDropdownOpen(true);
-	}, [debouncedSearchTerm, courses, loading]);
+	}, [debouncedSearchTerm]);
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -98,11 +80,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 	};
 
 	const handleInputFocus = () => {
-		if (courses.length === 0 && !loading) {
-			fetchCourses(); // 👈 solo busca si aún no cargó
-		}
-
-		if (searchTerm.trim() !== '' && filteredResults.length > 0) {
+		if (searchTerm.trim() !== '') {
 			setIsDropdownOpen(true);
 		}
 	};
@@ -142,7 +120,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 		}
 	};
 
-	const uniqueResults = Array.from(new Map(filteredResults.map((item) => [`${item.id}-${item.title}`, item])).values());
+	const uniqueResults = Array.from(new Map(courses.map((item) => [`${item.id}-${item.title}`, item])).values());
 
 	return (
 		<div className={`relative ${className}`} ref={searchContainerRef}>
@@ -194,7 +172,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 				</div>
 			)}
 
-			{isDropdownOpen && searchTerm && !loading && filteredResults.length === 0 && (
+			{isDropdownOpen && searchTerm && !loading && uniqueResults.length === 0 && (
 				<div className='absolute z-10 w-full bg-white border mt-2 rounded-lg shadow-md p-4 text-gray-500'>
 					No se encontraron resultados.
 				</div>
