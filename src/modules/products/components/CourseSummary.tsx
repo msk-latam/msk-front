@@ -32,7 +32,8 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 	const modules = data?.modules;
 	const duration = data?.duration + ' horas estimadas';
 	const certification = data?.certification;
-	const max_installments = data?.max_installments;
+	const max_installments = lang === 'ar' ? 6 : lang === 'cl' ? 8 : data?.max_installments;
+
 	const showPrice = lang.toLowerCase() !== 'es';
 
 	const price =

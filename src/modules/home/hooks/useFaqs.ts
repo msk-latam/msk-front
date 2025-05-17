@@ -9,8 +9,13 @@ export const useFaqContent = () => {
 	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
+		const pathname = window.location.pathname;
+		const langCandidate = pathname.split('/')[1]?.toLowerCase();
+		const lang = langCandidate === 'ar' || !langCandidate ? 'arg' : langCandidate?.length === 2 ? langCandidate : 'arg';
+
+		console.log(lang, 'paisss');
 		// Llamamos al servicio para obtener los datos del faq
-		getHomeData()
+		getHomeData(lang)
 			.then((homeData) => {
 				// courseData es todo el objeto del curso
 				const faqData: Faq[] = homeData.sections.faqs?.questions ?? [];
