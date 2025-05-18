@@ -123,7 +123,7 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 
 	const currency = 'ARS';
 
-	const totalPrice = product.total_price;
+	const totalPrice = product.prices.total_price;
 	const transactionAmount = parseInt(totalPrice.replace(/[\.,]/g, ''), 10);
 	const regularPrice = product.regular_price;
 	const regularPriceFixed = parseInt(regularPrice.replace(/[\.,]/g, ''), 10);

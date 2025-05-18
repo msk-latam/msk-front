@@ -13,6 +13,8 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 	const { ficha, total_price } = product;
 	const { paymentType, appliedCoupon, activeStep, certifications } = useCheckout();
 
+	console.log(product);
+
 	const currencies: any = {
 		cl: 'CLP',
 		ar: 'ARS',

@@ -9,7 +9,7 @@ const Certificaciones = ({ product, country }: any) => {
 	const { certifications, setCertifications, activeStep } = useCheckout();
 	const [certificados, setCertificados] = useState<any[]>([]);
 
-	console.log(product);
+	console.log(product.certificacion_relacionada);
 
 	const certificationsByCountry: Record<string, string[]> = {
 		ar: [
@@ -42,43 +42,49 @@ const Certificaciones = ({ product, country }: any) => {
 		uy: ['euneiz-faro', 'universidad-catolica-san-antonio-de-murcia-ucam'],
 	};
 
+	// useEffect(() => {
+	// 	const fetchCertificados = async () => {
+	// 		try {
+	// 			const titles = certificationsByCountry[country] || [];
+	// 			const normalizedCountry = country === 'ar' ? 'arg' : country;
+
+	// 			const requests = titles.map((title) =>
+	// 				ssr.getSingleProductCMS(title, normalizedCountry).catch((err) => {
+	// 					console.error(`Error al obtener certificado para: ${title}`, err);
+	// 					return null; // Evita que toda la promesa falle
+	// 				}),
+	// 			);
+
+	// 			const results = await Promise.all(requests);
+
+	// 			console.log(results);
+
+	// 			// Filtrás los nulls o falsos
+	// 			const certificados = results.filter(Boolean).map((result) => result.product);
+
+	// 			console.log(certificados);
+
+	// 			setCertificados(certificados);
+	// 		} catch (error) {
+	// 			console.error('Error al obtener certificados:', error);
+	// 		}
+	// 	};
+
+	// 	if (country) {
+	// 		fetchCertificados();
+	// 	}
+	// }, [country]);
+
 	useEffect(() => {
-		const fetchCertificados = async () => {
-			try {
-				const titles = certificationsByCountry[country] || [];
-				const normalizedCountry = country === 'ar' ? 'arg' : country;
-
-				const requests = titles.map((title) =>
-					ssr.getSingleProductCMS(title, normalizedCountry).catch((err) => {
-						console.error(`Error al obtener certificado para: ${title}`, err);
-						return null; // Evita que toda la promesa falle
-					}),
-				);
-
-				const results = await Promise.all(requests);
-
-				console.log(results);
-
-				// Filtrás los nulls o falsos
-				const certificados = results.filter(Boolean).map((result) => result.product);
-
-				console.log(certificados);
-
-				setCertificados(certificados);
-			} catch (error) {
-				console.error('Error al obtener certificados:', error);
-			}
-		};
-
-		if (country) {
-			fetchCertificados();
+		if (product?.certificacion_relacionada) {
+			setCertificados(product.certificacion_relacionada);
 		}
-	}, [country]);
+	}, [product]);
 
 	const certificaciones: Certification[] = certificados.map((cert) => ({
 		name: cert.title,
-		price: Number(cert.prices.total_price.replace(/[^\d]/g, '')),
-		product_code: cert.codes[0].unique_code,
+		price: Number(cert.total_price.replace(/[^\d]/g, '')),
+		product_code: cert.unique_code,
 	}));
 
 	const isSelected = (cert: Certification) => {
