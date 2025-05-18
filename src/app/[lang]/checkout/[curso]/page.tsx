@@ -24,10 +24,14 @@ const CursoCheckout: FC<Props> = async ({ params }) => {
 					<div className='overflow-visible max-w-[1400px] mx-auto -translate-y-12 bg-white h-full pb-10 rounded-[30px]'>
 						<CheckoutHeader />
 						<div className='flex flex-col gap-6 md:flex-row md:px-16'>
+							<div className='block w-full p-5 md:hidden'>
+								<CheckoutResume product={product} country={params.lang} />
+							</div>
+
 							<div className='flex-1 p-5 md:p-0'>
 								<CheckoutContent product={product} country={params.lang} />
 							</div>
-							<div className='w-full p-5 md:w-1/3 md:p-0'>
+							<div className='hidden w-full p-5 md:block md:w-1/3 md:p-0'>
 								<CheckoutResume product={product} country={params.lang} />
 							</div>
 						</div>
