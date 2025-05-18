@@ -38,22 +38,22 @@ export default function CourseInstitutions({ slug, lang, onHideEmpty }: CourseIn
 	if (!institutions || institutions.length === 0) return null;
 
 	return (
-		<section className='md:py-3 text-left h-fit'>
+		<section className='text-left md:py-3 h-fit'>
 			<h2 className='text-xl md:text-left text-center md:text-2xl text-[#1A1A1A] font-medium mb-6 w-fit mx-auto md:mx-0'>
 				Estas instituciones respaldan tu aprendizaje y revalorizan tu perfil profesional
 			</h2>
 
 			{/* Desktop grid */}
-			<div className='hidden md:flex md:gap-3 gap-4 flex-wrap items-center justify-center md:px-0 px-2'>
+			<div className='flex-wrap items-center justify-center hidden gap-4 px-2 md:flex md:gap-3 md:px-0'>
 				{institutions.map((inst) => (
 					<InstitutionCard key={inst.id} inst={inst} />
 				))}
 			</div>
 
 			{/* Mobile carousel */}
-			<div ref={sliderRef} className='sm:keen-slider flex md:hidden'>
+			<div ref={sliderRef} className='flex sm:keen-slider md:hidden'>
 				{institutions.map((inst) => (
-					<div key={inst.id} className='keen-slider__slide flex justify-center md:hidden'>
+					<div key={inst.id} className='flex justify-center keen-slider__slide md:hidden'>
 						<InstitutionCard inst={inst} />
 					</div>
 				))}
@@ -65,13 +65,7 @@ export default function CourseInstitutions({ slug, lang, onHideEmpty }: CourseIn
 function InstitutionCard({ inst }: { inst: any }) {
 	return (
 		<div className='bg-[#f7f9ff] rounded-[30px] p-7 h-32 flex items-center justify-center relative w-[250px]'>
-			<Image
-				src={inst.image}
-				alt={inst.title}
-				width={200}
-				height={80}
-				className='object-contain mix-blend-multiply max-h-[80px]'
-			/>
+			<Image src={inst.image} alt={inst.title} width={200} height={80} className='object-contain mix-blend-multiply' />
 			{inst.description && (
 				<div className='absolute bottom-2 right-2 group'>
 					<InfoIcon />
