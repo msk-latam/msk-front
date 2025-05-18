@@ -11,7 +11,7 @@ export async function PUT(request: NextRequest) {
 	if (!token || !email) {
 		return NextResponse.json({ message: 'Authentication required' }, { status: 401 });
 	}
-
+	console.log('test');
 	try {
 		// Use the transformed payload
 		const response = await fetch(`${EXTERNAL_API_ENDPOINT}${email}`, {
