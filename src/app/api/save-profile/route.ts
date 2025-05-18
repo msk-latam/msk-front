@@ -11,6 +11,7 @@ export async function PUT(request: NextRequest) {
 	if (!token || !email) {
 		return NextResponse.json({ message: 'Authentication required' }, { status: 401 });
 	}
+	console.log();
 
 	try {
 		// Use the transformed payload
