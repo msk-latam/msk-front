@@ -1,3 +1,4 @@
+import { environmentBackend } from '@/utils/isProductive';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
@@ -10,7 +11,7 @@ export async function GET() {
 	}
 
 	try {
-		const res = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/profile/${email}`, {
+		const res = await fetch(`${environmentBackend}/api/profile/${email}`, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 				Accept: 'application/json',

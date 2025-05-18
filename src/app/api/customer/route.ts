@@ -1,3 +1,4 @@
+import { environmentBackend } from '@/utils/isProductive';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -82,7 +83,8 @@ export async function PUT(request: NextRequest) {
 		console.log('email', email);
 		console.log('requestBody', requestBody);
 
-		const apiResponse = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/customer/${email}`, {
+		const apiResponse = await fetch(`${environmentBackend}/api/customer/${email}`, {
+			// const apiResponse = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/customer/${email}`, {
 			method: 'PUT',
 			headers: {
 				Accept: 'application/json',

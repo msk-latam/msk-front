@@ -1,3 +1,4 @@
+import { environmentBackend } from '@/utils/isProductive';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -136,7 +137,7 @@ export async function GET(request: NextRequest) {
 	}
 
 	try {
-		const customerRes = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/customer/${email}`, {
+		const customerRes = await fetch(`${environmentBackend}/api/customer/${email}`, {
 			headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' },
 		});
 
@@ -528,7 +529,7 @@ export async function GET(request: NextRequest) {
 		}
 
 		/* por ultimo, obtener los intereses adicionales de la api/interests */
-		const interestsResponse = await fetch(`${process.env.NEXT_PUBLIC_PUBLIC_URL}/api/customer/interests/${email}`, {
+		const interestsResponse = await fetch(`${environmentBackend}/api/customer/interests/${email}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',

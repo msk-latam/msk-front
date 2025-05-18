@@ -1,5 +1,6 @@
 // /app/api/auth/callback/route.ts
 import { auth0 } from '@/lib/auth0';
+import { environmentBackend } from '@/utils/isProductive';
 import { Session } from '@auth0/nextjs-auth0/edge';
 import { cookies } from 'next/headers';
 import { NextRequest } from 'next/server';
@@ -41,7 +42,8 @@ const signup = async (email: string, first_name: string, last_name: string, lang
 		identification: '',
 	};
 
-	const response = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/signup`, {
+	const response = await fetch(`${environmentBackend}/api/signup`, {
+		// const response = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/signup`, {
 		method: 'POST',
 		headers: {
 			Accept: 'application/json',

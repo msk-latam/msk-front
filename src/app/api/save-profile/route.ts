@@ -1,7 +1,8 @@
+import { environmentBackend } from '@/utils/isProductive';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
-const EXTERNAL_API_ENDPOINT = 'https://dev.msklatam.tech/msk-laravel/public/api/customer/';
+const EXTERNAL_API_ENDPOINT = `${environmentBackend}/api/customer/`;
 
 export async function PUT(request: NextRequest) {
 	const token = cookies().get('access_token')?.value;
