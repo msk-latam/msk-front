@@ -13,7 +13,7 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 	const { ficha, total_price } = product;
 	const { paymentType, appliedCoupon, activeStep, certifications } = useCheckout();
 
-	console.log(product);
+	console.log(certifications);
 
 	const currencies: any = {
 		cl: 'CLP',
@@ -199,7 +199,7 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 				<span className='text-sm font-medium text-[#6474A6]'>TOTAL</span>
 				<span className='text-3xl font-bold text-[#392C35]'>{`${currency} $${formatPesoArgentino(totalWithDiscount)}`}</span>
 
-				{installmentValueWithDiscount !== 0 && (
+				{installmentValueWithDiscount !== 0 && !isFree && (
 					<p className='mt-2 text-sm text-[#6474A6]'>
 						{`${installmentNumber} pagos de `}
 						<span className='font-bold'>{`${currency} $${formatPesoArgentino(installmentValueWithDiscount)}`}</span>
