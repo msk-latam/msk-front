@@ -2,85 +2,21 @@
 
 import React, { useEffect, useState } from 'react';
 import { Certification, useCheckout } from '../CheckoutContext';
-import { getJSONByCountry } from '@/app/products';
 
 const Certificaciones = ({ product, country }: any) => {
-	const { certifications, setCertifications } = useCheckout();
+	const { certifications, setCertifications, activeStep } = useCheckout();
 	const [certificados, setCertificados] = useState<any[]>([]);
 
-	const certificationsByCountry: Record<string, string[]> = {
-		ar: [
-			'EUNEIZ FARO',
-			'UDIMA',
-			'EUNEIZ',
-			'SAXUM',
-			'EUNEIZ APOSTILLADA',
-			'CMSC - Consejo Médico de la Provincia de Santa Cruz',
-			'Universidad Católica San Antonio de Murcia (UCAM)',
-		],
-		cl: [
-			'EUNEIZ FARO',
-			'UDIMA',
-			'EUNEIZ',
-			'SAXUM',
-			'EUNEIZ APOSTILLADA',
-			'Universidad Católica San Antonio de Murcia (UCAM)',
-		],
-		ec: [
-			'EUNEIZ FARO',
-			'UDIMA',
-			'EUNEIZ',
-			'SAXUM',
-			'EUNEIZ APOSTILLADA',
-			'AFEME/CUENCA',
-			'Universidad Católica San Antonio de Murcia (UCAM)',
-		],
-		mx: [
-			'EUNEIZ FARO',
-			'UDIMA',
-			'EUNEIZ',
-			'SAXUM',
-			'EUNEIZ APOSTILLADA',
-			'Universidad Católica San Antonio de Murcia (UCAM)',
-		],
-		pe: ['EUNEIZ FARO', 'SPMI', 'Universidad Católica San Antonio de Murcia (UCAM)'],
-		co: ['EUNEIZ FARO', 'FMC', 'Universidad Católica San Antonio de Murcia (UCAM)'],
-		cr: ['EUNEIZ FARO', 'Universidad Católica San Antonio de Murcia (UCAM)'],
-		sv: ['EUNEIZ FARO', 'Universidad Católica San Antonio de Murcia (UCAM)'],
-		gt: ['EUNEIZ FARO', 'Universidad Católica San Antonio de Murcia (UCAM)'],
-		hn: ['EUNEIZ FARO', 'Universidad Católica San Antonio de Murcia (UCAM)'],
-		ni: ['EUNEIZ FARO', 'Universidad Católica San Antonio de Murcia (UCAM)'],
-		pa: ['EUNEIZ FARO', 'Universidad Católica San Antonio de Murcia (UCAM)'],
-		py: ['EUNEIZ FARO', 'Universidad Católica San Antonio de Murcia (UCAM)'],
-		uy: ['EUNEIZ FARO', 'Universidad Católica San Antonio de Murcia (UCAM)'],
-	};
-
 	useEffect(() => {
-		const fetchCertificados = async () => {
-			try {
-				const data = await getJSONByCountry(country);
-				const allProducts = data.products || [];
-
-				const validTitles = certificationsByCountry[country] || [];
-
-				const filtered = allProducts.filter((product: any) => validTitles.includes(product.title));
-
-				setCertificados(filtered);
-			} catch (error) {
-				console.error('Error al obtener certificados:', error);
-			} finally {
-			}
-		};
-
-		if (country) {
-			fetchCertificados();
+		if (product?.certificacion_relacionada) {
+			setCertificados(product.certificacion_relacionada);
 		}
-	}, [country]);
+	}, [product]);
 
 	const certificaciones: Certification[] = certificados.map((cert) => ({
 		name: cert.title,
 		price: Number(cert.total_price.replace(/[^\d]/g, '')),
-		product_code: cert.product_code,
+		product_code: cert.unique_code,
 	}));
 
 	const isSelected = (cert: Certification) => {
@@ -125,29 +61,76 @@ const Certificaciones = ({ product, country }: any) => {
 	};
 	const currency = currencies[country] || 'USD';
 
+	const decodeHtml = (htmlString: string) => {
+		const txt = document.createElement('textarea');
+		txt.innerHTML = htmlString;
+		return txt.value;
+	};
+
+	const isFree = product.prices.total_price === '0' || product.prices.total_price === '';
+	const mskCert: Certification = {
+		name: 'MSK Digital',
+		price: isFree ? 25000 : 0,
+		product_code: 2000012,
+	};
+	useEffect(() => {
+		if (!isFree) {
+			toggleCertification(mskCert);
+		}
+	}, [isFree]);
+
 	return (
 		<div>
-			<h2 className='mb-4 text-lg font-semibold'>Certificaciones</h2>
-			<ul className='space-y-3'>
-				{certificaciones.map((cert: any) => (
-					<li key={cert.name} className='flex items-center justify-between'>
-						<label className='flex items-center gap-3'>
-							<input
-								type='checkbox'
-								checked={isSelected(cert)}
-								onChange={() => toggleCertification(cert)}
-								className='w-4 h-4 text-[#9200AD] border-[#9200AD] focus:ring-[#9200AD]'
-							/>
-							<span className='text-sm text-[#392C35] w-[200px]'>{cert.name}</span>
-						</label>
-						<span className='text-sm text-[#6474A6] text-right'>{`${currency} $${formatPesoArgentino(cert.price)}`}</span>
-					</li>
-				))}
-			</ul>
-			<div className='flex justify-between mt-4'>
-				<p>Total Certificaciones</p>
-				<span>{`${currency} $${formatPesoArgentino(certificationsTotal)}`}</span>
-			</div>
+			{
+				<>
+					<h2 className='mb-4 text-lg font-semibold'>Certificaciones</h2>
+					<ul className='space-y-3'>
+						{activeStep !== 3 && (
+							<>
+								{!isFree && (
+									<li key={mskCert.name} className='flex items-center justify-between'>
+										<label className='flex items-center gap-3'>
+											<input
+												type='checkbox'
+												checked={!isFree || isSelected(mskCert)}
+												onChange={() => toggleCertification(mskCert)}
+												disabled={!isFree}
+												className='w-4 h-4 text-[#9200AD] border-[#9200AD] focus:ring-[#9200AD]'
+											/>
+											<span className='text-sm text-[#392C35] w-[200px]'>{decodeHtml(mskCert.name)}</span>
+										</label>
+										<span className={`text-sm ${isFree ? 'text-[#6474A6]' : 'text-green-600'} text-right`}>
+											{isFree ? `${currency} $${formatPesoArgentino(mskCert.price)}` : 'Bonificado'}
+										</span>
+									</li>
+								)}
+
+								{/* Otras certificaciones */}
+								{certificaciones.map((cert: any) => (
+									<li key={cert.name} className='flex items-center justify-between'>
+										<label className='flex items-center gap-3'>
+											<input
+												type='checkbox'
+												checked={isSelected(cert)}
+												onChange={() => toggleCertification(cert)}
+												className='w-4 h-4 text-[#9200AD] border-[#9200AD] focus:ring-[#9200AD]'
+											/>
+											<span className='text-sm text-[#392C35] w-[200px]'>{decodeHtml(cert.name)}</span>
+										</label>
+										<span className='text-sm text-[#6474A6] text-right'>
+											{`${currency} $${formatPesoArgentino(cert.price)}`}
+										</span>
+									</li>
+								))}
+							</>
+						)}
+					</ul>
+					<div className='flex justify-between mt-4'>
+						<p>Total Certificaciones</p>
+						<span>{`${currency} $${formatPesoArgentino(certificationsTotal)}`}</span>
+					</div>
+				</>
+			}
 		</div>
 	);
 };

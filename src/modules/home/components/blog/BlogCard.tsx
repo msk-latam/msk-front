@@ -1,7 +1,9 @@
 'use client';
 
+import { supportedLanguages } from '@/config/languages';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 
 type ActionVariant = 'primary' | 'secondary' | 'tertiary';
@@ -14,12 +16,12 @@ interface BlogAction {
 interface BlogCardProps {
 	title: string;
 	subtitle?: string;
-	author: string;
+	author: { name: string; image?: string }[];
 	authorImage?: string;
 	date: string;
-	readTime: string;
+	readTime?: string | null;
 	tags: string[];
-	image: string;
+	image?: string;
 	action: BlogAction;
 	featured?: boolean;
 	link: string;
@@ -27,10 +29,9 @@ interface BlogCardProps {
 }
 
 interface ArticleMetaProps {
-	author: string;
-	authorImage?: string;
+	authors: { name: string; image?: string }[];
 	date: string;
-	readTime: string;
+	readTime?: string | null;
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({
@@ -48,15 +49,45 @@ const BlogCard: React.FC<BlogCardProps> = ({
 	bgColor,
 }) => {
 	const cardStyle = bgColor ? { backgroundColor: bgColor } : undefined;
+	const pathname = usePathname();
+	const firstSegment = pathname?.split('/')[1];
+	const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'ar';
+	console.log(`readTime recibido para "${title}":`, readTime);
+
+	function localizeExternalBlogUrl(lang: string, url: string): string {
+		try {
+			const parsed = new URL(url);
+			const path = parsed.pathname;
+			return lang === 'ar' ? `${parsed.origin}${path}` : `${parsed.origin}/${lang}${path}`;
+		} catch {
+			return url;
+		}
+	}
+	console.log(`[BlogCard] "${title}" readTime recibido:`, readTime);
 
 	return (
-		<Link href={link} className='group' passHref>
+		<div
+			onClick={() => (window.location.href = localizeExternalBlogUrl(lang, link))}
+			role='button'
+			tabIndex={0}
+			onKeyDown={(e) => {
+				if (e.key === 'Enter') {
+					window.location.href = localizeExternalBlogUrl(lang, link);
+				}
+			}}
+			className='group focus:outline-none h-full'
+		>
 			<article
 				className='rounded-2xl overflow-hidden h-full shadow-sm border border-gray-100 bg-[#F7F7F8] flex flex-col transform transition-transform duration-300 group-hover:scale-105 cursor-pointer'
 				style={cardStyle}
 			>
 				<div className='relative w-full h-[320px]'>
-					<Image src={image} alt={`Imagen destacada: ${title}`} fill className='object-cover' />
+					<Image
+						src={image || '/images/blog-placeholder.jpg'}
+						alt={`Imagen destacada: ${title}`}
+						fill
+						className='object-cover'
+					/>
 				</div>
 
 				<div className='p-4 md:p-5 flex flex-col flex-1 justify-between'>
@@ -66,7 +97,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
 
 						{subtitle && <p className='text-gray-600 font-inter text-base mb-3 line-clamp-2'>{subtitle}</p>}
 
-						<ArticleMeta author={author} authorImage={authorImage} date={date} readTime={readTime} />
+						<ArticleMeta authors={author} date={date} readTime={readTime} />
 					</div>
 
 					<div className='flex flex-row items-center justify-between mt-4 gap-2'>
@@ -106,10 +137,9 @@ const BlogCard: React.FC<BlogCardProps> = ({
 								>
 									<path strokeLinecap='round' strokeLinejoin='round' d='M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z' />
 								</svg>
-								<span>{readTime.replace('read', 'de lectura')}</span>
+								<span>{readTime && !isNaN(Number(readTime)) ? `${readTime} min de lectura` : 'NO ME TOMA LA INFO'}</span>
 							</div>
 						</div>
-
 						<div className='flex justify-end'>
 							<div
 								className={`px-4 py-2 rounded-full text-sm font-medium shadow-md ${
@@ -126,7 +156,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
 					</div>
 				</div>
 			</article>
-		</Link>
+		</div>
 	);
 };
 
@@ -156,7 +186,7 @@ const TagList: React.FC<{ tags: string[] }> = ({ tags }) => (
 	</div>
 );
 
-const ArticleMeta: React.FC<ArticleMetaProps> = ({ author, authorImage, date }) => {
+const ArticleMeta: React.FC<ArticleMetaProps> = ({ authors, date, readTime }) => {
 	const formatDate = (dateString: string) =>
 		new Intl.DateTimeFormat('es-ES', {
 			day: 'numeric',
@@ -164,24 +194,29 @@ const ArticleMeta: React.FC<ArticleMetaProps> = ({ author, authorImage, date }) 
 			year: 'numeric',
 		}).format(new Date(dateString));
 
+	const mainAuthor = authors[0];
+
 	return (
 		<div className='flex items-center gap-2 mt-4 text-xs text-gray-500'>
-			<div className='w-5 h-5 rounded-full overflow-hidden bg-gray-200'>
-				<Image
-					src={authorImage || '/images/blog/doctor-with-stetoscope.png'}
-					alt={`Foto de ${author}`}
-					width={20}
-					height={20}
-				/>
-			</div>
-			<span className='flex items-center gap-1 font-semibold'>
-				<span className='w-1.5 h-1.5 bg-[#6474A6] rounded-full'></span>
-				{author}
-			</span>
-			<span className='text-gray-400'>•</span>
+			{mainAuthor && (
+				<>
+					<div className='w-5 h-5 rounded-full overflow-hidden bg-gray-200'>
+						<Image
+							src={mainAuthor.image || '/images/blog/doctor-with-stetoscope.png'}
+							alt={`Foto de ${mainAuthor.name}`}
+							width={20}
+							height={20}
+						/>
+					</div>
+					<span className='flex items-center gap-1 font-semibold'>
+						<span className='w-1.5 h-1.5 bg-[#6474A6] rounded-full'></span>
+						{mainAuthor.name}
+					</span>
+					<span className='text-gray-400'>•</span>
+				</>
+			)}
 			<time dateTime={date}>{formatDate(date)}</time>
 		</div>
 	);
 };
-
 export default BlogCard;

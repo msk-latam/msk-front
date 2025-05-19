@@ -13,8 +13,11 @@ interface Props {
   setCurrentView: (view: string) => void;
   setSelectedCategory: (category: string | null) => void;
   isMobile?: boolean;
+  isAuthenticated?: boolean;
+  isLoading?: boolean;
   onClose?: () => void;
 }
+
 
 const DropdownContent: React.FC<Props> = ({
   currentView,
@@ -23,6 +26,8 @@ const DropdownContent: React.FC<Props> = ({
   setSelectedCategory,
   isMobile = true,
   onClose,
+  isAuthenticated,
+  isLoading,
 }) => {
   const [discoverChildView, setDiscoverChildView] = useState<string | null>(null);
   const [discoverSelectedCategory, setDiscoverSelectedCategory] = useState<string | null>(null);
@@ -145,8 +150,18 @@ const DropdownContent: React.FC<Props> = ({
       <div ref={dropdownRef} className={`${bgClass} overflow-hidden`}>
         {(() => {
           switch (currentView) {
-            case "main":
-              return <ViewMain navigateTo={navigateTo} isMobile={false} onClose={onClose} />;
+case "main":
+  return (
+    <ViewMain
+      navigateTo={navigateTo}
+      isMobile={isMobile} // ✅ Pasa correctamente el valor real
+      onClose={onClose}
+      isAuthenticated={isAuthenticated ?? false}
+      isLoading={isLoading ?? false}
+    />
+  );
+
+
             case "specialtyDetail":
               return (
                 <ViewSpecialtyDetail
@@ -174,8 +189,17 @@ const DropdownContent: React.FC<Props> = ({
   // Mobile layout
   const getContentMobile = () => {
     switch (currentView) {
-      case "main":
-        return <ViewMain navigateTo={navigateTo} isMobile onClose={onClose} />;
+case "main":
+  return (
+    <ViewMain
+      navigateTo={navigateTo}
+      isMobile
+      onClose={onClose}
+      isAuthenticated={isAuthenticated ?? false}
+      isLoading={isLoading ?? false}
+    />
+  );
+
       case "discover":
         return <ViewDiscover navigateTo={navigateTo} isMobile onClose={onClose} />;
       case "specialty":

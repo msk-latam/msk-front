@@ -24,6 +24,10 @@ export type CursoWP = {
 	duration: string | null;
 	categories: { name: string }[];
 	cedente: any[];
+	topics?: number;
+	hours?: number;
+	enrolled?: number;
+	certificate?: string;
 };
 
 export type CursoCardProps = {
@@ -48,14 +52,14 @@ export type OportunidadesResponse = {
 	gratuitos: CursoWP[];
 };
 
-export const mapCursoWPToCursoCard = (curso: CursoWP): CursoCardProps => ({
+export const mapCursoWPToCursoCard = (curso: any): CursoCardProps => ({
 	id: curso.id,
 	categoria: curso.categories?.[0]?.name || 'General',
 	titulo: curso.title,
-	temas: Math.floor(Math.random() * 10 + 5),
-	horas: parseInt(curso.duration || '12'),
-	inscriptos: Math.floor(Math.random() * 10000 + 1000),
-	certificado: 'Incluido',
+	temas: curso.themes ?? 0, // asegurate que este sea el nombre correcto
+	horas: curso.hours ?? parseInt(curso.duration || '0'),
+	inscriptos: curso.inscriptions ?? 0,
+	certificado: curso.certificate === true ? 'Certificación: incluída' : '',
 	imagen: curso.featured_image || '',
 	link: curso.link,
 });
@@ -120,7 +124,7 @@ export const mapMasterclassToProfessionals = (mc: MasterclassAPIItem): Professio
 	}));
 };
 
-// BLOG SECTION
+//BLOG SECTION
 
 export type Category = {
 	id: number;
@@ -128,19 +132,25 @@ export type Category = {
 	slug: string;
 };
 
-export type BlogPost = {
+export interface BlogAuthor {
+	id: number;
+	name: string;
+	image?: string;
+}
+
+export interface BlogPost {
 	id: number;
 	title: string;
 	subtitle?: string;
-	author: string;
+	author: BlogAuthor[];
 	date: string;
-	readTime: string | null;
-	tags: string[];
+	readTime?: string | null;
+	tags?: string[];
 	featured_image: string;
 	link: string;
-	categories: Category[];
-	featured: string; // Marks if the post is featured
-};
+	categories?: Category[];
+	featured?: string;
+}
 
 export type BlogResponse = {
 	title: string;
@@ -149,6 +159,23 @@ export type BlogResponse = {
 	featured_blog_guides: BlogPost[];
 	featured_blog_infographies: BlogPost[];
 };
+
+export const sanitizeBlogPost = (post: BlogPost): BlogPost => ({
+	...post,
+	subtitle: post.subtitle?.trim() || undefined,
+	author: Array.isArray(post.author)
+		? post.author.map((a) => ({
+				id: a.id,
+				name: a.name || 'No informado',
+				image: a.image || undefined,
+		  }))
+		: [],
+	readTime: typeof post.readTime === 'string' && post.readTime.trim() !== '' ? post.readTime : '3',
+	tags: post.tags || [],
+	categories: post.categories || [],
+	featured_image: post.featured_image || '/images/blog-placeholder.jpg',
+	link: post.link || '#',
+});
 
 // FQA SECTION
 

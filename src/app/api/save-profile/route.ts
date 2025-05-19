@@ -1,7 +1,8 @@
+import { environmentBackend } from '@/utils/isProductive';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
-const EXTERNAL_API_ENDPOINT = 'https://dev.msklatam.tech/msk-laravel/public/api/customer/';
+const EXTERNAL_API_ENDPOINT = `${environmentBackend}/api/customer/`;
 
 export async function PUT(request: NextRequest) {
 	const token = cookies().get('access_token')?.value;
@@ -10,7 +11,7 @@ export async function PUT(request: NextRequest) {
 	if (!token || !email) {
 		return NextResponse.json({ message: 'Authentication required' }, { status: 401 });
 	}
-
+	console.log('test');
 	try {
 		// Use the transformed payload
 		const response = await fetch(`${EXTERNAL_API_ENDPOINT}${email}`, {

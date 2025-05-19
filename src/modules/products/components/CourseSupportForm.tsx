@@ -4,22 +4,48 @@ import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { getCountries, getCountryCallingCode } from 'react-phone-number-input';
 import { getName } from 'country-list';
 import CountrySelect from '@/modules/login/components/hooks/CountrySelect';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { careerOptions } from '@/data/careers';
 import { professions } from '@/data/professions';
 import { specialtiesGroup } from '@/data/specialties';
 import { years } from '@/data/years';
+import { getCourse } from '../service/courseService';
+import { usePathname } from 'next/navigation';
 
 interface Specialty {
 	id: number;
 	name: string;
 }
-const getCountryNameByCode = (dialCode: string): string => {
-	const countryCode = getCountries().find((code) => `+${getCountryCallingCode(code)}` === dialCode);
-	return countryCode ? getName(countryCode) ?? '' : '';
-};
 
-export default function CourseSupportForm() {
+export default function CourseSupportForm({ slug, lang }: any) {
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : 'ar';
+
+	const countryMapping: any = {
+		ar: 'Argentina',
+		bo: 'Bolivia',
+		br: 'Brasil',
+		cl: 'Chile',
+		co: 'Colombia',
+		cr: 'Costa Rica',
+		cu: 'Cuba',
+		do: 'República Dominicana',
+		ec: 'Ecuador',
+		sv: 'El Salvador',
+		gt: 'Guatemala',
+		hn: 'Honduras',
+		mx: 'México',
+		ni: 'Nicaragua',
+		pa: 'Panamá',
+		py: 'Paraguay',
+		pe: 'Perú',
+		pr: 'Puerto Rico',
+		uy: 'Uruguay',
+		ve: 'Venezuela',
+	};
+
+	const countryComplete = countryMapping[country];
 	const [formData, setFormData] = useState({
 		name: '',
 		lastName: '',
@@ -33,6 +59,21 @@ export default function CourseSupportForm() {
 		message: '',
 		acceptTerms: false,
 	});
+	const [course, setCourse] = useState(null);
+
+	useEffect(() => {
+		const fetchCourse = async () => {
+			try {
+				const data = await getCourse(slug, lang);
+				console.log(data);
+				setCourse(data);
+			} catch (error) {
+				console.error('Error fetching course:', error);
+			}
+		};
+
+		fetchCourse();
+	}, [slug, lang]);
 
 	const { executeRecaptcha } = useGoogleReCaptcha();
 	const [formSent, setFormSent] = useState(false);
@@ -44,6 +85,9 @@ export default function CourseSupportForm() {
 
 	const [otherProfession, setOtherProfession] = useState<string>('');
 	const [otherSpecialty, setOtherSpecialty] = useState<string>('');
+	const [showSuccessModal, setShowSuccessModal] = useState(false);
+	const [submitted, setSubmitted] = useState(false);
+
 	const [filteredSpecialties, setFilteredSpecialties] = useState<Array<Specialty>>([]);
 	const professionId = professions.find((p) => p.name === formData.profession)?.id;
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -57,6 +101,8 @@ export default function CourseSupportForm() {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setShowSuccessModal(true);
+		setSubmitted(false); // por si querés reactivar el botón luego
 
 		if (!formData.name || !formData.email || !formData.acceptTerms) {
 			setFormError('Por favor, completá los campos obligatorios.');
@@ -64,7 +110,6 @@ export default function CourseSupportForm() {
 			return;
 		}
 
-		const country = getCountryNameByCode(formData.areaCode);
 		const urlOrigen = typeof window !== 'undefined' ? window.location.href : '';
 
 		const utmState = {
@@ -111,14 +156,15 @@ export default function CourseSupportForm() {
 			Otra_especialidad: formData.specialty === 'Otra Especialidad' ? formData.otherSpecialty : '',
 			Description: formData.message,
 			Preferencia_de_contactaci_n: '',
-			Pais: country,
+			Pais: countryComplete,
+
 			Terms_And_Conditions: true,
 			year: '',
 			career: '',
-			URL_ORIGEN: urlOrigen,
-			leadSource: 'Formulario de soporte de cursos',
-			Ebook_consultado: null,
-			Cursos_consultados: null,
+			URL_ORIGEN: urlOrigen.slice(0, 255),
+			leadSource: 'Solicitud de contacto',
+			Ebook_consultado: course?.resource === 'downloadable' ? course.title : null,
+			Cursos_consultados: course?.resource === 'course' ? course.title : null,
 			...utmState,
 		};
 
@@ -208,7 +254,7 @@ export default function CourseSupportForm() {
 			setCareer(value);
 		} else if (name === 'year') {
 			setYear(value);
-		} else if (name === 'speciality') {
+		} else if (name === 'specialty') {
 			setSpecialty(value);
 		}
 
@@ -217,6 +263,23 @@ export default function CourseSupportForm() {
 			[name]: value,
 		}));
 	};
+
+	const isFormValid = () => {
+		return (
+			formData.name.trim() !== '' &&
+			formData.lastName.trim() !== '' &&
+			formData.email.trim() !== '' &&
+			formData.phone.trim() !== '' &&
+			formData.acceptTerms &&
+			formData.profession.trim() !== '' &&
+			(formData.profession !== 'Otra profesión' || formData.otherProfession.trim() !== '') &&
+			(formData.profession === 'Estudiante'
+				? career.trim() !== '' && year.trim() !== ''
+				: formData.specialty.trim() !== '' &&
+				  (formData.specialty !== 'Otra Especialidad' || formData.otherSpecialty.trim() !== ''))
+		);
+	};
+
 	return (
 		<div className='w-full bg-white rounded-[38px] md:py-16 md:px-9 px-6 py-9 z-[9] space-y-6' id='course-support-form'>
 			<h2 className='text-[24px] md:text-[32px] font-raleway font-bold text-[#1A1A1A]'>
@@ -226,7 +289,7 @@ export default function CourseSupportForm() {
 				Nuestro equipo de especialistas en educación médica está listo para asesorarte. No dudes en escribirnos.
 			</p>
 
-			<form className='grid grid-cols-1 md:grid-cols-2 gap-4' onSubmit={handleSubmit}>
+			<form className='grid grid-cols-1 gap-4 md:grid-cols-2' onSubmit={handleSubmit}>
 				<input
 					name='name'
 					value={formData.name}
@@ -250,7 +313,12 @@ export default function CourseSupportForm() {
 						type='tel'
 						name='phone'
 						value={formData.phone}
-						onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value.replace(/\D/g, '') }))}
+						onChange={(e) =>
+							setFormData((prev) => ({
+								...prev,
+								phone: e.target.value.replace(/\D/g, ''),
+							}))
+						}
 						placeholder='Ingresar teléfono'
 						className='rounded-[16px] border-0 focus:outline-none focus:ring-0 w-full text-[#6E737C]'
 					/>
@@ -266,7 +334,7 @@ export default function CourseSupportForm() {
 				/>
 
 				{/* Profesión */}
-				<div className='flex flex-col gap-4 w-full'>
+				<div className='flex flex-col w-full gap-4'>
 					<select
 						name='profession'
 						value={profession}
@@ -301,9 +369,9 @@ export default function CourseSupportForm() {
 
 				<div>
 					{profession !== 'Estudiante' && (
-						<div className='flex flex-col gap-4 w-full'>
+						<div className='flex flex-col w-full gap-4'>
 							<select
-								name='speciality'
+								name='specialty'
 								value={specialty}
 								onChange={handleSelectChange}
 								className='w-full text-base rounded-2xl border border-[#DBDDE2] p-3 pl-4 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7]'
@@ -335,7 +403,7 @@ export default function CourseSupportForm() {
 						</div>
 					)}
 					{profession === 'Estudiante' && (
-						<div className='flex flex-col md:flex-row gap-4 w-full'>
+						<div className='flex flex-col w-full gap-4 md:flex-row'>
 							<select
 								name='career'
 								value={career}
@@ -364,7 +432,7 @@ export default function CourseSupportForm() {
 								))}
 							</select>
 
-							<input type='hidden' name='speciality' value={specialty} />
+							<input type='hidden' name='specialty' value={specialty} />
 						</div>
 					)}
 				</div>
@@ -379,7 +447,7 @@ export default function CourseSupportForm() {
 				/>
 
 				{/* Checkbox + Botón */}
-				<div className='col-span-1 md:col-span-2 flex flex-col md:flex-row justify-between items-center gap-4 md:mt-4'>
+				<div className='flex flex-col items-center justify-between col-span-1 gap-4 md:col-span-2 md:flex-row md:mt-4'>
 					<div className='flex items-center gap-2'>
 						<input
 							type='checkbox'
@@ -399,20 +467,45 @@ export default function CourseSupportForm() {
 
 					<button
 						type='submit'
-						className='bg-[#9200AD] hover:bg-[#6b1679] text-white px-6 py-2 rounded-full flex items-center gap-2 w-full md:w-fit justify-center md:justify-end'
+						disabled={submitted || !isFormValid()}
+						className={`px-6 py-2 rounded-full flex items-center gap-2 w-full md:w-fit justify-center md:justify-end transition-colors duration-200
+    ${
+			submitted || !isFormValid()
+				? 'bg-gray-300 text-white opacity-60 cursor-not-allowed'
+				: 'bg-[#9200AD] text-white hover:bg-[#6b1679]'
+		}
+  `}
 					>
-						Enviar
+						{submitted ? 'Enviando...' : 'Enviar'}
 					</button>
 				</div>
 			</form>
 
 			{formSent && (
-				<div className='text-green-700 bg-green-100 px-4 py-2 rounded-md mt-4'>
-					¡Gracias! En breve un asesor se comunicará con vos.
+				<div className='px-4 py-2 mt-4 text-green-700 bg-green-100 rounded-md'>
+					¡Gracias! En breve un asesor se pondrá en contacto contigo.
 				</div>
 			)}
 
-			{formError && <div className='text-red-700 bg-red-100 px-4 py-2 rounded-md mt-4'>{formError}</div>}
+			{formError && <div className='px-4 py-2 mt-4 text-red-700 bg-red-100 rounded-md'>{formError}</div>}
+			{showSuccessModal && (
+				<div className='fixed inset-0 bg-black/50 z-[99] flex items-center justify-center px-4'>
+					<div className='w-full max-w-4xl p-20 text-center bg-white shadow-lg rounded-2xl'>
+						<h2 className='mb-5 text-5xl font-bold'>¡Listo!</h2>
+						<h3 className='mb-3 text-2xl font-bold'>Gracias por interesarte en Medical & Scientific Knowledge</h3>
+						<p className='mb-4 text-gray-700'>
+							Un agente académico te estará contactando a la brevedad. Mientras, te invitamos a visitar nuestro blog con
+							información, opiniones, entrevistas y recursos de aprendizaje en múltiples formatos.
+						</p>
+						<button
+							onClick={() => setShowSuccessModal(false)}
+							className='bg-[#9200AD] hover:bg-[#6b1679] text-white px-6 py-3 rounded-full'
+						>
+							Cerrar
+						</button>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }

@@ -15,9 +15,7 @@ const ProfessionalCardMobile = ({ pro }: { pro: Professional }) => {
 	return (
 		<Link
 			href={
-				isDemo
-					? getLocalizedUrl(lang, '/tienda/administracion-y-gestion-hospitalaria/#equipo-docente')
-					: pro.perfilUrl || '#'
+				isDemo ? getLocalizedUrl(lang, '/curso/administracion-y-gestion-hospitalaria/#equipo-docente') : pro.perfilUrl || '#'
 			}
 			onClick={(e) => {
 				if (isDemo) {

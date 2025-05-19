@@ -7,7 +7,9 @@ export function getCurrentLang() {
   if (typeof window === 'undefined') {
     return 'ar'; // fallback para SSR (por las dudas)
   }
-
+  if(typeof window =="undefined" || !window)
+    return 'ar';
+  
   const pathname = window.location.pathname;
   const segments = pathname.split('/').filter(Boolean);
   const firstSegment = segments[0];

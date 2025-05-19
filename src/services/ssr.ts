@@ -533,7 +533,24 @@ class ApiSSRService {
 	async getSingleProduct(slug: string, country: string) {
 		try {
 			const response = await fetch(`${API_URL}/product/${slug}?country=${country}`);
-			console.log(`${API_URL}/product/${slug}?country=${country}`);
+			console.log('de aca viene el product', `${API_URL}/product/${slug}?country=${country}`);
+
+			if (!response.ok) {
+				throw new Error(`Failed to fetch single product. HTTP status ${response.status}`);
+			}
+
+			const data = await response.json();
+
+			return { product: data };
+		} catch (error) {
+			console.error('Network error:', error);
+			notFound();
+			return { error };
+		}
+	}
+	async getSingleProductCMS(slug: string, country: string) {
+		try {
+			const response = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/product/${slug}?lang=${country}&nocache=1`);
 
 			if (!response.ok) {
 				throw new Error(`Failed to fetch single product. HTTP status ${response.status}`);

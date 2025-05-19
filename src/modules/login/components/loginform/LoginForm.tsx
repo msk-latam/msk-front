@@ -24,12 +24,13 @@ type LoginApiResponse = {
 type LoginApiPayload = {
 	email: string;
 	password: string; // Assuming backend expects 'contrasenia' based on typical Spanish naming, adjust if needed
+	lang: string;
 };
 
 // Placeholder for your actual API URL - replace with env variable ideally
 // const API_SIGN_IN_URL = 'https://dev.msklatam.tech/msk-laravel/public/api/login';
 // Usaremos nuestro endpoint interno
-const API_SIGN_IN_URL = '/api/auth/login-c?returnTo=es/dashboard';
+const API_SIGN_IN_URL = '/api/auth/login-c';
 
 export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }: LoginFormProps) {
 	const router = useRouter();
@@ -41,7 +42,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 	const [onRequest, setOnRequest] = useState(false); // Loading state
 	const [loginError, setLoginError] = useState<string | null>(null); // Login error state
 	const params = useParams();
-	const lang = params.lang || 'es';
+	const lang = params?.lang || 'es';
 
 	const executeRecaptcha = async (action: string): Promise<string> => {
 		console.warn('Using placeholder executeRecaptcha');
@@ -68,14 +69,19 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 		setOnRequest(true);
 		setLoginError(null); // Clear previous errors
 
+		const currentPath = window.location.pathname;
+		const langMatch = currentPath.match(/^\/([^\/]+)\/login/);
+		const lang = langMatch ? langMatch[1] : '';
+
 		try {
 			const recaptchaToken = await executeRecaptcha('login');
 			const formData: LoginApiPayload = {
 				email: email,
 				password: password, // Ensure backend expects 'contrasenia'
+				lang: lang,
 			};
 
-			const response = await fetch(API_SIGN_IN_URL, {
+			const response = await fetch(`${API_SIGN_IN_URL}?lang=${lang}`, {
 				method: 'POST',
 				headers: {
 					Accept: 'application/json',
@@ -85,7 +91,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 			});
 
 			if (response.ok) {
-				router.push(`/${lang}/dashboard/`);
+				router.push(`${lang}/dashboard/`);
 			} else {
 				// Intentar obtener el mensaje de error del cuerpo de la respuesta
 				try {
@@ -110,8 +116,11 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 	};
 
 	const handleSocialLogin = (connection: string) => {
+		const currentPath = window.location.pathname;
+		const langMatch = currentPath.match(/^\/([^\/]+)\/login/);
+		const lang = langMatch ? langMatch[1] : '';
 		console.log('Redirecting to Auth0 login endpoint for connection:', connection);
-		window.location.href = `/api/auth/login?connection=${connection}`;
+		window.location.href = `/api/auth/login?connection=${connection}&lang=${lang}}`;
 	};
 
 	return (

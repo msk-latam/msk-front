@@ -7,14 +7,14 @@ import { years } from '@/data/years';
 import Input from '@/modules/dashboard/components/ui/Input';
 import PhoneInputWithCode from '@/modules/dashboard/components/ui/PhoneInputWithCode';
 import Select from '@/modules/dashboard/components/ui/Select';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProgressIndicator from './ProgressIndicator';
 
 interface Step1BasicInfoProps {
 	data: {
 		profession?: string;
 		otherProfession?: string;
-		specialty?: string;
+		speciality?: string;
 		otherSpecialty?: string;
 		country?: string;
 		phone?: string;
@@ -30,12 +30,58 @@ interface Step1BasicInfoProps {
 export default function Step1BasicInfo({ data, onNext, onSkip, onBack, onUpdate }: Step1BasicInfoProps) {
 	const [profession, setProfession] = useState(data.profession || '');
 	const [otherProfession, setOtherProfession] = useState(data.otherProfession || '');
-	const [specialty, setSpecialty] = useState(data.specialty || '');
+	const [speciality, setSpecialty] = useState(data.speciality || '');
 	const [country, setCountry] = useState(data.country || '');
 	const [phone, setPhone] = useState(data.phone || '');
 	const [year, setYear] = useState(data.year || '');
 	const [career, setCareer] = useState(data.career || '');
 	const [otherSpecialty, setOtherSpecialty] = useState(data.otherSpecialty || '');
+
+	useEffect(() => {
+		setProfession(data.profession || '');
+	}, [data.profession]);
+
+	useEffect(() => {
+		setOtherProfession(data.otherProfession || '');
+	}, [data.otherProfession]);
+
+	useEffect(() => {
+		// Reset specialty if profession changes and specialty belongs to the old profession
+		const currentProfessionId = professions.find((p) => p.name === data.profession)?.id;
+		const specialtyExistsInCurrentProfession =
+			currentProfessionId && specialtiesGroup[currentProfessionId]?.some((s) => s.name === data.speciality);
+
+		if (data.speciality && !specialtyExistsInCurrentProfession) {
+			setSpecialty(''); // Clear specialty if it doesn't belong to the new profession
+		} else {
+			setSpecialty(data.speciality || '');
+		}
+	}, [data.speciality, data.profession]); // Depend on profession as well
+
+	useEffect(() => {
+		setOtherSpecialty(data.otherSpecialty || '');
+	}, [data.otherSpecialty]);
+
+	useEffect(() => {
+		const countryValue = data.country || '';
+		// Find country by code (case-insensitive) or by name (case-insensitive)
+		const foundCountry = countries.find(
+			(c) => c.id.toLowerCase() === countryValue.toLowerCase() || c.name.toLowerCase() === countryValue.toLowerCase(),
+		);
+		setCountry(foundCountry ? foundCountry.name : '');
+	}, [data.country]);
+
+	useEffect(() => {
+		setPhone(data.phone || '');
+	}, [data.phone]);
+
+	useEffect(() => {
+		setYear(data.year || '');
+	}, [data.year]);
+
+	useEffect(() => {
+		setCareer(data.career || '');
+	}, [data.career]);
 
 	const professionId = professions.find((p) => p.name === profession)?.id;
 
@@ -44,7 +90,7 @@ export default function Step1BasicInfo({ data, onNext, onSkip, onBack, onUpdate 
 			? specialtiesGroup[professionId].slice().sort((a, b) => a.name.localeCompare(b.name))
 			: [];
 
-	const isValid = profession && specialty && country && phone;
+	const isValid = profession && speciality && country && phone;
 
 	return (
 		<section className='w-full max-w-[1632px] h-fit relative z-8 mx-auto px-6 pt-[84px] md:pb-28 mb-16 md:py-16 md:px-9 font-inter'>
@@ -124,13 +170,13 @@ export default function Step1BasicInfo({ data, onNext, onSkip, onBack, onUpdate 
 					label='Especialidad'
 					name='speciality'
 					options={filteredSpecialties.map((s) => ({ label: s.name, value: s.name }))}
-					value={specialty || ''}
+					value={speciality || ''}
 					onChange={(e) => setSpecialty(e.target.value)}
 					placeholder='Seleccionar especialidad'
 				/>
 
 				{/* si selecciona "otra especialidad" */}
-				{specialty === 'Otra Especialidad' && (
+				{speciality === 'Otra Especialidad' && (
 					<Input
 						id='specialty'
 						type='text'
@@ -172,7 +218,7 @@ export default function Step1BasicInfo({ data, onNext, onSkip, onBack, onUpdate 
 						onUpdate({
 							profession,
 							otherProfession,
-							specialty,
+							speciality,
 							otherSpecialty,
 							country,
 							phone,

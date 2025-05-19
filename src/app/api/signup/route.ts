@@ -1,3 +1,4 @@
+import { environmentBackend } from '@/utils/isProductive';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -32,7 +33,7 @@ export async function POST(request: NextRequest) {
 		cookies().set('first_name', requestBody.first_name);
 		cookies().set('last_name', requestBody.last_name);
 
-		const apiResponse = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/signup`, {
+		const apiResponse = await fetch(`${environmentBackend}/api/signup`, {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',

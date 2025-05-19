@@ -23,7 +23,7 @@ export default function CourseSummaryDownload({ slug, lang }: CourseSummaryProps
 	// const certification = data?.certification;
 	// const max_installments = data?.max_installments;
 	// const showPrice = lang.toLowerCase() !== 'es';
-	const files = data?.files
+	const files = data?.files;
 
 	if (loading) return <SkeletonCourseSummaryCard />;
 
@@ -33,7 +33,7 @@ export default function CourseSummaryDownload({ slug, lang }: CourseSummaryProps
 	return (
 		<div className='bg-white rounded-[38px] p-6 md:p-8 sticky top-10 w-full' style={{ backgroundColor: '#FFFFFF' }}>
 			<Image
-				src={data?.featured_images.medium ?? ''}
+				src={data?.featured_images.high ?? ''}
 				alt='Curso'
 				className='rounded-xl w-full object-cover mb-6'
 				width={420}
@@ -55,7 +55,6 @@ export default function CourseSummaryDownload({ slug, lang }: CourseSummaryProps
 				</li>
 			</ul>
 
-
 			{/* Botones CTA */}
 			<div className='space-y-3'>
 				<button
@@ -67,7 +66,7 @@ export default function CourseSummaryDownload({ slug, lang }: CourseSummaryProps
 			</div>
 
 			{isModalOpen && data?.files && (
-				<DownloadSyllabusModal slug={slug} fileUrl={data.files} onClose={handleCloseModal} isDownloadable={true}/>
+				<DownloadSyllabusModal slug={slug} fileUrl={data.files} onClose={handleCloseModal} isDownloadable={true} />
 			)}
 		</div>
 	);

@@ -30,6 +30,7 @@ export interface UpdateCustomerPayload {
 		content_interests: string[] | null;
 		other_interests: string[] | null;
 	};
+	platform_user?: number;
 }
 
 interface UseCustomerReturn {
@@ -63,8 +64,11 @@ export function useCustomer(action: 'update' | 'create' = 'update'): UseCustomer
 					...payload,
 					first_name: cookies.first_name,
 					last_name: cookies.last_name,
+					platform_user: 1,
 				};
 			}
+
+			// console.log('payload', payload);
 
 			const response = await fetch('/api/customer', {
 				method: 'PUT',
@@ -111,6 +115,14 @@ export function useCustomer(action: 'update' | 'create' = 'update'): UseCustomer
 				}
 			} else {
 				console.log('No interest data to update, skipping /api/interests call.');
+			}
+
+			if (action === 'create') {
+				/* Como ulitma accion, loguear al usuario en la plataforma */
+				/* Como puede estar completando el perfil desde el login social o el clasico, voy a hacer que guarde los datos necesarios para el login en las cookies, Si es login social va a a estar
+				con cookie isSocialLogin en true, si es login clasico va a estar con cookie isC
+
+				lassicLogin en true*/
 			}
 
 			setData(responseData);

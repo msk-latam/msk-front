@@ -120,7 +120,7 @@ const DocumentDetailsForm: React.FC<DocumentDetailsFormProps> = ({
 	const documents = documentsByCountry[country] || [];
 
 	return (
-		<div className='grid grid-cols-2 gap-4'>
+		<div className='grid md:grid-cols-2 gap-4'>
 			{/* Tipo de documento */}
 			<div>
 				<label htmlFor='type_doc' className='block text-sm font-medium text-[#1A1A1A]'>

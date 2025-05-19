@@ -49,7 +49,7 @@ export const countries = [
 	},
 	{
 		id: 'pa',
-		name: 'Panama',
+		name: 'Panamá',
 	},
 	{
 		id: 'py',
@@ -57,7 +57,7 @@ export const countries = [
 	},
 	{
 		id: 'pe',
-		name: 'Peru',
+		name: 'Perú',
 	},
 	{
 		id: 'uy',

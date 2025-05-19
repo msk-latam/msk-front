@@ -10,6 +10,7 @@ import { careerOptions } from '@/data/careers';
 import { professions } from '@/data/professions';
 import { specialtiesGroup } from '@/data/specialties';
 import { years } from '@/data/years';
+import { usePathname } from 'next/navigation';
 
 interface Specialty {
 	id: number;
@@ -49,13 +50,35 @@ export default function NewsLetterForm({ onClose, initialEmail }: NewsLetterForm
 	const [otherProfession, setOtherProfession] = useState<string>('');
 	const [otherSpecialty, setOtherSpecialty] = useState<string>('');
 	const [filteredSpecialties, setFilteredSpecialties] = useState<Array<Specialty>>([]);
-	const professionId = professions.find((p) => p.name === formData.profession)?.id;
-	const getCountryNameByCode = (dialCode: string): string => {
-		const countryCode = getCountries().find((code) => `+${getCountryCallingCode(code)}` === dialCode);
-		return countryCode ? getName(countryCode) ?? '' : '';
+
+	const pathName = usePathname();
+	const match = pathName.match(/^\/([a-z]{2})\b/);
+	const country = match ? `${match[1]}` : 'ar';
+
+	const countryMapping: any = {
+		ar: 'Argentina',
+		bo: 'Bolivia',
+		br: 'Brasil',
+		cl: 'Chile',
+		co: 'Colombia',
+		cr: 'Costa Rica',
+		cu: 'Cuba',
+		do: 'República Dominicana',
+		ec: 'Ecuador',
+		sv: 'El Salvador',
+		gt: 'Guatemala',
+		hn: 'Honduras',
+		mx: 'México',
+		ni: 'Nicaragua',
+		pa: 'Panamá',
+		py: 'Paraguay',
+		pe: 'Perú',
+		pr: 'Puerto Rico',
+		uy: 'Uruguay',
+		ve: 'Venezuela',
 	};
 
-	const countryName = getCountryNameByCode(formData.areaCode);
+	const countryComplete = countryMapping[country];
 
 	useEffect(() => {
 		const handleEscKey = (event: KeyboardEvent) => {
@@ -155,10 +178,10 @@ export default function NewsLetterForm({ onClose, initialEmail }: NewsLetterForm
 				Especialidad: specialty,
 				Otra_profesion: profession === 'Otra Profesión' ? formData.profession : '',
 				Otra_especialidad: specialty === 'Otra Especialidad' ? formData.speciality : '',
-				Pais: countryName,
+				Pais: countryComplete,
 				Terms_And_Conditions: true,
-				URL_ORIGEN: window.location.href,
-				leadSource: 'Formulario de contacto',
+				URL_ORIGEN: window.location.href.slice(0, 255),
+				leadSource: 'Suscriptor newsletter',
 				recaptcha_token,
 				Cursos_consultados: [],
 				utm_source: utmState.utm_source,
@@ -191,6 +214,30 @@ export default function NewsLetterForm({ onClose, initialEmail }: NewsLetterForm
 			setSubmitted(false);
 		}
 	};
+	const isFormValid = () => {
+		const requiredFields = ['name', 'lastName', 'email', 'phone'];
+		const hasRequiredFields = requiredFields.every((field) => formData[field as keyof typeof formData]);
+
+		const hasProfession = !!formData.profession;
+		const acceptedTerms = formData.acceptTerms;
+
+		let validProfession = true;
+		if (profession === 'Otra profesión') {
+			validProfession = otherProfession.trim() !== '';
+		}
+
+		let validSpecialty = true;
+		if (profession !== 'Estudiante' && specialty === 'Otra Especialidad') {
+			validSpecialty = otherSpecialty.trim() !== '';
+		}
+
+		let validStudentInfo = true;
+		if (profession === 'Estudiante') {
+			validStudentInfo = career.trim() !== '' && year.trim() !== '';
+		}
+
+		return hasRequiredFields && hasProfession && acceptedTerms && validProfession && validSpecialty && validStudentInfo;
+	};
 
 	return (
 		<div
@@ -206,12 +253,12 @@ export default function NewsLetterForm({ onClose, initialEmail }: NewsLetterForm
 				animate={{ opacity: 1, y: 0 }}
 				exit={{ opacity: 0, y: -20 }}
 				transition={{ duration: 0.3 }}
-				className='relative bg-white rounded-2xl p-8 max-w-2xl w-full shadow-lg'
+				className='relative w-full max-w-2xl p-8 bg-white shadow-lg rounded-2xl'
 			>
 				<button
 					onClick={onClose}
 					type='button'
-					className='absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-2xl'
+					className='absolute text-2xl text-gray-600 top-2 right-2 hover:text-gray-900'
 					aria-label='Cerrar'
 				>
 					×
@@ -412,8 +459,12 @@ export default function NewsLetterForm({ onClose, initialEmail }: NewsLetterForm
 							<div className='flex justify-center'>
 								<button
 									type='submit'
-									disabled={submitted}
-									className='w-full mt-4 py-2 text-white bg-[#9200ad] rounded-3xl hover:bg-[#a84db4]'
+									disabled={submitted || !isFormValid()}
+									className={`w-full mt-4 py-2 rounded-3xl text-white transition-all duration-200 ${
+										submitted || !isFormValid()
+											? 'bg-gray-400 cursor-not-allowed'
+											: 'bg-[#9200ad] hover:bg-[#a84db4] cursor-pointer'
+									}`}
 								>
 									{submitted ? 'Procesando...' : 'Enviar'}
 								</button>
@@ -422,7 +473,7 @@ export default function NewsLetterForm({ onClose, initialEmail }: NewsLetterForm
 					) : (
 						<motion.div
 							key='success'
-							className='text-center space-y-4 py-6 px-4'
+							className='px-4 py-6 space-y-4 text-center'
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							exit={{ opacity: 0 }}
@@ -430,7 +481,10 @@ export default function NewsLetterForm({ onClose, initialEmail }: NewsLetterForm
 						>
 							<>
 								<h1 className='text-[#1A1A1A] text-3xl font-bold'>¡Listo!</h1>
-								<h3 className='text-[#1A1A1A] text-xl font-semibold'>Gracias por suscribirte a nuestro newsletter</h3>
+								<h3 className='text-[#1A1A1A] text-xl font-semibold'>
+									¡Gracias por suscribirte! Pronto recibirás nuestras novedades y oportunidades de capacitación directamente
+									en tu correo.
+								</h3>
 							</>
 							<p className='text-[#6E737C] text-base whitespace-pre-line'>
 								Ahora es momento de avanzar en tu camino profesional.

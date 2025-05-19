@@ -12,7 +12,12 @@ export interface EspecialidadType {
   url_especialidad: string;
 }
 
+export interface RedesSocialesType {
+  redlink: string;
+}
+
 export interface FooterSections {
+  redes_sociales: RedesSocialesType;
   cursos_mas_elegidos: CursoType[];
   cursos_mas_buscados: CursoType[];
   especialidades: EspecialidadType[];

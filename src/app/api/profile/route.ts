@@ -1,3 +1,4 @@
+import { environmentBackend } from '@/utils/isProductive';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -10,6 +11,9 @@ interface CurrentCourseType {
 	product_code: any;
 	product_code_cedente: any;
 	resource: any;
+	link?: any;
+	status: string;
+	ov?: string;
 }
 
 // Define new interfaces for the API response
@@ -110,6 +114,7 @@ interface CourseProgress {
 	entity_id_crm: string; // CRM ID of the course_progress record
 	parent_id: string;
 	created_time: string;
+	certificate_url: string | null;
 }
 
 export async function GET(request: NextRequest) {
@@ -126,11 +131,13 @@ export async function GET(request: NextRequest) {
 		cookies().delete('access_token');
 		cookies().delete('email');
 		cookies().delete('picture');
+		cookies().delete('needsProfileCompletion');
+		cookies().delete('redirectToDashboard');
 		return NextResponse.json({ user: null }, { status: 401 });
 	}
 
 	try {
-		const customerRes = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/customer/${email}`, {
+		const customerRes = await fetch(`${environmentBackend}/api/customer/${email}`, {
 			headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' },
 		});
 
@@ -141,6 +148,8 @@ export async function GET(request: NextRequest) {
 			cookies().delete('access_token');
 			cookies().delete('email');
 			cookies().delete('picture');
+			cookies().delete('needsProfileCompletion');
+			cookies().delete('redirectToDashboard');
 			return NextResponse.json(
 				{ user: null, error: `Failed to fetch customer data: ${customerRes.status}` },
 				{ status: customerRes.status },
@@ -155,18 +164,23 @@ export async function GET(request: NextRequest) {
 		const courseRecommendationsList = customerData.web_recommender?.split(',').map((item: string) => item.trim());
 		let detailedRecommendedCourses: any[] = [];
 		if (courseRecommendationsList && courseRecommendationsList.length > 0) {
+			console.log('courseRecommendationsList', courseRecommendationsList);
 			detailedRecommendedCourses = await Promise.all(
 				courseRecommendationsList.slice(0, 4).map(async (courseIdentifier: string) => {
 					try {
 						const resourceRes = await fetch(
-							`https://cms1.msklatam.com/wp-json/msk/v1/product/${encodeURIComponent(courseIdentifier)}?lang=${lang}`,
+							`https://cms1.msklatam.com/wp-json/msk/v1/product/${encodeURIComponent(
+								courseIdentifier,
+							)}?lang=${lang}&nocache=1`,
 							{
 								headers: { Accept: 'application/json' },
-								next: { revalidate: 3600 * 7 }, // Cache for 7 hours
+								next: { revalidate: 3600 * 7 },
 							},
 						);
+
 						if (resourceRes.ok) {
 							const resourceData = await resourceRes.json();
+							console.log('resourceData', resourceData);
 							if (resourceData && resourceData.id != null) {
 								return resourceData;
 							}
@@ -182,26 +196,24 @@ export async function GET(request: NextRequest) {
 			detailedRecommendedCourses = detailedRecommendedCourses.filter((course) => course !== null); // Filter out nulls
 		}
 
-		const fetchCourseImage = async (courseName: string) => {
-			try {
-				const imageRes = await fetch(
-					`https://cms1.msklatam.com/wp-json/msk/v1/course-image?name=${encodeURIComponent(courseName)}`,
-					{
-						headers: { Accept: 'application/json' },
-						next: { revalidate: 3600 * 7 }, // Cache for 7 hours
-					},
-				);
+		const fetchCourseData = async (courseCode: string | number, courseName: string, lang: string) => {
+			const courseCmsData = await fetch(
+				`https://cms1.msklatam.com/wp-json/msk/v1/course-data/${encodeURIComponent(
+					courseCode,
+				)}?lang=${lang}&name=${encodeURIComponent(courseName)}`,
+				{
+					headers: { Accept: 'application/json' },
+					next: { revalidate: 3600 * 7 },
+					// cache: 'no-store',
+				},
+			);
 
-				if (!imageRes.ok) {
-					console.error(`Failed to fetch image for course: ${courseName}, status: ${imageRes.status}`);
-					return null;
-				}
-				const imageData = await imageRes.text();
-				return imageData.trim().replace(/^"|"$/g, '');
-			} catch (error) {
-				console.error(`Error fetching image for course: ${courseName}`, error);
+			if (!courseCmsData.ok) {
+				console.error(`CMS fetch failed for course ${courseCode} - ${courseName}: ${courseCmsData.status}`);
 				return null;
 			}
+			const courseCmsDataJson = await courseCmsData.json();
+			return courseCmsDataJson;
 		};
 
 		const calculateProfileCompletion = (
@@ -213,41 +225,147 @@ export async function GET(request: NextRequest) {
 			workArea: string | null | undefined,
 			apiInterests: CustomerApiResponse['interests'] | undefined,
 		) => {
-			let percentage = 25; // Base percentage for simple registration
+			// Base percentage for simple registration
+			let percentage = 25;
 
-			// Rule 2: Profession, specialty, country, and phone completed
-			if (profession && specialty && country && phone) {
+			// Check for interests
+			const hasInterests =
+				apiInterests &&
+				(apiInterests.specialty_interests?.length ||
+					apiInterests.content_interests?.length ||
+					apiInterests.other_interests?.length);
+
+			// Check for basic profile data
+			const hasBasicProfile = profession && specialty && country && phone;
+
+			// Check for complete profile data
+			const hasCompleteProfile = hasBasicProfile && workplace && workArea;
+
+			// Calculate percentage based on completion levels
+			if (hasCompleteProfile && hasInterests) {
+				// Complete profile with interests
+				percentage = 100;
+			} else if (hasCompleteProfile) {
+				// Complete profile without interests
+				percentage = 75;
+			} else if (hasBasicProfile || hasInterests) {
+				// Either basic profile or interests completed
 				percentage = 50;
-
-				// Rule 3: Institution (workplace) and work area completed (cumulative)
-				if (workplace && workArea) {
-					percentage = 75;
-
-					// Rule 4: Interests completed (cumulative)
-					const hasInterests =
-						apiInterests &&
-						(apiInterests.specialty_interests?.length ||
-							apiInterests.content_interests?.length ||
-							apiInterests.other_interests?.length);
-					if (hasInterests) {
-						percentage = 100;
-					}
-				}
 			}
+
 			return percentage;
 		};
 
 		const getCurrentCourse = async (rawCourseProgress: CourseProgress[] | undefined): Promise<CurrentCourseType | null> => {
 			if (!rawCourseProgress || rawCourseProgress.length === 0) {
-				return null;
-			}
+				// Fetch the latest course from products endpoint if no courses in progress
 
+				try {
+					/* https://cms1.msklatam.com/wp-json/msk/v1/products?lang=ar&page=1&per_page=1&nocache=1 */
+					const productsResponse = await fetch(
+						`https://cms1.msklatam.com/wp-json/msk/v1/products?lang=${lang}&page=1&per_page=1&nocache=1`,
+						{
+							headers: { Accept: 'application/json' },
+							next: { revalidate: 3600 * 7 },
+							// cache: 'no-store',
+						},
+					);
+
+					if (!productsResponse.ok) {
+						console.error(`Failed to fetch latest product: ${productsResponse.status}`);
+						return null;
+					}
+
+					let products: any = null;
+					try {
+						products = await productsResponse.json();
+					} catch (jsonErr) {
+						console.error('Empty or invalid JSON from CMS products endpoint (per_page):', jsonErr);
+						return null;
+					}
+
+					if (!products || (Array.isArray(products) && products.length === 0)) return null;
+
+					let latestProduct = products?.data ? products.data[0] : Array.isArray(products) ? products[0] : null;
+
+					if (!latestProduct) latestProduct = {};
+
+					return {
+						product_code: latestProduct?.product_code || '',
+						product_code_cedente: '',
+						id: latestProduct.id,
+						image: latestProduct?.featured_images?.high,
+						title: latestProduct?.title || '',
+						crm_id: latestProduct?.product_code || '',
+						completed_percentage: null,
+						resource: latestProduct.resource,
+						link: latestProduct.link,
+						status: '',
+						ov: '',
+					};
+				} catch (error) {
+					console.error('Error fetching latest product:', error);
+					return null;
+				}
+			}
+			// Also include courses with 'Sin enrolar' status as they appear in the sample data
 			const activeProgressList = rawCourseProgress.filter(
-				(course: CourseProgress) => course.end_date === null && course.enroll_status === 'Activo',
+				(course: CourseProgress) =>
+					course.end_date === null && (course.enroll_status === 'Activo' || course.enroll_status === 'Sin enrolar'),
 			);
 
 			if (activeProgressList.length === 0) {
-				return null;
+				// Fetch the latest course from products endpoint if no active courses
+				try {
+					const productsResponse = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/products?lang=${lang}&limit=1`, {
+						headers: { Accept: 'application/json' },
+						next: { revalidate: 3600 * 7 },
+					});
+
+					if (!productsResponse.ok) {
+						console.error(`Failed to fetch latest product: ${productsResponse.status}`);
+						return {
+							product_code: '',
+							product_code_cedente: '',
+							id: '', // CMS ID
+							image: '',
+							title: 'Curso 0',
+							crm_id: '', // Using product_code as CRM identifier for the course
+							completed_percentage: 0,
+							resource: '',
+							status: '',
+							ov: '',
+						};
+					}
+
+					let products: any = null;
+					try {
+						products = await productsResponse.json();
+					} catch (jsonErr) {
+						console.error('Empty or invalid JSON from CMS products endpoint (limit):', jsonErr);
+						return null;
+					}
+
+					if (!products || (Array.isArray(products) && products.length === 0)) return null;
+
+					const latestProduct = Array.isArray(products) ? products[0] : products?.data ? products.data[0] : null;
+
+					return {
+						product_code: latestProduct.product_code || '',
+						product_code_cedente: '',
+						id: latestProduct.id,
+						image: latestProduct.image,
+						title: latestProduct.title,
+						crm_id: latestProduct.product_code || '',
+						completed_percentage: 0,
+						resource: latestProduct.resource,
+						status: '',
+						ov: '',
+					};
+				} catch (error) {
+					console.error('Error fetching latest product:', error);
+					return null;
+				}
 			}
 
 			const latestCourseProgress =
@@ -260,41 +378,53 @@ export async function GET(request: NextRequest) {
 					  });
 
 			if (!latestCourseProgress) {
-				// Should be unreachable if activeProgressList has items
-				return null;
+				return {
+					product_code: '',
+					product_code_cedente: '',
+					id: '', // CMS ID
+					image: '',
+					title: 'Curso 2',
+					crm_id: '', // Using product_code as CRM identifier for the course
+					completed_percentage: 0,
+					resource: '',
+					status: '',
+					ov: '',
+				};
 			}
 
 			try {
-				const courseCmsRes = await fetch(
-					`https://cms1.msklatam.com/wp-json/msk/v1/products?search=${encodeURIComponent(latestCourseProgress.course_name)}`,
-					{
-						headers: { Accept: 'application/json' },
-						next: { revalidate: 3600 * 7 },
-					},
+				const cmsCourseDetail = await fetchCourseData(
+					latestCourseProgress.product_code,
+					latestCourseProgress.course_name,
+					lang,
 				);
 
-				if (!courseCmsRes.ok) {
-					console.error(`CMS fetch failed for current course ${latestCourseProgress.course_name}: ${courseCmsRes.status}`);
-					return null;
+				if (!cmsCourseDetail) {
+					return {
+						product_code: '',
+						product_code_cedente: '',
+						id: '', // CMS ID
+						image: '',
+						title: 'Curso 3',
+						crm_id: '', // Using product_code as CRM identifier for the course
+						completed_percentage: 0,
+						resource: '',
+						status: '',
+						ov: '',
+					};
 				}
-				const courseCmsData = await courseCmsRes.json();
-
-				if (!courseCmsData || !courseCmsData.data || courseCmsData.data.length === 0) {
-					console.warn(`No CMS data found for current course: ${latestCourseProgress.course_name}`);
-					return null;
-				}
-
-				const cmsCourseDetail = courseCmsData.data[0];
 
 				return {
 					product_code: latestCourseProgress.product_code,
 					product_code_cedente: latestCourseProgress.transferor_course_code,
 					id: cmsCourseDetail?.id, // CMS ID
-					image: cmsCourseDetail?.featured_images,
-					title: cmsCourseDetail?.title || latestCourseProgress.course_name,
+					image: cmsCourseDetail?.image,
+					title: cmsCourseDetail?.title,
 					crm_id: latestCourseProgress.product_code, // Using product_code as CRM identifier for the course
 					completed_percentage: parseFloat(latestCourseProgress.advance?.replace(',', '.')) || 0,
 					resource: cmsCourseDetail?.resource,
+					status: latestCourseProgress.enroll_status,
+					ov: cmsCourseDetail?.contract_status,
 				};
 			} catch (cmsError) {
 				console.error(`Error fetching CMS details for current course ${latestCourseProgress.course_name}:`, cmsError);
@@ -302,42 +432,79 @@ export async function GET(request: NextRequest) {
 			}
 		};
 
-		// This function is kept for structure but will return empty as `courseRecommendations` source is removed.
-		// const getRecommendedResourcesByInterests = async (
-		// 	_courseRecommendations: string[], // This will be an empty array
-		// ): Promise<any[]> => {
-		// 	return [];
-		// };
+		// Prepare course data for batch API call
+		const courseIds = (customerData.course_progress || []).map((cp) => cp.product_code).join(',');
+		const courseNames = (customerData.course_progress || []).map((cp) => cp.course_name).join(',');
 
-		// Process courses in parallel and wait for all to complete
-		const processedCoursesInProgress = await Promise.all(
-			(customerData.course_progress || []).map(async (cp: CourseProgress) => {
-				const advanceNumeric = parseFloat(cp.advance?.replace(',', '.')) || 0;
-				let statusText = cp.enroll_status;
-				if (cp.enroll_status === 'Activo') {
-					statusText = `${advanceNumeric}% completado`;
-				}
-
-				return {
-					image: await fetchCourseImage(cp.course_name),
-					product_code: cp.product_code,
-					product_code_cedente: cp.transferor_course_code,
-					id: cp.entity_id_crm, // Using the CRM ID of the progress record itself
-					status: cp.end_date != null || cp.enroll_status === 'Finalizado' ? 'finished' : 'progress',
-					title: cp.course_name,
-					expiryDate: cp.expiration_date || cp.deadline_enroll,
-					qualification: cp.score,
-					statusType: cp.enroll_status,
-					statusText: statusText,
-					// Keep original data if frontend needs it, or for debugging
-					_original_advance: cp.advance,
-					_original_entity_id_crm: cp.entity_id_crm,
-					_original_enroll_status: cp.enroll_status,
-					_original_last_session_date: cp.last_session_date,
-					_original_end_date: cp.end_date,
-				};
-			}),
+		const allCoursesResponse = await fetch(
+			`https://cms1.msklatam.com/wp-json/msk/v1/all-course-data?ids=${encodeURIComponent(
+				courseIds,
+			)}&names=${encodeURIComponent(courseNames)}&lang=${lang}&nocache=${Date.now()}`,
+			{
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				next: { revalidate: 3600 * 7 },
+			},
 		);
+
+		const allCoursesData = await allCoursesResponse.json();
+
+		// Process courses with the batch-fetched data
+		const processedCoursesInProgress = (customerData.course_progress || []).map((cp: CourseProgress) => {
+			const advanceNumeric = parseFloat(cp.advance?.replace(',', '.')) || 0;
+
+			// Consider a course as finished when advance is 100 and a score exists
+			const isFinalizado = advanceNumeric === 100 && cp.score != null && cp.score !== '';
+
+			const statusText = (() => {
+				if (isFinalizado) return 'Finalizado';
+				switch (cp.enroll_status) {
+					case 'Activo':
+						return `${advanceNumeric}% completado`;
+					case 'Baja':
+						return 'Cancelado';
+					default:
+						return cp.enroll_status;
+				}
+			})();
+
+			const courseCmsData = allCoursesData.find((course: any) => course.product_code == cp.product_code);
+
+			return {
+				image: courseCmsData?.image,
+				product_code: cp.product_code,
+				product_code_cedente: cp.transferor_course_code,
+				product_id: courseCmsData?.id,
+				father_post_id: courseCmsData?.father_post_id,
+				id: cp.entity_id_crm, // Using the CRM ID of the progress record itself
+				status: (() => {
+					if (cp.contract_status === 'Baja') return 'Cancelado';
+					if (isFinalizado || cp.end_date != null || cp.enroll_status === 'Finalizado') return 'finished';
+					return 'progress';
+				})(),
+				title: courseCmsData?.title,
+				expiryDate: cp.expiration_date || cp.deadline_enroll,
+				qualification: cp.score,
+				statusType: (() => {
+					// Ensure the visual status matches the logical status
+					if (cp.contract_status === 'Baja') return 'Cancelado';
+					return isFinalizado ? 'Finalizado' : cp.enroll_status;
+				})(),
+				statusText: statusText,
+				link_al_foro: courseCmsData?.link_al_foro,
+				resource: courseCmsData?.resource,
+				certificate_url: cp?.certificate_url,
+				// Keep original data if frontend needs it, or for debugging
+				_original_advance: cp.advance,
+				_original_contract_status: cp.contract_status,
+				_original_entity_id_crm: cp.entity_id_crm,
+				_original_enroll_status: cp.enroll_status,
+				_original_last_session_date: cp.last_session_date,
+				_original_end_date: cp.end_date,
+			};
+		});
 
 		const currentCourseData = await getCurrentCourse(customerData.course_progress);
 		// const recommendedResourcesData = await getRecommendedResourcesByInterests([]); // Will be empty
@@ -360,6 +527,40 @@ export async function GET(request: NextRequest) {
 				);
 			}
 		}
+
+		/* por ultimo, obtener los intereses adicionales de la api/interests */
+		const interestsResponse = await fetch(`${environmentBackend}/api/customer/interests/${email}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+
+		let additionalInterests = [];
+		if (interestsResponse.ok) {
+			if (interestsResponse.headers.get('Content-Length') !== '0') {
+				const interestsData = await interestsResponse.json();
+				additionalInterests = interestsData;
+			}
+		} else {
+			console.error(`Failed to fetch interests: ${interestsResponse.status}`);
+		}
+
+		/*  Comparar los intereses adicionales con los intereses del usuario, si tienen los mismos, no hacer nada, si no tienen los mismos, agregar los intereses adicionales al usuario */
+		if (additionalInterests && customerData) {
+			if (!customerData.interests) {
+				customerData.interests = {
+					specialty_interests: null,
+					content_interests: null,
+					other_interests: null,
+				};
+			}
+			customerData.interests.other_interests = additionalInterests.other_interests;
+			customerData.interests.content_interests = additionalInterests.content_interests;
+			customerData.interests.specialty_interests = additionalInterests.specialty_interests;
+		}
+
+		console.log('customerData', detailedRecommendedCourses);
 
 		const user = {
 			profileCompletion: {
@@ -398,10 +599,10 @@ export async function GET(request: NextRequest) {
 			document_type: customerData.document_type,
 			documentNumber: customerData.identification,
 			tax_regime: customerData.tax_regime,
-
 			invoice_required: customerData.invoice_required,
 			billingEmail: customerData.billing_email,
 			billingPhone: customerData.billing_phone || '',
+			interests: customerData.interests,
 			intereses: combinedInterests,
 			interesesAdicionales: null, // Data not available in new API
 			currentCourse: currentCourseData,
@@ -409,6 +610,7 @@ export async function GET(request: NextRequest) {
 			crm_id: customerData.entity_id_crm, // Main CRM ID for the contact
 			courseRecommendations: detailedRecommendedCourses, // Update with fetched detailed recommendations
 		};
+
 		// Helper to parse school_name and name
 		let finalSchoolName = customerData.school_name;
 		if (

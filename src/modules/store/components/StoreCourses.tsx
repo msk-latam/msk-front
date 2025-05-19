@@ -46,6 +46,9 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 	const [searchTerm, setSearchTerm] = useState<string>('');
 	const debouncedSearchTerm = useDebounce(searchTerm, 500); // 500ms debounce
 
+	// State for sorting - default to 'novedades'
+	const [sortKey, setSortKey] = useState<string>('novedades');
+
 	// Calculate the total count of selected filter *options*
 	let totalSelectedOptionsCount = 0;
 	searchParams?.forEach((value, key) => {
@@ -56,9 +59,19 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 		}
 	});
 
-	// Effect to initialize searchTerm from URL on mount
+	// Effect to initialize searchTerm from URL on mount and sortKey from localStorage
 	useEffect(() => {
 		setSearchTerm(searchParams?.get('search') || '');
+		// Initialize sortKey from localStorage only on the client side
+		if (typeof window !== 'undefined') {
+			const storedSortKey = localStorage.getItem('storeSortKey');
+			if (storedSortKey) {
+				setSortKey(storedSortKey);
+			} else {
+				// If nothing in localStorage, explicitly set to 'novedades' (matching useState default)
+				setSortKey('novedades');
+			}
+		}
 	}, []); // Run only once on mount
 
 	// Effect to update URL when debounced search term changes
@@ -66,8 +79,6 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 		const current = new URLSearchParams(searchParams?.toString());
 		const currentSearch = current.get('search');
 
-		// Update URL only if debounced term is different from current URL search param
-		// or if it's empty and the param exists
 		if (debouncedSearchTerm !== (currentSearch || '')) {
 			const params = new URLSearchParams(searchParams?.toString());
 			if (debouncedSearchTerm) {
@@ -75,8 +86,7 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 			} else {
 				params.delete('search');
 			}
-			// Reset page to 1 when search term changes
-			params.set('page', '1');
+			params.set('page', '1'); // Reset page when search term changes
 			router.push(`${pathname}?${params.toString()}`, { scroll: false });
 		}
 	}, [debouncedSearchTerm, searchParams, pathname, router]);
@@ -116,11 +126,34 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 						translatedValue = 'course';
 					} else if (recursoValue === 'guias-profesionales') {
 						translatedValue = 'downloadable';
+					} else if (recursoValue === 'curso-gratuito') {
+						params.set('filter', 'is-free');
+					} else {
+						params.set('resource', translatedValue);
 					}
-					params.set('resource', translatedValue);
 					params.delete('recurso'); // Remove original key
 				}
 				// NOTE: The 'search' parameter is already in `params` because the previous useEffect updated the URL
+
+				// Add sorting parameters based on sortKey state
+				params.delete('sort'); // Ensure no 'sort' param from URL is used
+				params.delete('orderby'); // Clear previous orderby
+				params.delete('order'); // Clear previous order
+
+				if (sortKey === 'precio-asc') {
+					params.set('orderby', 'price');
+					params.set('order', 'asc');
+				} else if (sortKey === 'precio-desc') {
+					params.set('orderby', 'price');
+					params.set('order', 'desc');
+				} else if (sortKey === 'novedades') {
+					// 'novedades' is the default and maps to newest items using 'newly'
+					params.set('orderby', 'newly');
+					// The 'order' parameter is typically not needed when orderby='newly'
+					// params.delete('order'); // Ensure order is not set if newly implies it
+				}
+				// If sortKey is 'relevancia' (or any other value not explicitly handled),
+				// no orderby/order parameters are set, relying on the API's default sorting.
 
 				const page = params.get('page') || '1';
 				setCurrentPage(parseInt(page, 10));
@@ -156,11 +189,26 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 		};
 
 		fetchCourses();
-	}, [searchParams]); // Re-fetch ONLY when searchParams change
+	}, [searchParams, lang, sortKey, router, pathname]); // Re-fetch when searchParams, lang, or sortKey change
 
 	const handleSearchChange = (term: string) => {
 		setSearchTerm(term);
 	};
+
+	const handleSortChange = (newSortKey: string) => {
+		setSortKey(newSortKey);
+		if (typeof window !== 'undefined') {
+			localStorage.setItem('storeSortKey', newSortKey);
+		}
+		// Reset page to 1 when sort order changes, and trigger re-fetch via searchParams update
+		const params = new URLSearchParams(searchParams?.toString());
+		params.set('page', '1');
+		// Ensure the 'sort' param is not in the URL we push to
+		params.delete('sort');
+		router.push(`${pathname}?${params.toString()}`, { scroll: false });
+	};
+
+	console.log(courses);
 
 	return (
 		<div className='md:col-span-1 md:row-span-3 bg-white rounded-[30px] p-[36px] order-1 md:order-1'>
@@ -169,9 +217,11 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 				searchTerm={searchTerm}
 				onSearchChange={handleSearchChange}
 				onOpenFilters={onOpenFilters}
+				sortKey={sortKey}
+				onSortChange={handleSortChange}
 			/>
 			{isLoading ? (
-				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
+				<div className='grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2 lg:grid-cols-3'>
 					{Array.from({ length: 12 }).map((_, index) => (
 						<CourseCardSkeleton key={index} />
 					))}
@@ -179,28 +229,30 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 			) : error ? (
 				<p className='text-[#f5006d]'>{error}</p> // Show error message
 			) : (
-				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
+				<div className='grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2 lg:grid-cols-3'>
 					{courses.length > 0 ? (
 						courses.map((course) => {
+							const isFree =
+								(course?.prices?.total_price === '0' || course?.prices?.total_price === '') && course.resource === 'course';
 							const lang = pathname?.split('/')[1] || 'ar'; // Obtener el idioma desde la ruta
 							const courseUrl = `/${lang}/curso/${course.slug}`;
 
 							return (
 								<Link href={courseUrl} key={course.id} className='border rounded-[30px] bg-white flex flex-col'>
 									<img
-										src={course.featured_images.medium}
+										src={course.featured_images.high}
 										alt={course.title}
 										className='w-full h-48 object-cover rounded-t-[30px]'
 									/>
-									<div className='p-4 flex flex-col h-full'>
+									<div className='flex flex-col h-full p-4'>
 										<div className='flex flex-wrap gap-1 mb-2 text-xs'>
 											{course.resource === 'downloadable' ? (
 												<>
-													<span className='px-2 py-1 rounded-full bg-green-100 text-green-800'>Guía profesional</span>
+													<span className='px-2 py-1 text-green-800 bg-green-100 rounded-full'>Guía profesional</span>
 													{course.categories
 														.filter((cat) => cat.is_primary)
 														.map((cat) => (
-															<span key={cat.term_id} className='px-2 py-1 rounded-full bg-blue-100 text-blue-800'>
+															<span key={cat.term_id} className='px-2 py-1 text-blue-800 bg-blue-100 rounded-full'>
 																{cat.name}
 															</span>
 														))}
@@ -220,12 +272,13 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 														</span>
 													))
 											)}
+											{isFree && <p className='px-2 py-1 text-[#6474A6] bg-[#DFE6FF] rounded-full'>Curso gratuito</p>}
 										</div>
-										<h3 className='font-bold text-lg mb-1'>{course.title}</h3>
+										<h3 className='mb-1 text-lg font-bold'>{course.title}</h3>
 										{typeof course.cedente === 'object' && !Array.isArray(course.cedente) && (
-											<p className='text-sm text-gray-600 mb-3'>{course.cedente.name}</p>
+											<p className='mb-3 text-sm text-gray-600'>{course.cedente.name}</p>
 										)}
-										<div className='flex justify-between items-center text-sm text-gray-500 mt-auto'>
+										<div className='flex items-center justify-between mt-auto text-sm text-gray-500'>
 											<div>
 												{course.duration && course.duration !== '0' && (
 													<span className='flex items-center gap-1'>
@@ -255,9 +308,9 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 							);
 						})
 					) : (
-						<div className='col-span-full flex flex-col items-center justify-center py-10 px-4 text-center'>
+						<div className='flex flex-col items-center justify-center px-4 py-10 text-center col-span-full'>
 							<svg
-								className='w-16 h-16 text-gray-400 mb-4'
+								className='w-16 h-16 mb-4 text-gray-400'
 								fill='none'
 								stroke='currentColor'
 								viewBox='0 0 24 24'
@@ -271,7 +324,7 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 								/>
 							</svg>
 							<p className='text-lg font-medium text-gray-700'>No se encontraron cursos</p>
-							<p className='text-sm text-gray-500 mt-2'>Intenta con otros filtros o vuelve más tarde</p>
+							<p className='mt-2 text-sm text-gray-500'>Intenta con otros filtros o vuelve más tarde</p>
 						</div>
 					)}
 				</div>

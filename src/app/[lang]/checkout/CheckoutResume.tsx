@@ -13,6 +13,8 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 	const { ficha, total_price } = product;
 	const { paymentType, appliedCoupon, activeStep, certifications } = useCheckout();
 
+	console.log(certifications);
+
 	const currencies: any = {
 		cl: 'CLP',
 		ar: 'ARS',
@@ -35,10 +37,12 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 
 	const items: any[] = [
 		{
-			description: ficha.title,
-			price: total_price,
+			description: product.title,
+			price: product.prices.total_price,
 		},
 	];
+
+	console.log(product.prices.total_price);
 
 	// Normaliza el número eliminando puntos y lo convierte a entero
 	const parseNumber = (value: string): number => {
@@ -61,8 +65,13 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 		}).format(value);
 	};
 
+	const cleanedPrice =
+		product.prices.total_price && product.prices.total_price.trim() !== ''
+			? product.prices.total_price.replace(/[\.,]/g, '')
+			: '0';
+
 	const certificationsTotal = certifications.reduce((acc, cert) => acc + cert.price, 0);
-	const total = parseNumber(total_price) + certificationsTotal;
+	const total = parseNumber(cleanedPrice) + certificationsTotal;
 	const installmentValue = Math.floor(total / 12);
 	const discount =
 		appliedCoupon && appliedCoupon.discountType === 'percentage'
@@ -151,8 +160,10 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 	const installmentNumber = installments[country].quotes;
 	const installmentValueWithDiscount = totalWithDiscount / installmentNumber;
 
+	const isFree = product.prices.total_price === '0' || product.prices.total_price === '';
+
 	return (
-		<div className='p-5 mt-16 bg-white border border-gray-300 rounded-3xl'>
+		<div className='p-5 mt-16 space-y-5 bg-white border border-gray-300 rounded-3xl'>
 			<h2 className='text-2xl font-semibold text-[#392C35]'>Resumen de inscripción</h2>
 
 			<div className='mt-4'>
@@ -163,7 +174,9 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 						<div className='text-sm text-[#392C35]'>{item.description}</div>
 
 						{/* Precio del artículo */}
-						<div className='text-sm text-[#6474A6] text-right'>{`${currency} $${item.price}`}</div>
+						<div className='text-sm text-[#6474A6] text-right'>{`${currency} $${
+							item.price ? formatPesoArgentino(item.price) : 0
+						}`}</div>
 					</div>
 				))}
 			</div>
@@ -176,9 +189,9 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 					</div>
 				</div>
 			)}
-			<Certificaciones country={country} />
+			<Certificaciones country={country} product={product} />
 
-			{activeStep <= 1 && <Cupon />}
+			{activeStep <= 1 && !isFree && <Cupon />}
 
 			<hr className='my-6 border-t-2 border-gray-300 border-dashed' style={{ borderStyle: 'dotted' }} />
 
@@ -186,10 +199,12 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 				<span className='text-sm font-medium text-[#6474A6]'>TOTAL</span>
 				<span className='text-3xl font-bold text-[#392C35]'>{`${currency} $${formatPesoArgentino(totalWithDiscount)}`}</span>
 
-				<p className='mt-2 text-sm text-[#6474A6]'>
-					{`${installmentNumber} pagos de `}
-					<span className='font-bold'>{`${currency} $${formatPesoArgentino(installmentValueWithDiscount)}`}</span>
-				</p>
+				{installmentValueWithDiscount !== 0 && !isFree && (
+					<p className='mt-2 text-sm text-[#6474A6]'>
+						{`${installmentNumber} pagos de `}
+						<span className='font-bold'>{`${currency} $${formatPesoArgentino(installmentValueWithDiscount)}`}</span>
+					</p>
+				)}
 			</div>
 		</div>
 	);

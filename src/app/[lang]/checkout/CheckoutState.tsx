@@ -22,7 +22,7 @@ const CheckoutState: React.FC = () => {
 
 	const message = state.user
 		? 'En unos minutos tendrás disponible tu capacitación en MSK.'
-		: 'Ahora, debes verificar tu e-mail. Revisa tu bandeja de entrada, spam o correos no deseados. \n Así, podrás acceder a tu cuenta, donde tendrás disponible tu capacitación en MSK.';
+		: '¡Listo! Tu inscripción se completó con éxito.<br>Ahora, revisá tu casilla de e-mail (incluyendo la carpeta de <i>spam</i> o <i>correos no deseados</i>) para verificar tu cuenta.<br>Una vez verificado, <b>iniciá sesión en tu cuenta de MSK</b> y comenzá a disfrutar de tu curso de obsequio.';
 
 	const paymentStatusCard = {
 		approved: {
@@ -31,10 +31,10 @@ const CheckoutState: React.FC = () => {
 			color: '#088543',
 			buttons: [
 				{
-					label: 'Ir a mis cursos',
+					label: 'Iniciar sesión',
 					action: () =>
 						window.open(
-							country === '' ? `${window.location.origin}/mi-perfil/` : `${window.location.origin}/${country}/mi-perfil/`,
+							country === '' ? `${window.location.origin}/login/` : `${window.location.origin}/${country}/login/`,
 							'_blank',
 						),
 					color: '#9200AD',
@@ -93,9 +93,11 @@ const CheckoutState: React.FC = () => {
 						<span className='w-3 h-3 mr-2 rounded-full' style={{ backgroundColor: color }}></span>
 						<h3 className='text-2xl font-semibold text-[#392C35]'>{title}</h3>
 					</div>
-					<p className='text-[#392C35] font-normal' style={{ whiteSpace: 'pre-line' }}>
-						{message}
-					</p>
+					<p
+						className='text-[#392C35] font-normal'
+						style={{ whiteSpace: 'pre-line' }}
+						dangerouslySetInnerHTML={{ __html: message }}
+					></p>
 				</div>
 				<div className='flex justify-end gap-6'>
 					{buttons.map((button, index) => (

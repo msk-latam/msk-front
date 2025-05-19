@@ -224,8 +224,11 @@ export const createContractCRM = async (
 	currency: any,
 	countryCompleteName: any,
 	paymentType: 'rebill' | 'mercadopago' | 'stripe',
-	certification?: Certification[],
+	certification: Certification[],
+	closingSource: string = 'Consulta directa',
 ) => {
+	console.log(product);
+	console.log(certification);
 	try {
 		let paymentConfig = { ...(paymentOptions[paymentType] || paymentOptions.mercadopago) };
 
@@ -235,7 +238,8 @@ export const createContractCRM = async (
 			paymentConfig.remainingPayments = 7;
 		}
 		const mainProduct = {
-			code: product.ficha.product_code,
+			code: product.codes[0].unique_code,
+			// code: product.ficha.product_code,
 			quantity: 1,
 			price: transactionAmount,
 			total: transactionAmount,
@@ -270,12 +274,18 @@ export const createContractCRM = async (
 			Modo_de_pago: paymentConfig.paymentMethod,
 			M_todo_de_pago: paymentConfig.payment,
 			Fecha_de_primer_cobro: new Date().toISOString().split('T')[0],
-			Seleccione_total_de_pagos_recurrentes: paymentConfig.totalPayments.toString(),
-			Cantidad_de_pagos_recurrentes_restantes: paymentConfig.remainingPayments.toString(),
-			Monto_de_cada_pago_restantes: parseFloat((total / paymentConfig.totalPayments).toFixed(2)),
+			Seleccione_total_de_pagos_recurrentes:
+				closingSource === 'Obsequio + Certificación' ? '1' : paymentConfig.totalPayments.toString(),
+			Cantidad_de_pagos_recurrentes_restantes:
+				closingSource === 'Obsequio + Certificación' ? '0' : paymentConfig.remainingPayments.toString(),
+			Monto_de_cada_pago_restantes:
+				closingSource === 'Obsequio + Certificación'
+					? parseFloat(total)
+					: parseFloat((total / paymentConfig.totalPayments).toFixed(2)),
 			Canal_por_el_que_se_cerro_la_venta: 'Web',
+			Licencia_enviada: false,
 			channel_sale: 'Web',
-			Fuente_de_cierre_venta: 'Consulta directa',
+			Fuente_de_cierre_venta: closingSource,
 		};
 
 		const response = await fetch(`${ENDPOINT_CRM}/api/zoho/sales_order/create_contract`, {

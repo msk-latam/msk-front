@@ -27,7 +27,7 @@ export function useProfile() {
 		onError: (err) => {
 			console.error('Failed to fetch profile, redirecting to login:', err);
 			// Redirect to login on ANY fetch error
-			router.push('/login');
+			// router.push('/login');
 		},
 	});
 

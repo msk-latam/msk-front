@@ -6,6 +6,7 @@ import CtaButton from '@/dashboard/components/ui/CtaButton';
 import { useLmsNavigation } from '@/hooks/useLmsNavigation';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import { goToEnroll } from '../../../lib/account';
 
 // Simple SVG placeholders for icons - replace with actual icons later
 const LightningIcon = () => (
@@ -49,12 +50,27 @@ interface Course {
 	title: string;
 	expiryDate?: string;
 	qualification?: number;
-	statusType: 'progress' | 'inactive' | 'finished' | 'expired' | 'Activo' | 'Finalizado' | 'Expirado' | 'Sin enrolar';
+	statusType:
+		| 'progress'
+		| 'drop'
+		| 'baja'
+		| 'Baja'
+		| 'Cancelado'
+		| 'inactive'
+		| 'finished'
+		| 'expired'
+		| 'Activo'
+		| 'Finalizado'
+		| 'Expirado'
+		| 'Sin enrolar'
+		| 'Listo para enrolar';
 	statusText: string;
 	createdDate?: string;
 	isFavorite?: boolean;
 	product_code?: number;
 	product_code_cedente?: string;
+	link_al_foro?: string;
+	certificate_url?: string;
 }
 
 const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = ({ courseData, userEmail }) => {
@@ -137,7 +153,12 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 		if (activeTab === 'Cursos') {
 			// Adjust this condition based on how you define 'Cursos'
 			// For example, show only active or not finished courses
-			return course.statusType === 'Activo' || course.statusType === 'progress';
+			return (
+				course.statusType === 'Activo' ||
+				course.statusType === 'progress' ||
+				course.statusType === 'drop' ||
+				course.statusType === 'Cancelado'
+			);
 		}
 		if (activeTab === 'Favoritos') {
 			// Assuming you have an 'isFavorite' property in your Course interface
@@ -182,9 +203,13 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 	const getStatusStyles = (statusType: Course['statusType']) => {
 		switch (statusType) {
 			case 'Activo':
-				return 'bg-[#FFEBF6] text-[#C42B8B]'; // Pink
+				return 'bg-[#FFEBF6] text-[#9200AD]'; // Purple for active progress
+			case 'progress':
+				return 'bg-[#FFEBF6] text-[#9200AD]'; // Purple for explicit progress
 			case 'Finalizado':
 				return 'bg-[#DFE6FF] text-[#29324F]'; // Blue
+			case 'Cancelado':
+				return 'bg-[#FFEBF6] text-[#C42B8B]'; // red
 			case 'Expirado':
 				return 'bg-[#FFF4D8] text-[#8E6E3B]'; // Yellow
 			case 'inactive':
@@ -198,12 +223,44 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 		}
 	};
 
+	const handleCourseAction = async (course: Course) => {
+		if (course.product_code && course.product_code_cedente && userEmail) {
+			setNavigatingCourseId(course.product_code);
+			try {
+				if (course.statusType === 'Sin enrolar') {
+					const enrollResponse = await goToEnroll(Number(course.product_code), userEmail);
+					console.log('Enroll response for MyCoursesSection:', enrollResponse); // For debugging
+
+					if (enrollResponse?.data?.[0]?.status === 'success') {
+						// Enrollment successful, now navigate to LMS
+						await navigateToLms(course.product_code, course.product_code_cedente, userEmail);
+					} else {
+						console.error('Enrollment failed in MyCoursesSection:', enrollResponse);
+						// TODO: Optionally, set an error state here to inform the user,
+						// similar to navigationError but for enrollment failures.
+					}
+				} else {
+					// For 'Activo', 'Finalizado', and other statuses that go directly to LMS
+					await navigateToLms(course.product_code, course.product_code_cedente, userEmail);
+				}
+			} catch (error) {
+				console.error('LMS navigation or enrollment failed for course in MyCoursesSection:', course.product_code, error);
+				// Errors from navigateToLms will be caught by the useLmsNavigation hook's error state (navigationError)
+			} finally {
+				setNavigatingCourseId(null);
+			}
+		} else {
+			console.error('Missing data for LMS navigation/enrollment in MyCoursesSection:', course);
+		}
+	};
+
 	const renderInfoLine = (course: Course) => {
 		if (
 			course.expiryDate &&
 			course.statusType !== 'Expirado' &&
 			course.statusType !== 'Finalizado' &&
-			course.statusType !== 'Sin enrolar'
+			course.statusType !== 'Sin enrolar' &&
+			course.statusType !== 'Cancelado'
 		) {
 			const date = new Date(course.expiryDate);
 			const day = date.getDate().toString().padStart(2, '0');
@@ -222,14 +279,16 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 				<div className='flex items-center gap-1.5 text-xs text-[#4F5D89] font-inter font-medium'>
 					<TrophyIcon />
 					<span>Calificación: {course.qualification}</span>
-					<a
-						href={`https://www.google.com`}
-						target='_blank'
-						rel='noopener noreferrer'
-						className='cursor-pointer text-[#9200AD] underline font-inter font-medium text-sm'
-					>
-						Ver certificado
-					</a>
+					{course.certificate_url && (
+						<a
+							href={course.certificate_url}
+							target='_blank'
+							rel='noopener noreferrer'
+							className='cursor-pointer text-[#9200AD] underline font-inter font-medium text-sm'
+						>
+							Ver certificado
+						</a>
+					)}
 				</div>
 			);
 		}
@@ -239,30 +298,39 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 		const secondaryButtonClass =
 			'bg-white text-[#1A1A1A] border border-[#DBDDE2]  px-6 py-3 rounded-full font-inter font-medium text-sm hover:bg-[#838790] transition whitespace-nowrap';
 
+		// Always show Reactivar for Cancelado status irrespective of statusType
+		if (course.status === 'Cancelado') {
+			return (
+				<CtaButton
+					onClick={() =>
+						window.open('https://ayuda.msklatam.com/portal/es/kb/articles/reactivar-tu-curso-expirado', '_blank')
+					}
+				>
+					Reactivar
+				</CtaButton>
+			);
+		}
+
 		switch (course.statusType) {
 			case 'Activo':
 			case 'Finalizado':
 			case 'Sin enrolar':
+			case 'Listo para enrolar':
 				return (
 					<>
-						<button className={secondaryButtonClass}>Ir al foro</button>
-						<CtaButton
-							onClick={async () => {
-								if (course.product_code && course.product_code_cedente && userEmail) {
-									setNavigatingCourseId(course.product_code);
-									try {
-										await navigateToLms(course.product_code, course.product_code_cedente, userEmail);
-									} catch (error) {
-										console.error('LMS navigation failed for course:', course.product_code, error);
-									} finally {
-										setNavigatingCourseId(null);
-									}
-								} else {
-									console.error('Missing data for LMS navigation:', course);
-								}
-							}}
-							isDisabled={navigatingCourseId === course.product_code}
-						>
+						{/* Hide forum button when course is Cancelado */}
+						{course.status !== 'Cancelado' && (
+							<button
+								style={{ display: course?.link_al_foro ? 'block' : 'none' }}
+								className={`${secondaryButtonClass} ${!course?.link_al_foro ? 'opacity-50 cursor-not-allowed' : ''}`}
+								onClick={() => course?.link_al_foro && window.open(course.link_al_foro, '_blank')}
+								disabled={!course?.link_al_foro}
+							>
+								Ir al foro
+							</button>
+						)}
+
+						<CtaButton onClick={() => handleCourseAction(course)} isDisabled={navigatingCourseId === course.product_code}>
 							{navigatingCourseId === course.product_code
 								? 'Cargando...'
 								: course.statusType === 'Sin enrolar'
@@ -271,9 +339,19 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 						</CtaButton>
 					</>
 				);
-
+			case 'drop':
 			case 'Expirado':
-				return <CtaButton onClick={() => {}}>Reactivar</CtaButton>;
+			case 'Cancelado':
+			case 'baja':
+				return (
+					<CtaButton
+						onClick={() =>
+							window.open('https://ayuda.msklatam.com/portal/es/kb/articles/reactivar-tu-curso-expirado', '_blank')
+						}
+					>
+						Reactivar
+					</CtaButton>
+				);
 			default:
 				return null;
 		}
@@ -341,7 +419,7 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 										(course as Course).statusType,
 									)}`}
 								>
-									{course.statusText}
+									{course.status === 'Cancelado' ? 'Cancelado' : course.statusText}
 								</span>
 								{/* Title */}
 								<h4 className='font-raleway font-bold text-base leading-tight text-[#1A1A1A] mb-2 min-h-[48px]'>

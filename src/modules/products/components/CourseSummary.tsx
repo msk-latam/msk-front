@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCourseSummary } from '../hooks/useCourseSummary';
 import SkeletonCourseSummaryCard from '../skeletons/SkeletonCourseSummaryCard';
+import { useProfile } from '@/hooks/useProfile';
 
 interface CourseSummaryProps {
 	slug: string;
@@ -16,12 +17,23 @@ interface CourseSummaryProps {
 export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 	const { data, loading } = useCourseSummary(slug, lang);
 	const router = useRouter();
+	const { user } = useProfile();
+
+	console.log(user);
+
+	const isFree = data
+		? [data.regular_price, data.sale_price, data.total_price].every((price) => {
+				const num = parseFloat(price);
+				return price === '' || isNaN(num) || num === 0;
+		  })
+		: false;
 
 	const enrolledFormatted = data?.enrolled;
 	const modules = data?.modules;
 	const duration = data?.duration + ' horas estimadas';
 	const certification = data?.certification;
-	const max_installments = data?.max_installments;
+	const max_installments = lang === 'ar' ? 6 : lang === 'cl' ? 8 : data?.max_installments;
+
 	const showPrice = lang.toLowerCase() !== 'es';
 
 	const price =
@@ -46,22 +58,48 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 					.replace(',', '.')
 			: '';
 
+	const cleanTotalString = total_price
+		.replace(/[^\d,.-]/g, '')
+		.replace(/\./g, '')
+		.replace(',', '.');
+	let total = Number(cleanTotalString);
+
+	// Validación por si sigue fallando
+	if (isNaN(total)) total = 0;
+
+	// Validar e interpretar los installments
+	let installments = Number(max_installments);
+	if (isNaN(installments) || installments === 0) installments = 1;
+
+	// Redondear
+	total = parseFloat(total.toFixed(2));
+	const precioCuota = parseFloat((total / installments).toFixed(2));
+
 	const cedente = data?.cedente;
 	if (loading) {
 		return <SkeletonCourseSummaryCard />; // Usa el Skeleton cuando los datos están cargando
 	}
+	const formatToARS = (value: number): string => {
+		const formatted = value.toLocaleString('es-AR', {
+			minimumFractionDigits: 2,
+			maximumFractionDigits: 2,
+		});
+
+		return formatted.endsWith(',00') ? formatted.slice(0, -3) : formatted;
+	};
 
 	const isSpanishVersion = lang?.toLowerCase().startsWith('es');
 	return (
 		<div className='bg-white rounded-[38px] p-6 md:p-8 sticky top-10 w-full' style={{ backgroundColor: '#FFFFFF' }}>
 			<Image
-				src={data?.featured_images.medium ?? ''}
+				src={data?.featured_images.high ?? ''}
 				alt='Curso'
-				className='rounded-xl w-full object-cover mb-6'
+				className='object-cover w-full mb-6 rounded-xl'
 				width={420}
 				height={300}
 			/>
 			{/* Total y precio */}
+			{isFree && <p className='px-4 py-2 my-6 text-[#6474A6] bg-[#DFE6FF] rounded-full w-fit'>Curso gratuito</p>}
 			{showPrice && data?.total_price && Number(data.total_price) > 0 && (
 				<>
 					<p className='text-[#1A1A1A] text-[20px] font-inter font-medium'>
@@ -69,7 +107,7 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 					</p>
 					<p className='text-[#4F5D89] font-inter font-medium text-base'>{max_installments} pagos de:</p>
 					<p className='text-2xl font-bold text-[#1A1A1A] mb-4'>
-						{price} {data?.currency}
+						$ {formatToARS(precioCuota)} {data?.currency}
 					</p>
 				</>
 			)}
@@ -120,12 +158,27 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 			{/* Botones CTA */}
 			<div className='space-y-3'>
 				{!isSpanishVersion && (
-					<Link href={getLocalizedUrl(lang, `/checkout/${slug}`)}>
+					<Link
+						href={isFree && !user ? getLocalizedUrl(lang, `/checkout/${slug}`) : getLocalizedUrl(lang, `/checkout/${slug}`)}
+						onClick={() => {
+							if (isFree) {
+								localStorage.setItem('redirectAfterLogin', window.location.pathname);
+								console.log('Guardando redirect y enviando a crear cuenta');
+							}
+						}}
+					>
 						<button className='bg-[#9200AD] hover:bg-[#6b1679] text-white w-full py-3 rounded-full font-inter font-medium text-base transition'>
-							Inscríbete ahora
+							{user
+								? isFree
+									? 'Inscríbete gratis ahora'
+									: 'Inscríbete ahora'
+								: isFree
+								? 'Regístrate o inicia sesión para inscribirte'
+								: 'Inscríbete ahora'}
 						</button>
 					</Link>
 				)}
+
 				<a href='#course-support-form' className='block'>
 					<button className='w-full border border-gray-300 text-[#1A1A1A] hover:bg-gray-100 flex items-center justify-center py-3 rounded-full font-inter font-bold text-base gap-2 transition'>
 						Contáctanos

@@ -3,7 +3,7 @@ import '@/app/globals.css';
 import Footer from '@/modules/components/footer/footer';
 import Navbar from '@/modules/components/navbar/Navbar';
 import NewsLetter from '@/modules/components/newsletter/NewsLetter';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import type { UpdateCustomerPayload } from '@/hooks/useCustomer';
 import { useCustomer } from '@/hooks/useCustomer';
@@ -20,6 +20,7 @@ import MyCoursesSection from '@/modules/dashboard/components/MyCoursesSection';
 import type { UserProfileData } from '@/modules/dashboard/components/ProfileEditModal';
 import ProfileEditModal from '@/modules/dashboard/components/ProfileEditModal';
 import PromoBanner from '@/modules/dashboard/components/PromoBanner';
+import { createContractCRM } from '../checkout/utils/utils';
 
 interface InterestPayload {
 	specialty_interests: string[];
@@ -143,7 +144,7 @@ export default function DashboardPage() {
 			document_type: formDataFromModal.document_type,
 			company_name: formDataFromModal.company_name,
 			invoice_required:
-				formDataFromModal.invoice_required === 'yes' ? 1 : formDataFromModal.invoice_required === 'no' ? 0 : undefined,
+				formDataFromModal.invoice_required !== undefined ? parseInt(formDataFromModal.invoice_required as string, 10) : 0,
 			billing_email: formDataFromModal.billingEmail,
 			billing_phone: formDataFromModal.fullBillingPhoneNumber,
 			tax_regime: formDataFromModal.tax_regime,
@@ -163,24 +164,26 @@ export default function DashboardPage() {
 
 		try {
 			console.log('(Page) Sending to API:', cleanedPayload);
-			await updateCustomerProfile(cleanedPayload as UpdateCustomerPayload); // Call mutate from useCustomer
-			// setShowEditModal(false); // Keep modal open to show success/error
+			await updateCustomerProfile(cleanedPayload as UpdateCustomerPayload); // API call to save data
+
 			setEditTargetField(undefined);
 			setSaveProfileSuccess(true);
+
+			// This is the call to re-fetch profile data and update the UI
 			mutateProfile(); // Re-fetch profile data via SWR
+
 			setTimeout(() => {
-				setSaveProfileError(null); // Clear error on success timeout as well
+				setSaveProfileError(null);
 				setSaveProfileSuccess(false);
 				// setShowEditModal(false); // Optionally close modal after success message duration
 			}, 3000);
 		} catch (error: any) {
 			console.error('Failed to save profile:', error);
 			setSaveProfileError(error.message || 'Error desconocido al guardar perfil');
-			// Keep success as false or reset it
 			setSaveProfileSuccess(false);
 			setTimeout(() => {
 				setSaveProfileError(null);
-			}, 5000); // Keep error message longer
+			}, 5000);
 		}
 	};
 
@@ -192,9 +195,9 @@ export default function DashboardPage() {
 		try {
 			console.log('(Page) Interests data to save user context:', user); // Corrected log
 			await updateInterests(interestData);
+			mutateProfile(); // Re-fetch profile data to update completion percentage
 			setEditTargetField(undefined);
 			setSaveInterestsSuccess(true);
-			handleReload(); // This seems to be for interests, profile mutate is separate
 			setTimeout(function () {
 				setSaveInterestsError(null);
 				setSaveInterestsSuccess(false);
@@ -205,7 +208,49 @@ export default function DashboardPage() {
 		}
 	};
 
-	// Calculate initial data for the Interests modal
+	useEffect(() => {
+		const enrolarCurso = async () => {
+			const redirectAfterLogin = localStorage.getItem('redirectAfterLogin');
+
+			if (redirectAfterLogin) {
+				// Elimina la barra final si existe
+				const cleanPath = redirectAfterLogin.endsWith('/') ? redirectAfterLogin.slice(0, -1) : redirectAfterLogin;
+
+				// Extrae la última parte
+				const extractedValue = cleanPath.split('/').pop();
+				console.log('Valor extraído:', extractedValue);
+
+				const lang = 'ar';
+				const slug = extractedValue;
+
+				try {
+					const res = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/product/${slug}?lang=${lang}`, {
+						cache: 'no-cache',
+					});
+
+					const course = await res.json();
+					console.log('Curso:', course);
+					//mapeo para no cambiar la funcion original
+					const product = {
+						ficha: {
+							product_code: 9005897,
+						},
+					};
+
+					createContractCRM(user.crm_id, product, 0, 'ARS', 'Argentina', 'mercadopago', 'Obsequio');
+					localStorage.removeItem('redirectAfterLogin');
+				} catch (error) {
+					console.error('Error al obtener el curso o crear el contrato:', error);
+				}
+			} else {
+				console.log('No hay redirección guardada en localStorage');
+			}
+		};
+
+		enrolarCurso();
+	}, [user]);
+
+	console.log(user);
 
 	return (
 		<>

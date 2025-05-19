@@ -1,9 +1,10 @@
+import { environmentBackend } from '@/utils/isProductive';
 import { cookies } from 'next/headers';
 import { type NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
 	try {
-		const { email, password } = await request.json();
+		const { email, password, lang } = await request.json();
 
 		//limpiar cookies para evitar que se guarde el email
 		cookies().delete('email');
@@ -11,6 +12,14 @@ export async function POST(request: NextRequest) {
 		cookies().delete('last_name');
 		cookies().delete('access_token');
 		cookies().delete('picture');
+
+		if (lang) {
+			cookies().set('msk-country', lang, {
+				path: '/',
+				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
+				sameSite: 'lax',
+			});
+		}
 
 		const apiSignInUrl = 'https://dev.msklatam.tech/msk-laravel/public/api/login';
 
@@ -28,12 +37,9 @@ export async function POST(request: NextRequest) {
 			body: JSON.stringify({ email, password }),
 		});
 
-		console.log('response', response);
-
 		const data = await response.json();
 
 		if (!response.ok) {
-			console.log('data', data);
 			// Forward the error from the backend API
 			return NextResponse.json({ message: data.message || 'Authentication failed' }, { status: response.status });
 		}
@@ -43,6 +49,27 @@ export async function POST(request: NextRequest) {
 		if (!access_token || typeof expires_at !== 'string') {
 			console.error('Invalid response structure from API (expected string expires_at):', data);
 			return NextResponse.json({ message: 'Invalid response from authentication server' }, { status: 500 });
+		}
+
+		/* llamar a la api de customer, si retorna platform_user en 0, llevar a completar perfil */
+
+		const customerResponse = await fetch(`${environmentBackend}/api/customer/${email}`, {
+			// const customerResponse = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/customer/${email}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+			},
+		});
+
+		const customerData = await customerResponse.json();
+
+		if (customerData.platform_user === 0) {
+			cookies().set('needsProfileCompletion', 'true', {
+				path: '/',
+				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
+				sameSite: 'lax',
+			});
 		}
 
 		const expiresDate = new Date(expires_at);
