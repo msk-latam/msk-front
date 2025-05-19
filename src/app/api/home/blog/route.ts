@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
-import { sanitizeBlogPost, BlogPost, Category } from '@/modules/home/types';
+import { sanitizeBlogPost, BlogPost, Category, BlogAuthor } from '@/modules/home/types';
 
 export async function GET(request: Request) {
 	const url = new URL(request.url);
 	const lang = url.searchParams.get('lang') || 'int';
 
 	try {
-		const res = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/front/inicio?lang=${lang}&nocache=1`, {
+		const res = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/front/inicio?lang=${lang}`, {
 			next: { revalidate: 0 },
 		});
 
@@ -25,6 +25,14 @@ export async function GET(request: Request) {
 					  }))
 					: [];
 
+				const author: BlogAuthor[] = Array.isArray(post.author)
+					? post.author.map((a: any, i: number) => ({
+							id: a?.id ?? i,
+							name: a?.name ?? 'Sin autor',
+							image: a?.image ?? undefined,
+					  }))
+					: [];
+
 				let featuredImage = '/images/default-image.jpg';
 				if (typeof post.featured_image === 'string') {
 					featuredImage = post.featured_image.replace('https://es.wp.msklatam.com', 'https://cms1.msklatam.com');
@@ -34,7 +42,7 @@ export async function GET(request: Request) {
 					id: post.id || 0,
 					title: post.title || '',
 					subtitle: post.subtitle || '',
-					author: Array.isArray(post.author) ? post.author.join(', ') : post.author || '',
+					author,
 					date: post.date || '',
 					readTime: post.readTime || post.time_to_read || null,
 					tags: Array.isArray(post.tags) ? post.tags : [],
@@ -44,22 +52,16 @@ export async function GET(request: Request) {
 					featured: isFeatured && index === 0 ? '1' : '0',
 				};
 
-				console.log(`readTime recibido para "${rawPost.title}":`, rawPost.readTime); // ✅ LOG
-
 				return sanitizeBlogPost(rawPost);
 			});
 		};
 
-		const featured_blog_articles = mapPosts(blogSection.featured_blog_articles || [], true);
-		const featured_blog_guides = mapPosts(blogSection.featured_blog_guides || []);
-		const featured_blog_infographies = mapPosts(blogSection.featured_blog_infographies || []);
-
 		return NextResponse.json({
 			title: blogSection.title || '',
 			subtitle: blogSection.subtitle || '',
-			featured_blog_articles,
-			featured_blog_guides,
-			featured_blog_infographies,
+			featured_blog_articles: mapPosts(blogSection.featured_blog_articles || [], true),
+			featured_blog_guides: mapPosts(blogSection.featured_blog_guides || []),
+			featured_blog_infographies: mapPosts(blogSection.featured_blog_infographies || []),
 		});
 	} catch (error) {
 		console.error('Error al obtener los datos del blog:', error);

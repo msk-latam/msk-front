@@ -16,7 +16,7 @@ interface BlogAction {
 interface BlogCardProps {
 	title: string;
 	subtitle?: string;
-	author?: string;
+	author: { name: string; image?: string }[];
 	authorImage?: string;
 	date: string;
 	readTime?: string | null;
@@ -29,8 +29,7 @@ interface BlogCardProps {
 }
 
 interface ArticleMetaProps {
-	author: string;
-	authorImage?: string;
+	authors: { name: string; image?: string }[];
 	date: string;
 	readTime?: string | null;
 }
@@ -98,7 +97,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
 
 						{subtitle && <p className='text-gray-600 font-inter text-base mb-3 line-clamp-2'>{subtitle}</p>}
 
-						<ArticleMeta author={author || 'MSK LATAM'} authorImage={authorImage} date={date} readTime={readTime} />
+						<ArticleMeta authors={author} date={date} readTime={readTime} />
 					</div>
 
 					<div className='flex flex-row items-center justify-between mt-4 gap-2'>
@@ -187,7 +186,7 @@ const TagList: React.FC<{ tags: string[] }> = ({ tags }) => (
 	</div>
 );
 
-const ArticleMeta: React.FC<ArticleMetaProps> = ({ author, authorImage, date, readTime }) => {
+const ArticleMeta: React.FC<ArticleMetaProps> = ({ authors, date, readTime }) => {
 	const formatDate = (dateString: string) =>
 		new Intl.DateTimeFormat('es-ES', {
 			day: 'numeric',
@@ -195,24 +194,29 @@ const ArticleMeta: React.FC<ArticleMetaProps> = ({ author, authorImage, date, re
 			year: 'numeric',
 		}).format(new Date(dateString));
 
+	const mainAuthor = authors[0];
+
 	return (
 		<div className='flex items-center gap-2 mt-4 text-xs text-gray-500'>
-			<div className='w-5 h-5 rounded-full overflow-hidden bg-gray-200'>
-				<Image
-					src={authorImage || '/images/blog/doctor-with-stetoscope.png'}
-					alt={`Foto de ${author}`}
-					width={20}
-					height={20}
-				/>
-			</div>
-			<span className='flex items-center gap-1 font-semibold'>
-				<span className='w-1.5 h-1.5 bg-[#6474A6] rounded-full'></span>
-				{author}
-			</span>
-			<span className='text-gray-400'>•</span>
+			{mainAuthor && (
+				<>
+					<div className='w-5 h-5 rounded-full overflow-hidden bg-gray-200'>
+						<Image
+							src={mainAuthor.image || '/images/blog/doctor-with-stetoscope.png'}
+							alt={`Foto de ${mainAuthor.name}`}
+							width={20}
+							height={20}
+						/>
+					</div>
+					<span className='flex items-center gap-1 font-semibold'>
+						<span className='w-1.5 h-1.5 bg-[#6474A6] rounded-full'></span>
+						{mainAuthor.name}
+					</span>
+					<span className='text-gray-400'>•</span>
+				</>
+			)}
 			<time dateTime={date}>{formatDate(date)}</time>
 		</div>
 	);
 };
-
 export default BlogCard;
