@@ -269,7 +269,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
 					window.location.href = localizeExternalBlogUrl(lang, link);
 				}
 			}}
-			className='group focus:outline-none'
+			className='group focus:outline-none h-full'
 		>
 			<article
 				className='rounded-2xl overflow-hidden h-full shadow-sm border border-gray-100 bg-[#F7F7F8] flex flex-col transform transition-transform duration-300 group-hover:scale-105 cursor-pointer'
