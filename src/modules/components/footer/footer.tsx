@@ -111,8 +111,8 @@ const Footer = () => {
 						<a href={buildFooterLink('/nosotros/')} className='block hover:underline'>
 							Quiénes somos
 						</a>
-						<a href={buildFooterLink('/conviertete-en-partner/')} className='block hover:underline'>
-							Conviértete en partner
+						<a href={buildFooterLink('/certificados-digitales/')} className='block hover:underline'>
+							Certificados digitales
 						</a>
 						<a href={buildFooterLink('/ayuda/')} className='block hover:underline'>
 							Centro de ayuda
