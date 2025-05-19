@@ -87,22 +87,23 @@ const Certificaciones = ({ product, country }: any) => {
 					<ul className='space-y-3'>
 						{activeStep !== 3 && (
 							<>
-								{/* Certificación MSK Digital */}
-								<li key={mskCert.name} className='flex items-center justify-between'>
-									<label className='flex items-center gap-3'>
-										<input
-											type='checkbox'
-											checked={!isFree || isSelected(mskCert)}
-											onChange={() => toggleCertification(mskCert)}
-											disabled={!isFree}
-											className='w-4 h-4 text-[#9200AD] border-[#9200AD] focus:ring-[#9200AD]'
-										/>
-										<span className='text-sm text-[#392C35] w-[200px]'>{decodeHtml(mskCert.name)}</span>
-									</label>
-									<span className={`text-sm ${isFree ? 'text-[#6474A6]' : 'text-green-600'} text-right`}>
-										{isFree ? `${currency} $${formatPesoArgentino(mskCert.price)}` : 'Bonificado'}
-									</span>
-								</li>
+								{!isFree && (
+									<li key={mskCert.name} className='flex items-center justify-between'>
+										<label className='flex items-center gap-3'>
+											<input
+												type='checkbox'
+												checked={!isFree || isSelected(mskCert)}
+												onChange={() => toggleCertification(mskCert)}
+												disabled={!isFree}
+												className='w-4 h-4 text-[#9200AD] border-[#9200AD] focus:ring-[#9200AD]'
+											/>
+											<span className='text-sm text-[#392C35] w-[200px]'>{decodeHtml(mskCert.name)}</span>
+										</label>
+										<span className={`text-sm ${isFree ? 'text-[#6474A6]' : 'text-green-600'} text-right`}>
+											{isFree ? `${currency} $${formatPesoArgentino(mskCert.price)}` : 'Bonificado'}
+										</span>
+									</li>
+								)}
 
 								{/* Otras certificaciones */}
 								{certificaciones.map((cert: any) => (

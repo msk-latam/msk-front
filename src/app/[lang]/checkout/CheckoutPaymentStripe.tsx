@@ -40,7 +40,7 @@ const CheckoutStripe = ({ product, country }: any) => {
 
 	const certificationsTotal = certifications?.reduce((sum, cert) => sum + cert.price, 0) || 0;
 
-	const productBaseAmount = Number(product.total_price.replace(/,/g, '').replace('.', ''));
+	const productBaseAmount = Number(product.prices.total_price.replace(/,/g, '').replace('.', ''));
 
 	// Monto total incluyendo certificaciones
 	const transactionAmount = productBaseAmount;
@@ -78,8 +78,8 @@ const CheckoutStripe = ({ product, country }: any) => {
 			country: currentCountry,
 		},
 		product: {
-			name: product.ficha.title,
-			product_code: product.ficha.product_code,
+			name: product.title,
+			product_code: product.codes[0].unique_code,
 			amount: parseFloat(total.toFixed(2)),
 		},
 	});
@@ -162,13 +162,6 @@ const CheckoutStripe = ({ product, country }: any) => {
 			const paymentIntentId = paymentIntent.payment_intent;
 
 			const updatePayment = await updatePaymentIntent({ paymentIntentId, paymentMethodId });
-
-			console.log(updatePayment);
-
-			console.log(customerId); //cus
-			console.log(stripeSubscriptionId); //sub
-			console.log(paymentMethodId); //pm
-			console.log(paymentIntentId); //pi
 
 			await attachCardToUser({
 				customer_id: customerId,
@@ -273,69 +266,3 @@ const CheckoutPaymentStripe = ({ product, country }: any) => {
 };
 
 export default CheckoutPaymentStripe;
-
-// 'use client';
-// import StepButtons from './buttons/CheckoutPaymentButtons';
-// import { CardElement } from '@stripe/react-stripe-js';
-// import { useCheckout } from './CheckoutContext';
-
-// const CheckoutStripe = () => {
-// 	return (
-// 		<form
-// 			onSubmit={(e) => e.preventDefault()}
-// 			className='w-full max-w-lg p-6 mx-auto bg-white border border-gray-300 shadow-xl rounded-3xl'
-// 		>
-// 			<h2 className='mb-4 text-2xl font-raleway font-semibold text-center text-[#1a1a1a]'>Finalizar Pago</h2>
-
-// 			<div className='p-4 border border-gray-300 rounded-lg bg-gray-50'>
-// 				<CardElement
-// 					options={{
-// 						style: {
-// 							base: {
-// 								fontSize: '18px',
-// 								color: '#333',
-// 								'::placeholder': { color: '#a0aec0' },
-// 							},
-// 						},
-// 					}}
-// 				/>
-// 			</div>
-
-// 			<button
-// 				type='submit'
-// 				className='flex items-center justify-center w-full py-3 mt-6 font-semibold text-white transition-all duration-300 bg-[#9200AD] rounded-[38px] hover:bg-[#B814D6]'
-// 			>
-// 				Pagar
-// 			</button>
-// 		</form>
-// 	);
-// };
-
-// const CheckoutPaymentStripe = () => {
-// 	const { subStep, setSubStep, activeStep, setActiveStep, setPaymentType } = useCheckout();
-
-// 	const handlePreviousStep = () => {
-// 		if (subStep > 0) {
-// 			setSubStep(subStep - 1);
-// 			setActiveStep(activeStep - 1);
-// 			setPaymentType(null);
-// 		} else if (activeStep > 1) {
-// 			setActiveStep(activeStep - 1);
-// 		}
-// 	};
-
-// 	return (
-// 		<div className='flex flex-col justify-between mt-16'>
-// 			<CheckoutStripe />
-// 			<StepButtons
-// 				isDisabled={false}
-// 				isFormValid={true}
-// 				isSubmitting={false}
-// 				handlePreviousStep={handlePreviousStep}
-// 				handleSubmit={() => console.log('Submit fake')}
-// 			/>
-// 		</div>
-// 	);
-// };
-
-// export default CheckoutPaymentStripe;
