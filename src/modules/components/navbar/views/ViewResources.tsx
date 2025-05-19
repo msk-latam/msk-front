@@ -29,13 +29,13 @@ const ViewResources: React.FC<Props> = ({ navigateTo, isMobile = true, onClose }
 
   if (!isMobile) {
     return (
-      <div className="h-fit p-4 overflow-visible w-fit bg-white rounded-b-2xl">
+      <div className="h-fit overflow-visible w-fit bg-white rounded-b-2xl">
         <div className="w-full rounded-b-2xl bg-white divide-y">
           {data.resources?.map((resource, index) => (
             <Link
               key={`resource-${index}`}
               href={resource.link.url}
-              className="w-full flex justify-between items-center py-4 text-gray-800 whitespace-nowrap hover:bg-gray-100 rounded-lg"
+              className="w-full flex justify-between items-center  py-3 px-4 text-gray-800 hover:bg-gray-100 rounded-lg"
             >
               <span>{resource.link.title}</span>
               <ChevronRight size={20} />
@@ -43,12 +43,12 @@ const ViewResources: React.FC<Props> = ({ navigateTo, isMobile = true, onClose }
           ))}
         </div>
 
-        <Link href="/tienda" >
+        {/* <Link href="/tienda" >
           <button className="flex justify-between items-center w-full p-4 bg-gray-100 hover:bg-gray-200 rounded-2xl text-gray-800">
             <span className="whitespace-nowrap">Ver todos los cursos</span>
             <ChevronRight size={20} />
           </button>
-        </Link>
+        </Link> */}
       </div>
     );
   }
