@@ -1,7 +1,12 @@
 'use client';
 
-import { Course, CoursesApiResponse } from '@/types/course';
 import { useEffect, useState } from 'react';
+
+type Product = {
+	id: number;
+	title: string;
+	link: string;
+};
 
 /**
  * Fetch courses from the MSK API using the server-side search endpoint.
@@ -9,7 +14,7 @@ import { useEffect, useState } from 'react';
  * When `searchTerm` is empty, no request is sent and the hook returns an empty list.
  */
 export const useSearchCourses = (lang: string, searchTerm: string) => {
-	const [courses, setCourses] = useState<Course[]>([]);
+	const [courses, setCourses] = useState<Product[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 
@@ -29,23 +34,21 @@ export const useSearchCourses = (lang: string, searchTerm: string) => {
 			setLoading(true);
 			setError(null);
 			try {
-				const apiUrl = `https://cms1.msklatam.com/wp-json/msk/v1/products?lang=${encodeURIComponent(
+				const apiUrl = `https://cms1.msklatam.com/wp-json/msk/v1/search-products?lang=${encodeURIComponent(
 					lang || 'int',
-				)}&search=${encodeURIComponent(trimmed)}&per_page=4&page=1`;
+				)}&search=${encodeURIComponent(trimmed)}`;
 
 				const response = await fetch(apiUrl, { signal });
 				if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-				const data: CoursesApiResponse = await response.json();
+				const data = await response.json();
 
-				// Deduplicate by father_id keeping the first occurrence (matches original logic)
-				const uniqueCourses = Object.values(
-					data.data.reduce((acc, course) => {
-						if (!acc[course.father_id]) acc[course.father_id] = course;
-						return acc;
-					}, {} as Record<number, Course>),
-				);
+				const courses = data.products.map((product: Product) => ({
+					id: product.id,
+					title: product.title,
+					link: product.link,
+				}));
 
-				setCourses(uniqueCourses);
+				setCourses(courses);
 			} catch (e: any) {
 				if (e.name !== 'AbortError') {
 					setError(e.message);
