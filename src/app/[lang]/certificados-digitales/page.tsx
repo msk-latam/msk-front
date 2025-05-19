@@ -85,11 +85,11 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 	// 	: pageData?.post_content || '<p>Contenido no disponible.</p>';
 
 	const displayContent = `
-        <i>
-<strong style="font-size: 30px">
+        
+<strong style="font-size: 24px">
 Un nuevo estándar en la validación académica
 </strong>
-</i>
+
 <br />
 <br />
 
@@ -109,7 +109,7 @@ sobre nosotros</a>
 
  <br /><br />
 
-<h3 style="font-size: 30px">
+<h3 style="font-size: 24px">
 Qué es la tecnología blockchain y por qué la usamos
 </h3>
 <br />
@@ -122,7 +122,7 @@ Blockchain es una tecnología de registro digital que permite almacenar datos de
 Esto garantiza la validez internacional de tu capacitación y te permite compartir tus logros de manera confiable con instituciones, empleadores y redes profesionales como LinkedIn.
 <br />
 <br />
-<h3 style="font-size: 30px">
+<h3 style="font-size: 24px">
 Qué incluye tu certificado digital
 </h3>
 <br />
@@ -142,7 +142,7 @@ Qué incluye tu certificado digital
 Mira un cerificado digital modelo. <a href="https://app.certika.co/certificate/OTgyMTg=" target="_blank" rel="noopener noreferrer" style="color: #9200AD;">Haz click aquí.</a>
 <br />
 <br />
-<h3 style="font-size: 30px">
+<h3 style="font-size: 24px">
 Cómo obtener tu certificado digital
 </h3>
 <br />
@@ -201,10 +201,10 @@ Mi certificado con tecnología blockchain</a>
 			</header>
 
 			<main className='bg-[#f3f4f6] flex justify-center px-0 sm:px-4 relative pt-0 pb-20  md:mb-0'>
-				<section className='w-full -mt-[40px] z-[10] relative overflow-visible max-w-[1400px] mx-auto'>
+				<section className='w-full -mt-[40px] z-[10] relative overflow-visible max-w-[1720px] mx-auto'>
 					<div className='mb-4 bg-white rounded-[30px] p-[36px]'>
 						{/* Render the HTML content from the API */}
-						<div className='space-y-5 text-xl' dangerouslySetInnerHTML={{ __html: displayContent }} />
+						<div className='mx-32 mt-12 space-y-5 text-xl' dangerouslySetInnerHTML={{ __html: displayContent }} />
 					</div>
 				</section>
 			</main>
