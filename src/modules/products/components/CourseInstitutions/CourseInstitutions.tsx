@@ -64,8 +64,14 @@ export default function CourseInstitutions({ slug, lang, onHideEmpty }: CourseIn
 
 function InstitutionCard({ inst }: { inst: any }) {
 	return (
-		<div className='bg-[#f7f9ff] rounded-[30px] p-7 h-32 flex items-center justify-center relative w-[250px]'>
-			<Image src={inst.image} alt={inst.title} width={200} height={80} className='object-contain mix-blend-multiply' />
+		<div className='bg-[#f7f9ff] rounded-[30px] p-7 h-32 flex items-center justify-center relative w-[250px] '>
+			<Image
+				src={inst.image}
+				alt={inst.title}
+				width={200}
+				height={80}
+				className='object-contain mix-blend-multiply max-h-[128px]'
+			/>
 			{inst.description && (
 				<div className='absolute bottom-2 right-2 group'>
 					<InfoIcon />
