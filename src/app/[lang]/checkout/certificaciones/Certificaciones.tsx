@@ -2,78 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 import { Certification, useCheckout } from '../CheckoutContext';
-import { getJSONByCountry } from '@/app/products';
-import ssr from '@/services/ssr';
 
 const Certificaciones = ({ product, country }: any) => {
 	const { certifications, setCertifications, activeStep } = useCheckout();
 	const [certificados, setCertificados] = useState<any[]>([]);
-
-	console.log(product.certificacion_relacionada);
-
-	const certificationsByCountry: Record<string, string[]> = {
-		ar: [
-			'euneiz-faro',
-			'udima',
-			'saxum',
-			'euneiz-apostillada',
-			'cmsc-consejo-medico-de-la-provincia-de-santa-cruz',
-			'universidad-catolica-san-antonio-de-murcia-ucam',
-		],
-		cl: ['euneiz-faro', 'udima', 'saxum', 'euneiz-apostillada', 'universidad-catolica-san-antonio-de-murcia-ucam'],
-		ec: [
-			'euneiz-faro',
-			'udima',
-			'saxum',
-			'euneiz-apostillada',
-			'afeme-cuenca',
-			'universidad-catolica-san-antonio-de-murcia-ucam',
-		],
-		mx: ['euneiz-faro', 'udima', 'SAXUM', 'euneiz-apostillada', 'universidad-catolica-san-antonio-de-murcia-ucam'],
-		pe: ['euneiz-faro', 'spmi', 'universidad-catolica-san-antonio-de-murcia-ucam'],
-		co: ['euneiz-faro', 'fmc', 'universidad-catolica-san-antonio-de-murcia-ucam'],
-		cr: ['euneiz-faro', 'universidad-catolica-san-antonio-de-murcia-ucam'],
-		sv: ['euneiz-faro', 'universidad-catolica-san-antonio-de-murcia-ucam'],
-		gt: ['euneiz-faro', 'universidad-catolica-san-antonio-de-murcia-ucam'],
-		hn: ['euneiz-faro', 'universidad-catolica-san-antonio-de-murcia-ucam'],
-		ni: ['euneiz-faro', 'universidad-catolica-san-antonio-de-murcia-ucam'],
-		pa: ['euneiz-faro', 'universidad-catolica-san-antonio-de-murcia-ucam'],
-		py: ['euneiz-faro', 'universidad-catolica-san-antonio-de-murcia-ucam'],
-		uy: ['euneiz-faro', 'universidad-catolica-san-antonio-de-murcia-ucam'],
-	};
-
-	// useEffect(() => {
-	// 	const fetchCertificados = async () => {
-	// 		try {
-	// 			const titles = certificationsByCountry[country] || [];
-	// 			const normalizedCountry = country === 'ar' ? 'arg' : country;
-
-	// 			const requests = titles.map((title) =>
-	// 				ssr.getSingleProductCMS(title, normalizedCountry).catch((err) => {
-	// 					console.error(`Error al obtener certificado para: ${title}`, err);
-	// 					return null; // Evita que toda la promesa falle
-	// 				}),
-	// 			);
-
-	// 			const results = await Promise.all(requests);
-
-	// 			console.log(results);
-
-	// 			// Filtrás los nulls o falsos
-	// 			const certificados = results.filter(Boolean).map((result) => result.product);
-
-	// 			console.log(certificados);
-
-	// 			setCertificados(certificados);
-	// 		} catch (error) {
-	// 			console.error('Error al obtener certificados:', error);
-	// 		}
-	// 	};
-
-	// 	if (country) {
-	// 		fetchCertificados();
-	// 	}
-	// }, [country]);
 
 	useEffect(() => {
 		if (product?.certificacion_relacionada) {
