@@ -86,7 +86,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 	};
 
 	const handleItemClick = (course: any) => {
-		const rawUrl: string | undefined = course.url || course.link;
+		const rawUrl: string | undefined = course.slug;
 
 		if (!rawUrl || typeof rawUrl !== 'string') {
 			console.warn('Course without valid url/link', course);
@@ -122,6 +122,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
 	const uniqueResults = Array.from(new Map(courses.map((item) => [`${item.id}-${item.title}`, item])).values());
 
+	console.log(courses);
+
 	return (
 		<div className={`relative ${className}`} ref={searchContainerRef}>
 			<div className='rounded-full border border-[#DBDDE2]-100 overflow-hidden relative flex items-center'>
@@ -135,14 +137,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
 					className={`bg-transparent w-full text-sm py-3 pl-4 pr-12 border-transparent focus:border-transparent focus:ring-0 focus:outline-none ${inputTextStyle}`}
 				/>
 				<button className='absolute right-1 bg-[#9200AD] p-3 rounded-full' onClick={handleSearchRedirect} type='button'>
-					<Search className='text-white w-4 h-4' />
+					<Search className='w-4 h-4 text-white' />
 				</button>
 			</div>
 
 			{isDropdownOpen && searchTerm && (
-				<div className='absolute z-10 w-full bg-white border mt-2 rounded-lg shadow-md max-h-60 overflow-y-auto'>
+				<div className='absolute z-10 w-full mt-2 overflow-y-auto bg-white border rounded-lg shadow-md max-h-60'>
 					{loading ? (
-						<div className='p-4 text-gray-500 flex items-center justify-center'>
+						<div className='flex items-center justify-center p-4 text-gray-500'>
 							<svg
 								className='animate-spin h-5 w-5 mr-2 text-[#9200AD]'
 								xmlns='http://www.w3.org/2000/svg'
@@ -159,7 +161,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 							{uniqueResults.map((course) => (
 								<li
 									key={`${course.id}-${course.title}`}
-									className='px-4 py-2 hover:bg-gray-100 cursor-pointer'
+									className='px-4 py-2 cursor-pointer hover:bg-gray-100'
 									onClick={() => handleItemClick(course)}
 								>
 									{course.title}
@@ -173,7 +175,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 			)}
 
 			{isDropdownOpen && searchTerm && !loading && uniqueResults.length === 0 && (
-				<div className='absolute z-10 w-full bg-white border mt-2 rounded-lg shadow-md p-4 text-gray-500'>
+				<div className='absolute z-10 w-full p-4 mt-2 text-gray-500 bg-white border rounded-lg shadow-md'>
 					No se encontraron resultados.
 				</div>
 			)}
