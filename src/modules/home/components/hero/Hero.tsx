@@ -48,9 +48,7 @@ const Hero = () => {
 
 	const current = slides[currentSlide];
 	const firstHeroImage = backgroundImages[0];
-	{
-		console.log('CTA URL:', current.cta?.url);
-	}
+
 	return (
 		<>
 			{firstHeroImage && (
@@ -66,7 +64,7 @@ const Hero = () => {
 
 				<div className='absolute inset-0'>
 					<div className='px-5 py-3 md:mt-40 md:py-0 overflow-visible max-w-[1600px] mx-auto md:px-4 h-[80%] md:h-[71%] flex flex-col justify-center items-center md:justify-end text-center gap-0 md:items-start md:text-left md:gap-2'>
-						<div className='md:px-6 w-full flex flex-col justify-center items-center md:justify-end text-center gap-0 md:items-start md:text-left md:gap-2'>
+						<div className='flex flex-col items-center justify-center w-full gap-0 text-center md:px-6 md:justify-end md:items-start md:text-left md:gap-2'>
 							{/* Tag dinámico */}
 
 							{/* Título + botón alineados como antes */}
@@ -81,7 +79,7 @@ const Hero = () => {
 												.replace(/<\/span>/gi, `</span>`),
 										}}
 									></h1>
-									<p className='text-white text-base font-Raleway font-semibold mt-4'>{current.subtitle}</p>
+									<p className='mt-4 text-base font-semibold text-white font-Raleway'>{current.subtitle}</p>
 								</div>
 
 								{/* Botón CTA */}

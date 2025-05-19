@@ -4,9 +4,9 @@ import { ArrowLeft, ChevronRight, ChevronLeft } from "react-feather";
 import { useOfferView } from "../hooks/useOfferView";
 import Link from "next/link";
 import ViewOfferSkeleton from "../skeletons/ViewOfferSkeleton";
-import { usePathname } from 'next/navigation';
-import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
-import { supportedLanguages } from '@/config/languages';
+import { usePathname } from "next/navigation";
+import { getLocalizedUrl } from "@/utils/getLocalizedUrl";
+import { supportedLanguages } from "@/config/languages";
 
 interface Props {
   navigateTo: (view: string, category?: string | null) => void;
@@ -14,12 +14,18 @@ interface Props {
   onClose?: () => void;
 }
 
-const ViewOffer: React.FC<Props> = ({ navigateTo, isMobile = true,onClose }) => {
+const ViewOffer: React.FC<Props> = ({
+  navigateTo,
+  isMobile = true,
+  onClose,
+}) => {
   // Pass the specialtyId to the hook
   const { data, loading, error } = useOfferView();
   const pathname = usePathname();
-const firstSegment = pathname?.split('/')[1];
-const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'ar';
+  const firstSegment = pathname?.split("/")[1];
+  const lang = supportedLanguages.includes(firstSegment ?? "")
+    ? firstSegment
+    : "ar";
 
   if (loading) {
     return <ViewOfferSkeleton />;
@@ -37,27 +43,26 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
 
   if (!isMobile) {
     return (
-      <div className="p-4 h-fit overflow-visible w-fit bg-white rounded-b-2xl">
+      <div className="h-fit overflow-visible w-fit bg-white rounded-b-2xl">
         <div className="w-full rounded-b-2xl bg-white divide-y">
-        {data.offers?.map((offer, index) => (
-  <Link
-    key={`offer-${index}`}
-    href={getLocalizedUrl(lang, offer.link.url)}
-  >
-    <button className="w-full flex justify-between items-center py-4 text-gray-800 hover:bg-gray-100 rounded-lg">
-      <span>{offer.link.title}</span>
-      <ChevronRight size={20} />
-    </button>
-  </Link>
-))}
+          {data.offers?.map((offer, index) => (
+            <Link
+              key={`offer-${index}`}
+              href={getLocalizedUrl(lang, offer.link.url)}
+              className="w-full flex justify-between items-center  py-3 px-4 text-gray-800 hover:bg-gray-100 rounded-lg"
+            >
+              <span>{offer.link.title}</span>
+              <ChevronRight size={20} />
+            </Link>
+          ))}
         </div>
 
-        <Link href={getLocalizedUrl(lang, '/tienda')}  >
-  <button className="mt-4 flex justify-between items-center w-full p-4 bg-gray-100 hover:bg-gray-200 rounded-2xl text-gray-800">
-    <span className="whitespace-nowrap">Ver todos los cursos</span>
-    <ChevronRight size={20} />
-  </button>
-</Link>
+        {/* <Link href={getLocalizedUrl(lang, "/tienda")}>
+          <button className="flex justify-between items-center w-full p-4 bg-gray-100 hover:bg-gray-200 rounded-2xl text-gray-800">
+            <span className="whitespace-nowrap">Ver todos los cursos</span>
+            <ChevronRight size={20} />
+          </button>
+        </Link> */}
       </div>
     );
   }
@@ -78,7 +83,7 @@ const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'a
           <Link
             key={`offer-${index}`}
             href={offer.link.url}
-            className="flex flex-row justify-between items-center p-4 hover:bg-gray-300 text-gray-800" 
+            className="flex flex-row justify-between items-center p-4 hover:bg-gray-300 text-gray-800"
             onClick={onClose}
           >
             <span>{offer.link.title}</span>

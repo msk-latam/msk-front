@@ -18,12 +18,12 @@ const DiscountAndButton = ({ offer, content, discountNumber, descLine1, descLine
 
 	return (
 		//PARA MOBILE SOLO
-		<div className='flex flex-col md:items-end md:flex-row gap-4 mt-6 md:mt-4 w-full md:w-auto md:text-right'>
-			<div className='md:hidden flex items-end gap-2 text-left md:text-right w-full md:w-auto'>
+		<div className='flex flex-col w-full gap-4 mt-6 md:items-end md:flex-row md:mt-4 md:w-auto md:text-right'>
+			<div className='flex items-end w-full gap-2 text-left md:hidden md:text-right md:w-auto'>
 				<span className='text-6xl md:text-[78.49px] font-inter font-bold leading-none tracking-tighter'>
 					{discountNumber}
 				</span>
-				<div className='flex flex-col items-center md:items-start gap-1'>
+				<div className='flex flex-col items-center gap-1 md:items-start'>
 					<span className='font-inter font-extralight text-4xl md:text-[47.42px] leading-none'>%</span>
 					<span className='text-sm md:text-[19.62px] font-inter font-light leading-none whitespace-pre-line'>OFF</span>
 				</div>
@@ -84,6 +84,7 @@ const Ofertas = ({ lang }: { lang: string }) => {
 	};
 
 	const [firstTitlePart, secondTitlePart] = getSplitTitle();
+	console.log(offer);
 
 	return (
 		<section className='relative w-full md:h-[993px] md:px-4 md:mt-[120px] min-h-screen flex items-end md:items-center justify-center md:translate-y-5  -translate-y-24 text-white font-raleway'>
@@ -99,32 +100,33 @@ const Ofertas = ({ lang }: { lang: string }) => {
 					priority
 				/>
 			) : (
-				<div className='bg-gray-400 w-full h-full flex items-center justify-center'>Imagen no disponible</div>
+				<div className='flex items-center justify-center w-full h-full bg-gray-400'>Imagen no disponible</div>
 			)}
 
 			{/* Imagen de fondo Desktop */}
-			<div className='absolute inset-0 z-0 hidden lg:block'>
-				<Image
-					src={offer.background_image}
-					alt='Oferta Salud Mobile'
-					layout='fill'
-					objectFit='cover'
-					objectPosition='66% center'
-					quality={100}
-					priority
-					onError={(e) => {
-						e.currentTarget.style.display = 'none'; // Ocultar el ícono de error
-					}}
-				/>
+			{offer?.background_image && (
+				<div className='absolute inset-0 z-0 hidden lg:block'>
+					<Image
+						src={offer?.background_image}
+						alt='Oferta Salud Mobile'
+						layout='fill'
+						objectFit='cover'
+						objectPosition='66% center'
+						quality={100}
+						priority
+						onError={(e) => {
+							e.currentTarget.style.display = 'none'; // Ocultar el ícono de error
+						}}
+					/>
 
-				<div className='absolute inset-0 bg-black/40' />
-			</div>
-
+					<div className='absolute inset-0 bg-black/40' />
+				</div>
+			)}
 			{/* Contenido */}
 			<div className='relative z-10 w-full overflow-visible max-w-[1600px] mx-auto md:px-4 px-5 py-16 flex flex-col md:flex-row items-center md:items-end md:justify-between justify-end gap-5'>
 				<div className='text-left text-white max-w-xl  font-raleway hidden md:block mt-0 leading-[100px]'>
 					<div>
-						<p className='text-base md:text-lg font-raleway mb-4 md:mb-20 font-regular'>{offer.disponibilidad}</p>
+						<p className='mb-4 text-base md:text-lg font-raleway md:mb-20 font-regular'>{offer.disponibilidad}</p>
 
 						<h2
 							className='text-3xl md:text-5xl font-raleway flex flex-col gap-2 md:gap-4 mb-6 md:mb-32 line-height: 1rem; whitespace-nowrap'
@@ -149,11 +151,11 @@ const Ofertas = ({ lang }: { lang: string }) => {
 							)}
 						</div>
 					</div>
-					<div className='flex items-end gap-2 text-left md:text-right w-full md:w-auto'>
+					<div className='flex items-end w-full gap-2 text-left md:text-right md:w-auto'>
 						<span className='text-6xl md:text-[78.49px] font-inter font-bold leading-none tracking-tighter'>
 							{offer.numero_de_porcentaje}
 						</span>
-						<div className='flex flex-col items-center md:items-start gap-1 md:gap-2'>
+						<div className='flex flex-col items-center gap-1 md:items-start md:gap-2'>
 							<span className='font-inter font-extralight text-4xl md:text-[47.42px] leading-none md:leading-[100%]'>%</span>
 							<span className='text-sm md:text-[19.62px] font-inter font-light leading-none md:leading-[100%] tracking-[-2.5%] whitespace-pre-line'>
 								OFF
@@ -166,7 +168,7 @@ const Ofertas = ({ lang }: { lang: string }) => {
 				</div>
 
 				{/* Texto Mobile */}
-				<div className='text-left text-white font-raleway md:hidden w-full px-3 pt-12'>
+				<div className='w-full px-3 pt-12 text-left text-white font-raleway md:hidden'>
 					<p className='text-[14px] leading-[14px] font-inter font-normal mb-6'>{stripHtml(offer.disponibilidad)}</p>
 					<h2 className='text-[28px] leading-[32px] mb-10'>
 						<span className='font-bold'>{firstTitlePart}</span> <span className='font-medium'>{secondTitlePart}</span>
@@ -184,7 +186,7 @@ const Ofertas = ({ lang }: { lang: string }) => {
 					</ul>
 
 					{/* Botón Mobile */}
-					<div className='mt-10 w-full'>
+					<div className='w-full mt-10'>
 						<DiscountAndButton offer={offer} discountNumber={discountNumber} descLine1={descLine1} descLine2={descLine2} />
 					</div>
 				</div>

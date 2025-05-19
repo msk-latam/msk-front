@@ -86,21 +86,17 @@ const SearchBar: React.FC<SearchBarProps> = ({
 	};
 
 	const handleItemClick = (course: any) => {
-		const rawUrl: string | undefined = course.slug;
+		const rawUrl: string | undefined = course.link;
 
 		if (!rawUrl || typeof rawUrl !== 'string') {
 			console.warn('Course without valid url/link', course);
 			return;
 		}
 
-		// Ensure leading slash for consistent regex handling
-		const normalized = rawUrl.startsWith('/') ? rawUrl : `/${rawUrl}`;
+		/* mantener el idioma en el url */
+		const storeUrl = getLocalizedUrl(lang, rawUrl);
 
-		const coursePath = normalized.replace(/^\/?(course|curso)/, '');
-
-		const storeUrl = getLocalizedUrl(lang, `/curso${coursePath}`);
-
-		window.location.href = urlFormat(storeUrl);
+		window.location.href = storeUrl;
 		setSearchTerm('');
 		setIsDropdownOpen(false);
 	};

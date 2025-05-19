@@ -44,7 +44,7 @@ export default function CourseInstitutions({ slug, lang, onHideEmpty }: CourseIn
 			</h2>
 
 			{/* Desktop grid */}
-			<div className='flex-wrap items-center justify-center hidden gap-4 px-2 md:flex md:gap-3 md:px-0'>
+			<div className='flex-wrap items-center justify-center hidden gap-4 px-2 md:flex md:gap-4 md:px-0'>
 				{institutions.map((inst) => (
 					<InstitutionCard key={inst.id} inst={inst} />
 				))}
@@ -64,7 +64,7 @@ export default function CourseInstitutions({ slug, lang, onHideEmpty }: CourseIn
 
 function InstitutionCard({ inst }: { inst: any }) {
 	return (
-		<div className='bg-[#f7f9ff] rounded-[30px] p-7 h-32 flex items-center justify-center relative w-[250px] '>
+		<div className='bg-[#f7f9ff] rounded-[30px] p-7 h-32 flex items-center justify-center relative w-[23%] '>
 			<Image
 				src={inst.image}
 				alt={inst.title}
