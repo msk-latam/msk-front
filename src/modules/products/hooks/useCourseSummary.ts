@@ -46,6 +46,7 @@ export function useCourseSummary(slug: string, lang: string) {
 			setError(null);
 			try {
 				const response = await fetch(`${API_BASE}/${slug}?nocache=1&lang=${lang}`);
+				console.log(`${API_BASE}/${slug}?nocache=1&lang=${lang}`);
 				if (!response.ok) {
 					throw new Error(`HTTP error! status: ${response.status}`);
 				}
@@ -66,7 +67,7 @@ export function useCourseSummary(slug: string, lang: string) {
 					cedente: result.cedente,
 					currency: result.prices.currency,
 					currency_code: result.prices.currency_code,
-					files:result.files,
+					files: result.files,
 				};
 
 				setData(setResult || null);

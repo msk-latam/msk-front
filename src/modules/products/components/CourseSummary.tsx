@@ -32,7 +32,8 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 	const modules = data?.modules;
 	const duration = data?.duration + ' horas estimadas';
 	const certification = data?.certification;
-	const max_installments = data?.max_installments;
+	const max_installments = lang === 'ar' ? 6 : lang === 'cl' ? 8 : data?.max_installments;
+
 	const showPrice = lang.toLowerCase() !== 'es';
 
 	const price =
@@ -57,10 +58,35 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 					.replace(',', '.')
 			: '';
 
+	const cleanTotalString = total_price
+		.replace(/[^\d,.-]/g, '')
+		.replace(/\./g, '')
+		.replace(',', '.');
+	let total = Number(cleanTotalString);
+
+	// Validación por si sigue fallando
+	if (isNaN(total)) total = 0;
+
+	// Validar e interpretar los installments
+	let installments = Number(max_installments);
+	if (isNaN(installments) || installments === 0) installments = 1;
+
+	// Redondear
+	total = parseFloat(total.toFixed(2));
+	const precioCuota = parseFloat((total / installments).toFixed(2));
+
 	const cedente = data?.cedente;
 	if (loading) {
 		return <SkeletonCourseSummaryCard />; // Usa el Skeleton cuando los datos están cargando
 	}
+	const formatToARS = (value: number): string => {
+		const formatted = value.toLocaleString('es-AR', {
+			minimumFractionDigits: 2,
+			maximumFractionDigits: 2,
+		});
+
+		return formatted.endsWith(',00') ? formatted.slice(0, -3) : formatted;
+	};
 
 	const isSpanishVersion = lang?.toLowerCase().startsWith('es');
 	return (
@@ -81,7 +107,7 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 					</p>
 					<p className='text-[#4F5D89] font-inter font-medium text-base'>{max_installments} pagos de:</p>
 					<p className='text-2xl font-bold text-[#1A1A1A] mb-4'>
-						{price} {data?.currency}
+						$ {formatToARS(precioCuota)} {data?.currency}
 					</p>
 				</>
 			)}

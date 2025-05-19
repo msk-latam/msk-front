@@ -1,3 +1,4 @@
+import { environmentBackend } from '@/utils/isProductive';
 import { cookies } from 'next/headers';
 import { type NextRequest, NextResponse } from 'next/server';
 
@@ -52,7 +53,8 @@ export async function POST(request: NextRequest) {
 
 		/* llamar a la api de customer, si retorna platform_user en 0, llevar a completar perfil */
 
-		const customerResponse = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/customer/${email}`, {
+		const customerResponse = await fetch(`${environmentBackend}/api/customer/${email}`, {
+			// const customerResponse = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/customer/${email}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',

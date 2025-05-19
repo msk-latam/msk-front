@@ -6,7 +6,10 @@ import { ArrowRight } from 'lucide-react';
 import { useBlogContent } from '@/modules/home/hooks/useBlogContent';
 import type { BlogPost } from '@/modules/home/types';
 import Link from 'next/link';
-import BlogSectionSkeleton from '@/modules/home/skeletons/BlogSectionSkeleton'; // Importar Skeleton
+import BlogSectionSkeleton from '@/modules/home/skeletons/BlogSectionSkeleton'; 
+import { usePathname } from 'next/navigation';
+import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
+
 
 const CATEGORIES = ['Artículos', 'Guías profesionales', 'Infografías'] as const;
 type CategoryType = typeof CATEGORIES[number];
@@ -38,6 +41,8 @@ const BlogSection: React.FC = () => {
   const { data, loading } = useBlogContent();
   const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
   const isMobile = useMediaQuery('(max-width: 767px)');
+const pathname = usePathname();
+const lang = pathname.split('/')[1] || 'ar';
 
   useEffect(() => {
     if (!data) return;
@@ -74,7 +79,7 @@ const BlogSection: React.FC = () => {
         </p>
         <div className="flex md:flex-wrap md:justify-between items-center mt-6 overflow-x-auto gap-3 md:gap-0 scrollbar-hide">
           <CategoryTabs categories={CATEGORIES} activeTab={activeTab} setActiveTab={setActiveTab} />
-          <BlogButton className="hidden md:flex" />
+          <BlogButton lang={lang} className="hidden md:flex" />
         </div>
       </header>
 
@@ -102,7 +107,7 @@ const BlogSection: React.FC = () => {
       </div>
 
       <div className="flex justify-center mt-8 md:hidden">
-        <BlogButton className="w-full" />
+        <BlogButton lang={lang} className="w-full" />
       </div>
     </section>
   );
@@ -134,9 +139,9 @@ const CategoryTabs: React.FC<{
   </nav>
 );
 
-const BlogButton: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <div className={className}>
-    <Link href="/blog">
+const BlogButton: React.FC<{ className?: string; lang: string }> = ({ className = '', lang }) => (
+   <div className={className}>
+    <Link href={getLocalizedUrl(lang, '/blog')}>
       <button
         className="bg-black text-white text-sm px-4 py-2 rounded-full flex items-center justify-center space-x-1 hover:bg-gray-900 hover:scale-105 transition w-full md:w-auto h-[48px]"
         aria-label="Ir al blog principal"

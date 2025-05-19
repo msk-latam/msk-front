@@ -38,7 +38,7 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
       if (atEnd) {
         container.scrollTo({ left: 0, behavior: "smooth" });
       } else {
-        container.scrollBy({ left: 200, behavior: "smooth" });
+        container.scrollBy({ left: 216, behavior: "smooth" });
       }
     }, 1500);
 
@@ -49,7 +49,9 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
     try {
       const getUrl = () => {
         const host = window.location.hostname;
-        return host !== "localhost" ? `https://${host}` : "http://localhost:3000";
+        return host !== "localhost"
+          ? `https://${host}`
+          : "http://localhost:3000";
       };
 
       const mappedCountry = country === "ar" ? "arg" : country;
@@ -81,7 +83,9 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
 
   const fetchDefaultBrands = async () => {
     try {
-      const response = await fetch("https://wp.msklatam.com/wp-json/wp/api/carrusel-instituciones?lang=int");
+      const response = await fetch(
+        "https://wp.msklatam.com/wp-json/wp/api/carrusel-instituciones?lang=int"
+      );
       if (!response.ok) throw new Error("Error al obtener marcas por defecto");
       return await response.json();
     } catch (error) {
@@ -90,20 +94,19 @@ const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
     }
   };
 
-const scrollToIndex = (index: number) => {
-  if (!mobileScrollRef.current) return;
+  const scrollToIndex = (index: number) => {
+    if (!mobileScrollRef.current) return;
 
-  const container = mobileScrollRef.current;
-  const clampedIndex = (index + brands.length) % brands.length;
-  const child = container.children[clampedIndex] as HTMLElement;
-  setCurrentIndex(clampedIndex);
-  child?.scrollIntoView({
-    behavior: "smooth",
-    inline: "center",
-    block: "nearest", // ✅ evita scroll vertical no deseado
-  });
-};
-
+    const container = mobileScrollRef.current;
+    const clampedIndex = (index + brands.length) % brands.length;
+    const child = container.children[clampedIndex] as HTMLElement;
+    setCurrentIndex(clampedIndex);
+    child?.scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+      block: "nearest", // ✅ evita scroll vertical no deseado
+    });
+  };
 
   const handleMouseDown = (e: React.MouseEvent) => {
     const container = desktopScrollRef.current;
@@ -148,59 +151,58 @@ const scrollToIndex = (index: number) => {
       <div className="hidden md:block absolute top-0 right-0 z-10 w-16 h-full pointer-events-none bg-gradient-to-l from-white via-white/70 to-transparent" />
 
       {/* Mobile view centrado tipo carrusel */}
-{/* Mobile view centrado tipo carrusel */}
-<div className="md:hidden relative overflow-visible py-6">
-  <div
-    ref={mobileScrollRef}
-    className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
-  >
-    {brands.map((brand, index) => (
-      <div
-        key={index}
-        className="flex-shrink-0 snap-center bg-[#F7F9FF] rounded-[30px] px-9 py-6 w-[85%] transition-transform duration-300"
-      >
-        <a
-          href={brand.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex justify-center items-center h-32"
-          onDragStart={preventImageDrag}
-          onClick={(e) => dragMoved && e.preventDefault()}
+      {/* Mobile view centrado tipo carrusel */}
+      <div className="md:hidden relative overflow-visible py-6">
+        <div
+          ref={mobileScrollRef}
+          className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
         >
-          <Image
-            src={brand.imgDefault}
-            alt="Brand logo"
-            width={brand.width}
-            height={100}
-            className="object-contain"
-          />
-        </a>
+          {brands.map((brand, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 snap-center bg-[#F7F9FF] rounded-[30px] px-9 py-6 w-[85%] transition-transform duration-300"
+            >
+              <a
+                href={brand.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex justify-center items-center h-32"
+                onDragStart={preventImageDrag}
+                onClick={(e) => dragMoved && e.preventDefault()}
+              >
+                <Image
+                  src={brand.imgDefault}
+                  alt="Brand logo"
+                  width={brand.width}
+                  height={100}
+                  className="object-contain"
+                />
+              </a>
+            </div>
+          ))}
+        </div>
+
+        {/* Botones navegación mobile */}
+        <button
+          type="button"
+          onClick={() => scrollToIndex(currentIndex - 1)}
+          className="absolute -bottom-10 left-4 -translate-y-1/2 bg-white border border-gray-300 w-9 h-9 rounded-full shadow-md flex items-center justify-center z-10"
+        >
+          <ChevronLeft size={20} className="mx-auto" />
+        </button>
+        <button
+          type="button"
+          onClick={() => scrollToIndex(currentIndex + 1)}
+          className="absolute -bottom-10 right-4 -translate-y-1/2 bg-white border border-gray-300 w-9 h-9 rounded-full shadow-md flex items-center justify-center z-10"
+        >
+          <ChevronRight size={20} className="mx-auto" />
+        </button>
       </div>
-    ))}
-  </div>
-
-  {/* Botones navegación mobile */}
-  <button
-  type="button"
-    onClick={() => scrollToIndex(currentIndex - 1)}
-    className="absolute -bottom-10 left-4 -translate-y-1/2 bg-white border border-gray-300 w-9 h-9 rounded-full shadow-md flex items-center justify-center z-10"
-  >
-    <ChevronLeft size={20} className="mx-auto"/>
-  </button>
-  <button
-  type="button"
-    onClick={() => scrollToIndex(currentIndex + 1)}
-    className="absolute -bottom-10 right-4 -translate-y-1/2 bg-white border border-gray-300 w-9 h-9 rounded-full shadow-md flex items-center justify-center z-10"
-  >
-    <ChevronRight size={20} className="mx-auto"/>
-  </button>
-</div>
-
 
       {/* Desktop view scrollable */}
       <div
         ref={desktopScrollRef}
-        className="hidden md:flex py-4 pl-16 space-x-4 overflow-x-auto scrollbar-hide overscroll-none"
+        className="hidden md:flex py-4 space-x-4 overflow-x-auto scrollbar-hide overscroll-none"
         onMouseEnter={() => setIsHovered(true)}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
@@ -244,9 +246,6 @@ const scrollToIndex = (index: number) => {
 };
 
 export default BrandSlider;
-
-
-
 
 // "use client";
 // import React, { FC, useEffect, useRef, useState } from "react";
