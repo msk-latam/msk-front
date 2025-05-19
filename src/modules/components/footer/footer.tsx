@@ -114,7 +114,7 @@ const Footer = () => {
 						<a href={buildFooterLink('/certificados-digitales/')} className='block hover:underline'>
 							Certificados digitales
 						</a>
-						<a href={buildFooterLink('/ayuda/')} className='block hover:underline'>
+						<a href={'https://ayuda.msklatam.com/portal/es/home'} target='_blank' className='block hover:underline'>
 							Centro de ayuda
 						</a>
 					</div>
