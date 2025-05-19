@@ -71,8 +71,13 @@ const Certificaciones = ({ product, country }: any) => {
 	const mskCert: Certification = {
 		name: 'MSK Digital',
 		price: isFree ? 25000 : 0,
-		product_code: 0,
+		product_code: 2000012,
 	};
+	useEffect(() => {
+		if (!isFree) {
+			toggleCertification(mskCert);
+		}
+	}, [isFree]);
 
 	return (
 		<div>

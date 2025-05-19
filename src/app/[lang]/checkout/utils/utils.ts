@@ -228,6 +228,7 @@ export const createContractCRM = async (
 	closingSource: string = 'Consulta directa',
 ) => {
 	console.log(product);
+	console.log(certification);
 	try {
 		let paymentConfig = { ...(paymentOptions[paymentType] || paymentOptions.mercadopago) };
 
