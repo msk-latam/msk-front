@@ -34,7 +34,7 @@ export async function GET(request: Request) {
 					id: post.id || 0,
 					title: post.title || '',
 					subtitle: post.subtitle || '',
-					author: post.author || '',
+					author: Array.isArray(post.author) ? post.author.join(', ') : post.author || '',
 					date: post.date || '',
 					readTime: post.readTime || post.time_to_read || null,
 					tags: Array.isArray(post.tags) ? post.tags : [],

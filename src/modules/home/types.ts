@@ -156,15 +156,14 @@ export type BlogResponse = {
 
 export const sanitizeBlogPost = (post: BlogPost): BlogPost => ({
 	...post,
-	subtitle: post.subtitle?.trim() || undefined,
-	author: post.author?.trim() || 'MSK LATAM',
+	subtitle: typeof post.subtitle === 'string' ? post.subtitle.trim() : undefined,
+	author: typeof post.author === 'string' && post.author.trim() !== '' ? post.author.trim() : 'No informado',
 	readTime: typeof post.readTime === 'string' && post.readTime.trim() !== '' ? post.readTime : '3',
-	tags: post.tags || [],
-	categories: post.categories || [],
-	featured_image: post.featured_image || '/images/blog-placeholder.jpg',
-	link: post.link || '#',
+	tags: Array.isArray(post.tags) ? post.tags : [],
+	categories: Array.isArray(post.categories) ? post.categories : [],
+	featured_image: typeof post.featured_image === 'string' ? post.featured_image : '/images/blog-placeholder.jpg',
+	link: typeof post.link === 'string' ? post.link : '#',
 });
-
 // FQA SECTION
 
 export interface Faq {
