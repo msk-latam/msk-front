@@ -59,7 +59,7 @@ export const mapCursoWPToCursoCard = (curso: any): CursoCardProps => ({
 	temas: curso.themes ?? 0, // asegurate que este sea el nombre correcto
 	horas: curso.hours ?? parseInt(curso.duration || '0'),
 	inscriptos: curso.inscriptions ?? 0,
-	certificado: curso.certificate === true ? 'Certificación incluida' : '',
+	certificado: curso.certificate === true ? 'Certificación: incluída' : '',
 	imagen: curso.featured_image || '',
 	link: curso.link,
 });
@@ -124,7 +124,7 @@ export const mapMasterclassToProfessionals = (mc: MasterclassAPIItem): Professio
 	}));
 };
 
-// BLOG SECTION
+//BLOG SECTION
 
 export type Category = {
 	id: number;
@@ -132,19 +132,19 @@ export type Category = {
 	slug: string;
 };
 
-export type BlogPost = {
+export interface BlogPost {
 	id: number;
 	title: string;
 	subtitle?: string;
-	author: string;
+	author?: string;
 	date: string;
-	readTime: string | null;
-	tags: string[];
+	readTime?: string | null;
+	tags?: string[];
 	featured_image: string;
 	link: string;
-	categories: Category[];
-	featured: string; // Marks if the post is featured
-};
+	categories?: Category[];
+	featured?: string;
+}
 
 export type BlogResponse = {
 	title: string;
@@ -153,6 +153,17 @@ export type BlogResponse = {
 	featured_blog_guides: BlogPost[];
 	featured_blog_infographies: BlogPost[];
 };
+
+export const sanitizeBlogPost = (post: BlogPost): BlogPost => ({
+	...post,
+	subtitle: post.subtitle?.trim() || undefined,
+	author: post.author?.trim() || 'MSK LATAM',
+	readTime: typeof post.readTime === 'string' && post.readTime.trim() !== '' ? post.readTime : '3',
+	tags: post.tags || [],
+	categories: post.categories || [],
+	featured_image: post.featured_image || '/images/blog-placeholder.jpg',
+	link: post.link || '#',
+});
 
 // FQA SECTION
 
