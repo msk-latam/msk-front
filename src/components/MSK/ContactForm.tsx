@@ -19,6 +19,8 @@ import { isFormValid } from '@/components/Footer/Newsletter';
 // import Checkbox from '../Checkbox/Checkbox';
 import ShowErrorMessage from '../ShowErrorMessage';
 import Checkbox from '@/modules/store/components/ui/Checkbox';
+import CountrySelect from '@/modules/login/components/hooks/CountrySelect';
+import Link from 'next/link';
 
 interface ContactFormProps {
 	hideHeader?: boolean;
@@ -941,7 +943,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 		Description: '',
 		Especialidad: '',
 		Phone: '',
-		Preferencia_de_contactaci_n: '',
+		// Preferencia_de_contactaci_n: '',
 		Pais: '',
 		Otra_profesion: '',
 		Otra_especialidad: '',
@@ -1133,20 +1135,22 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 
 	const optionsArray = [1, 2, 3, 4, 5];
 
-	const handleContactPreferenceChange = (value: string) => {
-		formik.setFieldValue('Preferencia_de_contactaci_n', value);
-	};
+	// const handleContactPreferenceChange = (value: string) => {
+	// 	formik.setFieldValue('Preferencia_de_contactaci_n', value);
+	// };
 	const requiredFormFields = [
 		'First_Name',
 		'Last_Name',
 		'Email',
 		'Phone',
-		'Preferencia_de_contactaci_n',
+		// 'Preferencia_de_contactaci_n',
 		'Profesion',
 		'Terms_And_Conditions',
 	];
 
 	const isSubmitDisabled = !formik.dirty || !isFormValid(requiredFormFields, formik.values, formik.errors, formik.touched);
+
+	console.log(formik);
 
 	return (
 		<>
@@ -1208,7 +1212,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 											<div className='rounded-xl'>
 												<ErrorMessage name='First_Name' component='span' className='text-red-500' />
 												<Field
-													className='w-full text-[#374151] bg-[#f8f8f9] border-none py-6'
+													className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 													type='text'
 													name='First_Name'
 													placeholder='Ingresar nombre'
@@ -1219,18 +1223,44 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 											<div className='contact-from-input'>
 												<ErrorMessage className='text-red-500' name='Last_Name' component='span' />
 												<Field
-													className='w-full  text-[#374151] bg-[#f8f8f9] border-none py-6'
+													className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 													type='text'
 													name='Last_Name'
 													placeholder='Ingresar apellido'
 												/>
 											</div>
 										</div>
+
+										<div className='col-span-2 border-none col-xl-6 md:col-span-1'>
+											<div className='border-none contact-from-input intl-input phone-contact-input-select'>
+												<Field name='phone'>
+													{({ field, form }: any) => (
+														<>
+															<div className='flex mt-1 w-full rounded-2xl border border-gray-300  focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c]  py-1.5 '>
+																<CountrySelect onChange={(code) => formik.setFieldValue('areaCode', code)} />
+
+																<input
+																	{...field}
+																	type='tel'
+																	onChange={(e) => {
+																		const onlyNumbers = e.target.value.replace(/\D/g, '');
+																		form.setFieldValue('Phone', onlyNumbers);
+																	}}
+																	placeholder='Ingresar número telefónico'
+																	className='p-0 border-none'
+																/>
+															</div>
+														</>
+													)}
+												</Field>
+											</div>
+										</div>
+
 										<div className='col-span-2 col-xl-6 md:col-span-1'>
 											<div className='contact-from-input'>
 												<ErrorMessage name='Email' component='span' className='text-red-500' />
 												<Field
-													className='w-full  text-[#374151] bg-[#f8f8f9] border-none py-6'
+													className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 													type='email'
 													name='Email'
 													placeholder='Ingresar e-mail'
@@ -1238,35 +1268,11 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 											</div>
 										</div>
 
-										<div className='col-span-2 border-none col-xl-6 md:col-span-1'>
-											<div className='border-none contact-from-input intl-input phone-contact-input-select'>
-												<Field name='Phone' className=' text-[#374151] bg-[#f8f8f9] !border-none py-6'>
-													{({ field, form, meta }: any) => (
-														<div className='border-none contact-from-input intl-input phone-contact-input-select'>
-															<ErrorMessage name='Phone' component='span' className='text-red-500' />
-															<PhoneInput
-																style={{ borderStyle: 'none' }}
-																className=' text-[#374151] bg-[#f8f8f9] !border-none py-6 '
-																name='Phone'
-																id='Phone'
-																placeholder='Ingresar número telefónico'
-																defaultCountry={defaultCountry}
-																onChange={(value: any) => {
-																	form.setFieldValue('Phone', value);
-																	handlePhoneChange(value);
-																}}
-															/>
-														</div>
-													)}
-												</Field>
-											</div>
-										</div>
-
 										<div className='w-full col-span-2 col-xl-6 md:col-span-1'>
 											<div className=''>
 												<ErrorMessage name='Profesion' component='span' className='text-red-500' />
 												<Field
-													className='w-full  text-[#374151] bg-[#f8f8f9] border-none py-6'
+													className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 													as='select'
 													name='Profesion'
 													onChange={handleOptionProfessionChange}
@@ -1289,7 +1295,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 												<div className='my-4 contact-from-input'>
 													<ErrorMessage name='Otra_profesion' component='span' className='text-red-500' />
 													<Field
-														className='w-full  text-[#374151] bg-[#f8f8f9] border-none py-6'
+														className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 														type='text'
 														name='Otra_profesion'
 														placeholder='Ingresar profesion'
@@ -1302,7 +1308,11 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 											<div className='flex gap-2 col-xl-12'>
 												<div className='w-1/2 contact-select'>
 													<ErrorMessage name='year' component='span' className='text-red-500' />
-													<Field as='select' name='year' className='w-full  text-[#374151] bg-[#f8f8f9] border-none py-6'>
+													<Field
+														as='select'
+														name='year'
+														className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
+													>
 														<option defaultValue=''>Año</option>
 														{optionsArray.map((y) => (
 															<option key={`st_year_${y}`} defaultValue={y}>
@@ -1314,7 +1324,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 												<div className='w-full contact-select'>
 													<ErrorMessage name='career' component='span' className='text-red-500' />
 													<Field
-														className='w-full  text-[#374151] bg-[#f8f8f9] border-none py-6'
+														className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 														as='select'
 														name='career'
 														onChange={handleOptionCareerChange}
@@ -1335,7 +1345,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 													<div className='contact-select'>
 														<ErrorMessage name='Especialidad' component='span' className='text-red-500' />
 														<Field
-															className='w-full  text-[#374151] bg-[#f8f8f9] border-none py-6'
+															className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 															as='select'
 															name='Especialidad'
 															onChange={handleOptionSpecialtyChange}
@@ -1360,7 +1370,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 													{showInputSpecialties && (
 														<div className='my-4 contact-from-input'>
 															<Field
-																className='w-full text-[#374151] bg-[#f8f8f9] border-none py-6'
+																className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 																type='text'
 																name='Otra_especialidad'
 																placeholder='Ingresar especialidad'
@@ -1377,7 +1387,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 													<div className='contact-from-input'>
 														<ErrorMessage name='Description' component='span' className='text-red-500' />
 														<Field
-															className='w-full text-[#374151] bg-[#f8f8f9] border-none py-6'
+															className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5 resize-none min-h-[150px]'
 															as='textarea'
 															id='Description'
 															name='Description'
@@ -1387,43 +1397,45 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 												</div>
 											)}
 
-											<div className='flex flex-wrap justify-center gap-1 mt-2 mb-4 sm:justify-start'>
-												<div className='contact-checkbox'>
-													<ErrorMessage name='Terms_And_Conditions' component='div' className='text-red-500' />
-													<div className='flex gap-2 center'>
-														<Field
-															type='checkbox'
-															name='Terms_And_Conditions'
-															checked={formik.values.Terms_And_Conditions}
-															className='mt-1 hidden-checkbox'
-														/>
-														<label>
-															Acepto las{' '}
-															<NcLink
-																href={
-																	country === ''
-																		? `${window.location.origin}/politica-de-privacidad`
-																		: `${window.location.origin}/${country}/politica-de-privacidad`
-																}
-																target='_blank'
-																className='underline text-primary'
-															>
-																condiciones de privacidad
-															</NcLink>
-														</label>
+											<div className='flex justify-between mt-8'>
+												<div className='flex flex-wrap justify-center gap-1 mt-2 mb-4 sm:justify-start'>
+													<div className='contact-checkbox'>
+														<ErrorMessage name='Terms_And_Conditions' component='div' className='text-red-500' />
+														<div className='flex gap-2 center'>
+															<Field
+																type='checkbox'
+																name='Terms_And_Conditions'
+																checked={formik.values.Terms_And_Conditions}
+																className='mt-1 hidden-checkbox'
+															/>
+															<label>
+																Acepto las{' '}
+																<Link
+																	href={
+																		country === ''
+																			? `${window.location.origin}/politica-de-privacidad`
+																			: `${window.location.origin}/${country}/politica-de-privacidad`
+																	}
+																	target='_blank'
+																	className='underline text-[#9200AD] '
+																>
+																	condiciones de privacidad
+																</Link>
+															</label>
+														</div>
 													</div>
 												</div>
-											</div>
 
-											<div className='mt-2 col-xl-2'>
-												<div className=''>
-													<button
-														type='submit'
-														className='px-6 py-3 rounded-full bg-[#9200AD] text-white'
-														disabled={isSubmitDisabled || onRequest}
-													>
-														{onRequest ? 'Enviando ...' : submitText}
-													</button>
+												<div className='mt-2 col-xl-2'>
+													<div className=''>
+														<button
+															type='submit'
+															className='px-6 py-3 rounded-full bg-[#9200AD] text-white'
+															disabled={isSubmitDisabled || onRequest}
+														>
+															{onRequest ? 'Enviando ...' : submitText}
+														</button>
+													</div>
 												</div>
 											</div>
 											<ShowErrorMessage text={formError} visible={formError !== ''} />

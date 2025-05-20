@@ -118,7 +118,7 @@ const PageContact: FC<PageContactProps> = ({ className = '' }) => {
 						</div>
 					</div>
 					<div className='flex flex-col   gap-8 md:py-12 pt-12 overflow-visible max-w-[1600px] md:px-4  '>
-						<div className='w-full bg-white rounded-[38px] flex flex-col relative z-[9] md:-mt-24 px-5 pt-9  my-auto pb-10 md:px-9 mb-20 gap-6 md:gap-0 overflow-visible max-w-[1600px] '>
+						<div className=' bg-white rounded-[38px] flex flex-col relative z-[9] md:-mt-24 px-5 pt-9  my-auto pb-10 md:px-9 mb-20 gap-6 md:gap-0 overflow-visible max-w-[1600px] w-[350px] '>
 							<ContactSidebar variant={1} />
 						</div>
 						<div className='w-full bg-white rounded-[38px] flex flex-col relative z-[9] md:-mt-24 px-12 pt-9  my-auto pb-10 md:px-9 mb-20 gap-6 md:gap-0 overflow-visible max-w-[1600px] '>
