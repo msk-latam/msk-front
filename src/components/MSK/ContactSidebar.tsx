@@ -2,8 +2,13 @@
 import { CountryContext } from '@/context/country/CountryContext';
 import { usePathname } from 'next/navigation';
 import React, { useContext, useEffect } from 'react';
+import { Mail, Phone } from 'react-feather';
 
-const ContactSidebar = () => {
+type ContactSidebarProps = {
+	variant?: 1 | 2; // 1: solo teléfono, 2: solo email
+};
+
+const ContactSidebar: React.FC<ContactSidebarProps> = ({ variant }) => {
 	const { countryState } = useContext(CountryContext);
 	const [phone, setPhone] = React.useState<string | null>(null);
 	const [secondaryPhone, setSecondaryPhone] = React.useState<string | null>(null);
@@ -44,37 +49,29 @@ const ContactSidebar = () => {
 		<div className='sidebar-widget-wrapper'>
 			<div className='support-contact mb-30'>
 				<div className='flex flex-col gap-4 support-contact-inner'>
-					{phone && (
+					{variant !== 2 && phone && (
 						<div className='flex gap-2'>
-							{/* <div className='support-icon'>
-								<img src='/images/icons/phone.svg' alt='' width='20' />
-							</div> */}
 							<div className='flex flex-col gap-2'>
-								<span>Teléfono</span>
+								<Phone className='text-[#9200AD]' />
+								<span className='text-lg font-bold'>Teléfono</span>
 								<p>{phone}</p>
 								{secondaryPhone && <p>{secondaryPhone}</p>}
 							</div>
 						</div>
 					)}
 
-					{/* <div className="support-item">
-            <div className="support-icon">
-              <img src="/images/icons/whatsapp.svg" alt="" width="20" />
-            </div>
-            <div className="support-info-whatsapp">
-              <span>Whatsapp</span>
-              {PhoneElement()}
-            </div>
-          </div> */}
-					<div className='support-item'>
-						<div className='support-icon'>
-							<img src='/images/icons/email.svg' alt='' width='20' />
+					{variant !== 1 && (
+						<div className='support-item'>
+							<div className='support-icon'>
+								<img src='/images/icons/email.svg' alt='' width='20' />
+							</div>
+							<div className='flex flex-col gap-2'>
+								<Mail className='text-[#9200AD]' />
+								<span className='text-lg font-bold'>E-mail</span>
+								<a href='mailto:hola@msklatam.com'>hola@msklatam.com</a>
+							</div>
 						</div>
-						<div className='flex flex-col gap-2'>
-							<span>E-mail</span>
-							<a href='mailto:hola@msklatam.com'>hola@msklatam.com</a>
-						</div>
-					</div>
+					)}
 				</div>
 			</div>
 		</div>

@@ -1177,7 +1177,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 
 										{!isEbook && (
 											<div className='flex flex-wrap gap-6 mt-6 mb-6 preferences'>
-												<p className='w-full md:w-auto'>Quiero hablar por</p>
+												{/* <p className='w-full md:w-auto'>Quiero hablar por</p>
 												<div className='grid grid-cols-1 gap-4 mt-1 md:grid-cols-3'>
 													{[
 														{ value: 'phone', label: 'Teléfono' },
@@ -1196,13 +1196,13 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 															<span className='text-sm'>{option.label}</span>
 														</label>
 													))}
-												</div>
+												</div> */}
 											</div>
 										)}
 									</div>
 								)}
 
-								<div className={`grid md:grid-cols-1  gap-4 ${hideSideInfo ? 'lg:grid-cols-2' : 'lg:grid-cols-3'}`}>
+								<div className={`grid md:grid-cols-1  gap-4 ${hideSideInfo ? 'lg:grid-cols-2' : 'lg:grid-cols-2'}`}>
 									<div className='grid w-full grid-cols-1 col-span-2 gap-4 md:grid-cols-2'>
 										<div className='col-span-2 col-xl-6 md:col-span-1'>
 											<div className='rounded-xl'>
@@ -1437,11 +1437,11 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 											</p>
 										</div>
 									</div>
-									{hideSideInfo ? null : (
+									{/* {hideSideInfo ? null : (
 										<div className='col-span-2 md:col-span-1'>
 											<ContactSidebar />
 										</div>
-									)}
+									)} */}
 								</div>
 							</Form>
 						</FormikProvider>
