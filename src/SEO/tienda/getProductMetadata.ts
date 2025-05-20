@@ -38,6 +38,7 @@ export async function getProductMetadata(lang: string, slug: string): Promise<Me
 
 	const host = headers().get('host') || '';
 	const baseUrl = getBaseUrlFromHost(host);
+	// const isProd = true;
 	const isProd = host.includes('msklatam.com') && !host.includes('.tech'); // ✅ Solo .com es prod
 
 	const canonical = `${baseUrl}${lang === 'ar' ? '' : `/${lang}`}/curso/${slug}`;
