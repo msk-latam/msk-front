@@ -27,6 +27,7 @@ export const metadata: Metadata = {
 		],
 		apple: '/apple-icon.png',
 	},
+	alternates: { canonical: 'https://msklatam.com/login' },
 };
 
 export default function LoginLayout({ children }: { children: React.ReactNode }) {
