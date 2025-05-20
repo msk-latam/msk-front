@@ -12,11 +12,11 @@ const GenericHeader = ({ title, description, tags, breadcrumbs }: GenericHeaderP
 	return (
 		<div className='flex flex-col items-start justify-center h-full text-white mt-8 overflow-visible px-4 max-w-[1600px] mx-auto'>
 			{/* Breadcrumb */}
-			<div className='flex items-center self-start text-sm mb-4 ml-4'>
+			<div className='flex items-center self-start mb-4 text-sm'>
 				<HomeIcon />
 				<div className='flex items-center'>
 					<ArrowRightIcon />
-					<span className='font-raleway font-bold text-base leading-7'>{title}</span>
+					<span className='text-base font-bold leading-7 font-raleway'>{title}</span>
 				</div>
 			</div>
 
@@ -26,11 +26,11 @@ const GenericHeader = ({ title, description, tags, breadcrumbs }: GenericHeaderP
 			</h1>
 
 			{/* Description */}
-			{description && <p className='text-lg font-raleway text-start max-w-3xl'>{description}</p>}
+			{description && <p className='max-w-3xl text-lg font-raleway text-start'>{description}</p>}
 
 			{/* Tags */}
 			{tags && tags.length > 0 && (
-				<div className='flex flex-wrap gap-2  mt-6 self-start'>
+				<div className='flex flex-wrap self-start gap-2 mt-6'>
 					{tags.map((tag, index) => (
 						<span key={index} className='bg-[#00000033] px-4 py-2 rounded-full text-sm'>
 							{tag}

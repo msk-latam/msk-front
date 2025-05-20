@@ -201,15 +201,15 @@ Mi certificado con tecnología blockchain</a>
 			</header>
 
 			<main className='bg-[#f3f4f6] flex justify-center px-0 sm:px-4 relative pt-0 pb-20  md:mb-0'>
-				<section className='w-full -mt-[40px] z-[10] relative overflow-visible max-w-[1720px] mx-auto'>
-					<div className='mb-4 bg-white rounded-[30px] p-[36px]'>
+				<section className='w-full -mt-[40px] z-[10] relative overflow-visible max-w-[2000px] mx-auto md:px-4'>
+					<div className='mb-4 bg-white rounded-[30px] p-[36px]  mx-44'>
 						{/* Render the HTML content from the API */}
-						<div className='mx-32 mt-12 space-y-5 text-xl' dangerouslySetInnerHTML={{ __html: displayContent }} />
+						<div className='mx-56 mt-12 space-y-5 text-xl' dangerouslySetInnerHTML={{ __html: displayContent }} />
 					</div>
 				</section>
 			</main>
 
-			{/* <NewsLetter /> */}
+			<NewsLetter />
 			<Footer />
 		</>
 	);
