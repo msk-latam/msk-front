@@ -158,7 +158,6 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 	const countryCompleteName = getCountryCompleteName(country);
 
 	const totalPrice = product.prices.total_price;
-	console.log(totalPrice);
 	const cleanedPrice = totalPrice && totalPrice.trim() !== '' ? totalPrice.replace(/[\.,]/g, '') : '0';
 
 	const transactionAmount = parseInt(cleanedPrice, 10);
@@ -247,15 +246,12 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 		setErrors(newErrors);
 		setTouched(newTouched);
 	};
-	console.log(userProfile);
 	useEffect(() => {
 		if (userProfile && userProfile.email) {
 			const fetchUser = async () => {
 				try {
 					setLoadingUser(true);
 					const user = await getCRMUser(userProfile.email);
-					console.log(user);
-					console.log('pais de usuario', user.Pais);
 					if (user) {
 						const updatedFormDataUser = {
 							...formDataUser,
@@ -291,8 +287,6 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 			fetchUser();
 		}
 	}, [userProfile]);
-
-	console.log(state);
 
 	if (loadingUser) {
 		return (

@@ -29,7 +29,6 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 		const fetchUser = async () => {
 			const user = await getCRMUser(state?.email);
 			const profIndex = professions.findIndex((prof: any) => prof.name === user?.Profesi_n);
-			console.log(profIndex);
 			setSelectedProfessionIndex(profIndex + 1);
 		};
 		fetchUser();
@@ -47,7 +46,7 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 			: [];
 
 	return (
-		<form className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+		<form className='grid grid-cols-1 gap-4 md:grid-cols-2'>
 			<div>
 				<label htmlFor='firstName' className='block text-sm font-medium text-[#6474A6]'>
 					Nombre
@@ -61,7 +60,7 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 					placeholder='Ingresar Nombre'
 					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
-				{touched.firstName && errors.firstName && <p className='text-red-500 text-sm'>{errors.firstName}</p>}
+				{touched.firstName && errors.firstName && <p className='text-sm text-red-500'>{errors.firstName}</p>}
 			</div>
 			<div>
 				<label htmlFor='lastName' className='block text-sm font-medium text-[#6474A6]'>
@@ -76,7 +75,7 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 					placeholder='Ingresar Apellido'
 					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
-				{touched.lastName && errors.lastName && <p className='text-red-500 text-sm'>{errors.lastName}</p>}
+				{touched.lastName && errors.lastName && <p className='text-sm text-red-500'>{errors.lastName}</p>}
 			</div>
 			<div>
 				<label htmlFor='email' className='block text-sm font-medium text-[#6474A6]'>
@@ -91,7 +90,7 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 					placeholder='Ingresar Correo'
 					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
-				{touched.email && errors.email && <p className='text-red-500 text-sm'>{errors.email}</p>}
+				{touched.email && errors.email && <p className='text-sm text-red-500'>{errors.email}</p>}
 			</div>
 			<div>
 				<label htmlFor='phone' className='block text-sm font-medium text-[#6474A6]'>
@@ -106,7 +105,7 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 					placeholder='Ingresar Teléfono'
 					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
-				{touched.phone && errors.phone && <p className='text-red-500 text-sm'>{errors.phone}</p>}
+				{touched.phone && errors.phone && <p className='text-sm text-red-500'>{errors.phone}</p>}
 			</div>
 			<div>
 				<label htmlFor='birthday' className='block text-sm font-medium text-[#6474A6]'>
@@ -125,7 +124,7 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 					placeholder='seleccione una fecha'
 					className='mt-1 block w-full border-transparent py-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-[#F8F8F9]'
 				/>
-				{touched.birthday && errors.birthday && <p className='text-red-500 text-sm'>{errors.birthday}</p>}
+				{touched.birthday && errors.birthday && <p className='text-sm text-red-500'>{errors.birthday}</p>}
 			</div>
 			<div>
 				<label htmlFor='profession' className='block text-sm font-medium text-[#6474A6]'>
@@ -145,7 +144,7 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 						</option>
 					))}
 				</select>
-				{touched.profession && errors.profession && <p className='text-red-500 text-sm'>{errors.profession}</p>}
+				{touched.profession && errors.profession && <p className='text-sm text-red-500'>{errors.profession}</p>}
 			</div>
 
 			<div>
@@ -166,7 +165,7 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 						</option>
 					))}
 				</select>
-				{touched.specialty && errors.specialty && <p className='text-red-500 text-sm'>{errors.specialty}</p>}
+				{touched.specialty && errors.specialty && <p className='text-sm text-red-500'>{errors.specialty}</p>}
 			</div>
 		</form>
 	);

@@ -5,6 +5,9 @@ export const useOffers = (lang: string) => {
 	const [data, setData] = useState<PromoData | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
+	if (lang === 'ar') {
+		lang = 'arg';
+	}
 
 	useEffect(() => {
 		const fetchOffers = async () => {

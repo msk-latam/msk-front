@@ -77,14 +77,11 @@ const Certificaciones = ({ product, country }: any) => {
 		}
 	}, [country]);
 
-	console.log(certificados);
 	const certificaciones: Certification[] = certificados.map((cert) => ({
 		name: cert.title,
 		price: Number(cert.total_price.replace(/[^\d]/g, '')), // admite decimales
 		product_code: cert.product_code,
 	}));
-
-	console.log(certificaciones);
 
 	const isSelected = (cert: Certification) => {
 		return certifications.some((c) => c.name === cert.name && c.price === cert.price);

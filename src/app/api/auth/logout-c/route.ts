@@ -14,7 +14,6 @@ export async function POST(request: NextRequest) {
 		cookieStore.delete('needsProfileCompletion');
 		cookieStore.delete('mustSignup');
 
-		console.log('Access token cookie cleared');
 		return NextResponse.json({ message: 'Logout successful' });
 	} catch (error) {
 		console.error('Logout API route error:', error);

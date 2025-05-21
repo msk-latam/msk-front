@@ -27,7 +27,6 @@ const Cupon: React.FC = () => {
 		try {
 			const response = await fetch(`https://api.msklatam.net/validarCupon?cupon=${couponCode.toUpperCase()}`);
 			const data = await response.json();
-			console.log(data);
 
 			if (!data.codigo) {
 				setError('Cupón inválido');
@@ -82,7 +81,7 @@ const Cupon: React.FC = () => {
 				>
 					{isLoading ? (
 						<svg
-							className='animate-spin h-5 w-5 text-white'
+							className='w-5 h-5 text-white animate-spin'
 							viewBox='0 0 24 24'
 							fill='none'
 							xmlns='http://www.w3.org/2000/svg'
@@ -101,11 +100,11 @@ const Cupon: React.FC = () => {
 
 			{/* Mensaje de cupón aplicado */}
 			{appliedCoupon && (
-				<div className='mt-2 flex items-center justify-between p-2 border rounded bg-green-100'>
-					<p className='text-green-600 text-sm'>
+				<div className='flex items-center justify-between p-2 mt-2 bg-green-100 border rounded'>
+					<p className='text-sm text-green-600'>
 						Cupón aplicado: <strong>{appliedCoupon.name}</strong> 🎉
 					</p>
-					<button onClick={handleRemoveCoupon} className='text-red-600 text-sm font-medium hover:underline'>
+					<button onClick={handleRemoveCoupon} className='text-sm font-medium text-red-600 hover:underline'>
 						Eliminar
 					</button>
 				</div>

@@ -13,8 +13,6 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 	const { ficha, total_price } = product;
 	const { paymentType, appliedCoupon, activeStep, certifications } = useCheckout();
 
-	console.log(certifications);
-
 	const currencies: any = {
 		cl: 'CLP',
 		ar: 'ARS',
@@ -41,8 +39,6 @@ const CheckoutResume: React.FC<CheckoutResumeProps> = ({ product, country }) => 
 			price: product.prices.total_price,
 		},
 	];
-
-	console.log(product.prices.total_price);
 
 	// Normaliza el número eliminando puntos y lo convierte a entero
 	const parseNumber = (value: string): number => {

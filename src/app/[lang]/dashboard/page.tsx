@@ -91,7 +91,6 @@ export default function DashboardPage() {
 	};
 
 	const handleEditProfile = (field?: string) => {
-		console.log('(Page) Edit profile triggered for field:', field || 'general');
 		setEditTargetField(field);
 
 		if (field === 'interests') {
@@ -102,19 +101,16 @@ export default function DashboardPage() {
 	};
 
 	const handleOpenCompleteProfileModal = () => {
-		console.log('(Page) Opening complete profile prompt modal.');
 		setShowCompleteProfileModal(true);
 	};
 
 	const handleCloseCompleteProfileModal = () => {
 		setShowCompleteProfileModal(false);
 		setEditTargetField(undefined);
-		console.log('(Page) Profile prompt modal closed.');
 	};
 
 	const handleCompleteProfileNow = () => {
 		handleCloseCompleteProfileModal();
-		console.log('(Page) Proceeding from prompt to edit modal for field:', editTargetField);
 		if (editTargetField === 'interests') {
 			setShowInterestsModal(true);
 		} else {
@@ -123,7 +119,6 @@ export default function DashboardPage() {
 	};
 
 	const handleSaveProfile = async (formDataFromModal: Partial<UserProfileData>, password?: string) => {
-		console.log('(Page) Profile data to save:', formDataFromModal, 'Password changed:', !!password);
 		setSaveProfileError(null);
 		setSaveProfileSuccess(false);
 
@@ -163,7 +158,6 @@ export default function DashboardPage() {
 		}, {} as Partial<UpdateCustomerPayload>);
 
 		try {
-			console.log('(Page) Sending to API:', cleanedPayload);
 			await updateCustomerProfile(cleanedPayload as UpdateCustomerPayload); // API call to save data
 
 			setEditTargetField(undefined);
@@ -188,12 +182,10 @@ export default function DashboardPage() {
 	};
 
 	const handleSaveInterests = async (interestData: InterestPayload) => {
-		console.log('(Page) Interests data to save:', interestData);
 		setSaveInterestsError(null);
 		setSaveInterestsSuccess(false);
 
 		try {
-			console.log('(Page) Interests data to save user context:', user); // Corrected log
 			await updateInterests(interestData);
 			mutateProfile(); // Re-fetch profile data to update completion percentage
 			setEditTargetField(undefined);
@@ -218,7 +210,6 @@ export default function DashboardPage() {
 
 				// Extrae la última parte
 				const extractedValue = cleanPath.split('/').pop();
-				console.log('Valor extraído:', extractedValue);
 
 				const lang = 'ar';
 				const slug = extractedValue;
@@ -229,7 +220,6 @@ export default function DashboardPage() {
 					});
 
 					const course = await res.json();
-					console.log('Curso:', course);
 					//mapeo para no cambiar la funcion original
 					const product = {
 						ficha: {
@@ -249,8 +239,6 @@ export default function DashboardPage() {
 
 		enrolarCurso();
 	}, [user]);
-
-	console.log(user);
 
 	return (
 		<>

@@ -164,7 +164,6 @@ export async function GET(request: NextRequest) {
 		const courseRecommendationsList = customerData.web_recommender?.split(',').map((item: string) => item.trim());
 		let detailedRecommendedCourses: any[] = [];
 		if (courseRecommendationsList && courseRecommendationsList.length > 0) {
-			console.log('courseRecommendationsList', courseRecommendationsList);
 			detailedRecommendedCourses = await Promise.all(
 				courseRecommendationsList.slice(0, 4).map(async (courseIdentifier: string) => {
 					try {
@@ -180,7 +179,6 @@ export async function GET(request: NextRequest) {
 
 						if (resourceRes.ok) {
 							const resourceData = await resourceRes.json();
-							console.log('resourceData', resourceData);
 							if (resourceData && resourceData.id != null) {
 								return resourceData;
 							}
@@ -559,8 +557,6 @@ export async function GET(request: NextRequest) {
 			customerData.interests.content_interests = additionalInterests.content_interests;
 			customerData.interests.specialty_interests = additionalInterests.specialty_interests;
 		}
-
-		console.log('customerData', detailedRecommendedCourses);
 
 		const user = {
 			profileCompletion: {

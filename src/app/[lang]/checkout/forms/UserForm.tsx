@@ -868,7 +868,6 @@ const UserForm: React.FC<UserFormProps> = ({ formData, errors, touched, handleCh
 		const fetchUser = async () => {
 			const user = await getCRMUser(userProfile?.email);
 			const profIndex = professions.findIndex((prof: any) => prof.name === user?.Profesi_n);
-			console.log(profIndex);
 			setSelectedProfessionIndex(profIndex + 1);
 		};
 		fetchUser();
