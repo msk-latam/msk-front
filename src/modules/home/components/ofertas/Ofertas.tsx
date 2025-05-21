@@ -58,6 +58,7 @@ const DiscountAndButton = ({ offer, content, discountNumber, descLine1, descLine
 
 const Ofertas = ({ lang }: { lang: string }) => {
 	const { data: offer, loading, error } = useOffers(lang);
+	console.log(lang);
 
 	if (loading) return <OffersSkeleton />; // 👈 Mostrar Skeleton mientras carga
 	if (error || !offer) return null;

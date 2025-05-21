@@ -7,7 +7,6 @@ export async function DELETE(request: NextRequest) {
 
 		cookieStore.delete('needsProfileCompletion');
 
-		console.log('needsProfileCompletion cookie cleared');
 		return NextResponse.json({ message: 'needsProfileCompletion cookie cleared' });
 	} catch (error) {
 		console.error('Complete profile API route error:', error);

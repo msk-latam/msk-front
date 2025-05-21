@@ -62,7 +62,6 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 				}
 				const data: PageData = await response.json();
 				setPageData(data);
-				console.log(data);
 			} catch (err) {
 				setError(err instanceof Error ? err.message : 'An unknown error occurred');
 				console.error('Failed to fetch page data:', err);

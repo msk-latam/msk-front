@@ -5,14 +5,12 @@ export async function GET(req: Request, { params }: { params: { slug: string } }
 	const { searchParams } = new URL(req.url);
 	let lang = searchParams.get('lang');
 
-	console.log(slug, lang);
-
 	if (!lang) {
 		return NextResponse.json({ message: 'El parámetro "lang" es requerido' }, { status: 400 });
 	}
 
-	if(lang=="int"){
-		lang="ar";
+	if (lang == 'int') {
+		lang = 'ar';
 	}
 
 	try {

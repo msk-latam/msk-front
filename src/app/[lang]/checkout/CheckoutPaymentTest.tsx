@@ -72,11 +72,6 @@ const CheckoutRebill: React.FC<CheckoutRebillProps> = ({ mode = 'payment', count
 	const transactionAmount = formData.amount;
 	const discountAmount = formData.discount;
 
-	console.log('datos del formulario', formData);
-
-	console.log('monto de transaccion para crm', transactionAmount);
-	console.log('descuento para crm', discountAmount);
-
 	const initializeRebillCheckout = () => {
 		if (!window.Rebill) {
 			console.error(
@@ -222,7 +217,6 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 	// const transactionAmount = Number(product.total_price.replace(/,/g, '').replace('.', ''));
 	const transactionAmount = Number(product.prices.total_price.replace(/[^\d]/g, ''));
 
-	console.log(transactionAmount, 'testing');
 	const currency = currencies[country] || 'USD';
 
 	const discountValue = Number(appliedCoupon?.value) || 0;
@@ -232,8 +226,6 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 		discountType === 'percentage' ? transactionAmount * (discountValue / 100) : discountType === 'fixed' ? discountValue : 0;
 
 	const transactionAmountWithDiscount = parseFloat(Math.max(transactionAmount - discount, 0).toFixed(2));
-
-	console.log('precio con descuento de recoil', transactionAmountWithDiscount);
 
 	// Datos del formulario para Rebill
 	const rebillForm = {
@@ -249,7 +241,6 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 		},
 	};
 
-	console.log('precio total con descuento despues del form', transactionAmountWithDiscount);
 	const handlePreviousStep = () => {
 		if (subStep > 0) {
 			setSubStep(subStep - 1);
@@ -259,8 +250,6 @@ const CheckoutPaymentTest = ({ product, country }: any) => {
 			setActiveStep(activeStep - 1);
 		}
 	};
-
-	console.log(isSubmitting);
 
 	return (
 		<div className='mt-16'>

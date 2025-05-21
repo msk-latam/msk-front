@@ -15,7 +15,6 @@ const CursoCheckout: FC<Props> = async ({ params }) => {
 	// const { product } = await ssr.getSingleProduct(params.curso, params.lang);
 	const country = params.lang === 'ar' ? 'arg' : params.lang;
 	const { product } = await ssr.getSingleProductCMS(params.curso, country);
-	console.log(product);
 	return (
 		<CheckoutProvider product={product} country={country}>
 			<div className='flex flex-col min-h-screen bg-[#f3f4f6]'>

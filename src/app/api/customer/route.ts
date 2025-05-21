@@ -80,9 +80,6 @@ export async function PUT(request: NextRequest) {
 	// }
 
 	try {
-		console.log('email', email);
-		console.log('requestBody', requestBody);
-
 		const apiResponse = await fetch(`${environmentBackend}/api/customer/${email}`, {
 			// const apiResponse = await fetch(`https://dev.msklatam.tech/msk-laravel/public/api/customer/${email}`, {
 			method: 'PUT',

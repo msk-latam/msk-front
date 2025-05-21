@@ -227,8 +227,6 @@ export const createContractCRM = async (
 	certification: Certification[],
 	closingSource: string = 'Consulta directa',
 ) => {
-	console.log(product);
-	console.log(certification);
 	try {
 		let paymentConfig = { ...(paymentOptions[paymentType] || paymentOptions.mercadopago) };
 
@@ -316,9 +314,6 @@ export const updateContractCRM = async (
 	const paymentConfig = paymentOptions[paymentType] || paymentOptions.mercadopago;
 	const totalCertifications = certification?.reduce((acc, cert) => acc + cert.price, 0) || 0;
 	const total = transactionAmountWithDescount + totalCertifications;
-	console.log(transactionAmountWithDescount);
-	console.log(total);
-	console.log(parseFloat((total / paymentConfig.totalPayments).toFixed(2)));
 	try {
 		const contractData = {
 			status: 'Confirmado',

@@ -12,9 +12,6 @@ export async function GET(request: NextRequest) {
 	const response = await fetch(`${environmentBackend}/api/customer/interests/${email}`);
 	const data = await response.json();
 
-	console.log('obteniendo intereses de: ', `${environmentBackend}/api/customer/interests/${email}`);
-	console.log('respuesta: ', data);
-
 	return NextResponse.json(data);
 }
 
@@ -22,8 +19,6 @@ export async function PUT(request: NextRequest) {
 	const email = cookies().get('email')?.value;
 
 	const body = await request.json();
-	console.log('actualizando intereses de: ', `${environmentBackend}/api/customer/interests/${email}`);
-	console.log('body: ', body);
 
 	if (!email) {
 		return NextResponse.json({ error: 'Email is required' }, { status: 400 });
@@ -36,7 +31,6 @@ export async function PUT(request: NextRequest) {
 	});
 
 	const data = await response.json();
-	console.log('respuesta: ', data);
 
 	return NextResponse.json(data);
 }

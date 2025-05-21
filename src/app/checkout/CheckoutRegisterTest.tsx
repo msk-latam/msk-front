@@ -83,8 +83,6 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 			Object.values(errors).every((error) => error === '') &&
 			Object.values(formDataUser).every((value) => value !== '' && value !== false);
 		setIsFormValid(formIsValid);
-		console.log(formDataUser);
-		console.log(errors);
 	}, [formDataUser, errors]);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -234,7 +232,6 @@ const CheckoutRegisterTest = ({ product, country }: any) => {
 				try {
 					setLoadingUser(true);
 					const user = await getCRMUser(state?.email);
-					console.log(user);
 					const capitalizeWords = (str: string) => {
 						return str.replace(/\b\w/g, (char) => char.toUpperCase());
 					};
