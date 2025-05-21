@@ -119,7 +119,7 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 				</section>
 			</main>
 
-			{/* <NewsLetter /> */}
+			<NewsLetter />
 			<Footer />
 		</>
 	);

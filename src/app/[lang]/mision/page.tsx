@@ -73,13 +73,19 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 		}
 	}, [country]);
 
+	console.log(pageData);
 	// Display values, use placeholders if loading or error
 	const displayTitle = loading || error ? initialPageData.title : pageData?.post_title || 'Título no disponible';
 	const displayContent = loading
 		? '<p>Cargando contenido...</p>'
 		: error
 		? `<p>Error al cargar el contenido: ${error}</p>`
-		: pageData?.post_content || '<p>Contenido no disponible.</p>';
+		: pageData?.nuestra_mision.contenido || '<p>Contenido no disponible.</p>';
+
+	const styledContent = displayContent.replace(
+		/<img([^>]*)src="([^"]+)"([^>]*)>/g,
+		`<img$1src="$2"$3 style="width: 100%; max-width: 1200px; display: block; " />`,
+	);
 
 	return (
 		<>
@@ -92,19 +98,19 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 				}}
 			>
 				<Navbar />
-				<GenericHeader title={'Nuesta misión'} description={initialPageData.description} />
+				<GenericHeader title={'Nuestra misión'} description={initialPageData.description} />
 			</header>
 
 			<main className='bg-[#f3f4f6] flex justify-center px-0 sm:px-4 relative pt-0 pb-20  md:mb-0'>
-				<section className='w-full -mt-[40px] z-[10] relative overflow-visible max-w-[1400px] mx-auto'>
-					<div className='mb-4 bg-white rounded-[30px] p-[36px]'>
+				<section className='w-full -mt-[100px] z-[10] relative overflow-visible max-w-[1600px] mx-auto '>
+					<div className='mb-4 bg-white rounded-[30px] p-[36px] mt-8'>
 						{/* Render the HTML content from the API */}
-						<div className='whitespace-pre-line ' dangerouslySetInnerHTML={{ __html: displayContent }} />
+						<div className='mx-56 mt-8 whitespace-pre-line' dangerouslySetInnerHTML={{ __html: styledContent }} />
 					</div>
 				</section>
 			</main>
 
-			{/* <NewsLetter /> */}
+			<NewsLetter />
 			<Footer />
 		</>
 	);
