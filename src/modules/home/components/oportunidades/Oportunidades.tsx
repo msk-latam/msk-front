@@ -58,19 +58,19 @@ const Oportunidades = () => {
 			className='relative w-full overflow-visible max-w-[1600px] mx-auto md:px-4 md:pt-24 pb-[240px] z-[1] pt-32'
 			aria-labelledby='oportunidades-heading'
 		>
-			<div className='relative bg-white rounded-[38px] -mt-32 -mb-64 pt-6 md:pt-[72px] md:pb-16 shadow-lg'>
+			<div className='relative bg-white rounded-[38px] -mt-32 -mb-64 pt-10 md:pt-[72px] md:pb-16 shadow-lg'>
 				<div className='px-5 md:px-16 pb-6 md:mb-0'>
 					{/* HEADER */}
-					<header className='md:text-left text-center max-w-7xl px-6 gap-4 md:px-0'>
+					<header className='md:text-left text-center max-w-7xl px-6 space-y-4 gap-4 md:px-0'>
 						<h2
 							id='oportunidades-heading'
-							className='mb-2 md:text-[34px] text-[20px] leading-[100%] text-[#1A1A1A] align-middle'
+							className='md:text-[34px] font-raleway text-[22px] leading-[100%] text-[#1A1A1A] align-middle'
 						>
-							<span className='block md:hidden font-Raleway leading-[32px]'>{infoCursos?.title}</span>
-							<span className='hidden md:inline'>{infoCursos?.title}</span>
+							<span className='block md:hidden font-raleway leading-[32px]'>{infoCursos?.title}</span>
+							<span className='hidden font-raleway md:inline'>{infoCursos?.title}</span>
 						</h2>
 
-						<p className='md:text-[18px] text-[14px] font-[400] text-[#838790] align-middle'>
+						<p className='md:text-[18px] text-base font-[400] text-[#838790] align-middle'>
 							<span className='block md:hidden'>{infoCursos?.subtitle}</span>
 							<span className='hidden md:inline'>{infoCursos?.subtitle}</span>
 						</p>
