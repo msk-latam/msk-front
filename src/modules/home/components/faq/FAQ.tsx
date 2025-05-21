@@ -44,7 +44,7 @@ const FaqSection = () => {
 					{data.map((item, index) => (
 						<div key={index}>
 							<button onClick={() => toggle(index)} className='flex items-center justify-between w-full py-6 text-left'>
-								<span className='md:text-[24px] text-[14px] text-[#1A1A1A] font-Inter md:mb-[25px] translate-y-[18px]'>
+								<span className='md:text-[24px] text-[14px] text-[#1A1A1A] font-Inter md:mb-[25px] md:translate-y-[18px]'>
 									{item.question}
 								</span>
 								{openIndex === index ? (

@@ -64,7 +64,7 @@ export default function CourseInstitutions({ slug, lang, onHideEmpty }: CourseIn
 
 function InstitutionCard({ inst }: { inst: any }) {
 	return (
-		<div className='bg-[#f7f9ff] rounded-[30px] p-7 h-32 flex items-center justify-center relative w-[23%] '>
+		<div className='bg-[#f7f9ff] rounded-[30px] p-7 h-32 flex items-center justify-center relative md:w-[23%] w-[75%]'>
 			<Image
 				src={inst.image}
 				alt={inst.title}

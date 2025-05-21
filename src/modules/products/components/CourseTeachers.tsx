@@ -77,7 +77,9 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 
 						return (
 							<div key={idx} className='flex items-start gap-4'>
-								<img src={image} alt={name} className='w-24 h-24 rounded-[24px] object-cover' />
+								<div className='w-24 h-24 rounded-[24px] overflow-hidden'>
+									<img src={image} alt={name} className='w-full h-full object-cover aspect-square' />
+								</div>
 								<div className='flex flex-col'>
 									<p className='font-raleway font-semibold text-[#1A1A1A]'>{name}</p>
 									<p className='text-sm font-inter font-normal text-[#5A5F67]'>{title}</p>
@@ -99,7 +101,9 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 
 						return (
 							<div key={idx} className='flex items-start gap-4'>
-								<img src={image} alt={name} className='w-24 h-24 rounded-[24px] object-cover' />
+								<div className='w-24 h-24 rounded-[24px] overflow-hidden bg-white flex-shrink-0'>
+									<img src={image} alt={name} className='w-full h-full object-cover' />
+								</div>
 								<div className='flex flex-col'>
 									<p className='font-raleway font-semibold text-[#1A1A1A]'>{name}</p>
 									<p className='text-sm font-inter font-normal text-[#5A5F67]'>{title}</p>
@@ -120,16 +124,33 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 							&lt;
 						</button>
 
-						<div className='flex items-center gap-6 text-sm text-gray-700 font-medium'>
-							{Array.from({ length: totalPages }).map((_, i) => (
-								<span
-									key={i}
-									className={`cursor-pointer ${i === page ? 'text-black font-bold' : ''}`}
-									onClick={() => setPage(i)}
-								>
-									{String(i + 1).padStart(2, '0')}
-								</span>
-							))}
+						<div className='flex items-center gap-2 text-sm text-gray-700 font-medium'>
+							{Array.from({ length: totalPages }).map((_, i) => {
+								const isFirst = i === 0;
+								const isLast = i === totalPages - 1;
+								const isNearCurrent = Math.abs(i - page) <= 1;
+								const shouldShow = isFirst || isLast || isNearCurrent || Math.abs(i - page) === 2;
+
+								if (!shouldShow) return null;
+
+								const isEllipsisBefore = i > 1 && i === page - 2 && i !== 1;
+								const isEllipsisAfter = i < totalPages - 2 && i === page + 2 && i !== totalPages - 2;
+
+								return (
+									<span key={i} className='flex items-center'>
+										{isEllipsisBefore || isEllipsisAfter ? (
+											<span className='px-1'>...</span>
+										) : (
+											<span
+												onClick={() => setPage(i)}
+												className={`cursor-pointer px-2 ${i === page ? 'text-black font-bold' : ''}`}
+											>
+												{i + 1}
+											</span>
+										)}
+									</span>
+								);
+							})}
 						</div>
 
 						<button
