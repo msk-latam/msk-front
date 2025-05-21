@@ -18,7 +18,7 @@ const BrandSlider: FC<BrandSliderProps> = ({ country, brands: externalBrands }) 
 	const [isDragging, setIsDragging] = useState(false);
 	const [startX, setStartX] = useState(0);
 	const [scrollLeft, setScrollLeft] = useState(0);
-	const [dragMoved, setDragMoved] = useState(false);
+	const dragMovedRef = useRef(false);
 	const [isHovered, setIsHovered] = useState(false);
 
 	useEffect(() => {
@@ -118,7 +118,7 @@ const BrandSlider: FC<BrandSliderProps> = ({ country, brands: externalBrands }) 
 		setIsDragging(true);
 		setStartX(e.pageX - container.offsetLeft);
 		setScrollLeft(container.scrollLeft);
-		setDragMoved(false);
+		dragMovedRef.current = false;
 	};
 
 	const handleMouseMove = (e: React.MouseEvent) => {
@@ -128,7 +128,7 @@ const BrandSlider: FC<BrandSliderProps> = ({ country, brands: externalBrands }) 
 		const x = e.pageX - container.offsetLeft;
 		const walk = x - startX;
 		container.scrollLeft = scrollLeft - walk;
-		if (Math.abs(walk) > 5) setDragMoved(true);
+		if (Math.abs(walk) > 5) dragMovedRef.current = true;
 	};
 
 	const handleMouseUp = () => {
@@ -137,7 +137,9 @@ const BrandSlider: FC<BrandSliderProps> = ({ country, brands: externalBrands }) 
 	};
 
 	const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-		if (dragMoved) e.preventDefault();
+		if (dragMovedRef.current) {
+			e.preventDefault();
+		}
 	};
 
 	const handleWheel = (e: React.WheelEvent) => {
@@ -164,12 +166,12 @@ const BrandSlider: FC<BrandSliderProps> = ({ country, brands: externalBrands }) 
 							className='flex-shrink-0 snap-center bg-[#F7F9FF] rounded-[30px] px-9 py-6 w-[85%] transition-transform duration-300'
 						>
 							<a
-								href={brand.url}
+								href={brand.url || '#'}
 								target='_blank'
 								rel='noopener noreferrer'
-								className='flex justify-center items-center h-32'
+								className='flex justify-center items-center h-32 cursor-pointer'
 								onDragStart={preventImageDrag}
-								onClick={(e) => dragMoved && e.preventDefault()}
+								onClick={(e) => dragMovedRef.current && e.preventDefault()}
 							>
 								<Image
 									src={brand.imgDefault}
@@ -214,10 +216,10 @@ const BrandSlider: FC<BrandSliderProps> = ({ country, brands: externalBrands }) 
 				{brands.map((brand: any, index: number) => (
 					<div key={index} className='flex-shrink-0 group bg-[#F7F9FF] rounded-[30px] px-9 py-6'>
 						<a
-							href={brand.url}
+							href={brand.url || '#'}
 							target='_blank'
 							rel='noopener noreferrer'
-							className='relative flex items-center justify-center md:w-32 h-20'
+							className='relative flex items-center justify-center md:w-32 h-20 cursor-pointer'
 							onDragStart={preventImageDrag}
 							onClick={handleClick}
 						>

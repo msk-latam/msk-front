@@ -152,7 +152,7 @@ const Institutions = () => {
 				brands={institutions.map((inst) => ({
 					imgDefault: inst.image,
 					imgHover: inst.image,
-					url: '#',
+					url: inst.link,
 					width: 130,
 				}))}
 			/>

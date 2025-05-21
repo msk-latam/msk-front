@@ -217,6 +217,7 @@ export interface Institution {
 	title: string;
 	slug: string;
 	image: string;
+	link: string;
 }
 
 // Offers SECTION
