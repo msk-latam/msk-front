@@ -468,7 +468,8 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 											<div className='flex flex-wrap gap-2'>
 												{resource?.sections?.header?.categories?.length > 0 && (
 													<span className={`px-3 py-1 rounded-full  font-inter font-medium bg-[#DFE6FF] text-[#29324F]`}>
-														{resource?.sections?.header?.categories?.find((cat: any) => cat.is_primary)?.name}
+														{resource?.sections?.header?.categories?.find((cat: any) => cat.is_primary)?.name ||
+															resource?.sections?.header?.categories?.[0]?.name}
 													</span>
 												)}
 												<span className={`px-3 py-1 rounded-full  font-inter font-medium bg-[#FFF4D8] text-[#8E6E3B]`}>

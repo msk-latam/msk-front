@@ -164,7 +164,6 @@ export async function GET(request: NextRequest) {
 		const courseRecommendationsList = customerData.web_recommender?.split(',').map((item: string) => item.trim());
 		let detailedRecommendedCourses: any[] = [];
 		if (courseRecommendationsList && courseRecommendationsList.length > 0) {
-			console.log('courseRecommendationsList', courseRecommendationsList);
 			detailedRecommendedCourses = await Promise.all(
 				courseRecommendationsList.slice(0, 4).map(async (courseIdentifier: string) => {
 					try {
@@ -180,7 +179,6 @@ export async function GET(request: NextRequest) {
 
 						if (resourceRes.ok) {
 							const resourceData = await resourceRes.json();
-							console.log('resourceData', resourceData);
 							if (resourceData && resourceData.id != null) {
 								return resourceData;
 							}
@@ -261,7 +259,6 @@ export async function GET(request: NextRequest) {
 				// Fetch the latest course from products endpoint if no courses in progress
 
 				try {
-					/* https://cms1.msklatam.com/wp-json/msk/v1/products?lang=ar&page=1&per_page=1&nocache=1 */
 					const productsResponse = await fetch(
 						`https://cms1.msklatam.com/wp-json/msk/v1/products?lang=${lang}&page=1&per_page=1&nocache=1`,
 						{
@@ -294,7 +291,11 @@ export async function GET(request: NextRequest) {
 						product_code: latestProduct?.product_code || '',
 						product_code_cedente: '',
 						id: latestProduct.id,
-						image: latestProduct?.featured_images?.high,
+						image:
+							latestProduct?.featured_images?.high ||
+							latestProduct?.featured_images?.medium ||
+							latestProduct?.featured_images?.low ||
+							'',
 						title: latestProduct?.title || '',
 						crm_id: latestProduct?.product_code || '',
 						completed_percentage: null,
@@ -317,10 +318,13 @@ export async function GET(request: NextRequest) {
 			if (activeProgressList.length === 0) {
 				// Fetch the latest course from products endpoint if no active courses
 				try {
-					const productsResponse = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/products?lang=${lang}&limit=1`, {
-						headers: { Accept: 'application/json' },
-						next: { revalidate: 3600 * 7 },
-					});
+					const productsResponse = await fetch(
+						`https://cms1.msklatam.com/wp-json/msk/v1/products?lang=${lang}&page=1&per_page=1&nocache=1`,
+						{
+							headers: { Accept: 'application/json' },
+							next: { revalidate: 3600 * 7 },
+						},
+					);
 
 					if (!productsResponse.ok) {
 						console.error(`Failed to fetch latest product: ${productsResponse.status}`);
@@ -354,10 +358,14 @@ export async function GET(request: NextRequest) {
 						product_code: latestProduct.product_code || '',
 						product_code_cedente: '',
 						id: latestProduct.id,
-						image: latestProduct.image,
+						image:
+							latestProduct?.featured_images?.high ||
+							latestProduct?.featured_images?.medium ||
+							latestProduct?.featured_images?.low ||
+							'',
 						title: latestProduct.title,
 						crm_id: latestProduct.product_code || '',
-						completed_percentage: 0,
+						completed_percentage: null,
 						resource: latestProduct.resource,
 						status: '',
 						ov: '',
@@ -559,8 +567,6 @@ export async function GET(request: NextRequest) {
 			customerData.interests.content_interests = additionalInterests.content_interests;
 			customerData.interests.specialty_interests = additionalInterests.specialty_interests;
 		}
-
-		console.log('customerData', detailedRecommendedCourses);
 
 		const user = {
 			profileCompletion: {
