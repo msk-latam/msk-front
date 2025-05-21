@@ -3,36 +3,47 @@
 @tailwind utilities;
 
 @layer base {
-  h1, h2, h3 {
-    font-family: var(--font-raleway), sans-serif;
-    font-weight: 700;
-  }
+	h1,
+	h2,
+	h3 {
+		font-family: var(--font-raleway), sans-serif;
+		font-weight: 700;
+	}
 
-  h2 {
-    font-weight: 500;
-  }
+	h2 {
+		font-weight: 500;
+	}
 
-  p, a, button, span {
-    font-family: var(--font-inter), sans-serif;
-    font-weight: 500;
-  }
+	p,
+	a,
+	button,
+	span {
+		font-family: var(--font-inter), sans-serif;
+		font-weight: 500;
+	}
 
-  html, body {
-    overflow-x: hidden;
-    font-family: var(--font-inter), system-ui, sans-serif;
-  }
+	html,
+	body {
+		overflow-x: hidden;
+		font-family: var(--font-inter), system-ui, sans-serif;
+	}
 
-  :root {
-    font-family: var(--font-inter), system-ui, sans-serif;
-  }
+	:root {
+		font-family: var(--font-inter), system-ui, sans-serif;
+	}
+}
+
+.teacher-image {
+	border-radius: 50% !important;
+	object-fit: cover;
 }
 
 body.step4-active .newsletter {
-  display: none !important;
+	display: none !important;
 }
 
 @layer components {
-  .custom-grid {
-    @apply grid grid-cols-12 gap-3;
-  }
+	.custom-grid {
+		@apply grid grid-cols-12 gap-3;
+	}
 }
