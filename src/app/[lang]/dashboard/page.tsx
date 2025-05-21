@@ -199,7 +199,7 @@ export default function DashboardPage() {
 			setSaveInterestsError(error.message || 'Error desconocido al guardar intereses');
 		}
 	};
-
+	const lang = 'ar';
 	useEffect(() => {
 		const enrolarCurso = async () => {
 			const redirectAfterLogin = localStorage.getItem('redirectAfterLogin');
@@ -211,7 +211,6 @@ export default function DashboardPage() {
 				// Extrae la última parte
 				const extractedValue = cleanPath.split('/').pop();
 
-				const lang = 'ar';
 				const slug = extractedValue;
 
 				try {
@@ -267,7 +266,7 @@ export default function DashboardPage() {
 						<>
 							<MyCoursesSection courseData={user.coursesInProgress} userEmail={user.email} />
 							<LearningPlanCta />
-							<PromoBanner />
+							<PromoBanner lang={lang} />
 							<HelpSection />
 						</>
 					)}
