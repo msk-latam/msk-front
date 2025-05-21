@@ -91,6 +91,8 @@ const Ofertas = ({ lang }: { lang: string }) => {
 		<section className='relative w-full md:h-[993px] md:px-4 md:mt-[120px] min-h-screen flex items-end md:items-center justify-center md:translate-y-5  -translate-y-24 text-white font-raleway'>
 			{/* Imagen de fondo Mobile */}
 			{offer.background_image ? (
+				<>
+      <div className="absolute inset-0 bg-black/25 z-[1] md:hidden " />
 				<Image
 					src={offer.background_image}
 					alt='Oferta Salud Mobile'
@@ -99,7 +101,7 @@ const Ofertas = ({ lang }: { lang: string }) => {
 					objectPosition='66% center'
 					quality={100}
 					priority
-				/>
+				/></>
 			) : (
 				<div className='flex items-center justify-center w-full h-full bg-gray-400'>Imagen no disponible</div>
 			)}
@@ -120,7 +122,7 @@ const Ofertas = ({ lang }: { lang: string }) => {
 						}}
 					/>
 
-					<div className='absolute inset-0 bg-black/40' />
+					<div className='absolute inset-0 bg-black/25' />
 				</div>
 			)}
 			{/* Contenido */}
