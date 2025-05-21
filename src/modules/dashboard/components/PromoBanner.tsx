@@ -6,11 +6,11 @@ import { usePathname, useRouter } from 'next/navigation'; // ✔️ Importamos u
 import React from 'react';
 import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
 
-const PromoBanner: React.FC = () => {
-	const { data: offer, loading, error } = useOffers();
+const PromoBanner = ({ lang }: { lang: string }) => {
+	const { data: offer, loading, error } = useOffers(lang);
 	const router = useRouter(); // ✔️ Inicializamos el router
-	const pathname = usePathname();
-	const lang = pathname?.split('/')[1] || 'ar';
+	// const pathname = usePathname();
+	// const lang = pathname?.split('/')[1] || 'arg';
 	if (!offer) return null;
 
 	// ✔️ Arreglo del contenido con listas y espaciado
@@ -38,7 +38,7 @@ const PromoBanner: React.FC = () => {
 		<div className='relative md:rounded-[30px] overflow-hidden -z-10 -mt-4 md:mt-5 text-white min-h-[450px] md:min-h-[350px] flex flex-col'>
 			{/* Background Image */}
 			<div
-				className='absolute inset-0 z-0 bg-cover bg-center'
+				className='absolute inset-0 z-0 bg-center bg-cover'
 				style={{
 					backgroundImage: `url(${offer.background_image})`,
 				}}
@@ -54,13 +54,13 @@ const PromoBanner: React.FC = () => {
 			></div>
 
 			{/* Content Container */}
-			<div className='relative z-20 flex flex-col flex-grow p-6 mt-40 md:mt-0 md:p-12 justify-between'>
+			<div className='relative z-20 flex flex-col justify-between flex-grow p-6 mt-40 md:mt-0 md:p-12'>
 				{/* Top Text Content */}
 				<div>
-					<p className='text-base md:text-lg font-inter font-normal mb-4 md:mb-8'>{offer.disponibilidad}</p>
+					<p className='mb-4 text-base font-normal md:text-lg font-inter md:mb-8'>{offer.disponibilidad}</p>
 
 					<h2
-						className='text-3xl md:text-5xl font-raleway flex flex-col gap-2 md:gap-4 mb-6 md:mb-8'
+						className='flex flex-col gap-2 mb-6 text-3xl md:text-5xl font-raleway md:gap-4 md:mb-8'
 						dangerouslySetInnerHTML={{ __html: offer.titulo }}
 					/>
 
@@ -69,13 +69,13 @@ const PromoBanner: React.FC = () => {
 				</div>
 
 				{/* Discount and Button Section */}
-				<div className='flex flex-col items-center md:items-end md:absolute md:bottom-12 md:right-12 md:flex-row gap-4 mt-6 md:mt-0'>
+				<div className='flex flex-col items-center gap-4 mt-6 md:items-end md:absolute md:bottom-12 md:right-12 md:flex-row md:mt-0'>
 					{/* Discount */}
 					<div className='flex items-end gap-2 text-center md:text-right'>
 						<span className='text-6xl md:text-[78.49px] font-inter font-bold leading-none md:leading-[100%] tracking-tighter md:tracking-[-13%]'>
 							{discountNumber}
 						</span>
-						<div className='flex flex-col items-center md:items-start gap-1 md:gap-2'>
+						<div className='flex flex-col items-center gap-1 md:items-start md:gap-2'>
 							<span className='font-inter font-extralight text-4xl md:text-[47.42px] leading-none md:leading-[100%]'>%</span>
 							<span className='text-sm md:text-[19.62px] font-inter font-light leading-none md:leading-[100%] tracking-[-2.5%] whitespace-pre-line'>
 								OFF
@@ -87,7 +87,7 @@ const PromoBanner: React.FC = () => {
 					</div>
 
 					{/* Button */}
-					<div className='w-full flex justify-center md:w-auto mb-10 md:mb-0'>
+					<div className='flex justify-center w-full mb-10 md:w-auto md:mb-0'>
 						<CtaButton
 							onClick={() => {
 								// Detectar si para argentina tiene `/dashboard`

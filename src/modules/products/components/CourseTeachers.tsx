@@ -77,9 +77,7 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 
 						return (
 							<div key={idx} className='flex items-start gap-4'>
-								<div className='w-24 h-24 rounded-[24px] overflow-hidden'>
-									<img src={image} alt={name} className='w-full h-full object-cover aspect-square' />
-								</div>
+								<img src={image} alt={name} className='w-24 h-24 teacher-image' />
 								<div className='flex flex-col'>
 									<p className='font-raleway font-semibold text-[#1A1A1A]'>{name}</p>
 									<p className='text-sm font-inter font-normal text-[#5A5F67]'>{title}</p>
@@ -101,9 +99,7 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 
 						return (
 							<div key={idx} className='flex items-start gap-4'>
-								<div className='w-24 h-24 rounded-[24px] overflow-hidden bg-white flex-shrink-0'>
-									<img src={image} alt={name} className='w-full h-full object-cover' />
-								</div>
+								<img src={image} alt={name} className='w-24 h-24 teacher-image' />
 								<div className='flex flex-col'>
 									<p className='font-raleway font-semibold text-[#1A1A1A]'>{name}</p>
 									<p className='text-sm font-inter font-normal text-[#5A5F67]'>{title}</p>
