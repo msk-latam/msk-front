@@ -54,7 +54,7 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 			setError(null);
 			try {
 				const response = await fetch(
-					`https://cms1.msklatam.com/wp-json/msk/v1/page/condiciones-de-contratacion?lang=${country}`,
+					`https://cms1.msklatam.com/wp-json/msk/v1/page/politicas-de-privacidad?lang=${country}`,
 				);
 
 				if (!response.ok) {
@@ -75,13 +75,14 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 		}
 	}, [country]);
 
+	console.log(pageData);
 	// Display values, use placeholders if loading or error
 	const displayTitle = loading || error ? initialPageData.title : pageData?.post_title || 'Título no disponible';
 	const displayContent = loading
 		? '<p>Cargando contenido...</p>'
 		: error
 		? `<p>Error al cargar el contenido: ${error}</p>`
-		: pageData?.post_content || '<p>Contenido no disponible.</p>';
+		: pageData?.content || '<p>Contenido no disponible.</p>';
 
 	return (
 		<>
@@ -98,10 +99,10 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 			</header>
 
 			<main className='bg-[#f3f4f6] flex justify-center px-0 sm:px-4 relative pt-0 pb-20  md:mb-0'>
-				<section className='w-full -mt-[40px] z-[10] relative overflow-visible max-w-[1400px] mx-auto'>
-					<div className='mb-4 bg-white rounded-[30px] p-[36px]'>
+				<section className='w-full -mt-[40px] z-[10] relative overflow-visible max-w-[1800px] mx-auto'>
+					<div className='mb-4 bg-white rounded-[30px] p-[36px] mx-24'>
 						{/* Render the HTML content from the API */}
-						<div className='whitespace-pre-line ' dangerouslySetInnerHTML={{ __html: displayContent }} />
+						<div className='mx-56 text-2xl whitespace-pre-line' dangerouslySetInnerHTML={{ __html: displayContent }} />
 					</div>
 				</section>
 			</main>

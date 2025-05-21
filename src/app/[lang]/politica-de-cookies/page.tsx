@@ -79,7 +79,7 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 		? '<p>Cargando contenido...</p>'
 		: error
 		? `<p>Error al cargar el contenido: ${error}</p>`
-		: pageData?.post_content || '<p>Contenido no disponible.</p>';
+		: pageData?.content || '<p>Contenido no disponible.</p>';
 
 	return (
 		<>
@@ -96,11 +96,11 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 			</header>
 
 			<main className='bg-[#f3f4f6] flex justify-center px-0 sm:px-4 relative pt-0 pb-20  md:mb-0'>
-				<section className='w-full -mt-[40px] z-[10] relative overflow-visible max-w-[1400px] mx-auto'>
+				<section className='w-full -mt-[40px] z-[10] relative overflow-visible max-w-[1600px] mx-auto'>
 					<div className='mb-4 bg-white rounded-[30px] p-[36px]'>
 						{/* Render the HTML content from the API */}
 						<div
-							className='mx-20 mt-10 text-2xl whitespace-pre-line font-lora text-[#374151]'
+							className='mx-56 mt-10 text-2xl whitespace-pre-line font-lora text-[#374151]'
 							dangerouslySetInnerHTML={{ __html: displayContent }}
 						/>
 					</div>
