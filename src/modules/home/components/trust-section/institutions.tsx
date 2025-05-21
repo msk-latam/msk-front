@@ -1,10 +1,9 @@
 import { useInstitutions } from '@/modules/home/hooks/useInstitution';
 import InstitutionsSkeleton from '@/modules/home/skeletons/InstitutionsSkeleton';
-import { usePathname } from 'next/navigation';
 import BrandSlider from './BrandSlider';
 
 const Institutions = () => {
-	const { institutions, loading, error } = useInstitutions();
+	const { institutions, title, loading, error } = useInstitutions();
 
 	// const scrollRef = useRef<HTMLDivElement>(null);
 	// const [isDragging, setIsDragging] = useState(false);
@@ -100,19 +99,17 @@ const Institutions = () => {
 	//   ...institutions,
 	// ];
 
-	const pathname = usePathname();
-	const country = pathname ? pathname.split('/')[1] || 'ar' : 'ar';
+	// Los datos ya vienen del API, no necesitamos filtrar por país para esta sección
 
 	if (loading) return <InstitutionsSkeleton />;
 	if (error) return <div className='text-center text-[#f5006d]'>Error: {error}</div>;
 
-  return (
-    <section className="relative bg-white h-fit rounded-[40px] overflow-visible max-w-[1600px] mx-auto md:px-[104px] z-10 pt-10 pb-6 md:gap-4 shadow-lg select-none mb-10">
-      <h2 className="text-center md:text-left font-raleway font-[500] md:text-[27px] text-[22px] px-5 mb-7">
-         Nos respaldan prestigiosas instituciones de todo el mundo con sus
-        certificaciones
-      </h2>
-{/*
+	return (
+		<section className='relative bg-white h-fit rounded-[40px] overflow-visible max-w-[1600px] mx-auto md:px-[104px] z-10 pt-10 pb-6 md:gap-4 shadow-lg select-none mb-10'>
+			<h2 className='text-center md:text-left font-raleway font-[500] md:text-[27px] text-[22px] px-5 mb-7'>
+				{title || 'Instituciones que respaldan nuestras certificaciones'}
+			</h2>
+			{/*
       <div
         className={`overflow-x-auto scrollbar-hide w-full ${
           isDragging ? "cursor-grabbing" : "cursor-grab"
@@ -151,7 +148,14 @@ const Institutions = () => {
           ))}
         </div>
       </div> */}
-			<BrandSlider country={country} />
+			<BrandSlider
+				brands={institutions.map((inst) => ({
+					imgDefault: inst.image,
+					imgHover: inst.image,
+					url: '#',
+					width: 130,
+				}))}
+			/>
 		</section>
 	);
 };

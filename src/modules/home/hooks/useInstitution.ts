@@ -1,12 +1,13 @@
 // src/modules/home/hooks/useInstitution.ts
 
-import { useEffect, useState } from 'react';
-import { Institution } from '../types';
-import { getHomeData } from '../service/home.service';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { getHomeData } from '../service/home.service';
+import { Institution } from '../types';
 
 export function useInstitutions() {
 	const [institutions, setInstitutions] = useState<Institution[]>([]);
+	const [title, setTitle] = useState<string>('');
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string | null>(null);
 	const pathname = usePathname();
@@ -17,8 +18,9 @@ export function useInstitutions() {
 		getHomeData(lang)
 			.then((homeData) => {
 				// courseData es todo el objeto del curso
-				const instutionsData: Institution[] = homeData.sections.backups?.institutions ?? [];
-				setInstitutions(instutionsData);
+				const backupsSection = homeData.sections.backups ?? { title: '', institutions: [] };
+				setTitle(backupsSection.title || '');
+				setInstitutions(backupsSection.institutions as Institution[]);
 			})
 			.catch((err) => {
 				console.error(err);
@@ -26,5 +28,5 @@ export function useInstitutions() {
 			})
 			.finally(() => setLoading(false));
 	}, []);
-	return { institutions, loading, error };
+	return { institutions, title, loading, error };
 }

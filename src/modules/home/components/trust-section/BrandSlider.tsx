@@ -1,248 +1,246 @@
-"use client";
-import React, { FC, useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "react-feather";
+'use client';
+import Image from 'next/image';
+import React, { FC, useEffect, useRef, useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'react-feather';
 
 interface BrandSliderProps {
-  country: string;
+	country?: string;
+	brands?: any[]; // optional array of pre-fetched brand objects (imgDefault, imgHover, url, width)
 }
 
-const BrandSlider: FC<BrandSliderProps> = ({ country }) => {
-  const [brands, setBrands] = useState<any[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+const BrandSlider: FC<BrandSliderProps> = ({ country, brands: externalBrands }) => {
+	const [brands, setBrands] = useState<any[]>(externalBrands ?? []);
+	const [currentIndex, setCurrentIndex] = useState(0);
 
-  const mobileScrollRef = useRef<HTMLDivElement | null>(null);
-  const desktopScrollRef = useRef<HTMLDivElement | null>(null);
+	const mobileScrollRef = useRef<HTMLDivElement | null>(null);
+	const desktopScrollRef = useRef<HTMLDivElement | null>(null);
 
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-  const [dragMoved, setDragMoved] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+	const [isDragging, setIsDragging] = useState(false);
+	const [startX, setStartX] = useState(0);
+	const [scrollLeft, setScrollLeft] = useState(0);
+	const [dragMoved, setDragMoved] = useState(false);
+	const [isHovered, setIsHovered] = useState(false);
 
-  useEffect(() => {
-    (async () => {
-      const fetchedBrands = await fetchBrands(country);
-      setBrands(fetchedBrands);
-    })();
-  }, [country]);
+	useEffect(() => {
+		if (externalBrands && externalBrands.length) {
+			setBrands(externalBrands);
+			return;
+		}
 
-  useEffect(() => {
-    const container = desktopScrollRef.current;
-    if (!container || isDragging || isHovered) return;
+		if (!country) return;
 
-    const scrollInterval = setInterval(() => {
-      const scrollPosition = container.scrollLeft + container.offsetWidth;
-      const atEnd = scrollPosition >= container.scrollWidth;
+		(async () => {
+			const fetchedBrands = await fetchBrands(country as string);
+			setBrands(fetchedBrands);
+		})();
+	}, [country, externalBrands]);
 
-      if (atEnd) {
-        container.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        container.scrollBy({ left: 216, behavior: "smooth" });
-      }
-    }, 1500);
+	useEffect(() => {
+		const container = desktopScrollRef.current;
+		if (!container || isDragging || isHovered) return;
 
-    return () => clearInterval(scrollInterval);
-  }, [isDragging, isHovered]);
+		const scrollInterval = setInterval(() => {
+			const scrollPosition = container.scrollLeft + container.offsetWidth;
+			const atEnd = scrollPosition >= container.scrollWidth;
 
-  const fetchBrands = async (country: string) => {
-    try {
-      const getUrl = () => {
-        const host = window.location.hostname;
-        return host !== "localhost"
-          ? `https://${host}`
-          : "http://localhost:3000";
-      };
+			if (atEnd) {
+				container.scrollTo({ left: 0, behavior: 'smooth' });
+			} else {
+				container.scrollBy({ left: 216, behavior: 'smooth' });
+			}
+		}, 1500);
 
-      const mappedCountry = country === "ar" ? "arg" : country;
-      const url = `${getUrl()}/instituciones/${country}.json`;
-      const response = await fetch(url);
-      if (!response.ok) throw new Error("Error al obtener marcas");
+		return () => clearInterval(scrollInterval);
+	}, [isDragging, isHovered]);
 
-      const data = await response.json();
-      const processUrl = (url: string) => {
-        let processed = url.replace(/^https?:\/\/[a-z]{2}\./, "https://");
-        if (!processed.includes("//wp.")) {
-          processed = processed.replace("//", "//wp.");
-        }
-        return processed;
-      };
+	const fetchBrands = async (country: string) => {
+		try {
+			const getUrl = () => {
+				const host = window.location.hostname;
+				return host !== 'localhost' ? `https://${host}` : 'http://localhost:3000';
+			};
 
-      return data.length
-        ? data.map((item: any) => ({
-            ...item,
-            imgDefault: processUrl(item.imgDefault),
-            imgHover: processUrl(item.imgHover),
-          }))
-        : await fetchDefaultBrands();
-    } catch (error) {
-      console.error(error);
-      return await fetchDefaultBrands();
-    }
-  };
+			const mappedCountry = country === 'ar' ? 'arg' : country;
+			const url = `${getUrl()}/instituciones/${country}.json`;
+			const response = await fetch(url);
+			if (!response.ok) throw new Error('Error al obtener marcas');
 
-  const fetchDefaultBrands = async () => {
-    try {
-      const response = await fetch(
-        "https://wp.msklatam.com/wp-json/wp/api/carrusel-instituciones?lang=int"
-      );
-      if (!response.ok) throw new Error("Error al obtener marcas por defecto");
-      return await response.json();
-    } catch (error) {
-      console.error(error);
-      return [];
-    }
-  };
+			const data = await response.json();
+			const processUrl = (url: string) => {
+				let processed = url.replace(/^https?:\/\/[a-z]{2}\./, 'https://');
+				if (!processed.includes('//wp.')) {
+					processed = processed.replace('//', '//wp.');
+				}
+				return processed;
+			};
 
-  const scrollToIndex = (index: number) => {
-    if (!mobileScrollRef.current) return;
+			return data.length
+				? data.map((item: any) => ({
+						...item,
+						imgDefault: processUrl(item.imgDefault),
+						imgHover: processUrl(item.imgHover),
+				  }))
+				: await fetchDefaultBrands();
+		} catch (error) {
+			console.error(error);
+			return await fetchDefaultBrands();
+		}
+	};
 
-    const container = mobileScrollRef.current;
-    const clampedIndex = (index + brands.length) % brands.length;
-    const child = container.children[clampedIndex] as HTMLElement;
-    setCurrentIndex(clampedIndex);
-    child?.scrollIntoView({
-      behavior: "smooth",
-      inline: "center",
-      block: "nearest", // ✅ evita scroll vertical no deseado
-    });
-  };
+	const fetchDefaultBrands = async () => {
+		try {
+			const response = await fetch('https://wp.msklatam.com/wp-json/wp/api/carrusel-instituciones?lang=int');
+			if (!response.ok) throw new Error('Error al obtener marcas por defecto');
+			return await response.json();
+		} catch (error) {
+			console.error(error);
+			return [];
+		}
+	};
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    const container = desktopScrollRef.current;
-    if (!container) return;
-    setIsDragging(true);
-    setStartX(e.pageX - container.offsetLeft);
-    setScrollLeft(container.scrollLeft);
-    setDragMoved(false);
-  };
+	const scrollToIndex = (index: number) => {
+		if (!mobileScrollRef.current) return;
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging) return;
-    const container = desktopScrollRef.current;
-    if (!container) return;
-    const x = e.pageX - container.offsetLeft;
-    const walk = x - startX;
-    container.scrollLeft = scrollLeft - walk;
-    if (Math.abs(walk) > 5) setDragMoved(true);
-  };
+		const container = mobileScrollRef.current;
+		const clampedIndex = (index + brands.length) % brands.length;
+		const child = container.children[clampedIndex] as HTMLElement;
+		setCurrentIndex(clampedIndex);
+		child?.scrollIntoView({
+			behavior: 'smooth',
+			inline: 'center',
+			block: 'nearest', // ✅ evita scroll vertical no deseado
+		});
+	};
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
-    setIsHovered(false);
-  };
+	const handleMouseDown = (e: React.MouseEvent) => {
+		const container = desktopScrollRef.current;
+		if (!container) return;
+		setIsDragging(true);
+		setStartX(e.pageX - container.offsetLeft);
+		setScrollLeft(container.scrollLeft);
+		setDragMoved(false);
+	};
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (dragMoved) e.preventDefault();
-  };
+	const handleMouseMove = (e: React.MouseEvent) => {
+		if (!isDragging) return;
+		const container = desktopScrollRef.current;
+		if (!container) return;
+		const x = e.pageX - container.offsetLeft;
+		const walk = x - startX;
+		container.scrollLeft = scrollLeft - walk;
+		if (Math.abs(walk) > 5) setDragMoved(true);
+	};
 
-  const handleWheel = (e: React.WheelEvent) => {
-    const container = desktopScrollRef.current;
-    if (!container) return;
-    container.scrollBy({ left: e.deltaY > 0 ? 200 : -200, behavior: "smooth" });
-  };
+	const handleMouseUp = () => {
+		setIsDragging(false);
+		setIsHovered(false);
+	};
 
-  const preventImageDrag = (e: React.DragEvent) => e.preventDefault();
+	const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+		if (dragMoved) e.preventDefault();
+	};
 
-  return (
-    <div className="relative md:overflow-hidden overflow-visible pb-5">
-      {/* Desktop: Difuminado */}
-      <div className="hidden md:block absolute top-0 left-0 z-10 w-16 h-full pointer-events-none bg-gradient-to-r from-white via-white/70 to-transparent" />
-      <div className="hidden md:block absolute top-0 right-0 z-10 w-16 h-full pointer-events-none bg-gradient-to-l from-white via-white/70 to-transparent" />
+	const handleWheel = (e: React.WheelEvent) => {
+		const container = desktopScrollRef.current;
+		if (!container) return;
+		container.scrollBy({ left: e.deltaY > 0 ? 200 : -200, behavior: 'smooth' });
+	};
 
-      {/* Mobile view centrado tipo carrusel */}
-      {/* Mobile view centrado tipo carrusel */}
-      <div className="md:hidden relative overflow-visible py-6">
-        <div
-          ref={mobileScrollRef}
-          className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
-        >
-          {brands.map((brand, index) => (
-            <div
-              key={index}
-              className="flex-shrink-0 snap-center bg-[#F7F9FF] rounded-[30px] px-9 py-6 w-[85%] transition-transform duration-300"
-            >
-              <a
-                href={brand.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex justify-center items-center h-32"
-                onDragStart={preventImageDrag}
-                onClick={(e) => dragMoved && e.preventDefault()}
-              >
-                <Image
-                  src={brand.imgDefault}
-                  alt="Brand logo"
-                  width={brand.width}
-                  height={100}
-                  className="object-contain"
-                />
-              </a>
-            </div>
-          ))}
-        </div>
+	const preventImageDrag = (e: React.DragEvent) => e.preventDefault();
 
-        {/* Botones navegación mobile */}
-        <button
-          type="button"
-          onClick={() => scrollToIndex(currentIndex - 1)}
-          className="absolute -bottom-10 left-4 -translate-y-1/2 bg-white border border-gray-300 w-9 h-9 rounded-full shadow-md flex items-center justify-center z-10"
-        >
-          <ChevronLeft size={20} className="mx-auto" />
-        </button>
-        <button
-          type="button"
-          onClick={() => scrollToIndex(currentIndex + 1)}
-          className="absolute -bottom-10 right-4 -translate-y-1/2 bg-white border border-gray-300 w-9 h-9 rounded-full shadow-md flex items-center justify-center z-10"
-        >
-          <ChevronRight size={20} className="mx-auto" />
-        </button>
-      </div>
+	return (
+		<div className='relative md:overflow-hidden overflow-visible pb-5'>
+			{/* Desktop: Difuminado */}
+			<div className='hidden md:block absolute top-0 left-0 z-10 w-16 h-full pointer-events-none bg-gradient-to-r from-white via-white/70 to-transparent' />
+			<div className='hidden md:block absolute top-0 right-0 z-10 w-16 h-full pointer-events-none bg-gradient-to-l from-white via-white/70 to-transparent' />
 
-      {/* Desktop view scrollable */}
-      <div
-        ref={desktopScrollRef}
-        className="hidden md:flex py-4 space-x-4 overflow-x-auto scrollbar-hide overscroll-none"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        onWheel={handleWheel}
-      >
-        {brands.map((brand: any, index: number) => (
-          <div
-            key={index}
-            className="flex-shrink-0 group bg-[#F7F9FF] rounded-[30px] px-9 py-6"
-          >
-            <a
-              href={brand.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative flex items-center justify-center md:w-32 h-20"
-              onDragStart={preventImageDrag}
-              onClick={handleClick}
-            >
-              <Image
-                src={brand.imgDefault}
-                alt="Brand logo"
-                width={brand.width}
-                height={100}
-                className="object-contain transition-all duration-500 ease-in-out opacity-100 group-hover:hidden"
-              />
-              <Image
-                src={brand.imgHover}
-                alt="Brand logo hover"
-                width={brand.width}
-                height={100}
-                className="hidden object-contain transition-all duration-500 ease-in-out opacity-0 group-hover:block group-hover:opacity-100"
-              />
-            </a>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+			{/* Mobile view centrado tipo carrusel */}
+			{/* Mobile view centrado tipo carrusel */}
+			<div className='md:hidden relative overflow-visible py-6'>
+				<div ref={mobileScrollRef} className='flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide'>
+					{brands.map((brand, index) => (
+						<div
+							key={index}
+							className='flex-shrink-0 snap-center bg-[#F7F9FF] rounded-[30px] px-9 py-6 w-[85%] transition-transform duration-300'
+						>
+							<a
+								href={brand.url}
+								target='_blank'
+								rel='noopener noreferrer'
+								className='flex justify-center items-center h-32'
+								onDragStart={preventImageDrag}
+								onClick={(e) => dragMoved && e.preventDefault()}
+							>
+								<Image
+									src={brand.imgDefault}
+									alt='Brand logo'
+									width={brand.width}
+									height={100}
+									className='object-contain mix-blend-multiply '
+								/>
+							</a>
+						</div>
+					))}
+				</div>
+
+				{/* Botones navegación mobile */}
+				<button
+					type='button'
+					onClick={() => scrollToIndex(currentIndex - 1)}
+					className='absolute -bottom-10 left-4 -translate-y-1/2 bg-white border border-gray-300 w-9 h-9 rounded-full shadow-md flex items-center justify-center z-10'
+				>
+					<ChevronLeft size={20} className='mx-auto' />
+				</button>
+				<button
+					type='button'
+					onClick={() => scrollToIndex(currentIndex + 1)}
+					className='absolute -bottom-10 right-4 -translate-y-1/2 bg-white border border-gray-300 w-9 h-9 rounded-full shadow-md flex items-center justify-center z-10'
+				>
+					<ChevronRight size={20} className='mx-auto' />
+				</button>
+			</div>
+
+			{/* Desktop view scrollable */}
+			<div
+				ref={desktopScrollRef}
+				className='hidden md:flex py-4 space-x-4 overflow-x-auto scrollbar-hide overscroll-none'
+				onMouseEnter={() => setIsHovered(true)}
+				onMouseDown={handleMouseDown}
+				onMouseMove={handleMouseMove}
+				onMouseUp={handleMouseUp}
+				onMouseLeave={handleMouseUp}
+				onWheel={handleWheel}
+			>
+				{brands.map((brand: any, index: number) => (
+					<div key={index} className='flex-shrink-0 group bg-[#F7F9FF] rounded-[30px] px-9 py-6'>
+						<a
+							href={brand.url}
+							target='_blank'
+							rel='noopener noreferrer'
+							className='relative flex items-center justify-center md:w-32 h-20'
+							onDragStart={preventImageDrag}
+							onClick={handleClick}
+						>
+							<Image
+								src={brand.imgDefault}
+								alt='Brand logo'
+								width={brand.width}
+								height={100}
+								className='object-contain mix-blend-multiply  transition-all duration-500 ease-in-out opacity-100 group-hover:hidden'
+							/>
+							<Image
+								src={brand.imgHover}
+								alt='Brand logo hover'
+								width={brand.width}
+								height={100}
+								className=' mix-blend-multiply  hidden object-contain transition-all duration-500 ease-in-out opacity-0 group-hover:block group-hover:opacity-100'
+							/>
+						</a>
+					</div>
+				))}
+			</div>
+		</div>
+	);
 };
 
 export default BrandSlider;
