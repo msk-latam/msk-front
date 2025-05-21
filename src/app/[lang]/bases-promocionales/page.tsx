@@ -53,15 +53,14 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 			setLoading(true);
 			setError(null);
 			try {
-				const response = await fetch(
-					`https://cms1.msklatam.com/wp-json/msk/v1/page/condiciones-de-contratacion?lang=${country}`,
-				);
+				const response = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/page/bases-promocionales?lang=${country}`);
 
 				if (!response.ok) {
 					throw new Error('Network response was not ok');
 				}
 				const data: PageData = await response.json();
 				setPageData(data);
+				console.log(data);
 			} catch (err) {
 				setError(err instanceof Error ? err.message : 'An unknown error occurred');
 				console.error('Failed to fetch page data:', err);
@@ -75,13 +74,16 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 		}
 	}, [country]);
 
+	console.log(pageData);
 	// Display values, use placeholders if loading or error
-	const displayTitle = loading || error ? initialPageData.title : pageData?.post_title || 'Título no disponible';
+	// const displayTitle = loading || error ? initialPageData.title : pageData?.post_title || 'Título no disponible';
 	const displayContent = loading
-		? '<p>Cargando contenido...</p>'
+		? [{ contenido: '<p>Cargando contenido...</p>' }]
 		: error
-		? `<p>Error al cargar el contenido: ${error}</p>`
-		: pageData?.post_content || '<p>Contenido no disponible.</p>';
+		? [{ contenido: `<p>Error al cargar el contenido: ${error}</p>` }]
+		: Array.isArray(pageData?.bloque_de_terminos)
+		? pageData.bloque_de_terminos
+		: [{ contenido: '<p>Contenido no disponible.</p>' }];
 
 	return (
 		<>
@@ -98,10 +100,21 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 			</header>
 
 			<main className='bg-[#f3f4f6] flex justify-center px-0 sm:px-4 relative pt-0 pb-20  md:mb-0'>
-				<section className='w-full -mt-[40px] z-[10] relative overflow-visible max-w-[1400px] mx-auto'>
-					<div className='mb-4 bg-white rounded-[30px] p-[36px]'>
-						{/* Render the HTML content from the API */}
-						<div className='whitespace-pre-line ' dangerouslySetInnerHTML={{ __html: displayContent }} />
+				<section className='w-full -mt-[40px] z-[10] relative overflow-visible max-w-[1600px] mx-auto'>
+					<div className='mb-4 bg-white rounded-[30px] p-[36px]  '>
+						{pageData?.bloque_de_terminos?.map((bloque, index) => (
+							<div key={index} className='mb-10 '>
+								<h2 className='mb-8 text-3xl font-semibold mx-28'>{bloque.titulo}</h2>
+
+								{bloque.fecha_desde && bloque.fecha_hasta && (
+									<p className='mb-4 text-lg text-gray-600 mx-28'>
+										Promoción válida del <strong>{bloque.fecha_desde}</strong> al <strong>{bloque.fecha_hasta}</strong>
+									</p>
+								)}
+
+								<div className='text-lg prose max-w-none mx-28' dangerouslySetInnerHTML={{ __html: bloque.descripcion }} />
+							</div>
+						))}
 					</div>
 				</section>
 			</main>

@@ -53,9 +53,7 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 			setLoading(true);
 			setError(null);
 			try {
-				const response = await fetch(
-					`https://cms1.msklatam.com/wp-json/msk/v1/page/condiciones-de-contratacion?lang=${country}`,
-				);
+				const response = await fetch(`https://cms1.msklatam.com/wp-json/msk/v1/page/terminos-y-condiciones?lang=${country}`);
 
 				if (!response.ok) {
 					throw new Error('Network response was not ok');
@@ -81,7 +79,7 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 		? '<p>Cargando contenido...</p>'
 		: error
 		? `<p>Error al cargar el contenido: ${error}</p>`
-		: pageData?.post_content || '<p>Contenido no disponible.</p>';
+		: pageData?.content || '<p>Contenido no disponible.</p>';
 
 	return (
 		<>
