@@ -36,7 +36,7 @@ const FaqSection = () => {
 	return (
 		<section className='w-full md:mb-60'>
 			<div className='rounded-[40px] max-w-7xl mx-auto px-6 md:px-12 pb-12'>
-				<h2 className='text-xl md:text-[34px] font-Raleway mb-5 md:mb-[100px] md:mt-10 md:text-left text-center'>
+				<h2 className='text-xl md:text-[34px] font-Raleway mb-5 md:mb-14 md:mt-10 md:text-left text-center'>
 					Preguntas frecuentes
 				</h2>
 
