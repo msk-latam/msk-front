@@ -76,14 +76,14 @@
 // 	}
 
 // 	return (
-// 		<section className='py-6 max-w-5xl mx-auto'>
+// 		<section className='max-w-5xl py-6 mx-auto'>
 // 			{/* Título principal */}
 // 			<h2 className='text-2xl whitespace-nowrap font-medium md:text-[34px] text-[#1A1A1A] font-raleway mb-6 text-center md:text-left'>
 // 				Desarróllate en lo importante
 // 			</h2>
 
 // 			{/* Habilidades (tags dinámicos) */}
-// 			<div className='flex flex-wrap gap-3 md:justify-start md:items-center justify-center items-center mb-8'>
+// 			<div className='flex flex-wrap items-center justify-center gap-3 mb-8 md:justify-start md:items-center'>
 // 				{data?.habilities?.map((item, index) => (
 // 					<span
 // 						key={index}
@@ -100,15 +100,15 @@
 // 			</h3>
 
 // 			{/* Paso a paso */}
-// 			<div className='flex flex-col md:flex-row md:flex-nowrap md:items-center md:justify-center md:gap-4 mb-10 w-full'>
+// 			<div className='flex flex-col w-full mb-10 md:flex-row md:flex-nowrap md:items-center md:justify-center md:gap-4'>
 // 				{steps.map((item, idx) => (
-// 					<div key={idx} className='flex items-start md:items-center gap-3 text-left'>
+// 					<div key={idx} className='flex items-start gap-3 text-left md:items-center'>
 // 						<div className='flex flex-col items-center'>
 // 							<div className='bg-[#f7f9ff] rounded-full w-16 h-16 flex items-center justify-center shrink-0'>
 // 								<Image src={item.icon} alt='' width={24} height={24} />
 // 							</div>
 // 							{idx < steps.length - 1 && (
-// 								<span className='text-gray-400 block md:hidden mt-1'>
+// 								<span className='block mt-1 text-gray-400 md:hidden'>
 // 									<ChevronDown />
 // 								</span>
 // 							)}
@@ -117,7 +117,7 @@
 // 							{item.step}
 // 						</span>
 // 						{idx < steps.length - 1 && (
-// 							<span className='text-gray-400 hidden md:block'>
+// 							<span className='hidden text-gray-400 md:block'>
 // 								<ChevronRight />
 // 							</span>
 // 						)}
@@ -181,12 +181,14 @@ const features = [
 	{
 		icon: <BiLike className='text-[#9200AD] w-5 h-5' />,
 		title: 'El 97% recomienda este curso',
-		description: 'Este curso ha sido altamente valorado por profesionales de la salud por su calidad y aplicabilidad práctica.',
+		description:
+			'Este curso ha sido altamente valorado por profesionales de la salud por su calidad y aplicabilidad práctica.',
 	},
 	{
 		icon: <GoShieldCheck className='text-[#9200AD] w-5 h-5' />,
 		title: 'Compromiso de satisfacción',
-		description: 'Si no deseas continuar con tu cursada dentro de los primeros 30 días, te devolvemos el 100% de tu inversión.',
+		description:
+			'Si no deseas continuar con tu cursada dentro de los primeros 10 días, te devolvemos el 100% de tu inversión.',
 	},
 ];
 
@@ -236,16 +238,12 @@ export default function CourseOverview({ slug, lang, onHideEmpty, isDownloadable
 	if (error || !data || isEmptyDynamicContent) return null;
 
 	const formattedWithThis = hasWithThisCourse
-		? formatWithThisCourse(
-				Array.isArray(data.with_this_course)
-					? data.with_this_course.join(' ')
-					: data.with_this_course
-		  )
+		? formatWithThisCourse(Array.isArray(data.with_this_course) ? data.with_this_course.join(' ') : data.with_this_course)
 		: null;
-console.log('CourseOverview render: shouldHide', isEmptyDynamicContent);
+	console.log('CourseOverview render: shouldHide', isEmptyDynamicContent);
 
 	return (
-		<section className='py-6 max-w-5xl mx-auto'>
+		<section className='max-w-5xl py-6 mx-auto'>
 			{hasHabilities && <CourseHabilities habilities={data.habilities} />}
 			{hasWithThisCourse && <WithThisCourse formattedContent={formattedWithThis} />}
 			<StepByStep isDownloadable={isDownloadable} />

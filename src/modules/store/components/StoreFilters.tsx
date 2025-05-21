@@ -14,6 +14,7 @@ const especialidadesData: FilterOption[] = [
 	{ value: 'administracion-y-gestion', label: 'Administración y gestión' },
 	{ value: 'anestesiologia-y-dolor', label: 'Anestesiología y dolor' },
 	{ value: 'cardiologia', label: 'Cardiología' },
+	{ value: 'cirugia', label: 'Cirugía ' },
 	{ value: 'dermatologia', label: 'Dermatología' },
 	{ value: 'diabetes', label: 'Diabetes' },
 	{ value: 'emergentologia', label: 'Emergentología' },

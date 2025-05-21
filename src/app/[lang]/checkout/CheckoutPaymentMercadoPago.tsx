@@ -126,7 +126,7 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 	const totalPrice = product.prices.total_price;
 	const transactionAmount = parseInt(totalPrice.replace(/[\.,]/g, ''), 10);
 	const regularPrice = product.regular_price;
-	const regularPriceFixed = parseInt(regularPrice.replace(/[\.,]/g, ''), 10);
+	const regularPriceFixed = parseInt(regularPrice?.replace(/[\.,]/g, ''), 10);
 
 	const discount =
 		appliedCoupon && appliedCoupon.discountType === 'percentage'
@@ -155,7 +155,7 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 
 		const allItems = [
 			{
-				code: product.ficha.product_code,
+				code: product.codes[0].unique_code,
 				quantity: 1,
 				price: regularPriceWithDiscount,
 				total: regularPriceWithDiscount,
@@ -166,10 +166,13 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 			...certificationItems,
 		];
 		const subTotal = regularPriceWithDiscount + (certifications?.reduce((acc, cert) => acc + cert.price, 0) || 0);
+
+		const isFree = product.prices.total_price === '0' || product.prices.total_price === '';
+
 		return {
 			// transaction_amount: 1000,
 			transaction_amount: finalTransactionAmount,
-			installments: 6,
+			installments: isFree ? 1 : 6,
 			description: 'Pago de contrato MSK',
 			payer: {
 				name: formData.firstName || user?.firstName || state.profile.name,
@@ -204,7 +207,7 @@ const CheckoutPaymentMercadoPago: React.FC<CheckoutContentProps> = ({ product, c
 			product: {
 				items: [
 					{
-						code: product.ficha.product_code,
+						code: product.codes[0].unique_code,
 						quantity: 1,
 						price: regularPriceWithDiscount,
 						total: regularPriceWithDiscount,

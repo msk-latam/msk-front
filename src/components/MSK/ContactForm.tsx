@@ -4,7 +4,6 @@ import ContactSidebar from './ContactSidebar';
 import 'react-phone-number-input/style.css';
 import PhoneInput, { parsePhoneNumber } from 'react-phone-number-input';
 import { Newsletter, Profession, Specialty } from '@/data/types';
-import Radio from '@/components/Radio/Radio';
 import { getName } from 'country-list';
 import { CountryContext } from '@/context/country/CountryContext';
 import { CountryCode } from 'libphonenumber-js/types';
@@ -17,8 +16,11 @@ import api from '@/services/api';
 import NcLink from '../NcLink/NcLink';
 import { usePathname, useRouter } from 'next/navigation';
 import { isFormValid } from '@/components/Footer/Newsletter';
-import ShowErrorMessage from '@/components/ShowErrorMessage';
-import Checkbox from '../Checkbox/Checkbox';
+// import Checkbox from '../Checkbox/Checkbox';
+import ShowErrorMessage from '../ShowErrorMessage';
+import Checkbox from '@/modules/store/components/ui/Checkbox';
+import CountrySelect from '@/modules/login/components/hooks/CountrySelect';
+import Link from 'next/link';
 
 interface ContactFormProps {
 	hideHeader?: boolean;
@@ -52,7 +54,11 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 	isNosotros,
 }) => {
 	const { state: dataState } = useContext(DataContext);
-	const { allProfessions, allSpecialties, allSpecialtiesGroups } = dataState;
+	const {
+		// allProfessions,
+		allSpecialties,
+		//   allSpecialtiesGroups
+	} = dataState;
 	const { countryState } = useContext(CountryContext);
 	const [defaultCountry, setDefaultCountry] = useState<CountryCode>('' as CountryCode);
 	const pathname = usePathname();
@@ -83,11 +89,843 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 	const { executeRecaptcha } = useGoogleReCaptcha();
 	const [urlOrigen, setUrlOrigen] = useState<string>(typeof window !== 'undefined' ? window.location.href : '');
 	const router = useRouter();
+	const allSpecialtiesGroups: any = {
+		'1': [
+			{
+				id: 1,
+				name: 'Alergia e inmunología',
+			},
+			{
+				id: 2,
+				name: 'Anatomía patológica',
+			},
+			{
+				id: 3,
+				name: 'Coloproctología',
+			},
+			{
+				id: 4,
+				name: 'Flebología y linfología',
+			},
+			{
+				id: 5,
+				name: 'Hepatología',
+			},
+			{
+				id: 6,
+				name: 'Mastología',
+			},
+			{
+				id: 7,
+				name: 'Medicina de la industria farmaceútica',
+			},
+			{
+				id: 8,
+				name: 'Medicina del trabajo / ocupacional',
+			},
+			{
+				id: 9,
+				name: 'Medicina estética',
+			},
+			{
+				id: 10,
+				name: 'Medicina física y rehabilitación',
+			},
+			{
+				id: 11,
+				name: 'Medicina legal',
+			},
+			{
+				id: 12,
+				name: 'Medicina paliativa y dolor',
+			},
+			{
+				id: 13,
+				name: 'Medicina reproductiva y fertilidad',
+			},
+			{
+				id: 14,
+				name: 'Neumonología',
+			},
+			{
+				id: 15,
+				name: 'Reumatología',
+			},
+			{
+				id: 16,
+				name: 'Toxicología',
+			},
+			{
+				id: 17,
+				name: 'Trasplante',
+			},
+			{
+				id: 18,
+				name: 'Urología',
+			},
+			{
+				id: 73,
+				name: 'Auditoría y administración sanitaria',
+			},
+			{
+				id: 74,
+				name: 'Diabetes',
+			},
+			{
+				id: 75,
+				name: 'Generalista',
+			},
+			{
+				id: 76,
+				name: 'Medicina del deporte',
+			},
+			{
+				id: 77,
+				name: 'Medicina familiar y comunitaria',
+			},
+			{
+				id: 78,
+				name: 'Medicina intensiva',
+			},
+			{
+				id: 79,
+				name: 'Medicina interna / clínica',
+			},
+			{
+				id: 80,
+				name: 'Nutrición',
+			},
+			{
+				id: 81,
+				name: 'Traumatología y ortopedia',
+			},
+			{
+				id: 82,
+				name: 'Anestesiología',
+			},
+			{
+				id: 84,
+				name: 'Cardiología',
+			},
+			{
+				id: 85,
+				name: 'Cirugía',
+			},
+			{
+				id: 87,
+				name: 'Dermatología',
+			},
+			{
+				id: 88,
+				name: 'Emergentología',
+			},
+			{
+				id: 89,
+				name: 'Endocrinología',
+			},
+			{
+				id: 90,
+				name: 'Gastroenterología',
+			},
+			{
+				id: 93,
+				name: 'Ginecología',
+			},
+			{
+				id: 94,
+				name: 'Hematología',
+			},
+			{
+				id: 95,
+				name: 'Infectología',
+			},
+			{
+				id: 97,
+				name: 'Nefrología',
+			},
+			{
+				id: 98,
+				name: 'Neonatología',
+			},
+			{
+				id: 99,
+				name: 'Neurología',
+			},
+			{
+				id: 101,
+				name: 'Obstetricia',
+			},
+			{
+				id: 102,
+				name: 'Obstetricia y Ginecología',
+			},
+			{
+				id: 104,
+				name: 'Oftalmología',
+			},
+			{
+				id: 105,
+				name: 'Oncología',
+			},
+			{
+				id: 107,
+				name: 'Otorrinolaringología',
+			},
+			{
+				id: 108,
+				name: 'Pediatría',
+			},
+			{
+				id: 109,
+				name: 'Psiquiatría',
+			},
+		],
+		'2': [
+			{
+				id: 1,
+				name: 'Alergia e inmunología',
+			},
+			{
+				id: 2,
+				name: 'Anatomía patológica',
+			},
+			{
+				id: 3,
+				name: 'Coloproctología',
+			},
+			{
+				id: 4,
+				name: 'Flebología y linfología',
+			},
+			{
+				id: 5,
+				name: 'Hepatología',
+			},
+			{
+				id: 6,
+				name: 'Mastología',
+			},
+			{
+				id: 7,
+				name: 'Medicina de la industria farmaceútica',
+			},
+			{
+				id: 8,
+				name: 'Medicina del trabajo / ocupacional',
+			},
+			{
+				id: 9,
+				name: 'Medicina estética',
+			},
+			{
+				id: 10,
+				name: 'Medicina física y rehabilitación',
+			},
+			{
+				id: 11,
+				name: 'Medicina legal',
+			},
+			{
+				id: 12,
+				name: 'Medicina paliativa y dolor',
+			},
+			{
+				id: 13,
+				name: 'Medicina reproductiva y fertilidad',
+			},
+			{
+				id: 14,
+				name: 'Neumonología',
+			},
+			{
+				id: 15,
+				name: 'Reumatología',
+			},
+			{
+				id: 16,
+				name: 'Toxicología',
+			},
+			{
+				id: 17,
+				name: 'Trasplante',
+			},
+			{
+				id: 18,
+				name: 'Urología',
+			},
+			{
+				id: 73,
+				name: 'Auditoría y administración sanitaria',
+			},
+			{
+				id: 74,
+				name: 'Diabetes',
+			},
+			{
+				id: 75,
+				name: 'Generalista',
+			},
+			{
+				id: 76,
+				name: 'Medicina del deporte',
+			},
+			{
+				id: 77,
+				name: 'Medicina familiar y comunitaria',
+			},
+			{
+				id: 78,
+				name: 'Medicina intensiva',
+			},
+			{
+				id: 79,
+				name: 'Medicina interna / clínica',
+			},
+			{
+				id: 80,
+				name: 'Nutrición',
+			},
+			{
+				id: 81,
+				name: 'Traumatología y ortopedia',
+			},
+			{
+				id: 82,
+				name: 'Anestesiología',
+			},
+			{
+				id: 84,
+				name: 'Cardiología',
+			},
+			{
+				id: 85,
+				name: 'Cirugía',
+			},
+			{
+				id: 87,
+				name: 'Dermatología',
+			},
+			{
+				id: 88,
+				name: 'Emergentología',
+			},
+			{
+				id: 89,
+				name: 'Endocrinología',
+			},
+			{
+				id: 90,
+				name: 'Gastroenterología',
+			},
+			{
+				id: 93,
+				name: 'Ginecología',
+			},
+			{
+				id: 94,
+				name: 'Hematología',
+			},
+			{
+				id: 95,
+				name: 'Infectología',
+			},
+			{
+				id: 97,
+				name: 'Nefrología',
+			},
+			{
+				id: 98,
+				name: 'Neonatología',
+			},
+			{
+				id: 99,
+				name: 'Neurología',
+			},
+			{
+				id: 101,
+				name: 'Obstetricia',
+			},
+			{
+				id: 102,
+				name: 'Obstetricia y Ginecología',
+			},
+			{
+				id: 104,
+				name: 'Oftalmología',
+			},
+			{
+				id: 105,
+				name: 'Oncología',
+			},
+			{
+				id: 107,
+				name: 'Otorrinolaringología',
+			},
+			{
+				id: 108,
+				name: 'Pediatría',
+			},
+			{
+				id: 109,
+				name: 'Psiquiatría',
+			},
+		],
+		'3': [
+			{
+				id: 45,
+				name: 'Producción de bioimágenes',
+			},
+			{
+				id: 46,
+				name: 'Bioquímica',
+			},
+			{
+				id: 47,
+				name: 'Psicología',
+			},
+			{
+				id: 48,
+				name: 'Farmacia',
+			},
+			{
+				id: 49,
+				name: 'Instrumentación quirúrgica',
+			},
+			{
+				id: 50,
+				name: 'Kinesiología y fisiatría',
+			},
+			{
+				id: 51,
+				name: 'Óptica',
+			},
+			{
+				id: 52,
+				name: 'Osteopatía',
+			},
+			{
+				id: 53,
+				name: 'Podología',
+			},
+			{
+				id: 54,
+				name: 'Terapia ocupacional',
+			},
+			{
+				id: 55,
+				name: 'Otra carrera o licenciatura',
+			},
+			{
+				id: 80,
+				name: 'Nutrición',
+			},
+			{
+				id: 101,
+				name: 'Obstetricia',
+			},
+			{
+				id: 103,
+				name: 'Odontología',
+			},
+			{
+				id: 110,
+				name: 'Radiología',
+			},
+		],
+		'4': [
+			{
+				id: 19,
+				name: 'Enfermería familiar y comunitaria',
+			},
+			{
+				id: 20,
+				name: 'Enfermería en administración y gestión sanitaria',
+			},
+			{
+				id: 21,
+				name: 'Enfermería en análisis clínicos',
+			},
+			{
+				id: 22,
+				name: 'Enfermería en cardiología y UCO',
+			},
+			{
+				id: 23,
+				name: 'Enfermería en cuidados intensivos de adultos',
+			},
+			{
+				id: 24,
+				name: 'Enfermería en cuidados intensivos pediátricos y neonatales',
+			},
+			{
+				id: 25,
+				name: 'Enfermería en cuidados paliativos y dolor',
+			},
+			{
+				id: 26,
+				name: 'Enfermería en emergencias y atención primaria',
+			},
+			{
+				id: 27,
+				name: 'Enfermería en internación domiciliaria',
+			},
+			{
+				id: 28,
+				name: 'Enfermería en internación general',
+			},
+			{
+				id: 29,
+				name: 'Enfermería en investigación',
+			},
+			{
+				id: 30,
+				name: 'Enfermería en lactancia y puerperio',
+			},
+			{
+				id: 31,
+				name: 'Enfermería en reproducción asistida',
+			},
+			{
+				id: 32,
+				name: 'Enfermería en salud mental',
+			},
+			{
+				id: 33,
+				name: 'Enfermería en unidades de trasplantes',
+			},
+			{
+				id: 34,
+				name: 'Enfermería escolar',
+			},
+			{
+				id: 35,
+				name: 'Enfermería geriátrica y gerontológica',
+			},
+			{
+				id: 36,
+				name: 'Enfermería hematológica',
+			},
+			{
+				id: 37,
+				name: 'Enfermería nefrológica y diálisis',
+			},
+			{
+				id: 38,
+				name: 'Enfermería neonatal',
+			},
+			{
+				id: 39,
+				name: 'Enfermería obstétrica y ginecológica',
+			},
+			{
+				id: 40,
+				name: 'Enfermería oncológica',
+			},
+			{
+				id: 41,
+				name: 'Enfermería pediátrica',
+			},
+			{
+				id: 42,
+				name: 'Enfermería quirúrgica',
+			},
+			{
+				id: 43,
+				name: 'Enfermería radiológica',
+			},
+			{
+				id: 44,
+				name: 'Otras especialidades',
+			},
+		],
+		'5': [
+			{
+				id: 19,
+				name: 'Enfermería familiar y comunitaria',
+			},
+			{
+				id: 20,
+				name: 'Enfermería en administración y gestión sanitaria',
+			},
+			{
+				id: 21,
+				name: 'Enfermería en análisis clínicos',
+			},
+			{
+				id: 22,
+				name: 'Enfermería en cardiología y UCO',
+			},
+			{
+				id: 23,
+				name: 'Enfermería en cuidados intensivos de adultos',
+			},
+			{
+				id: 24,
+				name: 'Enfermería en cuidados intensivos pediátricos y neonatales',
+			},
+			{
+				id: 25,
+				name: 'Enfermería en cuidados paliativos y dolor',
+			},
+			{
+				id: 26,
+				name: 'Enfermería en emergencias y atención primaria',
+			},
+			{
+				id: 27,
+				name: 'Enfermería en internación domiciliaria',
+			},
+			{
+				id: 28,
+				name: 'Enfermería en internación general',
+			},
+			{
+				id: 29,
+				name: 'Enfermería en investigación',
+			},
+			{
+				id: 30,
+				name: 'Enfermería en lactancia y puerperio',
+			},
+			{
+				id: 31,
+				name: 'Enfermería en reproducción asistida',
+			},
+			{
+				id: 32,
+				name: 'Enfermería en salud mental',
+			},
+			{
+				id: 33,
+				name: 'Enfermería en unidades de trasplantes',
+			},
+			{
+				id: 34,
+				name: 'Enfermería escolar',
+			},
+			{
+				id: 35,
+				name: 'Enfermería geriátrica y gerontológica',
+			},
+			{
+				id: 36,
+				name: 'Enfermería hematológica',
+			},
+			{
+				id: 37,
+				name: 'Enfermería nefrológica y diálisis',
+			},
+			{
+				id: 38,
+				name: 'Enfermería neonatal',
+			},
+			{
+				id: 39,
+				name: 'Enfermería obstétrica y ginecológica',
+			},
+			{
+				id: 40,
+				name: 'Enfermería oncológica',
+			},
+			{
+				id: 41,
+				name: 'Enfermería pediátrica',
+			},
+			{
+				id: 42,
+				name: 'Enfermería quirúrgica',
+			},
+			{
+				id: 43,
+				name: 'Enfermería radiológica',
+			},
+			{
+				id: 44,
+				name: 'Otras especialidades',
+			},
+		],
+		'6': [
+			{
+				id: 70,
+				name: 'Policía',
+			},
+			{
+				id: 71,
+				name: 'Bombero',
+			},
+			{
+				id: 72,
+				name: 'Guardavidas / Rescatista',
+			},
+		],
+		'7': [
+			{
+				id: 56,
+				name: 'Tecnicatura en laboratorio clínico',
+			},
+			{
+				id: 57,
+				name: 'Tecnicatura en radiología e imágenes diagnósticas',
+			},
+			{
+				id: 58,
+				name: 'Tecnicatura en atención de adicciones',
+			},
+			{
+				id: 59,
+				name: 'Tecnicatura en optometría',
+			},
+			{
+				id: 60,
+				name: 'Tecnicatura en hemoterapia e inmunohematología',
+			},
+			{
+				id: 61,
+				name: 'Tecnicatura en partería profesional con enfoque intercultural',
+			},
+			{
+				id: 62,
+				name: 'Tecnicatura en visita médica',
+			},
+			{
+				id: 63,
+				name: 'Tecnicatura en cuidados geriátricos',
+			},
+			{
+				id: 64,
+				name: 'Tecnicatura en tecnología en ciencias del esteticismo',
+			},
+			{
+				id: 65,
+				name: 'Tecnicatura en ciencia y tecnología de alimentos',
+			},
+			{
+				id: 66,
+				name: 'Tecnicatura en prácticas cardiológicas',
+			},
+			{
+				id: 67,
+				name: 'Tecnicatura en esterilización',
+			},
+			{
+				id: 68,
+				name: 'Tecnicatura en asistencia dental',
+			},
+			{
+				id: 69,
+				name: 'Tecnicatura en cosmetología',
+			},
+		],
+		'8': [
+			{
+				id: 1,
+				name: 'Medicina',
+			},
+			{
+				id: 2,
+				name: 'Enfermería',
+			},
+			{
+				id: 3,
+				name: 'Lic. en salud',
+			},
+			{
+				id: 4,
+				name: 'Técnico en salud',
+			},
+			{
+				id: 5,
+				name: 'Otra',
+			},
+		],
+		'9': [
+			{
+				id: 94,
+				name: 'Hematología',
+			},
+			{
+				id: 104,
+				name: 'Oftalmología',
+			},
+			{
+				id: 107,
+				name: 'Otorrinolaringología',
+			},
+			{
+				id: 111,
+				name: 'Bioanálisis Clínico-molecular',
+			},
+			{
+				id: 112,
+				name: 'Medicina Transfusional',
+			},
+			{
+				id: 113,
+				name: 'Imagenología',
+			},
+			{
+				id: 114,
+				name: 'Radioterapia',
+			},
+			{
+				id: 115,
+				name: 'Física Médica',
+			},
+			{
+				id: 116,
+				name: 'Morfofisiopatología y Citodiagnóstico',
+			},
+		],
+		'10': [],
+	};
+
+	const allProfessions = [
+		{
+			id: 1,
+			name: 'Personal médico',
+		},
+		{
+			id: 2,
+			name: 'Residente',
+		},
+		{
+			id: 3,
+			name: 'Licenciado en salud',
+		},
+		{
+			id: 4,
+			name: 'Personal de enfermería',
+		},
+		{
+			id: 5,
+			name: 'Auxiliar de enfermería',
+		},
+		{
+			id: 6,
+			name: 'Fuerza pública',
+		},
+		{
+			id: 7,
+			name: 'Técnico universitario',
+		},
+		{
+			id: 8,
+			name: 'Estudiante',
+		},
+		{
+			id: 9,
+			name: 'Tecnología médica',
+		},
+		{
+			id: 10,
+			name: 'Otra profesión',
+		},
+	];
 	useEffect(() => {
 		setProfessions(allProfessions);
 		setSpecialties(allSpecialties);
 		setSpecialtiesGroup(allSpecialtiesGroups);
-	}, [allProfessions, allSpecialties]);
+	}, [allSpecialties]);
 
 	const handleReCaptchaVerify = useCallback(async () => {
 		if (!executeRecaptcha) {
@@ -105,7 +943,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 		Description: '',
 		Especialidad: '',
 		Phone: '',
-		Preferencia_de_contactaci_n: '',
+		// Preferencia_de_contactaci_n: '',
 		Pais: '',
 		Otra_profesion: '',
 		Otra_especialidad: '',
@@ -265,7 +1103,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 
 								if (!isDownload) {
 									setTimeout(() => {
-										changeRoute(routeChange);
+										// changeRoute(routeChange);
 									}, 100);
 								} else if (updateFormSent) {
 									updateFormSent(true, body);
@@ -276,7 +1114,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 						} else {
 							if (!isDownload) {
 								setTimeout(() => {
-									changeRoute(routeChange);
+									// changeRoute(routeChange);
 								}, 100);
 							} else if (updateFormSent) {
 								updateFormSent(true, body);
@@ -297,26 +1135,28 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 
 	const optionsArray = [1, 2, 3, 4, 5];
 
-	const handleContactPreferenceChange = (value: string) => {
-		formik.setFieldValue('Preferencia_de_contactaci_n', value);
-	};
+	// const handleContactPreferenceChange = (value: string) => {
+	// 	formik.setFieldValue('Preferencia_de_contactaci_n', value);
+	// };
 	const requiredFormFields = [
 		'First_Name',
 		'Last_Name',
 		'Email',
 		'Phone',
-		'Preferencia_de_contactaci_n',
+		// 'Preferencia_de_contactaci_n',
 		'Profesion',
 		'Terms_And_Conditions',
 	];
 
 	const isSubmitDisabled = !formik.dirty || !isFormValid(requiredFormFields, formik.values, formik.errors, formik.touched);
 
+	console.log(formik);
+
 	return (
 		<>
 			<div className='col-span-3 ' id='contactanos'>
-				<div className='contact-area-wrapper'>
-					<div className='contact-form'>
+				<div className=''>
+					<div className=''>
 						<FormikProvider value={formik}>
 							<Form onSubmit={formik.handleSubmit} action='/leads' className='' autoComplete='off' ref={formRef}>
 								<input type='hidden' name='Cursos_consultados' id='Cursos_consultados' value={productName} />
@@ -328,7 +1168,7 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 								<input type='hidden' name='leadSource' id='leadSource' value={isEbook ? 'Descarga ebook' : ''} />
 
 								{hideContactPreference ? null : (
-									<div className={`section-title mb-30`}>
+									<div className={` mb-30`}>
 										{hideHeader ? null : (
 											<h4 className='font-medium text-violet-dark text-[36px] mb-1' style={{ maxWidth: '800px' }}>
 												{isNosotros
@@ -340,80 +1180,99 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 										)}
 
 										{!isEbook && (
-											<div className='flex flex-wrap gap-6 preferences mt-2 mb-6'>
-												<p className='talk-through w-full md:w-auto'>Quiero hablar por</p>
-												<div className='mt-1 grid grid-cols-1 md:grid-cols-3 gap-4'>
-													<Checkbox
-														inputClass='contact-radio-input'
-														name='Preferencia_de_contactaci_n_phone'
-														label='Teléfono'
-														onChange={() => handleContactPreferenceChange('phone')}
-													/>
-													<Checkbox
-														inputClass='contact-radio-input'
-														name='Preferencia_de_contactaci_n_whatsapp'
-														label='WhatsApp'
-														onChange={() => handleContactPreferenceChange('whatsapp')}
-													/>
-													<Checkbox
-														inputClass='contact-radio-input'
-														name='Preferencia_de_contactaci_n_email'
-														label='E-mail'
-														onChange={() => handleContactPreferenceChange('email')}
-													/>
-												</div>
+											<div className='flex flex-wrap gap-6 mt-6 mb-6 preferences'>
+												{/* <p className='w-full md:w-auto'>Quiero hablar por</p>
+												<div className='grid grid-cols-1 gap-4 mt-1 md:grid-cols-3'>
+													{[
+														{ value: 'phone', label: 'Teléfono' },
+														{ value: 'whatsapp', label: 'WhatsApp' },
+														{ value: 'email', label: 'E-mail' },
+													].map((option) => (
+														<label key={option.value} className='flex items-center gap-2 cursor-pointer'>
+															<input
+																type='radio'
+																name='Preferencia_de_contactaci_n'
+																value={option.value}
+																checked={formik.values.Preferencia_de_contactaci_n === option.value}
+																onChange={() => handleContactPreferenceChange(option.value)}
+																className='accent-[#9200AD] text-[#9200AD] ring-[#9200AD] w-5 h-5'
+															/>
+															<span className='text-sm'>{option.label}</span>
+														</label>
+													))}
+												</div> */}
 											</div>
 										)}
 									</div>
 								)}
 
-								<div className={`grid md:grid-cols-1  gap-4 ${hideSideInfo ? 'lg:grid-cols-2' : 'lg:grid-cols-3'}`}>
-									<div className='grid grid-cols-1 md:grid-cols-2 col-span-2 gap-4'>
-										<div className='col-xl-6 col-span-2 md:col-span-1'>
-											<div className='contact-from-input'>
-												<ErrorMessage name='First_Name' component='span' className='error' />
-												<Field type='text' name='First_Name' placeholder='Ingresar nombre' />
+								<div className={`grid md:grid-cols-1  gap-4 ${hideSideInfo ? 'lg:grid-cols-2' : 'lg:grid-cols-2'}`}>
+									<div className='grid w-full grid-cols-1 col-span-2 gap-4 md:grid-cols-2'>
+										<div className='col-span-2 col-xl-6 md:col-span-1'>
+											<div className='rounded-xl'>
+												<ErrorMessage name='First_Name' component='span' className='text-red-500' />
+												<Field
+													className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
+													type='text'
+													name='First_Name'
+													placeholder='Ingresar nombre'
+												/>
 											</div>
 										</div>
-										<div className='col-xl-6 col-span-2 md:col-span-1'>
+										<div className='col-span-2 col-xl-6 md:col-span-1'>
 											<div className='contact-from-input'>
-												<ErrorMessage className='error' name='Last_Name' component='span' />
-												<Field type='text' name='Last_Name' placeholder='Ingresar apellido' />
-											</div>
-										</div>
-										<div className='col-xl-6 col-span-2 md:col-span-1'>
-											<div className='contact-from-input'>
-												<ErrorMessage name='Email' component='span' className='error' />
-												<Field type='email' name='Email' placeholder='Ingresar e-mail' />
+												<ErrorMessage className='text-red-500' name='Last_Name' component='span' />
+												<Field
+													className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
+													type='text'
+													name='Last_Name'
+													placeholder='Ingresar apellido'
+												/>
 											</div>
 										</div>
 
-										<div className='col-xl-6 col-span-2 md:col-span-1'>
-											<div className='contact-from-input intl-input phone-contact-input-select'>
-												<Field name='Phone'>
-													{({ field, form, meta }: any) => (
-														<div className='contact-from-input intl-input phone-contact-input-select'>
-															<ErrorMessage name='Phone' component='span' className='error' />
-															<PhoneInput
-																name='Phone'
-																id='Phone'
-																placeholder='Ingresar número telefónico'
-																defaultCountry={defaultCountry}
-																onChange={(value: any) => {
-																	form.setFieldValue('Phone', value);
-																	handlePhoneChange(value);
-																}}
-															/>
-														</div>
+										<div className='col-span-2 border-none col-xl-6 md:col-span-1'>
+											<div className='border-none contact-from-input intl-input phone-contact-input-select'>
+												<Field name='phone'>
+													{({ field, form }: any) => (
+														<>
+															<div className='flex mt-1 w-full rounded-2xl border border-gray-300  focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c]  py-1.5 '>
+																<CountrySelect onChange={(code) => formik.setFieldValue('areaCode', code)} />
+
+																<input
+																	{...field}
+																	type='tel'
+																	onChange={(e) => {
+																		const onlyNumbers = e.target.value.replace(/\D/g, '');
+																		form.setFieldValue('Phone', onlyNumbers);
+																	}}
+																	placeholder='Ingresar número telefónico'
+																	className='p-0 border-none'
+																/>
+															</div>
+														</>
 													)}
 												</Field>
 											</div>
 										</div>
 
-										<div className='col-xl-6 col-span-2 md:col-span-1'>
-											<div className='contact-select'>
-												<ErrorMessage name='Profesion' component='span' className='error' />
+										<div className='col-span-2 col-xl-6 md:col-span-1'>
+											<div className='contact-from-input'>
+												<ErrorMessage name='Email' component='span' className='text-red-500' />
 												<Field
+													className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
+													type='email'
+													name='Email'
+													placeholder='Ingresar e-mail'
+												/>
+											</div>
+										</div>
+
+										<div className='w-full col-span-2 col-xl-6 md:col-span-1'>
+											<div className=''>
+												<ErrorMessage name='Profesion' component='span' className='text-red-500' />
+												<Field
+													className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 													as='select'
 													name='Profesion'
 													onChange={handleOptionProfessionChange}
@@ -433,18 +1292,27 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 											</div>
 
 											{showInputProfession && (
-												<div className='contact-from-input my-4'>
-													<ErrorMessage name='Otra_profesion' component='span' className='error' />
-													<Field type='text' name='Otra_profesion' placeholder='Ingresar profesion' />
+												<div className='my-4 contact-from-input'>
+													<ErrorMessage name='Otra_profesion' component='span' className='text-red-500' />
+													<Field
+														className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
+														type='text'
+														name='Otra_profesion'
+														placeholder='Ingresar profesion'
+													/>
 												</div>
 											)}
 										</div>
 
 										{studentInputs ? (
-											<div className='col-xl-12 flex gap-2'>
-												<div className='contact-select w-1/2'>
-													<ErrorMessage name='year' component='span' className='error' />
-													<Field as='select' name='year'>
+											<div className='flex gap-2 col-xl-12'>
+												<div className='w-1/2 contact-select'>
+													<ErrorMessage name='year' component='span' className='text-red-500' />
+													<Field
+														as='select'
+														name='year'
+														className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
+													>
 														<option defaultValue=''>Año</option>
 														{optionsArray.map((y) => (
 															<option key={`st_year_${y}`} defaultValue={y}>
@@ -453,9 +1321,15 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 														))}
 													</Field>
 												</div>
-												<div className='contact-select w-full'>
-													<ErrorMessage name='career' component='span' className='error' />
-													<Field as='select' name='career' onChange={handleOptionCareerChange} value={selectedCareer}>
+												<div className='w-full contact-select'>
+													<ErrorMessage name='career' component='span' className='text-red-500' />
+													<Field
+														className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
+														as='select'
+														name='career'
+														onChange={handleOptionCareerChange}
+														value={selectedCareer}
+													>
 														<option defaultValue=''>Seleccionar carrera</option>
 														{currentGroup.map((s: any) => (
 															<option key={`st_carrer_${s.id}`} defaultValue={s.name}>
@@ -469,8 +1343,9 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 											<>
 												<div className={`col-xl-6 col-span-2 sm:col-span-1`}>
 													<div className='contact-select'>
-														<ErrorMessage name='Especialidad' component='span' className='error' />
+														<ErrorMessage name='Especialidad' component='span' className='text-red-500' />
 														<Field
+															className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
 															as='select'
 															name='Especialidad'
 															onChange={handleOptionSpecialtyChange}
@@ -493,9 +1368,14 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 														</Field>
 													</div>
 													{showInputSpecialties && (
-														<div className='contact-from-input my-4'>
-															<Field type='text' name='Otra_especialidad' placeholder='Ingresar especialidad' />
-															<ErrorMessage name='Otra_especialidad' component='div' className='error' />
+														<div className='my-4 contact-from-input'>
+															<Field
+																className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5'
+																type='text'
+																name='Otra_especialidad'
+																placeholder='Ingresar especialidad'
+															/>
+															<ErrorMessage name='Otra_especialidad' component='div' className='text-red-500' />
 														</div>
 													)}
 												</div>
@@ -503,51 +1383,59 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 										)}
 										<div className='col-span-2'>
 											{!isEbook && (
-												<div className='col-xl-12 mt-4'>
+												<div className='mt-4 col-xl-12'>
 													<div className='contact-from-input'>
-														<ErrorMessage name='Description' component='span' className='error' />
-														<Field as='textarea' id='Description' name='Description' placeholder='Mensaje' />
+														<ErrorMessage name='Description' component='span' className='text-red-500' />
+														<Field
+															className='mt-1 w-full rounded-2xl border border-gray-300 p-2 focus:ring-4 focus:border-[#DBDDE2] focus:ring-[#F5E6F7] text-[#6e737c] py-2.5 px-3.5 resize-none min-h-[150px]'
+															as='textarea'
+															id='Description'
+															name='Description'
+															placeholder='Mensaje'
+														/>
 													</div>
 												</div>
 											)}
 
-											<div className='flex flex-wrap gap-1 mt-2 mb-4 justify-center sm:justify-start'>
-												<div className='contact-checkbox'>
-													<ErrorMessage name='Terms_And_Conditions' component='div' className='error' />
-													<div className='flex gap-2 center'>
-														<Field
-															type='checkbox'
-															name='Terms_And_Conditions'
-															checked={formik.values.Terms_And_Conditions}
-															className='hidden-checkbox mt-1'
-														/>
-														<label>
-															Acepto las{' '}
-															<NcLink
-																href={
-																	country === ''
-																		? `${window.location.origin}/politica-de-privacidad`
-																		: `${window.location.origin}/${country}/politica-de-privacidad`
-																}
-																target='_blank'
-																className='text-primary underline'
-															>
-																condiciones de privacidad
-															</NcLink>
-														</label>
+											<div className='flex justify-between mt-8'>
+												<div className='flex flex-wrap justify-center gap-1 mt-2 mb-4 sm:justify-start'>
+													<div className='contact-checkbox'>
+														<ErrorMessage name='Terms_And_Conditions' component='div' className='text-red-500' />
+														<div className='flex gap-2 center'>
+															<Field
+																type='checkbox'
+																name='Terms_And_Conditions'
+																checked={formik.values.Terms_And_Conditions}
+																className='mt-1 hidden-checkbox'
+															/>
+															<label>
+																Acepto las{' '}
+																<Link
+																	href={
+																		country === ''
+																			? `${window.location.origin}/politica-de-privacidad`
+																			: `${window.location.origin}/${country}/politica-de-privacidad`
+																	}
+																	target='_blank'
+																	className='underline text-[#9200AD] '
+																>
+																	condiciones de privacidad
+																</Link>
+															</label>
+														</div>
 													</div>
 												</div>
-											</div>
 
-											<div className='col-xl-2 mt-2'>
-												<div className='cont-btn'>
-													<button
-														type='submit'
-														className='cont-btn disabled:bg-grey-disabled'
-														disabled={isSubmitDisabled || onRequest}
-													>
-														{onRequest ? 'Enviando ...' : submitText}
-													</button>
+												<div className='mt-2 col-xl-2'>
+													<div className=''>
+														<button
+															type='submit'
+															className='px-6 py-3 rounded-full bg-[#9200AD] text-white'
+															disabled={isSubmitDisabled || onRequest}
+														>
+															{onRequest ? 'Enviando ...' : submitText}
+														</button>
+													</div>
 												</div>
 											</div>
 											<ShowErrorMessage text={formError} visible={formError !== ''} />
@@ -561,11 +1449,11 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 											</p>
 										</div>
 									</div>
-									{hideSideInfo ? null : (
+									{/* {hideSideInfo ? null : (
 										<div className='col-span-2 md:col-span-1'>
 											<ContactSidebar />
 										</div>
-									)}
+									)} */}
 								</div>
 							</Form>
 						</FormikProvider>

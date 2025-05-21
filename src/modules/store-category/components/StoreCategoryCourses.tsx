@@ -95,6 +95,10 @@ const StoreCategoryCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang
 	useEffect(() => {
 		if (category && !searchParams?.has('especialidad')) {
 			const params = new URLSearchParams(searchParams?.toString());
+			if (category === 'radiologia-e-imagenologia') {
+				category = 'radiologia';
+			}
+			console.log(category);
 
 			// Agregar la especialidad como filtro
 			params.set('especialidad', category);
@@ -222,7 +226,7 @@ const StoreCategoryCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang
 	return (
 		<div className='md:col-span-1 md:row-span-3 bg-white rounded-[30px] p-[36px] order-1 md:order-1'>
 			{isLoading ? (
-				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
+				<div className='grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2 lg:grid-cols-3'>
 					{Array.from({ length: 12 }).map((_, index) => (
 						<CourseCardSkeleton key={index} />
 					))}
@@ -230,7 +234,7 @@ const StoreCategoryCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang
 			) : error ? (
 				<p className='text-[#f5006d]'>{error}</p> // Show error message
 			) : (
-				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
+				<div className='grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2 lg:grid-cols-3'>
 					{courses.length > 0 ? (
 						courses.map((course) => {
 							const lang = pathname?.split('/')[1] || 'ar'; // Obtener el idioma desde la ruta
@@ -243,15 +247,15 @@ const StoreCategoryCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang
 										alt={course.title}
 										className='w-full h-48 object-cover rounded-t-[30px]'
 									/>
-									<div className='p-4 flex flex-col h-full'>
+									<div className='flex flex-col h-full p-4'>
 										<div className='flex flex-wrap gap-1 mb-2 text-xs'>
 											{course.resource === 'downloadable' ? (
 												<>
-													<span className='px-2 py-1 rounded-full bg-green-100 text-green-800'>Guía profesional</span>
+													<span className='px-2 py-1 text-green-800 bg-green-100 rounded-full'>Guía profesional</span>
 													{course.categories
 														.filter((cat) => cat.is_primary)
 														.map((cat) => (
-															<span key={cat.term_id} className='px-2 py-1 rounded-full bg-blue-100 text-blue-800'>
+															<span key={cat.term_id} className='px-2 py-1 text-blue-800 bg-blue-100 rounded-full'>
 																{cat.name}
 															</span>
 														))}
@@ -272,11 +276,11 @@ const StoreCategoryCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang
 													))
 											)}
 										</div>
-										<h3 className='font-bold text-lg mb-1'>{course.title}</h3>
+										<h3 className='mb-1 text-lg font-bold'>{course.title}</h3>
 										{typeof course.cedente === 'object' && !Array.isArray(course.cedente) && (
-											<p className='text-sm text-gray-600 mb-3'>{course.cedente.name}</p>
+											<p className='mb-3 text-sm text-gray-600'>{course.cedente.name}</p>
 										)}
-										<div className='flex justify-between items-center text-sm text-gray-500 mt-auto'>
+										<div className='flex items-center justify-between mt-auto text-sm text-gray-500'>
 											<div>
 												{course.duration && course.duration !== '0' && (
 													<span className='flex items-center gap-1'>
@@ -306,9 +310,9 @@ const StoreCategoryCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang
 							);
 						})
 					) : (
-						<div className='col-span-full flex flex-col items-center justify-center py-10 px-4 text-center'>
+						<div className='flex flex-col items-center justify-center px-4 py-10 text-center col-span-full'>
 							<svg
-								className='w-16 h-16 text-gray-400 mb-4'
+								className='w-16 h-16 mb-4 text-gray-400'
 								fill='none'
 								stroke='currentColor'
 								viewBox='0 0 24 24'
@@ -322,7 +326,7 @@ const StoreCategoryCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang
 								/>
 							</svg>
 							<p className='text-lg font-medium text-gray-700'>No se encontraron cursos o no se ha elegido especialidad </p>
-							<p className='text-sm text-gray-500 mt-2'>Intenta con otra especialidad o vuelve más tarde</p>
+							<p className='mt-2 text-sm text-gray-500'>Intenta con otra especialidad o vuelve más tarde</p>
 						</div>
 					)}
 				</div>

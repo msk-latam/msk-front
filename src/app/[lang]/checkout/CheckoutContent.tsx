@@ -23,14 +23,15 @@ const stripePublicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY;
 const stripePromise = loadStripe(stripePublicKey);
 const CheckoutContent: React.FC<CheckoutContentProps> = ({ product, country }) => {
 	const { activeStep, setActiveStep, subStep, paymentType, setPaymentStatus, certifications } = useCheckout();
+	console.log(certifications);
 
 	useEffect(() => {
 		const isFree = product.prices.total_price === '0' || product.prices.total_price === '';
-		if (isFree && activeStep === 2) {
+		if (isFree && activeStep === 2 && certifications.length === 0) {
 			setActiveStep(3);
 			setPaymentStatus('approved');
 		}
-	}, [product.prices.total_price, activeStep, setActiveStep]);
+	}, [product.prices.total_price, activeStep, setActiveStep, certifications]);
 
 	if (activeStep === 2) {
 		if (subStep === 0) {

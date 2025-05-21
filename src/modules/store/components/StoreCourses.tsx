@@ -118,21 +118,6 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 					params.delete('duracion'); // Remove original key
 				}
 
-				if (params.has('recurso')) {
-					const recursoValue = params.get('recurso') || '';
-					// Translate values: 'curso' to 'course', 'guias-profesionales' to 'downloadable'
-					let translatedValue = recursoValue;
-					if (recursoValue === 'curso') {
-						translatedValue = 'course';
-					} else if (recursoValue === 'guias-profesionales') {
-						translatedValue = 'downloadable';
-					} else if (recursoValue === 'curso-gratuito') {
-						params.set('filter', 'is-free');
-					} else {
-						params.set('resource', translatedValue);
-					}
-					params.delete('recurso'); // Remove original key
-				}
 				// NOTE: The 'search' parameter is already in `params` because the previous useEffect updated the URL
 
 				// Add sorting parameters based on sortKey state
@@ -151,6 +136,26 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 					params.set('orderby', 'newly');
 					// The 'order' parameter is typically not needed when orderby='newly'
 					// params.delete('order'); // Ensure order is not set if newly implies it
+				}
+
+				if (params.has('recurso')) {
+					const recursoValue = params.get('recurso') || '';
+					// Translate values: 'curso' to 'course', 'guias-profesionales' to 'downloadable'
+					let translatedValue = recursoValue;
+					if (recursoValue === 'curso') {
+						translatedValue = 'course';
+					} else if (recursoValue === 'guias-profesionales') {
+						translatedValue = 'downloadable';
+					} else if (recursoValue === 'curso-gratuito') {
+						params.set('filter', 'is-free');
+						params.set('resource', 'course');
+						params.delete('sort'); // Ensure no 'sort' param from URL is used
+						params.delete('orderby'); // Clear previous orderby
+						params.delete('order');
+					} else {
+						params.set('resource', translatedValue);
+					}
+					params.delete('recurso'); // Remove original key
 				}
 				// If sortKey is 'relevancia' (or any other value not explicitly handled),
 				// no orderby/order parameters are set, relying on the API's default sorting.

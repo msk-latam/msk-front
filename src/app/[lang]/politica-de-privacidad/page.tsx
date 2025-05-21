@@ -2,6 +2,7 @@
 import '@/app/globals.css';
 import Footer from '@/modules/components/footer/footer';
 import Navbar from '@/modules/components/navbar/Navbar';
+import NewsLetter from '@/modules/components/newsletter/NewsLetter';
 import GenericHeader from '@/modules/generic/components/GenericHeader';
 import { useEffect, useState } from 'react';
 
@@ -53,7 +54,7 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 			setError(null);
 			try {
 				const response = await fetch(
-					`https://cms1.msklatam.com/wp-json/msk/v1/page/politicas-de-privacidad?lang=${country}`,
+					`https://cms1.msklatam.com/wp-json/msk/v1/page/condiciones-de-contratacion?lang=${country}`,
 				);
 
 				if (!response.ok) {
@@ -94,7 +95,7 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 				}}
 			>
 				<Navbar />
-				<GenericHeader title={'Política de privacidad'} description={initialPageData.description} />
+				<GenericHeader title={'Políticas de privacidad'} description={initialPageData.description} />
 			</header>
 
 			<main className='bg-[#f3f4f6] flex justify-center px-0 sm:px-4 relative pt-0 pb-20  md:mb-0'>

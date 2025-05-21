@@ -10,6 +10,11 @@ const nextConfig = {
 				permanent: true, // Redirección permanente (código 301)
 			},
 			{
+				source: '/:lang/iniciar-sesion',
+				destination: '/:lang/login',
+				permanent: true,
+			},
+			{
 				source: '/:lang/blog2',
 				has: [
 					{
@@ -20,12 +25,10 @@ const nextConfig = {
 				],
 				destination: '/',
 				permanent: true,
-
-				
 			},
 		];
 	},
-	
+
 	async headers() {
 		return [
 			{
@@ -75,14 +78,11 @@ const nextConfig = {
 		ignoreBuildErrors: true,
 	},
 
-	
 	images: {
-		 
-			domains: ['es.wp.msklatam.com'],
-			unoptimized: true, // <-- Evita el intento de optimizar vía servidor Next
-		 
+		domains: ['es.wp.msklatam.com'],
+		unoptimized: true, // <-- Evita el intento de optimizar vía servidor Next
+
 		remotePatterns: [
-			
 			{
 				protocol: 'https',
 				hostname: 'images.pexels.com',
@@ -109,10 +109,10 @@ const nextConfig = {
 			},
 			{
 				protocol: 'https',
-				hostname: 'es.wp.msklatam.com', 
+				hostname: 'es.wp.msklatam.com',
 				port: '',
 				pathname: '/**',
-			  },
+			},
 			{
 				protocol: 'https',
 				hostname: 'dev.msklatam.tech',
