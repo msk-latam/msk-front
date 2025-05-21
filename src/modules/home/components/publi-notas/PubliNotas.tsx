@@ -65,7 +65,7 @@ const MskNewsSection = () => {
                       className="w-full h-full object-contain rounded-full"
                     />
                   </div>
-                  <span>{new Date(item.date).toLocaleDateString('es-AR', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                  <span className='text-[#6E737C] whitespace-nowrap'>· {new Date(item.date).toLocaleDateString('es-AR', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                 </div>
                 <button className="bg-[#1A1A1A] text-white px-6 py-3 rounded-full md:rounded-[38px] font-inter font-medium shadow-md hover:scale-105 transition text-sm w-full md:w-auto">{item.link.title}</button>
               </div>
@@ -83,23 +83,23 @@ const MskNewsSection = () => {
               rel="noopener noreferrer"
               className="keen-slider__slide min-w-[85%]"
             >
-              <div className="bg-white rounded-3xl p-6 shadow-sm h-full flex flex-col justify-between mr-2 mb-[40px] hover:shadow-md transition-shadow">
+              <div className="bg-[#F7F9FF] rounded-3xl p-6 shadow-sm h-full flex flex-col justify-between mr-2 mb-[40px] hover:shadow-md transition-shadow">
                 <div>
                   <h3 className="text-[24px] font-[700] leading-[140%] tracking-[0%] mb-4 font-raleway">{item.title}</h3>
                   <p className="text-sm font-inter font-normal text-neutral-600">{cleanContent(item.content)}</p>
                 </div>
                 <div className="mt-6 flex items-center justify-between text-xs text-neutral-500 font-inter">
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full overflow-hidden flex items-center justify-center bg-white border translate-y-[-30px]">
+                    <div className="w-6 h-6 rounded-full overflow-hidden flex items-center justify-center bg-white border translate-y-[-30px] my-auto">
                       <img
                         src={`https://www.google.com/s2/favicons?domain=${new URL(item.link.url).hostname}&sz=64`}
                         alt="favicon"
                         className="w-full h-full object-contain rounded-full"
                       />
                     </div>
-                    <span className="translate-y-[-30px]">{new Date(item.date).toLocaleDateString('es-AR', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                    <span className="translate-y-[-30px] text-[#6E737C] whitespace-nowrap">· {new Date(item.date).toLocaleDateString('es-AR', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                   </div>
-                  <button className="px-6 py-4 rounded-[38px] text-[16px] font-medium shadow-md bg-[#1A1A1A] text-white translate-y-[18px]">{item.link.title}</button>
+                  <button className="px-6 py-4 mb-3 rounded-[38px] text-[16px] font-medium shadow-md bg-[#1A1A1A] text-white translate-y-[18px] whitespace-nowrap">{item.link.title}</button>
                 </div>
               </div>
             </a>
