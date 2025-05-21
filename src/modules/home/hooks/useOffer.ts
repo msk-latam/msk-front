@@ -5,7 +5,6 @@ export const useOffers = (lang: string) => {
 	const [data, setData] = useState<PromoData | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
-	console.log(lang.lang);
 	if (lang === 'ar') {
 		lang = 'arg';
 	}
