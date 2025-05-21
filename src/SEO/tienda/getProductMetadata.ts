@@ -46,8 +46,9 @@ export async function getProductMetadata(lang: string, slug: string): Promise<Me
 	const hreflangs = Object.fromEntries(
 		Object.keys(countries).map((code) => [`es-${code}`, `${baseUrl}${code === 'ar' ? '' : `/${code}`}/curso/${slug}`]),
 	);
-	function stripHtml(html: string): string {
-		return html.replace(/<[^>]+>/g, '').trim();
+	function stripHtml(html: any): string {
+		const str = typeof html === 'string' ? html : '';
+		return str.replace(/<[^>]+>/g, '').trim();
 	}
 
 	return {
