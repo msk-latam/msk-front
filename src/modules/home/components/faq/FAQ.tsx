@@ -40,7 +40,7 @@ const FaqSection = () => {
 					Preguntas frecuentes
 				</h2>
 
-				<div className='divide-y divide-[#C4C7CD]'>
+				<div className='divide-y divide-[#C4C7CD] md:p-6'>
 					{data.map((item, index) => (
 						<div key={index}>
 							<button onClick={() => toggle(index)} className='flex items-center justify-between w-full py-6 text-left'>
