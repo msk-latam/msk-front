@@ -13,7 +13,7 @@ interface Doctor {
 
 interface Props {
 	pro: Doctor;
-	masterClassLink:string;
+	masterClassLink: string;
 	current: number;
 	total: number;
 	onPrev: () => void;
@@ -21,7 +21,7 @@ interface Props {
 	className?: string;
 }
 
-const ProfessionalCardDesktop = ({ pro,masterClassLink ,current, total, onPrev, onNext, className = '' }: Props) => {
+const ProfessionalCardDesktop = ({ pro, masterClassLink, current, total, onPrev, onNext, className = '' }: Props) => {
 	const pathname = usePathname();
 	const lang = pathname.split('/')[1] || 'ar';
 	return (
@@ -29,16 +29,16 @@ const ProfessionalCardDesktop = ({ pro,masterClassLink ,current, total, onPrev, 
 			className={`hidden md:flex flex-col relative bg-white text-black rounded-[30px] w-[430px] h-[556px] py-5 px-6 gap-5 shadow-xl border border-gray-200 ${className}`}
 		>
 			{/* Header con navegación */}
-			<div className='text-sm text-black flex flex-row justify-between'>
+			<div className='flex flex-row justify-between text-sm text-black'>
 				<p className='my-auto'>NUESTRO EQUIPO</p>
 				<div className='flex items-center gap-4 text-black bg-white'>
-					<button onClick={onPrev} className='p-1 rounded-full hover:bg-gray-100 transition'>
+					<button onClick={onPrev} className='p-1 transition rounded-full hover:bg-gray-100'>
 						<ChevronLeft size={18} />
 					</button>
 					<span className='text-sm font-medium'>
 						{current + 1} / {total}
 					</span>
-					<button onClick={onNext} className='p-1 rounded-full hover:bg-gray-100 transition'>
+					<button onClick={onNext} className='p-1 transition rounded-full hover:bg-gray-100'>
 						<ChevronRight size={18} />
 					</button>
 				</div>
@@ -55,17 +55,9 @@ const ProfessionalCardDesktop = ({ pro,masterClassLink ,current, total, onPrev, 
 				<p className='text-[24px] font-semibold text-black'>{pro.nombre}</p>
 			</div>
 
-			{/* Ver perfil*/}
-			<div className='flex justify-between items-center text-sm text-black mt-auto'>
-				<span className='text-sm'>NUESTRO EQUIPO</span>
-				{/*<Link href={pro.perfilUrl || "#"} target="_blank" rel="noopener noreferrer">*/}
-				<Link href={getLocalizedUrl(lang, masterClassLink+'#equipo-docente')}>
-					{/*<button className="bg-[#1A1A1A] text-white px-6 py-3 rounded-full md:rounded-[38px] font-inter font-medium shadow-md hover:scale-105 transition text-sm w-full md:w-auto">
-          Ver perfil
-        </button>*/}
-
-					{/* DEMO TEMPORAL:
-// Este Button solo existe para scrollear hacia el equipo docente después de cargar los datos.*/}
+			<div className='flex items-center justify-end mt-auto text-sm text-black'>
+				{/* <span className='text-sm'>NUESTRO EQUIPO</span> */}
+				<Link href={getLocalizedUrl(lang, masterClassLink + '#equipo-docente')}>
 					<button
 						onClick={() => {
 							const target = document.getElementById('equipo-docente');
