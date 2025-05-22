@@ -89,6 +89,8 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 	};
 
 	const isSpanishVersion = lang?.toLowerCase().startsWith('es');
+
+	console.log(cedente);
 	return (
 		<div className='bg-white rounded-[38px] p-6 md:p-8 sticky top-10 w-full' style={{ backgroundColor: '#FFFFFF' }}>
 			<Image
@@ -130,10 +132,13 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 					<img src='/icons/course/summary/person.svg' alt='' className='w-4 h-4' />
 					{enrolledFormatted} profesionales inscriptos
 				</li>
-				<li className='flex items-center gap-2'>
-					<img src='/icons/course/summary/download.svg' alt='' className='w-4 h-4' />
-					{certification ? 'Incluye material descargable' : 'Sin material adicional'}
-				</li>
+
+				{cedente?.slug !== 'tropos' && (
+					<li className='flex items-center gap-2'>
+						<img src='/icons/course/summary/download.svg' alt='' className='w-4 h-4' />
+						{certification ? 'Incluye material descargable' : 'Sin material adicional'}
+					</li>
+				)}
 			</ul>
 
 			{cedente && (

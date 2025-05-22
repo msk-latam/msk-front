@@ -21,6 +21,7 @@ import ShowErrorMessage from '../ShowErrorMessage';
 import Checkbox from '@/modules/store/components/ui/Checkbox';
 import CountrySelect from '@/modules/login/components/hooks/CountrySelect';
 import Link from 'next/link';
+import { Send } from 'react-feather';
 
 interface ContactFormProps {
 	hideHeader?: boolean;
@@ -1430,10 +1431,10 @@ const ContactForm: FC<ContactFormWrapperProps> = ({
 													<div className=''>
 														<button
 															type='submit'
-															className='px-6 py-3 rounded-full bg-[#9200AD] text-white'
+															className='px-6 py-3 rounded-full bg-[#9200AD] text-white flex gap-2'
 															disabled={isSubmitDisabled || onRequest}
 														>
-															{onRequest ? 'Enviando ...' : submitText}
+															{onRequest ? 'Enviando ...' : submitText} <Send className='text-white' />
 														</button>
 													</div>
 												</div>

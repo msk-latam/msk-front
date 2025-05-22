@@ -79,7 +79,7 @@ const nextConfig = {
 	},
 
 	images: {
-		domains: ['es.wp.msklatam.com'],
+		domains: ['es.wp.msklatam.com', 'cms1.msklatam.com'],
 		unoptimized: true, // <-- Evita el intento de optimizar vía servidor Next
 
 		remotePatterns: [
