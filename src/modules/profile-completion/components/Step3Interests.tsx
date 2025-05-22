@@ -90,7 +90,7 @@ export default function Step3Interests({ onNext, onBack, onUpdate, data }: Step3
 		setTimeout(() => {
 			setShowStep4(true);
 			setLoading(false);
-		}, 3000);
+		}, 5000);
 	};
 
 	const handleGoToDashboard = () => {
