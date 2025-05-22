@@ -146,6 +146,7 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 						translatedValue = 'course';
 					} else if (recursoValue === 'guias-profesionales') {
 						translatedValue = 'downloadable';
+						params.set('resource', translatedValue);
 					} else if (recursoValue === 'curso-gratuito') {
 						params.set('filter', 'is-free');
 						params.set('resource', 'course');
