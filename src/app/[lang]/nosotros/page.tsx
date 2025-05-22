@@ -235,19 +235,21 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 						)}
 					</div>
 				</section>
-				<div className='flex justify-center mx-40 mt-20'>
-					<div className='flex flex-col-reverse lg:flex-row gap-6 md:py-12 pt-12 overflow-visible max-w-[1500px] w-full md:px-4   '>
-						<div className='w-full bg-white rounded-[38px] flex flex-col relative z-[9] md:-mt-24 px-5 pt-9 h-full my-auto pb-10 md:px-9 mb-20 gap-6 md:gap-0 overflow-visible max-w-[1600px] '>
-							<h2 className='text-2xl font-medium text-center font-raleway'>¿Te gustaría recibir asesoría académica?</h2>
-							<ContactForm hideHeader />
+				<div className='flex justify-center mt-20'>
+					<div className='flex justify-between w-[1600px]'>
+						<div className='flex flex-col-reverse w-full gap-6 pt-12 overflow-visible lg:flex-row md:py-12  max-w-[1200px]'>
+							<div className='w-full bg-white rounded-[38px] flex flex-col relative z-[9] md:-mt-24 px-6 pt-9 h-full my-auto pb-10 md:px-9 mb-20 gap-6 md:gap-0 overflow-visible max-w-[1700px] '>
+								<h2 className='text-2xl font-medium text-center font-raleway'>¿Te gustaría recibir asesoría académica?</h2>
+								<ContactForm hideHeader />
+							</div>
 						</div>
-					</div>
-					<div className='flex flex-col   gap-8 md:py-12 pt-12 overflow-visible max-w-[1600px] md:px-4  '>
-						<div className=' bg-white rounded-[38px] flex flex-col relative z-[9] md:-mt-24 px-5 pt-9  my-auto pb-10 md:px-9 mb-20 gap-6 md:gap-0 overflow-visible max-w-[1600px] w-[350px] '>
-							<ContactSidebar variant={1} />
-						</div>
-						<div className='w-full bg-white rounded-[38px] flex flex-col relative z-[9] md:-mt-24 px-12 pt-9  my-auto pb-10 md:px-9 mb-20 gap-6 md:gap-0 overflow-visible max-w-[1600px] '>
-							<ContactSidebar variant={2} />
+						<div className='flex flex-col   gap-8 md:py-12 pt-12 overflow-visible max-w-[1600px] md:pl-4  '>
+							<div className=' bg-white rounded-[38px] flex flex-col relative z-[9] md:-mt-24 px-5 pt-9  my-auto pb-10 md:px-9 mb-20 gap-6 md:gap-0 overflow-visible max-w-[1600px] w-[350px] '>
+								<ContactSidebar variant={1} />
+							</div>
+							<div className='w-full bg-white rounded-[38px] flex flex-col relative z-[9] md:-mt-24 px-12 pt-9  my-auto pb-10 md:px-9 mb-20 gap-6 md:gap-0 overflow-visible max-w-[1600px] '>
+								<ContactSidebar variant={2} />
+							</div>
 						</div>
 					</div>
 				</div>
