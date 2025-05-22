@@ -66,6 +66,7 @@ export default function Step3Interests({ onNext, onBack, onUpdate, data }: Step3
 	const [selectedSpecialities, setSelectedSpecialities] = useState<string[]>(data.interests?.specialty_interests || []);
 	const [selectedContents, setSelectedContents] = useState<string[]>(data.interests?.content_interests || []);
 	const [showStep4, setShowStep4] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 	const router = useRouter();
 
@@ -85,7 +86,11 @@ export default function Step3Interests({ onNext, onBack, onUpdate, data }: Step3
 				other_interests: selectedReasons,
 			},
 		});
-		setShowStep4(true);
+		setLoading(true);
+		setTimeout(() => {
+			setShowStep4(true);
+			setLoading(false);
+		}, 3000);
 	};
 
 	const handleGoToDashboard = () => {
@@ -103,14 +108,14 @@ export default function Step3Interests({ onNext, onBack, onUpdate, data }: Step3
 				</svg>
 			</button>
 
-			<div className='text-center mb-6'>
+			<div className='mb-6 text-center'>
 				<h2 className='text-2xl sm:text-3xl font-raleway font-bold pb-5 text-[#1A1A1A]'>Cuéntanos tus intereses</h2>
 				<ProgressIndicator currentStep={3} />
 			</div>
 
-			<div className='text-center mb-6'>
+			<div className='mb-6 text-center'>
 				<h3 className='text-xl font-bold font-raleway text-[#1A1A1A] mb-4'>Especialidades</h3>
-				<div className='flex flex-wrap gap-3 justify-center'>
+				<div className='flex flex-wrap justify-center gap-3'>
 					{specialities.map((tag) => (
 						<button
 							key={tag}
@@ -128,9 +133,9 @@ export default function Step3Interests({ onNext, onBack, onUpdate, data }: Step3
 				</div>
 			</div>
 
-			<div className='text-center mb-6'>
+			<div className='mb-6 text-center'>
 				<h3 className='text-xl font-bold font-raleway text-[#1A1A1A] mb-4'>Contenido</h3>
-				<div className='flex flex-wrap gap-3 justify-center'>
+				<div className='flex flex-wrap justify-center gap-3'>
 					{contentOptions.map((content) => (
 						<button
 							key={content}
@@ -148,8 +153,8 @@ export default function Step3Interests({ onNext, onBack, onUpdate, data }: Step3
 				</div>
 			</div>
 
-			<div className='text-center mb-6'>
-				<h2 className='text-xl font-bold text-gray-900 mb-4'>¿Qué te trae a MSK hoy?</h2>
+			<div className='mb-6 text-center'>
+				<h2 className='mb-4 text-xl font-bold text-gray-900'>¿Qué te trae a MSK hoy?</h2>
 				<div className='grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-[1000px] mx-auto'>
 					{reasons.map((reason) => (
 						<label
@@ -175,12 +180,27 @@ export default function Step3Interests({ onNext, onBack, onUpdate, data }: Step3
 			{!showStep4 && (
 				<button
 					onClick={handleNext}
-					disabled={selectedReasons.length === 0}
+					disabled={selectedReasons.length === 0 || loading}
 					className={`mt-6 w-full sm:w-1/2 self-center mx-auto text-white py-3 px-4 rounded-full transition text-sm sm:text-base font-inter font-medium ${
-						selectedReasons.length > 0 ? 'bg-[#9200AD] hover:bg-[#700084]' : 'bg-[#989CA4] cursor-not-allowed'
+						selectedReasons.length > 0 && !loading ? 'bg-[#9200AD] hover:bg-[#700084]' : 'bg-[#989CA4] cursor-not-allowed'
 					}`}
 				>
-					Guardar
+					{loading ? (
+						<span className='flex items-center justify-center gap-2'>
+							<svg
+								className='w-5 h-5 text-white animate-spin'
+								xmlns='http://www.w3.org/2000/svg'
+								fill='none'
+								viewBox='0 0 24 24'
+							>
+								<circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4' />
+								<path className='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z' />
+							</svg>
+							Guardando...
+						</span>
+					) : (
+						'Guardar'
+					)}
 				</button>
 			)}
 

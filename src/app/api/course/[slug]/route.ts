@@ -10,7 +10,10 @@ export async function GET(req: Request, { params }: { params: { slug: string } }
 	}
 
 	if (lang == 'int') {
-		lang = 'ar';
+		lang = 'arg';
+	}
+	if (lang == 'ar') {
+		lang = 'arg';
 	}
 
 	try {
