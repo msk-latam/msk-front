@@ -148,7 +148,7 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 							Puedes conocer más sobre nuestra misión{' '}
 							<Link
 								className='text-[#9200AD] underline text-base sm:text-lg lg:text-xl'
-								href={country === '' ? `${window.location.origin}/mision` : `${window.location.origin}/${country}/mision`}
+								href={country === 'arg' ? `${window.location.origin}/mision` : `${window.location.origin}/${country}/mision`}
 								target='_blank'
 								rel='noopener noreferrer'
 							>
