@@ -152,6 +152,8 @@ const PhoneInputWithCode: React.FC<PhoneInputWithCodeProps> = ({
 	};
 
 	const currentSelectValue = countryOptions.find((option) => option.value === internalCode);
+	const isMobile = typeof window !== 'undefined' && window.innerWidth < 1000;
+	console.log(isMobile);
 
 	return (
 		<div className='flex flex-col '>
@@ -181,8 +183,8 @@ const PhoneInputWithCode: React.FC<PhoneInputWithCodeProps> = ({
 							width: '130px',
 							borderTopRightRadius: 0,
 							borderBottomRightRadius: 0,
-							paddingTop: '6px',
-							paddingBottom: '6px',
+							paddingTop: isMobile ? '6px' : '4px',
+							paddingBottom: isMobile ? '6px' : '4px',
 							paddingLeft: '8px',
 							paddingRight: '8px',
 							borderColor: state.isFocused ? '#9200AD' : '#d1d5db',
