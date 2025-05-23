@@ -150,8 +150,6 @@ const BrandSlider: FC<BrandSliderProps> = ({ country, brands: externalBrands }) 
 
 	const preventImageDrag = (e: React.DragEvent) => e.preventDefault();
 
-	console.log(brands);
-
 	return (
 		<div className='relative pb-5 overflow-visible md:overflow-hidden'>
 			<div className='absolute top-0 left-0 z-10 hidden w-16 h-full pointer-events-none md:block bg-gradient-to-r from-white via-white/70 to-transparent' />

@@ -72,9 +72,6 @@ class ApiService {
 				body: JSON.stringify(jsonData),
 			});
 
-			// console.log(await response.text());
-			// console.log(response.headers);
-
 			if (!response.ok) {
 				throw new Error(`Failed to sign up. HTTP status ${response.status}`);
 			}
@@ -242,19 +239,8 @@ class ApiService {
 
 				const data = await response.json();
 
-				// console.log(data);
-
-				// Guardar datos en `localStorage` con un nuevo timestamp
 				if (!isServer) {
 					localStorage.removeItem(cacheKey);
-					// localStorage.setItem(
-					//   cacheKey,
-					//   JSON.stringify({
-					//     value: data.user,
-					//     timestamp: new Date().getTime(),
-					//   }),
-					// );
-					// console.log(`Datos de usuario obtenidos de la API para ${email}`);
 				}
 
 				return data.user;

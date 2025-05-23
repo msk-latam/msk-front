@@ -240,7 +240,6 @@ export default function CourseOverview({ slug, lang, onHideEmpty, isDownloadable
 	const formattedWithThis = hasWithThisCourse
 		? formatWithThisCourse(Array.isArray(data.with_this_course) ? data.with_this_course.join(' ') : data.with_this_course)
 		: null;
-	console.log('CourseOverview render: shouldHide', isEmptyDynamicContent);
 
 	return (
 		<section className='max-w-5xl py-6 mx-auto'>

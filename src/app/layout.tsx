@@ -94,7 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				<Script src='https://sdk.rebill.com/v3/rebill.js' defer />
 			</head>
 			<body className={`${inter.variable} ${raleway.variable} font-inter`}>
-				<LoaderLayout />
+				{/* <LoaderLayout /> */}
 				<GoogleCaptchaWrapper>
 					<CountryProvider>
 						<UTMProvider>

@@ -65,7 +65,6 @@ export default function CourseSupportForm({ slug, lang }: any) {
 		const fetchCourse = async () => {
 			try {
 				const data = await getCourse(slug, lang);
-				console.log(data);
 				setCourse(data);
 			} catch (error) {
 				console.error('Error fetching course:', error);
@@ -183,8 +182,6 @@ export default function CourseSupportForm({ slug, lang }: any) {
 
 		try {
 			const endpoint = `https://dev.msklatam.tech/msk-laravel/public/api/crm/CreateLeadHomeContactUs`;
-			console.log('Enviando a:', endpoint);
-			console.log('Payload:', body);
 			const token = await executeRecaptcha('contact_form');
 
 			const response = await fetch(endpoint, {
@@ -197,7 +194,6 @@ export default function CourseSupportForm({ slug, lang }: any) {
 			});
 
 			const result = await response.json();
-			console.log('Respuesta del servidor:', result);
 
 			if (!response.ok || !Array.isArray(result.data) || result.data[0]?.code !== 'SUCCESS') {
 				console.error('Error en respuesta del CRM:', result);

@@ -58,7 +58,6 @@ const DiscountAndButton = ({ offer, content, discountNumber, descLine1, descLine
 
 const Ofertas = ({ lang }: { lang: string }) => {
 	const { data: offer, loading, error } = useOffers(lang);
-	console.log(lang);
 
 	if (loading) return <OffersSkeleton />; // 👈 Mostrar Skeleton mientras carga
 	if (error || !offer) return null;
@@ -85,23 +84,22 @@ const Ofertas = ({ lang }: { lang: string }) => {
 	};
 
 	const [firstTitlePart, secondTitlePart] = getSplitTitle();
-	console.log(offer);
 
 	return (
 		<section className='relative w-full md:h-[993px] md:px-4 md:mt-[120px] min-h-screen flex items-end md:items-center justify-center md:translate-y-5  -translate-y-24 text-white font-raleway'>
-			{/* Imagen de fondo Mobile */}
 			{offer.background_image ? (
 				<>
-      <div className="absolute inset-0 bg-black/25 z-[1] md:hidden " />
-				<Image
-					src={offer.background_image}
-					alt='Oferta Salud Mobile'
-					layout='fill'
-					objectFit='cover'
-					objectPosition='66% center'
-					quality={100}
-					priority
-				/></>
+					<div className='absolute inset-0 bg-black/25 z-[1] md:hidden ' />
+					<Image
+						src={offer.background_image}
+						alt='Oferta Salud Mobile'
+						layout='fill'
+						objectFit='cover'
+						objectPosition='66% center'
+						quality={100}
+						priority
+					/>
+				</>
 			) : (
 				<div className='flex items-center justify-center w-full h-full bg-gray-400'>Imagen no disponible</div>
 			)}

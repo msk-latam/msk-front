@@ -46,7 +46,6 @@ export function useCourseSummary(slug: string, lang: string) {
 			setError(null);
 			try {
 				const response = await fetch(`${API_BASE}/${slug}?nocache=1&lang=${lang}`);
-				console.log(`${API_BASE}/${slug}?nocache=1&lang=${lang}`);
 				if (!response.ok) {
 					throw new Error(`HTTP error! status: ${response.status}`);
 				}

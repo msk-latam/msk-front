@@ -98,7 +98,6 @@ const StoreCategoryCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang
 			if (category === 'radiologia-e-imagenologia') {
 				category = 'radiologia';
 			}
-			console.log(category);
 
 			// Agregar la especialidad como filtro
 			params.set('especialidad', category);
@@ -170,7 +169,6 @@ const StoreCategoryCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang
 				// no orderby/order parameters are set, relying on the API's default sorting.
 
 				const apiUrl = `https://cms1.msklatam.com/wp-json/msk/v1/products?${params.toString()}`;
-				console.log('Fetching courses with URL:', apiUrl); // Log the URL for debugging
 
 				const response = await fetch(apiUrl);
 				if (!response.ok) {

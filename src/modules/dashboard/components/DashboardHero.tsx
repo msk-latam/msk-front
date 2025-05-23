@@ -71,7 +71,6 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 			try {
 				if (isProductNotEnrolled(currentCourseStatus)) {
 					const enrollResponse = await goToEnroll(Number(productCode), userEmailAddress);
-					console.log('responseGoToEnroll', enrollResponse);
 
 					if (enrollResponse?.data?.[0]?.status === 'success') {
 						setInternalCurrentCourse((prevCourse: any) => {
@@ -127,7 +126,6 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 			workArea: 'workArea',
 		};
 		const actualFieldName = field ? fieldNameMap[field] || field : undefined;
-		console.log(`DashboardHero: Edit clicked for display field "${field}", mapped to UserData field "${actualFieldName}"`);
 		onEditProfile(actualFieldName);
 	};
 
@@ -135,7 +133,6 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({
 		return <DashboardHeroSkeleton />;
 	}
 	const data = userData;
-	console.log(data);
 	return (
 		<>
 			<div className='grid grid-cols-1 md:grid-cols-[468px_1fr] lg:grid-cols-[468px_3fr_3fr] gap-5 '>

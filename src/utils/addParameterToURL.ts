@@ -2,7 +2,6 @@ import { slugifySpecialty } from '@/lib/Slugify';
 
 export const addParameterToURL = (param: string, value: any) => {
 	const url = new URL(window.location.href);
-	//console.log("hi", url, param, value);
 	if (!url.searchParams.has('recurso') && param === 'resources' && typeof value.name !== 'undefined') {
 		let valueToUrl = value.name.includes('Curso') ? 'curso' : 'guias-profesionales';
 		url.searchParams.set('recurso', valueToUrl);

@@ -14,7 +14,6 @@ export function useCourseReviews(slug: string, lang: string) {
 			.then((courseData) => {
 				// courseData.sections.reviews is ReviewItem[]
 				const reviewsArray: ReviewItem[] = courseData.sections.reviews;
-				console.log(reviewsArray);
 				setData(reviewsArray);
 			})
 			.catch((err) => {

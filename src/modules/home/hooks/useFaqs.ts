@@ -13,7 +13,6 @@ export const useFaqContent = () => {
 		const langCandidate = pathname.split('/')[1]?.toLowerCase();
 		const lang = langCandidate === 'ar' || !langCandidate ? 'arg' : langCandidate?.length === 2 ? langCandidate : 'arg';
 
-		console.log(lang, 'paisss');
 		// Llamamos al servicio para obtener los datos del faq
 		getHomeData(lang)
 			.then((homeData) => {

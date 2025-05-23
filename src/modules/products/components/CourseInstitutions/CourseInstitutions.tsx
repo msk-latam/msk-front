@@ -18,8 +18,6 @@ export default function CourseInstitutions({ slug, lang, onHideEmpty }: CourseIn
 	const { data: institutions, loading, error } = useCourseInstitutions(slug, lang);
 	const hasNotified = useRef(false);
 
-	console.log(institutions);
-
 	useEffect(() => {
 		if (!hasNotified.current && !loading && (!institutions || institutions.length === 0)) {
 			onHideEmpty?.();

@@ -63,7 +63,6 @@ export const isLoadingStoreSpecialties = () => loadingAllStoreSpecialties;
 let allProfessions: any = [];
 let loadingAllProfessions: boolean = false;
 export const setAllProfessions = (value: any) => {
-	//console.log("Seteando profesiones:",{value})
 	allProfessions = value;
 };
 

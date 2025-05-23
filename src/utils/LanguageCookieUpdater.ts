@@ -23,29 +23,23 @@ export default function LanguageCookieUpdater() {
 				?.split('=')[1] === 'true';
 
 		if (!isRecoveryFlow) {
-			console.log('[LanguageCookieUpdater] ⏸ No estamos en flujo de recuperación. No hace nada.');
 			return;
 		}
 
 		// ⚠️ Excepción: si está en cambio de contraseña, no redirigir ni tocar cookie
 		if (pathname.includes('/change-pass') && hasToken) {
-			console.log('[LanguageCookieUpdater] Cambio de contraseña → no redirige ni cambia cookie');
 			return;
 		}
 
 		if (langFromUrl) {
 			document.cookie = `country=${langFromUrl}; path=/; max-age=60`;
-			console.log(`[LanguageCookieUpdater] Cookie actualizada a: ${langFromUrl}`);
 			return;
 		}
 
 		if (cookieLang && supportedLanguages.includes(cookieLang)) {
 			document.cookie = 'country=; path=/; max-age=0';
-			console.log('[LanguageCookieUpdater] Sin prefijo → cookie eliminada porque se asume AR');
 			return;
 		}
-
-		console.log('[LanguageCookieUpdater] No hay prefijo ni cookie → OK como Argentina');
 	}, []);
 
 	return null;

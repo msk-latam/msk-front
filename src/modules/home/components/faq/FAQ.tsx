@@ -18,8 +18,6 @@ const FaqSection = () => {
 		return <FaqSectionSkeleton />; // 👈 Mostrar Skeleton mientras carga
 	}
 
-	console.log(data, ' de aca');
-
 	if (error || !data.length) {
 		return (
 			<section className='w-full bg-gray-100 font-inter text-[#1A1A1A]'>

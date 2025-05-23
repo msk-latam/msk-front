@@ -118,8 +118,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
 	const uniqueResults = Array.from(new Map(courses.map((item) => [`${item.id}-${item.title}`, item])).values());
 
-	console.log(courses);
-
 	return (
 		<div className={`relative ${className}`} ref={searchContainerRef}>
 			<div className='rounded-full border border-[#DBDDE2]-100 overflow-hidden relative flex items-center'>

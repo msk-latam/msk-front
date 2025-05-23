@@ -119,7 +119,6 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 		const currentPath = window.location.pathname;
 		const langMatch = currentPath.match(/^\/([^\/]+)\/login/);
 		const lang = langMatch ? langMatch[1] : '';
-		console.log('Redirecting to Auth0 login endpoint for connection:', connection);
 		window.location.href = `/api/auth/login?connection=${connection}&lang=${lang}}`;
 	};
 
@@ -127,9 +126,9 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 		<div className='w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:p-0 md:mb-20 z-[10] relative overflow-visible max-w-[1600px] mx-auto md:px-4'>
 			{/* ✅ Modal */}
 			{showModal && (
-				<div className='fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50'>
-					<div className='bg-white p-6 rounded-2xl max-w-sm w-full shadow-lg text-center'>
-						<h2 className='text-lg font-semibold text-gray-800 mb-4'>¿Querés completar tu perfil ahora?</h2>
+				<div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40'>
+					<div className='w-full max-w-sm p-6 text-center bg-white shadow-lg rounded-2xl'>
+						<h2 className='mb-4 text-lg font-semibold text-gray-800'>¿Querés completar tu perfil ahora?</h2>
 						<div className='flex justify-between gap-4'>
 							<button
 								onClick={() => handleRedirect('/profile-completion')}
@@ -139,7 +138,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 							</button>
 							<button
 								onClick={() => handleRedirect('/dashboard')}
-								className='flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 rounded-full transition'
+								className='flex-1 py-2 font-medium text-gray-700 transition bg-gray-200 rounded-full hover:bg-gray-300'
 							>
 								No
 							</button>
@@ -149,10 +148,10 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 			)}
 
 			{/* Resto del login (sin cambios) */}
-			<div className='absolute md:top-10 md:left-8 top-5 left-5 flex z-10'>
+			<div className='absolute z-10 flex md:top-10 md:left-8 top-5 left-5'>
 				<button
 					onClick={onBack}
-					className='w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100 transition'
+					className='flex items-center justify-center w-10 h-10 transition border border-gray-300 rounded-full hover:bg-gray-100'
 				>
 					<svg width='6' height='12' viewBox='0 0 6 12' fill='none' xmlns='http://www.w3.org/2000/svg'>
 						<path d='M5 1L1 6L5 11' stroke='#1F2937' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
@@ -161,7 +160,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 			</div>
 
 			<section className='w-full h-fit relative z-8 mx-auto px-6 pt-[84px] pb-28 md:py-16 md:px-9'>
-				<div className='text-center mb-6'>
+				<div className='mb-6 text-center'>
 					<h1 className='md:text-[34px] text-[#1A1A1A] text-[24px] md:mb-6 mb-2 font-raleway font-medium'>Iniciar sesión</h1>
 					<p className='text-[16px] md:text-[18px] font-inter text-[#6E737C] mt-1'>Accede a tu perfil personal</p>
 				</div>
@@ -184,7 +183,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 
 					{/* Contraseña */}
 					<div>
-						<div className='flex justify-between items-center'>
+						<div className='flex items-center justify-between'>
 							<label htmlFor='password' className='block text-[#1A1A1A] font-medium text-left'>
 								Contraseña
 							</label>
@@ -197,7 +196,6 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 									document.cookie = 'recovery_flow_active=true; path=/; max-age=600';
 									document.cookie = `country=${lang}; path=/; max-age=60`;
 
-									console.log('[LoginForm] Activando flujo de recuperación con lang:', lang);
 									onForgotPassword();
 								}}
 								className='text-[#9200AD]'
@@ -217,7 +215,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 							<button
 								type='button'
 								onClick={() => setShowPassword(!showPassword)}
-								className='absolute right-3 top-1/2 transform -translate-y-1/2 transition-all duration-200'
+								className='absolute transition-all duration-200 transform -translate-y-1/2 right-3 top-1/2'
 								aria-label='Mostrar/Ocultar contraseña'
 							>
 								<Image
@@ -233,7 +231,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 					{/* Display Login Error */}
 					{loginError && (
 						<div
-							className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md relative text-sm'
+							className='relative px-4 py-3 text-sm text-red-700 bg-red-100 border border-red-400 rounded-md'
 							role='alert'
 						>
 							<span className='block sm:inline'>{loginError}</span>
@@ -264,7 +262,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 					</div>
 
 					{/* Redes sociales */}
-					<div className='space-y-4 mt-2'>
+					<div className='mt-2 space-y-4'>
 						{[
 							{ name: 'Google', icon: '/icons/google.svg', connection: 'google-oauth2' },
 							{ name: 'Facebook', icon: '/icons/facebook.svg', connection: 'facebook' },
@@ -279,7 +277,7 @@ export default function LoginForm({ onBack, onCreateAccount, onForgotPassword }:
 								className='w-full border text-sm font-medium border-gray-300 rounded-[38px] py-[14px] flex items-center justify-center gap-2 font-inter transition hover:bg-gray-100 hover:text-gray-800'
 							>
 								Continuar con {provider.name}
-								<img src={provider.icon} alt={provider.name} className='h-5 w-5' />
+								<img src={provider.icon} alt={provider.name} className='w-5 h-5' />
 							</button>
 						))}
 					</div>

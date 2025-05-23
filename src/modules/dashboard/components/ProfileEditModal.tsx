@@ -93,8 +93,6 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 	saveError,
 	saveSuccess,
 }) => {
-	console.log('ProfileEditModal received user prop:', JSON.stringify(user, null, 2));
-
 	const [formData, setFormData] = useState<Partial<any>>({});
 	const [password, setPassword] = useState<string>('');
 	const [selectedProfessionId, setSelectedProfessionId] = useState<number | null>(null);
@@ -300,9 +298,9 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 			<div className='text-center text-base md:text-lg text-[#6E737C] mb-6 mt-2'>
 				Gestiona todo lo relacionado con tus datos personales
 			</div>{' '}
-			<h3 className='text-lg md:text-2xl  text-center font-medium mb-2'>Datos personales</h3>
+			<h3 className='mb-2 text-lg font-medium text-center md:text-2xl'>Datos personales</h3>
 			<form onSubmit={handleSubmit} className='space-y-4 text-[#1a1a1a]'>
-				<div className='grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 p-1'>
+				<div className='grid grid-cols-1 p-1 md:grid-cols-2 gap-x-6 gap-y-4'>
 					<Input
 						id='firstName'
 						label='Nombre/s'
@@ -382,8 +380,8 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 				</div>
 
 				<div className='mt-6'>
-					<h3 className='text-lg md:text-2xl  text-center font-medium mb-2'>Datos profesionales</h3>
-					<div className='grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 p-1'>
+					<h3 className='mb-2 text-lg font-medium text-center md:text-2xl'>Datos profesionales</h3>
+					<div className='grid grid-cols-1 p-1 md:grid-cols-2 gap-x-6 gap-y-4'>
 						<div className='flex flex-col gap-2'>
 							<Select
 								id='profession'
@@ -501,8 +499,8 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 						/>
 					</div>
 					<div className='mt-6'>
-						<h3 className='text-lg md:text-2xl text-center font-medium mb-2'>Datos de facturación</h3>
-						<div className='grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 p-1'>
+						<h3 className='mb-2 text-lg font-medium text-center md:text-2xl'>Datos de facturación</h3>
+						<div className='grid grid-cols-1 p-1 md:grid-cols-2 gap-x-6 gap-y-4'>
 							<Select
 								id='invoice_required'
 								label='¿Requiere factura fiscal?'
@@ -580,24 +578,11 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 									placeholder='Seleccionar'
 								/>
 							)}
-
-							{/* <FileInput
-								id='file'
-								label='Constancia de la situación fiscal'
-								name='file'
-								onChange={(e) => {
-									const file = (e.target as HTMLInputElement).files?.[0] || null;
-									setFormData((prev) => ({
-										...prev,
-										file,
-									}));
-								}}
-							/> */}
 						</div>
 					</div>
 				</div>
 				<div className='flex flex-col items-center pt-6 mt-6'>
-					{saveError && !isSaving && <p className='text-red-600 text-sm mt-2 text-center'>{saveError}</p>}
+					{saveError && !isSaving && <p className='mt-2 text-sm text-center text-red-600'>{saveError}</p>}
 					<button type='submit' className={buttonClasses} disabled={buttonDisabled}>
 						{buttonContent}
 					</button>

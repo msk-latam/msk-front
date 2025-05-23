@@ -19,8 +19,6 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 	const router = useRouter();
 	const { user } = useProfile();
 
-	console.log(user);
-
 	const isFree = data
 		? [data.regular_price, data.sale_price, data.total_price].every((price) => {
 				const num = parseFloat(price);
@@ -90,7 +88,6 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 
 	const isSpanishVersion = lang?.toLowerCase().startsWith('es');
 
-	console.log(cedente);
 	return (
 		<div className='bg-white rounded-[38px] p-6 md:p-8 sticky top-10 w-full' style={{ backgroundColor: '#FFFFFF' }}>
 			<Image
@@ -165,7 +162,6 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 						onClick={() => {
 							if (isFree) {
 								localStorage.setItem('redirectAfterLogin', window.location.pathname);
-								console.log('Guardando redirect y enviando a crear cuenta');
 							}
 						}}
 					>

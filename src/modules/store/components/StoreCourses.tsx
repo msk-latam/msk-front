@@ -165,7 +165,6 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 				setCurrentPage(parseInt(page, 10));
 
 				const apiUrl = `https://cms1.msklatam.com/wp-json/msk/v1/products?${params.toString()}`;
-				console.log('Fetching courses with URL:', apiUrl); // Log the URL for debugging
 
 				const response = await fetch(apiUrl);
 				if (!response.ok) {
@@ -213,8 +212,6 @@ const StoreCourses: React.FC<StoreCoursesProps> = ({ onOpenFilters, lang }) => {
 		params.delete('sort');
 		router.push(`${pathname}?${params.toString()}`, { scroll: false });
 	};
-
-	console.log(courses);
 
 	return (
 		<div className='md:col-span-1 md:row-span-3 bg-white rounded-[30px] p-[36px] order-1 md:order-1'>

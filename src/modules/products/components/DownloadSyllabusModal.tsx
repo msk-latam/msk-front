@@ -187,8 +187,6 @@ export default function DownloadSyllabusModal({ fileUrl, onClose, slug, isDownlo
 			utm_content: sessionStorage.getItem('utm_content') || '',
 		};
 
-		console.log('UTMs detectados:', utmState);
-
 		if (!formData.acceptTerms) {
 			setStatus('error');
 			setErrorMessage('Debes aceptar los términos y condiciones para continuar.');

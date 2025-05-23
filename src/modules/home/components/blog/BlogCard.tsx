@@ -52,7 +52,6 @@ const BlogCard: React.FC<BlogCardProps> = ({
 	const pathname = usePathname();
 	const firstSegment = pathname?.split('/')[1];
 	const lang = supportedLanguages.includes(firstSegment ?? '') ? firstSegment : 'ar';
-	console.log(`readTime recibido para "${title}":`, readTime);
 
 	function localizeExternalBlogUrl(lang: string, url: string): string {
 		try {
@@ -63,7 +62,6 @@ const BlogCard: React.FC<BlogCardProps> = ({
 			return url;
 		}
 	}
-	console.log(`[BlogCard] "${title}" readTime recibido:`, readTime);
 
 	return (
 		<div
@@ -75,7 +73,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
 					window.location.href = localizeExternalBlogUrl(lang, link);
 				}
 			}}
-			className='group focus:outline-none h-full'
+			className='h-full group focus:outline-none'
 		>
 			<article
 				className='rounded-2xl overflow-hidden h-full shadow-sm border border-gray-100 bg-[#F7F7F8] flex flex-col transform transition-transform duration-300 group-hover:scale-105 cursor-pointer'
@@ -90,20 +88,20 @@ const BlogCard: React.FC<BlogCardProps> = ({
 					/>
 				</div>
 
-				<div className='p-4 md:p-5 flex flex-col flex-1 justify-between'>
+				<div className='flex flex-col justify-between flex-1 p-4 md:p-5'>
 					<div>
 						<TagList tags={tags} />
-						<h3 className='font-semibold font-raleway text-lg mt-2 mb-1 line-clamp-2'>{title}</h3>
+						<h3 className='mt-2 mb-1 text-lg font-semibold font-raleway line-clamp-2'>{title}</h3>
 
-						{subtitle && <p className='text-gray-600 font-inter text-base mb-3 line-clamp-2'>{subtitle}</p>}
+						{subtitle && <p className='mb-3 text-base text-gray-600 font-inter line-clamp-2'>{subtitle}</p>}
 
 						<ArticleMeta authors={author} date={date} readTime={readTime} />
 					</div>
 
-					<div className='flex flex-row items-center justify-between mt-4 gap-2'>
+					<div className='flex flex-row items-center justify-between gap-2 mt-4'>
 						<div className='flex items-center gap-4'>
 							<button
-								className='flex items-center gap-1 p-2 bg-white rounded-full text-xs text-gray-500 shadow hover:text-gray-700'
+								className='flex items-center gap-1 p-2 text-xs text-gray-500 bg-white rounded-full shadow hover:text-gray-700'
 								aria-label='Guardar artículo'
 								type='button'
 								onClick={(e) => e.preventDefault()}
@@ -125,7 +123,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
 								</svg>
 							</button>
 
-							<div className='flex items-center pt-1 gap-1 text-xs text-gray-500'>
+							<div className='flex items-center gap-1 pt-1 text-xs text-gray-500'>
 								<svg
 									xmlns='http://www.w3.org/2000/svg'
 									fill='none'
@@ -200,7 +198,7 @@ const ArticleMeta: React.FC<ArticleMetaProps> = ({ authors, date, readTime }) =>
 		<div className='flex items-center gap-2 mt-4 text-xs text-gray-500'>
 			{mainAuthor && (
 				<>
-					<div className='w-5 h-5 rounded-full overflow-hidden bg-gray-200'>
+					<div className='w-5 h-5 overflow-hidden bg-gray-200 rounded-full'>
 						<Image
 							src={mainAuthor.image || '/images/blog/doctor-with-stetoscope.png'}
 							alt={`Foto de ${mainAuthor.name}`}

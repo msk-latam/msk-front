@@ -90,14 +90,10 @@ const PromoBanner = ({ lang }: { lang: string }) => {
 					<div className='flex justify-center w-full mb-10 md:w-auto md:mb-0'>
 						<CtaButton
 							onClick={() => {
-								// Detectar si para argentina tiene `/dashboard`
 								const path = getLocalizedUrl(lang, offer.cta.url);
 
-								// Si es Argentina  y hay `/dashboard` en la URL, lo reemplazamos por `/ar`. Middleware detecta
-								// y quita el /ar
 								const cleanedPath = path.includes('/dashboard') ? path.replace('/dashboard', '/ar') : path;
 
-								console.log(`🔄 Redirigiendo a: ${cleanedPath}`);
 								router.push(cleanedPath);
 							}}
 							showIcon={true}

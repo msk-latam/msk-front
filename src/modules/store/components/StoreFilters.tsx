@@ -222,8 +222,6 @@ const StoreFilters = ({ isMobile = false, isModalOpen = false, onModalClose = ()
 
 		// Add { scroll: false } to prevent scroll on navigation
 		router.push(pathname + '?' + createQueryString(queryParams), { scroll: false });
-
-		console.log('Selected Filter Values:', nextFilters);
 	};
 
 	const filtersContent = (

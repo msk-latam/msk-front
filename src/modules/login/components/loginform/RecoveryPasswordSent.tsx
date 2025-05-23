@@ -23,7 +23,6 @@ export default function NewPasswordForm() {
 		// ✅ Solo correr si estamos en el flujo de recuperación
 		const inRecoveryFlow = document.cookie.includes('recovery_flow_active=true');
 		if (!inRecoveryFlow) {
-			console.log('[LanguageCookieUpdater] No estamos en flujo de recuperación → no se setea cookie de idioma');
 			return;
 		}
 
@@ -87,8 +86,8 @@ export default function NewPasswordForm() {
 		return (
 			<div className='w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:mb-24 p-4 sm:p-20 pb-[80px] md:pb-0 z-[10] relative overflow-visible max-w-[1600px] mx-auto md:px-4 min-h-fit h-[550px] flex md:items-center justify-center'>
 				<section className='w-full max-w-[1632px] absolute top-0 z-[1] mx-auto px-4 py-6 sm:py-12 md:mt-20 mt-28 text-center'>
-					<h2 className='text-2xl sm:text-3xl font-semibold text-gray-900 md:mb-6 mb-2'>¡Listo!</h2>
-					<p className='text-sm text-gray-600 max-w-md mx-auto mb-4'>
+					<h2 className='mb-2 text-2xl font-semibold text-gray-900 sm:text-3xl md:mb-6'>¡Listo!</h2>
+					<p className='max-w-md mx-auto mb-4 text-sm text-gray-600'>
 						Ya confirmaste tu e-mail. En breve podrás iniciar sesión con tu nueva contraseña en{' '}
 						<strong>Medical & Scientific Knowledge</strong>.
 					</p>
@@ -110,8 +109,8 @@ export default function NewPasswordForm() {
 	return (
 		<div className='w-full bg-white rounded-3xl shadow-md -mt-[40px] md:-mt-20 md:mb-24 p-4 sm:p-20 pb-[80px] md:pb-0 z-[10] relative overflow-visible max-w-[1600px] min-h-fit h-[550px] flex md:items-center justify-center'>
 			<section className='w-full max-w-[1632px] absolute md:top-0 z-[1] mx-auto px-4 md:py-12'>
-				<div className='text-center mt-16 mb-6'>
-					<h1 className='text-2xl md:text-3xl md:pb-6 mb-2 font-semibold text-gray-900'>Cambiar contraseña</h1>
+				<div className='mt-16 mb-6 text-center'>
+					<h1 className='mb-2 text-2xl font-semibold text-gray-900 md:text-3xl md:pb-6'>Cambiar contraseña</h1>
 					<p className='text-base md:text-[18px] text-gray-500'>Elige una nueva clave para iniciar sesión</p>
 				</div>
 
@@ -162,7 +161,7 @@ export default function NewPasswordForm() {
 							<button
 								type='button'
 								onClick={() => setShowPassword(!showPassword)}
-								className='absolute right-3 top-3 p-1 text-gray-500'
+								className='absolute p-1 text-gray-500 right-3 top-3'
 							>
 								<img
 									src={showPassword ? '/icons/eye-off.svg' : '/icons/eye.svg'}
@@ -172,9 +171,9 @@ export default function NewPasswordForm() {
 								/>
 							</button>
 						</div>
-						{errors.password && <p className='text-red-500 text-sm mt-2'>{errors.password.message}</p>}
+						{errors.password && <p className='mt-2 text-sm text-red-500'>{errors.password.message}</p>}
 
-						<ul className='text-sm mt-4 space-y-2'>
+						<ul className='mt-4 space-y-2 text-sm'>
 							{passwordHints.map((hint, index) => (
 								<li key={index} className='flex items-center gap-2'>
 									<div

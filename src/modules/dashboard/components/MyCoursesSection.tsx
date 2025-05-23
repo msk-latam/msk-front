@@ -105,7 +105,7 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 			// 		<h3 className='text-[#1A1A1A] font-raleway font-semibold text-xl text-center'>
 			// 			¿Qué plan quieres llevar adelante?
 			// 		</h3>
-			// 		<div className='flex flex-col md:flex-row gap-4 justify-center items-center w-full'>
+			// 		<div className='flex flex-col items-center justify-center w-full gap-4 md:flex-row'>
 			// 			{/* Plan Option: Tranquilo */}
 			// 			<button
 			// 				className={`flex flex-col items-center gap-2 p-6 rounded-[38px] border ${
@@ -229,8 +229,7 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 			try {
 				if (course.statusType === 'Sin enrolar') {
 					const enrollResponse = await goToEnroll(Number(course.product_code), userEmail);
-					console.log('Enroll response for MyCoursesSection:', enrollResponse); // For debugging
-
+					// console.log('Enroll response for MyCoursesSection:', enrollResponse);
 					if (enrollResponse?.data?.[0]?.status === 'success') {
 						// Enrollment successful, now navigate to LMS
 						await navigateToLms(course.product_code, course.product_code_cedente, userEmail);
@@ -363,10 +362,10 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 			<h2 className='font-raleway text-[34px] font-medium leading-[100%] text-[#1A1A1A] whitespace-nowrap mb-6'>
 				Mis cursos
 			</h2>
-			<div className='flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 w-full'>
-				<div className='flex flex-col md:flex-row items-center justify-between md:items-center gap-4 w-full '>
+			<div className='flex flex-col items-start justify-between w-full gap-4 mb-6 md:flex-row md:items-center'>
+				<div className='flex flex-col items-center justify-between w-full gap-4 md:flex-row md:items-center '>
 					{/* Tabs */}
-					<div className='flex items-center gap-2  p-1'>
+					<div className='flex items-center gap-2 p-1'>
 						{['Todo', 'Cursos', 'Favoritos'].map((tab) => (
 							<button
 								key={tab}
@@ -398,7 +397,7 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 			</div>
 
 			{/* Courses Grid / Mobile Carousel */}
-			<div className='flex space-x-4 overflow-x-auto scroll-snap-x scroll-snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-5 md:space-x-0 md:overflow-x-visible md:scroll-snap-none pb-4 -mb-4 scrollbar-hide '>
+			<div className='flex pb-4 -mb-4 space-x-4 overflow-x-auto scroll-snap-x scroll-snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-5 md:space-x-0 md:overflow-x-visible md:scroll-snap-none scrollbar-hide '>
 				{currentCourses.map((course) => (
 					<div
 						key={course.id}
@@ -411,7 +410,7 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 							</div>
 						</div>
 						{/* Content */}
-						<div className='p-4 flex flex-col flex-grow justify-between'>
+						<div className='flex flex-col justify-between flex-grow p-4'>
 							<div>
 								{/* Status Tag */}
 								<span
@@ -429,14 +428,14 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 								<div className='min-h-[20px] mb-3 font-inter'>{renderInfoLine(course as Course)}</div>
 							</div>
 							{/* Buttons */}
-							<div className='flex items-center gap-2 justify-end mt-auto'>{renderButtons(course as Course)}</div>
+							<div className='flex items-center justify-end gap-2 mt-auto'>{renderButtons(course as Course)}</div>
 						</div>
 					</div>
 				))}
 			</div>
 
 			{/* Pagination - Hidden on Mobile */}
-			<div className='flex justify-center items-center gap-4 mt-6'>
+			<div className='flex items-center justify-center gap-4 mt-6'>
 				<button
 					onClick={() => paginate(currentPage - 1)}
 					disabled={currentPage === 1}
@@ -445,7 +444,7 @@ const MyCoursesSection: React.FC<{ courseData: Course[]; userEmail: string }> = 
 				>
 					<ArrowLeftIcon />
 				</button>
-				<span className='font-inter text-sm' style={{ visibility: totalPages ? 'visible' : 'hidden' }}>
+				<span className='text-sm font-inter' style={{ visibility: totalPages ? 'visible' : 'hidden' }}>
 					<span className='font-bold text-[#1A1A1A]'>{String(currentPage).padStart(2, '0')}</span>
 					<span className='text-[#4F5D89]'> / {String(totalPages).padStart(2, '0')}</span>
 				</span>

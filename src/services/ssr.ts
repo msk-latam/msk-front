@@ -52,188 +52,16 @@ class ApiSSRService {
 		}
 	}
 
-	// async getAllCourses(country?: string, tag?: string, withAll: boolean = false, currentUrl = '') {
-	// 	setLoadingCourses(true);
-
-	// 	// Validar países
-	// 	let validCountries = countries.map((item) => item.id);
-	// 	let onValidCountry = country && validCountries.includes(country);
-	// 	const countryParam = onValidCountry ? `&country=${country}` : '&country=int';
-
-	// 	// Obtener el tag de la URL si no se pasa como argumento
-	// 	if (!tag) {
-	// 		let tagFromURL = new URLSearchParams(currentUrl).get('tag');
-	// 		tag = tagFromURL ? tagFromURL : '';
-	// 	}
-	// 	let tagParam = tag ? `&tag=${tag}` : '';
-	// 	const withAllParam = withAll ? '&filter=all' : '';
-
-	// 	// const queryParams = [countryParam, tagParam, withAllParam].filter(Boolean).join('');
-	// 	const queryParams = [countryParam, withAllParam].filter(Boolean).join('');
-
-	// 	const cacheKey = 'all-courses';
-	// 	// const TTL = 2 * 60 * 60 * 1000; // 24 horas
-	// 	const TTL = 0; // 24 horas
-
-	// 	try {
-	// 		// Verificar si estamos en un entorno donde `window` está disponible
-	// 		const isServer = typeof window === 'undefined';
-
-	// 		if (!isServer) {
-	// 			// Verificar si ya tenemos datos guardados en `localStorage`
-	// 			const cachedData = localStorage.getItem(cacheKey);
-	// 			if (cachedData) {
-	// 				const { value, timestamp } = JSON.parse(cachedData);
-	// 				const now = new Date().getTime();
-
-	// 				if (now - timestamp < TTL) {
-	// 					console.log(`getallcourses obtenidos de localStorage para ${cacheKey}`);
-	// 					setAllCourses(value);
-	// 					setLoadingCourses(false);
-	// 					return value;
-	// 				}
-	// 			}
-	// 		}
-
-	// 		// Si no hay datos válidos en `localStorage`, hacer la llamada a la API
-
-	// 		const response = await fetch(`${API_URL}/products?limit=-1${queryParams}&asd=tes2`);
-
-	// 		if (!response.ok) {
-	// 			throw new Error(`Failed to fetch courses. HTTP status ${response.status}`);
-	// 		}
-
-	// 		const data = await response.json();
-
-	// 		// Guardar los datos en `localStorage`
-	// 		if (!isServer) {
-	// 			localStorage.setItem(
-	// 				cacheKey,
-	// 				JSON.stringify({
-	// 					value: data.products,
-	// 					timestamp: new Date().getTime(),
-	// 				}),
-	// 			);
-	// 			console.log(`getallcourses obtenidos de la API para ${cacheKey}`);
-	// 		}
-
-	// 		setAllCourses(data.products);
-	// 		setLoadingCourses(false);
-	// 		return data.products;
-	// 	} catch (error) {
-	// 		console.error('Network error:', error);
-	// 		setLoadingCourses(false);
-	// 		return error;
-	// 	}
-	// }
-	// async getAllCourses1(country?: string, tag?: string, withAll: boolean = false, currentUrl = '') {
-	// 	setLoadingCourses(true);
-
-	// 	// Validar países
-	// 	let validCountries = countries.map((item) => item.id);
-	// 	let onValidCountry = country && validCountries.includes(country);
-	// 	const countryParam = onValidCountry ? `&country=${country}` : '&country=int';
-
-	// 	// Obtener el tag de la URL si no se pasa como argumento
-	// 	if (!tag) {
-	// 		let tagFromURL = new URLSearchParams(currentUrl).get('tag');
-	// 		tag = tagFromURL ? tagFromURL : '';
-	// 	}
-	// 	let tagParam = tag ? `&tag=${tag}` : '';
-	// 	const withAllParam = withAll ? '&filter=all' : '';
-	// 	const queryParams = [countryParam, withAllParam].filter(Boolean).join('');
-
-	// 	const cacheKey = 'all-courses';
-	// 	const countryCacheKey = 'current-country';
-	// 	const TTL = 0; // Ajusta el TTL si deseas usar caché por tiempo
-
-	// 	try {
-	// 		// Verificar si estamos en un entorno donde `window` está disponible
-	// 		const isServer = typeof window === 'undefined';
-
-	// 		if (!isServer) {
-	// 			// Obtener país almacenado en `localStorage`
-	// 			const cachedCountry = localStorage.getItem(countryCacheKey);
-
-	// 			// Si el país es diferente, limpiar caché y guardar el nuevo país
-	// 			if (cachedCountry !== country) {
-	// 				console.log(`Cambio de país detectado: ${cachedCountry} -> ${country}`);
-	// 				localStorage.removeItem(cacheKey);
-	// 				localStorage.setItem(countryCacheKey, country || 'int');
-	// 			} else {
-	// 				// Verificar si ya tenemos datos guardados en `localStorage`
-	// 				const cachedData = localStorage.getItem(cacheKey);
-	// 				if (cachedData) {
-	// 					const { value, timestamp } = JSON.parse(cachedData);
-	// 					const now = new Date().getTime();
-
-	// 					if (now - timestamp < TTL) {
-	// 						console.log(`getAllCourses obtenidos de localStorage para ${cacheKey}`);
-	// 						setAllCourses(value);
-	// 						setLoadingCourses(false);
-	// 						return value;
-	// 					}
-	// 				}
-	// 			}
-	// 		}
-
-	// 		// Si no hay datos válidos en `localStorage`, hacer la llamada a la API
-	// 		const response = await fetch(`${API_URL}/products?limit=-1${queryParams}
-	// 			`);
-
-	// 		if (!response.ok) {
-	// 			throw new Error(`Failed to fetch courses. HTTP status ${response.status}`);
-	// 		}
-
-	// 		const data = await response.json();
-
-	// 		// Guardar los datos en `localStorage`
-	// 		if (!isServer) {
-	// 			localStorage.setItem(
-	// 				cacheKey,
-	// 				JSON.stringify({
-	// 					value: data.products,
-	// 					timestamp: new Date().getTime(),
-	// 				}),
-	// 			);
-	// 			console.log(`getAllCourses obtenidos de la API para ${cacheKey}`);
-	// 		}
-
-	// 		setAllCourses(data.products);
-	// 		setLoadingCourses(false);
-	// 		return data.products;
-	// 	} catch (error) {
-	// 		console.error('Network error:', error);
-	// 		setLoadingCourses(false);
-	// 		return error;
-	// 	}
-	// }
-
 	async getAllCourses(country?: string): Promise<void> {
 		const JSONProduct = await getJSONByCountry(country);
 		setLoadingCourses(true); // Iniciar indicador de carga
 
 		try {
-			// Validar país y determinar el archivo correspondiente
 			const validCountries = countries.map((item) => item.id);
 			const countryFile = validCountries.includes(country || '') ? `${country}.json` : `int.json`;
 
-			// Construir la URL para el archivo JSON
-			// const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
-			// const fileUrl = `/products/${countryFile}`;
-			// const response = await fetch(`/app/products/${country || 'int'}.json`);
 			const response = JSONProduct;
-			// Obtener los datos desde el archivo JSON
-			// const response = await fetch(fileUrl);
-			// console.log(response);
 
-			// if (!response.ok) {
-			// 	throw new Error(`No se pudo cargar el archivo ${countryFile}. Código de estado: ${response.status}`);
-			// }
-
-			// const data = await response.json();
-
-			// console.log(data);
 			setAllCourses(response);
 			return response;
 		} catch (error) {
@@ -244,113 +72,16 @@ class ApiSSRService {
 		}
 	}
 
-	// async getStoreCourses1(country?: string, currentUrl = '') {
-	// 	setLoadingCourses(true);
-
-	// 	// Validar países
-	// 	let validCountries = countries.map((item) => item.id);
-	// 	let onValidCountry = country && validCountries.includes(country);
-
-	// 	const countryParam = onValidCountry ? `&country=${country}` : '&country=int';
-
-	// 	// Obtener el tag de la URL
-	// 	let tagParam = '';
-	// 	const tag = new URLSearchParams(window.location.search).get('tag');
-	// 	if (tag) {
-	// 		tagParam = `&tag=${tag}`;
-	// 	}
-
-	// 	// Crear clave única para almacenamiento
-	// 	const queryParams = [countryParam, tagParam].filter(Boolean).join('');
-	// 	const cacheKey = `store-courses-${country}-${tag}`;
-	// 	const TTL = 0; // 24 horas
-	// 	// const TTL = 2 * 60 * 60 * 1000; // 24 horas
-
-	// 	try {
-	// 		// Verificar si estamos en un entorno donde `window` está disponible
-	// 		const isServer = typeof window === 'undefined';
-
-	// 		if (!isServer) {
-	// 			// Verificar si ya tenemos datos guardados en `localStorage`
-	// 			const cachedData = localStorage.getItem(cacheKey);
-	// 			if (cachedData) {
-	// 				const { value, timestamp } = JSON.parse(cachedData);
-	// 				const now = new Date().getTime();
-
-	// 				// Verificar si los datos son válidos según el TTL
-	// 				if (now - timestamp < TTL) {
-	// 					console.log(`store courses obtenidos de localStorage para ${cacheKey}`);
-	// 					setStoreCourses(value);
-	// 					setLoadingCourses(false);
-	// 					return value;
-	// 				}
-	// 			}
-	// 		}
-
-	// 		const response = await fetch(`${API_URL}/products?limit=-1`);
-
-	// 		if (!response.ok) {
-	// 			throw new Error(`Failed to fetch courses. HTTP status ${response.status}`);
-	// 		}
-
-	// 		const data = await response.json();
-
-	// 		if (!isServer) {
-	// 			localStorage.setItem(
-	// 				cacheKey,
-	// 				JSON.stringify({
-	// 					value: data.products,
-	// 					timestamp: new Date().getTime(),
-	// 				}),
-	// 			);
-	// 			console.log(`storecourses obtenidos de la API para ${cacheKey}`);
-	// 		}
-
-	// 		setStoreCourses(data.products);
-	// 		setLoadingCourses(false);
-	// 		return data.products;
-	// 	} catch (error) {
-	// 		console.error('Network error:', error);
-	// 		setLoadingCourses(false);
-	// 		return error;
-	// 	}
-	// }
-
 	async getStoreCourses(country?: string): Promise<void> {
 		setLoadingCourses(true); // Asegúrate de que esta función esté definida en el contexto
 		const JSONProduct = await getJSONByCountry(country);
 
 		try {
-			// Lista de países válidos
 			let validCountries = countries.map((item) => item.id);
-			// Seleccionar el archivo JSON según el país
 			const countryFile = validCountries.includes(country || '') ? `${country}.json` : `int.json`;
 
-			// Intentar cargar el archivo JSON
-			// const response = await fetch(`/api/products/${country || 'int'}`);
-			// console.log(response);
-			// if (!response.ok) {
-			// 	throw new Error(`Failed to fetch JSON file. HTTP status ${response.status}`);
-			// }
-
-			// // Parsear los datos JSON
-			// const data = await response.json();
-			// console.log(data);
-
-			// // Actualizar el estado con los productos
-			// setStoreCourses(data.products); // Asegúrate de que esta función esté definida
 			const response = JSONProduct;
-			// Obtener los datos desde el archivo JSON
-			// const response = await fetch(fileUrl);
-			// console.log(response);
 
-			// if (!response.ok) {
-			// 	throw new Error(`No se pudo cargar el archivo ${countryFile}. Código de estado: ${response.status}`);
-			// }
-
-			// const data = await response.json();
-
-			// console.log(data);
 			setAllCourses(response);
 			return response;
 		} catch (error) {
@@ -360,102 +91,6 @@ class ApiSSRService {
 			setLoadingCourses(false); // Asegúrate de que esta función esté definida
 		}
 	}
-
-	// async getBestSellers(country?: string, tag?: string) {
-	// 	setLoadingBestSellers(true);
-
-	// 	try {
-	// 		let countryParam = 'int';
-	// 		let validCountries = countries.map((item) => item.id);
-
-	// 		if (country && validCountries.includes(country)) {
-	// 			countryParam = `${country}`;
-	// 		}
-	// 		const baseURL = process.env.NEXT_PUBLIC_HOST;
-
-	// 		const response = await fetch(`${baseURL}/bestSellers/${country}.json`);
-
-	// 		// console.log('getBestSellers URL', `${API_URL}/home/best-sellers?country=${countryParam}`);
-	// 		// const response = await fetch(`${API_URL}/home/best-sellers?country=${countryParam}`);
-	// 		// const response = await fetch(`http://localhost:3000/bestSellers/${countryParam}.json`);
-
-	// 		if (!response.ok) {
-	// 			throw new Error(`Failed to fetch best sellers. HTTP status ${response.status} Country ${country}`);
-	// 		}
-
-	// 		const data = await response.json();
-
-	// 		console.log(data);
-
-	// 		setLoadingBestSellers(false);
-
-	// 		return data.products;
-	// 	} catch (error) {
-	// 		setLoadingBestSellers(false);
-	// 		console.error('Network error:', error);
-	// 		return error;
-	// 	}
-	// }
-
-	// async getPosts(country?: string) {
-	// 	try {
-	// 		let currentYear = new Date().getFullYear();
-	// 		let validCountries = countries.map((item) => item.id);
-	// 		let countryParam = 'int';
-
-	// 		if (country && validCountries.includes(country)) {
-	// 			countryParam = `${country}`;
-	// 		}
-
-	// 		const postsList: any[] = [];
-
-	// 		// Solicitud para el año actual
-	// 		let response = await fetch(`${API_URL}/posts?year=${currentYear}&country=${countryParam}&limit=-1`);
-
-	// 		if (!response.ok) {
-	// 			throw new Error(`Failed to fetch posts for ${currentYear}. HTTP status ${response.status}`);
-	// 		}
-
-	// 		let data = await response.json();
-	// 		console.log(data.posts);
-
-	// 		if (data.posts && data.posts.length > 0) {
-	// 			const currentYearPosts = data.posts.map((post: any) => ({
-	// 				...post,
-	// 				image: post.thumbnail,
-	// 			}));
-	// 			postsList.push(...currentYearPosts);
-	// 		} else {
-	// 			console.log(`No posts found for ${currentYear}.`);
-	// 		}
-
-	// 		// Solicitud para el año anterior
-	// 		response = await fetch(`${API_URL}/posts?year=${currentYear - 1}&country=${countryParam}&limit=-1`);
-
-	// 		if (!response.ok) {
-	// 			throw new Error(`Failed to fetch posts for ${currentYear - 1}. HTTP status ${response.status}`);
-	// 		}
-
-	// 		data = await response.json();
-
-	// 		if (data.posts && data.posts.length > 0) {
-	// 			const previousYearPosts = data.posts.map((post: any) => ({
-	// 				...post,
-	// 				image: post.thumbnail,
-	// 			}));
-	// 			postsList.push(...previousYearPosts);
-	// 		} else {
-	// 			console.log(`No posts found for ${currentYear - 1}.`);
-	// 		}
-
-	// 		// console.log(postsList, 'Final combined posts list');
-
-	// 		return postsList;
-	// 	} catch (error) {
-	// 		console.error('Network error:', error);
-	// 		return [];
-	// 	}
-	// }
 
 	async getBestSellers(country?: string, tag?: string) {
 		setLoadingBestSellers(true);
@@ -567,7 +202,6 @@ class ApiSSRService {
 	}
 
 	async getSinglePost(slug: string, country: string) {
-		// console.log({ slug, country }, `${API_URL}/posts/${slug}?country=${country}`);
 		try {
 			const response = await fetch(`${API_URL}/posts/${slug}?country=${country}`);
 
@@ -608,7 +242,6 @@ class ApiSSRService {
 		try {
 			// Comprobamos si `window` está definido
 			if (typeof window === 'undefined') {
-				// console.log('Se está ejecutando en un entorno sin window.');
 				return []; // Devuelve un array vacío o maneja la lógica para entornos del lado del servidor
 			}
 
@@ -728,35 +361,14 @@ class ApiSSRService {
 		}
 	}
 
-	// async getProfessions() {
-	//   try {
-	//     //console.log('Get professions 2');
-	//     const response = await fetch(`${baseUrl}/api/professions`);
-
-	//     if (!response.ok) {
-	//       throw new Error(
-	//         `Failed to fetch professions. HTTP status ${response.status}`,
-	//       );
-	//     }
-
-	//     const data = await response.json();
-	//     console.log('getProfessions', { data });
-	//     return data;
-	//   } catch (error) {
-	//     return error;
-	//   }
-	// }
-
 	async getProfessions() {
 		const PROFESSIONS_TTL = 24 * 60 * 60 * 1000;
 		try {
 			if (typeof window !== 'undefined') {
 				const storedProfessions = localStorage.getItem('professions');
-				// console.log(storedProfessions);
 				if (storedProfessions) {
 					const { data, timestamp } = JSON.parse(storedProfessions);
 					const now = new Date().getTime();
-					// console.log(data);
 
 					if (now - timestamp < PROFESSIONS_TTL) {
 						return data;
@@ -764,8 +376,6 @@ class ApiSSRService {
 				}
 			}
 
-			// Si no hay datos o el TTL ha expirado, realizar una nueva llamada a la API
-			// console.log('haciendo llamada api');
 			const response = await fetch(`${baseUrl}/api/professions`);
 
 			if (!response.ok) {
@@ -773,9 +383,7 @@ class ApiSSRService {
 			}
 
 			const data = await response.json();
-			// console.log('getProfessions', { data });
 
-			// Guardar los datos en localStorage solo si estamos en el cliente
 			if (typeof window !== 'undefined') {
 				localStorage.setItem(
 					'professions',
@@ -813,22 +421,18 @@ class ApiSSRService {
 			const SPECIALTIES_TTL = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
 			let storedSpecialties;
 
-			// Verificar si estamos en un entorno de navegador
 			if (typeof window !== 'undefined') {
 				storedSpecialties = localStorage.getItem('specialtiesAndGroups');
 			}
 
-			// Comprobar si hay datos en localStorage y si son válidos
 			if (storedSpecialties) {
 				const { value, timestamp } = JSON.parse(storedSpecialties);
 				const now = new Date().getTime();
 				if (now - timestamp < SPECIALTIES_TTL) {
-					// console.log('especialidades tomados de localStorage');
 					return value; // Retorna los datos almacenados
 				}
 			}
 
-			// console.log('Llamando a la API para obtener especialidades y grupos');
 			const response = await fetch(`${baseUrl}/api/specialities`);
 
 			if (!response.ok) {
@@ -939,7 +543,6 @@ class ApiSSRService {
 			if (contentType && contentType.includes('application/json')) {
 				return await response.json();
 			} else {
-				// console.log(response);
 				return response;
 			}
 		} catch (e) {
@@ -1020,55 +623,6 @@ class ApiSSRService {
 			console.error('Pago error', { err });
 		}
 	}
-
-	// async createDrafContract(
-	//   product: FetchSingleProduct,
-	//   profile: UserProfile | null,
-	// ) {
-	//   console.log({ product, profile });
-	//   const body = {
-	//     customer_id: profile?.entity_id_crm,
-	//     products: [
-	//       {
-	//         code: product.ficha.product_code,
-	//         quantity: 1,
-	//         total: product.total_price,
-	//       },
-	//     ],
-	//     status: 'Borrador',
-	//     currency: 'ARS',
-	//     country: 'Argentina',
-	//     grand_total: product?.total_price,
-	//   };
-
-	//   try {
-	//     const response = await fetch(
-	//       `http://127.0.0.1:8000/api/gateway/api/mercadopago/arg/our_test`,
-	//       {
-	//         method: 'POST',
-	//         headers: {
-	//           'Content-Type': 'application/json',
-
-	//           Authorization: `Bearer $2y$12$tdFqIBqa413sfYENjGjVR.lUOfcRnRaXBgBDUeQIBg1BjujlLbmQW`, //este token va asi
-	//         },
-	//         body: JSON.stringify(body),
-	//       },
-	//     );
-
-	//     // if (!response.ok) {
-	//     //   throw new Error(`HTTP error! status: ${response.status}`);
-	//     // }
-	//     console.log({ body });
-	//     console.log({ response });
-	//     const data = response.json();
-	//     console.log({ data });
-
-	//     return data;
-	//   } catch (err) {
-	//     console.error('Pago error', { err });
-	//     return { error: true, message: '' };
-	//   }
-	// }
 
 	buildDraftContractBody(product: FetchSingleProduct, profile: UserProfile | null) {
 		const body = {

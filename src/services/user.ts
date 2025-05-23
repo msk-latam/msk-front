@@ -60,7 +60,5 @@ export const getUserCourses = (res: any, courses: any): UserCourseProgress[] => 
 		}
 	});
 
-	// console.log(res.contact.courses_progress, { courses });
-
 	return coursesList;
 };

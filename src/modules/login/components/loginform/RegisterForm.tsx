@@ -82,7 +82,6 @@ export default function RegisterForm({ onBack }: RegisterFormProps) {
 		const langMatch = currentPath.match(/^\/([^\/]+)\/login/);
 		const lang = langMatch ? langMatch[1] : '';
 
-		console.log('lang', lang);
 		const countryMapping: any = {
 			ar: 'Argentina',
 			bo: 'Bolivia',

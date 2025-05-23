@@ -9,8 +9,6 @@ type Props = {
 export async function generateBlogMetadata({ params }: Props) {
 	const currentCountry = params.lang || cookies().get('country')?.value;
 
-	console.log(currentCountry);
-
 	try {
 		const [postMetadata] = await ssr.getSinglePost(params.slug, currentCountry as string);
 		const hostname = process.env.VERCEL_URL || '';
