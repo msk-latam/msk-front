@@ -104,15 +104,27 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 					<div className='mb-4 bg-white rounded-[30px] p-[36px]  '>
 						{pageData?.bloque_de_terminos?.map((bloque, index) => (
 							<div key={index} className='mb-10 '>
-								<h2 className='mb-8 text-3xl font-semibold mx-28'>{bloque.titulo}</h2>
+								<h2 className='mb-8 mx-28 text-[22px] font-bold leading-[1.61] text-[#1A1A1A] font-raleway'>
+									{bloque.titulo}
+								</h2>
 
 								{bloque.fecha_desde && bloque.fecha_hasta && (
-									<p className='mb-4 text-lg text-gray-600 mx-28'>
+									<p className='mx-28 mb-4 text-base font-normal leading-[161%] text-[#1A1A1A] font-inter'>
 										Promoción válida del <strong>{bloque.fecha_desde}</strong> al <strong>{bloque.fecha_hasta}</strong>
 									</p>
 								)}
 
-								<div className='text-lg prose max-w-none mx-28' dangerouslySetInnerHTML={{ __html: bloque.descripcion }} />
+								<div
+									style={{
+										color: 'var(--Black-Soft, #1A1A1A)',
+										fontSize: '16px',
+										fontStyle: 'normal',
+										fontWeight: 400,
+										lineHeight: '161%',
+									}}
+									className='mx-28 font-inter'
+									dangerouslySetInnerHTML={{ __html: bloque.descripcion }}
+								/>
 							</div>
 						))}
 					</div>

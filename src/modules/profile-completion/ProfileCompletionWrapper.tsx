@@ -134,12 +134,12 @@ export default function ProfileCompletionWrapper() {
 			<section className='w-full bg-white md:rounded-3xl rounded-t-3xl  shadow-md -mt-[40px] md:-mt-20 md:mx-20 z-[1] relative overflow-visible max-w-[1600px] animate-pulse'>
 				<div className='w-full max-w-[1632px] h-fit relative z-8 mx-auto px-6 pt-[84px] md:pb-28 mb-16 md:py-16 md:px-9 font-inter'>
 					{/* Skeleton for Back Button */}
-					<div className='md:top-10 md:left-8 top-5 left-5 absolute w-10 h-10 rounded-full bg-gray-200'></div>
+					<div className='absolute w-10 h-10 bg-gray-200 rounded-full md:top-10 md:left-8 top-5 left-5'></div>
 
 					{/* Skeleton for Title and Progress */}
 					<div className='text-center mb-6 z-[1]'>
-						<div className='h-8 bg-gray-200 rounded w-3/4 mx-auto mb-5'></div>
-						<div className='flex justify-center items-center space-x-2'>
+						<div className='w-3/4 h-8 mx-auto mb-5 bg-gray-200 rounded'></div>
+						<div className='flex items-center justify-center space-x-2'>
 							<div className='w-16 h-2 bg-gray-300 rounded-full'></div>
 							<div className='w-16 h-2 bg-gray-200 rounded-full'></div>
 							<div className='w-16 h-2 bg-gray-200 rounded-full'></div>
@@ -151,7 +151,7 @@ export default function ProfileCompletionWrapper() {
 					<div className='max-w-md mx-auto space-y-6 font-inter'>
 						{[...Array(4)].map((_, i) => (
 							<div key={i} className='space-y-2'>
-								<div className='h-4 bg-gray-200 rounded w-1/4'></div>
+								<div className='w-1/4 h-4 bg-gray-200 rounded'></div>
 								<div className='h-10 bg-gray-200 rounded'></div>
 							</div>
 						))}

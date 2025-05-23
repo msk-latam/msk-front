@@ -102,7 +102,17 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 				<section className='w-full -mt-[40px] z-[10] relative overflow-visible max-w-[1800px] mx-auto'>
 					<div className='mb-4 bg-white rounded-[30px] p-[36px] mx-24'>
 						{/* Render the HTML content from the API */}
-						<div className='mx-56 text-2xl whitespace-pre-line' dangerouslySetInnerHTML={{ __html: displayContent }} />
+						<div
+							className='mx-56 text-2xl whitespace-pre-line font-inter'
+							style={{
+								color: 'var(--Black-Soft, #1A1A1A)',
+								fontSize: '16px',
+								fontStyle: 'normal',
+								fontWeight: 400,
+								lineHeight: '161%',
+							}}
+							dangerouslySetInnerHTML={{ __html: displayContent }}
+						/>
 					</div>
 				</section>
 			</main>

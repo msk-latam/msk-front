@@ -105,7 +105,17 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 				<section className='w-full -mt-[100px] z-[10] relative overflow-visible max-w-[1600px] mx-auto '>
 					<div className='mb-4 bg-white rounded-[30px] p-[36px] mt-8'>
 						{/* Render the HTML content from the API */}
-						<div className='mx-56 mt-8 whitespace-pre-line' dangerouslySetInnerHTML={{ __html: styledContent }} />
+						<div
+							className='mx-56 mt-8 whitespace-pre-line'
+							style={{
+								color: 'var(--Black-Soft, #1A1A1A)',
+								fontSize: '16px',
+								fontStyle: 'normal',
+								fontWeight: 400,
+								lineHeight: '161%',
+							}}
+							dangerouslySetInnerHTML={{ __html: styledContent }}
+						/>
 					</div>
 				</section>
 			</main>

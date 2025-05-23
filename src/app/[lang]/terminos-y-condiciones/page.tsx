@@ -101,6 +101,13 @@ export default function TerminosYCondiciones({ params }: { params: { slug: strin
 						{/* Render the HTML content from the API */}
 						<div
 							className='mx-56 mt-10 text-2xl whitespace-pre-line font-lora text-[#374151]'
+							style={{
+								color: 'var(--Black-Soft, #1A1A1A)',
+								fontSize: '16px',
+								fontStyle: 'normal',
+								fontWeight: 400,
+								lineHeight: '161%',
+							}}
 							dangerouslySetInnerHTML={{ __html: displayContent }}
 						/>
 					</div>
