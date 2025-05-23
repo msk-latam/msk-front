@@ -34,8 +34,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
 	const lang: string = firstSegment && supportedLanguages.includes(firstSegment) ? firstSegment : 'ar';
 
 	const [searchTerm, setSearchTerm] = useState('');
-	const debouncedSearchTerm = useDebounce(searchTerm, 300);
+	const debouncedSearchTerm = useDebounce(searchTerm, 500);
 	const { courses, loading } = useSearchCourses(lang, debouncedSearchTerm);
+
+	console.log(debouncedSearchTerm);
 
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const searchContainerRef = useRef<HTMLDivElement>(null);

@@ -9,13 +9,10 @@ interface SearchBarProps {
 const SearchBar: FC<SearchBarProps> = ({ onSearch }) => {
 	const { addFilter, removeFilter } = useStoreFilters();
 
-	// Local state for the raw value coming from the input
 	const [term, setTerm] = useState('');
 
-	// Debounce the raw term so we only fire the heavy logic once the user pauses typing
 	const debouncedTerm = useDebounce(term, 300);
 
-	// Sync the debounced term with the store filters and the optional callback
 	useEffect(() => {
 		const trimmed = debouncedTerm.trim();
 
@@ -32,6 +29,7 @@ const SearchBar: FC<SearchBarProps> = ({ onSearch }) => {
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setTerm(event.target.value);
+		console.log(term);
 	};
 
 	return (
