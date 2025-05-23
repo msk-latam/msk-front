@@ -81,7 +81,7 @@ const Masterclass = () => {
 	return (
 		<section
 			aria-labelledby='masterclass-heading'
-			className='relative flex items-center justify-center w-full min-h-screen text-white -translate-y-0 z-5 font-raleway'
+			className='relative flex items-center justify-center w-full h-full text-white -translate-y-0 z-5 font-raleway'
 		>
 			<div className='absolute inset-0 bg-black/40 backdrop-blur-sm z-[1] md:hidden ' />
 			<Image
@@ -142,14 +142,16 @@ const Masterclass = () => {
 
 				{/* Mobile */}
 				{professionals.length === 1 ? (
-					<div className='md:hidden w-full flex flex-col items-stretch pl-6 gap-6 z-[1] h-[500px] justify-between'>
+					<div className='md:hidden w-full flex flex-col items-stretch pl-6 gap-6 z-[1] h-[500px] justify-between py-20'>
 						{masterclass?.tags?.[0] && (
 							<h2 className='self-start px-6 py-3 tracking-widest uppercase border border-white rounded-full text-1xl'>
 								{masterclass.tags[0]}
 							</h2>
 						)}
-						<h2>Casos emblemáticos en gestión hospitalaria: análisis de decisiones complejas y sus aprendizajes</h2>
-						<p>
+						<h2 className='text-3xl font-bold'>
+							Casos emblemáticos en gestión hospitalaria: análisis de decisiones complejas y sus aprendizajes
+						</h2>
+						<p className='text-lg font-semibold'>
 							Junto con el Dr. Néstor Feldman, focalízate en la aplicación de herramientas clave en la administración de
 							instituciones de salud
 						</p>
