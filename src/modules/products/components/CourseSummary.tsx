@@ -132,13 +132,10 @@ export default function CourseSummary({ slug, lang }: CourseSummaryProps) {
 					<img src='/icons/course/summary/person.svg' alt='' className='w-4 h-4' />
 					{enrolledFormatted} profesionales inscriptos
 				</li>
-
-				{cedente?.slug !== 'tropos' && (
-					<li className='flex items-center gap-2'>
-						<img src='/icons/course/summary/download.svg' alt='' className='w-4 h-4' />
-						{certification ? 'Incluye material descargable' : 'Sin material adicional'}
-					</li>
-				)}
+				<li className='flex items-center gap-2'>
+					<img src='/icons/course/summary/download.svg' alt='' className='w-4 h-4' />
+					Incluye material descargable
+				</li>
 			</ul>
 
 			{cedente && (
