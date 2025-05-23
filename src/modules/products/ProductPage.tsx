@@ -146,6 +146,8 @@ export default function ProductPageComponent({ course, lang }: ProductPageCompon
 
 		const isDownloadable = metadata?.resource === 'downloadable';
 
+		console.log(metadata);
+
 		return (
 			<>
 				{/* HEADER CON GRADIENTE COMO EN LOGIN */}

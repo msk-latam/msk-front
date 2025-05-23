@@ -18,6 +18,8 @@ export default async function ProductPage({ params }: { params: { lang: string; 
 	const course = await res.json();
 	const structuredData = generateCourseStructuredData(course);
 
+	console.log(structuredData);
+
 	return (
 		<main className='bg-[#F3F4F6] text-neutral-900'>
 			<ProductPageComponent course={course} lang={lang} />
