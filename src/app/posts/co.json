@@ -7,6 +7,147 @@
 	"total_products": 262,
 	"posts": [
 		{
+			"id": 231326,
+			"title": "Por qué la investigación transforma el futuro de la enfermería",
+			"slug": "investigacion-transforma-el-futuro-de-la-enfermeria",
+			"permalink": "https://wp.msklatam.com/nota/enfermeria/investigacion-transforma-el-futuro-de-la-enfermeria/",
+			"thumbnail": "https://wp.msklatam.com/wp-content/uploads/2022/09/Foto-investigacion-transforma-el-futuro-de-la-enfermeria-scaled-e1745935027276.jpg",
+			"featured_image": [
+				"https://wp.msklatam.com/wp-content/uploads/2022/09/Foto-investigacion-transforma-el-futuro-de-la-enfermeria-scaled-e1745935027276.jpg",
+				"1000",
+				"667",
+				""
+			],
+			"excerpt": "La investigación en enfermería es clave para reducir brechas entre teoría y práctica, impulsar innovaciones y fortalecer el rol profesional. Aunque Latinoamérica ha avanzado, persisten desafíos como la escasa participación clínica y la baja colaboración regional. Este artículo analiza el panorama actual y por qué investigar es también una forma de cuidar.",
+			"date": "Mayo 21, 2025",
+			"author": {
+				"id": 254592,
+				"name": "Santiago Ríos Hernández",
+				"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+			},
+			"is_contenido_exclusivo": false,
+			"is_contenido_legado": false,
+			"authors": [
+				{
+					"id": 254592,
+					"name": "Santiago Ríos Hernández",
+					"description": "Licenciado en Periodismo por la Universidad Nacional Autónoma de México. Cazador de historias y respuestas con tres décadas de experiencia en la prensa especializada y del ámbito editorial.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/08/SRH02-scaled.jpg"
+				},
+				{
+					"id": 258873,
+					"name": "Fernando Fuentes",
+					"description": "Médico. Especialista en Neumonología por la Universidad de Buenos Aires. Comunicador científico.",
+					"avatar": "https://wp.msklatam.com/wp-content/uploads/2023/09/IMG-20230825-WA0000.jpg"
+				}
+			],
+			"featured_text_field": "",
+			"suggest_content": {
+				"description": "",
+				"link": ""
+			},
+			"the_most_read": [
+				{
+					"id": 341217,
+					"title": "Avances en investigación clínica con impacto en la medicina",
+					"slug": "investigacion-clinica-con-impacto-en-la-medicina",
+					"link": "https://wp.msklatam.com/nota/medicina/investigacion-clinica-con-impacto-en-la-medicina/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-investigacion-clinica-con-impacto-en-la-medicina-scaled-e1745848206454.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 252556,
+					"title": "Liderazgo médico: una necesidad que se aprende",
+					"slug": "liderazgo-medico-una-necesidad-que-se-aprende",
+					"link": "https://wp.msklatam.com/nota/medicina/liderazgo-medico-una-necesidad-que-se-aprende/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2023/04/Se-necesitan-mas-medicos-y-medicas-en-la-gestion-sanitaria.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 253555,
+					"title": "Capacitación en salud: una inversión que transforma",
+					"slug": "capacitacion-en-salud-una-inversion-que-transforma",
+					"link": "https://wp.msklatam.com/nota/e-learning/capacitacion-en-salud-una-inversion-que-transforma/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2023/09/Foto-capacitacion-en-salud-una-inversion-que-transforma-scaled-e1745327819157.jpg",
+					"category": "Actualidad"
+				},
+				{
+					"id": 340114,
+					"title": "El impacto de la inteligencia artificial en la enfermería",
+					"slug": "impacto-de-la-inteligencia-artificial-en-enfermeria",
+					"link": "https://wp.msklatam.com/nota/enfermeria/impacto-de-la-inteligencia-artificial-en-enfermeria/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-impacto-de-la-inteligencia-artificial-en-enfermeria-scaled-e1744907902528.png",
+					"category": "Actualidad"
+				},
+				{
+					"id": 339799,
+					"title": "¿Puede la inteligencia artificial permitir una atención médica más humana?",
+					"slug": "ia-atencion-medica-mas-humana",
+					"link": "https://wp.msklatam.com/nota/medicina/ia-atencion-medica-mas-humana/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2025/04/Foto-ia-atencion-medica-mas-humana-scaled-e1744661669205.jpg",
+					"category": "Actualidad"
+				}
+			],
+			"cursos_recomendados": [
+				{
+					"id": 36328,
+					"title": "Medicina de urgencias",
+					"link": "https://wp.msklatam.com/nota/course/curso-superior-en-medicina-de-urgencia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/02/9004437_fotoprimaria.jpg"
+				},
+				{
+					"id": 62098,
+					"title": "Obstetricia para profesionales de la salud",
+					"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/",
+					"image": "https://wp.msklatam.com/wp-content/uploads/2020/04/foto-primaria.jpg"
+				}
+			],
+			"fuentes": [
+				{
+					"fuente": "Matagira-Rondón G, Agudelo-Cifuentes MC, Toupin I, Bergeron DA. Nursing research in Latin America: priorities and possible solutions to move it forward. Rev CES Enf [Internet];3(1):46-54. Disponible en: https://revistas.ces.edu.co/index.php/enfermeria/article/view/6691/3662"
+				},
+				{
+					"fuente": "Manfredi M. El desarrollo de enfermería en América Latina: una mirada estratégica. Revista Latino-americana de Enfermagem. Disponible en: https://doi.org/10.1590/S0104-11691993000100004"
+				},
+				{
+					"fuente": "Ramírez-Sánchez, Sylvia Claudine, Pérez-Solís, Olivia Milagros, & Lozano-Rangel, Olga. (2019). Perspectiva de la Investigación en Enfermería: El caso México. Ene, 13(4), 1349. Epub 01 de junio de 2020. Recuperado en 29 de abril de 2025, de http://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S1988-348X2019000400008&lng=es&tlng=es."
+				}
+			],
+			"categories": [
+				{
+					"id": 1611,
+					"primary": true,
+					"name": "Enfermería",
+					"slug": "enfermeria",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/enfermeria/"
+				},
+				{
+					"id": 1540,
+					"name": "Actualidad",
+					"slug": "actualidad",
+					"description": "",
+					"link": "https://wp.msklatam.com/nota/category/actualidad/"
+				}
+			],
+			"primary_category": "1611",
+			"tags": [],
+			"specialty": {
+				"term_id": 1090,
+				"name": "Medicina general",
+				"slug": "medicina-general",
+				"term_group": 0,
+				"term_taxonomy_id": 1090,
+				"taxonomy": "product_cat",
+				"description": "",
+				"parent": 0,
+				"count": 1359,
+				"filter": "raw"
+			},
+			"reading_time": "6",
+			"link": "https://wp.msklatam.com/nota/course/formacion-integral-en-obstetricia/"
+		},
+		{
 			"id": 341217,
 			"title": "Avances en investigación clínica con impacto en la medicina",
 			"slug": "investigacion-clinica-con-impacto-en-la-medicina",
