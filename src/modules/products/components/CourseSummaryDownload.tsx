@@ -1,12 +1,10 @@
 'use client';
 
-// import { getLocalizedUrl } from '@/utils/getLocalizedUrl';
-// import { Phone } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import { useCourseSummary } from '../hooks/useCourseSummary';
 import SkeletonCourseSummaryCard from '../skeletons/SkeletonCourseSummaryCard';
-import DownloadSyllabusModal from './DownloadSyllabusModal'; // 👈 Asegúrate de importar esto
+import DownloadSyllabusModal from './DownloadSyllabusModal';
 
 interface CourseSummaryProps {
 	slug: string;
@@ -17,12 +15,6 @@ export default function CourseSummaryDownload({ slug, lang }: CourseSummaryProps
 	const { data, loading } = useCourseSummary(slug, lang);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
-	// const enrolledFormatted = data?.enrolled;
-	// const modules = data?.modules;
-	// const duration = data?.duration + ' horas estimadas';
-	// const certification = data?.certification;
-	// const max_installments = data?.max_installments;
-	// const showPrice = lang.toLowerCase() !== 'es';
 	const files = data?.files;
 
 	if (loading) return <SkeletonCourseSummaryCard />;
@@ -35,7 +27,7 @@ export default function CourseSummaryDownload({ slug, lang }: CourseSummaryProps
 			<Image
 				src={data?.featured_images.high ?? ''}
 				alt='Curso'
-				className='rounded-xl w-full object-cover mb-6'
+				className='object-cover w-full mb-6 rounded-xl'
 				width={420}
 				height={300}
 			/>
@@ -61,7 +53,7 @@ export default function CourseSummaryDownload({ slug, lang }: CourseSummaryProps
 					onClick={handleDownloadClick}
 					className='bg-[#9200AD] hover:bg-[#6b1679] text-white w-full py-3 rounded-full font-inter font-medium text-base transition'
 				>
-					Descargar ahora
+					Descargar gratis
 				</button>
 			</div>
 

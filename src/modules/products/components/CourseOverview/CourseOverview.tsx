@@ -235,7 +235,15 @@ export default function CourseOverview({ slug, lang, onHideEmpty, isDownloadable
 	}, [loading, error, data, isEmptyDynamicContent, onHideEmpty]);
 
 	if (loading) return <SkeletonCourseOverview />;
-	if (error || !data || isEmptyDynamicContent) return null;
+	if (error || !data || isEmptyDynamicContent)
+		return (
+			<>
+				<p className='my-12 text-2xl font-medium font-raleway'>
+					Con esta guía profesional, obtendrás nuevos conocimientos técnicos de alto valor.
+				</p>
+				<StepByStep isDownloadable={isDownloadable} />
+			</>
+		);
 
 	const formattedWithThis = hasWithThisCourse
 		? formatWithThisCourse(Array.isArray(data.with_this_course) ? data.with_this_course.join(' ') : data.with_this_course)

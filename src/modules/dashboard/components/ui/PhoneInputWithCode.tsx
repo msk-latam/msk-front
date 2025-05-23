@@ -156,7 +156,7 @@ const PhoneInputWithCode: React.FC<PhoneInputWithCodeProps> = ({
 
 	return (
 		<div className='flex flex-col '>
-			<label htmlFor={`${id}-code`} className='block text-sm font-medium text-[#1a1a1a] mb-1.5'>
+			<label htmlFor={`${id}-code`} className='block text-sm font-medium text-[#1a1a1a] '>
 				{label}
 			</label>
 			<div className='flex flex-row items-end'>

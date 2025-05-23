@@ -540,6 +540,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 									}));
 								}}
 							/>
+
 							<Input
 								id='billingName'
 								label='Razón social'
@@ -548,6 +549,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 								value={formData.company_name || ''}
 								onChange={handleChange}
 								placeholder='Ingresar razón social'
+								className='flex flex-col justify-end'
 							/>
 							<Select
 								id='document_type'

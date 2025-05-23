@@ -17,14 +17,14 @@ export default function CourseDescription({ slug, lang, onHideEmpty }: CourseDes
 
 	const MAX_LENGTH = 600;
 
-const hasNotified = useRef(false);
+	const hasNotified = useRef(false);
 
-useEffect(() => {
-	if (!hasNotified.current && !loading && (error || !data?.content)) {
-		onHideEmpty?.();
-		hasNotified.current = true;
-	}
-}, [loading, error, data?.content, onHideEmpty]);
+	useEffect(() => {
+		if (!hasNotified.current && !loading && (error || !data?.content)) {
+			onHideEmpty?.();
+			hasNotified.current = true;
+		}
+	}, [loading, error, data?.content, onHideEmpty]);
 
 	if (loading) {
 		return <CourseDescriptionSkeleton />;
@@ -40,15 +40,15 @@ useEffect(() => {
 	const displayDescription = isExpanded
 		? description
 		: description.length > MAX_LENGTH
-			? description.slice(0, MAX_LENGTH) + '...'
-			: description;
+		? description.slice(0, MAX_LENGTH) + '...'
+		: description;
 
 	const handleToggle = () => {
 		setIsExpanded((prev) => !prev);
 	};
 
 	return (
-		<section className='bg-white rounded-[38px] md:pt-7 md:pb-3'>
+		<section className='bg-white rounded-[38px] md:pt-7 md:pb-3  '>
 			<h1 className='text-2xl md:text-[34px] font-raleway font-medium mb-6 text-[#1A1A1A]'>{title}</h1>
 
 			<article className='text-[#1A1A1A] text-sm font-inter font-light text-[16px] leading-[161%] relative'>
@@ -58,7 +58,7 @@ useEffect(() => {
 				/>
 
 				{description.length > MAX_LENGTH && !isExpanded && (
-					<div className='absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-white to-transparent pointer-events-none'></div>
+					<div className='absolute bottom-0 left-0 right-0 pointer-events-none h-1/3 bg-gradient-to-t from-white to-transparent'></div>
 				)}
 			</article>
 

@@ -50,6 +50,7 @@ export function useCourseSummary(slug: string, lang: string) {
 					throw new Error(`HTTP error! status: ${response.status}`);
 				}
 				const result = await response.json();
+				console.log(result);
 				// Assuming the prices data is nested under a 'prices' key
 				const setResult = {
 					featured_images: result.featured_images,
@@ -66,7 +67,7 @@ export function useCourseSummary(slug: string, lang: string) {
 					cedente: result.cedente,
 					currency: result.prices.currency,
 					currency_code: result.prices.currency_code,
-					files: result.files,
+					files: result.temario,
 				};
 
 				setData(setResult || null);

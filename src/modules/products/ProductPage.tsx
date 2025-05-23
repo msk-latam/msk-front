@@ -146,8 +146,6 @@ export default function ProductPageComponent({ course, lang }: ProductPageCompon
 
 		const isDownloadable = metadata?.resource === 'downloadable';
 
-		console.log(metadata);
-
 		return (
 			<>
 				{/* HEADER CON GRADIENTE COMO EN LOGIN */}
@@ -163,10 +161,10 @@ export default function ProductPageComponent({ course, lang }: ProductPageCompon
 				</div>
 
 				{/* CONTENIDO PRINCIPAL */}
-				<main className='bg-gray-50 z-[9]'>
+				<main className='bg-gray-50 z-[0]'>
 					<div className='flex flex-col-reverse lg:flex-row gap-6 md:py-12 pt-12 overflow-visible max-w-[1600px] md:px-4 mx-auto'>
 						{/* Columna izquierda */}
-						<div className='w-full md:w-2/3 space-y-6 z-[9]'>
+						<div className='w-full md:w-2/3 space-y-6 z-[0]'>
 							<div
 								className={`w-full bg-white rounded-[38px] flex flex-col relative z-[9] md:-mt-20 px-5 pt-9 pb-3 md:px-9 gap-6 md:gap-0 ${
 									allSectionsHidden ? 'hidden' : ''
@@ -231,7 +229,7 @@ export default function ProductPageComponent({ course, lang }: ProductPageCompon
 					<div className='w-full z-[5]'>
 						<CourseTestimonials slug={slug} lang={lang} />
 					</div>
-					<Inscription slug={slug} lang={lang} />
+					<Inscription slug={slug} lang={lang} isDownloable={isDownloadable} />
 				</main>
 
 				<Footer />

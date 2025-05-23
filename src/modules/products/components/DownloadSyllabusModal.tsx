@@ -295,7 +295,7 @@ export default function DownloadSyllabusModal({ fileUrl, onClose, slug, isDownlo
 
 	return (
 		<div
-			className='fixed inset-0 bg-black/50 flex items-center justify-center z-[99] px-4 !mt-0'
+			className='fixed inset-0 bg-black/50 flex items-center justify-center z-[99] px-4 !mt-0 overscroll-none'
 			onClick={(e) => {
 				if (modalRef.current && !modalRef.current.contains(e.target as Node)) onClose();
 				else e.stopPropagation();
@@ -522,12 +522,7 @@ export default function DownloadSyllabusModal({ fileUrl, onClose, slug, isDownlo
 								Procesando tu solicitud...
 							</div>
 						)}
-						{/* 
-            {status === "success" && (
-              <div className="p-3 mt-4 text-sm text-center text-green-600 bg-green-100 rounded-lg">
-                ¡Archivo descargado con éxito!
-              </div>
-            )} */}
+
 						{status === 'error' && (
 							<div className='p-3 mt-4 text-sm text-center text-red-600 bg-red-100 rounded-lg'>{errorMessage}</div>
 						)}

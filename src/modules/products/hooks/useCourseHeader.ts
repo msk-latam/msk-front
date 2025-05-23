@@ -13,7 +13,7 @@ export function useCourseHeader(slug: string, lang: string) {
 		getCourse(slug, lang)
 			.then((courseData) => {
 				// courseData es todo el objeto del curso
-				const headerData: CourseSectionHeader = courseData.sections.header;
+				const headerData: CourseSectionHeader = courseData;
 				setData(headerData);
 			})
 			.catch((err) => {
