@@ -226,7 +226,7 @@ export default function ProductPageComponent({ course, lang }: ProductPageCompon
 					</div>
 
 					{/* Testimonios */}
-					<div className='w-full z-[5]'>
+					<div className='w-full z-[5] mt-56 md:mt-0'>
 						<CourseTestimonials slug={slug} lang={lang} />
 					</div>
 					<Inscription slug={slug} lang={lang} isDownloable={isDownloadable} />
