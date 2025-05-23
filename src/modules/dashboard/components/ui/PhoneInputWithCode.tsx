@@ -154,11 +154,11 @@ const PhoneInputWithCode: React.FC<PhoneInputWithCodeProps> = ({
 	const currentSelectValue = countryOptions.find((option) => option.value === internalCode);
 
 	return (
-			<div className='flex flex-col '>
-				<label htmlFor={`${id}-code`} className='block text-sm font-medium text-[#1a1a1a] mb-1.5'>
-					{label}
-				</label>
-		<div className='flex flex-row items-end'>
+		<div className='flex flex-col '>
+			<label htmlFor={`${id}-code`} className='block text-sm font-medium text-[#1a1a1a] mb-1.5'>
+				{label}
+			</label>
+			<div className='flex flex-row items-end'>
 				<SelectAsReactSelect
 					{...({} as SelectProps<CountryOptionType, false>)}
 					id={`${id}-code`}
@@ -181,8 +181,8 @@ const PhoneInputWithCode: React.FC<PhoneInputWithCodeProps> = ({
 							width: '130px',
 							borderTopRightRadius: 0,
 							borderBottomRightRadius: 0,
-							paddingTop: '4px',
-							paddingBottom: '4px',
+							paddingTop: '6px',
+							paddingBottom: '6px',
 							paddingLeft: '8px',
 							paddingRight: '8px',
 							borderColor: state.isFocused ? '#9200AD' : '#d1d5db',
@@ -211,18 +211,18 @@ const PhoneInputWithCode: React.FC<PhoneInputWithCodeProps> = ({
 					}}
 					classNamePrefix='react-select'
 				/>
-			<Input
-				id={id}
-				label=' '
-				type='tel'
-				name={id}
-				value={internalNumber}
-				onChange={handleNumberChange}
-				placeholder='Ingresar teléfono'
-				autoComplete='tel-national'
-				required={required}
-				className='mb-0 border-l-0 rounded-l-none w-full'
-			/>
+				<Input
+					id={id}
+					label=' '
+					type='tel'
+					name={id}
+					value={internalNumber}
+					onChange={handleNumberChange}
+					placeholder='Ingresar teléfono'
+					autoComplete='tel-national'
+					required={required}
+					className='w-full mb-0 border-l-0 rounded-l-none'
+				/>
 			</div>
 		</div>
 	);
