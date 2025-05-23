@@ -212,7 +212,7 @@ export default function ProductPageComponent({ course, lang }: ProductPageCompon
 								/>
 							</div>
 							<div className=''>{!isDownloadable && <CourseVideo slug={slug} lang={lang} />}</div>
-							<div className=''>{!isDownloadable && <CourseCertificate slug={slug} lang={lang} />}</div>
+							<div className='w-full'>{!isDownloadable && <CourseCertificate slug={slug} lang={lang} />}</div>
 							<div className=''>{!isDownloadable && <CourseSyllabus slug={slug} lang={lang} />}</div>
 							<div className='w-full'>{!isDownloadable && <CourseCards />}</div>
 							<div className=''>{!isDownloadable && <CourseSupportForm slug={slug} lang={lang} />}</div>

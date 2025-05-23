@@ -142,7 +142,7 @@ const Masterclass = () => {
 
 				{/* Mobile */}
 				{professionals.length === 1 ? (
-					<div className='md:hidden w-full flex flex-col items-stretch pl-6 gap-6 z-[1] h-[500px] justify-between py-20'>
+					<div className='md:hidden  flex flex-col items-stretch px-3 gap-6 z-[1] h-[600px] justify-between py-20'>
 						{masterclass?.tags?.[0] && (
 							<h2 className='self-start px-6 py-3 tracking-widest uppercase border border-white rounded-full text-1xl'>
 								{masterclass.tags[0]}
@@ -155,6 +155,22 @@ const Masterclass = () => {
 							Junto con el Dr. Néstor Feldman, focalízate en la aplicación de herramientas clave en la administración de
 							instituciones de salud
 						</p>
+						<Link
+							//href={getLocalizedUrl(lang, new URL(masterclassLink ?? '#').pathname.replace('/producto/', '/tienda/'))}
+							href={getLocalizedUrl(lang, masterclassLink || '')}
+							className='flex items-center content-center justify-center gap-2 px-6 py-2 text-sm font-semibold text-center text-black transition bg-white rounded-full md:text-base md:mx-0 hover:scale-105'
+						>
+							{masterclass?.link.title || ''}
+							<svg width='24' height='22' viewBox='0 0 25 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+								<path
+									d='M5.21582 12H19.2158M19.2158 12L12.2158 5M19.2158 12L12.2158 19'
+									stroke='black'
+									strokeWidth='1.5'
+									strokeLinecap='round'
+									strokeLinejoin='round'
+								/>
+							</svg>
+						</Link>
 					</div>
 				) : (
 					<section className='md:hidden w-full flex flex-col items-center pl-6 gap-6 overflow-x-hidden z-[1]'>

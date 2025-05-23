@@ -12,7 +12,8 @@ export function useCourseCertificate(slug: string | number, lang: string) {
 			setLoading(true);
 			try {
 				const res = await axios.get(`https://cms1.msklatam.com/wp-json/msk/v1/product/${slug}?lang=${lang}`);
-				setData(res.data.sections.has_certificate);
+				console.log(res);
+				setData(res.data.sections.certificate.has_certificate);
 			} catch (err) {
 				setError('Error al cargar el encabezado del curso');
 				console.error(err);

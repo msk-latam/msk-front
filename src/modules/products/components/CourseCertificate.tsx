@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useCourseCertificate } from '../hooks/useCourseCertificate';
 import SkeletonLoader from '../skeletons/CourseCertificateSkeleton'; // Import the skeleton loader
 
@@ -11,13 +12,15 @@ type Props = {
 export default function CourseCertificate({ slug, lang }: Props) {
 	const { data: hasCertificate, loading, error } = useCourseCertificate(slug, lang);
 
-	if (loading ) {
+	if (loading) {
 		return <SkeletonLoader />; // Show skeleton loader when loading or error
 	}
 
-	if (!hasCertificate|| error) {
+	if (!hasCertificate || error) {
 		return null; // harcodeado para QA
 	}
+
+	console.log(hasCertificate);
 
 	return (
 		<section className='bg-white text-center md:text-left w-full rounded-[38px] md:py-10 md:px-9 px-6 py-12'>
@@ -29,7 +32,7 @@ export default function CourseCertificate({ slug, lang }: Props) {
 					<img
 						src='/images/productpage/certificado-mockup.svg'
 						alt='Certificado del curso'
-						className='rounded-lg shadow-md w-full max-w-xs md:max-w-sm'
+						className='w-full max-w-xs rounded-lg shadow-md md:max-w-sm'
 					/>
 				</div>
 
@@ -40,6 +43,9 @@ export default function CourseCertificate({ slug, lang }: Props) {
 						conocimientos y habilidades clínicas adquiridos, potenciando tu perfil profesional.
 					</p>
 					<p>¡Podrás compartirlo de forma digital en LinkedIn o imprimirlo para sumarlo a tu consultorio!</p>
+					<Link href={'/certificados-digitales'} className='underline text-[#9200AD]'>
+						Conocé más sobre los certificados digitales
+					</Link>
 				</div>
 			</div>
 		</section>
