@@ -13,7 +13,7 @@ export function useCourseTeachers(slug: string, lang: string) {
 		getCourse(slug, lang)
 			.then((courseData) => {
 				// courseData es todo el objeto del curso
-				const teachersData: CourseTeachersData[] = courseData.sections.teaching_team;
+				const teachersData: CourseTeachersData[] = courseData;
 				setData(teachersData);
 			})
 			.catch((err) => {

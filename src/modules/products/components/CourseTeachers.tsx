@@ -18,7 +18,7 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 
 	// Scroll automático al equipo docente si el hash lo indica
 	useEffect(() => {
-		if (!loading && data?.length && typeof window !== 'undefined') {
+		if (!loading && data?.sections.teaching_team.length && typeof window !== 'undefined') {
 			const hash = window.location.hash;
 			if (hash === '#equipo-docente') {
 				const el = document.getElementById('equipo-docente');
@@ -33,7 +33,7 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 
 	const hasNotified = useRef(false);
 
-	const isEmpty = !data || data.length === 0;
+	const isEmpty = !data || data.sections.teaching_team.length === 0;
 
 	useEffect(() => {
 		if (!hasNotified.current && !loading && (error || isEmpty)) {
@@ -42,12 +42,16 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 		}
 	}, [loading, error, isEmpty, onHideEmpty]);
 	if (loading) return <SkeletonCourseTeachers />;
-	if (error || !data || data.length === 0) return null;
+	if (error || !data || data.sections.teaching_team.length === 0) return null;
 
 	const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
 	const start = page * ITEMS_PER_PAGE;
 	const end = start + ITEMS_PER_PAGE;
-	const currentData = data.slice(start, end);
+	const currentData = data.sections.teaching_team.slice(start, end);
+
+	console.log(data);
+
+	const text = data.resource === 'downloadable' ? 'Autores' : 'Equipo docente';
 
 	return (
 		<>
@@ -61,12 +65,10 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 				className='bg-white rounded-[38px] px-6 md:px-0 max-w-5xl py-12 space-y-8'
 				id={slug === 'administracion-y-gestion-hospitalaria' ? 'equipo-docente' : undefined}
 			>
-				<h2 className='text-[24px] md:text-[32px] font-raleway md:text-left text-center text-[#1A1A1A] mb-6'>
-					Equipo docente
-				</h2>
+				<h2 className='text-[24px] md:text-[32px] font-raleway md:text-left text-center text-[#1A1A1A] mb-6'>{text}</h2>
 
 				{/* Mobile: paginado */}
-				<div className='block md:hidden space-y-6'>
+				<div className='block space-y-6 md:hidden'>
 					{currentData.map((teacher, idx) => {
 						const name = teacher.name ?? 'Docente sin nombre';
 						const title = teacher.description ?? 'Sin descripción disponible';
@@ -88,7 +90,7 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 				</div>
 
 				{/* Desktop: grid completo */}
-				<div className='hidden md:grid md:grid-cols-2 gap-8'>
+				<div className='hidden gap-8 md:grid md:grid-cols-2'>
 					{currentData.map((teacher, idx) => {
 						const name = teacher.name ?? 'Docente sin nombre';
 						const title = teacher.description ?? 'Sin descripción disponible';
@@ -111,7 +113,7 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 
 				{/* Paginación para todas las vistas */}
 				{totalPages > 1 && (
-					<div className='flex justify-center items-center gap-6 mt-10'>
+					<div className='flex items-center justify-center gap-6 mt-10'>
 						<button
 							onClick={() => setPage((prev) => Math.max(prev - 1, 0))}
 							disabled={page === 0}
@@ -120,7 +122,7 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 							&lt;
 						</button>
 
-						<div className='flex items-center gap-2 text-sm text-gray-700 font-medium'>
+						<div className='flex items-center gap-2 text-sm font-medium text-gray-700'>
 							{Array.from({ length: totalPages }).map((_, i) => {
 								const isFirst = i === 0;
 								const isLast = i === totalPages - 1;
@@ -152,7 +154,7 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 						<button
 							onClick={() => setPage((prev) => Math.min(prev + 1, totalPages - 1))}
 							disabled={page === totalPages - 1}
-							className='w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 text-gray-600 hover:bg-gray-100 disabled:opacity-30'
+							className='flex items-center justify-center w-8 h-8 text-gray-600 border border-gray-300 rounded-full hover:bg-gray-100 disabled:opacity-30'
 						>
 							&gt;
 						</button>
