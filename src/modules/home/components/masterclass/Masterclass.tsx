@@ -92,7 +92,7 @@ const Masterclass = () => {
 				priority
 			/>
 
-			<main className='relative z-10 h-full md:h-screen overflow-visible max-w-[1600px] mx-auto md:px-4 w-full  md:py-0 md:mt-0 flex flex-col  md:mb-10'>
+			<main className='relative z-10 h-full  md:h-screen overflow-visible max-w-[1600px] mx-auto md:px-4 w-full  md:py-0 md:mt-0 flex flex-col  md:mb-10'>
 				<div className='flex flex-col justify-center h-full gap-10 md:flex-row md:items-center md:justify-between md:px-4'>
 					{/* Texto Desktop */}
 					<header className='flex-col hidden gap-16 text-center md:flex md:text-left md:max-w-2xl md:order-1'>
@@ -142,23 +142,25 @@ const Masterclass = () => {
 
 				{/* Mobile */}
 				{professionals.length === 1 ? (
-					<div className='md:hidden  flex flex-col items-stretch px-3 gap-6 z-[1] h-[600px] justify-between py-20'>
+					<div className='md:hidden  flex flex-col items-stretch px-6 gap-6 z-[1] h-[800px] justify-between py-14 pb-20 '>
 						{masterclass?.tags?.[0] && (
 							<h2 className='self-start px-6 py-3 tracking-widest uppercase border border-white rounded-full text-1xl'>
 								{masterclass.tags[0]}
 							</h2>
 						)}
-						<h2 className='text-3xl font-bold'>
-							Casos emblemáticos en gestión hospitalaria: análisis de decisiones complejas y sus aprendizajes
-						</h2>
-						<p className='text-lg font-semibold'>
-							Junto con el Dr. Néstor Feldman, focalízate en la aplicación de herramientas clave en la administración de
-							instituciones de salud
-						</p>
+						<div>
+							<h2 className='mb-4 text-3xl font-bold'>
+								Casos emblemáticos en gestión hospitalaria: análisis de decisiones complejas y sus aprendizajes
+							</h2>
+							<p className='font-medium '>
+								Junto con el Dr. Néstor Feldman, focalízate en la aplicación de herramientas clave en la administración de
+								instituciones de salud
+							</p>
+						</div>
 						<Link
 							//href={getLocalizedUrl(lang, new URL(masterclassLink ?? '#').pathname.replace('/producto/', '/tienda/'))}
 							href={getLocalizedUrl(lang, masterclassLink || '')}
-							className='flex items-center content-center justify-center gap-2 px-6 py-2 text-sm font-semibold text-center text-black transition bg-white rounded-full md:text-base md:mx-0 hover:scale-105'
+							className='flex items-center content-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-center text-black transition bg-white rounded-full md:text-base md:mx-0 hover:scale-105'
 						>
 							{masterclass?.link.title || ''}
 							<svg width='24' height='22' viewBox='0 0 25 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
