@@ -31,8 +31,11 @@ export default function CourseHeader({ slug, lang }: CourseHeaderProps) {
 		);
 	}
 
-	const { title, has_certificate, categories } = data.sections.header;
+	let title, has_certificate, categories;
 
+	if (data?.sections?.header) {
+		({ title, has_certificate, categories } = data.sections.header);
+	}
 	// ✅ Función que maneja el click en categoría
 	const handleSpecialtyClick = (specialtyName: string) => {
 		const specialtySlug = specialtyName
@@ -66,7 +69,7 @@ export default function CourseHeader({ slug, lang }: CourseHeaderProps) {
 						<span className='hidden md:block'>Tienda</span>
 					</Link>
 					{categories
-						.filter((spec) => spec.is_primary)
+						?.filter((spec) => spec.is_primary)
 						.map((spec) => (
 							<span key={spec.term_id} className='flex items-center'>
 								<span className='shrink-0'>
@@ -112,7 +115,7 @@ export default function CourseHeader({ slug, lang }: CourseHeaderProps) {
 
 				{/* Etiquetas de categorías */}
 				<div className='flex flex-wrap items-center justify-center gap-2 md:items-start md:justify-normal'>
-					{categories.map((spec) => (
+					{categories?.map((spec) => (
 						<span
 							key={spec.term_id}
 							className='px-5 py-2 text-xs font-normal text-white rounded-full cursor-pointer bg-black/20 font-inter hover:bg-black/30'

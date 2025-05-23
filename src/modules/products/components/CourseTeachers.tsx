@@ -18,7 +18,7 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 
 	// Scroll automático al equipo docente si el hash lo indica
 	useEffect(() => {
-		if (!loading && data?.sections.teaching_team.length && typeof window !== 'undefined') {
+		if (!loading && data?.sections?.teaching_team.length && typeof window !== 'undefined') {
 			const hash = window.location.hash;
 			if (hash === '#equipo-docente') {
 				const el = document.getElementById('equipo-docente');
@@ -33,7 +33,7 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 
 	const hasNotified = useRef(false);
 
-	const isEmpty = !data || data.sections.teaching_team.length === 0;
+	const isEmpty = !data || data?.sections?.teaching_team.length === 0;
 
 	useEffect(() => {
 		if (!hasNotified.current && !loading && (error || isEmpty)) {
@@ -42,16 +42,16 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 		}
 	}, [loading, error, isEmpty, onHideEmpty]);
 	if (loading) return <SkeletonCourseTeachers />;
-	if (error || !data || data.sections.teaching_team.length === 0) return null;
+	if (error || !data || data?.sections?.teaching_team.length === 0) return null;
 
 	const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
 	const start = page * ITEMS_PER_PAGE;
 	const end = start + ITEMS_PER_PAGE;
-	const currentData = data.sections.teaching_team.slice(start, end);
+	const currentData = data?.sections?.teaching_team.slice(start, end);
 
 	console.log(data);
 
-	const text = data.resource === 'downloadable' ? 'Autores' : 'Equipo docente';
+	const text = data?.resource === 'downloadable' ? 'Autores' : 'Equipo docente';
 
 	return (
 		<>
@@ -69,7 +69,7 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 
 				{/* Mobile: paginado */}
 				<div className='block space-y-6 md:hidden'>
-					{currentData.map((teacher, idx) => {
+					{currentData?.map((teacher, idx) => {
 						const name = teacher.name ?? 'Docente sin nombre';
 						const title = teacher.description ?? 'Sin descripción disponible';
 						const image =
@@ -91,7 +91,7 @@ export default function CourseTeachers({ slug, lang, onHideEmpty }: CourseTeache
 
 				{/* Desktop: grid completo */}
 				<div className='hidden gap-8 md:grid md:grid-cols-2'>
-					{currentData.map((teacher, idx) => {
+					{currentData?.map((teacher, idx) => {
 						const name = teacher.name ?? 'Docente sin nombre';
 						const title = teacher.description ?? 'Sin descripción disponible';
 						const image =
